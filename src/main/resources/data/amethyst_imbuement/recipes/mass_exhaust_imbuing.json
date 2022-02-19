@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftD": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftF": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftG": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftH": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftI": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "title": "Mass Exhaust",
+  "cost": 15,
+  "augment": "amethyst_imbuement:mass_exhaust"
+}
+

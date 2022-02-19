@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:slime_block"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:slime_block"
+  },
+  "craftF": {
+	"item": "minecraft:slime_block"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:slime_block"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Slimy",
+  "cost": 21,
+  "augment": "amethyst_imbuement:slimy"
+}
+

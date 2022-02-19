@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "minecraft:lantern"
+  },
+  "craftB": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftC": {
+	"item": "minecraft:lantern"
+  },
+  "craftD": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftF": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftG": {
+	"item": "minecraft:lantern"
+  },
+  "craftH": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftI": {
+	"item": "minecraft:lantern"
+  },
+  "title": "Moonlit",
+  "cost": 12,
+  "augment": "amethyst_imbuement:moonlit"
+}
+

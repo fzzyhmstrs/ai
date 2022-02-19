@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftD": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftF": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftG": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftH": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftI": {
+	"item": "minecraft:emerald_block"
+  },
+  "title": "Fang Barrage",
+  "cost": 25,
+  "augment": "amethyst_imbuement:fang_barrage"
+}
+

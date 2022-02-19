@@ -1,0 +1,11 @@
+{    
+"name": "Imbued Lapis",    
+"icon": "amethyst_imbuement:imbued_lapis",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "This is a test entry, but it should show up!"        
+}    
+]
+}

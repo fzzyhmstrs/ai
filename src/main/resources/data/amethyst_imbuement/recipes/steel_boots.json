@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"S S",
+	"S S"
+  ],
+  "key": {
+	"S": {
+	  "item": "amethyst_imbuement:steel_ingot"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:steel_boots"
+  }
+}
+

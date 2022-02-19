@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftA": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftB": {
+	"item": "minecraft:spyglass"
+  },
+  "craftC": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftD": {
+	"item": "minecraft:flint"
+  },
+  "craftF": {
+	"item": "minecraft:flint"
+  },
+  "craftG": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftH": {
+	"item": "minecraft:flint"
+  },
+  "craftI": {
+	"item": "minecraft:ender_eye"
+  },
+  "title": "Headhunter",
+  "cost": 13,
+  "augment": "amethyst_imbuement:headhunter"
+}
+

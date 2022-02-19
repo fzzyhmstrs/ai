@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "amethyst_imbuement:beryl_copper_block"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:cut_beryl_copper_block",
+    "count": 4
+  }
+}

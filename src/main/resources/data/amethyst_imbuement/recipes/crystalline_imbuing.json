@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "title": "Crystalline",
+  "cost": 6,
+  "augment": "amethyst_imbuement:crystalline"
+}
+

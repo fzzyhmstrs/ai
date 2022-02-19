@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftD": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftF": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftG": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftH": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftI": {
+	"item": "minecraft:golden_apple"
+  },
+  "title": "Mass Fortify",
+  "cost": 8,
+  "augment": "amethyst_imbuement:mass_fortify"
+}
+

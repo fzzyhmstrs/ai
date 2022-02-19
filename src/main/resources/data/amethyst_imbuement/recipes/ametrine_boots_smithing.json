@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:netherite_boots"
+  },
+  "addition": {
+    "item": "amethyst_imbuement:ametrine"
+  },
+  "result": {
+    "item": "amethyst_imbuement:ametrine_boots"
+  }
+}

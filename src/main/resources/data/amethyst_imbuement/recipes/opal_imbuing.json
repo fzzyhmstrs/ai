@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:water_bucket"
+  },
+  "imbueB": {
+	"item": "minecraft:water_bucket"
+  },
+  "imbueC": {
+	"item": "minecraft:water_bucket"
+  },
+  "imbueD": {
+	"item": "minecraft:water_bucket"
+  },
+  "craftA": {
+	"item": "minecraft:emerald"
+  },
+  "craftB": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftC": {
+	"item": "minecraft:redstone"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftF": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "title": "Opal",
+  "cost": 6,
+  "resultA": "amethyst_imbuement:opal",
+  "countA": 1
+}
+

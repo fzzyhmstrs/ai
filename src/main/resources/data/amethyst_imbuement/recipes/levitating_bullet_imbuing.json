@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftD": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftF": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftG": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftH": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftI": {
+	"item": "minecraft:shulker_shell"
+  },
+  "title": "Levitating Bullet",
+  "cost": 28,
+  "augment": "amethyst_imbuement:levitating_bullet"
+}
+

@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftF": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftH": {
+	"item": "minecraft:soul_sand"
+  },
+  "title": "Soul Missile",
+  "cost": 3,
+  "augment": "amethyst_imbuement:soul_missile"
+}
+

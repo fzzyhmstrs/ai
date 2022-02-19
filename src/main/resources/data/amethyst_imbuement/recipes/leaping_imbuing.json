@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftF": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Leaping",
+  "cost": 15,
+  "augment": "amethyst_imbuement:leaping"
+}
+

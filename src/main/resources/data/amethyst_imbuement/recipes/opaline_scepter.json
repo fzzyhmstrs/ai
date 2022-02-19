@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	" GO",
+	" BG",
+	"B  "
+  ],
+  "key": {
+	"O": {
+	  "item": "amethyst_imbuement:opal"
+	},
+	"G": {
+	  "item": "minecraft:gold_nugget"
+	},
+	"B": {
+	  "item": "amethyst_imbuement:beryl_copper_ingot"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  }
+}
+

@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:lilac"
+  },
+  "imbueB": {
+	"item": "minecraft:lilac"
+  },
+  "imbueC": {
+	"item": "minecraft:lilac"
+  },
+  "imbueD": {
+	"item": "minecraft:lilac"
+  },
+  "craftA": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftB": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftC": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftD": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftE": {
+	"item": "minecraft:book"
+  },
+  "craftF": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftG": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftH": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftI": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "title": "Imbued Lapis",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:imbued_lapis",
+  "countA": 4
+}
+

@@ -1,0 +1,8 @@
+{    
+"name": "Glistering Tome",    
+"landing_text": "MY LANDING TEXT HERE",    
+"version": 1,
+"show_progress": false,
+"dont_generate_book": true,
+"custom_book_item": "amethyst_imbuement:glistering_tome"
+}

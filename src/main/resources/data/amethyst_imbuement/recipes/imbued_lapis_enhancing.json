@@ -1,0 +1,12 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "base": {
+    "item": "minecraft:lapis_lazuli"
+  },
+  "addition": {
+    "item": "minecraft:lilac"
+  },
+  "result": {
+    "item": "amethyst_imbuement:imbued_lapis"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:beryl_copper_block",
+	"amethyst_imbuement:cut_beryl_copper_block",
+	"amethyst_imbuement:cut_beryl_copper_slab",
+	"amethyst_imbuement:cut_beryl_copper_stairs"
+  ]
+}

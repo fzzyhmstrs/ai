@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:shulker_shell"
+  },
+  "imbueB": {
+	"item": "minecraft:shulker_shell"
+  },
+  "imbueC": {
+	"item": "minecraft:shulker_shell"
+  },
+  "imbueD": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:brilliant_diamond"
+  },
+  "craftE": {
+	"item": "minecraft:nether_star"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:brilliant_diamond"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "title": "Celestine",
+  "cost": 49,
+  "resultA": "amethyst_imbuement:celestine",
+  "countA": 1
+}
+

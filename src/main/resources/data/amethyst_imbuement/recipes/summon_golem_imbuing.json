@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftA": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftD": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftF": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftG": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftH": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftI": {
+	"item": "minecraft:amethyst_block"
+  },
+  "title": "Summon: Golem",
+  "cost": 25,
+  "augment": "amethyst_imbuement:summon_golem"
+}
+

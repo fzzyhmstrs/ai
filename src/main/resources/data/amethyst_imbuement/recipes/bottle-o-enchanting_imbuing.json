@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "imbueB": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "imbueC": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "imbueD": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftA": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftB": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftC": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftD": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftE": {
+	"item": "minecraft:lapis_lazuli"
+  },
+  "craftF": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftG": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftH": {
+	"item": "minecraft:glass_bottle"
+  },
+  "craftI": {
+	"item": "minecraft:glass_bottle"
+  },
+  "title": "Bottle o' Enchanting",
+  "cost": 5,
+  "resultA": "minecraft:experience_bottle",
+  "countA": 8
+}
+

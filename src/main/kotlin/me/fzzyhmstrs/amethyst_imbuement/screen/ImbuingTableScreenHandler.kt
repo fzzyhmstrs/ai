@@ -1,0 +1,585 @@
+package me.fzzyhmstrs.amethyst_imbuement.screen
+
+import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
+import net.minecraft.advancement.criterion.Criteria
+import net.minecraft.block.Blocks
+import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventory
+import net.minecraft.inventory.SimpleInventory
+import net.minecraft.item.EnchantedBookItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.screen.Property
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.Slot
+import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
+import net.minecraft.stat.Stats
+import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
+import java.util.*
+import kotlin.math.max
+
+@Suppress("SENSELESS_COMPARISON", "unused")
+class ImbuingTableScreenHandler(
+    syncID: Int,
+    playerInventory: PlayerInventory,
+    private val context: ScreenHandlerContext
+):  ScreenHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, syncID) {
+
+    constructor(syncID: Int, playerInventory: PlayerInventory) : this(
+        syncID,
+        playerInventory,
+        ScreenHandlerContext.EMPTY,
+    )
+
+    private val inventory: Inventory = object : SimpleInventory(13) {
+        override fun markDirty() {
+            super.markDirty()
+            this@ImbuingTableScreenHandler.onContentChanged(this)
+        }
+    }
+
+    private val random = Random()
+    private val player = playerInventory.player
+    private val seed = Property.create()
+    var enchantmentPower = IntArray(3)
+    var enchantmentId = intArrayOf(-1, -1, -1)
+    var enchantmentLevel = intArrayOf(-1, -1, -1)
+    var imbueId = intArrayOf(0,0,0)
+    var levelLow = intArrayOf(0,0,0)
+    //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
+
+
+    override fun canUse(player: PlayerEntity): Boolean {
+        return canUse(this.context, player, RegisterBlock.IMBUING_TABLE)
+    }
+
+
+
+    fun getLapisCount(): Int {
+        val itemStack: ItemStack = this.inventory.getStack(7)
+        return if (itemStack.isEmpty) {
+            0
+        } else if(!itemStack.isOf(Items.LAPIS_LAZULI)){
+            0
+        } else{
+            itemStack.count
+        }
+    }
+
+    fun getSeed(): Int {
+        return this.seed.get()
+    }
+
+    override fun close(player: PlayerEntity?) {
+        super.close(player)
+        context.run { _: World?, _: BlockPos? ->
+            dropInventory(
+                player,
+                inventory
+            )
+        }
+    }
+
+    override fun onContentChanged(inventory: Inventory) {
+        if (inventory === this.inventory) {
+            val itemStack = inventory.getStack(6)
+
+            if (itemStack.isEmpty) { //|| !itemStack.isEnchantable
+                for (i in 0..2) {
+                    enchantmentPower[i] = 0
+                    enchantmentId[i] = -1
+                    enchantmentLevel[i] = -1
+                    imbueId[i] = 0
+                    levelLow[i] = 0
+                }
+            }else {
+                context.run { world: World, pos: BlockPos ->
+                    var match: Optional<ImbuingRecipe>? = null
+                    if (!world.isClient) {
+                        match = (world).recipeManager.getFirstMatch(
+                            ImbuingRecipe.Type,
+                            inventory as SimpleInventory,
+                            world
+                        )
+                    }
+                    if (match != null && match.isPresent){
+                        // a matching imbuement recipe is here!
+                        //matchBut = match
+                        enchantmentPower[0] = match.get().getCost()
+                        enchantmentPower[1] = 0
+                        enchantmentPower[2] = 0
+                        enchantmentLevel[0] = 1
+                        enchantmentLevel[1] = -1
+                        enchantmentLevel[2] = -1
+                        enchantmentId[1] = -1
+                        enchantmentId[2] = -1
+                        imbueId[1] = 0
+                        imbueId[2] = 0
+                        levelLow[1] = 0
+                        levelLow[2] = 0
+                        if (match.get().getAugment() != ""){
+                            val augment = Registry.ENCHANTMENT.get(Identifier(match.get().getAugment()))
+                            if (augment != null) {
+                                val augCheck = if (augment is ScepterAugment){
+                                    val blA = augment.isAcceptableScepterItem(itemStack, player)
+                                    val blB = augment.isAcceptableItem(itemStack)
+                                    Pair(blA,blB)
+                                } else {
+                                    Pair(true,augment.isAcceptableItem(itemStack))
+                                }
+                                if(augCheck.first && augCheck.second) {
+                                    val l = EnchantmentHelper.get(itemStack)
+                                    var bl1 = false
+                                    for (p in l.keys) {
+                                        if(p === augment){
+                                            if (l[p] == augment.maxLevel){
+                                                bl1 = true
+                                            }
+                                        }
+                                    }
+                                    if(!bl1) {
+                                        enchantmentId[0] = Registry.ENCHANTMENT.getRawId(augment)
+                                        imbueId[0] = Registry.ENCHANTMENT.getRawId(augment)
+                                        levelLow[0] = 0
+                                    } else {
+                                        enchantmentPower[0] = 0
+                                        enchantmentId[0] = -1
+                                        imbueId[0] = 0
+                                        levelLow[0] = 0
+                                    }
+                                } else if(!augCheck.first && augCheck.second) {
+                                    enchantmentId[0] = -1
+                                    imbueId[0] = 0
+                                    levelLow[0] = Registry.ENCHANTMENT.getRawId(augment)
+                                }else{
+                                    enchantmentPower[0] = 0
+                                    enchantmentId[0] = -1
+                                    imbueId[0] = 0
+                                    levelLow[0] = 0
+                                }
+                            } else {
+                                println("Could not find augment under the key " + match.get().getAugment())
+                            }
+                        } else{
+                            enchantmentId[0] = -2
+                            imbueId[0] = Registry.ITEM.getRawId(match.get().output.item) * -1
+                            levelLow[0] = 0
+                            /*
+                            println("imbueId")
+                            println(imbueId[0].toString())
+                            println(Registry.ITEM.getRawId(match.get().output.item).toString())
+                            println(match.get().output.name.toString())
+                            println(match.get().getTitle())
+                            println(match.get().matches(inventory as SimpleInventory,world).toString())
+                             */
+                        }
+                    } else if (!itemStack.isEnchantable){
+                        for (i in 0..2) {
+                            enchantmentPower[i] = 0
+                            enchantmentId[i] = -1
+                            enchantmentLevel[i] = -1
+                            imbueId[i] = 0
+                            levelLow[i] = 0
+                        }
+
+                    } else {
+                        var i = 0
+                        var j: Int = -1
+                        while (j <= 1) {
+                            for (k in -1..1) {
+                                if (j == 0 && k == 0 || !world.isAir(pos.add(k, 0, j)) || !world.isAir(
+                                        pos.add(
+                                            k,
+                                            1,
+                                            j
+                                        )
+                                    )
+                                ) continue
+                                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                                ++i
+                                }
+                                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                                        ++i
+                                }
+                                if (k == 0 || j == 0) continue
+                                if (world.getBlockState(pos.add(k * 2, 0, j)).isOf(Blocks.BOOKSHELF)) {
+                                    ++i
+                                }
+                                if (world.getBlockState(pos.add(k * 2, 1, j)).isOf(Blocks.BOOKSHELF)) {
+                                    ++i
+                                }
+                                if (world.getBlockState(pos.add(k, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                                    ++i
+                                }
+                                if (!world.getBlockState(pos.add(k, 1, j * 2)).isOf(Blocks.BOOKSHELF)) continue
+                                ++i
+                            }
+                            ++j
+                        }
+                        random.setSeed(seed.get().toLong())
+                        j = 0
+                        while (j < 3) {
+                            enchantmentPower[j] =
+                                this.calculateRequiredExperienceLevel(random, j, i, itemStack)
+                            enchantmentId[j] = -1
+                            enchantmentLevel[j] = -1
+                            if (enchantmentPower[j] >= j + 1) {
+                                ++j
+                                continue
+                            }
+                            enchantmentPower[j] = 0
+                            ++j
+                        }
+                        j = 0
+                        while (j < 3) {
+                            val k: List<EnchantmentLevelEntry>? = this.generateEnchantments(itemStack,j,enchantmentPower[j])
+                            if (enchantmentPower[j] <= 0 || k == null || k.isEmpty()) {
+                                ++j
+                                continue
+                            }
+                            val enchantmentLevelEntry = k[random.nextInt(k.size)]
+                            enchantmentId[j] =
+                                Registry.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
+                            enchantmentLevel[j] = enchantmentLevelEntry.level
+                            imbueId[j] = 0
+                            levelLow[j] = 0
+                            ++j
+                        }
+                    }
+                    sendContentUpdates()
+                }
+            }
+        }
+    }
+    override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        val itemStack = inventory.getStack(6)
+        val itemStack2 = inventory.getStack(7)
+        var i = id + 1
+        var match: Optional<ImbuingRecipe>? = Optional.empty()
+        context.run { world: World, _: BlockPos? ->
+            if (!world.isClient) {
+                match = (world).recipeManager.getFirstMatch(
+                    ImbuingRecipe.Type,
+                    inventory as SimpleInventory,
+                    world
+                )
+            }
+        }
+        if (match == null || match!!.isEmpty){
+            if(enchantmentPower[id] in 31..40){
+                i = id + 2
+            }else if(enchantmentPower[id] in 41..50){
+                i = id + 3
+            }else if(enchantmentPower[id] in 51..60){
+                i = id + 4
+            }
+            if ((itemStack2.isEmpty || itemStack2.count < i) && !player.abilities.creativeMode) {
+                return false
+            }
+        }else{
+            i = match!!.get().getCost()
+        }
+
+        if (enchantmentPower[id] > 0 && !itemStack.isEmpty && (player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] || player.abilities.creativeMode)) {
+            context.run { world: World, pos: BlockPos? ->
+                var itemStack3 = itemStack
+                if (match == null || match!!.isEmpty) {
+                    val list =
+                        generateEnchantments(itemStack3, id, enchantmentPower[id])
+                    if (list!!.isNotEmpty()) {
+                        player.applyEnchantmentCosts(itemStack3, i)
+                        val bl = itemStack3.isOf(Items.BOOK)
+                        if (bl) {
+                            itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
+                            val nbtCompound = itemStack.nbt
+                            if (nbtCompound != null) {
+                                itemStack3.nbt = nbtCompound.copy()
+                            }
+                            inventory.setStack(6, itemStack3)
+                        }
+                        for (nbtCompound in list.indices) {
+                            val enchantmentLevelEntry = list[nbtCompound]
+                            if (bl) {
+                                EnchantedBookItem.addEnchantment(itemStack3, enchantmentLevelEntry)
+                                continue
+                            }
+                            itemStack3.addEnchantment(enchantmentLevelEntry.enchantment, enchantmentLevelEntry.level)
+                        }
+                        if (!player.abilities.creativeMode) {
+                            itemStack2.decrement(i)
+                            if (itemStack2.isEmpty) {
+                                inventory.setStack(7, ItemStack.EMPTY)
+                            }
+                        }
+                        player.incrementStat(Stats.ENCHANT_ITEM)
+                        if (player is ServerPlayerEntity) {
+                            Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
+                        }
+                        inventory.markDirty()
+                        seed.set(player.enchantmentTableSeed)
+                        onContentChanged(inventory)
+                        world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                            SoundCategory.BLOCKS,
+                            1.0f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                    }
+                } else if(match!!.get().getAugment() != ""){
+                    val augmentChk = Registry.ENCHANTMENT.get(Identifier(match!!.get().getAugment()))
+                    if (augmentChk == null || !augmentChk.isAcceptableItem(itemStack3)){
+                        return@run
+                    }
+                    val bl = itemStack3.isOf(Items.BOOK)
+                    if (bl) {
+                        itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
+                        val nbtCompound = itemStack.nbt
+                        if (nbtCompound != null) {
+                            itemStack3.nbt = nbtCompound.copy()
+                        }
+                        inventory.setStack(6, itemStack3)
+                        player.applyEnchantmentCosts(itemStack3, i)
+                        EnchantedBookItem.addEnchantment(itemStack3, EnchantmentLevelEntry(augmentChk,1))
+
+                    } else {
+                        val l = EnchantmentHelper.get(itemStack3)
+                        //var m = 0
+                        //var n3 = 0
+                        var r: Int
+                        var bl1 = false
+                        for (p in l.keys) {
+                            if (p == null) continue
+                            if(p === augmentChk){
+                                r = l[p]!!.toInt() + 1
+                                if (r > augmentChk.maxLevel){
+                                    return@run
+                                }
+                                l[p] = r
+                                bl1 = true
+                            }
+                        }
+                        player.applyEnchantmentCosts(itemStack3, i)
+                        if(bl1) {
+                            EnchantmentHelper.set(l, itemStack3)
+                        } else{
+                            itemStack3.addEnchantment(augmentChk,1)
+                        }
+                    }
+                    for (j in 0..12) { //decrement inventory slots even for creative mode!
+                        if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
+                        if (inventory.getStack(j).item.hasRecipeRemainder()){
+                            inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
+                        }else {
+                            inventory.getStack(j).decrement(1)
+                            if (inventory.getStack(j).isEmpty) {
+                                inventory.setStack(j, ItemStack.EMPTY)
+                            }
+                        }
+                    }
+                    player.incrementStat(Stats.ENCHANT_ITEM)
+                    if (player is ServerPlayerEntity) {
+                        Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
+                    }
+                    inventory.markDirty()
+                    seed.set(player.enchantmentTableSeed)
+                    onContentChanged(inventory)
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                } else{
+                    player.applyEnchantmentCosts(itemStack3, i)
+                    val l = EnchantmentHelper.get(itemStack3)
+                    for (j in 0..12) {
+                        if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new itemstack
+                        if (inventory.getStack(j).item.hasRecipeRemainder()){
+                            inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
+                        }else {
+                            inventory.getStack(j).decrement(1)
+                            if (inventory.getStack(j).isEmpty) {
+                                inventory.setStack(j, ItemStack.EMPTY)
+                            }
+                        }
+                    }
+                    val itemStack4 = match!!.get().output
+                    itemStack4.item.onCraft(itemStack4,world, player)
+                    inventory.setStack(6,itemStack4)
+                    if(match!!.get().getTransferEnchant()){
+                        ScepterObject.transferNbt(itemStack3,itemStack4)
+                        EnchantmentHelper.set(l,itemStack4)
+                    }
+                    inventory.markDirty()
+                    onContentChanged(inventory)
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                }
+            }
+            return true
+        }
+        return false
+    }
+
+    private fun generateEnchantments(stack: ItemStack, slot: Int, level: Int): List<EnchantmentLevelEntry>? {
+        random.setSeed((seed.get() + slot).toLong())
+        val list = EnchantmentHelper.generateEnchantments(random, stack, level, false)
+        if (stack.isOf(Items.BOOK) && list.size > 1) {
+            list.removeAt(random.nextInt(list.size))
+        }
+        return list
+    }
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
+        var itemStack = ItemStack.EMPTY
+        val slot = this.slots[index]
+        if (slot != null && slot.hasStack()) {
+            val itemStack2 = slot.stack
+            itemStack = itemStack2.copy()
+            if (index == 0) {
+                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+            } else if (index == 1) {
+                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+            //} else if (!slots[6].hasStack() && slots[6].canInsert(itemStack2)) {
+            //    val itemStack3 = itemStack2.copy()
+            //    itemStack3.count = 1
+            //    itemStack2.decrement(1)
+            //    slots[6].stack = itemStack3
+            } else {
+                return ItemStack.EMPTY
+            }
+            if (itemStack2.isEmpty) {
+                slot.stack = ItemStack.EMPTY
+            } else {
+                slot.markDirty()
+            }
+            if (itemStack2.count == itemStack.count) {
+                return ItemStack.EMPTY
+            }
+            slot.onTakeItem(player, itemStack2)
+        }
+        return itemStack
+    }
+
+
+    private fun calculateRequiredExperienceLevel(random: Random, slotIndex: Int, bookshelfCount: Int, stack: ItemStack): Int {
+        var bookshelfCnt = bookshelfCount
+        val item = stack.item
+        val i = item.enchantability
+        if (i <= 0) {
+            return 0
+        }
+        if (bookshelfCount > 30) {
+            bookshelfCnt = 30
+        }
+        val j = random.nextInt(8) + 1 + (bookshelfCnt shr 1) + random.nextInt(bookshelfCnt + 1)
+        if (slotIndex == 0) {
+            return max(j / 3, 1)
+        }
+        return if (slotIndex == 1) {
+            j * 2 / 3 + 1 + bookshelfCount / 3
+        } else max(j, bookshelfCnt * 2)
+    }
+
+
+
+    init{
+        //coordinate system is in pixels, thank god
+        //add top two imbuement slots
+        val ofst = 0 //offset to get the slots drawing correctly, will attempt to fix later
+        val ofst2 = 4 //offset based on guid picture change. 2x change for the inventory slots
+        addSlot(object : Slot(inventory, 0, 8+ofst, 9+ofst2) {
+            override fun canInsert(stack: ItemStack): Boolean { return true }
+        })
+        addSlot(object : Slot(inventory, 1, 95+ofst, 9+ofst2) {
+            override fun canInsert(stack: ItemStack): Boolean { return true }
+        })
+        //add main imbuement crafting grid
+        for (j in 0..2) {
+            for(k in 0..2) {
+                if (2+j+(3*k) == 6) {  //skipping the main middle slot, so I can set max count 1
+                    addSlot(object : Slot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
+                        override fun canInsert(stack: ItemStack): Boolean {
+                            return true
+                        }
+                        override fun getMaxItemCount(): Int {
+                            return 1
+                        }
+                    })
+                }else {
+                    addSlot(object : Slot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
+                        override fun canInsert(stack: ItemStack): Boolean {
+                            return true
+                        }
+                    })
+                }
+            }
+        }
+
+
+        //add bottom two imbuement slots
+        addSlot(object : Slot(inventory, 11, 8+ofst, 59+ofst2) {
+            override fun canInsert(stack: ItemStack): Boolean { return true }
+        })
+        addSlot(object : Slot(inventory, 12, 95+ofst, 59+ofst2) {
+            override fun canInsert(stack: ItemStack): Boolean { return true }
+        })
+        //add the player main inventory
+        for(j in 0..8){
+            for(k in 0..2){
+                addSlot(object : Slot(playerInventory, 9+j+(9*k), 38+(18*j)+ofst, 84+(18*k)+ofst2*2) {})
+            }
+        }
+        //add the player hotbar
+        for(j in 0..8) {
+            addSlot(object : Slot(playerInventory, j, 38+(18*j)+ofst, 142+ofst2*2) {})
+        }
+
+        //add the properties for the three enchantment bars
+        addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
+        addProperty(Property.create(this.enchantmentPower, 0))
+        addProperty(Property.create(this.enchantmentPower, 1))
+        addProperty(Property.create(this.enchantmentPower, 2))
+        addProperty(Property.create(this.enchantmentId, 0))
+        addProperty(Property.create(this.enchantmentId, 1))
+        addProperty(Property.create(this.enchantmentId, 2))
+        addProperty(Property.create(this.enchantmentLevel, 0))
+        addProperty(Property.create(this.enchantmentLevel, 1))
+        addProperty(Property.create(this.enchantmentLevel, 2))
+        addProperty(Property.create(this.imbueId, 0))
+        addProperty(Property.create(this.imbueId, 1))
+        addProperty(Property.create(this.imbueId, 2))
+        addProperty(Property.create(this.levelLow, 0))
+        addProperty(Property.create(this.levelLow, 1))
+        addProperty(Property.create(this.levelLow, 2))
+    }
+
+
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:diamond_sword"
+  },
+  "addition": {
+    "item": "amethyst_imbuement:garnet"
+  },
+  "result": {
+    "item": "amethyst_imbuement:garnet_sword"
+  }
+}

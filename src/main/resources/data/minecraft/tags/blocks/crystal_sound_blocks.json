@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:polished_amethyst_block",
+	"amethyst_imbuement:polished_amethyst_stairs",
+	"amethyst_imbuement:polished_amethyst_pillar",
+	"amethyst_imbuement:polished_amethyst_slab",
+	"amethyst_imbuement:polished_amethyst_bricks",
+	"amethyst_imbuement:chiseled_polished_amethyst_block",
+	"amethyst_imbuement:crystalline_core"
+  ]
+}

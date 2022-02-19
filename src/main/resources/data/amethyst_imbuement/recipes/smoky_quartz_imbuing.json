@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:ink_sac"
+  },
+  "imbueB": {
+	"item": "minecraft:ink_sac"
+  },
+  "imbueC": {
+	"item": "minecraft:ink_sac"
+  },
+  "imbueD": {
+	"item": "minecraft:ink_sac"
+  },
+  "craftA": {
+	"item": "minecraft:quartz"
+  },
+  "craftB": {
+	"item": "minecraft:quartz"
+  },
+  "craftC": {
+	"item": "minecraft:quartz"
+  },
+  "craftD": {
+	"item": "minecraft:quartz"
+  },
+  "craftE": {
+	"item": "minecraft:campfire"
+  },
+  "craftF": {
+	"item": "minecraft:quartz"
+  },
+  "craftG": {
+	"item": "minecraft:quartz"
+  },
+  "craftH": {
+	"item": "minecraft:quartz"
+  },
+  "craftI": {
+	"item": "minecraft:quartz"
+  },
+  "title": "Smoky Quartz",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:smoky_quartz",
+  "countA": 4
+}
+

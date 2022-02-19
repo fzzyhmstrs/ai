@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:golden_heart"
+  },
+  "title": "Mass Revivify",
+  "cost": 25,
+  "augment": "amethyst_imbuement:mass_revivify"
+}
+

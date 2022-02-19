@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"GGG",
+	"G G",
+	" H "
+  ],
+  "key": {
+	"G": {
+	  "item": "amethyst_imbuement:beryl_copper_ingot"
+	},
+	"H": {
+	  "item": "minecraft:amethyst_shard"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:copper_amulet"
+  }
+}
+

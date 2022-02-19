@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:netherite_scrap"
+  },
+  "imbueB": {
+	"item": "minecraft:netherite_scrap"
+  },
+  "imbueC": {
+	"item": "minecraft:netherite_scrap"
+  },
+  "imbueD": {
+	"item": "minecraft:netherite_scrap"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftF": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftH": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "title": "Ametrine",
+  "cost": 11,
+  "resultA": "amethyst_imbuement:ametrine",
+  "countA": 1
+}
+

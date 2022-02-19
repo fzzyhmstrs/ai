@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftB": {
+	"tag": "minecraft:wool"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftD": {
+	"tag": "minecraft:wool"
+  },
+  "craftF": {
+	"tag": "minecraft:wool"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftH": {
+	"tag": "minecraft:wool"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "title": "Steadfast",
+  "cost": 4,
+  "augment": "amethyst_imbuement:steadfast"
+}
+

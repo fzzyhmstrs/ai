@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:shield"
+  },
+  "craftF": {
+	"item": "minecraft:shield"
+  },
+  "craftH": {
+	"item": "minecraft:shield"
+  },
+  "title": "Forcefield",
+  "cost": 8,
+  "augment": "amethyst_imbuement:forcefield"
+}
+

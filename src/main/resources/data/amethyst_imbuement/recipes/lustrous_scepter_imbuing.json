@@ -1,0 +1,48 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:lustrous_sphere"
+  },
+  "imbueC": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "title": "Lustrous Scepter",
+  "cost": 33,
+  "resultA": "amethyst_imbuement:lustrous_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+

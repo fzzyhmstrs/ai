@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:steel_helmet",
+	{
+      "id": "astromine:steel_helmet",
+      "required": false
+    }
+  ]
+}

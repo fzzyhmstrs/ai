@@ -1,0 +1,11 @@
+{    
+"name": "Garnet",    
+"icon": "amethyst_imbuement:garnet",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "This is a test entry, but it should show up!"        
+}    
+]
+}

@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "imbueB": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "imbueC": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "imbueD": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "craftA": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftE": {
+	"item": "minecraft:phantom_membrane"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftG": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftI": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "title": "Moonstone",
+  "cost": 6,
+  "resultA": "amethyst_imbuement:moonstone",
+  "countA": 1
+}
+

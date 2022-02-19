@@ -1,0 +1,12 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "base": {
+    "item": "minecraft:quartz"
+  },
+  "addition": {
+    "item": "minecraft:rose_bush"
+  },
+  "result": {
+    "item": "amethyst_imbuement:imbued_quartz"
+  }
+}

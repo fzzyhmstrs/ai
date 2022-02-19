@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftA": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftB": {
+	"item": "minecraft:dragon_head"
+  },
+  "craftC": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftD": {
+	"item": "minecraft:dragon_breath"
+  },
+  "craftF": {
+	"item": "minecraft:dragon_breath"
+  },
+  "craftG": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftH": {
+	"item": "minecraft:dragon_breath"
+  },
+  "craftI": {
+	"item": "minecraft:ender_eye"
+  },
+  "title": "Draconic Vision",
+  "cost": 18,
+  "augment": "amethyst_imbuement:draconic_vision"
+}
+

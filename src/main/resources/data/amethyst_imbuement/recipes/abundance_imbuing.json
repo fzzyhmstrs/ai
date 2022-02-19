@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:hay_block"
+  },
+  "craftF": {
+	"item": "minecraft:hay_block"
+  },
+  "craftH": {
+	"item": "minecraft:hay_block"
+  },
+  "title": "Abundance",
+  "cost": 8,
+  "augment": "amethyst_imbuement:abundance"
+}
+

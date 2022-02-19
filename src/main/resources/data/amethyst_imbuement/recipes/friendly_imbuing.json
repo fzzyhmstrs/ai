@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "minecraft:carved_pumpkin"
+  },
+  "craftD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftF": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:carved_pumpkin"
+  },
+  "title": "Friendly",
+  "cost": 8,
+  "augment": "amethyst_imbuement:friendly"
+}
+

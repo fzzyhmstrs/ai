@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+	"SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "amethyst_imbuement:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:steel_block",
+    "count": 1
+  }
+}

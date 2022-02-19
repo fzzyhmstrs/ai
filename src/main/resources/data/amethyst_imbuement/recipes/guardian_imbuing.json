@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:crystalline_heart"
+  },
+  "imbueB": {
+	"item": "minecraft:diamond"
+  },
+  "imbueC": {
+	"item": "minecraft:diamond"
+  },
+  "imbueD": {
+	"item": "minecraft:diamond"
+  },
+  "craftA": {
+	"item": "minecraft:poppy"
+  },
+  "craftB": {
+	"item": "minecraft:carved_pumpkin"
+  },
+  "craftC": {
+	"item": "minecraft:poppy"
+  },
+  "craftD": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftF": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftG": {
+	"item": "minecraft:poppy"
+  },
+  "craftH": {
+	"item": "minecraft:amethyst_block"
+  },
+  "craftI": {
+	"item": "minecraft:poppy"
+  },
+  "title": "Guardian",
+  "cost": 22,
+  "augment": "amethyst_imbuement:guardian"
+}
+

@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:obsidian"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:obsidian"
+  },
+  "craftF": {
+	"item": "minecraft:obsidian"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:obsidian"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "title": "Resilience",
+  "cost": 16,
+  "augment": "amethyst_imbuement:resilience"
+}
+

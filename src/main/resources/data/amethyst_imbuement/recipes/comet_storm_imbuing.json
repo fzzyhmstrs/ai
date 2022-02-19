@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "minecraft:tnt"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:tnt"
+  },
+  "craftD": {
+	"item": "minecraft:tnt"
+  },
+  "craftF": {
+	"item": "minecraft:tnt"
+  },
+  "craftG": {
+	"item": "minecraft:tnt"
+  },
+  "craftH": {
+	"item": "minecraft:tnt"
+  },
+  "craftI": {
+	"item": "minecraft:tnt"
+  },
+  "title": "Comet Storm",
+  "cost": 19,
+  "augment": "amethyst_imbuement:comet_storm"
+}
+

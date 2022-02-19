@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftA": {
+	"item": "minecraft:string"
+  },
+  "craftB": {
+	"item": "minecraft:string"
+  },
+  "craftC": {
+	"item": "minecraft:string"
+  },
+  "craftD": {
+	"item": "minecraft:string"
+  },
+  "craftF": {
+	"item": "minecraft:string"
+  },
+  "craftG": {
+	"item": "minecraft:string"
+  },
+  "craftH": {
+	"item": "minecraft:string"
+  },
+  "craftI": {
+	"item": "minecraft:string"
+  },
+  "title": "Feline",
+  "cost": 5,
+  "augment": "amethyst_imbuement:feline"
+}
+

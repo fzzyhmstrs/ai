@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftA": {
+	"item": "minecraft:leather"
+  },
+  "craftB": {
+	"item": "minecraft:leather"
+  },
+  "craftC": {
+	"item": "minecraft:leather"
+  },
+  "craftD": {
+	"item": "minecraft:leather"
+  },
+  "craftF": {
+	"item": "minecraft:leather"
+  },
+  "craftG": {
+	"item": "minecraft:leather"
+  },
+  "craftH": {
+	"item": "minecraft:leather"
+  },
+  "craftI": {
+	"item": "minecraft:leather"
+  },
+  "title": "Lightfooted",
+  "cost": 8,
+  "augment": "amethyst_imbuement:snowfooted"
+}
+

@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "minecraft:copper_block"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:copper_block"
+  },
+  "craftD": {
+	"item": "minecraft:copper_block"
+  },
+  "craftF": {
+	"item": "minecraft:copper_block"
+  },
+  "craftG": {
+	"item": "minecraft:copper_block"
+  },
+  "craftH": {
+	"item": "minecraft:copper_block"
+  },
+  "craftI": {
+	"item": "minecraft:copper_block"
+  },
+  "title": "Lightning Storm",
+  "cost": 22,
+  "augment": "amethyst_imbuement:lightning_storm"
+}
+

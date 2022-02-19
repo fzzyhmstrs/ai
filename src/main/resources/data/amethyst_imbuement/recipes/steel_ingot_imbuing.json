@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:magma_block"
+  },
+  "imbueB": {
+	"item": "minecraft:magma_block"
+  },
+  "imbueC": {
+	"item": "minecraft:magma_block"
+  },
+  "imbueD": {
+	"item": "minecraft:magma_block"
+  },
+  "craftA": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftB": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftC": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftD": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftE": {
+	"tag": "minecraft:coals"
+  },
+  "craftF": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftG": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftH": {
+	"item": "minecraft:raw_iron"
+  },
+  "craftI": {
+	"item": "minecraft:raw_iron"
+  },
+  "title": "Steel Ingot",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:steel_ingot",
+  "countA": 4
+}
+

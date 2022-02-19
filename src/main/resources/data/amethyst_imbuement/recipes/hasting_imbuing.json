@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:diamond"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftA": {
+	"item": "minecraft:iron_pickaxe"
+  },
+  "craftB": {
+	"item": "minecraft:redstone"
+  },
+  "craftC": {
+	"item": "minecraft:iron_pickaxe"
+  },
+  "craftD": {
+	"item": "minecraft:redstone"
+  },
+  "craftF": {
+	"item": "minecraft:redstone"
+  },
+  "craftG": {
+	"item": "minecraft:iron_pickaxe"
+  },
+  "craftH": {
+	"item": "minecraft:redstone"
+  },
+  "craftI": {
+	"item": "minecraft:iron_pickaxe"
+  },
+  "title": "Hasting",
+  "cost": 8,
+  "augment": "amethyst_imbuement:hasting"
+}
+

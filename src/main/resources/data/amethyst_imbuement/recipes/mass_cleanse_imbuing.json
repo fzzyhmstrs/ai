@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftF": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftH": {
+	"item": "minecraft:milk_bucket"
+  },
+  "title": "Mass Cleanse",
+  "cost": 12,
+  "augment": "amethyst_imbuement:mass_cleanse"
+}
+

@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "imbueB": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "imbueC": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "imbueD": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "craftA": {
+	"item": "minecraft:bone_meal"
+  },
+  "craftB": {
+	"item": "minecraft:quartz"
+  },
+  "craftC": {
+	"item": "minecraft:bone_meal"
+  },
+  "craftD": {
+	"item": "minecraft:quartz"
+  },
+  "craftE": {
+	"item": "minecraft:quartz"
+  },
+  "craftF": {
+	"item": "minecraft:quartz"
+  },
+  "craftG": {
+	"item": "minecraft:bone_meal"
+  },
+  "craftH": {
+	"item": "minecraft:quartz"
+  },
+  "craftI": {
+	"item": "minecraft:bone_meal"
+  },
+  "title": "Danburite",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:danburite",
+  "countA": 4
+}
+

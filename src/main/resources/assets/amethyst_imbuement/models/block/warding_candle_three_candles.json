@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_three_candles",
+  "textures": {
+    "all": "amethyst_imbuement:block/warding_candle",
+    "particle": "amethyst_imbuement:block/warding_candle"
+  }
+}

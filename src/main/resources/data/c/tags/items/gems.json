@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:ametrine",
+	"amethyst_imbuement:aventurine",
+	"amethyst_imbuement:bloodstone",
+	"amethyst_imbuement:brilliant_diamond",
+	"amethyst_imbuement:celestine",
+	"amethyst_imbuement:citrine",
+	"amethyst_imbuement:danburite",
+	"amethyst_imbuement:garnet",
+	"amethyst_imbuement:imbued_lapis",
+	"amethyst_imbuement:imbued_quartz",
+	"amethyst_imbuement:moonstone",
+	"amethyst_imbuement:opal",
+	"amethyst_imbuement:pyrite",
+	"amethyst_imbuement:smoky_quartz",
+	"minecraft:diamond",
+	"minecraft:emerald",
+	"minecraft:amethyst_shard",
+	"minecraft:prismarine_crystals",
+	"minecraft:quartz",
+	"minecraft:lapis_lazuli"
+  ]
+}

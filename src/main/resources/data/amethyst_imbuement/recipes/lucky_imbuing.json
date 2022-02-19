@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftA": {
+	"item": "minecraft:bamboo"
+  },
+  "craftB": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftC": {
+	"item": "minecraft:bamboo"
+  },
+  "craftD": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftF": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftG": {
+	"item": "minecraft:bamboo"
+  },
+  "craftH": {
+	"item": "minecraft:rabbit_foot"
+  },
+  "craftI": {
+	"item": "minecraft:bamboo"
+  },
+  "title": "Lucky",
+  "cost": 13,
+  "augment": "amethyst_imbuement:lucky"
+}
+

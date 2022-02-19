@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "craftA": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftB": {
+	"item": "minecraft:golden_carrot"
+  },
+  "craftC": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftD": {
+	"item": "minecraft:golden_carrot"
+  },
+  "craftF": {
+	"item": "minecraft:golden_carrot"
+  },
+  "craftG": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftH": {
+	"item": "minecraft:golden_carrot"
+  },
+  "craftI": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "title": "Invisibility",
+  "cost": 19,
+  "augment": "amethyst_imbuement:invisibilty"
+}
+

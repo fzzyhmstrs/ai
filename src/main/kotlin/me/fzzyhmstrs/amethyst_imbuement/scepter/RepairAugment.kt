@@ -1,0 +1,62 @@
+package me.fzzyhmstrs.amethyst_imbuement.scepter
+
+import me.fzzyhmstrs.amethyst_imbuement.util.ManaItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
+import net.minecraft.util.hit.HitResult
+import net.minecraft.world.World
+import kotlin.math.max
+import kotlin.math.min
+
+@Suppress("SpellCheckingInspection")
+class RepairAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot), ManaItem {
+
+    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+        if (user !is PlayerEntity) return false
+        val stacks: MutableList<ItemStack> = mutableListOf()
+        for (stack2 in user.inventory.main){
+            if (stack2.item !is ManaItem && stack2.isDamaged){
+                stacks.add(stack2)
+            }
+        }
+        for (stack2 in user.armorItems){
+            if (stack2.item !is ManaItem && stack2.isDamaged){
+                stacks.add(stack2)
+            }
+        }
+        if (user.offHandStack.item !is ManaItem && user.offHandStack.isDamaged){
+            stacks.add(user.offHandStack)
+        }
+        if (stacks.isEmpty()) return false
+        val healLeft = 15 * level
+        val leftOverHeal = healItems(stacks,world,healLeft)
+        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.7f,0.9f)
+        return (leftOverHeal < healLeft)
+    }
+
+    private fun healItems(list: MutableList<ItemStack>,world: World, healLeft: Int): Int{
+        var hl = healLeft
+        if (hl <= 0 || list.isEmpty()) return max(0,hl)
+        val rnd = world.random.nextInt(list.size)
+        val stack = list[rnd]
+        val healAmount = min(5,hl)
+        val healedAmount = healDamage(healAmount,stack)
+        hl -= min(healAmount,healedAmount)
+        if (!stack.isDamaged){
+            list.remove(stack)
+        }
+        return healItems(list,world,hl)
+    }
+
+    override fun soundEvent(): SoundEvent {
+        return SoundEvents.BLOCK_ANVIL_USE
+    }
+
+}

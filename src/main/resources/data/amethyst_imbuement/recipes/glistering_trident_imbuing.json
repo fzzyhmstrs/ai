@@ -1,0 +1,48 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftC": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftE": {
+	"item": "minecraft:trident"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftG": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftI": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "title": "Glistering Trident",
+  "cost": 19,
+  "resultA": "amethyst_imbuement:glistering_trident",
+  "countA": 1,
+  "transferEnchant": true
+}
+

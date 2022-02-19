@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:lightning_rod"
+  },
+  "craftF": {
+	"item": "minecraft:lightning_rod"
+  },
+  "craftH": {
+	"item": "minecraft:lightning_rod"
+  },
+  "title": "Lightning Bolt",
+  "cost": 11,
+  "augment": "amethyst_imbuement:lightning_bolt"
+}
+

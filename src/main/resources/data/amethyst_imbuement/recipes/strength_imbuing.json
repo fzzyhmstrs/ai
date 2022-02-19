@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftF": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:steel_ingot"
+  },
+  "title": "Strength",
+  "cost": 11,
+  "augment": "amethyst_imbuement:strength"
+}
+

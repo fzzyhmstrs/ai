@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:diamond"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftA": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftB": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftC": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftD": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftF": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftG": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftH": {
+	"item": "minecraft:milk_bucket"
+  },
+  "craftI": {
+	"item": "minecraft:milk_bucket"
+  },
+  "title": "Immunity",
+  "cost": 21,
+  "augment": "amethyst_imbuement:immunity"
+}
+

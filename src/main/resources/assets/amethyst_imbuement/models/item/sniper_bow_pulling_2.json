@@ -1,0 +1,6 @@
+{
+    "parent": "amethyst_imbuement:item/sniper_bow",
+    "textures": {
+        "layer0": "amethyst_imbuement:item/sniper_bow_pulling_2"
+    }
+}

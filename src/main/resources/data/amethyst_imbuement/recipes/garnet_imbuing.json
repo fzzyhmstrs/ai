@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:flint"
+  },
+  "imbueB": {
+	"item": "minecraft:flint"
+  },
+  "imbueC": {
+	"item": "minecraft:flint"
+  },
+  "imbueD": {
+	"item": "minecraft:flint"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "minecraft:redstone"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftD": {
+	"item": "minecraft:redstone"
+  },
+  "craftE": {
+	"item": "minecraft:diamond"
+  },
+  "craftF": {
+	"item": "minecraft:redstone"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftH": {
+	"item": "minecraft:redstone"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "title": "Garnet",
+  "cost": 8,
+  "resultA": "amethyst_imbuement:garnet",
+  "countA": 1
+}
+

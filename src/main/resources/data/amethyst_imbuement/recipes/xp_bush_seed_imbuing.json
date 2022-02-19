@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftA": {
+	"item": "minecraft:sweet_berries"
+  },
+  "craftB": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftC": {
+	"item": "minecraft:sweet_berries"
+  },
+  "craftD": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftE": {
+	"item": "minecraft:sweet_berries"
+  },
+  "craftF": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftG": {
+	"item": "minecraft:sweet_berries"
+  },
+  "craftH": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftI": {
+	"item": "minecraft:sweet_berries"
+  },
+  "title": "Experience Bush Seed",
+  "cost": 3,
+  "resultA": "amethyst_imbuement:xp_bush_seed",
+  "countA": 3
+}
+

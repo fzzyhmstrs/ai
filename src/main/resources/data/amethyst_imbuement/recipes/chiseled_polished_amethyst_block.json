@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "amethyst_imbuement:polished_amethyst_slab"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:chiseled_polished_amethyst_block"
+  }
+}

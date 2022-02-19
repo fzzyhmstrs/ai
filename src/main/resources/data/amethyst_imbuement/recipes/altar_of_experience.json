@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	" B ",
+	"DOD",
+	"OOO"
+  ],
+  "key": {
+	"B": {
+	  "item": "minecraft:emerald"
+	},
+	"D": {
+	  "item": "amethyst_imbuement:danburite"
+	},
+	"O": {
+	  "item": "minecraft:obsidian"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:altar_of_experience"
+  }
+}
+

@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:blaze_powder"
+  },
+  "imbueB": {
+	"item": "minecraft:blaze_powder"
+  },
+  "imbueC": {
+	"item": "minecraft:blaze_powder"
+  },
+  "imbueD": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftA": {
+	"item": "minecraft:emerald"
+  },
+  "craftB": {
+	"item": "minecraft:raw_copper"
+  },
+  "craftC": {
+	"item": "minecraft:emerald"
+  },
+  "craftD": {
+	"item": "minecraft:raw_copper"
+  },
+  "craftE": {
+	"item": "minecraft:raw_copper"
+  },
+  "craftF": {
+	"item": "minecraft:raw_copper"
+  },
+  "craftG": {
+	"item": "minecraft:emerald"
+  },
+  "craftH": {
+	"item": "minecraft:raw_copper"
+  },
+  "craftI": {
+	"item": "minecraft:emerald"
+  },
+  "title": "Beryllium Copper",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:beryl_copper_ingot",
+  "countA": 4
+}
+

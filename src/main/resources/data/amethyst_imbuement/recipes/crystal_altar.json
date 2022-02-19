@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"LL",
+	"WW",
+	"WW"
+  ],
+  "key": {
+	"L": [
+	  {
+	    "item": "minecraft:lapis_lazuli"
+	  },
+	  {
+	    "item": "minecraft:quartz"
+	  }
+	],
+	"W": {
+	  "tag": "minecraft:planks"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:crystal_altar"
+  }
+}
+

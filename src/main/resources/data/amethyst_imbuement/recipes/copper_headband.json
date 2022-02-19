@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"GHG",
+	"G G"
+  ],
+  "key": {
+	"G": {
+	  "item": "amethyst_imbuement:beryl_copper_ingot"
+	},
+	"H": {
+	  "item": "minecraft:amethyst_shard"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:copper_headband"
+  }
+}
+

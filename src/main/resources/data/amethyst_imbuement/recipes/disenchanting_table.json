@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"ABA",
+	"OEO",
+	"OSO"
+  ],
+  "key": {
+	"A": {
+	  "item": "amethyst_imbuement:moonstone"
+	},
+	"B": {
+	  "item": "minecraft:writable_book"
+	},
+	"E": {
+	  "item": "amethyst_imbuement:altar_of_experience"
+	},
+	"S": {
+	  "item": "minecraft:grindstone"
+	},
+	"O": {
+	  "item": "minecraft:crying_obsidian"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:disenchanting_table"
+  }
+}
+

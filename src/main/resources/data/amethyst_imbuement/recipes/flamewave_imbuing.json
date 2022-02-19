@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftD": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftF": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftG": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftH": {
+	"item": "minecraft:fire_charge"
+  },
+  "craftI": {
+	"item": "minecraft:fire_charge"
+  },
+  "title": "Flamewave",
+  "cost": 15,
+  "augment": "amethyst_imbuement:flamewave"
+}
+

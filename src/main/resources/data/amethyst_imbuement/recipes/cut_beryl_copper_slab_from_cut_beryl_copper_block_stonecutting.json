@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "amethyst_imbuement:cut_beryl_copper_block"
+  },
+  "result": "amethyst_imbuement:cut_beryl_copper_slab",
+  "count": 2
+}

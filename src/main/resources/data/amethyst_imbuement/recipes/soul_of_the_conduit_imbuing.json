@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueB": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "imbueC": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "imbueD": {
+	"item": "minecraft:prismarine_crystals"
+  },
+  "craftA": {
+	"item": "minecraft:prismarine_bricks"
+  },
+  "craftB": {
+	"item": "minecraft:heart_of_the_sea"
+  },
+  "craftC": {
+	"item": "minecraft:prismarine_bricks"
+  },
+  "craftD": {
+	"item": "minecraft:nautilus_shell"
+  },
+  "craftF": {
+	"item": "minecraft:nautilus_shell"
+  },
+  "craftG": {
+	"item": "minecraft:prismarine_bricks"
+  },
+  "craftH": {
+	"item": "minecraft:heart_of_the_sea"
+  },
+  "craftI": {
+	"item": "minecraft:prismarine_bricks"
+  },
+  "title": "Soul of the Conduit",
+  "cost": 18,
+  "augment": "amethyst_imbuement:soul_of_the_conduit"
+}
+

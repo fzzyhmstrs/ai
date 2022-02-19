@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:diamond"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftF": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Striding",
+  "cost": 18,
+  "augment": "amethyst_imbuement:striding"
+}
+

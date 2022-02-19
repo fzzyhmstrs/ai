@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftF": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftH": {
+	"item": "minecraft:golden_apple"
+  },
+  "title": "Fortify",
+  "cost": 9,
+  "augment": "amethyst_imbuement:fortify"
+}
+

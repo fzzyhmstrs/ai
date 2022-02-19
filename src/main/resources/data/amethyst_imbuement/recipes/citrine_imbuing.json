@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:dandelion"
+  },
+  "imbueB": {
+	"item": "minecraft:dandelion"
+  },
+  "imbueC": {
+	"item": "minecraft:dandelion"
+  },
+  "imbueD": {
+	"item": "minecraft:dandelion"
+  },
+  "craftA": {
+	"item": "minecraft:quartz"
+  },
+  "craftB": {
+	"item": "minecraft:quartz"
+  },
+  "craftC": {
+	"item": "minecraft:quartz"
+  },
+  "craftD": {
+	"item": "minecraft:quartz"
+  },
+  "craftE": {
+	"item": "minecraft:iron_ingot"
+  },
+  "craftF": {
+	"item": "minecraft:quartz"
+  },
+  "craftG": {
+	"item": "minecraft:quartz"
+  },
+  "craftH": {
+	"item": "minecraft:quartz"
+  },
+  "craftI": {
+	"item": "minecraft:quartz"
+  },
+  "title": "Citrine",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:citrine",
+  "countA": 4
+}
+

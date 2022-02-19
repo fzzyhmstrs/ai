@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "amethyst_imbuement:polished_amethyst_block"
+  },
+  "result": "amethyst_imbuement:chiseled_polished_amethyst_block",
+  "count": 1
+}

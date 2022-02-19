@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "amethyst_imbuement:block/polished_amethyst_slab"
+    },
+    "type=double": {
+      "model": "amethyst_imbuement:block/polished_amethyst_block"
+    },
+    "type=top": {
+      "model": "amethyst_imbuement:block/polished_amethyst_slab_top"
+    }
+  }
+}

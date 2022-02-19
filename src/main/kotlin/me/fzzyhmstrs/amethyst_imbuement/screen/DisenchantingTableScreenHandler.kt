@@ -1,0 +1,411 @@
+package me.fzzyhmstrs.amethyst_imbuement.screen
+
+import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventory
+import net.minecraft.inventory.SimpleInventory
+import net.minecraft.item.EnchantedBookItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.screen.Property
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.Slot
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
+import java.util.*
+
+@Suppress("SENSELESS_COMPARISON", "unused", "UnnecessaryVariable")
+class DisenchantingTableScreenHandler(
+    syncID: Int,
+    playerInventory: PlayerInventory,
+    private val context: ScreenHandlerContext
+):  ScreenHandler(RegisterHandler.DISENCHANTING_TABLE_SCREEN_HANDLER, syncID) {
+
+    constructor(syncID: Int, playerInventory: PlayerInventory) : this(
+        syncID,
+        playerInventory,
+        ScreenHandlerContext.EMPTY,
+    )
+
+    private val inventory: Inventory = object : SimpleInventory(2) {
+        override fun markDirty() {
+            super.markDirty()
+            this@DisenchantingTableScreenHandler.onContentChanged(this)
+        }
+    }
+    private val random = Random()
+    private val seed = Property.create()
+    private var activeItem = Property.create()
+    var enchantmentId = intArrayOf(-1, -1, -1)
+    var enchantmentLevel = intArrayOf(-1, -1, -1)
+    var disenchantCost = IntArray(1)
+    private var removing = false
+    //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
+
+
+    override fun canUse(player: PlayerEntity): Boolean {
+        return canUse(this.context, player, RegisterBlock.DISENCHANTING_TABLE)
+    }
+
+    fun getSlotStack(index:Int): ItemStack{
+        if (index < 0 || index > inventory.size()-1) return ItemStack.EMPTY
+        return inventory.getStack(index)
+
+    }
+
+    fun getSeed(): Int {
+        return this.seed.get()
+    }
+
+    override fun close(player: PlayerEntity) {
+        super.close(player)
+        context.run { _: World, _: BlockPos ->
+            dropInventory(
+                player,
+                inventory
+            )
+        }
+    }
+
+    override fun onContentChanged(inventory: Inventory) {
+        if (removing) return
+        if (inventory === this.inventory) {
+            val itemStack = inventory.getStack(0)
+            if (itemStack.isEmpty || !itemStack.hasEnchantments()) { //|| !itemStack.isEnchantable
+                for (i in 0..2) {
+                    enchantmentId[i] = -1
+                    enchantmentLevel[i] = -1
+                }
+                disenchantCost[0] = -1
+            }else {
+                context.run { world: World, pos: BlockPos ->
+                    val enchantList = itemStack.enchantments
+                    //first addition of the item to the table, initialize with a default selection
+                    if (enchantmentId[1] == -1 || !checkForEnchantMatch(itemStack)){
+                        enchantmentId[0] = -1
+                        enchantmentLevel[0] = -1
+                        val identifier = EnchantmentHelper.getIdFromNbt(enchantList[0] as NbtCompound)
+                        val defaultEnchant = Registry.ENCHANTMENT.get(identifier)
+                        val defaultEnchantId = Registry.ENCHANTMENT.getRawId(defaultEnchant)
+                        val defaultEnchantLevel = EnchantmentHelper.getLevel(defaultEnchant,itemStack)
+                        enchantmentId[1] = defaultEnchantId
+                        enchantmentLevel[1] = defaultEnchantLevel
+                        if (enchantList.size > 1){
+                            val identifier2 = EnchantmentHelper.getIdFromNbt(enchantList[1] as NbtCompound)
+                            val defaultEnchant2 = Registry.ENCHANTMENT.get(identifier2)
+                            val defaultEnchantId2 = Registry.ENCHANTMENT.getRawId(defaultEnchant2)
+                            val defaultEnchantLevel2 = EnchantmentHelper.getLevel(defaultEnchant2,itemStack)
+                            enchantmentId[2] = defaultEnchantId2
+                            enchantmentLevel[2] = defaultEnchantLevel2
+                        }
+                        activeItem.set(Registry.ITEM.getRawId(itemStack.item))
+                        val nbt = itemStack.nbt
+                        if (!world.isClient) {
+                            if (nbt == null) {
+                                disenchantCost[0] = calculateRequiredExperienceLevel(0)
+                            } else if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
+                                disenchantCost[0] = calculateRequiredExperienceLevel(0)
+                            } else {
+                                val level = readNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
+                                val maxLevel = checkPillars(world, pos) / 2 + 1
+                                if (level >= maxLevel) {
+                                    disenchantCost[0] = -1
+                                } else {
+                                    disenchantCost[0] = calculateRequiredExperienceLevel(level)
+                                }
+                            }
+                        }
+                    }
+                    sendContentUpdates()
+                }
+            }
+            //println("enchants_content_change: ${enchantmentId[0]}, ${enchantmentId[1]}, ${enchantmentId[2]}")
+        }
+    }
+
+    override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        val itemStack = inventory.getStack(0)
+        val itemStack2 = inventory.getStack(1)
+        if (itemStack.isEmpty) return false
+        when (id) {
+            0 -> {
+                if (enchantmentId[id] == -1) return false
+                context.run { world: World, pos: BlockPos ->
+                    val enchantList = itemStack.enchantments
+                    enchantmentId[2] = enchantmentId[1]
+                    enchantmentLevel[2] = enchantmentLevel[1]
+                    enchantmentId[1] = enchantmentId[0]
+                    enchantmentLevel[1] = enchantmentLevel[0]
+                    val refIndex = findReferenceId(itemStack, id)
+                    if (refIndex == 0){
+                        enchantmentId[0] = -1
+                        enchantmentLevel[0] = -1
+                    } else {
+                        val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex-1] as NbtCompound)
+                        val enchant = Registry.ENCHANTMENT.get(identifier)
+                        val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+                        val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)
+                        enchantmentId[0] = enchantId
+                        enchantmentLevel[0] = enchantLevel
+                    }
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.UI_BUTTON_CLICK,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                    sendContentUpdates()
+                }
+            }
+            1 -> {
+                if (enchantmentId[id] == -1) return false
+                if (!itemStack2.isOf(Items.BOOK) || (player.experienceLevel < disenchantCost[0] && !player.abilities.creativeMode)) return false
+                context.run { world: World, pos: BlockPos ->
+                    removing = true
+                    val enchantList3 = EnchantmentHelper.get(itemStack)
+                    val enchantCheck = Registry.ENCHANTMENT.get(enchantmentId[id])
+                    if (enchantList3.containsKey(enchantCheck)){
+                        enchantList3.remove(enchantCheck)
+                    } else {
+                        return@run
+                    }
+                    EnchantmentHelper.set(enchantList3,itemStack)
+                    val itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
+                    val nbtCompound = itemStack2.nbt
+                    if (nbtCompound != null) {
+                        itemStack3.nbt = nbtCompound.copy()
+                    }
+                    if (!player.abilities.creativeMode) {
+                        player.applyEnchantmentCosts(itemStack, disenchantCost[0])
+                    }
+                    inventory.setStack(1, itemStack3)
+                    val entry = EnchantmentLevelEntry(enchantCheck,enchantmentLevel[id])
+                    EnchantedBookItem.addEnchantment(itemStack3,entry)
+                    val enchantList = itemStack.enchantments
+
+                    inventory.markDirty()
+                    if (enchantmentId[2] == -1){
+                        enchantmentId[1] = -1
+                        enchantmentLevel[1] = -1
+                    } else {
+                        enchantmentId[1] = enchantmentId[2]
+                        enchantmentLevel[1] = enchantmentLevel[2]
+                        val refIndex = findReferenceId(itemStack, 2)
+                        if (refIndex == enchantList.size - 1){
+                            enchantmentId[2] = -1
+                            enchantmentLevel[2] = -1
+                        } else {
+                            val identifier2 = EnchantmentHelper.getIdFromNbt(enchantList[refIndex+1] as NbtCompound)
+                            val enchant2 = Registry.ENCHANTMENT.get(identifier2)
+                            val enchantId2 = Registry.ENCHANTMENT.getRawId(enchant2)
+                            val enchantLevel2 = EnchantmentHelper.getLevel(enchant2,itemStack)
+                            enchantmentId[2] = enchantId2
+                            enchantmentLevel[2] = enchantLevel2
+                        }
+                    }
+                    if (!world.isClient) {
+                        val nbt = itemStack.orCreateNbt
+                        if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
+                            writeNbt(NbtKeys.DISENCHANT_COUNT.str(), 1, nbt)
+                        } else {
+                            val currentLevel = readNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt)
+                            writeNbt(NbtKeys.DISENCHANT_COUNT.str(),currentLevel + 1,nbt)
+                        }
+                    }
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.BLOCK_GRINDSTONE_USE,
+                        SoundCategory.BLOCKS,
+                        0.5f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                    removing = false
+                    sendContentUpdates()
+                }
+                //println("enchants: ${enchantmentId[0]}, ${enchantmentId[1]}, ${enchantmentId[2]}")
+            }
+            2 -> {
+                if (enchantmentId[id] == -1) return false
+                context.run { world: World, pos: BlockPos? ->
+                    val enchantList = itemStack.enchantments
+                    enchantmentId[0] = enchantmentId[1]
+                    enchantmentLevel[0] = enchantmentLevel[1]
+                    enchantmentId[1] = enchantmentId[2]
+                    enchantmentLevel[1] = enchantmentLevel[2]
+                    val refIndex = findReferenceId(itemStack, id)
+                    if (refIndex >= enchantList.size-1){
+                        enchantmentId[2] = -1
+                        enchantmentLevel[2] = -1
+                    } else {
+                        val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex+1] as NbtCompound)
+                        println(identifier)
+                        val enchant = Registry.ENCHANTMENT.get(identifier)
+                        val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+                        val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)
+                        enchantmentId[2] = enchantId
+                        enchantmentLevel[2] = enchantLevel
+                    }
+                    world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.UI_BUTTON_CLICK,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        world.random.nextFloat() * 0.1f + 0.9f
+                    )
+                    sendContentUpdates()
+                }
+            }
+        }
+
+        return true
+
+
+    }
+
+
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
+        var itemStack = ItemStack.EMPTY
+        val slot = this.slots[index]
+        if (slot != null && slot.hasStack()) {
+            val itemStack2 = slot.stack
+            itemStack = itemStack2.copy()
+            if (index == 0) {
+                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+            } else if (index == 1) {
+                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+
+            } else {
+                return ItemStack.EMPTY
+            }
+            if (itemStack2.isEmpty) {
+                slot.stack = ItemStack.EMPTY
+            } else {
+                slot.markDirty()
+            }
+            if (itemStack2.count == itemStack.count) {
+                return ItemStack.EMPTY
+            }
+            slot.onTakeItem(player, itemStack2)
+        }
+        return itemStack
+    }
+
+
+    private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
+        return disenchantCount * disenchantCount + disenchantCount + 3
+    }
+    private fun writeNbt(key: String, input: Int, nbt: NbtCompound){
+        nbt.putInt(key,input)
+    }
+    private fun readNbt(key: String, nbt: NbtCompound): Int {
+        return nbt.getInt(key)
+    }
+    private fun checkForEnchantMatch(stack: ItemStack): Boolean{
+        if (Registry.ITEM.getRawId(stack.item) != activeItem.get()) return false
+        for (i in 0..2){
+            if (enchantmentId[i] == -1) continue
+            val enchantTest = Enchantment.byRawId(enchantmentId[i])
+            if (EnchantmentHelper.getLevel(enchantTest,stack) != enchantmentLevel[i]){
+                return false
+            }
+        }
+        return true
+    }
+    private fun findReferenceId(stack: ItemStack, id: Int): Int{
+        val enchantList2 = EnchantmentHelper.get(stack).keys
+        if (enchantList2.isEmpty()) return 0
+        for (i in enchantList2.indices){
+            val enchant = enchantList2.elementAt(i)
+            val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+            if (enchantId == enchantmentId[id]){
+                return i
+            }
+        }
+        return 0
+    }
+    private fun checkPillars(world: World, pos: BlockPos): Int {
+        var pillars = 0
+        for (i in -1..1) {
+            for (j in -1..1) {
+                if (i == 0 && j == 0 || !world.isAir(pos.add(i, 0, j))) continue
+                val bs = world.getBlockState(pos.add(i * 2, 0, j * 2))
+                val bs2 = world.getBlockState(pos.add(i * 2, 1, j * 2))
+                val bl = bs.isIn(RegisterTag.PILLARS_TAG) && bs2.isIn(RegisterTag.PILLARS_TAG)
+                if (bl) {
+                    pillars++
+                }
+            }
+        }
+
+        return pillars
+    }
+
+
+    init{
+        //coordinate system is in pixels, thank god
+        //add top two imbuement slots
+        addSlot(object : Slot(inventory, 0, 15, 47) {
+            override fun canInsert(stack: ItemStack): Boolean { return true }
+            override fun getMaxItemCount(): Int {
+                return 1
+            }
+        })
+        addSlot(object : Slot(inventory, 1, 35, 47) {
+            override fun canInsert(stack: ItemStack): Boolean { return stack.isOf(Items.BOOK) }
+        })
+
+        //add the player inventory
+        for (i in 0..2) {
+            for (j in 0..8) {
+                addSlot(Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
+            }
+        }
+
+        //add the player hotbar
+        for (i in 0..8) {
+            this.addSlot(net.minecraft.screen.slot.Slot(playerInventory, i, 8 + i * 18, 142))
+        }
+
+        //add the properties for the three enchantment bars
+        addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
+        addProperty(activeItem).set(-1)
+        addProperty(Property.create(this.enchantmentId, 0))
+        addProperty(Property.create(this.enchantmentId, 1))
+        addProperty(Property.create(this.enchantmentId, 2))
+        addProperty(Property.create(this.enchantmentLevel, 0))
+        addProperty(Property.create(this.enchantmentLevel, 1))
+        addProperty(Property.create(this.enchantmentLevel, 2))
+        addProperty(Property.create(this.disenchantCost, 0))
+    }
+
+
+}

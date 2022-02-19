@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:ender_eye"
+  },
+  "imbueB": {
+	"item": "minecraft:ender_eye"
+  },
+  "imbueC": {
+	"item": "minecraft:ender_eye"
+  },
+  "imbueD": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftB": {
+	"item": "minecraft:spyglass"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftE": {
+	"item": "minecraft:crossbow"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Sniper Bow",
+  "cost": 19,
+  "resultA": "amethyst_imbuement:sniper_bow",
+  "countA": 1,
+  "transferEnchant": true
+}

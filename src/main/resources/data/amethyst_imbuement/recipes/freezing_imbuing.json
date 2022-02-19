@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:packed_ice"
+  },
+  "craftF": {
+	"item": "minecraft:packed_ice"
+  },
+  "craftH": {
+	"item": "minecraft:packed_ice"
+  },
+  "title": "Freezing",
+  "cost": 6,
+  "augment": "amethyst_imbuement:freezing"
+}
+

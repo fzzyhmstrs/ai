@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:emerald"
+  },
+  "imbueB": {
+	"item": "minecraft:emerald"
+  },
+  "imbueC": {
+	"item": "minecraft:emerald"
+  },
+  "imbueD": {
+	"item": "minecraft:emerald"
+  },
+  "craftA": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftB": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftC": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftD": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftF": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftG": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftH": {
+	"item": "minecraft:soul_sand"
+  },
+  "craftI": {
+	"item": "minecraft:soul_sand"
+  },
+  "title": "Soulbinding",
+  "cost": 8,
+  "augment": "amethyst_imbuement:soulbinding"
+}
+

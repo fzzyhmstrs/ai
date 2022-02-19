@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:celestine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:brilliant_diamond"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:brilliant_diamond"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:celestine"
+  },
+  "craftA": {
+	"item": "minecraft:feather"
+  },
+  "craftB": {
+	"item": "minecraft:elytra"
+  },
+  "craftC": {
+	"item": "minecraft:feather"
+  },
+  "craftD": {
+	"item": "minecraft:feather"
+  },
+  "craftF": {
+	"item": "minecraft:feather"
+  },
+  "craftG": {
+	"item": "minecraft:feather"
+  },
+  "craftH": {
+	"item": "minecraft:elytra"
+  },
+  "craftI": {
+	"item": "minecraft:feather"
+  },
+  "title": "Angelic",
+  "cost": 35,
+  "augment": "amethyst_imbuement:angelic"
+}
+

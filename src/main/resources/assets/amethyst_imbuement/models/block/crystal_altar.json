@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "amethyst_imbuement:block/crystal_altar_front",
+    "north": "amethyst_imbuement:block/crystal_altar_front",
+    "south": "amethyst_imbuement:block/crystal_altar_front",
+    "east": "amethyst_imbuement:block/crystal_altar_side",
+    "west": "amethyst_imbuement:block/crystal_altar_side",
+    "up": "amethyst_imbuement:block/crystal_altar_top",
+    "down": "amethyst_imbuement:block/crystal_altar_bottom"
+  }
+}

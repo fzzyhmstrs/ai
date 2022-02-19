@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueB": {
+	"item": "minecraft:emerald"
+  },
+  "imbueC": {
+	"item": "minecraft:emerald"
+  },
+  "imbueD": {
+	"item": "minecraft:emerald"
+  },
+  "craftA": {
+	"item": "minecraft:ender_pearl"
+  },
+  "craftB": {
+	"item": "minecraft:cobblestone"
+  },
+  "craftC": {
+	"item": "minecraft:ender_pearl"
+  },
+  "craftD": {
+	"item": "minecraft:cobblestone"
+  },
+  "craftF": {
+	"item": "minecraft:cobblestone"
+  },
+  "craftG": {
+	"item": "minecraft:ender_pearl"
+  },
+  "craftH": {
+	"item": "minecraft:cobblestone"
+  },
+  "craftI": {
+	"item": "minecraft:ender_pearl"
+  },
+  "title": "Escape",
+  "cost": 13,
+  "augment": "amethyst_imbuement:escape"
+}
+

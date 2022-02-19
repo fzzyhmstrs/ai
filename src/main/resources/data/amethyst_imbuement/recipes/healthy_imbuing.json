@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:heartstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftA": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftB": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftC": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftD": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftF": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftG": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftH": {
+	"item": "minecraft:golden_apple"
+  },
+  "craftI": {
+	"item": "minecraft:golden_apple"
+  },
+  "title": "Healthy",
+  "cost": 820,
+  "augment": "amethyst_imbuement:healthy"
+}
+

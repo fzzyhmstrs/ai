@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"ABA",
+	"OEO",
+	"OSO"
+  ],
+  "key": {
+	"A": {
+	  "item": "minecraft:amethyst_shard"
+	},
+	"B": {
+	  "item": "minecraft:writable_book"
+	},
+	"E": {
+	  "item": "minecraft:enchanting_table"
+	},
+	"S": {
+	  "item": "minecraft:soul_campfire"
+	},
+	"O": {
+	  "item": "minecraft:crying_obsidian"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:imbuing_table"
+  }
+}
+

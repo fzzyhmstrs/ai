@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "amethyst_imbuement:block/cut_beryl_copper_slab"
+    },
+    "type=double": {
+      "model": "amethyst_imbuement:block/cut_beryl_copper_block"
+    },
+    "type=top": {
+      "model": "amethyst_imbuement:block/cut_beryl_copper_slab_top"
+    }
+  }
+}

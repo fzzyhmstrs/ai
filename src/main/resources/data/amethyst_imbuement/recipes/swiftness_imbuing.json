@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:sugar"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:sugar"
+  },
+  "craftF": {
+	"item": "minecraft:sugar"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:sugar"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Swiftness",
+  "cost": 12,
+  "augment": "amethyst_imbuement:swiftness"
+}
+

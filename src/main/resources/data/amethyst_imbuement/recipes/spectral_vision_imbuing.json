@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftA": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftB": {
+	"item": "minecraft:spectral_arrow"
+  },
+  "craftC": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftD": {
+	"item": "minecraft:spectral_arrow"
+  },
+  "craftF": {
+	"item": "minecraft:spectral_arrow"
+  },
+  "craftG": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftH": {
+	"item": "minecraft:spectral_arrow"
+  },
+  "craftI": {
+	"item": "minecraft:ender_eye"
+  },
+  "title": "Spectral Vision",
+  "cost": 12,
+  "augment": "amethyst_imbuement:spectral_vision"
+}
+

@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:ender_pearl"
+  },
+  "craftF": {
+	"item": "minecraft:ender_pearl"
+  },
+  "craftH": {
+	"item": "minecraft:ender_pearl"
+  },
+  "title": "Teleport",
+  "cost": 10,
+  "augment": "amethyst_imbuement:teleport"
+}
+
