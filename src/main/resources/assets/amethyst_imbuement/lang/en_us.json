@@ -114,7 +114,6 @@
 	"enchantment.amethyst_imbuement.cleaving": "Cleaving",
 	"enchantment.amethyst_imbuement.bulwark": "Bulwark",
 	"enchantment.amethyst_imbuement.night_vision": "Night Vision",
-	"enchantment.amethyst_imbuement.steadfast": "Steadfast",
 	"enchantment.amethyst_imbuement.rain_of_thorns": "Rain of Thorns",
 	"enchantment.amethyst_imbuement.lightfooted": "Lightfooted",
 	"enchantment.amethyst_imbuement.vein_miner": "Vein Miner",
@@ -220,5 +219,6 @@
 	"scepter.wit.lvl": "Wit: ",
 	"scepter.xp": ", XP to next: ",
 	"scepter.active_spell": "Active Spell: ",
-	"recipe.imbuing": "Imbuing"
+	"recipe.imbuing": "Imbuing",
+	"recipe.enhancing": "Enhancing"
 }

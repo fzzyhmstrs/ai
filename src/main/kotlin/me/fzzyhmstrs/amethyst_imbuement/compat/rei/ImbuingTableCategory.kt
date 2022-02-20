@@ -49,7 +49,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         widgets.add(Widgets.createCategoryBase(bounds))
 
         val middleSlotBackground =
-            Widgets.createResultSlotBackground(Point(bounds.x + xOffset + 39, bounds.y + yOffset + 21))
+            Widgets.createResultSlotBackground(Point(bounds.x + xOffset + 43, bounds.y + yOffset + 25))
         widgets.add(middleSlotBackground)
 
         val slot1: Slot = Widgets.createSlot(Point(bounds.x + xOffset, bounds.y + yOffset))
@@ -78,6 +78,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
 
         val slot7: Slot = Widgets.createSlot(Point(bounds.x + xOffset + 43, bounds.y + yOffset + 25))
         slot7.entries(display.inputEntries[6])
+        slot7.disableBackground()
         widgets.add(slot7)
 
         val slot8: Slot = Widgets.createSlot(Point(bounds.x + xOffset + 66, bounds.y + yOffset + 25))
@@ -108,19 +109,20 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         widgets.add(arrow1)
 
         val outputSlotBackground =
-            Widgets.createResultSlotBackground(Point(bounds.x + xOffset + 116, bounds.y + yOffset + 21))
+            Widgets.createResultSlotBackground(Point(bounds.x + xOffset + 120, bounds.y + yOffset + 25))
         widgets.add(outputSlotBackground)
 
         val outputSlot =
-            Widgets.createSlot(Point(bounds.x + xOffset + 116, bounds.y + yOffset + 21))
+            Widgets.createSlot(Point(bounds.x + xOffset + 120, bounds.y + yOffset + 25))
         outputSlot.entries(display.outputEntries[0])
+        outputSlot.disableBackground()
         widgets.add(outputSlot)
 
         return widgets
     }
 
     override fun getDisplayHeight(): Int {
-        return 78
+        return 76
     }
 
     override fun getDisplayWidth(display: ImbuingTableDisplay): Int {

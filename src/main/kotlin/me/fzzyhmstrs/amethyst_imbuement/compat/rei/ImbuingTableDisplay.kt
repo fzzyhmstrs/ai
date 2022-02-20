@@ -15,7 +15,6 @@ import java.util.*
 
 class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
 
-
     override fun getInputEntries(): MutableList<EntryIngredient> {
         val list: MutableList<EntryIngredient> = mutableListOf()
         val inputs = recipe.getInputs()
@@ -76,7 +75,7 @@ class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<*> {
-        return CategoryIdentifier.of<ImbuingTableDisplay>(recipe.id)
+        return CategoryIdentifier.of<ImbuingTableDisplay>(ImbuingRecipe.Type.ID)
     }
 
     /*override fun getDisplayLocation(): Optional<Identifier> {
