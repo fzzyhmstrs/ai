@@ -459,19 +459,30 @@ class ImbuingTableScreenHandler(
         if (slot != null && slot.hasStack()) {
             val itemStack2 = slot.stack
             itemStack = itemStack2.copy()
-            if (index == 0) {
-                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+            if (index < 13) {
+                if (!insertItem(itemStack2, 13, 49, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (index == 1) {
-                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
-                    return ItemStack.EMPTY
+            } else if (index in 13..39) {
+                if (itemStack2.isOf(Items.LAPIS_LAZULI)){
+                    if (!slotChecker(itemStack2,7,40,49)){
+                        return ItemStack.EMPTY
+                    }
+                } else {
+                    if (!slotChecker(itemStack2,6,40,49)){
+                        return ItemStack.EMPTY
+                    }
                 }
-            //} else if (!slots[6].hasStack() && slots[6].canInsert(itemStack2)) {
-            //    val itemStack3 = itemStack2.copy()
-            //    itemStack3.count = 1
-            //    itemStack2.decrement(1)
-            //    slots[6].stack = itemStack3
+            } else if (index in 40..48) {
+                if (itemStack2.isOf(Items.LAPIS_LAZULI)){
+                    if (!slotChecker(itemStack2,7,13,40)){
+                        return ItemStack.EMPTY
+                    }
+                } else {
+                    if (!slotChecker(itemStack2,6,13,40)){
+                        return ItemStack.EMPTY
+                    }
+                }
             } else {
                 return ItemStack.EMPTY
             }
@@ -486,6 +497,19 @@ class ImbuingTableScreenHandler(
             slot.onTakeItem(player, itemStack2)
         }
         return itemStack
+    }
+
+    private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
+        if (!insertItem(stack, firstSlot, firstSlot + 1, false)) {
+            if (!insertItem(stack, 0, firstSlot, false)) {
+                if (!insertItem(stack, firstSlot + 1, 13, false)) {
+                    if (!insertItem(stack, playerSlotStart, playerSlotEnd, true)) {
+                        return false
+                    }
+                }
+            }
+        }
+        return true
     }
 
 
@@ -522,9 +546,9 @@ class ImbuingTableScreenHandler(
             override fun canInsert(stack: ItemStack): Boolean { return true }
         })
         //add main imbuement crafting grid
-        for (j in 0..2) {
-            for(k in 0..2) {
-                if (2+j+(3*k) == 6) {  //skipping the main middle slot, so I can set max count 1
+        for (k in 0..2) {
+            for(j in 0..2) {
+                if (2+k+(3*j) == 6) {  //skipping the main middle slot, so I can set max count 1
                     addSlot(object : Slot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
                         override fun canInsert(stack: ItemStack): Boolean {
                             return true

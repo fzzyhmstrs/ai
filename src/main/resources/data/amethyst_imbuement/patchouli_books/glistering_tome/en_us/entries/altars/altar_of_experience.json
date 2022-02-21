@@ -1,0 +1,15 @@
+{    
+"name": "Altar of Experience",    
+"icon": "amethyst_imbuement:altar_of_experience",    
+"category": "amethyst_imbuement:altars",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The emerald suspended above this altar turns its friendly gaze towards you and offers to keep your soul safe from harm, ready to return it to you at any time. Use this altar to store your experience. Surrounding this altar with candles or warding candles improves its storage capacity."
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:altar_of_experience"
+}
+]
+}

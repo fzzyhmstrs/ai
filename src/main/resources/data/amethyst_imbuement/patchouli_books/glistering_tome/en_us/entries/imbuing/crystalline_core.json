@@ -1,0 +1,28 @@
+{    
+"name": "Crystalline Core",    
+"icon": "amethyst_imbuement:crystalline_core",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Crystalline Core"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:poppy",
+"imbue_b_item": "minecraft:poppy",
+"imbue_c_item": "minecraft:poppy",
+"imbue_d_item": "minecraft:poppy",
+"craft_a_item": "minecraft:amethyst_shard",
+"craft_b_item": "minecraft:amethyst_shard",
+"craft_c_item": "minecraft:amethyst_shard",
+"craft_d_item": "minecraft:amethyst_shard",
+"craft_e_item": "amethyst_imbuement:crystalline_heart",
+"craft_f_item": "minecraft:amethyst_shard",
+"craft_g_item": "minecraft:amethyst_shard",
+"craft_h_item": "minecraft:amethyst_shard",
+"craft_i_item": "minecraft:amethyst_shard",
+"cost_text": "$(l)Level Cost: $(2)10$()"
+}
+]
+}

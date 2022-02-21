@@ -4,8 +4,25 @@
 "category": "amethyst_imbuement:gems",    
 "pages": [        
 {            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	"type": "patchouli:text",            
+	"text": "$(l)Meaning:$() Prosperity $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce pyrite in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:iron_ingot",
+"imbue_b_item": "minecraft:gold_ingot",
+"imbue_c_item": "minecraft:gold_ingot",
+"imbue_d_item": "minecraft:iron_ingot",
+"craft_a_item": "amethyst_imbuement:imbued_quartz",
+"craft_b_item": "minecraft:amethyst_shard",
+"craft_c_item": "amethyst_imbuement:imbued_quartz",
+"craft_d_item": "amethyst_imbuement:citrine",
+"craft_e_item": "amethyst_imbuement:imbued_quartz",
+"craft_f_item": "amethyst_imbuement:citrine",
+"craft_g_item": "amethyst_imbuement:imbued_quartz",
+"craft_h_item": "minecraft:amethyst_shard",
+"craft_i_item": "amethyst_imbuement:imbued_quartz",
+"cost_text": "$(l)Level Cost: $(2)8$()"
+}     
 ]
 }

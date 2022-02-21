@@ -3,9 +3,14 @@
 "icon": "minecraft:diamond",    
 "category": "amethyst_imbuement:gems",    
 "pages": [        
-{            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)Meaning:$() Illumination and Fortitude $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Mine deep underground or ask an enterprising trader if they possess any."      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:diamond",
+		"text": "$(o)Diamonds are the queen of gems, supposedly created when the God of Mines crushed all other gems togehter into one. Use it to provide protection and amplify your innate abilities.$()"       
+	}
 ]
 }

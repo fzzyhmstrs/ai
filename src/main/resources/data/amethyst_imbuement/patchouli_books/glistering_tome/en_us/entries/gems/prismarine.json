@@ -3,9 +3,14 @@
 "icon": "minecraft:prismarine_crystals",    
 "category": "amethyst_imbuement:gems",    
 "pages": [        
-{            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)Meaning:$() Tranquility and Peace $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Prismarine is an oceanic gem; it can only be found in the depths of the oceans."      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:prismarine_crystals",
+		"text": "$(o)Prismarine crystals are key when attempting to calm the mind, body, and spirit. They are instrumental in magics of protection.$()"       
+	}
 ]
 }

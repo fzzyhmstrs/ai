@@ -3,9 +3,14 @@
 "icon": "minecraft:lapis_lazuli",    
 "category": "amethyst_imbuement:gems",    
 "pages": [        
-{            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)Meaning:$() Wisdom $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Lapis Lazuli is abundant in the lower layers of the Earths crust. Villagers also enjoy giving this beautiful cerulean stone as gifts to herioc individuals, and village clerics offer them in trade."      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:lapis_lazuli",
+		"text": "$(o)Lapis lazuli has long been treasured as a symbol of royalty and wisdom. If polished into a cabachon and infused with mystical energy, its abilities can reach new heights.$()"       
+	}
 ]
 }

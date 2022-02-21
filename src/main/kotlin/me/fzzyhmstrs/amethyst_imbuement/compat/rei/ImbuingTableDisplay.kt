@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
+import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
@@ -18,7 +21,6 @@ class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
     override fun getInputEntries(): MutableList<EntryIngredient> {
         val list: MutableList<EntryIngredient> = mutableListOf()
         val inputs = recipe.getInputs()
-        println(inputs)
         for (i in inputs.indices){
             val input = inputs[i]
             if (recipe.getAugment() != "" && i == 6){
@@ -33,7 +35,18 @@ class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
                         }
                         is ScepterAugment -> {
                             val builder = EntryIngredient.builder()
-                            enchant.acceptableItemStacks().forEach { builder.add(EntryStacks.of(it)) }
+                            enchant.acceptableItemStacks().forEach {
+                                val item = it.item
+                                val stack = it.copy()
+                                if (item is BookOfLoreItem){
+                                    println(item)
+                                    item.addLoreKeyForREI(stack,recipe.getAugment())
+                                } else if (item is BookOfMythosItem){
+                                    println(item)
+                                    item.addLoreKeyForREI(stack,recipe.getAugment())
+                                }
+                                builder.add(EntryStacks.of(stack))
+                            }
                             list.add(builder.build())
                         }
                         else -> {

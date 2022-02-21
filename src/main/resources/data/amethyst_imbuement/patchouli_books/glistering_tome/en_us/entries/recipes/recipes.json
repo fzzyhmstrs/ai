@@ -1,0 +1,61 @@
+{    
+"name": "Crafting Recipes",    
+"icon": "minecraft:crafting_table",    
+"category": "amethyst_imbuement:recipes",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Following are recipes for important items, trinkets, and other necessities."
+},
+{
+"type": "patchouli:crafting",
+"anchor": "golden_heart",
+"recipe": "amethyst_imbuement:golden_heart",
+"recipe2": "amethyst_imbuement:steel_block"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "steel_helmet",
+"recipe": "amethyst_imbuement:steel_helmet",
+"recipe2": "amethyst_imbuement:steel_chestplate"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:steel_leggings",
+"recipe2": "amethyst_imbuement:steel_boots"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "beryl_copper_block",
+"recipe": "amethyst_imbuement:beryl_copper_block",
+"recipe2": "amethyst_imbuement:cut_beryl_copper_block"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:cut_beryl_copper_stairs",
+"recipe2": "amethyst_imbuement:cut_beryl_copper_slab"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "chipped_anvil_combine",
+"recipe": "amethyst_imbuement:chipped_anvil_combine",
+"recipe2": "amethyst_imbuement:damaged_anvil_combine"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "polished_amethyst_block",
+"recipe": "amethyst_imbuement:polished_amethyst_block",
+"recipe2": "amethyst_imbuement:polished_amethyst_bricks"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:chiseled_polished_amethyst_block",
+"recipe2": "amethyst_imbuement:polished_amethyst_slab"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:polished_amethyst_stairs",
+"recipe2": "amethyst_imbuement:polished_amethyst_pillar"
+}
+]
+}

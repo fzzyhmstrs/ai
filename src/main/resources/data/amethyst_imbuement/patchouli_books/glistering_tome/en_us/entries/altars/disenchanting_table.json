@@ -1,0 +1,15 @@
+{    
+"name": "Disenchanting Table",    
+"icon": "amethyst_imbuement:disenchanting_table",    
+"category": "amethyst_imbuement:altars",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "When one needs to strip an item of its magical properties, the $(#490)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:disenchanting_table"
+}
+]
+}

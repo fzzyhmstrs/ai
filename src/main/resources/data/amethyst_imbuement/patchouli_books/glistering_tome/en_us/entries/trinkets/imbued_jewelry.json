@@ -1,0 +1,11 @@
+{    
+"name": "Imbued Jewelry",    
+"icon": "amethyst_imbuement:imbued_ring",    
+"category": "amethyst_imbuement:trinkets",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+}
+]
+}

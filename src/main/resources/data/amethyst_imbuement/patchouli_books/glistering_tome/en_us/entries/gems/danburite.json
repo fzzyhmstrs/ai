@@ -4,8 +4,25 @@
 "category": "amethyst_imbuement:gems",    
 "pages": [        
 {            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
+	"type": "patchouli:text",            
+	"text": "$(l)Meaning:$() Knowledge and Creativity $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce danburite in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."     
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:oxeye_daisy",
+"imbue_b_item": "minecraft:oxeye_daisy",
+"imbue_c_item": "minecraft:oxeye_daisy",
+"imbue_d_item": "minecraft:oxeye_daisy",
+"craft_a_item": "minecraft:bone_meal",
+"craft_b_item": "minecraft:quartz",
+"craft_c_item": "minecraft:bone_meal",
+"craft_d_item": "minecraft:quartz",
+"craft_e_item": "minecraft:quartz",
+"craft_f_item": "minecraft:quartz",
+"craft_g_item": "minecraft:bone_meal",
+"craft_h_item": "minecraft:quartz",
+"craft_i_item": "minecraft:bone_meal",
+"cost_text": "$(l)Level Cost: $(2)1$()"
 }    
 ]
 }

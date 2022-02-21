@@ -15,6 +15,7 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
@@ -55,33 +56,26 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
         }
     }
 
-    /*override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-        if (world !is ServerWorld) return
-        if (tickCounter < 40){
-            tickCounter++
-        } else {
-            val nbt = stack.orCreateNbt
-            if(!nbt.contains("book_of_lore_augment")){
-                val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
-                val enchant = readAugNbt("book_of_lore_augment",nbtTemp)
-                writeAugNbt("book_of_lore_augment",enchant,nbt)
-            }
-            tickCounter = 0
-        }
-
-    }*/
-
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
-        println("made it lore!")
         if (world !is ServerWorld) return TypedActionResult.fail(stack)
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
             val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
             val enchant = readAugNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
-            writeAugNbt("book_of_lore_augment",enchant,nbt)
+            writeAugNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
         }
         return TypedActionResult.success(stack)
+    }
+
+    fun addLoreKeyForREI(stack: ItemStack,augment: String){
+        val nbt = stack.orCreateNbt
+        if(!nbt.contains(NbtKeys.LORE_KEY.str())) {
+            val identifier = Identifier(augment)
+            val aug = identifier.path
+            writeAugNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
+            println(stack.nbt)
+        }
     }
 
     override fun hasGlint(stack: ItemStack): Boolean {

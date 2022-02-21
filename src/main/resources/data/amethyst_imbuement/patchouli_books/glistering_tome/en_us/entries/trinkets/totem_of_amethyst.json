@@ -1,0 +1,11 @@
+{    
+"name": "Totem of Amethyst",    
+"icon": "amethyst_imbuement:totem_of_amethyst",    
+"category": "amethyst_imbuement:trinkets",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+}
+]
+}

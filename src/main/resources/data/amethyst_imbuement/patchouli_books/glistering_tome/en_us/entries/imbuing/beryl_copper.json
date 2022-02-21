@@ -1,0 +1,28 @@
+{    
+"name": "Beryllium Copper",    
+"icon": "amethyst_imbuement:beryl_copper_ingot",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Beryllium Copper"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:blaze_powder",
+"imbue_b_item": "minecraft:blaze_powder",
+"imbue_c_item": "minecraft:blaze_powder",
+"imbue_d_item": "minecraft:blaze_powder",
+"craft_a_item": "minecraft:emerald",
+"craft_b_item": "minecraft:raw_copper",
+"craft_c_item": "minecraft:emerald",
+"craft_d_item": "minecraft:raw_copper",
+"craft_e_item": "minecraft:raw_copper",
+"craft_f_item": "minecraft:raw_copper",
+"craft_g_item": "minecraft:emerald",
+"craft_h_item": "minecraft:raw_copper",
+"craft_i_item": "minecraft:emerald",
+"cost_text": "$(l)Level Cost: $(2)1$()"
+}
+]
+}

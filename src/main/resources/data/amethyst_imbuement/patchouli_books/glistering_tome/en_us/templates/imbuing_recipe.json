@@ -1,0 +1,117 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "Imbuing Recipe",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_a_item#",
+"framed": true,
+"x": 4,            
+"y": 14
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_a_item#",
+"framed": true,
+"x": 27,            
+"y": 37
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_b_item#",
+"framed": true,
+"x": 50,            
+"y": 37
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_c_item#",
+"framed": true,
+"x": 73,            
+"y": 37
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_d_item#",
+"framed": true,
+"x": 27,            
+"y": 60
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_e_item#",
+"framed": true,
+"x": 50,            
+"y": 60
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_f_item#",
+"framed": true,
+"x": 73,            
+"y": 60
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_g_item#",
+"framed": true,
+"x": 27,            
+"y": 83
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_h_item#",
+"framed": true,
+"x": 50,            
+"y": 83
+},
+{
+"type": "patchouli:item", 
+"item": "#craft_i_item#",
+"framed": true,
+"x": 73,            
+"y": 83
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_b_item#",
+"framed": true,
+"x": 96,            
+"y": 14
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_c_item#",
+"framed": true,
+"x": 4,            
+"y": 106
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_d_item#",
+"framed": true,
+"x": 96,            
+"y": 106
+},
+{
+"type": "patchouli:text", 
+"text": "#cost_text#",
+"x": 28,            
+"y": 18
+}
+]}
+
+
+
+
+
+
+
+
+
+
+
+

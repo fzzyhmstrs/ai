@@ -2,10 +2,27 @@
 "name": "Celestine",    
 "icon": "amethyst_imbuement:celestine",    
 "category": "amethyst_imbuement:gems",    
-"pages": [        
+"pages": [      
 {            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	"type": "patchouli:text",            
+	"text": "$(l)Meaning:$() Divinity $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Produce celestine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:shulker_shell",
+"imbue_b_item": "minecraft:shulker_shell",
+"imbue_c_item": "minecraft:shulker_shell",
+"imbue_d_item": "minecraft:shulker_shell",
+"craft_a_item": "amethyst_imbuement:ametrine",
+"craft_b_item": "amethyst_imbuement:moonstone",
+"craft_c_item": "amethyst_imbuement:ametrine",
+"craft_d_item": "amethyst_imbuement:brilliant_diamond",
+"craft_e_item": "minecraft:nether_star",
+"craft_f_item": "amethyst_imbuement:brilliant_diamond",
+"craft_g_item": "amethyst_imbuement:ametrine",
+"craft_h_item": "amethyst_imbuement:moonstone",
+"craft_i_item": "amethyst_imbuement:ametrine",
+"cost_text": "$(l)Level Cost: $(2)49$()"
+}   
 ]
 }

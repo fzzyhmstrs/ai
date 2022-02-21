@@ -4,8 +4,31 @@
 "category": "amethyst_imbuement:gems",    
 "pages": [        
 {            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	"type": "patchouli:text",            
+	"text": "$(l)Meaning:$() Wisdom and Patience $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce imbued lapis in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() or enhance $(#b0b)lapis lazuli$() in the $(#490)$(l:amethyst_imbuement:altars/crystal_altar)Crystal Altar$()."      
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:lilac",
+"imbue_b_item": "minecraft:lilac",
+"imbue_c_item": "minecraft:lilac",
+"imbue_d_item": "minecraft:lilac",
+"craft_a_item": "minecraft:lapis_lazuli",
+"craft_b_item": "minecraft:lapis_lazuli",
+"craft_c_item": "minecraft:lapis_lazuli",
+"craft_d_item": "minecraft:lapis_lazuli",
+"craft_e_item": "minecraft:book",
+"craft_f_item": "minecraft:lapis_lazuli",
+"craft_g_item": "minecraft:lapis_lazuli",
+"craft_h_item": "minecraft:lapis_lazuli",
+"craft_i_item": "minecraft:lapis_lazuli",
+"cost_text": "$(l)Level Cost: $(2)1$()"
+},
+{
+"type": "amethyst_imbuement:altar_recipe",
+"input_item": "minecraft:lapis_lazuli",
+"addition_item": "minecraft:lilac",
+"output_item": "amethyst_imbuement:imbued_lapis"
+}
 ]
 }

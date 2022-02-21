@@ -86,9 +86,10 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             }
             val string = "" + handler.disenchantCost[0]
             val s = 86 - textRenderer.getWidth(string)
-            val stringVisitable = Enchantment.byRawId(r)?.getName(lvl)?: LiteralText("Missing Enchantment")
+            val str = Enchantment.byRawId(r)?.getName(lvl)?.string?: "Missing Enchantment"
+            val stringVisitable: StringVisitable = LiteralText(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             var t = 6839882
-            var t2 = 6839882
+            var t2 = 0x404040//6839882
             val oOfst = handler.disenchantCost[0] - 1
 
             var vertOffset = 0
@@ -102,7 +103,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         0xFFFF80
                     } else {
                         this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
-                        6839882
+                        0x404040
+                        //6839882
                     }
                     vertOffset = 0
                     vertOffset2 = 0
@@ -112,7 +114,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     vertOffset = 16
                     vertOffset2 = 10
                     t = 4226832
-                    t2 = 0x342F25
+                    t2 = 0xC0C0C0//0x342F25
                 }
                 if (oOfst <= 6) {
                     this.drawTexture(
@@ -178,7 +180,11 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     )
 
                 }
-                textRenderer.drawTrimmed(stringVisitable, q, j + 16 + 19 * o, s, t2)
+                if (textRenderer.getWidth(stringVisitable) > s) {
+                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                } else {
+                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                }
                 textRenderer.drawWithShadow(
                     matrices,
                     string,
@@ -211,9 +217,13 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         16,
                         16
                     )
-                    t2 = 6839882
+                    t2 = 0x404040
                 }
-                textRenderer.drawTrimmed(stringVisitable, q, j + 16 + 19 * o, s, t2)
+                if (textRenderer.getWidth(stringVisitable) > s) {
+                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                } else {
+                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                }
             }
 
         }

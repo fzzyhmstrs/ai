@@ -1,0 +1,15 @@
+{    
+"name": "Imbuing Table",    
+"icon": "amethyst_imbuement:imbuing_table",    
+"category": "amethyst_imbuement:altars",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical attunement... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround your table with bookshelves, stacked up to twice the number as an $(#490)Enchanting Table$(), to boost the magical performance of your table."
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:imbuing_table"
+}
+]
+}

@@ -15,6 +15,7 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
@@ -57,22 +58,6 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
         }
     }
 
-    /*override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-        if (world !is ServerWorld) return
-        if (tickCounter < 40){
-            tickCounter++
-        } else {
-            val nbt = stack.orCreateNbt
-            if(!nbt.contains("book_of_lore_augment")){
-                val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
-                val enchant = readAugNbt("book_of_lore_augment",nbtTemp)
-                writeAugNbt("book_of_lore_augment",enchant,nbt)
-            }
-            tickCounter = 0
-        }
-
-    }*/
-
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
         println("made it mythos!")
@@ -84,6 +69,15 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
             writeAugNbt("book_of_lore_augment",enchant,nbt)
         }
         return TypedActionResult.success(stack)
+    }
+
+    fun addLoreKeyForREI(stack: ItemStack,augment: String){
+        val nbt = stack.orCreateNbt
+        if(!nbt.contains(NbtKeys.LORE_KEY.str())) {
+            val identifier = Identifier(augment)
+            val aug = identifier.path
+            writeAugNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
+        }
     }
 
     override fun hasGlint(stack: ItemStack): Boolean {

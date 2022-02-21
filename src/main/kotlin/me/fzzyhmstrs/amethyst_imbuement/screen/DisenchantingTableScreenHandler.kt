@@ -294,15 +294,22 @@ class DisenchantingTableScreenHandler(
         if (slot != null && slot.hasStack()) {
             val itemStack2 = slot.stack
             itemStack = itemStack2.copy()
-            if (index == 0) {
-                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
+            if (index < 2) {
+                if (!insertItem(itemStack2, 2, 38, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (index == 1) {
-                if (!insertItem(itemStack2, this.inventory.size(), this.slots.size, true)) {
-                    return ItemStack.EMPTY
+            } else if (index in 2..28) {
+                if (itemStack2.isOf(Items.BOOK)) {
+                    slotChecker(itemStack2,1,29,38)
+                } else {
+                    slotChecker(itemStack2,0,29,38)
                 }
-
+            } else if (index in 29..37) {
+                if (itemStack2.isOf(Items.BOOK)) {
+                    slotChecker(itemStack2,1,2,29)
+                } else {
+                    slotChecker(itemStack2,0,2,29)
+                }
             } else {
                 return ItemStack.EMPTY
             }
@@ -317,6 +324,15 @@ class DisenchantingTableScreenHandler(
             slot.onTakeItem(player, itemStack2)
         }
         return itemStack
+    }
+
+    private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
+        if (!insertItem(stack, firstSlot, firstSlot + 1, false)) {
+            if (!insertItem(stack, playerSlotStart, playerSlotEnd, true)) {
+                return false
+            }
+        }
+        return true
     }
 
 
@@ -392,7 +408,7 @@ class DisenchantingTableScreenHandler(
 
         //add the player hotbar
         for (i in 0..8) {
-            this.addSlot(net.minecraft.screen.slot.Slot(playerInventory, i, 8 + i * 18, 142))
+            this.addSlot(Slot(playerInventory, i, 8 + i * 18, 142))
         }
 
         //add the properties for the three enchantment bars

@@ -1,0 +1,28 @@
+{    
+"name": "Mana Potion",    
+"icon": "amethyst_imbuement:mana_potion",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Mana Potion"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "amethyst_imbuement:imbued_lapis",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "minecraft:experience_bottle",
+"craft_b_item": "minecraft:experience_bottle",
+"craft_c_item": "minecraft:experience_bottle",
+"craft_d_item": "minecraft:experience_bottle",
+"craft_e_item": "amethyst_imbuement:imbued_lapis",
+"craft_f_item": "minecraft:experience_bottle",
+"craft_g_item": "minecraft:experience_bottle",
+"craft_h_item": "minecraft:experience_bottle",
+"craft_i_item": "minecraft:experience_bottle",
+"cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}

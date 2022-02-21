@@ -1,0 +1,28 @@
+{    
+"name": "Experience Bush Seed",    
+"icon": "amethyst_imbuement:xp_bush_seed",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Experience Bush Seed"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:sweet_berries",
+"craft_b_item": "minecraft:experience_bottle",
+"craft_c_item": "minecraft:sweet_berries",
+"craft_d_item": "minecraft:experience_bottle",
+"craft_e_item": "minecraft:sweet_berries",
+"craft_f_item": "minecraft:experience_bottle",
+"craft_g_item": "minecraft:sweet_berries",
+"craft_h_item": "minecraft:experience_bottle",
+"craft_i_item": "minecraft:sweet_berries",
+"cost_text": "$(l)Level Cost: $(2)3$()"
+}
+]
+}

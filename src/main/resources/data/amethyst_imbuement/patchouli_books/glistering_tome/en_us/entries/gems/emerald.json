@@ -3,9 +3,14 @@
 "icon": "minecraft:emerald",    
 "category": "amethyst_imbuement:gems",    
 "pages": [        
-{            
-"type": "patchouli:text",            
-"text": "This is a test entry, but it should show up!"        
-}    
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)Meaning:$() Loyalty and Compassion $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Mine deep underground in extreme hills or trade with a willing villager."      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:emerald",
+		"text": "$(o)All of the green of nature is compressed into the facets of the emerald. This natural energy is your steadfast friend, offering its hand in loyalty. Used when you need to depend on your magic most.$()"       
+	}
 ]
 }
