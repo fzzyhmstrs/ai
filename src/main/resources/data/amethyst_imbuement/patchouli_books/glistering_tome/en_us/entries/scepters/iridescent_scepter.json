@@ -1,0 +1,28 @@
+{    
+"name": "Iridescent Scepter",    
+"icon": "amethyst_imbuement:iridescent_scepter",    
+"category": "amethyst_imbuement:scepters",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Iridescent Scepter"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"imbue_a_item": "minecraft:gold_ingot",
+"imbue_b_item": "amethyst_imbuement:iridescent_orb",
+"imbue_c_item": "minecraft:gold_ingot",
+"imbue_d_item": "minecraft:gold_ingot",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:imbued_quartz",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_e_item": "amethyst_imbuement:opaline_scepter",
+"craft_f_item": "amethyst_imbuement:imbued_lapis",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "amethyst_imbuement:imbued_quartz",
+"craft_i_item": "minecraft:air",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}   
+]
+}

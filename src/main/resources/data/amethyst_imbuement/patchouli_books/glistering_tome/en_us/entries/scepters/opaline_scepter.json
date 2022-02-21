@@ -1,0 +1,15 @@
+{    
+"name": "Opaline Scepter",    
+"icon": "amethyst_imbuement:opaline_scepter",    
+"category": "amethyst_imbuement:scepters",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Opaline Scepter"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:opaline_scepter"
+}
+]
+}
