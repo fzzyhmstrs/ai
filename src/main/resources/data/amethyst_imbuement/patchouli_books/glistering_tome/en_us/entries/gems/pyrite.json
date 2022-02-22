@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Pyrite Imbuing",
 "imbue_a_item": "minecraft:iron_ingot",
 "imbue_b_item": "minecraft:gold_ingot",
 "imbue_c_item": "minecraft:gold_ingot",

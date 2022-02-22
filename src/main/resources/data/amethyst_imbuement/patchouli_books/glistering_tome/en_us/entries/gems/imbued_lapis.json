@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Imbued Lapis Imbuing",
 "imbue_a_item": "minecraft:lilac",
 "imbue_b_item": "minecraft:lilac",
 "imbue_c_item": "minecraft:lilac",

@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Danburite Imbuing",
 "imbue_a_item": "minecraft:oxeye_daisy",
 "imbue_b_item": "minecraft:oxeye_daisy",
 "imbue_c_item": "minecraft:oxeye_daisy",

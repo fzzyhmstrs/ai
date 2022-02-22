@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Mana Potion Imbuing",
 "imbue_a_item": "amethyst_imbuement:imbued_lapis",
 "imbue_b_item": "amethyst_imbuement:imbued_lapis",
 "imbue_c_item": "amethyst_imbuement:imbued_lapis",

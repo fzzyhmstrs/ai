@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Ametrine Imbuing",
 "imbue_a_item": "minecraft:netherite_scrap",
 "imbue_b_item": "minecraft:netherite_scrap",
 "imbue_c_item": "minecraft:netherite_scrap",

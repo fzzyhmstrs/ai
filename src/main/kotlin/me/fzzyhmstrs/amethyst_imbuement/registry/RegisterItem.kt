@@ -26,13 +26,13 @@ object RegisterItem {
     val SMOKY_QUARTZ = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["smoky_quartz"] = it}
     val GARNET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["garnet"] = it}
     val DANBURITE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["danburite"] = it}
-    val BLOODSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["bloodstone"] = it}
+    //val BLOODSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["bloodstone"] = it}
     val CRYSTALLINE_HEART = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"crystalline_heart", true).also{ regItem["crystalline_heart"] = it} //item is custom for flavor text
     val CELESTINE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"celestine", true).also{ regItem["celestine"] = it} // item is custom for flavor text. need texture
     val BRILLIANT_DIAMOND = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"brilliant_diamond", false).also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
     val IMBUED_LAPIS = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["imbued_lapis"] = it}
     val PYRITE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["pyrite"] = it}
-    val AVENTURINE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["aventurine"] = it}
+    //val AVENTURINE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["aventurine"] = it}
     val IMBUED_QUARTZ = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["imbued_quartz"] = it}
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["xp_bush_seed"] = it}
 

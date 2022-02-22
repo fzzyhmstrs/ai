@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Iridescent Scepter Imbuing",
 "imbue_a_item": "minecraft:gold_ingot",
 "imbue_b_item": "amethyst_imbuement:iridescent_orb",
 "imbue_c_item": "minecraft:gold_ingot",

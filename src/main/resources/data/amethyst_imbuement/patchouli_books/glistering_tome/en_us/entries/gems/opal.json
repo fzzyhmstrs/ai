@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Opal Imbuing",
 "imbue_a_item": "minecraft:water_bucket",
 "imbue_b_item": "minecraft:water_bucket",
 "imbue_c_item": "minecraft:water_bucket",

@@ -37,7 +37,7 @@
 	"item": "minecraft:golden_apple"
   },
   "title": "Healthy",
-  "cost": 820,
+  "cost": 20,
   "augment": "amethyst_imbuement:healthy"
 }
 

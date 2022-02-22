@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Bottle o' Enchanting Imbuing",
 "imbue_a_item": "minecraft:lapis_lazuli",
 "imbue_b_item": "minecraft:lapis_lazuli",
 "imbue_c_item": "minecraft:lapis_lazuli",

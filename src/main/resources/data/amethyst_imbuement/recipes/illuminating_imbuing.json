@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "minecraft:diamond"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:imbued_lapis"
@@ -13,13 +13,13 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftA": {
-	"item": "minecraft:ender_eye"
-  },
-  "craftB": {
 	"item": "minecraft:glowstone"
   },
-  "craftC": {
+  "craftB": {
 	"item": "minecraft:ender_eye"
+  },
+  "craftC": {
+	"item": "minecraft:glowstone"
   },
   "craftD": {
 	"item": "minecraft:glowstone"
@@ -28,13 +28,13 @@
 	"item": "minecraft:glowstone"
   },
   "craftG": {
-	"item": "minecraft:ender_eye"
+	"item": "minecraft:glowstone"
   },
   "craftH": {
 	"item": "minecraft:glowstone"
   },
   "craftI": {
-	"item": "minecraft:ender_eye"
+	"item": "minecraft:glowstone"
   },
   "title": "Illuminating",
   "cost": 8,

@@ -5,7 +5,25 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "TODO"
+"text": "Once imbued, your jewelry has the capacity to contain magical auras. $(l)Note that imbued jewelry can only hold one augment. Choose wisely!$()$(br2)If you wish to choose another augment, you may strip your jewelry of its current ability in a $($490)Grindstone$(), or you can retain a copy of the previous augment in a $(#490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()$(br2)Imbued Jewelry adds a shielding aura (effect stacks) to the previous speed boost."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Imbued Jewelry Imbuing",
+"imbue_a_item": "minecraft:gold_ingot",
+"imbue_b_item": "minecraft:gold_ingot",
+"imbue_c_item": "minecraft:gold_ingot",
+"imbue_d_item": "minecraft:gold_ingot",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:imbued_quartz",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_e_item": "amethyst_imbuement:copper_ring,amethyst_imbuement:copper_headband,amethyst_imbuement:copper_amulet",
+"craft_f_item": "amethyst_imbuement:imbued_lapis",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "amethyst_imbuement:imbued_quartz",
+"craft_i_item": "minecraft:air",
+"cost_text": "$(l)Level Cost: $(2)9$()"
 }
 ]
 }

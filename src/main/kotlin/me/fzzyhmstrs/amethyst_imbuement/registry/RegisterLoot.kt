@@ -141,7 +141,6 @@ object RegisterLoot {
                 val poolBuilder = FabricLootPoolBuilder.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0F))
                     .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
-                    .with(ItemEntry.builder(RegisterItem.BLOODSTONE).weight(1))
                     .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
                     .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(5))
                     .with(ItemEntry.builder(Items.AIR).weight(78))
@@ -181,7 +180,6 @@ object RegisterLoot {
             } else if (LootTables.NETHER_BRIDGE_CHEST.equals(id)) {
                 val poolBuilder = FabricLootPoolBuilder.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
-                    .with(ItemEntry.builder(RegisterItem.BLOODSTONE).weight(12))
                     .with(ItemEntry.builder(RegisterItem.OPAL).weight(6))
                     .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(2).apply(EnchantWithLevelsLootFunction.builder(UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
                     .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(2).apply(EnchantWithLevelsLootFunction.builder(UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))

@@ -1,0 +1,34 @@
+{    
+"name": "Starting Augments",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:scepter_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The follwoing augments are available for application to a scepter without any especially daunting considerations. Scattered around the world are other tomes that contain the knowledge required for more powerful spells. Adventure around and find some!"
+},
+{
+"type": "patchouli:text",            
+"text": "$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#angelic)Angelic: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#escape)Escape: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#guardian)Guardian: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#hasting)Hasting: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soul_of_the_conduit)Soul of the Conduit: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soulbinding)Soulbinding: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#strength)Strength: $()$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#undying)Undying: $()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Escape Imbuing",
+"anchor": "escape",
+"imbue_a_item": "amethyst_imbuement:pyrite",
+"imbue_b_item": "minecraft:emerald",
+"imbue_c_item": "minecraft:emerald",
+"imbue_d_item": "minecraft:emerald",
+"craft_a_item": "minecraft:ender_pearl",
+"craft_b_item": "minecraft:cobblestone",
+"craft_c_item": "minecraft:ender_pearl",
+"craft_d_item": "minecraft:cobblestone",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:cobblestone",
+"craft_g_item": "minecraft:ender_pearl",
+"craft_h_item": "minecraft:cobblestone",
+"craft_i_item": "minecraft:ender_pearl",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}

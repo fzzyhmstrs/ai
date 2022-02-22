@@ -10,7 +10,7 @@
 	"item": "amethyst_imbuement:pyrite"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:pyrite"
+	"item": "amethyst_imbuement:citrine"
   },
   "craftA": {
 	"item": "minecraft:bamboo"
@@ -22,16 +22,16 @@
 	"item": "minecraft:bamboo"
   },
   "craftD": {
-	"item": "minecraft:rabbit_foot"
+	"item": "minecraft:bamboo"
   },
   "craftF": {
-	"item": "minecraft:rabbit_foot"
+	"item": "minecraft:bamboo"
   },
   "craftG": {
 	"item": "minecraft:bamboo"
   },
   "craftH": {
-	"item": "minecraft:rabbit_foot"
+	"item": "minecraft:bamboo"
   },
   "craftI": {
 	"item": "minecraft:bamboo"

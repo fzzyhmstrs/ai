@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Smoky Quartz Imbuing",
 "imbue_a_item": "minecraft:ink_sac",
 "imbue_b_item": "minecraft:ink_sac",
 "imbue_c_item": "minecraft:ink_sac",

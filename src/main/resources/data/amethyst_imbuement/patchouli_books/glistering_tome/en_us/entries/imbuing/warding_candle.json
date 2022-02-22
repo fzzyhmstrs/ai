@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Warding Candle Imbuing",
 "imbue_a_item": "amethyst_imbuement:smoky_quartz",
 "imbue_b_item": "amethyst_imbuement:smoky_quartz",
 "imbue_c_item": "amethyst_imbuement:smoky_quartz",

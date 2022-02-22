@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Citrine Imbuing",
 "imbue_a_item": "minecraft:dandelion",
 "imbue_b_item": "minecraft:dandelion",
 "imbue_c_item": "minecraft:dandelion",

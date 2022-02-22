@@ -1,0 +1,29 @@
+{    
+"name": "Steel",    
+"icon": "amethyst_imbuement:steel_ingot",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Steel Ingot"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Steel Ingot Imbuing",
+"imbue_a_item": "minecraft:magma_block",
+"imbue_b_item": "minecraft:magma_block",
+"imbue_c_item": "minecraft:magma_block",
+"imbue_d_item": "minecraft:magma_block",
+"craft_a_item": "minecraft:raw_iron",
+"craft_b_item": "minecraft:raw_iron",
+"craft_c_item": "minecraft:raw_iron",
+"craft_d_item": "minecraft:raw_iron",
+"craft_e_item": "minecraft:coal,minecraft:charcoal",
+"craft_f_item": "minecraft:raw_iron",
+"craft_g_item": "minecraft:raw_iron",
+"craft_h_item": "minecraft:raw_iron",
+"craft_i_item": "minecraft:raw_iron",
+"cost_text": "$(l)Level Cost: $(2)1$()"
+}
+]
+}

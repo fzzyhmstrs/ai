@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Experience Bush Seed Imbuing",
 "imbue_a_item": "amethyst_imbuement:danburite",
 "imbue_b_item": "amethyst_imbuement:danburite",
 "imbue_c_item": "amethyst_imbuement:danburite",

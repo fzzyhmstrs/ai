@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Crystalline Core Imbuing",
 "imbue_a_item": "minecraft:poppy",
 "imbue_b_item": "minecraft:poppy",
 "imbue_c_item": "minecraft:poppy",

@@ -5,7 +5,12 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "TODO"
+"text": "The Totem of Amethyst is a powerful artifact reminiscent of the totems crafted by illagers. Totems have a soul of their own, and are therefor more potent magical vessels than jewelry. $(l)Totems can have one passive $(o)and$() $(l)one active augment at any given time.$(br2)If you wish to change augments, you may strip your totem of its current abilities in a $($490)Grindstone$(), or you can retain a copy of a previous augment from a $($490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "totem",
+"recipe": "amethyst_imbuement:totem_of_amethyst"
 }
 ]
 }

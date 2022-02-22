@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "To begin your quest to cast powerful spells, take note of the steps within this guide. Spell casting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters to unlock even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()." 
+"text": "To begin your spellcasting quest, take careful note of the steps within this guide. Spellcasting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters, unlocking even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()." 
 },
 {
 "type": "patchouli:text",

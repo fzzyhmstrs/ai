@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Garnet Imbuing",
 "imbue_a_item": "minecraft:flint",
 "imbue_b_item": "minecraft:flint",
 "imbue_c_item": "minecraft:flint",

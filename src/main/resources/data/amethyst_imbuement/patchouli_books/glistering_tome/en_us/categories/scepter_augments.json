@@ -1,0 +1,6 @@
+{    
+"name": "Scepter Augments",
+"parent": "amethyst_imbuement:augments",
+"description": "Within this section find descriptions of some basic spells you can start augmenting your scepters with right away, as well as templates for the recipes of more advanced spells.",
+"icon": "amethyst_imbuement:book_of_mythos"
+}

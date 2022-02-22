@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Celestine Imbuing",
 "imbue_a_item": "minecraft:shulker_shell",
 "imbue_b_item": "minecraft:shulker_shell",
 "imbue_c_item": "minecraft:shulker_shell",

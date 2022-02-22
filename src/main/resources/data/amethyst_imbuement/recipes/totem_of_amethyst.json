@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"AGA",
+	"GHG",
+	" G "
+  ],
+  "key": {
+	"A": {
+	  "item": "minecraft:amethyst_shard"
+	},
+	"D": {
+	  "item": "amethyst_imbuement:crystalline_heart"
+	},
+	"G": {
+	  "item": "minecraft:gold_ingot"
+	}
+  },
+  "result": {
+	"item": "amethyst_imbuement:totem_of_amethyst"
+  }
+}
+

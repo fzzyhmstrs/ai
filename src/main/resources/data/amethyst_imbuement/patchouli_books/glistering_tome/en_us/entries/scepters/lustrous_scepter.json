@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Lustrous Scepter Imbuing",
 "imbue_a_item": "minecraft:netherite_ingot",
 "imbue_b_item": "amethyst_imbuement:lustrous_sphere",
 "imbue_c_item": "minecraft:netherite_ingot",

@@ -9,6 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
+"title": "Moonstone Imbuing",
 "imbue_a_item": "minecraft:rotten_flesh",
 "imbue_b_item": "minecraft:rotten_flesh",
 "imbue_c_item": "minecraft:rotten_flesh",
