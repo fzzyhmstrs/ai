@@ -1,5 +1,6 @@
-package me.fzzyhmstrs.amethyst_imbuement.enchantment
+package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.enchantment.Enchantment
@@ -20,19 +21,6 @@ import net.minecraft.item.TridentItem
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 
-class LightfootedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.ARMOR_FEET,slot) {
-
-
-    override fun getMinPower(level: Int): Int {
-        return 20
-    }
-
-    override fun getMaxPower(level: Int): Int {
-        return 50
-    }
-
-    override fun getMaxLevel(): Int {
-        return 1
-    }
+class LightfootedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.ARMOR_FEET, *slot) {
 
 }

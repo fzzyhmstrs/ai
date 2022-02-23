@@ -34,7 +34,6 @@ object RegisterEnchantment {
     val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).also{regEnchant["night_vision"] = it}
     val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{regEnchant["steadfast"] = it}
     val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["rain_of_thorns"] = it}
-    val LIGHTFOOTED = LightfootedEnchantment(Enchantment.Rarity.UNCOMMON,EquipmentSlot.FEET).also{regEnchant["lightfooted"] = it}
     val VEIN_MINER = VienMinerEnchantment(Enchantment.Rarity.UNCOMMON,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{regEnchant["vein_miner"] = it}
 
     //augments for imbuing
@@ -54,11 +53,11 @@ object RegisterEnchantment {
     val IMMUNITY = ImmunityAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["immunity"] = it}
     val INVISIBILITY = InvisibilityAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{regEnchant["invisibility"] = it}
     val LEAPING = LeapingAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.LEGS).also{regEnchant["leaping"] = it}
+    val LIGHTFOOTED = LightfootedAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["lightfooted"] = it}
     val LUCKY = LuckyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["lucky"] = it}
     val MOONLIT = MoonlitAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{regEnchant["moonlit"] = it}
     val MULTI_JUMP = MultiJumpAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["multi_jump"] = it}
     val SLIMY = SlimyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["slimy"] = it}
-    val SNOWFOOTED = SnowfootedAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["snowfooted"] = it}
     val SOULBINDING = SoulbindingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["soulbinding"] = it}
     val SOUL_OF_THE_CONDUIT = SoulOfTheConduitAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.OFFHAND).also{regEnchant["soul_of_the_conduit"] = it}
     val SPECTRAL_VISION = SpectralVisionAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.HEAD).also{regEnchant["spectral_vision"] = it}
