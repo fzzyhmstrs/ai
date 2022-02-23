@@ -23,6 +23,7 @@
 "craft_g_item": "amethyst_imbuement:citrine",
 "craft_h_item": "minecraft:amethyst_shard",
 "craft_i_item": "amethyst_imbuement:citrine",
+"result_item": "amethyst_imbuement:ametrine",
 "cost_text": "$(l)Level Cost: $(2)11$()"
 }   
 ]

@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:air",
 "craft_h_item": "amethyst_imbuement:imbued_quartz",
 "craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:iridescent_scepter",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 }   
 ]

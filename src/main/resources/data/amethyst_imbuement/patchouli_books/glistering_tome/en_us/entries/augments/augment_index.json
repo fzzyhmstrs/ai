@@ -1,7 +1,7 @@
 {    
-"name": "Augment Information",    
+"name": "Augment Index",    
 "icon": "minecraft:enchanted_book",    
-"category": "amethyst_imbuement:trinket_augments",    
+"category": "amethyst_imbuement:augments",    
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -1,6 +1,6 @@
 {    
-"name": "Equipment Augments",    
-"icon": "minecraft:diamond_chestplate",    
+"name": "Weapon Augments",    
+"icon": "minecraft:diamond_sword",    
 "category": "amethyst_imbuement:augments",    
 "pages": [        
 {            
@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:text",            
-"text": "$(l)$(#490)$(l:amethyst_imbuement:augments/equipment_augments#crystalline)Crystalline: $()$(br)$(l)$(#490)$(l:amethyst_imbuement:augments/equipment_augments#headhunter)Headhunter: $()$(br)$(l)$(#490)$(l:amethyst_imbuement:augments/equipment_augments#illuminating)Illuminating: $()"
+"text": "$(l)$(#490)$(l:amethyst_imbuement:augments/weapon_augments#crystalline)Crystalline: $()$(br)$(l)$(#490)$(l:amethyst_imbuement:augments/weapon_augments#headhunter)Headhunter: $()$(br)$(l)$(#490)$(l:amethyst_imbuement:augments/weapon_augments#illuminating)Illuminating: $()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -28,6 +28,7 @@
 "craft_g_item": "amethyst_imbuement:citrine",
 "craft_h_item": "amethyst_imbuement:citrine",
 "craft_i_item": "amethyst_imbuement:citrine",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:crystalline\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)6$()"
 },
 {
@@ -47,6 +48,7 @@
 "craft_g_item": "minecraft:ender_eye",
 "craft_h_item": "minecraft:flint",
 "craft_i_item": "minecraft:ender_eye",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:headhunter\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 },
 {
@@ -66,6 +68,7 @@
 "craft_g_item": "minecraft:glowstone",
 "craft_h_item": "minecraft:glowstone",
 "craft_i_item": "minecraft:glowstone",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:illuminating\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)8$()"
 }
 ]

@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:quartz",
 "craft_h_item": "minecraft:quartz",
 "craft_i_item": "minecraft:quartz",
+"result_item": "amethyst_imbuement:imbued_quartz#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
 },
 {

@@ -23,6 +23,7 @@
 "craft_g_item": "amethyst_imbuement:imbued_quartz",
 "craft_h_item": "minecraft:amethyst_shard",
 "craft_i_item": "amethyst_imbuement:imbued_quartz",
+"result_item": "amethyst_imbuement:pyrite",
 "cost_text": "$(l)Level Cost: $(2)8$()"
 }     
 ]

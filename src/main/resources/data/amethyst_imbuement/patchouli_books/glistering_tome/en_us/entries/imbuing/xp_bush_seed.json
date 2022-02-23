@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:sweet_berries",
 "craft_h_item": "minecraft:experience_bottle",
 "craft_i_item": "minecraft:sweet_berries",
+"result_item": "amethyst_imbuement:xp_bush_seed#3",
 "cost_text": "$(l)Level Cost: $(2)3$()"
 }
 ]

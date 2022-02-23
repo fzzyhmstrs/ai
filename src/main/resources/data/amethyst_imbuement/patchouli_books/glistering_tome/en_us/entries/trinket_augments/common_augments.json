@@ -28,6 +28,7 @@
 "craft_g_item": "minecraft:string",
 "craft_h_item": "minecraft:string",
 "craft_i_item": "minecraft:string",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:feline\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)5$()"
 },
 {
@@ -47,6 +48,7 @@
 "craft_g_item": "minecraft:milk_bucket",
 "craft_h_item": "minecraft:milk_bucket",
 "craft_i_item": "minecraft:milk_bucket",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:immunity\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)21$()"
 },
 {
@@ -66,6 +68,7 @@
 "craft_g_item": "minecraft:bamboo",
 "craft_h_item": "minecraft:bamboo",
 "craft_i_item": "minecraft:bamboo",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:lucky\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 },
 {
@@ -85,6 +88,7 @@
 "craft_g_item": "minecraft:lantern",
 "craft_h_item": "minecraft:blaze_powder",
 "craft_i_item": "minecraft:lantern",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:moonlit\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)5$()"
 },
 {
@@ -104,6 +108,7 @@
 "craft_g_item": "minecraft:sunflower",
 "craft_h_item": "minecraft:blaze_powder",
 "craft_i_item": "minecraft:sunflower",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:suntouched\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]

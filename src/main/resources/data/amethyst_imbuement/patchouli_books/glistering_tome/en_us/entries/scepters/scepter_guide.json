@@ -9,11 +9,23 @@
 },
 {
 "type": "patchouli:text",
-"text": "With that accomplished, your path to spell mastery begins as follows... $(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an augment (there are several recorded within this tome).$(li)If you do not have the resources for that at the moment, scepters can naturally perform a magic missile attack.$(li)For more powerful spells find tomes scattered around the world $(li)Cast your spell, and find and add more augments!"
+"text": "With that accomplished, your path to spell mastery begins as follows... $(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_augments/available_augments)Augment$().$(li)If you do not have the resources for that, scepters can innately perform a magic missile attack.$(li)Cast your spells, and find and add more augments! For more powerful spells, find tomes scattered around the world."
 },
 {
 "type": "patchouli:text",
 "text": "Now that you have a functioning scepter, there is some more you should know...$(br2)$(l)Mana: $()Scepters have a limit to the magical energy they can expend at one time. More powerful scepters have higher limits. A blue bar in the item hotbar denotes the remaining scepter mana. If your scepter runs low, you can quaff a $(#b0b)$(l:amethyst_imbuement:imbuing/mana_potion)Mana Potion$() to restore its vigor."
+},
+{
+"type": "patchouli:text",
+"text": "$(l)Active Spell:$() Scepters have an active spell, which is the effect cast when using the item (right click by default). When created, scepters default to Magic Missile as their active spell. Once other augments are added, you can change the active spell by crouching and scrolling. The new active spell will be displayed in Chat. The scepter tooltip lists the active spell as well."
+},
+{
+"type": "patchouli:text",
+"text": "$(l)Scepter Level:$()Casting spells with a scepter increases its magical potential, granting access to more powerful spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augments/augment_index)Opal$() There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
+},
+{
+"type": "amethyst_imbuement:tooltip_image",
+"tooltip_text": "Active spell is shown in $(6)gold$(), the three magical school levels in $(c)red$(), $(2)green$(), and $(9)blue$(). Fury, for example, is currently level 3 and needs 9 more spell casts to reach level 4."
 }
 ]
 }

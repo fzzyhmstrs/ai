@@ -1,0 +1,30 @@
+{    
+"name": "Glistering Trident",    
+"icon": "amethyst_imbuement:glistering_trident",    
+"category": "amethyst_imbuement:weapons",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Glistering Trident"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Glistering Trident",
+"imbue_a_item": "minecraft:gold_ingot",
+"imbue_b_item": "minecraft:gold_ingot",
+"imbue_c_item": "minecraft:gold_ingot",
+"imbue_d_item": "minecraft:gold_ingot",
+"craft_a_item": "minecraft:prismarine_crystals",
+"craft_b_item": "amethyst_imbuement:garnet",
+"craft_c_item": "minecraft:prismarine_crystals",
+"craft_d_item": "amethyst_imbuement:garnet",
+"craft_e_item": "minecraft:trident",
+"craft_f_item": "amethyst_imbuement:garnet",
+"craft_g_item": "minecraft:prismarine_crystals",
+"craft_h_item": "amethyst_imbuement:garnet",
+"craft_i_item": "minecraft:prismarine_crystals",
+"result_item": "amethyst_imbuement:glistering_trident",
+"cost_text": "$(l)Level Cost: $(2)9$()"
+}
+]
+}

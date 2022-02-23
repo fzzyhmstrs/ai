@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:amethyst_shard",
 "craft_h_item": "minecraft:diamond",
 "craft_i_item": "minecraft:amethyst_shard",
+"result_item": "amethyst_imbuement:crystalline_heart",
 "cost_text": "$(l)Level Cost: $(2)15$()"
 }
 ]

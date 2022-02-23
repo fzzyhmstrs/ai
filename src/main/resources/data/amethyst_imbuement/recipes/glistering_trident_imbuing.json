@@ -40,7 +40,7 @@
 	"item": "minecraft:prismarine_crystals"
   },
   "title": "Glistering Trident",
-  "cost": 19,
+  "cost": 9,
   "resultA": "amethyst_imbuement:glistering_trident",
   "countA": 1,
   "transferEnchant": true

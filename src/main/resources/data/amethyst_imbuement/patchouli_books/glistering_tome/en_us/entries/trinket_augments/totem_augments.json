@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:text",            
-"text": "$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#angelic)Angelic: $()$(l)$(4)(Active, Drains durability)$() Enables creative flight when totem is used.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#escape)Escape: $()$(l)$(4)(Active, 3 Uses)$() Using the totem teleports the totem-holder to the surface.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#guardian)Guardian: $()$(l)$(1)(Passive, 1 Use)$() When you health is low, summons a Crystalline Golem as aid.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#hasting)Hasting: $()$(l)$(1)(Passive, Drains durability)$() Grants the totem-holder Haste.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soul_of_the_conduit)Soul of the Conduit: $()$(l)$(4)(Active, Drains durability)$() Grants the totem-holder Conduit Power while in water.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soulbinding)Soulbinding: $()$(l)$(1)(Passive)$() Inventory is not lost upon death.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#strength)Strength: $()$(l)$(4)(Active, Drains durability)$() Grants the totem-holder Strength.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#undying)Undying: $()$(l)$(1)(Passive, 1 Use)$() Ressurects the player upon death and grants them temporary protection."
+"text": "$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#angelic)Angelic: $()Enables creative flight when totem is used.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#escape)Escape: $()Using the totem teleports the holder to the surface.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#guardian)Guardian: $()When the holders health is low, summons a Crystalline Golem in aid.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#hasting)Hasting: $()Grants the holder Haste.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soul_of_the_conduit)Soul of the Conduit: $()Grants the holder Conduit Power while in water.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#soulbinding)Soulbinding: $()Inventory is not lost upon death.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#strength)Strength: $()Grants the totem-holder Strength.$(br)$(l)$(#490)$(l:amethyst_imbuement:trinket_augments/totem_augments#undying)Undying: $()Resurrects the holder upon death and grants them temporary protection."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -28,6 +28,7 @@
 "craft_g_item": "minecraft:feather",
 "craft_h_item": "minecraft:elytra",
 "craft_i_item": "minecraft:feather",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:angelic\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)35$()"
 },
 {
@@ -47,6 +48,7 @@
 "craft_g_item": "minecraft:ender_pearl",
 "craft_h_item": "minecraft:cobblestone",
 "craft_i_item": "minecraft:ender_pearl",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:escape\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 },
 {
@@ -66,6 +68,7 @@
 "craft_g_item": "minecraft:poppy",
 "craft_h_item": "minecraft:amethyst_block",
 "craft_i_item": "minecraft:poppy",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:guardian\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)22$()"
 },
 {
@@ -85,11 +88,12 @@
 "craft_g_item": "minecraft:iron_pickaxe",
 "craft_h_item": "minecraft:redstone",
 "craft_i_item": "minecraft:iron_pickaxe",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:hasting\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)8$()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
-"title": "Soul .. Conduit Imbuing",
+"title": "Soul..Conduit Imbuing",
 "anchor": "soul_of_the_conduit",
 "imbue_a_item": "amethyst_imbuement:danburite",
 "imbue_b_item": "minecraft:prismarine_crystals",
@@ -104,6 +108,7 @@
 "craft_g_item": "minecraft:prismarine_bricks",
 "craft_h_item": "minecraft:heart_of_the_sea",
 "craft_i_item": "minecraft:prismarine_bricks",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soul_of_the_conduit\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)18$()"
 },
 {
@@ -123,6 +128,7 @@
 "craft_g_item": "minecraft:soul_sand",
 "craft_h_item": "minecraft:soul_sand",
 "craft_i_item": "minecraft:soul_sand",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soulbinding\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)8$()"
 },
 {
@@ -142,6 +148,7 @@
 "craft_g_item": "amethyst_imbuement:steel_ingot",
 "craft_h_item": "minecraft:blaze_powder",
 "craft_i_item": "amethyst_imbuement:steel_ingot",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:strength\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)11$()"
 },
 {
@@ -161,6 +168,7 @@
 "craft_g_item": "minecraft:soul_sand",
 "craft_h_item": "minecraft:egg",
 "craft_i_item": "minecraft:soul_sand",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:undying\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)18$()"
 }
 ]

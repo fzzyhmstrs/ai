@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:emerald",
 "craft_h_item": "minecraft:raw_copper",
 "craft_i_item": "minecraft:emerald",
+"result_item": "amethyst_imbuement:beryl_copper_ingot#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
 }
 ]

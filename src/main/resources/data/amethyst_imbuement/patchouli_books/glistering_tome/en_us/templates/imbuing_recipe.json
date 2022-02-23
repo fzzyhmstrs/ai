@@ -14,6 +14,27 @@
 },
 {
 "type": "patchouli:item", 
+"item": "#imbue_b_item#",
+"framed": true,
+"x": 96,            
+"y": 14
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_c_item#",
+"framed": true,
+"x": 4,            
+"y": 106
+},
+{
+"type": "patchouli:item", 
+"item": "#imbue_d_item#",
+"framed": true,
+"x": 96,            
+"y": 106
+},
+{
+"type": "patchouli:item", 
 "item": "#craft_a_item#",
 "framed": true,
 "x": 27,            
@@ -77,30 +98,28 @@
 },
 {
 "type": "patchouli:item", 
-"item": "#imbue_b_item#",
+"item": "#result_item#",
 "framed": true,
-"x": 96,            
-"y": 14
-},
-{
-"type": "patchouli:item", 
-"item": "#imbue_c_item#",
-"framed": true,
-"x": 4,            
-"y": 106
-},
-{
-"type": "patchouli:item", 
-"item": "#imbue_d_item#",
-"framed": true,
-"x": 96,            
-"y": 106
+"x": 50,            
+"y": 123
 },
 {
 "type": "patchouli:text", 
 "text": "#cost_text#",
 "x": 28,            
 "y": 18
+},
+{
+"type": "patchouli:image",                        
+"x": 53,            
+"y": 107,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
 }
 ]}
 

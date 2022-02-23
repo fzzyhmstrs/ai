@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:bone_meal",
 "craft_h_item": "minecraft:quartz",
 "craft_i_item": "minecraft:bone_meal",
+"result_item": "amethyst_imbuement:danburite#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
 }    
 ]

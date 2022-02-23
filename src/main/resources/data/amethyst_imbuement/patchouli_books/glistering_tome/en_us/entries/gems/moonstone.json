@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:prismarine_crystals",
 "craft_h_item": "amethyst_imbuement:imbued_quartz",
 "craft_i_item": "minecraft:prismarine_crystals",
+"result_item": "amethyst_imbuement:moonstone",
 "cost_text": "$(l)Level Cost: $(2)6$()"
 }      
 ]

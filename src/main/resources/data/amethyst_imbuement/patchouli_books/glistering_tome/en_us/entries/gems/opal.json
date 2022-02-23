@@ -23,6 +23,7 @@
 "craft_g_item": "amethyst_imbuement:danburite",
 "craft_h_item": "amethyst_imbuement:imbued_lapis",
 "craft_i_item": "amethyst_imbuement:smoky_quartz",
+"result_item": "amethyst_imbuement:opal",
 "cost_text": "$(l)Level Cost: $(2)6$()"
 }     
 ]

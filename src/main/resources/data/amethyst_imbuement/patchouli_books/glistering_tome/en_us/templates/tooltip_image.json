@@ -1,0 +1,38 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "Toolip Example",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:image",                        
+"x": 0,            
+"y": 14,
+"image": "amethyst_imbuement:textures/gui/patchouli/tooltip.png",
+"width": 116,
+"height": 58,
+"u": 0,
+"v": 0,
+"texture_width": 128,
+"texture_height": 128
+},
+{
+"type": "patchouli:text",
+"text": "#tooltip_text#",
+"x": 0,
+"y": 80
+}
+]}
+
+
+
+
+
+
+
+
+
+
+
+

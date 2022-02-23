@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:candle",
 "craft_h_item": "minecraft:candle",
 "craft_i_item": "minecraft:candle",
+"result_item": "amethyst_imbuement:warding_candle#8",
 "cost_text": "$(l)Level Cost: $(2)3$()"
 }
 ]

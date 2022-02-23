@@ -28,6 +28,7 @@
 "craft_g_item": "minecraft:ender_eye",
 "craft_h_item": "minecraft:dragon_breath",
 "craft_i_item": "minecraft:ender_eye",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:draconic_vision\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)18$()"
 },
 {
@@ -47,6 +48,7 @@
 "craft_g_item": "minecraft:air",
 "craft_h_item": "minecraft:gold_ingot",
 "craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:friendly\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)21$()"
 },
 {
@@ -66,6 +68,7 @@
 "craft_g_item": "minecraft:golden_apple",
 "craft_h_item": "minecraft:golden_apple",
 "craft_i_item": "minecraft:golden_apple",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:healthy\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)20$()"
 },
 {
@@ -85,6 +88,7 @@
 "craft_g_item": "minecraft:shield",
 "craft_h_item": "minecraft:gold_ingot",
 "craft_i_item": "minecraft:shield",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:shielding\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)4$()"
 },
 {
@@ -104,6 +108,7 @@
 "craft_g_item": "minecraft:ender_eye",
 "craft_h_item": "minecraft:spectral_arrow",
 "craft_i_item": "minecraft:ender_eye",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:spectral_vision\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)12$()"
 }
 ]

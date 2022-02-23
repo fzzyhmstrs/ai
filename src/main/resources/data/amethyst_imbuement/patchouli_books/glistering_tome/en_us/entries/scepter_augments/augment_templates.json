@@ -1,11 +1,11 @@
 {    
-"name": "Starting Augments",    
+"name": "Augment Templates",    
 "icon": "amethyst_imbuement:book_of_lore",    
 "category": "amethyst_imbuement:scepter_augments",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The following augments are immediately available for upgrading a scepter. Scattered around the world are other tomes that contain the knowledge required for more powerful spells. Adventure around and find some!"
+"text": "The more powerful spells described in hidden tomes follow common imbuing patterns. See the following pages for the templates these spells follow:"
 },
 {
 "type": "patchouli:text",            

@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:raw_iron",
 "craft_h_item": "minecraft:raw_iron",
 "craft_i_item": "minecraft:raw_iron",
+"result_item": "amethyst_imbuement:steel_ingot#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
 }
 ]

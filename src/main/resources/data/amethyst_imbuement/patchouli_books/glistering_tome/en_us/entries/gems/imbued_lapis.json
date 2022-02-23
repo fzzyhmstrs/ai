@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:lapis_lazuli",
 "craft_h_item": "minecraft:lapis_lazuli",
 "craft_i_item": "minecraft:lapis_lazuli",
+"result_item": "amethyst_imbuement:imbued_lapis#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
 },
 {

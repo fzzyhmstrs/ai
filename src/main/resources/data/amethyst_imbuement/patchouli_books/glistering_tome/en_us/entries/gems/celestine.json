@@ -23,6 +23,7 @@
 "craft_g_item": "amethyst_imbuement:ametrine",
 "craft_h_item": "amethyst_imbuement:moonstone",
 "craft_i_item": "amethyst_imbuement:ametrine",
+"result_item": "amethyst_imbuement:celestine",
 "cost_text": "$(l)Level Cost: $(2)49$()"
 }   
 ]

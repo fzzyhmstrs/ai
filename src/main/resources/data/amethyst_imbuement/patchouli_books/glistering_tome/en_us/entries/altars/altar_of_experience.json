@@ -10,6 +10,21 @@
 {
 "type": "patchouli:crafting",
 "recipe": "amethyst_imbuement:altar_of_experience"
+},
+{
+"type": "patchouli:multiblock",
+"name": "Altar of XP Setup",
+"multiblock": {
+	"pattern": [
+		["BBBBB","B   B","B 0 B","B   B","BBBBB"]
+	],
+	"mapping": {                  
+	"B": "#minecraft:candles",         
+	"0": "amethyst_imbuement:altar_of_experience"     
+	}
+},
+"enable_visualize": false,
+"text": "Displayed is the maximum possible setup for the disenchanting table. Fewer pillars yield less power."
 }
 ]
 }

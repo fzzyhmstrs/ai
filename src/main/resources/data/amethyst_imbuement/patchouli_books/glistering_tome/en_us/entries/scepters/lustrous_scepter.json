@@ -23,6 +23,7 @@
 "craft_g_item": "amethyst_imbuement:imbued_lapis",
 "craft_h_item": "amethyst_imbuement:garnet",
 "craft_i_item": "amethyst_imbuement:imbued_lapis",
+"result_item": "amethyst_imbuement:lustrous_scepter",
 "cost_text": "$(l)Level Cost: $(2)33$()"
 }   
 ]

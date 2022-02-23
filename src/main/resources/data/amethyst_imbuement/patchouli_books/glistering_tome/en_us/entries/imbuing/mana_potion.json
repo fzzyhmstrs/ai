@@ -23,6 +23,7 @@
 "craft_g_item": "minecraft:experience_bottle",
 "craft_h_item": "minecraft:experience_bottle",
 "craft_i_item": "minecraft:experience_bottle",
+"result_item": "amethyst_imbuement:mana_potion#8",
 "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]
