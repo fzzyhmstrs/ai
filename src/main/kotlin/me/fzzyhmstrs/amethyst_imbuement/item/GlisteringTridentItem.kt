@@ -71,33 +71,32 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
         if (user !is PlayerEntity) {
             return
         }
-        val playerEntity = user
         val i = getMaxUseTime(stack) - remainingUseTicks
         if (i < 10) {
             return
         }
         val j = EnchantmentHelper.getRiptide(stack)
         println(j)
-        if (j > 0 && !playerEntity.isTouchingWaterOrRain) {
+        if (j > 0 && !user.isTouchingWaterOrRain) {
             return
         }
         if (!world.isClient) {
-            stack.damage(1, playerEntity) { p: PlayerEntity ->
+            stack.damage(1, user) { p: PlayerEntity ->
                 p.sendToolBreakStatus(
                     user.getActiveHand()
                 )
             }
             if (j == 0) {
-                val glisteringTridentEntity = GlisteringTridentEntity(world, playerEntity as LivingEntity, stack)
+                val glisteringTridentEntity = GlisteringTridentEntity(world, user as LivingEntity, stack)
                 glisteringTridentEntity.setVelocity(
-                    playerEntity,
-                    playerEntity.pitch,
-                    playerEntity.yaw,
+                    user,
+                    user.pitch,
+                    user.yaw,
                     0.0f,
                     2.5f + j.toFloat() * 0.5f,
                     1.0f
                 )
-                if (playerEntity.abilities.creativeMode) {
+                if (user.abilities.creativeMode) {
                     glisteringTridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
                 }
                 world.spawnEntity(glisteringTridentEntity)
@@ -109,15 +108,15 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
                     1.0f,
                     1.0f
                 )
-                if (!playerEntity.abilities.creativeMode) {
-                    playerEntity.inventory.removeOne(stack)
+                if (!user.abilities.creativeMode) {
+                    user.inventory.removeOne(stack)
                 }
             }
         }
-        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this))
+        user.incrementStat(Stats.USED.getOrCreateStat(this))
         if (j > 0) {
-            val glisteringTridentEntity = playerEntity.yaw
-            val f = playerEntity.pitch
+            val glisteringTridentEntity = user.yaw
+            val f = user.pitch
             var g =
                 -MathHelper.sin(glisteringTridentEntity * (Math.PI.toFloat() / 180)) * MathHelper.cos(f * (Math.PI.toFloat() / 180))
             var h = -MathHelper.sin(f * (Math.PI.toFloat() / 180))
@@ -130,16 +129,16 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
             g *= m
             h *= m
             k *= m
-            playerEntity.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
-            playerEntity.setRiptideTicks(20)
+            user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
+            user.setRiptideTicks(20)
             println("world is client: ${world.isClient}, after velocity is: ${user.velocity}")
-            if (playerEntity.isOnGround) {
+            if (user.isOnGround) {
                 //val n = 1.1999999f
-                playerEntity.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))
+                user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))
             }
             val n =
                 if (j >= 3) SoundEvents.ITEM_TRIDENT_RIPTIDE_3 else if (j == 2) SoundEvents.ITEM_TRIDENT_RIPTIDE_2 else SoundEvents.ITEM_TRIDENT_RIPTIDE_1
-            world.playSoundFromEntity(null, playerEntity, n, SoundCategory.PLAYERS, 1.0f, 1.0f)
+            world.playSoundFromEntity(null, user, n, SoundCategory.PLAYERS, 1.0f, 1.0f)
         }
     }
 

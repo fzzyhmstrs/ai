@@ -6,7 +6,7 @@ import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
 
-class IlluminingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW, *slot) {
+class IlluminatingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW, *slot) {
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return (stack.isOf(RegisterItem.SNIPER_BOW))
