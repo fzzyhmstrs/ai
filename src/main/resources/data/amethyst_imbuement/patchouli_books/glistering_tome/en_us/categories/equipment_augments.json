@@ -1,0 +1,6 @@
+{    
+"name": "Equipment Augments",
+"parent": "amethyst_imbuement:augments",
+"description": "Augments in this list can be applied to your normal armor and other equipment like shields. For augments related weaponry, see $(#490)Weapon Augments$().",
+"icon": "amethyst_imbuement:ametrine_chestplate"
+}

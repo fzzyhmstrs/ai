@@ -1,0 +1,31 @@
+{    
+"name": "Illuminating Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:weapon_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Illuminating Imbuing",
+"anchor": "illuminating",
+"imbue_a_item": "minecraft:diamond",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "minecraft:glowstone",
+"craft_b_item": "minecraft:ender_eye",
+"craft_c_item": "minecraft:glowstone",
+"craft_d_item": "minecraft:glowstone",
+"craft_e_item": "amethyst_imbuement:sniper_bow",
+"craft_f_item": "minecraft:glowstone",
+"craft_g_item": "minecraft:glowstone",
+"craft_h_item": "minecraft:glowstone",
+"craft_i_item": "minecraft:glowstone",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:illuminating\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)8$()"
+}
+]
+}

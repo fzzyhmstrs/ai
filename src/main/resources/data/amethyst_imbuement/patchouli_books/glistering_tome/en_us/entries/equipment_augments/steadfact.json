@@ -1,0 +1,31 @@
+{    
+"name": "Steadfast Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:equipment_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Steadfast Imbuing",
+"anchor": "steadfast",
+"imbue_a_item": "amethyst_imbuement:imbued_lapis",
+"imbue_b_item": "minecraft:amethyst_shard",
+"imbue_c_item": "minecraft:amethyst_shard",
+"imbue_d_item": "minecraft:amethyst_shard",
+"craft_a_item": "amethyst_imbuement:steel_ingot",
+"craft_b_item": "#minecraft:wool",
+"craft_c_item": "amethyst_imbuement:steel_ingot",
+"craft_d_item": "#minecraft:wool",
+"craft_e_item": "minecraft:chainmail_helmet,minecraft:chainmail_chestplate,minecraft:chainmail_leggings,minecraft:chainmail_boots",
+"craft_f_item": "#minecraft:wool",
+"craft_g_item": "amethyst_imbuement:steel_ingot",
+"craft_h_item": "#minecraft:wool",
+"craft_i_item": "amethyst_imbuement:steel_ingot",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:steadfast\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)4$()"
+}
+]
+}

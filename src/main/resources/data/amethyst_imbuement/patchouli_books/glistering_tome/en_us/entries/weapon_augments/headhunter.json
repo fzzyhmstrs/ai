@@ -1,0 +1,31 @@
+{    
+"name": "Headhunter Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:weapon_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Headhunter Imbuing",
+"anchor": "headhunter",
+"imbue_a_item": "amethyst_imbuement:garnet",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:ender_eye",
+"craft_b_item": "minecraft:spyglass",
+"craft_c_item": "minecraft:ender_eye",
+"craft_d_item": "minecraft:flint",
+"craft_e_item": "amethyst_imbuement:sniper_bow",
+"craft_f_item": "minecraft:flint",
+"craft_g_item": "minecraft:ender_eye",
+"craft_h_item": "minecraft:flint",
+"craft_i_item": "minecraft:ender_eye",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:headhunter\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}

@@ -1,0 +1,6 @@
+{    
+"name": "Augment Index",
+"parent": "amethyst_imbuement:augments",
+"description": "An index of all augments, with various filtered categories available.",
+"icon": "minecraft:writable_book"
+}
