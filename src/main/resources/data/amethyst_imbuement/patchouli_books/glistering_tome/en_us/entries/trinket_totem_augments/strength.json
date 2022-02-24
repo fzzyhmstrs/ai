@@ -1,0 +1,31 @@
+{    
+"name": "Strength Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Grants the totem-holder Strength when the totem is active."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Strength Imbuing",
+"anchor": "strength",
+"imbue_a_item": "amethyst_imbuement:garnet",
+"imbue_b_item": "amethyst_imbuement:garnet",
+"imbue_c_item": "amethyst_imbuement:garnet",
+"imbue_d_item": "amethyst_imbuement:garnet",
+"craft_a_item": "amethyst_imbuement:steel_ingot",
+"craft_b_item": "minecraft:blaze_powder",
+"craft_c_item": "amethyst_imbuement:steel_ingot",
+"craft_d_item": "minecraft:blaze_powder",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:blaze_powder",
+"craft_g_item": "amethyst_imbuement:steel_ingot",
+"craft_h_item": "minecraft:blaze_powder",
+"craft_i_item": "amethyst_imbuement:steel_ingot",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:strength\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)11$()"
+}
+]
+}

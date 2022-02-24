@@ -1,0 +1,31 @@
+{    
+"name": "Moonlit Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_common_augments",    
+"pages": [
+{            
+"type": "patchouli:text",            
+"text": "The user gains Strength and Resistance during the night time."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Moonlit Imbuing",
+"anchor": "moonlit",
+"imbue_a_item": "amethyst_imbuement:moonstone",
+"imbue_b_item": "amethyst_imbuement:moonstone",
+"imbue_c_item": "amethyst_imbuement:moonstone",
+"imbue_d_item": "amethyst_imbuement:moonstone",
+"craft_a_item": "minecraft:lantern",
+"craft_b_item": "minecraft:blaze_powder",
+"craft_c_item": "minecraft:lantern",
+"craft_d_item": "minecraft:blaze_powder",
+"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:blaze_powder",
+"craft_g_item": "minecraft:lantern",
+"craft_h_item": "minecraft:blaze_powder",
+"craft_i_item": "minecraft:lantern",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:moonlit\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}

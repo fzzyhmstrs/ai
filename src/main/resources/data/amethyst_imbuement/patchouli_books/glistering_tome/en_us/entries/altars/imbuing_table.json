@@ -31,7 +31,7 @@
 	}
 },
 "enable_visualize": false,
-"text": "Displayed is the maximum possible setup for the imbuing table. Fewer shelves yield less power."
+"text": "Displayed is the maximum setup for the imbuing table. Fewer shelves yield less power."
 },
 {
 "type": "patchouli:text",

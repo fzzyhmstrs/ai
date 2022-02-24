@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Sniper Bow"
+"text": "The sniper bow is designed with precision killing in mind. Besides having longer range and higher damage than the crossbow, right clicking and holding while the bow is loaded zooms into a scope view for precise aiming.$(br2)$(l:amethyst_imbuement:trinket_augments/sniper_bow#scope)Detail of scope feature$()$(br2)$(l:amethyst_imbuement:trinket_augments/sniper_bow#upgrades)Exclusive upgrades$()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -25,6 +25,27 @@
 "craft_i_item": "minecraft:air",
 "result_item": "amethyst_imbuement:sniper_bow",
 "cost_text": "$(l)Level Cost: $(2)19$()"
+},
+{
+"type": "patchouli:image",
+"anchor": "scope",
+"title": "Sniper Bow Scope",
+"images": [
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_0.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_1.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_2.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_3.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_4.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_5.png",
+"amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_6.png"
+],
+"border": true,
+"text": "Switch scope textures by crouching and scrolling."
+},
+{            
+"type": "patchouli:text",
+"anchor": "upgrades",
+"text": "There are several exclusive enchantments and upgrades available for this deadly weapon:$(br2)$(l)Deadly Shot:$() Increase the range and arrow speed even further.$(br)$(l)Headhunter:$() Gain a massive damage boost when you score a headshot.$(br)$(l)Illuminating:$() Gain night vision when aiming through the scope.$(br)$(l)Puncturing:$() Ignore a fraction of the opponents armor when dealing damage."
 }
 ]
 }

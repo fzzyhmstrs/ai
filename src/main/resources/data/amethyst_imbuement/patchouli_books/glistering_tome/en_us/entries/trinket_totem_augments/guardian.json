@@ -1,0 +1,31 @@
+{    
+"name": "Guardian Augment",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "When the holders health is low, summons a Crystalline Golem as aid."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Guardian Imbuing",
+"anchor": "guardian",
+"imbue_a_item": "amethyst_imbuement:crystalline_heart",
+"imbue_b_item": "minecraft:diamond",
+"imbue_c_item": "minecraft:diamond",
+"imbue_d_item": "minecraft:diamond",
+"craft_a_item": "minecraft:poppy",
+"craft_b_item": "minecraft:carved_pumpkin",
+"craft_c_item": "minecraft:poppy",
+"craft_d_item": "minecraft:amethyst_block",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:amethyst_block",
+"craft_g_item": "minecraft:poppy",
+"craft_h_item": "minecraft:amethyst_block",
+"craft_i_item": "minecraft:poppy",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:guardian\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)22$()"
+}
+]
+}

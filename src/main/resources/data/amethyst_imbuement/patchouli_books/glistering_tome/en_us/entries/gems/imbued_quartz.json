@@ -28,6 +28,7 @@
 },
 {
 "type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_quartz",
 "input_item": "minecraft:quartz",
 "addition_item": "minecraft:rose_bush",
 "output_item": "amethyst_imbuement:imbued_quartz"

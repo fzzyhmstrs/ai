@@ -1,0 +1,31 @@
+{    
+"name": "Angelic Augment",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Enables creative flight when the totem is active."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Angelic Imbuing",
+"anchor": "angelic",
+"imbue_a_item": "amethyst_imbuement:celestine",
+"imbue_b_item": "amethyst_imbuement:brilliant_diamond",
+"imbue_c_item": "amethyst_imbuement:brilliant_diamond",
+"imbue_d_item": "amethyst_imbuement:celestine",
+"craft_a_item": "minecraft:feather",
+"craft_b_item": "minecraft:elytra",
+"craft_c_item": "minecraft:feather",
+"craft_d_item": "minecraft:feather",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:feather",
+"craft_g_item": "minecraft:feather",
+"craft_h_item": "minecraft:elytra",
+"craft_i_item": "minecraft:feather",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:angelic\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)35$()"
+}
+]
+}

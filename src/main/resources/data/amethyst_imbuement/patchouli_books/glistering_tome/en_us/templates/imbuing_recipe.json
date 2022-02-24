@@ -100,6 +100,7 @@
 "type": "patchouli:item", 
 "item": "#result_item#",
 "framed": true,
+"link_recipe": true,
 "x": 50,            
 "y": 123
 },

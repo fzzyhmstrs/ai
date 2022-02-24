@@ -5,23 +5,23 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "To begin your spellcasting quest, take careful note of the steps within this guide. Spellcasting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters, unlocking even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()." 
+"text": "Spellcasting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters, unlocking even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()$(br2)With that accomplished, your path to spell mastery begins as follows... ." 
 },
 {
 "type": "patchouli:text",
-"text": "With that accomplished, your path to spell mastery begins as follows... $(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_augments/available_augments)Augment$().$(li)If you do not have the resources for that, scepters can innately perform a magic missile attack.$(li)Cast your spells, and find and add more augments! For more powerful spells, find tomes scattered around the world."
+"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_augments/available_augments)Augment$().$(li)If you do not have the resources for that, scepters can innately perform a magic missile attack.$(li)Cast your spells, and find and add more augments! For more powerful spells, find tomes scattered around the world."
 },
 {
 "type": "patchouli:text",
-"text": "Now that you have a functioning scepter, there is some more you should know...$(br2)$(l)Mana: $()Scepters have a limit to the magical energy they can expend at one time. More powerful scepters have higher limits. A blue bar in the item hotbar denotes the remaining scepter mana. If your scepter runs low, you can quaff a $(#b0b)$(l:amethyst_imbuement:imbuing/mana_potion)Mana Potion$() to restore its vigor."
+"text": "Now that you have a functioning scepter, there is some more you should know...$(br2)$(l)Mana: $()Scepters have a limit to the spells they can cast at one time. More powerful scepters have higher limits. A blue bar in the hotbar shows the remaining scepter mana. If your scepter runs low, you can quaff a $(#b0b)$(l:amethyst_imbuement:imbuing/mana_potion)Mana Potion$() to restore its vigor."
 },
 {
 "type": "patchouli:text",
-"text": "$(l)Active Spell:$() Scepters have an active spell, which is the effect cast when using the item (right click by default). When created, scepters default to Magic Missile as their active spell. Once other augments are added, you can change the active spell by crouching and scrolling. The new active spell will be displayed in Chat. The scepter tooltip lists the active spell as well."
+"text": "$(l)Active Spell:$() Scepters have an active spell which is cast on using the scepter (right click). When created, the active spell defaults to Magic Missile. Once other augments are added, you can change the active spell by crouching and scrolling. The new active spell will be displayed on screen and in the tooltip."
 },
 {
 "type": "patchouli:text",
-"text": "$(l)Scepter Level:$()Casting spells with a scepter increases its magical potential, granting access to more powerful spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augments/augment_index)Opal$() There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
+"text": "$(l)Scepter Level:$() Casting spells with a scepter increases its magical potential, granting access to more powerful spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augments/augment_index)Augment Index$() for a full overview. There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
 },
 {
 "type": "amethyst_imbuement:tooltip_image",

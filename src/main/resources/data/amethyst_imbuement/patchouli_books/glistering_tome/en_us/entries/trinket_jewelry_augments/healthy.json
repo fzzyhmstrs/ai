@@ -1,0 +1,31 @@
+{    
+"name": "Healthy Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_jewelry_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The wearers health is increased."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Healthy Imbuing",
+"anchor": "healthy",
+"imbue_a_item": "amethyst_imbuement:heartstone",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:imbued_quartz",
+"craft_a_item": "minecraft:golden_apple",
+"craft_b_item": "minecraft:golden_apple",
+"craft_c_item": "minecraft:golden_apple",
+"craft_d_item": "minecraft:golden_apple",
+"craft_e_item": "amethyst_imbuement:imbued_amulet",
+"craft_f_item": "minecraft:golden_apple",
+"craft_g_item": "minecraft:golden_apple",
+"craft_h_item": "minecraft:golden_apple",
+"craft_i_item": "minecraft:golden_apple",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:healthy\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)20$()"
+}
+]
+}

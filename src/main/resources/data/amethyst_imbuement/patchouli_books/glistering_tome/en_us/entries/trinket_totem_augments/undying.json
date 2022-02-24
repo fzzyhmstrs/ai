@@ -1,0 +1,31 @@
+{    
+"name": "Undying Augment",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Resurrects the holder upon death and grants them temporary protection."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Undying Imbuing",
+"anchor": "undying",
+"imbue_a_item": "amethyst_imbuement:celestine",
+"imbue_b_item": "amethyst_imbuement:pyrite",
+"imbue_c_item": "amethyst_imbuement:pyrite",
+"imbue_d_item": "amethyst_imbuement:pyrite",
+"craft_a_item": "minecraft:soul_sand",
+"craft_b_item": "minecraft:egg",
+"craft_c_item": "minecraft:soul_sand",
+"craft_d_item": "minecraft:egg",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:egg",
+"craft_g_item": "minecraft:soul_sand",
+"craft_h_item": "minecraft:egg",
+"craft_i_item": "minecraft:soul_sand",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:undying\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)18$()"
+}
+]
+}

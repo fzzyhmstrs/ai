@@ -1,0 +1,31 @@
+{    
+"name": "Draconic Vision Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_jewelry_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Locate nearby ores with the vision of a dragon!"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Draconic Vision Imbuing",
+"anchor": "draconic_vision",
+"imbue_a_item": "amethyst_imbuement:pyrite",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "minecraft:ender_eye",
+"craft_b_item": "minecraft:dragon_head",
+"craft_c_item": "minecraft:ender_eye",
+"craft_d_item": "minecraft:dragon_breath",
+"craft_e_item": "amethyst_imbuement:imbued_headband",
+"craft_f_item": "minecraft:dragon_breath",
+"craft_g_item": "minecraft:ender_eye",
+"craft_h_item": "minecraft:dragon_breath",
+"craft_i_item": "minecraft:ender_eye",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:draconic_vision\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)18$()"
+}
+]
+}

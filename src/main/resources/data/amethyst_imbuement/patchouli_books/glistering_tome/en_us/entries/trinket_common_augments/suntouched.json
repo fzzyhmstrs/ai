@@ -1,0 +1,31 @@
+{    
+"name": "Suntouched Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_common_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The user gains Strength and Speed during the day time."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Suntouched Imbuing",
+"anchor": "suntouched",
+"imbue_a_item": "amethyst_imbuement:pyrite",
+"imbue_b_item": "amethyst_imbuement:pyrite",
+"imbue_c_item": "amethyst_imbuement:pyrite",
+"imbue_d_item": "amethyst_imbuement:pyrite",
+"craft_a_item": "minecraft:sunflower",
+"craft_b_item": "minecraft:blaze_powder",
+"craft_c_item": "minecraft:sunflower",
+"craft_d_item": "minecraft:blaze_powder",
+"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:blaze_powder",
+"craft_g_item": "minecraft:sunflower",
+"craft_h_item": "minecraft:blaze_powder",
+"craft_i_item": "minecraft:sunflower",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:suntouched\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}

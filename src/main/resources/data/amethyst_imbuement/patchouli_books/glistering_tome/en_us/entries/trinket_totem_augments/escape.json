@@ -1,0 +1,31 @@
+{    
+"name": "Escape Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Using the totem teleports the holder to the surface."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Escape Imbuing",
+"anchor": "escape",
+"imbue_a_item": "amethyst_imbuement:pyrite",
+"imbue_b_item": "minecraft:emerald",
+"imbue_c_item": "minecraft:emerald",
+"imbue_d_item": "minecraft:emerald",
+"craft_a_item": "minecraft:ender_pearl",
+"craft_b_item": "minecraft:cobblestone",
+"craft_c_item": "minecraft:ender_pearl",
+"craft_d_item": "minecraft:cobblestone",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:cobblestone",
+"craft_g_item": "minecraft:ender_pearl",
+"craft_h_item": "minecraft:cobblestone",
+"craft_i_item": "minecraft:ender_pearl",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:escape\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}

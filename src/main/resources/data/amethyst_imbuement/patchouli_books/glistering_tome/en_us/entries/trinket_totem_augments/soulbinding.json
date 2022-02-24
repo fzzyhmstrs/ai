@@ -1,0 +1,31 @@
+{    
+"name": "Soulbinding Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Inventory is not lost upon death."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Soulbinding Imbuing",
+"anchor": "soulbinding",
+"imbue_a_item": "minecraft:emerald",
+"imbue_b_item": "minecraft:emerald",
+"imbue_c_item": "minecraft:emerald",
+"imbue_d_item": "minecraft:emerald",
+"craft_a_item": "minecraft:soul_sand",
+"craft_b_item": "minecraft:soul_sand",
+"craft_c_item": "minecraft:soul_sand",
+"craft_d_item": "minecraft:soul_sand",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:soul_sand",
+"craft_g_item": "minecraft:soul_sand",
+"craft_h_item": "minecraft:soul_sand",
+"craft_i_item": "minecraft:soul_sand",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soulbinding\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)8$()"
+}
+]
+}

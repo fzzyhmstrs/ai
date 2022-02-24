@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "When one needs to strip an item of its magical properties, the $(#490)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
+"text": "When one needs to strip an item of its magical properties, the $(#490)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present anbd store it in a book... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
 },
 {
 "type": "patchouli:crafting",
@@ -25,7 +25,11 @@
 	}
 },
 "enable_visualize": false,
-"text": "Displayed is the maximum possible setup for the disenchanting table. Fewer pillars yield less power."
+"text": "Displayed is the maximum setup for the disenchanting table. Fewer pillars yield less power."
+},
+{            
+"type": "patchouli:text",            
+"text": "Alone, the disenchanting table can remove up to one enchantment from any item and return an enchanted book. Enchantment removals are item-specific, so different tables won't stack. $(br2)Every two pillars added adds one more disenchant per item.$(br2)Any kind of enchantment can be stripped from an item, $(l)including augments$()"
 }
 ]
 }

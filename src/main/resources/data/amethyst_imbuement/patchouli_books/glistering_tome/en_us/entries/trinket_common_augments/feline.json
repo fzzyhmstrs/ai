@@ -1,0 +1,31 @@
+{    
+"name": "Feline Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_common_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Wards off nearby creepers."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Feline Imbuing",
+"anchor": "feline",
+"imbue_a_item": "amethyst_imbuement:moonstone",
+"imbue_b_item": "amethyst_imbuement:smoky_quartz",
+"imbue_c_item": "amethyst_imbuement:smoky_quartz",
+"imbue_d_item": "amethyst_imbuement:smoky_quartz",
+"craft_a_item": "minecraft:string",
+"craft_b_item": "minecraft:string",
+"craft_c_item": "minecraft:string",
+"craft_d_item": "minecraft:string",
+"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:string",
+"craft_g_item": "minecraft:string",
+"craft_h_item": "minecraft:string",
+"craft_i_item": "minecraft:string",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:feline\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}
