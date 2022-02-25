@@ -1,0 +1,31 @@
+{    
+"name": "Cleanse Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:scepter_available_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Cleanse yourself or a nearby target of all harmful effects."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Cleanse Imbuing",
+"anchor": "cleanse",
+"imbue_a_item": "amethyst_imbuement:imbued_quartz",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:imbued_quartz",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "minecraft:milk_bucket",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:milk_bucket",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:milk_bucket",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:milk_bucket",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:cleanse\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)8$()"
+}
+]
+}

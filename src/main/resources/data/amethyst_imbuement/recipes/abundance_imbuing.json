@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "minecraft:hay_block"
   },
   "craftD": {
 	"item": "minecraft:hay_block"

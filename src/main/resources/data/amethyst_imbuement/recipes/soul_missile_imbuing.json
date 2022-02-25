@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:citrine"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "minecraft:soul_sand"
   },
   "craftD": {
 	"item": "minecraft:soul_sand"
@@ -25,7 +25,7 @@
 	"item": "minecraft:soul_sand"
   },
   "title": "Soul Missile",
-  "cost": 3,
+  "cost": 5,
   "augment": "amethyst_imbuement:soul_missile"
 }
 

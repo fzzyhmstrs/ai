@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "minecraft:ghast_tear"
   },
   "craftD": {
 	"item": "minecraft:ghast_tear"
@@ -25,7 +25,7 @@
 	"item": "minecraft:ghast_tear"
   },
   "title": "Regenerate",
-  "cost": 3,
+  "cost": 8,
   "augment": "amethyst_imbuement:regenerate"
 }
 

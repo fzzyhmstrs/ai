@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:danburite"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "minecraft:torch"
   },
   "craftD": {
 	"item": "minecraft:torch"
@@ -25,7 +25,7 @@
 	"item": "minecraft:torch"
   },
   "title": "Shine",
-  "cost": 3,
+  "cost": 5,
   "augment": "amethyst_imbuement:shine"
 }
 

@@ -1,0 +1,31 @@
+{    
+"name": "Mend Equipemtn Augment",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:scepter_available_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Randomly repairs any damaged equipment in your inventory."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Mend Equipment Imbuing",
+"anchor": "abundance",
+"imbue_a_item": "amethyst_imbuement:imbued_quartz",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:imbued_quartz",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "minecraft:iron_ingot",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:iron_ingot",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:iron_ingot",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:iron_ingot",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:repair\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}

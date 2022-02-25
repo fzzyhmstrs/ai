@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:danburite"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"tag": "minecraft:boats"
   },
   "craftD": {
 	"tag": "minecraft:boats"
