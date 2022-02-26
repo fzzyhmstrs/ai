@@ -367,6 +367,12 @@ object ScepterObject: AugmentDamage {
         return max(1,cost)
     }
 
+    fun getAugmentCooldown(id: String): Int{
+        if(!augmentStats.containsKey(id)) return (20)
+        val cd = (augmentStats[id]?.cooldown) ?: 20
+        return max(1,cd)
+    }
+
     fun setLastActiveEnchant(newActiveEnchant: String){
         lastActiveEnchant = newActiveEnchant
     }
