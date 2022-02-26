@@ -133,7 +133,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("flamewave",SpellType.FURY,2,3,16,2, Items.FIRE_CHARGE)
         ScepterObject.registerAugmentStat("force_field",SpellType.GRACE,600,60,6,1, Items.SHIELD)
         ScepterObject.registerAugmentStat("fortify",SpellType.GRACE,1200,25,1,1, Items.GOLDEN_APPLE)
-        ScepterObject.registerAugmentStat("freezing",SpellType.FURY,35,8,10,1, Items.PACKED_ICE)
+        ScepterObject.registerAugmentStat("freezing",SpellType.FURY,35,8,5,1, Items.PACKED_ICE)
         ScepterObject.registerAugmentStat("gusting",SpellType.WIT,100,15,3,1, Items.FEATHER)
         ScepterObject.registerAugmentStat("levitating_bullet",SpellType.FURY,60,20,12,2, Items.SHULKER_SHELL)
         ScepterObject.registerAugmentStat("lightning_bolt",SpellType.FURY,50,10,5,1, Items.LIGHTNING_ROD)
