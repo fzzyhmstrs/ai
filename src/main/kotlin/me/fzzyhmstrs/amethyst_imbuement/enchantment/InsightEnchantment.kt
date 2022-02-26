@@ -36,7 +36,6 @@ class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantmen
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!target.isAlive){
             xpgiven = if (target is LivingEntity && !xpgiven){
-                println("gettingXP")
                 when (target) {
                     is PassiveEntity -> {
                         ExperienceOrbEntity.spawn(target.world as ServerWorld?, target.pos, 1 * level)
