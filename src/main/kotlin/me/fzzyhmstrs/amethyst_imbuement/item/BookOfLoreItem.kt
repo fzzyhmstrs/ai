@@ -44,8 +44,12 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
             }
             val item = ScepterObject.getAugmentItem(bola)
             val itemText = item.name.shallowCopy().formatted(Formatting.WHITE)
-            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.key_item").formatted(Formatting.WHITE))
-            tooltip.add(itemText)
+            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.key_item").formatted(Formatting.WHITE).append(itemText))
+            val cooldown = ScepterObject.getAugmentCooldown(bola).toFloat() / 20.0F
+            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("item.amethyst_imbuement.$ttn.cooldown1").formatted(Formatting.WHITE)))
+            val manaCost = ScepterObject.getAugmentManaCost(bola)
+            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
+            //tooltip.add(itemText)
         } else {
             tooltip.add(
                 TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(
