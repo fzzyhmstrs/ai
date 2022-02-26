@@ -1,0 +1,35 @@
+{    
+"name": "New Armor Enchants",    
+"icon": "amethyst_imbuement:ametrine_boots",    
+"category": "amethyst_imbuement:enchantments",    
+"pages": [
+{
+"type": "patchouli:text",
+"text": "New enchantments available for various armor and equipment pieces."
+},
+{
+"type": "patchouli:spotlight",
+"title": "Bulwark Enchantment",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:bulwark\",lvl:1}]}",
+"text": "$(l)Effect:$() Heals the user when blocking an attack with the enchanted shield.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"
+},
+{
+"type": "patchouli:spotlight",
+"title": "Multi-Jump Enchantment",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:multi_jump\",lvl:1}]}",
+"text": "$(l)Effect:$() User can double jump once while in the air. resets when the user lands.$(br)$(l)Enchants:$() $(#490)Boots$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"
+},
+{
+"type": "patchouli:spotlight",
+"title": "Night Vision Enchantment",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:night_vision\",lvl:1}]}",
+"text": "$(l)Effect:$() Grants the user Night Vision.$(br)$(l)Enchants:$() $(#490)Helmet$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Rare$(br)$(l)Incompatibilities:$() Aqua Affinity, Respiration"
+},
+{
+"type": "patchouli:spotlight",
+"title": "Steadfast Enchantment",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:steadfast\",lvl:3}]}",
+"text": "$(l)Effect:$() Reduces knockback from enemy attacks.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 3 $(br)$(l)Rarity:$() Uncommon$(br)$(l)Incompatibilities:$() None"
+}
+]
+}

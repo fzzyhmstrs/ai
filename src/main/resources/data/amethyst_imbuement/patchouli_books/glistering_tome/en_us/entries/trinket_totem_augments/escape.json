@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Using the totem teleports the holder to the surface."
+"text": "$(l)Effect:$() Using the totem teleports the holder to the surface.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Active, three uses before burnout unless totem repaired$(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other active totem augments."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Cleanse yourself or a nearby target of all harmful effects."
+"text": "$(l)Effect:$() Cleanses yourself or a nearby target of all harmful effects, and grants temporary status immunity.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 12$(br)$(l)Cooldown:$() 30.0 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

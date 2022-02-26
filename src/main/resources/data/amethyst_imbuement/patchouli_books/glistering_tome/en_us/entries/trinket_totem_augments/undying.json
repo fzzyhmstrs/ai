@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Resurrects the holder upon death and grants them temporary protection."
+"text": "$(l)Effect:$() Resurrects the holder upon death and grants them temporary protection.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Passive, 1 use and burns out on use$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

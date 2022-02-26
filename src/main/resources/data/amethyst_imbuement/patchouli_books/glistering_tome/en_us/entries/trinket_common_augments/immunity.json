@@ -5,7 +5,7 @@
 "pages": [
 {            
 "type": "patchouli:text",            
-"text": "The user is immune from negative status effects."
+"text": "$(l)Effect:$() The user is immune from negative status effects.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(),$(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() Other common or jewelry augments (jewelry), other common augments (totem)"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

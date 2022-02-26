@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Enables creative flight when the totem is active."
+"text": "$(l)Effect:$() Enables creative flight while the totem is active.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Active, drains durability while using$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other active totem augments."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

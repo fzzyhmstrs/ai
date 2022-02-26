@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Highlights nearby enemies with a spectral glow, even through obstacles."
+"text": "$(l)Effect:$() Highlights nearby enemies with a spectral glow, even through obstacles.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Headband$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

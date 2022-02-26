@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Inventory is not lost upon death."
+"text": "$(l)Effect:$() Inventory is not lost upon death.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Passive$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

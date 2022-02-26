@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Coaxes crops into faster growth, and harvests crops that are mature."
+"text": "$(l)Effect:$() Creates a source block of water at the target location.$(br)$(l)Magical School:$() $(2)Wit$()$(br)$(l)Mana Cost:$() 8$(br)$(l)Cooldown:$() 2.0 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

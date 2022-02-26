@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Bathes you or a nearby target in an aura that heals over time."
+"text": "$(l)Effect:$() Bathes you or a nearby target in an aura that heals over time.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 20$(br)$(l)Cooldown:$() 60.0 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "TODO"
+"text": "$(l)Effect:$() Blocking with a shield augmented with spiked damages the attacker like Thorns.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

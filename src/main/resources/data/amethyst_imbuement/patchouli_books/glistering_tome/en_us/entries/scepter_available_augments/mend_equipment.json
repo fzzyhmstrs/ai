@@ -1,11 +1,11 @@
 {    
-"name": "Mend Equipemtn Augment",    
+"name": "Mend Equipment Augment",    
 "icon": "amethyst_imbuement:book_of_lore",    
 "category": "amethyst_imbuement:scepter_available_augments",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Randomly repairs any damaged equipment in your inventory."
+"text": "$(l)Effect:$() Randomly repairs any damaged equipment in your inventory.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 3$(br)$(l)Cooldown:$() 0.7 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

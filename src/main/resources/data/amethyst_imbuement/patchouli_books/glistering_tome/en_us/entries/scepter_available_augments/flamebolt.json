@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Incinerate your foes with quick bolts of concentrated flame. Sets surfaces alight."
+"text": "$(l)Effect:$() Incinerate your foes with quick bolts of concentrated flame. Sets surfaces alight.$(br)$(l)Magical School:$() $(c)Fury$()$(br)$(l)Mana Cost:$() 4$(br)$(l)Cooldown:$() 0.9 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

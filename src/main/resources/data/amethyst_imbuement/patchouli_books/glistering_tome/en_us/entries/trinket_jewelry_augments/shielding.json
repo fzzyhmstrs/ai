@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Enhances the natural shielding effect of the worn jewelry."
+"text": "$(l)Effect:$() Enhances the natural shielding effect of the worn jewelry.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
