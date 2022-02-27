@@ -1,5 +1,5 @@
 {    
-"name": "All",    
+"name": "All Augments",    
 "icon": "amethyst_imbuement:imbuing_table",    
 "category": "amethyst_imbuement:augment_index",    
 "pages": [
@@ -10,20 +10,79 @@
 {
 "type": "patchouli:relations",
 "entries": [
-"amethyst_imbuement:scepter_augments/available_augments",
-"amethyst_imbuement:scepter_augments/augment_templates",
-"amethyst_imbuement:trinket_augments/common_augments",
-"amethyst_imbuement:gear_augments/equipment_augments",
-"amethyst_imbuement:trinket_augments/jewelry_augments",
-"amethyst_imbuement:trinket_augments/totem_augments",
-"amethyst_imbuement:gear_augments/weapon_augments"
+"amethyst_imbuement:scepter_available_augments/abundance",
+"amethyst_imbuement:trinket_totem_augments/angelic",
+"amethyst_imbuement:scepter_available_augments/cleanse",
+"amethyst_imbuement:scepter_available_augments/create_water",
+"amethyst_imbuement:weapon_augments/crystalline",
+"amethyst_imbuement:trinket_jewelry_augments/draconic_vision",
+"amethyst_imbuement:trinket_totem_augments/escape",
+"amethyst_imbuement:trinket_common_augments/feline",
+"amethyst_imbuement:trinket_jewelry_augments/friendly",
+"amethyst_imbuement:trinket_totem_augments/guardian",
+"amethyst_imbuement:trinket_totem_augments/hasting"
 ],
-"title": "Augment Recipe Guides",
-"text": "Links to the different recipe guides for specific sets of augments"
+"title": "A-H"
 },
 {
-"type": "patchouli:text",
-"text": "$(l)$(t:Max Level: 1$(br)Tier: Extreme$(br))Angelic$()"
+"type": "patchouli:relations",
+"entries": [
+"amethyst_imbuement:weapon_augments/headhunter",
+"amethyst_imbuement:trinket_jewelry_augments/healthy",
+"amethyst_imbuement:weapon_augments/illuminating",
+"amethyst_imbuement:trinket_common_augments/immunity",
+"amethyst_imbuement:equipment_augments/invisibility",
+"amethyst_imbuement:equipment_augments/leaping",
+"amethyst_imbuement:equipment_augments/lightfooted",
+"amethyst_imbuement:trinket_common_augments/lucky",
+"amethyst_imbuement:scepter_available_augments/mend_equipment",
+"amethyst_imbuement:trinket_common_augments/moonlit",
+"amethyst_imbuement:scepter_available_augments/regenerate"
+],
+"title": "H-R"
+},
+{
+"type": "patchouli:relations",
+"entries": [
+"amethyst_imbuement:equipment_augments/resilience",
+"amethyst_imbuement:trinket_jewelry_augments/shielding",
+"amethyst_imbuement:scepter_available_augments/shine",
+"amethyst_imbuement:equipment_augments/slimy",
+"amethyst_imbuement:scepter_available_augments/soul_missile",
+"amethyst_imbuement:trinket_totem_augments/soul_of_the_conduit",
+"amethyst_imbuement:trinket_totem_augments/soulbinding",
+"amethyst_imbuement:trinket_jewelry_augments/spectral_vision",
+"amethyst_imbuement:equipment_augments/spiked",
+"amethyst_imbuement:trinket_totem_augments/strength",
+"amethyst_imbuement:equipment_augments/striding"
+],
+"title": "R-S"
+},
+{
+"type": "patchouli:relations",
+"entries": [
+"amethyst_imbuement:scepter_available_augments/summon_boat",
+"amethyst_imbuement:trinket_common_augments/suntouched",
+"amethyst_imbuement:equipment_augments/swiftness",
+"amethyst_imbuement:equipment_augments/slimy",
+"amethyst_imbuement:scepter_template_augments/tier_1_fury",
+"amethyst_imbuement:scepter_template_augments/tier_1_grace",
+"amethyst_imbuement:scepter_template_augments/tier_1_wit",
+"amethyst_imbuement:scepter_template_augments/tier_2_fury",
+"amethyst_imbuement:scepter_template_augments/tier_2_grace",
+"amethyst_imbuement:scepter_template_augments/tier_2_wit",
+"amethyst_imbuement:scepter_template_augments/tier_3_fury"
+],
+"title": "S-T"
+},
+{
+"type": "patchouli:relations",
+"entries": [
+"amethyst_imbuement:scepter_template_augments/tier_3_grace",
+"amethyst_imbuement:scepter_template_augments/tier_3_wit",
+"amethyst_imbuement:trinket_totem_augments/undying"
+],
+"title": "T-U"
 }
 ]
 }

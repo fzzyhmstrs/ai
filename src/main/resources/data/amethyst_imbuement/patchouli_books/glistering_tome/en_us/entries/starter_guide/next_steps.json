@@ -1,0 +1,29 @@
+{    
+"name": "Next Steps",    
+"icon": "minecraft:leather_boots",    
+"category": "amethyst_imbuement:starter_guide",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Now that you've got your feet under you, find out some of the advanced things that Amethyst Imbuement can provide.$(li)Craft a scepter and start spellcasting$(li)Create imbued jewelry and imbue them with powerful abilities$(li)Upgrade your equipment beyond anything you thought possible"
+},
+{
+"type": "patchouli:spotlight",
+"title": "Scepter Spellcasting",
+"item": "amethyst_imbuement:opaline_scepter",
+"text": "Scepters are magical sources from which you can cast many offensive and defnsive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools."
+},
+{
+"type": "patchouli:spotlight",
+"title": "Trinket Imbuing",
+"item": "amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:imbued_ring,amethyst_imbuement:totem_of_amethyst",
+"text": "You can adorn yourself with magical jewelry, and even craft a special totem, that provide you with status effect bonuses and other powerful abilities. Read about the trinkets you can create:$(br2)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()$(br)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()"
+},
+{
+"type": "patchouli:spotlight",
+"title": "Upgrade Equipment",
+"item": "amethyst_imbuement:ametrine_chestplate,amethyst_imbuement:garnet_sword,amethyst_imbuement:sniper_bow,minecraft:bucket",
+"text": "There is a wide variety of new gear and upgrades available for existing items to explore!$(br)$(l)"
+}
+]
+}

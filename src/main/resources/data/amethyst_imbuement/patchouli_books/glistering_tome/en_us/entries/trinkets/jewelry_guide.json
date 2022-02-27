@@ -1,5 +1,6 @@
 {    
-"name": "Jewelry Guide",    
+"name": "Jewelry Guide",
+"priority": true,
 "icon": "amethyst_imbuement:imbued_headband",    
 "category": "amethyst_imbuement:trinkets",    
 "pages": [        

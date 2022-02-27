@@ -1,0 +1,30 @@
+{    
+"name": "Tier 3 Grace Template",    
+"icon": "amethyst_imbuement:golden_heart",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Imbuing template for Tier 3 Grace spells. The Book of Lore and the spell key items must match. You can't just use any old book of lore with any key items. $(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Tier 3 Grace Imbuing",
+"anchor": "tier_3_grace",
+"imbue_a_item": "amethyst_imbuement:ametrine",
+"imbue_b_item": "amethyst_imbuement:moonstone",
+"imbue_c_item": "amethyst_imbuement:moonstone",
+"imbue_d_item": "amethyst_imbuement:moonstone",
+"craft_a_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_b_item": "amethyst_imbuement:book_of_mythos",
+"craft_c_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_d_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_e_item": "amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_g_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_h_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_i_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

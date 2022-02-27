@@ -373,6 +373,12 @@ object ScepterObject: AugmentDamage {
         return max(1,cd)
     }
 
+    fun getAugmentTier(id: String): Int{
+        if(!augmentStats.containsKey(id)) return (1)
+        val cd = (augmentStats[id]?.bookOfLoreTier?.plus(1)) ?: 1
+        return max(1,cd)
+    }
+
     fun setLastActiveEnchant(newActiveEnchant: String){
         lastActiveEnchant = newActiveEnchant
     }

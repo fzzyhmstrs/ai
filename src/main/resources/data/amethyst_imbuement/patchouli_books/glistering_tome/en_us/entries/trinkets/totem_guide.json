@@ -1,5 +1,6 @@
 {    
-"name": "Totem Guide",    
+"name": "Totem Guide",
+"priority": true,
 "icon": "amethyst_imbuement:totem_of_amethyst",    
 "category": "amethyst_imbuement:trinkets",    
 "pages": [        

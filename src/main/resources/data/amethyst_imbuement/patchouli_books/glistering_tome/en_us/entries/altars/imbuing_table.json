@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical attunement... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround your table with bookshelves, up to twice as many as an $(#490)Enchanting Table$(), to boost the tables power.$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
+"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power.$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
 },
 {
 "type": "patchouli:crafting",
@@ -15,7 +15,7 @@
 "type": "patchouli:text",
 "title": "Enchanting",
 "anchor": "enchant_info",
-"text": "The imbuing table can function as an advanced $(#490)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than the normal 15. The same bookshelf arrangement requirements apply."
+"text": "The imbuing table can function as an advanced $(#490)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than 15. The same bookshelf arrangement requirements apply."
 },
 {
 "type": "patchouli:multiblock",
@@ -37,12 +37,12 @@
 "type": "patchouli:text",
 "title": "Imbuing",
 "anchor": "imbue_info",
-"text": "Imbuing is one of the primary tasks you will need to accomplish to progress in your magical journey. In short, imbuing is the act of infusing an object with the essense of other objects, as well as with some of your own soul. In gameplay, your $(#490)Experience$() stands in for your soul."
+"text": "Imbuing is one of the primary tasks you will need to accomplish to progress in your magical journey. Imbuing is a hybrid of crafting and enchanting; it is the act of infusing an object with the essense of other objects, as well as with some of your own soul. In gameplay, your $(#490)Experience$() stands in for your soul."
 },
 {
 "type": "patchouli:text",
 "title": "Imbuing",
-"text": "$(br)Imbuing is a hybrid of crafting and enchanting. It will require experience levels, marked in the enchantment list area, as well as physical components. You can find recipes for imbuements throughout this tome that show both the items required as well as the levels needed."
+"text": "You can find recipes for imbuements throughout this tome that show both the items required as well as the experience levels needed.$(br2)For sections dedicated to various imbuing recipes see the $(#490)$(l)Imbuing$() and $(#490)$(l)Augments$() categories, but there are also other imbuing recipes elsewhere in the book."
 }
 ]
 }

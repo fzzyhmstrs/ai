@@ -49,7 +49,10 @@ public class CreeperEntityMixin extends MobEntity {
                 }
             }
         }
-        return false;
+        ItemStack stack = entity.getOffHandStack();
+        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getFELINE(), stack) > 0) return true;
+        stack = entity.getMainHandStack();
+        return EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getFELINE(), stack) > 0;
     }
 
 }

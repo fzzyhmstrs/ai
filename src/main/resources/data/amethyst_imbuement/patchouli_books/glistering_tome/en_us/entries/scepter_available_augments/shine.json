@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(l)Effect:$() Summons a torch from the aether and places it on the target surface.$(br)$(l)Magical School:$() $(2)Wit$()$(br)$(l)Mana Cost:$() 2$(br)$(l)Cooldown:$() 0.25 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() Low"
+"text": "$(l)Effect:$() Summons a torch from the aether and places it on the target surface.$(br)$(l)Magical School:$() $(2)Wit$()$(br)$(l)Mana Cost:$() 2$(br)$(l)Cooldown:$() 0.25 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

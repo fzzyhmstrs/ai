@@ -1,5 +1,6 @@
 {    
-"name": "Starting with Scepters",    
+"name": "Starting with Scepters",
+"priority": true,
 "icon": "amethyst_imbuement:opaline_scepter",    
 "category": "amethyst_imbuement:scepters",    
 "pages": [        

@@ -34,21 +34,23 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
         val nbt = stack.orCreateNbt
         if (nbt?.contains(NbtKeys.LORE_KEY.str()) == true){
             val bola = readAugNbt(NbtKeys.LORE_KEY.str(),nbt)
-            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.$bola").formatted(Formatting.GOLD)))
+            tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.$bola").formatted(Formatting.GOLD)))
             val type = ScepterObject.getAugmentType(bola)
             if (type == SpellType.NULL){
-                tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.${type.str()}").formatted(type.fmt()))
+                tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
             } else {
                 val lvl = ScepterObject.getAugmentMinLvl(bola)
-                tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.${type.str()}").formatted(type.fmt()).append(LiteralText(lvl.toString())))
+                tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()).append(LiteralText(lvl.toString())))
             }
             val item = ScepterObject.getAugmentItem(bola)
             val itemText = item.name.shallowCopy().formatted(Formatting.WHITE)
-            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.key_item").formatted(Formatting.WHITE).append(itemText))
+            tooltip.add(TranslatableText("lore_book.key_item").formatted(Formatting.WHITE).append(itemText))
             val cooldown = ScepterObject.getAugmentCooldown(bola).toFloat() / 20.0F
-            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("item.amethyst_imbuement.$ttn.cooldown1").formatted(Formatting.WHITE)))
+            tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("item.amethyst_imbuement.$ttn.cooldown1").formatted(Formatting.WHITE)))
             val manaCost = ScepterObject.getAugmentManaCost(bola)
-            tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
+            tooltip.add(TranslatableText("lore_book.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
+            val spellTier = ScepterObject.getAugmentTier(bola)
+            tooltip.add(TranslatableText("lore_book.tier").formatted(Formatting.WHITE).append(LiteralText(spellTier.toString())))
             //tooltip.add(itemText)
         } else {
             tooltip.add(

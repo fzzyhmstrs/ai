@@ -1,0 +1,30 @@
+{    
+"name": "Tier 1 Wit Template",    
+"icon": "minecraft:feather",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Imbuing template for Tier 1 Wit spells. The Book of Lore and the spell key items must match. You can't just use any old book of lore with any key items. $(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Tier 1 Wit Imbuing",
+"anchor": "tier_1_wit",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:book_of_lore",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:feather,minecraft:sponge",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:feather,minecraft:sponge",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:feather,minecraft:sponge",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

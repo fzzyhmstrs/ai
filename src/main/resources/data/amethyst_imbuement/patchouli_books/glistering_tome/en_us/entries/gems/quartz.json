@@ -10,7 +10,7 @@
 	{            
 		"type": "patchouli:spotlight",
 		"item": "minecraft:quartz",
-		"text": "$(o)Quartz are one of the most common and bsic of crystals. Their healing properties are enhanced when imbued with further magical energy.$()"       
+		"text": "$(o)Quartz are one of the most common and basic of crystals that are useful in the creation of many other important gems. Their healing properties are enhanced when infused with further magical energy.$()"       
 	}
 ]
 }

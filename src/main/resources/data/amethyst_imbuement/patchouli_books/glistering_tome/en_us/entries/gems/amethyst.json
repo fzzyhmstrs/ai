@@ -10,7 +10,7 @@
 	{            
 		"type": "patchouli:spotlight",
 		"item": "minecraft:amethyst_shard",
-		"text": "$(o)$(#b0b)Amethysts$() are widely sought after for their ability to focus a mind and energize a body. These powerful crystals have myriad uses; some traders are even said to prize them.$()"       
+		"text": "$(o)Amethysts are widely sought after for their ability to focus a mind and energize a body. These powerful crystals have myriad uses; some traders are even said to prize them.$()"       
 	}
 ]
 }

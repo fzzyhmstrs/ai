@@ -1,0 +1,30 @@
+{    
+"name": "Tier 3 Fury Template",    
+"icon": "minecraft:shulker_shell",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Imbuing template for Tier 3 Fury spells. The Book of Lore and the spell key items must match. You can't just use any old book of lore with any key items. $(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Tier 3 Fury Imbuing",
+"anchor": "tier_3_fury",
+"imbue_a_item": "amethyst_imbuement:ametrine",
+"imbue_b_item": "amethyst_imbuement:garnet",
+"imbue_c_item": "amethyst_imbuement:garnet",
+"imbue_d_item": "amethyst_imbuement:garnet",
+"craft_a_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_b_item": "amethyst_imbuement:book_of_mythos",
+"craft_c_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_d_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_e_item": "amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_g_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_h_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_i_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

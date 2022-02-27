@@ -1,6 +1,5 @@
 {    
 "name": "Recipes",
-"parent": "amethyst_imbuement:misc",
-"description": "Listed here are miscellaneous recipes that you may find useful.$(li)$(#b0b)$(l:amethyst_imbuement:recipes/ametrine_armor)Ametrine Armor$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/garnet_tools)Garnet Tools$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Golden Heart$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Steel Block$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#steel_helmet)Steel Armor$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#beryl_copper_block)Beryllium Copper Blocks$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#chipped_anvil_combine)Anvil Repairing$()$(li)$(#b0b)$(l:amethyst_imbuement:recipes/recipes#polished_amethyst_block)Polished Amethyst Blocks$()",    
+"description": "Listed here are miscellaneous recipes that you may find useful.",    
 "icon": "amethyst_imbuement:golden_heart"
 }

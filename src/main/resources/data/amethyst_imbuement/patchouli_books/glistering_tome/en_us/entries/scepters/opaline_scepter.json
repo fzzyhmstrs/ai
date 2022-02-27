@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Opaline Scepter"
+"text": "The starter scepter. Can be augmented with tier one spells.$(br2)$(l)Mana:$() 426$(br2)$(l)Spells:$() (l:amethyst_imbuement:scepter_available_augments)Starter Augments$()"
 },
 {
 "type": "patchouli:crafting",
