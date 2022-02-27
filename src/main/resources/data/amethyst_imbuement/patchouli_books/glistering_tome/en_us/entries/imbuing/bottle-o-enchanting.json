@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Bottle o' Enchanting"
+"text": "Break this potion on the ground to receive between 3 and 11 experience points."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

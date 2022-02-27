@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Crystalline Core"
+"text": "Use this artifact as the heart of a Crystalline Golem to bring it to life. See the following pages for details on the Golem itself."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -25,6 +25,29 @@
 "craft_i_item": "minecraft:amethyst_shard",
 "result_item": "amethyst_imbuement:crystalline_core",
 "cost_text": "$(l)Level Cost: $(2)10$()"
+},
+{
+"type": "patchouli:entity",
+"entity": "amethyst_imbuement:crystal_golem",
+"text": "This dangerous Golem is about twice the strength of an Iron Golem."
+},
+{
+"type": "patchouli:multiblock",
+"name": "Golem Setup",
+"multiblock": {
+	"pattern": [
+		[" P "],
+		["B0B"],
+		[" B "]
+	],
+	"mapping": {
+	"P": "minecraft:carved_pumpkin,minecraft:jack_o_lantern",		
+	"B": "minecraft:amethyst_block",         
+	"0": "amethyst_imbuement:crystalline_core"     
+	}
+},
+"enable_visualize": false,
+"text": "The block pattern needed to summon a Crystalline Golem. Place the pumpkin last as usual."
 }
 ]
 }

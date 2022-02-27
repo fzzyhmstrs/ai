@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Lustrous Scepter"
+"text": "The thid and highest tier of scepters. Can be imbued with any spells.$(br2)$(l)Mana:$() 2876"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

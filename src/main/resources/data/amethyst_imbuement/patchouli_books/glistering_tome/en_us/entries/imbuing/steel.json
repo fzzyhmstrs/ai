@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Steel Ingot"
+"text": "A strong and durable material used to strengthen armors and other items."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
