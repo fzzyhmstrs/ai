@@ -38,7 +38,6 @@
   "mixins": [
     "amethyst_imbuement.mixins.json"
   ],
-  "accessWidener" : "amethyst_imbuement.accesswidener",
   "depends": {
     "fabricloader": ">=0.12.5",
     "fabric": "*",
