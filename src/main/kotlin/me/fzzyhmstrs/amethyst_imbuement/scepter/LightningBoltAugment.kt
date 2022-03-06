@@ -17,7 +17,7 @@ class LightningBoltAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         val entity = RaycasterUtil.raycastEntity(rangeOfEffect())
-        println(entity)
+
         val blockPos: BlockPos = if (entity == null){
             if (hit == null) {
                 return false
@@ -39,7 +39,7 @@ class LightningBoltAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot
         } else {
             entity.blockPos
         }
-        println(world.isSkyVisible(blockPos))
+
         if (world.isSkyVisible(blockPos)) {
             val le = EntityType.LIGHTNING_BOLT.create(world)
             le?.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))

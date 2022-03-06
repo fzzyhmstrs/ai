@@ -107,7 +107,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             val level = ScepterObject.getScepterStat(nbt,activeEnchantId).first
             //val testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
-            println("mana cost: $manaCost")
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
             testEnchant as ScepterAugment
             //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate

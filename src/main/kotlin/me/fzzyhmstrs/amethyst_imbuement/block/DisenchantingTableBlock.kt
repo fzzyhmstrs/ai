@@ -87,7 +87,6 @@ class DisenchantingTableBlock(settings: Settings): EnchantingTableBlock(settings
         pos: BlockPos
     ): NamedScreenHandlerFactory? {
         val blockEntity = world.getBlockEntity(pos)
-        println(blockEntity)
         if (blockEntity is DisenchantingTableBlockEntity) {
             val text = (blockEntity as Nameable).displayName
             return SimpleNamedScreenHandlerFactory({ syncId: Int, inventory: PlayerInventory, _: PlayerEntity ->

@@ -36,7 +36,7 @@ class GustingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equi
             if (entity is LivingEntity){
                 var distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
                 val strength = 1.5 + 1.0 * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
-                println(strength)
+
                 ScepterItem.addEntityToQueue(entity.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
             }
         }

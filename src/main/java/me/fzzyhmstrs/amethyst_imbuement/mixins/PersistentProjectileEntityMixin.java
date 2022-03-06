@@ -101,22 +101,13 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
                     } else {
                         y1Fix = y1;
                     }
-                    System.out.println("pitch! " + this.getPitch());
-                    System.out.println("fixed y1! " + y1Fix);
-                    System.out.println("original y1! " +y1);
-                    System.out.println(this.getX());
-                    System.out.println(this.getZ());
-                    System.out.println(y2);
-                    System.out.println(instance.getX());
-                    System.out.println(instance.getZ());
+
 
                     if (Math.abs(y1-y2) < 0.03){
                         amount = amount *4.2F;
-                        System.out.println("super headshot!");
                     } else if (Math.abs(y1Fix-y2) < 0.14){
                         float rndMultiplier = (instance.world.random.nextFloat() * 0.7f + 0.6f);
                         amount = amount * (1.0F + rndMultiplier);
-                        System.out.println("headshot!");
                     }
                 }
             }

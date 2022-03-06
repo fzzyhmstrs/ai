@@ -28,14 +28,13 @@ class DashAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equipment
             MathHelper.cos(y * (Math.PI.toFloat() / 180)) * MathHelper.cos(p * (Math.PI.toFloat() / 180))
         val l = MathHelper.sqrt(g * g + h * h + k * k)
         val m: Float = 3.0f * ((1.0f + level.toFloat()) / 4.0f)
-        println(world.isClient)
-        println("before: ${user.velocity}")
+
         g *= m / l
         h *= m / l
         k *= m / l
         user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
         user.setRiptideTicks(20)
-        println(user.velocity)
+
         if (user.isOnGround()) {
             user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))
         }

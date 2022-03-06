@@ -4,7 +4,8 @@ import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
-import net.minecraft.client.render.*
+import net.minecraft.client.render.DiffuseLighting
+import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
@@ -25,6 +26,11 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val texture = Identifier("amethyst_imbuement","textures/gui/container/imbuing_table_gui.png")
     private val backgrdWidth = 234
     private val backgrdHeight = 174
+
+    override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
+        return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
+    }
+
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val i = (width - backgrdWidth) / 2

@@ -47,7 +47,6 @@ class SteelAnvilScreenHandler(syncId: Int,inventory: PlayerInventory, context: S
     }
 
     override fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
-        println(player.name)
         if (!player.abilities.creativeMode) {
             player.addExperienceLevels(-levelCost.get())
         }
@@ -63,28 +62,22 @@ class SteelAnvilScreenHandler(syncId: Int,inventory: PlayerInventory, context: S
         } else {
             input.setStack(1, ItemStack.EMPTY)
         }
-        println("made it here")
-        println(context.toString())
         levelCost.set(0)
         context.run { world: World, pos: BlockPos ->
             val blockState = world.getBlockState(pos)
-            println("I'm Here!!")
             if (!player.abilities.creativeMode && player.random
                     .nextFloat() < 0.12f
             ) {
                 val blockState2 = AnvilBlock.getLandingState(blockState) //fix later if I get it working
-                println("made it here now")
                 if (blockState2 == null) {
                     world.removeBlock(pos, false)
                     world.syncWorldEvent(WorldEvents.ANVIL_DESTROYED, pos, 0)
                 } else {
                     world.setBlockState(pos, blockState2, Block.NOTIFY_LISTENERS)
                     world.syncWorldEvent(WorldEvents.ANVIL_USED, pos, 0)
-                    println("made it here third")
                 }
             } else {
                 world.syncWorldEvent(WorldEvents.ANVIL_USED, pos, 0)
-                println("made it here fourth")
             }
         }
     }

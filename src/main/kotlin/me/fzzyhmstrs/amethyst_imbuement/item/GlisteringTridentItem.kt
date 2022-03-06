@@ -76,7 +76,6 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
             return
         }
         val j = EnchantmentHelper.getRiptide(stack)
-        println(j)
         if (j > 0 && !user.isTouchingWaterOrRain) {
             return
         }
@@ -124,14 +123,13 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
                 MathHelper.cos(glisteringTridentEntity * (Math.PI.toFloat() / 180)) * MathHelper.cos(f * (Math.PI.toFloat() / 180))
             //val l = MathHelper.sqrt(g * g + h * h + k * k)
             val m = 3.0f * ((1.0f + j.toFloat()) / 4.0f)
-            println("values: $m... $g, $h, $j")
-            println("world is client: ${world.isClient}, before velocity is: ${user.velocity}")
+
             g *= m
             h *= m
             k *= m
             user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
             user.setRiptideTicks(20)
-            println("world is client: ${world.isClient}, after velocity is: ${user.velocity}")
+
             if (user.isOnGround) {
                 //val n = 1.1999999f
                 user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))

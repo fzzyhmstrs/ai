@@ -26,22 +26,18 @@ object ShieldingObject {
             val newId = entity.getNewId()
             items[newId] = Pair(Pair(amount,duration),time)
                 applyNewShielding(amount, duration, entity, false)
-                println("A brand new trinket given id: $newId")
             newId
         } else{ //if the function passes an existing trinket, check to make sure it's passing a proper ID first
             if(!items.containsKey(id)){
                 items[id] = Pair(Pair(amount,duration), time)
                     applyNewShielding(amount, duration, entity, false)
-                    println("Previously worn trinket newly equipped with id: $id")
             } else{
                 //println("item amount: " + amount.toString() + " maps amount: " + items[id]!!.first.first.toString())
                 if (amount > items[id]!!.first.first){
                     items[id] = Pair(Pair(amount,duration), items[id]!!.second)
                     val timeSince = time - items[id]!!.second
-                    println("time since last applied: $timeSince")
                     if (timeSince >= (items[id]!!.first.second * 9 / 10)) {
                         applyNewShielding(amount, duration, entity, false)
-                        println("Known trinket reequipped or altered with id: $id")
                     }
                 }
             }
@@ -66,8 +62,6 @@ object ShieldingObject {
             totalAbsorpSoFar += items[v]!!.first.first
         }
         if(totalAbsorpSoFar - 1 >= amplifier) {
-            println("applied!")
-            println("total: " + (totalAbsorpSoFar-1).toString() + " current: " + amplifier.toString())
             entity.removeStatusEffect(RegisterStatus.CUSTOM_ABSORPTION)
             val finalAmp = if (fullAmt) {totalAbsorpSoFar - 1} else {amplifier + amount- increment}
             entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CUSTOM_ABSORPTION, duration, finalAmp),null)
@@ -121,10 +115,8 @@ object ShieldingObject {
     fun TrinketComponent.initializeTrinkets(amount:Int, time:Long, duration: Int,durDiscount: Int, entity: LivingEntity) {
         val trinketsArray = allEquipped
         if (items.isEmpty() || items.size < trinketsArray.size) {
-            println("Initializing equipped trinkets")
             for (i in trinketsArray.indices) {
                 val stack = trinketsArray[i].right
-                println("Initializing: " + stack.name)
                 val nbt = stack.orCreateNbt
                 var id: Int
                 if (nbt!!.contains(NbtKeys.IMBUE_ID.str())) {
@@ -144,7 +136,6 @@ object ShieldingObject {
             }
             entity.removeStatusEffect(RegisterStatus.CUSTOM_ABSORPTION)
             applyNewShielding(amount, duration, entity, true)
-            println("Applied initial shielding after initialization")
         }
     }
 

@@ -41,7 +41,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
 
     override fun tick() {
         if (!this.hasStatusEffect(StatusEffects.GLOWING)) {
-            println(this.world.isClient)
             this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, 220))
         }
         this.setNoGravity(true)

@@ -109,7 +109,6 @@ object RaycasterUtil {
             return if (tempEntity != null) {
                 EntityHitResult(tempEntity, tempEntity.pos)
             } else {
-                println("bloop")
                 target
             }
         }

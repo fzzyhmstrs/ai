@@ -80,7 +80,6 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
             val identifier = Identifier(augment)
             val aug = identifier.path
             writeAugNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
-            println(stack.nbt)
         }
     }
 

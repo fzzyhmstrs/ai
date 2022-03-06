@@ -60,7 +60,6 @@ class CharmAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equipm
 
         val checkListPair = getRndEntityList(world,hostileEntity,level)
         val checkList = checkListPair.first
-        println(checkListPair.second)
 
         if (checkList.isNotEmpty()) {
             for (entity in checkList) {
@@ -76,7 +75,6 @@ class CharmAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equipm
             if (checkListPair.second > 0) {
                 val checkListPair2 = getRndEntityList(world,merchantEntity,checkListPair.second)
                 val checkList2 = checkListPair2.first
-                println(checkList2)
                 if (checkList.isNotEmpty()) {
                     for (entity in checkList2) {
                         //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)

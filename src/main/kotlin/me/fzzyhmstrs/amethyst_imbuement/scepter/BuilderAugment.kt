@@ -22,7 +22,6 @@ class BuilderAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equipm
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         var successes = 0
         val dir = user.horizontalFacing
-        println(dir)
         val pos = user.blockPos.add(0,-1,0)
         var xMod = 0
         var zMod = 0
@@ -43,7 +42,6 @@ class BuilderAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equipm
         }
         for (i in 1..rangeOfEffect().toInt()){
             val pos2 = pos.add(i * xMod,0,i * zMod)
-            println(pos2)
             if (world.isAir(pos2)){
                 world.setBlockState(pos2,RegisterBlock.HARD_LIGHT_BLOCK.defaultState)
                 successes++

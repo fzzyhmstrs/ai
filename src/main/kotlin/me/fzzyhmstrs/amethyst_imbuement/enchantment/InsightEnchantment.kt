@@ -29,7 +29,6 @@ class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantmen
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        println(stack.isOf(Items.CROSSBOW).toString())
         return (stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)
     }
 
