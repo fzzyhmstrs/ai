@@ -92,8 +92,8 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
                     if (sqrd < 0.0) sqrd = 0.0;
                     double d = Math.sqrt(sqrd);
                     double y1Fix;
-                    if (Math.abs(this.getPitch()) != 90.0) {
-                        y1Fix = y1 + d * Math.tan(this.getPitch() * 0.01745329);;
+                    if (Math.abs(this.getPitch()) != 90) {
+                        y1Fix = y1 + d * Math.tan(this.getPitch() * 0.01745329);
                     } else if (this.getPitch() == 90.0) {
                         return instance.damage(source,amount);
                     } else if (this.getPitch() == -90.0){
