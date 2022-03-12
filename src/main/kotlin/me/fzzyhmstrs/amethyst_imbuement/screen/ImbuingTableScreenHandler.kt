@@ -1,10 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import com.google.common.collect.Lists
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Blocks
 import net.minecraft.enchantment.EnchantmentHelper
@@ -25,13 +26,17 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
 import net.minecraft.util.Identifier
+import net.minecraft.util.Util
+import net.minecraft.util.collection.Weighting
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
 import kotlin.math.max
+import kotlin.math.roundToInt
 
-@Suppress("SENSELESS_COMPARISON", "unused")
+@Suppress("SENSELESS_COMPARISON", "unused", "SameParameterValue")
 class ImbuingTableScreenHandler(
     syncID: Int,
     playerInventory: PlayerInventory,
@@ -245,7 +250,7 @@ class ImbuingTableScreenHandler(
                         }
                         j = 0
                         while (j < 3) {
-                            val k: List<EnchantmentLevelEntry>? = this.generateEnchantments(itemStack,j,enchantmentPower[j])
+                            val k: List<EnchantmentLevelEntry> = this.generateEnchantments(itemStack,j,enchantmentPower[j])
                             if (enchantmentPower[j] <= 0 || k == null || k.isEmpty()) {
                                 ++j
                                 continue
@@ -299,7 +304,7 @@ class ImbuingTableScreenHandler(
                 if (match == null || match!!.isEmpty) {
                     val list =
                         generateEnchantments(itemStack3, id, enchantmentPower[id])
-                    if (list!!.isNotEmpty()) {
+                    if (list.isNotEmpty()) {
                         player.applyEnchantmentCosts(itemStack3, i)
                         val bl = itemStack3.isOf(Items.BOOK)
                         if (bl) {
@@ -444,9 +449,9 @@ class ImbuingTableScreenHandler(
         return false
     }
 
-    private fun generateEnchantments(stack: ItemStack, slot: Int, level: Int): List<EnchantmentLevelEntry>? {
+    private fun generateEnchantments(stack: ItemStack, slot: Int, level: Int): List<EnchantmentLevelEntry> {
         random.setSeed((seed.get() + slot).toLong())
-        val list = EnchantmentHelper.generateEnchantments(random, stack, level, false)
+        val list: ArrayList<EnchantmentLevelEntry> = generateEnchantmentList(random, stack, level, false)
         if (stack.isOf(Items.BOOK) && list.size > 1) {
             list.removeAt(random.nextInt(list.size))
         }
@@ -605,5 +610,70 @@ class ImbuingTableScreenHandler(
         addProperty(Property.create(this.levelLow, 2))
     }
 
+    companion object {
+
+        private fun generateEnchantmentList(
+            random: Random,
+            stack: ItemStack,
+            level: Int,
+            treasureAllowed: Boolean
+        ): ArrayList<EnchantmentLevelEntry> {
+            var level1 = level
+            val list = Lists.newArrayList<EnchantmentLevelEntry>()
+            val item = stack.item
+            val i = item.enchantability
+            if (i <= 0) {
+                return list
+            }
+            level1 += 1 + random.nextInt(i / 4 + 1) + random.nextInt(i / 4 + 1)
+            val f = (random.nextFloat() + random.nextFloat() - 1.0f) * 0.15f
+            val list2 = getPossibleEntries(
+                MathHelper.clamp(
+                    (level1.toFloat() + level1.toFloat() * f).roundToInt(),
+                    1,
+                    Int.MAX_VALUE
+                ).also {
+                    level1 = it
+                }, stack, treasureAllowed
+            )
+            if (list2.isNotEmpty()) {
+                Weighting.getRandom(random, list2).ifPresent { e: EnchantmentLevelEntry ->
+                    list.add(
+                        e
+                    )
+                }
+                while (random.nextInt(50) <= level1) {
+                    if (list.isNotEmpty()) {
+                        EnchantmentHelper.removeConflicts(list2, Util.getLast(list))
+                    }
+                    if (list2.isEmpty()) break
+                    Weighting.getRandom(random, list2).ifPresent { e: EnchantmentLevelEntry ->
+                        list.add(
+                            e
+                        )
+                    }
+                    level1 /= 2
+                }
+            }
+            return list
+        }
+
+        private fun getPossibleEntries(power: Int, stack: ItemStack, treasureAllowed: Boolean): ArrayList<EnchantmentLevelEntry> {
+            val list = Lists.newArrayList<EnchantmentLevelEntry>()
+            block0@ for (enchantment in Registry.ENCHANTMENT) {
+                if (enchantment.isTreasure && !treasureAllowed || !enchantment.isAvailableForRandomSelection || !enchantment.isAcceptableItem(
+                        stack
+                    ) && !stack.isOf(Items.BOOK)
+                ) continue
+                for (i in enchantment.maxLevel downTo enchantment.minLevel - 1 + 1) {
+                    if (power < enchantment.getMinPower(i) || power > enchantment.getMaxPower(i)) continue
+                    list.add(EnchantmentLevelEntry(enchantment, i))
+                    continue@block0
+                }
+            }
+            return list
+        }
+
+    }
 
 }

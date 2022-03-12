@@ -36,7 +36,6 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantme
         if (target is PlayerEntity){
             target.itemCooldownManager.set(Items.SHIELD, 10*level)
         }
-
     }
 
     override fun canAccept(other: Enchantment): Boolean {
@@ -44,6 +43,8 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantme
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
+        println(stack)
+        println(stack.item is AxeItem)
         return (stack.item is AxeItem)
     }
 }
