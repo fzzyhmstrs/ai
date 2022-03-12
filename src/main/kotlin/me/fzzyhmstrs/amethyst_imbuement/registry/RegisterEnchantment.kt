@@ -35,7 +35,7 @@ object RegisterEnchantment {
     val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).also{regEnchant["night_vision"] = it}
     val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{regEnchant["steadfast"] = it}
     val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["rain_of_thorns"] = it}
-    val VEIN_MINER = VienMinerEnchantment(Enchantment.Rarity.UNCOMMON,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{regEnchant["vein_miner"] = it}
+    val VEIN_MINER = VienMinerEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{regEnchant["vein_miner"] = it}
 
     //augments for imbuing
     val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).also{regEnchant["angelic"] = it}
