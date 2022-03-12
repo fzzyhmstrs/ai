@@ -54,34 +54,12 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
         val f = this.z + z2
         this.updateRotation()
         val g = 0.999999
-        val gg: Double
         val h = 0.0
-        if (this.isTouchingWater) {
-            for (i in -1..1) {
-                world.addParticle(
-                    ParticleTypes.BUBBLE,
-                    this.x + x2 * (world.random.nextFloat()-0.5f),
-                    this.y + x2 * (world.random.nextFloat()-0.5f),
-                    this.z + x2 * (world.random.nextFloat()-0.5f),
-                    -x2,
-                    -y2,
-                    -z2
-                )
-            }
-            gg = 0.95
+        addParticles(x2, y2, z2)
+        val gg: Double = if (this.isTouchingWater) {
+            0.95
         } else {
-            for (i in 0..3) {
-                world.addParticle(
-                    ParticleTypes.CRIT,
-                    this.x + x2 * (world.random.nextFloat()-0.5f),
-                    this.y + x2 * (world.random.nextFloat()-0.5f),
-                    this.z + x2 * (world.random.nextFloat()-0.5f),
-                    -x2,
-                    -y2,
-                    -z2
-                )
-            }
-            gg = g
+            g
         }
         velocity = vec3d.multiply(gg)
         if (!hasNoGravity()) {
@@ -148,6 +126,34 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
             println("adding particles!")
         }*/
         this.setVelocity(d, e, f)
+    }
+
+    open fun addParticles(x2: Double, y2: Double, z2: Double){
+        if (this.isTouchingWater) {
+            for (i in -1..1) {
+                world.addParticle(
+                    ParticleTypes.BUBBLE,
+                    this.x + x2 * (world.random.nextFloat()-0.5f),
+                    this.y + x2 * (world.random.nextFloat()-0.5f),
+                    this.z + x2 * (world.random.nextFloat()-0.5f),
+                    -x2,
+                    -y2,
+                    -z2
+                )
+            }
+        } else {
+            for (i in 0..3) {
+                world.addParticle(
+                    particleType,
+                    this.x + x2 * (world.random.nextFloat()-0.5f),
+                    this.y + x2 * (world.random.nextFloat()-0.5f),
+                    this.z + x2 * (world.random.nextFloat()-0.5f),
+                    -x2,
+                    -y2,
+                    -z2
+                )
+            }
+        }
     }
 
 }

@@ -25,8 +25,6 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         this.setRotation(owner.yaw, owner.pitch)
     }
 
-    override fun initDataTracker() {}
-
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity2 = owner
@@ -53,21 +51,8 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         return true
     }
 
-    override fun getParticleType(): ParticleEffect? {
+    override fun getParticleType(): ParticleEffect {
         return ParticleTypes.FLAME
-    }
-
-    override fun onSpawnPacket(packet: EntitySpawnS2CPacket) {
-        super.onSpawnPacket(packet)
-        val d = packet.velocityX
-        val e = packet.velocityY
-        val f = packet.velocityZ
-        /*for (i in 0..6) {
-            val g = 0.95-0.02*i
-            world.addParticle(ParticleTypes.CRIT, this.x, this.y, this.z, d * g, e, f * g)
-            println("adding particles!")
-        }*/
-        this.setVelocity(d, e, f)
     }
 
 }

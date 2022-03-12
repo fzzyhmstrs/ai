@@ -129,7 +129,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("fang_barrage",SpellType.FURY,100,35,15,2, Items.EMERALD_BLOCK)
         ScepterObject.registerAugmentStat("fangs",SpellType.FURY,30,8,5,1, Items.EMERALD)
         ScepterObject.registerAugmentStat("fireball",SpellType.FURY,32,10,8,1, Items.TNT)
-        ScepterObject.registerAugmentStat("flamebolt",SpellType.FURY,18,4,1,0, Items.FIRE_CHARGE)
+        ScepterObject.registerAugmentStat("flamebolt",SpellType.FURY,21,4,1,0, Items.FIRE_CHARGE)
         ScepterObject.registerAugmentStat("flamewave",SpellType.FURY,2,3,16,2, Items.FIRE_CHARGE)
         ScepterObject.registerAugmentStat("force_field",SpellType.GRACE,600,60,6,1, Items.SHIELD)
         ScepterObject.registerAugmentStat("fortify",SpellType.GRACE,1200,25,1,1, Items.GOLDEN_APPLE)
@@ -153,7 +153,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("summon_golem",SpellType.WIT,6000,250,25,2, Items.AMETHYST_BLOCK)
         ScepterObject.registerAugmentStat("summon_strider",SpellType.GRACE,1200,10,5,1, Items.SADDLE)
         ScepterObject.registerAugmentStat("summon_zombie",SpellType.WIT,1200,30,5,1, Items.ROTTEN_FLESH)
-        ScepterObject.registerAugmentStat("teleport",SpellType.WIT,200,15,10,1, Items.ENDER_PEARL)
+        ScepterObject.registerAugmentStat("teleport",SpellType.WIT,200,15,8,1, Items.ENDER_PEARL)
         ScepterObject.registerAugmentStat("withering_bolt",SpellType.FURY,28,13,14,1, Items.WITHER_SKELETON_SKULL)
 
         regEnchant.clear()
