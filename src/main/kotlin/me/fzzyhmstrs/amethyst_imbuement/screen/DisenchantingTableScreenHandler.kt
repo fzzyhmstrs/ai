@@ -397,6 +397,9 @@ class DisenchantingTableScreenHandler(
         })
         addSlot(object : Slot(inventory, 1, 35, 47) {
             override fun canInsert(stack: ItemStack): Boolean { return stack.isOf(Items.BOOK) }
+            override fun getMaxItemCount(): Int {
+                return 1
+            }
         })
 
         //add the player inventory
