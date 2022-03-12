@@ -17,20 +17,22 @@ class AbundanceAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equi
         val userPos = user.blockPos
         for (i in -range..range){
             for (j in -range..range){
-                val bs = world.getBlockState(userPos.add(i,0,j))
-                val bsb = bs.block
-                if (bsb is CropBlock){
-                    val rnd1 = world.random.nextDouble()
-                    if (rnd1 < 0.25 + 0.05 * level) {
-                        successes++
-                        if (bsb.isMature(bs)) {
-                            world.breakBlock(userPos.add(i, 0, j), true)
-                            world.setBlockState(userPos.add(i, 0, j),bsb.defaultState)
-                            continue
+                for (k in -1..1){
+                    val bs = world.getBlockState(userPos.add(i,k,j))
+                    val bsb = bs.block
+                        if (bsb is CropBlock){
+                            val rnd1 = world.random.nextDouble()
+                            if (rnd1 < 0.15 + 0.05 * level) {
+                                successes++
+                                if (bsb.isMature(bs)) {
+                                    world.breakBlock(userPos.add(i, k, j), true)
+                                    world.setBlockState(userPos.add(i, k, j),bsb.defaultState)
+                                    continue
+                                }
+                                bsb.grow(world as ServerWorld,world.random,userPos.add(i,k,j),bs)
+                            }
                         }
-                        bsb.grow(world as ServerWorld,world.random,userPos.add(i,0,j),bs)
                     }
-                }
             }
         }
         return successes > 0
