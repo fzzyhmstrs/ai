@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity
+import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.entity.projectile.ProjectileUtil
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
@@ -14,7 +15,7 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 
-class MissileEntity(entityType: EntityType<MissileEntity>, world: World): ExplosiveProjectileEntity(entityType,world) {
+open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: World): ExplosiveProjectileEntity(entityType,world) {
 
     constructor(world: World,owner: LivingEntity,_pierce: Boolean) : this(RegisterEntity.MISSILE_ENTITY,world){
         this.pierce = _pierce

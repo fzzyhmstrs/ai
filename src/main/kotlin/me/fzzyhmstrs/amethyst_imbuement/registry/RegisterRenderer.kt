@@ -85,6 +85,14 @@ object RegisterRenderer {
             )
         }
 
+        EntityRendererRegistry.register(
+            RegisterEntity.FLAMEBOLT_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            FlameboltEntityRenderer(
+                context
+            )
+        }
+
         BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
         ){context: BlockEntityRendererFactory.Context ->
             ImbuingTableBlockEntityRenderer(
@@ -127,29 +135,29 @@ object RegisterRenderer {
         }*/
 
         FabricModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("pulling"),
-            UnclampedModelPredicateProvider { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
-                if (entity != null && entity.isUsingItem && entity.activeItem == stack && !CrossbowItem.isCharged(
-                        stack
-                    )
-                ) 1.0f else 0.0f
-            })
+            RegisterItem.SNIPER_BOW, Identifier("pulling")
+        ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && entity.isUsingItem && entity.activeItem == stack && !CrossbowItem.isCharged(
+                    stack
+                )
+            ) 1.0f else 0.0f
+        }
         FabricModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("charged"),
-            UnclampedModelPredicateProvider { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
-                if (entity != null && CrossbowItem.isCharged(
-                        stack
-                    )
-                ) 1.0f else 0.0f
-            })
+            RegisterItem.SNIPER_BOW, Identifier("charged")
+        ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && CrossbowItem.isCharged(
+                    stack
+                )
+            ) 1.0f else 0.0f
+        }
         FabricModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("firework"),
-            UnclampedModelPredicateProvider { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
-                if (entity != null && CrossbowItem.isCharged(
-                        stack
-                    ) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET)
-                ) 1.0f else 0.0f
-            })
+            RegisterItem.SNIPER_BOW, Identifier("firework")
+        ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && CrossbowItem.isCharged(
+                    stack
+                ) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET)
+            ) 1.0f else 0.0f
+        }
         FabricModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("pull"),
             UnclampedModelPredicateProvider { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->

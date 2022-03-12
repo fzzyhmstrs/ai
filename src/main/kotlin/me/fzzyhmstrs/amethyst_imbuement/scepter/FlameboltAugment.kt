@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.FlameboltEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
-import net.minecraft.entity.projectile.SmallFireballEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.MathHelper
@@ -18,19 +18,25 @@ class FlameboltAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Eq
         println(pitch)
         println(user.eyeY - 0.3 + 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)))
         val roll = user.roll
-        val speed = 5.0F
-        val div = 1.0F
+        val speed = 2.0F
+        val div = 0.75F
         val userVelocity = user.velocity
-        val f = -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed + userVelocity.x
-        val g = -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed + userVelocity.y
-        val h = MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed + userVelocity.z
-        val sfe = SmallFireballEntity(world,
-            user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)),
+        val f =
+            -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.x
+        val g =
+            -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.y
+        val h =
+            MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.z
+        return FlameboltEntity(
+            world, user, speed, div,
+            user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                pitch * (Math.PI.toFloat() / 180)
+            ),
             user.eyeY - 0.3 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
-            user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)),
-            f,g,h)
-        sfe.owner = user
-        return sfe
+            user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                pitch * (Math.PI.toFloat() / 180)
+            ),
+        )
     }
 
     override fun soundEvent(): SoundEvent {

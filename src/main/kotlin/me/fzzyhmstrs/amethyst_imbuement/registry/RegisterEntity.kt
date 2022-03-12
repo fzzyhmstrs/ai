@@ -81,6 +81,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
     )
 
+    val FLAMEBOLT_ENTITY: EntityType<FlameboltEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier("amethyst_imbuement", "flamebolt_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<FlameboltEntity>, world: World ->
+            FlameboltEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+    )
+
     val FREEZING_ENTITY: EntityType<FreezingEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier("amethyst_imbuement", "freezing_entity"),

@@ -128,7 +128,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("dash",SpellType.WIT,36,10,5,1, Items.SUGAR)
         ScepterObject.registerAugmentStat("fang_barrage",SpellType.FURY,100,35,15,2, Items.EMERALD_BLOCK)
         ScepterObject.registerAugmentStat("fangs",SpellType.FURY,30,8,5,1, Items.EMERALD)
-        ScepterObject.registerAugmentStat("fireball",SpellType.FURY,40,10,8,1, Items.TNT)
+        ScepterObject.registerAugmentStat("fireball",SpellType.FURY,32,10,8,1, Items.TNT)
         ScepterObject.registerAugmentStat("flamebolt",SpellType.FURY,18,4,1,0, Items.FIRE_CHARGE)
         ScepterObject.registerAugmentStat("flamewave",SpellType.FURY,2,3,16,2, Items.FIRE_CHARGE)
         ScepterObject.registerAugmentStat("force_field",SpellType.GRACE,600,60,6,1, Items.SHIELD)

@@ -26,7 +26,7 @@ class FreezingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equ
 
     override fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?) {
         target.frozenTicks = 180 + 100 * level.toInt()
-        target.damage(DamageSource.GENERIC,1.0F)
+        target.damage(DamageSource.GENERIC,2.0F)
     }
 
     override fun soundEvent(): SoundEvent {

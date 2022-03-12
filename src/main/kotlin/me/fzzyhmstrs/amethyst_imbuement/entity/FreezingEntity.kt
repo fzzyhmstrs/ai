@@ -95,7 +95,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Expl
         val entity = owner
         if (entity is LivingEntity) {
             (entityHitResult.entity as LivingEntity).frozenTicks = 180 + 100 * level
-            entityHitResult.entity.damage(DamageSource.GENERIC,2.0F)
+            entityHitResult.entity.damage(DamageSource.GENERIC,4.0F)
         }
         val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,pos = entityHitResult.entity.blockPos)
         println(this.blockPos)
