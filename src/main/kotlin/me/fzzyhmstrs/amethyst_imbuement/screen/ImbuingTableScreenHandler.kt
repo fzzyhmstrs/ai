@@ -298,7 +298,7 @@ class ImbuingTableScreenHandler(
             i = match!!.get().getCost()
         }
 
-        if (enchantmentPower[id] > 0 && !itemStack.isEmpty && (player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] || player.abilities.creativeMode)) {
+        if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
             context.run { world: World, pos: BlockPos? ->
                 var itemStack3 = itemStack
                 if (match == null || match!!.isEmpty) {

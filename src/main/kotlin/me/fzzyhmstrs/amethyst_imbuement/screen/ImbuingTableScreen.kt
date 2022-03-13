@@ -95,9 +95,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             //println(handler.imbueId[o].toString())
             if (handler.imbueId[o] == 0) {
                 when (r) {
-                    in 31..40 -> oOfst = 1
-                    in 41..50 -> oOfst = 2
-                    in 51..60 -> oOfst = 3
+                    in 31..40 -> oOfst = 2
+                    in 41..50 -> oOfst = 3
+                    in 51..60 -> oOfst = 4
                 }
             } else{
                 oOfst = r - o - 1
@@ -311,27 +311,29 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 } else{
                     continue
                 }
-                if (!bl) {
-                    list.add(LiteralText.EMPTY)
-                    if (client!!.player!!.experienceLevel < k) {
-                        list.add(
-                            TranslatableText(
-                                "container.enchant.level.requirement",
-                                handler.enchantmentPower[j]
-                            ).formatted(Formatting.RED)
-                        )
-                    } else {
-                        val mutableText = if (m == 1) TranslatableText("container.enchant.lapis.one") else TranslatableText(
-                            "container.enchant.lapis.many",
-                            m
-                        )
-                        list.add(mutableText.formatted(if (i >= m) Formatting.GRAY else Formatting.RED))
-                        val mutableText2 =
-                            if (m == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
-                                "container.enchant.level.many",
+                if (handler.levelLow[j] <= 0){
+                    if (!bl) {
+                        list.add(LiteralText.EMPTY)
+                        if (client!!.player!!.experienceLevel < k) {
+                            list.add(
+                                TranslatableText(
+                                    "container.enchant.level.requirement",
+                                    handler.enchantmentPower[j]
+                                ).formatted(Formatting.RED)
+                            )
+                        } else {
+                            val mutableText = if (m == 1) TranslatableText("container.enchant.lapis.one") else TranslatableText(
+                                "container.enchant.lapis.many",
                                 m
                             )
-                        list.add(mutableText2.formatted(Formatting.GRAY))
+                            list.add(mutableText.formatted(if (i >= m) Formatting.GRAY else Formatting.RED))
+                            val mutableText2 =
+                                if (m == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                                    "container.enchant.level.many",
+                                    m
+                                )
+                            list.add(mutableText2.formatted(Formatting.GRAY))
+                        }
                     }
                 }
             } else {
