@@ -101,7 +101,7 @@ object RegisterEnchantment {
     val REGENERATE = RegenerateAugment(Enchantment.Rarity.VERY_RARE,1,5,EquipmentSlot.MAINHAND).also{regEnchant["regenerate"] = it}
     val REPAIR = RepairAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["repair"] = it}
     val SHINE = PlaceItemAugment(Enchantment.Rarity.VERY_RARE,1,1, Items.TORCH,EquipmentSlot.MAINHAND).also{regEnchant["shine"] = it}
-    val SUMMON_BLAZE = SummonEntityAugment(Enchantment.Rarity.VERY_RARE,2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
+    //val SUMMON_BLAZE = SummonEntityAugment(Enchantment.Rarity.VERY_RARE,2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonEntityAugment(Enchantment.Rarity.VERY_RARE,1,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_boat"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_chicken"] = it}
     val SUMMON_GOLEM = SummonGolemAugment(Enchantment.Rarity.VERY_RARE,3,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_golem"] = it}
@@ -147,7 +147,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("regenerate",SpellType.GRACE,1200,20,1,0, Items.GHAST_TEAR) //update cooldown once done debugging
         ScepterObject.registerAugmentStat("repair",SpellType.GRACE,14,3,1,0, Items.IRON_INGOT)
         ScepterObject.registerAugmentStat("shine",SpellType.WIT,5,2,1,0, Items.TORCH)
-        ScepterObject.registerAugmentStat("summon_blaze",SpellType.WIT,1200,30,8,1, Items.BLAZE_ROD)
+        //ScepterObject.registerAugmentStat("summon_blaze",SpellType.WIT,1200,30,8,1, Items.BLAZE_ROD)
         ScepterObject.registerAugmentStat("summon_boat",SpellType.WIT,1200,10,1,0, Items.OAK_BOAT)
         ScepterObject.registerAugmentStat("summon_chicken",SpellType.GRACE,900,10,1,1, Items.EGG)
         ScepterObject.registerAugmentStat("summon_golem",SpellType.WIT,6000,250,25,2, Items.AMETHYST_BLOCK)

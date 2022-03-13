@@ -130,27 +130,27 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
 
     open fun addParticles(x2: Double, y2: Double, z2: Double){
         if (this.isTouchingWater) {
-            for (i in -1..1) {
+            for (i in 0..2) {
                 world.addParticle(
                     ParticleTypes.BUBBLE,
                     this.x + x2 * (world.random.nextFloat()-0.5f),
                     this.y + x2 * (world.random.nextFloat()-0.5f),
                     this.z + x2 * (world.random.nextFloat()-0.5f),
-                    -x2,
-                    -y2,
-                    -z2
+                    0.0,
+                    0.0,
+                    0.0
                 )
             }
         } else {
-            for (i in 0..3) {
+            for (i in 0..2) {
                 world.addParticle(
                     particleType,
                     this.x + x2 * (world.random.nextFloat()-0.5f),
                     this.y + x2 * (world.random.nextFloat()-0.5f),
                     this.z + x2 * (world.random.nextFloat()-0.5f),
-                    -x2,
-                    -y2,
-                    -z2
+                    0.0,
+                    0.0,
+                    0.0
                 )
             }
         }

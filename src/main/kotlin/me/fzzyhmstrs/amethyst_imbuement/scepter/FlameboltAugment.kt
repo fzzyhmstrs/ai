@@ -13,26 +13,17 @@ import net.minecraft.world.World
 class FlameboltAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(weight, _tier, _maxLvl, *slot) {
 
     override fun entityClass(world: World, user: LivingEntity, pierce: Boolean, level: Int): ProjectileEntity {
-        val yaw = user.yaw
         val pitch = user.pitch
         println(pitch)
         println(user.eyeY - 0.3 + 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)))
-        val roll = user.roll
         val speed = 2.0F
         val div = 0.75F
-        val userVelocity = user.velocity
-        val f =
-            -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.x
-        val g =
-            -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.y
-        val h =
-            MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat() - 0.5F) * div / 10 + 1.0F) * speed + userVelocity.z
         return FlameboltEntity(
             world, user, speed, div,
             user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                 pitch * (Math.PI.toFloat() / 180)
             ),
-            user.eyeY - 0.3 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
+            user.eyeY - 0.4 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
             user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                 pitch * (Math.PI.toFloat() / 180)
             ),
