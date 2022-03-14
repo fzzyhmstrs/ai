@@ -10,7 +10,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
 import java.util.*
 
-class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.TRIDENT,slot) {
+class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.ARMOR_FEET,slot) {
 
     override fun getMinPower(level: Int): Int {
         return 30

@@ -11,7 +11,6 @@ val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
 group = mavenGroup
-minecraft {}
 repositories {
     maven {
         name = "TerraformersMC"
@@ -28,6 +27,10 @@ repositories {
     maven {
         name = "Patchouli Lib"
         url = uri("https://maven.blamejared.com")
+    }
+    maven {
+        name = "GlowLib"
+        url = uri("https://api.modrinth.com/maven")
     }
     flatDir {
         dirs("F:\\Documents\\Mod Development\\structurize")
@@ -56,6 +59,9 @@ dependencies {
 
     modImplementation (":structurized:1.4.0+1.18")
     include(":structurized:1.4.0+1.18")
+
+    modImplementation ("maven.modrinth:coloredglowlib:1.0.0")
+    include("maven.modrinth:coloredglowlib:1.0.0")
 
     modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0")
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")

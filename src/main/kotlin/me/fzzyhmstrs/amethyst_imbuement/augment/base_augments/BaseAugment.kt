@@ -19,8 +19,8 @@ open class BaseAugment(weight: Rarity, val mxLvl: Int = 1, val target: Enchantme
         return
     }
 
-    open fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack = ItemStack.EMPTY){
-        return
+    open fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack = ItemStack.EMPTY): Boolean{
+        return true
     }
 
     open fun unequipEffect(user: LivingEntity, level: Int, stack: ItemStack = ItemStack.EMPTY){

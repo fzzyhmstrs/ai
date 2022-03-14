@@ -1,0 +1,8 @@
+{
+  "ore_colors": [
+	{
+		"block": "minecraft:diamond_ore",
+		"color": [255,255,255]
+	}
+  ]
+}

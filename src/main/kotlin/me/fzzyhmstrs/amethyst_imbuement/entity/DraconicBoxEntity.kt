@@ -1,6 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.emafire003.dev.coloredglowlib.ColoredGlowLib
+import me.emafire003.dev.coloredglowlib.util.Color
+import me.fzzyhmstrs.amethyst_imbuement.util.GlowColorUtil
+import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -18,6 +23,11 @@ import net.minecraft.world.World
 
 class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World): LivingEntity(entityType,world) {
 
+    constructor(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block): this(entityType, world) {
+        entityBlock = block
+    }
+
+    private var entityBlock = Blocks.AIR
 
     init{
         this.isInvulnerable  = true
@@ -41,13 +51,26 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
 
     override fun tick() {
         if (!this.hasStatusEffect(StatusEffects.GLOWING)) {
-            this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, 220))
+            if (GlowColorUtil.oreIsRainbow(entityBlock)){
+                ColoredGlowLib.setRainbowColorToEntity(this,true)
+                println("i'm a ranibow")
+                println(uuid)
+                println(ColoredGlowLib.getEntityRainbowColor(this))
+            } else {
+                val color = GlowColorUtil.oreGlowColor(entityBlock)
+                ColoredGlowLib.setColorToEntity(this, color)
+            }
+            this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, 260))
+
         }
         this.setNoGravity(true)
         noClip = true
         super.tick()
         noClip = false
-        if (this.age >= 300) this.discard()
+        if (this.age >= 260) {
+            ColoredGlowLib.setRainbowColorToEntity(this,false)
+            this.discard()
+        }
     }
 
     override fun shouldRenderName(): Boolean {

@@ -17,11 +17,12 @@ import net.minecraft.item.TridentItem
 
 class UndyingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
-    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (user !is PlayerEntity) return
+    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
+        if (user !is PlayerEntity) return false
         if (TotemItem.damageHandler(stack, user.world, user, 360)) {
             TotemItem.burnOutHandler(stack, RegisterEnchantment.UNDYING, "Undying augment burnt out!")
         }
+        return true
     }
 
 }

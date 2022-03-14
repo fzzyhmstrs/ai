@@ -291,7 +291,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
                 world.getBlockState(blockPos),
                 Fluids.EMPTY.defaultState,
                 RegisterEntity.CRYSTAL_GOLEM_ENTITY
-            ) && world.intersectsEntities(this)
+            ) && world.doesNotIntersectEntities(this)
         }
         return false
     }

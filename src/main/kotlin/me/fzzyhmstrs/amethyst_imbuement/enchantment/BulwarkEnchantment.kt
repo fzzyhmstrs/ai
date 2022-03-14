@@ -36,10 +36,11 @@ class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
         return (stack.item is ShieldItem)
     }
 
-    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack) {
+    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         //user is the user
-        if (user.world !is ServerWorld) return
+        if (user.world !is ServerWorld) return false
         user.heal(1.0f)
+        return true
     }
 
 }

@@ -13,18 +13,30 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
-    @Shadow private int scaledWidth;
-    @Shadow private int scaledHeight;
+    //@Shadow private int scaledWidth;
+    //@Shadow private int scaledHeight;
     @Shadow @Final
     private MinecraftClient client;
+    @Shadow @Final private static Identifier SPYGLASS_SCOPE;
 
 
+    @Redirect(method = "renderSpyglassOverlay", at = @At(value = "INVOKE", target = "com/mojang/blaze3d/systems/RenderSystem.setShaderTexture (ILnet/minecraft/util/Identifier;)V"))
+    private void setShaderTextureMixin(int i, Identifier identifier){
+        assert this.client.player != null;
+        if (this.client.player.getActiveItem().getItem() != RegisterItem.INSTANCE.getSNIPER_BOW()){
+            RenderSystem.setShaderTexture(0, SPYGLASS_SCOPE);
+        } else {
+            RenderSystem.setShaderTexture(0, SniperBowItem.Companion.getSNIPER_BOW_SCOPE());
+        }
+    }
 
-    @Inject(method = "renderSpyglassOverlay", at = @At(value = "HEAD"), cancellable = true)
+
+    /*@Inject(method = "renderSpyglassOverlay", at = @At(value = "HEAD"), cancellable = true)
     private void renderSpyglassOverlay(float scale, CallbackInfo ci){
         assert this.client.player != null;
         if (this.client.player.getActiveItem().getItem() != RegisterItem.INSTANCE.getSNIPER_BOW()){
@@ -77,7 +89,7 @@ public abstract class InGameHudMixin {
         RenderSystem.enableDepthTest();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         ci.cancel();
-    }
+    }*/
 
 
 }

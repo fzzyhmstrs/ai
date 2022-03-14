@@ -95,9 +95,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             //println(handler.imbueId[o].toString())
             if (handler.imbueId[o] == 0) {
                 when (r) {
-                    in 31..40 -> oOfst = 2
-                    in 41..50 -> oOfst = 3
-                    in 51..60 -> oOfst = 4
+                    in 31..40 -> oOfst = 3 - o
+                    in 41..50 -> oOfst = 4 - o
+                    in 51..60 -> oOfst = 5 - o
                 }
             } else{
                 oOfst = r - o - 1

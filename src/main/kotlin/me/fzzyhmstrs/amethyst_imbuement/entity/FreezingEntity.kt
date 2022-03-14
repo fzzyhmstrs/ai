@@ -38,13 +38,15 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         super.onEntityHit(entityHitResult)
         val entity = owner
         if (entity is LivingEntity) {
-            (entityHitResult.entity as LivingEntity).frozenTicks = 180 + 100 * level
-            entityHitResult.entity.damage(DamageSource.GENERIC,4.0F)
+            if (!entityHitResult.entity.isFireImmune) {
+                (entityHitResult.entity as LivingEntity).frozenTicks = 180 + 100 * level
+                entityHitResult.entity.damage(DamageSource.GENERIC, 3.0F)
+            } else {
+                (entityHitResult.entity as LivingEntity).frozenTicks = 340 + 160 * level
+                entityHitResult.entity.damage(DamageSource.GENERIC, 5.0F)
+            }
         }
         val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,pos = entityHitResult.entity.blockPos)
-        println(this.blockPos)
-        println(entityHitResult.entity.blockPos)
-        println(entityList)
         if (entityList.isNotEmpty()){
             for (entity2 in entityList){
                 if (entity2 is Monster){

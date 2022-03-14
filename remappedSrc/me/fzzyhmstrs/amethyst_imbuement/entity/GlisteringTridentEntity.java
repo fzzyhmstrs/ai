@@ -42,7 +42,7 @@ public class GlisteringTridentEntity
     public int returnTimer;
 
     public GlisteringTridentEntity(EntityType<? extends GlisteringTridentEntity> entityType, World world) {
-        super((EntityType<? extends PersistentProjectileEntity>)entityType, world);
+        super((EntityType<? extends GlisteringTridentEntity>)entityType, world);
     }
 
     public GlisteringTridentEntity(World world, LivingEntity owner, ItemStack stack) {

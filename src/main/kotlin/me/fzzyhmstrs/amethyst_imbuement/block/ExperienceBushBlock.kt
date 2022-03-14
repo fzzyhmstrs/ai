@@ -26,10 +26,10 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         if (entity !is LivingEntity || entity.getType() === EntityType.FOX || entity.getType() === EntityType.BEE) {
             return
         }
-        entity.slowMovement(state, Vec3d(0.8, 0.75, 0.8))
+        entity.slowMovement(state, Vec3d(0.9, 0.85, 0.9))
     }
 
-    override fun getPickStack(world: BlockView?, pos: BlockPos?, state: BlockState?): ItemStack? {
+    override fun getPickStack(world: BlockView?, pos: BlockPos?, state: BlockState?): ItemStack {
         return ItemStack(Items.EXPERIENCE_BOTTLE)
     }
 
@@ -56,8 +56,7 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         }
         if (i > 1) {
             //val j = 1 + world.random.nextInt(9)
-            val j = world.random.nextInt(2) + 1
-            dropStack(world, pos, ItemStack (Items.EXPERIENCE_BOTTLE, if (bl) j else 1))
+            dropStack(world, pos, ItemStack (Items.EXPERIENCE_BOTTLE, if (bl) 2 else 1))
             //ExperienceOrbEntity.spawn(world as ServerWorld, Vec3d.ofCenter(pos), j + if (bl) 2 else 0)
             world.playSound(
                 null,

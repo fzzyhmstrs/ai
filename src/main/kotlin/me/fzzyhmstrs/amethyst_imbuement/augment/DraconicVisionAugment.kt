@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import net.minecraft.block.Blocks
 import net.minecraft.block.OreBlock
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -30,15 +31,16 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                     val jj = posJ + j
                     val kk = posK + k
                     if (world.isAir(pos.add(i,j,k))) continue
-                    if (world.getBlockState(pos.add(i,j,k)).block is OreBlock){
-                        val dbe = DraconicBoxEntity(RegisterEntity.DRACONIC_BOX_ENTITY,world)
+                    val bs = world.getBlockState(pos.add(i,j,k))
+                    if (bs.block is OreBlock || bs.isOf(Blocks.ANCIENT_DEBRIS)){
+                        val dbe = DraconicBoxEntity(RegisterEntity.DRACONIC_BOX_ENTITY,world,bs.block)
                         dbe.setPosition(ii + 0.5,jj.toDouble(),kk + 0.5)
                         world.spawnEntity(dbe)
                     }
                 }
             }
         }
-        addStatusToQueue(user.uuid, RegisterStatus.DRACONIC_VISION,300,0)
+        addStatusToQueue(user.uuid, RegisterStatus.DRACONIC_VISION,260,0)
         world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,1.0f,0.8f)
     }
 

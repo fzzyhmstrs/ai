@@ -21,6 +21,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.TridentItem;
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -29,6 +30,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.lang.annotation.Target;
@@ -73,4 +75,43 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
         }
     }
 
+    @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/entity/Entity.damage (Lnet/minecraft/entity/damage/DamageSource;F)Z"))
+    private boolean checkHeadHunter(Entity instance, DamageSource source, float amount){
+        PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
+        Entity owner = chk.getOwner();
+        if (owner != null) {
+            if (owner instanceof LivingEntity){
+                ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
+                int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
+                if (lvl > 0){
+                    double y1 = this.getY();
+                    double y2 = instance.getEyeY();
+                    double xdiff = this.getX() - instance.getX();
+                    double zdiff = this.getZ() - instance.getZ();
+                    double sqrd = xdiff * xdiff + zdiff * zdiff;
+                    if (sqrd < 0.0) sqrd = 0.0;
+                    double d = Math.sqrt(sqrd);
+                    double y1Fix;
+                    if (Math.abs(this.getPitch()) != 90) {
+                        y1Fix = y1 + d * Math.tan(this.getPitch() * 0.01745329);
+                    } else if (this.getPitch() == 90.0) {
+                        return instance.damage(source,amount);
+                    } else if (this.getPitch() == -90.0){
+                        return instance.damage(source,amount*2.0f);
+                    } else {
+                        y1Fix = y1;
+                    }
+
+
+                    if (Math.abs(y1-y2) < 0.03){
+                        amount = amount *4.2F;
+                    } else if (Math.abs(y1Fix-y2) < 0.14){
+                        float rndMultiplier = (instance.world.random.nextFloat() * 0.7f + 0.6f);
+                        amount = amount * (1.0F + rndMultiplier);
+                    }
+                }
+            }
+        }
+        return instance.damage(source,amount);
+    }
 }

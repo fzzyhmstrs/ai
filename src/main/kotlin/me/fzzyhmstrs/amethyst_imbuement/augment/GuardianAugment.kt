@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack
 
 class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
-    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack) {
+    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         val world = user.world
         if (TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 240, "Not enough durability to summon a guardian!")) {
             if (TotemItem.damageHandler(stack, world, user, 240)) {
@@ -28,6 +28,7 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             cge.setPosition(user.pos)
             world.spawnEntity(cge)
         }
+        return true
     }
 
 }

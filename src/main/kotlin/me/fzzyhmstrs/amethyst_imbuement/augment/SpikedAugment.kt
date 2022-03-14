@@ -33,9 +33,10 @@ class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): 
         return list
     }
 
-    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack) {
+    override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         //user is actually the attacker in this case
-        if (user.world !is ServerWorld) return
+        if (user.world !is ServerWorld) return false
         user.damage(DamageSource.SWEET_BERRY_BUSH,0.5F * level)
+        return true
     }
 }
