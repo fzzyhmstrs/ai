@@ -216,5 +216,7 @@
 	"lore_book.cooldown": "Cooldown: ",
 	"lore_book.cooldown1": " Seconds",
 	"lore_book.mana_cost": "Mana cost: ",
-	"lore_book.tier": "Spell tier: "
+	"lore_book.tier": "Spell tier: ",
+	"key.amethyst_imbuement.vein_mine_key": "Vein Mine",
+	"key.amethyst_imbuement.spell_key": "Current Scepter Spell"
 }
