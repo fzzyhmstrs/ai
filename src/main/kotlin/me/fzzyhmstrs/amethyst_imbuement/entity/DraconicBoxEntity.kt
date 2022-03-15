@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.emafire003.dev.coloredglowlib.util.Color
 import me.fzzyhmstrs.amethyst_imbuement.util.GlowColorUtil
+import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -16,6 +17,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Arm
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
@@ -53,9 +55,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
         if (!this.hasStatusEffect(StatusEffects.GLOWING)) {
             if (GlowColorUtil.oreIsRainbow(entityBlock)){
                 ColoredGlowLib.setRainbowColorToEntity(this,true)
-                println("i'm a ranibow")
-                println(uuid)
-                println(ColoredGlowLib.getEntityRainbowColor(this))
             } else {
                 val color = GlowColorUtil.oreGlowColor(entityBlock)
                 ColoredGlowLib.setColorToEntity(this, color)
@@ -76,8 +75,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
     override fun shouldRenderName(): Boolean {
         return false
     }
-
-
 
     override fun canTakeDamage(): Boolean {
         return false
@@ -114,5 +111,27 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
         return false
     }
 
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        if (ColoredGlowLib.getEntityRainbowColor(this)){
+            nbt.putInt(NbtKeys.GLOW_COLOR.str(),-1)
+        } else if (ColoredGlowLib.per_entity_color_map.containsKey(this.uuid)){
+            nbt.putInt(NbtKeys.GLOW_COLOR.str(),ColoredGlowLib.per_entity_color_map[this.uuid]?.colorValue?:Color.getWhiteColor().colorValue)
+        } else {
+            nbt.putInt(NbtKeys.GLOW_COLOR.str(),Color.getWhiteColor().colorValue)
+        }
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound?) {
+        super.readCustomDataFromNbt(nbt)
+        val color = nbt?.getInt(NbtKeys.GLOW_COLOR.str())
+        if (color != null){
+            if (color < 0){
+                ColoredGlowLib.setRainbowColorToEntity(this,true)
+            } else {
+                ColoredGlowLib.setColorToEntity(this, Color(color))
+            }
+        }
+    }
 
 }

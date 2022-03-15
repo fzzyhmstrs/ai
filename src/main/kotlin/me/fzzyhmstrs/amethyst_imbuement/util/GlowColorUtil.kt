@@ -47,11 +47,11 @@ object GlowColorUtil {
         oreColorMap[Blocks.LARGE_AMETHYST_BUD] = Color(166,120,241)
         oreColorMap[Blocks.MEDIUM_AMETHYST_BUD] = Color(166,120,241)
         oreColorMap[Blocks.SMALL_AMETHYST_BUD] = Color(166,120,241)
-        oreColorMap[Blocks.ANCIENT_DEBRIS] = Color(92,53,44)
+        //oreColorMap[Blocks.ANCIENT_DEBRIS] = Color(92,53,44)
     }
 
     private fun applyBuiltinRainbows(){
-        //oreRainbowList.add(Blocks.ANCIENT_DEBRIS)
+        oreRainbowList.add(Blocks.ANCIENT_DEBRIS)
     }
 
     //to-do
