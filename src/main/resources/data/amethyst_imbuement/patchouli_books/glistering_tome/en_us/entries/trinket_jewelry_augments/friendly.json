@@ -25,7 +25,7 @@
 "craft_h_item": "minecraft:gold_ingot",
 "craft_i_item": "minecraft:air",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:friendly\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)21$()"
+"cost_text": "$(l)Level Cost: $(2)13$()"
 }
 ]
 }

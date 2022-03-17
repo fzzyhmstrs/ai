@@ -37,7 +37,7 @@ class MendEquipmentAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot
         if (stacks.isEmpty()) return false
         val healLeft = 15 * level
         val leftOverHeal = healItems(stacks,world,healLeft)
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.7f,0.9f)
+        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.5f,0.8f)
         return (leftOverHeal < healLeft)
     }
 
