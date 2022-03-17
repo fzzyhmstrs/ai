@@ -24,7 +24,7 @@
 "craft_g_item": "minecraft:air",
 "craft_h_item": "minecraft:iron_ingot",
 "craft_i_item": "minecraft:air",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:repair\",lvl:1}]}",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:mend_equipment\",lvl:1}]}",
 "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]

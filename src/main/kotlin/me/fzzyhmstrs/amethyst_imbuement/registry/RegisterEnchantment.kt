@@ -70,10 +70,8 @@ object RegisterEnchantment {
 
     //Scepter Spells
     val MAGIC_MISSILE = SummonProjectileAugment(Enchantment.Rarity.VERY_RARE,1,1, EquipmentSlot.MAINHAND).also{regEnchant["magic_missile"] = it}
-    val SOUL_MISSILE = SummonProjectileAugment(Enchantment.Rarity.VERY_RARE,1,1, EquipmentSlot.MAINHAND).also{regEnchant["soul_missile"] = it}
     val ABUNDANCE = AbundanceAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["abundance"] = it}
-    val BUILDER = BuilderAugment(Enchantment.Rarity.VERY_RARE,2,1,EquipmentSlot.MAINHAND).also{regEnchant["builder"] = it}
-    val CHARM = CharmAugment(Enchantment.Rarity.VERY_RARE,2,1,EquipmentSlot.MAINHAND).also{regEnchant["charm"] = it}
+    val BEDAZZLE = BedazzleAugment(Enchantment.Rarity.VERY_RARE,2,1,EquipmentSlot.MAINHAND).also{regEnchant["bedazzle"] = it}
     val CLEANSE = CleanseAugment(Enchantment.Rarity.VERY_RARE,1,1,EquipmentSlot.MAINHAND).also{regEnchant["cleanse"] = it}
     val COMET_STORM = CometStormAugment(Enchantment.Rarity.VERY_RARE,3,3,EquipmentSlot.MAINHAND).also{regEnchant["comet_storm"] = it}
     val CREATE_LAVA = PlaceItemAugment(Enchantment.Rarity.VERY_RARE,2,1,Items.LAVA_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_lava"] = it}
@@ -89,6 +87,7 @@ object RegisterEnchantment {
     val FORTIFY = FortifyAugment(Enchantment.Rarity.VERY_RARE,2,2,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
+    val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(Enchantment.Rarity.VERY_RARE,2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
     val LEVITATING_BULLET = LevitatingBulletAugment(Enchantment.Rarity.VERY_RARE,3,3,EquipmentSlot.MAINHAND).also{regEnchant["levitating_bullet"] = it}
     val LIGHTNING_BOLT = LightningBoltAugment(Enchantment.Rarity.VERY_RARE,2,1,EquipmentSlot.MAINHAND).also{regEnchant["lightning_bolt"] = it}
     val LIGHTNING_STORM = LightningStormAugment(Enchantment.Rarity.VERY_RARE,3,3,EquipmentSlot.MAINHAND).also{regEnchant["lightning_storm"] = it}
@@ -97,10 +96,11 @@ object RegisterEnchantment {
     val MASS_FORTIFY = MassFortifyAugment(Enchantment.Rarity.VERY_RARE,3,2,EquipmentSlot.MAINHAND).also{regEnchant["mass_fortify"] = it}
     val MASS_HEAL = MassHealAugment(Enchantment.Rarity.VERY_RARE,2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_heal"] = it}
     val MASS_REVIVIFY = MassRevivifyAugment(Enchantment.Rarity.VERY_RARE,3,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_revivify"] = it}
+    val MEND_EQUIPMENT = MendEquipmentAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["mend_equipment"] = it}
     val MINOR_HEAL = MinorSupportAugment(Enchantment.Rarity.VERY_RARE,1,5,EquipmentSlot.MAINHAND).also{regEnchant["minor_heal"] = it}
     val REGENERATE = RegenerateAugment(Enchantment.Rarity.VERY_RARE,1,5,EquipmentSlot.MAINHAND).also{regEnchant["regenerate"] = it}
-    val REPAIR = RepairAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["repair"] = it}
     val SHINE = PlaceItemAugment(Enchantment.Rarity.VERY_RARE,1,1, Items.TORCH,EquipmentSlot.MAINHAND).also{regEnchant["shine"] = it}
+    val SOUL_MISSILE = SummonProjectileAugment(Enchantment.Rarity.VERY_RARE,1,1, EquipmentSlot.MAINHAND).also{regEnchant["soul_missile"] = it}
     //val SUMMON_BLAZE = SummonEntityAugment(Enchantment.Rarity.VERY_RARE,2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonEntityAugment(Enchantment.Rarity.VERY_RARE,1,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_boat"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment(Enchantment.Rarity.VERY_RARE,1,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_chicken"] = it}
@@ -116,10 +116,8 @@ object RegisterEnchantment {
             Registry.register(Registry.ENCHANTMENT, Identifier("amethyst_imbuement", k), regEnchant[k])
         }
         ScepterObject.registerAugmentStat("magic_missile",SpellType.NULL,15,1,1,0)
-        ScepterObject.registerAugmentStat("soul_missile",SpellType.FURY,14,2,1,0, Items.SOUL_SAND)
         ScepterObject.registerAugmentStat("abundance",SpellType.GRACE,10,2,1,0, Items.HAY_BLOCK)
-        ScepterObject.registerAugmentStat("builder",SpellType.WIT,5,1,5,1, Items.CRAFTING_TABLE)
-        ScepterObject.registerAugmentStat("charm",SpellType.WIT,1800,75,2,1, Items.DIAMOND)
+        ScepterObject.registerAugmentStat("bedazzle",SpellType.WIT,1800,75,2,1, Items.DIAMOND)
         ScepterObject.registerAugmentStat("cleanse",SpellType.GRACE,600,12,1,0, Items.MILK_BUCKET)
         ScepterObject.registerAugmentStat("comet_storm",SpellType.FURY,400,50,24,2, Items.TNT)
         ScepterObject.registerAugmentStat("create_lava",SpellType.WIT,200,20,1,1, Items.LAVA_BUCKET)
@@ -135,6 +133,7 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("fortify",SpellType.GRACE,1200,25,1,1, Items.GOLDEN_APPLE)
         ScepterObject.registerAugmentStat("freezing",SpellType.FURY,35,8,5,1, Items.PACKED_ICE)
         ScepterObject.registerAugmentStat("gusting",SpellType.WIT,100,15,3,1, Items.FEATHER)
+        ScepterObject.registerAugmentStat("hard_light_bridge",SpellType.WIT,5,1,5,1, Items.CRAFTING_TABLE)
         ScepterObject.registerAugmentStat("levitating_bullet",SpellType.FURY,60,20,12,2, Items.SHULKER_SHELL)
         ScepterObject.registerAugmentStat("lightning_bolt",SpellType.FURY,50,10,5,1, Items.LIGHTNING_ROD)
         ScepterObject.registerAugmentStat("lightning_storm",SpellType.FURY,400,50,28,2, Items.COPPER_BLOCK)
@@ -143,10 +142,11 @@ object RegisterEnchantment {
         ScepterObject.registerAugmentStat("mass_fortify",SpellType.GRACE,1800,60,15,2, Items.GOLDEN_APPLE)
         ScepterObject.registerAugmentStat("mass_heal",SpellType.GRACE,240,25,5,1, Items.GLISTERING_MELON_SLICE)
         ScepterObject.registerAugmentStat("mass_revivify",SpellType.GRACE,300,90,25,2, RegisterItem.GOLDEN_HEART)
+        ScepterObject.registerAugmentStat("mend_equipment",SpellType.GRACE,14,3,1,0, Items.IRON_INGOT)
         ScepterObject.registerAugmentStat("minor_heal",SpellType.GRACE,120,8,1,1, Items.GLISTERING_MELON_SLICE)
         ScepterObject.registerAugmentStat("regenerate",SpellType.GRACE,1200,20,1,0, Items.GHAST_TEAR) //update cooldown once done debugging
-        ScepterObject.registerAugmentStat("repair",SpellType.GRACE,14,3,1,0, Items.IRON_INGOT)
         ScepterObject.registerAugmentStat("shine",SpellType.WIT,5,2,1,0, Items.TORCH)
+        ScepterObject.registerAugmentStat("soul_missile",SpellType.FURY,14,2,1,0, Items.SOUL_SAND)
         //ScepterObject.registerAugmentStat("summon_blaze",SpellType.WIT,1200,30,8,1, Items.BLAZE_ROD)
         ScepterObject.registerAugmentStat("summon_boat",SpellType.WIT,1200,10,1,0, Items.OAK_BOAT)
         ScepterObject.registerAugmentStat("summon_chicken",SpellType.GRACE,900,10,1,1, Items.EGG)

@@ -23,7 +23,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 import kotlin.math.min
 
-class CharmAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot) {
+class BedazzleAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         val entityList: MutableList<Entity> = if (hit == null) {
@@ -66,7 +66,7 @@ class CharmAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equipm
                 //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
                 ScepterItem.addEntityToQueue(
                     entity.uuid,
-                    ScepterItem.EntityTaskInstance(RegisterEnchantment.CHARM, user, level.toDouble(), null)
+                    ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
                 )
             }
         }
@@ -80,7 +80,7 @@ class CharmAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equipm
                         //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
                         ScepterItem.addEntityToQueue(
                             entity.uuid,
-                            ScepterItem.EntityTaskInstance(RegisterEnchantment.CHARM, user, level.toDouble(), null)
+                            ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
                         )
                     }
                 }

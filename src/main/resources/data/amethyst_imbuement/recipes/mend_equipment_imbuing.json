@@ -26,6 +26,6 @@
   },
   "title": "Mend Equipment",
   "cost": 5,
-  "augment": "amethyst_imbuement:repair"
+  "augment": "amethyst_imbuement:mend_equipment"
 }
 

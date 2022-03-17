@@ -16,7 +16,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("SpellCheckingInspection")
-class RepairAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot), ManaItem {
+class MendEquipmentAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot), ManaItem {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         if (user !is PlayerEntity) return false
