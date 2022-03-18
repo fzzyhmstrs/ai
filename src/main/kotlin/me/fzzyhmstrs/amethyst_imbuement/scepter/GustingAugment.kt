@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -37,7 +38,7 @@ class GustingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equi
                 var distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
                 val strength = 1.5 + 1.0 * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
 
-                ScepterItem.addEntityToQueue(entity.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
+                ScepterObject.addEntityToQueue(entity.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
             }
         }
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,0.8F,1.2F)

@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
@@ -122,8 +123,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tick", at = @At(value = "TAIL"))
     private void augmentStatusCheck(CallbackInfo ci){
         if (!world.isClient) {
-            if (ScepterItem.SI.checkEntityTaskQueue()){
-                ScepterItem.SI.applyEntityTasks((LivingEntity) (Object) this);
+            if (ScepterObject.INSTANCE.checkEntityTaskQueue()){
+                ScepterObject.INSTANCE.applyEntityTasks((LivingEntity) (Object) this);
             }
             //armor effects a little less often because more intensive
             if (world.getTime() % 40 == 0) {

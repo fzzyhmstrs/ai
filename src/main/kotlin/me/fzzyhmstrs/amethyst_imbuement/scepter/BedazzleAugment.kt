@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -64,7 +65,7 @@ class BedazzleAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equ
         if (checkList.isNotEmpty()) {
             for (entity in checkList) {
                 //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
-                ScepterItem.addEntityToQueue(
+                ScepterObject.addEntityToQueue(
                     entity.uuid,
                     ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
                 )
@@ -78,7 +79,7 @@ class BedazzleAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equ
                 if (checkList.isNotEmpty()) {
                     for (entity in checkList2) {
                         //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
-                        ScepterItem.addEntityToQueue(
+                        ScepterObject.addEntityToQueue(
                             entity.uuid,
                             ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
                         )
