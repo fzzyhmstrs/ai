@@ -94,7 +94,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         }
 
         if (testEnchant !is ScepterAugment) return resetCooldown(stack,world,user,activeEnchantId)
-        val activeEnchant = testEnchant as? ScepterAugment ?: return resetCooldown(stack,world,user,activeEnchantId)
 
         val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world)
         return if (cd != null) {
@@ -147,7 +146,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             if (ScepterObject.checkClientTaskQueue()) {
                 ScepterObject.applyClientTasks(world,entity)
             }
-
             return
         }
         if (entity !is PlayerEntity) return

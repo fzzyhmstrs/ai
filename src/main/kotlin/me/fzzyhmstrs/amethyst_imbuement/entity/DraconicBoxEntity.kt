@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.emafire003.dev.coloredglowlib.util.Color
+import me.fzzyhmstrs.amethyst_imbuement.augment.DraconicVisionAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.GlowColorUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.minecraft.block.Block
@@ -24,14 +25,26 @@ import net.minecraft.world.World
 
 class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World): LivingEntity(entityType,world) {
 
-    constructor(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block): this(entityType, world) {
+    constructor(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block, age: Int, bp: BlockPos): this(entityType, world) {
         entityBlock = block
+        maxAge = age
+        startingBlockPos = bp
     }
 
     private var entityBlock = Blocks.AIR
+    private var maxAge = 260
+    private var startingBlockPos: BlockPos = BlockPos.ORIGIN
 
     init{
         this.isInvulnerable  = true
+    }
+
+    fun extendBoxLife(time: Int) {
+        this.age = 0
+        this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, maxAge))
+        if (time != maxAge) {
+            maxAge = time
+        }
     }
 
     override fun getArmorItems(): MutableIterable<ItemStack> {
@@ -58,15 +71,16 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
                 val color = GlowColorUtil.oreGlowColor(entityBlock)
                 ColoredGlowLib.setColorToEntity(this, color)
             }
-            this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, 260))
+            this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, maxAge))
 
         }
         this.setNoGravity(true)
         noClip = true
         super.tick()
         noClip = false
-        if (this.age >= 260) {
+        if (this.age >= maxAge) {
             ColoredGlowLib.setRainbowColorToEntity(this,false)
+            DraconicVisionAugment.removeBoxFromMap(startingBlockPos)
             this.discard()
         }
     }

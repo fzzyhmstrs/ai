@@ -138,18 +138,6 @@ public abstract class LivingEntityMixin extends Entity {
                             ((BaseAugment) enchant).tickEffect((LivingEntity) (Object) this, EnchantmentHelper.getLevel(enchant, stack), ItemStack.EMPTY);
                         }
                     }
-
-                    /*NbtList list = stack.getEnchantments();
-                    for (NbtElement nbt : list) {
-                        Identifier id = EnchantmentHelper.getIdFromNbt((NbtCompound) nbt);
-                        if (id == null) continue;
-                        Enchantment enchant = Registry.ENCHANTMENT.get(id);
-                        if (enchant != null) {
-                            if (enchant instanceof BaseAugment) {
-                                ((BaseAugment) enchant).tickEffect((LivingEntity) (Object) this, EnchantmentHelper.getLevel(enchant, stack), ItemStack.EMPTY);
-                            }
-                        }
-                    }*/
                 }
                 BaseAugment.Companion.applyEffects((LivingEntity) (Object) this);
             }
