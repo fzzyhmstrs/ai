@@ -69,8 +69,6 @@ public abstract class EntityMixin {
         }
 
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(),playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0){
-            /*Block slimeBlock = Blocks.SLIME_BLOCK;
-            slimeBlock.onEntityLand(world,entity);*/
             if (entity.bypassesLandingEffects()){
                 instance.onEntityLand(world,entity);
             } else {

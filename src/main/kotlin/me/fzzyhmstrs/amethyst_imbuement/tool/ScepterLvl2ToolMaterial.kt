@@ -8,7 +8,7 @@ import net.minecraft.recipe.Ingredient
 
 
 
-object ScepterLvl2ToolMaterial: ToolMaterial{
+object ScepterLvl2ToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun getDurability(): Int {
         return 1056
     }
@@ -25,7 +25,10 @@ object ScepterLvl2ToolMaterial: ToolMaterial{
         return 25
     }
 
-    override fun getRepairIngredient(): Ingredient? {
+    override fun getRepairIngredient(): Ingredient {
         return Ingredient.ofItems(Items.GOLD_INGOT)
+    }
+    override fun healCooldown(): Long {
+        return 130L
     }
 }
