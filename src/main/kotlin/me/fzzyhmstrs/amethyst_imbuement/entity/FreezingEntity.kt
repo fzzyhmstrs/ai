@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -51,7 +52,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
             for (entity2 in entityList){
                 if (entity2 is Monster){
                     if (entity is LivingEntity) {
-                        ScepterItem.addEntityToQueue(
+                        ScepterObject.addEntityToQueue(
                             entity2.uuid,
                             ScepterItem.EntityTaskInstance(
                                 RegisterEnchantment.FREEZING,

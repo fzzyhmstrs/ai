@@ -9,7 +9,6 @@
     "BucketItemMixin",
     "CarvedPumpkinBlockMixin",
     "ClientPlayNetworkHandlerMixin",
-    "ColoredGlowLibMixin",
     "CowEntityMixin",
     "CreeperEntityMixin",
     "CrossbowItemMixin",

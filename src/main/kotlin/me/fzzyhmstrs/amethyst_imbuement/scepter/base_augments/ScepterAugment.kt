@@ -10,11 +10,12 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-open class ScepterAugment(weight: Rarity, _tier: Int, _maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(weight, target,slot) {
+abstract class ScepterAugment(weight: Rarity, _tier: Int, _maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(weight, target,slot) {
     private val maxLvl = _maxLvl
     private val tier = _tier
 
@@ -81,4 +82,6 @@ open class ScepterAugment(weight: Rarity, _tier: Int, _maxLvl: Int, target: Ench
     open fun acceptableItemStacks(): MutableList<ItemStack> {
         return AcceptableItemStacks.scepterAcceptableItemStacks(tier)
     }
+
+    abstract fun applyTasks(world: World, user: LivingEntity,hand: Hand, level: Int): Boolean
 }

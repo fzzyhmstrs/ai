@@ -13,7 +13,6 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
@@ -111,12 +110,12 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
         return false
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    /*override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         if (ColoredGlowLib.getEntityRainbowColor(this)){
             nbt.putInt(NbtKeys.GLOW_COLOR.str(),-1)
         } else if (ColoredGlowLib.per_entity_color_map.containsKey(this.uuid)){
-            nbt.putInt(NbtKeys.GLOW_COLOR.str(),ColoredGlowLib.per_entity_color_map[this.uuid]?.colorValue?:Color.getWhiteColor().colorValue)
+            nbt.putInt(NbtKeys.GLOW_COLOR.str(), Color.translateFromHEX(ColoredGlowLib.per_entity_color_map[uuid]).colorValue)
         } else {
             nbt.putInt(NbtKeys.GLOW_COLOR.str(),Color.getWhiteColor().colorValue)
         }
@@ -132,6 +131,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
                 ColoredGlowLib.setColorToEntity(this, Color(color))
             }
         }
-    }
+    }*/
 
 }

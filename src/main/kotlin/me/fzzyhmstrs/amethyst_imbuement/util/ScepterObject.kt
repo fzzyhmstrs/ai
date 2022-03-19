@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import net.minecraft.client.MinecraftClient
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -24,6 +25,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import java.util.*
 import kotlin.math.max
 
 object ScepterObject: AugmentDamage {
@@ -38,6 +40,8 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int,PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
+    private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
+    private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
@@ -52,7 +56,7 @@ object ScepterObject: AugmentDamage {
             scepters[id] = mutableMapOf()
         }
         if(!scepterNbt.contains(NbtKeys.ACTIVE_ENCHANT.str())){
-            ScepterItem.writeDefaultNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
+            ScepterItem.writeDefaultNbt(stack)
             if(EnchantmentHelper.getLevel(RegisterEnchantment.MAGIC_MISSILE,stack) == 0) {
                 stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
             }
@@ -106,41 +110,6 @@ object ScepterObject: AugmentDamage {
         }
 
         return null
-    }
-
-    fun checkManaCost(cost: Int, stack: ItemStack, world: World, user: PlayerEntity): Boolean{
-        return (checkCanUseHandler(stack, world, user, cost, ""))
-    }
-
-    fun applyManaCost(cost: Int, stack: ItemStack, world: World, user: PlayerEntity){
-        damageHandler(stack,world,user,cost,"")
-    }
-
-    private fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String){
-        val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return
-        if(spellKey == SpellType.NULL.name) return
-        val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
-        val statXp = readNbt(spellKey + "_xp",scepterNbt) + 1
-        writeNbt(spellKey + "_xp",statXp,scepterNbt)
-        if(checkXpForLevelUp(statXp,statLvl)){
-            writeNbt(spellKey + "_lvl",statLvl+1,scepterNbt)
-        }
-    }
-
-
-
-    fun getScepterStat(scepterNbt: NbtCompound, activeEnchantId: String): Pair<Int,Int>{
-        val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return Pair(1,0)
-        val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
-        val statXp = readNbt(spellKey + "_xp",scepterNbt)
-        return Pair(statLvl,statXp)
-    }
-
-    fun checkScepterStat(scepterNbt: NbtCompound, activeEnchantId: String): Boolean{
-        if (!augmentStats.containsKey(activeEnchantId)) return false
-        val minLvl = augmentStats[activeEnchantId]?.minLvl?:return false
-        val curLvl = getScepterStat(scepterNbt,activeEnchantId).first
-        return (curLvl >= minLvl)
     }
 
     fun updateScepterActiveEnchant(stack: ItemStack, user: PlayerEntity, up: Boolean){
@@ -231,6 +200,44 @@ object ScepterObject: AugmentDamage {
                 activeEnchant
             }
         }
+    }
+
+    fun checkManaCost(cost: Int, stack: ItemStack, world: World, user: PlayerEntity): Boolean{
+        return (checkCanUseHandler(stack, world, user, cost, ""))
+    }
+
+    fun applyManaCost(cost: Int, stack: ItemStack, world: World, user: PlayerEntity){
+        damageHandler(stack,world,user,cost,"")
+    }
+
+    private fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String){
+        val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return
+        if(spellKey == SpellType.NULL.name) return
+        val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
+        val statXp = readNbt(spellKey + "_xp",scepterNbt) + 1
+        writeNbt(spellKey + "_xp",statXp,scepterNbt)
+        if(checkXpForLevelUp(statXp,statLvl)){
+            writeNbt(spellKey + "_lvl",statLvl+1,scepterNbt)
+        }
+    }
+
+    fun getScepterStat(scepterNbt: NbtCompound, activeEnchantId: String): Pair<Int,Int>{
+        val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return Pair(1,0)
+        val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
+        val statXp = readNbt(spellKey + "_xp",scepterNbt)
+        return Pair(statLvl,statXp)
+    }
+
+    fun checkScepterStat(scepterNbt: NbtCompound, activeEnchantId: String): Boolean{
+        if (!augmentStats.containsKey(activeEnchantId)) return false
+        val minLvl = augmentStats[activeEnchantId]?.minLvl?:return false
+        val curLvl = getScepterStat(scepterNbt,activeEnchantId).first
+        return (curLvl >= minLvl)
+    }
+
+    fun getScepterStats(stack: ItemStack): IntArray {
+        val nbt = stack.orCreateNbt
+        return getStatsHelper(nbt)
     }
 
     fun resetCooldown(stack: ItemStack, activeEnchantId: String){
@@ -326,6 +333,61 @@ object ScepterObject: AugmentDamage {
         return nbt
     }
 
+    fun checkEntityTaskQueue(): Boolean{
+        return entityTasks.isNotEmpty()
+    }
+
+    fun applyEntityTasks(entity: LivingEntity){
+        val uuid = entity.uuid
+        if (entityTasks.containsKey(uuid)){
+            val list = entityTasks[uuid]
+            if (list?.isNotEmpty() == true) {
+                for (data in list){
+                    val enchant = data.enchant
+                    if (enchant is ScepterAugment){
+                        enchant.entityTask(entity.world,entity,data.user,data.level,data.hit)
+                    }
+                }
+            }
+            removeEntitiesFromQueue(uuid)
+        }
+    }
+
+    fun addEntityToQueue(uuid: UUID, dataInstance: ScepterItem.EntityTaskInstance){
+        if (entityTasks.containsKey(uuid)){
+            entityTasks[uuid]?.add(dataInstance)
+        } else {
+            entityTasks[uuid] = mutableListOf()
+            entityTasks[uuid]?.add(dataInstance)
+        }
+    }
+
+    private fun removeEntitiesFromQueue(uuid: UUID){
+        if (entityTasks.containsKey(uuid)){
+            entityTasks.remove(uuid)
+        }
+    }
+
+    fun checkClientTaskQueue(): Boolean{
+        return clientTasks.isNotEmpty()
+    }
+
+    fun applyClientTasks(world: World, entity: LivingEntity){
+        for (task in clientTasks.keys) {
+            if (task is ScepterAugment) {
+                val target = clientTasks[task]?.target
+                val level = clientTasks[task]?.level ?: 1
+                val hit = clientTasks[task]?.hit
+                task.clientTask(world, target, entity, level, hit)
+            }
+        }
+        clientTasks.clear()
+    }
+
+    fun addClientTaskToQueue(enchant: Enchantment,dataInstance: ScepterItem.ClientTaskInstance){
+        clientTasks[enchant] = dataInstance
+    }
+
     fun registerAugmentStat(id: String, type: SpellType,cooldown: Int, cost: Int, minLvl: Int = 1, bookOfLoreTier: Int = 0, keyItem: Item = Items.GOLD_INGOT){
         if(!augmentStats.containsKey(id)){
             augmentStats[id] = AugmentDatapoint(type,cooldown,cost, minLvl, bookOfLoreTier, keyItem)
@@ -388,19 +450,6 @@ object ScepterObject: AugmentDamage {
         return (xpNext - xp + 1)
     }
 
-    fun spawnProjectileEntity(world: World, entity: LivingEntity, projectile: ProjectileEntity, soundEvent: SoundEvent): Boolean{
-        val bl = world.spawnEntity(projectile)
-        world.playSound(
-            null,
-            entity.blockPos,
-            soundEvent,
-            SoundCategory.PLAYERS,
-            1.0f,
-            world.getRandom().nextFloat() * 0.4f + 0.8f)
-        return bl
-    }
-
-
 
     private data class AugmentDatapoint(val type: SpellType,val cooldown: Int,
                                         val cost: Int, val minLvl: Int,
@@ -442,6 +491,34 @@ object ScepterObject: AugmentDamage {
         val rndMax = list.size
         val rndIndex = MinecraftClient.getInstance().world?.random?.nextInt(rndMax) ?: return "magic_missile"
         return list[rndIndex]
+    }
+    private fun getStatsHelper(nbt: NbtCompound): IntArray{
+        val stats = intArrayOf(0,0,0,0,0,0)
+        if(!nbt.contains("FURY_lvl")){
+            nbt.putInt("FURY_lvl",1)
+        }
+        stats[0] = nbt.getInt("FURY_lvl")
+        if(!nbt.contains("GRACE_lvl")){
+            nbt.putInt("GRACE_lvl",1)
+        }
+        stats[1] = nbt.getInt("GRACE_lvl")
+        if(!nbt.contains("WIT_lvl")){
+            nbt.putInt("WIT_lvl",1)
+        }
+        stats[2] = nbt.getInt("WIT_lvl")
+        if(!nbt.contains("FURY_xp")){
+            nbt.putInt("FURY_xp",0)
+        }
+        stats[3] = nbt.getInt("FURY_xp")
+        if(!nbt.contains("GRACE_xp")){
+            nbt.putInt("GRACE_xp",0)
+        }
+        stats[4] = nbt.getInt("GRACE_xp")
+        if(!nbt.contains("WIT_xp")){
+            nbt.putInt("WIT_xp",0)
+        }
+        stats[5] = nbt.getInt("WIT_xp")
+        return stats
     }
 
 }

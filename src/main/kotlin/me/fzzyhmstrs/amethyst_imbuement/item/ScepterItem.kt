@@ -47,14 +47,11 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             TranslatableText("enchantment.amethyst_imbuement.none")
         }
         tooltip.add(TranslatableText("scepter.active_spell").formatted(Formatting.GOLD).append(activeSpell.formatted(Formatting.GOLD)))
-        val stats = getStats(stack)
-        //tooltip.add(LiteralText("Fury: ${stats[0]}, XP to next: ${ScepterObject.xpToNextLevel(stats[3],stats[0])}").formatted(Formatting.RED))
+        val stats = ScepterObject.getScepterStats(stack)
         val furyText = TranslatableText("scepter.fury.lvl").string + stats[0].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[3],stats[0]).toString()
         tooltip.add(LiteralText(furyText).formatted(SpellType.FURY.fmt()))
-        //tooltip.add(LiteralText("Grace: ${stats[1]}, XP to next: ${ScepterObject.xpToNextLevel(stats[4],stats[1])}").formatted(Formatting.GREEN))
         val graceText = TranslatableText("scepter.grace.lvl").string + stats[1].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[4],stats[1]).toString()
         tooltip.add(LiteralText(graceText).formatted(SpellType.GRACE.fmt()))
-        //tooltip.add(LiteralText("Wit: ${stats[2]}, XP to next: ${ScepterObject.xpToNextLevel(stats[5],stats[2])}").formatted(Formatting.BLUE))
         val witText = TranslatableText("scepter.wit.lvl").string + stats[2].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[5],stats[2]).toString()
         tooltip.add(LiteralText(witText).formatted(SpellType.WIT.fmt()))
     }
@@ -62,10 +59,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
     override fun isFireproof(): Boolean {
         return true
     }
-
-    /*override fun isDamageable(): Boolean {
-        return false
-    }*/
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
@@ -100,15 +93,15 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             return TypedActionResult.fail(stack)
         }
 
-        //activeEnchantId = ScepterObject.activeEnchantHelper(stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
+        if (testEnchant !is ScepterAugment) return resetCooldown(stack,world,user,activeEnchantId)
+        val activeEnchant = testEnchant as? ScepterAugment ?: return resetCooldown(stack,world,user,activeEnchantId)
+
         val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world)
         return if (cd != null) {
             val manaReduction = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED, stack)
             val level = ScepterObject.getScepterStat(nbt,activeEnchantId).first
-            //val testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
-            testEnchant as ScepterAugment
             //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate
             val minLvl = ScepterObject.getAugmentMinLvl(activeEnchantId)
             val maxLevel = (testEnchant.getAugmentMaxLevel()) + minLvl - 1
@@ -116,93 +109,14 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             if (level >= minLvl){
                 testLevel = level
                 if (testLevel > maxLevel) testLevel = maxLevel
-                testLevel -= (ScepterObject.getAugmentMinLvl(activeEnchantId) - 1)
+                testLevel -= (minLvl - 1)
             }
 
-            if (testEnchant is SummonProjectileAugment) {
-                val activeEnchant = testEnchant as? SummonProjectileAugment
-                val pierce = activeEnchantId == "soul_missile"
-                val projectile = activeEnchant?.entityClass(world, user as LivingEntity, pierce)
-                val soundEvent = activeEnchant?.soundEvent()
-                if (projectile != null && soundEvent != null) {
-                    ScepterObject.applyManaCost(manaCost,stack, world, user)
-                    ScepterObject.spawnProjectileEntity(world, user as LivingEntity, projectile, soundEvent)
-                    if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(null,level,null)
-                    user.itemCooldownManager.set(stack.item, cd)
-                    TypedActionResult.success(stack)
-                } else {
-                    resetCooldown(stack,world,user,activeEnchantId)
-                }
-
-            } else if (testEnchant is MinorSupportAugment) {
-                val activeEnchant = testEnchant as? MinorSupportAugment
-                var target = RaycasterUtil.raycastEntity(distance = activeEnchant?.rangeOfEffect()?: 5.0)
-                if (target == null){
-                    target = ZombieEntity(world)
-                }
-                if (activeEnchant?.supportEffect(world,target,user,testLevel) == true){
-                    ScepterObject.applyManaCost(manaCost,stack, world, user)
-                    if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(target,testLevel,null)
-                    user.itemCooldownManager.set(stack.item, cd)
-                    TypedActionResult.success(stack)
-                } else {
-                    resetCooldown(stack,world,user,activeEnchantId)
-                }
-
-            } else if (testEnchant is PlaceItemAugment) {
-                val activeEnchant = testEnchant as? PlaceItemAugment
-                val hit = MinecraftClient.getInstance().crosshairTarget ?: return resetCooldown(stack,world,user,activeEnchantId)
-                if (hit.type != HitResult.Type.BLOCK) return resetCooldown(stack,world,user,activeEnchantId)
-                val testStack = activeEnchant?.itemToPlace(world,user)?: return resetCooldown(stack,world,user,activeEnchantId)
-                val testItem = testStack.item
-                if(testItem is BlockItem) {
-                    ScepterObject.applyManaCost(manaCost,stack, world, user)
-                    testItem.place(ItemPlacementContext(user,hand, ItemStack(testItem),hit as BlockHitResult))
-                    world.playSound(null,user.blockPos,testEnchant.soundEvent(),SoundCategory.NEUTRAL,1.0f,1.0f)
-                    if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(null,testLevel,hit)
-                    user.itemCooldownManager.set(stack.item, cd)
-                    return TypedActionResult.success(stack)
-                } else if(testItem is BucketItem){
-                    if (testItem.placeFluid(user,world,(hit as BlockHitResult).blockPos,hit)) {
-                        world.playSound(null,user.blockPos,testEnchant.soundEvent(),SoundCategory.NEUTRAL,1.0f,1.0f)
-                        ScepterObject.applyManaCost(manaCost,stack, world, user)
-                        if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(null,testLevel,hit)
-                        user.itemCooldownManager.set(stack.item, cd)
-                        return TypedActionResult.success(stack)
-                    } else {
-                        resetCooldown(stack,world,user,activeEnchantId)
-                    }
-                }
-                resetCooldown(stack,world,user,activeEnchantId)
-
-            } else if (testEnchant is SummonEntityAugment) {
-                val activeEnchant = testEnchant as? SummonEntityAugment
-                val hit = RaycasterUtil.raycastHit(distance = MinecraftClient.getInstance().interactionManager?.reachDistance?.toDouble()?:3.0, includeFluids = true) ?: return resetCooldown(stack,world,user,activeEnchantId)
-                if (hit.type != HitResult.Type.BLOCK) return resetCooldown(stack,world,user,activeEnchantId)
-                if (activeEnchant?.placeEntity(world,user,hit,testLevel) == true){
-                    ScepterObject.applyManaCost(manaCost,stack, world, user)
-                    if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(null,testLevel,hit)
-                    user.itemCooldownManager.set(stack.item, cd)
-                    return TypedActionResult.success(stack)
-                }
-                resetCooldown(stack,world,user,activeEnchantId)
-
-            }else if (testEnchant is MiscAugment) {
-                val activeEnchant = testEnchant as? MiscAugment
-                var target: Entity? = null
-                val hit = RaycasterUtil.raycastHit(distance = activeEnchant?.rangeOfEffect()?:4.0, includeFluids = true) ?: return resetCooldown(stack,world,user,activeEnchantId)
-                if (hit.type == HitResult.Type.ENTITY){
-                    target = (hit as EntityHitResult).entity
-                }
-                if (activeEnchant?.effect(world,target,user,testLevel,hit) == true){
-                    ScepterObject.applyManaCost(manaCost,stack, world, user)
-                    if (testEnchant.needsClient()) clientTasks[testEnchant] = ClientTaskInstance(target,testLevel,hit)
-                    user.itemCooldownManager.set(stack.item, cd)
-                    return TypedActionResult.success(stack)
-                }
-                resetCooldown(stack,world,user,activeEnchantId)
-
-            } else{
+            if (testEnchant.applyTasks(world, user, hand, testLevel)) {
+                ScepterObject.applyManaCost(manaCost,stack, world, user)
+                user.itemCooldownManager.set(stack.item, cd)
+                TypedActionResult.success(stack)
+            } else {
                 resetCooldown(stack,world,user,activeEnchantId)
             }
         } else {
@@ -217,8 +131,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
     override fun onCraft(stack: ItemStack, world: World, player: PlayerEntity) {
         if(EnchantmentHelper.getLevel(RegisterEnchantment.MAGIC_MISSILE,stack) == 0){
             stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
-            val nbt = stack.orCreateNbt
-            writeDefaultNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
+            writeDefaultNbt(stack)
             ScepterObject.initializeScepter(stack,world)
         }
     }
@@ -231,16 +144,8 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
                 smoke = false
             }
             if (entity !is PlayerEntity) return
-            if (clientTasks.isNotEmpty()) {
-                for (task in clientTasks.keys) {
-                    if (task is ScepterAugment) {
-                        val target = clientTasks[task]?.target
-                        val level = clientTasks[task]?.level ?: 1
-                        val hit = clientTasks[task]?.hit
-                        task.clientTask(world, target, entity, level, hit)
-                    }
-                }
-                clientTasks.clear()
+            if (ScepterObject.checkClientTaskQueue()) {
+                ScepterObject.applyClientTasks(world,entity)
             }
 
             return
@@ -273,11 +178,9 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
     //companion object for the scepter item, handles private functions and other housekeeping
 
     companion object SI {
-
-        private val clientTasks: MutableMap<Enchantment, ClientTaskInstance> = mutableMapOf()
-        private val entityTasks: MutableMap<UUID, MutableList<EntityTaskInstance>> = mutableMapOf()
         private var smoke = false
         private const val manaRepairTime = 150L
+
         private fun resetCooldown(stack: ItemStack,world: World, user: PlayerEntity, activeEnchant: String): TypedActionResult<ItemStack>{
             world.playSound(null,user.blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,0.6F,0.8F)
             ScepterObject.resetCooldown(stack,activeEnchant)
@@ -301,7 +204,9 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             return nbt.getInt(key)
         }
 
-        fun writeDefaultNbt(key: String, nbt: NbtCompound){
+        fun writeDefaultNbt(stack: ItemStack){
+            val nbt = stack.orCreateNbt
+            val key = NbtKeys.ACTIVE_ENCHANT.str()
             if(!nbt.contains(key)){
                 val identifier = Registry.ENCHANTMENT.getId(RegisterEnchantment.MAGIC_MISSILE)
                 if (identifier != null) {
@@ -309,80 +214,12 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
                     ScepterObject.setLastActiveEnchant(identifier.path)
                 }
             }
-            getStatsHelper(nbt)
-        }
-
-        private fun getStats(stack: ItemStack): IntArray {
-            val nbt = stack.orCreateNbt
-            return getStatsHelper(nbt)
-        }
-
-        private fun getStatsHelper(nbt: NbtCompound): IntArray{
-            val stats = intArrayOf(0,0,0,0,0,0)
-            if(!nbt.contains("FURY_lvl")){
-                nbt.putInt("FURY_lvl",1)
-            }
-            stats[0] = nbt.getInt("FURY_lvl")
-            if(!nbt.contains("GRACE_lvl")){
-                nbt.putInt("GRACE_lvl",1)
-            }
-            stats[1] = nbt.getInt("GRACE_lvl")
-            if(!nbt.contains("WIT_lvl")){
-                nbt.putInt("WIT_lvl",1)
-            }
-            stats[2] = nbt.getInt("WIT_lvl")
-            if(!nbt.contains("FURY_xp")){
-                nbt.putInt("FURY_xp",0)
-            }
-            stats[3] = nbt.getInt("FURY_xp")
-            if(!nbt.contains("GRACE_xp")){
-                nbt.putInt("GRACE_xp",0)
-            }
-            stats[4] = nbt.getInt("GRACE_xp")
-            if(!nbt.contains("WIT_xp")){
-                nbt.putInt("WIT_xp",0)
-            }
-            stats[5] = nbt.getInt("WIT_xp")
-            return stats
-        }
-
-        fun checkEntityTaskQueue(): Boolean{
-            return entityTasks.isNotEmpty()
-        }
-
-        fun applyEntityTasks(entity: LivingEntity){
-            val uuid = entity.uuid
-            if (entityTasks.containsKey(uuid)){
-                val list = entityTasks[uuid]
-                if (list?.isNotEmpty() == true) {
-                    for (data in list){
-                        val enchant = data.enchant
-                        if (enchant is ScepterAugment){
-                            enchant.entityTask(entity.world,entity,data.user,data.level,data.hit)
-                        }
-                    }
-                }
-                removeEntitiesFromQueue(uuid)
-            }
-        }
-
-        fun addEntityToQueue(uuid: UUID, dataInstance: EntityTaskInstance){
-            if (entityTasks.containsKey(uuid)){
-                entityTasks[uuid]?.add(dataInstance)
-            } else {
-                entityTasks[uuid] = mutableListOf()
-                entityTasks[uuid]?.add(dataInstance)
-            }
-        }
-
-        private fun removeEntitiesFromQueue(uuid: UUID){
-            if (entityTasks.containsKey(uuid)){
-                entityTasks.remove(uuid)
-            }
+            ScepterObject.getScepterStats(stack)
         }
     }
 
-    private data class ClientTaskInstance(val target: Entity?, val level: Int, val hit: HitResult?)
+
+    data class ClientTaskInstance(val target: Entity?, val level: Int, val hit: HitResult?)
 
     data class EntityTaskInstance(val enchant: Enchantment,val user: LivingEntity, val level: Double, val hit: HitResult?)
 
