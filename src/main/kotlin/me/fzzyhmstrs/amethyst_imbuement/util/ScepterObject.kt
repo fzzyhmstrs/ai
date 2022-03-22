@@ -40,7 +40,7 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int,PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
-    private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
+    //private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
     private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
 
     fun initializeScepter(stack: ItemStack, world: World){
@@ -368,7 +368,7 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-    fun checkClientTaskQueue(): Boolean{
+   /* fun checkClientTaskQueue(): Boolean{
         return clientTasks.isNotEmpty()
     }
 
@@ -386,12 +386,10 @@ object ScepterObject: AugmentDamage {
 
     fun addClientTaskToQueue(enchant: Enchantment,dataInstance: ScepterItem.ClientTaskInstance){
         clientTasks[enchant] = dataInstance
-    }
+    }*/
 
-    fun registerAugmentStat(id: String, type: SpellType,cooldown: Int, cost: Int, minLvl: Int = 1, bookOfLoreTier: Int = 0, keyItem: Item = Items.GOLD_INGOT){
-        if(!augmentStats.containsKey(id)){
-            augmentStats[id] = AugmentDatapoint(type,cooldown,cost, minLvl, bookOfLoreTier, keyItem)
-        }
+    fun registerAugmentStat(id: String, type: SpellType,cooldown: Int, manaCost: Int, minLvl: Int = 1,imbueLevel: Int = 1, bookOfLoreTier: Int = 0, keyItem: Item = Items.GOLD_INGOT){
+        registerAugmentStat(id,AugmentDatapoint(type,cooldown,manaCost, minLvl, bookOfLoreTier,imbueLevel, keyItem))
         if (bookOfLoreTier > 0) {
             if (!bookOfLoreListT12.contains(id)){
                 bookOfLoreListT12.add(id)
@@ -406,6 +404,15 @@ object ScepterObject: AugmentDamage {
                 bookOfLoreListT2.add(id)
             }
         }
+    }
+    fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
+        if(!augmentStats.containsKey(id) || overwrite){
+            augmentStats[id] = dataPoint
+        }
+    }
+
+    fun checkAugmentStat(id: String): Boolean{
+        return augmentStats.containsKey(id)
     }
 
     fun getAugmentType(id: String): SpellType {
@@ -425,13 +432,19 @@ object ScepterObject: AugmentDamage {
 
     fun getAugmentManaCost(id: String, reduction: Int = 0): Int{
         if(!augmentStats.containsKey(id)) return (10 - reduction)
-        val cost = (augmentStats[id]?.cost?.minus(reduction)) ?: (10 - reduction)
+        val cost = (augmentStats[id]?.manaCost?.minus(reduction)) ?: (10 - reduction)
         return max(1,cost)
     }
 
     fun getAugmentCooldown(id: String): Int{
         if(!augmentStats.containsKey(id)) return (20)
         val cd = (augmentStats[id]?.cooldown) ?: 20
+        return max(1,cd)
+    }
+
+    fun getAugmentImbueLevel(id: String): Int{
+        if(!augmentStats.containsKey(id)) return (1)
+        val cd = (augmentStats[id]?.imbueLevel) ?: 1
         return max(1,cd)
     }
 
@@ -451,8 +464,8 @@ object ScepterObject: AugmentDamage {
     }
 
 
-    private data class AugmentDatapoint(val type: SpellType,val cooldown: Int,
-                                        val cost: Int, val minLvl: Int,
+    data class AugmentDatapoint(val type: SpellType,val cooldown: Int,
+                                        val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
                                         val bookOfLoreTier: Int, val keyItem: Item){
         //hi
     }

@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
+import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.Enchantment
@@ -31,6 +32,18 @@ import java.util.*
 
 @Suppress("SameParameterValue", "unused", "USELESS_IS_CHECK")
 class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material,settings), ManaItem {
+
+    private val manaRepairTime: Long
+    private val defaultManaRepairTime = 150L
+    private var smoke = false
+
+    init {
+        manaRepairTime = if (material !is ScepterMaterialAddon){
+            defaultManaRepairTime
+        } else {
+            material.healCooldown()
+        }
+    }
 
     override fun appendTooltip(
         stack: ItemStack,
@@ -63,22 +76,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
 
-        if(world.isClient()) return TypedActionResult.fail(stack)
-        val stack2 = if (hand == Hand.MAIN_HAND){
-            user.offHandStack
-        } else {
-            user.mainHandStack
-        }
-        if (!stack2.isEmpty){
-            if (stack2.item is BlockItem){
-                val cht = MinecraftClient.getInstance().crosshairTarget
-                if(cht != null){
-                    if (cht.type == HitResult.Type.BLOCK) {
-                        return TypedActionResult.pass(stack)
-                    }
-                }
-            }
-        }
         val activeEnchantId: String
         val testEnchant: Any
         val nbt = stack.nbt
@@ -95,21 +92,49 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
         if (testEnchant !is ScepterAugment) return resetCooldown(stack,world,user,activeEnchantId)
 
+        //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate
+        val level = ScepterObject.getScepterStat(nbt,activeEnchantId).first
+        val minLvl = ScepterObject.getAugmentMinLvl(activeEnchantId)
+        val maxLevel = (testEnchant.getAugmentMaxLevel()) + minLvl - 1
+        var testLevel = 1
+        if (level >= minLvl){
+            testLevel = level
+            if (testLevel > maxLevel) testLevel = maxLevel
+            testLevel -= (minLvl - 1)
+        }
+
+        if(world.isClient()) {
+            return clientUse(world, user, hand, stack, activeEnchantId, testEnchant,testLevel)
+        } else {
+            val stack2 = if (hand == Hand.MAIN_HAND) {
+                user.offHandStack
+            } else {
+                user.mainHandStack
+            }
+            if (!stack2.isEmpty) {
+                if (stack2.item is BlockItem) {
+                    val cht = MinecraftClient.getInstance().crosshairTarget
+                    if (cht != null) {
+                        if (cht.type == HitResult.Type.BLOCK) {
+                            return TypedActionResult.pass(stack)
+                        }
+                    }
+                }
+            }
+            return serverUse(world, user, hand, stack, activeEnchantId, testEnchant, testLevel)
+        }
+
+
+
+    }
+
+    private fun serverUse(world: World, user: PlayerEntity, hand: Hand, stack: ItemStack,
+                          activeEnchantId: String, testEnchant: ScepterAugment, testLevel: Int): TypedActionResult<ItemStack>{
         val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world)
         return if (cd != null) {
             val manaReduction = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED, stack)
-            val level = ScepterObject.getScepterStat(nbt,activeEnchantId).first
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
-            //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate
-            val minLvl = ScepterObject.getAugmentMinLvl(activeEnchantId)
-            val maxLevel = (testEnchant.getAugmentMaxLevel()) + minLvl - 1
-            var testLevel = 1
-            if (level >= minLvl){
-                testLevel = level
-                if (testLevel > maxLevel) testLevel = maxLevel
-                testLevel -= (minLvl - 1)
-            }
 
             if (testEnchant.applyTasks(world, user, hand, testLevel)) {
                 ScepterObject.applyManaCost(manaCost,stack, world, user)
@@ -121,6 +146,11 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         } else {
             resetCooldown(stack,world,user,activeEnchantId)
         }
+    }
+    private fun clientUse(world: World, user: PlayerEntity, hand: Hand, stack: ItemStack,
+                          activeEnchantId: String, testEnchant: ScepterAugment, testLevel: Int): TypedActionResult<ItemStack>{
+        testEnchant.clientTask(world,user,hand,testLevel)
+        return TypedActionResult.pass(stack)
     }
 
     override fun getItemBarColor(stack: ItemStack): Int {
@@ -141,10 +171,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             if (smoke){
                 doSmoke(world,entity as LivingEntity)
                 smoke = false
-            }
-            if (entity !is PlayerEntity) return
-            if (ScepterObject.checkClientTaskQueue()) {
-                ScepterObject.applyClientTasks(world,entity)
             }
             return
         }
@@ -173,22 +199,22 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         return UseAction.BLOCK
     }
 
+    private fun resetCooldown(stack: ItemStack,world: World, user: PlayerEntity, activeEnchant: String): TypedActionResult<ItemStack>{
+        world.playSound(null,user.blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,0.6F,0.8F)
+        ScepterObject.resetCooldown(stack,activeEnchant)
+        smoke = true
+        return TypedActionResult.fail(stack)
+    }
+
     //companion object for the scepter item, handles private functions and other housekeeping
 
     companion object SI {
-        private var smoke = false
-        private const val manaRepairTime = 150L
 
-        private fun resetCooldown(stack: ItemStack,world: World, user: PlayerEntity, activeEnchant: String): TypedActionResult<ItemStack>{
-            world.playSound(null,user.blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,0.6F,0.8F)
-            ScepterObject.resetCooldown(stack,activeEnchant)
-            smoke = true
-            return TypedActionResult.fail(stack)
-        }
         private fun doSmoke(world: World, user: LivingEntity){
-            val smokeX = user.x - (user.width + 0.8f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180))
+            val pos = user.pos
+            val smokeX = pos.x - (user.width + 0.8f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180))
             val smokeY = user.eyeY - 0.1
-            val smokeZ = user.z + (user.width + 0.8f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180))
+            val smokeZ = pos.z + (user.width + 0.8f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180))
             world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,smokeX,smokeY,smokeZ,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
         }
 
@@ -217,7 +243,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
     }
 
 
-    data class ClientTaskInstance(val target: Entity?, val level: Int, val hit: HitResult?)
+    //data class ClientTaskInstance(val target: Entity?, val level: Int, val hit: HitResult?)
 
     data class EntityTaskInstance(val enchant: Enchantment,val user: LivingEntity, val level: Double, val hit: HitResult?)
 
