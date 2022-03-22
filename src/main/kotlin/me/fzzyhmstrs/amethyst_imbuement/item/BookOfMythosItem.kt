@@ -47,6 +47,8 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
             val item = ScepterObject.getAugmentItem(bola)
             val itemText = item.name.shallowCopy().formatted(Formatting.WHITE)
             tooltip.add(TranslatableText("lore_book.key_item").formatted(Formatting.WHITE).append(itemText))
+            val xpLevels = ScepterObject.getAugmentImbueLevel(bola)
+            tooltip.add(TranslatableText("lore_book.xp_level").formatted(Formatting.WHITE).append(xpLevels.toString()))
             val cooldown = ScepterObject.getAugmentCooldown(bola).toFloat() / 20.0F
             tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("lore_book.cooldown1").formatted(Formatting.WHITE)))
             val manaCost = ScepterObject.getAugmentManaCost(bola)
