@@ -34,6 +34,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
+@Suppress("SameParameterValue")
 class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     private val particleSpeed = 2.5
@@ -145,7 +146,7 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,1,imbueLevel,0, Items.IRON_SWORD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,1,imbueLevel,1, Items.IRON_SWORD)
     }
 
     private fun addParticles(world: World,particleEffect: ParticleEffect,pos: Vec3d,velocity: Vec3d){
