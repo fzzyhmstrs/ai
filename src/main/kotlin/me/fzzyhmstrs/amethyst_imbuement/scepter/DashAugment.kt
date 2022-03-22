@@ -1,21 +1,25 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.MovementType
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class DashAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight,tier,maxLvl, *slot) {
+class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         if (user !is PlayerEntity) return false
@@ -42,12 +46,12 @@ class DashAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equipment
         return true
     }
 
-    override fun needsClient(): Boolean {
-        return true
+    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+        effect(world, null, user, level, null)
     }
 
-    override fun clientTask(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?) {
-        effect(world, target, user, level, hit)
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,36,10,5,imbueLevel,1, Items.SUGAR)
     }
 
     override fun rangeOfEffect(): Double {

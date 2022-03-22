@@ -2,11 +2,14 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.util.ManaItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -16,7 +19,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("SpellCheckingInspection")
-class MendEquipmentAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot), ManaItem {
+class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), ManaItem {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         if (user !is PlayerEntity) return false
@@ -57,6 +60,10 @@ class MendEquipmentAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_ANVIL_USE
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,14,3,1,imbueLevel,0, Items.IRON_INGOT)
     }
 
 }

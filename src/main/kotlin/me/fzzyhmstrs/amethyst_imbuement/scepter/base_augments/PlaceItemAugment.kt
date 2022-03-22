@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.MinecraftClient
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -17,7 +18,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-open class PlaceItemAugment(weight: Rarity, tier: Int, maxLvl: Int,item: Item, vararg slot: EquipmentSlot): ScepterAugment(weight,tier,maxLvl, EnchantmentTarget.WEAPON, *slot) {
+abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl, EnchantmentTarget.WEAPON, *slot) {
     private val _item = item
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
@@ -28,13 +29,11 @@ open class PlaceItemAugment(weight: Rarity, tier: Int, maxLvl: Int,item: Item, v
             is BlockItem -> {
                 testItem.place(ItemPlacementContext(user, hand, ItemStack(testItem),hit as BlockHitResult))
                 world.playSound(null,user.blockPos,soundEvent(), SoundCategory.NEUTRAL,1.0f,1.0f)
-                if (needsClient()) ScepterObject.addClientTaskToQueue(this,ScepterItem.ClientTaskInstance(null, level, hit))
                 return true
             }
             is BucketItem -> {
                 return if (testItem.placeFluid(user,world,(hit as BlockHitResult).blockPos,hit)) {
                     world.playSound(null,user.blockPos,soundEvent(), SoundCategory.NEUTRAL,1.0f,1.0f)
-                    if (needsClient()) ScepterObject.addClientTaskToQueue(this,ScepterItem.ClientTaskInstance(null, level, hit))
                     true
                 } else {
                     false
@@ -48,10 +47,6 @@ open class PlaceItemAugment(weight: Rarity, tier: Int, maxLvl: Int,item: Item, v
 
     open fun itemToPlace(world: World, user: LivingEntity): ItemStack {
         return ItemStack(_item)
-    }
-
-    open fun soundEvent(): SoundEvent{
-        return SoundEvents.BLOCK_WOOD_PLACE
     }
 
 }

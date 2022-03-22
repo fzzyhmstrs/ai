@@ -1,21 +1,24 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.FireballEntity
 import net.minecraft.entity.projectile.ProjectileEntity
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class FireballAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(weight, _tier, _maxLvl, *slot) {
-    override fun entityClass(world: World, user: LivingEntity, pierce: Boolean, level: Int): ProjectileEntity {
+class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
+    override fun entityClass(world: World, user: LivingEntity, level: Int): ProjectileEntity {
         val yaw = user.yaw
         val pitch = user.pitch
         val roll = user.roll
-        val speed = 2.1F
+        val speed = 3.4F
         val div = 1.0F
         val f = -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed
         val g = -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed
@@ -27,5 +30,9 @@ class FireballAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equ
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_GHAST_SHOOT
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,32,10,8,imbueLevel,1, Items.WATER_BUCKET)
     }
 }

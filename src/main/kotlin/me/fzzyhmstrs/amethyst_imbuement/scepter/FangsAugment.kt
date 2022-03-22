@@ -1,9 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.mob.EvokerFangsEntity
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
@@ -15,7 +18,7 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class FangsAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot) {
+class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         var successes = 0
@@ -48,6 +51,10 @@ class FangsAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equipm
 
     override fun rangeOfEffect(): Double {
         return 8.0
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,30,8,5,imbueLevel,1, Items.EMERALD)
     }
 
     override fun soundEvent(): SoundEvent {

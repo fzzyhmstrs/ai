@@ -5,9 +5,11 @@ import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -17,8 +19,7 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class GustingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight, _tier, _maxLvl, *slot) {
-
+class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         val entityList = RaycasterUtil.raycastEntityArea(raycastHitRange())
@@ -35,7 +36,7 @@ class GustingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equi
         val maxDistNorm = 1.0
         for (entity in entityList){
             if (entity is LivingEntity){
-                var distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
+                val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
                 val strength = 1.5 + 1.0 * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
 
                 ScepterObject.addEntityToQueue(entity.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
@@ -51,13 +52,9 @@ class GustingAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: Equi
         }
     }
 
-    /*override fun needsClient(): Boolean {
-        return true
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,100,15,3,imbueLevel,1, Items.FEATHER)
     }
-
-    override fun clientTask(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?) {
-        effect(world, target, user, level, hit)
-    }*/
 
     override fun raycastHitRange(): Double {
         return 8.0

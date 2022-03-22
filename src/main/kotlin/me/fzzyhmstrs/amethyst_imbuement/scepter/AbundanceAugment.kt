@@ -1,16 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
-class AbundanceAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight,tier,maxLvl, *slot) {
+class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         var successes = 0
         val range = (rangeOfEffect() + level-1).toInt()
@@ -40,6 +43,10 @@ class AbundanceAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Equi
 
     override fun rangeOfEffect(): Double {
         return 2.0
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,10,2,1,imbueLevel,0, Items.HAY_BLOCK)
     }
 
 }

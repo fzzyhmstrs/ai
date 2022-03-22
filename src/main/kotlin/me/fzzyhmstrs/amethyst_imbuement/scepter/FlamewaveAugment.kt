@@ -13,14 +13,14 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
+class FlamewaveAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
     override fun entityClass(world: World, user: LivingEntity, level: Int): ProjectileEntity {
         val pitch = user.pitch
         println(pitch)
         println(user.eyeY - 0.3 + 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)))
-        val speed = 2.0F
-        val div = 0.75F
+        val speed = 1.5F
+        val div = 1.25F
         return FlameboltEntity(
             world, user, speed, div,
             user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
@@ -38,7 +38,7 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,21,4,1,imbueLevel,0, Items.FIRE_CHARGE)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,2,3,16,imbueLevel,2, Items.FIRE_CHARGE)
     }
 
 }

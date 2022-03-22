@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EntityType
@@ -12,6 +14,7 @@ import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.passive.StriderEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -21,7 +24,7 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonStriderAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(weight, _tier, _maxLvl, *slot) {
+class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
     override fun placeEntity(world: World, user: PlayerEntity, hit: HitResult, level: Int): Boolean {
 
         for(i in 1..level) {
@@ -38,5 +41,9 @@ class SummonStriderAugment(weight: Rarity, _tier: Int, _maxLvl: Int, vararg slot
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_STRIDER_AMBIENT
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,10,1,imbueLevel,1, Items.FEATHER)
     }
 }

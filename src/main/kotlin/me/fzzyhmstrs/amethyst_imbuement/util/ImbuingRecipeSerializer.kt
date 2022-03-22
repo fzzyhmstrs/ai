@@ -1,5 +1,3 @@
-@file:Suppress("SENSELESS_COMPARISON")
-
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import com.google.gson.Gson
@@ -10,7 +8,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.util.Identifier
 
-@Suppress("PropertyName")
+@Suppress("PropertyName","CanBeVal")
 object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
 
     val ID = Identifier("amethyst_imbuement:imbuing")
@@ -22,7 +20,7 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
             Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
             Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
             Ingredient.EMPTY)
-        if (recipeJson.imbueA != null) {inputsArray[0] = Ingredient.fromJson(recipeJson.imbueA)}
+        if (recipeJson.imbueA != null) inputsArray[0] = Ingredient.fromJson(recipeJson.imbueA)
         if (recipeJson.imbueB != null) inputsArray[1] = Ingredient.fromJson(recipeJson.imbueB)
         if (recipeJson.imbueC != null) inputsArray[11] = Ingredient.fromJson(recipeJson.imbueC)
         if (recipeJson.imbueD != null) inputsArray[12] = Ingredient.fromJson(recipeJson.imbueD)
@@ -37,28 +35,32 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
         if (recipeJson.craftI != null) inputsArray[10] = Ingredient.fromJson(recipeJson.craftI)
         val titleA = recipeJson.title
         val costA = recipeJson.cost
-        val augmentA: String = if(recipeJson.augment == null){
-            ""
-        }else{
-            recipeJson.augment
-        }
+        val augmentA = recipeJson.augment
         val resultA = recipeJson.resultA
-        val countA: Int = if (recipeJson.countA == 0){
-            1
-        } else{
-            recipeJson.countA
-        }
-        val transferEnchant = if(recipeJson.transferEnchant == null){
-            false
-        } else{
-            recipeJson.transferEnchant
-        }
-        //val outputA = ItemStack(Registry.ITEM.getOrEmpty(Identifier(resultA)).get(),countA)
         if(augmentA == "" && resultA == ""){
             throw JsonSyntaxException("Need either an augment or item output!: $id")
         } else if(augmentA != "" && resultA != ""){
             throw JsonSyntaxException("Can't have both outputs and augments!: $id")
         }
+        if (augmentA != ""){
+            val augId = Identifier(augmentA).path
+            if (ScepterObject.checkAugmentStat(augId)){
+                val type = ScepterObject.getAugmentType(augId)
+                val cooldown = ScepterObject.getAugmentCooldown(augId)
+                val manaCost = ScepterObject.getAugmentManaCost(augId)
+                val minLevel = ScepterObject.getAugmentMinLvl(augId)
+                val bookOfLoreTier = ScepterObject.getAugmentTier(augId)
+                val keyItem = ScepterObject.getAugmentItem(augId)
+                val datapoint = ScepterObject.AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,bookOfLoreTier,keyItem)
+                ScepterObject.registerAugmentStat(augId,datapoint,true)
+            }
+        }
+        val countA: Int = if (recipeJson.countA == 0){
+            1
+        } else{
+            recipeJson.countA
+        }
+        val transferEnchant = recipeJson.transferEnchant
 
         return ImbuingRecipe(inputsArray,resultA,countA,augmentA,transferEnchant,titleA,costA,id)
     }

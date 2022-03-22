@@ -2,37 +2,20 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PlaceItemAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 
-class CreateWaterAugment(weight: Enchantment.Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.WEAPON,slot) {
-    override fun getMinPower(level: Int): Int {
-        return 150000
+class CreateWaterAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot) {
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,40,8,1,imbueLevel,0, Items.WATER_BUCKET)
     }
 
-    override fun getMaxPower(level: Int): Int {
-        return 155000
-    }
-
-    override fun getMaxLevel(): Int {
-        return 1
-    }
-
-    override fun isTreasure(): Boolean {
-        return true
-    }
-
-    override fun isAvailableForEnchantedBookOffer(): Boolean {
-        return false
-    }
-
-    override fun isAvailableForRandomSelection(): Boolean {
-        return false
-    }
-
-    override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return stack.isOf(RegisterItem.OPALINE_SCEPTER) || stack.isOf(RegisterItem.IRIDESCENT_SCEPTER) || stack.isOf(RegisterItem.LUSTROUS_SCEPTER)
-    }
 }

@@ -4,31 +4,39 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-abstract class ScepterAugment(weight: Rarity, _tier: Int, _maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(weight, target,slot) {
+abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
     private val maxLvl = _maxLvl
     private val tier = _tier
 
-    open fun needsClient(): Boolean{
-        return false
-    }
+    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean
 
-    open fun clientTask(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?){
-
+    open fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int){
     }
 
     open fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?){
 
+    }
+
+    open fun soundEvent(): SoundEvent {
+        return SoundEvents.BLOCK_BEACON_ACTIVATE
+    }
+
+    open fun rangeOfEffect(): Double{
+        return 8.0
     }
 
     override fun getMinPower(level: Int): Int {
@@ -83,5 +91,15 @@ abstract class ScepterAugment(weight: Rarity, _tier: Int, _maxLvl: Int, target: 
         return AcceptableItemStacks.scepterAcceptableItemStacks(tier)
     }
 
-    abstract fun applyTasks(world: World, user: LivingEntity,hand: Hand, level: Int): Boolean
+    fun registerAugmentStat(){
+        val id = EnchantmentHelper.getEnchantmentId(this)?.path?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
+        val imbueLevel = if (ScepterObject.checkAugmentStat(id)){
+            ScepterObject.getAugmentImbueLevel(id)
+        } else {
+            1
+        }
+        ScepterObject.registerAugmentStat(id,augmentStat(imbueLevel),true)
+    }
+
+    abstract fun augmentStat(imbueLevel: Int = 1): ScepterObject.AugmentDatapoint
 }

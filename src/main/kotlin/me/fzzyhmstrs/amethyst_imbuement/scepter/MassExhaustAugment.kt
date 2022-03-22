@@ -2,16 +2,19 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Monster
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MassExhaustAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(weight,tier,maxLvl, *slot) {
+class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
         if (entityList.isEmpty()) return false
@@ -29,6 +32,10 @@ class MassExhaustAugment(weight: Rarity, tier: Int, maxLvl: Int, vararg slot: Eq
 
     override fun rangeOfEffect(): Double {
         return 12.0
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,400,35,11,imbueLevel,2, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun soundEvent(): SoundEvent {
