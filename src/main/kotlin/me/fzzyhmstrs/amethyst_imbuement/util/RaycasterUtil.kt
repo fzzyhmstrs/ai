@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.MobEntity
@@ -75,8 +76,8 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastEntityRotatedArea(world: ServerWorld,
-                                 user: PlayerEntity,
+    fun raycastEntityRotatedArea(world: World,
+                                 user: PlayerEntity?,
                                  center: Vec3d,
                                  rotation: Vec3d,
                                  perpendicularRotation: Vec3d,
@@ -87,10 +88,19 @@ object RaycasterUtil {
         val box = RaycasterBox(center, rotation, perpendicularRotation, lengthAlongRotation,
                                 lengthAlongPerpendicular, lengthPerpendicularToBoth)
 
-        for (entity in world.iterateEntities()){
-            if (entity !is LivingEntity) continue
-            if(box.testPoint(entity.pos.add(0.0,entity.height/2.0,0.0))){
-                entityList.add(entity)
+        if (world is ServerWorld) {
+            for (entity in world.iterateEntities()) {
+                if (entity !is LivingEntity) continue
+                if (box.testPoint(entity.pos.add(0.0, entity.height / 2.0, 0.0))) {
+                    entityList.add(entity)
+                }
+            }
+        } else if (world is ClientWorld){
+            for (entity in world.entities) {
+                if (entity !is LivingEntity) continue
+                if (box.testPoint(entity.pos.add(0.0, entity.height / 2.0, 0.0))) {
+                    entityList.add(entity)
+                }
             }
         }
         return entityList
@@ -115,12 +125,20 @@ object RaycasterUtil {
         if (target != null) {
             reachDistance = target.pos.squaredDistanceTo(cameraPos)
         }
-        val box: Box = entity
+
+        val rotation = entity.getRotationVec(tickDelta)
+        val perpendicularToPosX = 1.0
+        val perpendicularToPosZ = (rotation.x/rotation.z) * -1
+        val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
+        val center = cameraPos.add(entity.getRotationVec(tickDelta).multiply(reachDistance/2.0))
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,null,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
+
+        /*val box: Box = entity
             .boundingBox
             .stretch(entity.getRotationVec(tickDelta).multiply(reachDistance))
             .expand(1.0, 1.0, 1.0)
         //println(entity.world.getOtherEntities(entity, box, { entity2: Entity -> !entity2.isSpectator && entity2.collides() }).toString())
-        val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }
+        val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }*/
         if (entityList.isEmpty()){
             //println("bleep")
             return target
