@@ -43,7 +43,6 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
             for (currentDistance in 0..maxDistance){
                 if (blockMap.containsKey(currentDistance)) {
                     val distanceList = blockMap[currentDistance]
-                    println(distanceList)
                     if (distanceList != null) {
                         for (bp in distanceList){
                             blockChecker(world,bp,pos,block,currentDistance)
@@ -54,7 +53,6 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
                     continue
                 }
             }
-            println(blockMap)
 
             var remainingBlockBudget = blockBudget
             for (priority in 1..maxDistance) {

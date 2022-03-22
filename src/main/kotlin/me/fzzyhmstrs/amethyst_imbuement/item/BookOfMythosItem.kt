@@ -68,7 +68,6 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
-        println("made it mythos!")
         if (world !is ServerWorld) return TypedActionResult.fail(stack)
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){

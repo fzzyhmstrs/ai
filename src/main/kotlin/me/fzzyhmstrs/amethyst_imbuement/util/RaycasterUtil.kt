@@ -27,7 +27,6 @@ object RaycasterUtil {
     fun raycastEntity(distance: Double = 4.0, includeFluids: Boolean = false): Entity? {
         val client = MinecraftClient.getInstance()
         val hit = raycaster(distance, client,includeFluids) ?: return null
-        //println(hit.toString())
         return when(hit.type){
             HitResult.Type.MISS -> null
             HitResult.Type.ENTITY -> {val entityHit = hit as EntityHitResult; entityHit.entity
@@ -68,9 +67,6 @@ object RaycasterUtil {
             Box(entity.x+distance, entity.y+distance/2,entity.z+distance,entity.x-distance, entity.y-distance/2,entity.z-distance)
         }
         val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }
-        //println(entityList)
-        //println(box.center)
-        //println(box.averageSideLength)
         return entityList.ifEmpty {
             mutableListOf()
         }
@@ -137,10 +133,8 @@ object RaycasterUtil {
             .boundingBox
             .stretch(entity.getRotationVec(tickDelta).multiply(reachDistance))
             .expand(1.0, 1.0, 1.0)
-        //println(entity.world.getOtherEntities(entity, box, { entity2: Entity -> !entity2.isSpectator && entity2.collides() }).toString())
         val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }*/
         if (entityList.isEmpty()){
-            //println("bleep")
             return target
         } else {
             var dist = 1000000.0
@@ -242,9 +236,6 @@ object RaycasterUtil {
                     pointMap[pointIndex] = RaycasterBoxPoint(pointVec,center)
                 }
             }
-            for (value in pointMap.values){
-                println(value.asVec3d())
-            }
 
             //generate the cardinal direction vectors for angle checking
             for (keys in directionNumbering){
@@ -253,9 +244,6 @@ object RaycasterUtil {
                 val z = keys.value.third
                 val directionVec = center.add(rp.multiply(x)).add(prp.multiply(y)).add(dprp.multiply(z))
                 directionMap[keys.key] = RaycasterBoxPoint(directionVec,center)
-            }
-            for (value in directionMap.values){
-                println(value.asVec3d())
             }
         }
 

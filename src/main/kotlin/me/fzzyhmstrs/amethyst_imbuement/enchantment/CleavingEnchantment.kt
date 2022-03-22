@@ -43,8 +43,6 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantme
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        println(stack)
-        println(stack.item is AxeItem)
         return (stack.item is AxeItem)
     }
 }

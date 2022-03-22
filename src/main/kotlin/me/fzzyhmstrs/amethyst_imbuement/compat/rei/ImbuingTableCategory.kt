@@ -43,9 +43,6 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         val widgets: MutableList<Widget> = mutableListOf()
         val xOffset = 5
         val yOffset = 5
-
-        println("made it here!")
-        println(display.inputEntries)
         widgets.add(Widgets.createCategoryBase(bounds))
 
         val middleSlotBackground =

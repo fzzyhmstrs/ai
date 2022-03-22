@@ -17,8 +17,6 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
 
     override fun entityClass(world: World, user: LivingEntity, level: Int): ProjectileEntity {
         val pitch = user.pitch
-        println(pitch)
-        println(user.eyeY - 0.3 + 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)))
         val speed = 2.0F
         val div = 0.75F
         return FlameboltEntity(

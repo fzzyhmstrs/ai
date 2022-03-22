@@ -12,7 +12,6 @@ class CharmedStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
     StatusEffect(statusEffectCategory,i) {
     override fun onRemoved(entity: LivingEntity, attributes: AttributeContainer, amplifier: Int) {
         if (entity is MobEntity && entity !is VillagerEntity){
-            println(entity.isAiDisabled)
             entity.isAiDisabled = false
         }
         super.onRemoved(entity, attributes, amplifier)

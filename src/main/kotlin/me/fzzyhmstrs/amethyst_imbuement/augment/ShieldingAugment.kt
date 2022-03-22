@@ -47,7 +47,6 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                 if (appliedShielding[uuid]?.containsKey(sr) == false) {
                     appliedShielding[uuid]?.set(sr, Amounts(amount,0, 0L))
                     markDirty(uuid, sr, amount)
-                    println("new addition for this slot")
                 } else {
                     val priorAmounts = appliedShielding[uuid]?.get(sr)
                     if (priorAmounts != null){
@@ -58,22 +57,18 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                             val amountToDirty = max(amount - added, amount - removed)
                             appliedShielding[uuid]?.set(sr, Amounts(amount,removed,0L))
                             markDirty(uuid,sr, amountToDirty)
-                            println("bigger addition")
                         } else {
                             appliedShielding[uuid]?.set(sr, Amounts(amount, removed, time))
-                            println("smaller or equal addition")
                         }
                     } else {
                         appliedShielding[uuid]?.set(sr, Amounts(amount,0,0L))
                         markDirty(uuid,sr, amount)
-                        println("new addition for this slot 2")
                     }
                 }
             } else {
                 appliedShielding[uuid] = mutableMapOf()
                 appliedShielding[uuid]?.set(sr, Amounts(amount,0,0L))
                 markDirty(uuid, sr, amount)
-                println("brand new uuid")
             }
         }
 
@@ -120,16 +115,13 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                             markDirtyDeficit(uuid, checkShieldingDeficit(entity))
                             durationApply = statusInstance?.duration?:duration
                             val deficit = getDirtyDeficit(uuid)
-                            println("current deficit is: $deficit")
                             val dirtyAmount = getDirty(uuid)
-                            println("dirty amount is: $dirtyAmount")
                             totalAmount = max(totalAmount- deficit,dirtyAmount)
                         }
                         if (totalAmount - 1 == (statusInstance?.amplifier ?: -1)) {
                             cleanDirty(uuid)
                             return
                         }
-                        println("total amount being applied: $totalAmount")
                         entity.removeStatusEffect(RegisterStatus.CUSTOM_ABSORPTION)
                         entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CUSTOM_ABSORPTION,durationApply,totalAmount - 1))
                         for (slot in map.keys){

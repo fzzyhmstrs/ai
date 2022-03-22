@@ -45,7 +45,6 @@ public class HandledScreenMixin<T extends ScreenHandler> extends Screen {
     private void initMixin(CallbackInfo ci){
         if (handler != null) {
             if (handler.getType() == RegisterHandler.INSTANCE.getIMBUING_SCREEN_HANDLER()) {
-                System.out.println("made it to an imbuing table handler");
                 this.x = (this.width - 234) / 2;
                 this.y = (this.height - 174) / 2;
                 this.backgroundWidth = 234;

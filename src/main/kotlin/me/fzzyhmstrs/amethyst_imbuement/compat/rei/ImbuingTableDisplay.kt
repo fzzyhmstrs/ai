@@ -39,10 +39,8 @@ class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
                                 val item = it.item
                                 val stack = it.copy()
                                 if (item is BookOfLoreItem){
-                                    println(item)
                                     item.addLoreKeyForREI(stack,recipe.getAugment())
                                 } else if (item is BookOfMythosItem){
-                                    println(item)
                                     item.addLoreKeyForREI(stack,recipe.getAugment())
                                 }
                                 builder.add(EntryStacks.of(stack))

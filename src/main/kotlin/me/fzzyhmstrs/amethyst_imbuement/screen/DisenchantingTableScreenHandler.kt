@@ -261,7 +261,6 @@ class DisenchantingTableScreenHandler(
                         enchantmentLevel[2] = -1
                     } else {
                         val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex+1] as NbtCompound)
-                        println(identifier)
                         val enchant = Registry.ENCHANTMENT.get(identifier)
                         val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
                         val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)

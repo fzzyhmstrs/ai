@@ -74,7 +74,6 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
                 rangeOfEffect() + 0.5 * level,
                 rangeOfEffect() + 0.25 * level,
                 1.2)
-        println(entityList)
         //val entityList: MutableList<Entity> = RaycasterUtil.raycastEntityArea(rangeOfEffect() + 0.5 * level,BlockPos(raycasterPos))
         val hostileEntityList: MutableList<Entity> = mutableListOf()
         if (entityList.isNotEmpty()) {
@@ -86,7 +85,6 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
                 }
             }
         }
-        println(hostileEntityList)
         if (!effect(world, user, hostileEntityList, level)) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true

@@ -44,12 +44,7 @@ public class PowderSnowBucketItemMixin {
             map.put(Enchantments.INFINITY,1);
             EnchantmentHelper.set(map,outputStack);
         }
-        System.out.println(level);
-        System.out.println(outputStack);
-        System.out.println(outputStack.getEnchantments());
         instance.setStackInHand(hand,outputStack);
-        System.out.println(instance.getMainHandStack());
-        System.out.println(instance.getMainHandStack().getEnchantments());
     }
 
 }
