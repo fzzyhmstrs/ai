@@ -115,6 +115,7 @@ object ScepterObject: AugmentDamage {
     fun updateScepterActiveEnchant(stack: ItemStack, user: PlayerEntity, up: Boolean){
         if (stack.item !is ScepterItem) return
         var nbt = stack.orCreateNbt
+        println(nbt)
         if (!nbt.contains(NbtKeys.SCEPTER_ID.str())){
             initializeScepter(stack,user.world)
         }
@@ -131,6 +132,7 @@ object ScepterObject: AugmentDamage {
         } else {
             activeAugment[id]?:"magic_missile"
         }
+        println(activeEnchant)
         if(scepters[id]?.isEmpty() == true){
             initializeScepter(stack, user.world)
         }
@@ -151,7 +153,13 @@ object ScepterObject: AugmentDamage {
             }
         }
         val newIndex = if (augEls.size != 0) {
-            val augElIndex = augEls.indexOf(matchIndex)
+            val augElIndex = if (augEls.indexOf(matchIndex) == -1){
+                0
+            } else {
+                augEls.indexOf(matchIndex)
+            }
+            println(matchIndex)
+            println(augEls)
             if (augElIndex == (augEls.lastIndex) && up) {
                 augEls[0]
             } else if (augElIndex == 0 && !up) {
@@ -181,7 +189,7 @@ object ScepterObject: AugmentDamage {
         MinecraftClient.getInstance().player?.sendChatMessage(message)
     }
 
-    fun activeEnchantHelper(stack: ItemStack, activeEnchant: String): String{
+    fun activeEnchantHelper(world: World,stack: ItemStack, activeEnchant: String): String{
         val nbt: NbtCompound = stack.nbt?:return activeEnchant
         val id: Int = nbtChecker(nbt)?: return activeEnchant
         return if(!activeAugment.containsKey(id)){
@@ -192,9 +200,11 @@ object ScepterObject: AugmentDamage {
             } else if(activeAugment[id] != null) {
                 var nxt: String = activeEnchant
                 activeAugment[id]?.let { nxt = it }
-                lastActiveEnchant = nxt
-                augmentApplied[id] = -1
-                writeStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nxt, nbt)
+                if (!world.isClient) {
+                    lastActiveEnchant = nxt
+                    augmentApplied[id] = -1
+                    writeStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nxt, nbt)
+                }
                 nxt
             } else {
                 activeEnchant

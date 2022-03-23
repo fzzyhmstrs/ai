@@ -32,7 +32,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
     }
 
     private var entityBlock = Blocks.AIR
-    private var maxAge = 260
+    private var maxAge = 9999
     private var startingBlockPos: BlockPos = BlockPos.ORIGIN
 
     init{
@@ -41,10 +41,10 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
 
     fun extendBoxLife(time: Int) {
         this.age = 0
-        this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, maxAge))
         if (time != maxAge) {
             maxAge = time
         }
+        this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, maxAge))
     }
 
     override fun getArmorItems(): MutableIterable<ItemStack> {

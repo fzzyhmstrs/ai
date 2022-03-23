@@ -24,7 +24,7 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
             user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                 pitch * (Math.PI.toFloat() / 180)
             ),
-            user.eyeY - 0.4 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
+            user.eyeY - 0.6 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
             user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                 pitch * (Math.PI.toFloat() / 180)
             ),

@@ -71,6 +71,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                 val id = boxPositions[pos] ?: return false
                 val box = world.getEntityById(id) ?: return false
                 if (box !is DraconicBoxEntity) return false
+                //println("boo")
                 box.extendBoxLife(40)
                 return true
             } else {
@@ -79,10 +80,12 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
         }
 
         private fun addBoxToMap(pos: BlockPos, id: Int){
+            //println("add: $pos")
             boxPositions[pos] = id
         }
 
         fun removeBoxFromMap(pos: BlockPos){
+            //println("remove: $pos")
             if (boxPositions.containsKey(pos)){
                 boxPositions.remove(pos)
             }
