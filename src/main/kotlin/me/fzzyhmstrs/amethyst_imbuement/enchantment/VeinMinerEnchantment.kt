@@ -39,6 +39,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
             val blockBudget = 4 * level - 1
             blockMap[0] = mutableListOf()
             blockMap[0]?.add(pos)
+            println("made it here!")
             //build map of blocks
             for (currentDistance in 0..maxDistance){
                 if (blockMap.containsKey(currentDistance)) {

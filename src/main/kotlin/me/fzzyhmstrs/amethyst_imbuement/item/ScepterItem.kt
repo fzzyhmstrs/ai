@@ -75,20 +75,16 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
-        println("1")
         val activeEnchantId: String
         val testEnchant: Any
         var nbt = stack.nbt
-        println(nbt)
         if (nbt != null) {
             if  (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                 activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
-                println(activeEnchantId)
                 testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             } else {
                 ScepterObject.initializeScepter(stack,world)
                 activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
-                println(activeEnchantId)
                 testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             }
         } else {
@@ -97,7 +93,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             if (nbt != null) {
                 activeEnchantId =
                     ScepterObject.activeEnchantHelper(world,stack, readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
-                println(activeEnchantId)
                 testEnchant =
                     Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement", activeEnchantId)) ?: return resetCooldown(
                         stack,
@@ -109,7 +104,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
                 return TypedActionResult.fail(stack)
             }
         }
-        println("2")
         if (testEnchant !is ScepterAugment) return resetCooldown(stack,world,user,activeEnchantId)
 
         //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate
@@ -124,10 +118,8 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         }
 
         if(world.isClient()) {
-            println("3")
             return clientUse(world, user, hand, stack, activeEnchantId, testEnchant,testLevel)
         } else {
-            println("4")
             val stack2 = if (hand == Hand.MAIN_HAND) {
                 user.offHandStack
             } else {

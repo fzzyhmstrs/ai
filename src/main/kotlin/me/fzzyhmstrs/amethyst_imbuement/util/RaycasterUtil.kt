@@ -128,12 +128,6 @@ object RaycasterUtil {
         val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
         val center = cameraPos.add(entity.getRotationVec(tickDelta).multiply(reachDistance/2.0))
         val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,null,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
-
-        /*val box: Box = entity
-            .boundingBox
-            .stretch(entity.getRotationVec(tickDelta).multiply(reachDistance))
-            .expand(1.0, 1.0, 1.0)
-        val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }*/
         if (entityList.isEmpty()){
             return target
         } else {
@@ -142,7 +136,7 @@ object RaycasterUtil {
             for (entity3 in entityList) {
                 val distTemp = dist
                 dist = min(entity3.squaredDistanceTo(entity),dist)
-                if (distTemp > dist){
+                if (distTemp > dist && entity3 != entity){
                     tempEntity = entity3
                 }
             }

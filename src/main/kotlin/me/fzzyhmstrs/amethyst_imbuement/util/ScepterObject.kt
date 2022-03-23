@@ -115,7 +115,6 @@ object ScepterObject: AugmentDamage {
     fun updateScepterActiveEnchant(stack: ItemStack, user: PlayerEntity, up: Boolean){
         if (stack.item !is ScepterItem) return
         var nbt = stack.orCreateNbt
-        println(nbt)
         if (!nbt.contains(NbtKeys.SCEPTER_ID.str())){
             initializeScepter(stack,user.world)
         }
@@ -132,7 +131,6 @@ object ScepterObject: AugmentDamage {
         } else {
             activeAugment[id]?:"magic_missile"
         }
-        println(activeEnchant)
         if(scepters[id]?.isEmpty() == true){
             initializeScepter(stack, user.world)
         }
@@ -158,8 +156,6 @@ object ScepterObject: AugmentDamage {
             } else {
                 augEls.indexOf(matchIndex)
             }
-            println(matchIndex)
-            println(augEls)
             if (augElIndex == (augEls.lastIndex) && up) {
                 augEls[0]
             } else if (augElIndex == 0 && !up) {

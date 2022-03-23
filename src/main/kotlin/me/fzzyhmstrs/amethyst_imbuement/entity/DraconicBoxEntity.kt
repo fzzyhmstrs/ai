@@ -33,7 +33,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
 
     private var entityBlock = Blocks.AIR
     private var maxAge = 9999
-    private var startingBlockPos: BlockPos = BlockPos.ORIGIN
+    private var startingBlockPos: BlockPos = this.blockPos
 
     init{
         this.isInvulnerable  = true
@@ -78,7 +78,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
         noClip = true
         super.tick()
         noClip = false
-        if (this.age >= maxAge) {
+        if (this.age >= maxAge || !world.getBlockState(startingBlockPos).isOf(entityBlock)) {
             ColoredGlowLib.setRainbowColorToEntity(this,false)
             DraconicVisionAugment.removeBoxFromMap(startingBlockPos)
             this.discard()
