@@ -4,9 +4,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
 
-
-
-
 object ScepterToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun getDurability(): Int {
         return 426

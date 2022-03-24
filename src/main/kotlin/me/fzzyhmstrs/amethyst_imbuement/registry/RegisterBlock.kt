@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.block.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -33,9 +34,6 @@ object RegisterBlock {
     val CUT_BERYL_COPPER_SLAB = SlabBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER))
     val CUT_BERYL_COPPER_STAIRS = CutBerylCopperStairsBlock(CUT_BERYL_COPPER_BLOCK.defaultState,FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER))
     val HARD_LIGHT_BLOCK = Block(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10))
-    //val STEEL_ANVIL = SteelAnvilBlock(FabricBlockSettings.of(Material.REPAIR_STATION, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.ANVIL))
-    //val STEEL_ANVIL_CHIPPED = SteelAnvilBlock(FabricBlockSettings.of(Material.REPAIR_STATION, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.ANVIL))
-    //val STEEL_ANVIL_DAMAGED = SteelAnvilBlock(FabricBlockSettings.of(Material.REPAIR_STATION, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.ANVIL))
     val EXPERIENCE_BUSH = ExperienceBushBlock(FabricBlockSettings.of(Material.PLANT, MapColor.LICHEN_GREEN).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH))
     val CRYSTAL_ALTAR = CrystalAltarBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DEEPSLATE_GRAY).strength(2.5f).sounds(BlockSoundGroup.WOOD))
     val FORCEFIELD_BLOCK = ForcefieldBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() })
@@ -62,14 +60,14 @@ object RegisterBlock {
         //registerBlock("steel_anvil", STEEL_ANVIL,ItemGroup.DECORATIONS)
         //registerBlock("steel_anvil_chipped", STEEL_ANVIL_CHIPPED,ItemGroup.DECORATIONS)
         //registerBlock("steel_anvil_damaged", STEEL_ANVIL_DAMAGED,ItemGroup.DECORATIONS)
-        Registry.register(Registry.BLOCK, Identifier("amethyst_imbuement", "experience_bush"), EXPERIENCE_BUSH)
+        Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
         registerBlock("crystal_altar", CRYSTAL_ALTAR,ItemGroup.DECORATIONS)
         // put this in client init -> BlockRenderLayerMap.INSTANCE.putBlock(EXPERIENCE_BUSH,RenderLayer.getCutout())
     }
 
     private fun registerBlock(path: String, block:Block, itemGroup: ItemGroup){
-        Registry.register(Registry.BLOCK, Identifier("amethyst_imbuement", path), block)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement",path), BlockItem(block,FabricItemSettings().group(itemGroup)))
+        Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, path), block)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,path), BlockItem(block,FabricItemSettings().group(itemGroup)))
     }
 
     private fun always(): Boolean {

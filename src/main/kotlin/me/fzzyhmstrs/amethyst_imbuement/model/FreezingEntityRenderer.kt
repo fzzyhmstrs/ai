@@ -33,17 +33,13 @@ class FreezingEntityRenderer(context: EntityRendererFactory.Context): EntityRend
         vertexConsumerProvider: VertexConsumerProvider,
         i: Int
     ) {
-        //println("rendinger")
         matrixStack.push()
-        //val h = MathHelper.lerpAngle(missileEntity.prevYaw, missileEntity.yaw, g)
-        //val j = MathHelper.lerp(g, missileEntity.prevPitch, missileEntity.pitch)
         val k = freezingEntity.age.toFloat() + g
         matrixStack.translate(0.0, 0.15, 0.0)
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.sin(k * 0.1f) * 180.0f))
         matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.cos(k * 0.1f) * 180.0f))
         matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.sin(k * 0.15f) * 360.0f))
         matrixStack.scale(-0.5f, -0.5f, 0.5f)
-        //model.setAngles(missileEntity, 0.0f, 0.0f, 0.0f, h, j)
         val vertexConsumer = vertexConsumerProvider.getBuffer(model.getLayer(TEXTURE))
         model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
         matrixStack.scale(1.5f, 1.5f, 1.5f)

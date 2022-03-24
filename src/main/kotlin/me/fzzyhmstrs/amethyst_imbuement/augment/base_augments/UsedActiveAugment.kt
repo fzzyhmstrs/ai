@@ -1,7 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
-import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack

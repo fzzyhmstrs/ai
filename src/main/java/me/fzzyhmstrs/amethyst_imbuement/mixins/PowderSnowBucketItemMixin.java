@@ -35,9 +35,6 @@ public class PowderSnowBucketItemMixin {
 
     @Redirect(method = "useOnBlock", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.setStackInHand (Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
     private void setInfinityStackInHand(PlayerEntity instance, Hand hand, ItemStack itemStack){
-        /*ItemStack inputStack = instance.getStackInHand(hand);
-        System.out.println(inputStack);
-        System.out.println(inputStack.getEnchantments());*/
         ItemStack outputStack = Items.BUCKET.getDefaultStack();
         if (level > 0){
             Map<Enchantment, Integer> map = new HashMap<>();

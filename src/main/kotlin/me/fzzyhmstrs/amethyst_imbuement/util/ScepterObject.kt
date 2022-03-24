@@ -7,19 +7,15 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import net.minecraft.client.MinecraftClient
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
@@ -374,43 +370,6 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-   /* fun checkClientTaskQueue(): Boolean{
-        return clientTasks.isNotEmpty()
-    }
-
-    fun applyClientTasks(world: World, entity: LivingEntity){
-        for (task in clientTasks.keys) {
-            if (task is ScepterAugment) {
-                val target = clientTasks[task]?.target
-                val level = clientTasks[task]?.level ?: 1
-                val hit = clientTasks[task]?.hit
-                task.clientTask(world, target, entity, level, hit)
-            }
-        }
-        clientTasks.clear()
-    }
-
-    fun addClientTaskToQueue(enchant: Enchantment,dataInstance: ScepterItem.ClientTaskInstance){
-        clientTasks[enchant] = dataInstance
-    }*/
-
-    fun registerAugmentStat(id: String, type: SpellType,cooldown: Int, manaCost: Int, minLvl: Int = 1,imbueLevel: Int = 1, bookOfLoreTier: Int = 0, keyItem: Item = Items.GOLD_INGOT){
-        registerAugmentStat(id,AugmentDatapoint(type,cooldown,manaCost, minLvl, bookOfLoreTier,imbueLevel, keyItem))
-        if (bookOfLoreTier > 0) {
-            if (!bookOfLoreListT12.contains(id)){
-                bookOfLoreListT12.add(id)
-            }
-        }
-        if (bookOfLoreTier == 1) {
-            if (!bookOfLoreListT1.contains(id)){
-                bookOfLoreListT1.add(id)
-            }
-        } else if (bookOfLoreTier == 2) {
-            if (!bookOfLoreListT2.contains(id)){
-                bookOfLoreListT2.add(id)
-            }
-        }
-    }
     fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
         if(!augmentStats.containsKey(id) || overwrite){
             augmentStats[id] = dataPoint

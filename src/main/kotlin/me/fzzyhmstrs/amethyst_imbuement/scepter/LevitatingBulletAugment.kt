@@ -34,9 +34,9 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         } else if (hit.type == HitResult.Type.MISS){
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
         } else if (hit.type == HitResult.Type.BLOCK){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).pos)
         } else if (hit.type == HitResult.Type.ENTITY){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.pos)
         } else {
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
         }
@@ -63,18 +63,17 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         val xAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).x
         val zAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).z
         val maxAmount = max(abs(xAmount), abs(zAmount))
-        val axis: Direction.Axis
-        if (maxAmount == abs(xAmount)){
+        val axis: Direction.Axis = if (maxAmount == abs(xAmount)){
             if (xAmount < 0){
-                axis = Direction.EAST.axis
+                Direction.EAST.axis
             } else {
-                axis = Direction.WEST.axis
+                Direction.WEST.axis
             }
         }  else {
             if (xAmount < 0){
-                axis = Direction.SOUTH.axis
+                Direction.SOUTH.axis
             } else {
-                axis = Direction.NORTH.axis
+                Direction.NORTH.axis
             }
         }
 

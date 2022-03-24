@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.DisenchantingTableScreenHandler
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.block.EnchantingTableBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker

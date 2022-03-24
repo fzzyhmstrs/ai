@@ -21,15 +21,6 @@ import kotlin.math.roundToInt
 class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY,pos, state),Nameable {
 
     var ticks = 0
-    var nextPageAngle = 0f
-    var pageAngle = 0f
-    var field_11969 = 0f
-    var field_11967 = 0f
-    var nextPageTurningSpeed = 0f
-    var pageTurningSpeed = 0f
-    var field_11964 = 0f
-    var field_11963 = 0f
-    var field_11962 = 0f
     private var customName: Text? = null
     private var storedXp = 0
 
@@ -128,53 +119,6 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
                     blockEntity.ticks = 0
                 }
                 blockEntity.lookingRotR = blockEntity.rotClamp(360, blockEntity.lookingRotR)
-
-                /*blockEntity.pageTurningSpeed = blockEntity.nextPageTurningSpeed
-            blockEntity.field_11963 = blockEntity.field_11964
-            val playerEntity =
-                world.getClosestPlayer(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, 3.0, false)
-            if (playerEntity != null) {
-                val d2 = playerEntity.x - (pos.x.toDouble() + 0.5)
-                val e = playerEntity.z - (pos.z.toDouble() + 0.5)
-                blockEntity.field_11962 = MathHelper.atan2(e, d2).toFloat()
-                blockEntity.nextPageTurningSpeed += 0.1f
-                if (blockEntity.nextPageTurningSpeed < 0.5f || RANDOM.nextInt(40) == 0) {
-                    val f = blockEntity.field_11969
-                    do {
-                        blockEntity.field_11969 += (RANDOM.nextInt(4) - RANDOM.nextInt(4)).toFloat()
-                    } while (f == blockEntity.field_11969)
-                }
-            } else {
-                blockEntity.field_11962 += 0.02f
-                blockEntity.nextPageTurningSpeed -= 0.1f
-            }
-            while (blockEntity.field_11964 >= Math.PI.toFloat()) {
-                blockEntity.field_11964 -= Math.PI.toFloat() * 2
-            }
-            while (blockEntity.field_11964 < (-Math.PI).toFloat()) {
-                blockEntity.field_11964 += Math.PI.toFloat() * 2
-            }
-            while (blockEntity.field_11962 >= Math.PI.toFloat()) {
-                blockEntity.field_11962 -= Math.PI.toFloat() * 2
-            }
-            while (blockEntity.field_11962 < (-Math.PI).toFloat()) {
-                blockEntity.field_11962 += Math.PI.toFloat() * 2
-            }
-            var d: Float = blockEntity.field_11962 - blockEntity.field_11964
-            while (d >= Math.PI.toFloat()) {
-                d -= Math.PI.toFloat() * 2
-            }
-            while (d < (-Math.PI).toFloat()) {
-                d += Math.PI.toFloat() * 2
-            }
-            blockEntity.field_11964 += d * 0.4f
-            blockEntity.nextPageTurningSpeed = MathHelper.clamp(blockEntity.nextPageTurningSpeed, 0.0f, 1.0f)
-            ++blockEntity.ticks
-            blockEntity.pageAngle = blockEntity.nextPageAngle
-            var g = (blockEntity.field_11969 - blockEntity.nextPageAngle) * 0.4f
-            g = MathHelper.clamp(g, -0.2f, 0.2f)
-            blockEntity.field_11967 += (g - blockEntity.field_11967) * 0.9f
-            blockEntity.nextPageAngle += blockEntity.field_11967*/
             }
         }
 

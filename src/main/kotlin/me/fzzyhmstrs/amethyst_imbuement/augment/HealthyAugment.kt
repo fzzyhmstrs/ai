@@ -11,17 +11,6 @@ import java.util.*
 
 class HealthyAugment(weight: Rarity, mxLvl: Int, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
 
-    /*override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (user.hasStatusEffect(StatusEffects.HEALTH_BOOST)) return
-        addStatusToQueue(user.uuid, StatusEffects.HEALTH_BOOST, 500000000, 0)
-    }
-
-    override fun unequipEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (user.hasStatusEffect(StatusEffects.HEALTH_BOOST)) {
-            user.removeStatusEffect(StatusEffects.HEALTH_BOOST)
-        }
-    }*/
-
     override fun attributeModifier(stack: ItemStack, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier>? {
         return Pair(
             EntityAttributes.GENERIC_MAX_HEALTH,

@@ -7,6 +7,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
+@Suppress("PrivatePropertyName")
 class AmetrineArmorMaterial : ArmorMaterial {
     private val BASE_DURABILITY = intArrayOf(13, 15, 16, 11)
     private val PROTECTION_VALUES = intArrayOf(4, 7, 9, 4)

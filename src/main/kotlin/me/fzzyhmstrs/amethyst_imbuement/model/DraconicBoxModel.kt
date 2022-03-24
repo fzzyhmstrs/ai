@@ -7,7 +7,6 @@ import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.util.math.MatrixStack
-import java.awt.Color
 
 
 class DraconicBoxModel() : EntityModel<DraconicBoxEntity>() {

@@ -10,7 +10,6 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.ZombieEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
@@ -22,13 +21,10 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.*
-import net.minecraft.util.hit.BlockHitResult
-import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import java.util.*
 
 @Suppress("SameParameterValue", "unused", "USELESS_IS_CHECK")
 class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material,settings), ManaItem {
@@ -161,6 +157,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             resetCooldown(stack,world,user,activeEnchantId)
         }
     }
+    @Suppress("UNUSED_PARAMETER")
     private fun clientUse(world: World, user: PlayerEntity, hand: Hand, stack: ItemStack,
                           activeEnchantId: String, testEnchant: ScepterAugment, testLevel: Int): TypedActionResult<ItemStack>{
         testEnchant.clientTask(world,user,hand,testLevel)

@@ -7,6 +7,7 @@ import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer
 import net.minecraft.client.render.entity.model.EntityModelLayers
 import net.minecraft.util.Identifier
 
+@Suppress("PrivatePropertyName")
 class UnhallowedEntityRenderer(ctx: EntityRendererFactory.Context): BipedEntityRenderer<UnhallowedEntity, UnhallowedEntityModel>(ctx, UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE)), 0.5f) {
     private val TEXTURE = Identifier("textures/entity/zombie/zombie.png")
 
@@ -16,7 +17,7 @@ class UnhallowedEntityRenderer(ctx: EntityRendererFactory.Context): BipedEntityR
             UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_OUTER_ARMOR))))
     }
 
-    override fun getTexture(unhallowedEntity: UnhallowedEntity): Identifier? {
+    override fun getTexture(unhallowedEntity: UnhallowedEntity): Identifier {
         return TEXTURE
     }
 

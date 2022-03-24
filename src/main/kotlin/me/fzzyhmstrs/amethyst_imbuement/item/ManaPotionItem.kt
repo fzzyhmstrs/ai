@@ -46,7 +46,7 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
             val fractionXp = max((baseXp * manaFraction).toInt(), 1)
             user.addExperience(fractionXp)
         }
-        user.incrementStat(Stats.USED.getOrCreateStat(this));
+        user.incrementStat(Stats.USED.getOrCreateStat(this))
         if (!user.abilities.creativeMode) {
             stack.decrement(1)
             if (stack.isEmpty) {

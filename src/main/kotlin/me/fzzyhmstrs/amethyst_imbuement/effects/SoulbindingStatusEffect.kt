@@ -5,7 +5,6 @@ import net.minecraft.entity.attribute.AttributeContainer
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.world.GameRules
-import net.minecraft.world.GameRules.BooleanRule
 
 class SoulbindingStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
     StatusEffect(statusEffectCategory,i) {

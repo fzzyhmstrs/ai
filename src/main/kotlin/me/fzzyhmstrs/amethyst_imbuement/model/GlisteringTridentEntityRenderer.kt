@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.model
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.OverlayTexture
-import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
@@ -13,8 +12,9 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3f
 
+@Suppress("PrivatePropertyName")
 class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : EntityRenderer<GlisteringTridentEntity>(context) {
-    var TEXTURE = Identifier("amethyst_imbuement","textures/entity/glistering_trident.png")
+    private var TEXTURE = Identifier("amethyst_imbuement","textures/entity/glistering_trident.png")
     var model = GlisteringTridentEntityModel(context.getPart(RegisterRenderer.GLISTERING_TRIDENT))
 
     override fun render(

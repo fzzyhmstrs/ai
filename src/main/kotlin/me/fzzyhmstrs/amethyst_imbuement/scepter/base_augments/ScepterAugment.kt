@@ -40,11 +40,11 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
     }
 
     override fun getMinPower(level: Int): Int {
-        return 150000
+        return 30
     }
 
     override fun getMaxPower(level: Int): Int {
-        return 155000
+        return 50
     }
 
     override fun getMaxLevel(): Int {

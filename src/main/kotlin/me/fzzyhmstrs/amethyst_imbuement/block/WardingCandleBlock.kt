@@ -10,7 +10,6 @@ import net.minecraft.block.CandleBlock
 import net.minecraft.state.StateManager
 import net.minecraft.util.Util
 import net.minecraft.util.math.Vec3d
-import java.util.function.Supplier
 import java.util.function.ToIntFunction
 
 @Suppress("PrivatePropertyName")

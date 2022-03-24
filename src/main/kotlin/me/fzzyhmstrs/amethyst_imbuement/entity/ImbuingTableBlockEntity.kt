@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.EnchantingTableBlockEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -13,7 +12,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import java.util.*
 
-@Suppress("UNUSED_PARAMETER")
+@Suppress("UNUSED_PARAMETER", "PropertyName")
 class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY,pos, state),Nameable {
 
     var ticks = 0

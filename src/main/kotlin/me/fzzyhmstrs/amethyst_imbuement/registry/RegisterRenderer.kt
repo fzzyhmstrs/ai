@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -28,9 +29,9 @@ import java.util.function.Consumer
 
 
 object RegisterRenderer {
-    val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(Identifier("amethyst_imbuement","glistering_trident"),"glistering_trident_model")
-    val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier("amethyst_imbuement","draconic_box"),"draconic_box_model")
-    val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier("amethyst_imbuement","crystal_golem"),"crystal_golem_model")
+    val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"glistering_trident"),"glistering_trident_model")
+    val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"draconic_box"),"draconic_box_model")
+    val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
 
     fun registerAll() {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.EXPERIENCE_BUSH, RenderLayer.getCutout())
@@ -125,14 +126,9 @@ object RegisterRenderer {
 
 
         ModelLoadingRegistry.INSTANCE.registerModelProvider { _: ResourceManager?, out: Consumer<Identifier?> ->
-                out.accept(ModelIdentifier("amethyst_imbuement:glistering_trident_in_hand#inventory"))
+                out.accept(ModelIdentifier(AI.MOD_ID + ":glistering_trident_in_hand#inventory"))
 
             }
-
-        /*ModelLoadingRegistry.INSTANCE.registerModelProvider { _: ResourceManager?, out: Consumer<Identifier?> ->
-            out.accept(ModelIdentifier("amethyst_imbuement:textures/entity/imbuing_table_book.png"))
-
-        }*/
 
         FabricModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("pulling")
@@ -172,11 +168,11 @@ object RegisterRenderer {
 
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
                 _ , registry ->
-            registry.register(Identifier("amethyst_imbuement","entity/imbuing_table_book"))
+            registry.register(Identifier(AI.MOD_ID,"entity/imbuing_table_book"))
         }
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
                 _ , registry ->
-            registry.register(Identifier("amethyst_imbuement","entity/disenchanting_table_book"))
+            registry.register(Identifier(AI.MOD_ID,"entity/disenchanting_table_book"))
         }
 
     }

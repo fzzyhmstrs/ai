@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-@Suppress("PrivatePropertyName")
+@Suppress("PrivatePropertyName", "DEPRECATION")
 class ForcefieldBlock(settings: Settings) : BlockWithEntity(settings) {
 
     fun getWaterState(waterState: Boolean): BlockState{

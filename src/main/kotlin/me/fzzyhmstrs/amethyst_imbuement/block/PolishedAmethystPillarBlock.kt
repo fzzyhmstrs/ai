@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import net.minecraft.block.AmethystBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.PillarBlock
 import net.minecraft.entity.projectile.ProjectileEntity

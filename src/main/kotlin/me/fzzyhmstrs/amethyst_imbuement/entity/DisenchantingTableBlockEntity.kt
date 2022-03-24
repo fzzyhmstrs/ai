@@ -12,7 +12,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import java.util.*
 
-@Suppress("UNUSED_PARAMETER")
+@Suppress("UNUSED_PARAMETER", "PropertyName")
 class DisenchantingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEntity.DISENCHANTING_TABLE_BLOCK_ENTITY,pos, state),Nameable {
 
     var ticks = 0

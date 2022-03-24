@@ -45,7 +45,7 @@ class CrystalAltarScreenHandler(
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
-        return this.context.get<Boolean>(BiFunction { world: World, pos: BlockPos ->
+        return this.context.get(BiFunction { world: World, pos: BlockPos ->
             if (!this.canUse(world.getBlockState(pos))) {
                 return@BiFunction false
             }
@@ -68,13 +68,9 @@ class CrystalAltarScreenHandler(
         decrementStack(0)
         decrementStack(1)
         this.context.run { world: World, pos: BlockPos ->
-            world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.6f, world.random.nextFloat() * 0.1f + 0.9f);
+            world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.6f, world.random.nextFloat() * 0.1f + 0.9f)
         }
     }
-
-    /*override fun updateResult() {
-        return
-    }*/
 
     private fun decrementStack(slot: Int) {
         val itemStack = input.getStack(slot)

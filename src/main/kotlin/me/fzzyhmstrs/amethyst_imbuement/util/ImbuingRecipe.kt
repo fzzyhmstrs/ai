@@ -156,7 +156,7 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
     override fun getId(): Identifier {
         return id
     }
-    override fun getSerializer(): RecipeSerializer<*>? {
+    override fun getSerializer(): RecipeSerializer<*> {
         return ImbuingRecipeSerializer
     }
 

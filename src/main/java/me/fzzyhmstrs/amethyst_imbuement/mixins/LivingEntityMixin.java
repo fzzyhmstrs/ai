@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment;
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
@@ -64,16 +63,6 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
     @Shadow protected ItemStack activeItemStack;
-
-    /*@Inject(method = "applyEnchantmentsToDamage", at = @At(value = "TAIL"))
-    private void checkHorseInfo(DamageSource source, float amount, CallbackInfoReturnable<Float> cir){
-        System.out.println(this.getEntityName());
-        System.out.println(this.getArmorItems());
-        System.out.println(EnchantmentHelper.getProtectionAmount(this.getArmorItems(),source));
-        System.out.println(amount);
-        System.out.println(DamageUtil.getInflictedDamage(amount,EnchantmentHelper.getProtectionAmount(this.getArmorItems(),source)));
-    }*/
-
 
     @Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean checkArmorInvisibility(ItemStack instance){
@@ -218,15 +207,13 @@ public abstract class LivingEntityMixin extends Entity {
         block4: for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
             ItemStack itemStack;
             switch (equipmentSlot.getType()) {
-                case HAND: {
+                case HAND -> {
                     itemStack = this.getSyncedHandStack(equipmentSlot);
-                    break;
                 }
-                case ARMOR: {
+                case ARMOR -> {
                     itemStack = this.getSyncedArmorStack(equipmentSlot);
-                    break;
                 }
-                default: {
+                default -> {
                     continue block4;
                 }
             }
@@ -250,12 +237,10 @@ public abstract class LivingEntityMixin extends Entity {
         int stackValAdd = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance);
         int stackValAdd2 = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance);
         if (stackValAdd == 0 && stackValAdd2 == 0) {
-            //System.out.println("bloop");
             return instance.getAttributeModifiers(slot);
         } else {
             Multimap<EntityAttribute, EntityAttributeModifier> map = instance.getAttributeModifiers(slot);
             Multimap<EntityAttribute, EntityAttributeModifier> map2 = HashMultimap.create();
-            //System.out.println(map);
             for (EntityAttribute key : map.keys()){
                 if (key == EntityAttributes.GENERIC_ARMOR){
                     if (stackValAdd == 0){
@@ -306,7 +291,6 @@ public abstract class LivingEntityMixin extends Entity {
                     map2.putAll(key,map.get(key));
                 }
             }
-            //System.out.println(map2);
             return map2;
         }
     }

@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
@@ -115,7 +116,7 @@ object RegisterEnchantment {
 
         for (k in regEnchant.keys){
             val enchant = regEnchant[k]
-            Registry.register(Registry.ENCHANTMENT, Identifier("amethyst_imbuement", k), enchant)
+            Registry.register(Registry.ENCHANTMENT, Identifier(AI.MOD_ID, k), enchant)
             if (enchant is ScepterAugment){
                 enchant.registerAugmentStat()
             }

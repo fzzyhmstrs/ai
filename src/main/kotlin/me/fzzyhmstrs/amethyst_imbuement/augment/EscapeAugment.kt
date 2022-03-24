@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.UsedActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity

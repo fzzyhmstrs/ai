@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import com.google.common.collect.ImmutableList
 import com.mojang.datafixers.util.Pair
 import draylar.structurized.api.StructurePoolAddCallback
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
@@ -24,11 +25,11 @@ import java.util.function.Function
 
 object RegisterVillager {
 
-    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(Identifier("amethyst_imbuement","crystal_altar_poi"),1,1,RegisterBlock.CRYSTAL_ALTAR)
+    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(Identifier(AI.MOD_ID,"crystal_altar_poi"),1,1,RegisterBlock.CRYSTAL_ALTAR)
     private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(CRYSTAL_ALTAR_POINT_OF_INTEREST).id(Identifier("amethyst_imbuement","crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
 
     fun registerAll(){
-        Registry.register(Registry.VILLAGER_PROFESSION, Identifier("amethyst_imbuement","crystal_witch") , CRYSTAL_WITCH)
+        Registry.register(Registry.VILLAGER_PROFESSION, Identifier(AI.MOD_ID,"crystal_witch") , CRYSTAL_WITCH)
 
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.QUARTZ,16,Items.EMERALD,1,16,2))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.LAPIS_LAZULI,22,Items.EMERALD,1,12,2))}
@@ -55,61 +56,61 @@ object RegisterVillager {
         StructurePoolAddCallback.EVENT.register { structurePool ->
             when (structurePool.underlyingPool.id.toString()) {
                 "minecraft:village/plains/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/plains_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/plains_crystal_workshop",
                         StructureProcessorLists.MOSSIFY_10_PERCENT
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/plains/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/plains_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/plains_crystal_workshop",
                         StructureProcessorLists.ZOMBIE_PLAINS
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/taiga/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/taiga_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/taiga_crystal_workshop",
                         StructureProcessorLists.MOSSIFY_10_PERCENT
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/taiga/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/taiga_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/taiga_crystal_workshop",
                         StructureProcessorLists.ZOMBIE_TAIGA
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/snowy/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/snowy_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/snowy_crystal_workshop",
                         StructureProcessorLists.EMPTY
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/snowy/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/snowy_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/snowy_crystal_workshop",
                         StructureProcessorLists.ZOMBIE_SNOWY
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/savanna/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/savanna_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/savanna_crystal_workshop",
                         StructureProcessorLists.EMPTY
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/savanna/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/savanna_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/savanna_crystal_workshop",
                         StructureProcessorLists.ZOMBIE_SAVANNA
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/desert/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/desert_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/desert_crystal_workshop",
                         StructureProcessorLists.MOSSIFY_10_PERCENT
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/desert/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle("amethyst_imbuement:village/desert_crystal_workshop",
+                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/desert_crystal_workshop",
                         StructureProcessorLists.ZOMBIE_DESERT
                     ).apply(StructurePool.Projection.RIGID)
                     structurePool.addStructurePoolElement(poolElement, 1)

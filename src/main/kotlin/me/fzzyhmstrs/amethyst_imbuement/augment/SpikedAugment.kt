@@ -12,11 +12,6 @@ import net.minecraft.util.registry.Registry
 
 class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
-    /*override fun onUserDamaged(user: LivingEntity, attacker: Entity, level: Int) {
-        if (user.world !is ServerWorld) return
-        attacker.damage(DamageSource.GENERIC,1.0F)
-    }*/
-
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return (stack.item is ShieldItem)
     }

@@ -18,7 +18,7 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
 
     override fun read(id: Identifier, json: JsonObject): AltarRecipe {
         val recipeJson: AltarRecipeFormat = Gson().fromJson(json, AltarRecipeFormat::class.java)
-        var inputsArray: Array<Ingredient> = arrayOf(Ingredient.EMPTY,Ingredient.EMPTY)
+        val inputsArray: Array<Ingredient> = arrayOf(Ingredient.EMPTY,Ingredient.EMPTY)
         if (recipeJson.base != null) {inputsArray[0] = Ingredient.fromJson(recipeJson.base)}
         if (recipeJson.addition != null) inputsArray[1] = Ingredient.fromJson(recipeJson.addition)
         val itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))

@@ -17,14 +17,11 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.particle.BlockStateParticleEffect
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -52,7 +49,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
         }
     }
-    var attackTicksLeft = 0
+    private var attackTicksLeft = 0
     private var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
@@ -164,11 +161,11 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         }
     }
 
-    fun isPlayerCreated(): Boolean {
+    private fun isPlayerCreated(): Boolean {
         return (dataTracker.get(UNHALLOWED_FLAGS) and 1) != 0.toByte()
     }
 
-    fun setPlayerCreated(playerCreated: Boolean) {
+    private fun setPlayerCreated(playerCreated: Boolean) {
         val b = dataTracker.get(UNHALLOWED_FLAGS)
         if (playerCreated) {
             dataTracker.set(UNHALLOWED_FLAGS, (b or 1))
@@ -214,18 +211,21 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     }
 
     override fun initEquipment(difficulty: LocalDifficulty) {
-        //super.initEquipment(difficulty)
-        if (bonusEquipment == 1) {
-            this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.LEATHER_HELMET))
-            this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.LEATHER_CHESTPLATE))
-        } else if (bonusEquipment == 2){
-            this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.CHAINMAIL_HELMET))
-            this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.CHAINMAIL_CHESTPLATE))
-        } else if (bonusEquipment == 3){
-            this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.IRON_HELMET))
-            this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.IRON_CHESTPLATE))
-            this.equipStack(EquipmentSlot.FEET, ItemStack(Items.IRON_BOOTS))
-            this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.WOODEN_SWORD))
+        when (bonusEquipment) {
+            1 -> {
+                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.LEATHER_HELMET))
+                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.LEATHER_CHESTPLATE))
+            }
+            2 -> {
+                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.CHAINMAIL_HELMET))
+                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.CHAINMAIL_CHESTPLATE))
+            }
+            3 -> {
+                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.IRON_HELMET))
+                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.IRON_CHESTPLATE))
+                this.equipStack(EquipmentSlot.FEET, ItemStack(Items.IRON_BOOTS))
+                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.WOODEN_SWORD))
+            }
         }
     }
 

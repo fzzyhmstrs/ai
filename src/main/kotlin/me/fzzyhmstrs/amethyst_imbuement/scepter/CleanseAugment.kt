@@ -28,7 +28,6 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     if (effect.effectType.isBeneficial) continue
                     statuses.add(effect)
                 }
-                //val statuses: Collection<StatusEffectInstance> = user.statusEffects
                 for (effect in statuses) {
                     target.removeStatusEffect(effect.effectType)
                 }
@@ -45,7 +44,6 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     if (effect.effectType.isBeneficial) continue
                     statuses.add(effect)
                 }
-                //val statuses: Collection<StatusEffectInstance> = user.statusEffects
                 for (effect in statuses) {
                     user.removeStatusEffect(effect.effectType)
                 }

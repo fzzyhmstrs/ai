@@ -11,7 +11,6 @@ class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlo
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         addStatusToQueue(user.uuid,StatusEffects.SPEED,260,level - 1)
-        //user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, 200, level-1))
     }
 
 }

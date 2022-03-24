@@ -1,13 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
 import net.minecraft.screen.*
 import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
@@ -52,11 +49,11 @@ class AltarOfExperienceScreenHandler(
         super.close(player)
     }
 
-    fun getSyncedStoredXp(): Int{
+    private fun getSyncedStoredXp(): Int{
         return propertyDelegate.get(0)
     }
 
-    fun setSyncedStoredXp(amount: Int){
+    private fun setSyncedStoredXp(amount: Int){
         propertyDelegate.set(0,amount)
     }
 
@@ -199,7 +196,7 @@ class AltarOfExperienceScreenHandler(
         val progress = player.experienceProgress
         val progressXp = (nextLvlXp * progress).toInt()
         val lvlXp = if(lvl < 17){
-            (lvl*lvl + 6*lvl).toInt()
+            (lvl*lvl + 6*lvl)
         } else if (lvl < 32){
             (2.5*lvl*lvl - 40.5*lvl + 360).toInt()
         } else {

@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity
-import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.entity.projectile.ProjectileUtil
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
@@ -120,11 +119,6 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
         val d = packet.velocityX
         val e = packet.velocityY
         val f = packet.velocityZ
-        /*for (i in 0..6) {
-            val g = 0.95-0.02*i
-            world.addParticle(ParticleTypes.CRIT, this.x, this.y, this.z, d * g, e, f * g)
-            println("adding particles!")
-        }*/
         this.setVelocity(d, e, f)
     }
 

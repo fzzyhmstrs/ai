@@ -32,10 +32,10 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
         } else if (hit.type == HitResult.Type.BLOCK){
             blockPos = (hit as BlockHitResult).blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.pos)
         } else if (hit.type == HitResult.Type.ENTITY){
             blockPos = (hit as EntityHitResult).entity.blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.entity.blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.entity.pos)
         } else {
             blockPos = user.blockPos
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
@@ -63,6 +63,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         return successes > 0
     }
 
+    @Suppress("SpellCheckingInspection")
     override fun persistentEffect(world: World, user: LivingEntity, blockPos: BlockPos, entityList: MutableList<Entity>, level: Int) {
         val rnd1 = entityList.size
         val rnd2 = world.random.nextInt(rnd1)

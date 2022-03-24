@@ -11,7 +11,6 @@ class LeapingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         addStatusToQueue(user.uuid,StatusEffects.JUMP_BOOST,260,level - 1)
-        //user.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, 200,level - 1))
     }
 
 }

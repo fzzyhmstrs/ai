@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
-import net.minecraft.enchantment.PowerEnchantment;
 import net.minecraft.enchantment.SweepingEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

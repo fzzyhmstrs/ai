@@ -5,15 +5,10 @@ import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.projectile.ExplosiveProjectileEntity
-import net.minecraft.entity.projectile.ProjectileUtil
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.EntityHitResult
@@ -47,7 +42,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
                 entityHitResult.entity.damage(DamageSource.GENERIC, 5.0F)
             }
         }
-        val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,pos = entityHitResult.entity.blockPos)
+        val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,pos = entityHitResult.entity.pos)
         if (entityList.isNotEmpty()){
             for (entity2 in entityList){
                 if (entity2 is Monster){

@@ -34,9 +34,9 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         } else if (hit.type == HitResult.Type.MISS){
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
         } else if (hit.type == HitResult.Type.BLOCK){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).pos)
         } else if (hit.type == HitResult.Type.ENTITY){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.blockPos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.pos)
         } else {
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
         }

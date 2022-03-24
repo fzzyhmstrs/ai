@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
@@ -14,7 +13,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
-import java.util.*
 
 class ImbuingTableDisplay(val recipe: ImbuingRecipe): Display {
 

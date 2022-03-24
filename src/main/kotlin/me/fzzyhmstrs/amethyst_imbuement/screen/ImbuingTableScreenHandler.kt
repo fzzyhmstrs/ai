@@ -415,7 +415,7 @@ class ImbuingTableScreenHandler(
                     player.applyEnchantmentCosts(itemStack3, i)
                     val l = EnchantmentHelper.get(itemStack3)
                     for (j in 0..12) {
-                        if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new itemstack
+                        if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new item stack
                         if (inventory.getStack(j).item.hasRecipeRemainder()){
                             inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
                         }else {

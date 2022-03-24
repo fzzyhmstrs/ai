@@ -152,7 +152,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         readAngerFromNbt(world, nbt)
     }
 
-    fun isPlayerCreated(): Boolean {
+    private fun isPlayerCreated(): Boolean {
         return (dataTracker.get(CRYSTAL_GOLEM_FLAGS) and 1) != 0.toByte()
     }
 

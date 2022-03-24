@@ -10,7 +10,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.hit.HitResult
-import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {

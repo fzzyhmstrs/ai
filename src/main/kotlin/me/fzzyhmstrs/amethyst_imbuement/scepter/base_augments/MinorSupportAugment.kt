@@ -10,8 +10,6 @@ import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.world.World
 

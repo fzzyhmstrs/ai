@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.armor.AmetrineArmorMaterial
 import me.fzzyhmstrs.amethyst_imbuement.armor.SteelArmorMaterial
 import net.minecraft.entity.EquipmentSlot
@@ -24,13 +25,13 @@ object RegisterArmor {
     val AMETRINE_BOOTS = ArmorItem(AMETRINE_ARMOR_MATERIAL, EquipmentSlot.FEET,Item.Settings().group(ItemGroup.COMBAT))
 
     fun registerAll() {
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","steel_helmet"), STEEL_HELMET)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","steel_chestplate"), STEEL_CHESTPLATE)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","steel_leggings"), STEEL_LEGGINGS)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","steel_boots"), STEEL_BOOTS)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","ametrine_helmet"), AMETRINE_HELMET)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","ametrine_chestplate"), AMETRINE_CHESTPLATE)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","ametrine_leggings"), AMETRINE_LEGGINGS)
-        Registry.register(Registry.ITEM, Identifier("amethyst_imbuement","ametrine_boots"), AMETRINE_BOOTS)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"steel_helmet"), STEEL_HELMET)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"steel_chestplate"), STEEL_CHESTPLATE)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"steel_leggings"), STEEL_LEGGINGS)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"steel_boots"), STEEL_BOOTS)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"ametrine_helmet"), AMETRINE_HELMET)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"ametrine_chestplate"), AMETRINE_CHESTPLATE)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"ametrine_leggings"), AMETRINE_LEGGINGS)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"ametrine_boots"), AMETRINE_BOOTS)
     }
 }

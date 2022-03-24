@@ -40,15 +40,6 @@ object RegisterScreen {
                 title
             )
         }
-
-        /*val STEEL_ANVIL_TABLE_SCREEN = ScreenRegistry.register(AI.STEEL_ANVIL_SCREEN_HANDLER) {
-                handler: SteelAnvilScreenHandler2, playerInventory: PlayerInventory, title: Text ->
-            SteelAnvilScreen(
-                handler,
-                playerInventory,
-                title
-            )
-        }*/
     }
 
 }

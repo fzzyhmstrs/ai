@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.tag.TagFactory
 import net.minecraft.block.Block
 import net.minecraft.item.Item
@@ -14,6 +15,6 @@ object RegisterTag {
     val STEEL_HELMETS_TAG: Tag<Item> = TagFactory.ITEM.create(Identifier("c","steel_helmets"))
     val STEEL_INGOTS_TAG: Tag<Item> = TagFactory.ITEM.create(Identifier("c","steel_ingots"))
     val STEEL_LEGGINGS_TAG: Tag<Item> = TagFactory.ITEM.create(Identifier("c","steel_leggings"))
-    val PILLARS_TAG: Tag<Block> = TagFactory.BLOCK.create(Identifier("amethyst_imbuement","disenchant_pillar_blocks"))
+    val PILLARS_TAG: Tag<Block> = TagFactory.BLOCK.create(Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
 
 }

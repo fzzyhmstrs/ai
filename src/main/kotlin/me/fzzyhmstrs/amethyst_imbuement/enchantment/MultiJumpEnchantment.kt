@@ -1,14 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.item.ItemStack
-import java.util.*
 
 class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.ARMOR_FEET,slot) {
 

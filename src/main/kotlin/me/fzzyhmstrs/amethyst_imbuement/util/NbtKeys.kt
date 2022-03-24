@@ -7,11 +7,6 @@ enum class NbtKeys {
             return "totem_active"
         }
     },
-    GLOW_COLOR{
-        override fun str(): String {
-            return "glow_color"
-        }
-    },
     ANGELIC{
         override fun str(): String {
             return "angelic"
@@ -40,11 +35,6 @@ enum class NbtKeys {
     DISENCHANT_COUNT{
         override fun str(): String {
             return "disenchant_count"
-        }
-    },
-    IMBUE_ID{
-        override fun str(): String {
-            return "imbue_id"
         }
     };
 

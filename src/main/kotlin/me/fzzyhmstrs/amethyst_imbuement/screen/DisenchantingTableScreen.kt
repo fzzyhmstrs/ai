@@ -1,8 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
@@ -14,7 +12,6 @@ import net.minecraft.text.*
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Matrix4f
-import net.minecraft.util.registry.Registry
 
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "SpellCheckingInspection")

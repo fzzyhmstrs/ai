@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents

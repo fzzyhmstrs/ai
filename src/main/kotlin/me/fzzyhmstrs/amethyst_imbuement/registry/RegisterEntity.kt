@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -18,7 +19,7 @@ object RegisterEntity {
 
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "crystal_golem"),
+        Identifier(AI.MOD_ID, "crystal_golem"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<CrystallineGolemEntity>, world: World ->
@@ -31,7 +32,7 @@ object RegisterEntity {
 
     val UNHALLOWED_ENTITY: EntityType<UnhallowedEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "unhallowed"),
+        Identifier(AI.MOD_ID, "unhallowed"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<UnhallowedEntity>, world: World ->
@@ -44,7 +45,7 @@ object RegisterEntity {
 
     val DRACONIC_BOX_ENTITY: EntityType<DraconicBoxEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "draconic_box"),
+        Identifier(AI.MOD_ID, "draconic_box"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<DraconicBoxEntity>, world: World ->
@@ -57,7 +58,7 @@ object RegisterEntity {
 
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "glistering_trident"),
+        Identifier(AI.MOD_ID, "glistering_trident"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<GlisteringTridentEntity>, world: World ->
@@ -70,7 +71,7 @@ object RegisterEntity {
 
     val MISSILE_ENTITY: EntityType<MissileEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "missile_entity"),
+        Identifier(AI.MOD_ID, "missile_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<MissileEntity>, world: World ->
@@ -83,7 +84,7 @@ object RegisterEntity {
 
     val FLAMEBOLT_ENTITY: EntityType<FlameboltEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "flamebolt_entity"),
+        Identifier(AI.MOD_ID, "flamebolt_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<FlameboltEntity>, world: World ->
@@ -96,7 +97,7 @@ object RegisterEntity {
 
     val FREEZING_ENTITY: EntityType<FreezingEntity> = Registry.register(
         Registry.ENTITY_TYPE,
-        Identifier("amethyst_imbuement", "freezing_entity"),
+        Identifier(AI.MOD_ID, "freezing_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<FreezingEntity>, world: World ->
@@ -110,7 +111,7 @@ object RegisterEntity {
     
     val IMBUING_TABLE_BLOCK_ENTITY: BlockEntityType<ImbuingTableBlockEntity> = Registry.register(
         Registry.BLOCK_ENTITY_TYPE,
-        "amethyst_imbuement:imbuing_table_entity",
+        AI.MOD_ID + ":imbuing_table_entity",
         FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
             ImbuingTableBlockEntity(
                 pos,
@@ -120,7 +121,7 @@ object RegisterEntity {
 
     val ALTAR_OF_EXPERIENCE_BLOCK_ENTITY: BlockEntityType<AltarOfExperienceBlockEntity> = Registry.register(
         Registry.BLOCK_ENTITY_TYPE,
-        "amethyst_imbuement:altar_of_experience_entity",
+        AI.MOD_ID + ":altar_of_experience_entity",
         FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
             AltarOfExperienceBlockEntity(
                 pos,
@@ -130,7 +131,7 @@ object RegisterEntity {
 
     val DISENCHANTING_TABLE_BLOCK_ENTITY: BlockEntityType<DisenchantingTableBlockEntity> = Registry.register(
         Registry.BLOCK_ENTITY_TYPE,
-        "amethyst_imbuement:disenchanting_table_entity",
+        AI.MOD_ID + ":disenchanting_table_entity",
         FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
             DisenchantingTableBlockEntity(
                 pos,
@@ -140,7 +141,7 @@ object RegisterEntity {
 
     val FORCEFIELD_BLOCK_ENTITY: BlockEntityType<ForcefieldBlockEntity> = Registry.register(
         Registry.BLOCK_ENTITY_TYPE,
-        "amethyst_imbuement:forcefield_entity",
+        AI.MOD_ID + ":forcefield_entity",
         FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
             ForcefieldBlockEntity(
                 pos,

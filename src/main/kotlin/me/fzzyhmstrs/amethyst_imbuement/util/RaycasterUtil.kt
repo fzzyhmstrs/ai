@@ -1,20 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
-import net.minecraft.world.GameRules
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import java.util.*
@@ -23,6 +18,25 @@ import kotlin.math.min
 
 
 object RaycasterUtil {
+
+    fun raycastHit(distance: Double = 4.0, includeFluids: Boolean = false): HitResult? {
+        val client = MinecraftClient.getInstance()
+        return raycaster(distance, client, includeFluids)
+    }
+
+    @Suppress("unused")
+    fun raycastBlock(distance: Double = 4.0, includeFluids: Boolean = false): BlockPos? {
+        val client = MinecraftClient.getInstance()
+        val hit = raycaster(distance, client, includeFluids) ?: return null
+        return when(hit.type){
+            HitResult.Type.MISS -> null
+            HitResult.Type.BLOCK -> {
+                val blockHit = hit as BlockHitResult
+                blockHit.blockPos
+            }
+            else -> null
+        }
+    }
 
     fun raycastEntity(distance: Double = 4.0, includeFluids: Boolean = false): Entity? {
         val client = MinecraftClient.getInstance()
@@ -35,45 +49,32 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastBlock(distance: Double = 4.0, includeFluids: Boolean = false): Block? {
-        val client = MinecraftClient.getInstance()
-        val hit = raycaster(distance, client, includeFluids) ?: return null
-        return when(hit.type){
-            HitResult.Type.MISS -> null
-            HitResult.Type.BLOCK -> {
-                val blockHit = hit as BlockHitResult
-                val blockPos = blockHit.blockPos
-                val blockState = client.world?.getBlockState(blockPos)
-                blockState?.block
-            }
-            else -> null
-        }
-    }
-
-    fun raycastHit(distance: Double = 4.0, includeFluids: Boolean = false): HitResult? {
-        val client = MinecraftClient.getInstance()
-        return raycaster(distance, client, includeFluids)
-    }
-
-    fun raycastEntityArea(distance: Double = 4.0,pos: BlockPos? = null): MutableList<Entity>{
+    fun raycastEntityArea(distance: Double = 4.0,pos: Vec3d? = null, rotation: Vec3d = Vec3d(1.0,0.0,0.0)): MutableList<Entity>{
         val client = MinecraftClient.getInstance()
         val entity: Entity? = client.getCameraEntity()
         if (entity == null || client.world == null) {
             return mutableListOf()
         }
-        val box: Box = if (pos != null){
-            Box(pos.x+distance, pos.y+distance/2,pos.z+distance,pos.x-distance, pos.y-distance/2,pos.z-distance)
-        } else {
-            Box(entity.x+distance, entity.y+distance/2,entity.z+distance,entity.x-distance, entity.y-distance/2,entity.z-distance)
-        }
-        val entityList: MutableList<Entity> = entity.world.getOtherEntities(entity, box) { entity2: Entity -> !entity2.isSpectator && entity2.collides() }
+        val pos2: Vec3d = pos ?: entity.pos
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,entity,pos2,rotation,distance)
+
         return entityList.ifEmpty {
             mutableListOf()
         }
     }
 
+    private fun raycastEntityRotatedArea(world: World,
+                                         entityToExclude: Entity?,
+                                         center: Vec3d,
+                                         rotation: Vec3d,
+                                         size: Double): MutableList<Entity>{
+        val flatRotation = rotation.multiply(1.0,0.0,1.0)
+        val flatPerpendicular = perpendicularVector(flatRotation,InPlane.XZ)
+        return raycastEntityRotatedArea(world,entityToExclude, center, flatRotation,flatPerpendicular, size,size,size)
+    }
+
     fun raycastEntityRotatedArea(world: World,
-                                 user: PlayerEntity?,
+                                 entityToExclude: Entity?,
                                  center: Vec3d,
                                  rotation: Vec3d,
                                  perpendicularRotation: Vec3d,
@@ -83,20 +84,18 @@ object RaycasterUtil {
         val entityList: MutableList<Entity> = mutableListOf()
         val box = RaycasterBox(center, rotation, perpendicularRotation, lengthAlongRotation,
                                 lengthAlongPerpendicular, lengthPerpendicularToBoth)
-
-        if (world is ServerWorld) {
-            for (entity in world.iterateEntities()) {
-                if (entity !is LivingEntity) continue
-                if (box.testPoint(entity.pos.add(0.0, entity.height / 2.0, 0.0))) {
-                    entityList.add(entity)
-                }
+        val iterable : Iterable<Entity> =
+            when (world) {
+                is ServerWorld -> { world.iterateEntities() }
+                is ClientWorld -> { world.entities }
+                else -> { return entityList }
             }
-        } else if (world is ClientWorld){
-            for (entity in world.entities) {
-                if (entity !is LivingEntity) continue
-                if (box.testPoint(entity.pos.add(0.0, entity.height / 2.0, 0.0))) {
-                    entityList.add(entity)
-                }
+        for (entity in iterable) {
+            if (entity !is LivingEntity) continue
+            if (entity.isSpectator) continue
+            if (entity === entityToExclude) continue
+            if (box.testPoint(entity.pos.add(0.0, entity.height / 2.0, 0.0))) {
+                entityList.add(entity)
             }
         }
         return entityList
@@ -104,30 +103,22 @@ object RaycasterUtil {
 
     private fun raycaster(distance: Double = 10.0, client: MinecraftClient, includeFluids: Boolean): HitResult? {
         val tickDelta = client.tickDelta
-        val cameraDirection = client.cameraEntity!!.getRotationVec(tickDelta)
-        return raycastInDirection(client, tickDelta, cameraDirection, distance, includeFluids)
-    }
-
-
-    private fun raycastInDirection(client: MinecraftClient, tickDelta: Float, direction: Vec3d, distance: Double, includeFluids: Boolean): HitResult? {
         val entity: Entity? = client.getCameraEntity()
         if (entity == null || client.world == null) {
             return null
         }
+        val rotation = entity.getRotationVec(tickDelta)
         var reachDistance: Double = distance //Change this to extend the reach
-        val target: HitResult? = raycast(entity, reachDistance, tickDelta, includeFluids, direction)
+        val target: HitResult? = raycast(entity, reachDistance, tickDelta, includeFluids, rotation)
         val cameraPos: Vec3d = entity.getCameraPosVec(tickDelta)
         reachDistance *= reachDistance
         if (target != null) {
             reachDistance = target.pos.squaredDistanceTo(cameraPos)
         }
 
-        val rotation = entity.getRotationVec(tickDelta)
-        val perpendicularToPosX = 1.0
-        val perpendicularToPosZ = (rotation.x/rotation.z) * -1
-        val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
+        val perpendicularVector = perpendicularVector(rotation,InPlane.XZ)
         val center = cameraPos.add(entity.getRotationVec(tickDelta).multiply(reachDistance/2.0))
-        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,null,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,entity,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
         if (entityList.isEmpty()){
             return target
         } else {
@@ -136,7 +127,7 @@ object RaycasterUtil {
             for (entity3 in entityList) {
                 val distTemp = dist
                 dist = min(entity3.squaredDistanceTo(entity),dist)
-                if (distTemp > dist && entity3 != entity){
+                if (distTemp > dist){
                     tempEntity = entity3
                 }
             }
@@ -167,7 +158,44 @@ object RaycasterUtil {
         )
     }
 
-    @Suppress("SpellCheckingInspection", "UnnecessaryVariable")
+    fun perpendicularVector(rotation: Vec3d, inPlane: InPlane): Vec3d{
+        return when (inPlane) {
+            InPlane.XY -> {
+                if (rotation.y == 0.0){
+                    Vec3d(0.0,1.0,0.0)
+                } else {
+                    val perpendicularToPosX = 1.0
+                    val perpendicularToPosY = (rotation.x / rotation.y) * -1
+                    Vec3d(perpendicularToPosX, perpendicularToPosY, 0.0).normalize()
+                }
+            }
+            InPlane.XZ -> {
+                if (rotation.z == 0.0){
+                    Vec3d(0.0,0.0,1.0)
+                } else {
+                    val perpendicularToPosX = 1.0
+                    val perpendicularToPosZ = (rotation.x / rotation.z) * -1
+                    Vec3d(perpendicularToPosX, 0.0, perpendicularToPosZ).normalize()
+                }
+            }
+            InPlane.YZ -> {
+                if (rotation.z == 0.0){
+                    Vec3d(0.0,0.0,1.0)
+                } else {
+                    val perpendicularToPosY = 1.0
+                    val perpendicularToPosZ = (rotation.y / rotation.z) * -1
+                    Vec3d(0.0, perpendicularToPosY, perpendicularToPosZ).normalize()
+                }
+            }
+        }
+    }
+
+    enum class InPlane{
+        XY,
+        XZ,
+        YZ
+    }
+
     private class RaycasterBox(center: Vec3d,
                                rotation: Vec3d,
                                perpendicularRotation: Vec3d,
@@ -192,9 +220,9 @@ object RaycasterUtil {
             val doublePerpendicularRotation = rotation.crossProduct(perpendicularRotation)
             val rp = rotation.normalize().multiply(lengthAlongRotation/2.0)
             val prp = perpendicularRotation.normalize().multiply(lengthAlongPerpendicular/2.0)
-            val dprp = doublePerpendicularRotation.normalize().multiply(lengthPerpendicularToBoth/2.0)
+            val drp = doublePerpendicularRotation.normalize().multiply(lengthPerpendicularToBoth/2.0)
 
-            distanceToOrigin = origin.relativize(center.add(rp).add(prp).add(dprp)).length()
+            distanceToOrigin = origin.relativize(center.add(rp).add(prp).add(drp)).length()
 
             //initialize the min/max values
             minX = center.x
@@ -205,12 +233,11 @@ object RaycasterUtil {
             maxZ = center.z
 
             //generate the corner points
-            for (a in flipA){
+            for (x in flipA){
                 for (b in flipB){
-                    val x = a
                     val y = b.first
                     val z = b.second
-                    val pointVec = center.add(rp.multiply(x)).add(prp.multiply(y)).add(dprp.multiply(z))
+                    val pointVec = center.add(rp.multiply(x)).add(prp.multiply(y)).add(drp.multiply(z))
                     if (pointVec.x > maxX) {
                         maxX = pointVec.x
                     } else if (pointVec.x < minX){
@@ -236,7 +263,7 @@ object RaycasterUtil {
                 val x = keys.value.first
                 val y = keys.value.second
                 val z = keys.value.third
-                val directionVec = center.add(rp.multiply(x)).add(prp.multiply(y)).add(dprp.multiply(z))
+                val directionVec = center.add(rp.multiply(x)).add(prp.multiply(y)).add(drp.multiply(z))
                 directionMap[keys.key] = RaycasterBoxPoint(directionVec,center)
             }
         }
@@ -333,7 +360,7 @@ object RaycasterUtil {
 
             fun angleToPoint(point: Vec3d): Double{
                 //needs to be a zero-origin point
-                //calcualting angle between vectors with arccos(dotproduct[a*b] / (magnitude_a * magnitude_b))
+                //calculating angle between vectors with arc cos(dot product[a*b] / (magnitude_a * magnitude_b))
                 return acos(vectorFromOrigin.dotProduct(point)/(vectorFromOrigin.length() * point.length()))
             }
 
