@@ -26,28 +26,7 @@ public class CarvedPumpkinBlockMixin {
     private void crystalGolemTest(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci){
         BlockPattern.Result result = CrystallineCoreBlock.Companion.getCrystallineGolemPattern().searchAround(world,pos);
         if (result != null){
-            CachedBlockPosition cachedBlockPosition;
-            for (int i = 0; i < CrystallineCoreBlock.Companion.getCrystallineGolemPattern().getWidth(); ++i) {
-                for (int j = 0; j < CrystallineCoreBlock.Companion.getCrystallineGolemPattern().getHeight(); ++j) {
-                    cachedBlockPosition = result.translate(i, j, 0);
-                    world.setBlockState(cachedBlockPosition.getBlockPos(), Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS);
-                    world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, cachedBlockPosition.getBlockPos(), Block.getRawIdFromState(cachedBlockPosition.getBlockState()));
-                }
-            }
-            CrystallineGolemEntity cge = new CrystallineGolemEntity(RegisterEntity.INSTANCE.getCRYSTAL_GOLEM_ENTITY(), world);
-            BlockPos blockPos = result.translate(1, 2, 0).getBlockPos();
-            cge.setPlayerCreated(true);
-            cge.refreshPositionAndAngles((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.05, (double)blockPos.getZ() + 0.5, 0.0f, 0.0f);
-            world.spawnEntity(cge);
-            for (ServerPlayerEntity serverPlayerEntity : world.getNonSpectatingEntities(ServerPlayerEntity.class, cge.getBoundingBox().expand(5.0))) {
-                Criteria.SUMMONED_ENTITY.trigger(serverPlayerEntity, cge);
-            }
-            for (int i = 0; i < CrystallineCoreBlock.Companion.getCrystallineGolemPattern().getWidth(); ++i) {
-                for (int j = 0; j < CrystallineCoreBlock.Companion.getCrystallineGolemPattern().getHeight(); ++j) {
-                    CachedBlockPosition cachedBlockPosition2 = result.translate(i, j, 0);
-                    world.updateNeighbors(cachedBlockPosition2.getBlockPos(), Blocks.AIR);
-                }
-            }
+            CrystallineCoreBlock.Companion.spawnCrystallineGolem(result,world);
             ci.cancel();
         }
     }

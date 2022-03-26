@@ -83,7 +83,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 Entity source = damageSource.getSource();
                 if (source != null) {
                     if (source instanceof LivingEntity) {
-                        RegisterEnchantment.INSTANCE.getBULWARK().specialEffect((LivingEntity)(Object)this, level, activeStack);
+                        RegisterEnchantment.INSTANCE.getBULWARK().specialEffect(this, level, activeStack);
                     }
                 }
             }

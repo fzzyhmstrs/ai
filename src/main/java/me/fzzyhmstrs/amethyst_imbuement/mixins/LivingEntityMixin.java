@@ -207,12 +207,8 @@ public abstract class LivingEntityMixin extends Entity {
         block4: for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
             ItemStack itemStack;
             switch (equipmentSlot.getType()) {
-                case HAND -> {
-                    itemStack = this.getSyncedHandStack(equipmentSlot);
-                }
-                case ARMOR -> {
-                    itemStack = this.getSyncedArmorStack(equipmentSlot);
-                }
+                case HAND -> itemStack = this.getSyncedHandStack(equipmentSlot);
+                case ARMOR -> itemStack = this.getSyncedArmorStack(equipmentSlot);
                 default -> {
                     continue block4;
                 }

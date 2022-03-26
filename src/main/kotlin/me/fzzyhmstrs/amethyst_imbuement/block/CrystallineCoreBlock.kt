@@ -1,12 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity.CRYSTAL_GOLEM_ENTITY
+import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.block.pattern.BlockPatternBuilder
 import net.minecraft.block.pattern.CachedBlockPosition
 import net.minecraft.predicate.block.BlockStatePredicate
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.function.MaterialPredicate
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
+import net.minecraft.world.WorldEvents
 import java.util.function.Predicate
 
 class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
@@ -33,6 +40,43 @@ class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
                 pattern = crystallineGolemPattern as BlockPattern
             }
             return pattern
+        }
+
+        fun spawnCrystallineGolem(result: BlockPattern.Result, world: World){
+            var cachedBlockPosition: CachedBlockPosition
+            for (i in 0 until getCrystallineGolemPattern().width) {
+                for (j in 0 until getCrystallineGolemPattern().height) {
+                    cachedBlockPosition = result.translate(i, j, 0)
+                    world.setBlockState(cachedBlockPosition.blockPos, Blocks.AIR.defaultState, NOTIFY_LISTENERS)
+                    world.syncWorldEvent(
+                        WorldEvents.BLOCK_BROKEN,
+                        cachedBlockPosition.blockPos,
+                        getRawIdFromState(cachedBlockPosition.blockState)
+                    )
+                }
+            }
+            val cge = CrystallineGolemEntity(CRYSTAL_GOLEM_ENTITY, world)
+            val blockPos: BlockPos = result.translate(1, 2, 0).getBlockPos()
+            cge.setPlayerCreated(true)
+            cge.refreshPositionAndAngles(
+                blockPos.x.toDouble() + 0.5,
+                blockPos.y.toDouble() + 0.05,
+                blockPos.z.toDouble() + 0.5,
+                0.0f,
+                0.0f
+            )
+            world.spawnEntity(cge)
+            for (serverPlayerEntity in world.getNonSpectatingEntities(
+                ServerPlayerEntity::class.java, cge.boundingBox.expand(5.0)
+            )) {
+                Criteria.SUMMONED_ENTITY.trigger(serverPlayerEntity, cge)
+            }
+            for (i in 0 until getCrystallineGolemPattern().width) {
+                for (j in 0 until getCrystallineGolemPattern().height) {
+                    val cachedBlockPosition2: CachedBlockPosition = result.translate(i, j, 0)
+                    world.updateNeighbors(cachedBlockPosition2.blockPos, Blocks.AIR)
+                }
+            }
         }
     }
 

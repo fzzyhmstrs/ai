@@ -80,6 +80,7 @@ public abstract class EntityMixin {
     @Unique
     private float things$prevStepHeight = -1;
 
+    @SuppressWarnings("ConstantConditions")
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"))
     private void boostStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if (!((Object) this instanceof PlayerEntity player)) return;

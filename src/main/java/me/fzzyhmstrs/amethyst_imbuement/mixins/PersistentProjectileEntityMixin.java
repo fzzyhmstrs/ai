@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
+import me.fzzyhmstrs.amethyst_imbuement.augment.HeadhunterAugment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -31,7 +32,7 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
     @Shadow
     public boolean isNoClip(){
         return false;
-    };
+    }
 
     @Shadow protected abstract float getDragInWater();
 
@@ -67,31 +68,7 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
                 ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
                 int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
                 if (lvl > 0){
-                    double y1 = this.getY();
-                    double y2 = instance.getEyeY();
-                    double xdiff = this.getX() - instance.getX();
-                    double zdiff = this.getZ() - instance.getZ();
-                    double sqrd = xdiff * xdiff + zdiff * zdiff;
-                    if (sqrd < 0.0) sqrd = 0.0;
-                    double d = Math.sqrt(sqrd);
-                    double y1Fix;
-                    if (Math.abs(this.getPitch()) != 90) {
-                        y1Fix = y1 + d * Math.tan(this.getPitch() * 0.01745329);
-                    } else if (this.getPitch() == 90.0) {
-                        return instance.damage(source,amount);
-                    } else if (this.getPitch() == -90.0){
-                        return instance.damage(source,amount*2.0f);
-                    } else {
-                        y1Fix = y1;
-                    }
-
-
-                    if (Math.abs(y1-y2) < 0.03){
-                        amount = amount *4.2F;
-                    } else if (Math.abs(y1Fix-y2) < 0.14){
-                        float rndMultiplier = (instance.world.random.nextFloat() * 0.7f + 0.6f);
-                        amount = amount * (1.0F + rndMultiplier);
-                    }
+                    amount = HeadhunterAugment.Companion.checkHeadhunterHit(instance,(PersistentProjectileEntity)(Object) this,amount);
                 }
             }
         }

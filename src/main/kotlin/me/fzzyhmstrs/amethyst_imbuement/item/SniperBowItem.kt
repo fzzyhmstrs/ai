@@ -40,6 +40,28 @@ class SniperBowItem(settings: Settings) : CrossbowItem(settings) {
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_1.png")) //arranging it like this so scrolling down moves through the custom crosshairs and ends at the spyglass, not the other way around. figure scrolling down is more common
         val SNIPER_BOW_SCOPE_LIST_LENGTH = SNIPER_BOW_SCOPE_LIST.size-1 //return 0-indexed length of the above array (4 elements = length 3 etc.)
         var SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
+
+        fun changeScope(up: Boolean){
+            val si = _sniper_scope_index
+            val sl = SNIPER_BOW_SCOPE_LIST_LENGTH
+            if (up) {
+                _sniper_scope_index = if (si > 0) {
+                    si - 1
+                } else {
+                    sl
+                }
+                SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
+            } else {
+                _sniper_scope_index = if (si < sl) {
+                    si + 1
+                } else {
+                    0
+                }
+                SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
+            }
+
+
+        }
     }
 
     private fun getSpeed(stack: ItemStack): Float {
