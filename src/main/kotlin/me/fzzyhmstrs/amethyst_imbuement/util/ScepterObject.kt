@@ -60,7 +60,7 @@ object ScepterObject: AugmentDamage {
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
         if(scepters[id]?.isNotEmpty() == true){ //break out of initialization if the scepter has already been initialized and isn't changed
-            if (scepters[id]!!.size == stack.enchantments.size){
+            if (scepters[id]?.size == stack.enchantments.size){
                 return
             }
         }
@@ -85,13 +85,12 @@ object ScepterObject: AugmentDamage {
         if(!scepters.containsKey(id)){
             initializeScepter(stack,world)
         }
-        if(scepters[id]!!.containsKey(activeEnchantId)){
+        if(scepters[id]?.containsKey(activeEnchantId) == true){
             val cooldown = augmentStats[activeEnchantId]?.cooldown
             val time = user.world.time
-            //println("$activeEnchantId last cast ${scepters[id]!![activeEnchantId]} with cooldown $cooldown, now cast at $time")
-            if (cooldown != null && scepters[id]!![activeEnchantId] != null){
-                return if (time - cooldown >= scepters[id]!![activeEnchantId] as Long){ //checks that enough time has passed since last usage
-                    scepters[id]!![activeEnchantId] = user.world.time
+            if (cooldown != null && scepters[id]?.get(activeEnchantId) != null){
+                return if (time - cooldown >= scepters[id]?.get(activeEnchantId) as Long){ //checks that enough time has passed since last usage
+                    scepters[id]?.put(activeEnchantId, user.world.time)
                     incrementScepterStats(scepterNbt,activeEnchantId)
                     cooldown
                 } else {
@@ -130,7 +129,7 @@ object ScepterObject: AugmentDamage {
         if(scepters[id]?.isEmpty() == true){
             initializeScepter(stack, user.world)
         }
-        if (scepters[id]!!.size != stack.enchantments.size){
+        if (scepters[id]?.size != stack.enchantments.size){
             initializeScepter(stack, user.world)
         }
         val nbtEls = stack.enchantments
@@ -169,7 +168,12 @@ object ScepterObject: AugmentDamage {
         activeAugment[id] = newActiveEnchant?: return
         val tempActiveEnchant = activeAugment[id]
         val currentTime = user.world.time
-        val lastUsed: Long = if(scepters[id]?.containsKey(tempActiveEnchant) == true){scepters[id]!![tempActiveEnchant]?:currentTime} else{currentTime}
+        val lastUsed: Long = if(scepters[id]?.containsKey(tempActiveEnchant) == true)
+        {
+            scepters[id]?.get(tempActiveEnchant)?:currentTime
+        } else {
+            currentTime
+        }
         val timeSinceLast = currentTime - lastUsed
         val cooldown = augmentStats[tempActiveEnchant]?.cooldown?:20
         if(timeSinceLast >= cooldown){
@@ -271,9 +275,11 @@ object ScepterObject: AugmentDamage {
             val entityList = persistentEffect[id]?.entityList?:return
             val level = persistentEffect[id]?.level?:return
             aug.persistentEffect(world, user,blockPos, entityList, level)
-            if(persistentEffect[id]?.duration != null){
-                persistentEffect[id]!!.duration -= delay
-                if (persistentEffect[id]!!.duration <= 0){
+            val dur = persistentEffect[id]?.duration
+            if(dur != null){
+                val newDur = dur - delay
+                persistentEffect[id]?.duration = newDur
+                if (newDur <= 0) {
                     persistentEffectNeed[id] = -1
                     return
                 } else {

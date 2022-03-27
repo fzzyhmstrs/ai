@@ -264,7 +264,7 @@ class ImbuingTableScreenHandler(
         val itemStack = inventory.getStack(6)
         val itemStack2 = inventory.getStack(7)
         var i = id + 1
-        var match: Optional<ImbuingRecipe>? = Optional.empty()
+        var match: Optional<ImbuingRecipe> = Optional.empty()
         context.run { world: World, _: BlockPos? ->
             if (!world.isClient) {
                 match = (world).recipeManager.getFirstMatch(
@@ -274,7 +274,7 @@ class ImbuingTableScreenHandler(
                 )
             }
         }
-        if (match == null || match?.isEmpty == true){
+        if (match.isEmpty){
             if(enchantmentPower[id] in 31..40){
                 i = id + 2
             }else if(enchantmentPower[id] in 41..50){
@@ -286,13 +286,13 @@ class ImbuingTableScreenHandler(
                 return false
             }
         }else{
-            i = match?.get()?.getCost()?:return false
+            i = match.get().getCost()
         }
 
         if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
             context.run { world: World, pos: BlockPos? ->
                 var itemStack3 = itemStack
-                if (match == null || match?.isEmpty == true) {
+                if (match.isEmpty) {
                     val list =
                         generateEnchantments(itemStack3, id, enchantmentPower[id])
                     if (list.isNotEmpty()) {
@@ -336,8 +336,8 @@ class ImbuingTableScreenHandler(
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
                     }
-                } else if(match?.get()?.getAugment() != "" && match?.get()?.getAugment() != null){
-                    val augmentChk = Registry.ENCHANTMENT.get(Identifier(match!!.get().getAugment()))
+                } else if(match.get().getAugment() != ""){
+                    val augmentChk = Registry.ENCHANTMENT.get(Identifier(match.get().getAugment()))
                     if (augmentChk == null || !augmentChk.isAcceptableItem(itemStack3)){
                         return@run
                     }
@@ -354,14 +354,12 @@ class ImbuingTableScreenHandler(
 
                     } else {
                         val l = EnchantmentHelper.get(itemStack3)
-                        //var m = 0
-                        //var n3 = 0
                         var r: Int
                         var bl1 = false
                         for (p in l.keys) {
                             if (p == null) continue
                             if(p === augmentChk){
-                                r = l[p]!!.toInt() + 1
+                                r = l[p]?.plus(1) ?: return@run
                                 if (r > augmentChk.maxLevel){
                                     return@run
                                 }
@@ -416,10 +414,10 @@ class ImbuingTableScreenHandler(
                             }
                         }
                     }
-                    val itemStack4 = match!!.get().output
+                    val itemStack4 = match.get().output
                     itemStack4.item.onCraft(itemStack4,world, player)
                     inventory.setStack(6,itemStack4)
-                    if(match!!.get().getTransferEnchant()){
+                    if(match.get().getTransferEnchant()){
                         ScepterObject.transferNbt(itemStack3,itemStack4)
                         EnchantmentHelper.set(l,itemStack4)
                     }

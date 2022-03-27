@@ -22,6 +22,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
     private val texture = Identifier("amethyst_imbuement","textures/gui/container/altar_of_experience_gui.png")
     private var xp = IntArray(4)
+    private val player = playerInventory.player
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val i = (width - backgroundWidth) / 2
@@ -29,11 +30,11 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         for (k in 0..3) {
             val d = mouseX - (i + 26).toDouble()
             val e = mouseY - (j + 33 + 11 * k).toDouble()
-            if (d < 0.0 || e < 0.0 || d >= 124.0 || e >= 11.0 || !client!!.player?.let {
+            if (d < 0.0 || e < 0.0 || d >= 124.0 || e >= 11.0 || !player.let {
                     (handler as AltarOfExperienceScreenHandler).onButtonClick(
                         it, k
                     )
-                }!!
+                }
             ) continue
             client?.interactionManager?.clickButton(handler.syncId, k)
             return true
@@ -50,14 +51,18 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        val k = client!!.window.scaleFactor.toInt()
+        val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
         matrix4f.multiply(Matrix4f.viewboxMatrix(90.0, 1.3333334f, 9.0f, 80.0f))
         RenderSystem.backupProjectionMatrix()
         RenderSystem.setProjectionMatrix(matrix4f)
 
-        RenderSystem.viewport(0, 0, client!!.window.framebufferWidth, client!!.window.framebufferHeight)
+        client?.window?.framebufferWidth?.let { client?.window?.framebufferHeight?.let { it1 ->
+            RenderSystem.viewport(0, 0, it,
+                it1
+            )
+        } }
 
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()

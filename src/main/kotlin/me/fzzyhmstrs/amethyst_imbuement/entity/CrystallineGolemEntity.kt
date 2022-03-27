@@ -316,20 +316,18 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         NONE(1.0f), LOW(0.75f), MEDIUM(0.5f), HIGH(0.25f);
 
         companion object {
-            private var VALUES: List<Crack>? = null
+            private var VALUES: List<Crack> = Stream.of(*values()).sorted(
+                Comparator.comparingDouble { crack: Crack -> crack.maxHealthFraction.toDouble() }
+            ).collect(ImmutableList.toImmutableList())
+
             fun from(healthFraction: Float): Crack {
-                for (crack in VALUES!!) {
+                for (crack in VALUES) {
                     if (healthFraction >= crack.maxHealthFraction) continue
                     return crack
                 }
                 return NONE
             }
 
-            init {
-                VALUES = Stream.of(*values()).sorted(
-                    Comparator.comparingDouble { crack: Crack -> crack.maxHealthFraction.toDouble() }
-                ).collect(ImmutableList.toImmutableList())
-            }
         }
     }
 }

@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem.GLISTERING_TRIDENT
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.LightningEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -102,17 +103,17 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         val blockPos: BlockPos?
-        var livingEntity: Entity
+        var livingEntity: Entity? = null
         val entity = entityHitResult.entity
         var f = 11.0f //base thrown trident damage, setting to 11 vs. vanilla 8
         if (entity is LivingEntity) {
             livingEntity = entity
             f += EnchantmentHelper.getAttackDamage(tridentStack, livingEntity.group)
         }
-        val damageSource = DamageSource.trident(this, if (owner.also {
-                livingEntity =
-                    it!!
-            } == null) this else livingEntity)
+        if (owner != null){
+            livingEntity = owner as Entity
+        }
+        val damageSource = DamageSource.trident(this, if (owner == null) this else livingEntity)
         dealtDamage = true
         var soundEvent = SoundEvents.ITEM_TRIDENT_HIT
         if (entity.damage(damageSource, f)) {
@@ -122,7 +123,7 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
             if (entity is LivingEntity) {
                 if (livingEntity is LivingEntity) {
                     EnchantmentHelper.onUserDamaged(entity, livingEntity)
-                    EnchantmentHelper.onTargetDamaged(livingEntity as LivingEntity, entity)
+                    EnchantmentHelper.onTargetDamaged(livingEntity, entity)
                     if (EnchantmentHelper.getLevel(DECAYED, asItemStack()) > 0) {
                         entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 100, 1))
                     } else if (EnchantmentHelper.getLevel(CONTAMINATED, asItemStack()) > 0) {
@@ -133,18 +134,19 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
             }
         }
         velocity = velocity.multiply(-0.01, -0.1, -0.01)
-        var livingEntity2 = 1.0f
+        var volume = 1.0f
         if (world is ServerWorld && world.isThundering && hasChanneling() && world.isSkyVisible(entity.blockPos)) {
             blockPos = entity.blockPos
-            val lightningEntity = EntityType.LIGHTNING_BOLT.create(world)
-            lightningEntity!!.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
-            lightningEntity.channeler =
-                if (livingEntity is ServerPlayerEntity) livingEntity as ServerPlayerEntity else null
-            world.spawnEntity(lightningEntity)
+            val le = LightningEntity(EntityType.LIGHTNING_BOLT,world)
+            //val lightningEntity = EntityType.LIGHTNING_BOLT.create(world)
+            le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
+            le.channeler =
+                if (livingEntity is ServerPlayerEntity) livingEntity else null
+            world.spawnEntity(le)
             soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER
-            livingEntity2 = 5.0f
+            volume = 5.0f
         }
-        playSound(soundEvent, livingEntity2, 1.0f)
+        playSound(soundEvent, volume, 1.0f)
     }
 
     fun hasChanneling(): Boolean {

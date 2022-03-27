@@ -19,6 +19,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
     HandledScreen<DisenchantingTableScreenHandler>(handler, playerInventory, title) {
 
     private val texture = Identifier("amethyst_imbuement","textures/gui/container/disenchanting_table_gui.png")
+    private val player = playerInventory.player
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val i = (width - backgroundWidth) / 2
@@ -26,13 +27,13 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         for (k in 0..2) {
             val d = mouseX - (i + 60).toDouble()
             val e = mouseY - (j + 14 + 19 * k).toDouble()
-            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || !client!!.player?.let {
+            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || player.let {
                     (handler as DisenchantingTableScreenHandler).onButtonClick(
                         it, k
                     )
-                }!!
+                }
             ) continue
-            client!!.interactionManager!!.clickButton((handler as DisenchantingTableScreenHandler).syncId, k)
+            client?.interactionManager?.clickButton((handler as DisenchantingTableScreenHandler).syncId, k)
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
@@ -47,14 +48,18 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        val k = client!!.window.scaleFactor.toInt()
+        val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
         matrix4f.multiply(Matrix4f.viewboxMatrix(90.0, 1.3333334f, 9.0f, 80.0f))
         RenderSystem.backupProjectionMatrix()
         RenderSystem.setProjectionMatrix(matrix4f)
 
-        RenderSystem.viewport(0, 0, client!!.window.framebufferWidth, client!!.window.framebufferHeight)
+        client?.window?.framebufferWidth?.let { client?.window?.framebufferHeight?.let { it1 ->
+            RenderSystem.viewport(0, 0, it,
+                it1
+            )
+        } }
 
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
@@ -94,7 +99,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             val u = mouseX - (i + 60)
             val v = mouseY - (j + 14 + 19 * o)
             if (o == 1) {
-                if ((((client!!.player?.experienceLevel ?: 0) >= cost) || (client!!.player?.abilities?.creativeMode == true)) && handler.getSlotStack(1).isOf(Items.BOOK)) {
+                if ((((player.experienceLevel) >= cost) || (player.abilities.creativeMode)) && handler.getSlotStack(1).isOf(Items.BOOK)) {
                     t2 = if (u >= 0 && v >= 0 && u < 108 && v < 19) {
                         this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
                         0xFFFF80
@@ -237,7 +242,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             if (handler.enchantmentId[j] == -1) continue
             val tooltipText = if (handler.disenchantCost[0] < 0){
                 TranslatableText("container.disenchanting_table.tooltip.limit").formatted(Formatting.WHITE)
-            } else if ((client!!.player?.experienceLevel ?: 0) < handler.disenchantCost[0] && j == 1){
+            } else if ((player.experienceLevel) < handler.disenchantCost[0] && j == 1){
                 TranslatableText("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
             }else if ((!handler.getSlotStack(1).isOf(Items.BOOK)) && j == 1){
                 TranslatableText("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)

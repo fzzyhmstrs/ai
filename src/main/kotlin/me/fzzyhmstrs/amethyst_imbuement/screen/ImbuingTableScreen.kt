@@ -44,7 +44,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     )
                 }
             ) continue
-            client!!.interactionManager!!.clickButton(handler.syncId, k)
+            client?.interactionManager?.clickButton(handler.syncId, k)
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
@@ -60,14 +60,18 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         val j = (height - backgrdHeight) / 2
         val ofst2 = 4 //ofst to handle the screen height change
         this.drawTexture(matrices, i, j, 0, 0, backgrdWidth, backgrdHeight)
-        val k = client!!.window.scaleFactor.toInt()
+        val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
         matrix4f.multiply(Matrix4f.viewboxMatrix(90.0, 1.3333334f, 9.0f, 80.0f))
         RenderSystem.backupProjectionMatrix()
         RenderSystem.setProjectionMatrix(matrix4f)
 
-        RenderSystem.viewport(0, 0, client!!.window.framebufferWidth, client!!.window.framebufferHeight)
+        client?.window?.framebufferWidth?.let { client?.window?.framebufferHeight?.let { it1 ->
+            RenderSystem.viewport(0, 0, it,
+                it1
+            )
+        } }
 
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
@@ -108,7 +112,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             var onesOfst = 8
             var tensImageOfst: Int
             var onesImageOfst = 9
-            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0) && client!!.player!!.experienceLevel >= r && handler.levelLow[o] == 0 || client!!.player!!.abilities.creativeMode)) {
+            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0) && player.experienceLevel >= r && handler.levelLow[o] == 0 || player.abilities.creativeMode)) {
                 this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 if ((o+oOfst) <= 5) {
                     this.drawTexture(
@@ -272,7 +276,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         this.renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, dlta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
-        val bl = client!!.player!!.abilities.creativeMode
+        val bl = player.abilities.creativeMode
         val i = (handler as ImbuingTableScreenHandler).getLapisCount()
         for (j in 0..2) {
 
@@ -314,7 +318,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 if (handler.levelLow[j] <= 0){
                     if (!bl) {
                         list.add(LiteralText.EMPTY)
-                        if (client!!.player!!.experienceLevel < k) {
+                        if (player.experienceLevel < k) {
                             list.add(
                                 TranslatableText(
                                     "container.enchant.level.requirement",
@@ -352,7 +356,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
                     }
                 }
-                if (client!!.player!!.experienceLevel < k) {
+                if (player.experienceLevel < k) {
                     list.add(
                         TranslatableText(
                             "container.enchant.level.requirement",
