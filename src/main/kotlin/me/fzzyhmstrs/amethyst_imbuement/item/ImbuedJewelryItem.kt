@@ -23,6 +23,7 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
     private val ttn: String = _ttn
     private var shieldLevel: Int = 0
     private var tickCounter = 0
+    private val baseAmount = 2
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
         super.appendTooltip(stack, world, tooltip, context)
@@ -50,7 +51,8 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         super.onEquip(stack, slot, entity)
         if (entity.world.isClient()) return
         shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-        ShieldingAugment.addTrinketToQueue(entity,slot,2 + shieldLevel)
+        ShieldingAugment.addTrinket(entity,baseAmount + shieldLevel)
+        //ShieldingAugment.addTrinketToQueue(entity,slot,2 + shieldLevel)
         passiveEnchantmentTasks(stack,entity.world,entity)
     }
 
@@ -58,14 +60,17 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         super.onUnequip(stack, slot, entity)
         if(entity.world.isClient()) return
         unequipEnchantmentTasks(stack,entity.world,entity)
-        ShieldingAugment.removeTrinketFromQueue(entity,slot)
+        //ShieldingAugment.removeTrinketFromQueue(entity,slot)
+        shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+        ShieldingAugment.removeTrinket(entity,baseAmount + shieldLevel)
     }
 
     override fun tick(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         if(entity.world.isClient()) return
 
         if (entity.world.time%30 == 0L){
-            ShieldingAugment.applyShielding(entity)
+            //ShieldingAugment.applyShielding(entity)
+            ShieldingAugment.applyEntityShielding(entity)
             passiveEnchantmentTasks(stack,entity.world,entity)
             tickCounter = 0
         }

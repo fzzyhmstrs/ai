@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -7,10 +8,13 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.LiteralText
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 import org.lwjgl.glfw.GLFW
 
 @Suppress("PrivatePropertyName")
@@ -42,7 +46,8 @@ object RegisterKeybind {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                         val activeEnchant = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
-                        client.player?.sendMessage(LiteralText("Active spell is: $activeEnchant"), true)
+                        val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(AI.MOD_ID,activeEnchant))?.getName(1)?:LiteralText(activeEnchant)
+                        client.player?.sendMessage(LiteralText("Active spell is: $activeEnchantName"), true)
                         client.player?.addScoreboardTag(activeEnchant)
                     } else {
                         client.player?.sendMessage(LiteralText("Spells not activated yet..."), true)

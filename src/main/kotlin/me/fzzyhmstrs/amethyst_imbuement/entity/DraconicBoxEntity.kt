@@ -15,25 +15,34 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Arm
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World): LivingEntity(entityType,world) {
+class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block, age: Int, bp: BlockPos): LivingEntity(entityType,world) {
 
-    constructor(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block, age: Int, bp: BlockPos): this(entityType, world) {
-        entityBlock = block
-        maxAge = age
-        startingBlockPos = bp
+    constructor(entityType: EntityType<DraconicBoxEntity>, world: World): this(entityType, world,Blocks.AIR,40, BlockPos(0,0,0)){
     }
 
-    private var entityBlock = Blocks.AIR
-    private var maxAge = 9999
-    private var startingBlockPos: BlockPos = this.blockPos
+    private var entityBlock: Block
+    private var maxAge: Int
+    private var startingBlockPos : BlockPos
 
     init{
         this.isInvulnerable  = true
+        entityBlock = block
+        maxAge = age
+        startingBlockPos = bp
+        if (GlowColorUtil.oreIsRainbow(entityBlock)){
+            ColoredGlowLib.setRainbowColorToEntity(this,true)
+        } else {
+            val color = GlowColorUtil.oreGlowColor(entityBlock)
+            println(color)
+            ColoredGlowLib.setColorToEntity(this, color)
+        }
     }
 
     fun extendBoxLife(time: Int) {
@@ -62,22 +71,21 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World)
 
     override fun tick() {
         if (!this.hasStatusEffect(StatusEffects.GLOWING)) {
-            if (GlowColorUtil.oreIsRainbow(entityBlock)){
-                ColoredGlowLib.setRainbowColorToEntity(this,true)
-            } else {
-                val color = GlowColorUtil.oreGlowColor(entityBlock)
-                ColoredGlowLib.setColorToEntity(this, color)
-            }
             this.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, maxAge))
-
         }
         this.setNoGravity(true)
         noClip = true
         super.tick()
         noClip = false
-        if (this.age >= maxAge || !world.getBlockState(startingBlockPos).isOf(entityBlock)) {
+
+        if (world.isClient) return
+        if (yaw != 0.0F){
+            yaw = 0.0F
+        }
+        if (this.age >= maxAge || world.getBlockState(blockPos).isOf(Blocks.AIR)) {
             ColoredGlowLib.setRainbowColorToEntity(this,false)
             DraconicVisionAugment.removeBoxFromMap(startingBlockPos)
+            //world.playSound(null,blockPos,SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP,SoundCategory.NEUTRAL,1.0F,1.0F)
             this.discard()
         }
     }

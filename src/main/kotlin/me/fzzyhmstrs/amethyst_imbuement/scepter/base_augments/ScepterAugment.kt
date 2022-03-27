@@ -91,6 +91,10 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
         return AcceptableItemStacks.scepterAcceptableItemStacks(tier)
     }
 
+    fun getTier(): Int{
+        return tier
+    }
+
     fun registerAugmentStat(){
         val id = EnchantmentHelper.getEnchantmentId(this)?.path?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
         val imbueLevel = if (ScepterObject.checkAugmentStat(id)){

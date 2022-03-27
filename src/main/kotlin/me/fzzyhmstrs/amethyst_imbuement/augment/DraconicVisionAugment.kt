@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -45,6 +46,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                 }
             }
         }
+        ColoredGlowLib.updateData(world.server)
         addStatusToQueue(user.uuid, RegisterStatus.DRACONIC_VISION,260,0)
         world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,0.5f,0.8f)
     }
@@ -71,7 +73,6 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                 val id = boxPositions[pos] ?: return false
                 val box = world.getEntityById(id) ?: return false
                 if (box !is DraconicBoxEntity) return false
-                //println("boo")
                 box.extendBoxLife(40)
                 return true
             } else {

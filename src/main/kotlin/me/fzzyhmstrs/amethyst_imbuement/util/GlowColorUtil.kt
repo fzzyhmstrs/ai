@@ -41,7 +41,7 @@ object GlowColorUtil {
         oreColorMap[Blocks.REDSTONE_ORE] = Color(255,0,0)
         oreColorMap[Blocks.DEEPSLATE_REDSTONE_ORE] = Color(255,0,0)
         oreColorMap[Blocks.NETHER_GOLD_ORE] = Color(252,238,78)
-        oreColorMap[Blocks.NETHER_QUARTZ_ORE] = Color(166,120,241)
+        oreColorMap[Blocks.NETHER_QUARTZ_ORE] = Color(255,255,255)
         oreColorMap[Blocks.AMETHYST_CLUSTER] = Color(166,120,241)
         oreColorMap[Blocks.BUDDING_AMETHYST] = Color(166,120,241)
         oreColorMap[Blocks.LARGE_AMETHYST_BUD] = Color(166,120,241)

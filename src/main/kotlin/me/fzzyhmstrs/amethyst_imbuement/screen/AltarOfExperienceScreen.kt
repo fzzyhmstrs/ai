@@ -67,13 +67,9 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
         //experience values
         val xpStored = handler.experienceStored[0]
-        //println("xp stored: $xpStored")
         val xpMax = handler.experienceMax[0]
-        //println("max xp: $xpMax")
         val xpLeft = xpMax - xpStored
-        //println("xp left: $xpLeft")
         val xpPlayer = handler.getPlayerXp()
-        //println("player xp: $xpPlayer")
         xp[0] = if (xpLeft < 500 || xpPlayer < 500) { min(xpLeft,xpPlayer)} else {500}
         xp[1] = if (xpLeft < 50 || xpPlayer < 50) { min(xpLeft,xpPlayer)} else {50}
         xp[2] = if (xpStored < 50) {xpStored} else {50}
@@ -90,7 +86,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
             RenderSystem.setShader { GameRenderer.getPositionTexShader() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            if (xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 3 && xp[b] <= 50)){
+            if (xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)){
                 this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 177, 124, 11)
             } else {
                 //base mouse positions (top left corner of buttons)

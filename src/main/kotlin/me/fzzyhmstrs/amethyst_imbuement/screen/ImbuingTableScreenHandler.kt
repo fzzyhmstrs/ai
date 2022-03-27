@@ -121,8 +121,6 @@ class ImbuingTableScreenHandler(
                         )
                     }
                     if (match != null && match.isPresent){
-                        // a matching imbuement recipe is here!
-                        //matchBut = match
                         enchantmentPower[0] = match.get().getCost()
                         enchantmentPower[1] = 0
                         enchantmentPower[2] = 0
@@ -182,14 +180,6 @@ class ImbuingTableScreenHandler(
                             enchantmentId[0] = -2
                             imbueId[0] = Registry.ITEM.getRawId(match.get().output.item) * -1
                             levelLow[0] = 0
-                            /*
-                            println("imbueId")
-                            println(imbueId[0].toString())
-                            println(Registry.ITEM.getRawId(match.get().output.item).toString())
-                            println(match.get().output.name.toString())
-                            println(match.get().getTitle())
-                            println(match.get().matches(inventory as SimpleInventory,world).toString())
-                             */
                         }
                     } else if (!itemStack.isEnchantable){
                         for (i in 0..2) {
@@ -270,6 +260,7 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        if (player.world.isClient) return false
         val itemStack = inventory.getStack(6)
         val itemStack2 = inventory.getStack(7)
         var i = id + 1
@@ -283,7 +274,7 @@ class ImbuingTableScreenHandler(
                 )
             }
         }
-        if (match == null || match!!.isEmpty){
+        if (match == null || match?.isEmpty == true){
             if(enchantmentPower[id] in 31..40){
                 i = id + 2
             }else if(enchantmentPower[id] in 41..50){
@@ -295,13 +286,13 @@ class ImbuingTableScreenHandler(
                 return false
             }
         }else{
-            i = match!!.get().getCost()
+            i = match?.get()?.getCost()?:return false
         }
 
         if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
             context.run { world: World, pos: BlockPos? ->
                 var itemStack3 = itemStack
-                if (match == null || match!!.isEmpty) {
+                if (match == null || match?.isEmpty == true) {
                     val list =
                         generateEnchantments(itemStack3, id, enchantmentPower[id])
                     if (list.isNotEmpty()) {
@@ -345,7 +336,7 @@ class ImbuingTableScreenHandler(
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
                     }
-                } else if(match!!.get().getAugment() != ""){
+                } else if(match?.get()?.getAugment() != "" && match?.get()?.getAugment() != null){
                     val augmentChk = Registry.ENCHANTMENT.get(Identifier(match!!.get().getAugment()))
                     if (augmentChk == null || !augmentChk.isAcceptableItem(itemStack3)){
                         return@run

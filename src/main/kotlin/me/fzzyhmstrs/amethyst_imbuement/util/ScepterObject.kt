@@ -371,8 +371,28 @@ object ScepterObject: AugmentDamage {
     }
 
     fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
+        println(id + dataPoint.bookOfLoreTier.toString())
         if(!augmentStats.containsKey(id) || overwrite){
             augmentStats[id] = dataPoint
+            when (dataPoint.bookOfLoreTier){
+                1 -> {
+                    if (!bookOfLoreListT1.contains(id)){
+                        bookOfLoreListT1.add(id)
+                    }
+                    if (!bookOfLoreListT12.contains(id)){
+                        bookOfLoreListT12.add(id)
+                    }
+                }
+                2 -> {
+                    if (!bookOfLoreListT2.contains(id)){
+                        bookOfLoreListT2.add(id)
+                    }
+                    if (!bookOfLoreListT12.contains(id)){
+                        bookOfLoreListT12.add(id)
+                    }
+                }
+                else -> {}
+            }
         }
     }
 
@@ -415,7 +435,7 @@ object ScepterObject: AugmentDamage {
 
     fun getAugmentTier(id: String): Int{
         if(!augmentStats.containsKey(id)) return (1)
-        val cd = (augmentStats[id]?.bookOfLoreTier?.plus(1)) ?: 1
+        val cd = (augmentStats[id]?.bookOfLoreTier) ?: 1
         return max(1,cd)
     }
 
@@ -466,6 +486,7 @@ object ScepterObject: AugmentDamage {
     }
     private fun getRandBookOfLoreAugment(list: MutableList<String>): String{
         if (list.isEmpty()) return "magic_missile"
+        println(list)
         val rndMax = list.size
         val rndIndex = MinecraftClient.getInstance().world?.random?.nextInt(rndMax) ?: return "magic_missile"
         return list[rndIndex]

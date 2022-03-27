@@ -19,13 +19,13 @@ import net.minecraft.util.math.Matrix4f
 import net.minecraft.util.registry.Registry
 
 
-@Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
 class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<ImbuingTableScreenHandler>(handler, playerInventory, title) {
 
     private val texture = Identifier("amethyst_imbuement","textures/gui/container/imbuing_table_gui.png")
     private val backgrdWidth = 234
     private val backgrdHeight = 174
+    private val player = playerInventory.player
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
@@ -38,11 +38,11 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         for (k in 0..2) {
             val d = mouseX - (i + 118).toDouble()
             val e = mouseY - (j + 14 + 4 + 19 * k).toDouble()
-            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || !client!!.player?.let {
+            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || player.let {
                     (handler as ImbuingTableScreenHandler).onButtonClick(
                         it, k
                     )
-                }!!
+                }
             ) continue
             client!!.interactionManager!!.clickButton(handler.syncId, k)
             return true
@@ -102,11 +102,11 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else{
                 oOfst = r - o - 1
             }
-            var tens = 0
-            var ones = 0
+            var tens: Int
+            var ones: Int
             var tensOfst = 1
             var onesOfst = 8
-            var tensImageOfst = 0
+            var tensImageOfst: Int
             var onesImageOfst = 9
             if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0) && client!!.player!!.experienceLevel >= r && handler.levelLow[o] == 0 || client!!.player!!.abilities.creativeMode)) {
                 this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)

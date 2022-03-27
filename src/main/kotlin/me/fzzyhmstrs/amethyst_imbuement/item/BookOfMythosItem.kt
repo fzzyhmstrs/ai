@@ -1,9 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -17,6 +20,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(settings) {
@@ -53,9 +57,14 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
             tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("lore_book.cooldown1").formatted(Formatting.WHITE)))
             val manaCost = ScepterObject.getAugmentManaCost(bola)
             tooltip.add(TranslatableText("lore_book.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
-            val spellTier = ScepterObject.getAugmentTier(bola)
-            tooltip.add(TranslatableText("lore_book.tier").formatted(Formatting.WHITE).append(LiteralText(spellTier.toString())))
-            //tooltip.add(itemText)
+            val bole = Registry.ENCHANTMENT.get(Identifier(AI.MOD_ID,bola))
+            if (bole is ScepterAugment) {
+                val spellTier = bole.getTier()
+                tooltip.add(
+                    TranslatableText("lore_book.tier").formatted(Formatting.WHITE)
+                        .append(LiteralText(spellTier.toString()))
+                )
+            }
         } else {
             tooltip.add(
                 TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(
