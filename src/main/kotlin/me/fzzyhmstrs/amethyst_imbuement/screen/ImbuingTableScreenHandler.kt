@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Blocks
 import net.minecraft.enchantment.EnchantmentHelper
@@ -17,6 +18,7 @@ import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.recipe.RecipeMatcher
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -49,7 +51,7 @@ class ImbuingTableScreenHandler(
         ScreenHandlerContext.EMPTY,
     )
 
-    private val inventory: Inventory = object : SimpleInventory(13) {
+    private val inventory: SimpleInventory = object : SimpleInventory(13) {
         override fun markDirty() {
             super.markDirty()
             this@ImbuingTableScreenHandler.onContentChanged(this)
@@ -116,7 +118,7 @@ class ImbuingTableScreenHandler(
                     if (!world.isClient) {
                         match = (world).recipeManager.getFirstMatch(
                             ImbuingRecipe.Type,
-                            inventory as SimpleInventory,
+                            inventory,
                             world
                         )
                     }
@@ -269,7 +271,7 @@ class ImbuingTableScreenHandler(
             if (!world.isClient) {
                 match = (world).recipeManager.getFirstMatch(
                     ImbuingRecipe.Type,
-                    inventory as SimpleInventory,
+                    inventory,
                     world
                 )
             }
@@ -526,7 +528,12 @@ class ImbuingTableScreenHandler(
         } else max(j, bookshelfCnt * 2)
     }
 
-
+    fun populateRecipeFinder(finder: RecipeFinder) {
+        for (i in 0..12){
+            val stack = inventory.getStack(i)
+            finder.addNormalItem(stack)
+        }
+    }
 
     init{
         //coordinate system is in pixels, thank god

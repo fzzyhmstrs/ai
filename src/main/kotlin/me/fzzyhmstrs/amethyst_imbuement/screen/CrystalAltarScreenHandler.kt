@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -140,6 +141,13 @@ class CrystalAltarScreenHandler(
                 player,
                 input
             )
+        }
+    }
+
+    fun populateRecipeFinder(finder: RecipeFinder) {
+        for (i in 0..1){
+            val stack = input.getStack(i)
+            finder.addNormalItem(stack)
         }
     }
 }

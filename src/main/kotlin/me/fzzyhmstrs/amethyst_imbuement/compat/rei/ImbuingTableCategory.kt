@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.math.Point
@@ -31,12 +32,12 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         return TranslatableText("recipe.imbuing")
     }
 
-    override fun getCategoryIdentifier(): CategoryIdentifier<out ImbuingTableDisplay> {
+    override fun getCategoryIdentifier(): CategoryIdentifier<ImbuingTableDisplay> {
         return CategoryIdentifier.of(identifier)
     }
 
     override fun getIdentifier(): Identifier {
-        return Identifier(ImbuingRecipe.Type.ID)
+        return Identifier(AI.MOD_ID,ImbuingRecipe.Type.ID)
     }
 
     override fun setupDisplay(display: ImbuingTableDisplay, bounds: Rectangle): MutableList<Widget> {

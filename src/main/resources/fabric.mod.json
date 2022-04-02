@@ -32,6 +32,10 @@
       {
         "adapter": "kotlin",
         "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.REIPlugin"
+      },
+      {
+        "adapter": "kotlin",
+        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.REIServerPlugin"
       }
     ]
   },

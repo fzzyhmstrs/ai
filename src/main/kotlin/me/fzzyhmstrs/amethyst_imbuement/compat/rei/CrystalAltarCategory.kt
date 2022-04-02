@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.shedaniel.math.Point
@@ -31,12 +32,12 @@ class CrystalAltarCategory: DisplayCategory<CrystalAltarDisplay> {
         return TranslatableText("recipe.enhancing")
     }
 
-    override fun getCategoryIdentifier(): CategoryIdentifier<out CrystalAltarDisplay> {
+    override fun getCategoryIdentifier(): CategoryIdentifier<CrystalAltarDisplay> {
         return CategoryIdentifier.of(identifier)
     }
 
     override fun getIdentifier(): Identifier {
-        return Identifier(AltarRecipe.Type.ID)
+        return Identifier(AI.MOD_ID,AltarRecipe.Type.ID)
     }
 
     override fun setupDisplay(display: CrystalAltarDisplay, bounds: Rectangle): MutableList<Widget> {
