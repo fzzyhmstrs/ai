@@ -12,9 +12,8 @@ class CrystalAltarMenuInfo(private val display: CrystalAltarDisplay): SimplePlay
     override fun getInputSlots(context: MenuInfoContext<CrystalAltarScreenHandler, *, CrystalAltarDisplay>): Iterable<SlotAccessor> {
         val slots = context.menu.slots
         val returnList: MutableList<SlotAccessor> = mutableListOf()
-        for (slot in slots){
-            if (!context.menu.canInsertIntoSlot(null,slot)) continue
-            returnList.add(SlotAccessor.fromSlot(slot))
+        for (i in 0..1){
+            returnList.add(SlotAccessor.fromSlot(slots[i]))
         }
 
         return returnList.asIterable()

@@ -11,8 +11,8 @@ class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlay
     override fun getInputSlots(context: MenuInfoContext<ImbuingTableScreenHandler, *, ImbuingTableDisplay>): Iterable<SlotAccessor> {
         val slots = context.menu.slots
         val returnList: MutableList<SlotAccessor> = mutableListOf()
-        for (slot in slots){
-            returnList.add(SlotAccessor.fromSlot(slot))
+        for (i in 0..12) {
+            returnList.add(SlotAccessor.fromSlot(slots[i]))
         }
 
         return returnList.asIterable()

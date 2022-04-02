@@ -107,33 +107,6 @@ class CrystalAltarScreenHandler(
         return slot.inventory !== output && super.canInsertIntoSlot(stack, slot)
     }
 
-    /*override fun onContentChanged(inventory: Inventory) {
-        if (inventory === this.input) {
-            println("made it here!")
-            println(inventory)
-            context.run { world: World, pos: BlockPos ->
-                var match: Optional<AltarRecipe>? = null
-                if (!world.isClient) {
-                    match = (world).recipeManager.getFirstMatch(
-                        AltarRecipe.Type,
-                        inventory as SimpleInventory,
-                        world
-                    )
-                }
-                println(match?.isPresent)
-                if (match != null && match.isPresent){
-                    this.currentRecipe = match.get()
-                    val recipe = match.get()
-                    println(recipe)
-                    val itemStack: ItemStack = recipe.craft(input as SimpleInventory)
-                    output.lastRecipe = this.currentRecipe
-                    output.setStack(0, itemStack)
-                }
-                sendContentUpdates()
-            }
-        }
-    }*/
-
     override fun close(player: PlayerEntity?) {
         super.close(player)
         context.run { _: World, _: BlockPos ->
