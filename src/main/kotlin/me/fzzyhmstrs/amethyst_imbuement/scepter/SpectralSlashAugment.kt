@@ -134,7 +134,7 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,1,imbueLevel,1, Items.IRON_SWORD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,8,imbueLevel,1, Items.IRON_SWORD)
     }
 
     private fun addParticles(world: World,particleEffect: ParticleEffect,pos: Vec3d,velocity: Vec3d){

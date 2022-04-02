@@ -25,6 +25,6 @@ class TeleportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,200,15,8,imbueLevel,1, Items.ENDER_PEARL)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,200,15,7,imbueLevel,1, Items.ENDER_PEARL)
     }
 }

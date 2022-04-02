@@ -73,6 +73,6 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,6,imbueLevel,1, Items.SHIELD)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel,1, Items.SHIELD)
     }
 }

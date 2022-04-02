@@ -33,6 +33,6 @@ class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,32,10,8,imbueLevel,1, Items.WATER_BUCKET)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,32,10,6,imbueLevel,1, Items.WATER_BUCKET)
     }
 }

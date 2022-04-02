@@ -19,7 +19,7 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val yaw = user.yaw
         val pitch = user.pitch
         val roll = user.roll
-        val speed = 1.5F
+        val speed = 2.0F
         val f = -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed
         val g = -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed
         val h = MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed
@@ -34,6 +34,6 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,28,13,14,imbueLevel,1, Items.WITHER_SKELETON_SKULL)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,28,13,10,imbueLevel,1, Items.WITHER_SKELETON_SKULL)
     }
 }

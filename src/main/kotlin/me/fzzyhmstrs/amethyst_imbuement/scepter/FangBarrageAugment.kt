@@ -58,7 +58,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,110,35,15,imbueLevel,2, Items.EMERALD_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,110,35,22,imbueLevel,2, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

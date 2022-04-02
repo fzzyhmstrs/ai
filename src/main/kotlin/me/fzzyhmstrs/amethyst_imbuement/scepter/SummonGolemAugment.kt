@@ -35,6 +35,6 @@ class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,6000,250,25,imbueLevel,2, Items.AMETHYST_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,6000,250,22,imbueLevel,2, Items.AMETHYST_BLOCK)
     }
 }

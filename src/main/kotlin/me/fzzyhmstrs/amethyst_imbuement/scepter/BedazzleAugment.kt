@@ -66,7 +66,6 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
 
         if (checkList.isNotEmpty()) {
             for (entity in checkList) {
-                //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
                 ScepterObject.addEntityToQueue(
                     entity.uuid,
                     ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
@@ -103,7 +102,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,1800,75,5,imbueLevel,1, Items.DIAMOND)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel,1, Items.DIAMOND)
     }
 
     override fun rangeOfEffect(): Double {

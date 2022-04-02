@@ -51,7 +51,7 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,36,10,5,imbueLevel,1, Items.SUGAR)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,32,10,4,imbueLevel,1, Items.SUGAR)
     }
 
     override fun rangeOfEffect(): Double {

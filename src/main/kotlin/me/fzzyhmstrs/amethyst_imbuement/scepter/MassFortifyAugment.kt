@@ -35,7 +35,7 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1800,60,15,imbueLevel,2, Items.GOLDEN_APPLE)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,60,16,imbueLevel,2, Items.GOLDEN_APPLE)
     }
 
     override fun soundEvent(): SoundEvent {

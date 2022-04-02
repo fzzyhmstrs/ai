@@ -31,7 +31,7 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,35,8,5,imbueLevel,1, Items.PACKED_ICE)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,35,8,4,imbueLevel,1, Items.PACKED_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

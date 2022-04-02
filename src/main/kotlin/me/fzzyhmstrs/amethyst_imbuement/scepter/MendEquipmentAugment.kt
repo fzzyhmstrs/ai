@@ -40,7 +40,7 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         if (stacks.isEmpty()) return false
         val healLeft = 15 * level
         val leftOverHeal = healItems(stacks,world,healLeft)
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.5f,0.8f)
+        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.5f,1.0f)
         return (leftOverHeal < healLeft)
     }
 
