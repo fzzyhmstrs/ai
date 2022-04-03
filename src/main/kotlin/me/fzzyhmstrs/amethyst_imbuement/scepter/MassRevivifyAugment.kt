@@ -19,6 +19,11 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
         var successes = 0
+        if (entityList.isEmpty()){
+            successes++
+            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.REGENERATION,240 * level, 1, true)
+            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.ABSORPTION, 800, level, true)
+        }
         entityList.add(user)
         for (entity3 in entityList) {
             if(entity3 !is Monster){
@@ -38,7 +43,7 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,300,90,22,imbueLevel,2, RegisterItem.GOLDEN_HEART)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,300,100,22,imbueLevel,2, RegisterItem.GOLDEN_HEART)
     }
 
     override fun soundEvent(): SoundEvent {

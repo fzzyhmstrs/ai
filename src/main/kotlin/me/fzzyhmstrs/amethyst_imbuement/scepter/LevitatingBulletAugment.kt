@@ -120,7 +120,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,60,20,16,imbueLevel,2, Items.SHULKER_SHELL)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,2, Items.SHULKER_SHELL)
     }
 
 }

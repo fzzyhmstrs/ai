@@ -16,12 +16,19 @@ class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
         var successes = 0
-        entityList.add(user)
-        for (entity3 in entityList) {
-            if(entity3 !is Monster){
-                if ((entity3 as LivingEntity).health == entity3.maxHealth) continue
+        if (entityList.isEmpty()){
+            if (user.health < user.maxHealth){
                 successes++
-                entity3.heal(2.0F + 2.0F * level)
+                user.heal(2.5F + 3.5F * level)
+            }
+        } else {
+            entityList.add(user)
+            for (entity3 in entityList) {
+                if (entity3 !is Monster) {
+                    if ((entity3 as LivingEntity).health == entity3.maxHealth) continue
+                    successes++
+                    entity3.heal(2.0F + 2.0F * level)
+                }
             }
         }
         return successes > 0

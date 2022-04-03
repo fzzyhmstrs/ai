@@ -20,10 +20,10 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val pitch = user.pitch
         val roll = user.roll
         val speed = 2.0F
-        val f = -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed
-        val g = -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed
-        val h = MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed
-        val wse = WitherSkullEntity(world,user,f.toDouble(),g.toDouble(),h.toDouble())
+        val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.x
+        val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed) + user.velocity.y
+        val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.z
+        val wse = WitherSkullEntity(world,user,f,g,h)
         wse.setPos(user.x,user.eyeY-0.2,user.z)
         wse.isCharged = false
         return wse
