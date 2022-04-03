@@ -27,7 +27,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         for (k in 0..2) {
             val d = mouseX - (i + 60).toDouble()
             val e = mouseY - (j + 14 + 19 * k).toDouble()
-            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || player.let {
+            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || !player.let {
                     (handler as DisenchantingTableScreenHandler).onButtonClick(
                         it, k
                     )
@@ -239,7 +239,6 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         for (j in 0..2) {
             if (!isPointWithinBounds(60, 14 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
-            if (handler.enchantmentId[j] == -1) continue
             val tooltipText = if (handler.disenchantCost[0] < 0){
                 TranslatableText("container.disenchanting_table.tooltip.limit").formatted(Formatting.WHITE)
             } else if ((player.experienceLevel) < handler.disenchantCost[0] && j == 1){
@@ -247,6 +246,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             }else if ((!handler.getSlotStack(1).isOf(Items.BOOK)) && j == 1){
                 TranslatableText("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
             } else {
+                if (handler.enchantmentId[j] == -1) continue
                 TranslatableText("container.disenchanting_table.tooltip${j + 1}").formatted(Formatting.WHITE)
             }
             this.renderTooltip(matrices, tooltipText, mouseX, mouseY)

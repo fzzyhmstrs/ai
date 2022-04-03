@@ -92,6 +92,7 @@ class DisenchantingTableScreenHandler(
             }else {
                 context.run { world: World, pos: BlockPos ->
                     val enchantList = itemStack.enchantments
+                    println(enchantList)
                     //first addition of the item to the table, initialize with a default selection
                     if (enchantmentId[1] == -1 || !checkForEnchantMatch(itemStack)){
                         enchantmentId[0] = -1
@@ -139,6 +140,7 @@ class DisenchantingTableScreenHandler(
         val itemStack = inventory.getStack(0)
         val itemStack2 = inventory.getStack(1)
         if (itemStack.isEmpty) return false
+        println(enchantmentId[0].toString() + " " + enchantmentId[1].toString() + " " + enchantmentId[2].toString())
         when (id) {
             0 -> {
                 if (enchantmentId[id] == -1) return false

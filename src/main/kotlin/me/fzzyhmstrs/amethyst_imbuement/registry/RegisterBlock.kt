@@ -57,12 +57,8 @@ object RegisterBlock {
         registerBlock("cut_beryl_copper_slab", CUT_BERYL_COPPER_SLAB,ItemGroup.BUILDING_BLOCKS)
         registerBlock("hard_light_block", HARD_LIGHT_BLOCK,ItemGroup.DECORATIONS)
         registerBlock("forcefield_block", FORCEFIELD_BLOCK,ItemGroup.DECORATIONS)
-        //registerBlock("steel_anvil", STEEL_ANVIL,ItemGroup.DECORATIONS)
-        //registerBlock("steel_anvil_chipped", STEEL_ANVIL_CHIPPED,ItemGroup.DECORATIONS)
-        //registerBlock("steel_anvil_damaged", STEEL_ANVIL_DAMAGED,ItemGroup.DECORATIONS)
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
         registerBlock("crystal_altar", CRYSTAL_ALTAR,ItemGroup.DECORATIONS)
-        // put this in client init -> BlockRenderLayerMap.INSTANCE.putBlock(EXPERIENCE_BUSH,RenderLayer.getCutout())
     }
 
     private fun registerBlock(path: String, block:Block, itemGroup: ItemGroup){
