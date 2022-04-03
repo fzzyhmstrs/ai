@@ -1,7 +1,8 @@
 {    
 "name": "Lustrous Scepter",    
 "icon": "amethyst_imbuement:lustrous_scepter",    
-"category": "amethyst_imbuement:scepters",    
+"category": "amethyst_imbuement:scepters",
+"sortnum": 2,
 "pages": [        
 {            
 "type": "patchouli:text",            

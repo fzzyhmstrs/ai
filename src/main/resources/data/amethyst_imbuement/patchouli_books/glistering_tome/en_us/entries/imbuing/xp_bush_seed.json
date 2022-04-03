@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "This seed plants a bush similar to a Sweet Berry Bush. Once mature, harvesting from it will yield $(l:amethyst_imbuement:imbuing/experience_bottle)Bottles-O'-Enchanting$()! Plant a farm of these to get a steady stream of bottles and XP."
+"text": "This seed plants a bush similar to a Sweet Berry Bush. Once mature, harvesting from it will yield $(l:amethyst_imbuement:imbuing/bottle-o-enchanting)Bottles-O'-Enchanting$()! Plant a farm of these to get a steady stream of bottles and XP."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

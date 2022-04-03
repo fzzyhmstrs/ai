@@ -222,5 +222,7 @@
 	"lore_book.mana_cost": "Mana cost: ",
 	"lore_book.tier": "Spell tier: ",
 	"key.amethyst_imbuement.vein_mine_key": "Vein Mine",
-	"key.amethyst_imbuement.spell_key": "Current Scepter Spell"
+	"key.amethyst_imbuement.spell_key": "Current Scepter Spell",
+	"chat.amethyst_imbuement.active_spell": "Active spell is: ",
+	"chat.amethyst_imbuement.no_spell": "Spells not activated yet..."
 }

@@ -1,5 +1,5 @@
 {    
 "name": "Trinkets",
-"description": "The $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() has the ability to enchant equipment and jewelry with magic that can shield you from harm, increase your speed, make you feel lucky, and so much more... even protect you from death. This guide will teach you how to get started with such magical trinkets.$(br2)First decide if you would like to make jewelry or a totem, and follow the links:$(li)$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()$(li)$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()",
+"description": "The $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() has the ability to enchant certain curios with magic that offer all sorts of positive effects... even protection from death. Read on to get started with such magical trinkets:$(li)$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()$(li)$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()",
 "icon": "amethyst_imbuement:totem_of_amethyst"
 }

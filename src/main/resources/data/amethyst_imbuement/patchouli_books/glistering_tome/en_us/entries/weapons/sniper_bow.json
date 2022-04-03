@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The sniper bow is designed with precision killing in mind. Besides having longer range and higher damage than the crossbow, right clicking and holding while the bow is loaded zooms into a scope view for precise aiming.$(br2)$(l:amethyst_imbuement:trinket_augments/sniper_bow#scope)Detail of scope feature$()$(br2)$(l:amethyst_imbuement:trinket_augments/sniper_bow#upgrades)Exclusive upgrades$()"
+"text": "The sniper bow is designed with precision killing in mind. Besides having longer range and higher damage than the crossbow, right clicking and holding while the bow is loaded zooms into a scope view for precise aiming."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

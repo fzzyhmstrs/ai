@@ -1,6 +1,6 @@
 {    
 "name": "Glistering Tome",    
-"landing_text": "Welcome to $(o)Amethyst Imbument$(), a mod all about tapping into the innate magic hidden within crystals and other objects!$(br2)Imbue your equipment with powerful new abilities. Create devastating weapons. Weild magical scepters to cast a wide array of offensive and defensive spells.$(br2)If you are new here, check out the $(l)$(#490)Starter Guide$() section",    
+"landing_text": "Welcome to $(o)Amethyst Imbument$(), a mod all about the innate magic within crystals and other objects! Imbue your gear with powerful abilities. Create advanced weapons. Weild magical scepters to cast an array of offensive and defensive spells.$(br2)If you are new here, check out the $(l)$(#490)Starter Guide$() section",    
 "version": 1,
 "show_progress": false,
 "dont_generate_book": true,

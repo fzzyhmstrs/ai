@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Once imbued, your jewelry has the capacity to contain magical auras. $(l)Note that imbued jewelry can only hold one augment. Choose wisely!$()$(br2)To choose another augment, you may remove the current ability in a $($490)Grindstone$(), or you can retain a copy of the previous augment with a $(#490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()$(br2)Imbued Jewelry adds a shielding aura (effect stacks) to the previous speed boost."
+"text": "Once imbued, your jewelry can contain magic. $(l)Note that imbued jewelry can only hold one augment. Choose wisely!$()$(br2)To choose another augment, you may remove the current ability in a $(#490)Grindstone$() or a $(#490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()$(br2)Imbued Jewelry adds a shielding aura (effect stacks) to the previous speed boost."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

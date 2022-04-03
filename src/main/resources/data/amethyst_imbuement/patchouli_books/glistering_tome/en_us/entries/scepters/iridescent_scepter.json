@@ -1,7 +1,8 @@
 {    
 "name": "Iridescent Scepter",    
 "icon": "amethyst_imbuement:iridescent_scepter",    
-"category": "amethyst_imbuement:scepters",    
+"category": "amethyst_imbuement:scepters",
+"sortnum": 1,
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -1,5 +1,5 @@
 {    
-"name": "Scepter Augment Templates",
+"name": "Augment Templates",
 "parent": "amethyst_imbuement:scepter_augments",
 "description": "Templates for the more rare and powerful augments hidden around the world. The Book of Lore or Book of Mythos you find will reveal the augment within once used, as well as the $(#b0b)key item$() needed to complete the imbuement.",
 "icon": "amethyst_imbuement:book_of_mythos"

@@ -1,7 +1,8 @@
 {    
 "name": "Opaline Scepter",    
 "icon": "amethyst_imbuement:opaline_scepter",    
-"category": "amethyst_imbuement:scepters",    
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 0,
 "pages": [        
 {            
 "type": "patchouli:text",            
