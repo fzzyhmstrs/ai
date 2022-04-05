@@ -21,36 +21,43 @@ import kotlin.math.min
 class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        var successes = 0
+        val entityList: MutableList<Entity> = mutableListOf()
         val d: Double
         val e: Double
         if (target != null){
             d = min(target.y, user.y)
             e = max(target.y, user.y) + 1.0
+            entityList.add(target)
         } else {
             d = user.y
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        for (i in 0..12) {
-            val g = 1.25 * (i + 1).toDouble()
-            for (j in 1..3){
-                for (k in -1..1){
-                    val success = conjureFangs(
-                        world,
-                        user,
-                        user.x + MathHelper.cos(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
-                        user.z + MathHelper.sin(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
-                        d,
-                        e,
-                        f,
-                        i + (15 * (j - 1))
-                    )
-                    if (success) successes++
-                }
-            }
-        }
+        val successes = conjureBarrage(user,world,d,e,f)
+        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,15,30)
         return successes > 0
+    }
+
+    override fun persistentEffect(
+        world: World,
+        user: LivingEntity,
+        blockPos: BlockPos,
+        entityList: MutableList<Entity>,
+        level: Int
+    ) {
+        val d: Double
+        val e: Double
+        if (entityList.isNotEmpty()){
+            val target = entityList[0]
+            d = min(target.y, user.y)
+            e = max(target.y, user.y) + 1.0
+            entityList.add(target)
+        } else {
+            d = user.y
+            e = user.y + 1.0
+        }
+        val f = (user.yaw + 90) * MathHelper.PI / 180
+        conjureBarrage(user,world,d,e,f)
     }
 
     override fun rangeOfEffect(): Double {
@@ -58,11 +65,32 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,110,35,22,imbueLevel,2, Items.EMERALD_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,100,40,22,imbueLevel,2, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
+    }
+
+    private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float): Int{
+        var successes = 0
+        for (i in 0..12) {
+            val g = 1.25 * (i + 1).toDouble()
+            for (k in -1..1){
+                val success = conjureFangs(
+                    world,
+                    user,
+                    user.x + MathHelper.cos(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
+                    user.z + MathHelper.sin(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
+                    d,
+                    e,
+                    f,
+                    i
+                )
+                if (success) successes++
+            }
+        }
+        return successes
     }
 
     private fun conjureFangs(world: World,user: LivingEntity,x: Double, z: Double, maxY: Double, y: Double, yaw: Float, warmup: Int): Boolean {
