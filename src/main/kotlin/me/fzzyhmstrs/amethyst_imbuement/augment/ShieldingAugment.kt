@@ -161,7 +161,6 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
             private fun checkDeficit(entity: LivingEntity){
                 if (!isDirty()) return
                 val d2 = checkShieldingDeficit(entity)
-                println(d2)
                 d += d2
             }
             private fun clearDeficit(){

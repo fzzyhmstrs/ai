@@ -24,7 +24,6 @@ abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
             distance = MinecraftClient.getInstance().interactionManager?.reachDistance?.toDouble() ?: 3.0,
             includeFluids = true
         ) ?: return false
-        println(hit)
         if (hit.type != HitResult.Type.BLOCK) return false
         return placeEntity(world, user, hit, level)
     }

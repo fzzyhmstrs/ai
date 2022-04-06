@@ -40,7 +40,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
             ColoredGlowLib.setRainbowColorToEntity(this,true)
         } else {
             val color = GlowColorUtil.oreGlowColor(entityBlock)
-            println(color)
             ColoredGlowLib.setColorToEntity(this, color)
         }
     }

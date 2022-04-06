@@ -10,7 +10,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import vazkii.patchouli.api.PatchouliAPI
 
-class GlisteringTomeItem(settings: Item.Settings): Item(settings) {
+class GlisteringTomeItem(settings: Settings): Item(settings) {
     override fun use(world: World, playerEntity: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         if (!world.isClient) {
             PatchouliAPI.get().openBookGUI(playerEntity as ServerPlayerEntity, Identifier("amethyst_imbuement","glistering_tome"))
