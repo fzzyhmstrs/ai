@@ -51,8 +51,8 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:7.3.432")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:7.3.432")
 
-    modImplementation ("dev.emi:trinkets:3.1.0")
-    include("dev.emi:trinkets:3.1.0")
+    modImplementation ("dev.emi:trinkets:3.2.0")
+    include("dev.emi:trinkets:3.2.0")
 
     modImplementation ("vazkii.patchouli:Patchouli:1.18-60-FABRIC")
     include("vazkii.patchouli:Patchouli:1.18-60-FABRIC")
@@ -60,8 +60,8 @@ dependencies {
     modImplementation (":structurized:1.4.0+1.18")
     include(":structurized:1.4.0+1.18")
 
-    modImplementation ("maven.modrinth:coloredglowlib:1.2.0")
-    include("maven.modrinth:coloredglowlib:1.2.0")
+    modImplementation ("maven.modrinth:coloredglowlib:1.2.7")
+    include("maven.modrinth:coloredglowlib:1.2.7")
 
     modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0")
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")

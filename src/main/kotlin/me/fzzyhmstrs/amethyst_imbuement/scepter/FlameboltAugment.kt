@@ -36,7 +36,7 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,21,4,1,imbueLevel,0, Items.FIRE_CHARGE)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,19,4,1,imbueLevel,0, Items.FIRE_CHARGE)
     }
 
 }

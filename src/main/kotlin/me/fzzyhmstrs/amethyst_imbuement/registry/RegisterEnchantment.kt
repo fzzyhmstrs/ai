@@ -84,7 +84,7 @@ object RegisterEnchantment {
     val FIREBALL = FireballAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
     val FLAMEBOLT = FlameboltAugment(1,5,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
-    val FORCE_FIELD = ForcefieldAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["force_field"] = it}
+    val FORCE_FIELD = ForcefieldAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment(2,2,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
@@ -111,6 +111,8 @@ object RegisterEnchantment {
     val SUMMON_ZOMBIE = SummonZombieAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
     val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
     val WITHERING_BOLT = WitheringBoltAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["withering_bolt"] = it}
+
+    val DEBUG = DebugAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["debug"] = it}
 
     fun registerAll(){
 

@@ -13,6 +13,8 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -82,9 +84,11 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
             val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.HIGH_TIER)
             val enchant = readAugNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
-            writeAugNbt("book_of_lore_augment",enchant,nbt)
+            writeAugNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
+            world.playSound(null,user.blockPos, SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL,0.7f,1.0f)
+            return TypedActionResult.success(stack)
         }
-        return TypedActionResult.success(stack)
+        return TypedActionResult.pass(stack)
     }
 
     fun addLoreKeyForREI(stack: ItemStack,augment: String){
