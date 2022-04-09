@@ -48,7 +48,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
         }
         ColoredGlowLib.updateData(world.server)
         addStatusToQueue(user.uuid, RegisterStatus.DRACONIC_VISION,260,0)
-        world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,0.5f,0.8f)
+        world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,0.3f,0.8f)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

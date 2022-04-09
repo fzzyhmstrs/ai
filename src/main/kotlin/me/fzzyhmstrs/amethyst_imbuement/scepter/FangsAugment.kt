@@ -54,7 +54,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,28,8,8,imbueLevel,1, Items.EMERALD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,34,10,8,imbueLevel,1, Items.EMERALD)
     }
 
     override fun soundEvent(): SoundEvent {

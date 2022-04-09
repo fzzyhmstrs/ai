@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.tool
+package me.fzzyhmstrs.amethyst_imbuement.item
 
 import net.minecraft.item.HoeItem
 import net.minecraft.item.ToolMaterial

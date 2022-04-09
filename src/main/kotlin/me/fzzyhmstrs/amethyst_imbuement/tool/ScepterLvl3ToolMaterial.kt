@@ -27,6 +27,6 @@ object ScepterLvl3ToolMaterial: ToolMaterial,ScepterMaterialAddon{
         return Ingredient.ofItems(Items.NETHERITE_INGOT)
     }
     override fun healCooldown(): Long {
-        return 100L
+        return 80L
     }
 }

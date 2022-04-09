@@ -31,7 +31,7 @@ abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     open fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int = 1): Boolean{
-        return true
+        return false
     }
 
     open fun persistentEffect(world: World, user: LivingEntity,blockPos: BlockPos, entityList: MutableList<Entity>, level: Int = 1){

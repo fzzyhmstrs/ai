@@ -24,23 +24,6 @@ abstract class MinorSupportAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
     }
 
     open fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
-        if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).heal((2.0F + (level-1) * 1.0F))
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                return true
-            }
-        }
-        return if(user != null) {
-            if (user is PlayerEntity) {
-                user.heal((2.0F + (level-1) * 1.0F))
-                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                true
-            } else {
-                false
-            }
-        } else {
-            false
-        }
+        return false
     }
 }
