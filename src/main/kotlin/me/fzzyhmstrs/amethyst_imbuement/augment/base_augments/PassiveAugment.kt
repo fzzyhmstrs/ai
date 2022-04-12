@@ -20,10 +20,10 @@ open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.entries
+        val entries = Registry.ITEM.indexedEntries
         list.add(ItemStack(RegisterItem.TOTEM_OF_AMETHYST,1))
         for (entry in entries){
-            val item = entry.value
+            val item = entry.value()
             if (item is ImbuedJewelryItem){
                 list.add(ItemStack(item,1))
             }

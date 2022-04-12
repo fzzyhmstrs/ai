@@ -32,8 +32,6 @@ public abstract class GlisteringTridentModelMixin {
 
     @Inject(method = "render", at = @At(value = "TAIL"))
     private void renderMixin(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo ci) {
-
-
         if (stack.isOf(RegisterItem.INSTANCE.getGLISTERING_TRIDENT())) {
             matrices.push();
             matrices.scale(1.0f, -1.0f, -1.0f);

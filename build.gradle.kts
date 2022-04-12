@@ -48,27 +48,36 @@ dependencies {
     val fabricKotlinVersion: String by project
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:7.3.432")
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:7.3.432")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:8.0.442")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
 
-    modImplementation ("dev.emi:trinkets:3.2.0")
-    include("dev.emi:trinkets:3.2.0")
+    modImplementation ("dev.emi:trinkets:3.3.0"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("dev.emi:trinkets:3.3.0")
 
-    modImplementation ("vazkii.patchouli:Patchouli:1.18-60-FABRIC")
-    include("vazkii.patchouli:Patchouli:1.18-60-FABRIC")
+    modImplementation ("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC")
 
-    modImplementation (":structurized:1.4.0+1.18")
-    include(":structurized:1.4.0+1.18")
+    modImplementation (":structurized:1.4.0+1.18.2"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include(":structurized:1.4.0+1.18.2")
 
-    modImplementation ("maven.modrinth:coloredglowlib:1.2.7")
-    include("maven.modrinth:coloredglowlib:1.2.7")
+    modApi ("maven.modrinth:coloredglowlib:1.3.0"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("maven.modrinth:coloredglowlib:1.3.0")
 
-    modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0")
+    modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0"){
+        exclude("net.fabricmc.fabric-api")
+    }
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
 }
-/*loom{
-    accessWidener = file("src/main/resources/amethyst_imbuement.accesswidener")
-}*/
+
 tasks {
     val javaVersion = JavaVersion.VERSION_17
     withType<JavaCompile> {

@@ -21,9 +21,9 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.entries
+        val entries = Registry.ITEM.indexedEntries
         for (entry in entries){
-            val item = entry.value
+            val item = entry.value()
             if (item is ImbuedJewelryItem){
                 list.add(ItemStack(item,1))
             }

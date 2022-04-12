@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry
 object AcceptableItemStacks {
 
     fun baseAcceptableItemStacks(target: EnchantmentTarget?): MutableList<ItemStack>{
-        val entries = Registry.ITEM.entries
+        val entries = Registry.ITEM.indexedEntries
         val list: MutableList<ItemStack> = mutableListOf()
         return when(target){
             null->{
@@ -18,7 +18,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.ARMOR->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is ArmorItem){
                         list.add(ItemStack(item,1))
                     }
@@ -27,7 +27,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.ARMOR_FEET->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is ArmorItem && item.slotType == EquipmentSlot.FEET){
                         list.add(ItemStack(item,1))
                     }
@@ -36,7 +36,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.ARMOR_HEAD->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is ArmorItem && item.slotType == EquipmentSlot.HEAD){
                         list.add(ItemStack(item,1))
                     }
@@ -45,7 +45,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.ARMOR_CHEST->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is ArmorItem && item.slotType == EquipmentSlot.CHEST){
                         list.add(ItemStack(item,1))
                     }
@@ -54,7 +54,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.ARMOR_LEGS->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is ArmorItem && item.slotType == EquipmentSlot.LEGS){
                         list.add(ItemStack(item,1))
                     }
@@ -63,7 +63,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.CROSSBOW->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is CrossbowItem){
                         list.add(ItemStack(item,1))
                     }
@@ -72,7 +72,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.BREAKABLE->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item.isDamageable){
                         list.add(ItemStack(item,1))
                     }
@@ -81,7 +81,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.BOW->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is BowItem){
                         list.add(ItemStack(item,1))
                     }
@@ -90,7 +90,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.VANISHABLE->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item.isDamageable || item is Vanishable || Block.getBlockFromItem(item) is Vanishable){
                         list.add(ItemStack(item,1))
                     }
@@ -99,7 +99,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.WEAPON->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is SwordItem){
                         list.add(ItemStack(item,1))
                     }
@@ -108,7 +108,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.DIGGER->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is MiningToolItem){
                         list.add(ItemStack(item,1))
                     }
@@ -117,7 +117,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.TRIDENT->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is TridentItem){
                         list.add(ItemStack(item,1))
                     }
@@ -126,7 +126,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.FISHING_ROD->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is FishingRodItem){
                         list.add(ItemStack(item,1))
                     }
@@ -135,7 +135,7 @@ object AcceptableItemStacks {
             }
             EnchantmentTarget.WEARABLE->{
                 for (entry in entries){
-                    val item = entry.value
+                    val item = entry.value()
                     if (item is Wearable || Block.getBlockFromItem(item) is Wearable){
                         list.add(ItemStack(item,1))
                     }

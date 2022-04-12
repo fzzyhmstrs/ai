@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -24,13 +24,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MiningToolItemMixin {
 
     @Final
-    @Shadow private Tag<Block> effectiveBlocks;
+    @Shadow private TagKey<Block> effectiveBlocks;
 
 
     @Inject(method = "postMine", at = @At(value = "TAIL"), cancellable = true)
     private void postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner, CallbackInfoReturnable<Boolean> cir){
         Block block = state.getBlock();
-        if (miner instanceof ServerPlayerEntity && effectiveBlocks.contains(block)) {
+        if (miner instanceof ServerPlayerEntity && state.isIn(effectiveBlocks)) {
             int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getVEIN_MINER(), stack);
             if (lvl > 0) {
                 if (RegisterKeybind.INSTANCE.getVEIN_MINER().isPressed()) {

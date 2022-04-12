@@ -37,7 +37,7 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
         h *= m / l
         k *= m / l
         user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
-        user.setRiptideTicks(20)
+        user.useRiptide(20)
 
         if (user.isOnGround()) {
             user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))

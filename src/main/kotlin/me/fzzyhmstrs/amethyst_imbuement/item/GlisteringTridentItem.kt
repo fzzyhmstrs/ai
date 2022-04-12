@@ -128,7 +128,7 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
             h *= m
             k *= m
             user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
-            user.setRiptideTicks(20)
+            user.useRiptide(20)
 
             if (user.isOnGround) {
                 //val n = 1.1999999f

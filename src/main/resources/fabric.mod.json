@@ -47,7 +47,7 @@
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
     "fabric-language-kotlin": ">=1.7.0+kotlin.1.6.0",
-    "minecraft": ">=1.18",
+    "minecraft": ">=1.18.2",
     "java": ">=16"
   }
 }

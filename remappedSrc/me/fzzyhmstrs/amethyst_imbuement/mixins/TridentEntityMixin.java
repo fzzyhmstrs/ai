@@ -1,10 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
-import Z;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -26,9 +24,9 @@ public abstract class TridentEntityMixin {
     protected void onEntityHit(EntityHitResult entityHitResult, CallbackInfo ci){
         LivingEntity livingEntity2 = (LivingEntity) entityHitResult.getEntity();
         if(EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getDECAYED(), this.asItemStack()) > 0){
-            var b = livingEntity2.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1));
+            livingEntity2.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1));
         } else if(EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getCONTAMINATED(), this.asItemStack()) > 0){
-            var b = livingEntity2.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1));
+            livingEntity2.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1));
         }
     }
 

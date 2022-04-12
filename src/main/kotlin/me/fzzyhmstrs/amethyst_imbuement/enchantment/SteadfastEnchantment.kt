@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import net.fabricmc.fabric.api.tool.attribute.v1.DynamicAttributeTool
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -22,7 +21,7 @@ class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return stack.item is ArmorItem && stack.item !is DynamicAttributeTool
+        return stack.item is ArmorItem
     }
 
 }

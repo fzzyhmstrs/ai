@@ -7,12 +7,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -29,9 +26,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-
-    /*private boolean hasStriding;
-    @Shadow public float stepHeight;*/
 
     @Shadow public abstract boolean equals(Object o);
 
@@ -69,8 +63,6 @@ public abstract class EntityMixin {
         }
 
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(),playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0){
-            /*Block slimeBlock = Blocks.SLIME_BLOCK;
-            slimeBlock.onEntityLand(world,entity);*/
             if (entity.bypassesLandingEffects()){
                 instance.onEntityLand(world,entity);
             } else {
@@ -88,6 +80,7 @@ public abstract class EntityMixin {
     @Unique
     private float things$prevStepHeight = -1;
 
+    @SuppressWarnings("ConstantConditions")
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"))
     private void boostStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if (!((Object) this instanceof PlayerEntity player)) return;
