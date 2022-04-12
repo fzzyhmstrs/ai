@@ -62,7 +62,7 @@ object RegisterVillager {
                     val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
                     locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 2)
-                    structurePool.underlyingPool.getElementIndicesInRandomOrder(Random(124)).forEach { n -> println(n.toString())}
+                    //structurePool.underlyingPool.getElementIndicesInRandomOrder(Random(124)).forEach { n -> println(n.toString())}
                 }
                 "minecraft:village/plains/zombie/houses" -> {
                     val id = AI.MOD_ID + ":village/plains_crystal_workshop"
