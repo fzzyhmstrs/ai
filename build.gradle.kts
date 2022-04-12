@@ -60,8 +60,8 @@ dependencies {
     modImplementation (":structurized:1.4.0+1.18")
     include(":structurized:1.4.0+1.18")
 
-    modImplementation ("maven.modrinth:coloredglowlib:1.2.7")
-    include("maven.modrinth:coloredglowlib:1.2.7")
+    modImplementation ("maven.modrinth:coloredglowlib:1.3.0")
+    include("maven.modrinth:coloredglowlib:1.3.0")
 
     modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0")
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
