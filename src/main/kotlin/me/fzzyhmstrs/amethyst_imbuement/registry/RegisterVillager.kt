@@ -1,13 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import com.google.common.collect.ImmutableList
-import com.mojang.datafixers.util.Pair
 import draylar.structurized.api.StructurePoolAddCallback
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
@@ -17,17 +14,18 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.structure.pool.*
 import net.minecraft.structure.processor.StructureProcessorLists
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.BuiltinRegistries
 import net.minecraft.util.registry.Registry
 import net.minecraft.village.TradeOffer
 import net.minecraft.village.TradeOffers
 import net.minecraft.village.VillagerProfession
 import java.util.*
-import java.util.function.Function
 
 object RegisterVillager {
 
     private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(Identifier(AI.MOD_ID,"crystal_altar_poi"),1,1,RegisterBlock.CRYSTAL_ALTAR)
     private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(CRYSTAL_ALTAR_POINT_OF_INTEREST).id(Identifier("amethyst_imbuement","crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
+    val locationMap: MutableMap<String,Triple<String,String,String>> = mutableMapOf()
 
     fun registerAll(){
         Registry.register(Registry.VILLAGER_PROFESSION, Identifier(AI.MOD_ID,"crystal_witch") , CRYSTAL_WITCH)
@@ -57,54 +55,94 @@ object RegisterVillager {
         StructurePoolAddCallback.EVENT.register { structurePool ->
             when (structurePool.underlyingPool.id.toString()) {
                 "minecraft:village/plains/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofLegacySingle(AI.MOD_ID + ":village/plains_crystal_workshop").apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/plains_crystal_workshop"
+                    val processor = StructureProcessorLists.MOSSIFY_10_PERCENT
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 2)
                     structurePool.underlyingPool.getElementIndicesInRandomOrder(Random(124)).forEach { n -> println(n.toString())}
                 }
                 "minecraft:village/plains/zombie/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(AI.MOD_ID + ":village/plains_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_PLAINS
-                    ).apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/plains_crystal_workshop"
+                    val processor = StructureProcessorLists.ZOMBIE_PLAINS
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/taiga/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofLegacySingle(AI.MOD_ID + ":village/taiga_crystal_workshop").apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/taiga_crystal_workshop"
+                    val processor = StructureProcessorLists.MOSSIFY_20_PERCENT
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/taiga/zombie/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(AI.MOD_ID + ":village/taiga_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_TAIGA
-                    ).apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/taiga_crystal_workshop"
+                    val processor = StructureProcessorLists.MOSSIFY_20_PERCENT
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/snowy/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofLegacySingle(AI.MOD_ID + ":village/snowy_crystal_workshop").apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/snowy_crystal_workshop"
+                    val processor = StructureProcessorLists.EMPTY
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/snowy/zombie/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(AI.MOD_ID + ":village/snowy_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_SNOWY
-                    ).apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/snowy_crystal_workshop"
+                    val processor = StructureProcessorLists.ZOMBIE_SNOWY
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/savanna/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofLegacySingle(AI.MOD_ID + ":village/savanna_crystal_workshop").apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/savanna_crystal_workshop"
+                    val processor = StructureProcessorLists.EMPTY
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/savanna/zombie/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(AI.MOD_ID + ":village/savanna_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_SAVANNA
-                    ).apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/savanna_crystal_workshop"
+                    val processor = StructureProcessorLists.ZOMBIE_SAVANNA
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/desert/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofLegacySingle(AI.MOD_ID + ":village/desert_crystal_workshop").apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/desert_crystal_workshop"
+                    val processor = StructureProcessorLists.EMPTY
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/desert/zombie/houses" -> {
-                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(AI.MOD_ID + ":village/desert_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_DESERT
-                    ).apply(StructurePool.Projection.RIGID)
+                    val id = AI.MOD_ID + ":village/desert_crystal_workshop"
+                    val processor = StructureProcessorLists.ZOMBIE_DESERT
+                    val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
+                    val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
+                    val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
+                    locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
             }
