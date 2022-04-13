@@ -27,17 +27,12 @@ public class PoolStructurePieceMixin {
     @Inject(method = "writeNbt", at = @At(value = "TAIL"))
     private void fixPoolElement(StructureContext context, NbtCompound nbt, CallbackInfo ci){
         if (!nbt.contains("pool_element")) {
-            RegistryOps<NbtElement> dynamicOps = RegistryOps.of(NbtOps.INSTANCE, context.registryManager());
-            System.out.println(dynamicOps);
-            System.out.println(poolElement);
             NbtCompound nbtEl = new NbtCompound();
             String poolId = poolElement.toString();
-            String poolId2 = poolId.replace("\\]","");
+            String poolId2 = poolId.substring(0,poolId.length()-2);
             String split = "\\[";
             String[] poolIdArray = poolId2.split(split);
             String poolLocation = poolIdArray[poolIdArray.length - 1];
-            System.out.println(poolLocation);
-            System.out.println(RegisterVillager.INSTANCE.getLocationMap());
             if (RegisterVillager.INSTANCE.getLocationMap().containsKey(poolLocation)){
                 Triple<String, String, String> data = RegisterVillager.INSTANCE.getLocationMap().get(poolLocation);
                 nbtEl.putString("element_type",data.getFirst());
@@ -46,7 +41,6 @@ public class PoolStructurePieceMixin {
                 nbtEl.putString("projection", data.getThird());
                 nbt.put("pool_element",nbtEl);
             }
-            System.out.println(nbt);
         }
     }
 
