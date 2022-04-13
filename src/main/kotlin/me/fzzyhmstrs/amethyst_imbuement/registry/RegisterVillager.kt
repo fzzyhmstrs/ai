@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import draylar.structurized.api.StructurePoolAddCallback
+import fzzyhmstrs.structurized_reborn.impl.FabricStructurePoolRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
@@ -11,10 +11,8 @@ import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvents
-import net.minecraft.structure.pool.*
 import net.minecraft.structure.processor.StructureProcessorLists
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.BuiltinRegistries
 import net.minecraft.util.registry.Registry
 import net.minecraft.village.TradeOffer
 import net.minecraft.village.TradeOffers
@@ -52,7 +50,38 @@ object RegisterVillager {
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FLETCHER,5) { factories -> factories.add(TradeFactory(Items.EMERALD,24,6,Items.CROSSBOW,1,RegisterItem.SNIPER_BOW,1,6,12))}
 
-        StructurePoolAddCallback.EVENT.register { structurePool ->
+        val plainsId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/houses"),plainsId,2, StructureProcessorLists.MOSSIFY_10_PERCENT)
+
+        val plainsZombieId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop_zombie")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/zombie/houses"),plainsZombieId,1, StructureProcessorLists.ZOMBIE_PLAINS)
+
+        val taigaId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/houses"),taigaId,2, StructureProcessorLists.MOSSIFY_20_PERCENT)
+
+        val taigaZombieId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop_zombie")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/zombie/houses"),taigaZombieId,1, StructureProcessorLists.ZOMBIE_TAIGA)
+
+        val snowyId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/houses"),snowyId,1, StructureProcessorLists.EMPTY)
+
+        val snowyZombieId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop_zombie")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/zombie/houses"),snowyZombieId,1, StructureProcessorLists.ZOMBIE_SNOWY)
+
+        val savannaId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/houses"),savannaId,2, StructureProcessorLists.EMPTY)
+
+        val savannaZombieId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop_zombie")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/zombie/houses"),savannaZombieId,1, StructureProcessorLists.ZOMBIE_SAVANNA)
+
+        val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/houses"),desertId,1, StructureProcessorLists.EMPTY)
+
+        val desertZombieId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop_zombie")
+        FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/zombie/houses"),desertZombieId,1, StructureProcessorLists.ZOMBIE_DESERT)
+
+
+        /*StructurePoolAddCallback.EVENT.register { structurePool ->
             when (structurePool.underlyingPool.id.toString()) {
                 "minecraft:village/plains/houses" -> {
                     val id = AI.MOD_ID + ":village/plains_crystal_workshop"
@@ -62,6 +91,7 @@ object RegisterVillager {
                     val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
                     locationMap[id] = Triple(type,processorId,StructurePool.Projection.RIGID.id)
                     structurePool.addStructurePoolElement(poolElement, 2)
+
                     //structurePool.underlyingPool.getElementIndicesInRandomOrder(Random(124)).forEach { n -> println(n.toString())}
                 }
                 "minecraft:village/plains/zombie/houses" -> {
@@ -84,7 +114,7 @@ object RegisterVillager {
                 }
                 "minecraft:village/taiga/zombie/houses" -> {
                     val id = AI.MOD_ID + ":village/taiga_crystal_workshop_zombie"
-                    val processor = StructureProcessorLists.MOSSIFY_20_PERCENT
+                    val processor = StructureProcessorLists.ZOMBIE_TAIGA
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
                     val type = Registry.STRUCTURE_POOL_ELEMENT.getId(poolElement.type).toString()
@@ -146,7 +176,7 @@ object RegisterVillager {
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
             }
-        }
+        }*/
 
     }
 

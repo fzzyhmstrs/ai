@@ -62,10 +62,15 @@ dependencies {
     }
     include("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC")
 
-    modImplementation (":structurized:1.4.0+1.18.2"){
+    /*modImplementation (":structurized:1.4.0+1.18.2"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":structurized:1.4.0+1.18.2")
+    include(":structurized:1.4.0+1.18.2")*/
+
+    modImplementation (":structurized_reborn-1.18.2-01"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include(":structurized_reborn-1.18.2-01")
 
     modApi ("maven.modrinth:coloredglowlib:1.3.0"){
         exclude("net.fabricmc.fabric-api")
