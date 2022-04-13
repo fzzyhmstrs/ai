@@ -65,7 +65,7 @@ object RegisterVillager {
                     //structurePool.underlyingPool.getElementIndicesInRandomOrder(Random(124)).forEach { n -> println(n.toString())}
                 }
                 "minecraft:village/plains/zombie/houses" -> {
-                    val id = AI.MOD_ID + ":village/plains_crystal_workshop"
+                    val id = AI.MOD_ID + ":village/plains_crystal_workshop_zombie"
                     val processor = StructureProcessorLists.ZOMBIE_PLAINS
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
@@ -83,7 +83,7 @@ object RegisterVillager {
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/taiga/zombie/houses" -> {
-                    val id = AI.MOD_ID + ":village/taiga_crystal_workshop"
+                    val id = AI.MOD_ID + ":village/taiga_crystal_workshop_zombie"
                     val processor = StructureProcessorLists.MOSSIFY_20_PERCENT
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
@@ -101,7 +101,7 @@ object RegisterVillager {
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/snowy/zombie/houses" -> {
-                    val id = AI.MOD_ID + ":village/snowy_crystal_workshop"
+                    val id = AI.MOD_ID + ":village/snowy_crystal_workshop_zombie"
                     val processor = StructureProcessorLists.ZOMBIE_SNOWY
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
@@ -119,7 +119,7 @@ object RegisterVillager {
                     structurePool.addStructurePoolElement(poolElement, 2)
                 }
                 "minecraft:village/savanna/zombie/houses" -> {
-                    val id = AI.MOD_ID + ":village/savanna_crystal_workshop"
+                    val id = AI.MOD_ID + ":village/savanna_crystal_workshop_zombie"
                     val processor = StructureProcessorLists.ZOMBIE_SAVANNA
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
@@ -137,7 +137,7 @@ object RegisterVillager {
                     structurePool.addStructurePoolElement(poolElement, 1)
                 }
                 "minecraft:village/desert/zombie/houses" -> {
-                    val id = AI.MOD_ID + ":village/desert_crystal_workshop"
+                    val id = AI.MOD_ID + ":village/desert_crystal_workshop_zombie"
                     val processor = StructureProcessorLists.ZOMBIE_DESERT
                     val processorId = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.getId(processor.value()).toString()
                     val poolElement : StructurePoolElement = StructurePoolElement.ofProcessedLegacySingle(id,processor).apply(StructurePool.Projection.RIGID)
