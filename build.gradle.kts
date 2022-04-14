@@ -29,11 +29,11 @@ repositories {
         url = uri("https://maven.blamejared.com")
     }
     maven {
-        name = "GlowLib"
+        name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
-    }
-    flatDir {
-        dirs("F:\\Documents\\Mod Development\\structurize")
+        content {
+            includeGroup("maven.modrinth")
+        }
     }
 }
 dependencies {
@@ -52,32 +52,27 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
 
-    modImplementation ("dev.emi:trinkets:3.3.0"){
+    modImplementation("dev.emi:trinkets:3.3.0"){
         exclude("net.fabricmc.fabric-api")
     }
     include("dev.emi:trinkets:3.3.0")
 
-    modImplementation ("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
+    modImplementation("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
         exclude("net.fabricmc.fabric-api")
     }
     include("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC")
 
-    /*modImplementation (":structurized:1.4.0+1.18.2"){
+    modImplementation("maven.modrinth:Wd844r7Q:1.18.2-02"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":structurized:1.4.0+1.18.2")*/
+    include("maven.modrinth:Wd844r7Q:1.18.2-02")
 
-    modImplementation (":structurized_reborn-1.18.2-01"){
-        exclude("net.fabricmc.fabric-api")
-    }
-    include(":structurized_reborn-1.18.2-01")
-
-    modApi ("maven.modrinth:coloredglowlib:1.3.0"){
+    modImplementation("maven.modrinth:coloredglowlib:1.3.0"){
         exclude("net.fabricmc.fabric-api")
     }
     include("maven.modrinth:coloredglowlib:1.3.0")
 
-    modApi("io.github.ladysnake:PlayerAbilityLib:1.5.0"){
+    modImplementation("io.github.ladysnake:PlayerAbilityLib:1.5.0"){
         exclude("net.fabricmc.fabric-api")
     }
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
