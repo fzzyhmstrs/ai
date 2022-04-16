@@ -11,12 +11,16 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.checkerframework.checker.units.qual.A;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -24,6 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PersistentProjectileEntityMixin extends Entity {
 
     private static int i;
+    private Entity headhunterEntity = null;
 
     public PersistentProjectileEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -59,7 +64,45 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
         }
     }
 
-    @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/entity/Entity.damage (Lnet/minecraft/entity/damage/DamageSource;F)Z"))
+    @Inject(method = "onEntityHit", at = @At(value = "HEAD"))
+    private void getEntityForHeadhunter(EntityHitResult entityHitResult, CallbackInfo ci){
+        headhunterEntity = entityHitResult.getEntity();
+    }
+
+    @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/util/math/MathHelper.ceil (D)I"))
+    private int checkHeadhunter(double value){
+        int amount = MathHelper.ceil(value);
+        //System.out.println(amount);
+        PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
+        Entity owner = chk.getOwner();
+        if (owner != null) {
+            if (owner instanceof LivingEntity) {
+                ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
+                int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
+                if (lvl > 0 && headhunterEntity != null){
+                    amount = round(HeadhunterAugment.Companion.checkHeadhunterHit(headhunterEntity,(PersistentProjectileEntity)(Object) this,amount));
+                    headhunterEntity = null;
+                    //System.out.println(amount);
+                }
+            }
+        }
+        return amount;
+    }
+
+    private int round(float value){
+        int ceil = MathHelper.ceil(value);
+        int floor = MathHelper.floor(value);
+        double ceilDiff = Math.abs(ceil-value);
+        double floorDiff = Math.abs(floor-value);
+        if (ceilDiff >= floorDiff){
+            return floor;
+        } else {
+            return ceil;
+        }
+    }
+
+
+    /*@Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/entity/Entity.damage (Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private boolean checkHeadHunter(Entity instance, DamageSource source, float amount){
         PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
         Entity owner = chk.getOwner();
@@ -73,5 +116,5 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
             }
         }
         return instance.damage(source,amount);
-    }
+    }*/
 }

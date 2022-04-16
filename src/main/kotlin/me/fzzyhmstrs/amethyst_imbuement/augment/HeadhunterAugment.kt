@@ -27,6 +27,8 @@ class HeadhunterAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
     @Suppress("SpellCheckingInspection")
     companion object {
 
+
+
         fun checkHeadhunterHit(target: Entity, arrow: PersistentProjectileEntity, amount: Float): Float {
             val y1: Double = arrow.y
             val y2: Double = target.eyeY

@@ -28,13 +28,7 @@ public abstract class PlayerInventoryMixin {
     @Inject(at = @At("HEAD"), method = "scrollInHotbar", cancellable = true)
     private void scrollInHotbar(double scrollAmount, CallbackInfo ci) {
         //System.out.println(player.getStackInHand(Hand.MAIN_HAND).getItem().toString());
-        if(player.isUsingSpyglass()) {
-            if (player.getPose().equals(EntityPose.CROUCHING) && MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) {
-                SniperBowItem.Companion.changeScope(scrollAmount < 0.0D);
-                ci.cancel();
-
-            }
-        } else if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof ScepterItem){
+        if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof ScepterItem){
             if (player.getPose().equals(EntityPose.CROUCHING)){
                 ScepterObject.INSTANCE.updateScepterActiveEnchant(player.getStackInHand(Hand.MAIN_HAND),player,scrollAmount < 0.0D);
                 ci.cancel();

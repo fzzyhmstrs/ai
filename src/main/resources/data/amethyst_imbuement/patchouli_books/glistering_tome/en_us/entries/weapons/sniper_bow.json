@@ -40,7 +40,7 @@
 "amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_6.png"
 ],
 "border": true,
-"text": "Switch scope textures by crouching and scrolling."
+"text": "Switch scope textures by using the '=' key (by default, can be changed in the controls menu)."
 },
 {            
 "type": "patchouli:text",
