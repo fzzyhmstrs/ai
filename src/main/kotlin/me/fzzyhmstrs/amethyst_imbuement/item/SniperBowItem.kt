@@ -21,7 +21,7 @@ import net.minecraft.world.World
 import net.minecraft.util.TypedActionResult as TypedActionResult1
 
 @Suppress("ObjectPropertyName", "PrivatePropertyName")
-class SniperBowItem(settings: Settings) : CrossbowItem(settings) {
+class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
     private val CHARGED_PROJECTILES_KEY = "ChargedProjectiles"
     private var charged = false
     private var loaded = false

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
+import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
@@ -38,6 +39,15 @@ object RegisterKeybind {
         )
     )
 
+    private val SPYGLASS_CHANGE: KeyBinding = KeyBindingHelper.registerKeyBinding(
+        KeyBinding(
+            "key.amethyst_imbuement.sniper_bow_key",  // The translation key of the keybinding's name
+            InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+            GLFW.GLFW_KEY_EQUAL,  // The keycode of the key
+            KeyBinding.GAMEPLAY_CATEGORY // The translation key of the keybinding's category.
+        )
+    )
+
     fun registerAll(){
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient ->
             while (SCEPTER_ACTIVE_AUGMENT.wasPressed()) {
@@ -53,6 +63,13 @@ object RegisterKeybind {
                         client.player?.sendMessage(LiteralText("Spells not activated yet..."), true)
 
                     }
+                }
+            }
+        })
+        ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient ->
+            while (SPYGLASS_CHANGE.wasPressed()) {
+                if (client.player?.isUsingSpyglass == true) {
+                    SniperBowItem.changeScope(true)
                 }
             }
         })
