@@ -13,7 +13,7 @@ class SteelArmorMaterial : ArmorMaterial {
     private val PROTECTION_VALUES = intArrayOf(2, 6, 7, 2)
 
 
-    override fun getName(): String = "steel"
+    override fun getName(): String = "ai_steel"
     override fun getEquipSound(): SoundEvent = SoundEvents.ITEM_ARMOR_EQUIP_IRON
     override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.STEEL_INGOT)
     override fun getEnchantability(): Int = 10

@@ -40,7 +40,7 @@ class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,1, Items.DEBUG_STICK)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,0, Items.DEBUG_STICK)
     }
 
     override fun soundEvent(): SoundEvent {
