@@ -13,7 +13,7 @@ class AmetrineArmorMaterial : ArmorMaterial {
     private val PROTECTION_VALUES = intArrayOf(4, 7, 9, 4)
 
 
-    override fun getName(): String = "ametrine"
+    override fun getName(): String = "ai_ametrine"
     override fun getEquipSound(): SoundEvent = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND
     override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.AMETRINE)
     override fun getEnchantability(): Int = 18
