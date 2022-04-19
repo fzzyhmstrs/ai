@@ -492,7 +492,7 @@ object ScepterObject: AugmentDamage {
     private fun getRandBookOfLoreAugment(list: MutableList<String>): String{
         if (list.isEmpty()) return "magic_missile"
         val rndMax = list.size
-        val rndIndex = MinecraftClient.getInstance().world?.random?.nextInt(rndMax) ?: return "magic_missile"
+        val rndIndex = Random(124).nextInt(rndMax)
         return list[rndIndex]
     }
     private fun getStatsHelper(nbt: NbtCompound): IntArray{

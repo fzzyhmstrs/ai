@@ -10,6 +10,7 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
+import java.util.*
 
 object RepurposedStructuresLoot: AbstractModLoot {
 
@@ -47,7 +48,7 @@ object RepurposedStructuresLoot: AbstractModLoot {
             VanillaLoot.desertTempleLoot(table)
             return true
         } else if (repurposedRuinedPortalsChecker(id)) {
-            val rnd = MinecraftClient.getInstance().world?.random?.nextBoolean()?:false
+            val rnd = Random(124).nextBoolean()
             if (rnd) {
                 VanillaLoot.endCityLoot(table)
             } else {
