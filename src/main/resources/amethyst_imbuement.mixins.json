@@ -20,7 +20,6 @@
     "ItemMixin",
     "LivingEntityMixin",
     "MilkBucketMixin",
-    "MiningToolItemMixin",
     "PersistentProjectileEntityMixin",
     "PiglinBrainMixin",
     "PlayerEntityMixin",
