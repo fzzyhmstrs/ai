@@ -31,11 +31,11 @@
     "rei": [
       {
         "adapter": "kotlin",
-        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.REIPlugin"
+        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.ReiPlugin"
       },
       {
         "adapter": "kotlin",
-        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.REIServerPlugin"
+        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.ReiServerPlugin"
       }
     ]
   },

@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.VeinMinerEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterKeybind;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Environment(value= EnvType.CLIENT)
 @Mixin(MiningToolItem.class)
 public class MiningToolItemMixin {
 

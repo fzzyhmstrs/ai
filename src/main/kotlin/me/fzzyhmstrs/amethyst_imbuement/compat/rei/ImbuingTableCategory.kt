@@ -33,11 +33,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<ImbuingTableDisplay> {
-        return CategoryIdentifier.of(identifier)
-    }
-
-    override fun getIdentifier(): Identifier {
-        return Identifier(AI.MOD_ID,ImbuingRecipe.Type.ID)
+        return ReiCategoryIds.IMBUING_TABLE_CATEGORY_ID
     }
 
     override fun setupDisplay(display: ImbuingTableDisplay, bounds: Rectangle): MutableList<Widget> {

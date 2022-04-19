@@ -8,7 +8,7 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
 
-object REIPlugin: REIClientPlugin {
+object ReiPlugin: REIClientPlugin {
 
     private val IMBUING_TABLE_CATEGORY = ImbuingTableCategory()
     private val CRYSTAL_ALTAR_CATEGORY = CrystalAltarCategory()
