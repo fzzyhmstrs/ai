@@ -33,11 +33,7 @@ class CrystalAltarCategory: DisplayCategory<CrystalAltarDisplay> {
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<CrystalAltarDisplay> {
-        return CategoryIdentifier.of(identifier)
-    }
-
-    override fun getIdentifier(): Identifier {
-        return Identifier(AI.MOD_ID,AltarRecipe.Type.ID)
+        return ReiCategoryIds.CRYSTAL_ALTAR_CATEGORY_ID
     }
 
     override fun setupDisplay(display: CrystalAltarDisplay, bounds: Rectangle): MutableList<Widget> {

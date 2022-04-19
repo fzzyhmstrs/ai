@@ -8,7 +8,6 @@
     "AxolotlEntityMixin",
     "BucketItemMixin",
     "CarvedPumpkinBlockMixin",
-    "ClientPlayNetworkHandlerMixin",
     "CowEntityMixin",
     "CreeperEntityMixin",
     "CrossbowItemMixin",
@@ -18,7 +17,6 @@
     "EntityMixin",
     "FarmlandBlockMixin",
     "FishEntityMixin",
-    "GlisteringTridentModelMixin",
     "ItemMixin",
     "LivingEntityMixin",
     "MilkBucketMixin",
@@ -52,7 +50,10 @@
     "HeldItemRendererMixin",
     "InGameHudMixin",
     "ItemRendererMixin",
-    "PlayerInventoryMixin"
+    "PlayerInventoryMixin",
+    "GlisteringTridentModelMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "MiningToolItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
