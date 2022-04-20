@@ -82,20 +82,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
                 val ds = entity.recentDamageSource
                 if (ds != null) {
                     if (world.time - lastGuardian >= 40) {
-                        val bl = (ds != DamageSource.FALL &&
-                                ds != DamageSource.CACTUS &&
-                                ds != DamageSource.FLY_INTO_WALL &&
-                                ds != DamageSource.FALLING_BLOCK &&
-                                ds != DamageSource.HOT_FLOOR &&
-                                ds != DamageSource.IN_FIRE &&
-                                ds != DamageSource.DROWN &&
-                                ds != DamageSource.OUT_OF_WORLD &&
-                                ds != DamageSource.STALAGMITE &&
-                                ds != DamageSource.IN_WALL &&
-                                ds != DamageSource.FREEZE &&
-                                ds != DamageSource.DRYOUT &&
-                                ds != DamageSource.STARVE &&
-                                ds != DamageSource.SWEET_BERRY_BUSH)
+                        val bl = (checkDamageSource(ds))
                         if (bl) {
                             RegisterEnchantment.GUARDIAN.specialEffect(entity, 1, stack)
                             lastGuardian = world.time
@@ -132,6 +119,24 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
     }
 
     companion object: AugmentDamage {
+
+        private fun checkDamageSource(ds: DamageSource): Boolean{
+            return ds != DamageSource.FALL &&
+                    ds != DamageSource.CACTUS &&
+                    ds != DamageSource.FLY_INTO_WALL &&
+                    ds != DamageSource.FALLING_BLOCK &&
+                    ds != DamageSource.HOT_FLOOR &&
+                    ds != DamageSource.IN_FIRE &&
+                    ds != DamageSource.DROWN &&
+                    ds != DamageSource.OUT_OF_WORLD &&
+                    ds != DamageSource.STALAGMITE &&
+                    ds != DamageSource.IN_WALL &&
+                    ds != DamageSource.FREEZE &&
+                    ds != DamageSource.DRYOUT &&
+                    ds != DamageSource.STARVE &&
+                    ds != DamageSource.SWEET_BERRY_BUSH
+        }
+
         private fun writeNbt(key: String, state: Boolean, nbt: NbtCompound) {
             nbt.putBoolean(key, state)
         }

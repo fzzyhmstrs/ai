@@ -11,7 +11,7 @@ import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem
 
-class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.TRIDENT,slot) {
+class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.CROSSBOW,slot) {
 
     override fun getMinPower(level: Int): Int {
         return 20 + level * 10
