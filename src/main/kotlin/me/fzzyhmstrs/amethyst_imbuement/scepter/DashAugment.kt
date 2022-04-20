@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -17,7 +18,6 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import java.util.*
 
 class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
@@ -59,7 +59,7 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
     }
 
     override fun soundEvent(): SoundEvent {
-        return when(Random(124). nextInt(3)){
+        return when(AI.aiRandom().nextInt(3)){
             0-> SoundEvents.ITEM_TRIDENT_RIPTIDE_1
             1-> SoundEvents.ITEM_TRIDENT_RIPTIDE_2
             2-> SoundEvents.ITEM_TRIDENT_RIPTIDE_3
