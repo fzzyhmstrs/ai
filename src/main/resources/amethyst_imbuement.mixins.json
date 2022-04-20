@@ -3,7 +3,6 @@
   "package": "me.fzzyhmstrs.amethyst_imbuement.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PoolStructurePieceMixin",
     "AnvilScreenHandlerMixin",
     "ArmorItemMixin",
     "AxolotlEntityMixin",
