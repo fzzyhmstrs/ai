@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import net.minecraft.block.Blocks
@@ -62,7 +63,9 @@ class AltarOfExperienceScreenHandler(
     }
 
     private fun updateMaxXp(candles: Int, wardingCandles: Int): Int{
-        val level = 35 + 5 * candles + 10 * wardingCandles
+        val base = AiConfig.altars.altarOfExperienceBaseLevels
+        val perCandle = AiConfig.altars.altarOfExperienceCandleLevelsPer
+        val level = base + perCandle * candles + 2 * perCandle * wardingCandles
         return ((4.5 * level * level) - (162.5 * level) + 2220).toInt()
     }
 

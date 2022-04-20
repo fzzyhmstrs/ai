@@ -1,12 +1,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.tool
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
+import kotlin.math.max
 
 object ScepterToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun getDurability(): Int {
-        return 426
+        return AiConfig.scepters.opalineDurability
+    }
+    fun defaultDurability(): Int{
+        return 250
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 1.0f
@@ -24,6 +29,6 @@ object ScepterToolMaterial: ToolMaterial,ScepterMaterialAddon{
         return Ingredient.ofItems(RegisterItem.BERYL_COPPER_INGOT)
     }
     override fun healCooldown(): Long {
-        return 150L
+        return max(AiConfig.scepters.baseRegenRateTicks,minCooldown())
     }
 }

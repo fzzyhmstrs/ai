@@ -1,15 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.tool
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.item.Items
 import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
-
-
+import kotlin.math.max
 
 
 object ScepterLvl2ToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun getDurability(): Int {
-        return 1056
+        return AiConfig.scepters.iridescentDurability
+    }
+    fun defaultDurability(): Int{
+        return 550
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 1.0f
@@ -28,6 +31,6 @@ object ScepterLvl2ToolMaterial: ToolMaterial,ScepterMaterialAddon{
         return Ingredient.ofItems(Items.GOLD_INGOT)
     }
     override fun healCooldown(): Long {
-        return 130L
+        return max(AiConfig.scepters.baseRegenRateTicks - 25L,minCooldown())
     }
 }

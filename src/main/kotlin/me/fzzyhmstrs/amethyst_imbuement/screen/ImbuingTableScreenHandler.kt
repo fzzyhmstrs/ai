@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
@@ -192,42 +193,10 @@ class ImbuingTableScreenHandler(
                             levelLow[i] = 0
                         }
 
-                    } else {
-                        var i = 0
-                        var j: Int = -1
-                        while (j <= 1) {
-                            for (k in -1..1) {
-                                if (j == 0 && k == 0 || !world.isAir(pos.add(k, 0, j)) || !world.isAir(
-                                        pos.add(
-                                            k,
-                                            1,
-                                            j
-                                        )
-                                    )
-                                ) continue
-                                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
-                                ++i
-                                }
-                                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isOf(Blocks.BOOKSHELF)) {
-                                        ++i
-                                }
-                                if (k == 0 || j == 0) continue
-                                if (world.getBlockState(pos.add(k * 2, 0, j)).isOf(Blocks.BOOKSHELF)) {
-                                    ++i
-                                }
-                                if (world.getBlockState(pos.add(k * 2, 1, j)).isOf(Blocks.BOOKSHELF)) {
-                                    ++i
-                                }
-                                if (world.getBlockState(pos.add(k, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
-                                    ++i
-                                }
-                                if (!world.getBlockState(pos.add(k, 1, j * 2)).isOf(Blocks.BOOKSHELF)) continue
-                                ++i
-                            }
-                            ++j
-                        }
+                    } else if (AiConfig.altars.imbuingTableEnchantingEnabled) {
+                        val i = checkBookshelves(world, pos)
                         random.setSeed(seed.get().toLong())
-                        j = 0
+                        var j = 0
                         while (j < 3) {
                             enchantmentPower[j] =
                                 this.calculateRequiredExperienceLevel(random, j, i, itemStack)
@@ -526,6 +495,42 @@ class ImbuingTableScreenHandler(
         return if (slotIndex == 1) {
             j * 2 / 3 + 1 + bookshelfCount / 3
         } else max(j, bookshelfCnt * 2)
+    }
+    private fun checkBookshelves(world: World, pos: BlockPos): Int{
+        var i = 0
+        var j: Int = -1
+        while (j <= 1) {
+            for (k in -1..1) {
+                if (j == 0 && k == 0 || !world.isAir(pos.add(k, 0, j)) || !world.isAir(
+                        pos.add(
+                            k,
+                            1,
+                            j
+                        )
+                    )
+                ) continue
+                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                    ++i
+                }
+                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                    ++i
+                }
+                if (k == 0 || j == 0) continue
+                if (world.getBlockState(pos.add(k * 2, 0, j)).isOf(Blocks.BOOKSHELF)) {
+                    ++i
+                }
+                if (world.getBlockState(pos.add(k * 2, 1, j)).isOf(Blocks.BOOKSHELF)) {
+                    ++i
+                }
+                if (world.getBlockState(pos.add(k, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                    ++i
+                }
+                if (!world.getBlockState(pos.add(k, 1, j * 2)).isOf(Blocks.BOOKSHELF)) continue
+                ++i
+            }
+            ++j
+        }
+        return i
     }
 
     fun populateRecipeFinder(finder: RecipeFinder) {
