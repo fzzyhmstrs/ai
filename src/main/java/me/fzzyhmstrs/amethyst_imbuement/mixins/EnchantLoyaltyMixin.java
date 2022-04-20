@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
-import me.fzzyhmstrs.amethyst_imbuement.compat.rei.ImbuingTableMenuInfo;
 import net.minecraft.enchantment.LoyaltyEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

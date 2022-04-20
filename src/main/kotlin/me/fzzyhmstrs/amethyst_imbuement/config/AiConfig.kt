@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf

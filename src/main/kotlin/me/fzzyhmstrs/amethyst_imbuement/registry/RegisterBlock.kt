@@ -5,8 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.block.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
-import net.minecraft.block.AbstractBlock.ContextPredicate
-import net.minecraft.entity.EntityType
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemGroup
 import net.minecraft.sound.BlockSoundGroup
