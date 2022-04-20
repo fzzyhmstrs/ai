@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.EnchantmentLevelEntry
@@ -27,6 +27,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
+import kotlin.math.min
 
 @Suppress("SENSELESS_COMPARISON", "unused", "UnnecessaryVariable")
 class DisenchantingTableScreenHandler(
@@ -287,8 +288,6 @@ class DisenchantingTableScreenHandler(
 
     }
 
-
-
     override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
         var itemStack = ItemStack.EMPTY
         val slot = this.slots[index]
@@ -328,8 +327,8 @@ class DisenchantingTableScreenHandler(
     }
 
     private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
-        if (!insertItem(stack, firstSlot, firstSlot + 1, false)) {
-            if (!insertItem(stack, playerSlotStart, playerSlotEnd, true)) {
+        if (!Companion.insertItem(stack, firstSlot, firstSlot + 1, false,this.slots)) {
+            if (!Companion.insertItem(stack, playerSlotStart, playerSlotEnd, true,this.slots)) {
                 return false
             }
         }
@@ -383,8 +382,71 @@ class DisenchantingTableScreenHandler(
                 }
             }
         }
-
         return pillars
+    }
+
+    companion object{
+
+        fun insertItem(stack: ItemStack, startIndex: Int, endIndex: Int, fromLast: Boolean, slots: List<Slot>): Boolean {
+            var itemStack: ItemStack
+            var slot: Slot
+            var bl = false
+            var i = startIndex
+            if (fromLast) {
+                i = endIndex - 1
+            }
+            if (stack.isStackable) {
+                while (!stack.isEmpty && if (fromLast) i >= startIndex else i < endIndex) {
+                    slot = slots[i]
+                    itemStack = slot.stack
+                    if (!itemStack.isEmpty && ItemStack.canCombine(stack, itemStack)) {
+                        val j = itemStack.count + stack.count
+                        if (j <= stack.maxCount && j <= slot.maxItemCount) {
+                            stack.count = 0
+                            itemStack.count = j
+                            slot.markDirty()
+                            bl = true
+                        } else if (itemStack.count < stack.maxCount && itemStack.count < slot.maxItemCount) {
+                            val minToDec = min(stack.maxCount,slot.maxItemCount)
+                            stack.decrement(minToDec - itemStack.count)
+                            itemStack.count = minToDec
+                            slot.markDirty()
+                            bl = true
+                        }
+                    }
+                    if (fromLast) {
+                        --i
+                        continue
+                    }
+                    ++i
+                }
+            }
+            if (!stack.isEmpty) {
+                i = if (fromLast) endIndex - 1 else startIndex
+                while (if (fromLast) i >= startIndex else i < endIndex) {
+                    slot = slots[i]
+                    itemStack = slot.stack
+                    if (itemStack.isEmpty && slot.canInsert(stack)) {
+                        if (stack.count > slot.maxItemCount) {
+                            slot.stack = stack.split(slot.maxItemCount)
+                        } else {
+                            slot.stack = stack.split(stack.count)
+                        }
+                        slot.markDirty()
+                        bl = true
+                        break
+                    }
+                    if (fromLast) {
+                        --i
+                        continue
+                    }
+                    ++i
+                }
+            }
+            return bl
+        }
+
+
     }
 
 

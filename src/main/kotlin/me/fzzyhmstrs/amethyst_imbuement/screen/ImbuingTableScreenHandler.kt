@@ -465,10 +465,10 @@ class ImbuingTableScreenHandler(
     }
 
     private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
-        if (!insertItem(stack, firstSlot, firstSlot + 1, false)) {
-            if (!insertItem(stack, 0, firstSlot, false)) {
-                if (!insertItem(stack, firstSlot + 1, 13, false)) {
-                    if (!insertItem(stack, playerSlotStart, playerSlotEnd, true)) {
+        if (!DisenchantingTableScreenHandler.insertItem(stack, firstSlot, firstSlot + 1, false, this.slots)) {
+            if (!DisenchantingTableScreenHandler.insertItem(stack, 0, firstSlot, false, this.slots)) {
+                if (!DisenchantingTableScreenHandler.insertItem(stack, firstSlot + 1, 13, false, this.slots)) {
+                    if (!DisenchantingTableScreenHandler.insertItem(stack, playerSlotStart, playerSlotEnd, true, this.slots)) {
                         return false
                     }
                 }
