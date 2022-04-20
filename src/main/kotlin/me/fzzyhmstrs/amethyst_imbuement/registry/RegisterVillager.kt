@@ -23,7 +23,6 @@ object RegisterVillager {
 
     private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(Identifier(AI.MOD_ID,"crystal_altar_poi"),1,1,RegisterBlock.CRYSTAL_ALTAR)
     private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(CRYSTAL_ALTAR_POINT_OF_INTEREST).id(Identifier("amethyst_imbuement","crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
-    val locationMap: MutableMap<String,Triple<String,String,String>> = mutableMapOf()
 
     fun registerAll(){
         Registry.register(Registry.VILLAGER_PROFESSION, Identifier(AI.MOD_ID,"crystal_witch") , CRYSTAL_WITCH)
@@ -80,6 +79,7 @@ object RegisterVillager {
         val desertZombieId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop_zombie")
         FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/zombie/houses"),desertZombieId,1, StructureProcessorLists.ZOMBIE_DESERT)
     }
+
 
     internal class TradeFactory(offerItem: ItemConvertible, price: Int, rewardItem: ItemConvertible, reward: Int, _maxUses: Int, _experience: Int) :
         TradeOffers.Factory {
