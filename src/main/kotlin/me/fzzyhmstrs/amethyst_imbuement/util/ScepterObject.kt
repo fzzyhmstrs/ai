@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
@@ -492,7 +493,7 @@ object ScepterObject: AugmentDamage {
     private fun getRandBookOfLoreAugment(list: MutableList<String>): String{
         if (list.isEmpty()) return "magic_missile"
         val rndMax = list.size
-        val rndIndex = Random(124).nextInt(rndMax)
+        val rndIndex = AI.aiRandom().nextInt(rndMax)
         return list[rndIndex]
     }
     private fun getStatsHelper(nbt: NbtCompound): IntArray{

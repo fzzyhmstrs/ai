@@ -27,7 +27,6 @@ object RegisterLoot {
     fun registerAll(){
         registerModLoot(VanillaLoot)
         registerModLoot(BattletowersLoot)
-        registerModLoot(RepurposedStructuresLoot)
         registerModLoot(BetterStrongholdsLoot)
         registerModLoot(MoStructuresLoot)
         registerModLoot(GraveyardLoot)
