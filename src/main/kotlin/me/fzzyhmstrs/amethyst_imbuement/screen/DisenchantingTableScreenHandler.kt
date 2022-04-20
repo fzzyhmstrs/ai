@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
@@ -22,6 +23,7 @@ import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
@@ -119,7 +121,7 @@ class DisenchantingTableScreenHandler(
                                 disenchantCost[0] = calculateRequiredExperienceLevel(0)
                             } else {
                                 val level = readNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
-                                val maxLevel = checkPillars(world, pos) / 2 + 1
+                                val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
                                 if (level >= maxLevel) {
                                     disenchantCost[0] = -1
                                 } else {
@@ -336,7 +338,8 @@ class DisenchantingTableScreenHandler(
 
 
     private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
-        return disenchantCount * disenchantCount + disenchantCount + 3
+        val index = MathHelper.clamp(disenchantCount,0,AiConfig.altars.disenchantLevelCosts.size - 1)
+        return AiConfig.altars.disenchantLevelCosts[index]
     }
     private fun writeNbt(key: String, input: Int, nbt: NbtCompound){
         nbt.putInt(key,input)
