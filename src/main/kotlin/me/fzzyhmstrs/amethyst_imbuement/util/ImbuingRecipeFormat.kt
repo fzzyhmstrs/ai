@@ -16,12 +16,12 @@ class ImbuingRecipeFormat {
     var craftG: JsonObject? = null
     var craftH: JsonObject? = null
     var craftI: JsonObject? = null
-    var title = ""
-    var cost = 0
-    var augment = ""
-    var resultA = ""
-    var countA = 0
-    var transferEnchant = false
+    var title: String? = null
+    var cost: Int? = null
+    var augment: String? = null
+    var resultA: String? = null
+    var countA: Int? = null
+    var transferEnchant: Boolean? = null
 
 
 }

@@ -33,10 +33,10 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
         if (recipeJson.craftG != null) inputsArray[8] = Ingredient.fromJson(recipeJson.craftG)
         if (recipeJson.craftH != null) inputsArray[9] = Ingredient.fromJson(recipeJson.craftH)
         if (recipeJson.craftI != null) inputsArray[10] = Ingredient.fromJson(recipeJson.craftI)
-        val titleA = recipeJson.title
-        val costA = recipeJson.cost
-        val augmentA = recipeJson.augment
-        val resultA = recipeJson.resultA
+        val titleA = recipeJson.title?:""
+        val costA = recipeJson.cost?:1
+        val augmentA = recipeJson.augment?:""
+        val resultA = recipeJson.resultA?:""
         if(augmentA == "" && resultA == ""){
             throw JsonSyntaxException("Need either an augment or item output!: $id")
         } else if(augmentA != "" && resultA != ""){
@@ -55,12 +55,8 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
                 ScepterObject.registerAugmentStat(augId,datapoint,true)
             }
         }
-        val countA: Int = if (recipeJson.countA == 0){
-            1
-        } else{
-            recipeJson.countA
-        }
-        val transferEnchant = recipeJson.transferEnchant
+        val countA: Int = if (recipeJson.countA == 0){ 1 } else{ recipeJson.countA?:1 }
+        val transferEnchant = recipeJson.transferEnchant?:false
 
         return ImbuingRecipe(inputsArray,resultA,countA,augmentA,transferEnchant,titleA,costA,id)
     }
