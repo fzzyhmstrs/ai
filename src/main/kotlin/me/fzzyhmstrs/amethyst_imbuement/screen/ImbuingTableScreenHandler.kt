@@ -124,7 +124,7 @@ class ImbuingTableScreenHandler(
                         )
                     }
                     if (match != null && match.isPresent){
-                        enchantmentPower[0] = match.get().getCost()
+                        enchantmentPower[0] = MathHelper.ceil(match.get().getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
                         enchantmentPower[1] = 0
                         enchantmentPower[2] = 0
                         enchantmentLevel[0] = 1
@@ -257,7 +257,7 @@ class ImbuingTableScreenHandler(
                 return false
             }
         }else{
-            i = match.get().getCost()
+            i = MathHelper.ceil(match.get().getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
         }
 
         if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
