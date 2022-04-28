@@ -379,6 +379,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
 
     init{
+        this.backgroundWidth = backgrdWidth
+        this.backgroundHeight = backgrdHeight
         super.init()
         //x = (width - backgrdWidth) / 2
         //y = (height - backgrdHeight) / 2

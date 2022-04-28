@@ -25,7 +25,6 @@
     "PlayerEntityMixin",
     "PowderSnowBlockMixin",
     "PowderSnowBucketItemMixin",
-    "ScreenHandlerMixin",
     "TridentEntityMixin",
     "EnchantDamageMixin",
     "EnchantEfficiencyMixin",
@@ -45,7 +44,6 @@
   ],
   "client": [
     "AnvilScreenMixin",
-    "HandledScreenMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",
     "ItemRendererMixin",
