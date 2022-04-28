@@ -44,7 +44,7 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
             throw JsonSyntaxException("Can't have both outputs and augments!: $id")
         }
         if (augmentA != ""){
-            val augId = Identifier(augmentA).path
+            val augId = Identifier(augmentA).toString()
             if (ScepterObject.checkAugmentStat(augId)){
                 val type = ScepterObject.getAugmentType(augId)
                 val cooldown = ScepterObject.getAugmentCooldown(augId)

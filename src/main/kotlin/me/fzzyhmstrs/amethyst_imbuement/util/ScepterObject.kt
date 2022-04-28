@@ -19,6 +19,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
@@ -37,6 +38,7 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int,PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
+    val fallbackAugment = AI.MOD_ID+":magic_missile"
     //private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
     private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
 
@@ -69,7 +71,7 @@ object ScepterObject: AugmentDamage {
             val nbt = nbtEl as NbtCompound
             val identifier = EnchantmentHelper.getIdFromNbt(nbt)
             if (identifier != null) {
-                val stringId = identifier.path
+                val stringId = identifier.toString()
                 if(scepters[id]?.containsKey(stringId) == true) continue
                 scepters[id]?.put(stringId, world.time-1000000L)
             }
@@ -125,7 +127,7 @@ object ScepterObject: AugmentDamage {
         val activeEnchant = if (augmentApplied[id] == -1) {
             readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
         } else {
-            activeAugment[id]?:"magic_missile"
+            activeAugment[id] ?: (fallbackAugment)
         }
         if(scepters[id]?.isEmpty() == true){
             initializeScepter(stack, user.world)
@@ -142,7 +144,7 @@ object ScepterObject: AugmentDamage {
             if(enchantCheck is ScepterAugment) {
                 augEls.add(i)
             }
-            if (activeEnchant == identifier?.path){
+            if (activeEnchant == identifier?.toString()){
                 matchIndex = i
             }
         }
@@ -165,7 +167,7 @@ object ScepterObject: AugmentDamage {
             0
         }
         val nbtTemp = nbtEls[newIndex] as NbtCompound
-        val newActiveEnchant = EnchantmentHelper.getIdFromNbt(nbtTemp)?.path
+        val newActiveEnchant = EnchantmentHelper.getIdFromNbt(nbtTemp)?.toString()
         activeAugment[id] = newActiveEnchant?: return
         val tempActiveEnchant = activeAugment[id]
         val currentTime = user.world.time
@@ -182,7 +184,7 @@ object ScepterObject: AugmentDamage {
         } else{
             augmentApplied[id] = (cooldown.toLong() - timeSinceLast).toInt()
         }
-        val message = "New active spell: " + TranslatableText("enchantment.amethyst_imbuement.$newActiveEnchant").string
+        val message = TranslatableText("scepter.new_active_spell").string + TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}").string
         MinecraftClient.getInstance().player?.sendChatMessage(message)
     }
 
@@ -335,7 +337,7 @@ object ScepterObject: AugmentDamage {
                 getRandBookOfLoreAugment(bookOfLoreListT2)
             }
             else->{
-                "magic_missile"
+                fallbackAugment
             }
         }
         nbt.putString(NbtKeys.LORE_KEY.str(),aug)
@@ -485,13 +487,13 @@ object ScepterObject: AugmentDamage {
         return nbt.getString(key)
     }
     private fun World.getNewId():Int{
-        return (random.nextFloat() * 1000000000.0F).toInt()
+        return (random.nextFloat() * 2000000000.0F).toInt()
     }
     private fun checkXpForLevelUp(xp:Int,lvl:Int): Boolean{
         return (xp > (2 * lvl * lvl + 40 * lvl))
     }
     private fun getRandBookOfLoreAugment(list: MutableList<String>): String{
-        if (list.isEmpty()) return "magic_missile"
+        if (list.isEmpty()) return fallbackAugment
         val rndMax = list.size
         val rndIndex = AI.aiRandom().nextInt(rndMax)
         return list[rndIndex]

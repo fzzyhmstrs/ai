@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
@@ -77,11 +78,11 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         if (nbt != null) {
             if  (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                 activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
-                testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
+                testEnchant = Registry.ENCHANTMENT.get(Identifier(activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             } else {
                 ScepterObject.initializeScepter(stack,world)
                 activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
-                testEnchant = Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement",activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
+                testEnchant = Registry.ENCHANTMENT.get(Identifier(activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             }
         } else {
             ScepterObject.initializeScepter(stack,world)
@@ -90,7 +91,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
                 activeEnchantId =
                     ScepterObject.activeEnchantHelper(world,stack, readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
                 testEnchant =
-                    Registry.ENCHANTMENT.get(Identifier("amethyst_imbuement", activeEnchantId)) ?: return resetCooldown(
+                    Registry.ENCHANTMENT.get(Identifier(activeEnchantId)) ?: return resetCooldown(
                         stack,
                         world,
                         user,
@@ -195,7 +196,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             val chk = ScepterObject.shouldRemoveCooldownChecker(id)
             if (chk > 0){
                 entity.itemCooldownManager.set(stack.item,chk)
-                ScepterObject.activeEnchantHelper(world,stack,"magic_missile")
+                ScepterObject.activeEnchantHelper(world,stack,ScepterObject.fallbackAugment)
             } else if (chk == 0){
                 entity.itemCooldownManager.remove(stack.item)
             }
@@ -245,8 +246,8 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             if(!nbt.contains(key)){
                 val identifier = Registry.ENCHANTMENT.getId(RegisterEnchantment.MAGIC_MISSILE)
                 if (identifier != null) {
-                    nbt.putString(key, identifier.path)
-                    ScepterObject.setLastActiveEnchant(identifier.path)
+                    nbt.putString(key, identifier.toString())
+                    ScepterObject.setLastActiveEnchant(identifier.toString())
                 }
             }
             ScepterObject.getScepterStats(stack)
