@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.Recipe
@@ -133,7 +134,7 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
         return inputs
     }
     override fun getOutput(): ItemStack {
-        return ItemStack(Registry.ITEM.getOrEmpty(Identifier(result)).get(),count)
+        return ItemStack(Registry.ITEM.getOrEmpty(Identifier(result)).orElse(Items.AIR),count)
     }
     fun getAugment(): String {
         return augment
