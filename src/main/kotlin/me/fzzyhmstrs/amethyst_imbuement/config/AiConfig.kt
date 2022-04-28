@@ -63,11 +63,13 @@ object AiConfig {
         val gson = GsonBuilder().create()
         buf.writeString(gson.toJson(scepters))
         buf.writeString(gson.toJson(altars))
+        buf.writeString(gson.toJson(colors))
     }
 
     fun readFromServer(buf:PacketByteBuf){
         scepters = gson.fromJson(buf.readString(),Scepters::class.java)
         altars = gson.fromJson(buf.readString(),Altars::class.java)
+        colors = gson.fromJson(buf.readString(),Colors::class.java)
     }
 
     class Scepters {
@@ -84,6 +86,12 @@ object AiConfig {
         var imbuingTableDifficultyModifier: Float = 1.0F
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
+    }
+
+    class AugmentStats {
+        var cooldown: Int = 20
+        var manaCost: Int = 2
+        var minLvl: Int = 1
     }
 
     class Colors{
