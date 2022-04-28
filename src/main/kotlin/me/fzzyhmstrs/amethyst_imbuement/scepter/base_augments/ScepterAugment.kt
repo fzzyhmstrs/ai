@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
@@ -96,13 +97,27 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
     }
 
     fun registerAugmentStat(){
-        val id = EnchantmentHelper.getEnchantmentId(this)?.path?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
+        val id = EnchantmentHelper.getEnchantmentId(this)?.toString()?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
         val imbueLevel = if (ScepterObject.checkAugmentStat(id)){
             ScepterObject.getAugmentImbueLevel(id)
         } else {
             1
         }
-        ScepterObject.registerAugmentStat(id,augmentStat(imbueLevel),true)
+        ScepterObject.registerAugmentStat(id,configAugmentStat(id,imbueLevel),true)
+    }
+
+    private fun configAugmentStat(id: String,imbueLevel: Int = 1): ScepterObject.AugmentDatapoint{
+        val stat = augmentStat(imbueLevel)
+        val augmentConfig = AiConfig.AugmentStats()
+        val type = stat.type
+        augmentConfig.id = id
+        augmentConfig.cooldown = stat.cooldown
+        augmentConfig.manaCost = stat.manaCost
+        augmentConfig.minLvl = stat.minLvl
+        val tier = stat.bookOfLoreTier
+        val item = stat.keyItem
+        val augmentAfterConfig = AiConfig.configAugment(this.javaClass.simpleName + AiConfig.augmentVersion +".json",augmentConfig)
+        return ScepterObject.AugmentDatapoint(type,augmentAfterConfig.cooldown,augmentAfterConfig.manaCost,augmentAfterConfig.minLvl,imbueLevel,tier,item)
     }
 
     abstract fun augmentStat(imbueLevel: Int = 1): ScepterObject.AugmentDatapoint

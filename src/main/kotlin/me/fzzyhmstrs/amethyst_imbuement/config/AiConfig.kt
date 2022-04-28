@@ -6,14 +6,17 @@ import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.util.Identifier
 import java.io.File
 import java.io.FileWriter
 
 object AiConfig {
 
     private val gson = GsonBuilder().setPrettyPrinting().create()
+    const val augmentVersion = "_v0"
 
     var scepters: Scepters
     var altars: Altars
@@ -28,8 +31,8 @@ object AiConfig {
 
     fun initConfig(){}
 
-    private inline fun <reified T> readOrCreate(file: String, configClass: () -> T): T {
-        val dirPair = makeDir()
+    private inline fun <reified T> readOrCreate(file: String, child: String = "", configClass: () -> T): T {
+        val dirPair = makeDir(child)
         if (!dirPair.second) {
             return configClass()
         }
@@ -50,8 +53,16 @@ object AiConfig {
         }
     }
 
-    private fun makeDir(): Pair<File,Boolean>{
-        val dir = File(FabricLoader.getInstance().configDir.toFile(), AI.MOD_ID)
+    fun configAugment(file: String, configClass: AugmentStats): AugmentStats{
+        return readOrCreate(file,"augments") {configClass}
+    }
+
+    private fun makeDir(child:String = ""): Pair<File,Boolean>{
+        val dir = if (child != ""){
+            File(File(FabricLoader.getInstance().configDir.toFile(), AI.MOD_ID),child)
+        } else {
+            File(FabricLoader.getInstance().configDir.toFile(), AI.MOD_ID)
+        }
         if (!dir.exists() && !dir.mkdirs()) {
             println("Could not create directory, using default configs.")
             return Pair(dir,false)
@@ -89,6 +100,7 @@ object AiConfig {
     }
 
     class AugmentStats {
+        var id: String = ScepterObject.fallbackAugment
         var cooldown: Int = 20
         var manaCost: Int = 2
         var minLvl: Int = 1
@@ -165,7 +177,16 @@ object AiConfig {
             "> defaultColorMap: A map of the default colors pre-assigned to vanilla ores.",
             "> defaultRainbowList: List of the vanilla ores that are pre-assigned a rainbow outline",
             "> modColorMap: A map where you can add ores from other mods you are playing with. By default includes some ores from common ore-gen mods",
-            "> modRainbowList: List for mod ores you want to appear as a rainbow outline. By default includes some ores from common ore-gen mods"
+            "> modRainbowList: List for mod ores you want to appear as a rainbow outline. By default includes some ores from common ore-gen mods",
+            "",
+            "",
+            "Augments Configs:",
+            "These configs allow you to tweak the casting parameters for individual spells. Change these if you perhaps think a spell doesn't cost enough mana, or is too slow between casts",
+            "",
+            "> id: don't change this, or the config will break for that spell.",
+            "> cooldown: time in ticks (20 per second) between each cost of the spell.",
+            "> manaCost: durability usage of the scepter on each cast. Note the default durabilities in the scepter config to determine proper values.",
+            "> minLvl: the minimum scepter level required before the spell can be used in that scepter. Recommend keeping as-is, but may be useful to tweak if you think a spell is too easy to attain, for example."
         )
 
         fun writeReadMe(file: String){
