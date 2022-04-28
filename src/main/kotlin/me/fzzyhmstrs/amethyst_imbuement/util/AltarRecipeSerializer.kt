@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
@@ -14,7 +15,7 @@ import net.minecraft.util.JsonHelper
 @Suppress("PropertyName")
 object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
 
-    val ID = Identifier("amethyst_imbuement:enhancing")
+    val ID = Identifier(AI.MOD_ID,"enhancing")
 
     override fun read(id: Identifier, json: JsonObject): AltarRecipe {
         val recipeJson: AltarRecipeFormat = Gson().fromJson(json, AltarRecipeFormat::class.java)

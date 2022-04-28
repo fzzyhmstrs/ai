@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
@@ -11,7 +12,7 @@ import net.minecraft.util.Identifier
 @Suppress("PropertyName","CanBeVal")
 object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
 
-    val ID = Identifier("amethyst_imbuement:imbuing")
+    val ID = Identifier(AI.MOD_ID,"imbuing")
 
     override fun read(id: Identifier, json: JsonObject): ImbuingRecipe {
         val recipeJson: ImbuingRecipeFormat = Gson().fromJson(json, ImbuingRecipeFormat::class.java)

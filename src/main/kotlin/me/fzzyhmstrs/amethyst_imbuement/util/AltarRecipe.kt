@@ -46,10 +46,6 @@ class AltarRecipe(
         return addition.test(stack)
     }
 
-    override fun createIcon(): ItemStack {
-        return ItemStack(RegisterBlock.CRYSTAL_ALTAR)
-    }
-
     override fun getId(): Identifier {
         return id
     }
