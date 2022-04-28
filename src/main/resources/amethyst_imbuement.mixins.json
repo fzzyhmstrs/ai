@@ -3,7 +3,6 @@
   "package": "me.fzzyhmstrs.amethyst_imbuement.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "AnvilScreenHandlerMixin",
     "ArmorItemMixin",
     "AxolotlEntityMixin",
     "BucketItemMixin",
@@ -43,7 +42,6 @@
     "EnchantUnbreakingMixin"
   ],
   "client": [
-    "AnvilScreenMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",
     "ItemRendererMixin",
