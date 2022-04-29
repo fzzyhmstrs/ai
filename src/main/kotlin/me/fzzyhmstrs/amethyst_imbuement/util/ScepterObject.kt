@@ -218,8 +218,8 @@ object ScepterObject: AugmentDamage {
         } else{
             augmentApplied[id] = (cooldown.toLong() - timeSinceLast).toInt()
         }
-        val message = TranslatableText("scepter.new_active_spell").string + TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}").string
-        MinecraftClient.getInstance().player?.sendChatMessage(message)
+        val message = TranslatableText("scepter.new_active_spell").append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}"))
+        user.sendMessage(message,false)
     }
 
     fun activeEnchantHelper(world: World,stack: ItemStack, activeEnchant: String): String{

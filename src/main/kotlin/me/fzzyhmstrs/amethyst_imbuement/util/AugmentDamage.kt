@@ -1,12 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import net.minecraft.client.MinecraftClient
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.LiteralText
+import net.minecraft.text.TranslatableText
 import net.minecraft.world.World
 
 interface AugmentDamage {
@@ -15,7 +16,7 @@ interface AugmentDamage {
         world: World,
         entity: PlayerEntity,
         amount: Int,
-        message: String = "Not enough durability to use augment!"
+        message: String = TranslatableText("augment_damage.check_can_use").toString()
     ): Boolean {
         val damage = stack.damage
         val maxDamage = stack.maxDamage
@@ -32,13 +33,17 @@ interface AugmentDamage {
                     1.0F,
                     1.0F
                 )
-                MinecraftClient.getInstance().player?.sendChatMessage(message)
+                entity.sendMessage(LiteralText(message),false)
             }
             false
         }
     }
 
-    fun burnOutHandler(stack: ItemStack, aug: Enchantment, message: String = "${aug.getName(1)} augment burnt out!") {
+    fun burnOutHandler(
+        stack: ItemStack,
+        aug: Enchantment,
+        entity: PlayerEntity,
+        message: String = TranslatableText("augment_damage.burnout").append(aug.getName(1)).toString()) {
         val enchantList = EnchantmentHelper.get(stack)
         val newEnchantList: MutableMap<Enchantment, Int> = mutableMapOf()
         for (enchant in enchantList.keys) {
@@ -47,12 +52,17 @@ interface AugmentDamage {
             }
         }
         if (message != "") {
-            MinecraftClient.getInstance().player?.sendChatMessage(message)
+            entity.sendMessage(LiteralText(message),false)
         }
         EnchantmentHelper.set(newEnchantList, stack)
     }
 
-    fun damageHandler(stack: ItemStack, world: World, entity: PlayerEntity, amount: Int, message: String = "Totem at low durability!", unbreakingFlag: Boolean = false): Boolean {
+    fun damageHandler(
+        stack: ItemStack,
+        world: World,
+        entity: PlayerEntity,
+        amount: Int,
+        message: String = TranslatableText("augment_damage.damage").toString(), unbreakingFlag: Boolean = false): Boolean {
         val currentDmg = stack.damage
         val maxDmg = stack.maxDamage
         var newCurrentDmg = currentDmg
@@ -79,7 +89,7 @@ interface AugmentDamage {
                     1.0F
                 )
                 if (message != "") {
-                    MinecraftClient.getInstance().player?.sendChatMessage(message)
+                    entity.sendMessage(LiteralText(message),false)
                 }
             }
             if (newCurrentDmg == (maxDmg - 1)) {

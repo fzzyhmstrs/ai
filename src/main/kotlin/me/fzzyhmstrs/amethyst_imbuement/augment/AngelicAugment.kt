@@ -12,6 +12,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 
 class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
@@ -36,7 +37,7 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
                     if (rnd > 0.66) {1} else {0}
                 }
                 if (TotemItem.damageHandler(stack, user.world, user, dmg)){
-                    TotemItem.burnOutHandler(stack, RegisterEnchantment.ANGELIC, "Angelic augment burnt out!")
+                    TotemItem.burnOutHandler(stack, RegisterEnchantment.ANGELIC,user, TranslatableText("augment_damage.angelic.burnout").toString())
                     if (abilitySource.grants(user,ability)){
                         abilitySource.revokeFrom(user,ability)
                     }

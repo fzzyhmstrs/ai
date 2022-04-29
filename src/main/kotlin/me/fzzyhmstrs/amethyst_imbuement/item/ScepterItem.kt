@@ -185,6 +185,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
     //removes cooldown on the item if you switch item
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
+        if (world.isClient) return
         if (entity !is PlayerEntity) return
 
         val id = ScepterObject.scepterTickNbtCheck(stack)
