@@ -112,13 +112,4 @@ public abstract class EntityMixin {
             entity.setVelocity(vec3d.x, 0.0, vec3d.z);
         }
     }
-
-    /*@Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At(value = "HEAD"))
-    private void checkStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir){
-        hasStriding =
-        System.out.println("step height is: " + this.stepHeight);
-    }
-
-    @Redirect(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At(value = "FIELD", target = "net/minecraft/entity/Entity.stepHeight : F"))
-    private float modifyStepHeight*/
 }

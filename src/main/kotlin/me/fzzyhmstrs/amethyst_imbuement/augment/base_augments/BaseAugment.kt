@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -10,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.*
+import net.minecraft.server.MinecraftServer
 import java.util.*
 
 
@@ -165,7 +167,6 @@ open class BaseAugment(weight: Rarity, val mxLvl: Int = 1, val target: Enchantme
             while (immediateEffectFlag.contains(uuid)){
                 immediateEffectFlag.remove(uuid)
             }
-
         }
     }
 }
