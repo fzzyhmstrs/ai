@@ -49,16 +49,19 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int,PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
-    val fallbackAugment = AI.MOD_ID+":magic_missile"
-    val SCEPTER_SYNC_PACKET = Identifier("scepter_sync_packet")
-    //private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
+    const val fallbackAugment = AI.MOD_ID+":magic_missile"
+    private val SCEPTER_SYNC_PACKET = Identifier("scepter_sync_packet")
     private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
         val scepterNbt = stack.orCreateNbt
         if (!scepterNbt.contains(NbtKeys.SCEPTER_ID.str())){
-            id = world.getNewId()
+            var idTemp = world.getNewId()
+            while (scepters.containsKey(idTemp)){
+                idTemp = world.getNewId()
+            }
+            id = idTemp
             writeNbt(NbtKeys.SCEPTER_ID.str(),id,scepterNbt)
         } else {
             id = readNbt(NbtKeys.SCEPTER_ID.str(),scepterNbt)

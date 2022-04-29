@@ -1,10 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.SyncConfigPacket
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.Enchantment
@@ -15,6 +20,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -52,7 +58,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         val nbt = stack.orCreateNbt
         val activeSpell = if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
             val activeEnchantId = readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
-            TranslatableText("enchantment.amethyst_imbuement.$activeEnchantId")
+            TranslatableText("enchantment.amethyst_imbuement.${Identifier(activeEnchantId).path}")
         } else {
             TranslatableText("enchantment.amethyst_imbuement.none")
         }
@@ -179,13 +185,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
     //removes cooldown on the item if you switch item
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-        if(world !is ServerWorld) {
-            if (smoke){
-                doSmoke(world,entity as LivingEntity)
-                smoke = false
-            }
-            return
-        }
         if (entity !is PlayerEntity) return
 
         val id = ScepterObject.scepterTickNbtCheck(stack)
@@ -211,10 +210,15 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         return UseAction.BLOCK
     }
 
-    private fun resetCooldown(stack: ItemStack,world: World, user: PlayerEntity, activeEnchant: String): TypedActionResult<ItemStack>{
+    private fun resetCooldown(stack: ItemStack, world: World, user: PlayerEntity, activeEnchant: String): TypedActionResult<ItemStack>{
         world.playSound(null,user.blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,0.6F,0.8F)
         ScepterObject.resetCooldown(stack,activeEnchant)
-        smoke = true
+        if (user is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            ServerPlayNetworking.send(user, SCEPTER_SMOKE_PACKET,buf)
+        } else {
+            doSmoke(world,user)
+        }
         return TypedActionResult.fail(stack)
     }
 
@@ -238,6 +242,18 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         }
         private fun readStatNbt(key: String, nbt: NbtCompound): Int {
             return nbt.getInt(key)
+        }
+
+        val SCEPTER_SMOKE_PACKET = Identifier("scepter_client_packet")
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(SCEPTER_SMOKE_PACKET) { minecraftClient: MinecraftClient, _, _, _ ->
+                val world = minecraftClient.world
+                val entity = minecraftClient.player
+                if (world != null && entity != null){
+                    doSmoke(world,entity)
+                }
+            }
         }
 
         fun writeDefaultNbt(stack: ItemStack){
