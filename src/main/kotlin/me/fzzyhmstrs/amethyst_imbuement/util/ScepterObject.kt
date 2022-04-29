@@ -3,10 +3,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.SyncConfigPacket
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.PacketSender
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -16,6 +23,10 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.network.PacketByteBuf
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.network.ServerPlayNetworkHandler
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
@@ -39,6 +50,7 @@ object ScepterObject: AugmentDamage {
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
     val fallbackAugment = AI.MOD_ID+":magic_missile"
+    val SCEPTER_SYNC_PACKET = Identifier("scepter_sync_packet")
     //private val clientTasks: MutableMap<Enchantment, ScepterItem.ClientTaskInstance> = mutableMapOf()
     private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
 
@@ -110,7 +122,26 @@ object ScepterObject: AugmentDamage {
         return null
     }
 
-    fun updateScepterActiveEnchant(stack: ItemStack, user: PlayerEntity, up: Boolean){
+    fun sendScepterUpdateFromClient(up: Boolean) {
+        val buf = PacketByteBufs.create()
+        buf.writeBoolean(up)
+        ClientPlayNetworking.send(SCEPTER_SYNC_PACKET,buf)
+    }
+
+    fun registerServer() {
+        ServerPlayNetworking.registerGlobalReceiver(SCEPTER_SYNC_PACKET)
+        { _: MinecraftServer,
+          serverPlayerEntity: ServerPlayerEntity,
+          _: ServerPlayNetworkHandler,
+          packetByteBuf: PacketByteBuf,
+          _: PacketSender ->
+            val stack = serverPlayerEntity.getStackInHand(Hand.MAIN_HAND)
+            val up = packetByteBuf.readBoolean()
+            updateScepterActiveEnchant(stack,serverPlayerEntity,up)
+        }
+    }
+
+    private fun updateScepterActiveEnchant(stack: ItemStack, user: PlayerEntity, up: Boolean){
         if (stack.item !is ScepterItem) return
         var nbt = stack.orCreateNbt
         if (!nbt.contains(NbtKeys.SCEPTER_ID.str())){
