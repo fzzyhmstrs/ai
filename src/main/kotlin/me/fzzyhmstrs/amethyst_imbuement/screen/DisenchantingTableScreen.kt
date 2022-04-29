@@ -88,7 +88,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             }
             val string = "" + handler.disenchantCost[0]
             val s = 86 - textRenderer.getWidth(string)
-            val str = Enchantment.byRawId(r)?.getName(lvl)?.string?: "Missing Enchantment"
+            val str = Enchantment.byRawId(r)?.getName(lvl)?.string?: TranslatableText("container.disenchanting_table.button.missing_enchantment").toString()
             val stringVisitable: StringVisitable = LiteralText(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             var t = 6839882
             var t2 = 0x404040//6839882
