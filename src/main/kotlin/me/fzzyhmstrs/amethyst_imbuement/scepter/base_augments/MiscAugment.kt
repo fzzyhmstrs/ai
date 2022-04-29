@@ -16,7 +16,7 @@ abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
         var target: Entity? = null
-        val hit = RaycasterUtil.raycastHit(distance = rangeOfEffect(), includeFluids = true) ?: return false
+        val hit = RaycasterUtil.raycastHit(distance = rangeOfEffect(),user, includeFluids = true) ?: return false
         if (hit.type == HitResult.Type.ENTITY) {
             target = (hit as EntityHitResult).entity
         }
@@ -24,7 +24,7 @@ abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     open fun effect(world: World, target: Entity?, user: LivingEntity, level: Int = 1, hit: HitResult?): Boolean {
-        val entityList = RaycasterUtil.raycastEntityArea(rangeOfEffect())
+        val entityList = RaycasterUtil.raycastEntityArea(rangeOfEffect(), user)
         if (!effect(world, user, entityList, level)) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true

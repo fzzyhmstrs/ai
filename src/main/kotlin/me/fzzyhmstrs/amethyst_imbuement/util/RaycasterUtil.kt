@@ -11,7 +11,6 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.RaycastContext
-import net.minecraft.world.World
 import java.util.*
 import kotlin.math.acos
 import kotlin.math.min
@@ -19,15 +18,13 @@ import kotlin.math.min
 
 object RaycasterUtil {
 
-    fun raycastHit(distance: Double = 4.0, includeFluids: Boolean = false): HitResult? {
-        val client = MinecraftClient.getInstance()
-        return raycaster(distance, client, includeFluids)
+    fun raycastHit(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): HitResult? {
+        return raycasterServer(distance, entity, includeFluids)
     }
 
     @Suppress("unused")
-    fun raycastBlock(distance: Double = 4.0, includeFluids: Boolean = false): BlockPos? {
-        val client = MinecraftClient.getInstance()
-        val hit = raycaster(distance, client, includeFluids) ?: return null
+    fun raycastBlock(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): BlockPos? {
+        val hit = raycasterServer(distance, entity, includeFluids) ?: return null
         return when(hit.type){
             HitResult.Type.MISS -> null
             HitResult.Type.BLOCK -> {
@@ -38,9 +35,8 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastEntity(distance: Double = 4.0, includeFluids: Boolean = false): Entity? {
-        val client = MinecraftClient.getInstance()
-        val hit = raycaster(distance, client,includeFluids) ?: return null
+    fun raycastEntity(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): Entity? {
+        val hit = raycasterServer(distance, entity, includeFluids) ?: return null
         return when(hit.type){
             HitResult.Type.MISS -> null
             HitResult.Type.ENTITY -> {val entityHit = hit as EntityHitResult; entityHit.entity
@@ -49,31 +45,28 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastEntityArea(distance: Double = 4.0,pos: Vec3d? = null, rotation: Vec3d = Vec3d(1.0,0.0,0.0)): MutableList<Entity>{
-        val client = MinecraftClient.getInstance()
-        val entity: Entity? = client.getCameraEntity()
-        if (entity == null || client.world == null) {
-            return mutableListOf()
-        }
+    fun raycastEntityArea(distance: Double = 4.0,entity: Entity,pos: Vec3d? = null, rotation: Vec3d = Vec3d(1.0,0.0,0.0)): MutableList<Entity>{
         val pos2: Vec3d = pos ?: entity.pos
-        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,entity,pos2,rotation,distance)
+        if (entity.world.isClient) return mutableListOf()
+        val world = entity.world as ServerWorld
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea(world.iterateEntities(),entity,pos2,rotation,distance)
 
         return entityList.ifEmpty {
             mutableListOf()
         }
     }
 
-    private fun raycastEntityRotatedArea(world: World,
+    private fun raycastEntityRotatedArea(iterable : Iterable<Entity>,
                                          entityToExclude: Entity?,
                                          center: Vec3d,
                                          rotation: Vec3d,
                                          size: Double): MutableList<Entity>{
         val flatRotation = rotation.multiply(1.0,0.0,1.0)
         val flatPerpendicular = perpendicularVector(flatRotation,InPlane.XZ)
-        return raycastEntityRotatedArea(world,entityToExclude, center, flatRotation,flatPerpendicular, size,size,size)
+        return raycastEntityRotatedArea(iterable,entityToExclude, center, flatRotation,flatPerpendicular, size,size,size)
     }
 
-    fun raycastEntityRotatedArea(world: World,
+    fun raycastEntityRotatedArea(iterable : Iterable<Entity>,
                                  entityToExclude: Entity?,
                                  center: Vec3d,
                                  rotation: Vec3d,
@@ -84,12 +77,6 @@ object RaycasterUtil {
         val entityList: MutableList<Entity> = mutableListOf()
         val box = RaycasterBox(center, rotation, perpendicularRotation, lengthAlongRotation,
                                 lengthAlongPerpendicular, lengthPerpendicularToBoth)
-        val iterable : Iterable<Entity> =
-            when (world) {
-                is ServerWorld -> { world.iterateEntities() }
-                is ClientWorld -> { world.entities }
-                else -> { return entityList }
-            }
         for (entity in iterable) {
             if (entity !is LivingEntity) continue
             if (entity.isSpectator) continue
@@ -99,6 +86,41 @@ object RaycasterUtil {
             }
         }
         return entityList
+    }
+
+    private fun raycasterServer(distance: Double = 10.0, entity: Entity, includeFluids: Boolean,tickDelta: Float = 1.0F): HitResult? {
+        val rotation = entity.getRotationVec(tickDelta)
+        val world = entity.world
+        if (world.isClient) return null
+        var reachDistance: Double = distance //Change this to extend the reach
+        val target: HitResult? = raycast(entity, reachDistance, tickDelta, includeFluids, rotation)
+        val cameraPos: Vec3d = entity.getCameraPosVec(tickDelta)
+        if (target != null) {
+            reachDistance = target.pos.distanceTo(cameraPos)
+        }
+
+        val perpendicularVector = perpendicularVector(rotation,InPlane.XZ)
+        val center = cameraPos.add(rotation.multiply(reachDistance/2.0))
+
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea((world as ServerWorld).iterateEntities(),entity,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
+        if (entityList.isEmpty()){
+            return target
+        } else {
+            var dist = 1000000.0
+            var tempEntity: Entity? = null
+            for (entity3 in entityList) {
+                val distTemp = dist
+                dist = min(entity3.squaredDistanceTo(entity),dist)
+                if (distTemp > dist){
+                    tempEntity = entity3
+                }
+            }
+            return if (tempEntity != null) {
+                EntityHitResult(tempEntity, tempEntity.pos)
+            } else {
+                target
+            }
+        }
     }
 
     private fun raycaster(distance: Double = 10.0, client: MinecraftClient, includeFluids: Boolean): HitResult? {
@@ -111,14 +133,13 @@ object RaycasterUtil {
         var reachDistance: Double = distance //Change this to extend the reach
         val target: HitResult? = raycast(entity, reachDistance, tickDelta, includeFluids, rotation)
         val cameraPos: Vec3d = entity.getCameraPosVec(tickDelta)
-        reachDistance *= reachDistance
         if (target != null) {
-            reachDistance = target.pos.squaredDistanceTo(cameraPos)
+            reachDistance = target.pos.distanceTo(cameraPos)
         }
 
         val perpendicularVector = perpendicularVector(rotation,InPlane.XZ)
         val center = cameraPos.add(entity.getRotationVec(tickDelta).multiply(reachDistance/2.0))
-        val entityList: MutableList<Entity> = raycastEntityRotatedArea(entity.world,entity,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
+        val entityList: MutableList<Entity> = raycastEntityRotatedArea((entity.world as ClientWorld).entities,entity,center,rotation,perpendicularVector,reachDistance,1.0,1.8)
         if (entityList.isEmpty()){
             return target
         } else {

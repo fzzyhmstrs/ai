@@ -55,7 +55,7 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val raycasterPos = user.pos.add(rotation.multiply(rangeOfEffect()/2.0 + 0.25 * level)).add(Vec3d(0.0,user.height/2.0,0.0))
         val entityList: MutableList<Entity> =
             RaycasterUtil.raycastEntityRotatedArea(
-                world,
+                world.iterateEntities(),
                 user,
                 raycasterPos,
                 rotation,

@@ -19,7 +19,7 @@ import net.minecraft.world.World
 class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val entity = RaycasterUtil.raycastEntity(rangeOfEffect())
+        val entity = RaycasterUtil.raycastEntity(rangeOfEffect(),user)
 
         val blockPos: BlockPos = if (entity == null){
             if (hit == null) {
@@ -54,7 +54,7 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun rangeOfEffect(): Double {
-        return 15.0
+        return 14.0
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {

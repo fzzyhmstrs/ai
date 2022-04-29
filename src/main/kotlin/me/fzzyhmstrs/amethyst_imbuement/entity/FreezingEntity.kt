@@ -42,7 +42,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
                 entityHitResult.entity.damage(DamageSource.GENERIC, 5.0F)
             }
         }
-        val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,pos = entityHitResult.entity.pos)
+        val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,entityHitResult.entity)
         if (entityList.isNotEmpty()){
             for (entity2 in entityList){
                 if (entity2 is Monster){

@@ -29,17 +29,17 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         val entityList: MutableList<Entity> = if (hit == null) {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.MISS){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.BLOCK){
             val tickDelta = MinecraftClient.getInstance().tickDelta
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).pos, user.getRotationVec(tickDelta))
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as BlockHitResult).pos, user.getRotationVec(tickDelta))
         } else if (hit.type == HitResult.Type.ENTITY){
             val tickDelta = MinecraftClient.getInstance().tickDelta
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.pos, user.getRotationVec(tickDelta))
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as EntityHitResult).entity.pos, user.getRotationVec(tickDelta))
         } else {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         }
         if (entityList.isEmpty()) {
             return false

@@ -26,19 +26,19 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         val blockPos: BlockPos
         val entityList: MutableList<Entity> = if (hit == null) {
             blockPos = user.blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.MISS){
             blockPos = user.blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.BLOCK){
             blockPos = (hit as BlockHitResult).blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.pos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = hit.pos)
         } else if (hit.type == HitResult.Type.ENTITY){
             blockPos = (hit as EntityHitResult).entity.blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,hit.entity.pos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = hit.entity.pos)
         } else {
             blockPos = user.blockPos
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         }
         if (entityList.isEmpty() || blockPos == user.blockPos) return false
         effect(world, user, entityList, level)

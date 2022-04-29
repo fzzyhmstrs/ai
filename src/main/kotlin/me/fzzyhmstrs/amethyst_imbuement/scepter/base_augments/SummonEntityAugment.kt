@@ -22,6 +22,7 @@ abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
         if (user !is PlayerEntity) return false
         val hit = RaycasterUtil.raycastHit(
             distance = MinecraftClient.getInstance().interactionManager?.reachDistance?.toDouble() ?: 3.0,
+            user,
             includeFluids = true
         ) ?: return false
         if (hit.type != HitResult.Type.BLOCK) return false

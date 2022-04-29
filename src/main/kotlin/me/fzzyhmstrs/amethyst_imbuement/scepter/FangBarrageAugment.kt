@@ -34,7 +34,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
         val successes = conjureBarrage(user,world,d,e,f)
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,15,30)
+        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,14,28)
         return successes > 0
     }
 

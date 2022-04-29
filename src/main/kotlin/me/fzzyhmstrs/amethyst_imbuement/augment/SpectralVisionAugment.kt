@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack
 class SpectralVisionAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        val entityList: MutableList<Entity> = RaycasterUtil.raycastEntityArea(25.0)
+        val entityList: MutableList<Entity> = RaycasterUtil.raycastEntityArea(25.0,user)
         if (entityList.isEmpty()) return
         for (target in entityList){
             if (target is Monster || target is PassiveEntity){
