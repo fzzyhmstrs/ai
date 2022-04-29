@@ -26,7 +26,7 @@ public abstract class PlayerInventoryMixin {
         //System.out.println(player.getStackInHand(Hand.MAIN_HAND).getItem().toString());
         if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof ScepterItem){
             if (player.getPose().equals(EntityPose.CROUCHING)){
-                ScepterObject.INSTANCE.updateScepterActiveEnchant(player.getStackInHand(Hand.MAIN_HAND),player,scrollAmount < 0.0D);
+                ScepterObject.INSTANCE.sendScepterUpdateFromClient(scrollAmount < 0.0D);
                 ci.cancel();
             }
         }
