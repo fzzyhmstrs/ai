@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
-import net.minecraft.client.MinecraftClient
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -21,7 +20,7 @@ abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
         if (user !is PlayerEntity) return false
         val hit = RaycasterUtil.raycastHit(
-            distance = MinecraftClient.getInstance().interactionManager?.reachDistance?.toDouble() ?: 3.0,
+            distance = 3.0,
             user,
             includeFluids = true
         ) ?: return false

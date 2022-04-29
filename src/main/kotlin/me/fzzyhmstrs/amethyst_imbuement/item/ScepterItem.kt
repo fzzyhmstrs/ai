@@ -1,8 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.config.SyncConfigPacket
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
@@ -21,7 +18,6 @@ import net.minecraft.item.*
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.LiteralText
@@ -120,14 +116,12 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             testLevel -= (minLvl - 1)
         }
 
-        if(world.isClient()) {
-            return clientUse(world, user, hand, stack, activeEnchantId, testEnchant,testLevel)
+        val stack2 = if (hand == Hand.MAIN_HAND) {
+            user.offHandStack
         } else {
-            val stack2 = if (hand == Hand.MAIN_HAND) {
-                user.offHandStack
-            } else {
-                user.mainHandStack
-            }
+            user.mainHandStack
+        }
+        if(world.isClient()) {
             if (!stack2.isEmpty) {
                 if (stack2.item is BlockItem) {
                     val cht = MinecraftClient.getInstance().crosshairTarget
@@ -135,6 +129,16 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
                         if (cht.type == HitResult.Type.BLOCK) {
                             return TypedActionResult.pass(stack)
                         }
+                    }
+                }
+            }
+            return clientUse(world, user, hand, stack, activeEnchantId, testEnchant,testLevel)
+        } else {
+            if (!stack2.isEmpty) {
+                if (stack2.item is BlockItem) {
+                    val cht = RaycasterUtil.raycastBlock(entity = user)
+                    if (cht != null) {
+                        return TypedActionResult.pass(stack)
                     }
                 }
             }

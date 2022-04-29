@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.config.SyncConfigPacket
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PlaceItemAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
@@ -32,6 +33,7 @@ object AI: ModInitializer {
         RegisterRecipe.registerAll()
         SyncConfigPacket.registerServer()
         ScepterObject.registerServer()
+        PlaceItemAugment.registerServer()
     }
 
     fun aiRandom(): Random{
