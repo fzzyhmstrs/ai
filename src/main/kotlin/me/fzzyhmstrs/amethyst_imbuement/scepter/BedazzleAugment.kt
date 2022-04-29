@@ -30,15 +30,15 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         val entityList: MutableList<Entity> = if (hit == null) {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.MISS){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.BLOCK){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as BlockHitResult).pos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as BlockHitResult).pos)
         } else if (hit.type == HitResult.Type.ENTITY){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,(hit as EntityHitResult).entity.pos)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as EntityHitResult).entity.pos)
         } else {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level)
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level, user)
         }
         if (entityList.size <= 1) return false
         effect(world, user, entityList, level)

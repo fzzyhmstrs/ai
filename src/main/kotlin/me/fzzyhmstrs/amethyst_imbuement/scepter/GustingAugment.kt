@@ -22,7 +22,7 @@ import kotlin.math.min
 class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val entityList = RaycasterUtil.raycastEntityArea(raycastHitRange())
+        val entityList = RaycasterUtil.raycastEntityArea(raycastHitRange(), user)
         if (entityList.isEmpty()) return false
         var minDist = 10000000.0
         var maxDist = 0.0
