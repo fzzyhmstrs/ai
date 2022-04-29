@@ -181,6 +181,7 @@
 	"container.imbuing_table": "Imbue",
 	"container.imbuing_table.level_low": "Scepter level too low for this augment",
 	"container.disenchanting_table": "Disenchant",
+	"container.disenchanting_table.button.missing_enchantment": "Missing Enchantment",
 	"container.disenchanting_table.tooltip.limit": "Reached removal limit",
 	"container.disenchanting_table.tooltip1": "Scroll to previous enchantment",
 	"container.disenchanting_table.tooltip2": "Remove selected enchantment",
