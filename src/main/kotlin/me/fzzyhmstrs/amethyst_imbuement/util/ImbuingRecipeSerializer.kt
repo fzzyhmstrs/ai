@@ -65,11 +65,11 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
     override fun write(buf: PacketByteBuf, recipe: ImbuingRecipe) {
         recipe.getImbueA().write(buf)
         recipe.getImbueB().write(buf)
-        recipe.getImbueC().write(buf)
-        recipe.getImbueD().write(buf)
         for (i in 0..8){
             recipe.getCrafts(i).write(buf)
         }
+        recipe.getImbueC().write(buf)
+        recipe.getImbueD().write(buf)
 
         buf.writeString(recipe.getTitle())
         buf.writeInt(recipe.getCost())
