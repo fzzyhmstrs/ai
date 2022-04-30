@@ -72,7 +72,7 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
         val nbt = stack.orCreateNbt
         return ScepterObject.checkScepterStat(
             nbt,
-            Registry.ENCHANTMENT.getId(this)?.path ?: ""
+            Registry.ENCHANTMENT.getId(this)?.toString() ?: ""
         ) || player.abilities.creativeMode
     }
 

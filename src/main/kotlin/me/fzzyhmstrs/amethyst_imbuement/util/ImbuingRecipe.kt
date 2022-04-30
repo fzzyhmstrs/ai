@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
 import net.minecraft.inventory.SimpleInventory
@@ -84,8 +85,13 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
                                 return false
                             } else {
                                 val idTest = Identifier(augment)
-                                val pathTest = idTest.path
-                                val nbtTest = readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
+                                val pathTest = idTest.toString()
+                                val loreString = readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
+                                val nbtTest = if (Identifier(loreString).namespace == "minecraft"){
+                                    Identifier(AI.MOD_ID,Identifier(loreString).path).toString()
+                                } else {
+                                    loreString
+                                }
                                 bl1 = bl1 && pathTest == nbtTest
                             }
                         }

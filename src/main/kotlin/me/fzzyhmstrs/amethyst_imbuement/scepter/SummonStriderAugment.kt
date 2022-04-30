@@ -36,6 +36,6 @@ class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,10,1,imbueLevel,1, Items.FEATHER)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,10,1,imbueLevel,1, Items.SADDLE)
     }
 }
