@@ -38,9 +38,13 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.orCreateNbt
         if (nbt?.contains(NbtKeys.LORE_KEY.str()) == true){
-            val bola = readAugNbt(NbtKeys.LORE_KEY.str(),nbt)
-            tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.$bola").formatted(Formatting.GOLD)))
-            val type = ScepterObject.getAugmentType(bola)
+            val bola = if (Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).namespace == "minecraft"){
+                Identifier(AI.MOD_ID,Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).path).toString()
+            } else {
+                readAugNbt(NbtKeys.LORE_KEY.str(),nbt)
+            }
+        tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
+            val type = ScepterObject.getAugmentType(Identifier(AI.MOD_ID,Identifier(bola).path).toString())
             if (type == SpellType.NULL){
                 tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
             } else {
@@ -56,7 +60,7 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
             tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("lore_book.cooldown1").formatted(Formatting.WHITE)))
             val manaCost = ScepterObject.getAugmentManaCost(bola)
             tooltip.add(TranslatableText("lore_book.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
-            val bole = Registry.ENCHANTMENT.get(Identifier(AI.MOD_ID,bola))
+            val bole = Registry.ENCHANTMENT.get(Identifier(bola))
             if (bole is ScepterAugment) {
                 val spellTier = bole.getTier()
                 tooltip.add(
