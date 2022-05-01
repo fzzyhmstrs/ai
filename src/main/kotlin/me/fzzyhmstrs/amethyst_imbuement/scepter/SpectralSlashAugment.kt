@@ -50,7 +50,7 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
         if (world !is ServerWorld) return false
         if (user !is PlayerEntity) return false
-        val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta)
+        val rotation = user.getRotationVec(1.0F)
         val perpendicularVector = RaycasterUtil.perpendicularVector(rotation, RaycasterUtil.InPlane.XZ)
         val raycasterPos = user.pos.add(rotation.multiply(rangeOfEffect()/2.0 + 0.25 * level)).add(Vec3d(0.0,user.height/2.0,0.0))
         val entityList: MutableList<Entity> =

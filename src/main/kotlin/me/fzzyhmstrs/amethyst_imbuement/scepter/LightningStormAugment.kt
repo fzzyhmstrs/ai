@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -33,11 +32,9 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         } else if (hit.type == HitResult.Type.MISS){
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         } else if (hit.type == HitResult.Type.BLOCK){
-            val tickDelta = MinecraftClient.getInstance().tickDelta
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as BlockHitResult).pos, user.getRotationVec(tickDelta))
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as BlockHitResult).pos, user.getRotationVec(1.0F))
         } else if (hit.type == HitResult.Type.ENTITY){
-            val tickDelta = MinecraftClient.getInstance().tickDelta
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as EntityHitResult).entity.pos, user.getRotationVec(tickDelta))
+            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as EntityHitResult).entity.pos, user.getRotationVec(1.0F))
         } else {
             RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
         }
