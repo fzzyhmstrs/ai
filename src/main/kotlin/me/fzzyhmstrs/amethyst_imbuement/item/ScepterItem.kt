@@ -136,7 +136,12 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         } else {
             if (!stack2.isEmpty) {
                 if (stack2.item is BlockItem) {
-                    val cht = RaycasterUtil.raycastBlock(entity = user)
+                    val reachDistance = if (user.abilities.creativeMode){
+                        5.0
+                    } else {
+                        4.5
+                    }
+                    val cht = RaycasterUtil.raycastBlock(distance = reachDistance,entity = user)
                     if (cht != null) {
                         return TypedActionResult.pass(stack)
                     }

@@ -18,13 +18,13 @@ import kotlin.math.min
 
 object RaycasterUtil {
 
-    fun raycastHit(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): HitResult? {
+    fun raycastHit(distance: Double = 4.5,entity: Entity, includeFluids: Boolean = false): HitResult? {
         return raycasterServer(distance, entity, includeFluids)
     }
 
     @Suppress("unused")
-    fun raycastBlock(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): BlockPos? {
-        val hit = raycasterServer(distance, entity, includeFluids) ?: return null
+    fun raycastBlock(distance: Double = 4.5,entity: Entity, includeFluids: Boolean = false): BlockPos? {
+        val hit = raycast(entity, distance, 1.0F, includeFluids, entity.getRotationVec(1.0F)) ?: return null
         return when(hit.type){
             HitResult.Type.MISS -> null
             HitResult.Type.BLOCK -> {
@@ -35,7 +35,7 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastEntity(distance: Double = 4.0,entity: Entity, includeFluids: Boolean = false): Entity? {
+    fun raycastEntity(distance: Double = 4.5,entity: Entity, includeFluids: Boolean = false): Entity? {
         val hit = raycasterServer(distance, entity, includeFluids) ?: return null
         return when(hit.type){
             HitResult.Type.MISS -> null
@@ -45,7 +45,7 @@ object RaycasterUtil {
         }
     }
 
-    fun raycastEntityArea(distance: Double = 4.0,entity: Entity,pos: Vec3d? = null, rotation: Vec3d = Vec3d(1.0,0.0,0.0)): MutableList<Entity>{
+    fun raycastEntityArea(distance: Double = 4.5,entity: Entity,pos: Vec3d? = null, rotation: Vec3d = Vec3d(1.0,0.0,0.0)): MutableList<Entity>{
         val pos2: Vec3d = pos ?: entity.pos
         if (entity.world.isClient) return mutableListOf()
         val world = entity.world as ServerWorld

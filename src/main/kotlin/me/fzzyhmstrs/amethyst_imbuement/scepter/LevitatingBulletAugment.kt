@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -60,8 +59,8 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
     }
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
-        val xAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).x
-        val zAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).z
+        val xAmount = user.getRotationVec(1.0F).x
+        val zAmount = user.getRotationVec(1.0F).z
         val maxAmount = max(abs(xAmount), abs(zAmount))
         val axis: Direction.Axis = if (maxAmount == abs(xAmount)){
             if (xAmount < 0){
@@ -95,8 +94,8 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         val rnd2 = world.random.nextInt(rnd1)
         val entity = entityList[rnd2]
 
-        val xAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).x
-        val zAmount = user.getRotationVec(MinecraftClient.getInstance().tickDelta).z
+        val xAmount = user.getRotationVec(1.0F).x
+        val zAmount = user.getRotationVec(1.0F).z
         val maxAmount = max(abs(xAmount), abs(zAmount))
         val axis: Direction.Axis = if (maxAmount == abs(xAmount)){
             if (xAmount < 0){
