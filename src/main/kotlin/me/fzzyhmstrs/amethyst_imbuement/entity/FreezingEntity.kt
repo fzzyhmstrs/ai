@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource

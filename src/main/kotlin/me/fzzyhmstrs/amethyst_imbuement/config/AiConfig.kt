@@ -2,13 +2,12 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.util.Identifier
 import java.io.File
 import java.io.FileWriter
 

@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot

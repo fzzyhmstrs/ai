@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
