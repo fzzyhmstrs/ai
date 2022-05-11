@@ -24,7 +24,7 @@ object RegisterKeybind {
         KeyBinding(
             "key.amethyst_imbuement.spell_key",  // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-            GLFW.GLFW_KEY_SLASH,  // The keycode of the key
+            GLFW.GLFW_KEY_BACKSLASH,  // The keycode of the key
             KeyBinding.GAMEPLAY_CATEGORY // The translation key of the keybinding's category.
         )
     )
