@@ -5,7 +5,6 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.scepter.*
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*

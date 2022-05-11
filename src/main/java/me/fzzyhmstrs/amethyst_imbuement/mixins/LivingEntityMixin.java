@@ -8,7 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject;
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;

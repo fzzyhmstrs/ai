@@ -13,13 +13,13 @@
 	"item": "amethyst_imbuement:garnet"
   },
   "craftA": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftB": {
 	"item": "minecraft:blaze_powder"
   },
   "craftC": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftD": {
 	"item": "minecraft:blaze_powder"
@@ -28,13 +28,13 @@
 	"item": "minecraft:blaze_powder"
   },
   "craftG": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftH": {
 	"item": "minecraft:blaze_powder"
   },
   "craftI": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "title": "Strength",
   "cost": 11,

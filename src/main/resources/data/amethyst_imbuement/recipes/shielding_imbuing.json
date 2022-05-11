@@ -22,16 +22,16 @@
 	"item": "minecraft:shield"
   },
   "craftD": {
-	"item": "minecraft:gold_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftF": {
-	"item": "minecraft:gold_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftG": {
 	"item": "minecraft:shield"
   },
   "craftH": {
-	"item": "minecraft:gold_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftI": {
 	"item": "minecraft:shield"

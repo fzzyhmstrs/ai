@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.MinecraftClient
@@ -103,7 +102,8 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         return true
     }
 
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+    override fun clientTask(world: World, user: LivingEntity,
+                            hand: Hand, level: Int) {
         val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
         val perpendicularToPosX = 1.0
         val perpendicularToPosZ = (rotation.x/rotation.z) * -1

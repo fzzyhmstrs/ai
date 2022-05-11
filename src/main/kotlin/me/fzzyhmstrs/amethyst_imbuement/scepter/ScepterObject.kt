@@ -1,12 +1,16 @@
 @file:Suppress("REDUNDANT_ELSE_IN_WHEN")
 
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.AugmentDamage
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
+import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.PacketSender
@@ -36,13 +40,13 @@ import kotlin.math.max
 object ScepterObject: AugmentDamage {
 
     private val scepters: MutableMap<Int,MutableMap<String,Long>> = mutableMapOf()
-    private val augmentStats: MutableMap<String,AugmentDatapoint> = mutableMapOf()
+    private val augmentStats: MutableMap<String, AugmentDatapoint> = mutableMapOf()
     private val bookOfLoreListT1: MutableList<String> = mutableListOf()
     private val bookOfLoreListT2: MutableList<String> = mutableListOf()
     private val bookOfLoreListT12: MutableList<String> = mutableListOf()
     private val activeAugment: MutableMap<Int,String> = mutableMapOf()
     private val augmentApplied: MutableMap<Int,Int> = mutableMapOf()
-    private val persistentEffect: MutableMap<Int,PersistentEffectData> = mutableMapOf()
+    private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private var lastActiveEnchant = ""
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
@@ -220,7 +224,7 @@ object ScepterObject: AugmentDamage {
 
     fun activeEnchantHelper(world: World,stack: ItemStack, activeEnchant: String): String{
         val nbt: NbtCompound = stack.nbt?:return activeEnchant
-        val id: Int = nbtChecker(nbt)?: return activeEnchant
+        val id: Int = nbtChecker(nbt) ?: return activeEnchant
         return if(!activeAugment.containsKey(id)){
             activeEnchant
         } else {
@@ -281,7 +285,7 @@ object ScepterObject: AugmentDamage {
 
     fun resetCooldown(stack: ItemStack, activeEnchantId: String){
         val nbt = stack.nbt?: return
-        val id: Int = nbtChecker(nbt)?:return
+        val id: Int = nbtChecker(nbt) ?:return
         if(!scepters.containsKey(id)) return
         if (scepters[id]?.isEmpty() == true) return
         if(scepters[id]?.containsKey(activeEnchantId) != true) return
@@ -333,14 +337,14 @@ object ScepterObject: AugmentDamage {
     fun setPersistentTickerNeed(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int,blockPos: BlockPos, augment: MiscAugment, delay: Int, duration: Int){
         val stack = user.getStackInHand(Hand.MAIN_HAND)
         val nbt = stack.orCreateNbt
-        val id = nbtChecker(nbt)?:return
+        val id = nbtChecker(nbt) ?:return
         persistentEffect[id] = PersistentEffectData(world,user,entityList,level,blockPos,augment,delay,duration)
         persistentEffectNeed[id] = 0
     }
 
     fun scepterTickNbtCheck(stack: ItemStack): Int{
         val nbt = stack.nbt ?: return -1
-        return nbtChecker(nbt)?:return -1
+        return nbtChecker(nbt) ?:return -1
     }
 
     fun transferNbt(stack1: ItemStack,stack2: ItemStack){
@@ -354,16 +358,16 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-    fun bookOfLoreNbtGenerator(tier:LoreTier = LoreTier.ANY_TIER): NbtCompound{
+    fun bookOfLoreNbtGenerator(tier: LoreTier = LoreTier.ANY_TIER): NbtCompound{
         val nbt = NbtCompound()
         val aug =  when (tier){
-            LoreTier.ANY_TIER->{
+            LoreTier.ANY_TIER ->{
                 getRandBookOfLoreAugment(bookOfLoreListT12)
             }
-            LoreTier.LOW_TIER->{
+            LoreTier.LOW_TIER ->{
                 getRandBookOfLoreAugment(bookOfLoreListT1)
             }
-            LoreTier.HIGH_TIER->{
+            LoreTier.HIGH_TIER ->{
                 getRandBookOfLoreAugment(bookOfLoreListT2)
             }
             else->{
@@ -440,7 +444,7 @@ object ScepterObject: AugmentDamage {
 
     fun getAugmentType(id: String): SpellType {
         if(!augmentStats.containsKey(id)) return SpellType.NULL
-        return augmentStats[id]?.type?:SpellType.NULL
+        return augmentStats[id]?.type?: SpellType.NULL
     }
 
     fun getAugmentItem(id: String): Item {
@@ -487,9 +491,9 @@ object ScepterObject: AugmentDamage {
     }
 
 
-    data class AugmentDatapoint(val type: SpellType,val cooldown: Int,
-                                        val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
-                                        val bookOfLoreTier: Int, val keyItem: Item){
+    data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
+                                val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
+                                val bookOfLoreTier: Int, val keyItem: Item){
         //hi
     }
     private data class PersistentEffectData(val world: World, val user: LivingEntity,

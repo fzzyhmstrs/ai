@@ -4,9 +4,9 @@ import com.google.common.collect.Lists
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Blocks

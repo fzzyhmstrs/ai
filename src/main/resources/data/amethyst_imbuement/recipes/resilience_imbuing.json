@@ -13,13 +13,13 @@
 	"item": "amethyst_imbuement:citrine"
   },
   "craftA": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftB": {
 	"item": "minecraft:obsidian"
   },
   "craftC": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftD": {
 	"item": "minecraft:obsidian"
@@ -28,13 +28,13 @@
 	"item": "minecraft:obsidian"
   },
   "craftG": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "craftH": {
 	"item": "minecraft:obsidian"
   },
   "craftI": {
-	"item": "amethyst_imbuement:steel_ingot"
+	"tag": "c:steel_ingots"
   },
   "title": "Resilience",
   "cost": 16,
