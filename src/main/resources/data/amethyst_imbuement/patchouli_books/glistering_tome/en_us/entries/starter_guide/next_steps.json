@@ -11,7 +11,7 @@
 "type": "patchouli:spotlight",
 "title": "Scepter Spellcasting",
 "item": "amethyst_imbuement:opaline_scepter",
-"text": "Scepters are magical sources from which you can cast many offensive and defnsive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools."
+"text": "Scepters are magical sources from which you can cast many offensive and defensive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools."
 },
 {
 "type": "patchouli:spotlight",
@@ -23,7 +23,7 @@
 "type": "patchouli:spotlight",
 "title": "Upgrade Equipment",
 "item": "amethyst_imbuement:ametrine_chestplate,amethyst_imbuement:garnet_sword,amethyst_imbuement:sniper_bow,minecraft:bucket",
-"text": "There is a wide variety of new gear and upgrades available for existing items to explore!$(br)$(l)"
+"text": "There is a wide variety of new gear to craft, as well as upgrades available for new and existing items to check out!$(br)$(l)"
 }
 ]
 }
