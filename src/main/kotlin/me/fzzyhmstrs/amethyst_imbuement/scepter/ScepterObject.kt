@@ -48,7 +48,6 @@ object ScepterObject: AugmentDamage {
     private val augmentApplied: MutableMap<Int,Int> = mutableMapOf()
     private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
-    private var lastActiveEnchant = ""
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier("scepter_sync_packet")
     private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
@@ -104,6 +103,11 @@ object ScepterObject: AugmentDamage {
             initializeScepter(stack,world)
         }
         if(scepters[id]?.containsKey(activeEnchantId) == true){
+            val enchantCheck = Registry.ENCHANTMENT.get(Identifier(activeEnchantId))?:return null
+            if (EnchantmentHelper.getLevel(enchantCheck,stack) == 0){
+                fixActiveEnchantWhenMissing(stack, world)
+                return null
+            }
             val cooldown = augmentStats[activeEnchantId]?.cooldown
             val time = user.world.time
             if (cooldown != null && scepters[id]?.get(activeEnchantId) != null){
@@ -158,17 +162,32 @@ object ScepterObject: AugmentDamage {
             initializeScepter(stack,user.world)
         }
         nbt = stack.orCreateNbt
-        val activeEnchant = if (augmentApplied[id] == -1) {
+        val activeEnchantCheck = if (augmentApplied[id] == -1) {
             readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
         } else {
             activeAugment[id] ?: (fallbackAugment)
         }
+
+        val activeCheck = Registry.ENCHANTMENT.get(Identifier(activeEnchantCheck))
+        val activeEnchant = if (activeCheck != null) {
+            if (EnchantmentHelper.getLevel(activeCheck, stack) == 0) {
+                fixActiveEnchantWhenMissing(stack, user.world)
+                readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
+            } else {
+                activeEnchantCheck
+            }
+        } else {
+            fixActiveEnchantWhenMissing(stack, user.world)
+            readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
+        }
+
         if(scepters[id]?.isEmpty() == true){
             initializeScepter(stack, user.world)
         }
         if (scepters[id]?.size != stack.enchantments.size){
             initializeScepter(stack, user.world)
         }
+
         val nbtEls = stack.enchantments
         var matchIndex = 0
         val augEls: MutableList<Int> = mutableListOf()
@@ -222,6 +241,21 @@ object ScepterObject: AugmentDamage {
         user.sendMessage(message,false)
     }
 
+    private fun fixActiveEnchantWhenMissing(stack: ItemStack, world: World){
+        val nbt = stack.orCreateNbt
+        val newEnchant = EnchantmentHelper.get(stack).keys.firstOrNull()
+        val identifier = if (newEnchant != null){
+            Registry.ENCHANTMENT.getId(newEnchant)
+        } else {
+            stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
+            Registry.ENCHANTMENT.getId(RegisterEnchantment.MAGIC_MISSILE)
+        }
+        if (identifier != null) {
+            nbt.putString(NbtKeys.ACTIVE_ENCHANT.str(), identifier.toString())
+        }
+        initializeScepter(stack,world)
+    }
+
     fun activeEnchantHelper(world: World,stack: ItemStack, activeEnchant: String): String{
         val nbt: NbtCompound = stack.nbt?:return activeEnchant
         val id: Int = nbtChecker(nbt) ?: return activeEnchant
@@ -234,7 +268,6 @@ object ScepterObject: AugmentDamage {
                 var nxt: String = activeEnchant
                 activeAugment[id]?.let { nxt = it }
                 if (!world.isClient) {
-                    lastActiveEnchant = nxt
                     augmentApplied[id] = -1
                     writeStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nxt, nbt)
                 }
@@ -479,10 +512,6 @@ object ScepterObject: AugmentDamage {
         if(!augmentStats.containsKey(id)) return (1)
         val cd = (augmentStats[id]?.bookOfLoreTier) ?: 1
         return max(1,cd)
-    }
-
-    fun setLastActiveEnchant(newActiveEnchant: String){
-        lastActiveEnchant = newActiveEnchant
     }
 
     fun xpToNextLevel(xp: Int,lvl: Int): Int{
