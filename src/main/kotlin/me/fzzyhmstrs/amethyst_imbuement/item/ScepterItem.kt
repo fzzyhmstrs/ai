@@ -269,12 +269,10 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
         fun writeDefaultNbt(stack: ItemStack){
             val nbt = stack.orCreateNbt
-            val key = NbtKeys.ACTIVE_ENCHANT.str()
-            if(!nbt.contains(key)){
+            if(!nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())){
                 val identifier = Registry.ENCHANTMENT.getId(RegisterEnchantment.MAGIC_MISSILE)
                 if (identifier != null) {
-                    nbt.putString(key, identifier.toString())
-                    ScepterObject.setLastActiveEnchant(identifier.toString())
+                    nbt.putString(NbtKeys.ACTIVE_ENCHANT.str(), identifier.toString())
                 }
             }
             ScepterObject.getScepterStats(stack)
