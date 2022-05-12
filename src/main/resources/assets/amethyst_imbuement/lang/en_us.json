@@ -299,6 +299,7 @@
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",
 	"lore_book.augment": "Spell within: ",
+	"lore_book.augment.desc": "Description: ",
 	"lore_book.fury": "Min fury level required: ",
 	"lore_book.grace": "Min grace level required: ",
 	"lore_book.wit": "Min wit level required: ",
