@@ -35,7 +35,7 @@
 "type": "patchouli:spotlight",
 "title": "Decayed Enchantment",
 "item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:decayed\",lvl:1}]}",
-"text": "$(l)Effect:$() Adds damage to the enchanted axe and disables the opponents shield.$(br)$(l)Enchants:$() $(#490)Axe$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Very Rare$(br)$(l)Incompatibilities:$() Flame, Fire Aspect, Contaminated, Wasting"
+"text": "$(l)Effect:$() Your attack withers the target.$(br)$(l)Enchants:$() $(#490)Any weapon$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Very Rare$(br)$(l)Incompatibilities:$() Flame, Fire Aspect, Wasting, Contaminated"
 },
 {
 "type": "patchouli:spotlight",
