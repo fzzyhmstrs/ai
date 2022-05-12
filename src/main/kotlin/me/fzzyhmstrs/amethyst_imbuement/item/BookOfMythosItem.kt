@@ -44,6 +44,7 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Item
                 readAugNbt(NbtKeys.LORE_KEY.str(),nbt)
             }
             tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
+            tooltip.add(TranslatableText("lore_book.augment.desc").formatted(Formatting.WHITE).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE)))
             val type = ScepterObject.getAugmentType(bola)
             if (type == SpellType.NULL){
                 tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
