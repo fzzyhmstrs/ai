@@ -176,6 +176,7 @@
 	"enchantment.amethyst_imbuement.summon_zombie": "Summon Zombie",
 	"enchantment.amethyst_imbuement.teleport": "Teleport",
 	"enchantment.amethyst_imbuement.withering_bolt": "Withering Bolt",
+	"enchantment.amethyst_imbuement.none.desc": "No Description.",
 	"enchantment.amethyst_imbuement.heroic.desc": "Increases damage against illagers such as the Evoker and Pillager.",
 	"enchantment.amethyst_imbuement.wasting.desc": "Damaged enemies are inflicted with slowness.",
 	"enchantment.amethyst_imbuement.deadly_shot.desc": "Increases crossbow and sniper bow range and damage.",
