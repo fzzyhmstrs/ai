@@ -22,7 +22,7 @@ object AiConfig {
 
     init {
         scepters = readOrCreate("scepters_v0.json") { Scepters() }
-        altars = readOrCreate("altars_v0.json") { Altars() }
+        altars = readOrCreateUpdated("altars_v1.json","altars_v0.json", configClass = {Altars()}, previousClass = {AltarsV0()})
         colors = readOrCreate("colors_v0.json") { Colors() }
         ReadMe.writeReadMe("README.txt")
     }
@@ -45,6 +45,46 @@ object AiConfig {
                 f.writeText(gson.toJson(configClass()))
             }
             return configClass()
+        } catch (e: Exception) {
+            println("Failed to read config file! Using default values: " + e.message)
+            return configClass()
+        }
+    }
+
+    private inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "",configClass: () -> T, previousClass: () -> P): T{
+        val dirPair = makeDir(child)
+        if (!dirPair.second) {
+            return configClass()
+        }
+        val dir = dirPair.first
+        val p = File(dir, previous)
+        try {
+            if (p.exists()) {
+                val previousConfig = gson.fromJson(p.readLines().joinToString(""), P::class.java)
+                if (previousConfig is OldClass){
+                    val newClass = previousConfig.generateNewClass()
+                    if (newClass !is T){
+                        throw RuntimeException("Old config class is not returning the proper new config class: ${P::class.simpleName} is returning ${newClass.javaClass.simpleName}; expected ${T::class.simpleName}")
+                    } else {
+                        val f = File(dir,file)
+                        if (f.exists()){
+                            p.delete() //attempts to delete the now useless old config version file
+                            return gson.fromJson(f.readLines().joinToString(""), T::class.java)
+                        } else if (!f.createNewFile()){
+                            //don't delete old file if the new one can't be generated to take it's place
+                            println("Failed to create new config file ($file), using old config with new defaults.")
+                        } else {
+                            p.delete() //attempts to delete the now useless old config version file
+                            f.writeText(gson.toJson(newClass))
+                        }
+                        return newClass
+                    }
+                } else {
+                    throw RuntimeException("Old config not properly set up as an OldConfig: ${P::class.simpleName}")
+                }
+            } else {
+                return readOrCreate(file, configClass = configClass)
+            }
         } catch (e: Exception) {
             println("Failed to read config file! Using default values: " + e.message)
             return configClass()
@@ -92,9 +132,30 @@ object AiConfig {
         var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
+        var imbuingTableReplaceEnchantingTable: Boolean = false
         var imbuingTableDifficultyModifier: Float = 1.0F
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
+    }
+
+    class AltarsV0: OldClass {
+        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
+        var disenchantBaseDisenchantsAllowed: Int = 1
+        var imbuingTableEnchantingEnabled: Boolean = true
+        var imbuingTableDifficultyModifier: Float = 1.0F
+        var altarOfExperienceBaseLevels: Int = 35
+        var altarOfExperienceCandleLevelsPer: Int = 5
+
+        override fun generateNewClass(): Any {
+            val altars = Altars()
+            altars.disenchantLevelCosts = disenchantLevelCosts
+            altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
+            altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
+            altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
+            altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
+            altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
+            return altars
+        }
     }
 
     class AugmentStats {
@@ -141,11 +202,23 @@ object AiConfig {
         var modRainbowList: List<String> = listOf()
     }
 
+    private interface OldClass{
+
+        fun generateNewClass(): Any
+
+    }
+
     private object ReadMe{
         val textLines: List<String> = listOf(
             "README",
             "Amethyst Imbuement",
             "------------------",
+            "",
+            "Config Changelog:",
+            "1.18.1-13/1.18.2-14: Added imbuingTableReplaceEnchantingTable to the Altars Config. Config updated to v1.",
+            "",
+            "Note:  Previous versions of updated configs that have new version numbers (v1 from v0, for example) will be read and copied over to the new version, and the old version deleted.",
+            "",
             "",
             "Scepters Config:",
             "The scepters config json tweaks the properties of the scepters in-game. You may want to tweak it if you feel like scepters have too many uses at once, or conversely if you feel that they run out of mana too quickly",
@@ -162,6 +235,7 @@ object AiConfig {
             "> disenchantLevelCosts: array of the levels required to disenchant the first, second, third, etc. enchantment off a particular item. You can extend this array if you'd like, but it won't do anything unless you also add to the base disenchants allowed. If you allow 3 base enchants, an array up to 7 long would have practical use.",
             "> disenchantBaseDisenchantsAllowed: the base number of disenchants allowed with just the table present before adding pillars. If you want virtually infinite disenchants, make this number very high. You could make it 0, meaning you have to add pillars before you can disenchant at all, but I don't recommend it.",
             "> imbuingTableEnchantingEnabled: disable this to prevent the player from using the imbuing table as an enchanting table. Use this if you have an alternate enchanting system and don't want the table to allow vanilla style enchanting.",
+            "> imbuingTableReplaceEnchantingTable: disabled by default. Enable to replace all Enchanting Tables with Imbuing tables during structure generation. Doesn't affect existing structures or tables.",
             "> imbuingTableDifficultyModifier: Multiplies the level cost of imbuing by the value entered. A value of 0.5 will halve the imbuing level costs, 2.0 will double them, and so on. Clamped between 0.0 (free) and 10.0",
             "> altarOfExperienceBaseLevels: base number of levels a player can store in an altar of experience surrounded by 0 candles.",
             "> altarOfExperienceCandleLevelsPer: number of storable levels each candle placed around the altar of experience adds. Warding Candles provide double this base bonus.",

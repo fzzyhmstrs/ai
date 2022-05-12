@@ -24,6 +24,7 @@
     "PlayerEntityMixin",
     "PowderSnowBlockMixin",
     "PowderSnowBucketItemMixin",
+    "StructureMixin",
     "TridentEntityMixin",
     "EnchantDamageMixin",
     "EnchantEfficiencyMixin",
