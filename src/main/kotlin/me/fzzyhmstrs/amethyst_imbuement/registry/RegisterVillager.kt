@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import fzzyhmstrs.structurized_reborn.impl.FabricStructurePoolRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
@@ -49,35 +50,42 @@ object RegisterVillager {
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FLETCHER,5) { factories -> factories.add(TradeFactory(Items.EMERALD,24,6,Items.CROSSBOW,1,RegisterItem.SNIPER_BOW,1,6,12))}
 
-        val plainsId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/houses"),plainsId,2, StructureProcessorLists.MOSSIFY_10_PERCENT)
+        if (AiConfig.villages.enableDesertWorkshops){
+            val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/houses"),desertId,AiConfig.villages.desertWorkshopWeight, StructureProcessorLists.EMPTY)
 
-        val plainsZombieId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop_zombie")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/zombie/houses"),plainsZombieId,1, StructureProcessorLists.ZOMBIE_PLAINS)
+            val desertZombieId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop_zombie")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/zombie/houses"),desertZombieId,1, StructureProcessorLists.ZOMBIE_DESERT)
+        }
+        if (AiConfig.villages.enablePlainsWorkshops){
+            val plainsId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/houses"),plainsId,AiConfig.villages.plainsWorkshopWeight, StructureProcessorLists.MOSSIFY_10_PERCENT)
 
-        val taigaId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/houses"),taigaId,2, StructureProcessorLists.MOSSIFY_20_PERCENT)
+            val plainsZombieId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop_zombie")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/plains/zombie/houses"),plainsZombieId,1, StructureProcessorLists.ZOMBIE_PLAINS)
+        }
+        if (AiConfig.villages.enableSavannaWorkshops) {
+            val savannaId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/houses"),savannaId,AiConfig.villages.savannaWorkshopWeight, StructureProcessorLists.EMPTY)
 
-        val taigaZombieId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop_zombie")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/zombie/houses"),taigaZombieId,1, StructureProcessorLists.ZOMBIE_TAIGA)
+            val savannaZombieId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop_zombie")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/zombie/houses"),savannaZombieId,1, StructureProcessorLists.ZOMBIE_SAVANNA)
+        }
+        if (AiConfig.villages.enableSnowyWorkshops) {
+            val snowyId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/houses"),snowyId,AiConfig.villages.snowyWorkshopWeight, StructureProcessorLists.EMPTY)
 
-        val snowyId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/houses"),snowyId,1, StructureProcessorLists.EMPTY)
+            val snowyZombieId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop_zombie")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/zombie/houses"),snowyZombieId,1, StructureProcessorLists.ZOMBIE_SNOWY)
+        }
+        if (AiConfig.villages.enableTaigaWorkshops) {
+            val taigaId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/houses"),taigaId,AiConfig.villages.taigaWorkshopWeight, StructureProcessorLists.MOSSIFY_20_PERCENT)
 
-        val snowyZombieId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop_zombie")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/snowy/zombie/houses"),snowyZombieId,1, StructureProcessorLists.ZOMBIE_SNOWY)
+            val taigaZombieId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop_zombie")
+            FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/zombie/houses"),taigaZombieId,1, StructureProcessorLists.ZOMBIE_TAIGA)
+        }
 
-        val savannaId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/houses"),savannaId,2, StructureProcessorLists.EMPTY)
-
-        val savannaZombieId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop_zombie")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/savanna/zombie/houses"),savannaZombieId,1, StructureProcessorLists.ZOMBIE_SAVANNA)
-
-        val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/houses"),desertId,1, StructureProcessorLists.EMPTY)
-
-        val desertZombieId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop_zombie")
-        FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/zombie/houses"),desertZombieId,1, StructureProcessorLists.ZOMBIE_DESERT)
     }
 
 
