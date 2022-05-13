@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList
 import com.mojang.datafixers.util.Pair
 import draylar.structurized.api.StructurePoolAddCallback
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
@@ -56,64 +57,94 @@ object RegisterVillager {
         StructurePoolAddCallback.EVENT.register { structurePool ->
             when (structurePool.underlyingPool.id.toString()) {
                 "minecraft:village/plains/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/plains_crystal_workshop",
-                        StructureProcessorLists.MOSSIFY_10_PERCENT
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 2)
+                    if (AiConfig.villages.enablePlainsWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/plains_crystal_workshop",
+                            StructureProcessorLists.MOSSIFY_10_PERCENT
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, AiConfig.villages.plainsWorkshopWeight)
+                    }
                 }
                 "minecraft:village/plains/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/plains_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_PLAINS
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enablePlainsWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/plains_crystal_workshop",
+                            StructureProcessorLists.ZOMBIE_PLAINS
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, 1)
+                    }
                 }
                 "minecraft:village/taiga/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/taiga_crystal_workshop",
-                        StructureProcessorLists.MOSSIFY_10_PERCENT
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 2)
+                    if (AiConfig.villages.enableTaigaWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/taiga_crystal_workshop",
+                            StructureProcessorLists.MOSSIFY_10_PERCENT
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, AiConfig.villages.taigaWorkshopWeight)
+                    }
                 }
                 "minecraft:village/taiga/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/taiga_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_TAIGA
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableTaigaWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/taiga_crystal_workshop",
+                            StructureProcessorLists.ZOMBIE_TAIGA
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, 1)
+                    }
                 }
                 "minecraft:village/snowy/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/snowy_crystal_workshop",
-                        StructureProcessorLists.EMPTY
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableSnowyWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/snowy_crystal_workshop",
+                            StructureProcessorLists.EMPTY
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, AiConfig.villages.snowyWorkshopWeight)
+                    }
                 }
                 "minecraft:village/snowy/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/snowy_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_SNOWY
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableSnowyWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/snowy_crystal_workshop",
+                            StructureProcessorLists.ZOMBIE_SNOWY
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, 1)
+                    }
                 }
                 "minecraft:village/savanna/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/savanna_crystal_workshop",
-                        StructureProcessorLists.EMPTY
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 2)
+                    if (AiConfig.villages.enableSavannaWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/savanna_crystal_workshop",
+                            StructureProcessorLists.EMPTY
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, AiConfig.villages.savannaWorkshopWeight)
+                    }
                 }
                 "minecraft:village/savanna/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/savanna_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_SAVANNA
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableSavannaWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/savanna_crystal_workshop",
+                            StructureProcessorLists.ZOMBIE_SAVANNA
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, 1)
+                    }
                 }
                 "minecraft:village/desert/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/desert_crystal_workshop",
-                        StructureProcessorLists.MOSSIFY_10_PERCENT
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableDesertWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/desert_crystal_workshop",
+                            StructureProcessorLists.MOSSIFY_10_PERCENT
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, AiConfig.villages.desertWorkshopWeight)
+                    }
                 }
                 "minecraft:village/desert/zombie/houses" -> {
-                    val poolElement : SinglePoolElement = SinglePoolElement.ofProcessedSingle(AI.MOD_ID + ":village/desert_crystal_workshop",
-                        StructureProcessorLists.ZOMBIE_DESERT
-                    ).apply(StructurePool.Projection.RIGID)
-                    structurePool.addStructurePoolElement(poolElement, 1)
+                    if (AiConfig.villages.enableDesertWorkshops) {
+                        val poolElement: SinglePoolElement = SinglePoolElement.ofProcessedSingle(
+                            AI.MOD_ID + ":village/desert_crystal_workshop",
+                            StructureProcessorLists.ZOMBIE_DESERT
+                        ).apply(StructurePool.Projection.RIGID)
+                        structurePool.addStructurePoolElement(poolElement, 1)
+                    }
                 }
             }
         }
