@@ -4,8 +4,8 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.scepter.*
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import net.minecraft.enchantment.DamageEnchantment
@@ -15,27 +15,27 @@ import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
-@Suppress("MemberVisibilityCanBePrivate")
+//@Suppress("MemberVisibilityCanBePrivate")
 object RegisterEnchantment {
     private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()
 
     //vanilla style enchantments
     val ATTUNED = AttunedEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{regEnchant["attuned"] = it}
-    val HEROIC = DamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, EquipmentSlot.MAINHAND).also{regEnchant["heroic"] = it}
-    val WASTING = WastingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["wasting"] = it}
-    val DEADLY_SHOT = DeadlyShotEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{regEnchant["deadly_shot"] = it}
-    val PUNCTURING = PuncturingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["puncturing"] = it}
-    val INSIGHT = InsightEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{regEnchant["insight"] = it}
-    val LIFESTEAL = LifestealEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["lifesteal"] = it}
-    val DECAYED = DecayedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{regEnchant["decayed"] = it}
-    val CONTAMINATED = ContaminatedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{regEnchant["contaminated"] = it}
-    val CLEAVING = CleavingEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{regEnchant["cleaving"] = it}
-    val BULWARK = BulwarkEnchantment(Enchantment.Rarity.COMMON,1, EquipmentSlot.MAINHAND).also{regEnchant["bulwark"] = it}
-    val MULTI_JUMP = MultiJumpEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.FEET).also{regEnchant["multi_jump"] = it}
-    val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).also{regEnchant["night_vision"] = it}
-    val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{regEnchant["steadfast"] = it}
-    val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{regEnchant["rain_of_thorns"] = it}
-    val VEIN_MINER = VeinMinerEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{regEnchant["vein_miner"] = it}
+    val HEROIC = DamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, EquipmentSlot.MAINHAND).also{ checkConfig("heroic",it)}
+    val WASTING = WastingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("wasting", it)}
+    val DEADLY_SHOT = DeadlyShotEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("deadly_shot", it)}
+    val PUNCTURING = PuncturingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("puncturing", it)}
+    val INSIGHT = InsightEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("insight", it)}
+    val LIFESTEAL = LifestealEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("lifesteal", it)}
+    val DECAYED = DecayedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{ checkConfig("decayed", it)}
+    val CONTAMINATED = ContaminatedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{ checkConfig("contaminated", it)}
+    val CLEAVING = CleavingEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("cleaving", it)}
+    val BULWARK = BulwarkEnchantment(Enchantment.Rarity.COMMON,1, EquipmentSlot.MAINHAND).also{ checkConfig("bulwark", it)}
+    val MULTI_JUMP = MultiJumpEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.FEET).also{ checkConfig("multi_jump", it)}
+    val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).also{ checkConfig("night_vision", it)}
+    val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET).also{ checkConfig("steadfast", it)}
+    val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("rain_of_thorns", it)}
+    val VEIN_MINER = VeinMinerEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{ checkConfig("vein_miner", it)}
 
     //augments for imbuing
     val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).also{regEnchant["angelic"] = it}
@@ -113,6 +113,11 @@ object RegisterEnchantment {
 
     val DEBUG = DebugAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["debug"] = it}
 
+    private fun checkConfig(check: String, enchant: Enchantment){
+        if(AiConfig.enchantments.enabledEnchantments.getOrDefault(check,true)){
+            regEnchant[check] = enchant
+        }
+    }
     fun registerAll(){
 
         for (k in regEnchant.keys){

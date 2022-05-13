@@ -193,7 +193,7 @@ object ScepterObject: AugmentDamage {
         val augEls: MutableList<Int> = mutableListOf()
         for (i in 0..nbtEls.lastIndex){
             val identifier = EnchantmentHelper.getIdFromNbt(nbtEls[i] as NbtCompound)
-            val enchantCheck = Registry.ENCHANTMENT.get(identifier)?: RegisterEnchantment.DECAYED
+            val enchantCheck = Registry.ENCHANTMENT.get(identifier)?: RegisterEnchantment.ATTUNED
             if(enchantCheck is ScepterAugment) {
                 augEls.add(i)
             }
