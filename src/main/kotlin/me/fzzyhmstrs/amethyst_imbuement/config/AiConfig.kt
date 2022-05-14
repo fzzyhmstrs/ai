@@ -2,20 +2,14 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig.trimData
-import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.enchantment.Enchantment
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
 import java.io.File
-import java.io.FileWriter
 
 object AiConfig {
 
@@ -37,17 +31,16 @@ object AiConfig {
         colorsRaw.clearData()
         villages = readOrCreate("villages_v0.json") { Villages() }
         enchantments = readOrCreate("enchantments_v0.json") { Enchantments() }
-        ReadMe.writeReadMe("README.txt")
+        ReadmeText.writeReadMe("README.txt")
     }
 
     fun initConfig(){}
 
     private inline fun <reified T> readOrCreate(file: String, child: String = "", configClass: () -> T): T {
-        val dirPair = makeDir(child)
-        if (!dirPair.second) {
+        val (dir,dirCreated) = makeDir(child)
+        if (!dirCreated) {
             return configClass()
         }
-        val dir = dirPair.first
         val f = File(dir, file)
         try {
             if (f.exists()) {
@@ -64,12 +57,12 @@ object AiConfig {
         }
     }
 
-    private inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "",configClass: () -> T, previousClass: () -> P): T{
-        val dirPair = makeDir(child)
-        if (!dirPair.second) {
+    @Suppress("UNUSED_PARAMETER")
+    private inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "", configClass: () -> T, previousClass: () -> P): T{
+        val (dir,dirCreated) = makeDir(child)
+        if (!dirCreated) {
             return configClass()
         }
-        val dir = dirPair.first
         val p = File(dir, previous)
         try {
             if (p.exists()) {
@@ -84,7 +77,7 @@ object AiConfig {
                             p.delete() //attempts to delete the now useless old config version file
                             return gson.fromJson(f.readLines().joinToString(""), T::class.java)
                         } else if (!f.createNewFile()){
-                            //don't delete old file if the new one can't be generated to take it's place
+                            //don't delete old file if the new one can't be generated to take its place
                             println("Failed to create new config file ($file), using old config with new defaults.")
                         } else {
                             p.delete() //attempts to delete the now useless old config version file
@@ -108,7 +101,7 @@ object AiConfig {
         return readOrCreate(file,"augments") {configClass}
     }
 
-    private fun makeDir(child:String = ""): Pair<File,Boolean>{
+    fun makeDir(child:String = ""): Pair<File,Boolean>{
         val dir = if (child != ""){
             File(File(FabricLoader.getInstance().configDir.toFile(), AI.MOD_ID),child)
         } else {
@@ -134,6 +127,7 @@ object AiConfig {
         colors = gson.fromJson(buf.readString(),Colors::class.java)
     }
 
+
     class Scepters {
         var opalineDurability: Int = ScepterToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
@@ -149,26 +143,6 @@ object AiConfig {
         var imbuingTableDifficultyModifier: Float = 1.0F
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
-    }
-
-    class AltarsV0: OldClass {
-        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
-        var disenchantBaseDisenchantsAllowed: Int = 1
-        var imbuingTableEnchantingEnabled: Boolean = true
-        var imbuingTableDifficultyModifier: Float = 1.0F
-        var altarOfExperienceBaseLevels: Int = 35
-        var altarOfExperienceCandleLevelsPer: Int = 5
-
-        override fun generateNewClass(): Any {
-            val altars = Altars()
-            altars.disenchantLevelCosts = disenchantLevelCosts
-            altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
-            altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
-            altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
-            altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
-            altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
-            return altars
-        }
     }
 
     class AugmentStats {
@@ -223,6 +197,38 @@ object AiConfig {
         this.modRainbowList = listOf()
     }
 
+    class Villages{
+        var enableDesertWorkshops: Boolean = true
+        var desertWorkshopWeight: Int = 1
+        var enablePlainsWorkshops: Boolean = true
+        var plainsWorkshopWeight: Int = 2
+        var enableSavannaWorkshops: Boolean = true
+        var savannaWorkshopWeight: Int = 2
+        var enableSnowyWorkshops: Boolean = true
+        var snowyWorkshopWeight: Int = 1
+        var enableTaigaWorkshops: Boolean = true
+        var taigaWorkshopWeight: Int = 2
+    }
+
+    class Enchantments{
+        var enabledEnchantments: Map<String,Boolean> = mapOf(
+            "heroic" to true,
+            "wasting" to true,
+            "deadly_shot" to true,
+            "puncturing" to true,
+            "insight" to true,
+            "lifesteal" to true,
+            "decayed" to true,
+            "contaminated" to true,
+            "cleaving" to true,
+            "bulwark" to true,
+            "multi_jump" to true,
+            "night_vision" to true,
+            "steadfast" to true,
+            "rain_of_thorns" to true,
+            "vein_miner" to true
+        )
+    }
 
     class ColorsV0: OldClass{
 
@@ -270,37 +276,24 @@ object AiConfig {
         }
     }
 
-    class Villages{
-        var enableDesertWorkshops: Boolean = true
-        var desertWorkshopWeight: Int = 1
-        var enablePlainsWorkshops: Boolean = true
-        var plainsWorkshopWeight: Int = 2
-        var enableSavannaWorkshops: Boolean = true
-        var savannaWorkshopWeight: Int = 2
-        var enableSnowyWorkshops: Boolean = true
-        var snowyWorkshopWeight: Int = 1
-        var enableTaigaWorkshops: Boolean = true
-        var taigaWorkshopWeight: Int = 2
-    }
+    class AltarsV0: OldClass {
+        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
+        var disenchantBaseDisenchantsAllowed: Int = 1
+        var imbuingTableEnchantingEnabled: Boolean = true
+        var imbuingTableDifficultyModifier: Float = 1.0F
+        var altarOfExperienceBaseLevels: Int = 35
+        var altarOfExperienceCandleLevelsPer: Int = 5
 
-    class Enchantments{
-        var enabledEnchantments: Map<String,Boolean> = mapOf(
-            "heroic" to true,
-            "wasting" to true,
-            "deadly_shot" to true,
-            "puncturing" to true,
-            "insight" to true,
-            "lifesteal" to true,
-            "decayed" to true,
-            "contaminated" to true,
-            "cleaving" to true,
-            "bulwark" to true,
-            "multi_jump" to true,
-            "night_vision" to true,
-            "steadfast" to true,
-            "rain_of_thorns" to true,
-            "vein_miner" to true
-        )
+        override fun generateNewClass(): Any {
+            val altars = Altars()
+            altars.disenchantLevelCosts = disenchantLevelCosts
+            altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
+            altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
+            altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
+            altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
+            altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
+            return altars
+        }
     }
 
     private interface OldClass{
@@ -308,23 +301,4 @@ object AiConfig {
         fun generateNewClass(): Any
 
     }
-
-    private object ReadMe{
-        val textLines: List<String> = ReadmeText.readmeText()
-
-        fun writeReadMe(file: String){
-            val dirPair = makeDir()
-            if (!dirPair.second){
-                println("Couldn't make directory for storing the readme")
-            }
-            val f = File(dirPair.first,file)
-            val fw = FileWriter(f)
-            textLines.forEach {
-                value -> fw.write(value)
-                fw.write(System.getProperty("line.separator"))
-            }
-            fw.close()
-        }
-    }
-
 }
