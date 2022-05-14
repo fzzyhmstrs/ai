@@ -9,6 +9,7 @@ import net.minecraft.entity.passive.VillagerEntity
 
 class CharmedStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
     StatusEffect(statusEffectCategory,i) {
+
     override fun onRemoved(entity: LivingEntity, attributes: AttributeContainer, amplifier: Int) {
         if (entity is MobEntity && entity !is VillagerEntity){
             entity.isAiDisabled = false
@@ -21,5 +22,12 @@ class CharmedStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
             entity.isAiDisabled = true
         }
         super.onApplied(entity, attributes, amplifier)
+    }
+
+    override fun canApplyUpdateEffect(duration: Int, amplifier: Int): Boolean {
+        return false
+    }
+
+    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
     }
 }

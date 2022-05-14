@@ -16,4 +16,11 @@ class ShieldingStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
         entity.absorptionAmount = entity.absorptionAmount + (1 * (amplifier + 1)).toFloat()
         super.onApplied(entity, attributes, amplifier)
     }
+
+    override fun canApplyUpdateEffect(duration: Int, amplifier: Int): Boolean {
+        return false
+    }
+
+    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    }
 }

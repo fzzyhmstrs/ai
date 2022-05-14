@@ -19,4 +19,11 @@ class SoulbindingStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int)
         entity.world.gameRules[GameRules.KEEP_INVENTORY].set(true,server)
         super.onApplied(entity, attributes, amplifier)
     }
+
+    override fun canApplyUpdateEffect(duration: Int, amplifier: Int): Boolean {
+        return false
+    }
+
+    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    }
 }
