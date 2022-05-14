@@ -1,6 +1,24 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
+import java.io.File
+import java.io.FileWriter
+
 object ReadmeText {
+
+    fun writeReadMe(file: String){
+        val textLines: List<String> = readmeText()
+        val dirPair = AiConfig.makeDir()
+        if (!dirPair.second){
+            println("Couldn't make directory for storing the readme")
+        }
+        val f = File(dirPair.first,file)
+        val fw = FileWriter(f)
+        textLines.forEach {
+                value -> fw.write(value)
+            fw.write(System.getProperty("line.separator"))
+        }
+        fw.close()
+    }
 
     fun readmeText(): List<String>{
         return listOf(
