@@ -24,7 +24,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(settings) {
+open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(settings) {
 
     private val ttn: String = _ttn
     private val glint: Boolean = _glint
@@ -37,7 +37,7 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
     ) {
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.orCreateNbt
-        if (nbt?.contains(NbtKeys.LORE_KEY.str()) == true){
+        if (nbt.contains(NbtKeys.LORE_KEY.str())){
             val bola = if (Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).namespace == "minecraft"){
                 Identifier(AI.MOD_ID,Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).path).toString()
             } else {
@@ -45,7 +45,7 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
             }
             tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
             tooltip.add(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE))
-            val type = ScepterObject.getAugmentType(Identifier(AI.MOD_ID,Identifier(bola).path).toString())
+            val type = ScepterObject.getAugmentType(bola)
             if (type == SpellType.NULL){
                 tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
             } else {
@@ -110,10 +110,10 @@ class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : Item(s
         }
     }
 
-    private fun writeAugNbt(key: String, enchant: String, nbt: NbtCompound){
+    protected fun writeAugNbt(key: String, enchant: String, nbt: NbtCompound){
         nbt.putString(key,enchant)
     }
-    private fun readAugNbt(key: String, nbt: NbtCompound): String {
+    protected fun readAugNbt(key: String, nbt: NbtCompound): String {
         return nbt.getString(key)
     }
 }
