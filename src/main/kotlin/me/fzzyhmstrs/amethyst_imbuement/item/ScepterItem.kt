@@ -31,12 +31,15 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import kotlin.math.max
 
 @Suppress("SameParameterValue", "unused", "USELESS_IS_CHECK")
-class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material,settings), ManaItem {
+class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModifier: AugmentModifier): ToolItem(material, settings), ManaItem {
 
     private val tickerManaRepair: RegisterEvent.Ticker
     private val defaultManaRepairTime = 150L
+    private val augmentModifiers: MutableMap<Identifier,AugmentModifier> = mutableMapOf()
+    private val tempAugmentModifiers: MutableMap<Identifier,RegisterEvent.Ticker> = mutableMapOf()
 
     init {
         val manaRepairTime = if (material !is ScepterMaterialAddon){
@@ -45,6 +48,10 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             material.healCooldown()
         }
         tickerManaRepair = RegisterEvent.Ticker(manaRepairTime.toInt())
+        defaultModifier.forEach {
+            addModifier(it)
+
+        }
     }
 
     override fun appendTooltip(
@@ -69,6 +76,19 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         tooltip.add(LiteralText(graceText).formatted(SpellType.GRACE.fmt()))
         val witText = TranslatableText("scepter.wit.lvl").string + stats[2].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[5],stats[2]).toString()
         tooltip.add(LiteralText(witText).formatted(SpellType.WIT.fmt()))
+        if (augmentModifiers.isNotEmpty()){
+            val modifierText = TranslatableText("scepter.modifiers").formatted(Formatting.GOLD)
+            val commaText = LiteralText(", ").formatted(Formatting.GOLD)
+            val itr = augmentModifiers.asIterable().iterator()
+            while(itr.hasNext()){
+                val entry = itr.next()
+                modifierText.append(TranslatableText("scepter.modifiers.${entry.key}").formatted(Formatting.GOLD))
+                if (itr.hasNext()){
+                    modifierText.append(commaText)
+                }
+            }
+            tooltip.add(modifierText)
+        }
     }
 
     override fun isFireproof(): Boolean {
@@ -107,6 +127,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             }
         }
         if (testEnchant !is ScepterAugment) return resetCooldown(stack,world,user,activeEnchantId)
+
 
         //determine the level at which to apply the active augment, from 1 to the maximum level the augment can operate
         val level = ScepterObject.getScepterStat(nbt,activeEnchantId).first
@@ -159,13 +180,23 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
     private fun serverUse(world: World, user: PlayerEntity, hand: Hand, stack: ItemStack,
                           activeEnchantId: String, testEnchant: ScepterAugment, testLevel: Int): TypedActionResult<ItemStack>{
-        val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world)
+        val mods = checkForModifiers(Identifier(activeEnchantId))
+        var cdMod = 0
+        var levelMod = 0
+        var manaMod = 0
+        mods.forEach{
+            cdMod += it.cooldownModifier
+            levelMod += it.levelModifier
+            manaMod += it.manaCostModifier
+
+        }
+        val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world, cdMod)
         return if (cd != null) {
-            val manaReduction = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED, stack)
+            val manaReduction = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED, stack) + manaMod
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
-
-            if (testEnchant.applyTasks(world, user, hand, testLevel)) {
+            val level = max(1,testLevel + levelMod)
+            if (testEnchant.applyTasks(world, user, hand, level)) {
                 ScepterObject.applyManaCost(manaCost,stack, world, user)
                 user.itemCooldownManager.set(stack.item, cd)
                 TypedActionResult.success(stack)
@@ -200,6 +231,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         if (world.isClient) return
         if (entity !is PlayerEntity) return
 
+        tickModifiers()
         tickerManaRepair.tickUp()
         val id = ScepterObject.scepterTickNbtCheck(stack)
         if (id > 0){
@@ -234,6 +266,40 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             doSmoke(world,user)
         }
         return TypedActionResult.fail(stack)
+    }
+
+    fun addModifier(modifier: AugmentModifier){
+        val id = modifier.modifierId
+        augmentModifiers[id] = modifier
+        if (modifier.hasLifespan()){
+            tempAugmentModifiers[id] = RegisterEvent.Ticker(modifier.modifierLifespan)
+        }
+    }
+    fun removeModifier(identifier: Identifier){
+        augmentModifiers.remove(identifier)
+        tempAugmentModifiers.remove(identifier)
+    }
+    fun tickModifiers(){
+        tempAugmentModifiers.forEach {
+            it.value.tickUp()
+            if (it.value.isReady()){
+                removeModifier(it.key)
+            }
+        }
+    }
+    fun checkForModifiers(id: Identifier): List<AugmentModifier>{
+        if (augmentModifiers.isEmpty()) return listOf()
+        val list = mutableListOf<AugmentModifier>()
+        augmentModifiers.forEach{
+            if (it.value.hasSpellToAffect()){
+                if (it.value.spellsToAffect?.contains(id) == true){
+                    list.add(it.value)
+                }
+            } else {
+                list.add(it.value)
+            }
+        }
+        return list
     }
 
     //companion object for the scepter item, handles private functions and other housekeeping
