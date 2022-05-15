@@ -5,6 +5,7 @@ import dev.emi.trinkets.api.SlotReference
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.AugmentTasks
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -22,7 +23,6 @@ import java.util.*
 class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(settings,"copper_ring"), AugmentTasks {
     private val ttn: String = _ttn
     private var shieldLevel: Int = 0
-    private var tickCounter = 0
     private val baseAmount = 2
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
@@ -52,7 +52,6 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         if (entity.world.isClient()) return
         shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
         ShieldingAugment.addTrinket(entity,baseAmount + shieldLevel)
-        //ShieldingAugment.addTrinketToQueue(entity,slot,2 + shieldLevel)
         passiveEnchantmentTasks(stack,entity.world,entity)
     }
 
@@ -60,22 +59,18 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         super.onUnequip(stack, slot, entity)
         if(entity.world.isClient()) return
         unequipEnchantmentTasks(stack,entity.world,entity)
-        //ShieldingAugment.removeTrinketFromQueue(entity,slot)
         shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
         ShieldingAugment.removeTrinket(entity,baseAmount + shieldLevel)
     }
 
     override fun tick(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         if(entity.world.isClient()) return
-
-        if (entity.world.time%30 == 0L){
-            //ShieldingAugment.applyShielding(entity)
+        if (RegisterEvent.ticker_jewelry.isReady()){
             ShieldingAugment.applyEntityShielding(entity)
             passiveEnchantmentTasks(stack,entity.world,entity)
-            tickCounter = 0
         }
-
     }
+
     override fun passiveEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
         if (entity !is PlayerEntity) return
         super.passiveEnchantmentTasks(stack, world, entity)
