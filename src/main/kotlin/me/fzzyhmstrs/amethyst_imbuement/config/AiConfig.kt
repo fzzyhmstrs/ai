@@ -25,10 +25,8 @@ object AiConfig {
     init {
         scepters = readOrCreate("scepters_v0.json") { Scepters() }
         altars = readOrCreateUpdated("altars_v1.json","altars_v0.json", configClass = {Altars()}, previousClass = {AltarsV0()})
-        val colorsRaw: Colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", configClass = {Colors()}, previousClass = {ColorsV0()})
-        colorsRaw.trimData()
-        colors = colorsRaw
-        colorsRaw.clearData()
+        colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", configClass = {Colors()}, previousClass = {ColorsV0()})
+        colors.trimData()
         villages = readOrCreate("villages_v0.json") { Villages() }
         enchantments = readOrCreate("enchantments_v0.json") { Enchantments() }
         ReadmeText.writeReadMe("README.txt")
@@ -188,13 +186,6 @@ object AiConfig {
         this.defaultRainbowList = rainbowListBuilder(this.defaultRainbowList)
         this.modColorMap = colorMapBuilder(this.modColorMap)
         this.modRainbowList = rainbowListBuilder(this.modRainbowList)
-    }
-
-    private fun Colors.clearData(){
-        this.defaultColorMap = mapOf()
-        this.defaultRainbowList = listOf()
-        this.modColorMap = mapOf()
-        this.modRainbowList = listOf()
     }
 
     class Villages{
