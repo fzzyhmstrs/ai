@@ -27,7 +27,7 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
     private val maxLvl = _maxLvl
     private val tier = _tier
 
-    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean
+    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, modifiers: List<AugmentModifier>? = null): Boolean
 
     open fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int){
     }

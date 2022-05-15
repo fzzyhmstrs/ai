@@ -12,7 +12,13 @@ import net.minecraft.world.World
 
 abstract class SummonProjectileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        modifiers: List<AugmentModifier>?
+    ): Boolean {
         return spawnProjectileEntity(world, user, entityClass(world, user, level), soundEvent())
     }
 

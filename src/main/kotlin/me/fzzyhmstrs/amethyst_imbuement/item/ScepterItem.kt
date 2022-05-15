@@ -196,7 +196,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
             val level = max(1,testLevel + levelMod)
-            if (testEnchant.applyTasks(world, user, hand, level)) {
+            if (testEnchant.applyTasks(world, user, hand, level, mods)) {
                 ScepterObject.applyManaCost(manaCost,stack, world, user)
                 user.itemCooldownManager.set(stack.item, cd)
                 TypedActionResult.success(stack)

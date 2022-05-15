@@ -25,7 +25,13 @@ import net.minecraft.world.World
 abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl, EnchantmentTarget.WEAPON, *slot) {
     private val _item = item
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        modifiers: List<AugmentModifier>?
+    ): Boolean {
         return RaycasterUtil.raycastBlock(entity = user) != null
     }
 
