@@ -115,8 +115,8 @@ class AltarOfExperienceScreenHandler(
             }
         }
         context.run { world: World, pos: BlockPos ->
-            val candleTotals = checkCandles(world,pos)
-            val xpMax = updateMaxXp(candleTotals.first,candleTotals.second)
+            val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
+            val xpMax = updateMaxXp(candleTotal,wardingCandleTotal)
             experienceMax[0] = xpMax
             val xpLeft = xpMax - experienceStored[0]
             when (id) {
@@ -228,8 +228,8 @@ class AltarOfExperienceScreenHandler(
         addProperty(Property.create(this.experienceMax, 0))
         if (context != ScreenHandlerContext.EMPTY) {
             context.run { world: World, pos: BlockPos ->
-                val c = checkCandles(world, pos)
-                val e = updateMaxXp(c.first, c.second)
+                val (c,wc) = checkCandles(world, pos)
+                val e = updateMaxXp(c, wc)
                 experienceMax[0] = e
                 experienceStored[0] = getSyncedStoredXp()
                 sendContentUpdates()
