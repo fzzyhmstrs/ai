@@ -11,7 +11,13 @@ import net.minecraft.world.World
 
 abstract class MinorSupportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        modifiers: List<AugmentModifier>?
+    ): Boolean {
         var target = RaycasterUtil.raycastEntity(distance = rangeOfEffect(),user)
         if (target == null) {
             target = ZombieEntity(world)

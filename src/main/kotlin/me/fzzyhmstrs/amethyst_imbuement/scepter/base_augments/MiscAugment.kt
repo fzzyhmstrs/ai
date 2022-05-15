@@ -14,7 +14,13 @@ import net.minecraft.world.World
 
 abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int): Boolean {
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        modifiers: List<AugmentModifier>?
+    ): Boolean {
         var target: Entity? = null
         val hit = RaycasterUtil.raycastHit(distance = rangeOfEffect(),user, includeFluids = true) ?: return false
         if (hit.type == HitResult.Type.ENTITY) {
