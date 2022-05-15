@@ -92,7 +92,7 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World): Int?{
+    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Int = 0): Int?{
         if (world !is ServerWorld){return null}
         val scepterNbt = stack.orCreateNbt
         if (!scepterNbt.contains(NbtKeys.SCEPTER_ID.str())){
@@ -108,13 +108,15 @@ object ScepterObject: AugmentDamage {
                 fixActiveEnchantWhenMissing(stack, world)
                 return null
             }
-            val cooldown = augmentStats[activeEnchantId]?.cooldown
+            val cooldown = augmentStats[activeEnchantId]?.cooldown?.plus(cdMod)
             val time = user.world.time
-            if (cooldown != null && scepters[id]?.get(activeEnchantId) != null){
-                return if (time - cooldown >= scepters[id]?.get(activeEnchantId) as Long){ //checks that enough time has passed since last usage
+            val lastUsed = scepters[id]?.get(activeEnchantId)
+            if (cooldown != null && lastUsed != null){
+                val cooldown2 = max(cooldown,1) // don't let cooldown be less than 1 tick
+                return if (time - cooldown2 >= lastUsed){ //checks that enough time has passed since last usage
                     scepters[id]?.put(activeEnchantId, user.world.time)
                     incrementScepterStats(scepterNbt,activeEnchantId)
-                    cooldown
+                    cooldown2
                 } else {
                     null
                 }
@@ -123,7 +125,7 @@ object ScepterObject: AugmentDamage {
             initializeScepter(stack,world)
             //println("new enchant initialized with cooldown: ${augmentStats[activeEnchantId]?.cooldown}")
             incrementScepterStats(scepterNbt,activeEnchantId)
-            return augmentStats[activeEnchantId]?.cooldown
+            return augmentStats[activeEnchantId]?.cooldown?.plus(cdMod)
         }
 
         return null

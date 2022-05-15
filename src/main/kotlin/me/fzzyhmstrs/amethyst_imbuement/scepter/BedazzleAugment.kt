@@ -26,17 +26,7 @@ import kotlin.math.min
 class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val entityList: MutableList<Entity> = if (hit == null) {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
-        } else if (hit.type == HitResult.Type.MISS){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user)
-        } else if (hit.type == HitResult.Type.BLOCK){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as BlockHitResult).pos)
-        } else if (hit.type == HitResult.Type.ENTITY){
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level,user,pos = (hit as EntityHitResult).entity.pos)
-        } else {
-            RaycasterUtil.raycastEntityArea(rangeOfEffect() + 1.0 * level, user)
-        }
+        val (_,entityList) = raycastEntityArea(user,hit,level)
         if (entityList.size <= 1) return false
         effect(world, user, entityList, level)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.5F, 1.0F)
