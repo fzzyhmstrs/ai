@@ -13,7 +13,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
 
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid,StatusEffects.NIGHT_VISION,400,0)
+        addStatusToQueue(user,StatusEffects.NIGHT_VISION,400,0)
     }
 
     override fun getMinPower(level: Int): Int {

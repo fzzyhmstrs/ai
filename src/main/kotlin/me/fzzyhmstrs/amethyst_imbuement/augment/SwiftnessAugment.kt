@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack
 class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.ARMOR_LEGS, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid,StatusEffects.SPEED,260,level - 1)
+        addStatusToQueue(user,StatusEffects.SPEED,260,level - 1)
     }
 
 }

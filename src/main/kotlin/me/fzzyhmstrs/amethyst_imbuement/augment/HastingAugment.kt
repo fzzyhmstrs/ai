@@ -15,7 +15,7 @@ class HastingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.HASTING,stack)
-        addStatusToQueue(user.uuid, StatusEffects.HASTE,100,lvl-1)
+        addStatusToQueue(user, StatusEffects.HASTE,100,lvl-1)
         val rnd = user.world.random.nextFloat()
         if (rnd <= 0.25) {
             if (TotemItem.damageHandler(stack, user.world, user as PlayerEntity, 1)) {

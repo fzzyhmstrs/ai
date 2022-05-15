@@ -21,20 +21,19 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
 
         if (entityList.isEmpty()){
             successes++
-            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.RESISTANCE, 600 + 200 * level, level + 1, true)
-            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.STRENGTH, 800 + 200 * level, level - 1, true)
+            BaseAugment.addStatusToQueue(user,StatusEffects.RESISTANCE, 600 + 200 * level, level + 1)
+            BaseAugment.addStatusToQueue(user,StatusEffects.STRENGTH, 800 + 200 * level, level - 1)
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
-                if (entity3 !is Monster && entity3 !is PassiveEntity) {
+                if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
                     successes++
-                    BaseAugment.addStatusToQueue(entity3.uuid, StatusEffects.RESISTANCE, 600 + 200 * level, level, true)
+                    BaseAugment.addStatusToQueue(entity3, StatusEffects.RESISTANCE, 600 + 200 * level, level)
                     BaseAugment.addStatusToQueue(
-                        entity3.uuid,
+                        entity3,
                         StatusEffects.STRENGTH,
                         600 + 200 * level,
-                        level - 1,
-                        true
+                        level - 1
                     )
                 }
             }

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 class LuckyAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid,StatusEffects.LUCK,260,0)
+        addStatusToQueue(user,StatusEffects.LUCK,260,0)
     }
 
 }

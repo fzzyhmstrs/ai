@@ -10,6 +10,6 @@ import net.minecraft.item.ItemStack
 class StridingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.ARMOR_FEET, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid, RegisterStatus.STRIDING,260,0)
+        addStatusToQueue(user, RegisterStatus.STRIDING,260,0)
     }
 }

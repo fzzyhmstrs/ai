@@ -14,7 +14,7 @@ class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.STRENGTH,stack)
-        addStatusToQueue(user.uuid,StatusEffects.STRENGTH,100,lvl-1)
+        addStatusToQueue(user,StatusEffects.STRENGTH,100,lvl-1)
         val rnd = user.world.random.nextFloat()
         if (rnd <= 0.5) {
             if (TotemItem.damageHandler(stack, user.world, user as PlayerEntity, 1)) {

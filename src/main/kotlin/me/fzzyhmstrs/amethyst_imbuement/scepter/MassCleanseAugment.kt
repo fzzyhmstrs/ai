@@ -21,7 +21,8 @@ class MassCleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         var successes = 0
         for (target in entityList) {
             if(target !is Monster){
-                ScepterObject.addEntityToQueue(target.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.MASS_CLEANSE,user,level.toDouble(),null))
+                entityTask(world,target,user,level.toDouble(),null)
+                //ScepterObject.addEntityToQueue(target.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.MASS_CLEANSE,user,level.toDouble(),null))
                 successes++
             }
         }

@@ -31,7 +31,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     target.removeStatusEffect(effect.effectType)
                 }
                 target.fireTicks = 0
-                BaseAugment.addStatusToQueue(target.uuid,RegisterStatus.IMMUNITY,300,0, true)
+                BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,300,0)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
@@ -47,7 +47,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     user.removeStatusEffect(effect.effectType)
                 }
                 user.fireTicks = 0
-                BaseAugment.addStatusToQueue(user.uuid,RegisterStatus.IMMUNITY,200,0, true)
+                BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,200,0)
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 true
             } else {

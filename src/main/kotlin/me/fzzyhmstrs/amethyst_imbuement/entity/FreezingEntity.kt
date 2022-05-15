@@ -41,21 +41,20 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
                 (entityHitResult.entity as LivingEntity).frozenTicks = 340 + 160 * level
                 entityHitResult.entity.damage(DamageSource.GENERIC, 5.0F)
             }
-        }
-        val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level,entityHitResult.entity)
-        if (entityList.isNotEmpty()){
-            for (entity2 in entityList){
-                if (entity2 is Monster){
-                    if (entity is LivingEntity) {
-                        ScepterObject.addEntityToQueue(
-                            entity2.uuid,
+            val entityList = RaycasterUtil.raycastEntityArea(distance = 4.0 + level, entityHitResult.entity)
+            if (entityList.isNotEmpty()) {
+                for (entity2 in entityList) {
+                    if (entity2 is Monster) {
+                        RegisterEnchantment.FREEZING.entityTask(entity.world,entity2,entity,level.toDouble(),null)
+                        /*ScepterObject.addEntityToQueue2(
+                            entity2 as LivingEntity,
                             ScepterItem.EntityTaskInstance(
                                 RegisterEnchantment.FREEZING,
                                 entity,
                                 level.toDouble(),
                                 null
                             )
-                        )
+                        )*/
                     }
                 }
             }
