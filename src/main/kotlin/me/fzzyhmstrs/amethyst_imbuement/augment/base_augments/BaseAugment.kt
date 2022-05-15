@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -11,7 +10,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.*
-import net.minecraft.server.MinecraftServer
 import java.util.*
 
 
@@ -62,10 +60,9 @@ open class BaseAugment(weight: Rarity, val mxLvl: Int = 1, val target: Enchantme
     }
 
     companion object{
-        private val effectQueue: MutableMap<UUID,MutableMap<StatusEffect,MutableList<Pair<Int,Int>>>> = mutableMapOf()
         private val countQueue: MutableMap<UUID,MutableMap<String,Int>> = mutableMapOf()
-        private val immediateEffectQueue: MutableMap<UUID,MutableMap<StatusEffect,Pair<Int,Int>>> = mutableMapOf()
-        private var immediateEffectFlag: MutableList<UUID> = mutableListOf()
+        private val effectQueue: MutableMap<LivingEntity,MutableMap<StatusEffect,MutableList<Pair<Int,Int>>>> = mutableMapOf()
+        private var checkEffects: Boolean = false
 
         fun addCountToQueue(uuid: UUID,countTag: String,count: Int){
             if (countQueue.containsKey(uuid)){
@@ -85,88 +82,39 @@ open class BaseAugment(weight: Rarity, val mxLvl: Int = 1, val target: Enchantme
             return 0
         }
 
-        fun addStatusToQueue(uuid: UUID, effect: StatusEffect, duration: Int, amplifier: Int, immediate: Boolean = false){
-            if (immediate) {
-                if (!immediateEffectFlag.contains(uuid)){
-                    immediateEffectFlag.add(uuid)
+        fun addStatusToQueue(livingEntity: LivingEntity, effect: StatusEffect, duration: Int, amplifier: Int){
+            if (effectQueue.containsKey(livingEntity)) {
+                if (effectQueue[livingEntity]?.containsKey(effect) != true) {
+                    effectQueue[livingEntity]?.set(effect, mutableListOf())
                 }
-                if (immediateEffectQueue.containsKey(uuid)){
-                    immediateEffectQueue[uuid]?.set(effect,Pair(duration, amplifier))
-                } else {
-                    immediateEffectQueue[uuid] = mutableMapOf()
-                    immediateEffectQueue[uuid]?.set(effect,Pair(duration, amplifier))
-                }
-                return
-            }
-            if (effectQueue.containsKey(uuid)) {
-                if (effectQueue[uuid]?.containsKey(effect) != true) {
-                    effectQueue[uuid]?.set(effect, mutableListOf())
-                }
-                effectQueue[uuid]?.get(effect)?.add(Pair(duration,amplifier))
+                effectQueue[livingEntity]?.get(effect)?.add(Pair(duration,amplifier))
             } else {
-                effectQueue[uuid] = mutableMapOf()
-                if (effectQueue[uuid]?.containsKey(effect) != true) {
-                    effectQueue[uuid]?.set(effect, mutableListOf())
-                }
-                effectQueue[uuid]?.get(effect)?.add(Pair(duration,amplifier))
+                effectQueue[livingEntity] = mutableMapOf(effect to mutableListOf(Pair(duration,amplifier)))
             }
+            checkEffects = true
         }
 
-        fun applyEffects(entity: LivingEntity){
-            val uuid = entity.uuid
-            if (effectQueue.containsKey(uuid)){
-                val map = effectQueue[uuid]
-                if (map?.isNotEmpty() == true){
-                    for (effect in map.keys){
-                        val effectList = map[effect]
-                        if (effectList?.isNotEmpty() == true) {
-                            for (effect2 in effectList) {
-                                val dur = effect2.first
-                                val amp = effect2.second
-                                if (dur == 0) continue
-                                entity.addStatusEffect(StatusEffectInstance(effect, dur, amp))
-                            }
-                        }
-                    }
-                    removeStatusesFromQueue(uuid)
-                }
-            }
-        }
 
-        private fun removeStatusesFromQueue(uuid: UUID){
-            if (effectQueue.containsKey(uuid)){
-                effectQueue[uuid]?.clear()
-            }
-        }
-
-        fun checkImmediateEffects(): Boolean{
-            return immediateEffectFlag.isNotEmpty()
-        }
-
-        fun applyImmediateEffects(entity: LivingEntity){
-            val uuid = entity.uuid
-            if (immediateEffectQueue.containsKey(uuid)){
-                val map = immediateEffectQueue[uuid]
-                if (map?.isNotEmpty() == true){
-                    for (effect in map.keys){
-                        val effectPair = map[effect]
-                        val dur = effectPair?.first?:0
-                        val amp = effectPair?.second?:0
-                        if (dur == 0) continue
+        fun applyEffects(){
+            for ((entity,statusMap) in effectQueue){
+                if (entity.isDead|| entity.isRemoved) continue
+                for ((effect,effectList) in statusMap){
+                    for ((dur,amp) in effectList) {
                         entity.addStatusEffect(StatusEffectInstance(effect, dur, amp))
                     }
-                    removeImmediateStatusesFromQueue(uuid)
                 }
             }
+            //clear out the queue if any are needed
+            clearStatusesFromQueue()
         }
 
-        private fun removeImmediateStatusesFromQueue(uuid: UUID){
-            if (immediateEffectQueue.containsKey(uuid)){
-                immediateEffectQueue.remove(uuid)
-            }
-            while (immediateEffectFlag.contains(uuid)){
-                immediateEffectFlag.remove(uuid)
-            }
+        private fun clearStatusesFromQueue(){
+            effectQueue.clear()
+            checkEffects = false
+        }
+
+        fun checkEffectsQueue(): Boolean{
+            return checkEffects
         }
     }
 }
