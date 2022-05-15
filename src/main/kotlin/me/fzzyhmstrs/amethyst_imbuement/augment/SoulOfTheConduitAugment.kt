@@ -14,7 +14,7 @@ class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equip
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         if(user.isTouchingWaterOrRain){
-            addStatusToQueue(user.uuid,StatusEffects.CONDUIT_POWER,260,0)
+            addStatusToQueue(user,StatusEffects.CONDUIT_POWER,260,0)
             if (TotemItem.damageHandler(stack, user.world, user as PlayerEntity, 1)){
                 TotemItem.burnOutHandler(
                     stack,

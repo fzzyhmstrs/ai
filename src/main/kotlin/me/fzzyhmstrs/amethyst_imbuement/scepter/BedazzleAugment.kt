@@ -1,9 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -46,13 +44,13 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     }
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
-        val hostileEntity: MutableList<Entity> = mutableListOf()
+        val hostileEntity: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
             if (entity2 is HostileEntity && entity2 !is WitherEntity){
                 hostileEntity.add(entity2)
             }
         }
-        val merchantEntity: MutableList<Entity> = mutableListOf()
+        val merchantEntity: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
             if (entity2 is VillagerEntity){
                 merchantEntity.add(entity2)
@@ -60,29 +58,29 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         }
         if (hostileEntity.isEmpty() && merchantEntity.isEmpty()) return false
 
-        val checkListPair = getRndEntityList(world,hostileEntity,level)
-        val checkList = checkListPair.first
+        val (checkList,levelRemaining) = getRndEntityList(world,hostileEntity,level)
 
         if (checkList.isNotEmpty()) {
             for (entity in checkList) {
-                ScepterObject.addEntityToQueue(
-                    entity.uuid,
+                entityTask(world,entity,user,level.toDouble(),null)
+                /*ScepterObject.addEntityToQueue2(
+                    entity,
                     ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
-                )
+                )*/
             }
         }
 
         if (merchantEntity.isNotEmpty()){
-            if (checkListPair.second > 0) {
-                val checkListPair2 = getRndEntityList(world,merchantEntity,checkListPair.second)
-                val checkList2 = checkListPair2.first
+            if (levelRemaining > 0) {
+                val (checkList2, _) = getRndEntityList(world,merchantEntity,levelRemaining)
                 if (checkList.isNotEmpty()) {
                     for (entity in checkList2) {
                         //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
-                        ScepterObject.addEntityToQueue(
-                            entity.uuid,
+                        entityTask(world,entity,user,level.toDouble(),null)
+                        /*ScepterObject.addEntityToQueue2(
+                            entity,
                             ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
-                        )
+                        )*/
                     }
                 }
                 user.addStatusEffect(StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, 1200))
@@ -92,12 +90,13 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     }
 
     override fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?) {
+        if (target !is LivingEntity) return
         val duration = if (target is VillagerEntity){
             1200
         } else {
             600
         }
-        BaseAugment.addStatusToQueue(target.uuid,RegisterStatus.CHARMED,duration,0,true)
+        BaseAugment.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
@@ -116,9 +115,9 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         return SoundEvents.EVENT_RAID_HORN
     }
 
-    private fun getRndEntityList(world: World, list: MutableList<Entity>, level: Int): Pair<MutableList<Entity>,Int>{
+    private fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): Pair<MutableList<LivingEntity>,Int>{
         if (list.isNotEmpty()){
-            val listTmp: MutableList<Entity> = mutableListOf()
+            val listTmp: MutableList<LivingEntity> = mutableListOf()
             val startSize = min(level, list.size)
             var remaining = min(level, list.size)
             val leftOver = if(list.size < level) {

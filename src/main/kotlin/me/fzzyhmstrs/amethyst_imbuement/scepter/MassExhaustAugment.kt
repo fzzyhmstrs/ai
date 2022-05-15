@@ -20,10 +20,10 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         var successes = 0
         val amplifier = if (level > 1) {1} else {0}
         for (entity3 in entityList) {
-            if(entity3 is Monster){
+            if(entity3 is Monster && entity3 is LivingEntity){
                 successes++
-                BaseAugment.addStatusToQueue(entity3.uuid,StatusEffects.SLOWNESS,240 + 100*level,amplifier + 1, true)
-                BaseAugment.addStatusToQueue(entity3.uuid,StatusEffects.WEAKNESS,240 + 100*level,amplifier, true)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.SLOWNESS,240 + 100*level,amplifier + 1)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.WEAKNESS,240 + 100*level,amplifier)
             }
         }
         return successes > 0

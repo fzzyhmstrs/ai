@@ -37,8 +37,8 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
             if (entity is LivingEntity){
                 val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
                 val strength = 1.5 + 1.0 * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
-
-                ScepterObject.addEntityToQueue(entity.uuid, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
+                entityTask(world,entity,user,strength,null)
+                //ScepterObject.addEntityToQueue2(entity, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
             }
         }
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,0.8F,1.2F)

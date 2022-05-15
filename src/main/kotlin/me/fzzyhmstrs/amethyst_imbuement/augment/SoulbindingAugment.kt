@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 class SoulbindingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid, RegisterStatus.SOULBINDING, 260, 0)
+        addStatusToQueue(user, RegisterStatus.SOULBINDING, 260, 0)
     }
 
 }

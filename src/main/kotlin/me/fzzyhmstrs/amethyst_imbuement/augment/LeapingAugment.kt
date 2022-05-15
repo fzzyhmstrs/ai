@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack
 class LeapingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.ARMOR_FEET, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        addStatusToQueue(user.uuid,StatusEffects.JUMP_BOOST,260,level - 1)
+        addStatusToQueue(user,StatusEffects.JUMP_BOOST,260,level - 1)
     }
 
 }

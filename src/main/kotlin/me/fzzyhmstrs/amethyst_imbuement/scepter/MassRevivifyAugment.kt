@@ -20,15 +20,15 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
         var successes = 0
         if (entityList.isEmpty()){
             successes++
-            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.REGENERATION,240 * level, 1, true)
-            BaseAugment.addStatusToQueue(user.uuid,StatusEffects.ABSORPTION, 800, level, true)
+            BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION,240 * level, 1)
+            BaseAugment.addStatusToQueue(user,StatusEffects.ABSORPTION, 800, level)
         }
         entityList.add(user)
         for (entity3 in entityList) {
-            if(entity3 !is Monster){
+            if(entity3 !is Monster && entity3 is LivingEntity){
                 successes++
-                BaseAugment.addStatusToQueue(entity3.uuid,StatusEffects.REGENERATION,180 * level, 1, true)
-                BaseAugment.addStatusToQueue(entity3.uuid,StatusEffects.ABSORPTION, 600, level - 1, true)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.REGENERATION,180 * level, 1)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.ABSORPTION, 600, level - 1)
 
             }
         }

@@ -20,8 +20,8 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             if (TotemItem.damageHandler(stack, world, user, 240)) {
                 TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user, TranslatableText("augment_damage.guardian.burnout").toString())
             }
-            addStatusToQueue(user.uuid, StatusEffects.REGENERATION, 400, 0)
-            addStatusToQueue(user.uuid, StatusEffects.RESISTANCE, 400, 0)
+            addStatusToQueue(user, StatusEffects.REGENERATION, 400, 0)
+            addStatusToQueue(user, StatusEffects.RESISTANCE, 400, 0)
             //spawn the golem right at the player
             val cge = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world, 900)
             cge.setPosition(user.pos)
