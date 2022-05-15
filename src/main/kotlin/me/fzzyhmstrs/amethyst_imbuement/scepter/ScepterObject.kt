@@ -49,8 +49,8 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
-    private val SCEPTER_SYNC_PACKET = Identifier("scepter_sync_packet")
-    private val entityTasks: MutableMap<UUID, MutableList<ScepterItem.EntityTaskInstance>> = mutableMapOf()
+    private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
+
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
@@ -409,41 +409,6 @@ object ScepterObject: AugmentDamage {
         }
         nbt.putString(NbtKeys.LORE_KEY.str(),aug)
         return nbt
-    }
-
-    fun checkEntityTaskQueue(): Boolean{
-        return entityTasks.isNotEmpty()
-    }
-
-    fun applyEntityTasks(entity: LivingEntity){
-        val uuid = entity.uuid
-        if (entityTasks.containsKey(uuid)){
-            val list = entityTasks[uuid]
-            if (list?.isNotEmpty() == true) {
-                for (data in list){
-                    val enchant = data.enchant
-                    if (enchant is ScepterAugment){
-                        enchant.entityTask(entity.world,entity,data.user,data.level,data.hit)
-                    }
-                }
-            }
-            removeEntitiesFromQueue(uuid)
-        }
-    }
-
-    fun addEntityToQueue(uuid: UUID, dataInstance: ScepterItem.EntityTaskInstance){
-        if (entityTasks.containsKey(uuid)){
-            entityTasks[uuid]?.add(dataInstance)
-        } else {
-            entityTasks[uuid] = mutableListOf()
-            entityTasks[uuid]?.add(dataInstance)
-        }
-    }
-
-    private fun removeEntitiesFromQueue(uuid: UUID){
-        if (entityTasks.containsKey(uuid)){
-            entityTasks.remove(uuid)
-        }
     }
 
     fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
