@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
@@ -33,16 +35,16 @@ import net.minecraft.world.World
 @Suppress("SameParameterValue", "unused", "USELESS_IS_CHECK")
 class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material,settings), ManaItem {
 
-    private val manaRepairTime: Long
+    private val tickerManaRepair: RegisterEvent.Ticker
     private val defaultManaRepairTime = 150L
-    private var smoke = false
 
     init {
-        manaRepairTime = if (material !is ScepterMaterialAddon){
+        val manaRepairTime = if (material !is ScepterMaterialAddon){
             defaultManaRepairTime
         } else {
             material.healCooldown()
         }
+        tickerManaRepair = RegisterEvent.Ticker(manaRepairTime.toInt())
     }
 
     override fun appendTooltip(
@@ -198,6 +200,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
         if (world.isClient) return
         if (entity !is PlayerEntity) return
 
+        tickerManaRepair.tickUp()
         val id = ScepterObject.scepterTickNbtCheck(stack)
         if (id > 0){
             if (ScepterObject.getPersistentTickerNeed(id)){
@@ -212,7 +215,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             }
         }
         //slowly heal damage over time
-        if (world.time%manaRepairTime == 0L){
+        if (tickerManaRepair.isReady()){
             healDamage(1,stack)
         }
     }
@@ -237,6 +240,18 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
 
     companion object SI {
 
+        val SCEPTER_SMOKE_PACKET = Identifier(AI.MOD_ID,"scepter_smoke_packet")
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(SCEPTER_SMOKE_PACKET) { minecraftClient: MinecraftClient, _, _, _ ->
+                val world = minecraftClient.world
+                val entity = minecraftClient.player
+                if (world != null && entity != null){
+                    doSmoke(world,entity)
+                }
+            }
+        }
+
         private fun doSmoke(world: World, user: LivingEntity){
             val pos = user.pos
             val smokeX = pos.x - (user.width + 0.8f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180))
@@ -255,18 +270,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             return nbt.getInt(key)
         }
 
-        val SCEPTER_SMOKE_PACKET = Identifier("scepter_client_packet")
-
-        fun registerClient(){
-            ClientPlayNetworking.registerGlobalReceiver(SCEPTER_SMOKE_PACKET) { minecraftClient: MinecraftClient, _, _, _ ->
-                val world = minecraftClient.world
-                val entity = minecraftClient.player
-                if (world != null && entity != null){
-                    doSmoke(world,entity)
-                }
-            }
-        }
-
         fun writeDefaultNbt(stack: ItemStack){
             val nbt = stack.orCreateNbt
             if(!nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())){
@@ -278,9 +281,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings): ToolItem(material
             ScepterObject.getScepterStats(stack)
         }
     }
-
-
-    //data class ClientTaskInstance(val target: Entity?, val level: Int, val hit: HitResult?)
 
     data class EntityTaskInstance(val enchant: Enchantment,val user: LivingEntity, val level: Double, val hit: HitResult?)
 
