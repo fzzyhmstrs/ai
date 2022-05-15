@@ -24,7 +24,6 @@ public class StructureMixin {
         if (state.isOf(Blocks.ENCHANTING_TABLE) && AiConfig.INSTANCE.getAltars().getImbuingTableReplaceEnchantingTable()){
             Item table = RegisterBlock.INSTANCE.getIMBUING_TABLE().asItem();
             nbtCompound.putString("Name", Registry.ITEM.getId(table).toString());
-            System.out.println("swapped an enchanting table out!");
         }
         return nbtCompound;
     }
