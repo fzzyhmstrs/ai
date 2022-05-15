@@ -31,9 +31,7 @@ object AI: ModInitializer {
         RegisterStatus.registerAll()
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
-        SyncConfigPacket.registerServer()
-        ScepterObject.registerServer()
-        PlaceItemAugment.registerServer()
+        RegisterEvent.registerAll()
     }
 
     fun aiRandom(): Random{
@@ -48,8 +46,7 @@ object AIClient: ClientModInitializer{
         RegisterRenderer.registerAll()
         RegisterScreen.registerAll()
         RegisterKeybind.registerAll()
-        SyncConfigPacket.registerClient()
-        ScepterItem.registerClient()
+        RegisterEvent.registerClient()
     }
 
 }
