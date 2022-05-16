@@ -12,14 +12,17 @@ open class AugmentModifier(
     val manaCostModifier: Int = 0,
     val rangeModifier: Double = 0.0,
     val levelModifier: Int = 0,
+    val xpModifier: XpModifiers? = null,
     val modifierLifespan: Int = 0,
     val secondaryEffect: SecondaryEffect = SecondaryEffect(),
     val spellsToAffect: List<Identifier>? = null,
+    
 ) {
 
     private val hasSpell: Boolean = spellsToAffect != null
     private val hasEffect: Boolean = secondaryEffect.secondaryEffect != null
     private val hasLife: Boolean = modifierLifespan != 0
+    private val hasXp = xpModifier != null
 
     fun hasSpellToAffect(): Boolean{
         return hasSpell
@@ -32,7 +35,13 @@ open class AugmentModifier(
     fun hasLifespan(): Boolean{
         return hasLife
     }
+    
+    fun hasXpMods(): Boolean{
+        return hasXp
+    }
 
     data class SecondaryEffect(val overridesEffect: Boolean = false, val secondaryEffect: ScepterAugment? = null){}
+    
+    data class XpModifiers(val furyXpMod: Int = 0, val witXpMod: Int = 0, val graceXpMod: Int = 0){}
 
 }
