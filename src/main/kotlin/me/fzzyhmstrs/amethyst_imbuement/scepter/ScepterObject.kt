@@ -92,7 +92,7 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Int = 0, xpMods: XpModifiers? = null): Int?{
+    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Int = 0): Int?{
         if (world !is ServerWorld){return null}
         val scepterNbt = stack.orCreateNbt
         if (!scepterNbt.contains(NbtKeys.SCEPTER_ID.str())){
@@ -115,7 +115,7 @@ object ScepterObject: AugmentDamage {
                 val cooldown2 = max(cooldown,1) // don't let cooldown be less than 1 tick
                 return if (time - cooldown2 >= lastUsed){ //checks that enough time has passed since last usage
                     scepters[id]?.put(activeEnchantId, user.world.time)
-                    incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
+                    //incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
                     cooldown2
                 } else {
                     null
@@ -124,7 +124,7 @@ object ScepterObject: AugmentDamage {
         } else {
             initializeScepter(stack,world)
             //println("new enchant initialized with cooldown: ${augmentStats[activeEnchantId]?.cooldown}")
-            incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
+            //incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
             return augmentStats[activeEnchantId]?.cooldown?.plus(cdMod)
         }
 
@@ -288,20 +288,20 @@ object ScepterObject: AugmentDamage {
         damageHandler(stack,world,user,cost,"")
     }
 
-    private fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: xpModifiers? = null){
+    fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: xpModifiers? = null){
         val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return
         if(spellKey == SpellType.NULL.name) return
         val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
-val statIncrease = 1 + if(xpMods == null) {
-0
-} else {
-when(spellKey){
-SpellType.FURY.name ->{xpMods.furyXpMod}
-SpellType.WIT.name ->{xpMods.witXpMod}
-SpellType.GRACE.name ->{xpMods.graceXpMod}
-else -> 0
-}
-}
+        val statIncrease = 1 + if(xpMods == null) {
+            0
+        } else {
+            when(spellKey){
+                SpellType.FURY.name ->{xpMods.furyXpMod}
+                SpellType.WIT.name ->{xpMods.witXpMod}
+                SpellType.GRACE.name ->{xpMods.graceXpMod}
+                else -> 0
+            }
+        }
         val statXp = readNbt(spellKey + "_xp",scepterNbt) + statIncrease
         writeNbt(spellKey + "_xp",statXp,scepterNbt)
         if(checkXpForLevelUp(statXp,statLvl)){
