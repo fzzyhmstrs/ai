@@ -42,6 +42,13 @@ open class AugmentModifier(
 
     data class SecondaryEffect(val overridesEffect: Boolean = false, val secondaryEffect: ScepterAugment? = null){}
     
-    data class XpModifiers(val furyXpMod: Int = 0, val witXpMod: Int = 0, val graceXpMod: Int = 0){}
+    data class XpModifiers(var furyXpMod: Int = 0, var witXpMod: Int = 0, var graceXpMod: Int = 0){
+fun plus(xpMods: XpModifiers?){
+if(xpMods == null) return
+this.furyXpMod += xpMods.furyXpMod
+this.witXpMod += xpMods.witXpMod
+this.graceXpMod += xpMods.graceXpMod
+}
+}
 
 }
