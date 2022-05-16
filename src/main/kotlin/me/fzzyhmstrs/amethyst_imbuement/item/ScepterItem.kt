@@ -191,7 +191,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             manaMod += it.manaCostModifier
             xpMods.plus(it.xpModifier)
         }
-        val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world, cdMod, xpMods)
+        val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world, cdMod)
         return if (cd != null) {
             val manaReduction = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED, stack) + manaMod
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
@@ -199,6 +199,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             val level = max(1,testLevel + levelMod)
             if (testEnchant.applyTasks(world, user, hand, level, mods)) {
                 ScepterObject.applyManaCost(manaCost,stack, world, user)
+                ScepterObject.incrementScepterStats(stack.orCreateNbt, activeEnchantId, xpMods)
                 user.itemCooldownManager.set(stack.item, cd)
                 TypedActionResult.success(stack)
             } else {
