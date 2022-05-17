@@ -12,12 +12,15 @@ open class AugmentModifier(
     val manaCostModifier: Int = 0,
     val damageModifier: Float = 0.0F,
     val damagePerLevelModifier: Float = 0.0F,
+    val damagePercentModifier: Float = 0.0F,
     val amplifierModifier: Int = 0,
     val amplifierPerLevelModifier: Int = 0,
     val durationModifier: Int = 0,
     val durationPerLevelModifier: Int = 0,
+    val durationPercentModifier: Int = 0,
     val rangeModifier: Double = 0.0,
     val rangePerLevelModifier: Double = 0.0,
+    val rangePercentModifier: Double = 0.0,
     val xpModifier: XpModifiers? = null,
     val modifierLifespan: Int = 0,
     val secondaryEffect: ScepterAugment? = null,
@@ -30,12 +33,15 @@ open class AugmentModifier(
     private val effectModifier = ScepterObject.AugmentEffect(
         damageModifier,
         damagePerLevelModifier,
+        damagePercentModifier,
         amplifierModifier,
         amplifierPerLevelModifier,
         durationModifier,
         durationPerLevelModifier,
+        durationPercentModifier,
         rangeModifier,
-        rangePerLevelModifier)
+        rangePerLevelModifier,
+        rangePercentModifier)
 
     fun hasSpellToAffect(): Boolean{
         return hasSpell
