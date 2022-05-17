@@ -24,10 +24,9 @@ import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import kotlin.math.max
 
-abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
-    private val maxLvl = _maxLvl
-    private val tier = _tier
-    open val baseEffect = ScepterObject.AugmentEffect(4.0F,0.0F,0,0,20,20,8.0,1.0)
+abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
+    
+    open val baseEffect = ScepterObject.AugmentEffect(4.0F,0.0F,0.0F,0,0,20,20,0,8.0,1.0,0.0)
 
     abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: ScepterObject.AugmentEffect): Boolean
 
@@ -51,34 +50,6 @@ abstract class ScepterAugment(_tier: Int, _maxLvl: Int, target: EnchantmentTarge
 
     open fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_BEACON_ACTIVATE
-    }
-
-    fun rangeOfEffect(modifier: Pair<Double, Double>, level: Int): Double{
-        return max(1.0,(modifier.first + baseRangeOfEffect().first) + ((modifier.second + baseRangeOfEffect().second) * level))
-    }
-    open fun baseRangeOfEffect(): Pair<Double, Double>{
-        return Pair(8.0,1.0)
-    }
-
-    fun damage(modifier: Float): Float{
-        return max(0.1F,baseDamage() + modifier)
-    }
-    open fun baseDamage(): Float{
-        return 4.0F
-    }
-
-    fun duration(modifier: Pair<Int,Int>, level: Int): Int{
-        return max(0,(modifier.first + baseDuration().first) + ((modifier.second + baseDuration().second) * level))
-    }
-    open fun baseDuration(): Pair<Int,Int>{
-        return Pair(20,20)
-    }
-
-    fun amplifier(modifier: Int): Int{
-        return max(0,baseAmplifier() + modifier)
-    }
-    open fun baseAmplifier(): Int{
-        return 0
     }
 
     override fun getMinPower(level: Int): Int {
