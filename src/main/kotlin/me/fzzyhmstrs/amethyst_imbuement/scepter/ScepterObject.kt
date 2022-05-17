@@ -347,7 +347,8 @@ object ScepterObject: AugmentDamage {
             val blockPos = persistentEffect[id]?.blockPos?:return
             val entityList = persistentEffect[id]?.entityList?:return
             val level = persistentEffect[id]?.level?:return
-            aug.persistentEffect(world, user,blockPos, entityList, level)
+            val effect = persistentEffect[id]?.effect?:return
+            aug.persistentEffect(world, user,blockPos, entityList, level, effect)
             val dur = persistentEffect[id]?.duration
             if(dur != null){
                 val newDur = dur - delay
@@ -370,11 +371,22 @@ object ScepterObject: AugmentDamage {
         val chk = persistentEffectNeed[id]?:-1
         return (chk >= 0)
     }
-    fun setPersistentTickerNeed(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int,blockPos: BlockPos, augment: MiscAugment, delay: Int, duration: Int){
-        val stack = user.getStackInHand(Hand.MAIN_HAND)
+    fun setPersistentTickerNeed(
+        world: World, user: LivingEntity, 
+        entityList: MutableList<Entity>, 
+        level: Int,blockPos: BlockPos, 
+        augment: MiscAugment, 
+        delay: Int, duration: Int,
+        effect: AugmentEffect){
+        val stackTemp = user.getStackInHand(Hand.MAIN_HAND)
+        val stack = if (stackTemp.item is ScepterItem){
+            stackTemp
+        } else {
+            user.getStackInHand(Hand.OFF_HAND)
+        }
         val nbt = stack.orCreateNbt
         val id = nbtChecker(nbt) ?:return
-        persistentEffect[id] = PersistentEffectData(world,user,entityList,level,blockPos,augment,delay,duration)
+        persistentEffect[id] = PersistentEffectData(world,user,entityList,level,blockPos,augment,delay,duration, effect)
         persistentEffectNeed[id] = 0
     }
 
@@ -539,7 +551,7 @@ object ScepterObject: AugmentDamage {
     }
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
-                                            val augment: MiscAugment, var delay: Int, var duration: Int){
+                                            val augment: MiscAugment, var delay: Int, var duration: Int, effect: AugmentEffect){
         //hi
     }
     private fun nbtChecker(nbt: NbtCompound): Int?{
