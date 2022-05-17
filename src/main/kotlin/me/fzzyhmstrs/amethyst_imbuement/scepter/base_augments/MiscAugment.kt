@@ -44,7 +44,7 @@ abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         return false
     }
 
-    open fun persistentEffect(world: World, user: LivingEntity,blockPos: BlockPos, entityList: MutableList<Entity>, level: Int = 1){
+    open fun persistentEffect(world: World, user: LivingEntity,blockPos: BlockPos, entityList: MutableList<Entity>, level: Int = 1, effect: ScepterObject.AugmentEffect){
         return
     }
 
