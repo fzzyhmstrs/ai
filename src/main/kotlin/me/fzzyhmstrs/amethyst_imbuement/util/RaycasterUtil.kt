@@ -56,6 +56,27 @@ object RaycasterUtil {
         }
     }
 
+    fun raycastEntityArea(user: LivingEntity, hit: HitResult?, range: Double): Pair<BlockPos,MutableList<Entity>>{
+        val blockPos: BlockPos
+        val entityList: MutableList<Entity> = if (hit == null) {
+            blockPos = user.blockPos
+            raycastEntityArea(range,user)
+        } else if (hit.type == HitResult.Type.MISS){
+            blockPos = user.blockPos
+            raycastEntityArea(range,user)
+        } else if (hit.type == HitResult.Type.BLOCK){
+            blockPos = (hit as BlockHitResult).blockPos
+            raycastEntityArea(range,user,pos = hit.pos)
+        } else if (hit.type == HitResult.Type.ENTITY){
+            blockPos = (hit as EntityHitResult).entity.blockPos
+            raycastEntityArea(range,user,pos = hit.entity.pos)
+        } else {
+            blockPos = user.blockPos
+            raycastEntityArea(range,user)
+        }
+        return Pair(blockPos,entityList)
+    }
+
     private fun raycastEntityRotatedArea(iterable : Iterable<Entity>,
                                          entityToExclude: Entity?,
                                          center: Vec3d,

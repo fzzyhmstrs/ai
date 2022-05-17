@@ -184,7 +184,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
         var cdMod = 0
         var levelMod = 0
         var manaMod = 0
-        val xpMods = XpModifiers()
+        val xpMods = AugmentModifier.XpModifiers()
         mods.forEach{
             cdMod += it.cooldownModifier
             levelMod += it.levelModifier
@@ -197,7 +197,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,manaReduction)
             if (!ScepterObject.checkManaCost(manaCost,stack,world,user)) return resetCooldown(stack,world,user,activeEnchantId)
             val level = max(1,testLevel + levelMod)
-            if (testEnchant.applyTasks(world, user, hand, level, mods)) {
+            if (testEnchant.applyModifiableTasks(world, user, hand, level, mods)) {
                 ScepterObject.applyManaCost(manaCost,stack, world, user)
                 ScepterObject.incrementScepterStats(stack.orCreateNbt, activeEnchantId, xpMods)
                 user.itemCooldownManager.set(stack.item, cd)

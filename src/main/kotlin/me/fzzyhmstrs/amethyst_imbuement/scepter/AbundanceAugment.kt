@@ -12,9 +12,20 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withRange(1.0,1.0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
         var successes = 0
-        val range = (rangeOfEffect() + level-1).toInt()
+        val range = (effect.range(level)).toInt()
         val userPos = user.blockPos
         for (i in -range..range){
             for (j in -range..range){
@@ -37,10 +48,6 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             }
         }
         return successes > 0
-    }
-
-    override fun rangeOfEffect(): Double {
-        return 2.0
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {

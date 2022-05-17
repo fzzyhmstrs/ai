@@ -5,6 +5,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.AugmentDamage
@@ -50,7 +51,6 @@ object ScepterObject: AugmentDamage {
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
-
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
@@ -288,21 +288,12 @@ object ScepterObject: AugmentDamage {
         damageHandler(stack,world,user,cost,"")
     }
 
-    fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: xpModifiers? = null){
+    fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: AugmentModifier.XpModifiers? = null){
         val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return
         if(spellKey == SpellType.NULL.name) return
         val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
-        val statIncrease = 1 + if(xpMods == null) {
-            0
-        } else {
-            when(spellKey){
-                SpellType.FURY.name ->{xpMods.furyXpMod}
-                SpellType.WIT.name ->{xpMods.witXpMod}
-                SpellType.GRACE.name ->{xpMods.graceXpMod}
-                else -> 0
-            }
-        }
-        val statXp = readNbt(spellKey + "_xp",scepterNbt) + statIncrease
+        val statMod = xpMods?.getMod(spellKey) ?: 0
+        val statXp = readNbt(spellKey + "_xp",scepterNbt) + statMod + 1
         writeNbt(spellKey + "_xp",statXp,scepterNbt)
         if(checkXpForLevelUp(statXp,statLvl)){
             writeNbt(spellKey + "_lvl",statLvl + 1,scepterNbt)
@@ -496,7 +487,51 @@ object ScepterObject: AugmentDamage {
         return (xpNext - xp + 1)
     }
 
+    data class AugmentEffect(
+        private var damage: Float = 0.0F,
+        private var damagePerLevel: Float = 0.0F,
+        private var amplifier: Int = 0,
+        private var amplifierPerLevel: Int = 0,
+        private var duration: Int = 0,
+        private var durationPerLevel: Int = 0,
+        private var range: Double = 0.0,
+        private var rangePerLevel: Double = 0.0){
 
+        fun plus(ae: AugmentEffect){
+            damage += ae.damage
+            damagePerLevel += ae.damagePerLevel
+            amplifier += ae.amplifier
+            amplifierPerLevel += amplifierPerLevel
+            duration += ae.duration
+            durationPerLevel += ae.durationPerLevel
+            range += ae.range
+            rangePerLevel += ae.rangePerLevel
+        }
+        fun damage(level: Int): Float{
+            return max(0.0F,damage + damagePerLevel * level)
+        }
+        fun amplifier(level: Int): Int{
+            return max(0,amplifier + amplifierPerLevel * level)
+        }
+        fun duration(level: Int): Int{
+            return max(0,duration + durationPerLevel * level)
+        }
+        fun range(level: Int): Double{
+            return max(1.0,range + rangePerLevel * level)
+        }
+        fun withDamage(damage: Float): AugmentEffect{
+            return this.copy(damage = damage)
+        }
+        fun withAmplifier(amplifier: Int, amplifierPerLevel: Int): AugmentEffect{
+            return this.copy(amplifier = amplifier, amplifierPerLevel = amplifierPerLevel)
+        }
+        fun withDuration(duration: Int, durationPerLevel: Int): AugmentEffect{
+            return this.copy(duration = duration, durationPerLevel = durationPerLevel)
+        }
+        fun withRange(range: Double, rangePerLevel: Double): AugmentEffect{
+            return this.copy(range = range, rangePerLevel = rangePerLevel)
+        }
+    }
     data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
                                 val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
                                 val bookOfLoreTier: Int, val keyItem: Item){

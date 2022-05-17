@@ -18,24 +18,29 @@ import net.minecraft.world.World
 
 class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withDuration(0,400).withAmplifier(-1,1)
+
+    override fun supportEffect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        effects: ScepterObject.AugmentEffect
+    ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, 400 * level, level - 1))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 400 * level, level - 1))
+                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), level - 1))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), level - 1))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
         }
-        return if(user != null){
-            if (user is PlayerEntity) {
-                user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, 400 * level, level - 1))
-                user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 400 * level, level - 1))
-                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                true
-            } else {
-                false
-            }
+        return if (user is PlayerEntity) {
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), level - 1))
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), level - 1))
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+            true
         } else {
             false
         }

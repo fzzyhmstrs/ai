@@ -20,8 +20,18 @@ import kotlin.math.min
 
 class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val entityList = RaycasterUtil.raycastEntityArea(raycastHitRange(), user)
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
+        val entityList = RaycasterUtil.raycastEntityArea(effect.range(level), user)
         if (entityList.isEmpty()) return false
         var minDist = 10000000.0
         var maxDist = 0.0
@@ -36,9 +46,8 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
         for (entity in entityList){
             if (entity is LivingEntity){
                 val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
-                val strength = 1.5 + 1.0 * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
+                val strength = effect.amplifier(level) * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
                 entityTask(world,entity,user,strength,null)
-                //ScepterObject.addEntityToQueue2(entity, ScepterItem.EntityTaskInstance(RegisterEnchantment.GUSTING,user,strength,null))
             }
         }
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,0.8F,1.2F)
@@ -53,10 +62,6 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
         return ScepterObject.AugmentDatapoint(SpellType.WIT,80,15,1,imbueLevel,1, Items.FEATHER)
-    }
-
-    override fun raycastHitRange(): Double {
-        return 8.0
     }
 
     override fun soundEvent(): SoundEvent {

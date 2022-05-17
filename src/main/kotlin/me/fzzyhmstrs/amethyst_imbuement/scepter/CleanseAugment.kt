@@ -19,7 +19,16 @@ import net.minecraft.world.World
 
 class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withDuration(200,0)
+
+    override fun supportEffect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        effects: ScepterObject.AugmentEffect
+    ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
@@ -31,13 +40,12 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     target.removeStatusEffect(effect.effectType)
                 }
                 target.fireTicks = 0
-                BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,300,0)
+                BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,effects.duration(level),0)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
         }
-        return if(user != null){
-            if (user is PlayerEntity) {
+        return if (user is PlayerEntity) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
                 for (effect in user.statusEffects){
                     if (effect.effectType.isBeneficial) continue
@@ -47,15 +55,13 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     user.removeStatusEffect(effect.effectType)
                 }
                 user.fireTicks = 0
-                BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,200,0)
+                BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),0)
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 true
             } else {
                 false
             }
-        } else {
-            false
-        }
+
     }
 
     override fun soundEvent(): SoundEvent {
