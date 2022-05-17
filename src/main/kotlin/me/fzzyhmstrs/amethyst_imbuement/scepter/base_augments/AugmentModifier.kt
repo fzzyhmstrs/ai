@@ -113,19 +113,19 @@ open class AugmentModifier(
     }
     
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentModifier{
-        efects.plus(ScepterObject.AugmentEffect().withDamage(damage, damagePerLevel, damagePercent))
+        efects.plus(ScepterObject.BLANK_EFFECT.withDamage(damage, damagePerLevel, damagePercent))
         return this
     }
     fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0): AugmentModifier{
-        effects.plus(ScepterObject.AugmentEffect().withDamage(amplifier, amplifierPerLevel))
+        effects.plus(ScepterObject.BLANK_EFFECT.withDamage(amplifier, amplifierPerLevel))
         return this
     }
     fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentModifier{
-        effects.plus(ScepterObject.AugmentEffect().withDamage(duration, durationPerLevel, durationPercent))
+        effects.plus(ScepterObject.BLANK_EFFECT.withDamage(duration, durationPerLevel, durationPercent))
         return this
     }
     fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentModifier{
-        effects.plus(ScepterObject.AugmentEffect().withDamage(range, rangePerLevel, rangePercent))
+        effects.plus(ScepterObject.BLANK_EFFECT.withDamage(range, rangePerLevel, rangePercent))
         return this
     }
     fun withXpMod(type: SpellType, xpMod: Int): AugmentModifier{
