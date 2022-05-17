@@ -25,15 +25,24 @@ import kotlin.math.min
 
 class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val (_,entityList) = raycastEntityArea(user,hit,level)
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withRange(13.0,1.0)
+
+    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: ScepterObject.AugmentEffect): Boolean {
+        val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
         if (entityList.size <= 1) return false
-        effect(world, user, entityList, level)
+        effect(world, user, entityList, level, effect)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.5F, 1.0F)
         return true
     }
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
         val hostileEntity: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
             if (entity2 is HostileEntity && entity2 !is WitherEntity){
@@ -93,11 +102,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         return ScepterObject.AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel,1, Items.DIAMOND)
     }
 
-    override fun rangeOfEffect(): Double {
-        return 13.0
-    }
-
-    override fun raycastHitRange(): Double {
+    override fun raycastHitRange(modifier: Double): Double {
         return 18.0
     }
 

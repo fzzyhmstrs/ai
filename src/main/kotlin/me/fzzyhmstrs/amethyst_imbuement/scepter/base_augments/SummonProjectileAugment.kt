@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.MissileEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -17,16 +18,17 @@ abstract class SummonProjectileAugment(tier: Int, maxLvl: Int, vararg slot: Equi
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        modifiers: List<AugmentModifier>?
+        effects: ScepterObject.AugmentEffect
     ): Boolean {
-        return spawnProjectileEntity(world, user, entityClass(world, user, level), soundEvent())
+        return spawnProjectileEntity(world, user, entityClass(world, user, level, effects), soundEvent())
     }
 
-    open fun entityClass(world: World, user: LivingEntity,level: Int = 1): ProjectileEntity {
+    open fun entityClass(world: World, user: LivingEntity,level: Int = 1, effects: ScepterObject.AugmentEffect): ProjectileEntity {
         val me = MissileEntity(world, user, false)
-            me.setVelocity(user,user.pitch,user.yaw,0.0f,
-                2.0f,
-                0.1f)
+        me.damageModifier = effects.damage(level)
+        me.setVelocity(user,user.pitch,user.yaw,0.0f,
+            2.0f,
+            0.1f)
         return me
     }
 

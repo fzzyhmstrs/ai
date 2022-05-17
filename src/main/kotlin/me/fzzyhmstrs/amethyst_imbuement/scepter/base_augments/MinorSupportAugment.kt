@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
@@ -11,21 +12,21 @@ import net.minecraft.world.World
 
 abstract class MinorSupportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withRange(6.0,0.0)
+
     override fun applyTasks(
         world: World,
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        modifiers: List<AugmentModifier>?
+        effects: ScepterObject.AugmentEffect
     ): Boolean {
-        var target = RaycasterUtil.raycastEntity(distance = rangeOfEffect(),user)
-        if (target == null) {
-            target = ZombieEntity(world)
-        }
-        return supportEffect(world, target, user, level)
+        val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
+        return supportEffect(world, target, user, level, effects)
     }
 
-    open fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
+    open fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: ScepterObject.AugmentEffect): Boolean {
         return false
     }
 }

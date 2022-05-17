@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -30,7 +31,7 @@ abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: 
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        modifiers: List<AugmentModifier>?
+        effects: ScepterObject.AugmentEffect
     ): Boolean {
         return RaycasterUtil.raycastBlock(entity = user) != null
     }

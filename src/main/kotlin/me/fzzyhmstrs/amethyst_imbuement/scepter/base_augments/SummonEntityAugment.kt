@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
@@ -17,16 +18,19 @@ import net.minecraft.world.World
 
 abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = ScepterObject.AugmentEffect(0.0F,0.0F,0,0,0,0,3.0,0.0)
+
     override fun applyTasks(
         world: World,
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        modifiers: List<AugmentModifier>?
+        effects: ScepterObject.AugmentEffect
     ): Boolean {
         if (user !is PlayerEntity) return false
         val hit = RaycasterUtil.raycastHit(
-            distance = 3.0,
+            distance = effects.range(level),
             user,
             includeFluids = true
         ) ?: return false

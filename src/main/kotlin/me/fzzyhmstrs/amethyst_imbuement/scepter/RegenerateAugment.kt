@@ -18,25 +18,25 @@ import net.minecraft.world.World
 
 class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
+    override val baseEffect: ScepterObject.AugmentEffect
+        get() = super.baseEffect.withDuration(0,200)
+
+    override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: ScepterObject.AugmentEffect): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, 200 * level, 0))
+                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
         }
-        return if(user != null){
-            if (user is PlayerEntity) {
-                user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, 200 * level, 0))
+        return if (user is PlayerEntity) {
+                user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 true
             } else {
                 false
             }
-        } else {
-            false
-        }
+
     }
 
     override fun soundEvent(): SoundEvent {

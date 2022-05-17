@@ -14,7 +14,13 @@ import net.minecraft.world.World
 
 class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot) {
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity?, level: Int): Boolean {
+    override fun supportEffect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        effects: ScepterObject.AugmentEffect
+    ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 (target as LivingEntity).heal((3.0F + (level-1) * 1.0F))
@@ -22,17 +28,14 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
                 return true
             }
         }
-        return if(user != null) {
-            if (user is PlayerEntity) {
+        return if (user is PlayerEntity) {
                 user.heal((3.0F + (level-1) * 1.0F))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 true
             } else {
                 false
             }
-        } else {
-            false
-        }
+
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {

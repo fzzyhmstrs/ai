@@ -16,7 +16,13 @@ import net.minecraft.world.World
 
 class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
         var successes = 0
 
         if (entityList.isEmpty()){
@@ -41,9 +47,9 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         return successes > 0
     }
 
-    override fun rangeOfEffect(): Double {
+/*    override fun rangeOfEffect(modifier: Double): Double {
         return 9.0
-    }
+    }*/
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
         return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,60,16,imbueLevel,2, Items.GOLDEN_APPLE)

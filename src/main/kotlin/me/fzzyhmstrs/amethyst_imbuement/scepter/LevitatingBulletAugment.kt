@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil.raycastEntityArea
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -25,9 +26,16 @@ import kotlin.math.min
 
 class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
         val blockPos: BlockPos = user.blockPos
-        val (_,entityList) = raycastEntityArea(user,hit,level)
+        val (_,entityList) = raycastEntityArea(user,hit,effect.range(level))
         if (entityList.isEmpty()) {
             return false
         }
@@ -40,14 +48,20 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         if (hostileEntityList.isEmpty()) {
             return false
         }
-        if (!effect(world, user, hostileEntityList, level)) return false
+        if (!effect(world, user, hostileEntityList, level, effect)) return false
         ScepterObject.setPersistentTickerNeed(world,user,hostileEntityList,level,blockPos,
             RegisterEnchantment.LEVITATING_BULLET,16-2*level,40+20*level)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: ScepterObject.AugmentEffect
+    ): Boolean {
         val xAmount = user.getRotationVec(1.0F).x
         val zAmount = user.getRotationVec(1.0F).z
         val maxAmount = max(abs(xAmount), abs(zAmount))

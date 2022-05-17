@@ -28,7 +28,7 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
     }
 
     private var pierce: Boolean = false
-    override var damageModifier: Int = 0
+    override var damageModifier: Float = 0.0F
 
     override fun initDataTracker() {}
 
@@ -75,12 +75,12 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
             if(pierce){
                 entityHitResult.entity.damage(
                     DamageSource.magic(this, entity).setProjectile(),
-                    4.0f
+                    4.0f + damageModifier
                 )
             } else {
                 entityHitResult.entity.damage(
                     DamageSource.thrownProjectile(this, entity).setProjectile(),
-                    3.0f
+                    3.0f + damageModifier
                 )
             }
         }
