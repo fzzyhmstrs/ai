@@ -502,46 +502,52 @@ object ScepterObject: AugmentDamage {
     data class AugmentEffect(
         private var damage: Float = 0.0F,
         private var damagePerLevel: Float = 0.0F,
+        private var damagePercent: Float = 0.0F,
         private var amplifier: Int = 0,
         private var amplifierPerLevel: Int = 0,
         private var duration: Int = 0,
         private var durationPerLevel: Int = 0,
+        private var durationPercent: Int = 0,
         private var range: Double = 0.0,
-        private var rangePerLevel: Double = 0.0){
+        private var rangePerLevel: Double = 0.0
+        private var rangePercent: Double = 0.0){
 
         fun plus(ae: AugmentEffect){
             damage += ae.damage
             damagePerLevel += ae.damagePerLevel
+            damagePercent += ae.damagePercent
             amplifier += ae.amplifier
             amplifierPerLevel += amplifierPerLevel
             duration += ae.duration
             durationPerLevel += ae.durationPerLevel
+            durationPercent += ae.durationPercent
             range += ae.range
             rangePerLevel += ae.rangePerLevel
+            rangePercent += ae.rangePercent
         }
         fun damage(level: Int): Float{
-            return max(0.0F,damage + damagePerLevel * level)
+            return max(0.0F,(damage + damagePerLevel * level) * (100.0F + damagePercent) / 100.0F)
         }
         fun amplifier(level: Int): Int{
             return max(0,amplifier + amplifierPerLevel * level)
         }
         fun duration(level: Int): Int{
-            return max(0,duration + durationPerLevel * level)
+            return max(0,(duration + durationPerLevel * level) * (100.0F + durationPercent) / 100.0F )
         }
         fun range(level: Int): Double{
-            return max(1.0,range + rangePerLevel * level)
+            return max(1.0,(range + rangePerLevel * level) * (100.0F + rangePercent) / 100.0F)
         }
-        fun withDamage(damage: Float): AugmentEffect{
-            return this.copy(damage = damage)
+        fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
+            return this.copy(damage = damage, damagePerLevel = damagePerLevel, damagePercent = damagePercent)
         }
-        fun withAmplifier(amplifier: Int, amplifierPerLevel: Int): AugmentEffect{
+        fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0): AugmentEffect{
             return this.copy(amplifier = amplifier, amplifierPerLevel = amplifierPerLevel)
         }
-        fun withDuration(duration: Int, durationPerLevel: Int): AugmentEffect{
-            return this.copy(duration = duration, durationPerLevel = durationPerLevel)
+        fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentEffect{
+            return this.copy(duration = duration, durationPerLevel = durationPerLevel, durationPercent = durationPercent)
         }
-        fun withRange(range: Double, rangePerLevel: Double): AugmentEffect{
-            return this.copy(range = range, rangePerLevel = rangePerLevel)
+        fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect{
+            return this.copy(range = range, rangePerLevel = rangePerLevel, rangePercent = rangePercent)
         }
     }
     data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
