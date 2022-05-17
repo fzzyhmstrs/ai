@@ -51,6 +51,7 @@ object ScepterObject: AugmentDamage {
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
+    val BLANK_EFFECT = AugmentEffect()
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
