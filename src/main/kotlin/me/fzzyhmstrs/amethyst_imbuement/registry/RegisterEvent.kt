@@ -32,6 +32,7 @@ object RegisterEvent {
         ServerTickEvents.START_SERVER_TICK.register(TICKER_EVENT) {
             ticker_armor.tickUp()
             ticker_jewelry.tickUp()
+            ScepterObject.tickModifiers()
         }
         ServerTickEvents.END_SERVER_TICK.register(QUEUE_TICK_EVENT) {
             if (BaseAugment.checkEffectsQueue()){
@@ -41,7 +42,7 @@ object RegisterEvent {
 
     }
 
-    class Ticker(val reset: Int = 20){
+    class Ticker(private val reset: Int = 20){
         private var tick = 1
         private var ready = false
 

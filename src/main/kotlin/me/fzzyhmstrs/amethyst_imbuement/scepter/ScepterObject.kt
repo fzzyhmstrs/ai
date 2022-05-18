@@ -5,13 +5,9 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.AugmentDamage
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
+import me.fzzyhmstrs.amethyst_imbuement.util.*
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.PacketSender
@@ -35,7 +31,6 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import java.util.*
 import kotlin.math.max
 
 object ScepterObject: AugmentDamage {
@@ -49,9 +44,15 @@ object ScepterObject: AugmentDamage {
     private val augmentApplied: MutableMap<Int,Int> = mutableMapOf()
     private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
+    private val augmentModifiers: MutableMap<Int,MutableList<Identifier>> = mutableMapOf()
+    private val activeScepterModifiers: MutableMap<Int,CompiledModifiers> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
+    private val DIRT = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt)},-1)
+    private val BLANK_COMPILED_DATA = CompiledModifiers(listOf(),AugmentModifierDefaults.EMPTY_COMPILED)
     val BLANK_EFFECT = AugmentEffect()
+    val BLANK_XP_MOD = XpModifiers()
+
 
     fun initializeScepter(stack: ItemStack, world: World){
         val id : Int
@@ -75,6 +76,7 @@ object ScepterObject: AugmentDamage {
                 stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
             }
         }
+        DIRT.markDirty(id)
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
         if(scepters[id]?.isNotEmpty() == true){ //break out of initialization if the scepter has already been initialized and isn't changed
@@ -93,7 +95,11 @@ object ScepterObject: AugmentDamage {
         }
     }
 
-    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Int = 0): Int?{
+    fun initializeModifiers(){
+
+    }
+
+    fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Double = 0.0): Int?{
         if (world !is ServerWorld){return null}
         val scepterNbt = stack.orCreateNbt
         if (!scepterNbt.contains(NbtKeys.SCEPTER_ID.str())){
@@ -109,14 +115,14 @@ object ScepterObject: AugmentDamage {
                 fixActiveEnchantWhenMissing(stack, world)
                 return null
             }
-            val cooldown = augmentStats[activeEnchantId]?.cooldown?.plus(cdMod)
+            //cooldown modifier is a percentage modifier, so 20% will boost cooldown by 20%. -20% will take away 20% cooldown
+            val cooldown = (augmentStats[activeEnchantId]?.cooldown?.times(100.0+ cdMod)?.div(100.0))?.toInt()
             val time = user.world.time
             val lastUsed = scepters[id]?.get(activeEnchantId)
             if (cooldown != null && lastUsed != null){
                 val cooldown2 = max(cooldown,1) // don't let cooldown be less than 1 tick
                 return if (time - cooldown2 >= lastUsed){ //checks that enough time has passed since last usage
                     scepters[id]?.put(activeEnchantId, user.world.time)
-                    //incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
                     cooldown2
                 } else {
                     null
@@ -124,9 +130,7 @@ object ScepterObject: AugmentDamage {
             }
         } else {
             initializeScepter(stack,world)
-            //println("new enchant initialized with cooldown: ${augmentStats[activeEnchantId]?.cooldown}")
-            //incrementScepterStats(scepterNbt,activeEnchantId, xpMods)
-            return augmentStats[activeEnchantId]?.cooldown?.plus(cdMod)
+            return (augmentStats[activeEnchantId]?.cooldown?.times(100.0+ cdMod)?.div(100.0))?.toInt()
         }
 
         return null
@@ -240,6 +244,7 @@ object ScepterObject: AugmentDamage {
         } else{
             augmentApplied[id] = (cooldown.toLong() - timeSinceLast).toInt()
         }
+        DIRT.markDirty(id)
         val message = TranslatableText("scepter.new_active_spell").append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}"))
         user.sendMessage(message,false)
     }
@@ -289,7 +294,7 @@ object ScepterObject: AugmentDamage {
         damageHandler(stack,world,user,cost,"")
     }
 
-    fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: AugmentModifier.XpModifiers? = null){
+    fun incrementScepterStats(scepterNbt: NbtCompound, activeEnchantId: String, xpMods: XpModifiers? = null){
         val spellKey = augmentStats[activeEnchantId]?.type?.name ?: return
         if(spellKey == SpellType.NULL.name) return
         val statLvl = readNbt(spellKey + "_lvl",scepterNbt)
@@ -430,25 +435,7 @@ object ScepterObject: AugmentDamage {
     fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
         if(!augmentStats.containsKey(id) || overwrite){
             augmentStats[id] = dataPoint
-            when (dataPoint.bookOfLoreTier){
-                1 -> {
-                    if (!bookOfLoreListT1.contains(id)){
-                        bookOfLoreListT1.add(id)
-                    }
-                    if (!bookOfLoreListT12.contains(id)){
-                        bookOfLoreListT12.add(id)
-                    }
-                }
-                2 -> {
-                    if (!bookOfLoreListT2.contains(id)){
-                        bookOfLoreListT2.add(id)
-                    }
-                    if (!bookOfLoreListT12.contains(id)){
-                        bookOfLoreListT12.add(id)
-                    }
-                }
-                else -> {}
-            }
+            dataPoint.bookOfLoreTier.addToList(id)
         }
     }
 
@@ -471,9 +458,9 @@ object ScepterObject: AugmentDamage {
         return augmentStats[id]?.minLvl?:1
     }
 
-    fun getAugmentManaCost(id: String, reduction: Int = 0): Int{
-        if(!augmentStats.containsKey(id)) return (10 - reduction)
-        val cost = (augmentStats[id]?.manaCost?.minus(reduction)) ?: (10 - reduction)
+    fun getAugmentManaCost(id: String, reduction: Double = 0.0): Int{
+        if(!augmentStats.containsKey(id)) return (10 * (100.0 + reduction) / 100.0).toInt()
+        val cost = (augmentStats[id]?.manaCost?.times(100.0 + reduction)?.div(100.0))?.toInt() ?: (10 * (100.0 + reduction) / 100.0).toInt()
         return max(1,cost)
     }
 
@@ -489,10 +476,9 @@ object ScepterObject: AugmentDamage {
         return max(1,cd)
     }
 
-    fun getAugmentTier(id: String): Int{
-        if(!augmentStats.containsKey(id)) return (1)
-        val cd = (augmentStats[id]?.bookOfLoreTier) ?: 1
-        return max(1,cd)
+    fun getAugmentTier(id: String): LoreTier {
+        if (!augmentStats.containsKey(id)) return (LoreTier.NO_TIER)
+        return (augmentStats[id]?.bookOfLoreTier) ?: LoreTier.NO_TIER
     }
 
     fun xpToNextLevel(xp: Int,lvl: Int): Int{
@@ -500,67 +486,92 @@ object ScepterObject: AugmentDamage {
         return (xpNext - xp + 1)
     }
 
-    data class AugmentEffect(
-        private var damage: Float = 0.0F,
-        private var damagePerLevel: Float = 0.0F,
-        private var damagePercent: Float = 0.0F,
-        private var amplifier: Int = 0,
-        private var amplifierPerLevel: Int = 0,
-        private var duration: Int = 0,
-        private var durationPerLevel: Int = 0,
-        private var durationPercent: Int = 0,
-        private var range: Double = 0.0,
-        private var rangePerLevel: Double = 0.0
-        private var rangePercent: Double = 0.0){
 
-        fun plus(ae: AugmentEffect){
-            damage += ae.damage
-            damagePerLevel += ae.damagePerLevel
-            damagePercent += ae.damagePercent
-            amplifier += ae.amplifier
-            amplifierPerLevel += amplifierPerLevel
-            duration += ae.duration
-            durationPerLevel += ae.durationPerLevel
-            durationPercent += ae.durationPercent
-            range += ae.range
-            rangePerLevel += ae.rangePerLevel
-            rangePercent += ae.rangePercent
-        }
-        fun damage(level: Int): Float{
-            return max(0.0F,(damage + damagePerLevel * level) * (100.0F + damagePercent) / 100.0F)
-        }
-        fun amplifier(level: Int): Int{
-            return max(0,amplifier + amplifierPerLevel * level)
-        }
-        fun duration(level: Int): Int{
-            return max(0,(duration + durationPerLevel * level) * (100.0F + durationPercent) / 100.0F )
-        }
-        fun range(level: Int): Double{
-            return max(1.0,(range + rangePerLevel * level) * (100.0F + rangePercent) / 100.0F)
-        }
-        fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
-            return this.copy(damage = damage, damagePerLevel = damagePerLevel, damagePercent = damagePercent)
-        }
-        fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0): AugmentEffect{
-            return this.copy(amplifier = amplifier, amplifierPerLevel = amplifierPerLevel)
-        }
-        fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentEffect{
-            return this.copy(duration = duration, durationPerLevel = durationPerLevel, durationPercent = durationPercent)
-        }
-        fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect{
-            return this.copy(range = range, rangePerLevel = rangePerLevel, rangePercent = rangePercent)
-        }
-    }
     data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
                                 val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
-                                val bookOfLoreTier: Int, val keyItem: Item){
+                                val bookOfLoreTier: LoreTier, val keyItem: Item){
         //hi
     }
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
-                                            val augment: MiscAugment, var delay: Int, var duration: Int, effect: AugmentEffect){
+                                            val augment: MiscAugment, var delay: Int, var duration: Int, val effect: AugmentEffect){
         //hi
     }
+    data class CompiledModifiers(val modifiers: List<AugmentModifier>, val compiledData: CompiledAugmentModifier)
+
+    fun addModifier(modifier: Identifier, stack: ItemStack): Boolean{
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt) ?: return false
+        return addModifier(modifier, id)
+    }
+    private fun addModifier(modifier: Identifier, scepter: Int): Boolean{
+        if (augmentModifiers[scepter]?.contains(modifier) == true){
+            val mod = RegisterModifier.ENTRIES.get(modifier)
+            if (mod?.hasDescendant() == true){
+                val lineage = mod.getLineage()
+                val highestOrderDescendant = lineage.size
+                var highestDescendantPresent = 1
+                lineage.forEachIndexed { index, identifier ->
+                    if (augmentModifiers[scepter]?.contains(identifier) == true){
+                        highestDescendantPresent = index + 1
+                    }
+                }
+                return if (highestDescendantPresent >= highestOrderDescendant){
+                    false
+                } else {
+                    val newDescendant = lineage[highestDescendantPresent]
+                    augmentModifiers[scepter]?.add(newDescendant)
+                    DIRT.markDirty(scepter)
+                    true
+                }
+            } else {
+                return false
+            }
+        }
+        augmentModifiers[scepter]?.add(modifier)
+        DIRT.markDirty(scepter)
+        return true
+    }
+
+    fun getModifiers(stack: ItemStack): List<Identifier>{
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt) ?: return listOf()
+        return augmentModifiers[id] ?: listOf()
+    }
+
+    fun getActiveModifiers(stack: ItemStack): CompiledModifiers{
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt) ?: return BLANK_COMPILED_DATA
+        return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA
+    }
+
+    private fun gatherActiveScepterModifiers(scepter: Int){
+        val activeEnchant = activeAugment[scepter]?:return
+        val list : MutableList<AugmentModifier> = mutableListOf()
+        val compiledModifier = CompiledAugmentModifier()
+        augmentModifiers[scepter]?.forEach {
+            val modifier = RegisterModifier.ENTRIES.get(it)
+            if (modifier != null){
+                if (!modifier.hasSpellToAffect()){
+                    list.add(modifier)
+                    compiledModifier.plus(modifier)
+                } else {
+                    if (modifier.getSpellsToAffect().contains(Identifier(activeEnchant))){
+                        list.add(modifier)
+                        compiledModifier.plus(modifier)
+                    }
+                }
+            }
+        }
+        activeScepterModifiers[scepter] = CompiledModifiers(list, compiledModifier)
+    }
+
+    fun tickModifiers(){
+        if (DIRT.isDirty()){
+            DIRT.clean()
+        }
+    }
+
     private fun nbtChecker(nbt: NbtCompound): Int?{
         return if (!nbt.contains(NbtKeys.SCEPTER_ID.str())){
             null
