@@ -26,17 +26,16 @@ import kotlin.math.max
 
 abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
     
-    open val baseEffect = ScepterObject.AugmentEffect(4.0F,0.0F,0.0F,0,0,20,20,0,8.0,1.0,0.0)
+    open val baseEffect = AugmentEffect()
 
-    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: ScepterObject.AugmentEffect): Boolean
+    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean
 
-    fun applyModifiableTasks(world: World, user: LivingEntity, hand: Hand, level: Int, modifiers: List<AugmentModifier>? = null): Boolean{
-        val effectModifiers = ScepterObject.AugmentEffect()
-        modifiers?.forEach {
+    fun applyModifiableTasks(world: World, user: LivingEntity, hand: Hand, level: Int, modifiers: List<AugmentModifier> = listOf(), modifierData: CompiledAugmentModifier? = null): Boolean{
+        val effectModifiers = modifierData?.getEffectModifier()?: AugmentEffect()
+        modifiers.forEach {
             if (it.hasSecondaryEffect()){
-                it.secondaryEffect?.applyModifiableTasks(world, user, hand, level, null)
+                it.getSecondaryEffect()?.applyModifiableTasks(world, user, hand, level, listOf(), null)
             }
-            effectModifiers.plus(it.getEffectModifier())
         }
         effectModifiers.plus(baseEffect)
         return applyTasks(world,user,hand,level,effectModifiers)

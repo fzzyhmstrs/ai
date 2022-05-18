@@ -32,6 +32,7 @@ object AI: ModInitializer {
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
         RegisterEvent.registerAll()
+        RegisterModifier.registerAll()
     }
 
     fun aiRandom(): Random{

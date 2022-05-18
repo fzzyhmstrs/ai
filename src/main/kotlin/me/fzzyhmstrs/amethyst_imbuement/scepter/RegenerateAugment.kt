@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -18,10 +20,10 @@ import net.minecraft.world.World
 
 class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
+    override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(0,200)
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: ScepterObject.AugmentEffect): Boolean {
+    override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
@@ -44,6 +46,6 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,800,20,1,imbueLevel,0, Items.GHAST_TEAR)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,800,20,1,imbueLevel,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 }

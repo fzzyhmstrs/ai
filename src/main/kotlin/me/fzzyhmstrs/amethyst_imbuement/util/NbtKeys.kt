@@ -36,6 +36,16 @@ enum class NbtKeys {
         override fun str(): String {
             return "disenchant_count"
         }
+    },
+    MODIFIERS{
+        override fun str(): String {
+            return "modifiers"
+        }
+    },
+    MODIFIER_ID{
+        override fun str(): String {
+            return "modifier_id"
+        }
     };
 
     abstract fun str(): String
