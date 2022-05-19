@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -15,7 +17,13 @@ import net.minecraft.world.World
 
 class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
-    override fun placeEntity(world: World, user: PlayerEntity, hit: HitResult, level: Int): Boolean{
+    override fun placeEntity(
+        world: World,
+        user: PlayerEntity,
+        hit: HitResult,
+        level: Int,
+        effects: AugmentEffect
+    ): Boolean {
         val vec3d2: Vec3d
         val vec3d: Vec3d = user.getRotationVec(1.0f)
         val list: List<Entity> = world.getOtherEntities(
@@ -43,6 +51,6 @@ class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Sum
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,1200,10,1,imbueLevel,0, Items.OAK_BOAT)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,1200,10,1,imbueLevel,LoreTier.NO_TIER, Items.OAK_BOAT)
     }
 }

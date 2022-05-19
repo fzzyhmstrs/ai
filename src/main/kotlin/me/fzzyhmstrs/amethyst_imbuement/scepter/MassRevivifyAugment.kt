@@ -3,7 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -16,33 +18,40 @@ import net.minecraft.world.World
 
 class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(9.0,1.0,0.0)
+            .withAmplifier(0,1,0)
+            .withDuration(80,180,0)
+
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: AugmentEffect
+    ): Boolean {
         var successes = 0
         if (entityList.isEmpty()){
             successes++
-            BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION,240 * level, 1)
-            BaseAugment.addStatusToQueue(user,StatusEffects.ABSORPTION, 800, level)
+            BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
+            BaseAugment.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
         }
         entityList.add(user)
         for (entity3 in entityList) {
             if(entity3 !is Monster && entity3 is LivingEntity){
                 successes++
-                BaseAugment.addStatusToQueue(entity3,StatusEffects.REGENERATION,180 * level, 1)
-                BaseAugment.addStatusToQueue(entity3,StatusEffects.ABSORPTION, 600, level - 1)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))
 
             }
         }
-        RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level)
-        RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level)
+        RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level,effect)
+        RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level,effect)
         return successes > 0
     }
 
-    override fun rangeOfEffect(): Double {
-        return 9.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,300,100,22,imbueLevel,2, RegisterItem.GOLDEN_HEART)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,300,100,22,imbueLevel,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun soundEvent(): SoundEvent {

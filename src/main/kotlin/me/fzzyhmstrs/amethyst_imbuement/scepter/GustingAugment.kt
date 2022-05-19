@@ -3,7 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +22,7 @@ import kotlin.math.min
 
 class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
+    override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)
 
     override fun effect(
@@ -29,7 +31,7 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
         user: LivingEntity,
         level: Int,
         hit: HitResult?,
-        effect: ScepterObject.AugmentEffect
+        effect: AugmentEffect
     ): Boolean {
         val entityList = RaycasterUtil.raycastEntityArea(effect.range(level), user)
         if (entityList.isEmpty()) return false
@@ -46,22 +48,29 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
         for (entity in entityList){
             if (entity is LivingEntity){
                 val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
-                val strength = effect.amplifier(level) * level * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
-                entityTask(world,entity,user,strength,null)
+                val strength = effect.amplifier(level) * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
+                entityTask(world,entity,user,strength,null, effect)
             }
         }
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,0.8F,1.2F)
         return true
     }
 
-    override fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?) {
+    override fun entityTask(
+        world: World,
+        target: Entity,
+        user: LivingEntity,
+        level: Double,
+        hit: HitResult?,
+        effects: AugmentEffect
+    ) {
         if (target is LivingEntity){
             target.takeKnockback(level,user.x - target.x,user.z - target.z)
         }
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,80,15,1,imbueLevel,1, Items.FEATHER)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,80,15,1,imbueLevel,LoreTier.LOW_TIER, Items.FEATHER)
     }
 
     override fun soundEvent(): SoundEvent {

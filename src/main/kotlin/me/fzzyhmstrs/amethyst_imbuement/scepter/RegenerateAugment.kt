@@ -21,7 +21,7 @@ import net.minecraft.world.World
 class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(0,200)
+        get() = super.baseEffect.withDuration(0,200).withAmplifier(0,0,0)
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {

@@ -2,7 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil.raycastEntityArea
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
@@ -26,13 +29,18 @@ import kotlin.math.min
 
 class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(40,20,0).withRange(8.0,1.0,0.0)
+
+    private val delay = PerLvlI(16,-2,0)
+
     override fun effect(
         world: World,
         target: Entity?,
         user: LivingEntity,
         level: Int,
         hit: HitResult?,
-        effect: ScepterObject.AugmentEffect
+        effect: AugmentEffect
     ): Boolean {
         val blockPos: BlockPos = user.blockPos
         val (_,entityList) = raycastEntityArea(user,hit,effect.range(level))
@@ -50,7 +58,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         }
         if (!effect(world, user, hostileEntityList, level, effect)) return false
         ScepterObject.setPersistentTickerNeed(world,user,hostileEntityList,level,blockPos,
-            RegisterEnchantment.LEVITATING_BULLET,16-2*level,40+20*level)
+            RegisterEnchantment.LEVITATING_BULLET, delay.value(level),effect.duration(level),effect)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
@@ -60,7 +68,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         user: LivingEntity,
         entityList: MutableList<Entity>,
         level: Int,
-        effect: ScepterObject.AugmentEffect
+        effect: AugmentEffect
     ): Boolean {
         val xAmount = user.getRotationVec(1.0F).x
         val zAmount = user.getRotationVec(1.0F).z
@@ -81,6 +89,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
 
         for (i in 0..min(level-1,entityList.size-1)){
             val entity = entityList[i]
+            //consider custom shulker bullet entity for the modifiability
             val sbe = ShulkerBulletEntity(world,user,entity,axis)
             world.spawnEntity(sbe)
         }
@@ -91,8 +100,9 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         user: LivingEntity,
         blockPos: BlockPos,
         entityList: MutableList<Entity>,
-        level: Int
-    ){
+        level: Int,
+        effect: AugmentEffect
+    ) {
         val rnd1 = entityList.size
         val rnd2 = world.random.nextInt(rnd1)
         val entity = entityList[rnd2]
@@ -122,7 +132,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,2, Items.SHULKER_SHELL)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     }
 
 }

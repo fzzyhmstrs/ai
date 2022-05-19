@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -18,7 +20,7 @@ import net.minecraft.world.World
 
 class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
+    override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(0,400).withAmplifier(-1,1)
 
     override fun supportEffect(
@@ -26,7 +28,7 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         target: Entity?,
         user: LivingEntity,
         level: Int,
-        effects: ScepterObject.AugmentEffect
+        effects: AugmentEffect
     ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
@@ -51,6 +53,6 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,25,1,imbueLevel,1, Items.GOLDEN_APPLE)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1200,25,1,imbueLevel,LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
     }
 }

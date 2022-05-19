@@ -4,6 +4,7 @@ import com.google.common.collect.Lists
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
@@ -66,6 +67,7 @@ class ImbuingTableScreenHandler(
     var enchantmentId = intArrayOf(-1, -1, -1)
     var enchantmentLevel = intArrayOf(-1, -1, -1)
     var imbueId = intArrayOf(0,0,0)
+    var modId = intArrayOf(0,0,0)
     var levelLow = intArrayOf(0,0,0)
     //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
 
@@ -130,14 +132,21 @@ class ImbuingTableScreenHandler(
                         enchantmentLevel[0] = 1
                         enchantmentLevel[1] = -1
                         enchantmentLevel[2] = -1
+                        enchantmentId[0] = -1
                         enchantmentId[1] = -1
                         enchantmentId[2] = -1
+                        imbueId[0] = 0
                         imbueId[1] = 0
                         imbueId[2] = 0
+                        modId[0] = 0
+                        modId[1] = 0
+                        modId[2] = 0
+                        levelLow[0] = 0
                         levelLow[1] = 0
                         levelLow[2] = 0
                         if (match.get().getAugment() != ""){
-                            val augment = Registry.ENCHANTMENT.get(Identifier(match.get().getAugment()))
+                            val id = Identifier(match.get().getAugment())
+                            val augment = Registry.ENCHANTMENT.get(id)
                             if (augment != null) {
                                 val augCheck = if (augment is ScepterAugment){
                                     val blA = augment.isAcceptableScepterItem(itemStack, player)
@@ -159,40 +168,36 @@ class ImbuingTableScreenHandler(
                                     if(!bl1) {
                                         enchantmentId[0] = Registry.ENCHANTMENT.getRawId(augment)
                                         imbueId[0] = Registry.ENCHANTMENT.getRawId(augment)
-                                        levelLow[0] = 0
                                     } else {
                                         enchantmentPower[0] = 0
-                                        enchantmentId[0] = -1
-                                        imbueId[0] = 0
-                                        levelLow[0] = 0
                                     }
                                 } else if(!augCheck.first && augCheck.second) {
-                                    enchantmentId[0] = -1
-                                    imbueId[0] = 0
                                     levelLow[0] = Registry.ENCHANTMENT.getRawId(augment)
                                 }else{
                                     enchantmentPower[0] = 0
-                                    enchantmentId[0] = -1
-                                    imbueId[0] = 0
-                                    levelLow[0] = 0
+                                }
+                            }else if (RegisterModifier.ENTRIES.isModifier(id)) {
+                                val modifier = RegisterModifier.ENTRIES.get(id)
+                                val blA = modifier?.isAcceptableItem(itemStack)?:false
+                                val blB = ScepterObject.checkModifierLineage(id,itemStack)
+                                if (blA && blB){
+                                    modId[0] = RegisterModifier.ENTRIES.getRawId(id)
+                                    enchantmentId[0] = -2
+                                } else {
+                                    enchantmentPower[0] = 0
                                 }
                             } else {
-                                println("Could not find augment under the key " + match.get().getAugment())
+                                println("Could not find augment or modifier under the key $id")
                             }
                         } else{
                             enchantmentId[0] = -2
                             imbueId[0] = Registry.ITEM.getRawId(match.get().output.item) * -1
-                            levelLow[0] = 0
                         }
                     } else if (!itemStack.isEnchantable){
                         for (i in 0..2) {
                             enchantmentPower[i] = 0
-                            enchantmentId[i] = -1
                             enchantmentLevel[i] = -1
-                            imbueId[i] = 0
-                            levelLow[i] = 0
                         }
-
                     } else if (AiConfig.altars.imbuingTableEnchantingEnabled) {
                         val i = checkBookshelves(world, pos)
                         random.setSeed(seed.get().toLong())
@@ -220,8 +225,6 @@ class ImbuingTableScreenHandler(
                             enchantmentId[j] =
                                 Registry.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
                             enchantmentLevel[j] = enchantmentLevelEntry.level
-                            imbueId[j] = 0
-                            levelLow[j] = 0
                             ++j
                         }
                     }
@@ -261,11 +264,11 @@ class ImbuingTableScreenHandler(
         }
 
         if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
+            var buttonWorked = true
             context.run { world: World, pos: BlockPos? ->
                 var itemStack3 = itemStack
                 if (match.isEmpty) {
-                    val list =
-                        generateEnchantments(itemStack3, id, enchantmentPower[id])
+                    val list = generateEnchantments(itemStack3, id, enchantmentPower[id])
                     if (list.isNotEmpty()) {
                         player.applyEnchantmentCosts(itemStack3, i)
                         val bl = itemStack3.isOf(Items.BOOK)
@@ -298,63 +301,73 @@ class ImbuingTableScreenHandler(
                         inventory.markDirty()
                         seed.set(player.enchantmentTableSeed)
                         onContentChanged(inventory)
-                        world.playSound(
-                            null,
-                            pos,
-                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
-                            SoundCategory.BLOCKS,
-                            1.0f,
-                            world.random.nextFloat() * 0.1f + 0.9f
-                        )
+                        playEnchantmentSound(world,pos)
                     }
                 } else if(match.get().getAugment() != ""){
-                    val augmentChk = Registry.ENCHANTMENT.get(Identifier(match.get().getAugment()))
-                    if (augmentChk == null || !augmentChk.isAcceptableItem(itemStack3)){
+                    val augId = Identifier(match.get().getAugment())
+                    val augmentChk = Registry.ENCHANTMENT.get(augId)
+                    val modChk = RegisterModifier.ENTRIES.get(augId)
+                    if (augmentChk == null && modChk == null){
+                        buttonWorked = false
                         return@run
                     }
-                    val bl = itemStack3.isOf(Items.BOOK)
-                    if (bl) {
-                        itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
-                        val nbtCompound = itemStack.nbt
-                        if (nbtCompound != null) {
-                            itemStack3.nbt = nbtCompound.copy()
-                        }
-                        inventory.setStack(6, itemStack3)
-                        player.applyEnchantmentCosts(itemStack3, i)
-                        EnchantedBookItem.addEnchantment(itemStack3, EnchantmentLevelEntry(augmentChk,1))
+                    if (augmentChk != null && augmentChk.isAcceptableItem(itemStack3)){
+                        val bl = itemStack3.isOf(Items.BOOK)
+                        if (bl) {
+                            itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
+                            val nbtCompound = itemStack.nbt
+                            if (nbtCompound != null) {
+                                itemStack3.nbt = nbtCompound.copy()
+                            }
+                            inventory.setStack(6, itemStack3)
+                            player.applyEnchantmentCosts(itemStack3, i)
+                            EnchantedBookItem.addEnchantment(itemStack3, EnchantmentLevelEntry(augmentChk,1))
 
-                    } else {
-                        val l = EnchantmentHelper.get(itemStack3)
-                        var r: Int
-                        var bl1 = false
-                        for (p in l.keys) {
-                            if (p == null) continue
-                            if(p === augmentChk){
-                                r = l[p]?.plus(1) ?: return@run
-                                if (r > augmentChk.maxLevel){
-                                    return@run
+                        } else {
+                            val l = EnchantmentHelper.get(itemStack3)
+                            var r: Int
+                            var bl1 = false
+                            for (p in l.keys) {
+                                if (p == null) continue
+                                if(p === augmentChk){
+                                    buttonWorked = false
+                                    r = l[p]?.plus(1) ?: return@run
+                                    if (r > augmentChk.maxLevel){
+                                        return@run
+                                    }
+                                    l[p] = r
+                                    bl1 = true
+                                    buttonWorked = true
                                 }
-                                l[p] = r
-                                bl1 = true
+                            }
+                            player.applyEnchantmentCosts(itemStack3, i)
+                            if(bl1) {
+                                EnchantmentHelper.set(l, itemStack3)
+                            } else{
+                                itemStack3.addEnchantment(augmentChk,1)
                             }
                         }
-                        player.applyEnchantmentCosts(itemStack3, i)
-                        if(bl1) {
-                            EnchantmentHelper.set(l, itemStack3)
-                        } else{
-                            itemStack3.addEnchantment(augmentChk,1)
-                        }
-                    }
-                    for (j in 0..12) { //decrement inventory slots even for creative mode!
-                        if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
-                        if (inventory.getStack(j).item.hasRecipeRemainder()){
-                            inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
-                        }else {
-                            inventory.getStack(j).decrement(1)
-                            if (inventory.getStack(j).isEmpty) {
-                                inventory.setStack(j, ItemStack.EMPTY)
+                        for (j in 0..12) { //decrement inventory slots even for creative mode!
+                            if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
+                            if (inventory.getStack(j).item.hasRecipeRemainder()){
+                                inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
+                            }else {
+                                inventory.getStack(j).decrement(1)
+                                if (inventory.getStack(j).isEmpty) {
+                                    inventory.setStack(j, ItemStack.EMPTY)
+                                }
                             }
                         }
+                    } else if (modChk != null && modChk.isAcceptableItem(itemStack3)){
+                        if (ScepterObject.addModifier(augId,itemStack3)){
+                            player.applyEnchantmentCosts(itemStack3, i)
+                        } else {
+                            buttonWorked = false
+                            return@run
+                        }
+                    } else {
+                        buttonWorked = false
+                        return@run
                     }
                     player.incrementStat(Stats.ENCHANT_ITEM)
                     if (player is ServerPlayerEntity) {
@@ -363,14 +376,7 @@ class ImbuingTableScreenHandler(
                     inventory.markDirty()
                     seed.set(player.enchantmentTableSeed)
                     onContentChanged(inventory)
-                    world.playSound(
-                        null,
-                        pos,
-                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
-                        SoundCategory.BLOCKS,
-                        1.0f,
-                        world.random.nextFloat() * 0.1f + 0.9f
-                    )
+                    playEnchantmentSound(world,pos)
                 } else{
                     player.applyEnchantmentCosts(itemStack3, i)
                     val l = EnchantmentHelper.get(itemStack3)
@@ -394,28 +400,12 @@ class ImbuingTableScreenHandler(
                     }
                     inventory.markDirty()
                     onContentChanged(inventory)
-                    world.playSound(
-                        null,
-                        pos,
-                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
-                        SoundCategory.BLOCKS,
-                        1.0f,
-                        world.random.nextFloat() * 0.1f + 0.9f
-                    )
+                    playEnchantmentSound(world,pos)
                 }
             }
-            return true
+            return buttonWorked
         }
         return false
-    }
-
-    private fun generateEnchantments(stack: ItemStack, slot: Int, level: Int): List<EnchantmentLevelEntry> {
-        random.setSeed((seed.get() + slot).toLong())
-        val list: ArrayList<EnchantmentLevelEntry> = generateEnchantmentList(random, stack, level, false)
-        if (stack.isOf(Items.BOOK) && list.size > 1) {
-            list.removeAt(random.nextInt(list.size))
-        }
-        return list
     }
 
     override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
@@ -464,6 +454,25 @@ class ImbuingTableScreenHandler(
         return itemStack
     }
 
+    private fun generateEnchantments(stack: ItemStack, slot: Int, level: Int): List<EnchantmentLevelEntry> {
+        random.setSeed((seed.get() + slot).toLong())
+        val list: ArrayList<EnchantmentLevelEntry> = generateEnchantmentList(random, stack, level, false)
+        if (stack.isOf(Items.BOOK) && list.size > 1) {
+            list.removeAt(random.nextInt(list.size))
+        }
+        return list
+    }
+
+    private fun playEnchantmentSound(world: World, pos: BlockPos?){
+        world.playSound(
+            null,
+            pos,
+            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+            SoundCategory.BLOCKS,
+            1.0f,
+            world.random.nextFloat() * 0.1f + 0.9f
+        )
+    }
     private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
         if (!DisenchantingTableScreenHandler.insertItem(stack, firstSlot, firstSlot + 1, false, this.slots)) {
             if (!DisenchantingTableScreenHandler.insertItem(stack, 0, firstSlot, false, this.slots)) {
@@ -476,8 +485,6 @@ class ImbuingTableScreenHandler(
         }
         return true
     }
-
-
     private fun calculateRequiredExperienceLevel(random: Random, slotIndex: Int, bookshelfCount: Int, stack: ItemStack): Int {
         var bookshelfCnt = bookshelfCount
         val item = stack.item
@@ -606,6 +613,9 @@ class ImbuingTableScreenHandler(
         addProperty(Property.create(this.imbueId, 0))
         addProperty(Property.create(this.imbueId, 1))
         addProperty(Property.create(this.imbueId, 2))
+        addProperty(Property.create(this.modId, 0))
+        addProperty(Property.create(this.modId, 1))
+        addProperty(Property.create(this.modId, 2))
         addProperty(Property.create(this.levelLow, 0))
         addProperty(Property.create(this.levelLow, 1))
         addProperty(Property.create(this.levelLow, 2))

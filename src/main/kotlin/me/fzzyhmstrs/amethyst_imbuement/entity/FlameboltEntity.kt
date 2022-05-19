@@ -12,6 +12,9 @@ import net.minecraft.world.World
 
 class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType,world) {
 
+    override var damage: Float = 6.0F
+    override var amplifier: Int = 5
+
     constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.FLAMEBOLT_ENTITY,world){
         this.owner = owner
         this.setVelocity(owner,
@@ -32,10 +35,10 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
             if (!entity.isFireImmune) {
                 val i = entity.fireTicks
-                entity.setOnFireFor(5)
+                entity.setOnFireFor(amplifier)
                 val bl = entity.damage(
                     DamageSource.fireball(fbe,owner),
-                    6.0f
+                    damage
                 )
                 if (!bl) {
                     entity.fireTicks = i

@@ -2,7 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -14,6 +17,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
@@ -25,8 +29,37 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val (_,entityList) = raycastEntityArea(user,hit,level)
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(8.0,1.0,0.0).withDuration(0,120,0)
+
+    private val delay = PerLvlI(21,-3,0)
+
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect
+    ): Boolean {
+        var target: Entity? = null
+        val hit = RaycasterUtil.raycastHit(distance = effects.range(level) * 2,user, includeFluids = true)
+        if (hit != null) {
+            if (hit.type == HitResult.Type.ENTITY) {
+                target = (hit as EntityHitResult).entity
+            }
+        }
+        return effect(world, target, user, level, hit, effects)
+    }
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
+        val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
         if (entityList.isEmpty()) {
             return false
         }
@@ -42,14 +75,21 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         val avgBlockPos = BlockPos(x/s,y/s,z/s)
 
         (world as ServerWorld).setWeather(0, 1200, true, true)
-        if (!effect(world, user, entityList, level)) return false
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level,avgBlockPos,RegisterEnchantment.LIGHTNING_STORM,21-3*level,120*level)
+        if (!effect(world, user, entityList, level, effect)) return false
+        ScepterObject.setPersistentTickerNeed(world,user,entityList,level,avgBlockPos,
+            RegisterEnchantment.LIGHTNING_STORM, delay.value(level),effect.duration(level), effect)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
 
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: AugmentEffect
+    ): Boolean {
         user.isInvulnerable = true
         var successes = 0
         for (entity3 in entityList) {
@@ -69,7 +109,8 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         user: LivingEntity,
         blockPos: BlockPos,
         entityList: MutableList<Entity>,
-        level: Int
+        level: Int,
+        effect: AugmentEffect
     ) {
         var tries = 2
         while (tries >= 0) {
@@ -86,8 +127,9 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 bpZrnd = world.random.nextInt(5) - 2
             } else {
                 bP = blockPos
-                bpXrnd = world.random.nextInt((rangeOfEffect()*2 + 1).toInt()) - rangeOfEffect().toInt()
-                bpZrnd = world.random.nextInt((rangeOfEffect()*2 + 1).toInt()) - rangeOfEffect().toInt()
+                val range = effect.range(level)
+                bpXrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
+                bpZrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
             }
             val rndBlockPos = BlockPos(bP.x + bpXrnd,world.getTopY(Heightmap.Type.MOTION_BLOCKING,bP.x + bpXrnd,bP.z + bpZrnd), bP.z + bpZrnd)
             if (entity !is Monster || !world.isSkyVisible(rndBlockPos)){
@@ -101,16 +143,8 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         }
     }
 
-    override fun rangeOfEffect(): Double {
-        return 8.0
-    }
-
-    override fun raycastHitRange(): Double {
-        return 16.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,400,50,20,imbueLevel,2, Items.COPPER_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,400,50,20,imbueLevel,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
@@ -19,7 +21,17 @@ import kotlin.math.min
 
 class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(28,0,0).withAmplifier(12,0,0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         val entityList: MutableList<Entity> = mutableListOf()
         val d: Double
         val e: Double
@@ -32,8 +44,8 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        val successes = conjureBarrage(user,world,d,e,f)
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,14,28)
+        val successes = conjureBarrage(user,world,d,e,f, effect.amplifier(level))
+        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,14,effect.duration(level), effect)
         return successes > 0
     }
 
@@ -42,7 +54,8 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         user: LivingEntity,
         blockPos: BlockPos,
         entityList: MutableList<Entity>,
-        level: Int
+        level: Int,
+        effect: AugmentEffect
     ) {
         val d: Double
         val e: Double
@@ -56,24 +69,20 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        conjureBarrage(user,world,d,e,f)
-    }
-
-    override fun rangeOfEffect(): Double {
-        return 12.0
+        conjureBarrage(user,world,d,e,f, effect.amplifier(level))
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,100,40,22,imbueLevel,2, Items.EMERALD_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,100,40,22,imbueLevel,LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
     }
 
-    private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float): Int{
+    private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, fangs: Int): Int{
         var successes = 0
-        for (i in 0..12) {
+        for (i in 0..fangs) {
             val g = 1.25 * (i + 1).toDouble()
             for (k in -1..1){
                 val success = conjureFangs(
@@ -113,6 +122,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             break
         } while (blockPos.y >= MathHelper.floor(maxY) - 1)
         if (bl) {
+            //consider a custom fangs entity that can have damage effects
             world.spawnEntity(
                 EvokerFangsEntity(
                     world,

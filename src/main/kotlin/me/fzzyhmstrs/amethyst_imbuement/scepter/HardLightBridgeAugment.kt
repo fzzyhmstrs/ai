@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -16,7 +18,17 @@ import net.minecraft.world.World
 
 class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(8.0,0.0,0.0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         var successes = 0
         val dir = user.horizontalFacing
         val pos = user.blockPos.add(0,-1,0)
@@ -37,7 +49,7 @@ class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
             }
             else->{return false}
         }
-        for (i in 1..rangeOfEffect().toInt()){
+        for (i in 1..effect.range(level).toInt()){
             val pos2 = pos.add(i * xMod,0,i * zMod)
             if (world.isAir(pos2)){
                 world.setBlockState(pos2,RegisterBlock.HARD_LIGHT_BLOCK.defaultState)
@@ -48,12 +60,8 @@ class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         return successes > 0
     }
 
-    override fun rangeOfEffect(): Double {
-        return 8.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,5,1,5,imbueLevel,1, Items.CRAFTING_TABLE)
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,5,1,5,imbueLevel,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
     }
 
     override fun soundEvent(): SoundEvent {

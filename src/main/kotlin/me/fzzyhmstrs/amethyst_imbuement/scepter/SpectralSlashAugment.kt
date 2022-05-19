@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
@@ -26,6 +28,10 @@ import java.util.*
 @Suppress("SameParameterValue")
 class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDamage(2.5F,2.5F,0.0F)
+            .withRange(2.5,0.25,0.0)
+
     private val particleSpeed = 2.5
     private val particles: Array<Pair<Double,Double>> = arrayOf(
         Pair(-1.0,0.0),
@@ -46,12 +52,19 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         0.3)
 
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         if (world !is ServerWorld) return false
         if (user !is PlayerEntity) return false
         val rotation = user.getRotationVec(1.0F)
         val perpendicularVector = RaycasterUtil.perpendicularVector(rotation, RaycasterUtil.InPlane.XZ)
-        val raycasterPos = user.pos.add(rotation.multiply(rangeOfEffect()/2.0 + 0.25 * level)).add(Vec3d(0.0,user.height/2.0,0.0))
+        val raycasterPos = user.pos.add(rotation.multiply(effect.range(level * 2)/2)).add(Vec3d(0.0,user.height/2.0,0.0))
         val entityList: MutableList<Entity> =
             RaycasterUtil.raycastEntityRotatedArea(
                 world.iterateEntities(),
@@ -59,10 +72,9 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
                 raycasterPos,
                 rotation,
                 perpendicularVector,
-                rangeOfEffect() + 0.5 * level,
-                rangeOfEffect() + 0.25 * level,
+                effect.range(level * 2),
+                effect.range(level),
                 1.2)
-        //val entityList: MutableList<Entity> = RaycasterUtil.raycastEntityArea(rangeOfEffect() + 0.5 * level,BlockPos(raycasterPos))
         val hostileEntityList: MutableList<Entity> = mutableListOf()
         if (entityList.isNotEmpty()) {
             for (entity in entityList) {
@@ -73,12 +85,12 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
                 }
             }
         }
-        if (!effect(world, user, hostileEntityList, level)) return false
+        if (!effect(world, user, hostileEntityList, level, effect)) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
         val entityDistance: SortedMap<Double, Entity> = mutableMapOf<Double, Entity>().toSortedMap()
         for (entity in entityList){
             if (entity is MobEntity){
@@ -87,8 +99,8 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             }
         }
         if (entityDistance.isNotEmpty()) {
-            val baseDamage = 5.0F
-            val splashDamage = 2.5F
+            val baseDamage = effect.damage(level + 1)
+            val splashDamage = effect.damage(level)
             var closestHit = false
             for (entity in entityDistance){
                 if (!closestHit) {
@@ -109,7 +121,7 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val perpendicularToPosZ = (rotation.x/rotation.z) * -1
         val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
         val userPos = user.eyePos.add(0.0,-0.3,0.0)
-        val scale = rangeOfEffect()/2.0 + 0.125 * level
+        val scale = baseEffect.range(level)/2
         for (p in particles){
             for (p2 in particleOffsets) {
                 val particlePos =
@@ -125,16 +137,12 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         }
     }
 
-    override fun rangeOfEffect(): Double {
-        return 2.5
-    }
-
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,8,imbueLevel,1, Items.IRON_SWORD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,16,4,8,imbueLevel,LoreTier.LOW_TIER, Items.IRON_SWORD)
     }
 
     private fun addParticles(world: World,particleEffect: ParticleEffect,pos: Vec3d,velocity: Vec3d){

@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.*
 import net.minecraft.item.Items
@@ -17,8 +19,18 @@ import net.minecraft.world.World
 
 class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
-        val entity = RaycasterUtil.raycastEntity(rangeOfEffect(),user)
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(14.0,0.0,0.0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
+        val entity = RaycasterUtil.raycastEntity(effect.range(level),user)
 
         val blockPos: BlockPos = if (entity == null){
             if (hit == null) {
@@ -52,12 +64,8 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         return false
     }
 
-    override fun rangeOfEffect(): Double {
-        return 14.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,50,10,5,imbueLevel,1, Items.LIGHTNING_ROD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,50,10,5,imbueLevel,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
     }
 
     override fun soundEvent(): SoundEvent {

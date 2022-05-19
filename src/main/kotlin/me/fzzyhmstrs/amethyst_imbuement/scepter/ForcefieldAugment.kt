@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.Blocks
 import net.minecraft.block.PlantBlock
@@ -19,7 +21,14 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
 
     private val offset = intArrayOf(-2,2)
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         val pos = user.blockPos.add(0,1,0)
         var successes = 0
         for (i in offset){
@@ -72,6 +81,6 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel,1, Items.SHIELD)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel,LoreTier.LOW_TIER, Items.SHIELD)
     }
 }

@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -15,7 +17,13 @@ import net.minecraft.world.World
 
 class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int): Boolean {
+    override fun effect(
+        world: World,
+        user: LivingEntity,
+        entityList: MutableList<Entity>,
+        level: Int,
+        effect: AugmentEffect
+    ): Boolean {
         val stack1 = user.getStackInHand(Hand.MAIN_HAND)
         val stack2 = user.getStackInHand(Hand.OFF_HAND)
         if (stack1.item is ScepterItem) {
@@ -32,12 +40,8 @@ class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         return true
     }
 
-    override fun rangeOfEffect(): Double {
-        return 7.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,0, Items.DEBUG_STICK)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,LoreTier.NO_TIER, Items.DEBUG_STICK)
     }
 
     override fun soundEvent(): SoundEvent {

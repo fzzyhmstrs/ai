@@ -27,6 +27,16 @@ enum class LoreTier {
             return bookOfLoreListT2
         }
     },
+    EXTREME_TIER{
+        private val bookOfLoreListT3: MutableList<String> =  mutableListOf()
+
+        override fun addToList(string: String) {
+            bookOfLoreListT3.addIfDistinct(string)
+        }
+        override fun list(): List<String> {
+            return bookOfLoreListT3
+        }
+    },
     ANY_TIER{
         private val bookOfLoreListT12: MutableList<String> =  mutableListOf()
 

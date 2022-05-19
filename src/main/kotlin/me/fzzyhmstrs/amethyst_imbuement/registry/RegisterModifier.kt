@@ -2,6 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentModifier
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentModifierDefaults
+import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 
 object RegisterModifier {
@@ -24,7 +28,8 @@ object RegisterModifier {
         ENTRIES.register(LESSER_THRIFTY)
     }
 
-    data class ModifierRegistry(private val registry: MutableMap<Identifier,AugmentModifier> = mutableMapOf()){
+    class ModifierRegistry(){
+        private val registry: MutableMap<Identifier,AugmentModifier> = mutableMapOf()
         fun register(modifier: AugmentModifier){
             val id = modifier.modifierId
             if (registry.containsKey(id)){throw IllegalStateException("Modifier with id $id already present in ModififerRegistry")}
@@ -32,6 +37,18 @@ object RegisterModifier {
         }
         fun get(id: Identifier): AugmentModifier?{
             return registry[id]
+        }
+        fun getByRawId(rawId: Int): AugmentModifier?{
+            return registry[registry.keys.elementAtOrElse(rawId) { AugmentModifierDefaults.blankId }]
+        }
+        fun getIdByRawId(rawId:Int): Identifier{
+            return registry.keys.elementAtOrElse(rawId) { AugmentModifierDefaults.blankId }
+        }
+        fun getRawId(id: Identifier): Int{
+            return registry.keys.indexOf(id)
+        }
+        fun getName(id: Identifier): Text{
+            return TranslatableText("scepter.modifiers.$id")
         }
         fun isModifier(id: Identifier): Boolean{
             return this.get(id) != null
