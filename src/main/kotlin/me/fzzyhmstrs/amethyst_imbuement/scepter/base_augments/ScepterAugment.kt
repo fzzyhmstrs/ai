@@ -44,7 +44,7 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
     open fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int){
     }
 
-    open fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?){
+    open fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?, effects: AugmentEffect){
     }
 
     open fun soundEvent(): SoundEvent {
@@ -89,10 +89,9 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return when (tier) {
-            1 -> (stack.isOf(RegisterItem.OPALINE_SCEPTER) || stack.isOf(RegisterItem.IRIDESCENT_SCEPTER) || stack.isOf(
-                RegisterItem.LUSTROUS_SCEPTER))
-            2 -> (stack.isOf(RegisterItem.IRIDESCENT_SCEPTER) || stack.isOf(RegisterItem.LUSTROUS_SCEPTER))
-            3 -> stack.isOf(RegisterItem.LUSTROUS_SCEPTER)
+            1 -> AugmentModifierDefaults.TIER_ONE(stack)
+            2 -> AugmentModifierDefaults.TIER_TWO(stack)
+            3 -> AugmentModifierDefaults.TIER_THREE(stack)
             else -> {
                 false
             }

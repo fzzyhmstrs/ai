@@ -3,7 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -25,10 +27,10 @@ import kotlin.math.min
 
 class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
-        get() = super.baseEffect.withRange(13.0,1.0)
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(13.0,1.0).withDuration(1200,0,0)
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: ScepterObject.AugmentEffect): Boolean {
+    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: AugmentEffect): Boolean {
         val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
         if (entityList.size <= 1) return false
         effect(world, user, entityList, level, effect)
@@ -41,7 +43,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         user: LivingEntity,
         entityList: MutableList<Entity>,
         level: Int,
-        effect: ScepterObject.AugmentEffect
+        effect: AugmentEffect
     ): Boolean {
         val hostileEntity: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
@@ -61,11 +63,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
 
         if (checkList.isNotEmpty()) {
             for (entity in checkList) {
-                entityTask(world,entity,user,level.toDouble(),null)
-                /*ScepterObject.addEntityToQueue2(
-                    entity,
-                    ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
-                )*/
+                entityTask(world,entity,user,level.toDouble(),null, effect)
             }
         }
 
@@ -74,36 +72,34 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
                 val (checkList2, _) = getRndEntityList(world,merchantEntity,levelRemaining)
                 if (checkList.isNotEmpty()) {
                     for (entity in checkList2) {
-                        //entity.damage(DamageSource.mob(entity3 as LivingEntity), 0.5f)
-                        entityTask(world,entity,user,level.toDouble(),null)
-                        /*ScepterObject.addEntityToQueue2(
-                            entity,
-                            ScepterItem.EntityTaskInstance(RegisterEnchantment.BEDAZZLE, user, level.toDouble(), null)
-                        )*/
+                        entityTask(world,entity,user,level.toDouble(),null,effect)
                     }
                 }
-                user.addStatusEffect(StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, 1200))
+                user.addStatusEffect(StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, effect.duration(level)))
             }
         }
         return true
     }
 
-    override fun entityTask(world: World, target: Entity, user: LivingEntity, level: Double, hit: HitResult?) {
+    override fun entityTask(
+        world: World,
+        target: Entity,
+        user: LivingEntity,
+        level: Double,
+        hit: HitResult?,
+        effects: AugmentEffect
+    ) {
         if (target !is LivingEntity) return
         val duration = if (target is VillagerEntity){
-            1200
+            effects.duration(level.toInt())
         } else {
-            600
+            effects.duration(level.toInt())/2
         }
         BaseAugment.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel,1, Items.DIAMOND)
-    }
-
-    override fun raycastHitRange(modifier: Double): Double {
-        return 18.0
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel,LoreTier.LOW_TIER, Items.DIAMOND)
     }
 
     override fun soundEvent(): SoundEvent {

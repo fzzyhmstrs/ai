@@ -18,15 +18,15 @@ import net.minecraft.world.World
 
 abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
-        get() = ScepterObject.AugmentEffect(0.0F,0.0F,0,0,0,0,3.0,0.0)
+    override val baseEffect: AugmentEffect
+        get() = AugmentEffect().withRange(3.0,0.0,0.0)
 
     override fun applyTasks(
         world: World,
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        effects: ScepterObject.AugmentEffect
+        effects: AugmentEffect
     ): Boolean {
         if (user !is PlayerEntity) return false
         val hit = RaycasterUtil.raycastHit(
@@ -35,10 +35,10 @@ abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
             includeFluids = true
         ) ?: return false
         if (hit.type != HitResult.Type.BLOCK) return false
-        return placeEntity(world, user, hit, level)
+        return placeEntity(world, user, hit, level, effects)
     }
 
-    open fun placeEntity(world: World, user: PlayerEntity, hit: HitResult, level: Int): Boolean{
+    open fun placeEntity(world: World, user: PlayerEntity, hit: HitResult, level: Int, effects: AugmentEffect): Boolean{
         val vec3d2: Vec3d
         val vec3d: Vec3d = user.getRotationVec(1.0f)
         val list: List<Entity> = world.getOtherEntities(

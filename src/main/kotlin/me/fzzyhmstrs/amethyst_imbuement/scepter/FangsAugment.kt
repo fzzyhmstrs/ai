@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
@@ -19,7 +21,17 @@ import kotlin.math.min
 
 class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withAmplifier(15,0,0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         var successes = 0
         val d: Double
         val e: Double
@@ -31,7 +43,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        for (i in 0..15) {
+        for (i in 0..effect.amplifier(level)) {
             val g = 1.25 * (i + 1).toDouble()
             val success = conjureFangs(
                 world,
@@ -48,12 +60,8 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         return successes > 0
     }
 
-    override fun rangeOfEffect(): Double {
-        return 8.0
-    }
-
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,34,10,8,imbueLevel,1, Items.EMERALD)
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,34,10,8,imbueLevel,LoreTier.LOW_TIER, Items.EMERALD)
     }
 
     override fun soundEvent(): SoundEvent {

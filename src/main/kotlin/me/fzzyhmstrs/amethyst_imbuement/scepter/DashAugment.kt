@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +22,14 @@ import net.minecraft.world.World
 
 class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         if (user !is PlayerEntity) return false
         val y: Float = user.getYaw()
         val p: Float = user.getPitch()
@@ -46,15 +55,11 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
     }
 
     override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
-        effect(world, null, user, level, null)
+        effect(world, null, user, level, null, baseEffect)
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,32,10,4,imbueLevel,1, Items.SUGAR)
-    }
-
-    override fun rangeOfEffect(): Double {
-        return 0.0
+        return ScepterObject.AugmentDatapoint(SpellType.WIT,32,10,4,imbueLevel,LoreTier.LOW_TIER, Items.SUGAR)
     }
 
     override fun soundEvent(): SoundEvent {

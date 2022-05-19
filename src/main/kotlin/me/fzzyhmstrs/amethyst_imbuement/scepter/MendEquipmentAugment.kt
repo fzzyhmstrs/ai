@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.ManaItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +22,17 @@ import kotlin.math.min
 @Suppress("SpellCheckingInspection")
 class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), ManaItem {
 
-    override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?): Boolean {
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(0,15,0)
+
+    override fun effect(
+        world: World,
+        target: Entity?,
+        user: LivingEntity,
+        level: Int,
+        hit: HitResult?,
+        effect: AugmentEffect
+    ): Boolean {
         if (user !is PlayerEntity) return false
         val stacks: MutableList<ItemStack> = mutableListOf()
         for (stack2 in user.inventory.main){
@@ -37,7 +49,7 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             stacks.add(user.offHandStack)
         }
         if (stacks.isEmpty()) return false
-        val healLeft = 15 * level
+        val healLeft = effect.duration(level)
         val leftOverHeal = healItems(stacks,world,healLeft)
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.5f,1.0f)
         return (leftOverHeal < healLeft)
@@ -62,7 +74,7 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,14,3,1,imbueLevel,0, Items.IRON_INGOT)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,14,3,1,imbueLevel,LoreTier.NO_TIER, Items.IRON_INGOT)
     }
 
 }

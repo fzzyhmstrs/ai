@@ -2,7 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -19,7 +21,7 @@ import net.minecraft.world.World
 
 class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
+    override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(200,0)
 
     override fun supportEffect(
@@ -27,7 +29,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         target: Entity?,
         user: LivingEntity,
         level: Int,
-        effects: ScepterObject.AugmentEffect
+        effects: AugmentEffect
     ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
@@ -40,7 +42,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     target.removeStatusEffect(effect.effectType)
                 }
                 target.fireTicks = 0
-                BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,effects.duration(level),0)
+                BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
@@ -55,7 +57,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     user.removeStatusEffect(effect.effectType)
                 }
                 user.fireTicks = 0
-                BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),0)
+                BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 true
             } else {
@@ -69,6 +71,6 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,12,1,imbueLevel,0, Items.MILK_BUCKET)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,12,1,imbueLevel,LoreTier.NO_TIER, Items.MILK_BUCKET)
     }
 }

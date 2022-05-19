@@ -31,7 +31,7 @@ abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: 
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        effects: ScepterObject.AugmentEffect
+        effects: AugmentEffect
     ): Boolean {
         return RaycasterUtil.raycastBlock(entity = user) != null
     }

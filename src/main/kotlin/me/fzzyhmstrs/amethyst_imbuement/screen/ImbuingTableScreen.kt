@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -112,7 +113,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             var onesOfst = 8
             var tensImageOfst: Int
             var onesImageOfst = 9
-            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0) && player.experienceLevel >= r && handler.levelLow[o] == 0 || player.abilities.creativeMode)) {
+            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0 || handler.modId[o] != 0) && player.experienceLevel >= r && handler.levelLow[o] == 0 || player.abilities.creativeMode)) {
                 this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 if ((o+oOfst) <= 5) {
                     this.drawTexture(
@@ -298,7 +299,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 ) || k <= 0 || l < 0
             ) continue
             val list = Lists.newArrayList<Text>()
-            if (handler.imbueId[j] == 0){
+            if (handler.imbueId[j] == 0 && handler.modId[j] == 0){
                 val enchantment = if (handler.levelLow[j] > 0){
                     list.add(TranslatableText("container.imbuing_table.level_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j])
@@ -346,7 +347,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     //println(textName.toString())
                     list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                     list.add(LiteralText.EMPTY)
-                } else{
+                } else if (handler.imbueId[j] > 0){
                     if (Registry.ENCHANTMENT.get(handler.imbueId[j]) != null) {
                         val textName: MutableText =
                             Registry.ENCHANTMENT.get(handler.imbueId[j])?.getName(1) as MutableText
@@ -355,6 +356,13 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                         list.add(LiteralText.EMPTY)
 
                     }
+                }
+                if(handler.modId[j] > 0) {
+                    val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j])
+                    val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
+                    //println(textName.toString())
+                    list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                    list.add(LiteralText.EMPTY)
                 }
                 if (player.experienceLevel < k) {
                     list.add(

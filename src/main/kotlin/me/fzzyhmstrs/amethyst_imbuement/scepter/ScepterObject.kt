@@ -20,6 +20,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayNetworkHandler
@@ -76,6 +77,9 @@ object ScepterObject: AugmentDamage {
                 stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
             }
         }
+        if (scepterNbt.contains(NbtKeys.MODIFIERS.str())){
+            initializeModifiers(id,scepterNbt)
+        }
         DIRT.markDirty(id)
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
@@ -93,10 +97,6 @@ object ScepterObject: AugmentDamage {
                 scepters[id]?.put(stringId, world.time-1000000L)
             }
         }
-    }
-
-    fun initializeModifiers(){
-
     }
 
     fun useScepter(activeEnchantId: String, stack: ItemStack, user: PlayerEntity, world: World, cdMod: Double = 0.0): Int?{
@@ -489,48 +489,62 @@ object ScepterObject: AugmentDamage {
 
     data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
                                 val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
-                                val bookOfLoreTier: LoreTier, val keyItem: Item){
-        //hi
-    }
+                                val bookOfLoreTier: LoreTier, val keyItem: Item)
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
-                                            val augment: MiscAugment, var delay: Int, var duration: Int, val effect: AugmentEffect){
-        //hi
-    }
+                                            val augment: MiscAugment, var delay: Int, var duration: Int, val effect: AugmentEffect)
     data class CompiledModifiers(val modifiers: List<AugmentModifier>, val compiledData: CompiledAugmentModifier)
 
     fun addModifier(modifier: Identifier, stack: ItemStack): Boolean{
         val nbt = stack.orCreateNbt
         val id: Int = nbtChecker(nbt) ?: return false
-        return addModifier(modifier, id)
+        return addModifier(modifier, id, stack)
     }
-    private fun addModifier(modifier: Identifier, scepter: Int): Boolean{
+    private fun addModifier(modifier: Identifier, scepter: Int, stack: ItemStack): Boolean{
         if (augmentModifiers[scepter]?.contains(modifier) == true){
             val mod = RegisterModifier.ENTRIES.get(modifier)
-            if (mod?.hasDescendant() == true){
-                val lineage = mod.getLineage()
-                val highestOrderDescendant = lineage.size
-                var highestDescendantPresent = 1
-                lineage.forEachIndexed { index, identifier ->
-                    if (augmentModifiers[scepter]?.contains(identifier) == true){
-                        highestDescendantPresent = index + 1
-                    }
-                }
-                return if (highestDescendantPresent >= highestOrderDescendant){
+            return if (mod?.hasDescendant() == true){
+                val highestDescendantPresent = checkModifierLineage(mod,scepter)
+                if (highestDescendantPresent < 0){
                     false
                 } else {
+                    val lineage = mod.getLineage()
                     val newDescendant = lineage[highestDescendantPresent]
                     augmentModifiers[scepter]?.add(newDescendant)
+                    addModifierToNbt(modifier, stack)
                     DIRT.markDirty(scepter)
                     true
                 }
             } else {
-                return false
+                false
             }
         }
         augmentModifiers[scepter]?.add(modifier)
+        addModifierToNbt(modifier, stack)
         DIRT.markDirty(scepter)
         return true
+    }
+    private fun addModifierToNbt(modifier: Identifier, stack: ItemStack){
+        val nbt = stack.orCreateNbt
+        val nbtList = if (nbt.contains(NbtKeys.MODIFIERS.str())){
+            nbt.getList(NbtKeys.MODIFIERS.str(),9)
+        } else {
+            NbtList()
+        }
+        val newEl = NbtCompound()
+        newEl.putString(NbtKeys.MODIFIER_ID.str(),modifier.toString())
+        nbtList.add(newEl)
+        nbt.put(NbtKeys.MODIFIERS.str(),nbtList)
+    }
+    private fun initializeModifiers(id: Int, nbt: NbtCompound){
+        val nbtList = nbt.getList(NbtKeys.MODIFIERS.str(),9)
+        for (el in nbtList){
+            val compound = el as NbtCompound
+            if (compound.contains(NbtKeys.MODIFIER_ID.str())){
+                val modifier = compound.getString(NbtKeys.MODIFIER_ID.str())
+                augmentModifiers[id]?.add(Identifier(modifier))
+            }
+        }
     }
 
     fun getModifiers(stack: ItemStack): List<Identifier>{
@@ -543,6 +557,35 @@ object ScepterObject: AugmentDamage {
         val nbt = stack.orCreateNbt
         val id: Int = nbtChecker(nbt) ?: return BLANK_COMPILED_DATA
         return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA
+    }
+
+    fun checkModifierLineage(modifier:Identifier, stack: ItemStack): Boolean{
+        val mod = RegisterModifier.ENTRIES.get(modifier)
+        return if (mod != null){
+            checkModifierLineage(mod, stack)
+        } else {
+            false
+        }
+    }
+    private fun checkModifierLineage(mod:AugmentModifier, stack: ItemStack): Boolean{
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt) ?: return false
+        return checkModifierLineage(mod, id) > 0
+    }
+    private fun checkModifierLineage(mod:AugmentModifier, id: Int): Int{
+        val lineage = mod.getLineage()
+        val highestOrderDescendant = lineage.size
+        var highestDescendantPresent = 1
+        lineage.forEachIndexed { index, identifier ->
+            if (augmentModifiers[id]?.contains(identifier) == true){
+                highestDescendantPresent = index + 1
+            }
+        }
+        return if(highestDescendantPresent < highestOrderDescendant){
+            highestDescendantPresent
+        } else {
+            -1
+        }
     }
 
     private fun gatherActiveScepterModifiers(scepter: Int){

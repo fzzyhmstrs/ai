@@ -2,12 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
@@ -36,7 +34,6 @@ object AugmentModifierDefaults{
 
 open class AugmentModifier(
     val modifierId: Identifier,
-    val acceptableItemStacks: (ItemStack) -> Boolean = AugmentModifierDefaults.TIER_ONE,
     open val levelModifier: Int = 0,
     open val cooldownModifier: Double = 0.0,
     open val manaCostModifier: Double = 0.0
@@ -133,6 +130,10 @@ open class AugmentModifier(
         return this
     }
 
+    open fun isAcceptableItem(stack: ItemStack): Boolean{
+        return AugmentModifierDefaults.TIER_ONE(stack)
+    }
+
     //data class SecondaryEffect(val overridesEffect: Boolean = false, val secondaryEffect: ScepterAugment? = null)
 }
 
@@ -141,7 +142,7 @@ class CompiledAugmentModifier(
     override var levelModifier: Int = 0,
     override var cooldownModifier: Double = 0.0,
     override var manaCostModifier: Double = 0.0)
-    : AugmentModifier(modifierId,AugmentModifierDefaults.TIER_ONE, levelModifier, cooldownModifier, manaCostModifier){
+    : AugmentModifier(modifierId, levelModifier, cooldownModifier, manaCostModifier){
 
           fun plus(am: AugmentModifier) {
               levelModifier += am.levelModifier
@@ -153,10 +154,10 @@ class CompiledAugmentModifier(
     }
 
 data class AugmentEffect(
-    private var damageData: LevelDataF = LevelDataF(),
-    private var amplifierData: LevelDataI = LevelDataI(),
-    private var durationData: LevelDataI = LevelDataI(),
-    private var rangeData: LevelDataD = LevelDataD()){
+    private var damageData: PerLvlF = PerLvlF(),
+    private var amplifierData: PerLvlI = PerLvlI(),
+    private var durationData: PerLvlI = PerLvlI(),
+    private var rangeData: PerLvlD = PerLvlD()){
 
     fun plus(ae: AugmentEffect){
         damageData = damageData.plus(ae.damageData)
@@ -177,16 +178,16 @@ data class AugmentEffect(
         return max(1.0,rangeData.value(level))
     }
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
-        return this.copy(damageData = LevelDataF(damage, damagePerLevel, damagePercent))
+        return this.copy(damageData = PerLvlF(damage, damagePerLevel, damagePercent))
     }
     fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0): AugmentEffect{
-        return this.copy(amplifierData = LevelDataI(amplifier,amplifierPerLevel,amplifierPercent))
+        return this.copy(amplifierData = PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
     }
     fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentEffect{
-        return this.copy(durationData = LevelDataI(duration, durationPerLevel, durationPercent))
+        return this.copy(durationData = PerLvlI(duration, durationPerLevel, durationPercent))
     }
     fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect {
-        return this.copy(rangeData = LevelDataD(range, rangePerLevel, rangePercent))
+        return this.copy(rangeData = PerLvlD(range, rangePerLevel, rangePercent))
     }
 }
 
@@ -216,29 +217,29 @@ data class XpModifiers(var furyXpMod: Int = 0, var witXpMod: Int = 0, var graceX
     }
 }
 
-data class LevelDataI(val base: Int = 0, val perLevel: Int = 0, val percent: Int = 0){
+data class PerLvlI(val base: Int = 0, val perLevel: Int = 0, val percent: Int = 0){
     fun value(level: Int): Int{
         return (base + perLevel * level) * (100 + percent) / 100
     }
-    fun plus(ldi: LevelDataI): LevelDataI{
-        return LevelDataI(base + ldi.base, perLevel + ldi.perLevel, percent + ldi.percent)
+    fun plus(ldi: PerLvlI): PerLvlI{
+        return PerLvlI(base + ldi.base, perLevel + ldi.perLevel, percent + ldi.percent)
     }
 }
 
-data class LevelDataF(val base: Float = 0.0F, val perLevel: Float = 0.0F, val percent: Float = 0.0F){
+data class PerLvlF(val base: Float = 0.0F, val perLevel: Float = 0.0F, val percent: Float = 0.0F){
     fun value(level: Int): Float{
         return (base + perLevel * level) * (100 + percent) / 100
     }
-    fun plus(ldf: LevelDataF): LevelDataF{
-        return LevelDataF(base + ldf.base, perLevel + ldf.perLevel, percent + ldf.percent)
+    fun plus(ldf: PerLvlF): PerLvlF{
+        return PerLvlF(base + ldf.base, perLevel + ldf.perLevel, percent + ldf.percent)
     }
 }
 
-data class LevelDataD(val base: Double = 0.0, val perLevel: Double = 0.0, val percent: Double = 0.0){
+data class PerLvlD(val base: Double = 0.0, val perLevel: Double = 0.0, val percent: Double = 0.0){
     fun value(level: Int): Double{
         return (base + perLevel * level) * (100 + percent) / 100
     }
-    fun plus(ldd: LevelDataD): LevelDataD{
-        return LevelDataD(base + ldd.base, perLevel + ldd.perLevel, percent + ldd.percent)
+    fun plus(ldd: PerLvlD): PerLvlD{
+        return PerLvlD(base + ldd.base, perLevel + ldd.perLevel, percent + ldd.percent)
     }
 }

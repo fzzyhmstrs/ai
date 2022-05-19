@@ -12,21 +12,21 @@ import net.minecraft.world.World
 
 abstract class MinorSupportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
-        get() = super.baseEffect.withRange(6.0,0.0)
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(6.0,0.0, 0.0)
 
     override fun applyTasks(
         world: World,
         user: LivingEntity,
         hand: Hand,
         level: Int,
-        effects: ScepterObject.AugmentEffect
+        effects: AugmentEffect
     ): Boolean {
         val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
         return supportEffect(world, target, user, level, effects)
     }
 
-    open fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: ScepterObject.AugmentEffect): Boolean {
+    open fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         return false
     }
 }

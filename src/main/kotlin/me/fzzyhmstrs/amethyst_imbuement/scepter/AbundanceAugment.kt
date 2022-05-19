@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
@@ -13,7 +15,7 @@ import net.minecraft.world.World
 
 class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
-    override val baseEffect: ScepterObject.AugmentEffect
+    override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(1.0,1.0)
 
     override fun effect(
@@ -22,7 +24,7 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         user: LivingEntity,
         level: Int,
         hit: HitResult?,
-        effect: ScepterObject.AugmentEffect
+        effect: AugmentEffect
     ): Boolean {
         var successes = 0
         val range = (effect.range(level)).toInt()
@@ -51,7 +53,7 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,10,2,1,imbueLevel,0, Items.HAY_BLOCK)
+        return ScepterObject.AugmentDatapoint(SpellType.GRACE,10,2,1,imbueLevel,LoreTier.NO_TIER, Items.HAY_BLOCK)
     }
 
 }
