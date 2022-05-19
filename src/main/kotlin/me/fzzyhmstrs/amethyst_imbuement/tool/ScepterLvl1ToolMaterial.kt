@@ -6,7 +6,7 @@ import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
 import kotlin.math.max
 
-object ScepterToolMaterial: ToolMaterial,ScepterMaterialAddon{
+object ScepterLvl1ToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun getDurability(): Int {
         return AiConfig.scepters.opalineDurability
     }

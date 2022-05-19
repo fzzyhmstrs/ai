@@ -12,12 +12,12 @@ object RegisterModifier {
 
     val ENTRIES: ModifierRegistry = ModifierRegistry()
 
-    val GREATER_ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"attuned_3"), cooldownModifier = -22.5)
-    val ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"attuned_2"), cooldownModifier = -15.0).withDescendant(GREATER_ATTUNED)
-    val LESSER_ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"attuned_1"), cooldownModifier = -7.5).withDescendant(ATTUNED)
-    val GREATER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"thrifty_3"), manaCostModifier = -15.0)
-    val THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"thrifty_2"), manaCostModifier = -10.0).withDescendant(GREATER_THRIFTY)
-    val LESSER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"thrifty_1"), manaCostModifier = -5.0).withDescendant(THRIFTY)
+    val GREATER_ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"greater_attuned"), cooldownModifier = -22.5)
+    val ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"attuned"), cooldownModifier = -15.0).withDescendant(GREATER_ATTUNED)
+    val LESSER_ATTUNED = AugmentModifier(Identifier(AI.MOD_ID,"lesser_attuned"), cooldownModifier = -7.5).withDescendant(ATTUNED)
+    val GREATER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"greater_thrifty"), manaCostModifier = -15.0)
+    val THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"thrifty"), manaCostModifier = -10.0).withDescendant(GREATER_THRIFTY)
+    val LESSER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"lesser_thrifty"), manaCostModifier = -5.0).withDescendant(THRIFTY)
 
     fun registerAll(){
         ENTRIES.register(GREATER_ATTUNED)

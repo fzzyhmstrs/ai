@@ -43,7 +43,7 @@ object RegisterItem {
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_pickaxe"] = it}
     val GARNET_AXE = CustomAxeItem(GarnetToolMaterial,5.0f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_axe"] = it}
     val GARNET_HOE = CustomHoeItem(GarnetToolMaterial,-3,0.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_hoe"] = it}
-    val OPALINE_SCEPTER = ScepterItem(ScepterToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["opaline_scepter"] = it}
+    val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["opaline_scepter"] = it}
     val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["iridescent_scepter"] = it}
     val LUSTROUS_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["lustrous_scepter"] = it}
 

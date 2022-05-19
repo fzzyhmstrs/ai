@@ -5,7 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -127,10 +127,10 @@ object AiConfig {
 
 
     class Scepters {
-        var opalineDurability: Int = ScepterToolMaterial.defaultDurability()
+        var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
-        var baseRegenRateTicks: Long = ScepterToolMaterial.baseCooldown()
+        var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
     }
 
     class Altars {
