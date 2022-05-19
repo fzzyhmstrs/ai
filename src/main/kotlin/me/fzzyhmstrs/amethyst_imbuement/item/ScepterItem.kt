@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
@@ -25,6 +26,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.LiteralText
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.*
@@ -35,29 +37,25 @@ import net.minecraft.world.World
 import kotlin.math.max
 
 @Suppress("SameParameterValue", "unused", "USELESS_IS_CHECK")
-class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModifier: Identifier): ToolItem(material, settings), ManaItem {
+open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModifier: Identifier): ToolItem(material, settings), ManaItem {
 
-    private val tickerManaRepair: RegisterEvent.Ticker
-    private val defaultManaRepairTime = 150L
+    private val tickerManaRepair: Long
     private val defaultModifiers: MutableList<Identifier> = mutableListOf()
-    /*private val augmentUniversalModifiers: MutableMap<Identifier,AugmentModifier> = mutableMapOf()
-    private val augmentSpecificModifiers: MutableMap<Identifier,AugmentModifier> = mutableMapOf()
-    private val tempAugmentModifiers: MutableMap<Identifier,RegisterEvent.Ticker> = mutableMapOf()
-    private var hasModifiers: Boolean = false*/
 
     init {
-        val manaRepairTime = if (material !is ScepterMaterialAddon){
-            defaultManaRepairTime
+        tickerManaRepair = if (material !is ScepterMaterialAddon){
+            AiConfig.scepters.baseRegenRateTicks
         } else {
             material.healCooldown()
         }
-        tickerManaRepair = RegisterEvent.Ticker(manaRepairTime.toInt())
         defaultModifier.forEach {
             defaultModifiers.add(it)
         }
     }
 
-
+    fun getRepairTime(): Int{
+        return tickerManaRepair.toInt()
+    }
 
     override fun appendTooltip(
         stack: ItemStack,
@@ -84,7 +82,7 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
         val modifierList = ScepterObject.getModifiers(stack)
         if (modifierList.isNotEmpty()){
             val modifierText = TranslatableText("scepter.modifiers").formatted(Formatting.GOLD)
-            val commaText = LiteralText(", ").formatted(Formatting.GOLD)
+
             val itr = modifierList.asIterable().iterator()
             while(itr.hasNext()){
                 val mod = itr.next()
@@ -179,9 +177,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             }
             return serverUse(world, user, hand, stack, activeEnchantId, testEnchant, testLevel)
         }
-
-
-
     }
 
     private fun serverUse(world: World, user: PlayerEntity, hand: Hand, stack: ItemStack,
@@ -230,7 +225,6 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
         if (world.isClient) return
         if (entity !is PlayerEntity) return
 
-        tickerManaRepair.tickUp()
         val id = ScepterObject.scepterTickNbtCheck(stack)
         if (id > 0){
             if (ScepterObject.getPersistentTickerNeed(id)){
@@ -243,11 +237,12 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
             } else if (chk == 0){
                 entity.itemCooldownManager.remove(stack.item)
             }
+            //slowly heal damage over time
+            if (ScepterObject.tickTicker(id)){
+                healDamage(1,stack)
+            }
         }
-        //slowly heal damage over time
-        if (tickerManaRepair.isReady()){
-            healDamage(1,stack)
-        }
+
     }
 
     override fun getUseAction(stack: ItemStack): UseAction {
@@ -266,41 +261,12 @@ class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaultModi
         return TypedActionResult.fail(stack)
     }
 
-
-
-    /*private fun removeModifier(identifier: Identifier){
-        augmentUniversalModifiers.remove(identifier)
-        augmentSpecificModifiers.remove(identifier)
-        tempAugmentModifiers.remove(identifier)
-    }
-    private fun tickModifiers(){
-        tempAugmentModifiers.forEach {
-            it.value.tickUp()
-            if (it.value.isReady()){
-                removeModifier(it.key)
-            }
-        }
-    }
-    private fun checkForModifiers(id: Identifier): List<AugmentModifier>{
-        if (augmentModifiers.isEmpty()) return listOf()
-        val list = mutableListOf<AugmentModifier>()
-        augmentModifiers.forEach{
-            if (it.value.hasSpellToAffect()){
-                if (it.value.getSpellsToAffect().contains(id)){
-                    list.add(it.value)
-                }
-            } else {
-                list.add(it.value)
-            }
-        }
-        return list
-    }*/
-
     //companion object for the scepter item, handles private functions and other housekeeping
 
     companion object SI {
 
         val SCEPTER_SMOKE_PACKET = Identifier(AI.MOD_ID,"scepter_smoke_packet")
+        val commaText: MutableText = LiteralText(", ").formatted(Formatting.GOLD)
 
         fun registerClient(){
             ClientPlayNetworking.registerGlobalReceiver(SCEPTER_SMOKE_PACKET) { minecraftClient: MinecraftClient, _, _, _ ->
