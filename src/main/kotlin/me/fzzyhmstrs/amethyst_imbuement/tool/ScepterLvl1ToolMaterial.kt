@@ -31,4 +31,7 @@ object ScepterLvl1ToolMaterial: ToolMaterial,ScepterMaterialAddon{
     override fun healCooldown(): Long {
         return max(AiConfig.scepters.baseRegenRateTicks,minCooldown())
     }
+    override fun scepterTier(): Int{
+        return 1
+    }
 }
