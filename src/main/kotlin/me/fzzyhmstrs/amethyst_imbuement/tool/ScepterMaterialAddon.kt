@@ -8,7 +8,7 @@ interface ScepterMaterialAddon {
     fun baseCooldown(): Long{
         return 150L
     }
-
     fun healCooldown(): Long
 
+    fun scepterTier(): Int
 }
