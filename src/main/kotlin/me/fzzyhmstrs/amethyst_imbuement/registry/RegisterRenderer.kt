@@ -94,6 +94,14 @@ object RegisterRenderer {
             )
         }
 
+        EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_FANGS
+        ){context: EntityRendererFactory.Context ->
+            PlayerFangsRenderer(
+                context
+            )
+        }
+
         BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
         ){context: BlockEntityRendererFactory.Context ->
             ImbuingTableBlockEntityRenderer(

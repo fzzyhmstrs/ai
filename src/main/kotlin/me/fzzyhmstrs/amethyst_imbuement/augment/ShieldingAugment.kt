@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import dev.emi.trinkets.api.SlotReference
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
@@ -13,7 +12,6 @@ import java.util.*
 import kotlin.math.*
 
 class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
-
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return (stack.item is ImbuedJewelryItem)
@@ -33,6 +31,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     companion object ShieldingObject{
 
+        const val baseAmount = 2
         private var lastApplied: Long = 0L
         private const val duration = 18000
         private val entityShielding: MutableMap<UUID,EntityShieldingInstance> = mutableMapOf()
@@ -70,18 +69,18 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
         private fun apply(timeCheck: Long, entity: LivingEntity, data: EntityShieldingInstance){
             val amount = data.amountToApply(timeCheck,entity)
             if (data.checkAmountZero()){
-                entity.removeStatusEffect(RegisterStatus.CUSTOM_ABSORPTION)
+                entity.removeStatusEffect(RegisterStatus.SHIELDING)
             } else {
                 if (data.isDirty()){
-                    entity.removeStatusEffect(RegisterStatus.CUSTOM_ABSORPTION)
-                    entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CUSTOM_ABSORPTION,data.getDuration(entity),amount - 1))
+                    entity.removeStatusEffect(RegisterStatus.SHIELDING)
+                    entity.addStatusEffect(StatusEffectInstance(RegisterStatus.SHIELDING,data.getDuration(entity),amount - 1))
                     data.clean()
                 }
             }
         }
 
         private fun checkShieldingDeficit(entity: LivingEntity): Int{
-            val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.CUSTOM_ABSORPTION) ?: return 0
+            val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.SHIELDING) ?: return 0
             val baseAmount = statusInstance.amplifier + 1
             val currentAmount = entity.absorptionAmount
             val delta = baseAmount - currentAmount
@@ -96,7 +95,6 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
         }
 
         private class EntityShieldingInstance(amount: Int, timeApplied: Long){
-
             private var a: Int
             private var d: Int
             private var t: Long

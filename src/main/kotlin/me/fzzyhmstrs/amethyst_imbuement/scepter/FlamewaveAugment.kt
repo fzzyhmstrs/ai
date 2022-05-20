@@ -16,6 +16,9 @@ import net.minecraft.world.World
 
 class FlamewaveAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDamage(6.0F,0.0F,0.0F)
+
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val pitch = user.pitch
         val speed = 1.5F

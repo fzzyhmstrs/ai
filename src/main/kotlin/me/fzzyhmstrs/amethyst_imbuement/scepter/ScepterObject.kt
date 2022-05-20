@@ -8,7 +8,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -52,7 +51,7 @@ object ScepterObject: AugmentDamage {
     private val scepterHealTickers: MutableMap<Int,RegisterEvent.Ticker> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
-    private val DIRT = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt)},-1)
+    private val DUSTBIN = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt)},-1)
     private val BLANK_COMPILED_DATA = CompiledModifiers(listOf(),AugmentModifierDefaults.EMPTY_COMPILED)
     val BLANK_EFFECT = AugmentEffect()
     val BLANK_XP_MOD = XpModifiers()
@@ -80,10 +79,12 @@ object ScepterObject: AugmentDamage {
                 stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
             }
         }
+        println(scepterNbt)
+        println(scepterNbt.contains(NbtKeys.MODIFIERS.str()))
         if (scepterNbt.contains(NbtKeys.MODIFIERS.str())){
             initializeModifiers(id,scepterNbt, stack)
         }
-        DIRT.markDirty(id)
+        DUSTBIN.markDirty(id)
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
         if(scepters[id]?.isNotEmpty() == true){ //break out of initialization if the scepter has already been initialized and isn't changed
@@ -253,7 +254,7 @@ object ScepterObject: AugmentDamage {
         } else{
             augmentApplied[id] = (cooldown.toLong() - timeSinceLast).toInt()
         }
-        DIRT.markDirty(id)
+        DUSTBIN.markDirty(id)
         val message = TranslatableText("scepter.new_active_spell").append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}"))
         user.sendMessage(message,false)
     }
@@ -507,10 +508,12 @@ object ScepterObject: AugmentDamage {
     fun addModifier(modifier: Identifier, stack: ItemStack): Boolean{
         val nbt = stack.orCreateNbt
         val id: Int = nbtChecker(nbt)
-        if (!augmentModifiers.containsKey(id)) return false
         return addModifier(modifier, id, nbt)
     }
     private fun addModifier(modifier: Identifier, scepter: Int, nbt: NbtCompound): Boolean{
+        if (!augmentModifiers.containsKey(scepter)) {
+            augmentModifiers[scepter] = mutableListOf()
+        }
         if (augmentModifiers[scepter]?.contains(modifier) == true){
             val mod = RegisterModifier.ENTRIES.get(modifier)
             return if (mod?.hasDescendant() == true){
@@ -522,7 +525,7 @@ object ScepterObject: AugmentDamage {
                     val newDescendant = lineage[highestDescendantPresent]
                     augmentModifiers[scepter]?.add(newDescendant)
                     addModifierToNbt(modifier, nbt)
-                    DIRT.markDirty(scepter)
+                    DUSTBIN.markDirty(scepter)
                     true
                 }
             } else {
@@ -531,12 +534,12 @@ object ScepterObject: AugmentDamage {
         }
         augmentModifiers[scepter]?.add(modifier)
         addModifierToNbt(modifier, nbt)
-        DIRT.markDirty(scepter)
+        DUSTBIN.markDirty(scepter)
         return true
     }
     private fun addModifierToNbt(modifier: Identifier, nbt: NbtCompound){
         val nbtList = if (nbt.contains(NbtKeys.MODIFIERS.str())){
-            nbt.getList(NbtKeys.MODIFIERS.str(),9)
+            nbt.getList(NbtKeys.MODIFIERS.str(),10)
         } else {
             NbtList()
         }
@@ -546,14 +549,19 @@ object ScepterObject: AugmentDamage {
         nbt.put(NbtKeys.MODIFIERS.str(),nbtList)
     }
     private fun initializeModifiers(id: Int, nbt: NbtCompound, stack: ItemStack){
-        val nbtList = nbt.getList(NbtKeys.MODIFIERS.str(),9)
+        val nbtList = nbt.getList(NbtKeys.MODIFIERS.str(),10)
+        println(nbtList)
         for (el in nbtList){
             val compound = el as NbtCompound
             if (compound.contains(NbtKeys.MODIFIER_ID.str())){
                 val modifier = compound.getString(NbtKeys.MODIFIER_ID.str())
-                augmentModifiers[id]?.add(Identifier(modifier))
+                if (!augmentModifiers.containsKey(id)){
+                    augmentModifiers[id] = mutableListOf()
+                }
+                addModifier(Identifier(modifier),id,nbt)
             }
         }
+        println(augmentModifiers)
         if (stack.hasEnchantments()){
             val attunedLevel = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED,stack)
             if (attunedLevel > 0) {
@@ -627,8 +635,8 @@ object ScepterObject: AugmentDamage {
     }
 
     fun tickModifiers(){
-        if (DIRT.isDirty()){
-            DIRT.clean()
+        if (DUSTBIN.isDirty()){
+            DUSTBIN.clean()
         }
     }
 

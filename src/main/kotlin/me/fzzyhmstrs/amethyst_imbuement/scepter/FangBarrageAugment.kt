@@ -22,7 +22,9 @@ import kotlin.math.min
 class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(28,0,0).withAmplifier(12,0,0)
+        get() = super.baseEffect.withDuration(28,0,0)
+            .withAmplifier(12,0,0)
+            .withDamage(6.0F)
 
     override fun effect(
         world: World,
