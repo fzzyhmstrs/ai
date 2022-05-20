@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -20,7 +21,7 @@ import kotlin.math.min
 class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<AltarOfExperienceScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier("amethyst_imbuement","textures/gui/container/altar_of_experience_gui.png")
+    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/altar_of_experience_gui.png")
     private var xp = IntArray(4)
     private val player = playerInventory.player
 

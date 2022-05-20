@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.TridentEntityModel
@@ -10,7 +11,7 @@ class GlisteringTridentEntityModel(private val root: ModelPart) : TridentEntityM
 
 
     companion object {
-        var TEXTURE: Identifier = Identifier("amethyst_imbuement","textures/entity/glistering_trident.png")
+        var TEXTURE: Identifier = Identifier(AI.MOD_ID,"textures/entity/glistering_trident.png")
 
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()

@@ -128,9 +128,6 @@ object RegisterEnchantment {
         }
 
         regEnchant.clear()
-        /*
-        Registry.register(Registry.ENCHANTMENT, Identifier("amethyst_imbuement","seeking_missile"), SEEKING_MISSILE)
-        */
     }
 
 

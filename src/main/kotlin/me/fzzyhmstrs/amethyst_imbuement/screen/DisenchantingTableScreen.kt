@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
@@ -18,7 +19,7 @@ import net.minecraft.util.math.Matrix4f
 class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<DisenchantingTableScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier("amethyst_imbuement","textures/gui/container/disenchanting_table_gui.png")
+    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/disenchanting_table_gui.png")
     private val player = playerInventory.player
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

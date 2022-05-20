@@ -3,6 +3,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import com.google.common.collect.ImmutableMap
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
@@ -16,11 +17,11 @@ class CrystallineGolemCrackFeatureRenderer(context: FeatureRendererContext<Cryst
 
     private val DAMAGE_TO_TEXTURE: Map<CrystallineGolemEntity.Crack, Identifier> = ImmutableMap.of(
         CrystallineGolemEntity.Crack.LOW,
-        Identifier("amethyst_imbuement","textures/entity/crystal_golem/crystal_golem_crackiness_low.png"),
+        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_low.png"),
         CrystallineGolemEntity.Crack.MEDIUM,
-        Identifier("amethyst_imbuement","textures/entity/crystal_golem/crystal_golem_crackiness_medium.png"),
+        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_medium.png"),
         CrystallineGolemEntity.Crack.HIGH,
-        Identifier("amethyst_imbuement","textures/entity/crystal_golem/crystal_golem_crackiness_high.png")
+        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_high.png")
     )
 
     override fun render(
