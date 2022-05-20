@@ -13,7 +13,7 @@ import java.io.File
 
 object AiConfig {
 
-    private val gson = GsonBuilder().setPrettyPrinting().create()
+    val gson = GsonBuilder().setPrettyPrinting().create()
     const val augmentVersion = "_v0"
 
     var scepters: Scepters
@@ -34,7 +34,7 @@ object AiConfig {
 
     fun initConfig(){}
 
-    private inline fun <reified T> readOrCreate(file: String, child: String = "", configClass: () -> T): T {
+    inline fun <reified T> readOrCreate(file: String, child: String = "", configClass: () -> T): T {
         val (dir,dirCreated) = makeDir(child)
         if (!dirCreated) {
             return configClass()
@@ -56,7 +56,7 @@ object AiConfig {
     }
 
     @Suppress("UNUSED_PARAMETER")
-    private inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "", configClass: () -> T, previousClass: () -> P): T{
+    inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "", configClass: () -> T, previousClass: () -> P): T{
         val (dir,dirCreated) = makeDir(child)
         if (!dirCreated) {
             return configClass()
@@ -287,7 +287,7 @@ object AiConfig {
         }
     }
 
-    private interface OldClass{
+    interface OldClass{
 
         fun generateNewClass(): Any
 

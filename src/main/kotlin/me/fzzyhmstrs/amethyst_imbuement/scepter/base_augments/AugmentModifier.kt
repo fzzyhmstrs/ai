@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
@@ -16,17 +17,6 @@ import kotlin.math.max
 
 object AugmentModifierDefaults{
     val blankId = Identifier(AI.MOD_ID,"blank_modifier")
-    val TIER_ONE = {stack: ItemStack ->
-        val item = stack.item
-        item is ScepterItem}
-    val TIER_TWO = {stack: ItemStack ->
-        val item = stack.item
-        item is ScepterItem &&
-                (item.material is ScepterLvl2ToolMaterial || item.material is ScepterLvl3ToolMaterial)}
-    val TIER_THREE = {stack: ItemStack ->
-        val item = stack.item
-        item is ScepterItem &&
-                (item.material is ScepterLvl3ToolMaterial)}
     val EMPTY = AugmentModifier(blankId)
     val EMPTY_COMPILED = CompiledAugmentModifier(blankId)
 }
@@ -131,7 +121,15 @@ open class AugmentModifier(
     }
 
     open fun isAcceptableItem(stack: ItemStack): Boolean{
-        return AugmentModifierDefaults.TIER_ONE(stack)
+        acceptableItemStacks().forEach {
+            if (stack.isOf(it.item)){
+                return true
+            }
+        }
+        return false
+    }
+    open fun acceptableItemStacks(): MutableList<ItemStack>{
+        return AcceptableItemStacks.scepterAcceptableItemStacks(1)
     }
 
     //data class SecondaryEffect(val overridesEffect: Boolean = false, val secondaryEffect: ScepterAugment? = null)

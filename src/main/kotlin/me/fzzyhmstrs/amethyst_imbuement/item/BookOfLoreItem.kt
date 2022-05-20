@@ -98,9 +98,7 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
     fun addLoreKeyForREI(stack: ItemStack,augment: String){
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())) {
-            val identifier = Identifier(augment)
-            val aug = identifier.path
-            Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
+            Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),augment,nbt)
         }
     }
 

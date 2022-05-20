@@ -4,16 +4,13 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
-import me.shedaniel.rei.api.common.display.Display
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
 import me.shedaniel.rei.api.common.util.EntryStacks
-import net.minecraft.enchantment.EnchantmentTarget
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
@@ -27,7 +24,6 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         getRecipeInputEntries(recipe),
         getRecipeOutputEntries(recipe),
         Optional.ofNullable(recipe.id))
-
 
 
     override fun getInputEntries(): MutableList<EntryIngredient> {
@@ -62,6 +58,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                 if (recipe.getAugment() != "" && i == 6){
                     val identifier = Identifier(recipe.getAugment())
                     val enchant = Registry.ENCHANTMENT.get(identifier)
+                    val modifier = RegisterModifier.ENTRIES.get(identifier)
                     if (enchant != null){
                         when (enchant) {
                             is BaseAugment -> {
@@ -93,6 +90,12 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                                 list.add(builder.build())
                             }
                         }
+                    } else if(modifier != null) {
+                        val builder = EntryIngredient.builder()
+                        modifier.acceptableItemStacks().forEach {
+                            builder.add(EntryStacks.of(it))
+                        }
+                        list.add(builder.build())
                     } else {
                         list.add(EntryIngredient.empty())
                     }
@@ -114,23 +117,27 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
             } else {
                 val identifier = Identifier(recipe.getAugment())
                 val enchant = Registry.ENCHANTMENT.get(identifier)
-                var stack = ItemStack(Items.ENCHANTED_BOOK,1)
+                val modifier = RegisterModifier.ENTRIES.get(identifier)
+                val stack: ItemStack
+                val builder = EntryIngredient.builder()
                 if (enchant != null){
+                    stack = ItemStack(Items.ENCHANTED_BOOK,1)
                     stack.addEnchantment(enchant,1)
+                    builder.add(EntryStacks.of(stack))
+                    list.add(builder.build())
+                } else if (modifier != null){
+                    val builder2 = EntryIngredient.builder()
+                    modifier.acceptableItemStacks().forEach {
+                        builder2.add(EntryStacks.of(it))
+                    }
+                    list.add(builder2.build())
                 } else {
                     stack = ItemStack(Items.BOOK, 1)
+                    builder.add(EntryStacks.of(stack))
+                    list.add(builder.build())
                 }
-                val builder = EntryIngredient.builder()
-                builder.add(EntryStacks.of(stack))
-                list.add(builder.build())
             }
             return list
         }
-
     }
-
-
-    /*override fun getDisplayLocation(): Optional<Identifier> {
-        return Optional.of(recipe.id)
-    }*/
 }
