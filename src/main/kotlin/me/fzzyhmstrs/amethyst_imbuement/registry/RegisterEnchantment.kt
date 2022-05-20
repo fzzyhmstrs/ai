@@ -20,7 +20,6 @@ object RegisterEnchantment {
     private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()
 
     //vanilla style enchantments
-    val ATTUNED = AttunedEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{regEnchant["attuned"] = it}
     val HEROIC = DamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, EquipmentSlot.MAINHAND).also{ checkConfig("heroic",it)}
     val WASTING = WastingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("wasting", it)}
     val DEADLY_SHOT = DeadlyShotEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("deadly_shot", it)}

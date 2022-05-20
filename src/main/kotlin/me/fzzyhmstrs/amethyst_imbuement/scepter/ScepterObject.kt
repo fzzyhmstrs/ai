@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -210,7 +211,7 @@ object ScepterObject: AugmentDamage {
         val augEls: MutableList<Int> = mutableListOf()
         for (i in 0..nbtEls.lastIndex){
             val identifier = EnchantmentHelper.getIdFromNbt(nbtEls[i] as NbtCompound)
-            val enchantCheck = Registry.ENCHANTMENT.get(identifier)?: RegisterEnchantment.ATTUNED
+            val enchantCheck = Registry.ENCHANTMENT.get(identifier)?: Enchantments.VANISHING_CURSE
             if(enchantCheck is ScepterAugment) {
                 augEls.add(i)
             }
@@ -561,16 +562,23 @@ object ScepterObject: AugmentDamage {
                 addModifier(Identifier(modifier),id,nbt)
             }
         }
-        println(augmentModifiers)
         if (stack.hasEnchantments()){
-            val attunedLevel = EnchantmentHelper.getLevel(RegisterEnchantment.ATTUNED,stack)
+            val enchants = stack.enchantments
+            var attunedLevel = 0
+            var nbtEl: NbtCompound
+            for (el in enchants) {
+                nbtEl = el as NbtCompound
+                if (EnchantmentHelper.getIdFromNbt(nbtEl) == Identifier(AI.MOD_ID,"attuned")){
+                    attunedLevel = EnchantmentHelper.getLevelFromNbt(nbtEl)
+                    break
+                }
+            }
             if (attunedLevel > 0) {
                 for (i in 1..attunedLevel) {
                     addModifier(RegisterModifier.LESSER_ATTUNED.modifierId, id, nbt)
                 }
-                val enchants = EnchantmentHelper.get(stack)
-                enchants.remove(RegisterEnchantment.ATTUNED)
-                EnchantmentHelper.set(enchants,stack)
+                val newEnchants = EnchantmentHelper.fromNbt(enchants)
+                EnchantmentHelper.set(newEnchants,stack)
             }
         }
     }
