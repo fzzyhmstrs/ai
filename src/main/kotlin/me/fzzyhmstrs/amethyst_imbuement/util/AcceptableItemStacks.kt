@@ -147,7 +147,7 @@ object AcceptableItemStacks {
         }
     }
 
-    fun scepterAcceptableItemStacks(tier: Int): MutableList<ItemStack>{
+    fun odlScepterAcceptableItemStacks(tier: Int): MutableList<ItemStack>{
         val list: MutableList<ItemStack> = mutableListOf()
         return when (tier){
             1 -> {
@@ -169,7 +169,7 @@ object AcceptableItemStacks {
         }
     }
     
-    fun newScepterAcceptableItemStacks(tier:Int): MutableList<ItemStack>{
+    fun scepterAcceptableItemStacks(tier:Int): MutableList<ItemStack>{
         if (scepterAcceptableMap.containsKey(tier){
             return scepterAcceptableMap[tier]
         } else {
