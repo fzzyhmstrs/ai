@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -19,7 +20,6 @@ import net.minecraft.world.World
 @Suppress("SameParameterValue")
 class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
 
-    private var tickCounter = 0
     private var lastGuardian = 0L
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
@@ -36,12 +36,12 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
         usageEnchantmentTasks(stack, world, user)
         val nbt = stack.orCreateNbt
         return if (!nbt.contains(NbtKeys.TOTEM.str())){
-            writeNbt(NbtKeys.TOTEM.str(),true,nbt)
+            Nbt.writeBoolNbt(NbtKeys.TOTEM.str(),true,nbt)
             activeEnchantmentTasks(stack, world, user)
             TypedActionResult.success(stack)
         } else {
-            val bl = !readNbt(NbtKeys.TOTEM.str(), nbt)
-            writeNbt(NbtKeys.TOTEM.str(), bl, nbt)
+            val bl = !Nbt.readBoolNbt(NbtKeys.TOTEM.str(), nbt)
+            Nbt.writeBoolNbt(NbtKeys.TOTEM.str(), bl, nbt)
             if (bl) {
                 activeEnchantmentTasks(stack, world, user)
             } else {
@@ -60,18 +60,16 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
     }
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-        if(world !is ServerWorld || entity !is PlayerEntity) return
-        if (tickCounter < 19){
-            tickCounter++
+        if(world.isClient || entity !is PlayerEntity) return
+        if (RegisterEvent.ticker_totem.isNotReady()){
             if (entity.abilities.flying) {
                 val count = BaseAugment.readCountFromQueue(entity.uuid,NbtKeys.ANGELIC.str())
                 BaseAugment.addCountToQueue(entity.uuid,NbtKeys.ANGELIC.str(),count + 1)
             }
         } else {
-            tickCounter = 0
             val nbt = stack.orCreateNbt
             passiveEnchantmentTasks(stack,world,entity)
-            if (!readNbt(NbtKeys.TOTEM.str(),nbt)) return
+            if (!Nbt.readBoolNbt(NbtKeys.TOTEM.str(),nbt)) return
             activeEnchantmentTasks(stack,world,entity)
         }
         if (EnchantmentHelper.getLevel(RegisterEnchantment.GUARDIAN,stack) > 0){ //check for guardian every tick for max responsiveness
@@ -95,25 +93,25 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
     }
 
     override fun activeEnchantmentTasks(stack: ItemStack, world: World, entity: Entity){
-        if (entity !is PlayerEntity) return
+        if (!entity.isPlayer) return
         super.activeEnchantmentTasks(stack, world, entity)
 
     }
 
     override fun inactiveEnchantmentTasks(stack: ItemStack,world: World, entity: Entity){
-        if (entity !is PlayerEntity) return
+        if (!entity.isPlayer) return
         super.inactiveEnchantmentTasks(stack, world, entity)
 
     }
 
     override fun usageEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
-        if (entity !is PlayerEntity) return
+        if (!entity.isPlayer) return
         super.usageEnchantmentTasks(stack, world, entity)
 
     }
 
     override fun passiveEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
-        if (entity !is PlayerEntity) return
+        if (!entity.isPlayer) return
         super.passiveEnchantmentTasks(stack, world, entity)
 
     }
@@ -135,14 +133,6 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
                     ds != DamageSource.DRYOUT &&
                     ds != DamageSource.STARVE &&
                     ds != DamageSource.SWEET_BERRY_BUSH
-        }
-
-        private fun writeNbt(key: String, state: Boolean, nbt: NbtCompound) {
-            nbt.putBoolean(key, state)
-        }
-
-        private fun readNbt(key: String, nbt: NbtCompound): Boolean {
-            return nbt.getBoolean(key)
         }
     }
 }

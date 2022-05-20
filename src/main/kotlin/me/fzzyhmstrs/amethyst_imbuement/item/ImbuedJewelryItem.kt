@@ -71,7 +71,7 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
     }
 
     override fun passiveEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
-        if (entity !is PlayerEntity) return
+        if (!entity.isPlayer) return
         super.passiveEnchantmentTasks(stack, world, entity)
     }
 }

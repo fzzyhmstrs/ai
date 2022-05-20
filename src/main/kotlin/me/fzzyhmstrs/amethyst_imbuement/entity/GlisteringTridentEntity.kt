@@ -149,7 +149,7 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
         playSound(soundEvent, volume, 1.0f)
     }
 
-    fun hasChanneling(): Boolean {
+    private fun hasChanneling(): Boolean {
         return EnchantmentHelper.hasChanneling(tridentStack)
     }
 

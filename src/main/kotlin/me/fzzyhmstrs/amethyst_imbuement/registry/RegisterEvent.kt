@@ -15,6 +15,7 @@ object RegisterEvent {
     private val QUEUE_TICK_EVENT = Identifier(AI.MOD_ID, "queue_tick_event")
     val ticker_armor = Ticker(30)
     val ticker_jewelry = Ticker(30)
+    val ticker_totem = Ticker(20)
 
     fun registerAll(){
         registerServerTick()
@@ -32,6 +33,7 @@ object RegisterEvent {
         ServerTickEvents.START_SERVER_TICK.register(TICKER_EVENT) {
             ticker_armor.tickUp()
             ticker_jewelry.tickUp()
+            ticker_totem.tickUp()
             ScepterObject.tickModifiers()
         }
         ServerTickEvents.END_SERVER_TICK.register(QUEUE_TICK_EVENT) {
@@ -58,6 +60,9 @@ object RegisterEvent {
 
         fun isReady(): Boolean{
             return ready
+        }
+        fun isNotReady(): Boolean{
+            return !ready
         }
     }
 

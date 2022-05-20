@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
+import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.item.TooltipContext
@@ -32,8 +33,8 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Book
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
             val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.HIGH_TIER)
-            val enchant = readAugNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
-            writeAugNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
+            val enchant = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
+            Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
             world.playSound(null,user.blockPos, SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL,0.7f,1.0f)
             return TypedActionResult.success(stack)
         }

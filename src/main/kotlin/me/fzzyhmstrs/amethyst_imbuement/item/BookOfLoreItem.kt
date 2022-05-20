@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
+import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.item.TooltipContext
@@ -38,10 +39,11 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.orCreateNbt
         if (nbt.contains(NbtKeys.LORE_KEY.str())){
-            val bola = if (Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).namespace == "minecraft"){
-                Identifier(AI.MOD_ID,Identifier(readAugNbt(NbtKeys.LORE_KEY.str(),nbt)).path).toString()
+            val bolaNbtString = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
+            val bola = if (Identifier(bolaNbtString).namespace == "minecraft"){
+                Identifier(AI.MOD_ID,Identifier(bolaNbtString).path).toString()
             } else {
-                readAugNbt(NbtKeys.LORE_KEY.str(),nbt)
+                bolaNbtString
             }
             tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
             tooltip.add(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE))
@@ -85,8 +87,8 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
             val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
-            val enchant = readAugNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
-            writeAugNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
+            val enchant = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
+            Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
             world.playSound(null,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
             return TypedActionResult.success(stack)
         }
@@ -98,7 +100,7 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
         if(!nbt.contains(NbtKeys.LORE_KEY.str())) {
             val identifier = Identifier(augment)
             val aug = identifier.path
-            writeAugNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
+            Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),aug,nbt)
         }
     }
 
@@ -108,12 +110,5 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
         } else {
             super.hasGlint(stack)
         }
-    }
-
-    protected fun writeAugNbt(key: String, enchant: String, nbt: NbtCompound){
-        nbt.putString(key,enchant)
-    }
-    protected fun readAugNbt(key: String, nbt: NbtCompound): String {
-        return nbt.getString(key)
     }
 }

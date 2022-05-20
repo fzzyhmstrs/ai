@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
@@ -121,7 +122,7 @@ class DisenchantingTableScreenHandler(
                             } else if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
                                 disenchantCost[0] = calculateRequiredExperienceLevel(0)
                             } else {
-                                val level = readNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
+                                val level = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
                                 val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
                                 if (level >= maxLevel) {
                                     disenchantCost[0] = -1
@@ -223,10 +224,10 @@ class DisenchantingTableScreenHandler(
                     if (!world.isClient) {
                         val nbt = itemStack.orCreateNbt
                         if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
-                            writeNbt(NbtKeys.DISENCHANT_COUNT.str(), 1, nbt)
+                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(), 1, nbt)
                         } else {
-                            val currentLevel = readNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt)
-                            writeNbt(NbtKeys.DISENCHANT_COUNT.str(),currentLevel + 1,nbt)
+                            val currentLevel = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt)
+                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(),currentLevel + 1,nbt)
                         }
                     }
                     world.playSound(
@@ -339,12 +340,6 @@ class DisenchantingTableScreenHandler(
     private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
         val index = MathHelper.clamp(disenchantCount,0,AiConfig.altars.disenchantLevelCosts.size - 1)
         return AiConfig.altars.disenchantLevelCosts[index]
-    }
-    private fun writeNbt(key: String, input: Int, nbt: NbtCompound){
-        nbt.putInt(key,input)
-    }
-    private fun readNbt(key: String, nbt: NbtCompound): Int {
-        return nbt.getInt(key)
     }
     private fun checkForEnchantMatch(stack: ItemStack): Boolean{
         if (Registry.ITEM.getRawId(stack.item) != activeItem.get()) return false
