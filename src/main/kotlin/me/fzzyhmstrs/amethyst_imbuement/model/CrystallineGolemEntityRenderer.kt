@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
@@ -20,7 +21,7 @@ class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
         addFeature(CrystallineGolemCrackFeatureRenderer(this))
     }
 
-    private val TEXTURE = Identifier("amethyst_imbuement","textures/entity/crystal_golem/crystal_golem.png")
+    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem.png")
 
     override fun getTexture(entity: CrystallineGolemEntity): Identifier {
         return TEXTURE

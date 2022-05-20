@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.RenderLayer
@@ -14,7 +15,7 @@ class DraconicBoxEntityRenderer(ctx: EntityRendererFactory.Context,
     constructor(ctx: EntityRendererFactory.Context) : this(ctx, DraconicBoxModel(ctx.getPart(RegisterRenderer.DRACONIC_BOX_ENTITY)),0.2F)
 
     override fun getTexture(entity: DraconicBoxEntity): Identifier {
-        return Identifier("amethyst_imbuement", "textures/entity/draconic_box.png")
+        return Identifier(AI.MOD_ID, "textures/entity/draconic_box.png")
     }
 
     override fun hasLabel(livingEntity: DraconicBoxEntity): Boolean {

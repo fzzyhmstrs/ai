@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -23,7 +24,7 @@ import net.minecraft.util.registry.Registry
 class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<ImbuingTableScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier("amethyst_imbuement","textures/gui/container/imbuing_table_gui.png")
+    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/imbuing_table_gui.png")
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player

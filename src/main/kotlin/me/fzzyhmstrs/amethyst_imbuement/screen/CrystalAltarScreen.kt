@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.ingame.ForgingScreen
@@ -19,7 +20,7 @@ class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: Pl
     }
 
     companion object {
-        private val TEXTURE = Identifier("amethyst_imbuement","textures/gui/container/crystal_altar.png")
+        private val TEXTURE = Identifier(AI.MOD_ID,"textures/gui/container/crystal_altar.png")
     }
 
     init {

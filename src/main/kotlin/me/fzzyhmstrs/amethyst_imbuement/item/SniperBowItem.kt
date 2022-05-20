@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
@@ -30,14 +31,14 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
         var _hand: Hand = Hand.MAIN_HAND
         var _world: World? = null
         var _sniper_scope_index = 0
-        private val SNIPER_BOW_SCOPE_LIST = arrayOf(Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_0.png"),
+        private val SNIPER_BOW_SCOPE_LIST = arrayOf(Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_0.png"),
             Identifier("minecraft","textures/misc/spyglass_scope.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_6.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_5.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_4.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_3.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_2.png"),
-            Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_1.png")) //arranging it like this so scrolling down moves through the custom crosshairs and ends at the spyglass, not the other way around. figure scrolling down is more common
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_6.png"),
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_5.png"),
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_4.png"),
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_3.png"),
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_2.png"),
+            Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_1.png")) //arranging it like this so scrolling down moves through the custom crosshairs and ends at the spyglass, not the other way around. figure scrolling down is more common
         private val SNIPER_BOW_SCOPE_LIST_LENGTH = SNIPER_BOW_SCOPE_LIST.size-1 //return 0-indexed length of the above array (4 elements = length 3 etc.)
         var SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
 

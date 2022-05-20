@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.DisenchantingTableBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -64,8 +65,7 @@ class DisenchantingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Cont
     companion object {
         val BOOK_TEXTURE = SpriteIdentifier(
             SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
-            Identifier("amethyst_imbuement","entity/disenchanting_table_book")
-            //Identifier("amethyst_imbuement", "textures/entity/imbuing_table_book.png")
+            Identifier(AI.MOD_ID,"entity/disenchanting_table_book")
         )
     }
 

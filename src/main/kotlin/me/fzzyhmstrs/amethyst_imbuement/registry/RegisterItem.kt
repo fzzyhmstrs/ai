@@ -70,7 +70,5 @@ object RegisterItem {
             Registry.register(Registry.ITEM,Identifier(AI.MOD_ID,k), regItem[k])
         }
         regItem.clear()
-        //regular item registrations
-        //Registry.register(Registry.ITEM,Identifier("amethyst_imbuement","golden_heart"), GOLDEN_HEART)
     }
 }

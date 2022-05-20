@@ -4,6 +4,7 @@ import io.github.ladysnake.pal.AbilitySource
 import io.github.ladysnake.pal.Pal
 import io.github.ladysnake.pal.PlayerAbility
 import io.github.ladysnake.pal.VanillaAbilities
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
@@ -18,7 +19,7 @@ import net.minecraft.util.Identifier
 class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
 
     private val ability: PlayerAbility = VanillaAbilities.ALLOW_FLYING
-    private val abilitySource: AbilitySource = Pal.getAbilitySource(Identifier("amethyst_imbuement","angelic"))
+    private val abilitySource: AbilitySource = Pal.getAbilitySource(Identifier(AI.MOD_ID,"angelic"))
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         user as PlayerEntity
