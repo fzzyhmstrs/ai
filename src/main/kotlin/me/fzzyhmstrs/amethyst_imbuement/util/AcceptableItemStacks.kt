@@ -8,6 +8,8 @@ import net.minecraft.item.*
 import net.minecraft.util.registry.Registry
 
 object AcceptableItemStacks {
+    
+    val scepterAcceptableMap: MutableMap<Int,MutableList<ItemStack>> = mutableMapOf()
 
     fun baseAcceptableItemStacks(target: EnchantmentTarget?): MutableList<ItemStack>{
         val entries = Registry.ITEM.entries
@@ -164,6 +166,28 @@ object AcceptableItemStacks {
                 list
             }
             else -> mutableListOf()
+        }
+    }
+    
+    fun newScepterAcceptableItemStacks(tier:Int): MutableList<ItemStack>{
+        if (scepterAcceptableMap.containsKey(tier){
+            return scepterAcceptableMap[tier]
+        } else {
+            val entries = Registry.ITEM.indexedEntries
+            val list: MutableList<ItemStack> = mutableListOf()
+            for (entry in entries){
+                val item = entry.value()
+                if (item is ScepterItem){
+                    val material = item.material
+                    if (material is ScepterMaterialAddon){
+                        if (material.scpeterTier() >= tier){
+                            list.add(ItemStack(item,1))
+                        }
+                    }
+                }
+            }
+            scepterAcceptableMap[tier] = list
+            return list
         }
     }
 }
