@@ -30,7 +30,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
         var _hand: Hand = Hand.MAIN_HAND
         var _world: World? = null
         var _sniper_scope_index = 0
-        val SNIPER_BOW_SCOPE_LIST = arrayOf(Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_0.png"),
+        private val SNIPER_BOW_SCOPE_LIST = arrayOf(Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_0.png"),
             Identifier("minecraft","textures/misc/spyglass_scope.png"),
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_6.png"),
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_5.png"),
@@ -38,28 +38,27 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_3.png"),
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_2.png"),
             Identifier("amethyst_imbuement","textures/misc/sniper_bow_scope_1.png")) //arranging it like this so scrolling down moves through the custom crosshairs and ends at the spyglass, not the other way around. figure scrolling down is more common
-        val SNIPER_BOW_SCOPE_LIST_LENGTH = SNIPER_BOW_SCOPE_LIST.size-1 //return 0-indexed length of the above array (4 elements = length 3 etc.)
+        private val SNIPER_BOW_SCOPE_LIST_LENGTH = SNIPER_BOW_SCOPE_LIST.size-1 //return 0-indexed length of the above array (4 elements = length 3 etc.)
         var SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
 
         fun changeScope(up: Boolean){
             val si = _sniper_scope_index
             val sl = SNIPER_BOW_SCOPE_LIST_LENGTH
-            if (up) {
-                _sniper_scope_index = if (si > 0) {
+            _sniper_scope_index = if (up) {
+                if (si > 0) {
                     si - 1
                 } else {
                     sl
                 }
-                SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
+
             } else {
-                _sniper_scope_index = if (si < sl) {
+                if (si < sl) {
                     si + 1
                 } else {
                     0
                 }
-                SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
             }
-
+            SNIPER_BOW_SCOPE = SNIPER_BOW_SCOPE_LIST[_sniper_scope_index]
 
         }
     }
@@ -81,14 +80,8 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
         _world = world
         if (isCharged(itemStack)) {
             user.playSound(SoundEvents.ITEM_SPYGLASS_USE, 1.0f, 1.0f)
-            user.incrementStat(Stats.USED.getOrCreateStat(this)) //don't know if "this" will work or if I need to
+            user.incrementStat(Stats.USED.getOrCreateStat(this))
             return ItemUsage.consumeHeldItem(world, user, hand)
-                //this is what I need to change to have bee a separate clause of onStoppedUsing
-                //this use needs to be the spyglass zoom
-
-                //shootAll(world, user, hand, itemStack, getSpeed(itemStack), 1.0f)
-                //setCharged(itemStack, false)
-                //return TypedActionResult1.consume(itemStack)
         }
         if (!user.getArrowType(itemStack).isEmpty) {
             if (!isCharged(itemStack)) {
@@ -99,10 +92,6 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
             return TypedActionResult1.consume(itemStack)
         }
         return TypedActionResult1.fail(itemStack)
-    }
-
-    override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-        super.inventoryTick(stack, world, entity, slot, selected)
     }
 
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
@@ -122,7 +111,6 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
                 1.0f / (world.getRandom().nextFloat() * 0.5f + 1.0f) + 0.2f
             )
         } else if (isCharged(stack)){
-            //println("stopped using")
             shootAll(world, user, _hand, stack, getSpeed(stack), 0.1f)
             setCharged(stack, false)
             this.playStopUsingSound(user)
