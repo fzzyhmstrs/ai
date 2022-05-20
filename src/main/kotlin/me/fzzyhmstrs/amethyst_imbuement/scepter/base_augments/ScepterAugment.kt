@@ -93,14 +93,12 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return when (tier) {
-            1 -> AugmentModifierDefaults.TIER_ONE(stack)
-            2 -> AugmentModifierDefaults.TIER_TWO(stack)
-            3 -> AugmentModifierDefaults.TIER_THREE(stack)
-            else -> {
-                false
+        acceptableItemStacks().forEach {
+            if (stack.isOf(it.item)){
+                return true
             }
         }
+        return false
     }
 
     open fun acceptableItemStacks(): MutableList<ItemStack> {
