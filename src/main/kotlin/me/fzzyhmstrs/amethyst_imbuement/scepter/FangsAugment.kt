@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -22,7 +23,7 @@ import kotlin.math.min
 class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(15,0,0)
+        get() = super.baseEffect.withAmplifier(15,0,0).withDamage(6.0F)
 
     override fun effect(
         world: World,
@@ -53,7 +54,9 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 d,
                 e,
                 f,
-                i
+                i,
+                level,
+                effect
             )
             if (success) successes++
         }
@@ -68,7 +71,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
     }
 
-    private fun conjureFangs(world: World,user: LivingEntity,x: Double, z: Double, maxY: Double, y: Double, yaw: Float, warmup: Int): Boolean {
+    private fun conjureFangs(world: World,user: LivingEntity,x: Double, z: Double, maxY: Double, y: Double, yaw: Float, warmup: Int, level: Int, effect: AugmentEffect): Boolean {
         var blockPos = BlockPos(x, y, z)
         var bl = false
         var d = 0.0
@@ -89,17 +92,17 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
             break
         } while (blockPos.y >= MathHelper.floor(maxY) - 1)
         if (bl) {
-            world.spawnEntity(
-                EvokerFangsEntity(
-                    world,
-                    x,
-                    blockPos.y.toDouble() + d,
-                    z,
-                    yaw,
-                    warmup,
-                    user
-                )
+            val pfe = PlayerFangsEntity(
+                world,
+                x,
+                blockPos.y.toDouble() + d,
+                z,
+                yaw,
+                warmup,
+                user
             )
+            pfe.damage = effect.damage(level)
+            world.spawnEntity(pfe)
             return true
         }
         return false

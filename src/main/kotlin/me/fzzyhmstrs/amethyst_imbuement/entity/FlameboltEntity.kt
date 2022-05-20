@@ -50,7 +50,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
     }
 
     override fun isBurning(): Boolean {
-        return true
+        return this.age > 1
     }
 
     override fun getParticleType(): ParticleEffect {

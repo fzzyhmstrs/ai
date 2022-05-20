@@ -8,7 +8,7 @@ import net.minecraft.util.registry.Registry
 
 object RegisterStatus {
 
-    val CUSTOM_ABSORPTION = ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL,0x2552A5)
+    val SHIELDING = ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL,0x2552A5)
     val DRACONIC_VISION = DraconicVisionStatusEffect(StatusEffectCategory.BENEFICIAL,0xA606E5)
     val SPECTRAL_VISION = SpectralVisionStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
     val LEAPT = LeaptStatusEffect(StatusEffectCategory.BENEFICIAL,0x00000000)
@@ -18,7 +18,7 @@ object RegisterStatus {
     val SOULBINDING = SoulbindingStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000)
 
     fun registerAll(){
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), CUSTOM_ABSORPTION)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"draconic_vision"), DRACONIC_VISION)
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"spectral_vision"), SPECTRAL_VISION)
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"leapt"), LEAPT)

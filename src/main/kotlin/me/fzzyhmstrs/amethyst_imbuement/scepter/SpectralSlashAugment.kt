@@ -99,8 +99,8 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             }
         }
         if (entityDistance.isNotEmpty()) {
-            val baseDamage = effect.damage(level + 1)
-            val splashDamage = effect.damage(level)
+            val baseDamage = effect.damage(level)
+            val splashDamage = effect.damage(level - 1)
             var closestHit = false
             for (entity in entityDistance){
                 if (!closestHit) {

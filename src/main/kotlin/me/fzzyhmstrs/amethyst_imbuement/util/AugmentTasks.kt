@@ -68,10 +68,11 @@ interface AugmentTasks {
     fun unequipEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
         if (entity !is LivingEntity) return
         val enchants = EnchantmentHelper.get(stack)
-        for (enchant in enchants.keys){
-            if (enchant is BaseAugment){
-                val lvl = enchants[enchant] ?: 1
-                enchant.unequipEffect(entity,lvl,stack)
+        for (enchant in enchants){
+            val aug = enchant.key
+            if (aug is BaseAugment){
+                val lvl = enchant.value
+                aug.unequipEffect(entity,lvl,stack)
             }
         }
     }

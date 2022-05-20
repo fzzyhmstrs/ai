@@ -18,6 +18,7 @@ object RegisterModifier {
     val GREATER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"greater_thrifty"), manaCostModifier = -15.0)
     val THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"thrifty"), manaCostModifier = -10.0).withDescendant(GREATER_THRIFTY)
     val LESSER_THRIFTY = AugmentModifier(Identifier(AI.MOD_ID,"lesser_thrifty"), manaCostModifier = -5.0).withDescendant(THRIFTY)
+    val MODIFIER_DEBUG = AugmentModifier(Identifier(AI.MOD_ID,"modifier_debug")).withDamage(2.0F,2.0F).withRange(2.75)
 
     fun registerAll(){
         ENTRIES.register(GREATER_ATTUNED)
@@ -26,6 +27,7 @@ object RegisterModifier {
         ENTRIES.register(GREATER_THRIFTY)
         ENTRIES.register(THRIFTY)
         ENTRIES.register(LESSER_THRIFTY)
+        ENTRIES.register(MODIFIER_DEBUG)
     }
 
     class ModifierRegistry(){

@@ -14,6 +14,7 @@ import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.item.ShearsItem
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
@@ -22,8 +23,6 @@ import java.util.*
 
 class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(settings,"copper_ring"), AugmentTasks {
     private val ttn: String = _ttn
-    private var shieldLevel: Int = 0
-    private val baseAmount = 2
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
         super.appendTooltip(stack, world, tooltip, context)
@@ -50,8 +49,8 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
     override fun onEquip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         super.onEquip(stack, slot, entity)
         if (entity.world.isClient()) return
-        shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-        ShieldingAugment.addTrinket(entity,baseAmount + shieldLevel)
+        val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+        ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel)
         passiveEnchantmentTasks(stack,entity.world,entity)
     }
 
@@ -59,8 +58,8 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         super.onUnequip(stack, slot, entity)
         if(entity.world.isClient()) return
         unequipEnchantmentTasks(stack,entity.world,entity)
-        shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-        ShieldingAugment.removeTrinket(entity,baseAmount + shieldLevel)
+        val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+        ShieldingAugment.removeTrinket(entity,ShieldingAugment.baseAmount + shieldLevel)
     }
 
     override fun tick(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
