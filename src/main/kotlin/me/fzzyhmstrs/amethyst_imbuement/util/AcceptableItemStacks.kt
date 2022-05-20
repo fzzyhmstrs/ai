@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import net.minecraft.block.Block
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -146,32 +148,10 @@ object AcceptableItemStacks {
             }
         }
     }
-
-    fun odlScepterAcceptableItemStacks(tier: Int): MutableList<ItemStack>{
-        val list: MutableList<ItemStack> = mutableListOf()
-        return when (tier){
-            1 -> {
-                list.add(ItemStack(RegisterItem.OPALINE_SCEPTER,1))
-                list.add(ItemStack(RegisterItem.IRIDESCENT_SCEPTER,1))
-                list.add(ItemStack(RegisterItem.LUSTROUS_SCEPTER,1))
-                list
-            }
-            2 -> {
-                list.add(ItemStack(RegisterItem.IRIDESCENT_SCEPTER,1))
-                list.add(ItemStack(RegisterItem.LUSTROUS_SCEPTER,1))
-                list
-            }
-            3 -> {
-                list.add(ItemStack(RegisterItem.LUSTROUS_SCEPTER,1))
-                list
-            }
-            else -> mutableListOf()
-        }
-    }
     
     fun scepterAcceptableItemStacks(tier:Int): MutableList<ItemStack>{
-        if (scepterAcceptableMap.containsKey(tier){
-            return scepterAcceptableMap[tier]
+        if (scepterAcceptableMap.containsKey(tier)){
+            return scepterAcceptableMap[tier] ?: mutableListOf()
         } else {
             val entries = Registry.ITEM.indexedEntries
             val list: MutableList<ItemStack> = mutableListOf()
@@ -180,7 +160,7 @@ object AcceptableItemStacks {
                 if (item is ScepterItem){
                     val material = item.material
                     if (material is ScepterMaterialAddon){
-                        if (material.scpeterTier() >= tier){
+                        if (material.scepterTier() >= tier){
                             list.add(ItemStack(item,1))
                         }
                     }

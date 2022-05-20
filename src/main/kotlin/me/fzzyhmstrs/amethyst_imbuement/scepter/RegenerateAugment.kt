@@ -31,7 +31,7 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
                 return true
             }
         }
-        return if (user is PlayerEntity) {
+        return if (user.isPlayer) {
                 user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 true

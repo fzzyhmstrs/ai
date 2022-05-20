@@ -47,7 +47,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                 return true
             }
         }
-        return if (user is PlayerEntity) {
+        return if (user.isPlayer) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
                 for (effect in user.statusEffects){
                     if (effect.effectType.isBeneficial) continue

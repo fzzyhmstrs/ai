@@ -66,7 +66,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.orCreateNbt
         val activeSpell = if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
-            val activeEnchantId = readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
+            val activeEnchantId = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
             TranslatableText("enchantment.amethyst_imbuement.${Identifier(activeEnchantId).path}")
         } else {
             TranslatableText("enchantment.amethyst_imbuement.none")
@@ -106,11 +106,11 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
         var nbt = stack.nbt
         if (nbt != null) {
             if  (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
-                activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
+                activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
                 testEnchant = Registry.ENCHANTMENT.get(Identifier(activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             } else {
                 ScepterObject.initializeScepter(stack,world)
-                activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
+                activeEnchantId = ScepterObject.activeEnchantHelper(world,stack,Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
                 testEnchant = Registry.ENCHANTMENT.get(Identifier(activeEnchantId))?: return resetCooldown(stack,world,user,activeEnchantId)
             }
         } else {
@@ -118,7 +118,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             nbt = stack.nbt
             if (nbt != null) {
                 activeEnchantId =
-                    ScepterObject.activeEnchantHelper(world,stack, readAugNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
+                    ScepterObject.activeEnchantHelper(world,stack, Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt))
                 testEnchant =
                     Registry.ENCHANTMENT.get(Identifier(activeEnchantId)) ?: return resetCooldown(
                         stack,
@@ -286,22 +286,12 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,smokeX,smokeY,smokeZ,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
         }
 
-        private fun writeAugNbt(key: String, enchant: String, nbt: NbtCompound){
-            nbt.putString(key,enchant)
-        }
-        private fun readAugNbt(key: String, nbt: NbtCompound): String {
-            return nbt.getString(key)
-        }
-        private fun readStatNbt(key: String, nbt: NbtCompound): Int {
-            return nbt.getInt(key)
-        }
-
         fun writeDefaultNbt(stack: ItemStack){
             val nbt = stack.orCreateNbt
             if(!nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())){
                 val identifier = Registry.ENCHANTMENT.getId(RegisterEnchantment.MAGIC_MISSILE)
                 if (identifier != null) {
-                    nbt.putString(NbtKeys.ACTIVE_ENCHANT.str(), identifier.toString())
+                    Nbt.writeStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), identifier.toString(), nbt)
                 }
             }
             val item = stack.item
@@ -309,7 +299,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
                 val nbtList = NbtList()
                 item.defaultModifiers.forEach {
                     val nbtEl = NbtCompound()
-                    nbtEl.putString(NbtKeys.MODIFIER_ID.str(),it.toString())
+                    Nbt.writeStringNbt(NbtKeys.MODIFIER_ID.str(),it.toString(), nbtEl)
                     nbtList.add(nbtEl)
                 }
                 nbt.put(NbtKeys.MODIFIERS.str(),nbtList)
