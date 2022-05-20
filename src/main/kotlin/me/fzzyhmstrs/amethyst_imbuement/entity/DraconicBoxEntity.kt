@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.fzzyhmstrs.amethyst_imbuement.augment.DraconicVisionAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.GlowColorUtil
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -34,10 +33,10 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
         entityBlock = block
         maxAge = age
         startingBlockPos = bp
-        if (GlowColorUtil.oreIsRainbow(entityBlock)){
+        if (DraconicVisionAugment.oreIsRainbow(entityBlock)){
             ColoredGlowLib.setRainbowColorToEntity(this,true)
         } else {
-            val color = GlowColorUtil.oreGlowColor(entityBlock)
+            val color = DraconicVisionAugment.oreGlowColor(entityBlock)
             ColoredGlowLib.setColorToEntity(this, color)
         }
     }
