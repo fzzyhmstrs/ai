@@ -10,9 +10,11 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
@@ -26,7 +28,7 @@ import net.minecraft.world.World
 import java.util.*
 
 @Suppress("SameParameterValue")
-class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.5F,2.5F,0.0F)
@@ -102,12 +104,19 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             val baseDamage = effect.damage(level)
             val splashDamage = effect.damage(level - 1)
             var closestHit = false
-            for (entity in entityDistance){
+            for (entry in entityDistance){
+                val entity = entry.value
                 if (!closestHit) {
-                    entity.value.damage(DamageSource.magic(entity.value, user), baseDamage)
+                    entity.damage(DamageSource.magic(entity, user), baseDamage)
                     closestHit = true
                 } else {
-                    entity.value.damage(DamageSource.magic(entity.value, user), splashDamage)
+                    entity.damage(DamageSource.magic(entity, user), splashDamage)
+                }
+                val status = addStatusInstance(effect)
+                if (status != null){
+                    if (entity is LivingEntity){
+                        entity.addStatusEffect(status)
+                    }
                 }
             }
         }
@@ -127,14 +136,22 @@ class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
                 val particlePos =
                     userPos.add(perpendicularVector.multiply(p.first * scale)).add(rotation.multiply(p.second + p2))
                 val particleVelocity = rotation.multiply(particleSpeed + level * 0.25).add(user.velocity)
-                addParticles(world,ParticleTypes.ELECTRIC_SPARK,particlePos,particleVelocity)
+                addParticles(world,particleType(),particlePos,particleVelocity)
                 val particlePos2 =
                     userPos.add(perpendicularVector.multiply(p.first * -1 * scale)).add(rotation.multiply(p.second + p2))
                 val particleVelocity2 = rotation.multiply(particleSpeed+ level * 0.25).add(user.velocity)
-                addParticles(world,ParticleTypes.ELECTRIC_SPARK,particlePos2,particleVelocity2)
+                addParticles(world,particleType(),particlePos2,particleVelocity2)
             }
 
         }
+    }
+
+    open fun particleType(): DefaultParticleType{
+        return ParticleTypes.ELECTRIC_SPARK
+    }
+
+    open fun addStatusInstance(effect: AugmentEffect): StatusEffectInstance?{
+        return null
     }
 
     override fun soundEvent(): SoundEvent {

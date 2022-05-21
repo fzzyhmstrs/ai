@@ -183,6 +183,9 @@ class ImbuingTableScreenHandler(
                                 if (blA && blB){
                                     modId[0] = RegisterModifier.ENTRIES.getRawId(id)
                                     enchantmentId[0] = -2
+                                } else if (blA && !blB) {
+                                    modId[0] = -1 * RegisterModifier.ENTRIES.getRawId(id)
+                                    enchantmentId[0] = -2
                                 } else {
                                     enchantmentPower[0] = 0
                                 }

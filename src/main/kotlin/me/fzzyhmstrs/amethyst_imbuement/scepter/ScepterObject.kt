@@ -86,6 +86,8 @@ object ScepterObject: AugmentDamage {
         DUSTBIN.markDirty(id)
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
+        DUSTBIN.clean()
+        println("active modifiers: " + activeScepterModifiers[id]?.modifiers)
         if(scepters[id]?.isNotEmpty() == true){ //break out of initialization if the scepter has already been initialized and isn't changed
             if (scepters[id]?.size == stack.enchantments.size){
                 return
@@ -277,6 +279,7 @@ object ScepterObject: AugmentDamage {
         val nbt: NbtCompound = stack.nbt?:return activeEnchant
         val id: Int = nbtChecker(nbt)
         return if(!activeAugment.containsKey(id)){
+            initializeScepter(stack, world)
             activeEnchant
         } else {
             return if (augmentApplied[id] == -1){
@@ -543,7 +546,9 @@ object ScepterObject: AugmentDamage {
         if (!augmentModifiers.containsKey(scepter)) {
             augmentModifiers[scepter] = mutableListOf()
         }
-        augmentModifiers[scepter]?.add(modifier)
+        if (augmentModifiers[scepter]?.contains(modifier) != true) {
+            augmentModifiers[scepter]?.add(modifier)
+        }
         DUSTBIN.markDirty(scepter)
     }
     private fun removeModifier(scepter: Int, modifier: Identifier, nbt: NbtCompound){
@@ -621,7 +626,8 @@ object ScepterObject: AugmentDamage {
     }
 
     fun getActiveModifiers(stack: ItemStack): CompiledModifiers{
-        val id: Int = nbtChecker(stack.orCreateNbt)
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt)
         return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA
     }
 
