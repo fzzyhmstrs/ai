@@ -1,11 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.item.ItemStack
@@ -34,7 +31,7 @@ open class AugmentModifier(
     private val spellsToAffect: MutableList<Identifier> = mutableListOf()
     private var secondaryEffect: ScepterAugment? = null
     private var descendant: Identifier = AugmentModifierDefaults.blankId
-    private var lineage: MutableList<Identifier> = mutableListOf(modifierId)
+    private val lineage: List<Identifier> by lazy { generateLineage() }
         
     private var hasSpell: Boolean = false
     private var hasSecondEffect: Boolean = false
@@ -52,13 +49,13 @@ open class AugmentModifier(
     fun hasDescendant(): Boolean{
         return hasDesc
     }
-    fun getDescendant(): Identifier{
-        return descendant
+    fun getModLineage(): List<Identifier>{
+        return lineage
     }
-    fun getLineage(): List<Identifier>{
-        if (!hasDesc) return lineage
+    private fun generateLineage(): List<Identifier>{
         val nextInLineage = RegisterModifier.ENTRIES.get(descendant)
-        lineage.addAll(nextInLineage?.getLineage() ?: listOf())
+        val lineage: MutableList<Identifier> = mutableListOf(this.modifierId)
+        lineage.addAll(nextInLineage?.getModLineage() ?: listOf())
         return lineage
     }
     fun getSecondaryEffect(): ScepterAugment?{

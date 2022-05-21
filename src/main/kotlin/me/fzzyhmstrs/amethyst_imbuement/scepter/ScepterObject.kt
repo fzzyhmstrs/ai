@@ -80,8 +80,6 @@ object ScepterObject: AugmentDamage {
                 stack.addEnchantment(RegisterEnchantment.MAGIC_MISSILE,1)
             }
         }
-        println(scepterNbt)
-        println(scepterNbt.contains(NbtKeys.MODIFIERS.str()))
         if (scepterNbt.contains(NbtKeys.MODIFIERS.str())){
             initializeModifiers(id,scepterNbt, stack)
         }
@@ -515,17 +513,20 @@ object ScepterObject: AugmentDamage {
         if (!augmentModifiers.containsKey(scepter)) {
             augmentModifiers[scepter] = mutableListOf()
         }
-        if (augmentModifiers[scepter]?.contains(modifier) == true){
+        val highestModifier = checkDescendant(modifier,scepter)
+        if (highestModifier != null){
             val mod = RegisterModifier.ENTRIES.get(modifier)
             return if (mod?.hasDescendant() == true){
                 val highestDescendantPresent = checkModifierLineage(mod,scepter)
                 if (highestDescendantPresent < 0){
                     false
                 } else {
-                    val lineage = mod.getLineage()
+                    val lineage = mod.getModLineage()
                     val newDescendant = lineage[highestDescendantPresent]
+                    val currentGeneration = lineage[max(highestDescendantPresent - 1,0)]
                     augmentModifiers[scepter]?.add(newDescendant)
-                    addModifierToNbt(modifier, nbt)
+                    addModifierToNbt(newDescendant, nbt)
+                    removeModifier(scepter, currentGeneration, nbt)
                     DUSTBIN.markDirty(scepter)
                     true
                 }
@@ -538,28 +539,52 @@ object ScepterObject: AugmentDamage {
         DUSTBIN.markDirty(scepter)
         return true
     }
-    private fun addModifierToNbt(modifier: Identifier, nbt: NbtCompound){
-        val nbtList = if (nbt.contains(NbtKeys.MODIFIERS.str())){
-            nbt.getList(NbtKeys.MODIFIERS.str(),10)
-        } else {
-            NbtList()
+    private fun addModifier(modifier: Identifier,scepter: Int){
+        if (!augmentModifiers.containsKey(scepter)) {
+            augmentModifiers[scepter] = mutableListOf()
         }
+        augmentModifiers[scepter]?.add(modifier)
+        DUSTBIN.markDirty(scepter)
+    }
+    private fun removeModifier(scepter: Int, modifier: Identifier, nbt: NbtCompound){
+        augmentModifiers[scepter]?.remove(modifier)
+        DUSTBIN.markDirty(scepter)
+        removeModifierFromNbt(modifier,nbt)
+    }
+    private fun addModifierToNbt(modifier: Identifier, nbt: NbtCompound){
+        val nbtList = getModifierNbtList(nbt)
         val newEl = NbtCompound()
         newEl.putString(NbtKeys.MODIFIER_ID.str(),modifier.toString())
         nbtList.add(newEl)
         nbt.put(NbtKeys.MODIFIERS.str(),nbtList)
     }
+    private fun removeModifierFromNbt(modifier: Identifier, nbt: NbtCompound){
+        val nbtList = getModifierNbtList(nbt)
+        val nbtList2 = NbtList()
+        for (el in nbtList){
+            val nbtEl = el as NbtCompound
+            if (nbtEl.contains(NbtKeys.MODIFIER_ID.str())){
+                val chk = Identifier(nbtEl.getString(NbtKeys.MODIFIER_ID.str()))
+                if (chk == modifier) continue
+            }
+            nbtList2.add(el)
+        }
+        nbt.put(NbtKeys.MODIFIERS.str(), nbtList2)
+    }
+    private fun getModifierNbtList(nbt: NbtCompound): NbtList{
+        return if (nbt.contains(NbtKeys.MODIFIERS.str())){
+            nbt.getList(NbtKeys.MODIFIERS.str(),10)
+        } else {
+            NbtList()
+        }
+    }
     private fun initializeModifiers(id: Int, nbt: NbtCompound, stack: ItemStack){
         val nbtList = nbt.getList(NbtKeys.MODIFIERS.str(),10)
-        println(nbtList)
         for (el in nbtList){
             val compound = el as NbtCompound
             if (compound.contains(NbtKeys.MODIFIER_ID.str())){
                 val modifier = compound.getString(NbtKeys.MODIFIER_ID.str())
-                if (!augmentModifiers.containsKey(id)){
-                    augmentModifiers[id] = mutableListOf()
-                }
-                addModifier(Identifier(modifier),id,nbt)
+                addModifier(Identifier(modifier),id)
             }
         }
         if (stack.hasEnchantments()){
@@ -583,8 +608,15 @@ object ScepterObject: AugmentDamage {
         }
     }
 
+
     fun getModifiers(stack: ItemStack): List<Identifier>{
-        val id: Int = nbtChecker(stack.orCreateNbt)
+        val nbt = stack.orCreateNbt
+        val id: Int = nbtChecker(nbt)
+        if (!augmentModifiers.containsKey(id)) {
+            if (stack.nbt?.contains(NbtKeys.MODIFIERS.str()) == true) {
+                initializeModifiers(id,nbt, stack)
+            }
+        }
         return augmentModifiers[id] ?: listOf()
     }
 
@@ -593,6 +625,17 @@ object ScepterObject: AugmentDamage {
         return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA
     }
 
+    private fun checkDescendant(modifier: Identifier, scepter: Int): Identifier?{
+        val mod = RegisterModifier.ENTRIES.get(modifier)
+        val lineage = mod?.getModLineage() ?: return modifier
+        var highestModifier: Identifier? = null
+        lineage.forEach { identifier ->
+            if (augmentModifiers[scepter]?.contains(identifier) == true){
+                highestModifier = identifier
+            }
+        }
+        return highestModifier
+    }
     fun checkModifierLineage(modifier:Identifier, stack: ItemStack): Boolean{
         val mod = RegisterModifier.ENTRIES.get(modifier)
         return if (mod != null){
@@ -606,7 +649,8 @@ object ScepterObject: AugmentDamage {
         return checkModifierLineage(mod, id) > 0
     }
     private fun checkModifierLineage(mod:AugmentModifier, id: Int): Int{
-        val lineage = mod.getLineage()
+        val lineage = mod.getModLineage()
+        //println("lineage: $lineage")
         val highestOrderDescendant = lineage.size
         var highestDescendantPresent = 1
         lineage.forEachIndexed { index, identifier ->
