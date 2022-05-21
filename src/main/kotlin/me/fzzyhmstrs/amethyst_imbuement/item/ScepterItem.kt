@@ -184,6 +184,11 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
 
         val modifiers = ScepterObject.getActiveModifiers(stack)
 
+        println("cooldown mod:" + modifiers.compiledData.cooldownModifier)
+        println("mana cost mod: " + modifiers.compiledData.manaCostModifier)
+        println("level mod: " + modifiers.compiledData.levelModifier)
+        println("xp mods" + modifiers.compiledData.getXpModifiers())
+
         val cd : Int? = ScepterObject.useScepter(activeEnchantId, stack, user, world, modifiers.compiledData.cooldownModifier)
         return if (cd != null) {
             val manaCost = ScepterObject.getAugmentManaCost(activeEnchantId,modifiers.compiledData.manaCostModifier)

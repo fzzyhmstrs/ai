@@ -114,7 +114,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             var onesOfst = 8
             var tensImageOfst: Int
             var onesImageOfst = 9
-            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0 || handler.modId[o] != 0) && player.experienceLevel >= r && handler.levelLow[o] == 0 || player.abilities.creativeMode)) {
+            if (!(((n >= o+oOfst + 1) || handler.imbueId[o] != 0 || handler.modId[o] > 0) && (player.experienceLevel >= r && handler.levelLow[o] == 0 || player.abilities.creativeMode))) {
                 this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 if ((o+oOfst) <= 5) {
                     this.drawTexture(
@@ -362,6 +362,12 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j])
                     val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
                     //println(textName.toString())
+                    list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                    list.add(LiteralText.EMPTY)
+                } else if(handler.modId[j] < 0){
+                    val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j] * -1)
+                    val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
+                    list.add(TranslatableText("container.imbuing_table.modifier_max").formatted(Formatting.RED))
                     list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                     list.add(LiteralText.EMPTY)
                 }
