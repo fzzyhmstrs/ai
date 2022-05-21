@@ -112,6 +112,7 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
                 } else {
                     entity.damage(DamageSource.magic(entity, user), splashDamage)
                 }
+                secondaryEffect(world, user, entity, level, effect)
                 val status = addStatusInstance(effect)
                 if (status != null){
                     if (entity is LivingEntity){
@@ -121,6 +122,10 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
             }
         }
         return true
+    }
+
+    open fun secondaryEffect(world: World, user: LivingEntity, target: Entity, level: Int, effect: AugmentEffect){
+        return
     }
 
     override fun clientTask(world: World, user: LivingEntity,
