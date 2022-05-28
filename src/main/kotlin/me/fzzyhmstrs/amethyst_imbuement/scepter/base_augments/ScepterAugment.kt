@@ -22,13 +22,14 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import java.util.function.Consumer
 import kotlin.math.max
 
 abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
     
     open val baseEffect = AugmentEffect()
 
-    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean
+    abstract fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect, consumers: List<Consumer<List<LivingEntity>>>): Boolean
 
     fun applyModifiableTasks(world: World, user: LivingEntity, hand: Hand, level: Int, modifiers: List<AugmentModifier> = listOf(), modifierData: CompiledAugmentModifier? = null): Boolean{
         val effectModifiers = AugmentEffect()
@@ -38,7 +39,7 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
         println("Duration: " + effectModifiers.duration(level))
         println("Amplifier: " + effectModifiers.amplifier(level))
         println("Range: " + effectModifiers.range(level))
-        val bl = applyTasks(world,user,hand,level,effectModifiers)
+        val bl = applyTasks(world,user,hand,level,effectModifiers, modifierData?.getConsumer()?: listOf())
         if (bl) {
             modifiers.forEach {
                 if (it.hasSecondaryEffect()) {
@@ -137,4 +138,25 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
     }
 
     abstract fun augmentStat(imbueLevel: Int = 1): ScepterObject.AugmentDatapoint
+
+    class AugmentResult(val successful: Boolean = false){
+        private var entities: List<Entity>? = null
+
+        fun hasEntities(): Boolean{
+            return entities != null
+        }
+
+        fun withEntities(list: List<Entity>): AugmentResult{
+            entities = list
+            return this
+        }
+
+        enum class Type{
+            ATTACKED,
+            APPLIED_STATUS,
+            PLACED_BLOCK,
+            AFFECTED_ENVIRONMENT,
+        }
+
+    }
 }
