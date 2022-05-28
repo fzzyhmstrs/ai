@@ -499,9 +499,9 @@ object ScepterObject: AugmentDamage {
     }
 
 
-    data class AugmentDatapoint(val type: SpellType, val cooldown: Int,
-                                val manaCost: Int, val minLvl: Int, val imbueLevel: Int,
-                                val bookOfLoreTier: LoreTier, val keyItem: Item)
+    data class AugmentDatapoint(val type: SpellType = SpellType.NULL, val cooldown: Int = 20,
+                                val manaCost: Int = 20, val minLvl: Int = 1, val imbueLevel: Int = 1,
+                                val bookOfLoreTier: LoreTier = LoreTier.NO_TIER, val keyItem: Item = Items.AIR)
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
                                             val augment: MiscAugment, var delay: Int, var duration: Int, val effect: AugmentEffect)
