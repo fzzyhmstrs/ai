@@ -5,8 +5,10 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
+import java.util.function.Consumer
 import kotlin.math.max
 
 @Suppress("MemberVisibilityCanBePrivate", "CanBeParameter")
@@ -30,11 +32,13 @@ open class AugmentModifier(
     protected val xpModifier: XpModifiers = XpModifiers()
     private val spellsToAffect: MutableList<Identifier> = mutableListOf()
     private var secondaryEffect: ScepterAugment? = null
+    protected val consumers: MutableList<Consumer<List<LivingEntity>>> = mutableListOf()
     private var descendant: Identifier = AugmentModifierDefaults.blankId
     private val lineage: List<Identifier> by lazy { generateLineage() }
         
     private var hasSpell: Boolean = false
     private var hasSecondEffect: Boolean = false
+    private var hasConsumer: Boolean = false
     private var hasDesc: Boolean = false
 
     fun hasSpellToAffect(): Boolean{
@@ -45,6 +49,12 @@ open class AugmentModifier(
     }
     fun hasSecondaryEffect(): Boolean{
         return hasSecondEffect
+    }
+    fun hasConsumer(): Boolean{
+        return hasConsumer
+    }
+    fun getConsumer(): List<Consumer<List<LivingEntity>>>{
+        return consumers
     }
     fun hasDescendant(): Boolean{
         return hasDesc
@@ -110,6 +120,11 @@ open class AugmentModifier(
         hasSecondEffect = true
         return this
     }
+    fun withConsumer(vararg consumerList: Consumer<List<LivingEntity>>): AugmentModifier{
+        consumers.addAll(consumerList.asList())
+        hasConsumer = true
+        return this
+    }
     fun withDescendant(modifier: AugmentModifier): AugmentModifier{
         val id = modifier.modifierId
         descendant = id
@@ -139,13 +154,14 @@ class CompiledAugmentModifier(
     override var manaCostModifier: Double = 0.0)
     : AugmentModifier(modifierId, levelModifier, cooldownModifier, manaCostModifier){
 
-          fun plus(am: AugmentModifier) {
-              levelModifier += am.levelModifier
-              cooldownModifier += am.cooldownModifier
-              manaCostModifier += am.manaCostModifier
-              xpModifier.plus(am.getXpModifiers())
-              effects.plus(am.getEffectModifier())
-          }
+        fun plus(am: AugmentModifier) {
+            levelModifier += am.levelModifier
+            cooldownModifier += am.cooldownModifier
+            manaCostModifier += am.manaCostModifier
+            xpModifier.plus(am.getXpModifiers())
+            effects.plus(am.getEffectModifier())
+            consumers.addAll(am.getConsumer())
+        }
     }
 
 data class AugmentEffect(
