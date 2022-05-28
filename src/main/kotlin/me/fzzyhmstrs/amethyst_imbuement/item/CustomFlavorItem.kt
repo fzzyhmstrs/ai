@@ -13,9 +13,9 @@ class CustomFlavorItem(settings: Settings, _ttn: String,_glint: Boolean) : Item(
     private val ttn: String = _ttn
     private val glint: Boolean = _glint
 
-    override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
+    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, tooltip, context)
-        tooltip?.add(TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
+        tooltip.add(TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
     }
 
     override fun hasGlint(stack: ItemStack): Boolean {

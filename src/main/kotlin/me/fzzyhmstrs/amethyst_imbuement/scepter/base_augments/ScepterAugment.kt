@@ -33,17 +33,20 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
     fun applyModifiableTasks(world: World, user: LivingEntity, hand: Hand, level: Int, modifiers: List<AugmentModifier> = listOf(), modifierData: CompiledAugmentModifier? = null): Boolean{
         val effectModifiers = AugmentEffect()
         effectModifiers.plus(modifierData?.getEffectModifier()?: AugmentEffect())
-        modifiers.forEach {
-            if (it.hasSecondaryEffect()){
-                it.getSecondaryEffect()?.applyModifiableTasks(world, user, hand, level, listOf(), null)
-            }
-        }
         effectModifiers.plus(baseEffect)
         println("Damage:" + effectModifiers.damage(level))
         println("Duration: " + effectModifiers.duration(level))
         println("Amplifier: " + effectModifiers.amplifier(level))
         println("Range: " + effectModifiers.range(level))
-        return applyTasks(world,user,hand,level,effectModifiers)
+        val bl = applyTasks(world,user,hand,level,effectModifiers)
+        if (bl) {
+            modifiers.forEach {
+                if (it.hasSecondaryEffect()) {
+                    it.getSecondaryEffect()?.applyModifiableTasks(world, user, hand, level, listOf(), null)
+                }
+            }
+        }
+        return bl
     }
 
     open fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int){
