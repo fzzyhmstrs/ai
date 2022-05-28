@@ -22,18 +22,20 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
+import java.util.function.Consumer
 
 abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl, EnchantmentTarget.WEAPON, *slot) {
     private val _item = item
 
-    override fun applyTasks(
-        world: World,
-        user: LivingEntity,
-        hand: Hand,
-        level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        return RaycasterUtil.raycastBlock(entity = user) != null
+    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+        val bl = RaycasterUtil.raycastBlock(entity = user) != null
+        if (bl){
+            val list = listOf(user)
+            effects.goodConsumers().forEach {
+                it.consumer.accept(list)
+            }
+        }
+        return bl
     }
 
     override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
