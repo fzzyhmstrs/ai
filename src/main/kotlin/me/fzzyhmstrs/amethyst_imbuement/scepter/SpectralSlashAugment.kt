@@ -113,7 +113,7 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
                     entity.damage(DamageSource.magic(entity, user), splashDamage)
                 }
                 secondaryEffect(world, user, entity, level, effect)
-                val status = addStatusInstance(effect)
+                val status = addStatusInstance(effect, level)
                 if (status != null){
                     if (entity is LivingEntity){
                         entity.addStatusEffect(status)
@@ -155,7 +155,7 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
         return ParticleTypes.ELECTRIC_SPARK
     }
 
-    open fun addStatusInstance(effect: AugmentEffect): StatusEffectInstance?{
+    open fun addStatusInstance(effect: AugmentEffect, level: Int): StatusEffectInstance?{
         return null
     }
 
