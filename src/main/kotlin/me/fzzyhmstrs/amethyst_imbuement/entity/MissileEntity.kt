@@ -13,6 +13,7 @@ import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
+import java.util.function.Consumer
 
 open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: World): ExplosiveProjectileEntity(entityType,world), ModifiableDamageEntity {
 
@@ -32,6 +33,7 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
     override var amplifier: Int = 0
     override var range: Double = 4.0
     override var duration: Int = 0
+    override var consumers: List<Consumer<List<LivingEntity>>> = listOf()
 
     override fun initDataTracker() {}
 
