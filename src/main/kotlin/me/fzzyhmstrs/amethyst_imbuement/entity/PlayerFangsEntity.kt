@@ -13,6 +13,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import java.util.*
+import java.util.function.Consumer
 
 class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableDamageEntity {
 
@@ -27,6 +28,7 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
     override var amplifier: Int = 0
     override var range: Double = 0.0
     override var duration: Int = 0
+    override var consumers: List<Consumer<List<LivingEntity>>> = listOf()
 
     constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
         this.warmup = warmup

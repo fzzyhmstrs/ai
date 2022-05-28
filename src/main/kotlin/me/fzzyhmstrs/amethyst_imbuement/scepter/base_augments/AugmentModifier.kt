@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer.*
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.LivingEntity
@@ -32,13 +33,11 @@ open class AugmentModifier(
     protected val xpModifier: XpModifiers = XpModifiers()
     private val spellsToAffect: MutableList<Identifier> = mutableListOf()
     private var secondaryEffect: ScepterAugment? = null
-    protected val consumers: MutableList<Consumer<List<LivingEntity>>> = mutableListOf()
     private var descendant: Identifier = AugmentModifierDefaults.blankId
     private val lineage: List<Identifier> by lazy { generateLineage() }
         
     private var hasSpell: Boolean = false
     private var hasSecondEffect: Boolean = false
-    private var hasConsumer: Boolean = false
     private var hasDesc: Boolean = false
 
     fun hasSpellToAffect(): Boolean{
@@ -49,12 +48,6 @@ open class AugmentModifier(
     }
     fun hasSecondaryEffect(): Boolean{
         return hasSecondEffect
-    }
-    fun hasConsumer(): Boolean{
-        return hasConsumer
-    }
-    fun getConsumer(): List<Consumer<List<LivingEntity>>>{
-        return consumers
     }
     fun hasDescendant(): Boolean{
         return hasDesc
@@ -120,9 +113,12 @@ open class AugmentModifier(
         hasSecondEffect = true
         return this
     }
-    fun withConsumer(vararg consumerList: Consumer<List<LivingEntity>>): AugmentModifier{
-        consumers.addAll(consumerList.asList())
-        hasConsumer = true
+    fun withConsumer(consumer: Consumer<List<LivingEntity>>, type: Type): AugmentModifier{
+        effects.withConsumer(consumer,type)
+        return this
+    }
+    fun withConsumer(augmentConsumer: AugmentConsumer): AugmentModifier{
+        effects.withConsumer(augmentConsumer.consumer,augmentConsumer.type)
         return this
     }
     fun withDescendant(modifier: AugmentModifier): AugmentModifier{
@@ -160,7 +156,6 @@ class CompiledAugmentModifier(
             manaCostModifier += am.manaCostModifier
             xpModifier.plus(am.getXpModifiers())
             effects.plus(am.getEffectModifier())
-            consumers.addAll(am.getConsumer())
         }
     }
 
@@ -169,12 +164,16 @@ data class AugmentEffect(
     private var amplifierData: PerLvlI = PerLvlI(),
     private var durationData: PerLvlI = PerLvlI(),
     private var rangeData: PerLvlD = PerLvlD()){
+    private val goodConsumers: MutableList<AugmentConsumer> = mutableListOf()
+    private val badConsumers: MutableList<AugmentConsumer> = mutableListOf()
 
     fun plus(ae: AugmentEffect){
         damageData = damageData.plus(ae.damageData)
         amplifierData = amplifierData.plus(ae.amplifierData)
         durationData = durationData.plus(ae.durationData)
         rangeData = rangeData.plus(ae.rangeData)
+        goodConsumers.addAll(ae.goodConsumers)
+        badConsumers.addAll(ae.badConsumers)
     }
     fun damage(level: Int): Float{
         return max(0.0F, damageData.value(level))
@@ -188,6 +187,12 @@ data class AugmentEffect(
     fun range(level: Int): Double{
         return max(1.0,rangeData.value(level))
     }
+    fun goodConsumers(): List<AugmentConsumer>{
+        return goodConsumers
+    }
+    fun badConsumers(): List<AugmentConsumer>{
+        return badConsumers
+    }
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
         return this.copy(damageData = PerLvlF(damage, damagePerLevel, damagePercent))
     }
@@ -199,6 +204,13 @@ data class AugmentEffect(
     }
     fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect {
         return this.copy(rangeData = PerLvlD(range, rangePerLevel, rangePercent))
+    }
+    fun withConsumer(consumer: Consumer<List<LivingEntity>>, type: Type){
+        if (type == Type.BENEFICIAL){
+            goodConsumers.add(AugmentConsumer(consumer,type))
+        } else {
+            badConsumers.add(AugmentConsumer(consumer,type))
+        }
     }
 }
 
@@ -225,6 +237,13 @@ data class XpModifiers(var furyXpMod: Int = 0, var witXpMod: Int = 0, var graceX
     }
     fun withGraceMod(graceXpMod: Int = 0): XpModifiers{
         return this.copy(graceXpMod = graceXpMod)
+    }
+}
+
+data class AugmentConsumer(val consumer: Consumer<List<LivingEntity>>, val type: Type) {
+    enum class Type {
+        HARMFUL,
+        BENEFICIAL
     }
 }
 

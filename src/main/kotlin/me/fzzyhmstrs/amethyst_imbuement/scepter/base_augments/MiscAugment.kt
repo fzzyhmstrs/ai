@@ -12,17 +12,12 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.function.Consumer
 import kotlin.math.max
 
 abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override fun applyTasks(
-        world: World,
-        user: LivingEntity,
-        hand: Hand,
-        level: Int,
-        effects: AugmentEffect
-    ): Boolean {
+    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         var target: Entity? = null
         val hit = RaycasterUtil.raycastHit(distance = effects.range(level),user, includeFluids = true)
         if (hit != null) {
