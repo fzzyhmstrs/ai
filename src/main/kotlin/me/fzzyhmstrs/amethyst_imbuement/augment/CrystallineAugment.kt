@@ -7,7 +7,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.*
 import net.minecraft.util.registry.Registry
 
-class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.ARMOR, *slot) {
+class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.WEAPON, *slot) {
 
     override fun getAttackDamage(level: Int, group: EntityGroup?): Float {
         return 0.25F * level
@@ -21,12 +21,9 @@ class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
         val list = mutableListOf<ItemStack>()
         val entries = Registry.ITEM.entries
         list.addAll(super.acceptableItemStacks().asIterable())
-        list.addAll(super.acceptableItemStacks().asIterable())
-        list.addAll(super.acceptableItemStacks().asIterable())
-        list.addAll(super.acceptableItemStacks().asIterable())
         for (entry in entries){
             val item = entry.value
-            if (item is AxeItem){
+            if (item is AxeItem || item is CrossbowItem || item is TridentItem || item is BowItem){
                 list.add(ItemStack(item,1))
             }
         }
