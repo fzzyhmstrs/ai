@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -23,12 +24,7 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
     private var playingAnimation = false
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
-
-    override var damage: Float = 6.0F
-    override var amplifier: Int = 0
-    override var range: Double = 0.0
-    override var duration: Int = 0
-    override var consumers: List<Consumer<List<LivingEntity>>> = listOf()
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
 
     constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
         this.warmup = warmup
@@ -102,12 +98,12 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.MAGIC, damage)
+            target.damage(DamageSource.MAGIC, entityEffects.damage(0))
         } else {
             if (livingEntity.isTeammate(target)) {
                 return
             }
-            target.damage(DamageSource.magic(this, livingEntity), damage)
+            target.damage(DamageSource.magic(this, livingEntity), entityEffects.damage(0))
         }
     }
 
