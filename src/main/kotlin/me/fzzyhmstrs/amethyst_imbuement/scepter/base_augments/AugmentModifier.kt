@@ -193,6 +193,29 @@ data class AugmentEffect(
     fun badConsumers(): List<AugmentConsumer>{
         return badConsumers
     }
+    fun accept(list: List<LivingEntity>,type: Type? = null){
+        when (type){
+            Type.BENEFICIAL->{
+                goodConsumers.forEach {
+                    it.consumer.accept(list)
+                }
+            }
+            Type.HARMFUL->{
+                badConsumers.forEach {
+                    it.consumer.accept(list)
+                }
+            }
+            else->{
+                goodConsumers.forEach {
+                    it.consumer.accept(list)
+                }
+                badConsumers.forEach {
+                    it.consumer.accept(list)
+                }
+            }
+        }
+    }
+
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
         return this.copy(damageData = PerLvlF(damage, damagePerLevel, damagePercent))
     }
