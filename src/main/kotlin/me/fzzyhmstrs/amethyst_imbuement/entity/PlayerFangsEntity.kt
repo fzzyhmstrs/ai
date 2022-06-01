@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -81,6 +82,7 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
                 for (livingEntity in list) {
                     this.damage(livingEntity)
                 }
+                entityEffects.accept(list,AugmentConsumer.Type.HARMFUL)
             }
             if (!startedAttack) {
                 world.sendEntityStatus(this, 4.toByte())

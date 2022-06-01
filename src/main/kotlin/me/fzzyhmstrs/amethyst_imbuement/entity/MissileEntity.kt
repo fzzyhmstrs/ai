@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -74,16 +75,21 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
         super.onEntityHit(entityHitResult)
         val entity = owner
         if (entity is LivingEntity) {
+            val entity2 = entityHitResult.entity
             if(pierce){
-                entityHitResult.entity.damage(
+                entity2.damage(
                     DamageSource.magic(this, entity).setProjectile(),
                     entityEffects.damage(0)
                 )
             } else {
-                entityHitResult.entity.damage(
+                entity2.damage(
                     DamageSource.thrownProjectile(this, entity).setProjectile(),
                     entityEffects.damage(0)
                 )
+            }
+            applyDamageEffects(entity,entity2)
+            if (entity2 is LivingEntity) {
+                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
             }
         }
         discard()

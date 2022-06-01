@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -29,23 +30,27 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
-        val entity2 = owner
-        if (entity2 is LivingEntity) {
-            val entity = entityHitResult.entity
+        val entity = owner
+        if (entity is LivingEntity) {
+            val entity2 = entityHitResult.entity
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
-            if (!entity.isFireImmune) {
-                val i = entity.fireTicks
-                entity.setOnFireFor(entityEffects.amplifier(0))
-                val bl = entity.damage(
+            if (!entity2.isFireImmune) {
+                val i = entity2.fireTicks
+                entity2.setOnFireFor(entityEffects.amplifier(0))
+                val bl = entity2.damage(
                     DamageSource.fireball(fbe,owner),
                     entityEffects.damage(0)
                 )
                 if (!bl) {
-                    entity.fireTicks = i
+                    entity2.fireTicks = i
                 }
-                applyDamageEffects(entity2 as LivingEntity?, entity)
+                applyDamageEffects(entity as LivingEntity?, entity2)
+            }
+            if (entity2 is LivingEntity) {
+                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
             }
         }
+
         discard()
     }
 
