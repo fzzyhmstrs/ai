@@ -1,0 +1,64 @@
+package me.fzzyhmstrs.amethyst_imbuement.entity
+
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.projectile.AbstractFireballEntity
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.world.GameRules
+import net.minecraft.world.World
+import net.minecraft.world.explosion.Explosion
+
+class PlayerFireballEntity: AbstractFireballEntity, ModifiableDamageEntity {
+    constructor(entityType: EntityType<out PlayerFireballEntity?>, world: World): super(entityType, world)
+    constructor(world: World, owner: LivingEntity, velocityX: Double, velocityY: Double, velocityZ: Double):
+            super(RegisterEntity.PLAYER_FIREBALL,owner,velocityX,velocityY,velocityZ, world)
+
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(1)
+
+    override fun onCollision(hitResult: HitResult) {
+        super.onCollision(hitResult)
+        if (!world.isClient) {
+            val bl = world.gameRules.getBoolean(GameRules.DO_MOB_GRIEFING)
+            world.createExplosion(
+                null,
+                this.x,
+                this.y,
+                this.z,
+                entityEffects.amplifier(0).toFloat(),
+                bl,
+                if (bl) Explosion.DestructionType.DESTROY else Explosion.DestructionType.NONE
+            )
+            discard()
+        }
+    }
+
+    override fun onEntityHit(entityHitResult: EntityHitResult) {
+        super.onEntityHit(entityHitResult)
+        if (world.isClient) {
+            return
+        }
+        val entity = entityHitResult.entity
+        val entity2 = owner
+        entity.damage(DamageSource.fireball(this, entity2), entityEffects.damage(0))
+        if (entity2 is LivingEntity) {
+            applyDamageEffects(entity2 as LivingEntity?, entity)
+        }
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        nbt.putByte("ExplosionPower", entityEffects.amplifier(0).toByte())
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        if (nbt.contains("ExplosionPower", 99)) {
+            entityEffects.setAmplifier(nbt.getByte("ExplosionPower").toInt())
+        }
+    }
+}
