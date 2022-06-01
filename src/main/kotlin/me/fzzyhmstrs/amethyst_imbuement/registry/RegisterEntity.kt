@@ -118,7 +118,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).build()
     )
 
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(
@@ -131,7 +131,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
     )
 
     
