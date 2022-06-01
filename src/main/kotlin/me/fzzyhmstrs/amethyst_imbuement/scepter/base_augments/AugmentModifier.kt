@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer.*
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
@@ -214,6 +215,9 @@ data class AugmentEffect(
                 }
             }
         }
+    }
+    fun accept(entity: LivingEntity, type: Type? = null){
+        accept(listOf(entity), type)
     }
 
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
