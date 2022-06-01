@@ -46,7 +46,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         val f = (user.yaw + 90) * MathHelper.PI / 180
         for (i in 0..effect.amplifier(level)) {
             val g = 1.25 * (i + 1).toDouble()
-            val success = conjureFangs(
+            val success = PlayerFangsEntity.conjureFangs(
                 world,
                 user,
                 user.x + MathHelper.cos(f).toDouble() * g,
@@ -55,8 +55,8 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 e,
                 f,
                 i,
-                level,
-                effect
+                effect,
+                level
             )
             if (success) successes++
         }
@@ -101,7 +101,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 warmup,
                 user
             )
-            pfe.damage = effect.damage(level)
+            pfe.entityEffects = pfe.entityEffects.withDamage(effect.damage(level))
             world.spawnEntity(pfe)
             return true
         }

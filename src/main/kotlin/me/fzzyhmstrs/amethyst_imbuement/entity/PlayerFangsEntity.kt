@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -13,6 +14,10 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.MathHelper
+import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.World
 import java.util.*
 import java.util.function.Consumer
@@ -157,6 +162,49 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
 
     override fun createSpawnPacket(): Packet<*> {
         return EntitySpawnS2CPacket(this)
+    }
+
+    companion object{
+        fun conjureFangs(world: World,user: LivingEntity,
+                         x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
+                         warmup: Int, effect: AugmentEffect, level: Int): Boolean {
+            var blockPos = BlockPos(x, y, z)
+            var bl = false
+            var d = 0.0
+            do {
+
+                val blockPos2: BlockPos = blockPos.down()
+                val blockState: BlockState = world.getBlockState(blockPos2)
+                val blockState2: BlockState = world.getBlockState(blockPos)
+                val voxelShape: VoxelShape = blockState2.getCollisionShape(world,blockPos)
+                if (!blockState.isSideSolidFullSquare(world,blockPos2, Direction.UP)) {
+                    blockPos = blockPos.down()
+                    continue
+                }
+                if (!world.isAir(blockPos) && !voxelShape.isEmpty) {
+                    d = voxelShape.getMax(Direction.Axis.Y)
+                }
+                bl = true
+                break
+            } while (blockPos.y >= MathHelper.floor(maxY) - 1)
+            if (bl) {
+                //consider a custom fangs entity that can have damage effects
+                val pfe = PlayerFangsEntity(
+                    world,
+                    x,
+                    blockPos.y.toDouble() + d,
+                    z,
+                    yaw,
+                    warmup,
+                    user
+                )
+                pfe.entityEffects.setDamage(effect.damage(level))
+                pfe.entityEffects.setConsumers(effect)
+                world.spawnEntity(pfe)
+                return true
+            }
+            return false
+        }
     }
 
 

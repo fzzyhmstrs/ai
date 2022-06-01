@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -46,9 +48,13 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        val successes = conjureBarrage(user,world,d,e,f, effect.amplifier(level))
+        val successes = conjureBarrage(user,world,d,e,f, effect, level)
+        val bl = successes > 0
+        if (bl){
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        }
         ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,14,effect.duration(level), effect)
-        return successes > 0
+        return bl
     }
 
     override fun persistentEffect(
@@ -71,7 +77,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             e = user.y + 1.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        conjureBarrage(user,world,d,e,f, effect.amplifier(level))
+        conjureBarrage(user,world,d,e,f, effect, level)
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
@@ -82,12 +88,13 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
     }
 
-    private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, fangs: Int): Int{
+    private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, effect: AugmentEffect, level: Int): Int{
         var successes = 0
+        val fangs = effect.amplifier(level)
         for (i in 0..fangs) {
             val g = 1.25 * (i + 1).toDouble()
             for (k in -1..1){
-                val success = conjureFangs(
+                val success = PlayerFangsEntity.conjureFangs(
                     world,
                     user,
                     user.x + MathHelper.cos(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
@@ -95,50 +102,13 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                     d,
                     e,
                     f,
-                    i
+                    i,
+                    effect,
+                    level
                 )
                 if (success) successes++
             }
         }
         return successes
     }
-
-    private fun conjureFangs(world: World,user: LivingEntity,x: Double, z: Double, maxY: Double, y: Double, yaw: Float, warmup: Int): Boolean {
-        var blockPos = BlockPos(x, y, z)
-        var bl = false
-        var d = 0.0
-        do {
-
-            val blockPos2: BlockPos = blockPos.down()
-            val blockState: BlockState = world.getBlockState(blockPos2)
-            val blockState2: BlockState = world.getBlockState(blockPos)
-            val voxelShape: VoxelShape = blockState2.getCollisionShape(world,blockPos)
-            if (!blockState.isSideSolidFullSquare(world,blockPos2, Direction.UP)) {
-                blockPos = blockPos.down()
-                continue
-            }
-            if (!world.isAir(blockPos) && !voxelShape.isEmpty) {
-                d = voxelShape.getMax(Direction.Axis.Y)
-            }
-            bl = true
-            break
-        } while (blockPos.y >= MathHelper.floor(maxY) - 1)
-        if (bl) {
-            //consider a custom fangs entity that can have damage effects
-            world.spawnEntity(
-                EvokerFangsEntity(
-                    world,
-                    x,
-                    blockPos.y.toDouble() + d,
-                    z,
-                    yaw,
-                    warmup,
-                    user
-                )
-            )
-            return true
-        }
-        return false
-    }
-
 }
