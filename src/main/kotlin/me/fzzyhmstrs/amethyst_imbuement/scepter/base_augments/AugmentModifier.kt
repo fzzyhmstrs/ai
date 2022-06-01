@@ -176,23 +176,17 @@ data class AugmentEffect(
         goodConsumers.addAll(ae.goodConsumers)
         badConsumers.addAll(ae.badConsumers)
     }
-    fun damage(level: Int): Float{
+    fun damage(level: Int = 0): Float{
         return max(0.0F, damageData.value(level))
     }
-    fun amplifier(level: Int): Int{
+    fun amplifier(level: Int = 0): Int{
         return max(0,amplifierData.value(level))
     }
-    fun duration(level: Int): Int{
+    fun duration(level: Int = 0): Int{
         return max(0,durationData.value(level))
     }
-    fun range(level: Int): Double{
+    fun range(level: Int = 0): Double{
         return max(1.0,rangeData.value(level))
-    }
-    fun goodConsumers(): List<AugmentConsumer>{
-        return goodConsumers
-    }
-    fun badConsumers(): List<AugmentConsumer>{
-        return badConsumers
     }
     fun accept(list: List<LivingEntity>,type: Type? = null){
         when (type){
@@ -223,16 +217,32 @@ data class AugmentEffect(
     fun withDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F): AugmentEffect{
         return this.copy(damageData = PerLvlF(damage, damagePerLevel, damagePercent))
     }
+    fun addDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F){
+        damageData.plus(PerLvlF(damage, damagePerLevel, damagePercent))
+    }
     fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0): AugmentEffect{
         return this.copy(amplifierData = PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
+    }
+    fun addAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0){
+        amplifierData.plus(PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
     }
     fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentEffect{
         return this.copy(durationData = PerLvlI(duration, durationPerLevel, durationPercent))
     }
+    fun addDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0){
+        durationData.plus(PerLvlI(duration, durationPerLevel, durationPercent))
+    }
     fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect {
         return this.copy(rangeData = PerLvlD(range, rangePerLevel, rangePercent))
     }
-    fun withConsumer(consumer: Consumer<List<LivingEntity>>, type: Type){
+    fun addRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0){
+        rangeData.plus(PerLvlD(range, rangePerLevel, rangePercent))
+    }
+    fun withConsumer(consumer: Consumer<List<LivingEntity>>, type: Type): AugmentEffect{
+        addConsumer(consumer, type)
+        return this
+    }
+    fun addConsumer(consumer: Consumer<List<LivingEntity>>, type: Type){
         if (type == Type.BENEFICIAL){
             goodConsumers.add(AugmentConsumer(consumer,type))
         } else {
