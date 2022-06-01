@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -12,8 +13,7 @@ import net.minecraft.world.World
 
 class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType,world) {
 
-    override var damage: Float = 6.0F
-    override var amplifier: Int = 5
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(5)
 
     constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.FLAMEBOLT_ENTITY,world){
         this.owner = owner
@@ -35,10 +35,10 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
             if (!entity.isFireImmune) {
                 val i = entity.fireTicks
-                entity.setOnFireFor(amplifier)
+                entity.setOnFireFor(entityEffects.amplifier(0))
                 val bl = entity.damage(
                     DamageSource.fireball(fbe,owner),
-                    damage
+                    entityEffects.damage(0)
                 )
                 if (!bl) {
                     entity.fireTicks = i

@@ -1,13 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import net.minecraft.entity.LivingEntity
-import java.util.function.Consumer
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 
 interface ModifiableDamageEntity {
 
-    var damage: Float
-    var amplifier: Int
-    var range: Double
-    var duration: Int
-    var consumers: List<Consumer<List<LivingEntity>>>
+    var entityEffects: AugmentEffect
+
 }

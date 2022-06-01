@@ -29,28 +29,24 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
     }
 
     private var level: Int = 1
-    override var damage: Float = 3.0F
-    override var range: Double = 4.0
-    override var duration: Int = 180
-
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0).withDuration(180)
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = owner
         if (entity is LivingEntity) {
             if (!entityHitResult.entity.isFireImmune) {
-                (entityHitResult.entity as LivingEntity).frozenTicks = duration
-                entityHitResult.entity.damage(DamageSource.GENERIC, damage)
+                (entityHitResult.entity as LivingEntity).frozenTicks = entityEffects.duration(0)
+                entityHitResult.entity.damage(DamageSource.GENERIC, entityEffects.damage(0))
             } else {
-                (entityHitResult.entity as LivingEntity).frozenTicks = (duration * 1.6).toInt()
-                entityHitResult.entity.damage(DamageSource.GENERIC, damage * 1.6F)
+                (entityHitResult.entity as LivingEntity).frozenTicks = (entityEffects.duration() * 1.6).toInt()
+                entityHitResult.entity.damage(DamageSource.GENERIC, entityEffects.damage(0) * 1.6F)
             }
-            val entityList = RaycasterUtil.raycastEntityArea(distance = range, entityHitResult.entity)
+            val entityList = RaycasterUtil.raycastEntityArea(distance = entityEffects.range(0), entityHitResult.entity)
             if (entityList.isNotEmpty()) {
                 for (entity2 in entityList) {
                     if (entity2 is Monster) {
-                        val effects = AugmentEffect().withDuration(duration).withDamage(damage)
-                        RegisterEnchantment.FREEZING.entityTask(entity.world,entity2,entity,level.toDouble(),null,effects)
+                        RegisterEnchantment.FREEZING.entityTask(entity.world,entity2,entity,level.toDouble(),null,entityEffects)
                     }
                 }
             }

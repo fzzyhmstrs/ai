@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -29,11 +30,7 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
     }
 
     private var pierce: Boolean = false
-    override var damage: Float = 3.0F
-    override var amplifier: Int = 0
-    override var range: Double = 4.0
-    override var duration: Int = 0
-    override var consumers: List<Consumer<List<LivingEntity>>> = listOf()
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0)
 
     override fun initDataTracker() {}
 
@@ -80,12 +77,12 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
             if(pierce){
                 entityHitResult.entity.damage(
                     DamageSource.magic(this, entity).setProjectile(),
-                    damage
+                    entityEffects.damage(0)
                 )
             } else {
                 entityHitResult.entity.damage(
                     DamageSource.thrownProjectile(this, entity).setProjectile(),
-                    damage
+                    entityEffects.damage(0)
                 )
             }
         }
