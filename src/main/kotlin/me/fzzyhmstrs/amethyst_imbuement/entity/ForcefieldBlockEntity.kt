@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ForcefieldAugment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -12,7 +13,7 @@ class ForcefieldBlockEntity(pos: BlockPos, state: BlockState, _waterState: Boole
 
     private var maxAge: Int = 0
     private var age: Int = 0
-    private val baseAge = 2400
+    private val baseAge: Int = ForcefieldAugment.baseAge
     private val waterState = _waterState
 
     companion object{
