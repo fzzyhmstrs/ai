@@ -23,8 +23,7 @@ class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
         me.setVelocity(user,user.pitch,user.yaw,0.0f,
             2.0f,
             0.1f)
-        me.entityEffects.setDamage(effects.damage(level))
-        me.entityEffects.setConsumers(effects)
+        me.passEffects(effects, level)
         return me
     }
 

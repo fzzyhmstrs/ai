@@ -1,8 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
@@ -79,6 +81,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         if (!effect(world, user, entityList, level, effect)) return false
         ScepterObject.setPersistentTickerNeed(world,user,entityList,level,avgBlockPos,
             RegisterEnchantment.LIGHTNING_STORM, delay.value(level),effect.duration(level), effect)
+        effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
@@ -95,14 +98,10 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster && world.isSkyVisible(entity3.blockPos)){
-                successes++
-
                 //repalce with a player version that can pass consumers?
-                val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
-                if (le != null) {
-                    le.passEffects(effect, level)
-                    le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(entity3.blockPos))
-                    world.spawnEntity(le)
+                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), effect, level)
+                if (world.spawnEntity(le)){
+                    successes++
                 }
             }
         }
@@ -142,13 +141,8 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 tries--
                 continue
             }
-            val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
-            if (le != null) {
-                le.entityEffects.setDamage(effect.damage(level))
-                le.entityEffects.setConsumers(effect)
-                le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
-                world.spawnEntity(le)
-            }
+            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos), effect, level)
+            world.spawnEntity(le)
             break
         }
     }

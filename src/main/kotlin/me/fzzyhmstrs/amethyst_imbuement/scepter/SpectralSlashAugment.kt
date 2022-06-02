@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
@@ -33,25 +34,6 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.5F,2.5F,0.0F)
             .withRange(2.5,0.25,0.0)
-
-    private val particleSpeed = 2.5
-    private val particles: Array<Pair<Double,Double>> = arrayOf(
-        Pair(-1.0,0.0),
-        Pair(-0.9,0.05),
-        Pair(-0.8,0.1),
-        Pair(-0.7,0.1),
-        Pair(-0.6,0.15),
-        Pair(-0.5,0.15),
-        Pair(-0.4,0.15),
-        Pair(-0.3,0.15),
-        Pair(-0.2,0.2),
-        Pair(-0.1,0.2),
-        Pair(0.0,0.2))
-    private val particleOffsets: Array<Double> = arrayOf(
-        0.0,
-        0.05,
-        0.15,
-        0.3)
 
 
     override fun effect(
@@ -100,6 +82,7 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
                 entityDistance[dist] = entity
             }
         }
+        var bl = false
         if (entityDistance.isNotEmpty()) {
             val baseDamage = effect.damage(level)
             val splashDamage = effect.damage(level - 1)
@@ -107,10 +90,10 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
             for (entry in entityDistance){
                 val entity = entry.value
                 if (!closestHit) {
-                    entity.damage(DamageSource.magic(entity, user), baseDamage)
+                    bl = entity.damage(DamageSource.magic(entity, user), baseDamage)
                     closestHit = true
                 } else {
-                    entity.damage(DamageSource.magic(entity, user), splashDamage)
+                    bl = entity.damage(DamageSource.magic(entity, user), splashDamage)
                 }
                 secondaryEffect(world, user, entity, level, effect)
                 val status = addStatusInstance(effect, level)
@@ -120,7 +103,10 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
                     }
                 }
             }
-            effect.accept(toLivingEntityList(entityList))
+            if (bl){
+                effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
+            }
+            effect.accept(toLivingEntityList(entityList), AugmentConsumer.Type.HARMFUL)
         }
         return true
     }
@@ -171,5 +157,24 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
     private fun addParticles(world: World,particleEffect: ParticleEffect,pos: Vec3d,velocity: Vec3d){
         world.addParticle(particleEffect,pos.x,pos.y,pos.z,velocity.x,velocity.y,velocity.z)
     }
+
+    private val particleSpeed = 2.5
+    private val particles: Array<Pair<Double,Double>> = arrayOf(
+        Pair(-1.0,0.0),
+        Pair(-0.9,0.05),
+        Pair(-0.8,0.1),
+        Pair(-0.7,0.1),
+        Pair(-0.6,0.15),
+        Pair(-0.5,0.15),
+        Pair(-0.4,0.15),
+        Pair(-0.3,0.15),
+        Pair(-0.2,0.2),
+        Pair(-0.1,0.2),
+        Pair(0.0,0.2))
+    private val particleOffsets: Array<Double> = arrayOf(
+        0.0,
+        0.05,
+        0.15,
+        0.3)
 
 }
