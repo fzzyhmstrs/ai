@@ -165,8 +165,8 @@ data class AugmentEffect(
     private var amplifierData: PerLvlI = PerLvlI(),
     private var durationData: PerLvlI = PerLvlI(),
     private var rangeData: PerLvlD = PerLvlD()){
-    private val goodConsumers: MutableList<AugmentConsumer> = mutableListOf()
-    private val badConsumers: MutableList<AugmentConsumer> = mutableListOf()
+    private var goodConsumers: MutableList<AugmentConsumer> = mutableListOf()
+    private var badConsumers: MutableList<AugmentConsumer> = mutableListOf()
 
     fun plus(ae: AugmentEffect){
         damageData = damageData.plus(ae.damageData)
@@ -187,6 +187,12 @@ data class AugmentEffect(
     }
     fun range(level: Int = 0): Double{
         return max(1.0,rangeData.value(level))
+    }
+    fun consumers(): MutableList<AugmentConsumer>{
+        val list = mutableListOf<AugmentConsumer>()
+        list.addAll(goodConsumers)
+        list.addAll(badConsumers)
+        return list
     }
     fun accept(list: List<LivingEntity>,type: Type? = null){
         when (type){
@@ -220,11 +226,17 @@ data class AugmentEffect(
     fun addDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F){
         damageData.plus(PerLvlF(damage, damagePerLevel, damagePercent))
     }
+    fun setDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F){
+        damageData = PerLvlF(damage, damagePerLevel, damagePercent)
+    }
     fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0): AugmentEffect{
         return this.copy(amplifierData = PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
     }
     fun addAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0){
         amplifierData.plus(PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
+    }
+    fun setAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0){
+        amplifierData = PerLvlI(amplifier,amplifierPerLevel,amplifierPercent)
     }
     fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentEffect{
         return this.copy(durationData = PerLvlI(duration, durationPerLevel, durationPercent))
@@ -232,11 +244,17 @@ data class AugmentEffect(
     fun addDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0){
         durationData.plus(PerLvlI(duration, durationPerLevel, durationPercent))
     }
+    fun setDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0){
+        durationData = PerLvlI(duration, durationPerLevel, durationPercent)
+    }
     fun withRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0): AugmentEffect {
         return this.copy(rangeData = PerLvlD(range, rangePerLevel, rangePercent))
     }
     fun addRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0){
         rangeData.plus(PerLvlD(range, rangePerLevel, rangePercent))
+    }
+    fun setRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0){
+        rangeData = PerLvlD(range, rangePerLevel, rangePercent)
     }
     fun withConsumer(consumer: Consumer<List<LivingEntity>>, type: Type): AugmentEffect{
         addConsumer(consumer, type)
@@ -248,6 +266,26 @@ data class AugmentEffect(
         } else {
             badConsumers.add(AugmentConsumer(consumer,type))
         }
+    }
+    fun addConsumers(list: List<AugmentConsumer>){
+        list.forEach {
+            if (it.type == Type.BENEFICIAL){
+                goodConsumers.add(AugmentConsumer(it.consumer,it.type))
+            } else {
+                badConsumers.add(AugmentConsumer(it.consumer,it.type))
+            }
+        }
+    }
+    fun setConsumers(list: MutableList<AugmentConsumer>, type: Type){
+        if (type == Type.BENEFICIAL){
+            goodConsumers = list
+        } else {
+            badConsumers = list
+        }
+    }
+    fun setConsumers(ae: AugmentEffect){
+        goodConsumers = ae.goodConsumers
+        badConsumers = ae.badConsumers
     }
 }
 

@@ -19,13 +19,14 @@ import net.minecraft.world.World
 class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(180,100,0)
+        get() = super.baseEffect.withDuration(180,100,0).withDamage(3.0F).withRange(4.0)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val fe = FreezingEntity(world,user,level)
-        fe.duration = effects.duration(level)
-        fe.range = effects.range(level)
-        fe.damage = effects.damage(level)
+        fe.entityEffects.setDuration(effects.duration(level))
+        fe.entityEffects.setRange(effects.range(level))
+        fe.entityEffects.setDamage(effects.damage(level))
+        fe.entityEffects.setConsumers(effects)
         fe.setVelocity(user,user.pitch,user.yaw,0.0f,
             1.3f,
             0.5f)

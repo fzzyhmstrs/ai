@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -36,6 +37,7 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                 successes++
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level) + 1)
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
+                effect.accept(entity3,AugmentConsumer.Type.HARMFUL)
             }
         }
         return successes > 0

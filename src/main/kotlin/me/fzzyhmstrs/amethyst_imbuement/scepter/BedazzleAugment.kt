@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -65,6 +66,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
             for (entity in checkList) {
                 entityTask(world,entity,user,level.toDouble(),null, effect)
             }
+            effect.accept(checkList,AugmentConsumer.Type.HARMFUL)
         }
 
         if (merchantEntity.isNotEmpty()){
@@ -75,9 +77,11 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
                         entityTask(world,entity,user,level.toDouble(),null,effect)
                     }
                 }
+                effect.accept(checkList2,AugmentConsumer.Type.BENEFICIAL)
                 user.addStatusEffect(StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, effect.duration(level)))
             }
         }
+        effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         return true
     }
 

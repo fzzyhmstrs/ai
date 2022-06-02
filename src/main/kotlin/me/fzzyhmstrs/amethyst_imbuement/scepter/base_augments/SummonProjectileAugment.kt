@@ -28,13 +28,16 @@ abstract class SummonProjectileAugment(tier: Int, maxLvl: Int, vararg slot: Equi
 
     private fun spawnProjectileEntity(world: World, entity: LivingEntity, projectile: ProjectileEntity, soundEvent: SoundEvent): Boolean{
         val bl = world.spawnEntity(projectile)
-        world.playSound(
-            null,
-            entity.blockPos,
-            soundEvent,
-            SoundCategory.PLAYERS,
-            1.0f,
-            world.getRandom().nextFloat() * 0.4f + 0.8f)
+        if(bl) {
+            world.playSound(
+                null,
+                entity.blockPos,
+                soundEvent,
+                SoundCategory.PLAYERS,
+                1.0f,
+                world.getRandom().nextFloat() * 0.4f + 0.8f
+            )
+        }
         return bl
     }
 }

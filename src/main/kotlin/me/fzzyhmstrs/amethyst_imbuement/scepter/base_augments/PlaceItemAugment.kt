@@ -30,10 +30,7 @@ abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         val bl = RaycasterUtil.raycastBlock(entity = user) != null
         if (bl){
-            val list = listOf(user)
-            effects.goodConsumers().forEach {
-                it.consumer.accept(list)
-            }
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
         return bl
     }

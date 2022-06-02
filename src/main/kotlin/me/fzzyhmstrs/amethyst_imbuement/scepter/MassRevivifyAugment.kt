@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -35,6 +36,7 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
             successes++
             BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
             BaseAugment.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
         entityList.add(user)
         for (entity3 in entityList) {
@@ -42,11 +44,16 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
                 successes++
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))
-
+                effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
             }
         }
-        RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level,effect)
-        RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level,effect)
+        //removing consumers from the main effect so that I don't get triplicate beneficial consumer effects
+        val passedEffect = AugmentEffect()
+        passedEffect.plus(effect)
+        passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.BENEFICIAL)
+        passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.HARMFUL)
+        RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level, passedEffect)
+        RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level, passedEffect)
         return successes > 0
     }
 

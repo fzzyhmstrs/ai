@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -20,6 +21,8 @@ import net.minecraft.world.World
 class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     private val offset = intArrayOf(-2,2)
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(2400)
 
     override fun effect(
         world: World,
@@ -35,6 +38,7 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
             val posX = pos.add(i,0,0)
             val posY = pos.add(0,i,0)
             val posZ = pos.add(0,0,i)
+            baseAge = effect.duration(level)
             for (j in -1..1){
                 for (k in -1..1){
                     val bsX = world.getBlockState(posX.add(0,j,k))
@@ -69,11 +73,14 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
                     }
                 }
             }
+            baseAge = actualBaseAge
         }
-        if (successes > 0) {
+        val bl = successes > 0
+        if (bl) {
             world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,1.0f,1.0f)
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
-        return successes > 0
+        return bl
     }
 
     override fun soundEvent(): SoundEvent {
@@ -82,5 +89,10 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
         return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel,LoreTier.LOW_TIER, Items.SHIELD)
+    }
+
+    companion object{
+        private const val actualBaseAge = 2400
+        var baseAge = 2400
     }
 }

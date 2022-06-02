@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
@@ -35,13 +37,18 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val (blockPos,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
+        val (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
         if (entityList.isEmpty() || blockPos == user.blockPos) return false
-        effect(world, user, entityList, level, effect)
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level,blockPos,
-            RegisterEnchantment.COMET_STORM,delay.value(level),effect.duration(level), effect)
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-        return true
+        val bl = effect(world, user, entityList, level, effect)
+        if (bl) {
+            ScepterObject.setPersistentTickerNeed(
+                world, user, entityList, level, blockPos,
+                RegisterEnchantment.COMET_STORM, delay.value(level), effect.duration(level), effect
+            )
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        }
+        return bl
     }
 
     override fun effect(
@@ -56,11 +63,15 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         for (entity3 in entityList) {
             if(entity3 is Monster){
                 successes++
-                val ce = FireballEntity(world,user,0.0,-5.0,0.0,effect.amplifier(0))
+                val ce = PlayerFireballEntity(world,user,0.0,-5.0,0.0)
+                ce.entityEffects.addAmplifier(effect.amplifier(level))
+                ce.entityEffects.setDamage(effect.damage(level))
+                ce.entityEffects.setConsumers(effect)
                 ce.setPosition(entity3.x,entity3.y + 15,entity3.z)
                 world.spawnEntity(ce)
             }
         }
+        effect.accept(toLivingEntityList(entityList),AugmentConsumer.Type.HARMFUL)
         user.isInvulnerable = false
         return successes > 0
     }

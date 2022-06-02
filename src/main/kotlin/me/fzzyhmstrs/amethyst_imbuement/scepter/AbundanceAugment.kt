@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -49,7 +50,11 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
                     }
             }
         }
-        return successes > 0
+        val bl = successes > 0
+        if (bl){
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        }
+        return bl
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {

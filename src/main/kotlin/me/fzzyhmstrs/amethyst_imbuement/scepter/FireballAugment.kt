@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -15,6 +16,10 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
+
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDamage(6.0F)
+
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val yaw = user.yaw
         val pitch = user.pitch
@@ -24,7 +29,10 @@ class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
         val f = -MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed
         val g = -MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed
         val h = MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed
-        val fbe = FireballEntity(world, user, f.toDouble(), g.toDouble(), h.toDouble(), effects.amplifier(level))
+        val fbe = PlayerFireballEntity(world, user, f.toDouble(), g.toDouble(), h.toDouble())
+        fbe.entityEffects.addAmplifier(effects.amplifier(level))
+        fbe.entityEffects.setDamage(effects.damage(level))
+        fbe.entityEffects.setConsumers(effects)
         fbe.setPos(user.x,user.eyeY-0.2,user.z)
         return fbe
     }
