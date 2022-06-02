@@ -226,6 +226,9 @@ data class AugmentEffect(
     fun addDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F){
         damageData.plus(PerLvlF(damage, damagePerLevel, damagePercent))
     }
+    fun addDamage(ae: AugmentEffect){
+        damageData.plus(ae.damageData)
+    }
     fun setDamage(damage: Float = 0.0F, damagePerLevel: Float = 0.0F, damagePercent: Float = 0.0F){
         damageData = PerLvlF(damage, damagePerLevel, damagePercent)
     }
@@ -234,6 +237,9 @@ data class AugmentEffect(
     }
     fun addAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0){
         amplifierData.plus(PerLvlI(amplifier,amplifierPerLevel,amplifierPercent))
+    }
+    fun addAmplifier(ae: AugmentEffect){
+        amplifierData.plus(ae.amplifierData)
     }
     fun setAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0){
         amplifierData = PerLvlI(amplifier,amplifierPerLevel,amplifierPercent)
@@ -244,6 +250,9 @@ data class AugmentEffect(
     fun addDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0){
         durationData.plus(PerLvlI(duration, durationPerLevel, durationPercent))
     }
+    fun addDuration(ae: AugmentEffect){
+        durationData.plus(ae.durationData)
+    }
     fun setDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0){
         durationData = PerLvlI(duration, durationPerLevel, durationPercent)
     }
@@ -252,6 +261,9 @@ data class AugmentEffect(
     }
     fun addRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0){
         rangeData.plus(PerLvlD(range, rangePerLevel, rangePercent))
+    }
+    fun addRange(ae: AugmentEffect){
+        rangeData.plus(ae.rangeData)
     }
     fun setRange(range: Double = 0.0, rangePerLevel: Double = 0.0, rangePercent: Double = 0.0){
         rangeData = PerLvlD(range, rangePerLevel, rangePercent)
