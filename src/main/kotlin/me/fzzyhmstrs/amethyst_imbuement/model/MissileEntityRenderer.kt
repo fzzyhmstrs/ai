@@ -16,7 +16,9 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3f
 
 @Suppress("PrivatePropertyName", "SpellCheckingInspection")
-class MissileEntityRenderer(context: EntityRendererFactory.Context): EntityRenderer<MissileEntity>(context) {
+class MissileEntityRenderer(context: EntityRendererFactory.Context, val r: Float = 1.0f, val g: Float = 1.0f, val b: Float = 1.0f, val downScale: Float = 0.5f, val upScale: Float = 1.5f): EntityRenderer<MissileEntity>(context) {
+
+
     private val TEXTURE = Identifier("textures/entity/shulker/spark.png")
     private val LAYER = RenderLayer.getEntityTranslucent(TEXTURE)
     private val model: ShulkerBulletEntityModel<ShulkerBulletEntity> = ShulkerBulletEntityModel(context.getPart(EntityModelLayers.SHULKER_BULLET))
@@ -39,10 +41,10 @@ class MissileEntityRenderer(context: EntityRendererFactory.Context): EntityRende
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.sin(k * 0.1f) * 180.0f))
         matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.cos(k * 0.1f) * 180.0f))
         matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.sin(k * 0.15f) * 360.0f))
-        matrixStack.scale(-0.5f, -0.5f, 0.5f)
+        matrixStack.scale(-downScale, -downScale, downScale)
         val vertexConsumer = vertexConsumerProvider.getBuffer(model.getLayer(TEXTURE))
-        model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
-        matrixStack.scale(1.5f, 1.5f, 1.5f)
+        model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f)
+        matrixStack.scale(upScale, upScale, upScale)
         val vertexConsumer2 = vertexConsumerProvider.getBuffer(LAYER)
         model.render(matrixStack, vertexConsumer2, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 0.15f)
         matrixStack.pop()
