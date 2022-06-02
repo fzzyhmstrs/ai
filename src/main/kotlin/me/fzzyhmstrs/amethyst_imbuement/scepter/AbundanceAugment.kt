@@ -51,9 +51,6 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             }
         }
         val bl = successes > 0
-        if (bl){
-            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
-        }
         return bl
     }
 

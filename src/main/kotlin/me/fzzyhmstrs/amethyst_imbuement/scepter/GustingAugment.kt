@@ -54,6 +54,7 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
             }
         }
         effect.accept(toLivingEntityList(entityList),AugmentConsumer.Type.HARMFUL)
+        effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,0.8F,1.2F)
         return true
     }

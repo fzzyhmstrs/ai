@@ -20,21 +20,9 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
         get() = super.baseEffect.withDamage(6.0F,0.0F,0.0F)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val pitch = user.pitch
         val speed = 2.0F
         val div = 0.75F
-        val fbe = FlameboltEntity(
-            world, user, speed, div,
-            user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
-                pitch * (Math.PI.toFloat() / 180)
-            ),
-            user.eyeY - 0.6 - 0.8 * MathHelper.sin(pitch * (Math.PI.toFloat() / 180)),
-            user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
-                pitch * (Math.PI.toFloat() / 180)
-            ),
-        )
-        fbe.passEffects(effects, level)
-        return fbe
+        return FlameboltEntity.createFlamebolt(world, user, speed, div, effects, level)
     }
 
     override fun soundEvent(): SoundEvent {

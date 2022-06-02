@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
@@ -60,6 +61,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         if (!effect(world, user, hostileEntityList, level, effect)) return false
         ScepterObject.setPersistentTickerNeed(world,user,hostileEntityList,level,blockPos,
             RegisterEnchantment.LEVITATING_BULLET, delay.value(level),effect.duration(level),effect)
+        effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
@@ -72,13 +74,17 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         effect: AugmentEffect
     ): Boolean {
         val axis = getAxis(user)
+        var successes = 0
         for (i in 0..min(level-1,entityList.size-1)){
             val entity = entityList[i]
             //consider custom shulker bullet entity for the modifiability
             val sbe = PlayerBulletEntity(world,user,entity,axis)
             sbe.passEffects(effect, level)
-            world.spawnEntity(sbe)
+            if (world.spawnEntity(sbe)){
+                successes++
+            }
         }
+
         return true
     }
     override fun persistentEffect(
