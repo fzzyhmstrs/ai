@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -34,6 +35,7 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)))
+                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
@@ -41,6 +43,7 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         return if (user is PlayerEntity) {
             user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)))
             user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)))
+            effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
             true
         } else {

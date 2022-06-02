@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -30,12 +31,14 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 (target as LivingEntity).heal(effects.damage(level))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+                effects.accept(target,AugmentConsumer.Type.BENEFICIAL)
                 return true
             }
         }
         return if (user is PlayerEntity) {
                 user.heal(effects.damage(level))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+                effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
                 true
             } else {
                 false

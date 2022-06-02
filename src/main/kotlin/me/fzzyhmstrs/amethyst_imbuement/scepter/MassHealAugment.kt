@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -31,6 +32,7 @@ class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
             if (user.health < user.maxHealth){
                 successes++
                 user.heal(effect.damage(level))
+                effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
             }
         } else {
             entityList.add(user)
@@ -39,6 +41,7 @@ class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
                     if ((entity3 as LivingEntity).health == entity3.maxHealth) continue
                     successes++
                     entity3.heal(effect.damage(level)/1.25F)
+                    effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
                 }
             }
         }

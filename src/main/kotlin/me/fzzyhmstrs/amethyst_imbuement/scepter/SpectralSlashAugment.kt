@@ -120,6 +120,7 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
                     }
                 }
             }
+            effect.accept(toLivingEntityList(entityList))
         }
         return true
     }

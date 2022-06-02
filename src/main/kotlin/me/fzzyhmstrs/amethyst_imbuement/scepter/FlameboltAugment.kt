@@ -33,8 +33,9 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
                 pitch * (Math.PI.toFloat() / 180)
             ),
         )
-        fbe.damage = effects.damage(level)
-        fbe.amplifier += effects.amplifier(level)
+        fbe.entityEffects.setDamage(effects.damage(level))
+        fbe.entityEffects.addAmplifier(effects.amplifier(level))
+        fbe.entityEffects.setConsumers(effects)
 
         return fbe
     }

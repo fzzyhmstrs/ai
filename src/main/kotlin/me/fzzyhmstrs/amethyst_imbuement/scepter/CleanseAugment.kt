@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -44,6 +45,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                 target.fireTicks = 0
                 BaseAugment.addStatusToQueue(target,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+                effects.accept(target,AugmentConsumer.Type.BENEFICIAL)
                 return true
             }
         }
@@ -59,6 +61,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                 user.fireTicks = 0
                 BaseAugment.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+                effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
                 true
             } else {
                 false

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
@@ -20,7 +21,7 @@ import net.minecraft.world.World
 class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(14.0,0.0,0.0)
+        get() = super.baseEffect.withRange(14.0,0.0,0.0).withDamage(5.0F)
 
     override fun effect(
         world: World,
@@ -55,11 +56,17 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         }
 
         if (world.isSkyVisible(blockPos)) {
-            val le = EntityType.LIGHTNING_BOLT.create(world)
-            le?.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
-            world.spawnEntity(le)
-            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 0.65F)
-            return true
+
+            //replace with a player version that can pass consumers?
+            val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
+            if (le != null) {
+                le.entityEffects.setDamage(effect.damage(level))
+                le.entityEffects.setConsumers(effect)
+                le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
+                world.spawnEntity(le)
+                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 0.65F)
+                return true
+            }
         }
         return false
     }

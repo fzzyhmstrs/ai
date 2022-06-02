@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -36,14 +37,15 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             successes++
             BaseAugment.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+2))
             BaseAugment.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier(level))
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
                     successes++
                     BaseAugment.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+1))
-                    BaseAugment.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier(level)
-                    )
+                    BaseAugment.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier(level))
+                    effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
                 }
             }
         }

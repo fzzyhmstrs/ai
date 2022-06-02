@@ -70,42 +70,4 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
     }
-
-    private fun conjureFangs(world: World,user: LivingEntity,x: Double, z: Double, maxY: Double, y: Double, yaw: Float, warmup: Int, level: Int, effect: AugmentEffect): Boolean {
-        var blockPos = BlockPos(x, y, z)
-        var bl = false
-        var d = 0.0
-        do {
-
-            val blockPos2: BlockPos = blockPos.down()
-            val blockState: BlockState = world.getBlockState(blockPos2)
-            val blockState2: BlockState = world.getBlockState(blockPos)
-            val voxelShape: VoxelShape = blockState2.getCollisionShape(world,blockPos)
-            if (!blockState.isSideSolidFullSquare(world,blockPos2, Direction.UP)) {
-                blockPos = blockPos.down()
-                continue
-            }
-            if (!world.isAir(blockPos) && !voxelShape.isEmpty) {
-                d = voxelShape.getMax(Direction.Axis.Y)
-            }
-            bl = true
-            break
-        } while (blockPos.y >= MathHelper.floor(maxY) - 1)
-        if (bl) {
-            val pfe = PlayerFangsEntity(
-                world,
-                x,
-                blockPos.y.toDouble() + d,
-                z,
-                yaw,
-                warmup,
-                user
-            )
-            pfe.entityEffects = pfe.entityEffects.withDamage(effect.damage(level))
-            world.spawnEntity(pfe)
-            return true
-        }
-        return false
-    }
-
 }

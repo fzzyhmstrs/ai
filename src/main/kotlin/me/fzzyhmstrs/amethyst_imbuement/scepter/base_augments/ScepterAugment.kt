@@ -60,6 +60,16 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
         return SoundEvents.BLOCK_BEACON_ACTIVATE
     }
 
+    protected fun toLivingEntityList(list: List<Entity>): List<LivingEntity>{
+        val newList: MutableList<LivingEntity> = mutableListOf()
+        list.forEach {
+            if (it is LivingEntity){
+                newList.add(it)
+            }
+        }
+        return newList
+    }
+
     override fun getMinPower(level: Int): Int {
         return 30
     }

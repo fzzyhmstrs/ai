@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
@@ -95,9 +96,15 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         for (entity3 in entityList) {
             if(entity3 is Monster && world.isSkyVisible(entity3.blockPos)){
                 successes++
-                val le = EntityType.LIGHTNING_BOLT.create(world)
-                le?.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(entity3.blockPos))
-                world.spawnEntity(le)
+
+                //repalce with a player version that can pass consumers?
+                val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
+                if (le != null) {
+                    le.entityEffects.setDamage(effect.damage(level))
+                    le.entityEffects.setConsumers(effect)
+                    le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(entity3.blockPos))
+                    world.spawnEntity(le)
+                }
             }
         }
         user.isInvulnerable = false
@@ -136,9 +143,13 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 tries--
                 continue
             }
-            val le = EntityType.LIGHTNING_BOLT.create(world)
-            le?.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(rndBlockPos))
-            world.spawnEntity(le)
+            val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
+            if (le != null) {
+                le.entityEffects.setDamage(effect.damage(level))
+                le.entityEffects.setConsumers(effect)
+                le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
+                world.spawnEntity(le)
+            }
             break
         }
     }
