@@ -100,8 +100,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 //repalce with a player version that can pass consumers?
                 val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
                 if (le != null) {
-                    le.entityEffects.setDamage(effect.damage(level))
-                    le.entityEffects.setConsumers(effect)
+                    le.passEffects(effect, level)
                     le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(entity3.blockPos))
                     world.spawnEntity(le)
                 }

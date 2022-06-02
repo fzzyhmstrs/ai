@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
@@ -20,6 +21,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
@@ -62,13 +64,10 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
-                successes++
-                val ce = PlayerFireballEntity(world,user,0.0,-5.0,0.0)
-                ce.entityEffects.addAmplifier(effect.amplifier(level))
-                ce.entityEffects.setDamage(effect.damage(level))
-                ce.entityEffects.setConsumers(effect)
-                ce.setPosition(entity3.x,entity3.y + 15,entity3.z)
-                world.spawnEntity(ce)
+                val ce = createFireball(world, user, Vec3d(0.0,-5.0,0.0), entity3.pos.add(0.0,15.0,0.0), effect, level)
+                if (world.spawnEntity(ce)){
+                    successes++
+                }
             }
         }
         effect.accept(toLivingEntityList(entityList),AugmentConsumer.Type.HARMFUL)
@@ -105,10 +104,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         }
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
-        //update to a modifiable entity
-        val ce = FireballEntity(world,user,0.0,-5.0,0.0,effect.amplifier(0))
-        //update to a modifiable entity
-                ce.setPosition(rndX.toDouble(),(blockPos.y + 15).toDouble(),rndZ.toDouble())
+        val ce = createFireball(world, user, Vec3d(0.0,-5.0,0.0), Vec3d(rndX.toDouble(),(blockPos.y + 15).toDouble(),rndZ.toDouble()), effect, level)
         world.spawnEntity(ce)
     }
 
@@ -119,5 +115,4 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_FIRE_AMBIENT
     }
-
 }

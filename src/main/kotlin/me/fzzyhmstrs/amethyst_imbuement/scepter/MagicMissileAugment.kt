@@ -24,6 +24,7 @@ class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
             2.0f,
             0.1f)
         me.entityEffects.setDamage(effects.damage(level))
+        me.entityEffects.setConsumers(effects)
         return me
     }
 
