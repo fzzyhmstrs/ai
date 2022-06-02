@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -26,16 +27,22 @@ class SummonChickenAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-
+        var successes = 0
         for(i in 1..level) {
             val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
             val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
             val chikin = ChickenEntity(EntityType.CHICKEN, world)
             chikin.setPos(xrnd, yrnd, zrnd)
-            world.spawnEntity(chikin)
+            if (world.spawnEntity(chikin)){
+                successes++
+            }
         }
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0F,1.0F)
+        val bl = successes > 0
+        if (bl) {
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        }
         return true
     }
 
