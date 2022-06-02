@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerWitherSkullEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -16,6 +17,9 @@ import net.minecraft.world.World
 
 class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDamage(8.0f)
+
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val yaw = user.yaw
         val pitch = user.pitch
@@ -24,8 +28,8 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.x
         val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed) + user.velocity.y
         val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.z
-        //update with modifiable entity
-        val wse = WitherSkullEntity(world,user,f,g,h)
+        val wse = PlayerWitherSkullEntity(world,user,f,g,h)
+        wse.passEffects(effects, level)
         wse.setPos(user.x,user.eyeY-0.2,user.z)
         wse.isCharged = false
         return wse

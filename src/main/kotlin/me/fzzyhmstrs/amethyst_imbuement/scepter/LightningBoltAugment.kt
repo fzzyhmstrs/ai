@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
@@ -56,17 +57,13 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         }
 
         if (world.isSkyVisible(blockPos)) {
-
             //replace with a player version that can pass consumers?
-            val le = RegisterEntity.PLAYER_LIGHTNING.create(world)
-            if (le != null) {
-                le.entityEffects.setDamage(effect.damage(level))
-                le.entityEffects.setConsumers(effect)
-                le.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
-                world.spawnEntity(le)
+            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),effect, level)
+            val bl = world.spawnEntity(le)
+            if (bl) {
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 0.65F)
-                return true
             }
+            return bl
         }
         return false
     }

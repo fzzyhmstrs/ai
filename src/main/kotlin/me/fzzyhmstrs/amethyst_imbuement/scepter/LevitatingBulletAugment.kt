@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
@@ -30,7 +31,7 @@ import kotlin.math.min
 class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(40,20,0).withRange(8.0,1.0,0.0)
+        get() = super.baseEffect.withDuration(40,20,0).withRange(8.0,1.0,0.0).withDamage(4.0f)
 
     private val delay = PerLvlI(16,-2,0)
 
@@ -70,27 +71,12 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        val xAmount = user.getRotationVec(1.0F).x
-        val zAmount = user.getRotationVec(1.0F).z
-        val maxAmount = max(abs(xAmount), abs(zAmount))
-        val axis: Direction.Axis = if (maxAmount == abs(xAmount)){
-            if (xAmount < 0){
-                Direction.EAST.axis
-            } else {
-                Direction.WEST.axis
-            }
-        }  else {
-            if (xAmount < 0){
-                Direction.SOUTH.axis
-            } else {
-                Direction.NORTH.axis
-            }
-        }
-
+        val axis = getAxis(user)
         for (i in 0..min(level-1,entityList.size-1)){
             val entity = entityList[i]
             //consider custom shulker bullet entity for the modifiability
-            val sbe = ShulkerBulletEntity(world,user,entity,axis)
+            val sbe = PlayerBulletEntity(world,user,entity,axis)
+            sbe.passEffects(effect, level)
             world.spawnEntity(sbe)
         }
         return true
@@ -107,6 +93,21 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         val rnd2 = world.random.nextInt(rnd1)
         val entity = entityList[rnd2]
 
+        val axis = getAxis(user)
+        val sbe = PlayerBulletEntity(world,user,entity,axis)
+        sbe.passEffects(effect, level)
+        world.spawnEntity(sbe)
+    }
+
+    override fun soundEvent(): SoundEvent {
+        return SoundEvents.ENTITY_SHULKER_SHOOT
+    }
+
+    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
+        return ScepterObject.AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+    }
+
+    private fun getAxis(user: LivingEntity): Direction.Axis{
         val xAmount = user.getRotationVec(1.0F).x
         val zAmount = user.getRotationVec(1.0F).z
         val maxAmount = max(abs(xAmount), abs(zAmount))
@@ -123,16 +124,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
                 Direction.NORTH.axis
             }
         }
-        val sbe = ShulkerBulletEntity(world,user,entity,axis)
-        world.spawnEntity(sbe)
-    }
-
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_SHULKER_SHOOT
-    }
-
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+        return axis
     }
 
 }

@@ -33,9 +33,7 @@ class FlamewaveAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
                 pitch * (Math.PI.toFloat() / 180)
             ),
         )
-        fbe.entityEffects.setDamage(effects.damage(level))
-        fbe.entityEffects.addAmplifier(effects.amplifier(level))
-        fbe.entityEffects.setConsumers(effects)
+        fbe.passEffects(effects,level)
         return fbe
     }
 

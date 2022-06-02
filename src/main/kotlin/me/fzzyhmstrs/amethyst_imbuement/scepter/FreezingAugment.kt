@@ -23,10 +23,7 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val fe = FreezingEntity(world,user,level)
-        fe.entityEffects.setDuration(effects.duration(level))
-        fe.entityEffects.setRange(effects.range(level))
-        fe.entityEffects.setDamage(effects.damage(level))
-        fe.entityEffects.setConsumers(effects)
+        fe.passEffects(effects, level)
         fe.setVelocity(user,user.pitch,user.yaw,0.0f,
             1.3f,
             0.5f)
