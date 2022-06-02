@@ -20,6 +20,12 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableDamageEntity {
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(1)
 
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        entityEffects.setDamage(ae.damage(level))
+        entityEffects.addAmplifier(ae.amplifier(level))
+    }
+
     override fun onCollision(hitResult: HitResult) {
         super.onCollision(hitResult)
         if (!world.isClient) {

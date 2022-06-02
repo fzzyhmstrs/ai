@@ -28,7 +28,13 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     private var ambientTick = 2
     private var remainingActions = this.random.nextInt(3 + 1)
     private val struckEntities: MutableSet<Entity> = Sets.newHashSet()
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withAmplifier(8)
+
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        ae.setDamage(ae.damage(level))
+        ae.addAmplifier(ae.amplifier(level))
+    }
 
     override fun tick() {
         var list: List<Entity>
@@ -110,7 +116,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                 for (entity2 in list) {
                     entity2.fireTicks++
                     if (entity2.fireTicks == 0){
-                        entity2.setOnFireFor(8)
+                        entity2.setOnFireFor(entityEffects.amplifier(0))
                     }
                     entity2.damage(DamageSource.LIGHTNING_BOLT,entityEffects.damage(0))
                     if (entity2 is LivingEntity) {

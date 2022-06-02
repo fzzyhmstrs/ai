@@ -31,7 +31,12 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
     }
 
     private var pierce: Boolean = false
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F)
+
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        entityEffects.setDamage(ae.damage(level))
+    }
 
     override fun initDataTracker() {}
 

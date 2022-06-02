@@ -16,6 +16,11 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(5)
 
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        ae.addAmplifier(ae.amplifier(level))
+    }
+
     constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.FLAMEBOLT_ENTITY,world){
         this.owner = owner
         this.setVelocity(owner,

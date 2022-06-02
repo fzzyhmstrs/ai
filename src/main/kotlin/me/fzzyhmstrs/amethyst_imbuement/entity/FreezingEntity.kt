@@ -32,6 +32,12 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
     private var level: Int = 1
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0).withDuration(180)
 
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        entityEffects.setRange(ae.range(level))
+        entityEffects.setDuration(ae.duration(level))
+    }
+
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = owner
