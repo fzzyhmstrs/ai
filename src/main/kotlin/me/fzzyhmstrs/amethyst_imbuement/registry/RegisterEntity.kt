@@ -27,7 +27,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).build()
+        }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
     )
 
     val UNHALLOWED_ENTITY: EntityType<UnhallowedEntity> = Registry.register(
@@ -40,7 +40,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.61f, 1.8f)).build()
+        }.dimensions(EntityDimensions.fixed(0.61f, 1.8f)).trackRangeChunks(8).build()
     )
 
     val DRACONIC_BOX_ENTITY: EntityType<DraconicBoxEntity> = Registry.register(
@@ -66,7 +66,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build()
     )
 
     val MISSILE_ENTITY: EntityType<MissileEntity> = Registry.register(
@@ -118,7 +118,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).build()
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(
@@ -131,7 +131,20 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
+        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).trackRangeChunks(4).trackedUpdateRate(10).build()
+    )
+
+    val PLAYER_LIGHTNING: EntityType<PlayerLightningEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "player_lightning_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlayerLightningEntity>, world: World ->
+            PlayerLightningEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.0f, 0.0f)).disableSaving().trackRangeChunks(16).trackedUpdateRate(Integer.MAX_VALUE).build()
     )
 
     

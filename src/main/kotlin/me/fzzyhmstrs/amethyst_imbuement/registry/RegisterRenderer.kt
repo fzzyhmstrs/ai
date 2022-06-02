@@ -15,6 +15,8 @@ import net.minecraft.client.item.UnclampedModelPredicateProvider
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer
+import net.minecraft.client.render.entity.LightningEntityRenderer
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.util.ModelIdentifier
@@ -81,16 +83,23 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
         ){context: EntityRendererFactory.Context ->
-            FreezingEntityRenderer(
-                context
+            MissileEntityRenderer(
+                context,
+                0.7f,
+                0.7f
             )
         }
 
         EntityRendererRegistry.register(
             RegisterEntity.FLAMEBOLT_ENTITY
         ){context: EntityRendererFactory.Context ->
-            FlameboltEntityRenderer(
-                context
+            MissileEntityRenderer(
+                context,
+                1.0f,
+                0.7f,
+                0.3f,
+                0.6666F,
+                1.2F
             )
         }
 
@@ -98,6 +107,24 @@ object RegisterRenderer {
             RegisterEntity.PLAYER_FANGS
         ){context: EntityRendererFactory.Context ->
             PlayerFangsRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_FIREBALL
+        ){context: EntityRendererFactory.Context ->
+            FlyingItemEntityRenderer(
+                context,
+                3.0f,
+                true
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_LIGHTNING
+        ){context: EntityRendererFactory.Context ->
+            LightningEntityRenderer(
                 context
             )
         }
