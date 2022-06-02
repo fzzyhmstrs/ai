@@ -1,9 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -34,7 +36,9 @@ import kotlin.experimental.or
 class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): GolemEntity(entityType,world),
     Angerable {
 
-    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, bonusEquips: Int = 0) : this(entityType, world){
+    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
+        modifiedDamage = modDamage
+        modifiedHealth = modHealth
         maxAge = ageLimit
         bonusEquipment = bonusEquips
     }
@@ -42,11 +46,14 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     companion object {
         private val UNHALLOWED_FLAGS =
             DataTracker.registerData(UnhallowedEntity::class.java, TrackedDataHandlerRegistry.BYTE)
+        private const val baseMaxHealth = 20.0
+        private const val baseMoveSpeed = 0.4
+        private const val baseAttackDamage = 3.0
 
         fun createUnhallowedAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage)
         }
     }
     private var attackTicksLeft = 0
@@ -56,6 +63,8 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     private var maxAge = -1
     private var bonusEquipment = 0
     private var angryAt: UUID? = null
+    private var modifiedDamage = 0.0
+    private var modifiedHealth = 0.0
 
     init{
         stepHeight = 1.0f
@@ -94,6 +103,24 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         entityNbt: NbtCompound?
     ): EntityData? {
         this.initEquipment(difficulty)
+        if (modifiedDamage > baseAttackDamage){
+            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    "Modified damage bonus",
+                    modifiedDamage - baseAttackDamage,
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+        }
+        if (modifiedHealth > baseMaxHealth){
+            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    "Modified health bonus",
+                    modifiedHealth - baseMaxHealth,
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+        }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

@@ -24,7 +24,7 @@ import kotlin.math.min
 class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(3,0,0).withDuration(2400,0,0)
+        get() = super.baseEffect.withAmplifier(3,0,0).withDuration(2400,0,0).withDamage(3.0F)
 
     override fun placeEntity(
         world: World,
@@ -39,7 +39,8 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
             val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
             val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
-            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), bonus)
+            val zomAmplifier = max(effects.amplifier(level) - baseEffect.amplifier(level), 0)
+            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), bonus, effects.damage(level).toDouble(), 4.0* zomAmplifier)
             zom.setPos(xrnd, yrnd, zrnd)
             if (world.spawnEntity(zom)){
                 successes++
