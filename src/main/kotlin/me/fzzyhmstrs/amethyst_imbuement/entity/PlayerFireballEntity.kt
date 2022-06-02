@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -9,6 +10,7 @@ import net.minecraft.entity.projectile.AbstractFireballEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.explosion.Explosion
@@ -52,6 +54,9 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableDamageEntity {
         val entity2 = owner
         entity.damage(DamageSource.fireball(this, entity2), entityEffects.damage(0))
         if (entity2 is LivingEntity) {
+            if (entity is LivingEntity) {
+                entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
+            }
             applyDamageEffects(entity2 as LivingEntity?, entity)
         }
     }
@@ -65,6 +70,15 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableDamageEntity {
         super.readCustomDataFromNbt(nbt)
         if (nbt.contains("ExplosionPower", 99)) {
             entityEffects.setAmplifier(nbt.getByte("ExplosionPower").toInt())
+        }
+    }
+
+    companion object{
+        fun createFireball(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int): PlayerFireballEntity{
+            val fbe = PlayerFireballEntity(world, user, vel.x, vel.y, vel.z)
+            fbe.passEffects(effects, level)
+            fbe.setPos(pos.x,pos.y,pos.z)
+            return fbe
         }
     }
 }

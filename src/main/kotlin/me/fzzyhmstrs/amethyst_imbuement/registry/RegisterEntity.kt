@@ -108,6 +108,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
     )
 
+    val PLAYER_BULLET: EntityType<PlayerBulletEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "player_bullet_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlayerBulletEntity>, world: World ->
+            PlayerBulletEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.0f, 0.0f)).disableSaving().trackRangeChunks(16).trackedUpdateRate(Integer.MAX_VALUE).build()
+    )
+
     val PLAYER_FANGS: EntityType<PlayerFangsEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_fangs_entity"),
@@ -141,6 +154,19 @@ object RegisterEntity {
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerLightningEntity>, world: World ->
             PlayerLightningEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.0f, 0.0f)).disableSaving().trackRangeChunks(16).trackedUpdateRate(Integer.MAX_VALUE).build()
+    )
+
+    val PLAYER_WITHER_SKULL: EntityType<PlayerWitherSkullEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "player_wither_skull_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlayerWitherSkullEntity>, world: World ->
+            PlayerWitherSkullEntity(
                 entityType,
                 world
             )

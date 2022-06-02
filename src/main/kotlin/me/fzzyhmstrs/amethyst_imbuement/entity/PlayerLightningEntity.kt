@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.Sets
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.advancement.criterion.Criteria
@@ -16,6 +17,7 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Difficulty
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
@@ -24,6 +26,8 @@ import net.minecraft.world.event.GameEvent
 import java.util.*
 
 class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world), ModifiableDamageEntity {
+
+    constructor(world: World): this(RegisterEntity.PLAYER_LIGHTNING, world)
 
     private var ambientTick = 2
     private var remainingActions = this.random.nextInt(3 + 1)
@@ -210,5 +214,13 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
         return Optional.empty()
     }
 
+    companion object{
+        fun createLightning(world: World, pos: Vec3d, effect: AugmentEffect, level: Int): PlayerLightningEntity {
+            val le = PlayerLightningEntity(world)
+            le.passEffects(effect, level)
+            le.refreshPositionAfterTeleport(pos)
+            return le
+        }
+    }
 
 }
