@@ -32,6 +32,11 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
     private var ownerUuid: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
 
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        entityEffects.setDamage(ae.damage(level))
+    }
+
     constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
         this.warmup = warmup
         setOwner(owner)

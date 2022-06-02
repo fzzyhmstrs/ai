@@ -6,4 +6,8 @@ interface ModifiableDamageEntity {
 
     var entityEffects: AugmentEffect
 
+    fun passEffects(ae:AugmentEffect, level: Int){
+        entityEffects.setConsumers(ae)
+    }
+
 }
