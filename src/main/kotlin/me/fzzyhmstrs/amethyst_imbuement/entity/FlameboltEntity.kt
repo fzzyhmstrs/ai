@@ -10,6 +10,7 @@ import net.minecraft.entity.projectile.SmallFireballEntity
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType,world) {
@@ -48,14 +49,15 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
                 )
                 if (!bl) {
                     entity2.fireTicks = i
+                } else {
+                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+                    applyDamageEffects(entity as LivingEntity?, entity2)
+                    if (entity2 is LivingEntity) {
+                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                    }
                 }
-                applyDamageEffects(entity as LivingEntity?, entity2)
-            }
-            if (entity2 is LivingEntity) {
-                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
             }
         }
-
         discard()
     }
 
@@ -65,6 +67,23 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
 
     override fun getParticleType(): ParticleEffect {
         return ParticleTypes.FLAME
+    }
+
+    companion object{
+        fun createFlamebolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int): FlameboltEntity{
+            val fbe = FlameboltEntity(
+                world, user, speed, div,
+                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                    user.pitch * (Math.PI.toFloat() / 180)
+                ),
+                user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
+                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                    user.pitch * (Math.PI.toFloat() / 180)
+                ),
+            )
+            fbe.passEffects(effects, level)
+            return fbe
+        }
     }
 
 }

@@ -81,7 +81,7 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if(pierce){
+            val bl: Boolean = if(pierce){
                 entity2.damage(
                     DamageSource.magic(this, entity).setProjectile(),
                     entityEffects.damage(0)
@@ -92,9 +92,11 @@ open class MissileEntity(entityType: EntityType<out MissileEntity?>, world: Worl
                     entityEffects.damage(0)
                 )
             }
-            applyDamageEffects(entity,entity2)
-            if (entity2 is LivingEntity) {
-                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+            if (bl) {
+                applyDamageEffects(entity, entity2)
+                if (entity2 is LivingEntity) {
+                    entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                }
             }
         }
         discard()
