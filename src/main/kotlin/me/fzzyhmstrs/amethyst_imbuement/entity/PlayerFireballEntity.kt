@@ -57,6 +57,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableDamageEntity {
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
             }
+            entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
             applyDamageEffects(entity2 as LivingEntity?, entity)
         }
     }

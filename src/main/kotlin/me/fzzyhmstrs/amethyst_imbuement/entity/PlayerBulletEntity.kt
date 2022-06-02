@@ -30,16 +30,19 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableDamageEntity {
         super.onEntityHit(entityHitResult)
         val entity = entityHitResult.entity
         val entity2 = owner
-        val livingEntity = if (entity2 is LivingEntity) entity2 else null
-        val bl = entity.damage(DamageSource.mobProjectile(this, livingEntity).setProjectile(), entityEffects.damage(0))
-        if (bl) {
-            applyDamageEffects(livingEntity, entity)
-            if (entity is LivingEntity) {
-                entity.addStatusEffect(
-                    StatusEffectInstance(StatusEffects.LEVITATION, entityEffects.duration(0)),
-                    MoreObjects.firstNonNull(entity2, this)
-                )
-                entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
+        if (entity2 is LivingEntity) {
+            val bl =
+                entity.damage(DamageSource.mobProjectile(this, entity2).setProjectile(), entityEffects.damage(0))
+            if (bl) {
+                applyDamageEffects(entity2, entity)
+                if (entity is LivingEntity) {
+                    entity.addStatusEffect(
+                        StatusEffectInstance(StatusEffects.LEVITATION, entityEffects.duration(0)),
+                        MoreObjects.firstNonNull(entity2, this)
+                    )
+                    entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
+                }
+                entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
             }
         }
     }

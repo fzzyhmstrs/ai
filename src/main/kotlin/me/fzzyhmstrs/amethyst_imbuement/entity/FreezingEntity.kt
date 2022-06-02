@@ -43,14 +43,18 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!entity2.isFireImmune) {
+            val bl = if (!entity2.isFireImmune) {
                 (entity2 as LivingEntity).frozenTicks = entityEffects.duration(0)
                 entity2.damage(DamageSource.GENERIC, entityEffects.damage(0))
             } else {
                 (entity2 as LivingEntity).frozenTicks = (entityEffects.duration() * 1.6).toInt()
                 entity2.damage(DamageSource.GENERIC, entityEffects.damage(0) * 1.6F)
             }
-            applyDamageEffects(entity,entity2)
+            if (bl){
+                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                applyDamageEffects(entity, entity2)
+                entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+            }
             val entityList = RaycasterUtil.raycastEntityArea(distance = entityEffects.range(0), entityHitResult.entity)
             if (entityList.isNotEmpty()) {
                 for (entity3 in entityList) {
@@ -59,7 +63,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
                     }
                 }
             }
-            entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+
 
         }
         discard()
