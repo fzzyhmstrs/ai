@@ -111,11 +111,13 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
         }
         if (livingEntity == null) {
             target.damage(DamageSource.MAGIC, entityEffects.damage(0))
+            entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
                 return
             }
             target.damage(DamageSource.magic(this, livingEntity), entityEffects.damage(0))
+            entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }
     }
 
@@ -203,8 +205,7 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
                     warmup,
                     user
                 )
-                pfe.entityEffects.setDamage(effect.damage(level))
-                pfe.entityEffects.setConsumers(effect)
+                pfe.passEffects(effect, level)
                 world.spawnEntity(pfe)
                 return true
             }

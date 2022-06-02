@@ -14,9 +14,7 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.UnclampedModelPredicateProvider
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.entity.EntityRendererFactory
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer
-import net.minecraft.client.render.entity.LightningEntityRenderer
+import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.util.ModelIdentifier
@@ -104,6 +102,14 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_BULLET
+        ){context: EntityRendererFactory.Context ->
+            ShulkerBulletEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FANGS
         ){context: EntityRendererFactory.Context ->
             PlayerFangsRenderer(
@@ -128,6 +134,15 @@ object RegisterRenderer {
                 context
             )
         }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_WITHER_SKULL
+        ){context: EntityRendererFactory.Context ->
+            WitherSkullEntityRenderer(
+                context
+            )
+        }
+
 
         BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
         ){context: BlockEntityRendererFactory.Context ->
