@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -33,16 +34,23 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
         effects: AugmentEffect
     ): Boolean {
         val bonus = max(0,level-3)
+        var successes = 0
         for(i in 1..min(effects.amplifier(level),level)) {
             val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
             val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
             val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), bonus)
             zom.setPos(xrnd, yrnd, zrnd)
-            world.spawnEntity(zom)
+            if (world.spawnEntity(zom)){
+                successes++
+            }
         }
-        world.playSound(null,user.blockPos,soundEvent(), SoundCategory.PLAYERS,1.0F,1.0F)
-        return true
+        val bl = successes > 0
+        if (bl) {
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        }
+        return bl
     }
 
     override fun soundEvent(): SoundEvent {

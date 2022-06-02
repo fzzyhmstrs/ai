@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -29,15 +30,16 @@ class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-
         val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
         val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
         val yrnd = hit.blockPos.y + 1.0
         val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level))
         golem.setPos(xrnd, yrnd, zrnd)
-        world.spawnEntity(golem)
-
-        world.playSound(null,user.blockPos,soundEvent(), SoundCategory.PLAYERS,1.0F,1.0F)
+        val bl = world.spawnEntity(golem)
+        if (bl) {
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        }
         return true
     }
 

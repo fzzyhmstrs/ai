@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -45,8 +46,11 @@ class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Sum
         if (!world.isSpaceEmpty(boat, boat.boundingBox)) {
             return false
         }
-        world.spawnEntity(boat)
-        world.playSound(null,user.blockPos,soundEvent(), SoundCategory.PLAYERS,1.0F,1.0F)
+        val bl = world.spawnEntity(boat)
+        if (bl) {
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        }
         return true
     }
 
