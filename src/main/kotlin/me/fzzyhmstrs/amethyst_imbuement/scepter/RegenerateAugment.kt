@@ -27,7 +27,7 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
+                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)),user)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 effects.accept(target,AugmentConsumer.Type.BENEFICIAL)
                 return true

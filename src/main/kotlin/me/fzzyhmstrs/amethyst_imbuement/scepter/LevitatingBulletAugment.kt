@@ -3,10 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil.raycastEntityArea
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -29,12 +26,14 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(40,20,0).withRange(8.0,1.0,0.0).withDamage(4.0f)
+        get() = super.baseEffect.withDuration(40,20,0)
+            .withRange(8.0,1.0,0.0)
+            .withDamage(4.0f)
 
-    private val delay = PerLvlI(16,-2,0)
+    override val delay = PerLvlI(16,-2,0)
 
     override fun effect(
         world: World,

@@ -118,7 +118,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.0f, 0.0f)).disableSaving().trackRangeChunks(16).trackedUpdateRate(Integer.MAX_VALUE).build()
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).trackRangeChunks(8).build()
     )
 
     val PLAYER_FANGS: EntityType<PlayerFangsEntity> = Registry.register(
@@ -170,7 +170,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.0f, 0.0f)).disableSaving().trackRangeChunks(16).trackedUpdateRate(Integer.MAX_VALUE).build()
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).trackRangeChunks(4).trackedUpdateRate(10).build()
     )
 
     

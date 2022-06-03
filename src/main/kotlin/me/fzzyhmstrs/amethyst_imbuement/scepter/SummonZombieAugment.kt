@@ -24,7 +24,9 @@ import kotlin.math.min
 class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(3,0,0).withDuration(2400,0,0).withDamage(3.0F)
+        get() = super.baseEffect.withAmplifier(3,0,0)
+            .withDuration(2400,0,0)
+            .withDamage(3.0F)
 
     override fun placeEntity(
         world: World,

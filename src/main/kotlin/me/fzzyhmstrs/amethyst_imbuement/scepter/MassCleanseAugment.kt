@@ -19,6 +19,9 @@ import net.minecraft.world.World
 
 class MassCleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(300)
+
     override fun effect(
         world: World,
         user: LivingEntity,

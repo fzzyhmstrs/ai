@@ -39,7 +39,6 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
-        super.onEntityHit(entityHitResult)
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity

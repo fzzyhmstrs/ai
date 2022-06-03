@@ -32,7 +32,7 @@ import java.util.*
 open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(2.5F,2.5F,0.0F)
+        get() = super.baseEffect.withDamage(3.0F,2.0F,0.0F)
             .withRange(2.5,0.25,0.0)
 
 
@@ -111,10 +111,6 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
         return true
     }
 
-    open fun secondaryEffect(world: World, user: LivingEntity, target: Entity, level: Int, effect: AugmentEffect){
-        return
-    }
-
     override fun clientTask(world: World, user: LivingEntity,
                             hand: Hand, level: Int) {
         val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
@@ -144,6 +140,10 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
 
     open fun addStatusInstance(effect: AugmentEffect, level: Int): StatusEffectInstance?{
         return null
+    }
+
+    open fun secondaryEffect(world: World, user: LivingEntity, target: Entity, level: Int, effect: AugmentEffect){
+        return
     }
 
     override fun soundEvent(): SoundEvent {

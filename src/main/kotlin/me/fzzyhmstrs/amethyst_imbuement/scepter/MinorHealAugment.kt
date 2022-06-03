@@ -29,14 +29,18 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).heal(effects.damage(level))
+                val healthCheck = (target as LivingEntity).health
+                target.heal(effects.damage(level))
+                if (target.health == healthCheck) return false
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 effects.accept(target,AugmentConsumer.Type.BENEFICIAL)
                 return true
             }
         }
         return if (user is PlayerEntity) {
+            val healthCheck = user.health
                 user.heal(effects.damage(level))
+                if (user.health == healthCheck) return false
                 world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
                 true
