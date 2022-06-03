@@ -364,6 +364,17 @@ class ImbuingTableScreenHandler(
                     } else if (modChk != null && modChk.isAcceptableItem(itemStack3)){
                         if (ScepterObject.addModifier(augId,itemStack3)){
                             player.applyEnchantmentCosts(itemStack3, i)
+                            for (j in 0..12) { //decrement inventory slots even for creative mode!
+                                if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
+                                if (inventory.getStack(j).item.hasRecipeRemainder()){
+                                    inventory.setStack(j, ItemStack(inventory.getStack(j).item.recipeRemainder, 1))
+                                }else {
+                                    inventory.getStack(j).decrement(1)
+                                    if (inventory.getStack(j).isEmpty) {
+                                        inventory.setStack(j, ItemStack.EMPTY)
+                                    }
+                                }
+                            }
                         } else {
                             buttonWorked = false
                             return@run
