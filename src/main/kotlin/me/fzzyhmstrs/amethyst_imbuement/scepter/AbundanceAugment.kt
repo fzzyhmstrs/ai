@@ -17,7 +17,7 @@ import net.minecraft.world.World
 class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(1.0,1.0)
+        get() = super.baseEffect.withRange(1.0,1.0).withDamage(0.15F,0.05F)
 
     override fun effect(
         world: World,
@@ -37,7 +37,7 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
                     val bsb = bs.block
                         if (bsb is CropBlock){
                             val rnd1 = world.random.nextDouble()
-                            if (rnd1 < 0.15 + 0.05 * level) {
+                            if (rnd1 < effect.damage(level)) {
                                 successes++
                                 if (bsb.isMature(bs)) {
                                     world.breakBlock(userPos.add(i, k, j), true)

@@ -1,9 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.BlockState
@@ -21,12 +19,14 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
             .withAmplifier(12,0,0)
             .withDamage(6.0F)
+
+    override val delay = PerLvlI(15,-1,0)
 
     override fun effect(
         world: World,
@@ -53,7 +53,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         if (bl){
             effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this,14,effect.duration(level), effect)
+        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this, delay.value(level),effect.duration(level), effect)
         return bl
     }
 

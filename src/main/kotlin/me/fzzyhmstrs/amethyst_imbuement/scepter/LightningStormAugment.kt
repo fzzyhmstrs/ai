@@ -4,10 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
@@ -30,12 +27,14 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(8.0,1.0,0.0).withDuration(0,120,0)
+        get() = super.baseEffect.withRange(8.0,1.0,0.0)
+            .withDuration(0,120,0)
+            .withDamage(5.0f)
 
-    private val delay = PerLvlI(21,-3,0)
+    override val delay = PerLvlI(21,-3,0)
 
     override fun applyTasks(
         world: World,

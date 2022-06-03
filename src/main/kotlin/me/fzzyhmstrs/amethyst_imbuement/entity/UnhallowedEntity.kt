@@ -41,6 +41,9 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         modifiedHealth = modHealth
         maxAge = ageLimit
         bonusEquipment = bonusEquips
+        if (world is ServerWorld) {
+            initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
+        }
     }
 
     companion object {
@@ -121,6 +124,9 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
                 )
             )
         }
+        println(this.maxHealth)
+        println(this.maxAge)
+        println(this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE))
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

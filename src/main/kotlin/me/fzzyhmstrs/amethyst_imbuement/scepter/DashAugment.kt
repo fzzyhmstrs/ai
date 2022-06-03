@@ -22,6 +22,9 @@ import net.minecraft.world.World
 
 class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withAmplifier(1,1).withDuration(20)
+
     override fun effect(
         world: World,
         target: Entity?,
@@ -39,13 +42,13 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
         var k =
             MathHelper.cos(y * (Math.PI.toFloat() / 180)) * MathHelper.cos(p * (Math.PI.toFloat() / 180))
         val l = MathHelper.sqrt(g * g + h * h + k * k)
-        val m: Float = 3.0f * ((1.0f + level.toFloat()) / 4.0f)
+        val m: Float = 3.0f * (effect.amplifier(level).toFloat() / 4.0f)
 
         g *= m / l
         h *= m / l
         k *= m / l
         user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
-        user.setRiptideTicks(20)
+        user.setRiptideTicks(effect.duration(level))
 
         if (user.isOnGround()) {
             user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))

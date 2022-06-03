@@ -15,13 +15,6 @@ import net.minecraft.world.World
 
 class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType,world) {
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(5)
-
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        ae.addAmplifier(ae.amplifier(level))
-    }
-
     constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.FLAMEBOLT_ENTITY,world){
         this.owner = owner
         this.setVelocity(owner,
@@ -34,8 +27,17 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         this.setRotation(owner.yaw, owner.pitch)
     }
 
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(5)
+
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        ae.addAmplifier(ae.amplifier(level))
+    }
+
     override fun onEntityHit(entityHitResult: EntityHitResult) {
-        super.onEntityHit(entityHitResult)
+        if (world.isClient) {
+            return
+        }
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity

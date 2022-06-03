@@ -16,7 +16,7 @@ import net.minecraft.world.World
 class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(3.0F,0.0F,0.0F)
+        get() = super.baseEffect.withDamage(3.0F)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val me = MissileEntity(world, user, false)

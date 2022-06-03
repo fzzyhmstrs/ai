@@ -392,7 +392,7 @@ object ScepterObject: AugmentDamage {
         world: World, user: LivingEntity, 
         entityList: MutableList<Entity>, 
         level: Int,blockPos: BlockPos, 
-        augment: MiscAugment, 
+        augment: PersistentAugment,
         delay: Int, duration: Int,
         effect: AugmentEffect){
         val stackTemp = user.getStackInHand(Hand.MAIN_HAND)
@@ -504,7 +504,7 @@ object ScepterObject: AugmentDamage {
                                 val bookOfLoreTier: LoreTier = LoreTier.NO_TIER, val keyItem: Item = Items.AIR)
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
-                                            val augment: MiscAugment, var delay: Int, var duration: Int, val effect: AugmentEffect)
+                                            val augment: PersistentAugment, var delay: Int, var duration: Int, val effect: AugmentEffect)
     data class CompiledModifiers(val modifiers: List<AugmentModifier>, val compiledData: CompiledAugmentModifier)
 
     fun addModifier(modifier: Identifier, stack: ItemStack): Boolean{

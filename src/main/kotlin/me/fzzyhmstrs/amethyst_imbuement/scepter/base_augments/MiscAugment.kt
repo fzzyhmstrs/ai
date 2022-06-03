@@ -33,13 +33,9 @@ abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         if (!effect(world, user, entityList, level, effect)) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
     return true
-}
+    }
 
-open fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int = 1, effect: AugmentEffect): Boolean{
-    return false
-}
-
-open fun persistentEffect(world: World, user: LivingEntity,blockPos: BlockPos, entityList: MutableList<Entity>, level: Int = 1, effect: AugmentEffect){
-        return
+    open fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int = 1, effect: AugmentEffect): Boolean{
+        return false
     }
 }

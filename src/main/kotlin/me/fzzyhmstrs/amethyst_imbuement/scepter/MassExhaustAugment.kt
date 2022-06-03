@@ -35,12 +35,16 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         for (entity3 in entityList) {
             if(entity3 is Monster && entity3 is LivingEntity){
                 successes++
-                BaseAugment.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level) + 1)
+                BaseAugment.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
                 effect.accept(entity3,AugmentConsumer.Type.HARMFUL)
             }
         }
-        return successes > 0
+        val bl = successes > 0
+        if (bl){
+            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        }
+        return bl
     }
 
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {

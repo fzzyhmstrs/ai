@@ -4,10 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PerLvlI
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
@@ -24,12 +21,14 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(140,100).withAmplifier(1).withRange(8.0,1.0,0.0)
+        get() = super.baseEffect.withDuration(140,100)
+            .withAmplifier(1)
+            .withRange(8.0,1.0)
 
-    private val delay = PerLvlI(16,-3,0)
+    override val delay = PerLvlI(16,-3,0)
 
     override fun effect(
         world: World,
