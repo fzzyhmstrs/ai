@@ -35,10 +35,10 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
         val effectModifiers = AugmentEffect()
         effectModifiers.plus(modifierData?.getEffectModifier()?: AugmentEffect())
         effectModifiers.plus(baseEffect)
-        println("Damage:" + effectModifiers.damage(level))
+/*        println("Damage:" + effectModifiers.damage(level))
         println("Duration: " + effectModifiers.duration(level))
         println("Amplifier: " + effectModifiers.amplifier(level))
-        println("Range: " + effectModifiers.range(level))
+        println("Range: " + effectModifiers.range(level))*/
         val bl = applyTasks(world,user,hand,level,effectModifiers)
         if (bl) {
             modifiers.forEach {
