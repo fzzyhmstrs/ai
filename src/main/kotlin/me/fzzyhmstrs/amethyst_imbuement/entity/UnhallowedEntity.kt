@@ -124,9 +124,6 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
                 )
             )
         }
-        println(this.maxHealth)
-        println(this.maxAge)
-        println(this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE))
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

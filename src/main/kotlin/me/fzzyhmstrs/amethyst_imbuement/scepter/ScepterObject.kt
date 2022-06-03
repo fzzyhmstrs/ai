@@ -87,7 +87,6 @@ object ScepterObject: AugmentDamage {
         activeAugment[id] = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),scepterNbt)
         augmentApplied[id] = -1
         DUSTBIN.clean()
-        println("active modifiers: " + activeScepterModifiers[id]?.modifiers)
         if(scepters[id]?.isNotEmpty() == true){ //break out of initialization if the scepter has already been initialized and isn't changed
             if (scepters[id]?.size == stack.enchantments.size){
                 return
