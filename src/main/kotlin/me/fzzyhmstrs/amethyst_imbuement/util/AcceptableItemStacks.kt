@@ -153,10 +153,10 @@ object AcceptableItemStacks {
         if (scepterAcceptableMap.containsKey(tier)){
             return scepterAcceptableMap[tier] ?: mutableListOf()
         } else {
-            val entries = Registry.ITEM.indexedEntries
+            val entries = Registry.ITEM.entries
             val list: MutableList<ItemStack> = mutableListOf()
             for (entry in entries){
-                val item = entry.value()
+                val item = entry.value
                 if (item is ScepterItem){
                     val material = item.material
                     if (material is ScepterMaterialAddon){
