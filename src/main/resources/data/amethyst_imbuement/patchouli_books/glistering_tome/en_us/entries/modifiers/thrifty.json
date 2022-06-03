@@ -1,6 +1,6 @@
 {    
-"name": "Attuned Modifier",    
-"icon": "minecraft:sugar",    
+"name": "Thrifty Modifier",    
+"icon": "minecraft:paper",    
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            
@@ -10,21 +10,21 @@
 {
 "type": "amethyst_imbuement:imbuing_recipe",
 "title": "Thrifty Imbuing",
-"imbue_a_item": "amethyst_imbuement:imbued_lapis",
-"imbue_b_item": "amethyst_imbuement:imbued_lapis",
-"imbue_c_item": "amethyst_imbuement:imbued_lapis",
-"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
 "craft_a_item": "minecraft:air",
-"craft_b_item": "minecraft:clock",
+"craft_b_item": "minecraft:emerald",
 "craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:sugar",
+"craft_d_item": "minecraft:paper",
 "craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"craft_f_item": "minecraft:sugar",
+"craft_f_item": "minecraft:paper",
 "craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:sugar",
+"craft_h_item": "minecraft:paper",
 "craft_i_item": "minecraft:air",
 "result_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"cost_text": "$(l)Level Cost: $(2)11$()"
+"cost_text": "$(l)Level Cost: $(2)19$()"
 }
 ]
 }
