@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.FireAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PlaceItemAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -9,7 +10,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
-class CreateLavaAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot) {
+class CreateLavaAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot), FireAugment {
     override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
         return ScepterObject.AugmentDatapoint(SpellType.WIT,200,20,1,imbueLevel,LoreTier.LOW_TIER, Items.LAVA_BUCKET)
     }

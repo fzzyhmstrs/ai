@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.LightningAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
@@ -20,7 +21,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), LightningAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(14.0,0.0,0.0).withDamage(5.0F)

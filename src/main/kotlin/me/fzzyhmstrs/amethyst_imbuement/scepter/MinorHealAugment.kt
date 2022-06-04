@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.HealerAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -15,7 +16,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
-class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot) {
+class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot), HealerAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.0F,1.0F,0.0F)

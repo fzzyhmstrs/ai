@@ -27,7 +27,7 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
+class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment, LightningAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,1.0,0.0)
