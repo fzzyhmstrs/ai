@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem;
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject;
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

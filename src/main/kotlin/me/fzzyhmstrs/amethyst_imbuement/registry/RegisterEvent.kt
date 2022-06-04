@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.SyncConfigPacket
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PlaceItemAugment
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.util.Identifier

@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer.*
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
@@ -96,9 +95,12 @@ open class AugmentModifier(
     }
     fun withXpMod(type: SpellType, xpMod: Int): AugmentModifier{
         val xpMods = when(type){
-                SpellType.FURY ->{ScepterObject.BLANK_XP_MOD.withFuryMod(xpMod)}
-                SpellType.WIT ->{ScepterObject.BLANK_XP_MOD.withWitMod(xpMod)}
-                SpellType.GRACE ->{ScepterObject.BLANK_XP_MOD.withGraceMod(xpMod)}
+                SpellType.FURY ->{
+                    ScepterObject.BLANK_XP_MOD.withFuryMod(xpMod)}
+                SpellType.WIT ->{
+                    ScepterObject.BLANK_XP_MOD.withWitMod(xpMod)}
+                SpellType.GRACE ->{
+                    ScepterObject.BLANK_XP_MOD.withGraceMod(xpMod)}
                 else -> return this
             }
         xpModifier.plus(xpMods)

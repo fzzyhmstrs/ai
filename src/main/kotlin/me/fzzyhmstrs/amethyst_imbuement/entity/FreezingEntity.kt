@@ -1,10 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.entity.EntityType

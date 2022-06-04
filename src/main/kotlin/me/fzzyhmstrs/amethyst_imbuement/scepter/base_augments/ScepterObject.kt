@@ -1,13 +1,12 @@
 @file:Suppress("REDUNDANT_ELSE_IN_WHEN")
 
-package me.fzzyhmstrs.amethyst_imbuement.scepter
+package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -48,11 +47,11 @@ object ScepterObject: AugmentDamage {
     private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private val augmentModifiers: MutableMap<Int,MutableList<Identifier>> = mutableMapOf()
-    private val activeScepterModifiers: MutableMap<Int,CompiledModifiers> = mutableMapOf()
+    private val activeScepterModifiers: MutableMap<Int, CompiledModifiers> = mutableMapOf()
     private val scepterHealTickers: MutableMap<Int,RegisterEvent.Ticker> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
-    private val DUSTBIN = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt)},-1)
+    private val DUSTBIN = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt) },-1)
     private val BLANK_COMPILED_DATA = CompiledModifiers(listOf(),AugmentModifierDefaults.EMPTY_COMPILED)
     val BLANK_EFFECT = AugmentEffect()
     val BLANK_XP_MOD = XpModifiers()
@@ -624,7 +623,7 @@ object ScepterObject: AugmentDamage {
         return augmentModifiers[id] ?: listOf()
     }
 
-    fun getActiveModifiers(stack: ItemStack): CompiledModifiers{
+    fun getActiveModifiers(stack: ItemStack): CompiledModifiers {
         val nbt = stack.orCreateNbt
         val id: Int = nbtChecker(nbt)
         return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA

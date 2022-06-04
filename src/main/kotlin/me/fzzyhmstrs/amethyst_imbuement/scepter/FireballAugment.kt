@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.FireAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType

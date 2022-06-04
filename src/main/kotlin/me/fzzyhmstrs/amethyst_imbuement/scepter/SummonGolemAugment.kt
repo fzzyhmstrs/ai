@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
