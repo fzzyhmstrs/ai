@@ -78,8 +78,8 @@ open class AugmentModifier(
         effects.plus(ScepterObject.BLANK_EFFECT.withDamage(damage, damagePerLevel, damagePercent))
         return this
     }
-    fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0): AugmentModifier{
-        effects.plus(ScepterObject.BLANK_EFFECT.withAmplifier(amplifier, amplifierPerLevel))
+    fun withAmplifier(amplifier: Int = 0, amplifierPerLevel: Int = 0, amplifierPercent: Int = 0): AugmentModifier{
+        effects.plus(ScepterObject.BLANK_EFFECT.withAmplifier(amplifier, amplifierPerLevel, amplifierPercent))
         return this
     }
     fun withDuration(duration: Int = 0, durationPerLevel: Int = 0, durationPercent: Int = 0): AugmentModifier{
