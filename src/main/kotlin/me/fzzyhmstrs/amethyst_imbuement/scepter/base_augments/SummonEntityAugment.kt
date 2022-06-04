@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity

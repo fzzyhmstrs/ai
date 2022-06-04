@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial

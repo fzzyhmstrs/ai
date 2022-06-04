@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
@@ -10,10 +9,7 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
-import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.function.Consumer
-import kotlin.math.max
 
 abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 

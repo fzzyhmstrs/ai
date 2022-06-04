@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -11,7 +10,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.projectile.FireballEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent

@@ -5,7 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
@@ -20,7 +20,6 @@ import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.recipe.RecipeMatcher
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext

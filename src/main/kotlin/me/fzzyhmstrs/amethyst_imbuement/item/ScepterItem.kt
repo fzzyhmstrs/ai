@@ -4,8 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterMaterialAddon
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -233,7 +232,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             val chk = ScepterObject.shouldRemoveCooldownChecker(id)
             if (chk > 0){
                 entity.itemCooldownManager.set(stack.item,chk)
-                ScepterObject.activeEnchantHelper(world,stack,ScepterObject.fallbackAugment)
+                ScepterObject.activeEnchantHelper(world,stack, ScepterObject.fallbackAugment)
             } else if (chk == 0){
                 entity.itemCooldownManager.remove(stack.item)
             }

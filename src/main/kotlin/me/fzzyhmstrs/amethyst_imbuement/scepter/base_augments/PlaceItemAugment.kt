@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -22,13 +21,15 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
-import java.util.function.Consumer
 
 abstract class PlaceItemAugment(tier: Int, maxLvl: Int,item: Item, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl, EnchantmentTarget.WEAPON, *slot), BuilderAugment {
     private val _item = item
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(4.5)
+
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
-        val bl = RaycasterUtil.raycastBlock(entity = user) != null
+        val bl = RaycasterUtil.raycastBlock(effects.range(level),entity = user) != null
         if (bl){
             effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
