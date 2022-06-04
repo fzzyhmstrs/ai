@@ -6,11 +6,11 @@ import me.fzzyhmstrs.amethyst_imbuement.scepter.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer.*
 import me.fzzyhmstrs.amethyst_imbuement.util.AcceptableItemStacks
 import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
 import java.util.function.Consumer
+import java.util.function.Predicate
 import kotlin.math.max
 
 @Suppress("MemberVisibilityCanBePrivate", "CanBeParameter")
@@ -32,7 +32,7 @@ open class AugmentModifier(
 
     protected val effects: AugmentEffect = AugmentEffect()
     protected val xpModifier: XpModifiers = XpModifiers()
-    private val spellsToAffect: MutableList<Identifier> = mutableListOf()
+    private var spellsToAffect: Predicate<Identifier>? = null
     private var secondaryEffect: ScepterAugment? = null
     private var descendant: Identifier = AugmentModifierDefaults.blankId
     private val lineage: List<Identifier> by lazy { generateLineage() }
@@ -44,8 +44,8 @@ open class AugmentModifier(
     fun hasSpellToAffect(): Boolean{
         return hasSpell
     }
-    fun getSpellsToAffect(): MutableList<Identifier>{
-        return spellsToAffect
+    fun checkSpellsToAffect(id: Identifier): Boolean{
+        return spellsToAffect?.test(id) ?: return false
     }
     fun hasSecondaryEffect(): Boolean{
         return hasSecondEffect
@@ -90,7 +90,7 @@ open class AugmentModifier(
         effects.plus(ScepterObject.BLANK_EFFECT.withRange(range, rangePerLevel, rangePercent))
         return this
     }
-    fun withEffect(effect: AugmentEffect): AugmentModifier{
+    fun withSecondaryEffect(effect: AugmentEffect): AugmentModifier{
         effects.plus(effect)
         return this
     }
@@ -104,12 +104,12 @@ open class AugmentModifier(
         xpModifier.plus(xpMods)
         return this
     }
-    fun withSpellToAffect(id: Identifier): AugmentModifier{
-        spellsToAffect.add(id)
+    fun withSpellToAffect(predicate: Predicate<Identifier>): AugmentModifier{
+        spellsToAffect = predicate
         hasSpell = true
         return this
     }
-    fun withSecondaryEffect(augment: ScepterAugment): AugmentModifier{
+    fun withEffect(augment: ScepterAugment): AugmentModifier{
         secondaryEffect = augment
         hasSecondEffect = true
         return this

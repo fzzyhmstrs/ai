@@ -671,17 +671,17 @@ object ScepterObject: AugmentDamage {
     }
 
     private fun gatherActiveScepterModifiers(scepter: Int){
-        val activeEnchant = activeAugment[scepter]?:return
+        val activeEnchant =  Identifier(activeAugment[scepter]?:return)
         val list : MutableList<AugmentModifier> = mutableListOf()
         val compiledModifier = CompiledAugmentModifier()
-        augmentModifiers[scepter]?.forEach {
-            val modifier = RegisterModifier.ENTRIES.get(it)
+        augmentModifiers[scepter]?.forEach { identifier ->
+            val modifier = RegisterModifier.ENTRIES.get(identifier)
             if (modifier != null){
                 if (!modifier.hasSpellToAffect()){
                     list.add(modifier)
                     compiledModifier.plus(modifier)
                 } else {
-                    if (modifier.getSpellsToAffect().contains(Identifier(activeEnchant))){
+                    if (modifier.checkSpellsToAffect(activeEnchant)){
                         list.add(modifier)
                         compiledModifier.plus(modifier)
                     }
