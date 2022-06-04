@@ -7,3 +7,5 @@ interface LightningAugment
 interface HealerAugment
 
 interface BuilderAugment
+
+interface OceanicAugment
