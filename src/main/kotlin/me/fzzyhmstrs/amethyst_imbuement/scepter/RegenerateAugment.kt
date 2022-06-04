@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MinorSupportAugment
@@ -27,20 +28,20 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)),user)
+                BaseAugment.addStatusToQueue(target as LivingEntity,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level))
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 effects.accept(target,AugmentConsumer.Type.BENEFICIAL)
                 return true
             }
         }
         return if (user.isPlayer) {
-                user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level)))
-                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-                true
-            } else {
-                false
-            }
+            BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level))
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            true
+        } else {
+            false
+        }
 
     }
 
