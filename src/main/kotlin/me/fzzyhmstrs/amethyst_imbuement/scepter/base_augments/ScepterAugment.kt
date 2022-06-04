@@ -148,25 +148,4 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
     }
 
     abstract fun augmentStat(imbueLevel: Int = 1): ScepterObject.AugmentDatapoint
-
-    class AugmentResult(val successful: Boolean = false){
-        private var entities: List<Entity>? = null
-
-        fun hasEntities(): Boolean{
-            return entities != null
-        }
-
-        fun withEntities(list: List<Entity>): AugmentResult{
-            entities = list
-            return this
-        }
-
-        enum class Type{
-            ATTACKED,
-            APPLIED_STATUS,
-            PLACED_BLOCK,
-            AFFECTED_ENVIRONMENT,
-        }
-
-    }
 }
