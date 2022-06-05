@@ -9,7 +9,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class CustomFlavorItem(settings: Settings, nameSpace: String = AI.MOD_ID, flavor: String, glint: Boolean) : Item(settings) {
+class CustomFlavorItem(settings: Settings, flavor: String, glint: Boolean, nameSpace: String = AI.MOD_ID) : Item(settings) {
 
     private val ns: String = nameSpace
     private val ttn: String = flavor
