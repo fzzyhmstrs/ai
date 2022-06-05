@@ -40,7 +40,7 @@
 	"item": "minecraft:amethyst_shard"
   },
   "title": "Crystalline Heart",
-  "cost": 13,
+  "cost": 15,
   "resultA": "amethyst_imbuement:crystalline_heart",
   "countA": 1
 }
