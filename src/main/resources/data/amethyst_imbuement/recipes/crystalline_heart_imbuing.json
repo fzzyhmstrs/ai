@@ -39,9 +39,9 @@
   "craftI": {
 	"item": "minecraft:amethyst_shard"
   },
-  "title": "Crystalline Core",
-  "cost": 10,
-  "resultA": "amethyst_imbuement:crystalline_core",
+  "title": "Crystalline Heart",
+  "cost": 13,
+  "resultA": "amethyst_imbuement:crystalline_heart",
   "countA": 1
 }
 
