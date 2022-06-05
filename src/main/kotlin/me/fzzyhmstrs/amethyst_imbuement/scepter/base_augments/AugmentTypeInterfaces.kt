@@ -9,3 +9,5 @@ interface HealerAugment
 interface BuilderAugment
 
 interface OceanicAugment
+
+interface TravelerAugment
