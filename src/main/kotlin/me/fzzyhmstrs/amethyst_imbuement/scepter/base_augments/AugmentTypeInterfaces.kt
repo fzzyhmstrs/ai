@@ -11,3 +11,5 @@ interface BuilderAugment
 interface OceanicAugment
 
 interface TravelerAugment
+
+interface SoulAugment
