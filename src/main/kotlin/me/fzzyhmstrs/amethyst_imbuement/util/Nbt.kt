@@ -44,6 +44,6 @@ object Nbt {
             }
             nbtList2.add(el)
         }
-        nbt.put(listKey, nbtList2)
+        baseNbt.put(listKey, nbtList2)
     }
 }
