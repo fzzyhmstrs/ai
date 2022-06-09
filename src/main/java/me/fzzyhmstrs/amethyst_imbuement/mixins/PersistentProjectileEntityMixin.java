@@ -100,21 +100,4 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
             return ceil;
         }
     }
-
-
-    /*@Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/entity/Entity.damage (Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-    private boolean checkHeadHunter(Entity instance, DamageSource source, float amount){
-        PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
-        Entity owner = chk.getOwner();
-        if (owner != null) {
-            if (owner instanceof LivingEntity){
-                ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
-                int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
-                if (lvl > 0){
-                    amount = HeadhunterAugment.Companion.checkHeadhunterHit(instance,(PersistentProjectileEntity)(Object) this,amount);
-                }
-            }
-        }
-        return instance.damage(source,amount);
-    }*/
 }
