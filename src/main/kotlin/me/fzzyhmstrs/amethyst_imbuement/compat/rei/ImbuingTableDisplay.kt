@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
@@ -69,14 +70,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                             is ScepterAugment -> {
                                 val builder = EntryIngredient.builder()
                                 enchant.acceptableItemStacks().forEach {
-                                    val item = it.item
-                                    val stack = it.copy()
-                                    if (item is BookOfLoreItem){
-                                        item.addLoreKeyForREI(stack,recipe.getAugment())
-                                    } else if (item is BookOfMythosItem){
-                                        item.addLoreKeyForREI(stack,recipe.getAugment())
-                                    }
-                                    builder.add(EntryStacks.of(stack))
+                                    builder.add(EntryStacks.of(it))
                                 }
                                 list.add(builder.build())
                             }
@@ -102,7 +96,16 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                     continue
                 }
                 val builder = EntryIngredient.builder()
-                input.matchingStacks.forEach { builder.add(EntryStacks.of(it)) }
+                input.matchingStacks.forEach {
+                    val item = it.item
+                    val stack = it.copy()
+                    if (item is BookOfLoreItem){
+                        item.addLoreKeyForREI(stack,recipe.getAugment())
+                    } else if (item is BookOfMythosItem){
+                        item.addLoreKeyForREI(stack,recipe.getAugment())
+                    }
+                    builder.add(EntryStacks.of(stack))
+                }
                 list.add(builder.build())
             }
             return list
@@ -128,7 +131,9 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                 } else if (modifier != null){
                     val builder2 = EntryIngredient.builder()
                     modifier.acceptableItemStacks().forEach {
-                        builder2.add(EntryStacks.of(it))
+                        val moddedStack = it.copy()
+                        ScepterObject.addModifierForREI(modifier.modifierId, moddedStack)
+                        builder2.add(EntryStacks.of(moddedStack))
                     }
                     list.add(builder2.build())
                 } else {
