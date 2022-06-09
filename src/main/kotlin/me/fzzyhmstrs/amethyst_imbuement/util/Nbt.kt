@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
+import net.minecraft.util.math.BlockPos
+import java.util.function.Predicate
 
 object Nbt {
 
@@ -22,8 +25,18 @@ object Nbt {
     fun readStringNbt(key: String, nbt: NbtCompound): String {
         return nbt.getString(key)
     }
-    fun readNbtList(nbt: NbtCompound, key: String): NbtList{
-        return if (nbt.contains(key){
+    fun writeBlockPos(key: String, pos: BlockPos, nbt: NbtCompound){
+        nbt.putLong(key,pos.asLong())
+    }
+    fun readBlockPos(key: String, nbt: NbtCompound): BlockPos{
+        return if (nbt.contains(key)){
+            BlockPos.fromLong(nbt.getLong(key))
+        } else {
+            BlockPos.ORIGIN
+        }
+    }
+    fun readNbtList(nbt: NbtCompound, key: String): NbtList {
+        return if (nbt.contains(key)){
             nbt.getList(key,10)
         } else {
             NbtList()
@@ -34,7 +47,7 @@ object Nbt {
         nbtList.add(newNbt)
         baseNbt.put(listKey,nbtList)
     }
-    fun removeMbtFromList(listKey: String, baseNbt: NbtCompound, removalTest: Predicate<NbtCompound>){
+    fun removeNbtFromList(listKey: String, baseNbt: NbtCompound, removalTest: Predicate<NbtCompound>){
         val nbtList = readNbtList(baseNbt, listKey)
         val nbtList2 = NbtList()
         for (el in nbtList){

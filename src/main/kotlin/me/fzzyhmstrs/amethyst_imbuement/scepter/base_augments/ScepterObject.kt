@@ -555,30 +555,18 @@ object ScepterObject: AugmentDamage {
         removeModifierFromNbt(modifier,nbt)
     }
     private fun addModifierToNbt(modifier: Identifier, nbt: NbtCompound){
-        val nbtList = getModifierNbtList(nbt)
         val newEl = NbtCompound()
         newEl.putString(NbtKeys.MODIFIER_ID.str(),modifier.toString())
-        nbtList.add(newEl)
-        nbt.put(NbtKeys.MODIFIERS.str(),nbtList)
+        Nbt.addNbtToList(newEl,NbtKeys.MODIFIERS.str(),nbt)
     }
     private fun removeModifierFromNbt(modifier: Identifier, nbt: NbtCompound){
-        val nbtList = getModifierNbtList(nbt)
-        val nbtList2 = NbtList()
-        for (el in nbtList){
-            val nbtEl = el as NbtCompound
+        Nbt.removeNbtFromList(NbtKeys.MODIFIERS.str(),nbt) { nbtEl: NbtCompound ->
             if (nbtEl.contains(NbtKeys.MODIFIER_ID.str())){
                 val chk = Identifier(nbtEl.getString(NbtKeys.MODIFIER_ID.str()))
-                if (chk == modifier) continue
+                chk == modifier
+            } else {
+                false
             }
-            nbtList2.add(el)
-        }
-        nbt.put(NbtKeys.MODIFIERS.str(), nbtList2)
-    }
-    private fun getModifierNbtList(nbt: NbtCompound): NbtList{
-        return if (nbt.contains(NbtKeys.MODIFIERS.str())){
-            nbt.getList(NbtKeys.MODIFIERS.str(),10)
-        } else {
-            NbtList()
         }
     }
     private fun initializeModifiers(id: Int, nbt: NbtCompound, stack: ItemStack){
