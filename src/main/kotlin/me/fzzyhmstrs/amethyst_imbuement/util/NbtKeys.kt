@@ -46,6 +46,41 @@ enum class NbtKeys {
         override fun str(): String {
             return "modifier_id"
         }
+    },
+    LOCK_POS{
+        override fun str(): String {
+            return "lock_pos"
+        }
+    },
+    LOCKS{
+        override fun str(): String {
+            return "switch_locks"
+        }
+    },
+    DOORS{
+        override fun str(): String {
+            return "switch_doors"
+        }
+    },
+    DOOR_POS{
+        override fun str(): String {
+            return "door_pos"
+        }
+    },
+    KEY_ITEM{
+        override fun str(): String {
+            return "key_item"
+        }
+    },
+    HELD_ITEM{
+        override fun str(): String {
+            return "held_item"
+        }
+    },
+    KEY_NUM{
+        override fun str(): String {
+            return "key_num"
+        }
     };
 
     abstract fun str(): String
