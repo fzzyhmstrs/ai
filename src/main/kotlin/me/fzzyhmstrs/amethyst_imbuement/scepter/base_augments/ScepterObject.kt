@@ -510,6 +510,10 @@ object ScepterObject: AugmentDamage {
         val id: Int = nbtChecker(nbt)
         return addModifier(modifier, id, nbt)
     }
+    fun addModifierForREI(modifier: Identifier, stack: ItemStack){
+        val nbt = stack.orCreateNbt
+        addModifierToNbt(modifier, nbt)
+    }
     private fun addModifier(modifier: Identifier, scepter: Int, nbt: NbtCompound): Boolean{
         if (!augmentModifiers.containsKey(scepter)) {
             augmentModifiers[scepter] = mutableListOf()
