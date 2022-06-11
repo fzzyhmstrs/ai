@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.client.option.Perspective
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -31,6 +32,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.*
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import kotlin.math.max
@@ -272,17 +274,56 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
                 val world = minecraftClient.world
                 val entity = minecraftClient.player
                 if (world != null && entity != null){
-                    doSmoke(world,entity)
+                    doSmoke(world,minecraftClient,entity)
                 }
             }
         }
 
+        private fun doSmoke(world: World, client: MinecraftClient, user: LivingEntity){
+            val particlePos = scepterParticlePos(client, user)
+            world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,particlePos.x,particlePos.y,particlePos.z,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
+        }
         private fun doSmoke(world: World, user: LivingEntity){
-            val pos = user.pos
-            val smokeX = pos.x - (user.width + 0.8f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180))
-            val smokeY = user.eyeY - 0.1
-            val smokeZ = pos.z + (user.width + 0.8f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) - 0.1 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180))
-            world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,smokeX,smokeY,smokeZ,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
+            val pos = user.eyePos
+            val width = user.width
+            val yaw = user.yaw
+            val posX = pos.x - (width + 0.8f) * 0.5 * MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) - 0.6 * MathHelper.cos(yaw * (Math.PI.toFloat() / 180))
+            val posY = pos.y - 0.1
+            val posZ = pos.z + (width + 0.8f) * 0.5 * MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) - 0.6 * MathHelper.sin(yaw * (Math.PI.toFloat() / 180))
+            world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,posX,posY,posZ,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
+        }
+
+        fun scepterParticlePos(client: MinecraftClient, user: LivingEntity): Vec3d{
+            val pos = user.getCameraPosVec(client.tickDelta)
+            val width = user.width
+            val perspective = client.options.perspective
+            val yaw = if(perspective == Perspective.THIRD_PERSON_FRONT){
+                user.bodyYaw
+            } else {
+                user.getYaw(client.tickDelta)
+            }
+            val fov = MathHelper.clamp(client.options.fov,30.0,110.0)
+            return scepterParticlePos(pos, width, yaw, perspective, fov)
+        }
+
+        private fun scepterParticlePos(pos: Vec3d, width: Float, yaw: Float, perspective: Perspective, fov: Double): Vec3d{
+            val offset: Vec3d = when(perspective){
+
+                Perspective.FIRST_PERSON -> {
+                    val fpx = MathHelper.lerpFromProgress(fov,30.0,110.0,1.4,-0.1)
+                    Vec3d(fpx,-0.13,0.6)
+                }
+                Perspective.THIRD_PERSON_FRONT -> {
+                    Vec3d(0.8,-0.5,0.5)
+                }
+                Perspective.THIRD_PERSON_BACK -> {
+                    Vec3d(0.8, -0.5, 0.5)
+                }
+            }
+            val posX = pos.x - (width + offset.x) * 0.5 * MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) - offset.z * MathHelper.cos(yaw * (Math.PI.toFloat() / 180))
+            val posY = pos.y + offset.y
+            val posZ = pos.z + (width + offset.x) * 0.5 * MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) - offset.z * MathHelper.sin(yaw * (Math.PI.toFloat() / 180))
+            return Vec3d(posX, posY, posZ)
         }
 
         fun writeDefaultNbt(stack: ItemStack){

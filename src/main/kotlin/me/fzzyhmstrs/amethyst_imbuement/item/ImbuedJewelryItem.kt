@@ -21,7 +21,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 import java.util.*
 
-class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(settings,"copper_ring"), AugmentTasks {
+open class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(settings,"copper_ring"), AugmentTasks {
     private val ttn: String = _ttn
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
@@ -50,7 +50,7 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         super.onEquip(stack, slot, entity)
         if (entity.world.isClient()) return
         val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-        ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel)
+        ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
         passiveEnchantmentTasks(stack,entity.world,entity)
     }
 
@@ -59,7 +59,7 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
         if(entity.world.isClient()) return
         unequipEnchantmentTasks(stack,entity.world,entity)
         val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-        ShieldingAugment.removeTrinket(entity,ShieldingAugment.baseAmount + shieldLevel)
+        ShieldingAugment.removeTrinket(entity,ShieldingAugment.baseAmount + shieldLevel+ shieldingAdder())
     }
 
     override fun tick(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
@@ -73,5 +73,9 @@ class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(setti
     override fun passiveEnchantmentTasks(stack: ItemStack,world: World,entity: Entity){
         if (!entity.isPlayer) return
         super.passiveEnchantmentTasks(stack, world, entity)
+    }
+
+    open fun shieldingAdder(): Int{
+        return 0
     }
 }
