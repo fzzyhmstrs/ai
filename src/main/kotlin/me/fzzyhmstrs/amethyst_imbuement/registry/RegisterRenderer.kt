@@ -4,11 +4,12 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
+import me.fzzyhmstrs.amethyst_imbuement.model.DisenchantingTableBlockEntityRenderer.Companion.DISENCHANTING_TABLE_BOOK_SPRITE_ID
+import me.fzzyhmstrs.amethyst_imbuement.model.ImbuingTableBlockEntityRenderer.Companion.IMBUING_TABLE_BOOK_SPRITE_ID
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -19,15 +20,12 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.texture.SpriteAtlasTexture
-import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
-import java.util.function.Consumer
 
 @Environment(value = EnvType.CLIENT)
 object RegisterRenderer {
@@ -216,13 +214,14 @@ object RegisterRenderer {
                 (stack.maxUseTime - entity.itemUseTimeLeft).toFloat() / CrossbowItem.getPullTime(stack).toFloat()
             })
 
+
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
                 _ , registry ->
-            registry.register(Identifier(AI.MOD_ID,"entity/imbuing_table_book"))
+            registry.register(IMBUING_TABLE_BOOK_SPRITE_ID)
         }
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
                 _ , registry ->
-            registry.register(Identifier(AI.MOD_ID,"entity/disenchanting_table_book"))
+            registry.register(DISENCHANTING_TABLE_BOOK_SPRITE_ID)
         }
 
     }
