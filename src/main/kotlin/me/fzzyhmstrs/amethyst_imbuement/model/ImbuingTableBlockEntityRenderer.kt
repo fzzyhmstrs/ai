@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.RenderLayer
@@ -63,9 +64,10 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
     }
 
     companion object {
+        val IMBUING_TABLE_BOOK_SPRITE_ID = Identifier(AI.MOD_ID,"entity/imbuing_table_book")
         val BOOK_TEXTURE = SpriteIdentifier(
             SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
-            Identifier(AI.MOD_ID,"entity/imbuing_table_book")
+            IMBUING_TABLE_BOOK_SPRITE_ID
         )
     }
 
