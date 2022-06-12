@@ -180,12 +180,6 @@ object RegisterRenderer {
             RegisterItem.GLISTERING_TRIDENT, Identifier("throwing")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int -> if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f }
 
-
-        ModelLoadingRegistry.INSTANCE.registerModelProvider { _: ResourceManager?, out: Consumer<Identifier?> ->
-                out.accept(ModelIdentifier(AI.MOD_ID + ":glistering_trident_in_hand#inventory"))
-
-            }
-
         FabricModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("pulling")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
