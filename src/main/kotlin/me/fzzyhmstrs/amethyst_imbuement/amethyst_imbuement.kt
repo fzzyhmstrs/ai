@@ -44,6 +44,7 @@ object AIClient: ClientModInitializer{
         RegisterScreen.registerAll()
         RegisterKeybind.registerAll()
         RegisterEvent.registerClient()
+        RegisterItemModel.registerAll()
     }
 
 }
