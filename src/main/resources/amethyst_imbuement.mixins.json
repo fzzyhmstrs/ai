@@ -47,7 +47,6 @@
     "InGameHudMixin",
     "ItemRendererMixin",
     "PlayerInventoryMixin",
-    "GlisteringTridentModelMixin",
     "ClientPlayNetworkHandlerMixin",
     "MiningToolItemMixin"
   ],
