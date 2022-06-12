@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentItemEntityRendere
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.MinecraftClient
@@ -19,7 +20,9 @@ import net.minecraft.item.Item
 import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.SynchronousResourceReloader
+import net.minecraft.util.Identifier
 import java.util.*
+import java.util.function.Consumer
 import java.util.function.Function
 import kotlin.NoSuchElementException
 import kotlin.collections.HashMap
@@ -52,7 +55,7 @@ object RegisterItemModel: SynchronousResourceReloader {
     fun registerAll(){
         registerReloader()
         val modelsPerMode = ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID + ":glistering_trident#inventory"))
-            .withHeld(ModelIdentifier(AI.MOD_ID + ":glistering_trident_in_hand#inventory"))
+            .withHeld(ModelIdentifier(AI.MOD_ID + ":glistering_trident_in_hand#inventory"), true)
         registerItemModelId(RegisterItem.GLISTERING_TRIDENT, modelsPerMode)
         registerItemEntityModel(RegisterItem.GLISTERING_TRIDENT,
             GlisteringTridentItemEntityRenderer,
@@ -93,27 +96,42 @@ object RegisterItemModel: SynchronousResourceReloader {
     class ModelIdentifierPerModes(private val defaultId: ModelIdentifier){
         private val modeMap: EnumMap<ModelTransformation.Mode,ModelIdentifier> = EnumMap(ModelTransformation.Mode::class.java)
 
-        fun with(mode: ModelTransformation.Mode, modelId: ModelIdentifier): ModelIdentifierPerModes{
+        fun with(mode: ModelTransformation.Mode, modelId: ModelIdentifier, needsRegistration: Boolean = false): ModelIdentifierPerModes{
+            if (needsRegistration){
+                registerIdWithModalLoading(modelId)
+            }
             modeMap[mode] = modelId
             return this
         }
-        fun withGuiGroundFixed(modelId: ModelIdentifier): ModelIdentifierPerModes{
+        fun withGuiGroundFixed(modelId: ModelIdentifier, needsRegistration: Boolean = false): ModelIdentifierPerModes{
+            if (needsRegistration){
+                registerIdWithModalLoading(modelId)
+            }
             modeMap[ModelTransformation.Mode.GUI] = modelId
             modeMap[ModelTransformation.Mode.FIXED] = modelId
             modeMap[ModelTransformation.Mode.GROUND] = modelId
             return this
         }
-        fun withFirstHeld(modelId: ModelIdentifier): ModelIdentifierPerModes {
+        fun withFirstHeld(modelId: ModelIdentifier, needsRegistration: Boolean = false): ModelIdentifierPerModes {
+            if (needsRegistration){
+                registerIdWithModalLoading(modelId)
+            }
             modeMap[ModelTransformation.Mode.FIRST_PERSON_RIGHT_HAND] = modelId
             modeMap[ModelTransformation.Mode.FIRST_PERSON_LEFT_HAND] = modelId
             return this
         }
-        fun withThirdHeld(modelId: ModelIdentifier): ModelIdentifierPerModes {
+        fun withThirdHeld(modelId: ModelIdentifier, needsRegistration: Boolean = false): ModelIdentifierPerModes {
+            if (needsRegistration){
+                registerIdWithModalLoading(modelId)
+            }
             modeMap[ModelTransformation.Mode.THIRD_PERSON_RIGHT_HAND] = modelId
             modeMap[ModelTransformation.Mode.THIRD_PERSON_LEFT_HAND] = modelId
             return this
         }
-        fun withHeld(modelId: ModelIdentifier): ModelIdentifierPerModes{
+        fun withHeld(modelId: ModelIdentifier, needsRegistration: Boolean = false): ModelIdentifierPerModes{
+            if (needsRegistration){
+                registerIdWithModalLoading(modelId)
+            }
             modeMap[ModelTransformation.Mode.FIRST_PERSON_RIGHT_HAND] = modelId
             modeMap[ModelTransformation.Mode.FIRST_PERSON_LEFT_HAND] = modelId
             modeMap[ModelTransformation.Mode.THIRD_PERSON_RIGHT_HAND] = modelId
@@ -123,6 +141,15 @@ object RegisterItemModel: SynchronousResourceReloader {
 
         fun getIdFromMode(mode: ModelTransformation.Mode): ModelIdentifier{
             return modeMap[mode] ?: defaultId
+        }
+
+        companion object{
+            fun registerIdWithModalLoading(id: ModelIdentifier){
+                ModelLoadingRegistry.INSTANCE.registerModelProvider { _: ResourceManager?, out: Consumer<Identifier?> ->
+                    out.accept(id)
+
+                }
+            }
         }
     }
 
