@@ -81,6 +81,31 @@ enum class NbtKeys {
         override fun str(): String {
             return "key_num"
         }
+    },
+    PORTAL_KEY{
+        override fun str(): String {
+            return "portal_key"
+        }
+    },
+    FRAME_LIST{
+        override fun str(): String {
+            return "frame_list"
+        }
+    },
+    FRAME_POS{
+        override fun str(): String {
+            return "frame_pos"
+        }
+    },
+    PORTAL_LIST{
+        override fun str(): String {
+            return "portal_list"
+        }
+    },
+    PORTAL_POS{
+        override fun str(): String {
+            return "portal_pos"
+        }
     };
 
     abstract fun str(): String
