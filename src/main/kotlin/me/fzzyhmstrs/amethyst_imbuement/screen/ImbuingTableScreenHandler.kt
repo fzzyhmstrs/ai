@@ -33,6 +33,7 @@ import net.minecraft.util.Util
 import net.minecraft.util.collection.Weighting
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
@@ -59,7 +60,7 @@ class ImbuingTableScreenHandler(
         }
     }
 
-    private val random = Random()
+    private val random = net.minecraft.util.math.random.LocalRandom(0L)
     private val player = playerInventory.player
     private val seed = Property.create()
     var enchantmentPower = IntArray(3)

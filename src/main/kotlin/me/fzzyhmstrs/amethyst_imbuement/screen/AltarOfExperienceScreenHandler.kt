@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.item.ItemStack
 import net.minecraft.screen.*
 import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
@@ -191,6 +192,10 @@ class AltarOfExperienceScreenHandler(
             sendContentUpdates()
         }
         return true
+    }
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+        return ItemStack.EMPTY
     }
 
     private fun getPlayerLvlXp(player: PlayerEntity): Int{

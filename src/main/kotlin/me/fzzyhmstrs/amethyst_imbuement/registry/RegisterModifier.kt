@@ -7,9 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentModifierDef
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 
 object RegisterModifier {
@@ -75,7 +73,7 @@ object RegisterModifier {
             return registry.keys.indexOf(id)
         }
         fun getName(id: Identifier): Text{
-            return TranslatableText("scepter.modifiers.$id")
+            return Text.translatable("scepter.modifiers.$id")
         }
         fun isModifier(id: Identifier): Boolean{
             return this.get(id) != null

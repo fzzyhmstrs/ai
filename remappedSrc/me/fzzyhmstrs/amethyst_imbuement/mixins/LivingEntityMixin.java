@@ -6,9 +6,9 @@ import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
-import me.fzzyhmstrs.amethyst_imbuement.util.ScepterObject;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
@@ -108,15 +108,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-
     @Inject(method = "tick", at = @At(value = "TAIL"))
     private void augmentStatusCheck(CallbackInfo ci){
         if (!world.isClient) {
-            if (ScepterObject.INSTANCE.checkEntityTaskQueue()){
-                ScepterObject.INSTANCE.applyEntityTasks((LivingEntity) (Object) this);
-            }
+
             //armor effects a little less often because more intensive
-            if (world.getTime() % 40 == 0) {
+            if (RegisterEvent.INSTANCE.getTicker_armor().isReady()) {
                 Iterable<ItemStack> iterable = this.getArmorItems();
                 for (ItemStack stack : iterable) {
                     if (stack.isEmpty()) continue;
@@ -124,17 +121,15 @@ public abstract class LivingEntityMixin extends Entity {
                     Map<Enchantment, Integer> map = EnchantmentHelper.get(stack);
                     for (Enchantment enchant : map.keySet()){
                         if (enchant instanceof BaseAugment) {
-                            ((BaseAugment) enchant).tickEffect((LivingEntity) (Object) this, EnchantmentHelper.getLevel(enchant, stack), ItemStack.EMPTY);
+                            ((BaseAugment) enchant).tickEffect((LivingEntity) (Object) this, map.get(enchant),ItemStack.EMPTY);
                         }
                     }
                 }
-                BaseAugment.Companion.applyEffects((LivingEntity) (Object) this);
             }
-            if (BaseAugment.Companion.checkImmediateEffects()) {
-                BaseAugment.Companion.applyImmediateEffects((LivingEntity) (Object) this);
-            }
+
         }
     }
+
 
     @Redirect(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
     private boolean checkForMultiJump(LivingEntity instance){

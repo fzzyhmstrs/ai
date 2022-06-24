@@ -14,9 +14,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
@@ -44,35 +42,35 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
             } else {
                 bolaNbtString
             }
-            tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
-            tooltip.add(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE))
+            tooltip.add(Text.translatable("lore_book.augment").formatted(Formatting.GOLD).append(Text.translatable("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
+            tooltip.add(Text.translatable("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE))
             val type = ScepterObject.getAugmentType(bola)
             if (type == SpellType.NULL){
-                tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
+                tooltip.add(Text.translatable("lore_book.${type.str()}").formatted(type.fmt()))
             } else {
                 val lvl = ScepterObject.getAugmentMinLvl(bola)
-                tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()).append(LiteralText(lvl.toString())))
+                tooltip.add(Text.translatable("lore_book.${type.str()}").formatted(type.fmt()).append(Text.literal(lvl.toString())))
             }
             val item = ScepterObject.getAugmentItem(bola)
-            val itemText = item.name.shallowCopy().formatted(Formatting.WHITE)
-            tooltip.add(TranslatableText("lore_book.key_item").formatted(Formatting.WHITE).append(itemText))
+            val itemText = item.name.copyContentOnly().formatted(Formatting.WHITE)
+            tooltip.add(Text.translatable("lore_book.key_item").formatted(Formatting.WHITE).append(itemText))
             val xpLevels = ScepterObject.getAugmentImbueLevel(bola)
-            tooltip.add(TranslatableText("lore_book.xp_level").formatted(Formatting.WHITE).append(xpLevels.toString()))
+            tooltip.add(Text.translatable("lore_book.xp_level").formatted(Formatting.WHITE).append(xpLevels.toString()))
             val cooldown = ScepterObject.getAugmentCooldown(bola).toFloat() / 20.0F
-            tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("lore_book.cooldown1").formatted(Formatting.WHITE)))
+            tooltip.add(Text.translatable("lore_book.cooldown").formatted(Formatting.WHITE).append(Text.literal(cooldown.toString())).append(Text.translatable("lore_book.cooldown1").formatted(Formatting.WHITE)))
             val manaCost = ScepterObject.getAugmentManaCost(bola)
-            tooltip.add(TranslatableText("lore_book.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
+            tooltip.add(Text.translatable("lore_book.mana_cost").formatted(Formatting.WHITE).append(Text.literal(manaCost.toString())))
             val bole = Registry.ENCHANTMENT.get(Identifier(bola))
             if (bole is ScepterAugment) {
                 val spellTier = bole.getTier()
                 tooltip.add(
-                    TranslatableText("lore_book.tier").formatted(Formatting.WHITE)
-                        .append(LiteralText(spellTier.toString()))
+                    Text.translatable("lore_book.tier").formatted(Formatting.WHITE)
+                        .append(Text.literal(spellTier.toString()))
                 )
             }
         } else {
             tooltip.add(
-                TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(
+                Text.translatable("item.amethyst_imbuement.$ttn.tooltip1").formatted(
                     Formatting.WHITE,
                     Formatting.ITALIC
                 )

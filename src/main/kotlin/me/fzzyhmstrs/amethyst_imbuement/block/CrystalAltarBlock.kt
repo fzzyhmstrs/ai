@@ -10,7 +10,6 @@ import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -19,8 +18,9 @@ import net.minecraft.world.World
 
 @Suppress("PrivatePropertyName")
 class CrystalAltarBlock(settings: Settings): CraftingTableBlock(settings) {
-    private val SCREEN_TITLE: Text = TranslatableText("container.crystal_altar")
+    private val SCREEN_TITLE: Text = Text.translatable("container.crystal_altar")
 
+    @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,
@@ -35,6 +35,7 @@ class CrystalAltarBlock(settings: Settings): CraftingTableBlock(settings) {
         }, SCREEN_TITLE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,

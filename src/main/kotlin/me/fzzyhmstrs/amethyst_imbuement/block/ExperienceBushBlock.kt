@@ -16,12 +16,13 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
-import java.util.*
 
 class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
 
+    @Deprecated("Deprecated in Java")
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
         if (entity !is LivingEntity || entity.getType() === EntityType.FOX || entity.getType() === EntityType.BEE) {
             return
@@ -33,6 +34,7 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         return ItemStack(Items.EXPERIENCE_BOTTLE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
         val i = state.get(AGE)
         if (i < 3 && random.nextInt(6) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
@@ -40,6 +42,7 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,

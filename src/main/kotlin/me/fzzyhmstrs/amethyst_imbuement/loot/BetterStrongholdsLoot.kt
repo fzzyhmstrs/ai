@@ -3,16 +3,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
+import net.minecraft.loot.LootTable
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
 
 object BetterStrongholdsLoot: AbstractModLoot {
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
+    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
         if (id.namespace != "betterstrongholds") return false
         if (armouryChecker(id)){
             VanillaLoot.villageWeaponsmithLoot(table)
@@ -30,7 +30,7 @@ object BetterStrongholdsLoot: AbstractModLoot {
             VanillaLoot.shipwreckTreasureLoot(table)
             return true
         } else if (cryptChecker(id)){
-            val poolBuilder = FabricLootPoolBuilder.builder()
+            val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .with(ItemEntry.builder(RegisterItem.MOONSTONE).weight(1))
                 .with(ItemEntry.builder((Items.AIR)).weight(3))

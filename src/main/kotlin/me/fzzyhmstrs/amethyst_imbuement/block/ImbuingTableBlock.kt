@@ -22,8 +22,8 @@ import net.minecraft.util.Hand
 import net.minecraft.util.Nameable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
-import java.util.*
 
 @Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
 class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
@@ -63,6 +63,7 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
@@ -78,6 +79,7 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         return ActionResult.CONSUME
     }
 
+    @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,

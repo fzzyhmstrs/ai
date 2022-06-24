@@ -10,15 +10,17 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 
 class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         val world = user.world
-        if (TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 240, TranslatableText("augment_damage.guardian.check_can_use").toString())) {
+        if (TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 240,
+                Text.translatable("augment_damage.guardian.check_can_use").toString())) {
             if (TotemItem.damageHandler(stack, world, user, 240)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user, TranslatableText("augment_damage.guardian.burnout").toString())
+                TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user,
+                    Text.translatable("augment_damage.guardian.burnout").toString())
             }
             addStatusToQueue(user, StatusEffects.REGENERATION, 400, 0)
             addStatusToQueue(user, StatusEffects.RESISTANCE, 200, 0)

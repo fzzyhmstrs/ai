@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Nameable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
@@ -99,7 +98,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     override fun getName(): Text? {
         return if (customName != null) {
             customName
-        } else TranslatableText("container.imbuing_table")
+        } else Text.translatable("container.imbuing_table")
     }
 
     fun setCustomName(value: Text?) {

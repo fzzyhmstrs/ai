@@ -25,6 +25,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
@@ -105,7 +106,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.initEquipment(difficulty)
+        this.initEquipment(world.random, difficulty)
         if (modifiedDamage > baseAttackDamage){
             getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
                 EntityAttributeModifier(
@@ -240,7 +241,8 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         return EntityGroup.UNDEAD
     }
 
-    override fun initEquipment(difficulty: LocalDifficulty) {
+
+    override fun initEquipment(random: Random ,difficulty: LocalDifficulty) {
         when (bonusEquipment) {
             1 -> {
                 this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.LEATHER_HELMET))

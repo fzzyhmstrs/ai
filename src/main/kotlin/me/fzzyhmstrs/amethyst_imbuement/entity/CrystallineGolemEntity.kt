@@ -247,7 +247,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         }
         val g = 1.0f + (random.nextFloat() - random.nextFloat()) * 0.2f
         playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0f, g)
-        this.emitGameEvent(GameEvent.MOB_INTERACT, this.cameraBlockPos)
+        this.emitGameEvent(GameEvent.ENTITY_INTERACT, this)
         if (!player.abilities.creativeMode) {
             itemStack.decrement(1)
         }

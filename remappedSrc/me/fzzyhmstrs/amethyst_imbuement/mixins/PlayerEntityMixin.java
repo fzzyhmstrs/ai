@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -48,10 +47,17 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
     }
 
-    @Redirect(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"))
+    /*@Redirect(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"))
     private void checkForSoulbinding(PlayerInventory instance){
         if (!this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
             instance.dropAll();
+        }
+    }*/
+
+    @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
+    private void checkForSoulbinding(CallbackInfo ci){
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
+            ci.cancel();
         }
     }
 

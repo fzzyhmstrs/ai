@@ -2,17 +2,16 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
+import net.minecraft.loot.LootTable
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
 object MoStructuresLoot: AbstractModLoot {
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean{
+    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean{
         if (id.namespace != "mostructures") return false
         when (id) {
             Identifier("mostructures","bunny_skeleton") -> {
@@ -29,7 +28,7 @@ object MoStructuresLoot: AbstractModLoot {
                 return true
             }
             Identifier("mostructures","barnhouse_3") -> {
-                val poolBuilder = FabricLootPoolBuilder.builder()
+                val poolBuilder = LootPool.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F,4.0F))
                     .with(ItemEntry.builder(RegisterItem.XP_BUSH_SEED).weight(1))
                     .with(ItemEntry.builder(Items.AIR).weight(9))

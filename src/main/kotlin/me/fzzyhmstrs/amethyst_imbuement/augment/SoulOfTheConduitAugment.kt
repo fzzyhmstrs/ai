@@ -8,7 +8,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 
 class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
 
@@ -20,7 +20,7 @@ class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equip
                     stack,
                     RegisterEnchantment.SOUL_OF_THE_CONDUIT,
                     user,
-                    TranslatableText("augment_damage.soul_of_the_conduit.burnout").toString()
+                    Text.translatable("augment_damage.soul_of_the_conduit.burnout").toString()
                 )
             }
         }

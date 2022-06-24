@@ -21,13 +21,12 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtList
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayNetworkHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
@@ -254,7 +253,7 @@ object ScepterObject: AugmentDamage {
             augmentApplied[id] = (cooldown.toLong() - timeSinceLast).toInt()
         }
         DUSTBIN.markDirty(id)
-        val message = TranslatableText("scepter.new_active_spell").append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}"))
+        val message = Text.translatable("scepter.new_active_spell").append(Text.translatable("enchantment.amethyst_imbuement.${Identifier(newActiveEnchant).path}"))
         user.sendMessage(message,false)
     }
 

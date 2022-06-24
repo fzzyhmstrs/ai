@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.world.Heightmap
 
 class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): UsedActiveAugment(weight,mxLvl, *slot) {
@@ -19,9 +19,9 @@ class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot):
         val rndX = user.blockPos.x + world.random.nextInt(17) - 8
         val rndZ = user.blockPos.z + world.random.nextInt(17) - 8
         val rndY = world.getTopY(Heightmap.Type.MOTION_BLOCKING,rndX,rndZ)
-        if(TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 120, TranslatableText("augment_damage.escape.check_can_use").toString())) {
+        if(TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 120, Text.translatable("augment_damage.escape.check_can_use").toString())) {
             if (TotemItem.damageHandler(stack, world, user, 120)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.ESCAPE,user, TranslatableText("augment_damage.escape.burnout").toString())
+                TotemItem.burnOutHandler(stack, RegisterEnchantment.ESCAPE,user, Text.translatable("augment_damage.escape.burnout").toString())
             }
             user.teleport(rndX.toDouble(), (rndY + 1).toDouble(), rndZ.toDouble())
             world.playSound(

@@ -6,7 +6,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.AnvilScreenHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,7 +26,7 @@ public class AnvilScreenMixin  {
 
     @Redirect(method = "drawForeground", at = @At(value = "INVOKE", target = "net/minecraft/client/font/TextRenderer.drawWithShadow (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Text;FFI)I"))
     private int ignoreTooExpensiveText(TextRenderer instance, MatrixStack matrices, Text text, float x, float y, int color){
-        Text text2 = new TranslatableText("container.repair.cost", (handler2).getLevelCost());
+        Text text2 = new Text.translatable("container.repair.cost", (handler2).getLevelCost());
         int t;
         if (playerLvl >= handler2.getLevelCost()){
             t = 8453920;

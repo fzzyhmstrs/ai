@@ -24,7 +24,7 @@ import net.minecraft.util.Nameable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.*
+import net.minecraft.util.math.random.Random
 
 @Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
 class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings) {
@@ -64,6 +64,7 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
@@ -79,6 +80,7 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
         return ActionResult.CONSUME
     }
 
+    @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,

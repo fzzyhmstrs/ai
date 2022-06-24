@@ -4,17 +4,16 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
+import net.minecraft.loot.LootTable
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
 object BetterDungeonsLoot: AbstractModLoot {
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
+    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
         if (id.namespace != "betterdungeons") return false
         when (id) {
             Identifier("betterdungeons", "zombie_dungeon/chests/common") -> {
@@ -26,7 +25,7 @@ object BetterDungeonsLoot: AbstractModLoot {
                 return true
             }
             Identifier("betterdungeons", "zombie_dungeon/chests/tombstone") -> {
-                val poolBuilder = FabricLootPoolBuilder.builder()
+                val poolBuilder = LootPool.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
                     .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                     .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))

@@ -14,7 +14,9 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvents
 import net.minecraft.structure.processor.StructureProcessorLists
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
+import net.minecraft.util.registry.RegistryKey
 import net.minecraft.village.TradeOffer
 import net.minecraft.village.TradeOffers
 import net.minecraft.village.VillagerProfession
@@ -22,8 +24,11 @@ import java.util.*
 
 object RegisterVillager {
 
-    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(Identifier(AI.MOD_ID,"crystal_altar_poi"),1,1,RegisterBlock.CRYSTAL_ALTAR)
-    private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(CRYSTAL_ALTAR_POINT_OF_INTEREST).id(Identifier(AI.MOD_ID,"crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
+    private val CRYSTAL_WITCH_POI_IDENTIFIER = Identifier(AI.MOD_ID,"crystal_altar_poi")
+    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(CRYSTAL_WITCH_POI_IDENTIFIER,1,1,RegisterBlock.CRYSTAL_ALTAR)
+    private val CRYSTAL_ALTAR_POI_KEY = RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, CRYSTAL_WITCH_POI_IDENTIFIER)
+    private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(
+        CRYSTAL_ALTAR_POI_KEY).id(Identifier(AI.MOD_ID,"crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
 
     fun registerAll(){
         Registry.register(Registry.VILLAGER_PROFESSION, Identifier(AI.MOD_ID,"crystal_witch") , CRYSTAL_WITCH)

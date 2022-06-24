@@ -3,20 +3,17 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.AugmentTasks
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
+import me.fzzyhmstrs.amethyst_imbuement.util.AugmentTasks
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.item.ShearsItem
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 import java.util.*
@@ -27,7 +24,7 @@ open class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
         super.appendTooltip(stack, world, tooltip, context)
         tooltip?.removeAt(tooltip.size-1)
-        tooltip?.add(TranslatableText("item.amethyst_imbuement.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
+        tooltip?.add(Text.translatable("item.amethyst_imbuement.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
     }
 
     override fun getModifiers(

@@ -5,7 +5,6 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
@@ -17,7 +16,7 @@ class CustomFlavorItem(settings: Settings, flavor: String, glint: Boolean, nameS
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, tooltip, context)
-        tooltip.add(TranslatableText("item.$ns.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
+        tooltip.add(Text.translatable("item.$ns.$ttn.tooltip1").formatted(Formatting.WHITE, Formatting.ITALIC))
     }
 
     override fun hasGlint(stack: ItemStack): Boolean {

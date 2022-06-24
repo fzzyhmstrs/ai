@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.block.Block
 import net.minecraft.block.OperatorBlock
 import net.minecraft.enchantment.Enchantment
@@ -58,7 +59,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
             for (priority in 1..maxDistance) {
                 val priorityList = blockMap[priority]
                 if (priorityList != null) {
-                    priorityList.shuffle(world.random)
+                    priorityList.shuffle(AI.aiRandom())
                     for (bp2 in priorityList){
                         tryBreakBlock(bp2,world,miner)
                         remainingBlockBudget--

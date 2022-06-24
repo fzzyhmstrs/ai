@@ -35,8 +35,10 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    mavenCentral()
 }
 dependencies {
+    implementation("com.google.guava:guava:31.1-jre")
     val minecraftVersion: String by project
     minecraft("com.mojang:minecraft:$minecraftVersion")
     val yarnMappings: String by project
@@ -62,10 +64,10 @@ dependencies {
     }
     include("vazkii.patchouli:Patchouli:1.19-73-FABRIC")
 
-    modImplementation("maven.modrinth:Wd844r7Q:1.18.2-02"){
+    modImplementation("maven.modrinth:Wd844r7Q:1.19-01"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:Wd844r7Q:1.18.2-02")
+    include("maven.modrinth:Wd844r7Q:1.19.01")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")

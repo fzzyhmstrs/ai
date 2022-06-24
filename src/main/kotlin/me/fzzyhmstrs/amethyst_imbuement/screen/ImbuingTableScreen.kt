@@ -11,10 +11,8 @@ import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Matrix4f
@@ -302,14 +300,14 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             val list = Lists.newArrayList<Text>()
             if (handler.imbueId[j] == 0 && handler.modId[j] == 0){
                 val enchantment = if (handler.levelLow[j] > 0){
-                    list.add(TranslatableText("container.imbuing_table.level_low").formatted(Formatting.RED))
+                    list.add(Text.translatable("container.imbuing_table.level_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j])
                 } else {
                     Enchantment.byRawId(handler.enchantmentId[j])
                 }
                 if (enchantment != null) {
                     list.add(
-                        TranslatableText(
+                        Text.translatable(
                             "container.enchant.clue",
                             enchantment.getName(l)
                         ).formatted(Formatting.WHITE)
@@ -319,22 +317,22 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 }
                 if (handler.levelLow[j] <= 0){
                     if (!bl) {
-                        list.add(LiteralText.EMPTY)
+                        list.add(Text.empty())
                         if (player.experienceLevel < k) {
                             list.add(
-                                TranslatableText(
+                                Text.translatable(
                                     "container.enchant.level.requirement",
                                     handler.enchantmentPower[j]
                                 ).formatted(Formatting.RED)
                             )
                         } else {
-                            val mutableText = if (m == 1) TranslatableText("container.enchant.lapis.one") else TranslatableText(
+                            val mutableText = if (m == 1) Text.translatable("container.enchant.lapis.one") else Text.translatable(
                                 "container.enchant.lapis.many",
                                 m
                             )
                             list.add(mutableText.formatted(if (i >= m) Formatting.GRAY else Formatting.RED))
                             val mutableText2 =
-                                if (m == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                                if (m == 1) Text.translatable("container.enchant.level.one") else Text.translatable(
                                     "container.enchant.level.many",
                                     m
                                 )
@@ -346,15 +344,15 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 if(handler.imbueId[j] < 0) {
                     val textName: MutableText = Registry.ITEM.get(handler.imbueId[j]*-1).name as MutableText
                     //println(textName.toString())
-                    list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
-                    list.add(LiteralText.EMPTY)
+                    list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                    list.add(Text.empty())
                 } else if (handler.imbueId[j] > 0){
                     if (Registry.ENCHANTMENT.get(handler.imbueId[j]) != null) {
                         val textName: MutableText =
                             Registry.ENCHANTMENT.get(handler.imbueId[j])?.getName(1) as MutableText
                         //println(textName.toString())
-                        list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
-                        list.add(LiteralText.EMPTY)
+                        list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                        list.add(Text.empty())
 
                     }
                 }
@@ -362,25 +360,25 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j])
                     val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
                     //println(textName.toString())
-                    list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
-                    list.add(LiteralText.EMPTY)
+                    list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                    list.add(Text.empty())
                 } else if(handler.modId[j] < 0){
                     val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j] * -1)
                     val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
-                    list.add(TranslatableText("container.imbuing_table.modifier_max").formatted(Formatting.RED))
-                    list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
-                    list.add(LiteralText.EMPTY)
+                    list.add(Text.translatable("container.imbuing_table.modifier_max").formatted(Formatting.RED))
+                    list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                    list.add(Text.empty())
                 }
                 if (player.experienceLevel < k) {
                     list.add(
-                        TranslatableText(
+                        Text.translatable(
                             "container.enchant.level.requirement",
                             handler.enchantmentPower[j]
                         ).formatted(Formatting.RED)
                     )
                 } else{
                     val mutableText2 =
-                        if (k == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                        if (k == 1) Text.translatable("container.enchant.level.one") else Text.translatable(
                             "container.enchant.level.many",
                             k
                         )

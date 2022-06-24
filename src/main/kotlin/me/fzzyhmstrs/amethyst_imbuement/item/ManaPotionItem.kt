@@ -13,7 +13,6 @@ import net.minecraft.item.PotionItem
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
@@ -54,7 +53,7 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
             }
             user.inventory.insertStack(ItemStack(Items.GLASS_BOTTLE))
         }
-        world.emitGameEvent(user as Entity, GameEvent.DRINKING_FINISH, user.getCameraBlockPos())
+        world.emitGameEvent(user as Entity, GameEvent.DRINK, user.eyePos)
         return stack
     }
 
@@ -77,7 +76,7 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        tooltip.add(TranslatableText("item.amethyst_imbuement.mana_potion.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
+        tooltip.add(Text.translatable("item.amethyst_imbuement.mana_potion.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
     }
 
     override fun hasGlint(stack: ItemStack?): Boolean {

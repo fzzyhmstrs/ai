@@ -20,7 +20,7 @@ object TryBucketReplacer {
     fun tryBucket(player: PlayerEntity, hand: Hand, entity: LivingEntity): Optional<ActionResult> {
         val itemStack = player.getStackInHand(hand)
         if (itemStack.item === Items.WATER_BUCKET && entity.isAlive) {
-            entity.playSound((entity as Bucketable).bucketedSound, 1.0f, 1.0f)
+            entity.playSound((entity as Bucketable).bucketFillSound, 1.0f, 1.0f)
             val itemStack2 = (entity as Bucketable).bucketItem
             (entity as Bucketable).copyDataToStack(itemStack2)
             val itemStack3 = exchangeInfinityStacks(itemStack, player, itemStack2)

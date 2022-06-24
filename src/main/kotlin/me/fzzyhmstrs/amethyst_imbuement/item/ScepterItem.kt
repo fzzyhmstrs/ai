@@ -25,10 +25,8 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.*
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
@@ -68,26 +66,26 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
         val nbt = stack.orCreateNbt
         val activeSpell = if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
             val activeEnchantId = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(), nbt)
-            TranslatableText("enchantment.amethyst_imbuement.${Identifier(activeEnchantId).path}")
+            Text.translatable("enchantment.amethyst_imbuement.${Identifier(activeEnchantId).path}")
         } else {
-            TranslatableText("enchantment.amethyst_imbuement.none")
+            Text.translatable("enchantment.amethyst_imbuement.none")
         }
-        tooltip.add(TranslatableText("scepter.active_spell").formatted(Formatting.GOLD).append(activeSpell.formatted(Formatting.GOLD)))
+        tooltip.add(Text.translatable("scepter.active_spell").formatted(Formatting.GOLD).append(activeSpell.formatted(Formatting.GOLD)))
         val stats = ScepterObject.getScepterStats(stack)
-        val furyText = TranslatableText("scepter.fury.lvl").string + stats[0].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[3],stats[0]).toString()
-        tooltip.add(LiteralText(furyText).formatted(SpellType.FURY.fmt()))
-        val graceText = TranslatableText("scepter.grace.lvl").string + stats[1].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[4],stats[1]).toString()
-        tooltip.add(LiteralText(graceText).formatted(SpellType.GRACE.fmt()))
-        val witText = TranslatableText("scepter.wit.lvl").string + stats[2].toString() + TranslatableText("scepter.xp").string + ScepterObject.xpToNextLevel(stats[5],stats[2]).toString()
-        tooltip.add(LiteralText(witText).formatted(SpellType.WIT.fmt()))
+        val furyText = Text.translatable("scepter.fury.lvl").string + stats[0].toString() + Text.translatable("scepter.xp").string + ScepterObject.xpToNextLevel(stats[3],stats[0]).toString()
+        tooltip.add(Text.literal(furyText).formatted(SpellType.FURY.fmt()))
+        val graceText = Text.translatable("scepter.grace.lvl").string + stats[1].toString() + Text.translatable("scepter.xp").string + ScepterObject.xpToNextLevel(stats[4],stats[1]).toString()
+        tooltip.add(Text.literal(graceText).formatted(SpellType.GRACE.fmt()))
+        val witText = Text.translatable("scepter.wit.lvl").string + stats[2].toString() + Text.translatable("scepter.xp").string + ScepterObject.xpToNextLevel(stats[5],stats[2]).toString()
+        tooltip.add(Text.literal(witText).formatted(SpellType.WIT.fmt()))
         val modifierList = ScepterObject.getModifiers(stack)
         if (modifierList.isNotEmpty()){
-            val modifierText = TranslatableText("scepter.modifiers").formatted(Formatting.GOLD)
+            val modifierText = Text.translatable("scepter.modifiers").formatted(Formatting.GOLD)
 
             val itr = modifierList.asIterable().iterator()
             while(itr.hasNext()){
                 val mod = itr.next()
-                modifierText.append(TranslatableText("scepter.modifiers.${mod}").formatted(Formatting.GOLD))
+                modifierText.append(Text.translatable("scepter.modifiers.${mod}").formatted(Formatting.GOLD))
                 if (itr.hasNext()){
                     modifierText.append(commaText)
                 }
@@ -267,7 +265,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
     companion object SI {
 
         val SCEPTER_SMOKE_PACKET = Identifier(AI.MOD_ID,"scepter_smoke_packet")
-        val commaText: MutableText = LiteralText(", ").formatted(Formatting.GOLD)
+        val commaText: MutableText = Text.literal(", ").formatted(Formatting.GOLD)
 
         fun registerClient(){
             ClientPlayNetworking.registerGlobalReceiver(SCEPTER_SMOKE_PACKET) { minecraftClient: MinecraftClient, _, _, _ ->
@@ -302,8 +300,8 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             } else {
                 user.getYaw(client.tickDelta)
             }
-            val fov = MathHelper.clamp(client.options.fov,30.0,110.0)
-            return scepterParticlePos(pos, width, yaw, perspective, fov)
+            val fov = MathHelper.clamp(client.options.fov.value,30,110)
+            return scepterParticlePos(pos, width, yaw, perspective, fov.toDouble())
         }
 
         private fun scepterParticlePos(pos: Vec3d, width: Float, yaw: Float, perspective: Perspective, fov: Double): Vec3d{

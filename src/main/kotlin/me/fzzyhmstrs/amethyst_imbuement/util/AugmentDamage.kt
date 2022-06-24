@@ -6,8 +6,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.world.World
 
 interface AugmentDamage {
@@ -16,7 +15,7 @@ interface AugmentDamage {
         world: World,
         entity: PlayerEntity,
         amount: Int,
-        message: String = TranslatableText("augment_damage.check_can_use").toString()
+        message: String = Text.translatable("augment_damage.check_can_use").toString()
     ): Boolean {
         val damage = stack.damage
         val maxDamage = stack.maxDamage
@@ -33,7 +32,7 @@ interface AugmentDamage {
                     1.0F,
                     1.0F
                 )
-                entity.sendMessage(LiteralText(message),false)
+                entity.sendMessage(Text.literal(message),false)
             }
             false
         }
@@ -43,7 +42,7 @@ interface AugmentDamage {
         stack: ItemStack,
         aug: Enchantment,
         entity: PlayerEntity,
-        message: String = TranslatableText("augment_damage.burnout").append(aug.getName(1)).toString()) {
+        message: String = Text.translatable("augment_damage.burnout").append(aug.getName(1)).toString()) {
         val enchantList = EnchantmentHelper.get(stack)
         val newEnchantList: MutableMap<Enchantment, Int> = mutableMapOf()
         for (enchant in enchantList.keys) {
@@ -52,7 +51,7 @@ interface AugmentDamage {
             }
         }
         if (message != "") {
-            entity.sendMessage(LiteralText(message),false)
+            entity.sendMessage(Text.literal(message),false)
         }
         EnchantmentHelper.set(newEnchantList, stack)
     }
@@ -62,7 +61,7 @@ interface AugmentDamage {
         world: World,
         entity: PlayerEntity,
         amount: Int,
-        message: String = TranslatableText("augment_damage.damage").toString(), unbreakingFlag: Boolean = false): Boolean {
+        message: String = Text.translatable("augment_damage.damage").toString(), unbreakingFlag: Boolean = false): Boolean {
         val currentDmg = stack.damage
         val maxDmg = stack.maxDamage
         var newCurrentDmg = currentDmg
@@ -89,7 +88,7 @@ interface AugmentDamage {
                     1.0F
                 )
                 if (message != "") {
-                    entity.sendMessage(LiteralText(message),false)
+                    entity.sendMessage(Text.literal(message),false)
                 }
             }
             if (newCurrentDmg == (maxDmg - 1)) {
