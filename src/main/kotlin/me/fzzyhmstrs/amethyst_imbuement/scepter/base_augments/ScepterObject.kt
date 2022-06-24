@@ -423,22 +423,15 @@ object ScepterObject: AugmentDamage {
 
     fun bookOfLoreNbtGenerator(tier: LoreTier = LoreTier.ANY_TIER): NbtCompound{
         val nbt = NbtCompound()
-        val aug =  when (tier){
-            LoreTier.ANY_TIER ->{
-                getRandBookOfLoreAugment(bookOfLoreListT12)
-            }
-            LoreTier.LOW_TIER ->{
-                getRandBookOfLoreAugment(bookOfLoreListT1)
-            }
-            LoreTier.HIGH_TIER ->{
-                getRandBookOfLoreAugment(bookOfLoreListT2)
-            }
-            else->{
-                fallbackAugment
-            }
-        }
+        val aug = getRandBookOfLoreAugment(tier.list())
         nbt.putString(NbtKeys.LORE_KEY.str(),aug)
         return nbt
+    }
+    private fun getRandBookOfLoreAugment(list: List<String>): String{
+        if (list.isEmpty()) return fallbackAugment
+        val rndMax = list.size
+        val rndIndex = AI.aiRandom().nextInt(rndMax)
+        return list[rndIndex]
     }
 
     fun registerAugmentStat(id: String, dataPoint: AugmentDatapoint, overwrite: Boolean = false){
@@ -720,12 +713,7 @@ object ScepterObject: AugmentDamage {
     private fun checkXpForLevelUp(xp:Int,lvl:Int): Boolean{
         return (xp > (2 * lvl * lvl + 40 * lvl))
     }
-    private fun getRandBookOfLoreAugment(list: MutableList<String>): String{
-        if (list.isEmpty()) return fallbackAugment
-        val rndMax = list.size
-        val rndIndex = AI.aiRandom().nextInt(rndMax)
-        return list[rndIndex]
-    }
+
     private fun getStatsHelper(nbt: NbtCompound): IntArray{
         val stats = intArrayOf(0,0,0,0,0,0)
         if(!nbt.contains("FURY_lvl")){

@@ -23,8 +23,8 @@ class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlay
         return display
     }
 
-    override fun populateRecipeFinder(menu: ImbuingTableScreenHandler, finder: RecipeFinder) {
-        menu.populateRecipeFinder(finder)
+    override fun populateRecipeFinder(context: MenuInfoContext<ImbuingTableScreenHandler, *, ImbuingTableDisplay>, finder: RecipeFinder) {
+        context.menu.populateRecipeFinder(finder)
     }
 
     override fun getRecipeFinderPopulator(): RecipeFinderPopulator<ImbuingTableScreenHandler, ImbuingTableDisplay> {
@@ -33,7 +33,7 @@ class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlay
             for (inventoryStack in getInventorySlots(context)) {
                 finder.addItem(inventoryStack.itemStack)
             }
-            populateRecipeFinder(context.menu, finder)
+            populateRecipeFinder(context, finder)
         }
     }
 }

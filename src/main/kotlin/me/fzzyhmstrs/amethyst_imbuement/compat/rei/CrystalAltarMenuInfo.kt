@@ -23,7 +23,10 @@ class CrystalAltarMenuInfo(private val display: CrystalAltarDisplay): SimplePlay
         return display
     }
 
-    override fun populateRecipeFinder(menu: CrystalAltarScreenHandler, finder: RecipeFinder) {
-        menu.populateRecipeFinder(finder)
+    override fun populateRecipeFinder(
+        context: MenuInfoContext<CrystalAltarScreenHandler, *, CrystalAltarDisplay>,
+        finder: RecipeFinder
+    ) {
+        context.menu.populateRecipeFinder(finder)
     }
 }

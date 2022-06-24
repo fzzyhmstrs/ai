@@ -67,7 +67,7 @@ dependencies {
     modImplementation("maven.modrinth:Wd844r7Q:1.19-01"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:Wd844r7Q:1.19.01")
+    include("maven.modrinth:Wd844r7Q:1.19-01")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")

@@ -28,11 +28,13 @@
         "value": "me.fzzyhmstrs.amethyst_imbuement.AIClient"
       }
     ],
-    "rei": [
+    "rei_client": [
       {
         "adapter": "kotlin",
         "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.ReiPlugin"
-      },
+      }
+    ],
+    "rei_server": [
       {
         "adapter": "kotlin",
         "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.ReiServerPlugin"
