@@ -230,6 +230,11 @@ class ImbuingTableScreenHandler(
                             enchantmentLevel[j] = enchantmentLevelEntry.level
                             ++j
                         }
+                    } else {
+                        for (i in 0..2) {
+                            enchantmentPower[i] = 0
+                            enchantmentLevel[i] = -1
+                        }
                     }
                     sendContentUpdates()
                 }
