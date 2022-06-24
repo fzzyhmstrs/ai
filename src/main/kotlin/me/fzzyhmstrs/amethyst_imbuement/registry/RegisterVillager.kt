@@ -20,18 +20,17 @@ import net.minecraft.util.registry.RegistryKey
 import net.minecraft.village.TradeOffer
 import net.minecraft.village.TradeOffers
 import net.minecraft.village.VillagerProfession
-import java.util.*
 
 object RegisterVillager {
 
-    private val CRYSTAL_WITCH_POI_IDENTIFIER = Identifier(AI.MOD_ID,"crystal_altar_poi")
-    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(CRYSTAL_WITCH_POI_IDENTIFIER,1,1,RegisterBlock.CRYSTAL_ALTAR)
-    private val CRYSTAL_ALTAR_POI_KEY = RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, CRYSTAL_WITCH_POI_IDENTIFIER)
+    private val CRYSTAL_WITCH_IDENTIFIER = Identifier(AI.MOD_ID,"crystal_witch")
+    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(CRYSTAL_WITCH_IDENTIFIER,1,1,RegisterBlock.CRYSTAL_ALTAR)
+    private val CRYSTAL_ALTAR_POI_KEY = RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, CRYSTAL_WITCH_IDENTIFIER)
     private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(
-        CRYSTAL_ALTAR_POI_KEY).id(Identifier(AI.MOD_ID,"crystal_witch")).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
+        Registry.POINT_OF_INTEREST_TYPE.getKey(CRYSTAL_ALTAR_POINT_OF_INTEREST).get()).id(CRYSTAL_WITCH_IDENTIFIER).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
 
     fun registerAll(){
-        Registry.register(Registry.VILLAGER_PROFESSION, Identifier(AI.MOD_ID,"crystal_witch") , CRYSTAL_WITCH)
+        Registry.register(Registry.VILLAGER_PROFESSION, CRYSTAL_WITCH_IDENTIFIER , CRYSTAL_WITCH)
 
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.QUARTZ,16,Items.EMERALD,1,16,2))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.LAPIS_LAZULI,22,Items.EMERALD,1,12,2))}
