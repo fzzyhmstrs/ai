@@ -200,8 +200,9 @@ class ImbuingTableScreenHandler(
                             enchantmentPower[i] = 0
                             enchantmentLevel[i] = -1
                         }
-                    } else if (AiConfig.altars.imbuingTableEnchantingEnabled) {
+                    } else if (AiConfig.altars.imbuingTableEnchantingEnabled && checkLapisAndSlots(inventory)) {
                         val i = checkBookshelves(world, pos)
+
                         random.setSeed(seed.get().toLong())
                         var j = 0
                         while (j < 3) {
@@ -551,6 +552,12 @@ class ImbuingTableScreenHandler(
             ++j
         }
         return i
+    }
+    private fun checkLapisAndSlots(inventory: Inventory): Boolean{
+        for (i in intArrayOf(0,1,2,3,4,5,8,9,10,11,12)){
+            if (!inventory.getStack(i).isEmpty) return false
+        }
+        return (inventory.getStack(7).isEmpty || inventory.getStack(7).isOf(Items.LAPIS_LAZULI))
     }
 
     fun populateRecipeFinder(finder: RecipeFinder) {
