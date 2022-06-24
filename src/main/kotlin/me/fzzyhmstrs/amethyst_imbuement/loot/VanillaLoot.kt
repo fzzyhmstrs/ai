@@ -32,27 +32,27 @@ object VanillaLoot: AbstractModLoot {
             val poolBuilder = LootPool.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
                 .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(40))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(10)).apply(
+                .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(10).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(10).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(10).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(10).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
                 .with(ItemEntry.builder(Items.AIR).weight(40))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_FLETCHER_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
-                .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1)).apply(
+                .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
                 .with(ItemEntry.builder(Items.AIR).weight(9))
             table.pool(poolBuilder)
             return true
@@ -164,9 +164,9 @@ object VanillaLoot: AbstractModLoot {
                 .with(
                     ItemEntry.builder(RegisterItem.GLISTERING_TRIDENT).weight(6).apply(
                         EnchantWithLevelsLootFunction.builder(
-                            ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments())).apply(
-                    SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.05f, 0.35f)))
+                            ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
+                        SetDamageLootFunction.builder(
+                            UniformLootNumberProvider.create(0.05f, 0.35f))))
                 .with(ItemEntry.builder(Items.AIR).weight(12))
             table.pool(poolBuilder)
             return true
@@ -224,12 +224,12 @@ object VanillaLoot: AbstractModLoot {
             .with(
                 ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(3).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments())).apply(
+                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(
+                        UniformLootNumberProvider.create(0.05f, 0.35f))))
+            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
-            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(5)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
+                    UniformLootNumberProvider.create(0.05f, 0.35f))))
             .with(ItemEntry.builder(RegisterItem.TOTEM_OF_AMETHYST).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))
             .with(ItemEntry.builder(Items.AIR).weight(10))
@@ -242,12 +242,12 @@ object VanillaLoot: AbstractModLoot {
             .with(
                 ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments())).apply(
+                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(
+                        UniformLootNumberProvider.create(0.05f, 0.35f))))
+            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(3).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
-            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(3)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
+                    UniformLootNumberProvider.create(0.05f, 0.35f))))
             .with(ItemEntry.builder(Items.AIR).weight(5))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
@@ -270,7 +270,7 @@ object VanillaLoot: AbstractModLoot {
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(5))
             .with(ItemEntry.builder(Items.AIR).weight(10))
         table.pool(poolBuilder2)
-        val poolBuilder3 = RegisterLoot.tierTwoGemPool(2.0F, 0.333F)
+        val poolBuilder3 = RegisterLoot.tierTwoGemPool(2.0F, 0.25F)
         table.pool(poolBuilder3)
     }
 
@@ -313,21 +313,21 @@ object VanillaLoot: AbstractModLoot {
     fun shipwreckSupplyLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.GARNET_SWORD).weight(5)).apply(
+            .with(ItemEntry.builder(RegisterItem.GARNET_SWORD).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_PICKAXE).weight(5)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterItem.GARNET_PICKAXE).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_AXE).weight(5)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterItem.GARNET_AXE).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_SHOVEL).weight(5)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterItem.GARNET_SHOVEL).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
             .with(ItemEntry.builder(Items.AIR).weight(25))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
@@ -418,38 +418,37 @@ object VanillaLoot: AbstractModLoot {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(4)).apply(
+            .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(4).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(4)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(4).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(4)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(4).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(4)).apply(
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(4).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(ItemEntry.builder(Items.AIR).weight(40))
         table.pool(poolBuilder2)
         val poolBuilder3 = LootPool.builder()
@@ -535,23 +534,23 @@ object VanillaLoot: AbstractModLoot {
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments())).apply(
-                SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f)))
+                        UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
             .with(ItemEntry.builder(Items.AIR).weight(24))
         table.pool(poolBuilder2)
         val poolBuilder3 = RegisterLoot.tierTwoGemPool(3.0F, 1.0F)
