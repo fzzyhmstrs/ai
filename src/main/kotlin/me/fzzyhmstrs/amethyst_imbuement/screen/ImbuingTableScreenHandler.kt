@@ -561,9 +561,6 @@ class ImbuingTableScreenHandler(
     }
     private fun checkLapisAndSlots(inventory: Inventory): Boolean{
         for (i in intArrayOf(0,1,2,3,4,5,8,9,10,11,12)){
-            println(inventory.getStack(i))
-            println(inventory.getStack(i).isEmpty)
-            println(i)
             if (!inventory.getStack(i).isEmpty) return false
         }
         return (inventory.getStack(7).isEmpty || inventory.getStack(7).isOf(Items.LAPIS_LAZULI))
