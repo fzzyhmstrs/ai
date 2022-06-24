@@ -48,34 +48,34 @@ dependencies {
     val fabricKotlinVersion: String by project
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:8.0.442")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:9.0.491")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
 
-    modImplementation("dev.emi:trinkets:3.3.0"){
+    modImplementation("dev.emi:trinkets:3.4.0"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("dev.emi:trinkets:3.3.0")
+    include("dev.emi:trinkets:3.4.0")
 
-    modImplementation("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
+    modImplementation("vazkii.patchouli:Patchouli:1.19-73-FABRIC"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC")
+    include("vazkii.patchouli:Patchouli:1.19-73-FABRIC")
 
     modImplementation("maven.modrinth:Wd844r7Q:1.18.2-02"){
         exclude("net.fabricmc.fabric-api")
     }
     include("maven.modrinth:Wd844r7Q:1.18.2-02")
 
-    modImplementation("maven.modrinth:coloredglowlib:1.3.0"){
+    modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:coloredglowlib:1.3.0")
+    include("maven.modrinth:coloredglowlib:1.3.4")
 
-    modImplementation("io.github.ladysnake:PlayerAbilityLib:1.5.0"){
+    modImplementation("io.github.ladysnake:PlayerAbilityLib:1.6.0"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
+    include("io.github.ladysnake:PlayerAbilityLib:1.6.0")
 }
 
 tasks {
