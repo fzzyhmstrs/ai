@@ -5,6 +5,7 @@ import net.minecraft.nbt.NbtList
 import net.minecraft.util.math.BlockPos
 import java.util.function.Predicate
 
+@Deprecated("moving to amethyst_core")
 object Nbt {
 
     fun writeBoolNbt(key: String, state: Boolean, nbt: NbtCompound) {

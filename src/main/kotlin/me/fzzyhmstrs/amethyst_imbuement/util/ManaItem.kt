@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack
 import kotlin.math.max
 import kotlin.math.min
 
+@Deprecated("moving to amethyst_core")
 interface ManaItem {
 
     //interface used for type comparison

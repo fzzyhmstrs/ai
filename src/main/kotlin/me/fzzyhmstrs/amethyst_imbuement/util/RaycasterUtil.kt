@@ -15,7 +15,7 @@ import java.util.*
 import kotlin.math.acos
 import kotlin.math.min
 
-
+@Deprecated("moving to amethyst_core")
 object RaycasterUtil {
 
     fun raycastHit(distance: Double = 4.5,entity: Entity, includeFluids: Boolean = false): HitResult? {

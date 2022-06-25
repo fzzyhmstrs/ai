@@ -9,6 +9,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.world.World
 
+@Deprecated("moving to amethyst_core")
 interface AugmentDamage {
     fun checkCanUseHandler(
         stack: ItemStack,

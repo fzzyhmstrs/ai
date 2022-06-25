@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+@Deprecated("moving to amethyst_core")
 enum class NbtKeys {
 
     TOTEM{

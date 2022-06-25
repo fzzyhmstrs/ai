@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import net.minecraft.util.Formatting
 
+@Deprecated("moving to amethyst_core")
 enum class SpellType {
     FURY{
         override fun str(): String {

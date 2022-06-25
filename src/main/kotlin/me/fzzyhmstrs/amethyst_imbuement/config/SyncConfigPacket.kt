@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.util.Identifier
 
+@Deprecated("moving to amethyst_core")
 object SyncConfigPacket {
 
     private val SYNC_CONFIG_PACKET = Identifier(AI.MOD_ID,"sync_config_packet")

@@ -19,6 +19,7 @@ object AugmentModifierDefaults{
     val blankId = Identifier(AI.MOD_ID,"blank_modifier")
     val EMPTY = AugmentModifier(blankId)
     val EMPTY_COMPILED = CompiledAugmentModifier(blankId)
+    val BLANK_COMPILED_DATA = CompiledAugmentModifier.CompiledModifiers(listOf(), EMPTY_COMPILED)
 }
 
 
@@ -160,7 +161,9 @@ class CompiledAugmentModifier(
             xpModifier.plus(am.getXpModifiers())
             effects.plus(am.getEffectModifier())
         }
-    }
+
+    data class CompiledModifiers(val modifiers: List<AugmentModifier>, val compiledData: CompiledAugmentModifier)
+}
 
 data class AugmentEffect(
     private var damageData: PerLvlF = PerLvlF(),
