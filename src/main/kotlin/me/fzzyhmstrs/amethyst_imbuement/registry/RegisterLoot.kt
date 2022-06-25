@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import kotlin.math.max
 
-
+@Deprecated("moving to amethyst_core")
 object RegisterLoot {
 
     private val modLoots: MutableList<AbstractModLoot> = mutableListOf()
@@ -40,6 +40,7 @@ object RegisterLoot {
         })
     }
 
+    @Deprecated("moving to amethyst_core")
     @Suppress("MemberVisibilityCanBePrivate")
     fun registerModLoot(modLoot: AbstractModLoot){
         modLoots.add(modLoot)

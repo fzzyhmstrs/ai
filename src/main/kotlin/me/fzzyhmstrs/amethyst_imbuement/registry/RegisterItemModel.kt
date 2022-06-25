@@ -37,6 +37,7 @@ import kotlin.reflect.jvm.javaField
 import kotlin.reflect.typeOf
 
 @Environment(value = EnvType.CLIENT)
+@Deprecated("moving to amethyst_core")
 object RegisterItemModel: SynchronousResourceReloader {
 
     private val fallbackId = ModelIdentifier("minecraft:trident_in_hand#inventory")
