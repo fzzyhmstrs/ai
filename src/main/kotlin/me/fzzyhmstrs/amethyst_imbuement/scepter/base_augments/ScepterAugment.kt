@@ -17,6 +17,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
+@Deprecated("moving to amethyst_core")
 abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, target: EnchantmentTarget, vararg slot: EquipmentSlot): Enchantment(Rarity.VERY_RARE, target,slot) {
     
     open val baseEffect = AugmentEffect()

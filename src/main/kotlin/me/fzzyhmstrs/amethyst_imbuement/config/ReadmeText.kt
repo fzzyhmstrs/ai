@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 import java.io.File
 import java.io.FileWriter
 
+@Deprecated("moving to amethyst_core")
 object ReadmeText {
 
     fun writeReadMe(file: String){

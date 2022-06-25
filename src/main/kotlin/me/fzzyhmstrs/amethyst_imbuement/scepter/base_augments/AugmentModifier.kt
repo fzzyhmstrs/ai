@@ -12,6 +12,7 @@ import java.util.function.Consumer
 import java.util.function.Predicate
 import kotlin.math.max
 
+@Deprecated("moving to amethyst_core")
 @Suppress("MemberVisibilityCanBePrivate", "CanBeParameter")
     //alternative version with the AugmentEffect directly included
 

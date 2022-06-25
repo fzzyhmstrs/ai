@@ -1,4 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
+@Deprecated("moving to amethyst_core")
 
 fun <T> MutableList<T>.addIfDistinct(element: T) {
     if (!this.contains(element)){

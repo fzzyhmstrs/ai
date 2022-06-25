@@ -293,6 +293,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,posX,posY,posZ,user.velocity.x,user.velocity.y + 0.5,user.velocity.z)
         }
 
+        @Deprecated("moving to amethyst_core")
         fun scepterParticlePos(client: MinecraftClient, user: LivingEntity): Vec3d{
             val pos = user.getCameraPosVec(client.tickDelta)
             val width = user.width
@@ -306,11 +307,13 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             return scepterParticlePos(pos, width, yaw, perspective, fov)
         }
 
+        @Deprecated("moving to amethyst_core")
         private fun scepterParticlePos(pos: Vec3d, width: Float, yaw: Float, perspective: Perspective, fov: Double): Vec3d{
             val offset: Vec3d = scepterOffset(perspective, fov)
             return playerParticlePos(pos, width, yaw, offset)
         }
 
+        @Deprecated("moving to amethyst_core")
         fun playerParticlePos(pos: Vec3d, width: Float, yaw: Float, offset: Vec3d): Vec3d{
             val posX = pos.x - (width + offset.x) * 0.5 * MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) - offset.z * MathHelper.cos(yaw * (Math.PI.toFloat() / 180))
             val posY = pos.y + offset.y
@@ -318,6 +321,7 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
             return Vec3d(posX, posY, posZ)
         }
 
+        @Deprecated("moving to amethyst_core")
         fun scepterOffset(perspective: Perspective, fov: Double): Vec3d{
             return when(perspective){
                 Perspective.FIRST_PERSON -> {
@@ -355,7 +359,4 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
 
         }
     }
-
-    data class EntityTaskInstance(val enchant: Enchantment,val user: LivingEntity, val level: Double, val hit: HitResult?)
-
 }

@@ -49,7 +49,9 @@ object ScepterObject: AugmentDamage {
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
     private val DUSTBIN = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt) },-1)
+    @Deprecated("moving to amethyst_core")
     val BLANK_EFFECT = AugmentEffect()
+    @Deprecated("moving to amethyst_core")
     val BLANK_XP_MOD = XpModifiers()
 
 
@@ -356,6 +358,7 @@ object ScepterObject: AugmentDamage {
         return aa
         }
 
+    @Deprecated("moving to amethyst_core")
     fun persistentEffectTicker(id: Int){
         val curTick = persistentEffectNeed[id]?:return
         val delay = persistentEffect[id]?.delay?:return
@@ -386,10 +389,12 @@ object ScepterObject: AugmentDamage {
         }
     }
 
+    @Deprecated("moving to amethyst_core")
     fun getPersistentTickerNeed(id:Int): Boolean{
         val chk = persistentEffectNeed[id]?:-1
         return (chk >= 0)
     }
+    @Deprecated("moving to amethyst_core")
     fun setPersistentTickerNeed(
         world: World, user: LivingEntity, 
         entityList: MutableList<Entity>, 
