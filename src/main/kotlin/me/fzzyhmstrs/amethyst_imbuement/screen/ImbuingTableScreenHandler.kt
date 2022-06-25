@@ -149,7 +149,7 @@ class ImbuingTableScreenHandler(
                             val augment = Registry.ENCHANTMENT.get(id)
                             if (augment != null) {
                                 val augCheck = if (augment is ScepterAugment){
-                                    val blA = augment.isAcceptableScepterItem(itemStack, player)
+                                    val blA = ScepterObject.isAcceptableScepterItem(augment,itemStack, player)
                                     val blB = augment.isAcceptableItem(itemStack)
                                     Pair(blA,blB)
                                 } else {
