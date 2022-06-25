@@ -90,14 +90,6 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
         return false
     }
 
-    fun isAcceptableScepterItem(stack: ItemStack, player: PlayerEntity): Boolean {
-        val nbt = stack.orCreateNbt
-        return ScepterObject.checkScepterStat(
-            nbt,
-            Registry.ENCHANTMENT.getId(this)?.toString() ?: ""
-        ) || player.abilities.creativeMode
-    }
-
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         acceptableItemStacks().forEach {
             if (stack.isOf(it.item)){
@@ -113,30 +105,6 @@ abstract class ScepterAugment(private val tier: Int, private val maxLvl: Int, ta
 
     fun getTier(): Int{
         return tier
-    }
-
-    fun registerAugmentStat(){
-        val id = EnchantmentHelper.getEnchantmentId(this)?.toString()?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
-        val imbueLevel = if (ScepterObject.checkAugmentStat(id)){
-            ScepterObject.getAugmentImbueLevel(id)
-        } else {
-            1
-        }
-        ScepterObject.registerAugmentStat(id,configAugmentStat(id,imbueLevel),true)
-    }
-
-    private fun configAugmentStat(id: String,imbueLevel: Int = 1): ScepterObject.AugmentDatapoint{
-        val stat = augmentStat(imbueLevel)
-        val augmentConfig = AiConfig.AugmentStats()
-        val type = stat.type
-        augmentConfig.id = id
-        augmentConfig.cooldown = stat.cooldown
-        augmentConfig.manaCost = stat.manaCost
-        augmentConfig.minLvl = stat.minLvl
-        val tier = stat.bookOfLoreTier
-        val item = stat.keyItem
-        val augmentAfterConfig = AiConfig.configAugment(this.javaClass.simpleName + AiConfig.augmentVersion +".json",augmentConfig)
-        return ScepterObject.AugmentDatapoint(type,augmentAfterConfig.cooldown,augmentAfterConfig.manaCost,augmentAfterConfig.minLvl,imbueLevel,tier,item)
     }
 
     abstract fun augmentStat(imbueLevel: Int = 1): ScepterObject.AugmentDatapoint

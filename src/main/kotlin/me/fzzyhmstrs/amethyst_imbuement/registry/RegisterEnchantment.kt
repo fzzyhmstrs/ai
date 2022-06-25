@@ -123,7 +123,7 @@ object RegisterEnchantment {
             val enchant = regEnchant[k]
             Registry.register(Registry.ENCHANTMENT, Identifier(AI.MOD_ID, k), enchant)
             if (enchant is ScepterAugment){
-                enchant.registerAugmentStat()
+                ScepterObject.registerAugmentStat(enchant)
             }
         }
 

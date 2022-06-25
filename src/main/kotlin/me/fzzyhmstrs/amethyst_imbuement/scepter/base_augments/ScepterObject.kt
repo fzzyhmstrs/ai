@@ -3,6 +3,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
@@ -335,6 +336,14 @@ object ScepterObject: AugmentDamage {
         return getStatsHelper(nbt)
     }
 
+    fun isAcceptableScepterItem(augment:ScepterAugment, stack: ItemStack, player: PlayerEntity): Boolean {
+        val nbt = stack.orCreateNbt
+        return ScepterObject.checkScepterStat(
+            nbt,
+            Registry.ENCHANTMENT.getId(augment)?.toString() ?: ""
+        ) || player.abilities.creativeMode
+    }
+
     fun resetCooldown(stack: ItemStack, activeEnchantId: String){
         val nbt = stack.nbt?: return
         val id: Int = nbtChecker(nbt)
@@ -441,6 +450,29 @@ object ScepterObject: AugmentDamage {
             dataPoint.bookOfLoreTier.addToList(id)
         }
     }
+    fun registerAugmentStat(augment: ScepterAugment){
+        val id = EnchantmentHelper.getEnchantmentId(augment)?.toString()?:throw NoSuchElementException("Enchantment ID for ${this.javaClass.canonicalName} not found!")
+        val imbueLevel = if (checkAugmentStat(id)){
+            getAugmentImbueLevel(id)
+        } else {
+            1
+        }
+        registerAugmentStat(id,configAugmentStat(augment,id,imbueLevel),true)
+    }
+
+    private fun configAugmentStat(augment: ScepterAugment,id: String,imbueLevel: Int = 1): AugmentDatapoint{
+        val stat = augment.augmentStat(imbueLevel)
+        val augmentConfig = AiConfig.AugmentStats()
+        val type = stat.type
+        augmentConfig.id = id
+        augmentConfig.cooldown = stat.cooldown
+        augmentConfig.manaCost = stat.manaCost
+        augmentConfig.minLvl = stat.minLvl
+        val tier = stat.bookOfLoreTier
+        val item = stat.keyItem
+        val augmentAfterConfig = AiConfig.configAugment(this.javaClass.simpleName + AiConfig.augmentVersion +".json",augmentConfig)
+        return ScepterObject.AugmentDatapoint(type,augmentAfterConfig.cooldown,augmentAfterConfig.manaCost,augmentAfterConfig.minLvl,imbueLevel,tier,item)
+    }
 
     fun checkAugmentStat(id: String): Boolean{
         return augmentStats.containsKey(id)
@@ -489,7 +521,7 @@ object ScepterObject: AugmentDamage {
         return (xpNext - xp + 1)
     }
 
-
+    @Deprecated("moving to amethyst_core")
     data class AugmentDatapoint(val type: SpellType = SpellType.NULL, val cooldown: Int = 20,
                                 val manaCost: Int = 20, val minLvl: Int = 1, val imbueLevel: Int = 1,
                                 val bookOfLoreTier: LoreTier = LoreTier.NO_TIER, val keyItem: Item = Items.AIR)
