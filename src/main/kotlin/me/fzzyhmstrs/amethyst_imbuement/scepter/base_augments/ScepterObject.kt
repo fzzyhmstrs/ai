@@ -22,7 +22,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtList
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayNetworkHandler
@@ -40,20 +39,16 @@ object ScepterObject: AugmentDamage {
 
     private val scepters: MutableMap<Int,MutableMap<String,Long>> = mutableMapOf()
     private val augmentStats: MutableMap<String, AugmentDatapoint> = mutableMapOf()
-    private val bookOfLoreListT1: MutableList<String> = mutableListOf()
-    private val bookOfLoreListT2: MutableList<String> = mutableListOf()
-    private val bookOfLoreListT12: MutableList<String> = mutableListOf()
     private val activeAugment: MutableMap<Int,String> = mutableMapOf()
     private val augmentApplied: MutableMap<Int,Int> = mutableMapOf()
     private val persistentEffect: MutableMap<Int, PersistentEffectData> = mutableMapOf()
     private val persistentEffectNeed: MutableMap<Int,Int> = mutableMapOf()
     private val augmentModifiers: MutableMap<Int,MutableList<Identifier>> = mutableMapOf()
-    private val activeScepterModifiers: MutableMap<Int, CompiledModifiers> = mutableMapOf()
+    private val activeScepterModifiers: MutableMap<Int, CompiledAugmentModifier.CompiledModifiers> = mutableMapOf()
     private val scepterHealTickers: MutableMap<Int,RegisterEvent.Ticker> = mutableMapOf()
     const val fallbackAugment = AI.MOD_ID+":magic_missile"
     private val SCEPTER_SYNC_PACKET = Identifier(AI.MOD_ID,"scepter_sync_packet")
     private val DUSTBIN = Dustbin({ dirt -> gatherActiveScepterModifiers(dirt) },-1)
-    private val BLANK_COMPILED_DATA = CompiledModifiers(listOf(),AugmentModifierDefaults.EMPTY_COMPILED)
     val BLANK_EFFECT = AugmentEffect()
     val BLANK_XP_MOD = XpModifiers()
 
@@ -471,7 +466,7 @@ object ScepterObject: AugmentDamage {
         val tier = stat.bookOfLoreTier
         val item = stat.keyItem
         val augmentAfterConfig = AiConfig.configAugment(this.javaClass.simpleName + AiConfig.augmentVersion +".json",augmentConfig)
-        return ScepterObject.AugmentDatapoint(type,augmentAfterConfig.cooldown,augmentAfterConfig.manaCost,augmentAfterConfig.minLvl,imbueLevel,tier,item)
+        return AugmentDatapoint(type,augmentAfterConfig.cooldown,augmentAfterConfig.manaCost,augmentAfterConfig.minLvl,imbueLevel,tier,item)
     }
 
     fun checkAugmentStat(id: String): Boolean{
@@ -528,7 +523,6 @@ object ScepterObject: AugmentDamage {
     private data class PersistentEffectData(val world: World, val user: LivingEntity,
                                             val entityList: MutableList<Entity>, val level: Int, val blockPos: BlockPos,
                                             val augment: PersistentAugment, var delay: Int, var duration: Int, val effect: AugmentEffect)
-    data class CompiledModifiers(val modifiers: List<AugmentModifier>, val compiledData: CompiledAugmentModifier)
 
     fun addModifier(modifier: Identifier, stack: ItemStack): Boolean{
         val nbt = stack.orCreateNbt
@@ -640,10 +634,10 @@ object ScepterObject: AugmentDamage {
         return augmentModifiers[id] ?: listOf()
     }
 
-    fun getActiveModifiers(stack: ItemStack): CompiledModifiers {
+    fun getActiveModifiers(stack: ItemStack): CompiledAugmentModifier.CompiledModifiers {
         val nbt = stack.orCreateNbt
         val id: Int = nbtChecker(nbt)
-        return activeScepterModifiers[id] ?: BLANK_COMPILED_DATA
+        return activeScepterModifiers[id] ?: AugmentModifierDefaults.BLANK_COMPILED_DATA
     }
 
     private fun checkDescendant(modifier: Identifier, scepter: Int): Identifier?{
@@ -704,7 +698,7 @@ object ScepterObject: AugmentDamage {
                 }
             }
         }
-        activeScepterModifiers[scepter] = CompiledModifiers(list, compiledModifier)
+        activeScepterModifiers[scepter] = CompiledAugmentModifier.CompiledModifiers(list, compiledModifier)
     }
 
     fun tickModifiers(){

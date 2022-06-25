@@ -6,6 +6,7 @@ fun <T> MutableList<T>.addIfDistinct(element: T) {
     }
 }
 
+@Deprecated("moving to amethyst_core")
 enum class LoreTier {
     LOW_TIER{
         private val bookOfLoreListT1: MutableList<String> =  mutableListOf()
