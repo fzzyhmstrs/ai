@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.tool
 
+@Deprecated("moving to amethyst_core")
 interface ScepterMaterialAddon {
 
     fun minCooldown(): Long{

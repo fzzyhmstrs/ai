@@ -34,6 +34,7 @@ object AiConfig {
 
     fun initConfig(){}
 
+    @Deprecated("moving to amethyst_core")
     inline fun <reified T> readOrCreate(file: String, child: String = "", configClass: () -> T): T {
         val (dir,dirCreated) = makeDir(child)
         if (!dirCreated) {
@@ -55,6 +56,7 @@ object AiConfig {
         }
     }
 
+    @Deprecated("moving to amethyst_core")
     @Suppress("UNUSED_PARAMETER")
     inline fun <reified T, reified P> readOrCreateUpdated(file: String, previous: String, child: String = "", configClass: () -> T, previousClass: () -> P): T{
         val (dir,dirCreated) = makeDir(child)
@@ -99,6 +101,7 @@ object AiConfig {
         return readOrCreate(file,"augments") {configClass}
     }
 
+    @Deprecated("moving to amethyst_core")
     fun makeDir(child:String = ""): Pair<File,Boolean>{
         val dir = if (child != ""){
             File(File(FabricLoader.getInstance().configDir.toFile(), AI.MOD_ID),child)
@@ -112,6 +115,7 @@ object AiConfig {
         return Pair(dir,true)
     }
 
+    @Deprecated("moving to amethyst_core")
     fun writeToClient(buf:PacketByteBuf){
         val gson = GsonBuilder().create()
         buf.writeString(gson.toJson(scepters))
@@ -119,6 +123,7 @@ object AiConfig {
         buf.writeString(gson.toJson(colors))
     }
 
+    @Deprecated("moving to amethyst_core")
     fun readFromServer(buf:PacketByteBuf){
         scepters = gson.fromJson(buf.readString(),Scepters::class.java)
         altars = gson.fromJson(buf.readString(),Altars::class.java)
@@ -287,6 +292,7 @@ object AiConfig {
         }
     }
 
+    @Deprecated("moving to amethyst_core")
     interface OldClass{
 
         fun generateNewClass(): Any

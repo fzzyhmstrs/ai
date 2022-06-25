@@ -357,7 +357,4 @@ open class ScepterItem(material: ToolMaterial, settings: Settings, vararg defaul
 
         }
     }
-
-    data class EntityTaskInstance(val enchant: Enchantment,val user: LivingEntity, val level: Double, val hit: HitResult?)
-
 }

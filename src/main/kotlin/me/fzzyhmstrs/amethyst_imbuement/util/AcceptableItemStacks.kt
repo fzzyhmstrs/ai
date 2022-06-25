@@ -9,6 +9,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.*
 import net.minecraft.util.registry.Registry
 
+@Deprecated("moving to amethyst_core")
 object AcceptableItemStacks {
     
     val scepterAcceptableMap: MutableMap<Int,MutableList<ItemStack>> = mutableMapOf()
