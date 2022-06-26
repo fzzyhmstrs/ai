@@ -17,19 +17,19 @@ object RegisterItem {
     private val regItem: MutableMap<String, Item> = mutableMapOf()
 
     //declaring the items to add to the game
-    val GOLDEN_HEART = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"golden_heart", false).also{ regItem["golden_heart"] = it}
+    val GOLDEN_HEART = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"golden_heart", false).also{ regItem["golden_heart"] = it}
     val STEEL_INGOT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["steel_ingot"] = it}
     val BERYL_COPPER_INGOT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["beryl_copper_ingot"] = it}
     val CITRINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["citrine"] = it}
-    val AMETRINE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"ametrine", false).also{ regItem["ametrine"] = it} // item is custom for flavor text
+    val AMETRINE = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"ametrine", false).also{ regItem["ametrine"] = it} // item is custom for flavor text
     val MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["moonstone"] = it}
     val OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["opal"] = it}
     val SMOKY_QUARTZ = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["smoky_quartz"] = it}
     val GARNET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["garnet"] = it}
     val DANBURITE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["danburite"] = it}
-    val CRYSTALLINE_HEART = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"crystalline_heart", true).also{ regItem["crystalline_heart"] = it} //item is custom for flavor text
-    val CELESTINE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"celestine", true).also{ regItem["celestine"] = it} // item is custom for flavor text. need texture
-    val BRILLIANT_DIAMOND = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"brilliant_diamond", false).also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
+    val CRYSTALLINE_HEART = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"crystalline_heart", true).also{ regItem["crystalline_heart"] = it} //item is custom for flavor text
+    val CELESTINE = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"celestine", true).also{ regItem["celestine"] = it} // item is custom for flavor text. need texture
+    val BRILLIANT_DIAMOND = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC),"brilliant_diamond", false).also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
     val IMBUED_LAPIS = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["imbued_lapis"] = it}
     val PYRITE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["pyrite"] = it}
     val IMBUED_QUARTZ = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["imbued_quartz"] = it}
@@ -58,9 +58,9 @@ object RegisterItem {
     val IMBUED_HEADBAND = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1),"imbued_headband").also{ regItem["imbued_headband"] = it}
     val IMBUED_AMULET = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1),"imbued_amulet").also{ regItem["imbued_amulet"] = it}
     val TOTEM_OF_AMETHYST = TotemItem(FabricItemSettings().group(ItemGroup.COMBAT).maxDamage(360).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
-    val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"iridescent_orb", false).also{ regItem["iridescent_orb"] = it}
-    val LUSTROUS_SPHERE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"lustrous_sphere", true).also{ regItem["lustrous_sphere"] = it}
-    val HEARTSTONE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"heartstone", true).also{ regItem["heartstone"] = it}
+    val IRIDESCENT_ORB = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"iridescent_orb", false).also{ regItem["iridescent_orb"] = it}
+    val LUSTROUS_SPHERE = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE),"lustrous_sphere", true).also{ regItem["lustrous_sphere"] = it}
+    val HEARTSTONE = CustomAiFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),"heartstone", true).also{ regItem["heartstone"] = it}
     val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1),"book_of_lore", false).also{ regItem["book_of_lore"] = it}
     val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1),"book_of_mythos", true).also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glistering_tome"] = it}

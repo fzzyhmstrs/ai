@@ -1,16 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_core.item_util.ManaItem
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
+import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentDamage
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
@@ -18,7 +21,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 @Suppress("SameParameterValue")
-class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
+class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
 
     private var lastGuardian = 0L
 
@@ -61,7 +64,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem{
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         if(world.isClient || entity !is PlayerEntity) return
-        if (RegisterEvent.ticker_totem.isNotReady()){
+        if (EventRegistry.ticker_30.isNotReady()){
             if (entity.abilities.flying) {
                 val count = BaseAugment.readCountFromQueue(entity.uuid,NbtKeys.ANGELIC.str())
                 BaseAugment.addCountToQueue(entity.uuid,NbtKeys.ANGELIC.str(),count + 1)

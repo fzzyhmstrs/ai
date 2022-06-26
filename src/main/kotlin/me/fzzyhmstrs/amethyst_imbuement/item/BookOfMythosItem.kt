@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
@@ -20,7 +20,7 @@ class BookOfMythosItem(settings: Settings, _ttn: String, _glint: Boolean) : Book
         if (world !is ServerWorld) return TypedActionResult.fail(stack)
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
-            val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.HIGH_TIER)
+            val nbtTemp = ScepterHelper.bookOfLoreNbtGenerator(LoreTier.HIGH_TIER)
             val enchant = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
             Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
             world.playSound(null,user.blockPos, SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.NEUTRAL,0.7f,1.0f)

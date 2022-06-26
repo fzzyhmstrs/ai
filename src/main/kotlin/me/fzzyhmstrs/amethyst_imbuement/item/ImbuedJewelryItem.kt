@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
