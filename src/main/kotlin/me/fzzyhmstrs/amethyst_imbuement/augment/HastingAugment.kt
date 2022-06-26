@@ -19,7 +19,7 @@ class HastingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
         val rnd = user.world.random.nextFloat()
         if (rnd <= 0.25) {
             if (TotemItem.damageHandler(stack, user.world, user as PlayerEntity, 1)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.HASTING,user, TranslatableText("augment_damage.hasting.burnout").toString())
+                TotemItem.burnOutHandler(stack, RegisterEnchantment.HASTING,user, TranslatableText("augment_damage.hasting.burnout"))
             }
         }
     }

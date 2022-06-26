@@ -7,13 +7,14 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.text.LiteralText
 
 class UndyingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         if (user !is PlayerEntity) return false
         if (TotemItem.damageHandler(stack, user.world, user, 360)) {
-            TotemItem.burnOutHandler(stack, RegisterEnchantment.UNDYING,user, "Undying augment burnt out!")
+            TotemItem.burnOutHandler(stack, RegisterEnchantment.UNDYING,user, LiteralText("Undying augment burnt out!"))
         }
         return true
     }

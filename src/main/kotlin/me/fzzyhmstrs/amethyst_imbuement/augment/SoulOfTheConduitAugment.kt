@@ -20,7 +20,7 @@ class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equip
                     stack,
                     RegisterEnchantment.SOUL_OF_THE_CONDUIT,
                     user,
-                    TranslatableText("augment_damage.soul_of_the_conduit.burnout").toString()
+                    TranslatableText("augment_damage.soul_of_the_conduit.burnout")
                 )
             }
         }

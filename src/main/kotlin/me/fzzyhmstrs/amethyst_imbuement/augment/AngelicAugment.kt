@@ -4,10 +4,10 @@ import io.github.ladysnake.pal.AbilitySource
 import io.github.ladysnake.pal.Pal
 import io.github.ladysnake.pal.PlayerAbility
 import io.github.ladysnake.pal.VanillaAbilities
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -27,7 +27,7 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
             if (!abilitySource.grants(user,ability)){
                 abilitySource.grantTo(user,ability)
             }
-            val count = readCountFromQueue(user.uuid,NbtKeys.ANGELIC.str())
+            val count = readCountFromQueue(user.uuid, NbtKeys.ANGELIC.str())
             if (count > 0){
                 val rnd = user.world.random.nextFloat()
                 val dmg: Int = if(count > 13) {

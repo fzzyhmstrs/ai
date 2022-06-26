@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentTarget
@@ -26,9 +26,6 @@ class HeadhunterAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
 
     @Suppress("SpellCheckingInspection")
     companion object {
-
-
-
         fun checkHeadhunterHit(target: Entity, arrow: PersistentProjectileEntity, amount: Float): Float {
             val y1: Double = arrow.y
             val y2: Double = target.eyeY
