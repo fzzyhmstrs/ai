@@ -21,7 +21,7 @@ class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot):
         val rndY = world.getTopY(Heightmap.Type.MOTION_BLOCKING,rndX,rndZ)
         if(TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 120, TranslatableText("augment_damage.escape.check_can_use"))) {
             if (TotemItem.damageHandler(stack, world, user, 120)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.ESCAPE,user, TranslatableText("augment_damage.escape.burnout").toString())
+                TotemItem.burnOutHandler(stack, RegisterEnchantment.ESCAPE,user, TranslatableText("augment_damage.escape.burnout"))
             }
             user.teleport(rndX.toDouble(), (rndY + 1).toDouble(), rndZ.toDouble())
             world.playSound(

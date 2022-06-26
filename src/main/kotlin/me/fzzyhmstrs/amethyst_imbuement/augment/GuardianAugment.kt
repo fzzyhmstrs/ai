@@ -18,7 +18,7 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         val world = user.world
         if (TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 240, TranslatableText("augment_damage.guardian.check_can_use"))) {
             if (TotemItem.damageHandler(stack, world, user, 240)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user, TranslatableText("augment_damage.guardian.burnout").toString())
+                TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user, TranslatableText("augment_damage.guardian.burnout"))
             }
             addStatusToQueue(user, StatusEffects.REGENERATION, 400, 0)
             addStatusToQueue(user, StatusEffects.RESISTANCE, 200, 0)
