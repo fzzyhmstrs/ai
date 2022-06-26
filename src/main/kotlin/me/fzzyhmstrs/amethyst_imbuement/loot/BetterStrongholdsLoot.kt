@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
+import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder

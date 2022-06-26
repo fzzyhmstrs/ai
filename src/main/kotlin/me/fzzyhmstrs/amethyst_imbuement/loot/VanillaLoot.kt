@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
+import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
@@ -15,6 +16,7 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
+@Suppress("MemberVisibilityCanBePrivate")
 object VanillaLoot: AbstractModLoot {
 
     override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean{

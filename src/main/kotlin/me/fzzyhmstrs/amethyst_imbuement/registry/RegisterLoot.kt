@@ -1,27 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.registry.LootRegistry.registerModLoot
 import me.fzzyhmstrs.amethyst_imbuement.loot.*
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback.LootTableSetter
-import net.minecraft.block.Blocks
 import net.minecraft.item.Items
-import net.minecraft.loot.LootManager
-import net.minecraft.loot.LootTables
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.function.*
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
-import net.minecraft.resource.ResourceManager
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import kotlin.math.max
 
-@Deprecated("moving to amethyst_core")
 object RegisterLoot {
 
-    private val modLoots: MutableList<AbstractModLoot> = mutableListOf()
 
     //private val COAL_ORE_LOOT_TABLE_ID = Blocks.CHEST.lootTableId
     fun registerAll(){
@@ -32,18 +21,6 @@ object RegisterLoot {
         registerModLoot(GraveyardLoot)
         registerModLoot(TowersOfTheWildReworkedLoot)
         registerModLoot(BetterDungeonsLoot)
-        LootTableLoadingCallback.EVENT.register(LootTableLoadingCallback { _: ResourceManager, _: LootManager, id: Identifier, table: FabricLootSupplierBuilder, _: LootTableSetter ->
-            if (modLoots.isEmpty()) return@LootTableLoadingCallback
-            for (modLoot in modLoots) {
-                if (modLoot.lootBuilder(id, table)) return@LootTableLoadingCallback
-            }
-        })
-    }
-
-    @Deprecated("moving to amethyst_core")
-    @Suppress("MemberVisibilityCanBePrivate")
-    fun registerModLoot(modLoot: AbstractModLoot){
-        modLoots.add(modLoot)
     }
 
     fun tierOneGemPool(maxCount: Float, overallChance: Float): FabricLootPoolBuilder {
