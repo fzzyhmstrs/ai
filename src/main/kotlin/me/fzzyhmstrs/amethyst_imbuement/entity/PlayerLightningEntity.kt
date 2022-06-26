@@ -1,9 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.Sets
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableDamageEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
@@ -25,7 +26,8 @@ import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import java.util.*
 
-class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world), ModifiableDamageEntity {
+class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world),
+    ModifiableDamageEntity {
 
     constructor(world: World): this(RegisterEntity.PLAYER_LIGHTNING, world)
 

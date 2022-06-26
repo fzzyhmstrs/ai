@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import me.fzzyhmstrs.amethyst_imbuement.model.DisenchantingTableBlockEntityRenderer.Companion.DISENCHANTING_TABLE_BOOK_SPRITE_ID
@@ -67,14 +68,6 @@ object RegisterRenderer {
             RegisterEntity.GLISTERING_TRIDENT_ENTITY
         ){context: EntityRendererFactory.Context ->
             GlisteringTridentEntityRenderer(
-                context
-            )
-        }
-
-        EntityRendererRegistry.register(
-            RegisterEntity.MISSILE_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            MissileEntityRenderer(
                 context
             )
         }

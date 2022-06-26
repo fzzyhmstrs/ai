@@ -21,8 +21,7 @@ import net.minecraft.world.World
 
 class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World, block: Block, age: Int, bp: BlockPos): LivingEntity(entityType,world) {
 
-    constructor(entityType: EntityType<DraconicBoxEntity>, world: World): this(entityType, world,Blocks.AIR,40, BlockPos(0,0,0)){
-    }
+    constructor(entityType: EntityType<DraconicBoxEntity>, world: World): this(entityType, world,Blocks.AIR,40, BlockPos(0,0,0))
 
     private var entityBlock: Block
     private var maxAge: Int
