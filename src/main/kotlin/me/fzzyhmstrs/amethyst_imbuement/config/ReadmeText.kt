@@ -1,27 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import java.io.File
-import java.io.FileWriter
+import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper
 
-@Deprecated("moving to amethyst_core")
-object ReadmeText {
+object ReadmeText: SyncedConfigHelper.ReadMeWriter {
 
-    fun writeReadMe(file: String){
-        val textLines: List<String> = readmeText()
-        val dirPair = AiConfig.makeDir()
-        if (!dirPair.second){
-            println("Couldn't make directory for storing the readme")
-        }
-        val f = File(dirPair.first,file)
-        val fw = FileWriter(f)
-        textLines.forEach {
-                value -> fw.write(value)
-            fw.write(System.getProperty("line.separator"))
-        }
-        fw.close()
-    }
-
-    fun readmeText(): List<String>{
+    override fun readmeText(): List<String>{
         return listOf(
             "README",
             "Amethyst Imbuement",
