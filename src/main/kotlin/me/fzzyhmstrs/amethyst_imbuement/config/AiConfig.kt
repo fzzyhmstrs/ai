@@ -6,15 +6,12 @@ import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.gson
 import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreate
 import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreateUpdated
 import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigPacketRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
-import java.io.File
 
 object AiConfig: SyncedConfigHelper.SyncedConfig {
 
@@ -140,6 +137,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         )
     }
 
+    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
     class ColorsV0: SyncedConfigHelper.OldClass{
 
         private var defaultColorMap: Map<String,String> = mapOf(
@@ -186,6 +184,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         }
     }
 
+    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
     class AltarsV0: SyncedConfigHelper.OldClass {
         var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
         var disenchantBaseDisenchantsAllowed: Int = 1
