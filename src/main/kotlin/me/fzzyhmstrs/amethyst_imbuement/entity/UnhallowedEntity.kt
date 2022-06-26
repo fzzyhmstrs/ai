@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*

@@ -1,8 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.base.MoreObjects
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableDamageEntity
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity

@@ -69,19 +69,6 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build()
     )
 
-    val MISSILE_ENTITY: EntityType<MissileEntity> = Registry.register(
-        Registry.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "missile_entity"),
-        FabricEntityTypeBuilder.create(
-            SpawnGroup.MISC
-        ) { entityType: EntityType<MissileEntity>, world: World ->
-            MissileEntity(
-                entityType,
-                world
-            )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
-    )
-
     val FLAMEBOLT_ENTITY: EntityType<FlameboltEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "flamebolt_entity"),
