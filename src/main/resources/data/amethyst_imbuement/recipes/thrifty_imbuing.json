@@ -26,6 +26,6 @@
   },
   "title": "Thrifty Modifier",
   "cost": 19,
-  "augment": "amethyst_imbuement:lesser_thrifty"
+  "augment": "amethyst_core:lesser_thrifty"
 }
 

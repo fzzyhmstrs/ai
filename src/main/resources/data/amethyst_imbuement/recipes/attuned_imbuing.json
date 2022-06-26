@@ -26,6 +26,6 @@
   },
   "title": "Attuned Modifier",
   "cost": 11,
-  "augment": "amethyst_imbuement:lesser_attuned"
+  "augment": "amethyst_core:lesser_attuned"
 }
 
