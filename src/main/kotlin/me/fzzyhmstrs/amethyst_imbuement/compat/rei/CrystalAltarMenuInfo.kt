@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
-import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import me.shedaniel.rei.api.common.transfer.info.MenuInfoContext
 import me.shedaniel.rei.api.common.transfer.info.simple.SimplePlayerInventoryMenuInfo

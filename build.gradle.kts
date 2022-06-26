@@ -35,6 +35,9 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
+    }
     mavenCentral()
 }
 dependencies {
@@ -53,6 +56,8 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:9.0.491")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
+
+    modImplementation(":amethyst_core-0.1.0+1.19")
 
     modImplementation("dev.emi:trinkets:3.4.0"){
         exclude("net.fabricmc.fabric-api")
