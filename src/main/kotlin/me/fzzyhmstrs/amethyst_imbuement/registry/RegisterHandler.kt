@@ -25,7 +25,7 @@ object RegisterHandler {
             )
         }
 
-        ALTAR_OF_EXPERIENCE_SCREEN_HANDLER = ScreenHandlerType() { syncID: Int, playerInventory: PlayerInventory ->
+        ALTAR_OF_EXPERIENCE_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
             AltarOfExperienceScreenHandler(
                 syncID,
                 playerInventory

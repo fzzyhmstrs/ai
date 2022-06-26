@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.advancement.criterion.Criteria
@@ -175,15 +175,15 @@ class ImbuingTableScreenHandler(
                                 }else{
                                     enchantmentPower[0] = 0
                                 }
-                            }else if (RegisterModifier.ENTRIES.isModifier(id)) {
-                                val modifier = RegisterModifier.ENTRIES.get(id)
+                            }else if (ModifierRegistry.isModifier(id)) {
+                                val modifier = ModifierRegistry.get(id)
                                 val blA = modifier?.isAcceptableItem(itemStack)?:false
                                 val blB = ScepterHelper.checkModifierLineage(id,itemStack)
                                 if (blA && blB){
-                                    modId[0] = RegisterModifier.ENTRIES.getRawId(id)
+                                    modId[0] = ModifierRegistry.getRawId(id)
                                     enchantmentId[0] = -2
                                 } else if (blA && !blB) {
-                                    modId[0] = -1 * RegisterModifier.ENTRIES.getRawId(id)
+                                    modId[0] = -1 * ModifierRegistry.getRawId(id)
                                     enchantmentId[0] = -2
                                 } else {
                                     enchantmentPower[0] = 0
@@ -314,7 +314,7 @@ class ImbuingTableScreenHandler(
                 } else if(match.get().getAugment() != ""){
                     val augId = Identifier(match.get().getAugment())
                     val augmentChk = Registry.ENCHANTMENT.get(augId)
-                    val modChk = RegisterModifier.ENTRIES.get(augId)
+                    val modChk = ModifierRegistry.get(augId)
                     if (augmentChk == null && modChk == null){
                         buttonWorked = false
                         return@run

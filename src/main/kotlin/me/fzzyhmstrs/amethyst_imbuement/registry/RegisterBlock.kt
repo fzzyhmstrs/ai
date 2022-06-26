@@ -64,6 +64,7 @@ object RegisterBlock {
         Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,path), BlockItem(block,FabricItemSettings().group(itemGroup)))
     }
 
+    @Suppress("unused")
     private fun always(): Boolean {
         return true
     }

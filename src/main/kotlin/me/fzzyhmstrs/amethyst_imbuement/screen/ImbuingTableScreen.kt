@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -359,14 +359,14 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     }
                 }
                 if(handler.modId[j] > 0) {
-                    val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j])
-                    val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
+                    val id = ModifierRegistry.getIdByRawId(handler.modId[j])
+                    val textName: MutableText = (ModifierRegistry.get(id)?.getName()?:LiteralText.EMPTY) as MutableText
                     //println(textName.toString())
                     list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                     list.add(LiteralText.EMPTY)
                 } else if(handler.modId[j] < 0){
-                    val id = RegisterModifier.ENTRIES.getIdByRawId(handler.modId[j] * -1)
-                    val textName: MutableText = RegisterModifier.ENTRIES.getName(id) as MutableText
+                    val id = ModifierRegistry.getIdByRawId(handler.modId[j] * -1)
+                    val textName: MutableText = (ModifierRegistry.get(id)?.getName()?:LiteralText.EMPTY) as MutableText
                     list.add(TranslatableText("container.imbuing_table.modifier_max").formatted(Formatting.RED))
                     list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                     list.add(LiteralText.EMPTY)
