@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
-import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.EnchantmentLevelEntry
