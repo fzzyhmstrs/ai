@@ -2,19 +2,17 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.AugmentTasks
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.item.ShearsItem
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
@@ -64,7 +62,7 @@ open class ImbuedJewelryItem(settings: Settings,_ttn: String):CopperJewelryItem(
 
     override fun tick(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         if(entity.world.isClient()) return
-        if (RegisterEvent.ticker_jewelry.isReady()){
+        if (EventRegistry.ticker_30.isReady()){
             ShieldingAugment.applyEntityShielding(entity)
             passiveEnchantmentTasks(stack,entity.world,entity)
         }

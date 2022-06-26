@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.Nbt
-import me.fzzyhmstrs.amethyst_imbuement.util.NbtKeys
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -46,21 +46,21 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
             }
             tooltip.add(TranslatableText("lore_book.augment").formatted(Formatting.GOLD).append(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}").formatted(Formatting.GOLD)))
             tooltip.add(TranslatableText("enchantment.amethyst_imbuement.${Identifier(bola).path}.desc").formatted(Formatting.WHITE))
-            val type = ScepterObject.getAugmentType(bola)
+            val type = ScepterHelper.getAugmentType(bola)
             if (type == SpellType.NULL){
                 tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()))
             } else {
-                val lvl = ScepterObject.getAugmentMinLvl(bola)
+                val lvl = ScepterHelper.getAugmentMinLvl(bola)
                 tooltip.add(TranslatableText("lore_book.${type.str()}").formatted(type.fmt()).append(LiteralText(lvl.toString())))
             }
-            val item = ScepterObject.getAugmentItem(bola)
+            val item = ScepterHelper.getAugmentItem(bola)
             val itemText = item.name.shallowCopy().formatted(Formatting.WHITE)
             tooltip.add(TranslatableText("lore_book.key_item").formatted(Formatting.WHITE).append(itemText))
-            val xpLevels = ScepterObject.getAugmentImbueLevel(bola)
+            val xpLevels = ScepterHelper.getAugmentImbueLevel(bola)
             tooltip.add(TranslatableText("lore_book.xp_level").formatted(Formatting.WHITE).append(xpLevels.toString()))
-            val cooldown = ScepterObject.getAugmentCooldown(bola).toFloat() / 20.0F
+            val cooldown = ScepterHelper.getAugmentCooldown(bola).toFloat() / 20.0F
             tooltip.add(TranslatableText("lore_book.cooldown").formatted(Formatting.WHITE).append(LiteralText(cooldown.toString())).append(TranslatableText("lore_book.cooldown1").formatted(Formatting.WHITE)))
-            val manaCost = ScepterObject.getAugmentManaCost(bola)
+            val manaCost = ScepterHelper.getAugmentManaCost(bola)
             tooltip.add(TranslatableText("lore_book.mana_cost").formatted(Formatting.WHITE).append(LiteralText(manaCost.toString())))
             val bole = Registry.ENCHANTMENT.get(Identifier(bola))
             if (bole is ScepterAugment) {
@@ -85,7 +85,7 @@ open class BookOfLoreItem(settings: Settings, _ttn: String, _glint: Boolean) : I
         if (world !is ServerWorld) return TypedActionResult.fail(stack)
         val nbt = stack.orCreateNbt
         if(!nbt.contains(NbtKeys.LORE_KEY.str())){
-            val nbtTemp = ScepterObject.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
+            val nbtTemp = ScepterHelper.bookOfLoreNbtGenerator(LoreTier.LOW_TIER)
             val enchant = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbtTemp)
             Nbt.writeStringNbt(NbtKeys.LORE_KEY.str(),enchant,nbt)
             world.playSound(null,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
