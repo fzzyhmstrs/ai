@@ -1,9 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_core.misc_util.PersistentEffectHelper
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.PersistentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import net.minecraft.entity.*
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
@@ -15,7 +19,7 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment {
+class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentEffect {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
@@ -49,7 +53,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         if (bl){
             effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
-        ScepterObject.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this, delay.value(level),effect.duration(level), effect)
+        PersistentEffectHelper.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this, delay.value(level),effect.duration(level), effect)
         return bl
     }
 
@@ -76,8 +80,8 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         conjureBarrage(user,world,d,e,f, effect, level)
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,100,40,22,imbueLevel,LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(me.fzzyhmstrs.amethyst_core.scepter_util.SpellType.FURY,100,40,22,imbueLevel,me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

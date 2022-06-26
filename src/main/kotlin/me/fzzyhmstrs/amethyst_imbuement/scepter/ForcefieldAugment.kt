@@ -1,9 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.BuilderAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.block.Blocks
 import net.minecraft.block.PlantBlock
 import net.minecraft.entity.Entity
@@ -16,7 +20,8 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), BuilderAugment {
+class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    BuilderAugment {
 
     private val offset = intArrayOf(-2,2)
     override val baseEffect: AugmentEffect
@@ -76,7 +81,7 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         val bl = successes > 0
         if (bl) {
             world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,1.0f,1.0f)
-            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
         return bl
     }
@@ -85,8 +90,8 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         return SoundEvents.BLOCK_BEACON_POWER_SELECT
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel,LoreTier.LOW_TIER, Items.SHIELD)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     companion object{
