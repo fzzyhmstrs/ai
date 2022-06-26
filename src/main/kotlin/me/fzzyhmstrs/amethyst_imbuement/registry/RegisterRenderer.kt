@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION")
+@file:Suppress("DEPRECATION", "MemberVisibilityCanBePrivate")
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
@@ -208,11 +208,11 @@ object RegisterRenderer {
             })
 
 
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
+        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {
                 _ , registry ->
             registry.register(IMBUING_TABLE_BOOK_SPRITE_ID)
         }
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register() {
+        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {
                 _ , registry ->
             registry.register(DISENCHANTING_TABLE_BOOK_SPRITE_ID)
         }

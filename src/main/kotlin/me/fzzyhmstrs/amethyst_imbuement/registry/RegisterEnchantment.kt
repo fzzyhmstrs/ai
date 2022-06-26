@@ -2,12 +2,13 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.scepter.*
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
@@ -123,7 +124,7 @@ object RegisterEnchantment {
             val enchant = regEnchant[k]
             Registry.register(Registry.ENCHANTMENT, Identifier(AI.MOD_ID, k), enchant)
             if (enchant is ScepterAugment){
-                ScepterObject.registerAugmentStat(enchant)
+                ScepterHelper.registerAugmentStat(enchant)
             }
         }
 
