@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
@@ -59,7 +59,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                 if (recipe.getAugment() != "" && i == 6){
                     val identifier = Identifier(recipe.getAugment())
                     val enchant = Registry.ENCHANTMENT.get(identifier)
-                    val modifier = RegisterModifier.ENTRIES.get(identifier)
+                    val modifier = ModifierRegistry.get(identifier)
                     if (enchant != null){
                         when (enchant) {
                             is BaseAugment -> {
@@ -120,7 +120,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
             } else {
                 val identifier = Identifier(recipe.getAugment())
                 val enchant = Registry.ENCHANTMENT.get(identifier)
-                val modifier = RegisterModifier.ENTRIES.get(identifier)
+                val modifier = ModifierRegistry.get(identifier)
                 val stack: ItemStack
                 val builder = EntryIngredient.builder()
                 if (enchant != null){
@@ -132,7 +132,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                     val builder2 = EntryIngredient.builder()
                     modifier.acceptableItemStacks().forEach {
                         val moddedStack = it.copy()
-                        ScepterObject.addModifierForREI(modifier.modifierId, moddedStack)
+                        ScepterHelper.addModifierForREI(modifier.modifierId, moddedStack)
                         builder2.add(EntryStacks.of(moddedStack))
                     }
                     list.add(builder2.build())

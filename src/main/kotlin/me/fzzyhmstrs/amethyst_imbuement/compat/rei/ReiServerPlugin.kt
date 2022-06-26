@@ -2,17 +2,12 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin
 import me.shedaniel.rei.api.common.transfer.info.MenuInfoRegistry
 import me.shedaniel.rei.api.common.transfer.info.simple.SimpleMenuInfoProvider
-import net.minecraft.util.Identifier
 
 object ReiServerPlugin: REIServerPlugin {
 

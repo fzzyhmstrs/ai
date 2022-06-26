@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier
 
 object ReiCategoryIds {
 
-    val IMBUING_TABLE_CATEGORY_ID = CategoryIdentifier.of<ImbuingTableDisplay>(Identifier(AI.MOD_ID, ImbuingRecipe.Type.ID))
-    val CRYSTAL_ALTAR_CATEGORY_ID = CategoryIdentifier.of<CrystalAltarDisplay>(Identifier(AI.MOD_ID, AltarRecipe.Type.ID))
+    val IMBUING_TABLE_CATEGORY_ID: CategoryIdentifier<ImbuingTableDisplay> = CategoryIdentifier.of<ImbuingTableDisplay>(Identifier(AI.MOD_ID, ImbuingRecipe.Type.ID))
+    val CRYSTAL_ALTAR_CATEGORY_ID: CategoryIdentifier<CrystalAltarDisplay> = CategoryIdentifier.of<CrystalAltarDisplay>(Identifier(AI.MOD_ID, AltarRecipe.Type.ID))
 
 }
