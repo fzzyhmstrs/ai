@@ -31,7 +31,7 @@ import net.minecraft.world.World
 class GlisteringTridentEntity : PersistentProjectileEntity {
     private var tridentStack = ItemStack(GLISTERING_TRIDENT)
     private var dealtDamage = false
-    var returnTimer = 0
+    private var returnTimer = 0
 
     constructor(entityType: EntityType<out GlisteringTridentEntity?>?, world: World?) : super(entityType, world)
     constructor(world: World?, owner: LivingEntity?, stack: ItemStack) : super(
