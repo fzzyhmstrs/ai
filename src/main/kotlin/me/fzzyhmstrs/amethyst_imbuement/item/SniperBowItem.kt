@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.Enchantments
-import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
@@ -30,7 +29,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
     companion object{
         var _hand: Hand = Hand.MAIN_HAND
         var _world: World? = null
-        var _sniper_scope_index = 0
+        private var _sniper_scope_index = 0
         private val SNIPER_BOW_SCOPE_LIST = arrayOf(Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_0.png"),
             Identifier("minecraft","textures/misc/spyglass_scope.png"),
             Identifier(AI.MOD_ID,"textures/misc/sniper_bow_scope_6.png"),
