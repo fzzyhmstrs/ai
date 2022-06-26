@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
-import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -13,7 +15,13 @@ import net.minecraft.world.World
 
 abstract class MiscAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): ScepterAugment(tier,maxLvl,EnchantmentTarget.WEAPON, *slot) {
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+    override fun applyTasks(
+        world: World,
+        user: LivingEntity,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect
+    ): Boolean {
         var target: Entity? = null
         val hit = RaycasterUtil.raycastHit(distance = effects.range(level),user, includeFluids = true)
         if (hit != null) {
