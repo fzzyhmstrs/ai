@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.emafire003.dev.coloredglowlib.util.Color
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
@@ -51,7 +52,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
             }
         }
         ColoredGlowLib.updateData(world.server)
-        addStatusToQueue(user, RegisterStatus.DRACONIC_VISION,260,0)
+        EffectQueue.addStatusToQueue(user, RegisterStatus.DRACONIC_VISION,260,0)
         world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,0.3f,0.8f)
     }
 

@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -10,7 +10,7 @@ import net.minecraft.item.ShieldItem
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.registry.Registry
 
-class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
+class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return (stack.item is ShieldItem)
