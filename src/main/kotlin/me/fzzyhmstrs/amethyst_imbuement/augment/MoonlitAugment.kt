@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.enchantment.EnchantmentHelper
@@ -20,10 +21,10 @@ class MoonlitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
             val comp2 = abs(tod - 23000L)
             val comp3 = abs(tod - 18000L)
             if((comp3 < comp1) && (comp3 < comp2)){
-                addStatusToQueue(user,StatusEffects.STRENGTH, 400, lvl)
-                addStatusToQueue(user,StatusEffects.RESISTANCE, 400, lvl-1)
+                EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, 400, lvl)
+                EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE, 400, lvl-1)
             } else {
-                addStatusToQueue(user,StatusEffects.STRENGTH, 400, lvl-1)
+                EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, 400, lvl-1)
             }
         }
     }

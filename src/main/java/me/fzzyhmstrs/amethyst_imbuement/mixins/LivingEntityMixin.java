@@ -4,8 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
@@ -120,8 +120,8 @@ public abstract class LivingEntityMixin extends Entity {
                     if (!stack.hasEnchantments()) continue;
                     Map<Enchantment, Integer> map = EnchantmentHelper.get(stack);
                     for (Enchantment enchant : map.keySet()){
-                        if (enchant instanceof BaseAugment) {
-                            ((BaseAugment) enchant).tickEffect((LivingEntity) (Object) this, map.get(enchant),ItemStack.EMPTY);
+                        if (enchant instanceof AbstractEquipmentAugment) {
+                            ((AbstractEquipmentAugment) enchant).equipmentEffect((LivingEntity) (Object) this, map.get(enchant), stack);
                         }
                     }
                 }

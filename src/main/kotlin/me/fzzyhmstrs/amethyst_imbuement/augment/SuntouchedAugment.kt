@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -17,10 +18,10 @@ class SuntouchedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSl
             val comp2 = abs(tod - 11000L)
             val comp3 = abs(tod - 6000L)
             if((comp3 < comp1) && (comp3 < comp2)){
-                addStatusToQueue(user, StatusEffects.STRENGTH, 400, level)
-                addStatusToQueue(user, StatusEffects.SPEED, 400, level-1)
+                EffectQueue.addStatusToQueue(user, StatusEffects.STRENGTH, 400, level)
+                EffectQueue.addStatusToQueue(user, StatusEffects.SPEED, 400, level-1)
             } else {
-                addStatusToQueue(user, StatusEffects.STRENGTH, 400, level-1)
+                EffectQueue.addStatusToQueue(user, StatusEffects.STRENGTH, 400, level-1)
             }
         }
     }
