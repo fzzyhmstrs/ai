@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.BuilderAugment
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.BuilderAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -18,7 +18,8 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot), BuilderAugment {
+class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
+    BuilderAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0,0.0)
@@ -62,8 +63,8 @@ class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         return successes > 0
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,5,1,5,imbueLevel,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,5,1,5,imbueLevel,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
     }
 
     override fun soundEvent(): SoundEvent {

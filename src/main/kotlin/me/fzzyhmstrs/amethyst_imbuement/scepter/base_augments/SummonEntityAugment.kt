@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments
 
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
@@ -40,29 +41,8 @@ abstract class SummonEntityAugment(tier: Int, maxLvl: Int, vararg slot: Equipmen
     }
 
     open fun placeEntity(world: World, user: PlayerEntity, hit: HitResult, level: Int, effects: AugmentEffect): Boolean{
-        val vec3d2: Vec3d
-        val vec3d: Vec3d = user.getRotationVec(1.0f)
-        val list: List<Entity> = world.getOtherEntities(
-            user,
-            user.boundingBox.stretch(vec3d.multiply(5.0)).expand(1.0),
-            EntityPredicates.EXCEPT_SPECTATOR.and { obj: Entity -> obj.collides() }
-        )
-        if (list.isNotEmpty()) {
-            vec3d2 = user.eyePos
-            for (entity in list) {
-                val box = entity.boundingBox.expand(entity.targetingMargin.toDouble())
-                if (!box.contains(vec3d2)) continue
-                return false
-            }
-        }
-        val boat = BoatEntity(world, hit.pos.x, hit.pos.y, hit.pos.z)
-        boat.boatType = BoatEntity.Type.OAK
-        boat.yaw = user.yaw
-        if (!world.isSpaceEmpty(boat, boat.boundingBox)) {
-            return false
-        }
-        world.spawnEntity(boat)
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0F,1.0F)
+        effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
     }
 

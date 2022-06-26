@@ -1,11 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_core.misc_util.PersistentEffectHelper
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.FireAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.PersistentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
-import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -19,7 +26,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentAugment, FireAugment {
+class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentEffect,
+    FireAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(140,100)
@@ -40,12 +48,12 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         if (entityList.isEmpty() || blockPos == user.blockPos) return false
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
-            ScepterObject.setPersistentTickerNeed(
+            PersistentEffectHelper.setPersistentTickerNeed(
                 world, user, entityList, level, blockPos,
                 RegisterEnchantment.COMET_STORM, delay.value(level), effect.duration(level), effect
             )
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
+            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
         return bl
     }
@@ -105,8 +113,8 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         world.spawnEntity(ce)
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.FURY,400,50,18,imbueLevel,LoreTier.HIGH_TIER, Items.TNT)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,400,50,18,imbueLevel, LoreTier.HIGH_TIER, Items.TNT)
     }
 
     override fun soundEvent(): SoundEvent {

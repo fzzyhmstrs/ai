@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -38,7 +38,7 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                 successes++
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
                 BaseAugment.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
-                effect.accept(entity3,AugmentConsumer.Type.HARMFUL)
+                effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
             }
         }
         val bl = successes > 0
@@ -48,8 +48,8 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         return bl
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.GRACE,400,35,11,imbueLevel,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,400,35,11,imbueLevel,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun soundEvent(): SoundEvent {

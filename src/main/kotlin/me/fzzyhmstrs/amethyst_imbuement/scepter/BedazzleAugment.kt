@@ -1,11 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SoulAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -22,7 +26,8 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 import kotlin.math.min
 
-class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), SoulAugment {
+class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    SoulAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(13.0,1.0).withDuration(1200,0,0)
@@ -62,7 +67,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
             for (entity in checkList) {
                 entityTask(world,entity,user,level.toDouble(),null, effect)
             }
-            effect.accept(checkList,AugmentConsumer.Type.HARMFUL)
+            effect.accept(checkList, AugmentConsumer.Type.HARMFUL)
         }
 
         if (merchantEntity.isNotEmpty()){
@@ -98,8 +103,8 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         BaseAugment.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel,LoreTier.LOW_TIER, Items.DIAMOND)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel, LoreTier.LOW_TIER, Items.DIAMOND)
     }
 
     override fun soundEvent(): SoundEvent {

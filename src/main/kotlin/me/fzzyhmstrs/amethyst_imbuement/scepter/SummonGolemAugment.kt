@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentConsumer
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonEntityAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.LoreTier
-import me.fzzyhmstrs.amethyst_imbuement.util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -36,19 +36,18 @@ class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
         val yrnd = hit.blockPos.y + 1.0
         val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level))
         golem.setPos(xrnd, yrnd, zrnd)
-        val bl = world.spawnEntity(golem)
-        if (bl) {
-            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+
+        if (world.spawnEntity(golem)) {
+            return super.placeEntity(world, user, hit, level, effects)
         }
-        return true
+        return false
     }
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_IRON_GOLEM_REPAIR
     }
 
-    override fun augmentStat(imbueLevel: Int): ScepterObject.AugmentDatapoint {
-        return ScepterObject.AugmentDatapoint(SpellType.WIT,6000,250,22,imbueLevel,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,6000,250,22,imbueLevel,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
     }
 }
