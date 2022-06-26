@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem

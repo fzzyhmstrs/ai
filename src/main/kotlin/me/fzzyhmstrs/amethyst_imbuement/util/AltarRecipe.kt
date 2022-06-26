@@ -1,13 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.*
 import net.minecraft.util.Identifier
-import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
-import java.util.stream.Stream
 
 class AltarRecipe(
     private val id: Identifier,

@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.UsedActiveAugment
 import net.minecraft.enchantment.EnchantmentHelper
