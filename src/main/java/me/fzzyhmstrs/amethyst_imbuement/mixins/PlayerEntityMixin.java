@@ -11,7 +11,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -46,13 +45,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             }
         }
     }
-
-    /*@Redirect(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"))
-    private void checkForSoulbinding(PlayerInventory instance){
-        if (!this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
-            instance.dropAll();
-        }
-    }*/
 
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
     private void checkForSoulbinding(CallbackInfo ci){

@@ -45,8 +45,6 @@
   "client": [
     "HeldItemRendererMixin",
     "InGameHudMixin",
-    "ItemRendererMixin",
-    "PlayerInventoryMixin",
     "ClientPlayNetworkHandlerMixin",
     "MiningToolItemMixin"
   ],

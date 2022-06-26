@@ -3,10 +3,10 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.BaseAugment;
+import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEvent;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
 import net.minecraft.enchantment.Enchantment;
@@ -113,7 +113,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (!world.isClient) {
 
             //armor effects a little less often because more intensive
-            if (RegisterEvent.INSTANCE.getTicker_armor().isReady()) {
+            if (EventRegistry.INSTANCE.getTicker_30().isReady()) {
                 Iterable<ItemStack> iterable = this.getArmorItems();
                 for (ItemStack stack : iterable) {
                     if (stack.isEmpty()) continue;
