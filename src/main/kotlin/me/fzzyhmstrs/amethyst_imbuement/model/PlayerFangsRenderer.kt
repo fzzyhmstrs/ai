@@ -11,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3f
 
+@Suppress("PrivatePropertyName", "SpellCheckingInspection")
 class PlayerFangsRenderer(context: EntityRendererFactory.Context): EntityRenderer<PlayerFangsEntity>(context) {
     private val TEXTURE = Identifier("textures/entity/illager/evoker_fangs.png")
     private val model: EvokerFangsEntityModel<PlayerFangsEntity> = EvokerFangsEntityModel(context.getPart(
