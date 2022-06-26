@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterObject
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.advancement.criterion.Criteria
@@ -148,7 +148,7 @@ class ImbuingTableScreenHandler(
                             val augment = Registry.ENCHANTMENT.get(id)
                             if (augment != null) {
                                 val augCheck = if (augment is ScepterAugment){
-                                    val blA = ScepterObject.isAcceptableScepterItem(augment,itemStack, player)
+                                    val blA = ScepterHelper.isAcceptableScepterItem(augment,itemStack, player)
                                     val blB = augment.isAcceptableItem(itemStack)
                                     Pair(blA,blB)
                                 } else {
@@ -178,7 +178,7 @@ class ImbuingTableScreenHandler(
                             }else if (RegisterModifier.ENTRIES.isModifier(id)) {
                                 val modifier = RegisterModifier.ENTRIES.get(id)
                                 val blA = modifier?.isAcceptableItem(itemStack)?:false
-                                val blB = ScepterObject.checkModifierLineage(id,itemStack)
+                                val blB = ScepterHelper.checkModifierLineage(id,itemStack)
                                 if (blA && blB){
                                     modId[0] = RegisterModifier.ENTRIES.getRawId(id)
                                     enchantmentId[0] = -2
@@ -367,7 +367,7 @@ class ImbuingTableScreenHandler(
                             }
                         }
                     } else if (modChk != null && modChk.isAcceptableItem(itemStack3)){
-                        if (ScepterObject.addModifier(augId,itemStack3)){
+                        if (ScepterHelper.addModifier(augId,itemStack3)){
                             player.applyEnchantmentCosts(itemStack3, i)
                             for (j in 0..12) { //decrement inventory slots even for creative mode!
                                 if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
@@ -414,7 +414,7 @@ class ImbuingTableScreenHandler(
                     itemStack4.item.onCraft(itemStack4,world, player)
                     inventory.setStack(6,itemStack4)
                     if(match.get().getTransferEnchant()){
-                        ScepterObject.transferNbt(itemStack3,itemStack4)
+                        ScepterHelper.transferNbt(itemStack3,itemStack4)
                         EnchantmentHelper.set(l,itemStack4)
                     }
                     inventory.markDirty()
