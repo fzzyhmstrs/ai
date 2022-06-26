@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper
 import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.gson
 import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreate
 import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreateUpdated
+import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigPacketRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
@@ -33,7 +34,9 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         ReadmeText.writeReadMe("README.txt")
     }
 
-    fun initConfig(){}
+    fun initConfig(){
+        SyncedConfigPacketRegistry.registerConfig(this)
+    }
 
     override fun writeToClient(buf:PacketByteBuf){
         val gson = GsonBuilder().create()
