@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.tool
 
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
 import kotlin.math.max
 
-object ScepterLvl1ToolMaterial: ToolMaterial,ScepterMaterialAddon{
+object ScepterLvl1ToolMaterial: ScepterToolMaterial() {
     override fun getDurability(): Int {
         return AiConfig.scepters.opalineDurability
     }
