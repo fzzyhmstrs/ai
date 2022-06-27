@@ -17,12 +17,12 @@ repositories {
         url = uri("https://maven.terraformersmc.com/")
     }
     maven {
-        name = "REI"
-        url = uri("https://maven.shedaniel.me")
-    }
-    maven {
         name = "Ladysnake Libs"
         url = uri("https://ladysnake.jfrog.io/artifactory/mods")
+    }
+    maven {
+        name = "REI"
+        url = uri("https://maven.shedaniel.me")
     }
     maven {
         name = "Patchouli Lib"
@@ -60,7 +60,6 @@ dependencies {
     modImplementation("dev.emi:trinkets:3.3.0"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("dev.emi:trinkets:3.3.0")
 
     modImplementation("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
         exclude("net.fabricmc.fabric-api")
