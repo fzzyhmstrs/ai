@@ -4,9 +4,9 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.MiscAugment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity

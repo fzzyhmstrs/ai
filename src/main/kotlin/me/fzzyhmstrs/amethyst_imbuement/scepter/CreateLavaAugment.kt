@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.PlaceItemAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.PlaceItemAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Item
 import net.minecraft.item.Items

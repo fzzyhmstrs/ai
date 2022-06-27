@@ -5,8 +5,8 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.FlameboltEntity
-import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.SummonProjectileAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
