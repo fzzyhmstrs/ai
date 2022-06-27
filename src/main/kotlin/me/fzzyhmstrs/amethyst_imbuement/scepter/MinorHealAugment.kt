@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.HealerAugment

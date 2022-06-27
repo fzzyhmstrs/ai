@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SoulAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import net.minecraft.entity.Entity
@@ -100,7 +100,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         } else {
             effects.duration(level.toInt())/2
         }
-        BaseAugment.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
+        EffectQueue.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

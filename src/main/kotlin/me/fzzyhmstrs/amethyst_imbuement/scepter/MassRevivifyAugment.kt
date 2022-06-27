@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.HealerAugment
@@ -10,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -37,16 +37,16 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
         var successes = 0
         if (entityList.isEmpty()){
             successes++
-            BaseAugment.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
-            BaseAugment.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
+            EffectQueue.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
         entityList.add(user)
         for (entity3 in entityList) {
             if(entity3 !is Monster && entity3 is LivingEntity){
                 successes++
-                BaseAugment.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
-                BaseAugment.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))
+                EffectQueue.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
+                EffectQueue.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))
                 effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
             }
         }

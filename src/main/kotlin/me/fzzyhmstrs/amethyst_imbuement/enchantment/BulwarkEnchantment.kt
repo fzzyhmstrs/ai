@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.*
 import net.minecraft.server.world.ServerWorld
 
-class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): BaseAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
+class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
     override fun getMinPower(level: Int): Int {
         return 25
