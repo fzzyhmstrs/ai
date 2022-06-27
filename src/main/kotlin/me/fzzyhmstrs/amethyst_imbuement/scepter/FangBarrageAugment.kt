@@ -1,11 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
-import me.fzzyhmstrs.amethyst_core.misc_util.PersistentEffectHelper
+import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.PersistentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.MiscAugment
 import net.minecraft.entity.*
@@ -19,7 +18,8 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentEffect {
+class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    PersistentEffectHelper.PersistentEffect {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)

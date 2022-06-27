@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
-import me.fzzyhmstrs.amethyst_core.misc_util.PersistentEffectHelper
+import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
@@ -11,7 +11,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LightningAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
-import me.fzzyhmstrs.amethyst_core.scepter_util.PersistentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -31,7 +30,8 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentEffect,
+class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    PersistentEffectHelper.PersistentEffect,
     LightningAugment {
 
     override val baseEffect: AugmentEffect

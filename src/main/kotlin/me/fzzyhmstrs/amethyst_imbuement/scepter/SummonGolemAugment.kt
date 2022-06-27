@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -11,7 +10,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
-import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult

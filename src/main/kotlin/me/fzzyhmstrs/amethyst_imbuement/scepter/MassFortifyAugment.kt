@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.HealerAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.base_augments.*
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -38,16 +38,16 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
 
         if (entityList.isEmpty()){
             successes++
-            BaseAugment.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+2))
-            BaseAugment.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+2))
+            EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier(level))
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
                     successes++
-                    BaseAugment.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+1))
-                    BaseAugment.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier(level))
+                    EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+1))
+                    EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier(level))
                     effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
                 }
             }

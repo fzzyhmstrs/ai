@@ -1,14 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
-import me.fzzyhmstrs.amethyst_core.misc_util.PersistentEffectHelper
+import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
-import me.fzzyhmstrs.amethyst_core.scepter_util.PersistentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -26,7 +25,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), PersistentEffect,
+class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    PersistentEffectHelper.PersistentEffect,
     FireAugment {
 
     override val baseEffect: AugmentEffect

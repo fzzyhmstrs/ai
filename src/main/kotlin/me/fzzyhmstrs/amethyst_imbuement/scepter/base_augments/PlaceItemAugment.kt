@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.scepter_util.BuilderAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
