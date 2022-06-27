@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
-import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper
-import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.gson
-import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreate
-import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper.readOrCreateUpdated
-import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigPacketRegistry
+import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper
+import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.gson
+import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreate
+import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
+import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
@@ -32,7 +32,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     fun initConfig(){
-        SyncedConfigPacketRegistry.registerConfig(this)
+        SyncedConfigRegistry.registerConfig(this)
     }
 
     override fun writeToClient(buf:PacketByteBuf){

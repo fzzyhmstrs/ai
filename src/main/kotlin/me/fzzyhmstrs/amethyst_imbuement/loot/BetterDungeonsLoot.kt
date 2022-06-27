@@ -2,7 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import net.minecraft.item.Items
@@ -12,10 +12,11 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
-object BetterDungeonsLoot: AbstractModLoot {
+object BetterDungeonsLoot: AbstractModLoot() {
 
-    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
-        if (id.namespace != "betterdungeons") return false
+    override val targetNameSpace: String = "betterdungeons"
+
+    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
         when (id) {
             Identifier("betterdungeons", "zombie_dungeon/chests/common") -> {
                 VanillaLoot.mineshaftLoot(table)

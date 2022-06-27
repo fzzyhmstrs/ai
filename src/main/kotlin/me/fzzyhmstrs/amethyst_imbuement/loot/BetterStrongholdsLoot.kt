@@ -2,7 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
@@ -11,10 +11,10 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
 
-object BetterStrongholdsLoot: AbstractModLoot {
+object BetterStrongholdsLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "betterstrongholds"
 
     override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
-        if (id.namespace != "betterstrongholds") return false
         if (armouryChecker(id)){
             VanillaLoot.villageWeaponsmithLoot(table)
             return true

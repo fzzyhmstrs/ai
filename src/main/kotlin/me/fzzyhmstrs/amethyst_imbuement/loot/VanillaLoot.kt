@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
@@ -17,10 +17,10 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
 @Suppress("MemberVisibilityCanBePrivate")
-object VanillaLoot: AbstractModLoot {
+object VanillaLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "minecraft"
 
     override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean{
-        if (id.namespace != "minecraft") return false
         if (Blocks.NETHER_QUARTZ_ORE.lootTableId.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))

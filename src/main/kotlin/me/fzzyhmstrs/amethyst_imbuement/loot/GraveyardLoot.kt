@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
@@ -12,10 +12,10 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
-object GraveyardLoot: AbstractModLoot {
+object GraveyardLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "graveyard"
 
     override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
-        if (id.namespace != "graveyard") return false
         when (id) {
             Identifier("graveyard","chests/candle_loot") -> {
                 val poolBuilder = LootPool.builder()
