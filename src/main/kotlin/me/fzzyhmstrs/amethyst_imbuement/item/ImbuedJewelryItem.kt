@@ -3,8 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
+import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentTasks
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.AugmentTasks
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper

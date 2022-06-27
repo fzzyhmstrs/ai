@@ -1,20 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
 import net.minecraft.item.Items
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
-object MoStructuresLoot: AbstractModLoot {
+object MoStructuresLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "mostructures"
 
     override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean{
-        if (id.namespace != "mostructures") return false
         when (id) {
             Identifier("mostructures","bunny_skeleton") -> {
                 VanillaLoot.shipwreckTreasureLoot(table)

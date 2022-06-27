@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler

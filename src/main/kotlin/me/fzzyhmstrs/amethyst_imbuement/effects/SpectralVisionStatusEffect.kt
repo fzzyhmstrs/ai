@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.effects
 
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect
@@ -23,7 +23,7 @@ class SpectralVisionStatusEffect(statusEffectCategory:StatusEffectCategory, i: I
         if (entityList.isEmpty()) return
         for (target in entityList){
             if (target is Monster || target is PassiveEntity){
-                BaseAugment.addStatusToQueue(target as LivingEntity, StatusEffects.GLOWING, 260, 0)
+                EffectQueue.addStatusToQueue(target as LivingEntity, StatusEffects.GLOWING, 260, 0)
             }
         }
     }

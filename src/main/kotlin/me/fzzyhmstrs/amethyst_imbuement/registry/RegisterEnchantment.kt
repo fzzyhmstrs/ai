@@ -2,8 +2,8 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig

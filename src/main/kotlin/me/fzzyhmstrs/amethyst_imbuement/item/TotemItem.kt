@@ -5,7 +5,9 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentDamage
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentTasks
+import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem

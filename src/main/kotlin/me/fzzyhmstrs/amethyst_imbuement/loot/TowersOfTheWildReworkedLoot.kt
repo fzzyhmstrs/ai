@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
@@ -10,10 +10,10 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
-object TowersOfTheWildReworkedLoot: AbstractModLoot {
+object TowersOfTheWildReworkedLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "towers_of_the_wild_reworked"
 
     override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
-        if (id.namespace != "towers_of_the_wild_reworked") return false
         return when (id) {
             Identifier("towers_of_the_wild_reworked","chests/tower/ocean/ocean_tower_chest") -> {
                 towerLoot(table)

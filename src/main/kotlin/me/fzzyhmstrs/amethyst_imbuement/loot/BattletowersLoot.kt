@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.misc_util.AbstractModLoot
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
@@ -11,10 +11,10 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
-object BattletowersLoot: AbstractModLoot {
+object BattletowersLoot: AbstractModLoot() {
+    override val targetNameSpace: String = "battletowers"
 
     override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean{
-        if (id.namespace != "battletowers") return false
         when (id) {
             Identifier("battletowers","default") -> {
                 val poolBuilder = RegisterLoot.tierOneGemPool(2.0F, 0.1F)

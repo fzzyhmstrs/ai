@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.trinket_util.BaseAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem

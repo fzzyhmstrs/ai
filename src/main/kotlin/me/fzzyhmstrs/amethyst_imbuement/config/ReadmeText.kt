@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import me.fzzyhmstrs.amethyst_core.misc_util.SyncedConfigHelper
+import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper
 
 object ReadmeText: SyncedConfigHelper.ReadMeWriter {
 
