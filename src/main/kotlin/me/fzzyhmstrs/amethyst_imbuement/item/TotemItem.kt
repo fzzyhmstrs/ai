@@ -1,14 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.item_util.ManaItem
+import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
-import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentDamage
 import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentTasks
-import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.util.*
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
@@ -121,7 +118,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
 
     }
 
-    companion object: AugmentDamage {
+    companion object {
 
         private fun checkDamageSource(ds: DamageSource): Boolean{
             return ds != DamageSource.FALL &&
@@ -139,5 +136,9 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
                     ds != DamageSource.STARVE &&
                     ds != DamageSource.SWEET_BERRY_BUSH
         }
+    }
+
+    override fun getRepairTime(): Int {
+        return 0
     }
 }

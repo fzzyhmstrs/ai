@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.item_util.ManaItem
+import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
