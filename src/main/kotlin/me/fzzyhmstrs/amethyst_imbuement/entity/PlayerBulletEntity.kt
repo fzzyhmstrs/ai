@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.base.MoreObjects
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableDamageEntity
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import net.minecraft.entity.Entity
@@ -15,7 +15,7 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class PlayerBulletEntity: ShulkerBulletEntity, ModifiableDamageEntity {
+class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerBulletEntity?>, world: World): super(entityType, world)
     constructor(world: World, owner: LivingEntity, target: Entity, axis: Direction.Axis): super(world, owner, target, axis)
 
