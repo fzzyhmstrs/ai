@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableDamageEntity
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
@@ -22,7 +22,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.World
 import java.util.*
 
-class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableDamageEntity {
+class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity {
 
     private var warmup = 0
     private var startedAttack = false

@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableDamageEntity
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
@@ -15,7 +15,7 @@ import net.minecraft.world.Difficulty
 import net.minecraft.world.World
 import kotlin.math.sqrt
 
-class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableDamageEntity {
+class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerWitherSkullEntity?>, world: World): super(entityType, world)
     constructor(world: World, owner: LivingEntity, directionX: Double, directionY: Double, directionZ: Double): super(RegisterEntity.PLAYER_WITHER_SKULL, world){
         this.owner = owner
