@@ -1,8 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
@@ -100,9 +101,9 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                     val item = it.item
                     val stack = it.copy()
                     if (item is BookOfLoreItem){
-                        item.addLoreKeyForREI(stack,recipe.getAugment())
+                        AbstractAugmentBookItem.addLoreKeyForREI(stack,recipe.getAugment())
                     } else if (item is BookOfMythosItem){
-                        item.addLoreKeyForREI(stack,recipe.getAugment())
+                        AbstractAugmentBookItem.addLoreKeyForREI(stack,recipe.getAugment())
                     }
                     builder.add(EntryStacks.of(stack))
                 }
@@ -132,7 +133,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                     val builder2 = EntryIngredient.builder()
                     modifier.acceptableItemStacks().forEach {
                         val moddedStack = it.copy()
-                        ScepterHelper.addModifierForREI(modifier.modifierId, moddedStack)
+                        ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
                         builder2.add(EntryStacks.of(moddedStack))
                     }
                     list.add(builder2.build())
