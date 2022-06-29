@@ -9,6 +9,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.world.World
 
 class PolishedAmethystStairsBlock(baseBlockState: BlockState,settings: Settings): StairsBlock(baseBlockState, settings) {
+    @Deprecated("Deprecated in Java")
     override fun onProjectileHit(world: World, state: BlockState?, hit: BlockHitResult, projectile: ProjectileEntity?) {
         if (!world.isClient) {
             val blockPos = hit.blockPos

@@ -63,6 +63,7 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
@@ -78,6 +79,7 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         return ActionResult.CONSUME
     }
 
+    @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,

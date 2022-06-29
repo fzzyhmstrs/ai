@@ -21,6 +21,7 @@ import net.minecraft.world.World
 class CrystalAltarBlock(settings: Settings): CraftingTableBlock(settings) {
     private val SCREEN_TITLE: Text = TranslatableText("container.crystal_altar")
 
+    @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,
@@ -35,6 +36,7 @@ class CrystalAltarBlock(settings: Settings): CraftingTableBlock(settings) {
         }, SCREEN_TITLE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
