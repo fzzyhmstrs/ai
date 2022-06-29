@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-@Suppress("PrivatePropertyName", "DEPRECATION")
+@Suppress("PrivatePropertyName", "DEPRECATION", "DeprecatedCallableAddReplaceWith")
 class ForcefieldBlock(settings: Settings) : BlockWithEntity(settings) {
 
     fun getWaterState(waterState: Boolean): BlockState{
@@ -55,6 +55,7 @@ class ForcefieldBlock(settings: Settings) : BlockWithEntity(settings) {
         return true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isSideInvisible(state: BlockState?, stateFrom: BlockState, direction: Direction?): Boolean {
         return if (stateFrom.isOf(this)) {
             true
@@ -65,6 +66,7 @@ class ForcefieldBlock(settings: Settings) : BlockWithEntity(settings) {
         return false
     }
 
+    @Deprecated("Deprecated in Java")
     override fun canPathfindThrough(
         state: BlockState,
         world: BlockView,
@@ -101,10 +103,12 @@ class ForcefieldBlock(settings: Settings) : BlockWithEntity(settings) {
         } else null
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getRenderType(state: BlockState): BlockRenderType {
         return BlockRenderType.MODEL
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getCollisionShape(
         state: BlockState,
         world: BlockView,

@@ -12,6 +12,7 @@ import net.minecraft.world.World
 
 @Suppress("PrivatePropertyName")
 class PolishedAmethystSlabBlock(settings: Settings): SlabBlock( settings){
+    @Deprecated("Deprecated in Java")
     override fun onProjectileHit(world: World, state: BlockState?, hit: BlockHitResult, projectile: ProjectileEntity?) {
         if (!world.isClient) {
             val blockPos = hit.blockPos
