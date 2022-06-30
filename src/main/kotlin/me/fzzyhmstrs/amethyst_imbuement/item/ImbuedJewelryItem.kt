@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
 import java.util.*
 
-open class ImbuedJewelryItem(settings: Settings, flavor: String): AbstractAugmentJewelryItem(settings, Identifier(AI.MOD_ID,flavor)) {
+open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
     override fun getModifiers(
         stack: ItemStack,
