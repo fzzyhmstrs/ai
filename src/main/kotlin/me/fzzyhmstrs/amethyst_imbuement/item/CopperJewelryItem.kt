@@ -11,7 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
 import java.util.*
 
-open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavorful {
+open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavorful<CopperJewelryItem> {
 
     override var flavor: String = ""
     override var glint: Boolean = false
@@ -28,5 +28,9 @@ open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavor
             EntityAttributeModifier(uuid, "amethyst_imbuement:movement_speed", 0.03, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         )
         return modifiers
+    }
+
+    override fun getFlavorItem(): CopperJewelryItem {
+        return this
     }
 }
