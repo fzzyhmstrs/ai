@@ -3,8 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
-import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
@@ -47,15 +47,15 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
         }
         if (augmentA != ""){
             val augId = Identifier(augmentA).toString()
-            if (ScepterHelper.checkAugmentStat(augId)){
-                val type = ScepterHelper.getAugmentType(augId)
-                val cooldown = ScepterHelper.getAugmentCooldown(augId)
-                val manaCost = ScepterHelper.getAugmentManaCost(augId)
-                val minLevel = ScepterHelper.getAugmentMinLvl(augId)
-                val bookOfLoreTier = ScepterHelper.getAugmentTier(augId)
-                val keyItem = ScepterHelper.getAugmentItem(augId)
+            if (AugmentHelper.checkAugmentStat(augId)){
+                val type = AugmentHelper.getAugmentType(augId)
+                val cooldown = AugmentHelper.getAugmentCooldown(augId)
+                val manaCost = AugmentHelper.getAugmentManaCost(augId)
+                val minLevel = AugmentHelper.getAugmentMinLvl(augId)
+                val bookOfLoreTier = AugmentHelper.getAugmentTier(augId)
+                val keyItem = AugmentHelper.getAugmentItem(augId)
                 val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,bookOfLoreTier,keyItem)
-                ScepterHelper.registerAugmentStat(augId,datapoint,true)
+                AugmentHelper.registerAugmentStat(augId,datapoint,true)
             }
         }
         val countA: Int = if (recipeJson.countA == 0){ 1 } else{ recipeJson.countA?:1 }
