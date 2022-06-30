@@ -5,11 +5,12 @@ import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.FireAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.Entity
@@ -48,9 +49,12 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         if (entityList.isEmpty() || blockPos == user.blockPos) return false
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
+            val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
             PersistentEffectHelper.setPersistentTickerNeed(
-                world, user, entityList, level, blockPos,
-                RegisterEnchantment.COMET_STORM, delay.value(level), effect.duration(level), effect
+                RegisterEnchantment.COMET_STORM,
+                delay.value(level),
+                effect.duration(level),
+                data
             )
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
@@ -81,36 +85,30 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     @Suppress("SpellCheckingInspection")
-    override fun persistentEffect(
-        world: World,
-        user: LivingEntity,
-        blockPos: BlockPos,
-        entityList: MutableList<Entity>,
-        level: Int,
-        effect: AugmentEffect
-    ) {
-        val rnd1 = entityList.size
-        val rnd2 = world.random.nextInt(rnd1)
-        val rnd3 = world.random.nextFloat()
-        val entity = entityList[rnd2]
+    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+        if (data !is AugmentPersistentEffectData) return
+        val rnd1 = data.entityList.size
+        val rnd2 = data.world.random.nextInt(rnd1)
+        val rnd3 = data.world.random.nextFloat()
+        val entity = data.entityList[rnd2]
         val bP: BlockPos
         val bpXrnd: Int
         val bpZrnd: Int
-        val range = effect.range(level)
+        val range = data.effect.range(data.level)
 
         if (rnd3 >0.4) {
             bP = entity.blockPos
-            bpXrnd = world.random.nextInt(5) - 2
-            bpZrnd = world.random.nextInt(5) - 2
+            bpXrnd = data.world.random.nextInt(5) - 2
+            bpZrnd = data.world.random.nextInt(5) - 2
         } else {
-            bP = blockPos
-            bpXrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
-            bpZrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
+            bP = data.blockPos
+            bpXrnd = data.world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
+            bpZrnd = data.world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
         }
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
-        val ce = createFireball(world, user, Vec3d(0.0,-5.0,0.0), Vec3d(rndX.toDouble(),(blockPos.y + 15).toDouble(),rndZ.toDouble()), effect, level)
-        world.spawnEntity(ce)
+        val ce = createFireball(data.world, data.user, Vec3d(0.0,-5.0,0.0), Vec3d(rndX.toDouble(),(data.blockPos.y + 15).toDouble(),rndZ.toDouble()), data.effect, data.level)
+        data.world.spawnEntity(ce)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

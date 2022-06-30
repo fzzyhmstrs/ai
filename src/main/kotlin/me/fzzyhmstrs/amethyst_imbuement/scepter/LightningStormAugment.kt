@@ -1,17 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
-import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
 import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
-import me.fzzyhmstrs.amethyst_core.scepter_util.LightningAugment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.LightningAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -83,8 +84,8 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
 
         (world as ServerWorld).setWeather(0, 1200, true, true)
         if (!effect(world, user, entityList, level, effect)) return false
-        PersistentEffectHelper.setPersistentTickerNeed(world,user,entityList,level,avgBlockPos,
-            RegisterEnchantment.LIGHTNING_STORM, delay.value(level),effect.duration(level), effect)
+        val data = AugmentPersistentEffectData(world, user, avgBlockPos, entityList, level, effect)
+        PersistentEffectHelper.setPersistentTickerNeed(RegisterEnchantment.LIGHTNING_STORM, delay.value(level),effect.duration(level), data)
         effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
@@ -113,40 +114,34 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         return successes > 0
     }
 
-    override fun persistentEffect(
-        world: World,
-        user: LivingEntity,
-        blockPos: BlockPos,
-        entityList: MutableList<Entity>,
-        level: Int,
-        effect: AugmentEffect
-    ) {
+    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+        if (data !is AugmentPersistentEffectData) return
         var tries = 2
         while (tries >= 0) {
-            val rnd1 = entityList.size
-            val rnd2 = world.random.nextInt(rnd1)
-            val rnd3 = world.random.nextFloat()
-            val entity = entityList[rnd2]
+            val rnd1 = data.entityList.size
+            val rnd2 = data.world.random.nextInt(rnd1)
+            val rnd3 = data.world.random.nextFloat()
+            val entity = data.entityList[rnd2]
             val bP: BlockPos
             val bpXrnd: Int
             val bpZrnd: Int
             if (rnd3 >0.3) {
                 bP = entity.blockPos
-                bpXrnd = world.random.nextInt(5) - 2
-                bpZrnd = world.random.nextInt(5) - 2
+                bpXrnd = data.world.random.nextInt(5) - 2
+                bpZrnd = data.world.random.nextInt(5) - 2
             } else {
-                bP = blockPos
-                val range = effect.range(level)
-                bpXrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
-                bpZrnd = world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
+                bP = data.blockPos
+                val range = data.effect.range(data.level)
+                bpXrnd = data.world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
+                bpZrnd = data.world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
             }
-            val rndBlockPos = BlockPos(bP.x + bpXrnd,world.getTopY(Heightmap.Type.MOTION_BLOCKING,bP.x + bpXrnd,bP.z + bpZrnd), bP.z + bpZrnd)
-            if (entity !is Monster || !world.isSkyVisible(rndBlockPos)){
+            val rndBlockPos = BlockPos(bP.x + bpXrnd,data.world.getTopY(Heightmap.Type.MOTION_BLOCKING,bP.x + bpXrnd,bP.z + bpZrnd), bP.z + bpZrnd)
+            if (entity !is Monster || !data.world.isSkyVisible(rndBlockPos)){
                 tries--
                 continue
             }
-            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos), effect, level)
-            world.spawnEntity(le)
+            val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos), data.effect, data.level)
+            data.world.spawnEntity(le)
             break
         }
     }

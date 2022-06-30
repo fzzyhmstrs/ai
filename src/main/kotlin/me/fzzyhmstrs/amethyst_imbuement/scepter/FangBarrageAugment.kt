@@ -1,13 +1,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
 import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
-import net.minecraft.entity.*
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -53,31 +57,26 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         if (bl){
             effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
-        PersistentEffectHelper.setPersistentTickerNeed(world,user,entityList,level, BlockPos.ORIGIN,this, delay.value(level),effect.duration(level), effect)
+        val data = AugmentPersistentEffectData(world, user, BlockPos.ORIGIN, entityList, level, effect)
+        PersistentEffectHelper.setPersistentTickerNeed(RegisterEnchantment.FANG_BARRAGE, delay.value(level),effect.duration(level), data)
         return bl
     }
 
-    override fun persistentEffect(
-        world: World,
-        user: LivingEntity,
-        blockPos: BlockPos,
-        entityList: MutableList<Entity>,
-        level: Int,
-        effect: AugmentEffect
-    ) {
+    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+        if (data !is AugmentPersistentEffectData) return
         val d: Double
         val e: Double
-        if (entityList.isNotEmpty()){
-            val target = entityList[0]
-            d = min(target.y, user.y)
-            e = max(target.y, user.y) + 1.0
-            entityList.add(target)
+        if (data.entityList.isNotEmpty()){
+            val target = data.entityList[0]
+            d = min(target.y, data.user.y)
+            e = max(target.y, data.user.y) + 1.0
+            data.entityList.add(target)
         } else {
-            d = user.y
-            e = user.y + 1.0
+            d = data.user.y
+            e = data.user.y + 1.0
         }
-        val f = (user.yaw + 90) * MathHelper.PI / 180
-        conjureBarrage(user,world,d,e,f, effect, level)
+        val f = (data.user.yaw + 90) * MathHelper.PI / 180
+        conjureBarrage(data.user,data.world,d,e,f, data.effect, data.level)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
