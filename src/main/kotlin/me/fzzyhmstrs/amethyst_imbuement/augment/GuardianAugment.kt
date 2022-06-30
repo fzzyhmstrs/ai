@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
@@ -17,11 +18,9 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         val world = user.world
-        if (TotemItem.checkCanUseHandler(stack, world, user as PlayerEntity, 240,
-                Text.translatable("augment_damage.guardian.check_can_use").toString())) {
-            if (TotemItem.damageHandler(stack, world, user, 240)) {
-                TotemItem.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user,
-                    Text.translatable("augment_damage.guardian.burnout").toString())
+        if (RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack, world, user as PlayerEntity, 240, Text.translatable("augment_damage.guardian.check_can_use"))) {
+            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, world, user, 240)) {
+                RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.GUARDIAN,user, Text.translatable("augment_damage.guardian.burnout"))
             }
             EffectQueue.addStatusToQueue(user, StatusEffects.REGENERATION, 400, 0)
             EffectQueue.addStatusToQueue(user, StatusEffects.RESISTANCE, 200, 0)

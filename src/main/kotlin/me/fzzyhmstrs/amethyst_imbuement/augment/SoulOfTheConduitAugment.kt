@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
@@ -16,8 +17,8 @@ class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equip
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         if(user.isTouchingWaterOrRain){
             EffectQueue.addStatusToQueue(user,StatusEffects.CONDUIT_POWER,260,0)
-            if (TotemItem.damageHandler(stack, user.world, user as PlayerEntity, 1)){
-                TotemItem.burnOutHandler(
+            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)){
+                RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
                     stack,
                     RegisterEnchantment.SOUL_OF_THE_CONDUIT,
                     user,

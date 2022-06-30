@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -37,9 +38,8 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
                 } else {
                     if (rnd > 0.66) {1} else {0}
                 }
-                if (TotemItem.damageHandler(stack, user.world, user, dmg)){
-                    TotemItem.burnOutHandler(stack, RegisterEnchantment.ANGELIC,user,
-                        Text.translatable("augment_damage.angelic.burnout").toString())
+                if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, dmg)){
+                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.ANGELIC,user, Text.translatable("augment_damage.angelic.burnout"))
                     if (abilitySource.grants(user,ability)){
                         abilitySource.revokeFrom(user,ability)
                     }
