@@ -1,9 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
@@ -178,7 +180,7 @@ class ImbuingTableScreenHandler(
                             }else if (ModifierRegistry.isModifier(id)) {
                                 val modifier = ModifierRegistry.get(id)
                                 val blA = modifier?.isAcceptableItem(itemStack)?:false
-                                val blB = ScepterHelper.checkModifierLineage(id,itemStack)
+                                val blB = ModifierHelper.checkModifierLineage(id,itemStack)
                                 if (blA && blB){
                                     modId[0] = ModifierRegistry.getRawId(id)
                                     enchantmentId[0] = -2
@@ -367,7 +369,7 @@ class ImbuingTableScreenHandler(
                             }
                         }
                     } else if (modChk != null && modChk.isAcceptableItem(itemStack3)){
-                        if (ScepterHelper.addModifier(augId,itemStack3)){
+                        if (ModifierHelper.addModifier(augId,itemStack3)){
                             player.applyEnchantmentCosts(itemStack3, i)
                             for (j in 0..12) { //decrement inventory slots even for creative mode!
                                 if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
@@ -414,7 +416,7 @@ class ImbuingTableScreenHandler(
                     itemStack4.item.onCraft(itemStack4,world, player)
                     inventory.setStack(6,itemStack4)
                     if(match.get().getTransferEnchant()){
-                        ScepterHelper.transferNbt(itemStack3,itemStack4)
+                        Nbt.transferNbt(itemStack3,itemStack4)
                         EnchantmentHelper.set(l,itemStack4)
                     }
                     inventory.markDirty()
