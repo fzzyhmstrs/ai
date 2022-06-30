@@ -2,8 +2,8 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -124,7 +124,7 @@ object RegisterEnchantment {
             val enchant = regEnchant[k]
             Registry.register(Registry.ENCHANTMENT, Identifier(AI.MOD_ID, k), enchant)
             if (enchant is ScepterAugment){
-                ScepterHelper.registerAugmentStat(enchant)
+                AugmentHelper.registerAugmentStat(enchant)
             }
         }
 

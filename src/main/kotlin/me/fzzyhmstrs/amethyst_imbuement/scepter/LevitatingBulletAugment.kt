@@ -1,16 +1,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
 import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil.raycastEntityArea
-import me.fzzyhmstrs.amethyst_core.scepter_util.base_augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -60,8 +61,8 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
             return false
         }
         if (!effect(world, user, hostileEntityList, level, effect)) return false
-        PersistentEffectHelper.setPersistentTickerNeed(world,user,hostileEntityList,level,blockPos,
-            RegisterEnchantment.LEVITATING_BULLET, delay.value(level),effect.duration(level),effect)
+        val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
+        PersistentEffectHelper.setPersistentTickerNeed(RegisterEnchantment.LEVITATING_BULLET, delay.value(level),effect.duration(level),data)
         effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return true
@@ -88,22 +89,16 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
 
         return true
     }
-    override fun persistentEffect(
-        world: World,
-        user: LivingEntity,
-        blockPos: BlockPos,
-        entityList: MutableList<Entity>,
-        level: Int,
-        effect: AugmentEffect
-    ) {
-        val rnd1 = entityList.size
-        val rnd2 = world.random.nextInt(rnd1)
-        val entity = entityList[rnd2]
+    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+        if (data !is AugmentPersistentEffectData) return
+        val rnd1 = data.entityList.size
+        val rnd2 = data.world.random.nextInt(rnd1)
+        val entity = data.entityList[rnd2]
 
-        val axis = getAxis(user)
-        val sbe = PlayerBulletEntity(world,user,entity,axis)
-        sbe.passEffects(effect, level)
-        world.spawnEntity(sbe)
+        val axis = getAxis(data.user)
+        val sbe = PlayerBulletEntity(data.world,data.user,entity,axis)
+        sbe.passEffects(data.effect, data.level)
+        data.world.spawnEntity(sbe)
     }
 
     override fun soundEvent(): SoundEvent {
