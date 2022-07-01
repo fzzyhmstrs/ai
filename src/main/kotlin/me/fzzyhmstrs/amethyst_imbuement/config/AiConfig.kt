@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.gson
 import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreate
 import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
 import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
@@ -22,16 +23,16 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     var enchantments: Enchantments
 
     init {
-        scepters = readOrCreate("scepters_v0.json") { Scepters() }
-        altars = readOrCreateUpdated("altars_v1.json","altars_v0.json", configClass = {Altars()}, previousClass = {AltarsV0()})
-        colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", configClass = {Colors()}, previousClass = {ColorsV0()})
+        scepters = readOrCreate("scepters_v0.json", base = AI.MOD_ID) { Scepters() }
+        altars = readOrCreateUpdated("altars_v1.json","altars_v0.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV0()})
+        colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
-        villages = readOrCreate("villages_v0.json") { Villages() }
-        enchantments = readOrCreate("enchantments_v0.json") { Enchantments() }
-        ReadmeText.writeReadMe("README.txt")
+        villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
+        enchantments = readOrCreate("enchantments_v0.json", base = AI.MOD_ID) { Enchantments() }
+        ReadmeText.writeReadMe("README.txt", AI.MOD_ID)
     }
 
-    fun initConfig(){
+    override fun initConfig(){
         SyncedConfigRegistry.registerConfig(this)
     }
 
