@@ -18,6 +18,7 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
+import net.minecraft.tag.BlockTags
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Nameable
@@ -112,7 +113,7 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
                     continue
                 }
                 val blockPos = pos.add(i, 0, j)
-                if (!(world.getBlockState(blockPos).isOf(Blocks.CANDLE) || world.getBlockState(blockPos).isOf(RegisterBlock.WARDING_CANDLE))) continue
+                if (!(world.getBlockState(blockPos).isIn(BlockTags.CANDLES))) continue
                 if (!world.isAir(pos.add(i / 2, 0, j / 2))) {
                     ++j
                     continue@block1
