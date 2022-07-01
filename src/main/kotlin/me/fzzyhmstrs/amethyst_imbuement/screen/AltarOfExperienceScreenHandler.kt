@@ -10,6 +10,7 @@ import net.minecraft.screen.*
 import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.BlockTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
@@ -75,20 +76,20 @@ class AltarOfExperienceScreenHandler(
         for (i in -1..1){
             for (j in -1..1){
                 if (i == 0 && j == 0 || !world.isAir(pos.add(i, 0, j))) continue
-                if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isOf(Blocks.CANDLE)) {
-                    candles++
-                } else if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
+                if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
                     wardingCandles++
+                } else if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isIn(BlockTags.CANDLES)) {
+                    candles++
                 }
-                if (world.getBlockState(pos.add(i, 0, j * 2)).isOf(Blocks.CANDLE)) {
-                    candles++
-                } else if (world.getBlockState(pos.add(i, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
+                if (world.getBlockState(pos.add(i, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
                     wardingCandles++
+                } else if (world.getBlockState(pos.add(i, 0, j * 2)).isIn(BlockTags.CANDLES)) {
+                    candles++
                 }
-                if (world.getBlockState(pos.add(i * 2, 0, j)).isOf(Blocks.CANDLE)) {
-                    candles++
-                } else if (world.getBlockState(pos.add(i * 2, 0, j)).isOf(RegisterBlock.WARDING_CANDLE)) {
+                if (world.getBlockState(pos.add(i * 2, 0, j)).isOf(RegisterBlock.WARDING_CANDLE)) {
                     wardingCandles++
+                } else if (world.getBlockState(pos.add(i * 2, 0, j)).isIn(BlockTags.CANDLES)) {
+                    candles++
                 }
             }
         }
