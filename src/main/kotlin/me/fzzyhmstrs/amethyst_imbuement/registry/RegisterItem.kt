@@ -38,7 +38,7 @@ object RegisterItem {
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["xp_bush_seed"] = it}
 
     //tool and weapon item declarations
-    val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["glistering_trident"] = it}
+    val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(Item.Settings().maxDamage(500).group(ItemGroup.COMBAT)).also{ regItem["sniper_bow"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_shovel"] = it}
@@ -56,9 +56,9 @@ object RegisterItem {
     val COPPER_RING = CopperJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"copper_ring")) .also{ regItem["copper_ring"] = it}
     val COPPER_HEADBAND = CopperJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"copper_headband")).also{ regItem["copper_headband"] = it}
     val COPPER_AMULET = CopperJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"copper_amulet")).also{ regItem["copper_amulet"] = it}
-    val IMBUED_RING = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_ring")) .also{ regItem["imbued_ring"] = it}
-    val IMBUED_HEADBAND = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_headband")).also{ regItem["imbued_headband"] = it}
-    val IMBUED_AMULET = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_amulet")).also{ regItem["imbued_amulet"] = it}
+    val IMBUED_RING = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_ring")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"imbued_ring")) .also{ regItem["imbued_ring"] = it}
+    val IMBUED_HEADBAND = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_headband")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"imbued_headband")).also{ regItem["imbued_headband"] = it}
+    val IMBUED_AMULET = ImbuedJewelryItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_amulet")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"imbued_amulet")).also{ regItem["imbued_amulet"] = it}
     val TOTEM_OF_AMETHYST = TotemItem(FabricItemSettings().group(ItemGroup.COMBAT).maxDamage(360).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"iridescent_orb")).also{ regItem["iridescent_orb"] = it}
     val LUSTROUS_SPHERE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"lustrous_sphere")).withGlint().also{ regItem["lustrous_sphere"] = it}

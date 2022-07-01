@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
+import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
@@ -23,8 +24,14 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class GlisteringTridentItem(settings: Settings) : TridentItem(settings) {
+class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorful<GlisteringTridentItem> {
  private var attributeModifiers: Multimap<EntityAttribute, EntityAttributeModifier>
+    override var flavor: String = ""
+    override var glint: Boolean = false
+    override var flavorDesc: String = ""
+    override fun getFlavorItem(): GlisteringTridentItem {
+        return this
+    }
     init {
         val builder = ImmutableMultimap.builder<EntityAttribute, EntityAttributeModifier>()
         builder.put(
