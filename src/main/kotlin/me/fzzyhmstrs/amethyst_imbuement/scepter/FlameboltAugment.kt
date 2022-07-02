@@ -32,7 +32,7 @@ class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,19,4,1,imbueLevel, LoreTier.NO_TIER, Items.FIRE_CHARGE)
+        return AugmentDatapoint(SpellType.FURY,19,4,1, imbueLevel, LoreTier.NO_TIER, Items.FIRE_CHARGE)
     }
 
 }
