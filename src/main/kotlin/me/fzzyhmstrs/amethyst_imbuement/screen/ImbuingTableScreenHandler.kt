@@ -175,6 +175,8 @@ class ImbuingTableScreenHandler(
                                     }
                                 } else if(!augCheck.first && augCheck.second) {
                                     levelLow[0] = Registry.ENCHANTMENT.getRawId(augment)
+                                } else if(!augCheck.second) {
+                                    levelLow[0] = -1 * Registry.ENCHANTMENT.getRawId(augment)
                                 }else{
                                     enchantmentPower[0] = 0
                                 }
@@ -276,7 +278,7 @@ class ImbuingTableScreenHandler(
             i = MathHelper.ceil(match.get().getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
         }
 
-        if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] <= 0)  || player.abilities.creativeMode)) {
+        if (enchantmentPower[id] > 0 && !itemStack.isEmpty && ((player.experienceLevel >= i && player.experienceLevel >= enchantmentPower[id] && levelLow[id] == 0)  || player.abilities.creativeMode)) {
             var buttonWorked = true
             context.run { world: World, pos: BlockPos? ->
                 var itemStack3 = itemStack

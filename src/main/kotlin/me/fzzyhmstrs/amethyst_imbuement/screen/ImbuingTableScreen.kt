@@ -304,7 +304,10 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 val enchantment = if (handler.levelLow[j] > 0){
                     list.add(TranslatableText("container.imbuing_table.level_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j])
-                } else {
+                } else if (handler.levelLow[j] > 0) {
+                    list.add(TranslatableText("container.imbuing_table.scepter_low").formatted(Formatting.RED))
+                    Enchantment.byRawId(handler.levelLow[j] * -1)
+                }else {
                     Enchantment.byRawId(handler.enchantmentId[j])
                 }
                 if (enchantment != null) {
@@ -317,7 +320,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 } else{
                     continue
                 }
-                if (handler.levelLow[j] <= 0){
+                if (handler.levelLow[j] == 0){
                     if (!bl) {
                         list.add(LiteralText.EMPTY)
                         if (player.experienceLevel < k) {
