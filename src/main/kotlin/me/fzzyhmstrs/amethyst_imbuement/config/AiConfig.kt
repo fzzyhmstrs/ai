@@ -33,7 +33,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     override fun initConfig(){
-        SyncedConfigRegistry.registerConfig(this)
+        SyncedConfigRegistry.registerConfig(AI.MOD_ID,this)
     }
 
     override fun writeToClient(buf:PacketByteBuf){

@@ -34,6 +34,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
     }
 
     override fun onEquip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
+        if(entity.world.isClient()) return
         super.onEquip(stack, slot, entity)
         val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
         ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
@@ -48,6 +49,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
 
     override fun intermittentTick(stack: ItemStack, entity: LivingEntity) {
         super.intermittentTick(stack, entity)
+        if(entity.world.isClient()) return
         ShieldingAugment.applyEntityShielding(entity)
     }
 

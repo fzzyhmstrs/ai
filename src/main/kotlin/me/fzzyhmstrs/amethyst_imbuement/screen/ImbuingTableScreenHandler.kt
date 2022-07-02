@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
@@ -179,7 +180,7 @@ class ImbuingTableScreenHandler(
                                     enchantmentPower[0] = 0
                                 }
                             }else if (ModifierRegistry.isModifier(id)) {
-                                val modifier = ModifierRegistry.get(id)
+                                val modifier = ModifierRegistry.getByType<AugmentModifier>(id)
                                 val blA = modifier?.isAcceptableItem(itemStack)?:false
                                 val blB = ModifierHelper.checkModifierLineage(id,itemStack)
                                 if (blA && blB){
@@ -245,6 +246,8 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        println(player)
+        println(id)
         if (player.world.isClient) return false
         val itemStack = inventory.getStack(6)
         val itemStack2 = inventory.getStack(7)
@@ -317,7 +320,7 @@ class ImbuingTableScreenHandler(
                 } else if(match.get().getAugment() != ""){
                     val augId = Identifier(match.get().getAugment())
                     val augmentChk = Registry.ENCHANTMENT.get(augId)
-                    val modChk = ModifierRegistry.get(augId)
+                    val modChk = ModifierRegistry.getByType<AugmentModifier>(augId)
                     if (augmentChk == null && modChk == null){
                         buttonWorked = false
                         return@run

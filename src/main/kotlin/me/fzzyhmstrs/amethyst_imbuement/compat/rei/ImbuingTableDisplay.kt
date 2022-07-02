@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -60,7 +61,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                 if (recipe.getAugment() != "" && i == 6){
                     val identifier = Identifier(recipe.getAugment())
                     val enchant = Registry.ENCHANTMENT.get(identifier)
-                    val modifier = ModifierRegistry.get(identifier)
+                    val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
                     if (enchant != null){
                         when (enchant) {
                             is BaseAugment -> {
@@ -121,7 +122,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
             } else {
                 val identifier = Identifier(recipe.getAugment())
                 val enchant = Registry.ENCHANTMENT.get(identifier)
-                val modifier = ModifierRegistry.get(identifier)
+                val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
                 val stack: ItemStack
                 val builder = EntryIngredient.builder()
                 if (enchant != null){

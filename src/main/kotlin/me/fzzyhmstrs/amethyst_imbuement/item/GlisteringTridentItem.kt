@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap
 import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -19,6 +20,7 @@ import net.minecraft.item.TridentItem
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
+import net.minecraft.text.Text
 import net.minecraft.util.UseAction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
@@ -53,6 +55,16 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
             )
         )
         this.attributeModifiers = builder.build()
+    }
+
+    override fun appendTooltip(
+        stack: ItemStack,
+        world: World?,
+        tooltip: MutableList<Text>,
+        context: TooltipContext
+    ) {
+        super.appendTooltip(stack, world, tooltip, context)
+        addFlavorText(tooltip, context)
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {
