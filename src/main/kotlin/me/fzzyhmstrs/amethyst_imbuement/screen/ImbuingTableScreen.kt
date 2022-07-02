@@ -360,7 +360,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 }
                 if(handler.modId[j] > 0) {
                     val id = ModifierRegistry.getIdByRawId(handler.modId[j])
-                    val textName: MutableText = (ModifierRegistry.get(id)?.getName()?:LiteralText.EMPTY) as MutableText
+                    val textName: MutableText = TranslatableText("scepter.modifiers.${id}")
                     //println(textName.toString())
                     list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                     list.add(LiteralText.EMPTY)
