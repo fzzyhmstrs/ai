@@ -248,8 +248,6 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
-        println(player)
-        println(id)
         if (player.world.isClient) return false
         val itemStack = inventory.getStack(6)
         val itemStack2 = inventory.getStack(7)

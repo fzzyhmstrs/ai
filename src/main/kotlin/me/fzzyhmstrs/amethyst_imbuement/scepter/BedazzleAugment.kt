@@ -34,7 +34,6 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: AugmentEffect): Boolean {
         val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
-        println(entityList)
         if (entityList.size <= 1) return false
         if (effect(world, user, entityList, level, effect)) {
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.5F, 1.0F)
