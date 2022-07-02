@@ -47,6 +47,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity) {
+            println("wither damage: ${entityEffects.damage(0)}")
             bl = entity.damage(DamageSource.witherSkull(this, entity2), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
