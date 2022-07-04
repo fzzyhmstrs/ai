@@ -60,6 +60,7 @@ dependencies {
     modImplementation("dev.emi:trinkets:3.3.0"){
         exclude("net.fabricmc.fabric-api")
     }
+    include("dev.emi:trinkets:3.3.0")
 
     modImplementation("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
         exclude("net.fabricmc.fabric-api")
