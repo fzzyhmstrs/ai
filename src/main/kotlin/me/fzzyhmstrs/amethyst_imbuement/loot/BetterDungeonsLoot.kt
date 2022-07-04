@@ -16,7 +16,7 @@ object BetterDungeonsLoot: AbstractModLoot() {
 
     override val targetNameSpace: String = "betterdungeons"
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
+    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean {
         when (id) {
             Identifier("betterdungeons", "zombie_dungeon/chests/common") -> {
                 VanillaLoot.mineshaftLoot(table)

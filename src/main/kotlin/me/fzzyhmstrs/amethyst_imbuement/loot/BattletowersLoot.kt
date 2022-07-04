@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier
 object BattletowersLoot: AbstractModLoot() {
     override val targetNameSpace: String = "battletowers"
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean{
+    override fun lootBuilder(id: Identifier, table: LootTable.Builder): Boolean{
         when (id) {
             Identifier("battletowers","default") -> {
                 val poolBuilder = RegisterLoot.tierOneGemPool(2.0F, 0.1F)

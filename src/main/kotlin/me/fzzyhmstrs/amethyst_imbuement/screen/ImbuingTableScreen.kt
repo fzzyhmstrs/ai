@@ -303,7 +303,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     list.add(Text.translatable("container.imbuing_table.level_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j])
                 } else if (handler.levelLow[j] < 0) {
-                    list.add(TranslatableText("container.imbuing_table.scepter_low").formatted(Formatting.RED))
+                    list.add(Text.translatable("container.imbuing_table.scepter_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j] * -1)
                 }else {
                     Enchantment.byRawId(handler.enchantmentId[j])
