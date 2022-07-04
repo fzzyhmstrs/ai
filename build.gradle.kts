@@ -35,9 +35,6 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
-    flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
-    }
 }
 dependencies {
     val minecraftVersion: String by project
@@ -55,8 +52,6 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
 
-    modImplementation(":amethyst_core-1.0.0+1.18.2")
-
     modImplementation("dev.emi:trinkets:3.3.0"){
         exclude("net.fabricmc.fabric-api")
     }
@@ -71,6 +66,11 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
     include("maven.modrinth:Wd844r7Q:1.18.2-02")
+
+    modImplementation("maven.modrinth:amethyst-core:0.1.0+1.18.2"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("maven.modrinth:amethyst-core:0.1.0+1.18.2")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.0"){
         exclude("net.fabricmc.fabric-api")
