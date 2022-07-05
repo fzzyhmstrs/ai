@@ -1,23 +1,38 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import org.lwjgl.glfw.GLFW
+import java.util.*
 
 @Suppress("PrivatePropertyName")
 object RegisterKeybind {
+
+    private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
+    @Environment(value = EnvType.SERVER)
+    private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
+    @Environment(value = EnvType.CLIENT)
+    private var veinMinerKeyPressed: Boolean = false
 
     private val SCEPTER_ACTIVE_AUGMENT: KeyBinding = KeyBindingHelper.registerKeyBinding(
         KeyBinding(
@@ -53,7 +68,7 @@ object RegisterKeybind {
                 if (stack.item is ScepterItem) {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
-                        val activeEnchant = readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
+                        val activeEnchant = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
                         val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: Text.literal(activeEnchant)
                         client.player?.sendMessage(Text.translatable("scepter.active_spell_key").append(activeEnchantName), true)
                         client.player?.addScoreboardTag(activeEnchant)
@@ -63,18 +78,48 @@ object RegisterKeybind {
                     }
                 }
             }
-        })
-        ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient ->
             while (SPYGLASS_CHANGE.wasPressed()) {
                 if (client.player?.isUsingSpyglass == true) {
                     SniperBowItem.changeScope(true)
                 }
             }
+            if (VEIN_MINER.isPressed){
+                if (!veinMinerKeyPressed){
+                    veinMinerKeyPressed = true
+                    val uuid = client.player?.uuid
+                    if (uuid != null) {
+                        ClientPlayNetworking.send(VEIN_MINER_PACKET, writeBuf(uuid, veinMinerKeyPressed))
+                    }
+                }
+            } else {
+                if (veinMinerKeyPressed){
+                    veinMinerKeyPressed = false
+                    val uuid = client.player?.uuid
+                    if (uuid != null) {
+                        ClientPlayNetworking.send(VEIN_MINER_PACKET, writeBuf(uuid, veinMinerKeyPressed))
+                    }
+                }
+            }
         })
     }
 
-    private fun readStringNbt(key: String, nbt: NbtCompound): String {
-        return nbt.getString(key)
+    fun registerServer(){
+        ServerPlayNetworking.registerGlobalReceiver(VEIN_MINER_PACKET) {_, _, _, buf, _ ->
+            val uuid = buf.readUuid()
+            val state = buf.readBoolean()
+            veinMiners[uuid] = state
+        }
+    }
+
+    private fun writeBuf(uuid: UUID, state: Boolean): PacketByteBuf{
+        val buf = PacketByteBufs.create()
+        buf.writeUuid(uuid)
+        buf.writeBoolean(state)
+        return buf
+    }
+
+    fun checkForVeinMine(uuid: UUID): Boolean{
+        return veinMiners[uuid]?:false
     }
 
 }
