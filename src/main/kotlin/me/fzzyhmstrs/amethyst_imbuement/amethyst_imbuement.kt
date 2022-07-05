@@ -27,6 +27,7 @@ object AI: ModInitializer {
         RegisterStatus.registerAll()
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
+        RegisterKeybind.registerServer()
     }
 
     fun aiRandom(): Random{

@@ -19,6 +19,7 @@
     "ItemMixin",
     "LivingEntityMixin",
     "MilkBucketMixin",
+    "MiningToolItemMixin",
     "PersistentProjectileEntityMixin",
     "PiglinBrainMixin",
     "PlayerEntityMixin",
@@ -45,8 +46,7 @@
   "client": [
     "HeldItemRendererMixin",
     "InGameHudMixin",
-    "ClientPlayNetworkHandlerMixin",
-    "MiningToolItemMixin"
+    "ClientPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

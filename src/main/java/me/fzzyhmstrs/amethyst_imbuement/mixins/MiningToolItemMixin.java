@@ -22,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(value= EnvType.CLIENT)
 @Mixin(MiningToolItem.class)
 public class MiningToolItemMixin {
 
@@ -30,13 +29,16 @@ public class MiningToolItemMixin {
     @Shadow private TagKey<Block> effectiveBlocks;
 
 
-    @Inject(method = "postMine", at = @At(value = "TAIL"), cancellable = true)
+    @Inject(method = "postMine", at = @At(value = "TAIL"))
     private void postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner, CallbackInfoReturnable<Boolean> cir){
-        Block block = state.getBlock();
+        System.out.println("blup");
         if (miner instanceof ServerPlayerEntity && state.isIn(effectiveBlocks)) {
             int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getVEIN_MINER(), stack);
             if (lvl > 0) {
-                if (RegisterKeybind.INSTANCE.getVEIN_MINER().isPressed()) {
+                System.out.println("bloop");
+                if (RegisterKeybind.INSTANCE.checkForVeinMine(miner.getUuid())) {
+                    System.out.println("bleep");
+                    Block block = state.getBlock();
                     VeinMinerEnchantment.Companion.veinMine(world, pos, block, (ServerPlayerEntity) miner, lvl);
                 }
             }
