@@ -11,14 +11,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.text.Text
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
@@ -31,8 +28,6 @@ import java.util.*
 object RegisterKeybind {
 
     private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
-    @Environment(value = EnvType.SERVER)
-    private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
 
@@ -45,7 +40,7 @@ object RegisterKeybind {
         )
     )
 
-    val VEIN_MINER: KeyBinding = KeyBindingHelper.registerKeyBinding(
+    private val VEIN_MINER: KeyBinding = KeyBindingHelper.registerKeyBinding(
         KeyBinding(
             "key.amethyst_imbuement.vein_mine_key",  // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
@@ -105,14 +100,6 @@ object RegisterKeybind {
         })
     }
 
-    fun registerServer(){
-        ServerPlayNetworking.registerGlobalReceiver(VEIN_MINER_PACKET) {_, _, _, buf, _ ->
-            val uuid = buf.readUuid()
-            val state = buf.readBoolean()
-            veinMiners[uuid] = state
-        }
-    }
-
     private fun writeBuf(uuid: UUID, state: Boolean): PacketByteBuf{
         val buf = PacketByteBufs.create()
         buf.writeUuid(uuid)
@@ -120,8 +107,5 @@ object RegisterKeybind {
         return buf
     }
 
-    fun checkForVeinMine(uuid: UUID): Boolean{
-        return veinMiners[uuid]?:false
-    }
-
 }
+
