@@ -2,9 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.VeinMinerEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterKeybind;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterKeybindServer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -36,7 +34,7 @@ public class MiningToolItemMixin {
             int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getVEIN_MINER(), stack);
             if (lvl > 0) {
                 System.out.println("bloop");
-                if (RegisterKeybind.INSTANCE.checkForVeinMine(miner.getUuid())) {
+                if (RegisterKeybindServer.INSTANCE.checkForVeinMine(miner.getUuid())) {
                     System.out.println("bleep");
                     Block block = state.getBlock();
                     VeinMinerEnchantment.Companion.veinMine(world, pos, block, (ServerPlayerEntity) miner, lvl);

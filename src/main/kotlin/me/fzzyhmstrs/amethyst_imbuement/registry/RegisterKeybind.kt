@@ -103,14 +103,6 @@ object RegisterKeybind {
         })
     }
 
-    fun registerServer(){
-        ServerPlayNetworking.registerGlobalReceiver(VEIN_MINER_PACKET) {_, _, _, buf, _ ->
-            val uuid = buf.readUuid()
-            val state = buf.readBoolean()
-            veinMiners[uuid] = state
-        }
-    }
-
     private fun writeBuf(uuid: UUID, state: Boolean): PacketByteBuf{
         val buf = PacketByteBufs.create()
         buf.writeUuid(uuid)
@@ -118,8 +110,5 @@ object RegisterKeybind {
         return buf
     }
 
-    fun checkForVeinMine(uuid: UUID): Boolean{
-        return veinMiners[uuid]?:false
-    }
-
 }
+
