@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractPassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -15,7 +16,7 @@ open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is ImbuedJewelryItem) || (stack.isOf(RegisterItem.TOTEM_OF_AMETHYST))
+        return (stack.item is AbstractAugmentJewelryItem) || (stack.isOf(RegisterItem.TOTEM_OF_AMETHYST))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
