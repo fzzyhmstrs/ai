@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The glistering trident is an enhanced version of the common prismarine version. Enchant this trident with all the enchantments you'd expect (and more!), augment it even further. $(br2)Base damage is substantially increased over the trident."
+"text": "The Glistering Trident is an enhanced version of the common prismarine version. Enchant this trident with all the enchantments you'd expect (and more!), augment it even further. $(br2)Base damage is substantially increased over the Trident."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
