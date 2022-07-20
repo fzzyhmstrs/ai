@@ -5,6 +5,7 @@
   "mixins": [
     "ArmorItemMixin",
     "AxolotlEntityMixin",
+    "BlockMixin",
     "BucketItemMixin",
     "CarvedPumpkinBlockMixin",
     "CowEntityMixin",

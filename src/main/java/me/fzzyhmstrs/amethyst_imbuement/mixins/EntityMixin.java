@@ -29,7 +29,7 @@ public abstract class EntityMixin {
 
     @Shadow public abstract boolean equals(Object o);
 
-    @Redirect(method = "fall", at = @At(value = "INVOKE", target = "net/minecraft/block/Block.onLandedUpon (Lnet/minecraft/world/World;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V"))
+/*    @Redirect(method = "fall", at = @At(value = "INVOKE", target = "net/minecraft/block/Block.onLandedUpon (Lnet/minecraft/world/World;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V"))
     private void onSlimedUpon(Block instance, World world, BlockState state, BlockPos pos, Entity entity, float fallDistance){
         if (!(entity instanceof PlayerEntity playerEntity)){
             instance.onLandedUpon(world, state, pos, entity, fallDistance);
@@ -46,9 +46,9 @@ public abstract class EntityMixin {
         } else {
             instance.onLandedUpon(world, state, pos, entity, fallDistance);
         }
-    }
+    }*/
 
-    @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/block/Block.onEntityLand (Lnet/minecraft/world/BlockView;Lnet/minecraft/entity/Entity;)V"))
+/*    @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/block/Block.onEntityLand (Lnet/minecraft/world/BlockView;Lnet/minecraft/entity/Entity;)V"))
     private void slimyBounce(Block instance, BlockView world, Entity entity){
         if (!(entity instanceof PlayerEntity playerEntity)){
             instance.onEntityLand(world,entity);
@@ -73,7 +73,7 @@ public abstract class EntityMixin {
             instance.onEntityLand(world,entity);
         }
 
-    }
+    }*/
 
     @Shadow public float stepHeight;
 
@@ -103,7 +103,7 @@ public abstract class EntityMixin {
         return EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTRIDING(),player.getEquippedStack(EquipmentSlot.FEET));
     }
 
-    private void bounce(Entity entity) {
+    /*private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < -0.4) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
@@ -111,5 +111,5 @@ public abstract class EntityMixin {
         } else {
             entity.setVelocity(vec3d.x, 0.0, vec3d.z);
         }
-    }
+    }*/
 }
