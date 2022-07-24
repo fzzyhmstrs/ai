@@ -50,39 +50,5 @@ object RegisterHandler {
         Registry.register(Registry.SCREEN_HANDLER,Identifier(AI.MOD_ID,"altar_of_experience"), ALTAR_OF_EXPERIENCE_SCREEN_HANDLER)
         Registry.register(Registry.SCREEN_HANDLER,Identifier(AI.MOD_ID,"disenchanting_table"), DISENCHANTING_TABLE_SCREEN_HANDLER)
         Registry.register(Registry.SCREEN_HANDLER,Identifier(AI.MOD_ID,"crystal_altar"), CRYSTAL_ALTAR_SCREEN_HANDLER)
-
     }
-
-    /*CRYSTAL_ALTAR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(
-            Identifier(AI.MOD_ID,"crystal_altar")
-        ) { syncID: Int, playerInventory: PlayerInventory ->
-            CrystalAltarScreenHandler(
-                syncID,
-                playerInventory
-            )
-    }*/
-    /*DISENCHANTING_TABLE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(
-        Identifier(AI.MOD_ID,"disenchanting_table")
-    ) { syncID: Int, playerInventory: PlayerInventory ->
-        DisenchantingTableScreenHandler(
-            syncID,
-            playerInventory
-        )
-    }*/
-    /*ALTAR_OF_EXPERIENCE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(
-        Identifier(AI.MOD_ID,"altar_of_experience")
-    ) { syncID: Int, playerInventory: PlayerInventory ->
-        AltarOfExperienceScreenHandler(
-            syncID,
-            playerInventory
-        )
-    }*/
-    /*IMBUING_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(
-            Identifier(AI.MOD_ID,"imbuing_table")
-        ) { syncID: Int, playerInventory: PlayerInventory ->
-            ImbuingTableScreenHandler(
-                syncID,
-                playerInventory
-            )
-    }*/
 }

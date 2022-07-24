@@ -7,11 +7,15 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Blocks
 import net.minecraft.client.font.TextRenderer
@@ -26,6 +30,7 @@ import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -101,16 +106,12 @@ class ImbuingTableScreenHandler(
 
     override fun close(player: PlayerEntity?) {
         super.close(player)
-        context.run { _: World?, _: BlockPos? ->
-            dropInventory(
-                player,
-                inventory
-            )
-        }
+        context.run { _: World?, _: BlockPos? -> dropInventory(player, inventory) }
     }
 
     override fun onContentChanged(inventory: Inventory) {
         if (inventory === this.inventory) {
+
             val itemStack = inventory.getStack(6)
             results = listOf()
             resultsIndexes =  intArrayOf(-1, -1, -1)
@@ -125,7 +126,7 @@ class ImbuingTableScreenHandler(
                             world)
                     }
                     if (matches.isNotEmpty()){
-                        matches.forEachIndexed { index, imbuingRecipe ->
+                        matches.forEach {  imbuingRecipe ->
                             val power = MathHelper.ceil(imbuingRecipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
                             if (imbuingRecipe.getAugment() != "") {
                                 val id = Identifier(imbuingRecipe.getAugment())
@@ -153,17 +154,10 @@ class ImbuingTableScreenHandler(
                                         }
                                     } else if (!augCheck.first && augCheck.second) {
                                         val str = augment.getName(1).string
-                                        tempResults.add(ErrorResult(listOf(Text.translatable("container.imbuing_table.level_low").formatted(Formatting.RED)),
-                                            augment.getName(1),
-                                            Text.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
-                                            power,
-                                            power))
+                                        tempResults.add(LevelLowErrorResult(str,power))
                                     } else if (!augCheck.second) {
                                         val str = augment.getName(1).string
-                                        tempResults.add(ErrorResult(listOf(Text.translatable("container.imbuing_table.scepter_low").formatted(Formatting.RED)),
-                                            augment.getName(1),
-                                            Text.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
-                                            power,
+                                        tempResults.add(ScepterLowErrorResult(str,
                                             power))
                                     } else {
                                         tempResults.add(EmptyResult())
@@ -235,6 +229,7 @@ class ImbuingTableScreenHandler(
                         }
                     }
                     results = tempResults
+                    println(results)
                     for (i in 0..2){
                         if (results.size >= i + 1){
                             if (results[i].power > 0){
@@ -246,8 +241,10 @@ class ImbuingTableScreenHandler(
                             resultsIndexes[i] = -1
                         }
                     }
+                    println(resultsIndexes)
                     resultsCanDown = results.size > 3
                     sendContentUpdates()
+                    sendPacket(player,this)
                 }
             }
         }
@@ -494,6 +491,65 @@ class ImbuingTableScreenHandler(
 
     companion object {
 
+        val RESULTS_PACKET = Identifier(AI.MOD_ID, "results_packet")
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(RESULTS_PACKET) {client,_,buf,_ ->
+                val player = client.player?:return@registerGlobalReceiver
+                val world = client.world?:return@registerGlobalReceiver
+                val syncID = buf.readInt()
+                val handler = player.currentScreenHandler
+                if (handler.syncId != syncID) return@registerGlobalReceiver
+                if (handler !is ImbuingTableScreenHandler) return@registerGlobalReceiver
+                val resultCount = buf.readByte().toInt()
+                if (resultCount == 0){
+                    handler.results = listOf()
+                    handler.resultsIndexes =  intArrayOf(-1, -1, -1)
+                    handler.resultsCanUp = false
+                    handler.resultsCanDown = false
+                    return@registerGlobalReceiver
+                }
+                val tempResults: MutableList<TableResult> = mutableListOf()
+                for (i in 1..resultCount){
+                    tempResults.add(TableResult.resultFromBuf(world, buf))
+                }
+                handler.results = tempResults
+                val int1 = buf.readByte().toInt()
+                val int2 = buf.readByte().toInt()
+                val int3 = buf.readByte().toInt()
+                handler.resultsIndexes = intArrayOf(int1, int2, int3)
+                handler.resultsCanUp = buf.readBoolean()
+                handler.resultsCanDown = buf.readBoolean()
+                println("synced handler on the client!")
+                println(handler.results)
+                println(handler.resultsIndexes.asList())
+                println(handler.resultsCanUp)
+                println(handler.resultsCanDown)
+            }
+        }
+
+        fun sendPacket(player: PlayerEntity, handler: ImbuingTableScreenHandler){
+            if (player !is ServerPlayerEntity) return
+            val buf = PacketByteBufs.create()
+            buf.writeInt(handler.syncId)
+            buf.writeByte(handler.results.size)
+            for (result in handler.results){
+                result.bufResultWriter(buf)
+            }
+            buf.writeByte(handler.resultsIndexes[0])
+            buf.writeByte(handler.resultsIndexes[1])
+            buf.writeByte(handler.resultsIndexes[2])
+            buf.writeBoolean(handler.resultsCanUp)
+            buf.writeBoolean(handler.resultsCanDown)
+
+            ServerPlayNetworking.send(player, RESULTS_PACKET,buf)
+            println("synced handler on the client!")
+            println(handler.results)
+            println(handler.resultsIndexes.asList())
+            println(handler.resultsCanUp)
+            println(handler.resultsCanDown)
+        }
+
         private fun generateEnchantmentList(
             random: Random,
             stack: ItemStack,
@@ -563,6 +619,15 @@ class ImbuingTableScreenHandler(
         val power: Int
         val lapis: Int
 
+        fun bufResultWriter(buf: PacketByteBuf){
+            buf.writeByte(type)
+            bufClassWriter(buf)
+        }
+
+        fun bufClassWriter(buf: PacketByteBuf)
+
+        fun bufClassReader(world: World,buf: PacketByteBuf): TableResult
+
         fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable
 
         fun isReady(id: Int, player: PlayerEntity, handler: ImbuingTableScreenHandler): Boolean
@@ -573,12 +638,39 @@ class ImbuingTableScreenHandler(
 
         fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text
 
+        companion object{
+
+            val resultTypes = mapOf<Int,TableResult>(
+                -11 to ScepterLowErrorResult("", 0),
+                -10 to LevelLowErrorResult("",0),
+                -2 to EmptyResult(),
+                0 to EnchantingResult(0, 0, 0),
+                1 to ImbuingResult(ImbuingRecipe.blankRecipe(),0),
+                2 to ImbuingResult(ImbuingRecipe.blankRecipe(),0)
+            )
+
+            fun resultFromBuf(world: World,buf: PacketByteBuf): TableResult{
+                val type = buf.readByte().toInt()
+                return resultFromBuf(type, world, buf)
+            }
+
+            fun resultFromBuf(type: Int, world: World, buf: PacketByteBuf): TableResult{
+                return resultTypes[type]?.bufClassReader(world, buf) ?: EmptyResult()
+            }
+        }
     }
 
-    class EmptyResult: TableResult {
+    class EmptyResult(): TableResult {
         override val type: Int = -2
         override val power: Int = 0
         override val lapis: Int = 0
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            return EmptyResult()
+        }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             return StringVisitable.EMPTY
@@ -608,6 +700,7 @@ class ImbuingTableScreenHandler(
     }
 
     class EnchantingResult(override val power: Int, val id: Int, val level: Int): TableResult{
+
         override val type: Int = 0
 
         override val lapis: Int = when(power){
@@ -618,6 +711,19 @@ class ImbuingTableScreenHandler(
             in 41..50 -> 5
             in 51..60 -> 6
             else -> 1
+        }
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+            buf.writeShort(power)
+            buf.writeShort(id)
+            buf.writeByte(level)
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            val pow = buf.readShort().toInt()
+            val i = buf.readShort().toInt()
+            val lvl = buf.readShort().toInt()
+            return EnchantingResult(pow,i,lvl)
         }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
@@ -729,6 +835,27 @@ class ImbuingTableScreenHandler(
 
         override val type: Int = 1
         override val lapis = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+            buf.writeIdentifier(recipe.id)
+            buf.writeShort(power)
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            val recipeId = buf.readIdentifier()
+            val pow = buf.readShort().toInt()
+            val opt = world.recipeManager.get(recipeId)
+            val recipe = if(opt.isPresent){
+                opt.get()
+            } else {
+                null
+            } ?: return EmptyResult()
+            return if (recipe is ImbuingRecipe){
+                ImbuingResult(recipe, pow)
+            } else {
+                EmptyResult()
+            }
+        }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             return if(recipe.getAugment() != "") {
@@ -882,9 +1009,32 @@ class ImbuingTableScreenHandler(
 
     }
 
-    class ModifierResult(val recipe: ImbuingRecipe, val lineageMax: Boolean, override val power: Int): TableResult{
+    class ModifierResult(val recipe: ImbuingRecipe, private val lineageMax: Boolean, override val power: Int): TableResult{
         override val type: Int = 2
         override val lapis: Int = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+            buf.writeIdentifier(recipe.id)
+            buf.writeBoolean(lineageMax)
+            buf.writeShort(power)
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            val recipeId = buf.readIdentifier()
+            val lineage = buf.readBoolean()
+            val pow = buf.readShort().toInt()
+            val opt = world.recipeManager.get(recipeId)
+            val recipe = if(opt.isPresent){
+                opt.get()
+            } else {
+                null
+            } ?: return EmptyResult()
+            return if (recipe is ImbuingRecipe){
+                ModifierResult(recipe,lineage, pow)
+            } else {
+                EmptyResult()
+            }
+        }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             val augId = Identifier(recipe.getAugment())
@@ -962,7 +1112,7 @@ class ImbuingTableScreenHandler(
         }
     }
 
-    class ErrorResult(private val error: List<Text>,
+    abstract class ErrorResult(private val error: List<Text>,
                       private val nextRecipeError: Text,
                       private val stringVisitable: StringVisitable,
                       override val lapis: Int,
@@ -995,6 +1145,46 @@ class ImbuingTableScreenHandler(
             return nextRecipeError
         }
 
+    }
+
+    class LevelLowErrorResult(private val augment: String,pow: Int): ErrorResult(listOf(Text.translatable("container.imbuing_table.level_low").formatted(Formatting.RED)),
+        Text.literal(augment),
+        Text.literal(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
+        pow,
+        pow) {
+
+        override val type: Int = -10
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+            buf.writeString(augment)
+            buf.writeShort(power)
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            val aug = buf.readString()
+            val pow = buf.readShort().toInt()
+            return LevelLowErrorResult(aug, pow)
+        }
+    }
+
+    class ScepterLowErrorResult(private val augment: String, pow: Int): ErrorResult(listOf(Text.translatable("container.imbuing_table.scepter_low").formatted(Formatting.RED)),
+        Text.literal(augment),
+        Text.literal(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
+        pow,
+        pow) {
+
+        override val type: Int = -11
+
+        override fun bufClassWriter(buf: PacketByteBuf) {
+            buf.writeString(augment)
+            buf.writeShort(power)
+        }
+
+        override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
+            val aug = buf.readString()
+            val pow = buf.readShort().toInt()
+            return LevelLowErrorResult(aug, pow)
+        }
     }
 
 }

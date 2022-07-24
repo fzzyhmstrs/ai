@@ -171,4 +171,17 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
     private fun readStringNbt(key: String, nbt: NbtCompound): String {
         return nbt.getString(key)
     }
+
+    companion object{
+
+        fun blankRecipe(): ImbuingRecipe{
+            return ImbuingRecipe(arrayOf(Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
+                Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
+                Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
+                Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
+                Ingredient.EMPTY),"",1,"",false,"",1, Identifier(AI.MOD_ID,"blank_recipe")
+            )
+        }
+
+    }
 }
