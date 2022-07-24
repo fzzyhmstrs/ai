@@ -19,8 +19,8 @@ import net.minecraft.util.math.Matrix4f
 import net.minecraft.util.registry.Registry
 
 
-class ImbuingTableScreenV2(handler: ImbuingTableScreenHandlerV2, playerInventory: PlayerInventory, title: Text):
-    HandledScreen<ImbuingTableScreenHandlerV2>(handler, playerInventory, title) {
+class ImbuingTableScreenOld(handler: ImbuingTableScreenHandlerOld, playerInventory: PlayerInventory, title: Text):
+    HandledScreen<ImbuingTableScreenHandlerOld>(handler, playerInventory, title) {
 
     private val texture = Identifier(AI.MOD_ID,"textures/gui/container/imbuing_table_gui.png")
     private val backgrdWidth = 234
@@ -39,7 +39,7 @@ class ImbuingTableScreenV2(handler: ImbuingTableScreenHandlerV2, playerInventory
             val d = mouseX - (i + 118).toDouble()
             val e = mouseY - (j + 14 + 4 + 19 * k).toDouble()
             if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || player.let {
-                    (handler as ImbuingTableScreenHandler).onButtonClick(
+                    (handler as ImbuingTableScreenHandlerOld).onButtonClick(
                         it, k
                     )
                 }
@@ -76,7 +76,7 @@ class ImbuingTableScreenV2(handler: ImbuingTableScreenHandlerV2, playerInventory
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
         //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        EnchantingPhrases.getInstance().setSeed((handler as ImbuingTableScreenHandlerV2).getSeed().toLong())
+        EnchantingPhrases.getInstance().setSeed((handler as ImbuingTableScreenHandlerOld).getSeed().toLong())
         val n = handler.getLapisCount()
         for (o in 0..2) {
             val p = i + 118 //offset from left edge of enchantment boxes
@@ -277,7 +277,7 @@ class ImbuingTableScreenV2(handler: ImbuingTableScreenHandlerV2, playerInventory
         super.render(matrices, mouseX, mouseY, dlta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         val bl = player.abilities.creativeMode
-        val i = (handler as ImbuingTableScreenHandler).getLapisCount()
+        val i = (handler as ImbuingTableScreenHandlerOld).getLapisCount()
         for (j in 0..2) {
 
             val k = handler.enchantmentPower[j]
@@ -300,10 +300,10 @@ class ImbuingTableScreenV2(handler: ImbuingTableScreenHandlerV2, playerInventory
             val list = Lists.newArrayList<Text>()
             if (handler.imbueId[j] == 0 && handler.modId[j] == 0){
                 val enchantment = if (handler.levelLow[j] > 0){
-                    list.add()
+                    list.add(Text.translatable("container.imbuing_table.level_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j])
                 } else if (handler.levelLow[j] < 0) {
-                    list.add()
+                    list.add(Text.translatable("container.imbuing_table.scepter_low").formatted(Formatting.RED))
                     Enchantment.byRawId(handler.levelLow[j] * -1)
                 }else {
                     Enchantment.byRawId(handler.enchantmentId[j])
