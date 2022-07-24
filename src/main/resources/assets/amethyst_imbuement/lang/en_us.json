@@ -269,6 +269,7 @@
 	"container.imbuing_table.level_low": "Scepter level too low for this augment",
 	"container.imbuing_table.scepter_low": "Scepter tier not high enough for this augment",
 	"container.imbuing_table.modifier_max": "Modifier already at maximum level",
+	"container.imbuing_table.item_result": "%1$sx %2$s",
 	"container.disenchanting_table": "Disenchant",
 	"container.disenchanting_table.button.missing_enchantment": "Missing Enchantment",
 	"container.disenchanting_table.tooltip.limit": "Reached removal limit",
