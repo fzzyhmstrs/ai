@@ -24,7 +24,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     init {
         scepters = readOrCreate("scepters_v0.json", base = AI.MOD_ID) { Scepters() }
-        altars = readOrCreateUpdated("altars_v1.json","altars_v0.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV0()})
+        altars = readOrCreateUpdated("altars_v2.json","altars_v1.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV1()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
         villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
@@ -65,6 +65,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var imbuingTableDifficultyModifier: Float = 1.0F
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
+        var altarOfExperienceCustomXpMethod: Boolean = true
     }
 
     class Colors{
@@ -186,10 +187,11 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class AltarsV0: SyncedConfigHelper.OldClass {
+    class AltarsV1: SyncedConfigHelper.OldClass {
         var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
+        var imbuingTableReplaceEnchantingTable: Boolean = false
         var imbuingTableDifficultyModifier: Float = 1.0F
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
@@ -199,6 +201,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             altars.disenchantLevelCosts = disenchantLevelCosts
             altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
             altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
+            altars.imbuingTableReplaceEnchantingTable = imbuingTableReplaceEnchantingTable
             altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
             altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
             altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
