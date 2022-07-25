@@ -39,7 +39,10 @@
       }
     ],
     "emi": [
-      "me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiPlugin"
+      {
+        "adapter": "kotlin",
+        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiPlugin"
+      }
     ]
   },
   "mixins": [
