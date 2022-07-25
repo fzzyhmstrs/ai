@@ -14,11 +14,13 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     private val id: Identifier
     private val inputs: List<EmiIngredient>
     private val outputs: List<EmiStack>
+    private val isEnchantingType: Boolean
 
     init{
         id = recipe.id
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
+        isEnchantingType = recipe.getAugment() != ""
     
     }
     
@@ -28,6 +30,10 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
 
     private fun initoutputs(recipe: ImbuingRecipe): List<EmiStack>{
         TODO()
+    }
+    
+    override fun getCategory(): EmiRecipeCategory{
+        return EmiClientPlugin.IMBUING_CATEGORY
     }
     
     override fun getId(){
@@ -42,16 +48,36 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         return outputs
     }
     
+    override fun supportsRecipeTree(): Boolean{
+        return super.supportsRecipeTree() && !isEnchantingType
+    }
+    
     override fun getDisplayWidth(): Int{
-        TODO()
+        152
     }
     
     override fun getDisplayHeight(): Int{
-        TODO()
+        76
     }
     
     override fun addWidgets(widgets: WidgetHolder){
-        TODO()
+        val xOffset = 5
+        val yOffset = 5
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 88, 25)
+        widgets.addSlot(inputs[0], xOffset, yOffset)
+        widgets.addSlot(inputs[1], xOffset + 87, yOffset)
+        widgets.addSlot(inputs[2], xOffset + 20, yOffset + 2)
+        widgets.addSlot(inputs[3], xOffset + 43, yOffset + 2)
+        widgets.addSlot(inputs[4], xOffset + 66, yOffset + 2)
+        widgets.addSlot(inputs[5], xOffset + 20, yOffset + 25)
+        widgets.addSlot(inputs[6], xOffset + 43, yOffset + 25)
+        widgets.addSlot(inputs[7], xOffset + 66, yOffset + 25)
+        widgets.addSlot(inputs[8], xOffset + 20, yOffset + 48)
+        widgets.addSlot(inputs[9], xOffset + 43, yOffset + 48)
+        widgets.addSlot(inputs[10], xOffset + 66, yOffset + 48)
+        widgets.addSlot(inputs[11], xOffset, yOffset + 50)
+        widgets.addSlot(inputs[12], xOffset + 87, yOffset + 50)
+        widgets.addSlot(outputs[0], xOffset + 120, yOffset + 25).recipeContext(this)
     }
 
 }
