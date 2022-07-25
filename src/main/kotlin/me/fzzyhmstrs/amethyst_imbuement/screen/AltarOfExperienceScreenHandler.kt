@@ -3,15 +3,16 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.item.ItemStack
 import net.minecraft.screen.*
 import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.BlockTags
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import java.util.*
 
@@ -124,18 +125,18 @@ class AltarOfExperienceScreenHandler(
                 0 -> {
                     if (currentXp >= 500) {
                         if (xpLeft < 500){
-                            player.addExperience(-xpLeft)
+                            addExperience(player,-xpLeft)
                             experienceStored[0] += xpLeft
                         } else {
-                            player.addExperience(-500)
+                            addExperience(player,-500)
                             experienceStored[0] += 500
                         }
                     } else {
                         if (xpLeft < currentXp){
-                            player.addExperience(-xpLeft)
+                            addExperience(player,-xpLeft)
                             experienceStored[0] += xpLeft
                         } else {
-                            player.addExperience(-currentXp)
+                            addExperience(player,-currentXp)
                             experienceStored[0] += currentXp
                         }
                     }
@@ -143,37 +144,37 @@ class AltarOfExperienceScreenHandler(
                 1 -> {
                     if (currentXp >= 50) {
                         if (xpLeft < 50){
-                            player.addExperience(-xpLeft)
+                            addExperience(player,-xpLeft)
                             experienceStored[0] += xpLeft
                         } else {
-                            player.addExperience(-50)
+                            addExperience(player,-50)
                             experienceStored[0] += 50
                         }
                     } else {
                         if (xpLeft < currentXp){
-                            player.addExperience(-xpLeft)
+                            addExperience(player,-xpLeft)
                             experienceStored[0] += xpLeft
                         } else {
-                            player.addExperience(-currentXp)
+                            addExperience(player,-currentXp)
                             experienceStored[0] += currentXp
                         }
                     }
                 }
                 2 -> {
                     if (experienceStored[0] < 50){
-                        player.addExperience(experienceStored[0])
+                        addExperience(player,experienceStored[0])
                         experienceStored[0] = 0
                     } else {
-                        player.addExperience(50)
+                        addExperience(player,50)
                         experienceStored[0] -= 50
                     }
                 }
                 3 -> {
                     if (experienceStored[0] < 500){
-                        player.addExperience(experienceStored[0])
+                        addExperience(player,experienceStored[0])
                         experienceStored[0] = 0
                     } else {
-                        player.addExperience(500)
+                        addExperience(player,500)
                         experienceStored[0] -= 500
                     }
                 }
@@ -192,6 +193,39 @@ class AltarOfExperienceScreenHandler(
             sendContentUpdates()
         }
         return true
+    }
+
+    private fun addExperience(player: PlayerEntity, experience: Int){
+        if (AiConfig.altars.altarOfExperienceCustomXpMethod){
+            addCustomExperience(experience, player)
+        } else {
+            player.addExperience(experience)
+        }
+    }
+
+    private fun addCustomExperience(experience: Int, player: PlayerEntity) {
+        player.addScore(experience)
+        player.experienceProgress += experience.toFloat() / player.nextLevelExperience.toFloat()
+        player.totalExperience = MathHelper.clamp(player.totalExperience + experience, 0, Int.MAX_VALUE)
+        while (player.experienceProgress < 0.0f) {
+            val f: Float = player.experienceProgress * player.nextLevelExperience.toFloat()
+            if (player.experienceLevel > 0) {
+                player.addExperienceLevels(-1)
+                player.experienceProgress = 1.0f + f / player.nextLevelExperience.toFloat()
+                continue
+            }
+            player.addExperienceLevels(-1)
+            player.experienceProgress = 0.0f
+        }
+        while (player.experienceProgress >= 1.0f) {
+            player.experienceProgress = (player.experienceProgress - 1.0f) * player.nextLevelExperience.toFloat()
+            player.addExperienceLevels(1)
+            player.experienceProgress /= player.nextLevelExperience.toFloat()
+        }
+    }
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+        return ItemStack.EMPTY
     }
 
     private fun getPlayerLvlXp(player: PlayerEntity): Int{

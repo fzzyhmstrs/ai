@@ -8,6 +8,8 @@ import dev.emi.emi.api.recipe.*
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.EmiPlugin
+import dev.emi.emi.api.stack.EmiIngredient
+import dev.emi.emi.api.widget.WidgetHolder
 
 class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     
@@ -28,7 +30,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         TODO()
     }
 
-    private fun initoutputs(recipe: ImbuingRecipe): List<EmiStack>{
+    private fun initOutputs(recipe: ImbuingRecipe): List<EmiStack>{
         TODO()
     }
     
@@ -36,7 +38,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         return EmiClientPlugin.IMBUING_CATEGORY
     }
     
-    override fun getId(){
+    override fun getId(): Identifier{
         return id
     }
     
@@ -53,11 +55,11 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
     
     override fun getDisplayWidth(): Int{
-        152
+        return 152
     }
     
     override fun getDisplayHeight(): Int{
-        76
+        return 76
     }
     
     override fun addWidgets(widgets: WidgetHolder){

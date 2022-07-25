@@ -29,6 +29,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdHeight = 174
     private val player = playerInventory.player
     private var lastDisplayed = 0L
+    private val previousRecipe = Text.literal(Text.translatable("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val nextRecipe = Text.literal(Text.translatable("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
@@ -41,8 +43,10 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
         for (k in 0..2) {
             val m = if (k == 0 && handler.resultsCanUp){
+                println("ywy")
                 3
             } else if (k == 2 && handler.resultsCanDown){
+                println("yey")
                 4
             } else {
                 k
@@ -55,7 +59,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     )
                 }
             ) continue
-            client?.interactionManager?.clickButton(handler.syncId, k)
+            client?.interactionManager?.clickButton(handler.syncId, m)
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
@@ -103,11 +107,15 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 continue //jumps to the next enchantment in the list
             }
             val string = "" + power
-            val s = 86 - textRenderer.getWidth(string)
-            val stringVisitable = if((handler.resultsCanUp && o == 0) || (handler.resultsCanDown && o == 2)){
-                val str = Text.translatable("container.imbuing_table.next_recipe").toString()
-                Text.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
+            val s :Int
+            val stringVisitable = if((handler.resultsCanUp && o == 0)){
+                s = 86
+                previousRecipe
+            } else if( (handler.resultsCanDown && o == 2)){
+                s = 86
+                nextRecipe
             } else {
+                s = 86 - textRenderer.getWidth(string)
                 result.buttonStringVisitable(textRenderer, s)
             }
 
@@ -239,7 +247,14 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 )
 
             }
-            textRenderer.drawTrimmed(stringVisitable, q, j + 16 + ofst2 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
+            val ofst3 = if (textRenderer.getWidth(stringVisitable) > s){
+                -1
+            } else if(o == 0 && handler.resultsCanUp|| o == 2 && handler.resultsCanDown){
+                3
+            } else {
+                0
+            }
+            textRenderer.drawTrimmed(stringVisitable, q, j + 16 + ofst2 + ofst3 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
             if (!(o == 0 && handler.resultsCanUp || o == 2 && handler.resultsCanDown))
             textRenderer.drawWithShadow(
                 matrices,
@@ -272,11 +287,17 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     mouseX.toDouble(),
                     mouseY.toDouble()
                 )) continue
-            val list = if(j == 0 && handler.resultsCanUp || j == 2 && handler.resultsCanDown){
+            val list = if(j == 0 && handler.resultsCanUp){
                 val tempList: MutableList<Text> = mutableListOf()
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe").formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList.add(Text.translatable("container.imbuing_table.previous_recipe"))
                 tempList.add(Text.empty())
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)))
+                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList
+            } else if (j == 2 && handler.resultsCanDown){
+                val tempList: MutableList<Text> = mutableListOf()
+                tempList.add(Text.translatable("container.imbuing_table.next_recipe"))
+                tempList.add(Text.empty())
+                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
                 tempList
             } else {
                 result.tooltipList(player, handler)
