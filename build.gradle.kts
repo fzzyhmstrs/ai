@@ -57,6 +57,8 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
 
+    modImplementation("dev.emi:emi:0.3.0+1.19")
+
     modImplementation("dev.emi:trinkets:3.4.0"){
         exclude("net.fabricmc.fabric-api")
     }
