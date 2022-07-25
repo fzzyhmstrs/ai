@@ -61,8 +61,8 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
     
     override fun addWidgets(widgets: WidgetHolder){
-        val xOffset = 5
-        val yOffset = 5
+        val xOffset = 0
+        val yOffset = 0
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 88, 25)
         widgets.addSlot(inputs[0], xOffset, yOffset)
         widgets.addSlot(inputs[1], xOffset + 87, yOffset)
