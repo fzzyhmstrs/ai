@@ -45,6 +45,9 @@
         "adapter": "kotlin",
         "value": "me.fzzyhmstrs.amethyst_imbuement.compat.rei.ReiServerPlugin"
       }
+    ],
+    "emi": [
+      "me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiPlugin"
     ]
   },
   "mixins": [
