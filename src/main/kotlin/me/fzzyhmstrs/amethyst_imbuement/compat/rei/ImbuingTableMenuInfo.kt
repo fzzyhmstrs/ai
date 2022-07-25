@@ -6,6 +6,8 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinderPopulator
 import me.shedaniel.rei.api.common.transfer.info.MenuInfoContext
 import me.shedaniel.rei.api.common.transfer.info.simple.SimplePlayerInventoryMenuInfo
 import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor
+import net.minecraft.item.ItemStack
+import net.minecraft.server.network.ServerPlayerEntity
 
 class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlayerInventoryMenuInfo<ImbuingTableScreenHandler, ImbuingTableDisplay> {
 
@@ -17,6 +19,11 @@ class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlay
         }
 
         return returnList.asIterable()
+    }
+
+    override fun markDirty(context: MenuInfoContext<ImbuingTableScreenHandler, out ServerPlayerEntity, ImbuingTableDisplay>) {
+        super.markDirty(context)
+        context.menu.onContentChanged(context.menu.getInventory())
     }
 
     override fun getDisplay(): ImbuingTableDisplay {

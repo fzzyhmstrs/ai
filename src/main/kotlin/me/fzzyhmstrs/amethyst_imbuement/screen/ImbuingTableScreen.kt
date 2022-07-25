@@ -23,6 +23,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player
+    private var lastDisplayed = 0L
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
@@ -80,7 +81,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
-        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         EnchantingPhrases.getInstance().setSeed((handler as ImbuingTableScreenHandler).getSeed().toLong())
         for (o in 0..2) {
             val p = i + 118 //offset from left edge of enchantment boxes
@@ -92,7 +92,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             val r = handler.resultsIndexes[o]
             val result = handler.results.getOrElse(r) { ImbuingTableScreenHandler.EmptyResult() }
             val power = result.power
-            if (r == -1 || result.type == -2 || power == 0) {
+            if (r == -1 || result.type == 3 || power == 0) {
                 //draws the "browned out" no-entry box
                 this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 continue //jumps to the next enchantment in the list
@@ -118,6 +118,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             val hovered = (u >= 0 && v >= 0 && u < 108 && v < 19)
 
             val lapisOffset = max(0,result.lapis - 1)
+            val lapisOffset2: Int
             val buttonOffset: Int
             val buttonHoveredOffset: Int
             val numeralOffset: Int
@@ -126,12 +127,14 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
             if (!result.isReady(o, player, handler)) {
                 buttonOffset = 193
+                lapisOffset2 = 190
                 buttonHoveredOffset = 193
                 numeralOffset = 222
-                powerTextColor = 8453920
+                powerTextColor = 4226832
                 descTextColor = 6839882
             } else {
                 buttonOffset = 174
+                lapisOffset2 = 174
                 buttonHoveredOffset = 212
                 numeralOffset = 212
                 powerTextColor = 8453920
@@ -173,7 +176,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
                     108 + 16 * (lapisOffset),
-                    buttonOffset + 16,
+                    lapisOffset2,
                     16,
                     16
                 )
