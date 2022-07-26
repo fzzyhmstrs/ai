@@ -11,10 +11,7 @@ import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.LiteralText
-import net.minecraft.text.MutableText
-import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.*
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Matrix4f
@@ -29,8 +26,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdHeight = 174
     private val player = playerInventory.player
     private var lastDisplayed = 0L
-    private val previousRecipe = Text.literal(Text.translatable("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
-    private val nextRecipe = Text.literal(Text.translatable("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val previousRecipe = LiteralText(TranslatableText("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val nextRecipe = LiteralText(TranslatableText("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
@@ -289,15 +286,15 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 )) continue
             val list = if(j == 0 && handler.resultsCanUp){
                 val tempList: MutableList<Text> = mutableListOf()
-                tempList.add(Text.translatable("container.imbuing_table.previous_recipe"))
-                tempList.add(Text.empty())
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList.add(TranslatableText("container.imbuing_table.previous_recipe"))
+                tempList.add(LiteralText.EMPTY)
+                tempList.add(TranslatableText("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
                 tempList
             } else if (j == 2 && handler.resultsCanDown){
                 val tempList: MutableList<Text> = mutableListOf()
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe"))
-                tempList.add(Text.empty())
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList.add(TranslatableText("container.imbuing_table.next_recipe"))
+                tempList.add(LiteralText.EMPTY)
+                tempList.add(TranslatableText("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
                 tempList
             } else {
                 result.tooltipList(player, handler)
