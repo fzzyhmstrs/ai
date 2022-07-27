@@ -1,15 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import com.google.common.collect.Lists
 import com.mojang.blaze3d.systems.RenderSystem
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.*
 import net.minecraft.util.Formatting
@@ -25,7 +22,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player
-    private var lastDisplayed = 0L
     private val previousRecipe = LiteralText(TranslatableText("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
     private val nextRecipe = LiteralText(TranslatableText("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
 
@@ -40,10 +36,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
         for (k in 0..2) {
             val m = if (k == 0 && handler.resultsCanUp){
-                println("ywy")
                 3
             } else if (k == 2 && handler.resultsCanDown){
-                println("yey")
                 4
             } else {
                 k

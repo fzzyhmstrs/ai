@@ -56,7 +56,6 @@ class DisenchantingTableScreenHandler(
     var enchantmentLevel = intArrayOf(-1, -1, -1)
     var disenchantCost = IntArray(1)
     private var removing = false
-    //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
 
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -135,7 +134,6 @@ class DisenchantingTableScreenHandler(
                     sendContentUpdates()
                 }
             }
-            //println("enchants_content_change: ${enchantmentId[0]}, ${enchantmentId[1]}, ${enchantmentId[2]}")
         }
     }
 
@@ -249,7 +247,6 @@ class DisenchantingTableScreenHandler(
                     removing = false
                     sendContentUpdates()
                 }
-                //println("enchants: ${enchantmentId[0]}, ${enchantmentId[1]}, ${enchantmentId[2]}")
             }
             2 -> {
                 if (enchantmentId[id] == -1) return false
@@ -427,7 +424,6 @@ class DisenchantingTableScreenHandler(
                         } else {
                             slot.stack = stack.split(stack.count)
                         }
-                        slot.markDirty()
                         bl = true
                         break
                     }
