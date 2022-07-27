@@ -1,8 +1,10 @@
 {
 	"entity.amethyst_imbuement.draconic_box": "Draconic Sprite",
 	"entity.amethyst_imbuement.crystal_golem": "Crystalline Golem",
+	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
 	"entity.amethyst_imbuement.unhallowed": "Unhallowed",
 	"entity.minecraft.villager.crystal_witch": "Crystal Witch",
+	"tag.amethyst_imbuement.disenchant_pillar_blocks": "Disenchanting Table Pillar Blocks",
 	"item.amethyst_imbuement.golden_heart": "Golden Heart",
 	"item.amethyst_imbuement.golden_heart.flavor": "You can hear it beating softly...",
 	"item.amethyst_imbuement.steel_ingot": "Steel Ingot",
@@ -269,6 +271,10 @@
 	"container.imbuing_table.level_low": "Scepter level too low for this augment",
 	"container.imbuing_table.scepter_low": "Scepter tier not high enough for this augment",
 	"container.imbuing_table.modifier_max": "Modifier already at maximum level",
+	"container.imbuing_table.item_result": "%1$sx %2$s",
+	"container.imbuing_table.previous_recipe": "Previous Recipe",
+	"container.imbuing_table.next_recipe": "Next Recipe",
+	"container.imbuing_table.next_recipe_1": "(%1$s)",
 	"container.disenchanting_table": "Disenchant",
 	"container.disenchanting_table.button.missing_enchantment": "Missing Enchantment",
 	"container.disenchanting_table.tooltip.limit": "Reached removal limit",
@@ -322,5 +328,7 @@
 	"augment_damage.soul_of_the_conduit.burnout": "Soul of the Conduit augment burnt out!",
 	"augment_damage.strength.burnout": "Strength augment burnt out!",
 	"augment_damage.undying.burnout": "Undying augment burnt out!",
-	"augment_damage.damage": "Totem at low durability!"
+	"augment_damage.damage": "Totem at low durability!",
+	"display.imbuing.cost.small": "%1$s Lvl",
+	"display.imbuing.cost.big": "%1$s Lv"
 }

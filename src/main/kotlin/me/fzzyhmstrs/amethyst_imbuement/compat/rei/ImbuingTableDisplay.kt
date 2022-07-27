@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
@@ -16,18 +17,21 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import java.util.*
 
-class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: MutableList<EntryIngredient>, location: Optional<Identifier>):
+class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: MutableList<EntryIngredient>, location: Optional<Identifier>, tag: NbtCompound):
     BasicDisplay(inputs, outputs, location) {
 
     constructor(recipe: ImbuingRecipe): this(
         getRecipeInputEntries(recipe),
         getRecipeOutputEntries(recipe),
-        Optional.ofNullable(recipe.id))
+        Optional.ofNullable(recipe.id),
+        createCostTag(recipe))
 
+    private val cost = Nbt.readIntNbt("display_cost", tag)
 
     override fun getInputEntries(): MutableList<EntryIngredient> {
         return inputs
@@ -37,18 +41,30 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         return outputs
     }
 
+    fun getCost(): Int{
+        return cost
+    }
+
     override fun getCategoryIdentifier(): CategoryIdentifier<*> {
         return CategoryIdentifier.of<ImbuingTableDisplay>(AI.MOD_ID, ImbuingRecipe.Type.ID)
     }
 
     companion object{
 
+        private fun createCostTag(recipe: ImbuingRecipe): NbtCompound{
+            val nbt = NbtCompound()
+            val cost = recipe.getCost()
+            Nbt.writeIntNbt("display_cost",cost,nbt)
+            return nbt
+        }
+
         fun serializer(): Serializer<ImbuingTableDisplay>{
-            return Serializer.ofSimple { inputs: MutableList<EntryIngredient>, outputs: MutableList<EntryIngredient>, location: Optional<Identifier> ->
+            return Serializer.of { inputs: MutableList<EntryIngredient>, outputs: MutableList<EntryIngredient>, location: Optional<Identifier>, tag:NbtCompound ->
                 ImbuingTableDisplay(
                     inputs,
                     outputs,
-                    location
+                    location,
+                    tag
                 )
             }
         }

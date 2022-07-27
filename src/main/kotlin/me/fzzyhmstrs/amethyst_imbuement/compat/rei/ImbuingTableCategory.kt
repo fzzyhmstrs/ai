@@ -13,6 +13,7 @@ import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 
 
 @Suppress("UnstableApiUsage")
@@ -107,6 +108,18 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         outputSlot.entries(display.outputEntries[0])
         outputSlot.disableBackground()
         widgets.add(outputSlot)
+
+        val cost = display.getCost()
+        val textOffset: Int
+        val levelBoxText = if(cost > 99) {
+            textOffset = 124
+            Text.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN)
+        } else {
+            textOffset = 127
+            Text.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN)
+        }
+        val levelBox = Widgets.createLabel(Point(bounds.x + xOffset + textOffset, bounds.y + yOffset + 50),levelBoxText)
+        widgets.add(levelBox)
 
         return widgets
     }

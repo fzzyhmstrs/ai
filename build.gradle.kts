@@ -57,6 +57,8 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
 
+    modImplementation("dev.emi:emi:0.3.0+1.19")
+
     modImplementation("dev.emi:trinkets:3.4.0"){
         exclude("net.fabricmc.fabric-api")
     }
@@ -72,10 +74,15 @@ dependencies {
     }
     include("maven.modrinth:Wd844r7Q:1.19-01")
 
-    modImplementation("maven.modrinth:amethyst-core:0.2.0+1.19"){
+    /*modImplementation("maven.modrinth:amethyst-core:0.2.0+1.19"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:amethyst-core:0.2.0+1.19")
+    include("maven.modrinth:amethyst-core:0.2.0+1.19")*/
+
+    modImplementation(":amethyst_core-0.2.1+1.19"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include(":amethyst_core-0.2.1+1.19")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")

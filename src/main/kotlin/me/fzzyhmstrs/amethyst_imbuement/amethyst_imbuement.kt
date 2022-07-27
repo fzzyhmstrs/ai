@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -43,6 +44,7 @@ object AIClient: ClientModInitializer{
         RegisterScreen.registerAll()
         RegisterKeybind.registerAll()
         RegisterItemModel.registerAll()
+        ImbuingTableScreenHandler.registerClient()
     }
 
 }
