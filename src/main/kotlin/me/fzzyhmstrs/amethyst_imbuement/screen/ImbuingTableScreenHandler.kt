@@ -736,14 +736,14 @@ class ImbuingTableScreenHandler(
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeShort(power)
             buf.writeShort(id)
-            buf.writeShort(level)
+            buf.writeByte(level)
             buf.writeByte(slot)
         }
 
         override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
             val pow = buf.readShort().toInt()
             val i = buf.readShort().toInt()
-            val lvl = buf.readShort().toInt()
+            val lvl = buf.readByte().toInt()
             val slt = buf.readByte().toInt()
             return EnchantingResult(pow,i,lvl, slt)
         }
