@@ -110,7 +110,7 @@ class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World)
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.MAGIC, entityEffects.damage(0))
+            target.damage(DamageSource.magic(this,owner), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
