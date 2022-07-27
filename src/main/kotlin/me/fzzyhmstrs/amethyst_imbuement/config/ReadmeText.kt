@@ -35,6 +35,7 @@ object ReadmeText: SyncedConfigHelper.ReadMeWriter {
             "> imbuingTableDifficultyModifier: Multiplies the level cost of imbuing by the value entered. A value of 0.5 will halve the imbuing level costs, 2.0 will double them, and so on. Clamped between 0.0 (free) and 10.0",
             "> altarOfExperienceBaseLevels: base number of levels a player can store in an altar of experience surrounded by 0 candles.",
             "> altarOfExperienceCandleLevelsPer: number of storable levels each candle placed around the altar of experience adds. Warding Candles provide double this base bonus.",
+            "> altarOfExperienceCustomXpMethod: When true, the Altar of Experience will use a custom method for giving/taking XP that bypasses vanilla code. This might help avoid undesirable interactions with mods that monitor XP gain. If these interactions are desirable, set to false.",
             "",
             "",
             "Colors Config:",
