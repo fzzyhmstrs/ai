@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
@@ -70,9 +71,16 @@ class ImbuingTableScreenHandler(
     )
 
     private val inventory: SimpleInventory = object : SimpleInventory(13) {
+        private var dirtyChecked: Boolean = false
         override fun markDirty() {
-            super.markDirty()
+            if (dirtyChecked) {
+                dirtyChecked = false
+                return
+            }
+            Exception().printStackTrace()
             this@ImbuingTableScreenHandler.onContentChanged(this)
+            dirtyChecked = true
+            super.markDirty()
         }
     }
     fun getInventory(): Inventory{
@@ -81,6 +89,7 @@ class ImbuingTableScreenHandler(
 
     private val random = net.minecraft.util.math.random.LocalRandom(0L)
     val player = playerInventory.player
+    private val LOGGER = LogUtils.getLogger()
     private val seed = Property.create()
     var results: List<TableResult> = listOf()
     var resultsIndexes =  intArrayOf(-1, -1, -1)
@@ -177,7 +186,7 @@ class ImbuingTableScreenHandler(
                                         tempResults.add(EmptyResult())
                                     }
                                 } else {
-                                    println("Could not find augment or modifier under the key $id")
+                                    LOGGER.warn("Could not find augment or modifier under the key $id")
                                 }
                             } else {
                                 tempResults.add(ImbuingResult(imbuingRecipe,power))
@@ -224,7 +233,7 @@ class ImbuingTableScreenHandler(
                                 tempResults.add(EmptyResult())
                                 continue
                             }
-                            tempResults.add(EnchantingResult(enchantmentPower[e], enchantmentId[e], enchantmentLevel[e], j))
+                            tempResults.add(EnchantingResult(enchantmentPower[e], enchantmentId[e], enchantmentLevel[e], e))
                         }
                     } else {
                         for (i in 0..2) {
@@ -253,7 +262,6 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
-        println(id)
         if (id == 3){
             if (resultsIndexes[0] == 0) return false
             val max = results.size - 1
@@ -288,8 +296,6 @@ class ImbuingTableScreenHandler(
             buttonWorked = result.applyResult(player,itemStack,world,pos,this)
             if (buttonWorked) {
                 if (!world.isClient) {
-                    inventory.markDirty()
-                    seed.set(player.enchantmentTableSeed)
                     onContentChanged(inventory)
                     playEnchantmentSound(world, pos)
                 }
@@ -448,17 +454,17 @@ class ImbuingTableScreenHandler(
         //add top two imbuement slots
         val ofst = 0 //offset to get the slots drawing correctly, will attempt to fix later
         val ofst2 = 4 //offset based on guid picture change. 2x change for the inventory slots
-        addSlot(object : Slot(inventory, 0, 8+ofst, 9+ofst2) {
+        addSlot(object : ImbuingSlot(inventory, 0, 8+ofst, 9+ofst2) {
             override fun canInsert(stack: ItemStack): Boolean { return true }
         })
-        addSlot(object : Slot(inventory, 1, 95+ofst, 9+ofst2) {
+        addSlot(object : ImbuingSlot(inventory, 1, 95+ofst, 9+ofst2) {
             override fun canInsert(stack: ItemStack): Boolean { return true }
         })
         //add main imbuement crafting grid
         for (k in 0..2) {
             for(j in 0..2) {
                 if (2+k+(3*j) == 6) {  //skipping the main middle slot, so I can set max count 1
-                    addSlot(object : Slot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
+                    addSlot(object : ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
                         override fun canInsert(stack: ItemStack): Boolean {
                             return true
                         }
@@ -467,7 +473,7 @@ class ImbuingTableScreenHandler(
                         }
                     })
                 }else {
-                    addSlot(object : Slot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
+                    addSlot(object : ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
                         override fun canInsert(stack: ItemStack): Boolean {
                             return true
                         }
@@ -478,10 +484,10 @@ class ImbuingTableScreenHandler(
 
 
         //add bottom two imbuement slots
-        addSlot(object : Slot(inventory, 11, 8+ofst, 59+ofst2) {
+        addSlot(object : ImbuingSlot(inventory, 11, 8+ofst, 59+ofst2) {
             override fun canInsert(stack: ItemStack): Boolean { return true }
         })
-        addSlot(object : Slot(inventory, 12, 95+ofst, 59+ofst2) {
+        addSlot(object : ImbuingSlot(inventory, 12, 95+ofst, 59+ofst2) {
             override fun canInsert(stack: ItemStack): Boolean { return true }
         })
         //add the player main inventory
@@ -497,6 +503,21 @@ class ImbuingTableScreenHandler(
 
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
+    }
+
+    open class ImbuingSlot(inventory: Inventory, index: Int, x:Int, y: Int): Slot(inventory, index, x, y) {
+        private var locked = false
+        override fun setStack(stack: ItemStack) {
+            if (!locked) {
+                super.setStack(stack)
+            } else {
+                inventory.setStack(index, stack)
+            }
+        }
+
+        fun setLocked(lock: Boolean){
+            locked = lock
+        }
     }
 
     companion object {
@@ -531,7 +552,7 @@ class ImbuingTableScreenHandler(
                 handler.resultsIndexes = intArrayOf(int1, int2, int3)
                 handler.resultsCanUp = buf.readBoolean()
                 handler.resultsCanDown = buf.readBoolean()
-                println("synced handler on the client!")
+                handler.LOGGER.info("synced handler on the client!")
             }
         }
 
@@ -643,7 +664,7 @@ class ImbuingTableScreenHandler(
 
         companion object{
 
-            val resultTypes = mapOf(
+            private val resultTypes = mapOf(
                 0 to EnchantingResult(0, 0, 0, 0),
                 1 to ImbuingResult(ImbuingRecipe.blankRecipe(),0),
                 2 to ModifierResult(ImbuingRecipe.blankRecipe(),false,0),
@@ -657,13 +678,13 @@ class ImbuingTableScreenHandler(
                 return resultFromBuf(type, world, buf)
             }
 
-            fun resultFromBuf(type: Int, world: World, buf: PacketByteBuf): TableResult{
+            private fun resultFromBuf(type: Int, world: World, buf: PacketByteBuf): TableResult{
                 return resultTypes[type]?.bufClassReader(world, buf) ?: EmptyResult()
             }
         }
     }
 
-    class EmptyResult(): TableResult {
+    class EmptyResult: TableResult {
         override val type: Int = 3
         override val power: Int = 0
         override val lapis: Int = 0
@@ -748,7 +769,7 @@ class ImbuingTableScreenHandler(
             pos: BlockPos?,
             handler: ImbuingTableScreenHandler
         ): Boolean {
-
+            if (world.isClient) return true
             if ((player.experienceLevel < lapis || player.experienceLevel < power || handler.getLapisCount() < lapis) && !player.abilities.creativeMode) return false
             var itemStack3 = stack
             val list = handler.generateEnchantments(itemStack3, slot, power)
@@ -782,10 +803,7 @@ class ImbuingTableScreenHandler(
                 if (player is ServerPlayerEntity) {
                     Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, lapis)
                 }
-                handler.inventory.markDirty()
                 handler.seed.set(player.enchantmentTableSeed)
-                handler.onContentChanged(handler.inventory)
-                handler.playEnchantmentSound(world, pos)
             }
             return true
         }
@@ -940,10 +958,6 @@ class ImbuingTableScreenHandler(
                 if (player is ServerPlayerEntity) {
                     Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
                 }
-                handler.inventory.markDirty()
-                handler.seed.set(player.enchantmentTableSeed)
-                handler.onContentChanged(handler.inventory)
-                handler.playEnchantmentSound(world,pos)
             } else{
                 player.applyEnchantmentCosts(itemStack3, i)
                 val l = EnchantmentHelper.get(itemStack3)
@@ -965,9 +979,6 @@ class ImbuingTableScreenHandler(
                     Nbt.transferNbt(itemStack3,itemStack4)
                     EnchantmentHelper.set(l,itemStack4)
                 }
-                handler.inventory.markDirty()
-                handler.onContentChanged(handler.inventory)
-                handler.playEnchantmentSound(world,pos)
             }
             return true
         }
@@ -1085,10 +1096,6 @@ class ImbuingTableScreenHandler(
                 if (player is ServerPlayerEntity) {
                     Criteria.ENCHANTED_ITEM.trigger(player, stack, i)
                 }
-                handler.inventory.markDirty()
-                handler.seed.set(player.enchantmentTableSeed)
-                handler.onContentChanged(handler.inventory)
-                handler.playEnchantmentSound(world,pos)
             }
             return true
         }

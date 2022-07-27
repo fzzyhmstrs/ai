@@ -23,7 +23,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player
-    private var lastDisplayed = 0L
     private val previousRecipe = Text.literal(Text.translatable("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
     private val nextRecipe = Text.literal(Text.translatable("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
 
@@ -38,10 +37,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
         for (k in 0..2) {
             val m = if (k == 0 && handler.resultsCanUp){
-                println("ywy")
                 3
             } else if (k == 2 && handler.resultsCanDown){
-                println("yey")
                 4
             } else {
                 k

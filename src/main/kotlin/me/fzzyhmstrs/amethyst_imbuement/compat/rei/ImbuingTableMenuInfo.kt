@@ -15,15 +15,25 @@ class ImbuingTableMenuInfo(private val display: ImbuingTableDisplay): SimplePlay
         val slots = context.menu.slots
         val returnList: MutableList<SlotAccessor> = mutableListOf()
         for (i in 0..12) {
-            returnList.add(SlotAccessor.fromSlot(slots[i]))
+            val slot = slots[i]
+            if (slot is ImbuingTableScreenHandler.ImbuingSlot){
+                slot.setLocked(true)
+            }
+            returnList.add(SlotAccessor.fromSlot(slot))
         }
 
         return returnList.asIterable()
     }
 
     override fun markDirty(context: MenuInfoContext<ImbuingTableScreenHandler, out ServerPlayerEntity, ImbuingTableDisplay>) {
+        val slots = context.menu.slots
+        for (i in 0..12){
+            val slot = slots[i]
+            if (slot is ImbuingTableScreenHandler.ImbuingSlot){
+                slot.setLocked(false)
+            }
+        }
         super.markDirty(context)
-        context.menu.onContentChanged(context.menu.getInventory())
     }
 
     override fun getDisplay(): ImbuingTableDisplay {
