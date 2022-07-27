@@ -29,13 +29,10 @@ public class MiningToolItemMixin {
 
     @Inject(method = "postMine", at = @At(value = "TAIL"))
     private void postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner, CallbackInfoReturnable<Boolean> cir){
-        System.out.println("blup");
         if (miner instanceof ServerPlayerEntity && state.isIn(effectiveBlocks)) {
             int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getVEIN_MINER(), stack);
             if (lvl > 0) {
-                System.out.println("bloop");
                 if (RegisterKeybindServer.INSTANCE.checkForVeinMine(miner.getUuid())) {
-                    System.out.println("bleep");
                     Block block = state.getBlock();
                     VeinMinerEnchantment.Companion.veinMine(world, pos, block, (ServerPlayerEntity) miner, lvl);
                 }
