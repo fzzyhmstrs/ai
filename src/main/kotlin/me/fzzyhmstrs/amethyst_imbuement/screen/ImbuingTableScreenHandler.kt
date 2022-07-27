@@ -224,7 +224,7 @@ class ImbuingTableScreenHandler(
                                 tempResults.add(EmptyResult())
                                 continue
                             }
-                            tempResults.add(EnchantingResult(enchantmentPower[e], enchantmentId[e], enchantmentLevel[e]))
+                            tempResults.add(EnchantingResult(enchantmentPower[e], enchantmentId[e], enchantmentLevel[e], j))
                         }
                     } else {
                         for (i in 0..2) {
@@ -644,7 +644,7 @@ class ImbuingTableScreenHandler(
         companion object{
 
             val resultTypes = mapOf(
-                0 to EnchantingResult(0, 0, 0),
+                0 to EnchantingResult(0, 0, 0, 0),
                 1 to ImbuingResult(ImbuingRecipe.blankRecipe(),0),
                 2 to ModifierResult(ImbuingRecipe.blankRecipe(),false,0),
                 3 to EmptyResult(),
@@ -702,7 +702,7 @@ class ImbuingTableScreenHandler(
         }
     }
 
-    class EnchantingResult(override val power: Int, val id: Int, val level: Int): TableResult{
+    class EnchantingResult(override val power: Int, val id: Int, val level: Int, val slot: Int): TableResult{
 
         override val type: Int = 0
 
@@ -720,13 +720,15 @@ class ImbuingTableScreenHandler(
             buf.writeShort(power)
             buf.writeShort(id)
             buf.writeShort(level)
+            buf.writeByte(slot)
         }
 
         override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
             val pow = buf.readShort().toInt()
             val i = buf.readShort().toInt()
             val lvl = buf.readShort().toInt()
-            return EnchantingResult(pow,i,lvl)
+            val slt = buf.readByte().toInt()
+            return EnchantingResult(pow,i,lvl, slt)
         }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
@@ -749,7 +751,7 @@ class ImbuingTableScreenHandler(
 
             if ((player.experienceLevel < lapis || player.experienceLevel < power || handler.getLapisCount() < lapis) && !player.abilities.creativeMode) return false
             var itemStack3 = stack
-            val list = handler.generateEnchantments(itemStack3, id, power)
+            val list = handler.generateEnchantments(itemStack3, slot, power)
             if (list.isNotEmpty()) {
                 player.applyEnchantmentCosts(itemStack3, lapis)
                 val bl = itemStack3.isOf(Items.BOOK)
