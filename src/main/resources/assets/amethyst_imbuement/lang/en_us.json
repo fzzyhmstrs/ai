@@ -328,5 +328,7 @@
 	"augment_damage.soul_of_the_conduit.burnout": "Soul of the Conduit augment burnt out!",
 	"augment_damage.strength.burnout": "Strength augment burnt out!",
 	"augment_damage.undying.burnout": "Undying augment burnt out!",
-	"augment_damage.damage": "Totem at low durability!"
+	"augment_damage.damage": "Totem at low durability!",
+	"display.imbuing.cost.small": "%1$s Lvl",
+	"display.imbuing.cost.big": "%1$s Lv"
 }

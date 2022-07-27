@@ -73,7 +73,7 @@ class ImbuingTableScreenHandler(
                 dirtyChecked = false
                 return
             }
-            Exception().printStackTrace()
+            //Exception().printStackTrace()
             this@ImbuingTableScreenHandler.onContentChanged(this)
             dirtyChecked = true
             super.markDirty()
