@@ -54,6 +54,6 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,100,8,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+        return AugmentDatapoint(SpellType.GRACE,100,8,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 }
