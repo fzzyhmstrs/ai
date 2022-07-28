@@ -104,7 +104,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         for (entity3 in entityList) {
             if(entity3 is Monster && world.isSkyVisible(entity3.blockPos)){
                 //repalce with a player version that can pass consumers?
-                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), effect, level)
+                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), user, effect, level)
                 if (world.spawnEntity(le)){
                     successes++
                 }
@@ -140,7 +140,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 tries--
                 continue
             }
-            val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos), data.effect, data.level)
+            val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos),data.user, data.effect, data.level)
             data.world.spawnEntity(le)
             break
         }

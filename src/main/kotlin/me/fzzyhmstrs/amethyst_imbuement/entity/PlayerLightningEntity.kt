@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LightningEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -29,8 +30,11 @@ import java.util.*
 class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world),
     ModifiableEffectEntity {
 
-    constructor(world: World): this(RegisterEntity.PLAYER_LIGHTNING, world)
+    constructor(world: World, attacker: LivingEntity): this(RegisterEntity.PLAYER_LIGHTNING, world){
+        owner = attacker
+    }
 
+    private var owner: LivingEntity? = null
     private var ambientTick = 2
     private var remainingActions = this.random.nextInt(3 + 1)
     private val struckEntities: MutableSet<Entity> = Sets.newHashSet()
@@ -124,7 +128,11 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     if (entity2.fireTicks == 0){
                         entity2.setOnFireFor(entityEffects.amplifier(0))
                     }
-                    entity2.damage(DamageSource.LIGHTNING_BOLT,entityEffects.damage(0))
+                    if (owner != null && owner is PlayerEntity) {
+                        entity2.damage(DamageSource.player(owner as PlayerEntity), entityEffects.damage(0))
+                    } else {
+                        entity2.damage(DamageSource.LIGHTNING_BOLT, entityEffects.damage(0))
+                    }
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                     }
@@ -217,8 +225,8 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     }
 
     companion object{
-        fun createLightning(world: World, pos: Vec3d, effect: AugmentEffect, level: Int): PlayerLightningEntity {
-            val le = PlayerLightningEntity(world)
+        fun createLightning(world: World, pos: Vec3d, owner: LivingEntity, effect: AugmentEffect, level: Int): PlayerLightningEntity {
+            val le = PlayerLightningEntity(world, owner)
             le.passEffects(effect, level)
             le.refreshPositionAfterTeleport(pos)
             return le
