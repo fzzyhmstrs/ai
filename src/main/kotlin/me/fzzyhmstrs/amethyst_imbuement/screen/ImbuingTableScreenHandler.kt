@@ -329,7 +329,8 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,1.0f,1.0f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.6f,1.2f)
+                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.5f,0.5f + world.random.nextFloat() * 1.2f)
             }
             return true
         }
@@ -345,7 +346,8 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,1.0f,1.0f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.6f,1.2f)
+                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.5f,0.5f + world.random.nextFloat() * 1.2f)
             }
             return true
         }
@@ -421,15 +423,10 @@ class ImbuingTableScreenHandler(
     }
 
     private fun playEnchantmentSound(world: World, pos: BlockPos?){
-        world.playSound(
-            null,
-            pos,
-            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
-            SoundCategory.BLOCKS,
-            1.0f,
-            world.random.nextFloat() * 0.1f + 0.9f
-        )
+        world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0f, world.random.nextFloat() * 0.1f + 0.9f)
+        world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,SoundCategory.BLOCKS,1.7f,0.5f + world.random.nextFloat() * 1.2f)
     }
+
     private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
         if (!DisenchantingTableScreenHandler.insertItem(stack, firstSlot, firstSlot + 1, false, this.slots)) {
             if (!DisenchantingTableScreenHandler.insertItem(stack, 0, firstSlot, false, this.slots)) {
