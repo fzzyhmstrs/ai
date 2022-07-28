@@ -72,10 +72,10 @@ dependencies {
     }
     include("maven.modrinth:Wd844r7Q:1.18.2-02")
 
-    modImplementation("maven.modrinth:amethyst-core:0.2.1+1.18.2"){
+    modImplementation("maven.modrinth:amethyst-core:0.2.2+1.18.2"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:amethyst-core:0.2.1+1.18.2")
+    include("maven.modrinth:amethyst-core:0.2.2+1.18.2")
 
 /*    modImplementation(":amethyst_core-0.2.1+1.18.2"){
         exclude("net.fabricmc.fabric-api")
