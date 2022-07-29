@@ -6,15 +6,20 @@ import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import net.minecraft.client.MinecraftClient
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.text.OrderedText
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
@@ -23,12 +28,22 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     private val id: Identifier
     private val inputs: List<EmiIngredient>
     private val outputs: List<EmiStack>
+    private val costText: OrderedText
+    private val costOffset: Int
     private val isEnchantingType: Boolean
 
     init{
         id = recipe.id
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
+        val cost = recipe.getCost()
+        if(cost > 99){
+            costText = Text.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
+            costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
+        } else{
+            costText = Text.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
+            costOffset = 119 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
+        }
         isEnchantingType = recipe.getAugment() != ""
     
     }
@@ -51,6 +66,14 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
                         }
                         is ScepterAugment -> {
                             val stacks = enchant.acceptableItemStacks().toTypedArray()
+                            for (chk in stacks.indices){
+                                val item = stacks[chk].item
+                                if (item is AbstractAugmentBookItem) {
+                                    val augBookStack = stacks[chk].copy()
+                                    AbstractAugmentBookItem.addLoreKeyForREI(augBookStack, recipe.getAugment())
+                                    stacks[chk] = augBookStack
+                                }
+                            }
                             val ingredient = Ingredient.ofStacks(*stacks)
                             list.add(EmiIngredient.of(ingredient))
                         }
@@ -97,7 +120,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
                 stack = modifier.acceptableItemStacks().first()
                 val moddedStack = stack.copy()
                 ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
-                list.add(EmiStack.of(stack))
+                list.add(EmiStack.of(moddedStack))
             } else {
                 stack = ItemStack(Items.BOOK, 1)
                 list.add(EmiStack.of(stack))
@@ -127,31 +150,32 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
     
     override fun getDisplayWidth(): Int{
-        return 152
+        return 134
     }
     
     override fun getDisplayHeight(): Int{
-        return 76
+        return 60
     }
     
     override fun addWidgets(widgets: WidgetHolder){
         val xOffset = 0
         val yOffset = 0
-        widgets.addTexture(EmiTexture.EMPTY_ARROW, 88, 25)
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 82, 21)
         widgets.addSlot(inputs[0], xOffset, yOffset)
-        widgets.addSlot(inputs[1], xOffset + 87, yOffset)
+        widgets.addSlot(inputs[1], xOffset + 81, yOffset)
         widgets.addSlot(inputs[2], xOffset + 20, yOffset + 2)
-        widgets.addSlot(inputs[3], xOffset + 43, yOffset + 2)
-        widgets.addSlot(inputs[4], xOffset + 66, yOffset + 2)
-        widgets.addSlot(inputs[5], xOffset + 20, yOffset + 25)
-        widgets.addSlot(inputs[6], xOffset + 43, yOffset + 25)
-        widgets.addSlot(inputs[7], xOffset + 66, yOffset + 25)
-        widgets.addSlot(inputs[8], xOffset + 20, yOffset + 48)
-        widgets.addSlot(inputs[9], xOffset + 43, yOffset + 48)
-        widgets.addSlot(inputs[10], xOffset + 66, yOffset + 48)
-        widgets.addSlot(inputs[11], xOffset, yOffset + 50)
-        widgets.addSlot(inputs[12], xOffset + 87, yOffset + 50)
-        widgets.addSlot(outputs[0], xOffset + 120, yOffset + 25).recipeContext(this)
+        widgets.addSlot(inputs[3], xOffset + 40, yOffset + 2)
+        widgets.addSlot(inputs[4], xOffset + 60, yOffset + 2)
+        widgets.addSlot(inputs[5], xOffset + 20, yOffset + 21)
+        widgets.addSlot(inputs[6], xOffset + 40, yOffset + 21)
+        widgets.addSlot(inputs[7], xOffset + 60, yOffset + 21)
+        widgets.addSlot(inputs[8], xOffset + 20, yOffset + 40)
+        widgets.addSlot(inputs[9], xOffset + 40, yOffset + 40)
+        widgets.addSlot(inputs[10], xOffset + 60, yOffset + 40)
+        widgets.addSlot(inputs[11], xOffset, yOffset + 42)
+        widgets.addSlot(inputs[12], xOffset + 81, yOffset + 42)
+        widgets.addSlot(outputs[0], xOffset + 111, yOffset + 21).recipeContext(this)
+        widgets.addText(costText,costOffset,42,0x55FF55,true)
     }
 
 }
