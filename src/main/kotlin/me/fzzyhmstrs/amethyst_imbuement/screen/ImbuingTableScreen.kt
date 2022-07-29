@@ -66,6 +66,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         val j = (height - backgrdHeight) / 2
         val ofst2 = 4 //ofst to handle the screen height change
         this.drawTexture(matrices, i, j, 0, 0, backgrdWidth, backgrdHeight)
+        if (handler.lapisSlot.get() > 0){
+            this.drawTexture(matrices,i+72,j+38,8,13,16,16)
+        }
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)

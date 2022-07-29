@@ -88,9 +88,10 @@ class ImbuingTableScreenHandler(
     }
 
     private val random = net.minecraft.util.math.random.LocalRandom(0L)
-    val player = playerInventory.player
-    private val LOGGER = LogUtils.getLogger()
+    val player: PlayerEntity = playerInventory.player
+    private val logger = LogUtils.getLogger()
     private val seed = Property.create()
+    val lapisSlot: Property = Property.create()
     var results: List<TableResult> = listOf()
     var resultsIndexes =  intArrayOf(-1, -1, -1)
     var resultsCanUp = false
@@ -150,6 +151,7 @@ class ImbuingTableScreenHandler(
 
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
+        addProperty(lapisSlot).set(0)
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -180,6 +182,9 @@ class ImbuingTableScreenHandler(
         if (player.world.isClient) return
         if (inventory === this.inventory) {
             val itemStack = inventory.getStack(6)
+            val lapisStack = inventory.getStack(7)
+            val lapisStackFull = if(lapisStack.isEmpty) {0} else {1}
+            lapisSlot.set(lapisStackFull)
             results = listOf()
             resultsIndexes =  intArrayOf(-1, -1, -1)
 
@@ -241,7 +246,7 @@ class ImbuingTableScreenHandler(
                                         tempResults.add(EmptyResult())
                                     }
                                 } else {
-                                    LOGGER.warn("Could not find augment or modifier under the key $id")
+                                    logger.warn("Could not find augment or modifier under the key $id")
                                 }
                             } else {
                                 tempResults.add(ImbuingResult(imbuingRecipe,power))
@@ -309,10 +314,10 @@ class ImbuingTableScreenHandler(
                     }
                     resultsCanUp = false
                     resultsCanDown = results.size > 3
-                    sendContentUpdates()
 
                 }
             }
+            sendContentUpdates()
             sendPacket(player,this)
         }
     }
@@ -530,7 +535,7 @@ class ImbuingTableScreenHandler(
                 handler.resultsIndexes = intArrayOf(int1, int2, int3)
                 handler.resultsCanUp = buf.readBoolean()
                 handler.resultsCanDown = buf.readBoolean()
-                handler.LOGGER.info("synced handler on the client!")
+                handler.logger.info("synced handler on the client!")
             }
         }
 
