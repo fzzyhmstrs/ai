@@ -7,9 +7,11 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ForgingScreenHandler
+import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.sound.SoundCategory
@@ -32,13 +34,25 @@ class CrystalAltarScreenHandler(
         ScreenHandlerContext.EMPTY,
     )
 
+    val flowerSlot: Property = Property.create()
     private var world: World
     private var currentRecipe: AltarRecipe? = null
     private var recipes: List<AltarRecipe>
 
     init{
+        addProperty(flowerSlot).set(0)
         world = playerInventory.player.world
         recipes = playerInventory.player.world.recipeManager.listAllOfType(AltarRecipe.Type)
+    }
+
+    override fun onContentChanged(inventory: Inventory) {
+        super.onContentChanged(inventory)
+        if (inventory === this.input){
+            val flowerStack = inventory.getStack(1)
+            val flowerStackFull = if(flowerStack.isEmpty){ 0 }else{ 1 }
+            flowerSlot.set(flowerStackFull)
+            sendContentUpdates()
+        }
     }
 
     override fun canUse(state: BlockState): Boolean {
