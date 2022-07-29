@@ -45,15 +45,15 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
     
     override fun getDisplayHeight(): Int{
-        return 18
+        return 40
     }
     
     override fun addWidgets(widgets: WidgetHolder){
-        widgets.addTexture(EmiTexture.PLUS, 27, 3)
-		    widgets.addTexture(EmiTexture.EMPTY_ARROW, 75, 1)
-		    widgets.addSlot(base, 0, 0)
-		    widgets.addSlot(addition, 49, 0)
-		    widgets.addSlot(result, 107, 0).recipeContext(this)
+        widgets.addTexture(EmiTexture.PLUS, 27, 14)
+		    widgets.addTexture(EmiTexture.EMPTY_ARROW, 75, 12)
+		    widgets.addSlot(base, 0, 11)
+		    widgets.addSlot(addition, 49, 11)
+		    widgets.addSlot(result, 107, 11).recipeContext(this)
     }
 
 }
