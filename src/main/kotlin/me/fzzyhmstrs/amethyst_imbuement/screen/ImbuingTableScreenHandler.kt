@@ -239,9 +239,11 @@ class ImbuingTableScreenHandler(
                                     val blA = modifier?.isAcceptableItem(itemStack) ?: false
                                     val blB = ModifierHelper.checkModifierLineage(id, itemStack)
                                     if (blA && blB) {
-                                        tempResults.add(ModifierResult(imbuingRecipe,false,power))
+                                        val nextInLine = ModifierHelper.getNextInLineage(id, itemStack)
+                                        tempResults.add(ModifierResult(imbuingRecipe,nextInLine.toString(),false, power))
                                     } else if (blA && !blB) {
-                                        tempResults.add(ModifierResult(imbuingRecipe,true,power))
+                                        val maxModifier = ModifierHelper.getMaxInLineage(id)
+                                        tempResults.add(ModifierResult(imbuingRecipe,maxModifier.toString(),true, power))
                                     } else {
                                         tempResults.add(EmptyResult())
                                     }
@@ -665,7 +667,7 @@ class ImbuingTableScreenHandler(
             private val resultTypes = mapOf(
                 0 to EnchantingResult(0, 0, 0, 0),
                 1 to ImbuingResult(ImbuingRecipe.blankRecipe(),0),
-                2 to ModifierResult(ImbuingRecipe.blankRecipe(),false,0),
+                2 to ModifierResult(ImbuingRecipe.blankRecipe(),"",false,0),
                 3 to EmptyResult(),
                 4 to LevelLowErrorResult("",0),
                 5 to ScepterLowErrorResult("", 0)
@@ -1020,18 +1022,20 @@ class ImbuingTableScreenHandler(
 
     }
 
-    class ModifierResult(val recipe: ImbuingRecipe, private val lineageMax: Boolean, override val power: Int): TableResult{
+    class ModifierResult(val recipe: ImbuingRecipe, private val nextInLine: String, private val lineageMax: Boolean, override val power: Int): TableResult{
         override val type: Int = 2
         override val lapis: Int = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
 
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeIdentifier(recipe.id)
+            buf.writeString(nextInLine)
             buf.writeBoolean(lineageMax)
             buf.writeShort(power)
         }
 
         override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
             val recipeId = buf.readIdentifier()
+            val nextInLine = buf.readString()
             val lineage = buf.readBoolean()
             val pow = buf.readShort().toInt()
             val opt = world.recipeManager.get(recipeId)
@@ -1041,15 +1045,14 @@ class ImbuingTableScreenHandler(
                 null
             } ?: return EmptyResult()
             return if (recipe is ImbuingRecipe){
-                ModifierResult(recipe,lineage, pow)
+                ModifierResult(recipe,nextInLine,lineage, pow)
             } else {
                 EmptyResult()
             }
         }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
-            val augId = Identifier(recipe.getAugment())
-            val str = ModifierRegistry.getByType<AugmentModifier>(augId)?.getName()?.string ?: Text.translatable("container.disenchanting_table.button.missing_enchantment").toString()
+            val str = Text.translatable("scepter.modifier.$nextInLine").string
             return Text.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
         }
 
@@ -1100,21 +1103,30 @@ class ImbuingTableScreenHandler(
 
         override fun tooltipList(player: PlayerEntity, handler: ImbuingTableScreenHandler): List<Text> {
             val list: MutableList<Text> = mutableListOf()
-            val textName: MutableText = Text.translatable("scepter.modifier.${recipe.getAugment()}")
+            val textName: MutableText = Text.translatable("scepter.modifier.$nextInLine")
             if (!lineageMax){
                 list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                 list.add(Text.empty())
             } else {
                 list.add(Text.translatable("container.imbuing_table.modifier_max").formatted(Formatting.RED))
-                list.add(Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                list.add(Text.translatable("container.imbuing_table.next_recipe_1", Text.translatable("scepter.modifier.$nextInLine")).formatted(Formatting.GRAY))
                 list.add(Text.empty())
             }
-            list.add(Text.empty())
+            if (player.experienceLevel < power){
+                list.add(Text.translatable("container.enchant.level.requirement", power).formatted(Formatting.RED))
+            } else {
+                val mutableText2 =
+                    if (power == 1) Text.translatable("container.enchant.level.one") else Text.translatable(
+                        "container.enchant.level.many",
+                        power
+                    )
+                list.add(mutableText2.formatted(Formatting.GRAY))
+            }
             return list
         }
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
-            val textName: MutableText = Text.translatable("scepter.modifier.${recipe.getAugment()}")
+            val textName: MutableText = Text.translatable("scepter.modifier.$nextInLine")
             return Text.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE))
         }
     }
