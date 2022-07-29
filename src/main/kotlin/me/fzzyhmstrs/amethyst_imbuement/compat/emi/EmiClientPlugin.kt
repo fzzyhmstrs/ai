@@ -1,15 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import net.minecraft.util.Identifier
-import dev.emi.emi.api.recipe.EmiRecipeCategory
-import dev.emi.emi.api.stack.EmiStack
-import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
+import dev.emi.emi.api.recipe.EmiRecipeCategory
+import dev.emi.emi.api.render.EmiTexture
+import dev.emi.emi.api.stack.EmiStack
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import net.minecraft.util.Identifier
 
 object EmiClientPlugin: EmiPlugin{
     val SPRITE_SHEET = Identifier(AI.MOD_ID,"textures/gui/emi_recipe_textures.png")

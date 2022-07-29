@@ -1,12 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import net.minecraft.util.Identifier
-import dev.emi.emi.api.recipe.*
-import dev.emi.emi.api.stack.EmiStack
+import dev.emi.emi.api.recipe.EmiRecipe
+import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.stack.EmiIngredient
+import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
+import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import net.minecraft.util.Identifier
 
 class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     

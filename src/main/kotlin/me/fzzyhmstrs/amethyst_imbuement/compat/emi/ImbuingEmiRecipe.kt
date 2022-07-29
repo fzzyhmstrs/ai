@@ -1,28 +1,21 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import net.minecraft.util.Identifier
-import dev.emi.emi.api.recipe.*
-import dev.emi.emi.api.stack.EmiStack
+import dev.emi.emi.api.recipe.EmiRecipe
+import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.render.EmiTexture
-import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.stack.EmiIngredient
+import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
-import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
-import me.shedaniel.rei.api.common.entry.EntryIngredient
-import me.shedaniel.rei.api.common.util.EntryStacks
+import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
