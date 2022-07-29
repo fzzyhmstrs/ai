@@ -1100,7 +1100,7 @@ class ImbuingTableScreenHandler(
 
         override fun tooltipList(player: PlayerEntity, handler: ImbuingTableScreenHandler): List<Text> {
             val list: MutableList<Text> = mutableListOf()
-            val textName: MutableText = TranslatableText("scepter.modifiers.${recipe.getAugment()}")
+            val textName: MutableText = TranslatableText("scepter.modifier.${recipe.getAugment()}")
             if (!lineageMax){
                 list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
                 list.add(LiteralText.EMPTY)
@@ -1114,7 +1114,7 @@ class ImbuingTableScreenHandler(
         }
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
-            val textName: MutableText = TranslatableText("scepter.modifiers.${recipe.getAugment()}")
+            val textName: MutableText = TranslatableText("scepter.modifier.${recipe.getAugment()}")
             return TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE))
         }
     }
