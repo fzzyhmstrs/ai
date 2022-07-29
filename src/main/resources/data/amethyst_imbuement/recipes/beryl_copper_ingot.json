@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "amethyst_imbuement:beryl_copper_block"
+    }
+  ],
+  "result": {
+    "item": "amethyst_imbuement:beryl_copper_ingot",
+	"count": 9
+  }
+}
