@@ -325,8 +325,8 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.6f,1.2f)
-                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.5f,0.5f + world.random.nextFloat() * 1.2f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.5f,1.2f)
+                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.6f,0.6f + world.random.nextFloat() * 1.2f)
             }
             return true
         }
@@ -342,8 +342,8 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.6f,1.2f)
-                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.5f,0.5f + world.random.nextFloat() * 1.2f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.5f,1.2f)
+                world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.6f,0.6f + world.random.nextFloat() * 1.2f)
             }
             return true
         }
@@ -356,7 +356,8 @@ class ImbuingTableScreenHandler(
             if (buttonWorked) {
                 if (!world.isClient) {
                     onContentChanged(inventory)
-                    playEnchantmentSound(world, pos)
+                    world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.9f, world.random.nextFloat() * 0.1f + 0.9f)
+                    world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,SoundCategory.BLOCKS,2.0f,0.5f + world.random.nextFloat() * 1.2f)
                 }
             }
         }
@@ -396,11 +397,6 @@ class ImbuingTableScreenHandler(
             } else {
                 return ItemStack.EMPTY
             }
-            /*if (itemStack2.isEmpty) {
-                slot.stack = ItemStack.EMPTY
-            } else {
-                slot.markDirty()
-            }*/
             if (itemStack2.count == itemStack.count) {
                 return ItemStack.EMPTY
             }
@@ -416,11 +412,6 @@ class ImbuingTableScreenHandler(
             list.removeAt(random.nextInt(list.size))
         }
         return list
-    }
-
-    private fun playEnchantmentSound(world: World, pos: BlockPos?){
-        world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0f, world.random.nextFloat() * 0.1f + 0.9f)
-        world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,SoundCategory.BLOCKS,1.7f,0.5f + world.random.nextFloat() * 1.2f)
     }
 
     private fun slotChecker(stack: ItemStack, firstSlot:Int, playerSlotStart: Int, playerSlotEnd: Int): Boolean{
