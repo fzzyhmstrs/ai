@@ -171,11 +171,4 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
             break
         }
     }
-
-    init{
-        super.init()
-//        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2
-    }
-
-
 }

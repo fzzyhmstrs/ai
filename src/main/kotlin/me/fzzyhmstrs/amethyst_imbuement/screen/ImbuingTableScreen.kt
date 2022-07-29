@@ -29,7 +29,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
     }
 
-
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val i = (width - backgrdWidth) / 2
         val j = (height - backgrdHeight) / 2
@@ -298,17 +297,16 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         }
     }
 
-
-    init{
+    override fun init() {
         this.backgroundWidth = backgrdWidth
         this.backgroundHeight = backgrdHeight
-        super.init()
         //x = (width - backgrdWidth) / 2
         //y = (height - backgrdHeight) / 2
         titleX = 30+29-14
         titleY = 5
         playerInventoryTitleX = 8+29
         playerInventoryTitleY = this.backgrdHeight-94
+        super.init()
     }
 
 
