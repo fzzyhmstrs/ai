@@ -254,8 +254,4 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             break
         }
     }
-
-    init{
-        super.init()
-    }
 }
