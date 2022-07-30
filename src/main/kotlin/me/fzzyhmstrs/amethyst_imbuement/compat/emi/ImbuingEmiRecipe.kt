@@ -14,6 +14,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.minecraft.client.MinecraftClient
+import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
@@ -114,7 +116,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
             val stack: ItemStack
             if (enchant != null){
                 stack = ItemStack(Items.ENCHANTED_BOOK,1)
-                stack.addEnchantment(enchant,1)
+                EnchantedBookItem.addEnchantment(stack,EnchantmentLevelEntry(enchant,1))
                 list.add(EmiStack.of(stack))
             } else if (modifier != null){
                 stack = modifier.acceptableItemStacks().first()

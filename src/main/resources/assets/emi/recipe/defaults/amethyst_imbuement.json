@@ -1,5 +1,6 @@
 {
   "recipes": [
+    "amethyst_imbuement:bottle-o-enchanting_imbuing",
     "amethyst_imbuement:xp_bush_seed_imbuing",
     "amethyst_imbuement:mana_potion_imbuing",
     "amethyst_imbuement:polished_amethyst_block",
@@ -10,6 +11,13 @@
     "amethyst_imbuement:chiseled_polished_amethyst_block",
     "amethyst_imbuement:steel_block",
 	"amethyst_imbuement:beryl_copper_block",
+    "amethyst_imbuement:golden_heart",
+    "amethyst_imbuement:garnet",
+    "amethyst_imbuement:opal",
+    "amethyst_imbuement:moonstone",
+    "amethyst_imbuement:pyrite",
+    "amethyst_imbuement:ametrine",
+    "amethyst_imbuement:celestine",
 	"amethyst_imbuement:crystalline_heart_imbuing",
     "amethyst_imbuement:cut_beryl_copper_block",
     "amethyst_imbuement:cut_beryl_copper_slab",
