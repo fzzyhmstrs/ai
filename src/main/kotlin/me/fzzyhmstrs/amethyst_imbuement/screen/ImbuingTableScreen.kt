@@ -52,6 +52,20 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             client?.interactionManager?.clickButton(handler.syncId, m)
             return true
         }
+        val recipesOffset = handler.needsRecipeBook.get()
+        if(recipesOffset >= 0) {
+            val d = mouseX - (i + 6).toDouble()
+            val e = mouseY - (j + 91).toDouble()
+            if (!(d < 0.0 || e < 0.0 || d >= 20.0 || e >= 18.0 || !player.let {
+                    (handler as ImbuingTableScreenHandler).onButtonClick(
+                        it, -1
+                    )
+                }
+                        )) {
+                client?.interactionManager?.clickButton(handler.syncId, -1)
+                return true
+            }
+        }
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
@@ -255,6 +269,21 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 (q + 86 - textRenderer.getWidth(string)).toFloat(),
                 (j + 16 + 19 * o + 7).toFloat(),
                 powerTextColor
+            )
+        }
+        val recipesOffset = handler.needsRecipeBook.get()
+        if (recipesOffset > 0){
+            val u = mouseX - (i + 6)
+            val v = mouseY - (j + 91)
+            val hovered = (u >= 0 && v >= 0 && u < 20 && v < 18)
+            this.drawTexture(
+                matrices,
+                i + 6,
+                j + 91,
+                236,
+                if(hovered){18 + 36 * recipesOffset} else {0 + 36*recipesOffset},
+                20,
+                18
             )
         }
     }

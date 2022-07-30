@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import com.mojang.logging.LogUtils
+import dev.emi.emi.api.EmiApi
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
@@ -9,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
@@ -17,6 +19,7 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Blocks
 import net.minecraft.client.font.TextRenderer
@@ -83,6 +86,7 @@ class ImbuingTableScreenHandler(
         return inventory
     }
 
+    val needsRecipeBook: Property = Property.create()
     private val logger = LogUtils.getLogger()
     private val random = Random()
     private val player = playerInventory.player
@@ -148,6 +152,14 @@ class ImbuingTableScreenHandler(
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
+        val viewerIncluded = if(FabricLoader.getInstance().isModLoaded("emi")){
+            1
+        } else if (FabricLoader.getInstance().isModLoaded("roughlyenoughitems")){
+            2
+        } else {
+            -1
+        }
+        addProperty(needsRecipeBook).set(viewerIncluded)
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -320,6 +332,20 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        if (id == -1){
+            if (needsRecipeBook.get() == 1) {
+                EmiApi.displayRecipeCategory(EmiClientPlugin.IMBUING_CATEGORY)
+                context.run { world, pos ->
+                    world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
+                }
+                return true
+            } else if (needsRecipeBook.get() == 2) {
+                context.run { world, pos ->
+                    world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
+                }
+                return true
+            }
+        }
         if (id == 3){
             if (resultsIndexes[0] == 0) return false
             val max = results.size - 1
