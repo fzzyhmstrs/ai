@@ -997,13 +997,14 @@ class ImbuingTableScreenHandler(
             }
             if (player.experienceLevel < power){
                 list.add(Text.translatable("container.enchant.level.requirement", power).formatted(Formatting.RED))
+            } else {
+                val mutableText2 =
+                    if (power == 1) Text.translatable("container.enchant.level.one") else Text.translatable(
+                        "container.enchant.level.many",
+                        power
+                    )
+                list.add(mutableText2.formatted(Formatting.GRAY))
             }
-            val mutableText2 =
-                if (power == 1) Text.translatable("container.enchant.level.one") else Text.translatable(
-                    "container.enchant.level.many",
-                    power
-                )
-            list.add(mutableText2.formatted(Formatting.GRAY))
             return list
         }
 
