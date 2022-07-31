@@ -14,7 +14,11 @@ class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || (stack.item is AxeItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item))
+        return (EnchantmentTarget.CROSSBOW.isAcceptableItem(stack.item) ||
+                EnchantmentTarget.TRIDENT.isAcceptableItem(stack.item) ||
+                EnchantmentTarget.BOW.isAcceptableItem(stack.item) ||
+                (stack.item is AxeItem) ||
+                EnchantmentTarget.WEAPON.isAcceptableItem(stack.item))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
