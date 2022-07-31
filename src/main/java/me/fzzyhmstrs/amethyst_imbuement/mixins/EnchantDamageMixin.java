@@ -48,6 +48,13 @@ public abstract class EnchantDamageMixin {
         cir.setReturnValue(7);
     }
 
+    @Inject(method = "getAttackDamage", at = @At(value = "HEAD"), cancellable = true)
+    private void getAttackDamage(int level, EntityGroup group, CallbackInfoReturnable<Float> cir){
+        if (typeIndex == 3 && group == EntityGroup.ILLAGER){
+            cir.setReturnValue(level * 2.5F);
+        }
+    }
+
     @Inject(method = "onTargetDamaged", at = @At(value = "HEAD"), cancellable = true)
     public void onTargetDamaged(LivingEntity user, Entity target, int level, CallbackInfo ci){
         if (target instanceof LivingEntity livingEntity) {

@@ -79,7 +79,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
     val FREEZING_ENTITY: EntityType<FreezingEntity> = Registry.register(
@@ -92,7 +92,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
     val PLAYER_BULLET: EntityType<PlayerBulletEntity> = Registry.register(
