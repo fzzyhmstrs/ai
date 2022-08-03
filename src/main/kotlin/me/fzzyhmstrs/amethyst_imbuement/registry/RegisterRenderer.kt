@@ -96,6 +96,12 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.SOUL_MISSILE_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            MissileEntityRenderer(context)
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.PLAYER_BULLET
         ){context: EntityRendererFactory.Context ->
             ShulkerBulletEntityRenderer(

@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SoulAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.SoulMissileEntity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -22,7 +23,7 @@ class SoulMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
         get() = super.baseEffect.withDamage(4.0F,0.0F,0.0F)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val me = MissileEntity(world, user, true)
+        val me = SoulMissileEntity(world, user, true)
         me.setVelocity(user,user.pitch,user.yaw,0.0f,
             2.0f,
             0.1f)

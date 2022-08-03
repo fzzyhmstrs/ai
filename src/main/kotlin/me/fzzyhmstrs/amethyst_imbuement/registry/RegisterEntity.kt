@@ -95,6 +95,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
+    val SOUL_MISSILE_ENTITY: EntityType<SoulMissileEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "soul_missile_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<SoulMissileEntity>, world: World ->
+            SoulMissileEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
     val PLAYER_BULLET: EntityType<PlayerBulletEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_bullet_entity"),
@@ -131,7 +144,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).trackRangeChunks(4).trackedUpdateRate(10).build()
+        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).trackRangeChunks(12).trackedUpdateRate(10).build()
     )
 
     val PLAYER_LIGHTNING: EntityType<PlayerLightningEntity> = Registry.register(
