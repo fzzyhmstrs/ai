@@ -14,7 +14,7 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType,world) {
+class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): MissileEntity(entityType, world) {
 
     constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.FLAMEBOLT_ENTITY,world){
         this.owner = owner

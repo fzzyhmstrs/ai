@@ -48,7 +48,6 @@ class DisenchantingTableBlock(settings: Settings): EnchantingTableBlock(settings
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        //println("created imbuing table entity")
         return DisenchantingTableBlockEntity(pos, state)
     }
     override fun onPlaced(
@@ -76,7 +75,6 @@ class DisenchantingTableBlock(settings: Settings): EnchantingTableBlock(settings
         if (world.isClient) {
             return ActionResult.SUCCESS
         }
-        //println("used imbuing table")
         player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
         return ActionResult.CONSUME
     }
