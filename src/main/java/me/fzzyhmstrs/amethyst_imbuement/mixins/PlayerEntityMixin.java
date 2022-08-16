@@ -59,10 +59,36 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             ci.cancel();
         }
     }
+    
+    @Inject(method = "heal", at = @At(value = "HEAD")
+    private void healMixin(float amount, CallbackInfo ci){
+        for (int i = 0; i < 9; i++){
+            ItemStack stack = inventory.getStack(i);
+            if (stack.getItem() instanceof GemOfPromiseItem){
+                GemOfPromiseItem.Companion.healingGemCheck(stack,inventory,amount);
+            }
+        }
+        ItemStack stack2 = inventory.getStack(inventory.OFF_HAND);
+        if (stack2.getItem() instanceof GemOfPromiseItem){
+            GemOfPromiseItem.Companion.healingGemCheck(stack,inventory,amount);
+        }
+    }
 
     @Inject(method = "damage", at = @At(value = "HEAD"))
-    private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    private void damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         damageSource = source;
+        for (int i = 0; i < 9; i++){
+            ItemStack stack = inventory.getStack(i);
+            if (stack.getItem() instanceof GemOfPromiseItem){
+                GemOfPromiseItem.Companion.blazingGemCheck(stack,inventory,source);
+                GemOfPromiseItem.Companion.brutalGemStack(stack,inventory,source);
+            }
+        }
+        ItemStack stack2 = inventory.getStack(inventory.OFF_HAND);
+        if (stack2.getItem() instanceof GemOfPromiseItem){
+            GemOfPromiseItem.Companion.blazingGemCheck(stack,inventory,this,source);
+            GemOfPromiseItem.Companion.brutalGemStack(stack,inventory,source);
+        }
     }
 
     @Inject(method = "damageShield", at = @At(value = "HEAD"))
@@ -99,9 +125,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir){
         for (int i = 0; i < 9; i++){
             ItemStack stack = inventory.getStack(i);
-            Item item = stack.getItem();
-            if (item instanceof GemOfPromiseItem){
-                GemOfPromiseItem.Companion.incrementKillCount(stack,inventory);
+            if (stack.getItem() instanceof GemOfPromiseItem){
+                GemOfPromiseItem.Companion.lethalGemCheck(stack,inventory);
             }
         }
     }
