@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "title": "Smiting Blow",
+  "cost": 13,
+  "augment": "amethyst_imbuement:smiting_blow"
+}
