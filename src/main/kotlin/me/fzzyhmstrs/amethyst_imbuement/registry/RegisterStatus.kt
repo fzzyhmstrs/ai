@@ -16,6 +16,7 @@ object RegisterStatus {
     val STRIDING = StridingStatusEffect(StatusEffectCategory.BENEFICIAL,0x48f369)
     val CHARMED = CharmedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF80FF)
     val SOULBINDING = SoulbindingStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000)
+    val RESONATING = ResonatingStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0)
 
     fun registerAll(){
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
@@ -26,6 +27,7 @@ object RegisterStatus {
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"striding"), STRIDING)
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"charmed"), CHARMED)
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"soulbinding"), SOULBINDING)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"resonating"), RESONATING)
     }
 
 }

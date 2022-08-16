@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterOfBladesToolMaterial
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -55,6 +56,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
         var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
+        var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
+        var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
     }
 
     class Altars {
@@ -137,6 +140,21 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             "rain_of_thorns" to true,
             "vein_miner" to true
         )
+    }
+
+    class SceptersV0: SyncedConfigHelper.OldClass {
+        var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
+        var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
+        var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
+        var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
+        override fun generateNewClass(): Any {
+            val scepters = Scepters()
+            scepters.baseRegenRateTicks = baseRegenRateTicks
+            scepters.opalineDurability = opalineDurability
+            scepters.iridescentDurability = iridescentDurability
+            scepters.lustrousDurability = lustrousDurability
+            return scepters
+        }
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")

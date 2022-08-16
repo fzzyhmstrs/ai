@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import me.fzzyhmstrs.amethyst_imbuement.item.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
@@ -11,12 +12,17 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -27,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
 
+    @Shadow @Final private PlayerInventory inventory;
     private DamageSource damageSource;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -84,6 +91,17 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                         RegisterEnchantment.INSTANCE.getBULWARK().specialEffect(this, level, activeStack);
                     }
                 }
+            }
+        }
+    }
+
+    @Inject(method = "onKilledOther", at = @At(value = "HEAD"))
+    private void checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfo ci){
+        for (int i = 0; i < 9; i++){
+            ItemStack stack = inventory.getStack(i);
+            Item item = stack.getItem();
+            if (item instanceof GemOfPromiseItem){
+                GemOfPromiseItem.Companion.incrementKillCount(stack,inventory);
             }
         }
     }

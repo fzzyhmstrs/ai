@@ -38,21 +38,25 @@ object RegisterItem {
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["xp_bush_seed"] = it}
     
     //scepter update gem and found items
-    val GEM_OF_PROMISE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["gem_of_promise"] = it}
+    val GEM_OF_PROMISE = Item(FabricItemSettings().maxCount(1).group(ItemGroup.MISC)).also{ regItem["gem_of_promise"] = it}
     val GEM_DUST = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["gem_dust"] = it}
     val SPARKING_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["sparking_gem"] = it}
     val BLAZING_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["blazing_gem"] = it}
     val INQUISITIVE_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["inquisitive_gem"] = it}
     val LETHAL_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["lethal_gem"] = it}
     val HEALERS_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["healers_gem"] = it}
-    val SCHOLARLY_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["scholarly_gem"] = it}
-    val GLOWING_BLADE_FRAGMENT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glowing_blade_fragment"] = it}
+    val BRUTAL_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["brutal_gem"] = it}
+    val GLOWING_FRAGMENT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glowing_fragment"] = it}
     val MALACHITE_FIGURINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["resonant_rod"] = it}
+    val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
+    val CHARGED_MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["charged_moonstone"] = it}
+    val ENERGETIC_OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["energetic_opal"] = it}
 
     //tool and weapon item declarations
     val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(Item.Settings().maxDamage(500).group(ItemGroup.COMBAT)).also{ regItem["sniper_bow"] = it}
+    val GLOWING_BLADE = SwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_shovel"] = it}
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_pickaxe"] = it}
@@ -93,11 +97,11 @@ object RegisterItem {
         .also{ regItem["sparking_scepter"] = it}
     val SCEPTER_OF_BLADES = CustomScepterItem(ScepterOfBladesToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
-        .withModifiers(listOf(RegisterModifier.BLADE_ASPECT, RegisterModifier.LESSER_THRIFTY))
+        .withModifiers(listOf(RegisterModifier.BLADE_ASPECT, ModifierRegistry.LESSER_THRIFTY))
         .also{ regItem["scepter_of_blades"] = it}
     val SCEPTER_OF_RECALL = CustomScepterItem(ScepterOfBladesToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.RECALL))
-        .withModifiers(listOf(ModifierRegistry.GREATER_REACH))
+        .withModifiers(listOf(RegisterModifier.GREATER_REACH))
         .also{ regItem["scepter_of_recall"] = it}
     val CLERICS_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MINOR_HEAL))
@@ -105,7 +109,7 @@ object RegisterItem {
         .also{ regItem["clerics_scepter"] = it}
     val BARDIC_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.REGENERATE))
-        .withModifiers(listOf(RegisterModifier.GREATER_ENDURING, RegisterModifier.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.GREATER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["bardic_scepter"] = it}
     val SCEPTER_OF_SUMMONING = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
@@ -127,7 +131,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_pacifist"] = it}
     val CORRUPTED_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withAugments(listOf(RegisterEnchantmentAIO.CORRUPTED_SLASH))
+        .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.NECROTIC))
         .also{ regItem["corrupted_scepter"] = it}
     val DANGEROUS_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
@@ -152,7 +156,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.DANGEROUS, ModifierRegistry.LESSER_THRIFTY))
         .also{ regItem["lethality"] = it}
     val RESONANCE = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withAugments(listOf(RegisterEnchantmentAIO.RESONATE))
+        .withAugments(listOf(RegisterEnchantment.RESONATE))
         .withModifiers(listOf(RegisterModifier.ECHOING,RegisterModifier.SKILLFUL))
         .also{ regItem["resonance"] = it}
     val REDEMPTION = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
@@ -163,11 +167,11 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, ModifierRegistry.GREATER_THRIFTY))
         .also{ regItem["equinox"] = it}
     val SOJOURN = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withAugments(listOf(RegisterEnchantmentAIO.RESONATE))
+        .withAugments(listOf(RegisterEnchantment.SURVEY))
         .withModifiers(listOf(RegisterModifier.SKILLFUL,RegisterModifier.TRAVELER))
         .also{ regItem["sojourn"] = it}
     val AEGIS = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING, RegisterModifier.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["aegis"] = it}
 
 

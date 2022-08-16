@@ -20,22 +20,20 @@ object ModifierPredicates {
     private fun gracefulPredicate(id: Identifier): Boolean{
         return AugmentHelper.getAugmentType(id.toString()) == SpellType.GRACE
     }
-
     val BLADE_PREDICATE = Predicate {id: Identifier -> bladePredicate(id)}
     private fun bladePredicate(id: Identifier): Boolean{
         val augment = Registry.ENCHANTMENT.get(id)?:return false
         return augment is SlashAugment
     }
-
-    val SOUL_PREDICATE = Predicate {id: Identifier -> soulPredicate(id)}
-    private fun soulPredicate(id: Identifier): Boolean{
+    val ICE_PREDICATE = Predicate {id: Identifier -> icePredicate(id)}
+    private fun icePredicate(id: Identifier): Boolean{
         val augment = Registry.ENCHANTMENT.get(id)?:return false
-        return augment is SoulAugment
+        return augment is IceAugment
     }
-    
-    val KNOWLEDGE_PREDICATE = Predicate {id: Identifier -> knowledgePredicate(id)}
-    private fun knowledgePredicate(id: Identifier): Boolean{
-        return AugmentHelper.getAugmentType(id.toString()) != SpellType.WIT
+    val ELEMENTAL_PREDICATE = Predicate {id: Identifier -> elementalPredicate(id)}
+    private fun elementalPredicate(id: Identifier): Boolean{
+        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        return augment is ElementalAugment
     }
 
     val HEALERS_PREDICATE = Predicate {id: Identifier -> healersPredicate(id)}

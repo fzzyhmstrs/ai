@@ -134,6 +134,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
+    val ICE_SPIKE: EntityType<IceSpikeEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "ice_spike_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<IceSpikeEntity>, world: World ->
+            IceSpikeEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).trackRangeChunks(6).trackedUpdateRate(2).build()
+    )
+
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_fireball_entity"),

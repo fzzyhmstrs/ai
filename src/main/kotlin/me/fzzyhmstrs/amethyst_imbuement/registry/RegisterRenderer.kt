@@ -118,6 +118,14 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.ICE_SPIKE
+        ){context: EntityRendererFactory.Context ->
+            IceSpikeRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FIREBALL
         ){context: EntityRendererFactory.Context ->
             FlyingItemEntityRenderer(
