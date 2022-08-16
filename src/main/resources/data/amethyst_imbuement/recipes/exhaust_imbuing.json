@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftF": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "craftH": {
+	"item": "minecraft:fermented_spider_eye"
+  },
+  "title": "Exhaust",
+  "cost": 11,
+  "augment": "amethyst_imbuement:exhaust"
+}
