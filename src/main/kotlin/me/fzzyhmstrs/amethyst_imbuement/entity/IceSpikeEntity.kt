@@ -22,7 +22,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.World
 import java.util.*
 
-open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity {
+open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity {
 
     private var warmup = 0
     private var startedAttack = false
@@ -30,14 +30,15 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     private var playingAnimation = false
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withDuration(180)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
+        entityEffects.setDuration(ae.duration(level))
     }
 
-    constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
+    constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.ICE_SPIKE,world){
         this.warmup = warmup
         setOwner(owner)
         this.yaw = yaw * 57.295776f
@@ -80,7 +81,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                         val g = (random.nextDouble() * 2.0 - 1.0) * 0.3
                         val h = 0.3 + random.nextDouble() * 0.3
                         val j = (random.nextDouble() * 2.0 - 1.0) * 0.3
-                        world.addParticle(ParticleTypes.CRIT, d, e + 1.0, f, g, h, j)
+                        world.addParticle(ParticleTypes.SNOWFLAKE, d, e + 1.0, f, g, h, j)
                     }
                 }
             }
@@ -111,6 +112,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         }
         if (livingEntity == null) {
             target.damage(DamageSource.magic(this,owner), entityEffects.damage(0))
+            target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
@@ -196,7 +198,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
             } while (blockPos.y >= MathHelper.floor(maxY) - 1)
             if (bl) {
                 //consider a custom fangs entity that can have damage effects
-                val pfe = PlayerFangsEntity(
+                val pfe = IceSpikeEntity(
                     world,
                     x,
                     blockPos.y.toDouble() + d,

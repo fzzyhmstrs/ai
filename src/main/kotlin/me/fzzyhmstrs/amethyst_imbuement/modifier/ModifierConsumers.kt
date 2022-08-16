@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.ExperienceOrbEntity
@@ -102,6 +103,17 @@ object ModifierConsumers {
         }
     }
 
+    val AEGIS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> aegisConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun aegisConsumer(list: List<LivingEntity>){
+        list.forEach {
+            EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,20,2)
+            val rnd = AI.aiRandom().nextInt(5)
+            if (rnd == 0){
+                EffectQueue.addStatusToQueue(it,StatusEffects.RESISTANCE,20,0)
+            }
+        }
+    }
+
     val TRAVELER_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> travelerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun travelerConsumer(list: List<LivingEntity>){
         list.forEach {
@@ -109,6 +121,18 @@ object ModifierConsumers {
                 val rnd1 = it.world.random.nextInt(8)
                 if (rnd1 == 0)
                 EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,30,0)
+            }
+        }
+    }
+
+    val SOJOURNER_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> sojournerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun sojournerConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it is PlayerEntity){
+                val rnd1 = it.world.random.nextInt(4)
+                if (rnd1 == 0)
+                    EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,30,1)
+                EffectQueue.addStatusToQueue(it,StatusEffects.JUMP_BOOST,30,0)
             }
         }
     }
