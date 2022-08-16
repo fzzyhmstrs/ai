@@ -49,14 +49,14 @@ object RegisterItem {
     val GLOWING_FRAGMENT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glowing_fragment"] = it}
     val MALACHITE_FIGURINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["resonant_rod"] = it}
-    val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
+    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
     val CHARGED_MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["charged_moonstone"] = it}
     val ENERGETIC_OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["energetic_opal"] = it}
 
     //tool and weapon item declarations
     val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(Item.Settings().maxDamage(500).group(ItemGroup.COMBAT)).also{ regItem["sniper_bow"] = it}
-    val GLOWING_BLADE = SwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
+    val GLOWING_BLADE = SwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["glowing_blade"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_shovel"] = it}
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_pickaxe"] = it}
