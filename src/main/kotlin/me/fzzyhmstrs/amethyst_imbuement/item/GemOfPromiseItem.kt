@@ -20,29 +20,88 @@ class GemOfPromiseItem(settings: Settings): Item(settings) {
 
     companion object{
         
-        private val KILL_TARGET = 30
+        private const val KILL_TARGET = 30
+        private const val FIRE_TARGET = 120
+        private const val HIT_TARGET = 100
+        private const val HEAL_TARGET = 80
+        private const val STATUS_TARGET = 10
         
-        fun healersGemCheck(stack: ItemStack, player: PlayerEntity){
-        
+        fun healersGemCheck(stack: ItemStack,inventory: PlayerInventory, player: PlayerEntity, healAmount: Int){
+            val nbt = stack.orCreateNbt
+            var healed: Int = 0
+            if (nbt.contains("healed")){
+                    healed = Nbt.getIntNbt("healed",nbt)
+                }
+                val newHeal = healed + healAmount
+                if (newHeal >= HEAL_TARGET){
+                    stack.decrement(1)
+                    todo()
+                } else {
+                    Nbt.writeIntNbt("healed",newHit,nbt)
+                }
         }
         
-        fun brutalGemCheck(stack: ItemStack, player: PlayerEntity){
-        
+        fun brutalGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){
+            val source = damageSource.source
+            if (damageSource is DamageSource.MOB || (source != null && source is HostileEntity)){
+                val nbt = stack.orCreateNbt
+                var hit: Int = 0
+                if (nbt.contains("mob_hit")){
+                    hit = Nbt.getIntNbt("mob_hit",nbt)
+                }
+                val newHit = hit + 1
+                if (newHit >= HIT_TARGET){
+                    stack.decrement(1)
+                    todo()
+                } else {
+                    Nbt.writeIntNbt("mob_hit",newHit,nbt)
+                }
+                
+            }
         }
         
-        fun inquisitiveGemCheck(stack: ItemStack, player: PlayerEntity){
-        
+        fun inquisitiveGemCheck(stack: ItemStack,inventory: PlayerInventory, statusEffect: StatusEffect){
+            val nbt = stack.orCreateNbt
+            var compound = NbtCompound()
+            if (nbt.contains("statuses")){
+                compound = nbt.get("statuses") as NbtCompound
+            }
+            val id = statusEffect.id
+            if (compound.contains(id)) return
+            Nbt.writeIntNbt(id, 1, compound)
+            val keys = compound.keys
+            if (keys.size >= STATUS_TARGET){
+                stack.decrement(1)
+                todo()
+            }
         }
         
-        fun sparkingGemCheck(stack: ItemStack, world: World, playerEntity: PlayerEntity, record: DamageRecord){
+        fun sparkingGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){
+            if (damageSource is DamageSource.LIGHTNING_BOLT){
+                stack.decrement(1)
+                todo()
+            }
+        }
 
-        }
-
-        fun blazingGemCheck(stack: ItemStack, world: World, playerEntity: PlayerEntity, record: DamageRecord){
-
+        fun blazingGemCheck(stack: ItemStack, inventory: PlayerInventory,player: LivingEntity, damageSource: DamageSource){
+            if ((damageSource is DamageSource.ON_FIRE || damageSource is DamageSource.LAVA) && !player.hasStatus(StatusEffects.FIRE_RESISTANCE)){
+                val nbt = stack.orCreateNbt
+                var fire: Int = 0
+                if (nbt.contains("on_fire")){
+                    fire = Nbt.getIntNbt("on_fire",nbt)
+                }
+                val newFire = fire + 1
+                if (newFire >= FIRE_TARGET){
+                    stack.decrement(1)
+                    todo()
+                } else {
+                    Nbt.writeIntNbt("on_fire",newFire,nbt)
+                }
+                
+            }
         }
         
-        fun incrementKillCount(stack: ItemStack, inventory: PlayerInventory){
+        fun lethalGemCheck(stack: ItemStack, inventory: PlayerInventory){
             val nbt = stack.orCreateNbt
             var kills: Int = 0
             if (nbt.contains("kill_count")){
