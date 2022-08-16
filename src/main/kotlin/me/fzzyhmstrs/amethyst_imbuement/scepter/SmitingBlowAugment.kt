@@ -78,6 +78,6 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,8,10, imbueLevel, LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+        return AugmentDatapoint(SpellType.FURY,20,8,10, imbueLevel, LoreTier.LOW_TIER, RegisterItem.GLOWING_FRAGMENT)
     }
 }
