@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
+import me.fzzyhmstrs.amethyst_imbuement.item.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
@@ -21,10 +22,12 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -64,6 +67,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow protected ItemStack activeItemStack;
 
+    @Shadow public abstract float getHealth();
+
+    @Shadow public abstract float getMaxHealth();
+
     @Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean checkArmorInvisibility(ItemStack instance){
         return (instance.isEmpty() || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) == 0);
@@ -74,6 +81,39 @@ public abstract class LivingEntityMixin extends Entity {
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getIMMUNITY())){
             if (!effect.getEffectType().isBeneficial()){
                 cir.setReturnValue(false);
+            }
+        }
+    }
+
+    @Inject(method = "heal", at = @At(value = "HEAD"))
+    private void healMixin(float amount, CallbackInfo ci){
+        if ((LivingEntity)(Object)this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity)(Object)this;
+            PlayerInventory inventory = player.getInventory();
+            float newHealth = this.getHealth() + amount;
+            float clampedDelta = newHealth - MathHelper.clamp(newHealth,0.0f,this.getMaxHealth());
+            float healed = amount - clampedDelta;
+            /*for (int i = 0; i < 9; i++) {
+                ItemStack stack = inventory.getStack(i);
+                if (stack.getItem() instanceof GemOfPromiseItem) {
+                    GemOfPromiseItem.Companion.healersGemCheck(stack, inventory, healed);
+                }
+            }*/
+            ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
+            if (stack2.getItem() instanceof GemOfPromiseItem) {
+                GemOfPromiseItem.Companion.healersGemCheck(stack2, inventory, healed);
+            }
+        }
+    }
+
+    @Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At(value = "HEAD"))
+    private void addStatusEffectMixin(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir){
+        if ((LivingEntity)(Object)this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity)(Object)this;
+            PlayerInventory inventory = player.getInventory();
+            ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
+            if (stack2.getItem() instanceof GemOfPromiseItem) {
+                GemOfPromiseItem.Companion.inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
             }
         }
     }

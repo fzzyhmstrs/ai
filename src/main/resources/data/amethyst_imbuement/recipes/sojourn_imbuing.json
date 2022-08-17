@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "imbueB": {
+	"item": "minecraft:elytra"
+  },
+  "imbueC": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:netherite_ingot"
+  },
+  "craftA": {
+	"item": "minecraft:cartography_table"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:lustrous_sphere"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:inquisitive_gem"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftI": {
+	"item": "minecraft:cartography_table"
+  },
+  "title": "Sojourn",
+  "cost": 37,
+  "resultA": "amethyst_imbuement:sojourn",
+  "countA": 1,
+  "transferEnchant": true
+}

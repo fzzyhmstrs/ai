@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.*
+import net.minecraft.tag.ItemTags
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry

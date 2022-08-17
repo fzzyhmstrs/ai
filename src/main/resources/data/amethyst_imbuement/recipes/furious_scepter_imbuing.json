@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:lethal_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+	"item": "minecraft:bow"
+  },
+  "craftD": {
+	"item": "minecraft:bow"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:bow"
+  },
+  "craftH": {
+	"item": "minecraft:bow"
+  },
+  "title": "Furious Scepter",
+  "cost": 5,
+  "resultA": "amethyst_imbuement:furious_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+

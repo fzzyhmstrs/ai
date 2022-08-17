@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:glowing_blade"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"tag": "minecraft:crafting_table"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:iridescent_orb"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftG": {
+	"tag": "minecraft:crafting_table"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftI": {
+	"tag": "minecraft:crafting_table"
+  },
+  "title": "Builders Scepter",
+  "cost": 15,
+  "resultA": "amethyst_imbuement:builders_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}

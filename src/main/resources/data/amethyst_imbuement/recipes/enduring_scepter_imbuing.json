@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:healers_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftD": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:redstone_block"
+  },
+  "craftH": {
+	"item": "minecraft:redstone_block"
+  },
+  "title": "Enduring Scepter",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:enduring_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+

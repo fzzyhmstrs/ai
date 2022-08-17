@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:healers_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftD": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftH": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "title": "Graceful Scepter",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:graceful_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+
