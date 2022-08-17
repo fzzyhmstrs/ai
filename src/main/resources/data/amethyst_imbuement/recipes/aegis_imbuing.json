@@ -39,9 +39,9 @@
   "craftI": {
 	"item": "minecraft:diamond_helmet"
   },
-  "title": "Sojourn",
-  "cost": 37,
-  "resultA": "amethyst_imbuement:sojourn",
+  "title": "Aegis",
+  "cost": 39,
+  "resultA": "amethyst_imbuement:aegis",
   "countA": 1,
   "transferEnchant": true
 }

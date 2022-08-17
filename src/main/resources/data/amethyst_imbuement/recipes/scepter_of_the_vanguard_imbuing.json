@@ -39,9 +39,9 @@
   "craftI": {
 	"item": "minecraft:shield"
   },
-  "title": "Scepter of the Paladin",
+  "title": "Scepter of the Vanguard",
   "cost": 19,
-  "resultA": "amethyst_imbuement:scepter_of_the_paladin",
+  "resultA": "amethyst_imbuement:scepter_of_the_vanguard",
   "countA": 1,
   "transferEnchant": true
 }
