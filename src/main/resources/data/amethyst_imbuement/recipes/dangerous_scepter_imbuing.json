@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:lethal_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:citrine"
+  },
+  "craftB": {
+	"item": "minecraft:stone_sword"
+  },
+  "craftD": {
+	"item": "minecraft:stone_sword"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:stone_sword"
+  },
+  "craftH": {
+	"item": "minecraft:stone_sword"
+  },
+  "title": "Dangerous Scepter",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:dangerous_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+

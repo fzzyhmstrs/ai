@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:inquisitive_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftB": {
+	"item": "minecraft:writable_book"
+  },
+  "craftD": {
+	"item": "minecraft:writable_book"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:writable_book"
+  },
+  "craftH": {
+	"item": "minecraft:writable_book"
+  },
+  "title": "Witty Scepter",
+  "cost": 5,
+  "resultA": "amethyst_imbuement:witty_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+

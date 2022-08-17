@@ -11,6 +11,7 @@ import net.minecraft.util.registry.Registry
 object RegisterTag {
 
     val GEMS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","gems"))
+    val SKULLS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","skulls"))
     val STEEL_BOOTS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_boots"))
     val STEEL_CHESTPLATES_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_chestplates"))
     val STEEL_HELMETS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_helmets"))

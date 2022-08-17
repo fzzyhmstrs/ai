@@ -1,0 +1,36 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:inquisitive_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:danburite"
+  },
+  "craftB": {
+	"item": "minecraft:enchanted_book"
+  },
+  "craftD": {
+	"item": "minecraft:enchanted_book"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:opaline_scepter"
+  },
+  "craftF": {
+	"item": "minecraft:enchanted_book"
+  },
+  "craftH": {
+	"item": "minecraft:enchanted_book"
+  },
+  "title": "Skillful Scepter",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:skillful_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}
+
