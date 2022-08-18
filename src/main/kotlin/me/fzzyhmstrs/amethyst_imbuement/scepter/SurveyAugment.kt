@@ -76,7 +76,6 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
             MapType(ConfiguredStructureFeatureTags.MINESHAFT,MapIcon.Type.TARGET_POINT,"filled_map.mineshaft"),
         )
 
-
         private class MapType(val structure: TagKey<ConfiguredStructureFeature<*,*>>, val iconType: MapIcon.Type,val nameKey: String)
     }
 

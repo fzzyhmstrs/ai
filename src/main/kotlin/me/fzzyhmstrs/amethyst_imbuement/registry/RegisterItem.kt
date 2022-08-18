@@ -50,7 +50,6 @@ object RegisterItem {
     val GLOWING_FRAGMENT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glowing_fragment"] = it}
     val MALACHITE_FIGURINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["resonant_rod"] = it}
-    val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
     val CHARGED_MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["charged_moonstone"] = it}
     val ENERGETIC_OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["energetic_opal"] = it}
 
@@ -71,7 +70,7 @@ object RegisterItem {
         .withModifiers(listOf(ModifierRegistry.MODIFIER_DEBUG,ModifierRegistry.MODIFIER_DEBUG_2,ModifierRegistry.MODIFIER_DEBUG_3))
         .also{ regItem["debug_scepter"] = it}
         
-    // scpeter upgrade scepters
+    // scepter upgrade scepters
     val FURIOUS_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.FURIOUS))
