@@ -24,6 +24,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraft.world.dimension.DimensionType
 import net.minecraft.world.gen.structure.Structure
 
 class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
@@ -73,9 +74,8 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
             MapType(StructureTags.ON_WOODLAND_EXPLORER_MAPS,MapIcon.Type.MANSION,"filled_map.mansion"),
             MapType(StructureTags.ON_TREASURE_MAPS,MapIcon.Type.RED_X,"filled_map.buried_treasure"),
             MapType(StructureTags.VILLAGE,MapIcon.Type.TARGET_X,"filled_map.village"),
-            MapType(StructureTags.MINESHAFT,MapIcon.Type.TARGET_POINT,"filled_map.mineshaft"),
+            MapType(StructureTags.MINESHAFT,MapIcon.Type.TARGET_POINT,"filled_map.mineshaft")
         )
-
 
         private class MapType(val structure: TagKey<Structure>, val iconType: MapIcon.Type,val nameKey: String)
     }
