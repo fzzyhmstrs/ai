@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:garnet",
+	"amethyst_imbuement:garnet_sword",
+	"amethyst_imbuement:garnet_shovel",
+	"amethyst_imbuement:garnet_axe",
+	"amethyst_imbuement:garnet_pickaxe",
+	"amethyst_imbuement:garnet_hoe",
+	"amethyst_imbuement:opal",
+	"amethyst_imbuement:iridescent_orb"
+  ]
+}
