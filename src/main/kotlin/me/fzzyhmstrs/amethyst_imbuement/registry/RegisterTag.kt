@@ -18,5 +18,6 @@ object RegisterTag {
     val STEEL_INGOTS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_ingots"))
     val STEEL_LEGGINGS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_leggings"))
     val PILLARS_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
+    val BOOKSHELVES: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY,Identifier("c","bookshelves"))
 
 }

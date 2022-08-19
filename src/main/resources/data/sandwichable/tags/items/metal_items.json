@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:steel_block",
+	"amethyst_imbuement:steel_ingot",
+	"amethyst_imbuement:steel_helmet",
+	"amethyst_imbuement:steel_chestplate",
+	"amethyst_imbuement:steel_leggings",
+	"amethyst_imbuement:steel_boots",
+	"amethyst_imbuement:beryl_copper_ingot",
+	"amethyst_imbuement:beryl_copper_block",
+	"amethyst_imbuement:cut_beryl_copper_block",
+	"amethyst_imbuement:cut_beryl_copper_stairs",
+	"amethyst_imbuement:cut_beryl_copper_slab"
+  ]
+}

@@ -89,8 +89,11 @@ object ModifierConsumers {
         val item = stack.item
         if (item is AugmentScepterItem){
             val activeEnchant = item.getActiveEnchant(stack)
+            println(activeEnchant)
             val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
+            println(augment)
             if (augment != null && augment is ScepterAugment){
+                println("whee")
                 augment.applyModifiableTasks(user.world,user,Hand.MAIN_HAND,1)
             }
         }

@@ -14,6 +14,7 @@ import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -494,23 +495,23 @@ class ImbuingTableScreenHandler(
                         )
                     )
                 ) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
                     ++i
                 }
                 if (k == 0 || j == 0) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j)).isOf(Blocks.BOOKSHELF)) {
+                if (world.getBlockState(pos.add(k * 2, 0, j)).isIn(RegisterTag.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k * 2, 1, j)).isOf(Blocks.BOOKSHELF)) {
+                if (world.getBlockState(pos.add(k * 2, 1, j)).isIn(RegisterTag.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k, 0, j * 2)).isOf(Blocks.BOOKSHELF)) {
+                if (world.getBlockState(pos.add(k, 0, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
                     ++i
                 }
-                if (!world.getBlockState(pos.add(k, 1, j * 2)).isOf(Blocks.BOOKSHELF)) continue
+                if (!world.getBlockState(pos.add(k, 1, j * 2)).isIn(RegisterTag.BOOKSHELVES)) continue
                 ++i
             }
             ++j
