@@ -95,7 +95,7 @@ object RegisterItem {
     val FROSTED_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.ICE_SPIKES))
         .withModifiers(listOf(RegisterModifier.ICE_ASPECT,ModifierRegistry.LESSER_THRIFTY))
-        .also{ regItem["sparking_scepter"] = it}
+        .also{ regItem["frosted_scepter"] = it}
     val SCEPTER_OF_BLADES = CustomScepterItem(ScepterOfBladesToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT, ModifierRegistry.LESSER_THRIFTY))
