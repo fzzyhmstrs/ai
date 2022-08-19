@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "minecraft:item/dangerous_scepter"
+    "layer0": "amethyst_imbuement:item/dangerous_scepter"
   }
 }
