@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
@@ -51,6 +52,7 @@ object RegisterVillager {
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FLETCHER,5) { factories -> factories.add(TradeFactory(Items.EMERALD,24,6,Items.CROSSBOW,1,RegisterItem.SNIPER_BOW,1,6,12))}
 
+
         if (AiConfig.villages.enableDesertWorkshops){
             val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
             FabricStructurePoolRegistry.register(Identifier("minecraft:village/desert/houses"),desertId,AiConfig.villages.desertWorkshopWeight, StructureProcessorLists.EMPTY)
@@ -85,6 +87,115 @@ object RegisterVillager {
 
             val taigaZombieId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop_zombie")
             FabricStructurePoolRegistry.register(Identifier("minecraft:village/taiga/zombie/houses"),taigaZombieId,1, StructureProcessorLists.ZOMBIE_TAIGA)
+        }
+
+        if(FabricLoader.getInstance().isModLoaded("ctov")){
+            if (AiConfig.villages.enableDesertWorkshops){
+                val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/desert/house"),desertId,AiConfig.villages.desertWorkshopWeight, StructureProcessorLists.EMPTY)
+                val desertOasisId = Identifier(AI.MOD_ID + ":village/desert_oasis_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/desert_oasis/house"),desertOasisId,AiConfig.villages.desertWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enablePlainsWorkshops){
+                val plainsId = Identifier(AI.MOD_ID + ":village/plains_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/plains/house"),plainsId,AiConfig.villages.plainsWorkshopWeight, StructureProcessorLists.MOSSIFY_10_PERCENT)
+                val plainsFortId = Identifier(AI.MOD_ID + ":village/plains_fortified_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/plains_fortified/house"),plainsFortId,AiConfig.villages.plainsWorkshopWeight, StructureProcessorLists.MOSSIFY_10_PERCENT)
+            }
+            if (AiConfig.villages.enableSavannaWorkshops) {
+                val savannaId = Identifier(AI.MOD_ID + ":village/savanna_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/savanna/house"),savannaId,AiConfig.villages.savannaWorkshopWeight, StructureProcessorLists.EMPTY)
+                val savannaNaId = Identifier(AI.MOD_ID + ":village/savanna_na_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/savanna_na/house"),savannaNaId,AiConfig.villages.savannaWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableSnowyWorkshops) {
+                val snowyId = Identifier(AI.MOD_ID + ":village/snowy_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/snowy_igloo/house"),snowyId,AiConfig.villages.snowyWorkshopWeight, StructureProcessorLists.EMPTY)
+                val xmasId = Identifier(AI.MOD_ID + ":village/christmas_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/christmas/house"),xmasId,AiConfig.villages.snowyWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableTaigaWorkshops) {
+                val taigaId = Identifier(AI.MOD_ID + ":village/taiga_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/taiga/house"),taigaId,AiConfig.villages.taigaWorkshopWeight, StructureProcessorLists.MOSSIFY_20_PERCENT)
+                val taigaFortId = Identifier(AI.MOD_ID + ":village/taiga_fortified_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/taiga_fortified/house"),taigaFortId,AiConfig.villages.taigaWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovBeachWorkshops){
+                val beachId = Identifier(AI.MOD_ID + ":village/ctov/beach_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/beach/house"),beachId,AiConfig.villages.ctovBeachWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovDarkForestWorkshops){
+                val darkForestId = Identifier(AI.MOD_ID + ":village/ctov/halloween_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/halloween/house"),darkForestId,AiConfig.villages.ctovDarkForestWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovJungleWorkshops){
+                val jungleId = Identifier(AI.MOD_ID + ":village/ctov/jungle_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/jungle/house"),jungleId,AiConfig.villages.ctovJungleWorkshopWeight, StructureProcessorLists.EMPTY)
+                val jungleTreeId = Identifier(AI.MOD_ID + ":village/ctov/jungle_tree_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/jungle_tree/house"),jungleTreeId,AiConfig.villages.ctovJungleTreeWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovMesaWorkshops){
+                val mesaId = Identifier(AI.MOD_ID + ":village/ctov/mesa_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/mesa/house"),mesaId,AiConfig.villages.ctovMesaWorkshopWeight, StructureProcessorLists.EMPTY)
+                val mesaFortId = Identifier(AI.MOD_ID + ":village/ctov/mesa_fortified_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/mesa_fortified/house"),mesaFortId,AiConfig.villages.ctovMesaFortifiedWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovMountainWorkshops){
+                val mountId = Identifier(AI.MOD_ID + ":village/ctov/mountain_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/mountain/house"),mountId,AiConfig.villages.ctovMountainWorkshopWeight, StructureProcessorLists.EMPTY)
+                val mountAlpId = Identifier(AI.MOD_ID + ":village/ctov/mountain_alpine_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/mountain_alpine/house"),mountAlpId,AiConfig.villages.ctovMountainAlpineWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovMushroomWorkshops){
+                val darkForestId = Identifier(AI.MOD_ID + ":village/ctov/mushroom_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/mushroom/house"),darkForestId,AiConfig.villages.ctovMushroomWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableCtovSwampWorkshops){
+                val swampId = Identifier(AI.MOD_ID + ":village/ctov/swamp_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/swamp/house"),swampId,AiConfig.villages.ctovSwampWorkshopWeight, StructureProcessorLists.EMPTY)
+                val swampFortId = Identifier(AI.MOD_ID + ":village/ctov/swamp_fortified_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("ctov:village/swamp_fortified/house"),swampFortId,AiConfig.villages.ctovSwampFortifiedWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+        }
+
+        if(FabricLoader.getInstance().isModLoaded("repurposed_structures")){
+            if (AiConfig.villages.enableRsBadlandsWorkshops) {
+                val badlandsId = Identifier(AI.MOD_ID + ":village/badlands_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/badlands/houses"), badlandsId, AiConfig.villages.rsBadlandsWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsBirchWorkshops) {
+                val birchId = Identifier(AI.MOD_ID + ":village/birch_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/birch/houses"), birchId, AiConfig.villages.rsBirchWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsDarkForestWorkshops) {
+                val darkId = Identifier(AI.MOD_ID + ":village/dark_forest_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/dark_forest/houses"), darkId, AiConfig.villages.rsDarkForestWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsGiantTaigaWorkshops) {
+                val giantId = Identifier(AI.MOD_ID + ":village/giant_taiga_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/giant_taiga/houses"), giantId, AiConfig.villages.rsGiantTaigaWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsJungleWorkshops) {
+                val jungleId = Identifier(AI.MOD_ID + ":village/jungle_rs_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/jungle/houses"), jungleId, AiConfig.villages.rsJungleWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsMountainsWorkshops) {
+                val mountainsId = Identifier(AI.MOD_ID + ":village/mountains_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/mountains/houses"), mountainsId, AiConfig.villages.rsMountainsWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsMushroomsWorkshops) {
+                val mountainsId = Identifier(AI.MOD_ID + ":village/mountains_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/mountains/houses"), mountainsId, AiConfig.villages.rsMushroomsWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsOakWorkshops) {
+                val mountainsId = Identifier(AI.MOD_ID + ":village/oak_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/oak/houses"), mountainsId, AiConfig.villages.rsOakWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+            if (AiConfig.villages.enableRsOakWorkshops) {
+                val mountainsId = Identifier(AI.MOD_ID + ":village/oak_crystal_workshop")
+                FabricStructurePoolRegistry.register(Identifier("repurposed_structures:villages/oak/houses"), mountainsId, AiConfig.villages.rsOakWorkshopWeight, StructureProcessorLists.EMPTY)
+            }
+
         }
 
     }
