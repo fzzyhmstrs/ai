@@ -24,11 +24,12 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     var enchantments: Enchantments
 
     init {
-        scepters = readOrCreate("scepters_v0.json", base = AI.MOD_ID) { Scepters() }
+        scepters = readOrCreateUpdated("scepters_v1.json","scepters_v0.json", base = AI.MOD_ID, configClass = { Scepters() }, previousClass = {SceptersV0()})
         altars = readOrCreateUpdated("altars_v2.json","altars_v1.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV1()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
-        villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
+        //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
+        villages = readOrCreateUpdated("villages_v1.json","villages_v0.json", base = AI.MOD_ID, configClass = { Villages() }, previousClass = {VillagesV0()})
         enchantments = readOrCreate("enchantments_v0.json", base = AI.MOD_ID) { Enchantments() }
         ReadmeText.writeReadMe("README.txt", AI.MOD_ID)
     }
@@ -120,6 +121,46 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var snowyWorkshopWeight: Int = 1
         var enableTaigaWorkshops: Boolean = true
         var taigaWorkshopWeight: Int = 2
+        var enableCtovBeachWorkshops: Boolean = true
+        var ctovBeachWorkshopWeight: Int = 1
+        var enableCtovDarkForestWorkshops: Boolean = true
+        var ctovDarkForestWorkshopWeight: Int = 1
+        var enableCtovJungleWorkshops: Boolean = true
+        var ctovJungleWorkshopWeight: Int = 1
+        var ctovJungleTreeWorkshopWeight: Int = 1
+        var enableCtovMesaWorkshops: Boolean = true
+        var ctovMesaWorkshopWeight: Int = 1
+        var ctovMesaFortifiedWorkshopWeight: Int = 1
+        var enableCtovMountainWorkshops: Boolean = true
+        var ctovMountainWorkshopWeight: Int = 1
+        var ctovMountainAlpineWorkshopWeight: Int = 1
+        var enableCtovMushroomWorkshops: Boolean = true
+        var ctovMushroomWorkshopWeight: Int = 1
+        var enableCtovSwampWorkshops: Boolean = true
+        var ctovSwampWorkshopWeight: Int = 1
+        var ctovSwampFortifiedWorkshopWeight: Int = 1
+        var enableRsBadlandsWorkshops: Boolean = true
+        var rsBadlandsWorkshopWeight: Int = 2
+        var enableRsBirchWorkshops: Boolean = true
+        var rsBirchWorkshopWeight: Int = 2
+        var enableRsDarkForestWorkshops: Boolean = true
+        var rsDarkForestWorkshopWeight: Int = 2
+        var enableRsGiantTaigaWorkshops: Boolean = true
+        var rsGiantTaigaWorkshopWeight: Int = 1
+        var enableRsJungleWorkshops: Boolean = true
+        var rsJungleWorkshopWeight: Int = 2
+        var enableRsMountainsWorkshops: Boolean = true
+        var rsMountainsWorkshopWeight: Int = 2
+        var enableRsMushroomsWorkshops: Boolean = true
+        var rsMushroomsWorkshopWeight: Int = 2
+        var enableRsOakWorkshops: Boolean = true
+        var rsOakWorkshopWeight: Int = 2
+        var enableRsSwampWorkshops: Boolean = true
+        var rsSwampWorkshopWeight: Int = 2
+        var enableRsCrimsonWorkshops: Boolean = true
+        var rsCrimsonWorkshopWeight: Int = 2
+        var enableRsWarpedWorkshops: Boolean = true
+        var rsWarpedWorkshopWeight: Int = 2
     }
 
     class Enchantments{
@@ -142,6 +183,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         )
     }
 
+    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
     class SceptersV0: SyncedConfigHelper.OldClass {
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
@@ -224,6 +266,34 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
             altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
             return altars
+        }
+    }
+
+    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
+    class VillagesV0: SyncedConfigHelper.OldClass{
+        var enableDesertWorkshops: Boolean = true
+        var desertWorkshopWeight: Int = 1
+        var enablePlainsWorkshops: Boolean = true
+        var plainsWorkshopWeight: Int = 2
+        var enableSavannaWorkshops: Boolean = true
+        var savannaWorkshopWeight: Int = 2
+        var enableSnowyWorkshops: Boolean = true
+        var snowyWorkshopWeight: Int = 1
+        var enableTaigaWorkshops: Boolean = true
+        var taigaWorkshopWeight: Int = 2
+        override fun generateNewClass(): Any {
+            val villages = Villages()
+            villages.enableDesertWorkshops = enableDesertWorkshops
+            villages.desertWorkshopWeight = desertWorkshopWeight
+            villages.enablePlainsWorkshops = enablePlainsWorkshops
+            villages.plainsWorkshopWeight = plainsWorkshopWeight
+            villages.enableSavannaWorkshops = enableSavannaWorkshops
+            villages.savannaWorkshopWeight = savannaWorkshopWeight
+            villages.enableSnowyWorkshops = enableSnowyWorkshops
+            villages.snowyWorkshopWeight = snowyWorkshopWeight
+            villages.enableTaigaWorkshops = enableTaigaWorkshops
+            villages.taigaWorkshopWeight = taigaWorkshopWeight
+            return villages
         }
     }
 }

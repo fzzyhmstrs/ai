@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
+import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
@@ -82,23 +84,6 @@ object ModifierConsumers {
         }
     }
 
-    val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
-    private fun echoingConsumer(list: List<LivingEntity>){
-        val user = list[0]
-        val stack = user.getStackInHand(Hand.MAIN_HAND)
-        val item = stack.item
-        if (item is AugmentScepterItem){
-            val activeEnchant = item.getActiveEnchant(stack)
-            println(activeEnchant)
-            val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
-            println(augment)
-            if (augment != null && augment is ScepterAugment){
-                println("whee")
-                augment.applyModifiableTasks(user.world,user,Hand.MAIN_HAND,1)
-            }
-        }
-    }
-
     val PROTECTIVE_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> protectiveConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun protectiveConsumer(list: List<LivingEntity>){
         list.forEach {
@@ -138,6 +123,44 @@ object ModifierConsumers {
                 EffectQueue.addStatusToQueue(it,StatusEffects.JUMP_BOOST,30,0)
             }
         }
+    }
+
+
+    val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun echoingConsumer(list: List<LivingEntity>){
+        val user = list[0]
+        val stack = user.getStackInHand(Hand.MAIN_HAND)
+        val item = stack.item
+        if (item is AugmentScepterItem){
+            val activeEnchant = item.getActiveEnchant(stack)
+            println(activeEnchant)
+            val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
+            println(augment)
+            if (augment != null && augment is ScepterAugment){
+                val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
+            }
+        }
+    }
+
+    private class EchoingPersistentEffect(user: LivingEntity,hand: Hand, augment: ScepterAugment): PersistentEffectHelper.PersistentEffect{
+
+        init{
+            val data = EchoingPersistentData(user, hand, augment)
+            PersistentEffectHelper.setPersistentTickerNeed(this,14,14,data)
+        }
+
+        override val delay: PerLvlI = PerLvlI()
+
+        override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+            println("whoo")
+            if (data is EchoingPersistentData){
+                val user = data.user
+                data.augment.applyModifiableTasks(user.world,user,data.hand,1)
+
+            }
+        }
+
+        private class EchoingPersistentData(val user: LivingEntity, val hand: Hand, val augment: ScepterAugment): PersistentEffectHelper.PersistentEffectData
     }
 
 }
