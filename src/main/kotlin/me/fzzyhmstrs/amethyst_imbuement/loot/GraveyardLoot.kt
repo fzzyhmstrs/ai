@@ -29,7 +29,7 @@ object GraveyardLoot: AbstractModLoot() {
                 val poolBuilder = FabricLootPoolBuilder.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
                     .with(ItemEntry.builder(RegisterItem.XP_BUSH_SEED).weight(1))
-                    .with(ItemEntry.builder(Items.AIR).weight(4))
+                    .with(ItemEntry.builder(Items.AIR).weight(9))
                 table.pool(poolBuilder)
                 return true
             }
@@ -42,7 +42,7 @@ object GraveyardLoot: AbstractModLoot() {
                 return true
             }
             Identifier("graveyard","small_loot") -> {
-                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.8F)
+                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.25F)
                 table.pool(poolBuilder)
                 return true
             }
@@ -50,14 +50,14 @@ object GraveyardLoot: AbstractModLoot() {
                 val poolBuilder = FabricLootPoolBuilder.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0F))
                     .with(ItemEntry.builder(RegisterItem.TOTEM_OF_AMETHYST).weight(1))
-                    .with(ItemEntry.builder(Items.AIR).weight(19))
+                    .with(ItemEntry.builder(Items.AIR).weight(99))
                 table.pool(poolBuilder)
                 return true
             }
             Identifier("graveyard","vase_loot") -> {
-                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.8F)
+                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.2F)
                 table.pool(poolBuilder)
-                val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F, 0.25F)
+                val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F, 0.05F)
                 table.pool(poolBuilder2)
                 return true
             }

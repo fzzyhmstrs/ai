@@ -33,6 +33,7 @@ object RegisterLoot {
             .with(ItemEntry.builder(RegisterItem.SMOKY_QUARTZ).weight(10))
             .with(ItemEntry.builder(RegisterItem.IMBUED_QUARTZ).weight(10))
             .with(ItemEntry.builder(RegisterItem.IMBUED_LAPIS).weight(10))
+            .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(1))
             .with(ItemEntry.builder(Items.AIR).weight(max(airWeight.toInt(),1)))
     }
     fun tierTwoGemPool(maxCount: Float, overallChance: Float): FabricLootPoolBuilder {
@@ -44,6 +45,7 @@ object RegisterLoot {
             .with(ItemEntry.builder(RegisterItem.OPAL).weight(10))
             .with(ItemEntry.builder(RegisterItem.GARNET).weight(10))
             .with(ItemEntry.builder(RegisterItem.PYRITE).weight(10))
+            .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(10))
             .with(ItemEntry.builder(Items.AIR).weight(max(airWeight.toInt(),1)))
     }
 }

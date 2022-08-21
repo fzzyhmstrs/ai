@@ -24,26 +24,26 @@ object VanillaLoot: AbstractModLoot() {
         if (Blocks.NETHER_QUARTZ_ORE.lootTableId.equals(id)) {
             val poolBuilder = FabricLootPoolBuilder.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
-                .with(ItemEntry.builder(Items.AMETHYST_SHARD).weight(3))
-                .with(ItemEntry.builder(RegisterItem.CITRINE).weight(2))
-                .with(ItemEntry.builder(RegisterItem.SMOKY_QUARTZ).weight(2))
-                .with(ItemEntry.builder(Items.AIR).weight(113))
+                .with(ItemEntry.builder(Items.AMETHYST_SHARD).weight(2))
+                .with(ItemEntry.builder(RegisterItem.CITRINE).weight(1))
+                .with(ItemEntry.builder(RegisterItem.SMOKY_QUARTZ).weight(1))
+                .with(ItemEntry.builder(Items.AIR).weight(116))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_ARMORER_CHEST.equals(id)) {
             val poolBuilder = FabricLootPoolBuilder.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
                 .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(40))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(10)).apply(
+                .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(8).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_CHESTPLATE).weight(8).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_LEGGINGS).weight(8).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(10)).apply(
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(8).apply(
                     SetDamageLootFunction.builder(
                         UniformLootNumberProvider.create(0.25f, 0.75f)))
                 .with(ItemEntry.builder(Items.AIR).weight(40))
@@ -54,8 +54,8 @@ object VanillaLoot: AbstractModLoot() {
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1)).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
-                .with(ItemEntry.builder(Items.AIR).weight(9))
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                .with(ItemEntry.builder(Items.AIR).weight(39))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_TEMPLE_CHEST.equals(id)) {
@@ -64,7 +64,7 @@ object VanillaLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(5))
                 .with(ItemEntry.builder(Items.AIR).weight(10))
             table.pool(poolBuilder)
-            val poolBuilder2 = RegisterLoot.tierOneGemPool(3.0F, 1.0F)
+            val poolBuilder2 = RegisterLoot.tierOneGemPool(3.0F, 0.25F)
             table.pool(poolBuilder2)
             return true
         } else if (LootTables.VILLAGE_WEAPONSMITH_CHEST.equals(id)) {
@@ -94,7 +94,7 @@ object VanillaLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(9))
+                .with(ItemEntry.builder(Items.AIR).weight(29))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.UNDERWATER_RUIN_BIG_CHEST.equals(id)) {
@@ -103,9 +103,9 @@ object VanillaLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(6))
+                .with(ItemEntry.builder(Items.AIR).weight(16))
             table.pool(poolBuilder)
-            val poolBuilder2 = RegisterLoot.tierOneGemPool(3.0F, 1.333F)
+            val poolBuilder2 = RegisterLoot.tierOneGemPool(2.0F, 0.5F)
             table.pool(poolBuilder2)
             return true
         } else if (LootTables.RUINED_PORTAL_CHEST.equals(id)) {
@@ -129,9 +129,10 @@ object VanillaLoot: AbstractModLoot() {
         } else if (LootTables.PIGLIN_BARTERING_GAMEPLAY.equals(id)) {
             val poolBuilder = FabricLootPoolBuilder.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
-                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(5))
-                .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(5))
-                .with(ItemEntry.builder(Items.AIR).weight(90))
+                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
+                .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(1))
+                .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
+                .with(ItemEntry.builder(Items.AIR).weight(198))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.SIMPLE_DUNGEON_CHEST.equals(id)) {
@@ -162,14 +163,14 @@ object VanillaLoot: AbstractModLoot() {
             val poolBuilder = FabricLootPoolBuilder.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
                 .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(1))
-                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
+                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
                 .with(
-                    ItemEntry.builder(RegisterItem.GLISTERING_TRIDENT).weight(6).apply(
+                    ItemEntry.builder(RegisterItem.GLISTERING_TRIDENT).weight(1).apply(
                         EnchantWithLevelsLootFunction.builder(
-                            ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments())).apply(
-                    SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.05f, 0.35f)))
-                .with(ItemEntry.builder(Items.AIR).weight(12))
+                            ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
+                        SetDamageLootFunction.builder(
+                            UniformLootNumberProvider.create(0.05f, 0.35f))))
+                .with(ItemEntry.builder(Items.AIR).weight(36))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.FISHING_TREASURE_GAMEPLAY.equals(id)) {
@@ -191,21 +192,22 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(ItemEntry.builder(RegisterItem.IMBUED_QUARTZ).weight(10))
-            .with(ItemEntry.builder(RegisterItem.PYRITE).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(30))
+            .with(ItemEntry.builder(RegisterItem.PYRITE).weight(3))
+            .with(ItemEntry.builder(Items.AIR).weight(32))
         table.pool(poolBuilder)
     }
 
     fun bastionTreasureLoot(table: FabricLootSupplierBuilder){
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(4))
-            .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
+            .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(2))
+            .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(6))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(6))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(6))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(2))
-            .with(ItemEntry.builder(Items.AIR).weight(6))
+            .with(ItemEntry.builder(Items.AIR).weight(16))
         table.pool(poolBuilder)
-        val poolBuilder2 = RegisterLoot.tierTwoGemPool(3.0F, 0.75F)
+        val poolBuilder2 = RegisterLoot.tierTwoGemPool(3.0F, 0.333F)
         table.pool(poolBuilder2)
     }
 
@@ -216,7 +218,7 @@ object VanillaLoot: AbstractModLoot() {
             .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(10))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(10))
-            .with(ItemEntry.builder(Items.AIR).weight(9))
+            .with(ItemEntry.builder(Items.AIR).weight(19))
         table.pool(poolBuilder)
     }
 
@@ -234,7 +236,7 @@ object VanillaLoot: AbstractModLoot() {
                     UniformLootNumberProvider.create(0.05f, 0.35f)))
             .with(ItemEntry.builder(RegisterItem.TOTEM_OF_AMETHYST).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
+            .with(ItemEntry.builder(Items.AIR).weight(15))
         table.pool(poolBuilder)
     }
 
@@ -242,15 +244,15 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(
-                ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(2).apply(
+                ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
-                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments())).apply(
+                        ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
+                    SetDamageLootFunction.builder(
+                        UniformLootNumberProvider.create(0.05f, 0.35f))))
+            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
-            .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(3)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.05f, 0.35f)))
-            .with(ItemEntry.builder(Items.AIR).weight(5))
+                    UniformLootNumberProvider.create(0.05f, 0.35f))))
+            .with(ItemEntry.builder(Items.AIR).weight(18))
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
@@ -262,7 +264,7 @@ object VanillaLoot: AbstractModLoot() {
     fun mineshaftLoot(table: FabricLootSupplierBuilder){
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(4))
+            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(7))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
             .with(ItemEntry.builder(Items.AIR).weight(11))
         table.pool(poolBuilder)
@@ -270,9 +272,9 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
+            .with(ItemEntry.builder(Items.AIR).weight(20))
         table.pool(poolBuilder2)
-        val poolBuilder3 = RegisterLoot.tierTwoGemPool(2.0F, 0.333F)
+        val poolBuilder3 = RegisterLoot.tierTwoGemPool(2.0F, 0.20F)
         table.pool(poolBuilder3)
     }
 
@@ -286,7 +288,7 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,5.0F))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
+            .with(ItemEntry.builder(Items.AIR).weight(15))
         table.pool(poolBuilder2)
     }
 
@@ -304,38 +306,30 @@ object VanillaLoot: AbstractModLoot() {
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(5))
             .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(5))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(15))
+            .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(10))
             .with(ItemEntry.builder(Items.AIR).weight(50))
         table.pool(poolBuilder)
-        val poolBuilder2 = RegisterLoot.tierOneGemPool(4.0F, 1.88F)
+        val poolBuilder2 = RegisterLoot.tierOneGemPool(4.0F, 0.75F)
         table.pool(poolBuilder2)
-        val poolBuilder3 = RegisterLoot.tierTwoGemPool(1.0F, 0.25F)
+        val poolBuilder3 = RegisterLoot.tierTwoGemPool(1.0F, 0.15F)
         table.pool(poolBuilder3)
     }
 
     fun shipwreckSupplyLoot(table: FabricLootSupplierBuilder){
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.GARNET_SWORD).weight(5)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_PICKAXE).weight(5)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_AXE).weight(5)).apply(
-                SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5)).apply(
+            .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.25f, 0.75f)))
             .with(ItemEntry.builder(RegisterItem.GARNET_SHOVEL).weight(5)).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
-            .with(ItemEntry.builder(Items.AIR).weight(25))
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+            .with(ItemEntry.builder(Items.AIR).weight(40))
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(6))
+            .with(ItemEntry.builder(Items.AIR).weight(9))
         table.pool(poolBuilder2)
     }
 
@@ -351,21 +345,22 @@ object VanillaLoot: AbstractModLoot() {
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
             .with(ItemEntry.builder(Items.AIR).weight(brilliantDiamondAirWeight))
         table.pool(poolBuilder2)
-        val poolBuilder3 = RegisterLoot.tierTwoGemPool(3.0F, 0.8F)
+        val poolBuilder3 = RegisterLoot.tierTwoGemPool(3.0F, 0.4F)
         table.pool(poolBuilder3)
     }
 
     fun strongholdLibraryLoot(table: FabricLootSupplierBuilder){
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(1))
+            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(3))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
+            .with(ItemEntry.builder(Items.AIR).weight(2))
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(8))
+            .with(ItemEntry.builder(Items.AIR).weight(5))
         table.pool(poolBuilder2)
     }
 
@@ -374,8 +369,9 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(1))
+            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(4))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
+            .with(ItemEntry.builder(Items.AIR).weight(2))
         table.pool(poolBuilder2)
         val poolBuilder3 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
@@ -390,7 +386,7 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(2))
             .with(ItemEntry.builder(RegisterItem.XP_BUSH_SEED).weight(6))
-            .with(ItemEntry.builder(Items.AIR).weight(40))
+            .with(ItemEntry.builder(Items.AIR).weight(62))
         table.pool(poolBuilder)
     }
 
@@ -398,16 +394,9 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder = FabricLootPoolBuilder.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(15))
-            .with(ItemEntry.builder(Items.AIR).weight(45))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(3))
+            .with(ItemEntry.builder(Items.AIR).weight(42))
         table.pool(poolBuilder)
-        val poolBuilder2 = FabricLootPoolBuilder.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.GARNET_SWORD).weight(8))
-            .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(5))
-            .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(5))
-            .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(27))
-        table.pool(poolBuilder2)
     }
 
     fun desertTempleLoot(table: FabricLootSupplierBuilder){
@@ -456,8 +445,9 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder2)
         val poolBuilder3 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(7))
+            .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(3))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
+            .with(ItemEntry.builder(Items.AIR).weight(18))
         table.pool(poolBuilder3)
     }
 
@@ -471,8 +461,9 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
-            .with(ItemEntry.builder(RegisterItem.AMETRINE).weight(2))
-            .with(ItemEntry.builder(Items.AIR).weight(12))
+            .with(ItemEntry.builder(RegisterItem.AMETRINE).weight(1))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
+            .with(ItemEntry.builder(Items.AIR).weight(16))
         table.pool(poolBuilder2)
         val poolBuilder3 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
@@ -533,7 +524,6 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.OPALINE_SCEPTER).weight(8))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
