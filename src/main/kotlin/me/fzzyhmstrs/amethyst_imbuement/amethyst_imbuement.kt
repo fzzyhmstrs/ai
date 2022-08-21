@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
@@ -29,6 +30,7 @@ object AI: ModInitializer {
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
         RegisterKeybindServer.registerServer()
+        AltarOfExperienceScreenHandler.registerServer()
     }
 
     fun aiRandom(): Random{
@@ -45,6 +47,7 @@ object AIClient: ClientModInitializer{
         RegisterKeybind.registerAll()
         RegisterItemModel.registerAll()
         ImbuingTableScreenHandler.registerClient()
+        AltarOfExperienceScreenHandler.registerClient()
     }
 
 }

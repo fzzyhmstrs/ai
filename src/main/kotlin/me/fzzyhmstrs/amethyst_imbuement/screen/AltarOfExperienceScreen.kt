@@ -14,6 +14,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Matrix4f
+import org.lwjgl.glfw.GLFW
 import kotlin.math.min
 
 
@@ -23,24 +24,48 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
     private val texture = Identifier(AI.MOD_ID,"textures/gui/container/altar_of_experience_gui.png")
     private var xp = IntArray(4)
+    private var shifted = false
     private val player = playerInventory.player
 
+    override fun init() {
+        super.init()
+        handler.requestXpUpdates()
+    }
+
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
+        val shifted = if (this.shifted){
+            println("foo")
+            4
+        } else {
+            0
+        }
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
         for (k in 0..3) {
             val d = mouseX - (i + 26).toDouble()
             val e = mouseY - (j + 33 + 11 * k).toDouble()
             if (d < 0.0 || e < 0.0 || d >= 124.0 || e >= 11.0 || !player.let {
-                    (handler as AltarOfExperienceScreenHandler).onButtonClick(
-                        it, k
-                    )
+                    (handler as AltarOfExperienceScreenHandler).onButtonClick(it, k + shifted)
                 }
             ) continue
-            client?.interactionManager?.clickButton(handler.syncId, k)
+            client?.interactionManager?.clickButton(handler.syncId, k + shifted)
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
+    }
+
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (keyCode == GLFW.GLFW_KEY_LEFT_SHIFT){
+            shifted = true
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers)
+    }
+
+    override fun keyReleased(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (keyCode == GLFW.GLFW_KEY_LEFT_SHIFT){
+            shifted = false
+        }
+        return super.keyReleased(keyCode, scanCode, modifiers)
     }
 
 
@@ -72,14 +97,49 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)*/
 
         //experience values
-        val xpStored = handler.experienceStored[0]
-        val xpMax = handler.experienceMax[0]
+        val xpStored = handler.xpStored
+        val xpMax = handler.xpMax
         val xpLeft = xpMax - xpStored
         val xpPlayer = handler.getPlayerXp()
-        xp[0] = if (xpLeft < 500 || xpPlayer < 500) { min(xpLeft,xpPlayer)} else {500}
-        xp[1] = if (xpLeft < 50 || xpPlayer < 50) { min(xpLeft,xpPlayer)} else {50}
-        xp[2] = if (xpStored < 50) {xpStored} else {50}
-        xp[3] = if (xpStored < 500) {xpStored} else {500}
+        if (shifted) {
+            xp[0] = if (xpLeft < xpPlayer) {
+                xpLeft
+            } else {
+                xpPlayer
+            }
+            xp[1] = if (xpLeft < 5000 || xpPlayer < 5000) {
+                min(xpLeft, xpPlayer)
+            } else {
+                5000
+            }
+            xp[2] = if (xpStored < 5000) {
+                xpStored
+            } else {
+                5000
+            }
+            xp[3] = xpStored
+        } else {
+            xp[0] = if (xpLeft < 500 || xpPlayer < 500) {
+                min(xpLeft, xpPlayer)
+            } else {
+                500
+            }
+            xp[1] = if (xpLeft < 50 || xpPlayer < 50) {
+                min(xpLeft, xpPlayer)
+            } else {
+                50
+            }
+            xp[2] = if (xpStored < 50) {
+                xpStored
+            } else {
+                50
+            }
+            xp[3] = if (xpStored < 500) {
+                xpStored
+            } else {
+                500
+            }
+        }
         //println("array of xp: ${xp[0]}, ${xp[1]}, ${xp[2]}, ${xp[3]}")
         //base text color and string
         val t = 8453920
@@ -92,7 +152,9 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
             RenderSystem.setShader { GameRenderer.getPositionTexShader() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            if (xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)){
+            val bl1 = xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)
+            val bl2 = xp[b] == 0 || (b == 0 && xp[b] <= 5000) || (b == 1 && xp[b] <= 0) || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 5000)
+            if ((!shifted && bl1) || (shifted && bl2)){
                 this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 177, 124, 11)
             } else {
                 //base mouse positions (top left corner of buttons)
@@ -123,8 +185,8 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.disableBlend()
         textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), 0x404040)
         //super.drawForeground(matrices, mouseX, mouseY)
-        val xp = handler.experienceStored[0]
-        val xpMax = handler.experienceMax[0]
+        val xp = handler.xpStored
+        val xpMax = handler.xpMax
         val text = TranslatableText("container.altar_of_experience_1").append(LiteralText("$xp/$xpMax"))
         if (text != null) {
             val k = backgroundWidth/2.0f - this.textRenderer.getWidth(text)/2.0f
@@ -166,8 +228,18 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
             } else {
                 TranslatableText("container.altar_of_experience_tooltip_2").formatted(Formatting.WHITE)
             }
+            val tooltipText2 = if (!shifted){
+                TranslatableText("container.altar_of_experience_tooltip_3").formatted(Formatting.ITALIC)
+            } else {
+                TranslatableText("container.altar_of_experience_tooltip_4").formatted(Formatting.ITALIC)
+            }
 
-            this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
+            val tooltipList = listOf(
+                tooltipText,
+                tooltipText2
+            )
+
+            this.renderTooltip(matrices, tooltipList, mouseX, mouseY)
             break
         }
     }
