@@ -4,6 +4,8 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -27,6 +29,8 @@ object AI: ModInitializer {
         RegisterStatus.registerAll()
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
+        RegisterKeybindServer.registerServer()
+        AltarOfExperienceScreenHandler.registerServer()
         RegisterModifier.registerAll()
         RegisterNetworking.registerServer()
     }
@@ -44,6 +48,8 @@ object AIClient: ClientModInitializer{
         RegisterScreen.registerAll()
         RegisterKeybind.registerAll()
         RegisterItemModel.registerAll()
+        ImbuingTableScreenHandler.registerClient()
+        AltarOfExperienceScreenHandler.registerClient()
         RegisterNetworking.registerClient()
     }
 
