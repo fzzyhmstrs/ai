@@ -34,7 +34,7 @@ object BetterStrongholdsLoot: AbstractModLoot() {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .with(ItemEntry.builder(RegisterItem.MOONSTONE).weight(1))
-                .with(ItemEntry.builder((Items.AIR)).weight(3))
+                .with(ItemEntry.builder((Items.AIR)).weight(7))
             table.pool(poolBuilder)
             return true
         }

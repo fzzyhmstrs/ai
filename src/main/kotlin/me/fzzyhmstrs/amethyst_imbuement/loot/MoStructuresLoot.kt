@@ -24,7 +24,7 @@ object MoStructuresLoot: AbstractModLoot() {
                 return true
             }
             Identifier("mostructures","ice_tower") -> {
-                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.75F)
+                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.20F)
                 table.pool(poolBuilder)
                 return true
             }
@@ -32,7 +32,7 @@ object MoStructuresLoot: AbstractModLoot() {
                 val poolBuilder = LootPool.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F,4.0F))
                     .with(ItemEntry.builder(RegisterItem.XP_BUSH_SEED).weight(1))
-                    .with(ItemEntry.builder(Items.AIR).weight(9))
+                    .with(ItemEntry.builder(Items.AIR).weight(19))
                 table.pool(poolBuilder)
                 return true
             }
@@ -45,9 +45,9 @@ object MoStructuresLoot: AbstractModLoot() {
                 return true
             }
             Identifier("mostructures","pirate_ship_cargo_misc") -> {
-                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.8F)
+                val poolBuilder = RegisterLoot.tierOneGemPool(3.0F, 0.333F)
                 table.pool(poolBuilder)
-                val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F, 0.25F)
+                val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F, 0.1F)
                 table.pool(poolBuilder2)
                 return true
             }

@@ -3,6 +3,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import me.fzzyhmstrs.amethyst_imbuement.model.DisenchantingTableBlockEntityRenderer.Companion.DISENCHANTING_TABLE_BOOK_SPRITE_ID
@@ -219,7 +222,39 @@ object RegisterRenderer {
                     return@UnclampedModelPredicateProvider 0.0f
                 }
                 (stack.maxUseTime - entity.itemUseTimeLeft).toFloat() / CrossbowItem.getPullTime(stack).toFloat()
-            })
+        })
+
+        FabricModelPredicateProviderRegistry.register(
+            RegisterItem.BOOK_OF_LORE, Identifier("type")
+        ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
+            val nbt = stack.orCreateNbt
+            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
+                when(Nbt.readStringNbt(NbtKeys.LORE_TYPE.str(), nbt)){
+                    SpellType.FURY.str() ->{ 0.3f }
+                    SpellType.GRACE.str() -> { 0.7f }
+                    SpellType.WIT.str() -> { 1.0f }
+                    else -> { 0.0f }
+                }
+            } else {
+                0.0f
+            }
+        }
+
+        FabricModelPredicateProviderRegistry.register(
+            RegisterItem.BOOK_OF_MYTHOS, Identifier("type")
+        ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
+            val nbt = stack.orCreateNbt
+            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
+                when(Nbt.readStringNbt(NbtKeys.LORE_TYPE.str(), nbt)){
+                    SpellType.FURY.str() ->{ 0.3f }
+                    SpellType.GRACE.str() -> { 0.7f }
+                    SpellType.WIT.str() -> { 1.0f }
+                    else -> { 0.0f }
+                }
+            } else {
+                0.0f
+            }
+        }
 
 
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {

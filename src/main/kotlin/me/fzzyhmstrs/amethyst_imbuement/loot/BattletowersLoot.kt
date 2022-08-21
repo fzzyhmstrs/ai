@@ -26,7 +26,7 @@ object BattletowersLoot: AbstractModLoot() {
                     .rolls(UniformLootNumberProvider.create(1.0F,5.0F))
                     .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(1))
                     .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(1))
-                    .with(ItemEntry.builder(Items.AIR).weight(18))
+                    .with(ItemEntry.builder(Items.AIR).weight(28))
                 table.pool(poolBuilder)
                 return true
             }

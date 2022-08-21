@@ -30,9 +30,9 @@ object TowersOfTheWildReworkedLoot: AbstractModLoot() {
     }
 
     private fun towerLoot(table: LootTable.Builder){
-        val poolBuilder = RegisterLoot.tierOneGemPool(2.0F,0.5F)
+        val poolBuilder = RegisterLoot.tierOneGemPool(2.0F,0.25F)
         table.pool(poolBuilder)
-        val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F,0.1F)
+        val poolBuilder2 = RegisterLoot.tierTwoGemPool(1.0F,0.05F)
         table.pool(poolBuilder2)
         val poolBuilder3 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))

@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueB": {
-	"item": "minecraft:quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueC": {
-	"item": "minecraft:quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueD": {
-	"item": "minecraft:quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftA": {
 	"item": "amethyst_imbuement:gem_dust"
@@ -25,7 +25,7 @@
 	"item": "amethyst_imbuement:gem_dust"
   },
   "craftE": {
-	"item": "minecraft:quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftF": {
 	"item": "amethyst_imbuement:gem_dust"
@@ -40,7 +40,7 @@
 	"item": "amethyst_imbuement:gem_dust"
   },
   "title": "Gem of Promise",
-  "cost": 9,
+  "cost": 13,
   "resultA": "amethyst_imbuement:gem_of_promise",
   "countA": 1
 }

@@ -82,4 +82,11 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         }
         return ActionResult.PASS
     }
+
+    override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState) {
+        if (random.nextFloat() > 0.667) {
+            val i = 3.coerceAtMost(state.get(AGE) + 1)
+            world.setBlockState(pos, state.with(AGE, i) as BlockState, NOTIFY_LISTENERS)
+        }
+    }
 }

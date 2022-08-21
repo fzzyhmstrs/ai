@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.coding_util.PlayerParticles.scepterParticlePos
+import me.fzzyhmstrs.amethyst_core.coding_util.PlayerParticlesV2.scepterParticlePos
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

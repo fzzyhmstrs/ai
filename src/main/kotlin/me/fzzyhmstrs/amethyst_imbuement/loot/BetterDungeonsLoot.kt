@@ -32,7 +32,7 @@ object BetterDungeonsLoot: AbstractModLoot() {
                     .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                     .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
                     .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
-                    .with(ItemEntry.builder(Items.AIR).weight(15))
+                    .with(ItemEntry.builder(Items.AIR).weight(25))
                 table.pool(poolBuilder)
                 return true
             }
@@ -41,7 +41,7 @@ object BetterDungeonsLoot: AbstractModLoot() {
                 return true
             }
             Identifier("betterdungeons", "skeleton_dungeon/chests/middle") -> {
-                val poolBuilder = RegisterLoot.tierOneGemPool(2.0F, 0.5F)
+                val poolBuilder = RegisterLoot.tierOneGemPool(2.0F, 0.25F)
                 table.pool(poolBuilder)
                 return true
             }
