@@ -27,7 +27,7 @@ class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
         val yaw = user.yaw
         val pitch = user.pitch
         val roll = user.roll
-        val speed = 3.4F
+        val speed = 4.0F
         val div = 1.0F
         val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed).toDouble()
         val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed).toDouble()

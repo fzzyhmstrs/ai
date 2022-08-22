@@ -85,7 +85,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.GRACEFUL))
         .also{ regItem["graceful_scepter"] = it}
     val BLAZING_SCEPTER = BlazingScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
-        .withAugments(listOf(RegisterEnchantment.FLAMEBOLT))
+        .withAugments(listOf(RegisterEnchantment.FIREBALL))
         .withModifiers(listOf(RegisterModifier.FIRE_ASPECT))
         .also{ regItem["blazing_scepter"] = it}
     val SPARKING_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
