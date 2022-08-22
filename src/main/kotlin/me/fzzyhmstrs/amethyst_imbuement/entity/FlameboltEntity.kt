@@ -28,7 +28,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         this.setRotation(owner.yaw, owner.pitch)
     }
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(5)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(4)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)

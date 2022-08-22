@@ -25,7 +25,7 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(0,200).withAmplifier(0,0,0)
+        get() = super.baseEffect.withDuration(300,100).withAmplifier(0,0,0)
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
@@ -52,6 +52,6 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,800,20,1,imbueLevel,LoreTier.NO_TIER, Items.GHAST_TEAR)
+        return AugmentDatapoint(SpellType.GRACE,800,24,1,imbueLevel,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 }

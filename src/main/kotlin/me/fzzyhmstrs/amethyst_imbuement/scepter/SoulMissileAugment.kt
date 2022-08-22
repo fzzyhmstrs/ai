@@ -19,7 +19,7 @@ class SoulMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
     SoulAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.0F,0.0F,0.0F)
+        get() = super.baseEffect.withDamage(3.9F,0.1F,0.0F)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val me = SoulMissileEntity(world, user)
@@ -35,7 +35,7 @@ class SoulMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,16,2,1,imbueLevel,LoreTier.NO_TIER,Items.SOUL_SAND)
+        return AugmentDatapoint(SpellType.FURY,16,3,1,imbueLevel,LoreTier.NO_TIER,Items.SOUL_SAND)
     }
 
 }

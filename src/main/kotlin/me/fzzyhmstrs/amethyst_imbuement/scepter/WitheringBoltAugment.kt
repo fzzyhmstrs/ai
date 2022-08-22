@@ -20,13 +20,13 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     SoulAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(8.0f)
+        get() = super.baseEffect.withDamage(7.5f,0.5f)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val yaw = user.yaw
         val pitch = user.pitch
         val roll = user.roll
-        val speed = 2.0F
+        val speed = 3.0F
         val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.x
         val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed) + user.velocity.y
         val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.z

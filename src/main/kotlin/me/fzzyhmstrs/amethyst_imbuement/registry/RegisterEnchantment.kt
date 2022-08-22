@@ -79,11 +79,12 @@ object RegisterEnchantment {
     val CREATE_SPONGE = CreateSpongeAugment(1,1,Items.SPONGE,EquipmentSlot.MAINHAND).also{regEnchant["create_sponge"] = it}
     val CREATE_WATER = CreateWaterAugment(2,1,Items.WATER_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_water"] = it}
     val DASH = DashAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["dash"] = it}
+    val EMPOWERED_SLASH = EmpoweredSlashAugment(2,3, EquipmentSlot.MAINHAND).also{regEnchant["empowered_slash"] = it}
     val EXHAUST = ExhaustAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["exhaust"] = it}
     val FANG_BARRAGE = FangBarrageAugment(3,1,EquipmentSlot.MAINHAND).also{regEnchant["fang_barrage"] = it}
     val FANGS = FangsAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fangs"] = it}
     val FIREBALL = FireballAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
-    val FLAMEBOLT = FlameboltAugment(1,5,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
+    val FLAMEBOLT = FlameboltAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
     val FORCE_FIELD = ForcefieldAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment(2,2,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
@@ -106,7 +107,7 @@ object RegisterEnchantment {
     val RESONATE = ResonateAugment(3,3, EquipmentSlot.MAINHAND).also{regEnchant["resonate"] = it}
     val SHINE = ShineAugment(1,1, Items.TORCH,EquipmentSlot.MAINHAND).also{regEnchant["shine"] = it}
     val SMITING_BLOW = SmitingBlowAugment(2,3, EquipmentSlot.MAINHAND).also{regEnchant["smiting_blow"] = it}
-    val SOUL_MISSILE = SoulMissileAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["soul_missile"] = it}
+    val SOUL_MISSILE = SoulMissileAugment(1,21, EquipmentSlot.MAINHAND).also{regEnchant["soul_missile"] = it}
     val SPECTRAL_SLASH = SpectralSlashAugment(1,3, EquipmentSlot.MAINHAND).also{regEnchant["spectral_slash"] = it}
     //val SUMMON_BLAZE = SummonEntityAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonBoatAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_boat"] = it}
