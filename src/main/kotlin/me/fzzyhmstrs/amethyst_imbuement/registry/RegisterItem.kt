@@ -47,12 +47,12 @@ object RegisterItem {
     val LETHAL_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["lethal_gem"] = it}
     val HEALERS_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["healers_gem"] = it}
     val BRUTAL_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["brutal_gem"] = it}
-    val GLOWING_FRAGMENT = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glowing_fragment"] = it}
-    val MALACHITE_FIGURINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["malachite_figurine"] = it}
-    val RESONANT_ROD = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["resonant_rod"] = it}
+    val GLOWING_FRAGMENT = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_fragment").also{ regItem["glowing_fragment"] = it}
+    val MALACHITE_FIGURINE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"malachite_figurine").also{ regItem["malachite_figurine"] = it}
+    val RESONANT_ROD = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"resonant_rod").also{ regItem["resonant_rod"] = it}
     //val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
-    val CHARGED_MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["charged_moonstone"] = it}
-    val ENERGETIC_OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["energetic_opal"] = it}
+    val CHARGED_MOONSTONE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"charged_moonstone").also{ regItem["charged_moonstone"] = it}
+    val ENERGETIC_OPAL = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"energetic_opal").also{ regItem["energetic_opal"] = it}
 
     //tool and weapon item declarations
     val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
@@ -169,7 +169,7 @@ object RegisterItem {
         .also{ regItem["equinox"] = it}
     val SOJOURN = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.SURVEY))
-        .withModifiers(listOf(RegisterModifier.SKILLFUL,RegisterModifier.TRAVELER))
+        .withModifiers(listOf(RegisterModifier.WITTY,RegisterModifier.TRAVELER))
         .also{ regItem["sojourn"] = it}
     val AEGIS = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
