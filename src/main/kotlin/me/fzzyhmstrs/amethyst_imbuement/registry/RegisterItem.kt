@@ -174,6 +174,9 @@ object RegisterItem {
     val AEGIS = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["aegis"] = it}
+    val BALANCE = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
+        .withModifiers(listOf(RegisterModifier.FURIOUS, RegisterModifier.WITTY, ModifierRegistry.GRACEFUL))
+        .also{ regItem["balance"] = it}
 
 
     //trinket and book declaration
