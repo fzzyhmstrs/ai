@@ -13,8 +13,51 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.registry.Registry
 
-class GemOfPromiseItem(settings: Settings): Item(settings) {
+class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromiseItem> {
 
+    override var flavor: String = ""
+    override var glint: Boolean = false
+    override var flavorDesc: String = ""
+    
+    override fun getFlavorItem(): GemOfPromiseItem {
+        return this
+    }
+    
+    override fun appendTooltip(
+        stack: ItemStack,
+        world: World?,
+        tooltip: MutableList<Text>,
+        context: TooltipContext
+    ) {
+        super.appendTooltip(stack, world, tooltip, context)
+        addFlavorText(tooltip, context)
+        val nbt = stack.orCreateNbt
+        if (nbt.contains("on_fire")){
+            val fire = Nbt.readIntNbt("on_fire",nbt)
+            val progress = fire/FIRE_TARGET*100.0F
+            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress))
+        }
+        if (nbt.contains("statuses")){
+            val status = Nbt.readIntNbt("statuses",nbt)
+            val progress = status/STATUS_TARGET*100.0F
+            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress))
+        }
+        if (nbt.contains("kill_count")){
+            val kills = Nbt.readIntNbt("kill_count",nbt)
+            val progress = kills/KILL_TARGET*100.0F
+            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress))
+        }
+        if (nbt.contains("healed")){
+            val healed = Nbt.readIntNbt("healed",nbt)
+            val progress = healed/HEAL_TARGET*100.0F
+            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress))
+        }
+        if (nbt.contains("mob_hit")){
+            val hit = Nbt.readIntNbt("mob_hit",nbt)
+            val progress = hit/HIT_TARGET*100.0F
+            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress))
+        }
+    }
 
     companion object{
 
