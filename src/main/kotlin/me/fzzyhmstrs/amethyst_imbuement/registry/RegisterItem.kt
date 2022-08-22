@@ -84,7 +84,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.GRACEFUL))
         .also{ regItem["graceful_scepter"] = it}
     val BLAZING_SCEPTER = BlazingScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
-        .withAugments(listOf(RegisterEnchantment.FLAMEBOLT, RegisterEnchantment.FIREBALL))
+        .withAugments(listOf(RegisterEnchantment.FLAMEBOLT))
         .withModifiers(listOf(RegisterModifier.FIRE_ASPECT))
         .also{ regItem["blazing_scepter"] = it}
     val SPARKING_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
@@ -128,7 +128,8 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
     val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withModifiers(listOf(RegisterModifier.LESSER_ENDURING))
+        .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
+        .withModifiers(listOf(RegisterModifier.HEALERS_GRACE, RegisterModifier.HEALERS_PACT))
         .also{ regItem["scepter_of_the_pacifist"] = it}
     val CORRUPTED_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
@@ -163,7 +164,6 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["redemption"] = it}
     val EQUINOX = LethalityScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withAugments(listOf(RegisterEnchantment.FANGS))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, ModifierRegistry.GREATER_THRIFTY))
         .also{ regItem["equinox"] = it}
     val SOJOURN = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))

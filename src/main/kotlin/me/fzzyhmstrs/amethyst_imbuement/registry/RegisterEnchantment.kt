@@ -118,6 +118,7 @@ object RegisterEnchantment {
     val SURVEY = SurveyAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
     val WITHERING_BOLT = WitheringBoltAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["withering_bolt"] = it}
+    val ZAP = ZapAugment(1,11, EquipmentSlot.MAINHAND).also{regEnchant["zap"] = it}
 
     val DEBUG = DebugAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["debug"] = it}
 

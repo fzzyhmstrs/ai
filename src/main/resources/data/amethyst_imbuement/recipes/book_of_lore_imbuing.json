@@ -1,0 +1,46 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:gem_of_promise"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:gem_of_promise"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:gem_of_promise"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:gem_of_promise"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "minecraft:enchanted_book"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Book of Lore",
+  "cost": 19,
+  "resultA": "amethyst_imbuement:book_of_lore",
+  "countA": 1
+}
