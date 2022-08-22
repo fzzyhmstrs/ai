@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:lightning_rod"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sparking_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:lightning_rod"
+  },
+  "imbueD": {
+	"item": "minecraft:lightning_rod"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Sparking Scepter",
+  "cost": 10,
+  "resultA": "amethyst_imbuement:sparking_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}

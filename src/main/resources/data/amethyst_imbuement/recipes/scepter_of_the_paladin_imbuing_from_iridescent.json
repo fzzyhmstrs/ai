@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:shield"
+  },
+  "imbueB": {
+	"item": "minecraft:charged_moonstone"
+  },
+  "imbueC": {
+	"item": "minecraft:shield"
+  },
+  "imbueD": {
+	"item": "minecraft:shield"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "title": "Scepter of the Paladin",
+  "cost": 10,
+  "resultA": "amethyst_imbuement:scepter_of_the_paladin",
+  "countA": 1,
+  "transferEnchant": true
+}

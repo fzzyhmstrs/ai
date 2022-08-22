@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:iron_chestplate"
+  },
+  "imbueB": {
+	"item": "minecraft:brutal_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:iron_chestplate"
+  },
+  "imbueD": {
+	"item": "minecraft:iron_chestplate"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Scepter of the Vanguard",
+  "cost": 10,
+  "resultA": "amethyst_imbuement:scepter_of_the_vanguard",
+  "countA": 1,
+  "transferEnchant": true
+}
