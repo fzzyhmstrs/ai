@@ -32,7 +32,7 @@ class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
         val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
         val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
         val yrnd = hit.blockPos.y + 1.0
-        val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level))
+        val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level), true)
         golem.setPos(xrnd, yrnd, zrnd)
 
         if (world.spawnEntity(golem)) {

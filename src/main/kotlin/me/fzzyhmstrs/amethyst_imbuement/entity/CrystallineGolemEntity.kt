@@ -44,13 +44,15 @@ import kotlin.experimental.or
 @Suppress("PrivatePropertyName")
 class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, world: World): GolemEntity(entityType,world), Angerable {
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int) : this(entityType, world){
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, playerCreated: Boolean) : this(entityType, world){
         maxAge = ageLimit
+        created = playerCreated
     }
 
     companion object {
         private val CRYSTAL_GOLEM_FLAGS =
             DataTracker.registerData(CrystallineGolemEntity::class.java, TrackedDataHandlerRegistry.BYTE)
+        private val CRYSTAL_GOLEM_CREATED = DataTracker.registerData(CrystallineGolemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 180.0)
@@ -63,6 +65,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
     private var maxAge = -1
+    private var created = false
     private var angryAt: UUID? = null
 
     init{
@@ -92,6 +95,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         } else {
             dataTracker.startTracking(CRYSTAL_GOLEM_FLAGS, 1.toByte())
         }
+        dataTracker.startTracking(CRYSTAL_GOLEM_CREATED, created)
     }
 
     override fun getNextAirUnderwater(air: Int): Int {
@@ -153,7 +157,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
     }
 
     private fun isPlayerCreated(): Boolean {
-        return (dataTracker.get(CRYSTAL_GOLEM_FLAGS) and 1) != 0.toByte()
+        return ((dataTracker.get(CRYSTAL_GOLEM_FLAGS) and 1) != 0.toByte()) || dataTracker.get(CRYSTAL_GOLEM_CREATED)
     }
 
     fun setPlayerCreated(playerCreated: Boolean) {
@@ -265,6 +269,13 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     fun getCrack(): Crack {
         return Crack.from(this.health / this.maxHealth)
+    }
+
+    override fun canTarget(type: EntityType<*>): Boolean {
+        if (isPlayerCreated() && type === EntityType.PLAYER) {
+            return false
+        }
+        return super.canTarget(type)
     }
 
     override fun canSpawn(world: WorldView): Boolean {
