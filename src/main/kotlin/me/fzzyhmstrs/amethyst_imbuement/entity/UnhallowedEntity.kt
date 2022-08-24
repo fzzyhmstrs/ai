@@ -36,10 +36,11 @@ import kotlin.experimental.or
 class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): GolemEntity(entityType,world),
     Angerable {
 
-    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
+    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, playerCreated: Boolean = false, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
         modifiedDamage = modDamage
         modifiedHealth = modHealth
         maxAge = ageLimit
+        created = playerCreated
         bonusEquipment = bonusEquips
         if (world is ServerWorld) {
             initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
@@ -49,6 +50,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     companion object {
         private val UNHALLOWED_FLAGS =
             DataTracker.registerData(UnhallowedEntity::class.java, TrackedDataHandlerRegistry.BYTE)
+        private val UNHALLOWED_CREATED = DataTracker.registerData(UnhallowedEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         private const val baseMaxHealth = 20.0
         private const val baseMoveSpeed = 0.4
         private const val baseAttackDamage = 3.0
@@ -64,6 +66,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
     private var maxAge = -1
+    private var created = false
     private var bonusEquipment = 0
     private var angryAt: UUID? = null
     private var modifiedDamage = 0.0
@@ -96,6 +99,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         } else {
             dataTracker.startTracking(UNHALLOWED_FLAGS, 1.toByte())
         }
+        dataTracker.startTracking(UNHALLOWED_CREATED,created)
     }
 
     override fun initialize(
@@ -192,7 +196,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     }
 
     private fun isPlayerCreated(): Boolean {
-        return (dataTracker.get(UNHALLOWED_FLAGS) and 1) != 0.toByte()
+        return ((dataTracker.get(UNHALLOWED_FLAGS) and 1) != 0.toByte()) || dataTracker.get(UNHALLOWED_CREATED)
     }
 
     private fun setPlayerCreated(playerCreated: Boolean) {

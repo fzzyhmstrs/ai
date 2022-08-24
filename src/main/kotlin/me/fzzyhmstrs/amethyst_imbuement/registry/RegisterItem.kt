@@ -51,8 +51,8 @@ object RegisterItem {
     val MALACHITE_FIGURINE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["resonant_rod"] = it}
     //val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["survey_map"] = it}
-    val CHARGED_MOONSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["charged_moonstone"] = it}
-    val ENERGETIC_OPAL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["energetic_opal"] = it}
+    val CHARGED_MOONSTONE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withGlint().also{ regItem["charged_moonstone"] = it}
+    val ENERGETIC_OPAL = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withGlint().also{ regItem["energetic_opal"] = it}
 
     //tool and weapon item declarations
     val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
