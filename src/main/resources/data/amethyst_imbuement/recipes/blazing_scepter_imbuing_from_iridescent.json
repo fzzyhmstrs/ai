@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:blaze_powder"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:blazing_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:blaze_powder"
+  },
+  "imbueD": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Blazing Scepter",
+  "cost": 10,
+  "resultA": "amethyst_imbuement:blazing_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}

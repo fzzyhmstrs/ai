@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:potion"
+  },
+  "imbueB": {
+	"item": "minecraft:healers_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:potion"
+  },
+  "imbueD": {
+	"item": "minecraft:potion"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Clerics Scepter",
+  "cost": 9,
+  "resultA": "amethyst_imbuement:clerics_scepter",
+  "countA": 1,
+  "transferEnchant": true
+}

@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:inquisitive_gem"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:iridescent_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Scepter of Insight",
+  "cost": 15,
+  "resultA": "amethyst_imbuement:scepter_of_insight",
+  "countA": 1,
+  "transferEnchant": true
+}

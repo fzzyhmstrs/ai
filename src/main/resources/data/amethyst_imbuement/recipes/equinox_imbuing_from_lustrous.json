@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sparking_gem"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:energetic_opal"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:brilliant_diamond"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:blazing_gem"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:lustrous_scepter"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Equinox",
+  "cost": 21,
+  "resultA": "amethyst_imbuement:equinox",
+  "countA": 1,
+  "transferEnchant": true
+}
