@@ -42,7 +42,7 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)
                     effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
                     generateParticles(world,target.pos)
-                    world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+                    world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.8F, 1.3F)
                 }
                 bl
             } else {
@@ -54,19 +54,19 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     private fun generateParticles(world: World, pos: Vec3d){
-        for (i in 1..8){
+        for (i in 1..16){
             val rnd1 = world.random.nextDouble() - 0.5
             val rnd2 = world.random.nextDouble() - 0.5
             val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
             world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x,pos.add(rnd1,2.3,rnd2).y,pos.z,0.0,rnd3,0.0)
         }
-        for (i in 1..8){
+        for (i in 1..16){
             val rnd1 = world.random.nextDouble() - 0.5
             val rnd2 = world.random.nextDouble() - 0.5
             val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
             world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x,pos.add(rnd1,2.0,rnd2).y,pos.z,0.0,rnd3,0.0)
         }
-        for (i in 1..8){
+        for (i in 1..16){
             val rnd1 = world.random.nextDouble() - 0.5
             val rnd2 = world.random.nextDouble() - 0.5
             val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
@@ -75,7 +75,7 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_ATTACK_CRIT
+        return SoundEvents.ENTITY_ELDER_GUARDIAN_HURT
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

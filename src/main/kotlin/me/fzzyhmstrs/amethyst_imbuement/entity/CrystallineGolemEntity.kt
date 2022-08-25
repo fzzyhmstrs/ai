@@ -1,7 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.ImmutableList
+import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -38,22 +42,16 @@ import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
 import java.util.*
 import java.util.stream.Stream
-import kotlin.experimental.and
-import kotlin.experimental.or
 
 @Suppress("PrivatePropertyName")
-class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, world: World): GolemEntity(entityType,world), Angerable {
+class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, world: World): GolemEntity(entityType,world), Angerable, PlayerCreatable {
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, playerCreated: Boolean) : this(entityType, world){
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : this(entityType, world){
         maxAge = ageLimit
-        created = playerCreated
+        this.createdBy = createdBy?.uuid
     }
 
     companion object {
-        private val CRYSTAL_GOLEM_FLAGS =
-            DataTracker.registerData(CrystallineGolemEntity::class.java, TrackedDataHandlerRegistry.BYTE)
-        private val CRYSTAL_GOLEM_CREATED = DataTracker.registerData(CrystallineGolemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
-
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 180.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
@@ -64,12 +62,18 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
     private var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
-    private var maxAge = -1
-    private var created = false
+    override var maxAge = -1
+    override var createdBy: UUID? = null
+    override var owner: LivingEntity? = null
     private var angryAt: UUID? = null
 
     init{
         stepHeight = 1.0f
+    }
+
+    fun setGolemOwner(owner: LivingEntity?){
+        createdBy = owner?.uuid
+        this.owner = owner
     }
 
     override fun initGoals() {
@@ -81,21 +85,9 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
         targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(2, ActiveTargetGoal(
-            this,
-            MobEntity::class.java, 5, false, false
-        ) { entity: LivingEntity? -> entity is Monster})
+        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
+        targetSelector.add(2, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster})
         targetSelector.add(3, UniversalAngerGoal(this, false))
-    }
-
-    override fun initDataTracker() {
-        super.initDataTracker()
-        if (maxAge == -1) {
-            dataTracker.startTracking(CRYSTAL_GOLEM_FLAGS, 0.toByte())
-        } else {
-            dataTracker.startTracking(CRYSTAL_GOLEM_FLAGS, 1.toByte())
-        }
-        dataTracker.startTracking(CRYSTAL_GOLEM_CREATED, created)
     }
 
     override fun getNextAirUnderwater(air: Int): Int {
@@ -116,6 +108,15 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
                 kill()
             }
         }
+        if (owner != null){
+            val attacker = owner?.recentDamageSource?.attacker
+            if (attacker != null && attacker is LivingEntity){
+                this.target = attacker
+                setAngryAt(attacker.uuid)
+                chooseRandomAngerTime()
+            }
+        }
+
     }
 
     override fun tickMovement() {
@@ -146,28 +147,17 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putBoolean("PlayerCreated", this.isPlayerCreated())
+        writePlayerCreatedNbt(nbt)
         writeAngerToNbt(nbt)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setPlayerCreated(nbt.getBoolean("PlayerCreated"))
+        readPlayerCreatedNbt(world,nbt)
         readAngerFromNbt(world, nbt)
+
     }
 
-    private fun isPlayerCreated(): Boolean {
-        return ((dataTracker.get(CRYSTAL_GOLEM_FLAGS) and 1) != 0.toByte()) || dataTracker.get(CRYSTAL_GOLEM_CREATED)
-    }
-
-    fun setPlayerCreated(playerCreated: Boolean) {
-        val b = dataTracker.get(CRYSTAL_GOLEM_FLAGS)
-        if (playerCreated) {
-            dataTracker.set(CRYSTAL_GOLEM_FLAGS, (b or 1))
-        } else {
-            dataTracker.set(CRYSTAL_GOLEM_FLAGS, (b and -0x2))
-        }
-    }
 
     override fun chooseRandomAngerTime() {
         setAngerTime(ANGER_TIME_RANGE[random])
@@ -271,11 +261,13 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         return Crack.from(this.health / this.maxHealth)
     }
 
-    override fun canTarget(type: EntityType<*>): Boolean {
-        if (isPlayerCreated() && type === EntityType.PLAYER) {
-            return false
+    override fun canTarget(target: LivingEntity): Boolean {
+        if (!isPlayerCreated()) return super.canTarget(target)
+        val uuid = target.uuid
+        if (owner != null) {
+            if (target.isTeammate(owner)) return false
         }
-        return super.canTarget(type)
+        return uuid != createdBy
     }
 
     override fun canSpawn(world: WorldView): Boolean {

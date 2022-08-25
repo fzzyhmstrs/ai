@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+    "item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:beryl_copper_ingot"
+  },
+  "title": "Zap",
+  "cost": 7,
+  "augment": "amethyst_imbuement:zap"
+}
+
