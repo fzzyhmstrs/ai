@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
@@ -11,7 +13,9 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.text.Text
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
 
 class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromiseItem> {
 
@@ -35,27 +39,27 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         if (nbt.contains("on_fire")){
             val fire = Nbt.readIntNbt("on_fire",nbt)
             val progress = fire/FIRE_TARGET*100.0F
-            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress))
         }
         if (nbt.contains("statuses")){
             val status = Nbt.readIntNbt("statuses",nbt)
             val progress = status/STATUS_TARGET*100.0F
-            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress))
         }
         if (nbt.contains("kill_count")){
             val kills = Nbt.readIntNbt("kill_count",nbt)
             val progress = kills/KILL_TARGET*100.0F
-            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress))
         }
         if (nbt.contains("healed")){
             val healed = Nbt.readIntNbt("healed",nbt)
             val progress = healed/HEAL_TARGET*100.0F
-            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress))
         }
         if (nbt.contains("mob_hit")){
             val hit = Nbt.readIntNbt("mob_hit",nbt)
             val progress = hit/HIT_TARGET*100.0F
-            tooltop.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress))
         }
     }
 
@@ -141,7 +145,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if ((damageSource == DamageSource.ON_FIRE || damageSource == DamageSource.LAVA) && !player.hasStatusEffect(
                     StatusEffects.FIRE_RESISTANCE)){
                 val nbt = stack.orCreateNbt
-                var fire: Int = 0
+                var fire = 0
                 if (nbt.contains("on_fire")){
                     fire = Nbt.readIntNbt("on_fire",nbt)
                 }
@@ -161,7 +165,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
 
         fun lethalGemCheck(stack: ItemStack, inventory: PlayerInventory){
             val nbt = stack.orCreateNbt
-            var kills: Int = 0
+            var kills = 0
             if (nbt.contains("kill_count")){
                 kills = Nbt.readIntNbt("kill_count",nbt)
             }
