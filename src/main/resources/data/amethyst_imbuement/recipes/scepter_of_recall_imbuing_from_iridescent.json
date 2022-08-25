@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "imbueB": {
 	"item": "minecraft:lodestone"
   },
   "imbueC": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "imbueD": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "craftB": {
 	"item": "amethyst_imbuement:gem_dust"

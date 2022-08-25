@@ -4,7 +4,7 @@
 	"item": "minecraft:gold_ingot"
   },
   "imbueB": {
-	"item": "minecraft:brutal_gem"
+	"item": "amethyst_imbuement:brutal_gem"
   },
   "imbueC": {
 	"item": "minecraft:gold_ingot"

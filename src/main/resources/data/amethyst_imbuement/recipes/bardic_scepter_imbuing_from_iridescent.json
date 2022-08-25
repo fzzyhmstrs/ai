@@ -7,10 +7,10 @@
 	"item": "amethyst_imbuement:inquisitive_gem"
   },
   "imbueC": {
-	"item": "minecraft:music_discs"
+	"tag": "minecraft:music_discs"
   },
   "imbueD": {
-	"item": "minecraft:music_discs"
+	"tag": "minecraft:music_discs"
   },
   "craftB": {
 	"item": "amethyst_imbuement:gem_dust"
@@ -26,7 +26,7 @@
   },
   "craftH": {
 	"item": "amethyst_imbuement:gem_dust"
-  }
+  },
   "title": "Bardic Scepter",
   "cost": 7,
   "resultA": "amethyst_imbuement:bardic_scepter",

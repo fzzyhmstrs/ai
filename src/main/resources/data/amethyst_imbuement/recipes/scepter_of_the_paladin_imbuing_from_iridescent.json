@@ -4,7 +4,7 @@
 	"item": "minecraft:shield"
   },
   "imbueB": {
-	"item": "minecraft:charged_moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "imbueC": {
 	"item": "minecraft:shield"

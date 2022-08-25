@@ -13,7 +13,7 @@
 	"item": "minecraft:gold_ingot"
   },
   "craftA": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "craftB": {
 	"item": "amethyst_imbuement:imbued_quartz"
@@ -31,13 +31,13 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftG": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "craftH": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftI": {
-	"item": "minecraft:eye_of_ender"
+	"item": "minecraft:ender_eye"
   },
   "title": "Scepter of Recall",
   "cost": 21,
