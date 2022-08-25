@@ -35,8 +35,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Shadow @Final private PlayerInventory inventory;
 
-    @Shadow public abstract void startFallFlying();
-
     private DamageSource damageSource;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -57,24 +55,18 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
-    private void checkForSoulbinding(CallbackInfo ci){
-        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
-            ci.cancel();
-        }
-    }
-
-    @Inject(method = "damage", at = @At(value = "HEAD"))
-    private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        damageSource = source;
-        /*for (int i = 0; i < 9; i++){
-            ItemStack stack = inventory.getStack(i);
-            if (stack.getItem() instanceof GemOfPromiseItem){
-                GemOfPromiseItem.Companion.sparkingGemCheck(stack, inventory,source);
-                GemOfPromiseItem.Companion.blazingGemCheck(stack,inventory,this,source);
-                GemOfPromiseItem.Companion.brutalGemCheck(stack,inventory,source);
+        private void checkForSoulbinding(CallbackInfo ci){
+            if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
+                ci.cancel();
             }
-        }*/
-        ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
+        }
+
+        @Inject(method = "damage", at = @At(value = "HEAD"))
+        private void damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+            damageSource = source;
+
+            ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
+            System.out.println(stack2.getName());
         if (stack2.getItem() instanceof GemOfPromiseItem){
             GemOfPromiseItem.Companion.sparkingGemCheck(stack2, inventory,source);
             GemOfPromiseItem.Companion.blazingGemCheck(stack2,inventory,this,source);

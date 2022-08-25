@@ -4,7 +4,7 @@
 	"item": "minecraft:iron_chestplate"
   },
   "imbueB": {
-	"item": "minecraft:brutal_gem"
+	"item": "amethyst_imbuement:brutal_gem"
   },
   "imbueC": {
 	"item": "minecraft:iron_chestplate"
