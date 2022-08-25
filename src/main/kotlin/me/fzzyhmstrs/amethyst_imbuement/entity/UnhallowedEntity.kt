@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
@@ -33,13 +34,14 @@ import kotlin.experimental.or
 
 @Suppress("PrivatePropertyName")
 class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): GolemEntity(entityType,world),
-    Angerable {
+    Angerable, PlayerCreatable {
 
-    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, playerCreated: Boolean = false, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
+    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
         modifiedDamage = modDamage
         modifiedHealth = modHealth
         maxAge = ageLimit
-        created = playerCreated
+        this.createdBy = createdBy?.uuid
+        this.owner = createdBy
         bonusEquipment = bonusEquips
         if (world is ServerWorld) {
             initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
@@ -47,9 +49,6 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     }
 
     companion object {
-        private val UNHALLOWED_FLAGS =
-            DataTracker.registerData(UnhallowedEntity::class.java, TrackedDataHandlerRegistry.BYTE)
-        private val UNHALLOWED_CREATED = DataTracker.registerData(UnhallowedEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         private const val baseMaxHealth = 20.0
         private const val baseMoveSpeed = 0.4
         private const val baseAttackDamage = 3.0
@@ -64,9 +63,10 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     private var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
-    private var maxAge = -1
-    private var created = false
+    override var maxAge = -1
     private var bonusEquipment = 0
+    override var createdBy: UUID? = null
+    override var owner: LivingEntity? = null
     private var angryAt: UUID? = null
     private var modifiedDamage = 0.0
     private var modifiedHealth = 0.0
@@ -84,21 +84,9 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
         targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(2, ActiveTargetGoal(
-            this,
-            MobEntity::class.java, 5, false, false
-        ) { entity: LivingEntity? -> entity is Monster })
+        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
+        targetSelector.add(2, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
         targetSelector.add(3, UniversalAngerGoal(this, false))
-    }
-
-    override fun initDataTracker() {
-        super.initDataTracker()
-        if (maxAge == -1) {
-            dataTracker.startTracking(UNHALLOWED_FLAGS, 0.toByte())
-        } else {
-            dataTracker.startTracking(UNHALLOWED_FLAGS, 1.toByte())
-        }
-        dataTracker.startTracking(UNHALLOWED_CREATED,created)
     }
 
     override fun initialize(
@@ -174,13 +162,17 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putBoolean("PlayerCreated", this.isPlayerCreated())
+        nbt.putDouble("ModifiedHealth", modifiedHealth)
+        nbt.putDouble("ModifiedDamage", modifiedDamage)
+        writePlayerCreatedNbt(nbt)
         writeAngerToNbt(nbt)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setPlayerCreated(nbt.getBoolean("PlayerCreated"))
+        modifiedHealth = nbt.getDouble("ModifiedHealth")
+        modifiedDamage = nbt.getDouble("ModifiedDamage")
+        readPlayerCreatedNbt(world, nbt)
         readAngerFromNbt(world, nbt)
     }
 
@@ -194,17 +186,13 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         }
     }
 
-    private fun isPlayerCreated(): Boolean {
-        return ((dataTracker.get(UNHALLOWED_FLAGS) and 1) != 0.toByte()) || dataTracker.get(UNHALLOWED_CREATED)
-    }
-
-    private fun setPlayerCreated(playerCreated: Boolean) {
-        val b = dataTracker.get(UNHALLOWED_FLAGS)
-        if (playerCreated) {
-            dataTracker.set(UNHALLOWED_FLAGS, (b or 1))
-        } else {
-            dataTracker.set(UNHALLOWED_FLAGS, (b and -0x2))
+    override fun canTarget(target: LivingEntity): Boolean {
+        if (!isPlayerCreated()) return super.canTarget(target)
+        val uuid = target.uuid
+        if (owner != null) {
+            if (target.isTeammate(owner)) return false
         }
+        return uuid != createdBy
     }
 
     override fun handleStatus(status: Byte) {

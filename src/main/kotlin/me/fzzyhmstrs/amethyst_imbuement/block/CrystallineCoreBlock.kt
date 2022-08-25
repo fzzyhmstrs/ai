@@ -8,6 +8,8 @@ import net.minecraft.block.*
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.block.pattern.BlockPatternBuilder
 import net.minecraft.block.pattern.CachedBlockPosition
+import net.minecraft.entity.ai.TargetPredicate
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.predicate.block.BlockStatePredicate
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.function.MaterialPredicate
@@ -56,8 +58,8 @@ class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
                 }
             }
             val cge = CrystallineGolemEntity(CRYSTAL_GOLEM_ENTITY, world)
+
             val blockPos: BlockPos = result.translate(1, 2, 0).getBlockPos()
-            cge.setPlayerCreated(true)
             cge.refreshPositionAndAngles(
                 blockPos.x.toDouble() + 0.5,
                 blockPos.y.toDouble() + 0.05,
@@ -65,6 +67,8 @@ class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
                 0.0f,
                 0.0f
             )
+            val owner = world.getClosestPlayer(cge.x,cge.y,cge.z,6.0,false)
+            cge.setGolemOwner(owner)
             world.spawnEntity(cge)
             for (serverPlayerEntity in world.getNonSpectatingEntities(
                 ServerPlayerEntity::class.java, cge.boundingBox.expand(5.0)

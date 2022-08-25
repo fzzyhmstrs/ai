@@ -41,7 +41,7 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
             val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
             val zomAmplifier = max(effects.amplifier(level) - baseEffect.amplifier(level), 0)
-            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),true, bonus, effects.damage(level).toDouble(), 4.0* zomAmplifier)
+            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),user, bonus, effects.damage(level).toDouble(), 4.0* zomAmplifier)
             zom.setPos(xrnd, yrnd, zrnd)
             if (world.spawnEntity(zom)){
                 successes++
