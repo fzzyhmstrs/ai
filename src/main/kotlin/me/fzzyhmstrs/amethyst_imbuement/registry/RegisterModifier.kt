@@ -37,7 +37,7 @@ object RegisterModifier {
     val SKILLFUL = AugmentModifier(Identifier(AI.MOD_ID,"skillful"), levelModifier = 1).withDescendant(MASTERFUL).also { regMod.add(it) }
     val AEGIS = AugmentModifier(Identifier(AI.MOD_ID,"aegis")).withConsumer(ModifierConsumers.AEGIS_CONSUMER).also { regMod.add(it) }
     val PROTECTIVE = AugmentModifier(Identifier(AI.MOD_ID,"protective")).withConsumer(ModifierConsumers.PROTECTIVE_CONSUMER).withDescendant(AEGIS).also { regMod.add(it) }
-    val ELEMENTAL = AugmentModifier(Identifier(AI.MOD_ID,"ice_aspect"), cooldownModifier = -10.0, manaCostModifier = -5.0).withAmplifier(1).withRange(0.0,0.0,10.0).withDuration(0,0,10).withSpellToAffect(ModifierPredicates.ELEMENTAL_PREDICATE).also { regMod.add(it) }
+    val ELEMENTAL = AugmentModifier(Identifier(AI.MOD_ID,"elemental"), cooldownModifier = -10.0, manaCostModifier = -5.0).withAmplifier(1).withRange(0.0,0.0,10.0).withDuration(0,0,10).withSpellToAffect(ModifierPredicates.ELEMENTAL_PREDICATE).also { regMod.add(it) }
     val BLADE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"blade_aspect"), cooldownModifier = -5.0).withDamage(0.5F).withRange(0.25,0.25).withSpellToAffect(ModifierPredicates.BLADE_PREDICATE) .also { regMod.add(it) }
     val FIRE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"fire_aspect"), cooldownModifier = -5.0).withAmplifier(1).withDuration(32).withSpellToAffect(ModifierPredicates.FIRE_PREDICATE).also { regMod.add(it) }
     val ICE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"ice_aspect"), cooldownModifier = -5.0).withAmplifier(1).withDuration(32).withSpellToAffect(ModifierPredicates.ICE_PREDICATE).also { regMod.add(it) }

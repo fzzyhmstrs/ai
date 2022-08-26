@@ -64,6 +64,7 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
                     bl = bl || resonateTarget(world, user, entity3, level, effect, true)
                 }
             }
+            println(bl)
             if (bl){
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
             }
@@ -79,14 +80,12 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
         } else {
             -1
         }
-        println(amp)
         val damage = if(!splash) {
             effect.damage(level + amp + 1)
         } else {
             effect.damage(level + amp - 1)
         }
         val bl = target.damage(DamageSource.mob(user),damage)
-        println(damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))

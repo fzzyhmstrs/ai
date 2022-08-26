@@ -130,6 +130,7 @@ object ModifierConsumers {
     private fun echoingConsumer(list: List<LivingEntity>){
         val user = list[0]
         val stack = user.getStackInHand(Hand.MAIN_HAND)
+        println(stack.name)
         val item = stack.item
         if (item is AugmentScepterItem){
             val activeEnchant = item.getActiveEnchant(stack)
