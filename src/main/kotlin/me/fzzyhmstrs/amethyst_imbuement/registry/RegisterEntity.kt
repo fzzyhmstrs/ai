@@ -217,16 +217,6 @@ object RegisterEntity {
             )
         },RegisterBlock.DISENCHANTING_TABLE).build(null))
 
-    val FORCEFIELD_BLOCK_ENTITY: BlockEntityType<ForcefieldBlockEntity> = Registry.register(
-        Registry.BLOCK_ENTITY_TYPE,
-        AI.MOD_ID + ":forcefield_entity",
-        FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
-            ForcefieldBlockEntity(
-                pos,
-                state
-            )
-        },RegisterBlock.FORCEFIELD_BLOCK).build(null))
-
 
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
