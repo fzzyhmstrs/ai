@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ResonateAugment
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.fabricmc.api.ClientModInitializer
@@ -48,6 +49,7 @@ object AIClient: ClientModInitializer{
         RegisterItemModel.registerAll()
         ImbuingTableScreenHandler.registerClient()
         AltarOfExperienceScreenHandler.registerClient()
+        ResonateAugment.registerClient()
     }
 
 }
