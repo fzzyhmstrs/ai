@@ -126,7 +126,7 @@ object ModifierConsumers {
     }
 
 
-    val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.AUTOMATIC)
     private fun echoingConsumer(list: List<LivingEntity>){
         val user = list[0]
         val stack = user.getStackInHand(Hand.MAIN_HAND)
