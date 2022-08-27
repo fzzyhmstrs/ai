@@ -27,13 +27,15 @@ class AltarOfExperienceScreenHandler(
     syncID: Int,
     playerInventory: PlayerInventory,
     private val context: ScreenHandlerContext,
-    private val propertyDelegate: PropertyDelegate
+    private val storedXp: PropertyDelegate,
+    private val maxXp: PropertyDelegate
 ):  ScreenHandler(RegisterHandler.ALTAR_OF_EXPERIENCE_SCREEN_HANDLER, syncID) {
 
     constructor(syncID: Int, playerInventory: PlayerInventory) : this(
         syncID,
         playerInventory,
         ScreenHandlerContext.EMPTY,
+        ArrayPropertyDelegate(1),
         ArrayPropertyDelegate(1)
     )
 
@@ -41,10 +43,9 @@ class AltarOfExperienceScreenHandler(
     private val random = Random()
     private val seed = Property.create()
     private var xp = 0
-    var xpStored = 0
-    var xpMax = 0
+    var displayXpMax = 0
+    var displayXpStored = 0
     //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
-
 
     override fun canUse(player: PlayerEntity): Boolean {
         return canUse(this.context, player, RegisterBlock.ALTAR_OF_EXPERIENCE)
@@ -58,12 +59,22 @@ class AltarOfExperienceScreenHandler(
         super.close(player)
     }
 
-    private fun getSyncedStoredXp(): Int{
-        return propertyDelegate.get(0)
+    fun getSyncedStoredXp(): Int{
+        return storedXp.get(0)
     }
 
-    private fun setSyncedStoredXp(amount: Int){
-        propertyDelegate.set(0,amount)
+    fun setSyncedStoredXp(amount: Int){
+        storedXp.set(0,amount)
+        displayXpStored = amount
+    }
+
+    fun getSyncedMaxXp(): Int{
+        return maxXp.get(0)
+    }
+
+    fun setSyncedMaxXp(amount: Int){
+        maxXp.set(0,amount)
+        displayXpMax = amount
     }
 
     fun getPlayerXp(): Int{
@@ -101,7 +112,7 @@ class AltarOfExperienceScreenHandler(
                 return false
             }
         } else if (id == 2) {
-            if (xpStored == 0){
+            if (getSyncedStoredXp() == 0){
                 return false
             }
         } else if (id == 4){
@@ -113,34 +124,36 @@ class AltarOfExperienceScreenHandler(
                 return false
             }
         }else if (id == 6) {
-            if (xpStored == 0){
+            if (getSyncedStoredXp() == 0){
                 return false
             }
         }else if (id == 7) {
-            if (xpStored <= 5000){
+            if (getSyncedStoredXp() <= 5000){
                 return false
             }
         } else {
-            if (xpStored <= 50){
+            if (getSyncedStoredXp() <= 50){
                 return false
             }
         }
         context.run { world: World, pos: BlockPos ->
             val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
-            xpMax = updateMaxXp(candleTotal,wardingCandleTotal)
-            val xpLeft = xpMax - xpStored
+            setSyncedMaxXp(updateMaxXp(candleTotal,wardingCandleTotal))
+            val xpLeft = getSyncedMaxXp() - getSyncedStoredXp()
             when (id) {
                 0 -> {
+                    var xpTemp = getSyncedStoredXp()
                     if (currentXp >= 500) {
-                        xpStored += if (xpLeft < 500){
+                        xpTemp += if (xpLeft < 500){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
                             addExperience(player,-500)
                             500
                         }
+
                     } else {
-                        xpStored += if (xpLeft < currentXp){
+                        xpTemp += if (xpLeft < currentXp){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
@@ -148,10 +161,12 @@ class AltarOfExperienceScreenHandler(
                             currentXp
                         }
                     }
+                    setSyncedStoredXp(xpTemp)
                 }
                 1 -> {
+                    var xpTemp = getSyncedStoredXp()
                     if (currentXp >= 50) {
-                        xpStored += if (xpLeft < 50){
+                        xpTemp += if (xpLeft < 50){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
@@ -159,7 +174,7 @@ class AltarOfExperienceScreenHandler(
                             50
                         }
                     } else {
-                        xpStored += if (xpLeft < currentXp){
+                        xpTemp += if (xpLeft < currentXp){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
@@ -167,37 +182,43 @@ class AltarOfExperienceScreenHandler(
                             currentXp
                         }
                     }
+                    setSyncedStoredXp(xpTemp)
                 }
                 2 -> {
-                    if (xpStored < 50){
-                        addExperience(player,xpStored)
-                        xpStored = 0
+                    val xpTemp = getSyncedStoredXp()
+                    if (xpTemp < 50){
+                        addExperience(player,xpTemp)
+                        setSyncedStoredXp(0)
                     } else {
                         addExperience(player,50)
-                        xpStored -= 50
+                        setSyncedStoredXp(xpTemp - 50)
                     }
                 }
                 3 -> {
-                    if (xpStored < 500){
-                        addExperience(player,xpStored)
-                        xpStored = 0
+                    val xpTemp = getSyncedStoredXp()
+                    if (xpTemp < 500){
+                        addExperience(player,xpTemp)
+                        setSyncedStoredXp(0)
                     } else {
                         addExperience(player,500)
-                        xpStored -= 500
+                        setSyncedStoredXp(xpTemp - 500)
                     }
                 }
                 4 -> {
-                    xpStored += if (xpLeft < currentXp){
+                    var xpTemp = getSyncedStoredXp()
+                    xpTemp += if (xpLeft < currentXp){
                         addExperience(player,-xpLeft)
                         xpLeft
                     } else {
                         addExperience(player,-currentXp)
                         currentXp
                     }
+                    setSyncedStoredXp(xpTemp)
                 }
                 5 -> {
+                    var xpTemp = getSyncedStoredXp()
                     if (currentXp >= 5000) {
-                        xpStored += if (xpLeft < 5000){
+                        xpTemp += if (xpLeft < 5000){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
@@ -205,7 +226,7 @@ class AltarOfExperienceScreenHandler(
                             5000
                         }
                     } else {
-                        xpStored += if (xpLeft < currentXp){
+                        xpTemp += if (xpLeft < currentXp){
                             addExperience(player,-xpLeft)
                             xpLeft
                         } else {
@@ -213,19 +234,21 @@ class AltarOfExperienceScreenHandler(
                             currentXp
                         }
                     }
+                    setSyncedStoredXp(xpTemp)
                 }
                 6 -> {
-                    if (xpStored < 5000){
-                        addExperience(player,xpStored)
-                        xpStored = 0
+                    val xpTemp = getSyncedStoredXp()
+                    if (xpTemp < 5000){
+                        addExperience(player,xpTemp)
+                        setSyncedStoredXp(0)
                     } else {
                         addExperience(player,5000)
-                        xpStored -= 5000
+                        setSyncedStoredXp(xpTemp - 5000)
                     }
                 }
                 7 -> {
-                    addExperience(player,xpStored)
-                    xpStored = 0
+                    addExperience(player,getSyncedStoredXp())
+                    setSyncedStoredXp(0)
                 }
                 else -> {}
             }
@@ -237,7 +260,6 @@ class AltarOfExperienceScreenHandler(
                 1.0f,
                 world.random.nextFloat() * 0.1f + 0.9f
             )
-            setSyncedStoredXp(xpStored)
             xp = getPlayerLvlXp(player)
             sendXpUpdates()
             sendContentUpdates()
@@ -308,13 +330,14 @@ class AltarOfExperienceScreenHandler(
 
         val totalXp = getPlayerLvlXp(playerInventory.player)
         xp = totalXp
+        addProperties(storedXp)
+        addProperties(maxXp)
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         if (context != ScreenHandlerContext.EMPTY) {
             context.run { world: World, pos: BlockPos ->
                 val (c,wc) = checkCandles(world, pos)
                 val e = updateMaxXp(c, wc)
-                xpMax = e
-                xpStored = getSyncedStoredXp()
+                setSyncedMaxXp(e)
                 sendXpUpdates()
                 sendContentUpdates()
             }
@@ -327,8 +350,8 @@ class AltarOfExperienceScreenHandler(
             val buf = PacketByteBufs.create()
             buf.writeInt(syncId)
             buf.writeInt(xp)
-            buf.writeInt(xpStored)
-            buf.writeInt(xpMax)
+            buf.writeInt(displayXpMax)
+            buf.writeInt(displayXpStored)
 
             ServerPlayNetworking.send(player, XP_UPDATE, buf)
         }
@@ -352,8 +375,8 @@ class AltarOfExperienceScreenHandler(
                 if (handler.syncId != syncID) return@registerGlobalReceiver
                 if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
                 handler.xp = buf.readInt()
-                handler.xpStored = buf.readInt()
-                handler.xpMax = buf.readInt()
+                handler.displayXpMax = buf.readInt()
+                handler.displayXpStored = buf.readInt()
             }
         }
 
