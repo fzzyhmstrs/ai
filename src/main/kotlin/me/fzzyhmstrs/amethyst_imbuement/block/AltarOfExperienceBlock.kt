@@ -1,11 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.AltarOfExperienceBlockEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.block.EnchantingTableBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -95,7 +93,8 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
                     syncId,
                     inventory,
                     ScreenHandlerContext.create(world, pos),
-                    blockEntity.propertyDelegate
+                    blockEntity.storedXp,
+                    blockEntity.maxXp
                 )
             }, text)
         }

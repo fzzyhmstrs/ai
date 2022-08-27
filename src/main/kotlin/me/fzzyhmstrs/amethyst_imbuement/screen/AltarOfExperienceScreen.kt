@@ -31,7 +31,6 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val shifted = if (this.shifted){
-            println("foo")
             4
         } else {
             0
@@ -89,13 +88,9 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
-        /*RenderSystem.setShader { GameRenderer.getPositionTexShader() }
-        RenderSystem.setShaderTexture(0, this.texture)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)*/
 
-        //experience values
-        val xpStored = handler.xpStored
-        val xpMax = handler.xpMax
+        val xpStored = handler.displayXpStored
+        val xpMax = handler.displayXpMax
         val xpLeft = xpMax - xpStored
         val xpPlayer = handler.getPlayerXp()
         if (shifted) {
@@ -184,18 +179,18 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.disableBlend()
         textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), 0x404040)
         //super.drawForeground(matrices, mouseX, mouseY)
-        val xp = handler.xpStored
-        val xpMax = handler.xpMax
-        val text = Text.translatable("container.altar_of_experience_1").append(Text.literal("$xp/$xpMax"))
+        val storedXp = handler.displayXpStored
+        val maxXp = handler.displayXpMax
+        val text = Text.translatable("container.altar_of_experience_1").append(Text.literal("$storedXp/$maxXp"))
         if (text != null) {
             val k = backgroundWidth/2.0f - this.textRenderer.getWidth(text)/2.0f
             val k2 = backgroundWidth/2.0f + this.textRenderer.getWidth(text)/2.0f
             fill(matrices, (k - 2).toInt(), 17, (k2 + 2).toInt(), 29, 0x4F000000)
-            val t = when (xp) {
+            val t = when (storedXp) {
                 0 -> {
                     0xFF6060
                 }
-                xpMax -> {
+                maxXp -> {
                     0x60BFFF
                 }
                 else -> {

@@ -21,15 +21,32 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
 
     var ticks = 0
     private var customName: Text? = null
-    private var storedXp = 0
+    private var xpStored = 0
+    private var xpMax = 0
 
-    val propertyDelegate: PropertyDelegate = object : PropertyDelegate {
+    val storedXp: PropertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int {
-            return storedXp
+            return xpStored
         }
 
         override fun set(index: Int, value: Int) {
-            storedXp = value
+            xpStored = value
+            markDirty()
+        }
+
+        //this is supposed to return the amount of integers you have in your delegate, in our example only one
+        override fun size(): Int {
+            return 1
+        }
+    }
+
+    val maxXp: PropertyDelegate = object : PropertyDelegate {
+        override fun get(index: Int): Int {
+            return xpMax
+        }
+
+        override fun set(index: Int, value: Int) {
+            xpMax = value
             markDirty()
         }
 
@@ -44,7 +61,8 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
         if (hasCustomName()) {
             nbt.putString("CustomName", Text.Serializer.toJson(customName))
         }
-        nbt.putInt(NbtKeys.ALTAR_KEY.str(),storedXp)
+        nbt.putInt(NbtKeys.ALTAR_KEY.str(),xpStored)
+        nbt.putInt("max_xp",xpMax)
     }
 
     override fun readNbt(nbt: NbtCompound) {
@@ -53,7 +71,8 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
             customName = Text.Serializer.fromJson(nbt.getString("CustomName"))
         }
         if (nbt.contains(NbtKeys.ALTAR_KEY.str())) {
-            storedXp = nbt.getInt(NbtKeys.ALTAR_KEY.str())
+            xpStored = nbt.getInt(NbtKeys.ALTAR_KEY.str())
+            xpMax = nbt.getInt("max_xp")
         }
     }
 
