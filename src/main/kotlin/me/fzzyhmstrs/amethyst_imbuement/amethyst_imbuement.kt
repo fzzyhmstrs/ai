@@ -30,6 +30,7 @@ object AI: ModInitializer {
         RegisterStatus.registerAll()
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
+        RegisterModifier.registerAll()
         RegisterKeybindServer.registerServer()
         AltarOfExperienceScreenHandler.registerServer()
     }
