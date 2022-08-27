@@ -164,7 +164,7 @@ object RegisterItem {
     val REDEMPTION = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["redemption"] = it}
-    val EQUINOX = LethalityScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
+    val EQUINOX = EquinoxScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, ModifierRegistry.GREATER_THRIFTY))
         .also{ regItem["equinox"] = it}
     val SOJOURN = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
