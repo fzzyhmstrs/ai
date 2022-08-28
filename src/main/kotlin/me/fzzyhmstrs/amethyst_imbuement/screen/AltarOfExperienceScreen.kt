@@ -89,8 +89,8 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.restoreProjectionMatrix()
         DiffuseLighting.enableGuiDepthLighting()
 
-        val xpStored = handler.displayXpStored
-        val xpMax = handler.displayXpMax
+        val xpStored = handler.getSyncedStoredXp()
+        val xpMax = handler.getSyncedMaxXp()
         val xpLeft = xpMax - xpStored
         val xpPlayer = handler.getPlayerXp()
         if (shifted) {
@@ -179,8 +179,8 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.disableBlend()
         textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), 0x404040)
         //super.drawForeground(matrices, mouseX, mouseY)
-        val storedXp = handler.displayXpStored
-        val maxXp = handler.displayXpMax
+        val storedXp = handler.getSyncedStoredXp()
+        val maxXp = handler.getSyncedMaxXp()
         val text = Text.translatable("container.altar_of_experience_1").append(Text.literal("$storedXp/$maxXp"))
         if (text != null) {
             val k = backgroundWidth/2.0f - this.textRenderer.getWidth(text)/2.0f
