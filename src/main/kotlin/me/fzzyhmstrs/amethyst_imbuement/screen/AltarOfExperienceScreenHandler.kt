@@ -21,6 +21,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 @Suppress("SENSELESS_COMPARISON", "unused")
 class AltarOfExperienceScreenHandler(
@@ -35,14 +37,14 @@ class AltarOfExperienceScreenHandler(
         syncID,
         playerInventory,
         ScreenHandlerContext.EMPTY,
-        ArrayPropertyDelegate(1),
-        ArrayPropertyDelegate(1)
+        ArrayPropertyDelegate(2),
+        ArrayPropertyDelegate(2)
     )
 
     private val playInventory = playerInventory
     private val random = Random()
     private val seed = Property.create()
-    private var xp = 0
+    private var xp = Property.create()
     var displayXpMax = 0
     var displayXpStored = 0
     //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
@@ -60,25 +62,35 @@ class AltarOfExperienceScreenHandler(
     }
 
     fun getSyncedStoredXp(): Int{
-        return storedXp.get(0)
+        val divisor = storedXp.get(0)
+        val remainder = storedXp.get(1)
+        return divisor * Short.MAX_VALUE + remainder
     }
 
     fun setSyncedStoredXp(amount: Int){
-        storedXp.set(0,amount)
+        val divisor = amount / Short.MAX_VALUE
+        val remainder = amount % Short.MAX_VALUE
+        storedXp.set(0,divisor)
+        storedXp.set(1,remainder)
         displayXpStored = amount
     }
 
     fun getSyncedMaxXp(): Int{
-        return maxXp.get(0)
+        val divisor = maxXp.get(0)
+        val remainder = maxXp.get(1)
+        return divisor * Short.MAX_VALUE + remainder
     }
 
     fun setSyncedMaxXp(amount: Int){
-        maxXp.set(0,amount)
+        val divisor = amount / Short.MAX_VALUE
+        val remainder = amount % Short.MAX_VALUE
+        maxXp.set(0,divisor)
+        maxXp.set(1,remainder)
         displayXpMax = amount
     }
 
     fun getPlayerXp(): Int{
-        return xp
+        return xp.get()
     }
 
     private fun updateMaxXp(candles: Int, wardingCandles: Int): Int{
@@ -88,14 +100,16 @@ class AltarOfExperienceScreenHandler(
         return ((4.5 * level * level) - (162.5 * level) + 2220).toInt()
     }
 
+
+
     private fun checkCandles(world: World, pos: BlockPos): Pair<Int,Int>{
         var candles = 0
         var wardingCandles = 0
         for (offset in blocks){
-            if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isIn(BlockTags.CANDLES)) {
-                candles++
-            } else if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isOf(RegisterBlock.WARDING_CANDLE)) {
+            if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isOf(RegisterBlock.WARDING_CANDLE)) {
                 wardingCandles++
+            } else if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isIn(BlockTags.CANDLES)) {
+                candles++
             }
         }
         return Pair(candles,wardingCandles)
@@ -103,6 +117,7 @@ class AltarOfExperienceScreenHandler(
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
         val currentXp = getPlayerLvlXp(player)
+        println(getSyncedStoredXp())
         if (id == 0){
             if (currentXp <= 50){
                 return false
@@ -260,8 +275,8 @@ class AltarOfExperienceScreenHandler(
                 1.0f,
                 world.random.nextFloat() * 0.1f + 0.9f
             )
-            xp = getPlayerLvlXp(player)
-            sendXpUpdates()
+            xp.set(getPlayerLvlXp(player))
+            //sendXpUpdates()
             sendContentUpdates()
         }
         return true
@@ -327,18 +342,18 @@ class AltarOfExperienceScreenHandler(
         for (i in 0..8) {
             this.addSlot(Slot(playerInventory, i, 8 + i * 18, 142))
         }
-
-        val totalXp = getPlayerLvlXp(playerInventory.player)
-        xp = totalXp
         addProperties(storedXp)
         addProperties(maxXp)
+        addProperty(xp)
+        val totalXp = getPlayerLvlXp(playerInventory.player)
+        xp.set(totalXp)
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         if (context != ScreenHandlerContext.EMPTY) {
             context.run { world: World, pos: BlockPos ->
                 val (c,wc) = checkCandles(world, pos)
                 val e = updateMaxXp(c, wc)
                 setSyncedMaxXp(e)
-                sendXpUpdates()
+                //sendXpUpdates()
                 sendContentUpdates()
             }
         }
@@ -349,7 +364,7 @@ class AltarOfExperienceScreenHandler(
         if (player is ServerPlayerEntity) {
             val buf = PacketByteBufs.create()
             buf.writeInt(syncId)
-            buf.writeInt(xp)
+            buf.writeInt(xp.get())
             buf.writeInt(displayXpMax)
             buf.writeInt(displayXpStored)
 
@@ -374,7 +389,7 @@ class AltarOfExperienceScreenHandler(
                 val handler = player.currentScreenHandler
                 if (handler.syncId != syncID) return@registerGlobalReceiver
                 if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
-                handler.xp = buf.readInt()
+                handler.xp.set(buf.readInt())
                 handler.displayXpMax = buf.readInt()
                 handler.displayXpStored = buf.readInt()
             }
@@ -384,7 +399,8 @@ class AltarOfExperienceScreenHandler(
             ServerPlayNetworking.registerGlobalReceiver(XP_REQUEST){_,player,_,_,_ ->
                 val handler = player.currentScreenHandler
                 if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
-                handler.sendXpUpdates()
+                //handler.sendXpUpdates()
+                handler.sendContentUpdates()
             }
         }
 

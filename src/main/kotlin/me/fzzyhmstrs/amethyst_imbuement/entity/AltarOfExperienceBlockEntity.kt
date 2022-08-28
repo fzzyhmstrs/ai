@@ -22,38 +22,38 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
 
     var ticks = 0
     private var customName: Text? = null
-    private var xpStored = 0
-    private var xpMax = 0
+    private var xpStored = intArrayOf(0,0)
+    private var xpMax = intArrayOf(0,0)
 
     val storedXp: PropertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int {
-            return xpStored
+            return xpStored[index]
         }
 
         override fun set(index: Int, value: Int) {
-            xpStored = value
+            xpStored[index] = value
             markDirty()
         }
 
         //this is supposed to return the amount of integers you have in your delegate, in our example only one
         override fun size(): Int {
-            return 1
+            return 2
         }
     }
 
     val maxXp: PropertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int {
-            return xpMax
+            return xpMax[index]
         }
 
         override fun set(index: Int, value: Int) {
-            xpMax = value
+            xpMax[index] = value
             markDirty()
         }
 
         //this is supposed to return the amount of integers you have in your delegate, in our example only one
         override fun size(): Int {
-            return 1
+            return 2
         }
     }
 
@@ -62,8 +62,10 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
         if (hasCustomName()) {
             nbt.putString("CustomName", Text.Serializer.toJson(customName))
         }
-        nbt.putInt(NbtKeys.ALTAR_KEY.str(),xpStored)
-        nbt.putInt("max_xp",xpMax)
+        nbt.putInt(NbtKeys.ALTAR_KEY.str(),xpStored[0])
+        nbt.putInt("altar_used_1",xpStored[1])
+        nbt.putInt("max_xp",xpMax[0])
+        nbt.putInt("max_xp_1",xpMax[1])
     }
 
     override fun readNbt(nbt: NbtCompound) {
@@ -72,8 +74,10 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
             customName = Text.Serializer.fromJson(nbt.getString("CustomName"))
         }
         if (nbt.contains(NbtKeys.ALTAR_KEY.str())) {
-            xpStored = nbt.getInt(NbtKeys.ALTAR_KEY.str())
-            xpMax = nbt.getInt("max_xp")
+            xpStored[0] = nbt.getInt(NbtKeys.ALTAR_KEY.str())
+            xpStored[1] = nbt.getInt("altar_used_1")
+            xpMax[0] = nbt.getInt("max_xp")
+            xpMax[1] = nbt.getInt("max_xp_1")
         }
     }
 
