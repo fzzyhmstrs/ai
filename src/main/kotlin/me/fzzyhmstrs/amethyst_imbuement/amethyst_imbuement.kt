@@ -4,8 +4,6 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ResonateAugment
-import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -30,7 +28,7 @@ object AI: ModInitializer {
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
         RegisterModifier.registerAll()
-        RegisterKeybindServer.registerServer()
+        RegisterNetworking.registerServer()
     }
 
     fun aiRandom(): Random{
@@ -46,8 +44,7 @@ object AIClient: ClientModInitializer{
         RegisterScreen.registerAll()
         RegisterKeybind.registerAll()
         RegisterItemModel.registerAll()
-        ImbuingTableScreenHandler.registerClient()
-        ResonateAugment.registerClient()
+        RegisterNetworking.registerClient()
     }
 
 }
