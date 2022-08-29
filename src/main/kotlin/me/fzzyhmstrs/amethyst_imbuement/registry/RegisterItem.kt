@@ -39,7 +39,10 @@ object RegisterItem {
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["xp_bush_seed"] = it}
     
     //scepter update gem and found items
-    val GEM_OF_PROMISE = Item(FabricItemSettings().maxCount(1).group(ItemGroup.MISC)).also{ regItem["gem_of_promise"] = it}
+    val GEM_OF_PROMISE = GemOfPromiseItem(FabricItemSettings().maxCount(1).group(ItemGroup.MISC))
+        .withFlavorDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
+        .withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
+        .also{ regItem["gem_of_promise"] = it}
     val GEM_DUST = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["gem_dust"] = it}
     val SPARKING_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["sparking_gem"] = it}
     val BLAZING_GEM = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["blazing_gem"] = it}
@@ -188,8 +191,8 @@ object RegisterItem {
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"iridescent_orb")).also{ regItem["iridescent_orb"] = it}
     val LUSTROUS_SPHERE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"lustrous_sphere")).withGlint().also{ regItem["lustrous_sphere"] = it}
     val HEARTSTONE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"heartstone")).withGlint() .also{ regItem["heartstone"] = it}
-    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
+    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
+    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().group(ItemGroup.MISC).maxCount(16)).also{ regItem["mana_potion"] = it}
 
