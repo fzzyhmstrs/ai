@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:enduring_scepter",
+    "amethyst_imbuement:graceful_scepter",
+	"#amethyst_imbuement:redemption_scepters",
+	"#amethyst_imbuement:aegis_scepters",
+	"amethyst_imbuement:redemption",
+	"amethyst_imbuement:aegis"
+  ]
+}

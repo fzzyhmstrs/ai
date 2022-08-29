@@ -30,6 +30,10 @@ object RegisterTag {
     val FURY_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"fury_scepters"))
     val WIT_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"wit_scepters"))
     val GRACE_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"grace_scepters"))
+
+    val ALL_FURY_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"all_fury_scepters"))
+    val ALL_WIT_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"all_wit_scepters"))
+    val ALL_GRACE_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"all_grace_scepters"))
     
 
 }
