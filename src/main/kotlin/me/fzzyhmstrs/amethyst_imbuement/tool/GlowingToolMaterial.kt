@@ -12,7 +12,7 @@ object GlowingToolMaterial: ToolMaterial{
         return 185
     }
     override fun getMiningSpeedMultiplier(): Float {
-        return 7.5f
+        return 11.5f
     }
     override fun getAttackDamage(): Float {
         return 3.5f
