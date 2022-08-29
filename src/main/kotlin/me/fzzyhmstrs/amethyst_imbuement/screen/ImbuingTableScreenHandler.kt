@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
@@ -65,30 +66,21 @@ import kotlin.math.roundToInt
 class ImbuingTableScreenHandler(
     syncID: Int,
     playerInventory: PlayerInventory,
+    private val inventory: ImbuingTableBlockEntity.ImbuingInventory,
     private val context: ScreenHandlerContext
 ):  ScreenHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, syncID) {
 
     constructor(syncID: Int, playerInventory: PlayerInventory) : this(
         syncID,
         playerInventory,
+        ImbuingTableBlockEntity.ImbuingInventory(13, null),
         ScreenHandlerContext.EMPTY,
     )
-
-    private val inventory: SimpleInventory = object : SimpleInventory(13) {
-        private var dirtyChecked: Boolean = false
-        override fun markDirty() {
-            if (dirtyChecked) {
-                dirtyChecked = false
-                return
-            }
-            //Exception().printStackTrace()
-            this@ImbuingTableScreenHandler.onContentChanged(this)
-            dirtyChecked = true
-            super.markDirty()
-        }
-    }
     fun getInventory(): Inventory{
         return inventory
+    }
+    private fun onParentChanged(parentInventory: Inventory){
+        this.onContentChanged(parentInventory)
     }
 
     val needsRecipeBook: Property = Property.create()
@@ -101,6 +93,7 @@ class ImbuingTableScreenHandler(
     var resultsIndexes =  intArrayOf(-1, -1, -1)
     var resultsCanUp = false
     var resultsCanDown = false
+    private val listener = { inventory: Inventory -> onParentChanged(inventory) }
 
     init{
         //coordinate system is in pixels, thank god
@@ -153,7 +146,7 @@ class ImbuingTableScreenHandler(
         for(j in 0..8) {
             addSlot(object : Slot(playerInventory, j, 38+(18*j)+ofst, 142+ofst2*2) {})
         }
-
+        inventory.addListener(listener)
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
@@ -188,7 +181,12 @@ class ImbuingTableScreenHandler(
 
     override fun close(player: PlayerEntity?) {
         super.close(player)
-        context.run { _: World?, _: BlockPos? -> dropInventory(player, inventory) }
+        inventory.removeListener(listener)
+        //context.run { _: World?, _: BlockPos? -> dropInventory(player, inventory) }
+    }
+
+    fun requestContent(){
+        ClientPlayNetworking.send(REQUEST_CONTENTS,PacketByteBufs.create())
     }
 
     override fun onContentChanged(inventory: Inventory) {
@@ -535,6 +533,7 @@ class ImbuingTableScreenHandler(
     companion object {
 
         private val RESULTS_PACKET = Identifier(AI.MOD_ID, "results_packet")
+        private val REQUEST_CONTENTS = Identifier(AI.MOD_ID, "request_contents")
         private var lastPacketTime: Long = 0L
 
         fun registerClient(){
@@ -565,6 +564,15 @@ class ImbuingTableScreenHandler(
                 handler.resultsCanUp = buf.readBoolean()
                 handler.resultsCanDown = buf.readBoolean()
                 handler.logger.info("synced handler on the client!")
+            }
+        }
+
+        fun registerServer(){
+            ServerPlayNetworking.registerGlobalReceiver(REQUEST_CONTENTS) {_,player,_,_,_ ->
+                val handler = player.currentScreenHandler
+                if (handler is ImbuingTableScreenHandler){
+                    handler.onContentChanged(handler.inventory)
+                }
             }
         }
 
@@ -987,7 +995,6 @@ class ImbuingTableScreenHandler(
                 }
             } else{
                 player.applyEnchantmentCosts(itemStack3, i)
-                val l = EnchantmentHelper.get(itemStack3)
                 for (j in 0..12) {
                     if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new item stack
                     if (handler.inventory.getStack(j).item.hasRecipeRemainder()){
@@ -1000,12 +1007,13 @@ class ImbuingTableScreenHandler(
                     }
                 }
                 val itemStack4 = recipe.output
-                itemStack4.item.onCraft(itemStack4,world, player)
                 handler.inventory.setStack(6,itemStack4)
                 if(recipe.getTransferEnchant()){
                     Nbt.transferNbt(itemStack3,itemStack4)
+                    val l = EnchantmentHelper.get(itemStack3)
                     EnchantmentHelper.set(l,itemStack4)
                 }
+                itemStack4.item.onCraft(itemStack4,world, player)
             }
             return true
         }

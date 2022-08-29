@@ -92,6 +92,7 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
                 ImbuingTableScreenHandler(
                     syncId,
                     inventory,
+                    blockEntity.inventory,
                     ScreenHandlerContext.create(world, pos)
                 )
             }, text)

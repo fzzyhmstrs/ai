@@ -340,6 +340,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         playerInventoryTitleX = 8+29
         playerInventoryTitleY = this.backgrdHeight-94
         super.init()
+        handler.requestContent()
     }
 
 
