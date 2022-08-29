@@ -1,0 +1,10 @@
+{    
+"name": "Scepter Upgrade Guide",
+"priority": true,
+"icon": "amethyst_imbuement:scepter_of_the_vanguard",    
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Scepters can be upgraded with special materials to attune them to magical aspects and focuses. These upgraded scepters are more powerful and specialized, and some have unique spells you can't get otherwise!$(br2)While scepters can be upgraded via the plain path, it's recommended you pick a path to follow in the scepter tree for a customized and augmented scepter." 
+}
