@@ -6,5 +6,9 @@
 {            
 "type": "patchouli:text",            
 "text": "In order to progress your scepter there are some magical ingredients you must find, craft, and generate special imbuing materials." 
+},
+{            
+"type": "amethyst_imbuement:base_components"
 }
 ]
+}
