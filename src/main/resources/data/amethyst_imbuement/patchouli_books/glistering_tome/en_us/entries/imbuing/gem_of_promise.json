@@ -1,0 +1,30 @@
+{    
+"name": "Gem of Promise",    
+"icon": "amethyst_imbuement:gem_of_promise",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The base gem for creating aspect gems. Gems of promise will transmute into various aspect gems depending on what the user experiences in the environment."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Gem of Promise Imbuing",
+"imbue_a_item": "amethyst_imbuement:imbued_quartz",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:imbued_quartz",
+"craft_a_item": "amethyst_imbuement:gem_dust",
+"craft_b_item": "amethyst_imbuement:gem_dust",
+"craft_c_item": "amethyst_imbuement:gem_dust",
+"craft_d_item": "amethyst_imbuement:gem_dust",
+"craft_e_item": "amethyst_imbuement:imbued_quartz",
+"craft_f_item": "amethyst_imbuement:gem_dust",
+"craft_g_item": "amethyst_imbuement:gem_dust",
+"craft_h_item": "amethyst_imbuement:gem_dust",
+"craft_i_item": "amethyst_imbuement:gem_dust",
+"result_item": "amethyst_imbuement:gem_of_promise",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}
