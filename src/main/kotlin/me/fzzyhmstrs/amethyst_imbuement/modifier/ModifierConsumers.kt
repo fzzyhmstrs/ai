@@ -129,14 +129,13 @@ object ModifierConsumers {
     val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.AUTOMATIC)
     private fun echoingConsumer(list: List<LivingEntity>){
         val user = list[0]
+        val rnd = user.world.random.nextInt(3)
+        if (rnd != 0) return
         val stack = user.getStackInHand(Hand.MAIN_HAND)
-        println(stack.name)
         val item = stack.item
         if (item is AugmentScepterItem){
             val activeEnchant = item.getActiveEnchant(stack)
-            println(activeEnchant)
             val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
-            println(augment)
             if (augment != null && augment is ScepterAugment){
                 val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
             }
@@ -153,7 +152,6 @@ object ModifierConsumers {
         override val delay: PerLvlI = PerLvlI()
 
         override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
-            println("whoo")
             if (data is EchoingPersistentData){
                 val user = data.user
                 data.augment.applyModifiableTasks(user.world,user,data.hand,1)
