@@ -1,0 +1,60 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "#header_text#",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:item", 
+"item": "#parent_a#",
+"framed": true,
+"x": 35,            
+"y": 15
+},
+{
+"type": "patchouli:item", 
+"item": "#parent_b#",
+"framed": true,
+"x": 65,            
+"y": 15
+},
+{
+"type": "patchouli:item", 
+"item": "#scepter_item#",
+"framed": true,
+"x": 50,            
+"y": 50
+},
+{
+"type": "patchouli:item", 
+"item": "#child_item#",
+"framed": true,
+"x": 50,            
+"y": 85
+},
+{
+"type": "patchouli:image",                        
+"x": 35,            
+"y": 52,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:image",                        
+"x": 72,            
+"y": 52,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+}
+]}
