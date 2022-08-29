@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The starter scepter. Can be augmented with tier one spells.$(br2)$(l)Mana:$() 426"
+"text": "The starter scepter. Can be augmented with tier one spells. The starting point for progressing through a $(#b0b)$(l:amethyst_imbuement:imbuing/beryl_copper)scepter upgrade path.$()$(br2)$(l)Mana:$() 426"
 },
 {
 "type": "patchouli:crafting",
