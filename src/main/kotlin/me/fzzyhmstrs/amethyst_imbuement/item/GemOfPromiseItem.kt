@@ -14,6 +14,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
@@ -37,29 +38,29 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         addFlavorText(tooltip, context)
         val nbt = stack.orCreateNbt
         if (nbt.contains("on_fire")){
-            val fire = Nbt.readIntNbt("on_fire",nbt)
-            val progress = fire/FIRE_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress))
+            val fire = Nbt.readIntNbt("on_fire",nbt).toFloat()
+            val progress = fire/FIRE_TARGET.toFloat()*100.0F
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(Text.literal("%")).formatted(Formatting.RED))
         }
         if (nbt.contains("statuses")){
-            val status = Nbt.readIntNbt("statuses",nbt)
-            val progress = status/STATUS_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress))
+            val status = Nbt.readIntNbt("statuses",nbt).toFloat()
+            val progress = status/STATUS_TARGET.toFloat()*100.0F
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(Text.literal("%")).formatted(Formatting.BLUE))
         }
         if (nbt.contains("kill_count")){
-            val kills = Nbt.readIntNbt("kill_count",nbt)
-            val progress = kills/KILL_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress))
+            val kills = Nbt.readIntNbt("kill_count",nbt).toFloat()
+            val progress = kills/KILL_TARGET.toFloat()*100.0F
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress).append(Text.literal("%")).formatted(Formatting.DARK_RED))
         }
         if (nbt.contains("healed")){
-            val healed = Nbt.readIntNbt("healed",nbt)
+            val healed = nbt.getFloat("healed")
             val progress = healed/HEAL_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress))
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).append(Text.literal("%")).formatted(Formatting.GREEN))
         }
         if (nbt.contains("mob_hit")){
-            val hit = Nbt.readIntNbt("mob_hit",nbt)
-            val progress = hit/HIT_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress))
+            val hit = Nbt.readIntNbt("mob_hit",nbt).toFloat()
+            val progress = hit/HIT_TARGET.toFloat()*100.0F
+            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(Text.literal("%")).formatted(Formatting.GRAY))
         }
     }
 
@@ -68,7 +69,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         private const val KILL_TARGET = 30
         private const val FIRE_TARGET = 120
         private const val HIT_TARGET = 100
-        private const val HEAL_TARGET = 140.0F
+        private const val HEAL_TARGET = 250.0F
         private const val STATUS_TARGET = 10
 
         fun healersGemCheck(stack: ItemStack,inventory: PlayerInventory, healAmount: Float){
@@ -142,8 +143,13 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         }
 
         fun blazingGemCheck(stack: ItemStack, inventory: PlayerInventory, player: LivingEntity, damageSource: DamageSource){
-            if ((damageSource == DamageSource.ON_FIRE || damageSource == DamageSource.LAVA) && !player.hasStatusEffect(
-                    StatusEffects.FIRE_RESISTANCE)){
+            if ((damageSource == DamageSource.ON_FIRE ||
+                        damageSource == DamageSource.IN_FIRE ||
+                        damageSource == DamageSource.LAVA ||
+                        damageSource == DamageSource.HOT_FLOOR)
+                && !player.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
+                && !player.isFireImmune)
+            {
                 val nbt = stack.orCreateNbt
                 var fire = 0
                 if (nbt.contains("on_fire")){
