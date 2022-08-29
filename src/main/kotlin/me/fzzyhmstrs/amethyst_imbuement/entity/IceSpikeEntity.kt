@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -111,14 +112,15 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.magic(this,owner), entityEffects.damage(0))
+            target.damage(DamageSource.FREEZE, entityEffects.damage(0))
             target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
                 return
             }
-            target.damage(DamageSource.magic(this, livingEntity), entityEffects.damage(0))
+            target.damage(CustomDamageSources.FreezingDamageSource(livingEntity), entityEffects.damage(0))
+            target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }
     }
@@ -174,6 +176,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
     }
 
     companion object{
+
         fun conjureFangs(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
                          warmup: Int, effect: AugmentEffect, level: Int): Boolean {

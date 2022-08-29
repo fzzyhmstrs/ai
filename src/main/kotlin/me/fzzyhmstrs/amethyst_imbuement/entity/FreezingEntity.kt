@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -46,7 +47,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
                 entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
             } else {
                 (entity2 as LivingEntity).frozenTicks = (entityEffects.duration() * 1.6).toInt()
-                entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0) * 1.6F)
+                entity2.damage(CustomDamageSources.FreezingDamageSource(entity), entityEffects.damage(0) * 1.6F)
             }
             if (bl){
                 entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
