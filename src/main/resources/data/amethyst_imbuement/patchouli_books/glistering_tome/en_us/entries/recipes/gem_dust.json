@@ -1,0 +1,40 @@
+{    
+"name": "Gem Dust Recycling",    
+"icon": "amethyst_imbuement:gem_dust",    
+"category": "amethyst_imbuement:recipes",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Gem dust is a base ingredient for the aspect gems used in scepter upgrading. It recycles magical items into new, more useful, items."
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_book_of_lore",
+"recipe2": "amethyst_imbuement:gem_dust_from_book_of_mythos"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_enchanted_book",
+"recipe2": "amethyst_imbuement:gem_dust_from_iridescent_orb"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_lustrous_sphere",
+"recipe2": "amethyst_imbuement:gem_dust_from_blazing_gem"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_sparking_gem",
+"recipe2": "amethyst_imbuement:gem_dust_from_brutal_gem"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_lethal_gem",
+"recipe2": "amethyst_imbuement:gem_dust_from_inquisitive_gem"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:gem_dust_from_healers_gem"
+}
+]
+}
