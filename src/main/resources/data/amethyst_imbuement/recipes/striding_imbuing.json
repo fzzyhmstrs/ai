@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:diamond"
+	"item": "amethyst_imbuement:energetic_opal"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:opal"

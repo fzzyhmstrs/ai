@@ -25,7 +25,7 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftE": {
-	"item": "amethyst_imbuement:opaline_scepter"
+    "tag": "amethyst_imbuement:fury_scepters"
   },
   "craftF": {
 	"item": "amethyst_imbuement:imbued_lapis"

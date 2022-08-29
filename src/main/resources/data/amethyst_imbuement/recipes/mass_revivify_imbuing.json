@@ -4,13 +4,13 @@
 	"item": "amethyst_imbuement:ametrine"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "craftA": {
 	"item": "amethyst_imbuement:golden_heart"

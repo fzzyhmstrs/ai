@@ -7,10 +7,10 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:danburite"
+	"item": "amethyst_imbuement:imbued_lapis"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:danburite"
   },
   "craftB": {
 	"item": "amethyst_imbuement:glowing_fragment"
