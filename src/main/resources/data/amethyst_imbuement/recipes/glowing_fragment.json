@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "amethyst_imbuement:brilliant_diamond"
+    }
+  ],
+  "result": {
+    "item": "amethyst_imbuement:glowing_fragment",
+    "count": 3
+  }
+}
