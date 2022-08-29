@@ -110,7 +110,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.magic(this,owner), entityEffects.damage(0))
+            target.damage(DamageSource.MAGIC, entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
@@ -174,7 +174,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     companion object{
         fun conjureFangs(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
-                         warmup: Int, effect: AugmentEffect, level: Int): Boolean {
+                         warmup: Int, effect: AugmentEffect, level: Int): Double{
             var blockPos = BlockPos(x, y, z)
             var bl = false
             var d = 0.0
@@ -207,9 +207,9 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                 )
                 pfe.passEffects(effect, level)
                 world.spawnEntity(pfe)
-                return true
+                return (blockPos.y.toDouble() + d)
             }
-            return false
+            return -1.0
         }
     }
 

@@ -60,7 +60,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
                 }
             }
         } else {
-            bl = entity.damage(DamageSource.MAGIC, 5.0f)
+            bl = entity.damage(DamageSource.WITHER, 5.0f)
         }
         if (bl && entity is LivingEntity) {
             var i = -1
