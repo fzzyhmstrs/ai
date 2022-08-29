@@ -21,7 +21,7 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(2.0F,1.0F,0.0F)
+        get() = super.baseEffect.withDamage(2.5F,0.5F,0.0F)
 
     override fun supportEffect(
         world: World,

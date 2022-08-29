@@ -59,6 +59,6 @@ class BarrierAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,400,35,1,imbueLevel, LoreTier.NO_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.GRACE,600,35,1,imbueLevel, LoreTier.NO_TIER, Items.SHIELD)
     }
 }

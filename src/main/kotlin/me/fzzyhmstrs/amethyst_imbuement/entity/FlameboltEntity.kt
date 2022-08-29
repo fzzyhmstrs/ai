@@ -28,11 +28,11 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         this.setRotation(owner.yaw, owner.pitch)
     }
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(4)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.8F,0.2F,0.0F).withDuration(80)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
-        ae.addAmplifier(ae.amplifier(level))
+        ae.addDuration(ae.amplifier(level))
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
@@ -45,7 +45,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
             if (!entity2.isFireImmune) {
                 val i = entity2.fireTicks
-                entity2.setOnFireFor(entityEffects.amplifier(0))
+                entity2.setOnFireFor(entityEffects.duration(0))
                 val bl = entity2.damage(
                     DamageSource.fireball(fbe,owner),
                     entityEffects.damage(0)

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
@@ -11,9 +12,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Items
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -27,7 +26,7 @@ import net.minecraft.world.World
 class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(5.75,0.25).withDamage(3.4f,0.1f)
+        get() = super.baseEffect.withRange(5.8,0.2).withDamage(3.4f,0.1f)
 
     override fun effect(
         world: World,
@@ -55,7 +54,7 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
         val bl = entityList.isNotEmpty()
         if (bl) {
             entityList.forEach {
-                it.damage(DamageSource.magic(user, user), effect.damage(level))
+                it.damage(CustomDamageSources.LightningDamageSource(user), effect.damage(level))
             }
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.9F, 1.1F)
         }
@@ -88,4 +87,6 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,6,1,imbueLevel, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
     }
+
+
 }

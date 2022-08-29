@@ -12,6 +12,8 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -34,7 +36,7 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
+            if (target is Monster || target is HostileEntity || target is PlayerEntity) {
                 EffectQueue.addStatusToQueue(
                     target as LivingEntity,
                     StatusEffects.SLOWNESS,

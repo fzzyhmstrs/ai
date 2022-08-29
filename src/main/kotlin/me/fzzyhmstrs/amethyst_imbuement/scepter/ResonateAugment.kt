@@ -38,9 +38,10 @@ import kotlin.random.asJavaRandom
 class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.0F,1.0F,0.0F)
+        get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F)
             .withRange(3.5,0.25,0.0)
             .withDuration(36,4)
+            .withAmplifier(0,1,0)
 
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
@@ -56,15 +57,12 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
             val entityDistance2 = entityDistance.toList()
             val entity1 = entityDistance2[0].second
             bl = resonateTarget(world,user,entity1,level, effect)
-            if (entityDistance2.size > 1 && level > 1){
-                val entity2 = entityDistance2[1].second
+            var nextTarget = 1
+            while (entityDistance.size > nextTarget && effect.amplifier(level) > nextTarget){
+                val entity2 = entityDistance2[nextTarget].second
                 bl = bl || resonateTarget(world, user, entity2, level, effect, true)
-                if (entityDistance2.size > 2 && level > 2){
-                    val entity3 = entityDistance2[2].second
-                    bl = bl || resonateTarget(world, user, entity3, level, effect, true)
-                }
+                nextTarget++
             }
-            println(bl)
             if (bl){
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
             }
@@ -124,7 +122,7 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,15,15,imbueLevel, LoreTier.NO_TIER, Items.NOTE_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,18,18,18,imbueLevel, LoreTier.NO_TIER, Items.NOTE_BLOCK)
     }
 
     companion object {

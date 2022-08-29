@@ -20,7 +20,7 @@ import net.minecraft.world.World
 class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(6000,0,0)
+        get() = super.baseEffect.withDuration(5500,500,0)
 
     override fun placeEntity(
         world: World,

@@ -25,26 +25,27 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(300,100).withAmplifier(0,0,0)
+        get() = super.baseEffect.withDuration(384,12)
+            .withAmplifier(0)
+            .withDamage(-1.0f,0.2f)
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                EffectQueue.addStatusToQueue(target as LivingEntity,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level))
+                EffectQueue.addStatusToQueue(target as LivingEntity,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level) + effects.damage(level).toInt())
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 return true
             }
         }
         return if (user.isPlayer) {
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level))
+            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level) + effects.damage(level).toInt())
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
             effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
             true
         } else {
             false
         }
-
     }
 
     override fun soundEvent(): SoundEvent {

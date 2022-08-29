@@ -31,11 +31,12 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     FireAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(140,100)
+        get() = super.baseEffect.withDuration(70,4)
             .withAmplifier(1)
-            .withRange(8.0,1.0)
+            .withRange(8.25,0.25)
+            .withDamage(7.75f,0.25f)
 
-    override val delay = PerLvlI(16,-3,0)
+    override val delay = PerLvlI(19,-1,0)
 
     override fun effect(
         world: World,
@@ -73,7 +74,8 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
-                val ce = createFireball(world, user, Vec3d(0.0,-5.0,0.0), entity3.pos.add(0.0,15.0,0.0), effect, level)
+                val vel = entity3.pos.subtract(user.pos).normalize().multiply(4.0)
+                val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level)
                 if (world.spawnEntity(ce)){
                     successes++
                 }
@@ -107,7 +109,8 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         }
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
-        val ce = createFireball(data.world, data.user, Vec3d(0.0,-5.0,0.0), Vec3d(rndX.toDouble(),(data.blockPos.y + 15).toDouble(),rndZ.toDouble()), data.effect, data.level)
+        val vel = Vec3d(rndX.toDouble(),(data.blockPos.y + 15).toDouble(),rndZ.toDouble()).subtract(data.user.pos).normalize().multiply(4.0)
+        val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
         data.world.spawnEntity(ce)
     }
 

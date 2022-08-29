@@ -21,7 +21,7 @@ class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     FireAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(6.0F)
+        get() = super.baseEffect.withDamage(7.75F,0.25f)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val yaw = user.yaw

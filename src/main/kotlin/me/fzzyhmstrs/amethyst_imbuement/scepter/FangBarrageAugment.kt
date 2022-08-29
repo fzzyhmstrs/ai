@@ -88,6 +88,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, effect: AugmentEffect, level: Int): Int{
+        var dd = d
         var successes = 0
         val fangs = effect.amplifier(level)
         for (i in 0..fangs) {
@@ -98,14 +99,17 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                     user,
                     user.x + MathHelper.cos(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
                     user.z + MathHelper.sin(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
-                    d,
+                    dd,
                     e,
                     f,
                     i,
                     effect,
                     level
                 )
-                if (success) successes++
+                if (success > 0) {
+                    successes++
+                    dd = success
+                }
             }
         }
         return successes
