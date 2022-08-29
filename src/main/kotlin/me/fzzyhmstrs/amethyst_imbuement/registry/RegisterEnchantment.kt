@@ -74,26 +74,26 @@ object RegisterEnchantment {
     val BARRIER = BarrierAugment(2,2,EquipmentSlot.MAINHAND).also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["bedazzle"] = it}
     val CLEANSE = CleanseAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["cleanse"] = it}
-    val COMET_STORM = CometStormAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["comet_storm"] = it}
+    val COMET_STORM = CometStormAugment(3,9,EquipmentSlot.MAINHAND).also{regEnchant["comet_storm"] = it}
     val CREATE_LAVA = CreateLavaAugment(2,1,Items.LAVA_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_lava"] = it}
     val CREATE_SPONGE = CreateSpongeAugment(1,1,Items.SPONGE,EquipmentSlot.MAINHAND).also{regEnchant["create_sponge"] = it}
     val CREATE_WATER = CreateWaterAugment(2,1,Items.WATER_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_water"] = it}
     val DASH = DashAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["dash"] = it}
-    val EMPOWERED_SLASH = EmpoweredSlashAugment(2,3, EquipmentSlot.MAINHAND).also{regEnchant["empowered_slash"] = it}
+    val EMPOWERED_SLASH = EmpoweredSlashAugment(2,5, EquipmentSlot.MAINHAND).also{regEnchant["empowered_slash"] = it}
     val EXHAUST = ExhaustAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["exhaust"] = it}
     val FANG_BARRAGE = FangBarrageAugment(3,1,EquipmentSlot.MAINHAND).also{regEnchant["fang_barrage"] = it}
     val FANGS = FangsAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fangs"] = it}
-    val FIREBALL = FireballAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
+    val FIREBALL = FireballAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
     val FLAMEBOLT = FlameboltAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
-    val FLAMEWAVE = FlamewaveAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
-    val FORCE_FIELD = ForcefieldAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
+    val FLAMEWAVE = FlamewaveAugment(3,11,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
+    val FORCE_FIELD = ForcefieldAugment(2,4,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment(2,2,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
-    val FREEZING = FreezingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
+    val FREEZING = FreezingAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
     val ICE_SPIKES = IceSpikesAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["ice_spikes"] = it}
     val LEVITATING_BULLET = LevitatingBulletAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["levitating_bullet"] = it}
-    val LIGHTNING_BOLT = LightningBoltAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["lightning_bolt"] = it}
+    val LIGHTNING_BOLT = LightningBoltAugment(2,11,EquipmentSlot.MAINHAND).also{regEnchant["lightning_bolt"] = it}
     val LIGHTNING_STORM = LightningStormAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["lightning_storm"] = it}
     val MASS_CLEANSE = MassCleanseAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["mass_cleanse"] = it}
     val MASS_EXHAUST = MassExhaustAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["mass_exhaust"] = it}
@@ -101,18 +101,18 @@ object RegisterEnchantment {
     val MASS_HEAL = MassHealAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_heal"] = it}
     val MASS_REVIVIFY = MassRevivifyAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_revivify"] = it}
     val MEND_EQUIPMENT = MendEquipmentAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["mend_equipment"] = it}
-    val MINOR_HEAL = MinorHealAugment(1,5,EquipmentSlot.MAINHAND).also{regEnchant["minor_heal"] = it}
+    val MINOR_HEAL = MinorHealAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["minor_heal"] = it}
     val RECALL = RecallAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["recall"] = it}
-    val REGENERATE = RegenerateAugment(1,5,EquipmentSlot.MAINHAND).also{regEnchant["regenerate"] = it}
-    val RESONATE = ResonateAugment(3,3, EquipmentSlot.MAINHAND).also{regEnchant["resonate"] = it}
+    val REGENERATE = RegenerateAugment(1,17,EquipmentSlot.MAINHAND).also{regEnchant["regenerate"] = it}
+    val RESONATE = ResonateAugment(3,5, EquipmentSlot.MAINHAND).also{regEnchant["resonate"] = it}
     val SHINE = ShineAugment(1,1, Items.TORCH,EquipmentSlot.MAINHAND).also{regEnchant["shine"] = it}
-    val SMITING_BLOW = SmitingBlowAugment(2,3, EquipmentSlot.MAINHAND).also{regEnchant["smiting_blow"] = it}
+    val SMITING_BLOW = SmitingBlowAugment(2,5, EquipmentSlot.MAINHAND).also{regEnchant["smiting_blow"] = it}
     val SOUL_MISSILE = SoulMissileAugment(1,21, EquipmentSlot.MAINHAND).also{regEnchant["soul_missile"] = it}
-    val SPECTRAL_SLASH = SpectralSlashAugment(1,3, EquipmentSlot.MAINHAND).also{regEnchant["spectral_slash"] = it}
+    val SPECTRAL_SLASH = SpectralSlashAugment(1,9, EquipmentSlot.MAINHAND).also{regEnchant["spectral_slash"] = it}
     //val SUMMON_BLAZE = SummonEntityAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonBoatAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_boat"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_chicken"] = it}
-    val SUMMON_GOLEM = SummonGolemAugment(3,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_golem"] = it}
+    val SUMMON_GOLEM = SummonGolemAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["summon_golem"] = it}
     val SUMMON_STRIDER = SummonStriderAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_strider"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
