@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:skillful_scepter",
+    "amethyst_imbuement:witty_scepter",
+	"#amethyst_imbuement:sojourn_scepters",
+	"#amethyst_imbuement:resonance_scepters",
+	"amethyst_imbuement:sojourn",
+	"amethyst_imbuement:resonance"
+  ]
+}

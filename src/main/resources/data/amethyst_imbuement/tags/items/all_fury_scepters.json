@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:dangerous_scepter",
+    "amethyst_imbuement:furious_scepter",
+	"#amethyst_imbuement:lethality_scepters",
+	"#amethyst_imbuement:equinox_scepters",
+	"amethyst_imbuement:lethality",
+	"amethyst_imbuement:equinox"
+  ]
+}
