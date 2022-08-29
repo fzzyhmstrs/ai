@@ -1,0 +1,47 @@
+{    
+"name": "Aspect Gems",
+"icon": "amethyst_imbuement:blazing_gem",    
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Aspect gems are important for crafting various themed scepters as you progress on an upgrade path. They are created by interacting with the environment in various ways.$(br2)$(bold)For any aspect gem to be created, a $(l:amethyst_imbuement:imbuing/gem_of_promise)Gem of Promise$(/l) needs to be held in the off-hand$()" 
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:blazing_gem",
+"link_recipe": true,
+"text": "A blazing gem has a heart of fire. Create one by holding a Gem of Promise in your off-hand and withstanding a large amount of fire-type damage (fire, lava, etc).
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:sparking_gem",
+"link_recipe": true,
+"text": "A sparking gem is imbued with lightning. Create one by holding a Gem of Promise in your off-hand and getting struck by lightning.
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:brutal_gem",
+"link_recipe": true,
+"text": "A brutal gem is tough with a steely resolve. Create one by holding a Gem of Promise in your off-hand and taking damage from hostile mobs.
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:lethal_gem",
+"link_recipe": true,
+"text": "A lethal gem bleeds the essence of combat. Create one by holding a Gem of Promise in your off-hand and killing mobs.
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:inquisitive_gem",
+"link_recipe": true,
+"text": "A inquisitive gem has a curious mind. Create one by holding a Gem of Promise in your off-hand and subjecting yourself to many status effects.
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:healers_gem",
+"link_recipe": true,
+"text": "A healers gem glows with life. Create one by holding a Gem of Promise in your off-hand and healing yourself (a lot). Eating counts.
+}
+]
+}
