@@ -1,0 +1,10 @@
+{    
+"name": "Gems and Materials",
+"icon": "amethyst_imbuement:gem_of_promise",    
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "In order to progress your scepter there are some magical ingredients you must find, craft, and generate special imbuing materials." 
+}
+]
