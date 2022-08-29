@@ -16,7 +16,7 @@
 	"item": "amethyst_imbuement:ametrine"
   },
   "craftB": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "craftC": {
 	"item": "amethyst_imbuement:ametrine"
@@ -34,7 +34,7 @@
 	"item": "amethyst_imbuement:ametrine"
   },
   "craftH": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "craftI": {
 	"item": "amethyst_imbuement:ametrine"

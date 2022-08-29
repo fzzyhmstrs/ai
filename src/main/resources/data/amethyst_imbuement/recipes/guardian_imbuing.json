@@ -4,13 +4,13 @@
 	"item": "amethyst_imbuement:crystalline_heart"
   },
   "imbueB": {
-	"item": "minecraft:diamond"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "imbueC": {
-	"item": "minecraft:diamond"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "imbueD": {
-	"item": "minecraft:diamond"
+	"item": "amethyst_imbuement:charged_moonstone"
   },
   "craftA": {
 	"item": "minecraft:poppy"
