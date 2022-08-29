@@ -10,7 +10,7 @@
 },
 {
 "type": "patchouli:text",
-"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an Augment.$(li)If you do not have the resources for that, scepters can innately perform a magic missile attack.$(li)Cast your spells, and find and add more augments! For more powerful spells, find tomes scattered around the world."
+"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an Augment.$(li)Cast your spells and add more augments! For more powerful spells, find tomes scattered around the world.$(li)Begin looking into an $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)upgrade path$() for powering up your scepter."
 },
 {
 "type": "patchouli:text",
@@ -22,7 +22,7 @@
 },
 {
 "type": "patchouli:text",
-"text": "$(l)Scepter Level:$() Casting spells with a scepter increases its magical potential, granting access to more powerful spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augment_index/all_augments)Augment Index$() for a full overview. There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
+"text": "$(l)Scepter Level:$() Casting spells with a scepter increases its magical potential, granting access to more spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augment_index/all_augments)Augment Index$() for a full overview. There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
 },
 {
 "type": "amethyst_imbuement:tooltip_image",
