@@ -1,9 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.inventory.SimpleInventory
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Nameable
@@ -26,6 +30,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     var field_11963 = 0f
     var field_11962 = 0f
     private var customName: Text? = null
+    val inventory = ImbuingInventory(13, this)
 
 
     override fun writeNbt(nbt: NbtCompound) {
@@ -33,6 +38,8 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         if (hasCustomName()) {
             nbt.putString("CustomName", Text.Serializer.toJson(customName))
         }
+        val list = inventory.toNbtList()
+        nbt.put("inventory",list)
     }
 
     override fun readNbt(nbt: NbtCompound) {
@@ -40,6 +47,8 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         if (nbt.contains("CustomName", 8)) {
             customName = Text.Serializer.fromJson(nbt.getString("CustomName"))
         }
+        val list = Nbt.readNbtList(nbt,"inventory")
+        inventory.readNbtList(list)
     }
 
     companion object {
@@ -94,6 +103,42 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
             blockEntity.nextPageAngle += blockEntity.field_11967
         }
 
+    }
+
+    class ImbuingInventory(size: Int, private val blockEntity: ImbuingTableBlockEntity?): SimpleInventory(size){
+        override fun readNbtList(nbtList: NbtList) {
+            for (i in 0 until nbtList.size){
+                val compound = nbtList.getCompound(i)
+                val stack = ItemStack.fromNbt(compound)
+                if (stack.isEmpty) continue
+                val slot = compound.getInt("slot")
+                this.setStack(slot,stack)
+            }
+        }
+
+        override fun toNbtList(): NbtList {
+            val list = NbtList()
+            for (i in 0 until this.size()){
+                val compound = NbtCompound()
+                compound.putInt("slot",i)
+                val stack = this.getStack(i)
+                stack.writeNbt(compound)
+                list.add(compound)
+            }
+            return list
+        }
+
+        private var dirtyChecked: Boolean = false
+        override fun markDirty() {
+            if (dirtyChecked) {
+                dirtyChecked = false
+                return
+            }
+            //Exception().printStackTrace()
+            dirtyChecked = true
+            super.markDirty()
+            blockEntity?.markDirty()
+        }
     }
 
     override fun getName(): Text? {
