@@ -7,10 +7,10 @@
 	"item": "amethyst_imbuement:citrine"
   },
   "imbueC": {
-	"item": "minecraft:amethyst_shard"
+	"item": "amethyst_imbuement:citrine"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:citrine"
+	"item": "minecraft:amethyst_shard"
   },
   "craftB": {
 	"item": "amethyst_imbuement:glowing_fragment"

@@ -1,0 +1,34 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "imbueB": {
+    "item": "amethyst_imbuement:citrine"
+  },
+  "imbueC": {
+    "item": "amethyst_imbuement:citrine"
+  },
+  "imbueD": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:garnet_shovel"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "title": "Glowing Spade",
+  "cost": 13,
+  "resultA": "amethyst_imbuement:glowing_spade",
+  "countA": 1
+}

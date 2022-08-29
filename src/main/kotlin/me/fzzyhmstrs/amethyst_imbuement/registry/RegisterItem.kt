@@ -57,12 +57,16 @@ object RegisterItem {
     //tool and weapon item declarations
     val GLISTERING_TRIDENT = GlisteringTridentItem(Item.Settings().maxDamage(550).group(ItemGroup.COMBAT).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(Item.Settings().maxDamage(500).group(ItemGroup.COMBAT)).also{ regItem["sniper_bow"] = it}
-    val GLOWING_BLADE = SwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["glowing_blade"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_shovel"] = it}
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_pickaxe"] = it}
     val GARNET_AXE = CustomAxeItem(GarnetToolMaterial,5.0f,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_axe"] = it}
     val GARNET_HOE = CustomHoeItem(GarnetToolMaterial,-3,0.0f,FabricItemSettings().group(ItemGroup.TOOLS)).also{ regItem["garnet_hoe"] = it}
+    val GLOWING_BLADE = CustomSwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_blade")) .also{ regItem["glowing_blade"] = it}
+    val GLOWING_SPADE = CustomShovelItem(GlowingToolMaterial,1.5f ,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_spade")) .also{ regItem["glowing_spade"] = it}
+    val GLOWING_PICK = CustomPickaxeItem(GlowingToolMaterial,1 ,-2.8f,FabricItemSettings().group(ItemGroup.TOOLS)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_pick")) .also{ regItem["glowing_pick"] = it}
+    val GLOWING_AXE = CustomAxeItem(GlowingToolMaterial,5.0f ,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_axe")) .also{ regItem["glowing_axe"] = it}
+    val GLOWING_HOE = CustomHoeItem(GlowingToolMaterial,-3 ,-3.0f,FabricItemSettings().group(ItemGroup.TOOLS)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_hoe")) .also{ regItem["glowing_hoe"] = it}
     val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["opaline_scepter"] = it}
     val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["iridescent_scepter"] = it}
     val LUSTROUS_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE)).also{ regItem["lustrous_scepter"] = it}
@@ -73,15 +77,12 @@ object RegisterItem {
         
     // scepter upgrade scepters
     val FURIOUS_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.FURIOUS))
         .also{ regItem["furious_scepter"] = it}
     val WITTY_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withAugments(listOf(RegisterEnchantment.SHINE))
         .withModifiers(listOf(RegisterModifier.WITTY))
         .also{ regItem["witty_scepter"] = it}
     val GRACEFUL_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withAugments(listOf(RegisterEnchantment.REGENERATE))
         .withModifiers(listOf(RegisterModifier.GRACEFUL))
         .also{ regItem["graceful_scepter"] = it}
     val BLAZING_SCEPTER = BlazingScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
