@@ -95,7 +95,7 @@ object RegisterVillager {
         }
 
         if(FabricLoader.getInstance().isModLoaded("ctov")){
-            if (AiConfig.villages.enableDesertWorkshops){
+            if (AiConfig.villages.enableCtovWorkshops){
                 val desertId = Identifier(AI.MOD_ID + ":village/desert_crystal_workshop")
                 FabricStructurePoolRegistry.register(Identifier("ctov:village/desert/house"),desertId,AiConfig.villages.desertWorkshopWeight, StructureProcessorLists.EMPTY)
                 val desertOasisId = Identifier(AI.MOD_ID + ":village/desert_oasis_crystal_workshop")
