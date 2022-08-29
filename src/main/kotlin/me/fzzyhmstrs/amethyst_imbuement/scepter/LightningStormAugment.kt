@@ -38,7 +38,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,1.0,0.0)
             .withDuration(0,120,0)
-            .withDamage(5.0f)
+            .withDamage(5.0f,1.0f)
 
     override val delay = PerLvlI(21,-3,0)
 
@@ -120,12 +120,17 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         while (tries >= 0) {
             val rnd1 = data.entityList.size
             val rnd2 = data.world.random.nextInt(rnd1)
-            val rnd3 = data.world.random.nextFloat()
             val entity = data.entityList[rnd2]
+            val rnd3 = if(!entity.isAlive) {
+                data.world.random.nextDouble()
+            } else {
+                0.0
+            }
+
             val bP: BlockPos
             val bpXrnd: Int
             val bpZrnd: Int
-            if (rnd3 >0.3) {
+            if (rnd3 > 0.3) {
                 bP = entity.blockPos
                 bpXrnd = data.world.random.nextInt(5) - 2
                 bpZrnd = data.world.random.nextInt(5) - 2

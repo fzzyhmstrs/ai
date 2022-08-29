@@ -18,7 +18,7 @@ import net.minecraft.sound.SoundEvents
 open class EmpoweredSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(6.0F,3.0F,0.0F).withAmplifier(0,1,0)
+        get() = super.baseEffect.withDamage(7.5F,1.5F,0.0F)
 
 
     override fun particleType(): DefaultParticleType{

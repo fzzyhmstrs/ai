@@ -19,7 +19,7 @@ class FlamewaveAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summ
     FireAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(6.0F,0.0F,0.0F)
+        get() = super.baseEffect.withDamage(5.8F,0.2F,0.0F).withDuration(78,2)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = 1.5F

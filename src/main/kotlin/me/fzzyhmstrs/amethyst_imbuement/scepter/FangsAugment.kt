@@ -33,7 +33,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-        val d: Double
+        var d: Double
         val e: Double
         if (target != null){
             d = min(target.y, user.y)
@@ -57,7 +57,10 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 effect,
                 level
             )
-            if (success) successes++
+            if (success > 0) {
+                successes++
+                d = success
+            }
         }
         val bl = successes > 0
         if (bl){

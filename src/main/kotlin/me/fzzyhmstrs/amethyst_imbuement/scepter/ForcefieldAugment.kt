@@ -25,7 +25,7 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
 
     private val offset = intArrayOf(-2,2)
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(2400)
+        get() = super.baseEffect.withDuration(2200,200)
 
     override fun effect(
         world: World,
