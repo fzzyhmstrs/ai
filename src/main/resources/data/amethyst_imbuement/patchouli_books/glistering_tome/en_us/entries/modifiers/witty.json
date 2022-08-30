@@ -1,0 +1,21 @@
+{    
+"name": "Witty",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/witty.png",
+"sortnum": 3,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects wit spells only. Doubles Wit XP gained on spell-cast, and the range of effect of wit spells. Affects:$(li)Path of the Sojourn$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Witty",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/witty.png",
+"ancestor": "N/A"
+"descendent": "$(l:amethyst_imbuement:modifiers/genius)Genius$()"
+"mod_type": "$(2)Spell Casting$()"
+"mod_text": "Your scepter links with your mind and shares in your cleverness. Imbued with the Witty Scepter and persists on that scepters paths."
+}
+]
+}

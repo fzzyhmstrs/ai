@@ -1,0 +1,21 @@
+{    
+"name": "Dangerous",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/dangerous.png",
+"sortnum": 27,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases spell damage by 12.5%. Affects:$(li)Path of Lethality$(li)Path of the Equinox$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Dangerous",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/dangerous.png",
+"ancestor": "N/A"
+"descendent": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()"
+"mod_type": "$(2)Damage$()"
+"mod_text": "Your scepter glints with harmful intent. Imbues on the Dangerous Scepter and persists of the Path of Lethality and the Path of the Equinox."
+}
+]
+}
