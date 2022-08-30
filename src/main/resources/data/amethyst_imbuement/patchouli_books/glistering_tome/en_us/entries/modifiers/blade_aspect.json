@@ -1,0 +1,21 @@
+{    
+"name": "Blade Aspect",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/blade_aspect.png",
+"sortnum": 33,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Only affect slash-type spells. Slash spells deal 0.5 additional damage, have 10% reduced cooldown, and have slightly wider area of effect. Affects:$(li)Path of Lethality"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Blade Aspect",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/blade_aspect.png",
+"ancestor": "N/A"
+"descendent": "N/A"
+"mod_type": "$(2)Damage$()"
+"mod_text": "Your scepter grows a keen edge. It now can deal damage like a sword. Imbues onto the Scepter of Blades and persists through the Path of Lethality"
+}
+]
+}

@@ -1,0 +1,21 @@
+{    
+"name": "Genius",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/genius.png",
+"sortnum": 5,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects wit spells. Triples Wit XP gained on spell-cast, increases the range of effect of wit spells, and reduces their cooldown 10%. Affects:$(li)Path of the Sojourn$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Graceful",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/genius.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/witty)Witty$()"
+"descendent": "N/A"
+"mod_type": "$(2)Spell Casting$()"
+"mod_text": "Your scepter blazes with your shared brilliance. Manifests if you complete the Path of the Sojourn"
+}
+]
+}

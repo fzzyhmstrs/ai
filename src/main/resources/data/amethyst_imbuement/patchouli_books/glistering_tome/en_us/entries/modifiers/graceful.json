@@ -1,0 +1,21 @@
+{    
+"name": "Graceful",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/graceful.png",
+"sortnum": 7,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects grace spells only. Doubles Grace XP gained on spell-cast, and the duration of grace spells by 15%. Affects:$(li)Path of Redemption$(li)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Graceful",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/graceful.png",
+"ancestor": "N/A"
+"descendent": "N/A"
+"mod_type": "$(2)Spell Casting$()"
+"mod_text": "Your scepter bathes in your inner kindness. Imbued with the Graceful Scepter and persists on that scepters paths."
+}
+]
+}

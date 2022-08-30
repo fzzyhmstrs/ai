@@ -1,0 +1,21 @@
+{    
+"name": "Necrotic",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/necrotic.png",
+"sortnum": 31,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Offensive spells and spells that otherwise negatively affect an enemy now apply wither to the target(s). Affects:$(li)Path of Lethality$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Necrotic",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/necrotic.png",
+"ancestor": "N/A"
+"descendent": "N/A"
+"mod_type": "$(2)Status Effects$()"
+"mod_text": "Your scepter oozes a vile pitch. Imbues onto the Corrupted Scepter and persists through the Path of Lethality"
+}
+]
+}

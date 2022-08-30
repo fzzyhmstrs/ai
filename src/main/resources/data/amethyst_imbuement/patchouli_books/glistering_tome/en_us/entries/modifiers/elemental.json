@@ -1,0 +1,21 @@
+{    
+"name": "Elemental",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/elemental.png",
+"sortnum": 41,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects all elemental spells. Elemental spells cooldown and mana cost are decreased by 10%, spell level increases by 1, spell range increases 10%, spell effect amplification increases a level and effect duration increases 10%. Affects:$(li)Path of the Equinox$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Elemental",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/elemental.png",
+"ancestor": "N/A"
+"descendent": "N/A"
+"mod_type": "$(2)Elemental Spells$()"
+"mod_text": "Your scepter is in tune with all the elements. Imbues on the Equinox, available only if following the Path of the Equinox."
+}
+]
+}

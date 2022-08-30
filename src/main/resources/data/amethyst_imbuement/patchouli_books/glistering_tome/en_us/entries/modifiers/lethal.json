@@ -1,0 +1,21 @@
+{    
+"name": "Lethal",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lethal.png",
+"sortnum": 29,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases spell damage by 25% and adds 0.5 flat damage. Affects:$(li)Path of Lethality$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Lethal",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lethal.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()"
+"descendent": "N/A"
+"mod_type": "$(2)Damage$()"
+"mod_text": "Your scepter hungers with bloodlust. Available on Lethality if you complete the Path of Lethality."
+}
+]
+}

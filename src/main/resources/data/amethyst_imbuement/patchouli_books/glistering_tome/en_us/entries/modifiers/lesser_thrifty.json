@@ -1,0 +1,40 @@
+{    
+"name": "Lesser Thrifty",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lesser_thrifty.png",
+"sortnum": 15,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Reduces the mana cost of your scepter spells by 5%. This modifier is independent of scepter. Affects:$(li)All scepters$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Lesser Thrifty",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lesser_thrifty.png",
+"ancestor": "N/A"
+"descendent": "$(l:amethyst_imbuement:modifiers/thrifty)Thrifty$()"
+"mod_type": "$(2)Spell Casting$()"
+"mod_text": "Your scepter becomes more effective at utilizing it's magical energy. Imbue onto any scepter with the recipe on the next page."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Thrifty Imbuing",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "minecraft:emerald",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:paper",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:paper",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:paper",
+"craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"cost_text": "$(l)Level Cost: $(2)19$()"
+}
+]
+}
