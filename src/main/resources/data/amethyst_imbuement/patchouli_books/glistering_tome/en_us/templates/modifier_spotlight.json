@@ -1,0 +1,45 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "Altar Enhancing",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:image",                        
+"x": 35,            
+"y": 10,
+"image": "amethyst_imbuement:textures/gui/patchouli/modifier_spotlight.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:image",                        
+"x": 42,            
+"y": 12,
+"image": "#mod_image",
+"width": 32,
+"height": 16,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:item", 
+"item": "#addition_item#",
+"framed": true,
+"x": 50,            
+"y": 42
+},
+{            
+"type": "patchouli:text",            
+"text": "#modifier_text#",            
+"x": 5,            
+"y": 40        
+}
+]}
