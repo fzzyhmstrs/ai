@@ -1,0 +1,30 @@
+{    
+"name": "Energetic Opal",
+"icon": "amethyst_imbuement:energetic_opal",
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+	"type": "patchouli:text",            
+	"text": "$(l)Meaning:$() Channeling of all aspects of reality $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce energetic opal in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Charged Moonstone Imbuing",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:glowing_fragment",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "amethyst_imbuement:glowing_fragment",
+"craft_e_item": "amethyst_imbuement:opal",
+"craft_f_item": "amethyst_imbuement:glowing_fragment",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "amethyst_imbuement:glowing_fragment",
+"craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:charged_moonstone",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}      
+]
+}

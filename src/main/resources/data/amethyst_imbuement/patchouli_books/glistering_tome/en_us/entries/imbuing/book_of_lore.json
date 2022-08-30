@@ -1,0 +1,30 @@
+{    
+"name": "Book of Lore",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Books of lore hold the secrets to imbuing spells. This recipe is a recycling recipe, converting leftover materials into new books, it is not efficient. Explore the world or trade with villagers for more books."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Book of Lore Imbuing",
+"imbue_a_item": "amethyst_imbuement:gem_of_promise",
+"imbue_b_item": "amethyst_imbuement:gem_of_promise",
+"imbue_c_item": "amethyst_imbuement:gem_of_promise",
+"imbue_d_item": "amethyst_imbuement:gem_of_promise",
+"craft_a_item": "amethyst_imbuement:gem_dust",
+"craft_b_item": "amethyst_imbuement:gem_dust",
+"craft_c_item": "amethyst_imbuement:gem_dust",
+"craft_d_item": "amethyst_imbuement:gem_dust",
+"craft_e_item": "minecraft:enchanted_book",
+"craft_f_item": "amethyst_imbuement:gem_dust",
+"craft_g_item": "amethyst_imbuement:gem_dust",
+"craft_h_item": "amethyst_imbuement:gem_dust",
+"craft_i_item": "amethyst_imbuement:gem_dust",
+"result_item": "amethyst_imbuement:book_of_lore",
+"cost_text": "$(l)Level Cost: $(2)19$()"
+}
+]
+}
