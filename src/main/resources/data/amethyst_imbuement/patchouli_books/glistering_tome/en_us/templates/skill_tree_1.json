@@ -1,53 +1,150 @@
-{    "components": [        
-{            
-"type": "patchouli:header",            
-"text": "Altar Enhancing",            
-"x": -1,            
-"y": -1        
-},
-{
-"type": "patchouli:item", 
-"item": "#input_item#",
-"framed": true,
-"x": 50,            
-"y": 18
-},
-{
-"type": "patchouli:item", 
-"item": "#addition_item#",
-"framed": true,
-"x": 50,            
-"y": 42
-},
-{
-"type": "patchouli:item", 
-"item": "#output_item#",
-"framed": true,
-"x": 50,            
-"y": 66
-},
-{
-"type": "patchouli:image",                        
-"x": 35,            
-"y": 46,
-"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
-"width": 9,
-"height": 9,
-"u": 10,
-"v": 0,
-"texture_width": 32,
-"texture_height": 16
-},
-{
-"type": "patchouli:image",                        
-"x": 72,            
-"y": 46,
-"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
-"width": 9,
-"height": 9,
-"u": 0,
-"v": 0,
-"texture_width": 32,
-"texture_height": 16
-}
+{    "components": [
+  {
+    "type": "patchouli:header",
+    "text": "Scepter Upgrade Tree",
+    "x": -1,
+    "y": -1
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:opaline_scepter",
+    "framed": true,
+    "x": 10,
+    "y": 67
+  },
+  {
+    "type": "patchouli:image",
+    "x": 36,
+    "y": 73,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 36,
+    "y": 23,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 36,
+    "y": 125,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:text",
+    "text": "Fury",
+    "color": "FF5555",
+    "x": 34,
+    "y": 25
+  },
+  {
+    "type": "patchouli:text",
+    "text": "Wit",
+    "color": "00AA00",
+    "x": 34,
+    "y": 62
+  },
+  {
+    "type": "patchouli:text",
+    "text": "Grace",
+    "color": "5555FF",
+    "x": 34,
+    "y": 97
+  },
+  {
+    "type": "patchouli:image",
+    "x": 99,
+    "y": 73,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 99,
+    "y": 23,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 99,
+    "y": 125,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:furious_scepter",
+    "framed": true,
+    "x": 52,
+    "y": 17
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:dangerous_scepter",
+    "framed": true,
+    "x": 75,
+    "y": 17
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:witty_scepter",
+    "framed": true,
+    "x": 52,
+    "y": 67
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:skillful_scepter",
+    "framed": true,
+    "x": 75,
+    "y": 67
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:graceful_scepter",
+    "framed": true,
+    "x": 52,
+    "y": 119
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:enduring_scepter",
+    "framed": true,
+    "x": 75,
+    "y": 119
+  }
 ]}

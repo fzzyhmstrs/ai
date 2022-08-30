@@ -100,7 +100,7 @@
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:malachite_figurine"
+"item": "amethyst_imbuement:malachite_figurine",
 "framed": false,
 "x": 7,            
 "y": 95
@@ -125,7 +125,7 @@
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:charged_moonstone,amethyst_imbuement:energetic_opal"
+"item": "amethyst_imbuement:charged_moonstone,amethyst_imbuement:energetic_opal",
 "framed": false,
 "x": 7,            
 "y": 116
@@ -150,9 +150,9 @@
 },
 {
 "type": "patchouli:item",
-"item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick"
+"item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick",
 "framed": false,
 "x": 7,            
 "y": 137
-},
+}
 ]}
