@@ -25,7 +25,7 @@
 	"item": "minecraft:ghast_tear"
   },
   "title": "Regenerate",
-  "cost": 8,
+  "cost": 9,
   "augment": "amethyst_imbuement:regenerate"
 }
 

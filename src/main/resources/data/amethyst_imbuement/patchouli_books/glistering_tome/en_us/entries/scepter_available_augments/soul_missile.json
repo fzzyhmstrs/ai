@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(l)Effect:$() An enhanced version of Magic Missile that deals more damage and pierces armor.$(br)$(l)Magical School:$() $(c)Fury$()$(br)$(l)Mana Cost:$() 2$(br)$(l)Cooldown:$() 0.7 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
+"text": "$(l)Effect:$() An enhanced version of Magic Missile that deals more damage and pierces armor.$(br)$(l)Magical School:$() $(c)Fury$()$(br)$(l)Mana Cost:$() 3$(br)$(l)Cooldown:$() 0.8 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

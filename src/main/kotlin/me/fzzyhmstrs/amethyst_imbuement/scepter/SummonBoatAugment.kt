@@ -52,6 +52,6 @@ class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Sum
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,10,1,imbueLevel,LoreTier.NO_TIER, Items.OAK_BOAT)
+        return AugmentDatapoint(SpellType.WIT,1200,25,1,imbueLevel,LoreTier.NO_TIER, Items.OAK_BOAT)
     }
 }

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.tool
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.fabricmc.yarn.constants.MiningLevels
 import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
 
@@ -9,7 +10,7 @@ import net.minecraft.recipe.Ingredient
 
 object GlowingToolMaterial: ToolMaterial{
     override fun getDurability(): Int {
-        return 185
+        return 333
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 11.5f
@@ -18,7 +19,7 @@ object GlowingToolMaterial: ToolMaterial{
         return 3.5f
     }
     override fun getMiningLevel(): Int {
-        return 1
+        return MiningLevels.NETHERITE
     }
     override fun getEnchantability(): Int {
         return 35
