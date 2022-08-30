@@ -38,8 +38,20 @@
 },
 {            
 "type": "patchouli:text",            
-"text": "#modifier_text#",            
+"text": "Upgrade from: #ancestor#",            
 "x": 5,            
 "y": 40        
+},
+{            
+"type": "patchouli:text",            
+"text": "Upgrades into: #descendent#",            
+"x": 5,            
+"y": 50       
+},
+{            
+"type": "patchouli:text",            
+"text": "#modifier_text#",            
+"x": 5,            
+"y": 50       
 }
 ]}
