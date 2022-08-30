@@ -1,7 +1,7 @@
 {    "components": [        
 {            
 "type": "patchouli:header",            
-"text": "Altar Enhancing",            
+"text": "#modifier_head#",            
 "x": -1,            
 "y": -1        
 },
