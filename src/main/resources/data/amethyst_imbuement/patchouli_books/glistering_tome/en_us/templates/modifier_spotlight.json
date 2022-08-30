@@ -43,8 +43,14 @@
 },
 {            
 "type": "patchouli:text",            
-"text": "#mod_text#",            
+"text": "Modifier type: #mod_type#",            
 "x": 5,            
 "y": 50       
+},
+{            
+"type": "patchouli:text",            
+"text": "#mod_text#",            
+"x": 5,            
+"y": 70      
 }
 ]}
