@@ -1,53 +1,222 @@
-{    "components": [        
-{            
-"type": "patchouli:header",            
-"text": "Altar Enhancing",            
-"x": -1,            
-"y": -1        
-},
-{
-"type": "patchouli:item", 
-"item": "#input_item#",
-"framed": true,
-"x": 50,            
-"y": 18
-},
-{
-"type": "patchouli:item", 
-"item": "#addition_item#",
-"framed": true,
-"x": 50,            
-"y": 42
-},
-{
-"type": "patchouli:item", 
-"item": "#output_item#",
-"framed": true,
-"x": 50,            
-"y": 66
-},
-{
-"type": "patchouli:image",                        
-"x": 35,            
-"y": 46,
-"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
-"width": 9,
-"height": 9,
-"u": 10,
-"v": 0,
-"texture_width": 32,
-"texture_height": 16
-},
-{
-"type": "patchouli:image",                        
-"x": 72,            
-"y": 46,
-"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
-"width": 9,
-"height": 9,
-"u": 0,
-"v": 0,
-"texture_width": 32,
-"texture_height": 16
-}
+{    "components": [
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:blazing_scepter",
+    "framed": true,
+    "x": 10,
+    "y": 4
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:sparking_scepter",
+    "framed": true,
+    "x": 33,
+    "y": 4
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:frosted_scepter",
+    "framed": true,
+    "x": 56,
+    "y": 4
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 10,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_blades",
+    "framed": true,
+    "x": 10,
+    "y": 28
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:corrupted_scepter",
+    "framed": true,
+    "x": 33,
+    "y": 28
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 34,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:builders_scepter",
+    "framed": true,
+    "x": 10,
+    "y": 55
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:travelers_scepter",
+    "framed": true,
+    "x": 33,
+    "y": 55
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_recall",
+    "framed": true,
+    "x": 56,
+    "y": 55
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 61,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_summoning",
+    "framed": true,
+    "x": 10,
+    "y": 79
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_insight",
+    "framed": true,
+    "x": 33,
+    "y": 79
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 85,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_the_pacifist",
+    "framed": true,
+    "x": 10,
+    "y": 106
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:clerics_scepter",
+    "framed": true,
+    "x": 33,
+    "y": 106
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:bardic_scepter",
+    "framed": true,
+    "x": 56,
+    "y": 106
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 112,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_the_paladin",
+    "framed": true,
+    "x": 10,
+    "y": 130
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_the_vanguard",
+    "framed": true,
+    "x": 33,
+    "y": 130
+  },
+  {
+    "type": "patchouli:image",
+    "x": 82,
+    "y": 136,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 20,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:equinox",
+    "framed": true,
+    "x": 95,
+    "y": 4
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:lethality",
+    "framed": true,
+    "x": 95,
+    "y": 28
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:sojourn",
+    "framed": true,
+    "x": 95,
+    "y": 55
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:resonance",
+    "framed": true,
+    "x": 95,
+    "y": 79
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:redemption",
+    "framed": true,
+    "x": 95,
+    "y": 106
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:aegis",
+    "framed": true,
+    "x": 95,
+    "y": 130
+  }
+
 ]}
