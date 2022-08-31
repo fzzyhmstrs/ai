@@ -17,14 +17,14 @@ object RegisterModifier {
     val WITTY = AugmentModifier(Identifier(AI.MOD_ID,"witty")).withXpMod(SpellType.WIT,1).withRange(0.25,0.0,15.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).withDescendant(GENIUS).also { regMod.add(it) }
     val GRACEFUL = AugmentModifier(Identifier(AI.MOD_ID,"graceful")).withXpMod(SpellType.GRACE,1).withDuration(0,0,15).withSpellToAffect(ModifierPredicates.GRACEFUL_PREDICATE).also { regMod.add(it) }
     val NECROTIC = AugmentModifier(Identifier(AI.MOD_ID,"necrotic")).withConsumer(ModifierConsumers.NECROTIC_CONSUMER).also { regMod.add(it) }
-    val SAINTS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"saints_pact"), cooldownModifier = 75.0, manaCostModifier = 50.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE) .also { regMod.add(it) }
-    val HEALERS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"healers_pact"), cooldownModifier = 50.0, manaCostModifier = 20.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE).withDescendant(SAINTS_PACT) .also { regMod.add(it) }
+    val SAINTS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"saints_pact"), cooldownModifier = 90.0, manaCostModifier = 65.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE) .also { regMod.add(it) }
+    val HEALERS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"healers_pact"), cooldownModifier = 35.0, manaCostModifier = 35.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE).withDescendant(SAINTS_PACT) .also { regMod.add(it) }
     val SAINTS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"saints_grace")).withAmplifier(3).withDuration(durationPercent = 100).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE) .also { regMod.add(it) }
-    val HEALERS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"healers_grace")).withAmplifier(2).withDuration(durationPercent = 50).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE).withDescendant(SAINTS_GRACE) .also { regMod.add(it) }
-    val LETHAL_PACT = AugmentModifier(Identifier(AI.MOD_ID,"pact_of_danger"), cooldownModifier = 66.6666, manaCostModifier = 66.6666).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE) .also { regMod.add(it) }
-    val DANGEROUS_PACT= AugmentModifier(Identifier(AI.MOD_ID,"pact_of_lethality"), cooldownModifier = 33.3333, manaCostModifier = 33.3333).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE).withDescendant(
+    val HEALERS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"healers_grace")).withAmplifier(1).withDuration(durationPercent = 50).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE).withDescendant(SAINTS_GRACE) .also { regMod.add(it) }
+    val LETHAL_PACT = AugmentModifier(Identifier(AI.MOD_ID,"pact_of_danger"), cooldownModifier = 65.0, manaCostModifier = 65.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE) .also { regMod.add(it) }
+    val DANGEROUS_PACT= AugmentModifier(Identifier(AI.MOD_ID,"pact_of_lethality"), cooldownModifier = 25.0, manaCostModifier = 25.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE).withDescendant(
         LETHAL_PACT) .also { regMod.add(it) }
-    val HEALING = AugmentModifier(Identifier(AI.MOD_ID,"healing")).withConsumer(ModifierConsumers.HEALING_CONSUMER).withDescendant(HEALERS_GRACE).also { regMod.add(it) }
+    val HEALING = AugmentModifier(Identifier(AI.MOD_ID,"healing")).withConsumer(ModifierConsumers.HEALING_CONSUMER).also { regMod.add(it) }
     val SMITING = AugmentModifier(Identifier(AI.MOD_ID,"smiting")).withConsumer(ModifierConsumers.SMITING_CONSUMER).also { regMod.add(it) }
     val INSIGHTFUL = AugmentModifier(Identifier(AI.MOD_ID,"insightful")).withConsumer(ModifierConsumers.INSIGHTFUL_CONSUMER).also { regMod.add(it) }
     val LETHAL = AugmentModifier(Identifier(AI.MOD_ID,"lethal")).withDamage(0.5F,0.0F,25.0F).also { regMod.add(it) }
