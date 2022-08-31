@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Increases the duration of spell effects by 50%. Affects:$(li)Path of Redemption$(li)Path of the Aegis$()"
+"text": "Increases the duration of spell effects by 65%. Affects:$(li)Path of Redemption$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
@@ -15,7 +15,7 @@
 "ancestor": "$(l:amethyst_imbuement:modifiers/enduring)Enduring$()",
 "descendant": "N/A",
 "mod_type": "$(2)Spell Duration$()",
-"mod_text": "Your scepters spells are incredibly long-lasting. Manifests on Redemption if you complete the Enduring Bardic Path of Redemption. Manifests on the Aegis if you completed the Paladins Enduring Path of the Aegis."
+"mod_text": "Your scepters spells are incredibly long-lasting. Manifests on Redemption if you complete the Enduring Bardic Path of Redemption."
 }
 ]
 }
