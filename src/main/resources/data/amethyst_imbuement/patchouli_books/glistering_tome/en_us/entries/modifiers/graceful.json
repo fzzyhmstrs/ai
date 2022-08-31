@@ -13,7 +13,7 @@
 "mod_head": "Graceful",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/graceful.png",
 "ancestor": "N/A",
-"descendant": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/elegant)Elegant$()",
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter bathes in your inner kindness. Imbued on the Graceful Scepter and persists on that scepter's paths."
 }
