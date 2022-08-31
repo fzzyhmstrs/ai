@@ -1,0 +1,21 @@
+{    
+"name": "Enraged",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/enraged.png",
+"sortnum": 2,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects fury spells only. Doubles Fury XP gained on spell-cast, increases fury spell level by 1, and adds 0.4 flat damage. Affects:$(li)Path of the Equinox$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Enraged",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enraged.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "Your scepter blazes with your rage and anger. Manifests on the Equinox when you complete the Furious Path of the Equinox."
+}
+]
+}
