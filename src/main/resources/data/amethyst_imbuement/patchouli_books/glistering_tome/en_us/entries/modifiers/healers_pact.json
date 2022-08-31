@@ -15,7 +15,7 @@
 "ancestor": "$(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$()",
 "descendant": "N/A",
 "mod_type": "$(2)Pact$()",
-"mod_text": "Your scepter has become bound to the mission of healing. Imbues onto the Bardic Scepter and persists on the Path of Redemption"
+"mod_text": "Your scepter has become bound to the mission of healing. Imbues onto the Scepter of the Pacifist and persists on the Path of Redemption"
 }
 ]
 }
