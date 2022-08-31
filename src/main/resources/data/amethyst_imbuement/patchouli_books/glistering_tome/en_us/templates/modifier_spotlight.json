@@ -37,7 +37,7 @@
 },
 {            
 "type": "patchouli:text",            
-"text": "Upgrades into: #descendent#",            
+"text": "Upgrades into: #descendant#",
 "x": 5,            
 "y": 50       
 },

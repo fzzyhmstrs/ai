@@ -48,6 +48,11 @@ object ModifierPredicates {
         return augment !is HealerAugment
     }
 
+    val DANGER_PACT_PREDICATE = Predicate {id: Identifier -> dangerPactPredicate(id)}
+    private fun dangerPactPredicate(id: Identifier): Boolean{
+        return  AugmentHelper.getAugmentType(id.toString()) != SpellType.FURY
+    }
+
     val FIRE_PREDICATE = Predicate {id: Identifier -> firePredicate(id)}
     private fun firePredicate(id: Identifier): Boolean{
         val augment = Registry.ENCHANTMENT.get(id)?:return false

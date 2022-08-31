@@ -1,0 +1,21 @@
+{    
+"name": "Skillful",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/skillful.png",
+"sortnum": 47,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases the level of cast spells by 1. Affects:$(li)Path of the Sojourn$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Skillful",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/skillful.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/masterful)Masterful$()",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "Your scepter has grown skilled at casting its spells. Imbued onto the Skillful Scepter and persists through the Path of the Sojourn or the Path of Resonance"
+}
+]
+}

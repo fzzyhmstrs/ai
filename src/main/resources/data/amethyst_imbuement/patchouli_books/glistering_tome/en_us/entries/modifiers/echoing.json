@@ -1,0 +1,21 @@
+{    
+"name": "Echoing",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/echoing.png",
+"sortnum": 47,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Spells cast have a 33% chance of being cast again for free 1 second later. Affects:$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Echoing",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/echoing.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Duplication$()",
+"mod_text": "Your scepter rings sweetly like wind chimes. Available on Resonance if you complete the Path of Resonance"
+}
+]
+}

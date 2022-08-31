@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.BuilderAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.PlaceItemAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -15,7 +16,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.world.World
 
-class ShineAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot) {
+class ShineAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot), BuilderAugment {
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         return RaycasterUtil.raycastBlock(entity = user) != null

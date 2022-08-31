@@ -1,0 +1,21 @@
+{    
+"name": "Insightful",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/insightful.png",
+"sortnum": 45,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Mobs drops extra experience when slain by the spell caster. Affects:$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Insightful",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/insightful.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)World Interaction$()",
+"mod_text": "Your scepter yearns to learn form the world around it. Imbues onto the Scepter of Insight and persists through the Path of Resonance"
+}
+]
+}

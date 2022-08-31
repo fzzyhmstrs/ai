@@ -12,10 +12,10 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Lesser Reach",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lesser_reach.png",
-"ancestor": "N/A"
-"descendent": "$(l:amethyst_imbuement:modifiers/reach)Reach$()"
-"mod_type": "$(2)Spell Range$()"
-"mod_text": "Your scepter can project its energy further. Imbued onto the Scepter of Insight, the Builders Scepter, and the Scepter of Recall."
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/reach)Reach$()",
+"mod_type": "$(2)Spell Range$()",
+"mod_text": "Your scepter can project its energy further. Imbues onto the Scepter of Insight, the Builders Scepter, and the Scepter of Recall."
 }
 ]
 }

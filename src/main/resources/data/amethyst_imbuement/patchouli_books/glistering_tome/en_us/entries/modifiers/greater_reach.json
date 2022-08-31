@@ -12,10 +12,10 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Greater Reach",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/greater_reach.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/reach)Reach$()"
-"descendent": "N/A"
-"mod_type": "$(2)Spell Range$()"
-"mod_text": "Your scepter can now stretch its magic great distances. Imbues onto the Scepter of Recall."
+"ancestor": "$(l:amethyst_imbuement:modifiers/reach)Reach$()",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Range$()",
+"mod_text": "Your scepter can now stretch its magic great distances. Imbues onto the Scepter of Recall and persists on the Path of the Sojourn."
 }
 ]
 }

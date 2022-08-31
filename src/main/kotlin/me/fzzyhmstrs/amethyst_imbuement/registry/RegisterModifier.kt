@@ -21,6 +21,9 @@ object RegisterModifier {
     val HEALERS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"healers_pact"), cooldownModifier = 50.0, manaCostModifier = 20.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE).withDescendant(SAINTS_PACT) .also { regMod.add(it) }
     val SAINTS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"saints_grace")).withAmplifier(3).withDuration(durationPercent = 100).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE) .also { regMod.add(it) }
     val HEALERS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"healers_grace")).withAmplifier(2).withDuration(durationPercent = 50).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE).withDescendant(SAINTS_GRACE) .also { regMod.add(it) }
+    val LETHAL_PACT = AugmentModifier(Identifier(AI.MOD_ID,"pact_of_danger"), cooldownModifier = 66.6666, manaCostModifier = 66.6666).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE) .also { regMod.add(it) }
+    val DANGEROUS_PACT= AugmentModifier(Identifier(AI.MOD_ID,"pact_of_lethality"), cooldownModifier = 33.3333, manaCostModifier = 33.3333).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE).withDescendant(
+        LETHAL_PACT) .also { regMod.add(it) }
     val HEALING = AugmentModifier(Identifier(AI.MOD_ID,"healing")).withConsumer(ModifierConsumers.HEALING_CONSUMER).withDescendant(HEALERS_GRACE).also { regMod.add(it) }
     val SMITING = AugmentModifier(Identifier(AI.MOD_ID,"smiting")).withConsumer(ModifierConsumers.SMITING_CONSUMER).also { regMod.add(it) }
     val INSIGHTFUL = AugmentModifier(Identifier(AI.MOD_ID,"insightful")).withConsumer(ModifierConsumers.INSIGHTFUL_CONSUMER).also { regMod.add(it) }
@@ -30,9 +33,9 @@ object RegisterModifier {
     val GREATER_REACH = AugmentModifier(Identifier(AI.MOD_ID,"greater_reach")).withRange(rangePercent = 18.0).also { regMod.add(it) }
     val REACH = AugmentModifier(Identifier(AI.MOD_ID,"reach")).withDescendant(GREATER_REACH).withRange(rangePercent = 12.0).also { regMod.add(it) }
     val LESSER_REACH = AugmentModifier(Identifier(AI.MOD_ID,"lesser_reach")).withDescendant(REACH).withRange(rangePercent = 6.0).also { regMod.add(it) }
-    val GREATER_ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"greater_enduring")).withDuration(durationPercent = 25).also { regMod.add(it) }
-    val ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"enduring")).withDescendant(GREATER_ENDURING).withDuration(durationPercent = 15).also { regMod.add(it) }
-    val LESSER_ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"lesser_enduring")).withDescendant(ENDURING).withDuration(durationPercent = 10).also { regMod.add(it) }
+    val GREATER_ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"greater_enduring")).withDuration(durationPercent = 50).also { regMod.add(it) }
+    val ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"enduring")).withDescendant(GREATER_ENDURING).withDuration(durationPercent = 30).also { regMod.add(it) }
+    val LESSER_ENDURING = AugmentModifier(Identifier(AI.MOD_ID,"lesser_enduring")).withDescendant(ENDURING).withDuration(durationPercent = 15).also { regMod.add(it) }
     val MASTERFUL = AugmentModifier(Identifier(AI.MOD_ID,"masterful"), levelModifier = 2).also { regMod.add(it) }
     val SKILLFUL = AugmentModifier(Identifier(AI.MOD_ID,"skillful"), levelModifier = 1).withDescendant(MASTERFUL).also { regMod.add(it) }
     val AEGIS = AugmentModifier(Identifier(AI.MOD_ID,"aegis")).withConsumer(ModifierConsumers.AEGIS_CONSUMER).also { regMod.add(it) }

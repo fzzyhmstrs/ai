@@ -114,7 +114,7 @@ object RegisterItem {
         .also{ regItem["clerics_scepter"] = it}
     val BARDIC_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.REGENERATE))
-        .withModifiers(listOf(RegisterModifier.GREATER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.ENDURING, ModifierRegistry.ATTUNED))
         .also{ regItem["bardic_scepter"] = it}
     val SCEPTER_OF_SUMMONING = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
@@ -141,13 +141,13 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.NECROTIC))
         .also{ regItem["corrupted_scepter"] = it}
     val DANGEROUS_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withModifiers(listOf(RegisterModifier.DANGEROUS))
+        .withModifiers(listOf(RegisterModifier.DANGEROUS, RegisterModifier.DANGEROUS_PACT))
         .also{ regItem["dangerous_scepter"] = it}
     val SKILLFUL_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.SKILLFUL))
         .also{ regItem["skillful_scepter"] = it}
     val ENDURING_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
-        .withModifiers(listOf(RegisterModifier.ENDURING))
+        .withModifiers(listOf(RegisterModifier.LESSER_ENDURING))
         .also{ regItem["enduring_scepter"] = it}
     val SCEPTER_OF_INSIGHT = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
@@ -157,9 +157,9 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))
         .withModifiers(listOf(RegisterModifier.TRAVELER))
         .also{ regItem["travelers_scepter"] = it}
-    val LETHALITY = LethalityScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
+    val LETHALITY = LethalityScepterItem(LethalityToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.FANGS))
-        .withModifiers(listOf(RegisterModifier.DANGEROUS, ModifierRegistry.LESSER_THRIFTY))
+        .withModifiers(listOf(RegisterModifier.DANGEROUS,RegisterModifier.DANGEROUS_PACT, ModifierRegistry.LESSER_THRIFTY))
         .also{ regItem["lethality"] = it}
     val RESONANCE = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.RESONATE))

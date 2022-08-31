@@ -12,10 +12,10 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Dangerous",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/dangerous.png",
-"ancestor": "N/A"
-"descendent": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()"
-"mod_type": "$(2)Damage$()"
-"mod_text": "Your scepter glints with harmful intent. Imbues on the Dangerous Scepter and persists of the Path of Lethality and the Path of the Equinox."
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()",
+"mod_type": "$(2)Damage$()",
+"mod_text": "Your scepter glints with harmful intent. $(o)it can now deal damage like a sword.$() Imbues on the Dangerous Scepter and persists of the Path of Lethality and the Path of the Equinox."
 }
 ]
 }

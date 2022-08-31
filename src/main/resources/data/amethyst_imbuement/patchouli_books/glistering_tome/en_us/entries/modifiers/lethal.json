@@ -12,10 +12,10 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Lethal",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lethal.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()"
-"descendent": "N/A"
-"mod_type": "$(2)Damage$()"
-"mod_text": "Your scepter hungers with bloodlust. Available on Lethality if you complete the Path of Lethality."
+"ancestor": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()",
+"descendant": "N/A",
+"mod_type": "$(2)Damage$()",
+"mod_text": "Your scepter hungers with bloodlust. $(o)it can now deal damage like a sword.$() Manifests if you complete the Dangerous Path of Lethality."
 }
 ]
 }

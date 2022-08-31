@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Necrotic",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/necrotic.png",
-"ancestor": "N/A"
-"descendent": "N/A"
-"mod_type": "$(2)Status Effects$()"
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Status Effects$()",
 "mod_text": "Your scepter oozes a vile pitch. Imbues onto the Corrupted Scepter and persists through the Path of Lethality"
 }
 ]

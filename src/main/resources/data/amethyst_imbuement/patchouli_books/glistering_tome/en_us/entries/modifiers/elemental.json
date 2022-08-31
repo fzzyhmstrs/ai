@@ -12,10 +12,10 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Elemental",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/elemental.png",
-"ancestor": "N/A"
-"descendent": "N/A"
-"mod_type": "$(2)Elemental Spells$()"
-"mod_text": "Your scepter is in tune with all the elements. Imbues on the Equinox, available only if following the Path of the Equinox."
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Elemental Spells$()",
+"mod_text": "Your scepter is in tune with all the elements. Imbues onto the Equinox, available only if following the Path of the Equinox."
 }
 ]
 }

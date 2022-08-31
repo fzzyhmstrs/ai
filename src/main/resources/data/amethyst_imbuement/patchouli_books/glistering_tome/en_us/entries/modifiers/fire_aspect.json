@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Fire Aspect",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/fire_aspect.png",
-"ancestor": "N/A"
-"descendent": "N/A"
-"mod_type": "$(2)Elemental Damage$()"
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Elemental Damage$()",
 "mod_text": "Your scepter feels warm to the touch. Imbues onto the Blazing Scepter and persists through the Path of the Equinox"
 }
 ]
