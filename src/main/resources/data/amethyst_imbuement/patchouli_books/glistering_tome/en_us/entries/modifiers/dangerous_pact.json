@@ -1,21 +1,21 @@
 {    
-"name": "Healers Pact",
-"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/saints_pact.png",
-"sortnum": 63,
+"name": "Pact of Danger",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/pact_of_danger.png",
+"sortnum": 31,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Affects all non-healing spells. Affected spells cooldown increased by 50% and mana cost increased 20%. Affects:$(li)Path of Redemption$()"
+"text": "Affects all non-fury spells. Affected spells cooldown and mana cost are increased by 33.3%. Affects:$(li)Path of Lethality$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
-"mod_head": "Saints Pact",
-"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/saints_pact.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$()",
-"descendant": "N/A",
+"mod_head": "Pact of Danger",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/pact_of_danger.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/pact_of_Lethality)Pact of Lethality$()",
 "mod_type": "$(2)Pact$()",
-"mod_text": "Your scepter has become bound to the mission of healing. Imbues onto the Bardic Scepter and persists on the Path of Redemption"
+"mod_text": "Your scepters hunger for combat has reduced its ability to cast other spells. Imbues onto the Dangerous Scepter and persists on the Path of Lethality"
 }
 ]
 }
