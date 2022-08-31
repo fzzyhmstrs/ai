@@ -1,0 +1,21 @@
+{    
+"name": "Pact of Lethality",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/pact_of_lethality.png",
+"sortnum": 33,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects all non-fury spells. Affected spells cooldown and mana cost are increased by 33.3%. Affects:$(li)Path of Lethality$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Pact of Lethality",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/pact_of_lethality.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$()",
+"descendant": "N/A",
+"mod_type": "$(2)Pact$()",
+"mod_text": "Your scepters hunger for combat has reduced its ability to cast other spells. Imbues onto the Dangerous Scepter and persists on the Path of Lethality"
+}
+]
+}

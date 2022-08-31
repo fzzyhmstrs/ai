@@ -1,0 +1,21 @@
+{    
+"name": "Elegant",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/elegant.png",
+"sortnum": 8,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects grace spells only. Triple Grace XP gained on spell-cast, and increases the duration of grace spells by 30%. Affects:$(li)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Elegant",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/elegant.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/graceful)Graceful$()"
+"descendent": "N/A"
+"mod_type": "$(2)Spell Casting$()"
+"mod_text": "Your scepter glows with grace and charity. Manifests on the Scepter of the Vanguard as you progress on the Vanguards Path of the Aegis"
+}
+]
+}
