@@ -1,12 +1,12 @@
 {    
-"name": "Attuned",    
+"name": "Furious",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/furious.png",
 "sortnum": 1,  
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Affects fury spells only. Doubles Fury XP gained on spell-cast, and increases fury spell levels by 1. Affects:$(li)Path of Lethality$(li)Path of the Equinox$()"
+"text": "Affects fury spells only. Doubles Fury XP gained on spell-cast, and adds 0.2 flat damage. Affects:$(li)Path of Lethality$(li)Path of the Equinox$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
