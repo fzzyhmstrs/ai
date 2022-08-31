@@ -1,0 +1,21 @@
+{    
+"name": "Warrior of Light",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png",
+"sortnum": 79,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Spell cooldowns are decreased by 10%. Spells that hit or affect an undead mob deal 4 damage in addition to their normal effects and may weaken the target. Affects:$(li)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Smiting",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/warrior_of_light.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/smiting)Smiting$()"
+"descendent": "N/A"
+"mod_type": "$(2)Damage$()"
+"mod_text": "You and your scepter are devoted to eradicating the monsters of the night. Manifests on the Aegis when you complete the Vanguards Path of the Aegis"
+}
+]
+}
