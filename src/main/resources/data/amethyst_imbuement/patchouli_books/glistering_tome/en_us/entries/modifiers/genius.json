@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Graceful",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/genius.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/witty)Witty$()"
-"descendent": "N/A"
-"mod_type": "$(2)Spell Casting$()"
+"ancestor": "$(l:amethyst_imbuement:modifiers/witty)Witty$()",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter blazes with your shared brilliance. Manifests if you complete the Path of the Sojourn"
 }
 ]

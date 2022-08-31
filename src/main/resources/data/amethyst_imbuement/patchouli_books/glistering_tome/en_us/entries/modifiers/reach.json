@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Reach",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/reach.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()"
-"descendent": "$(l:amethyst_imbuement:modifiers/greater_reach)Greater Reach$()"
-"mod_type": "$(2)Spell Range$()"
+"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()",
+"descendant": "$(l:amethyst_imbuement:modifiers/greater_reach)Greater Reach$()",
+"mod_type": "$(2)Spell Range$()",
 "mod_text": "Your scepters reach increases. Imbue onto any scepter with the recipe on the next page."
 }
 ]

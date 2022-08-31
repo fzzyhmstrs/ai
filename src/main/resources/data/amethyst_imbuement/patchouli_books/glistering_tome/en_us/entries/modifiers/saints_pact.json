@@ -1,0 +1,21 @@
+{    
+"name": "Saints Pact",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healers_pact.png",
+"sortnum": 47,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects all non-healing spells. Affected spells cooldown increased by 75% and mana cost increased 50%. Affects:$(li)Path of Redemption$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Healers Pact",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healers_pact.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/saints_pact)Saints Pact$()",
+"mod_type": "$(2)Pact$()",
+"mod_text": "You and your scepter have become fully devoted to the healing arts. Available on Redemption if you complete the Bardic Path of Redemption"
+}
+]
+}

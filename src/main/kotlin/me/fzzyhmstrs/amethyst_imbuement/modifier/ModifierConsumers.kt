@@ -108,7 +108,7 @@ object ModifierConsumers {
             if (it is PlayerEntity){
                 val rnd1 = it.world.random.nextInt(8)
                 if (rnd1 == 0)
-                EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,30,0)
+                EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,80,0)
             }
         }
     }
@@ -119,8 +119,8 @@ object ModifierConsumers {
             if (it is PlayerEntity){
                 val rnd1 = it.world.random.nextInt(4)
                 if (rnd1 == 0)
-                    EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,30,1)
-                EffectQueue.addStatusToQueue(it,StatusEffects.JUMP_BOOST,30,0)
+                    EffectQueue.addStatusToQueue(it,StatusEffects.SPEED,160,1)
+                EffectQueue.addStatusToQueue(it,StatusEffects.JUMP_BOOST,160,0)
             }
         }
     }

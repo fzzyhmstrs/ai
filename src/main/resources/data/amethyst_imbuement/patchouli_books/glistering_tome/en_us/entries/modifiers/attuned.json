@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Attuned",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/attuned.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_attuned)Lesser Attuned$()"
-"descendent": "$(l:amethyst_imbuement:modifiers/greater_attuned)Greater Attuned$()"
-"mod_type": "$(2)Spell Casting$()"
+"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_attuned)Lesser Attuned$()",
+"descendant": "$(l:amethyst_imbuement:modifiers/greater_attuned)Greater Attuned$()",
+"mod_type": "$(2)Spell Casting$()",
 "mod_text": "The scepters natural attunement grows. Imbue onto any scepter with the recipe on the next page."
 },
 {

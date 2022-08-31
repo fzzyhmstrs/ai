@@ -1,0 +1,21 @@
+{    
+"name": "Sojourner",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/sojourner.png",
+"sortnum": 55,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Only affects spells involved with movement and exploration. Affected spells cooldown is decreased 90% and range of effect is increased 25%. Casting an affected spell has a 25% chance of granting the caster Speed and Jump Boost. Affects:$(li)Path of the Sojourn$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Sojourner",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/sojourner.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/traveler)Traveler$()",
+"descendant": "N/A",
+"mod_type": "$(2)Exploration$()",
+"mod_text": "You and your scepter are united in your dream to explore the world. Manifests on the Sojourn if you complete the Travelers Path of the Sojourn"
+}
+]
+}

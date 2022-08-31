@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Lesser Attuned",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lesser_attuned.png",
-"ancestor": "N/A"
-"descendent": "$(l:amethyst_imbuement:modifiers/attuned)Attuned$()"
-"mod_type": "$(2)Spell Casting$()"
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/attuned)Attuned$()",
+"mod_type": "$(2)Spell Casting$()",
 "mod_text": "Attune your scepter to the world around you. Imbue onto any scepter with the recipe on the next page."
 },
 {

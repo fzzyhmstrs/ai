@@ -1,0 +1,21 @@
+{    
+"name": "Greater Enduring",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_enduring.png",
+"sortnum": 61,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases the duration of spell effects by 50%. Affects:$(li)Path of Redemption$(li)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Greater Enduring",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/greater_enduring.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/enduring)Enduring$()",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Duration$()",
+"mod_text": "Your scepters spells are incredibly long-lasting. Manifests on Redemption if you complete the Enduring Bardic Path of Redemption. Manifests on the Aegis if you completed the Paladins Enduring Path of the Aegis."
+}
+]
+}

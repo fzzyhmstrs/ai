@@ -7,10 +7,7 @@ import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreate
 import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
 import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl2ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl3ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterLvl1ToolMaterial
-import me.fzzyhmstrs.amethyst_imbuement.tool.ScepterOfBladesToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -59,6 +56,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
         var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
         var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
+        var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
+        var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
     }
 
     class Altars {

@@ -1,0 +1,21 @@
+{    
+"name": "Masterful",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/masterful.png",
+"sortnum": 51,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases the level of cast spells by 2. Affects:$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Skillful",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/skillful.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/skillful)Skillful$()",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "Your scepter is exceptionally skilled at spell casting. Manifests on Resonance if you complete the Skillful Path of Resonance"
+}
+]
+}

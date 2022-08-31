@@ -1,0 +1,21 @@
+{    
+"name": "Traveler",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/traveler.png",
+"sortnum": 53,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Only affects spells involved with movement and exploration. Affected spells cooldown is decreased 65% and range of effect is increased 15%. Casting an affected spell has a 12.5% chance of granting the caster Speed. Affects:$(li)Path of the Sojourn$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Traveler",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/traveler.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/sojourner)Sojourner$()",
+"mod_type": "$(2)Exploration$()",
+"mod_text": "Your scepter seeks to travel the world. Imbued onto the Travelers Scepter and persists through the Path of the Sojourn"
+}
+]
+}

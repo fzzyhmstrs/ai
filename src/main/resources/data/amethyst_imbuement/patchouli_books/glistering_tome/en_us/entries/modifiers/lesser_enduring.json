@@ -1,0 +1,21 @@
+{    
+"name": "Lesser Enduring",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lesser_enduring.png",
+"sortnum": 57,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases the duration of spell effects by 15%. Affects:$(li)Path of Redemption$(li)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Lesser Enduring",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lesser_enduring.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/enduring)Enduring$()",
+"mod_type": "$(2)Spell Duration$()",
+"mod_text": "The spells from your scepter persist longer. Imbues onto the Enduring Scepter or the Scepter of the Paladin. Persists on the Path of Redemption or the Path of the Aegis."
+}
+]
+}
