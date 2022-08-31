@@ -114,7 +114,7 @@ object RegisterItem {
         .also{ regItem["clerics_scepter"] = it}
     val BARDIC_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.REGENERATE))
-        .withModifiers(listOf(RegisterModifier.ENDURING, ModifierRegistry.ATTUNED))
+        .withModifiers(listOf(RegisterModifier.LESSER_ENDURING, ModifierRegistry.ATTUNED))
         .also{ regItem["bardic_scepter"] = it}
     val SCEPTER_OF_SUMMONING = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
@@ -166,7 +166,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.ECHOING,RegisterModifier.SKILLFUL))
         .also{ regItem["resonance"] = it}
     val REDEMPTION = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["redemption"] = it}
     val EQUINOX = EquinoxScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, ModifierRegistry.GREATER_THRIFTY))
@@ -176,7 +176,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.WITTY,RegisterModifier.TRAVELER))
         .also{ regItem["sojourn"] = it}
     val AEGIS = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING, ModifierRegistry.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.SMITING))
         .also{ regItem["aegis"] = it}
 
 
