@@ -1,7 +1,7 @@
 {    
 "name": "Saints Pact",
-"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healers_pact.png",
-"sortnum": 47,
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/saints_pact.png",
+"sortnum": 69,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            
@@ -10,8 +10,8 @@
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
-"mod_head": "Healers Pact",
-"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healers_pact.png",
+"mod_head": "Saints Pact",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/saints_pact.png",
 "ancestor": "N/A",
 "descendant": "$(l:amethyst_imbuement:modifiers/saints_pact)Saints Pact$()",
 "mod_type": "$(2)Pact$()",
