@@ -12,7 +12,8 @@ object RegisterModifier {
 
     private val regMod: MutableList<AugmentModifier> = mutableListOf()
 
-    val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious"), levelModifier = 1).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod.add(it) }
+    val ENRAGED = AugmentModifier(Identifier(AI.MOD_ID,"enraged"), levelModifier = 1).withDamage(0.4F).withXpMod(SpellType.FURY,2).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod.add(it) }
+    val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious")).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod.add(it) }
     val GENIUS = AugmentModifier(Identifier(AI.MOD_ID,"genius"), cooldownModifier = -10.0).withXpMod(SpellType.WIT,2).withRange(0.6,0.0,25.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).also { regMod.add(it) }
     val WITTY = AugmentModifier(Identifier(AI.MOD_ID,"witty")).withXpMod(SpellType.WIT,1).withRange(0.25,0.0,15.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).withDescendant(GENIUS).also { regMod.add(it) }
     val ELEGANT = AugmentModifier(Identifier(AI.MOD_ID,"elegant"), cooldownModifier = -10.0).withXpMod(SpellType.GRACE,2).withDuration(0,0,30).withSpellToAffect(ModifierPredicates.GRACEFUL_PREDICATE).also { regMod.add(it) }
