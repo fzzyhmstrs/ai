@@ -62,6 +62,22 @@ object ModifierConsumers {
             }
         }
     }
+    val WARRIORS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> warriorsConsumer(list)}, AugmentConsumer.Type.HARMFUL)
+    private fun warriorsConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if(it.isUndead){
+                if (!it.isDead) {
+                    it.isInvulnerable = false //these two lines take away damage invulnerability
+                    it.timeUntilRegen = 0
+                    it.damage(DamageSource.GENERIC, 4.0F)
+                    val rnd = AI.aiRandom().nextInt(5)
+                    if (rnd == 0){
+                        EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,60,0)
+                    }
+                }
+            }
+        }
+    }
     val INSIGHTFUL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> insightfulConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun insightfulConsumer(list: List<LivingEntity>){
         list.forEach {
@@ -87,17 +103,16 @@ object ModifierConsumers {
     val PROTECTIVE_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> protectiveConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun protectiveConsumer(list: List<LivingEntity>){
         list.forEach {
-            EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,20,0)
+            EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,40,0)
         }
     }
-
-    val AEGIS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> aegisConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
-    private fun aegisConsumer(list: List<LivingEntity>){
+    val CHAMPIONS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> championsConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun championsConsumer(list: List<LivingEntity>){
         list.forEach {
-            EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,20,2)
+            EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,100,2)
             val rnd = AI.aiRandom().nextInt(5)
             if (rnd == 0){
-                EffectQueue.addStatusToQueue(it,StatusEffects.RESISTANCE,20,0)
+                EffectQueue.addStatusToQueue(it,StatusEffects.RESISTANCE,200,0)
             }
         }
     }
