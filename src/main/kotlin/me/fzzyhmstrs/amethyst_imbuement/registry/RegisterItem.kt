@@ -126,7 +126,7 @@ object RegisterItem {
         .also{ regItem["builders_scepter"] = it}
     val SCEPTER_OF_THE_VANGUARD = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BARRIER))
-        .withModifiers(listOf(RegisterModifier.PROTECTIVE ,RegisterModifier.SMITING))
+        .withModifiers(listOf(RegisterModifier.SMITING, RegisterModifier.GRACEFUL))
         .also{ regItem["scepter_of_the_vanguard"] = it}
     val SCEPTER_OF_THE_PALADIN = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
