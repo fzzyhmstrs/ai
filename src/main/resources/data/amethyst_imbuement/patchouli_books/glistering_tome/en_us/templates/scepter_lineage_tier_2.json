@@ -1,42 +1,54 @@
 {    "components": [        
 {            
 "type": "patchouli:header",            
-"text": "#header_text#",            
+"text": "Crafting Lineage",
 "x": -1,            
 "y": -1        
 },
 {
 "type": "patchouli:item", 
-"item": "#parent_a#",
+"item": "#anc_a#",
 "framed": true,
-"x": 35,            
+"x": 25,            
 "y": 15
 },
 {
 "type": "patchouli:item", 
-"item": "#parent_b#",
+"item": "#anc_b#",
 "framed": true,
-"x": 65,            
+"x": 75,            
 "y": 15
-},
-{
-"type": "patchouli:item", 
-"item": "#scepter_item#",
-"framed": true,
-"x": 50,            
-"y": 50
-},
-{
-"type": "patchouli:item", 
-"item": "#child_item#",
-"framed": true,
-"x": 50,            
-"y": 85
 },
 {
 "type": "patchouli:image",                        
-"x": 35,            
-"y": 52,
+"x": 25,
+"y": 50,
+"image": "patchouli:textures/gui/crafting.png",
+"width": 66,
+"height": 26,
+"u": 0,
+"v": 102,
+"texture_width": 128,
+"texture_height": 256
+},
+{
+"type": "patchouli:item", 
+"item": "#input_item#",
+"framed": false,
+"x": 50,            
+"y": 55
+},
+{
+"type": "patchouli:item", 
+"item": "#desc_a#",
+"framed": true,
+"x": 50,
+"y": 110
+},
+{
+"type": "patchouli:image",                        
+"x": 56,
+"y": 35,
 "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
 "width": 9,
 "height": 9,
@@ -47,8 +59,8 @@
 },
 {
 "type": "patchouli:image",                        
-"x": 72,            
-"y": 52,
+"x": 56,
+"y": 85,
 "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
 "width": 9,
 "height": 9,
