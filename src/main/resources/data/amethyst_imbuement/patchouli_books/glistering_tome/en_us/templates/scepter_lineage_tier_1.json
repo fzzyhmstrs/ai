@@ -35,22 +35,36 @@
 "type": "patchouli:item", 
 "item": "#desc_a#",
 "framed": true,
-"x": 25,
-"y": 97
+"x": 20,
+"y": 95
 },
-  {
+{
 "type": "patchouli:item", 
 "item": "#desc_b#",
 "framed": true,
-"x": 75,
-"y": 97
+"x": 25,
+"y": 125
 },
 {
 "type": "patchouli:item", 
 "item": "#desc_c#",
 "framed": true,
 "x": 50,
-"y": 110
+"y": 125
+},
+{
+"type": "patchouli:item", 
+"item": "#desc_d#",
+"framed": true,
+"x": 80,
+"y": 95
+},
+{
+"type": "patchouli:item", 
+"item": "#desc_e#",
+"framed": true,
+"x": 75,
+"y": 125
 },
 {
 "type": "patchouli:image",                        
