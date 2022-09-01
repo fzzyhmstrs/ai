@@ -1,35 +1,73 @@
 {    "components": [        
 {            
 "type": "patchouli:header",            
-"text": "#header#",
+"text": "Crafting Lineage",
 "x": -1,            
 "y": -1        
 },
 {
 "type": "patchouli:item", 
-"item": "#input_item#",
+"item": "amethyst_imbuement:opaline_scepter",
 "framed": true,
 "x": 50,            
-"y": 25
+"y": 15
+},
+{
+"type": "patchouli:image",                        
+"x": 25,
+"y": 50,
+"image": "patchouli:textures/gui/crafting.png",
+"width": 66,
+"height": 26,
+"u": 0,
+"v": 102,
+"texture_width": 128,
+"texture_height": 256
 },
 {
 "type": "patchouli:item", 
-"item": "#two_desc_a#",
-"framed": true,
-"x": 35,
-"y": 42
+"item": "#input_item#",
+"framed": false,
+"x": 50,            
+"y": 55
 },
 {
 "type": "patchouli:item", 
-"item": "#output_item#",
+"item": "#desc_a#",
 "framed": true,
-"x": 65,
-"y": 66
+"x": 25,
+"y": 97
+},
+  {
+"type": "patchouli:item", 
+"item": "#desc_b#",
+"framed": true,
+"x": 75,
+"y": 97
+},
+{
+"type": "patchouli:item", 
+"item": "#desc_c#",
+"framed": true,
+"x": 50,
+"y": 110
 },
 {
 "type": "patchouli:image",                        
 "x": 56,
-"y": 55,
+"y": 35,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:image",                        
+"x": 56,
+"y": 85,
 "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
 "width": 9,
 "height": 9,
