@@ -8,24 +8,33 @@
 "type": "patchouli:text",            
 "text": "Tier one fury aspect scepter. Can be augmented with tier one spells. The starting point for progressing through a $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)scepter upgrade path.$()$(br2)$(l)Mana:$() 426"
 },
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_1",
+"input_item": "amethyst_imbuement:furious_scepter",
+"desc_a": "amethyst_imbuement:blazing_scepter",
+"desc_b": "amethyst_imbuement:sparking_scepter",
+"desc_c": "amethyst_imbuement:frosted_scepter",
+"desc_d": "amethyst_imbuement:corrupted_scepter",
+"desc_e": "amethyst_imbuement:scepter_of_blades",
+},
 {
   "type": "amethyst_imbuement:imbuing_recipe",
   "title": "Furious Scepter Imbuing",
-  "imbue_a_item": "minecraft:gold_ingot",
-  "imbue_b_item": "amethyst_imbuement:iridescent_orb",
-  "imbue_c_item": "minecraft:gold_ingot",
-  "imbue_d_item": "minecraft:gold_ingot",
+  "imbue_a_item": "minecraft:amethyst_shard",
+  "imbue_b_item": "amethyst_imbuement:lethal_gem",
+  "imbue_c_item": "minecraft:amethyst_shard",
+  "imbue_d_item": "minecraft:amethyst_shard",
   "craft_a_item": "minecraft:air",
-  "craft_b_item": "amethyst_imbuement:imbued_quartz",
+  "craft_b_item": "minecraft:bow",
   "craft_c_item": "minecraft:air",
-  "craft_d_item": "amethyst_imbuement:imbued_lapis",
+  "craft_d_item": "minecraft:bow",
   "craft_e_item": "amethyst_imbuement:opaline_scepter",
-  "craft_f_item": "amethyst_imbuement:imbued_lapis",
+  "craft_f_item": "minecraft:bow",
   "craft_g_item": "minecraft:air",
-  "craft_h_item": "amethyst_imbuement:imbued_quartz",
+  "craft_h_item": "minecraft:bow",
   "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:iridescent_scepter",
-  "cost_text": "$(l)Level Cost: $(2)13$()"
+  "result_item": "amethyst_imbuement:furious_scepter",
+  "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]
 }
