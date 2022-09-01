@@ -1,7 +1,7 @@
 {    
 "name": "Elemental",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/elemental.png",
-"sortnum": 41,  
+"sortnum": 45,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

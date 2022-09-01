@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.HealerAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -38,7 +39,7 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
         if (entityList.isEmpty()){
             successes++
-            inspire(user,level+2,effect
+            inspire(user,level+2,effect)
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         } else {
             entityList.add(user)
@@ -55,17 +56,17 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     
     private fun inspire(entity: LivingEntity,level: Int, effect: AugmentEffect){
         if(level < 6){
-            EffectQueue.addStatusToQueue(user,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effect.duration(3), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.REGENERATION, effect.duration(3), effect.amplifier(level))
         } else if(level < 11){
-            EffectQueue.addStatusToQueue(user,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,StatusEffects.JUMP_BOOST, effect.duration(level), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effect.duration(8), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.JUMP_BOOST, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.REGENERATION, effect.duration(8), effect.amplifier(level))
         } else {
-            EffectQueue.addStatusToQueue(user,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,StatusEffects.JUMP_BOOST, effect.duration(level), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effect.duration(12), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(user,RegisterStatus.INSPIRED, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.JUMP_BOOST, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity,StatusEffects.REGENERATION, effect.duration(12), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity, RegisterStatus.INSPIRED, effect.duration(level), effect.amplifier(level))
         }
     }
 

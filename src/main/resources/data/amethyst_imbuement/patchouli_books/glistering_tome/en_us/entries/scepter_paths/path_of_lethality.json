@@ -1,0 +1,20 @@
+{    
+"name": "The Path of Lethality",
+"icon": "amethyst_imbuement:lethality",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The Path of Lethality is the path of the killer. Dish out major damage, wield scepters that can be used like swords, even wither your opponents away."
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:furious_scepter,amethyst_imbuement:dangerous_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_blades,amethyst_imbuement:corrupted_scepter",
+  "tier_3": "amethyst_imbuement:lethality",
+  "spec": "Brutal Combat",
+  "spells": "No unique spells",
+  "mods": "Possible unique modifiers: Lethal/Pact of Lethality, Corrupted, Blade Aspect"
+}
+]
+}

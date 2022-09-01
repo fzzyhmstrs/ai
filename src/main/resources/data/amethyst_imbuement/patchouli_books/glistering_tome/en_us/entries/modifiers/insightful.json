@@ -1,7 +1,7 @@
 {    
 "name": "Insightful",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/insightful.png",
-"sortnum": 45,
+"sortnum": 49,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

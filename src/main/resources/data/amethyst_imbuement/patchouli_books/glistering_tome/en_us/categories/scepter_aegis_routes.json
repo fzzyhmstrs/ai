@@ -1,0 +1,6 @@
+{    
+"name": "Aegis Path Routes",
+"parent": "amethyst_imbuement:scepter_paths",
+"description": "The four specific crafting paths one can take with the Path of the Aegis. These paths are related to protection and righteous warrior classes. These are fairly close to what one might consider a 'sub-class'",
+"icon": "amethyst_imbuement:aegis"
+}

@@ -1,7 +1,7 @@
 {    
 "name": "Blade Aspect",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/blade_aspect.png",
-"sortnum": 33,  
+"sortnum": 37,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

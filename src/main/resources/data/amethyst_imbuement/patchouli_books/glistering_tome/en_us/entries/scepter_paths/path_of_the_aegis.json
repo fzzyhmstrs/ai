@@ -1,0 +1,20 @@
+{    
+"name": "The Path of Redemption",
+"icon": "amethyst_imbuement:lethality",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The Path of Redemption is the path of the protector. Rally against the forces of evil, cast powerful protective spells, and shield yourself from harm while saving others from blight."
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:graceful_scepter,amethyst_imbuement:enduring_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the paladin,amethyst_imbuement:scepter_of_the_vanguard",
+  "tier_3": "amethyst_imbuement:aegis",
+  "spec": "Tanking",
+  "spells": "Barrier (Scepter of the Vanguard)",
+  "mods": "Possible unique modifiers: Smiting, Warrior of Light, Protective, Champion of the Meek, Elegant"
+}
+]
+}

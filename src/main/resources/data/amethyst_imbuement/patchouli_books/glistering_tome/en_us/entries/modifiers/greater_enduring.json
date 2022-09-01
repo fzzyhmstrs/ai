@@ -1,7 +1,7 @@
 {    
 "name": "Greater Enduring",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_enduring.png",
-"sortnum": 61,
+"sortnum": 65,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

@@ -1,7 +1,7 @@
 {    
 "name": "Sojourner",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/sojourner.png",
-"sortnum": 55,
+"sortnum": 59,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            
