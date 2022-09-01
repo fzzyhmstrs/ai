@@ -1,0 +1,20 @@
+{    
+"name": "The Path of the Equinox",
+"icon": "amethyst_imbuement:equinox",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The Path of the Equinox is the path of the elementalist. Control the elements to fry your opponents with lightning, immolate them with fire, or freeze them solid."
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:furious_scepter,amethyst_imbuement:dangerous_scepter",
+  "tier_2": "amethyst_imbuement:blazing_scepter,amethyst_imbuement:sparking_scepter,amethyst_imbuement:frosted_scepter",
+  "tier_3": "amethyst_imbuement:equinox",
+  "spec": "Elemental Spells",
+  "spells": "Ice Spikes (Frosted Scepter)",
+  "mods": "Possible unique modifiers: Elemental, Fire Aspect, Lightning Aspect, Ice Aspect, Enraged"
+}
+]
+}

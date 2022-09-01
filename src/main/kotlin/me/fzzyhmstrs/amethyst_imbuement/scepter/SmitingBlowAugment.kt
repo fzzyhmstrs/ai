@@ -96,19 +96,19 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             for (i in 1..16){
                 val rnd1 = world.random.nextDouble() - 0.5
                 val rnd2 = world.random.nextDouble() - 0.5
-                val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
+                val rnd3 = -1.0 + (world.random.nextDouble() - 0.5) * 0.1
                 world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x,pos.add(rnd1,2.3,rnd2).y,pos.z,0.0,rnd3,0.0)
             }
             for (i in 1..16){
                 val rnd1 = world.random.nextDouble() - 0.5
                 val rnd2 = world.random.nextDouble() - 0.5
-                val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
+                val rnd3 = -1.0 + (world.random.nextDouble() - 0.5) * 0.1
                 world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x,pos.add(rnd1,2.0,rnd2).y,pos.z,0.0,rnd3,0.0)
             }
             for (i in 1..16){
                 val rnd1 = world.random.nextDouble() - 0.5
                 val rnd2 = world.random.nextDouble() - 0.5
-                val rnd3 = -3.0 + (world.random.nextDouble() - 0.5) * 0.1
+                val rnd3 = -1.0 + (world.random.nextDouble() - 0.5) * 0.1
                 world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x,pos.add(rnd1,2.6,rnd2).y,pos.z,0.0,rnd3,0.0)
             }
         }

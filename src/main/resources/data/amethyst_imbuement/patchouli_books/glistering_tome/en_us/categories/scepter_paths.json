@@ -1,0 +1,6 @@
+{    
+"name": "Scepter Paths",
+"parent": "amethyst_imbuement:scepters",
+"description": "Scepter paths are crafting routes you can take with your $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$() to develop a powerful scepter customized to your tastes and needs. Think of it like a skill tree for your scepter!)",
+"icon": "minecraft:filled_map"
+}

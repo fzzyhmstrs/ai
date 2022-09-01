@@ -1,0 +1,20 @@
+{    
+"name": "The Path of the Sojourn",
+"icon": "amethyst_imbuement:sojourn",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The Path of the Sojourn is the path of the explorer. Travel with ease, survey your surrounding, warp back home, or build the world around you as you go."
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:witty_scepter,amethyst_imbuement:skillful_scepter",
+  "tier_2": "amethyst_imbuement:travelers_scepter,amethyst_imbuement:scepter_of_recall,amethyst_imbuement:builders_scepter",
+  "tier_3": "amethyst_imbuement:sojourn",
+  "spec": "Exploration",
+  "spells": "Survey, Recall (Scepter of Recall)",
+  "mods": "Possible unique modifiers: Traveler, Sojourner, Greater Reach, Builders Aspect"
+}
+]
+}

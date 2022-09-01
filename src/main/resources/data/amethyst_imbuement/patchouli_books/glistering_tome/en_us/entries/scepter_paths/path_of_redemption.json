@@ -1,0 +1,20 @@
+{    
+"name": "The Path of Redemption",
+"icon": "amethyst_imbuement:lethality",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "The Path of Redemption is the path of the healer. Devote yourself to the healing arts, inspire your allies, endure through all hardships, and maybe even forsake the ways of the warrior"
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:graceful_scepter,amethyst_imbuement:enduring_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the pacifist,amethyst_imbuement:clerics_scepter,amethyst_imbuement:bardic_scepter",
+  "tier_3": "amethyst_imbuement:redemption",
+  "spec": "Healing & Support",
+  "spells": "Inspiring Song (Bardic Scepter)",
+  "mods": "Possible unique modifiers: Healers Grace/Pact, Saints Grace/Pact, Healing"
+}
+]
+}

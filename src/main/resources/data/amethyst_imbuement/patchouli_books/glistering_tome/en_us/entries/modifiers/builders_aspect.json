@@ -1,7 +1,7 @@
 {    
 "name": "Builders Aspect",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/builders_aspect.png",
-"sortnum": 43,
+"sortnum": 47,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

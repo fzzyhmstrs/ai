@@ -1,7 +1,7 @@
 {    
 "name": "Necrotic",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/necrotic.png",
-"sortnum": 31,  
+"sortnum": 35,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

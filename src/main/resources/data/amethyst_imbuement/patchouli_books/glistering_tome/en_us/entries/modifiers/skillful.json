@@ -1,7 +1,7 @@
 {    
 "name": "Skillful",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/skillful.png",
-"sortnum": 47,
+"sortnum": 53,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

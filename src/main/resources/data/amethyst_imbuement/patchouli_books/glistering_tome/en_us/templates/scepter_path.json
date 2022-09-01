@@ -1,0 +1,84 @@
+{    "components": [
+  {
+    "type": "patchouli:item",
+    "item": "opaline_scepter",
+    "framed": true,
+    "x": 10,
+    "y": 7
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_1#",
+    "framed": true,
+    "x": 10,
+    "y": 47
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_2#",
+    "framed": true,
+    "x": 10,
+    "y": 87
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_3#",
+    "framed": true,
+    "x": 10,
+    "y": 127
+  },
+  {
+    "type": "patchouli:text",
+    "text": "$(l)Specialization:$()",
+    "x": 40,
+    "y": 7
+  },
+  {
+    "type": "patchouli:text",
+    "text": "#spec#",
+    "x": 40,
+    "y": 16
+  },
+  {
+    "type": "patchouli:text",
+    "text": "$(l)Unique Spells:$()$(br)#spells#$(br2)$(l)Unique Modifiers:$()#mods#",
+    "x": 40,
+    "y": 34
+  },
+  {
+    "type": "patchouli:image",
+    "x": 15,
+    "y": 32,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 15,
+    "y": 72,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 15,
+    "y": 112,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  }
+]}
