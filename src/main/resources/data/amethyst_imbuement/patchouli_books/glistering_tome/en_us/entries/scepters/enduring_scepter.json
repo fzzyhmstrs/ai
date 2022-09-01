@@ -1,0 +1,40 @@
+{    
+"name": "Enduring Scepter",    
+"icon": "amethyst_imbuement:enduring_scepter",
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 8,
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Tier one grace aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/lesser_enduring)lesser_enduring$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis.$()$(br2)$(l)Mana:$() 426"
+},
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_1",
+"input_item": "amethyst_imbuement:enduring_scepter",
+"desc_a": "amethyst_imbuement:scepter_of_the_paladin",
+"desc_b": "amethyst_imbuement:scepter_of_the_vanguard",
+"desc_c": "amethyst_imbuement:scepter_of_the_pacifist",
+"desc_d": "amethyst_imbuement:bardic_scepter",
+"desc_e": "amethyst_imbuement:clerics_scepter"
+},
+{
+  "type": "amethyst_imbuement:imbuing_recipe",
+  "title": "Enduring Scepter Imbuing",
+  "imbue_a_item": "amethyst_imbuement:smoky_quartz",
+  "imbue_b_item": "amethyst_imbuement:healers_gem",
+  "imbue_c_item": "amethyst_imbuement:smoky_quartz",
+  "imbue_d_item": "amethyst_imbuement:smoky_quartz",
+  "craft_a_item": "minecraft:air",
+  "craft_b_item": "minecraft:redstone_block",
+  "craft_c_item": "minecraft:air",
+  "craft_d_item": "minecraft:redstone_block",
+  "craft_e_item": "amethyst_imbuement:opaline_scepter",
+  "craft_f_item": "minecraft:redstone_block",
+  "craft_g_item": "minecraft:air",
+  "craft_h_item": "minecraft:redstone_block",
+  "craft_i_item": "minecraft:air",
+  "result_item": "amethyst_imbuement:enduring_scepter",
+  "cost_text": "$(l)Level Cost: $(2)7$()"
+}
+]
+}

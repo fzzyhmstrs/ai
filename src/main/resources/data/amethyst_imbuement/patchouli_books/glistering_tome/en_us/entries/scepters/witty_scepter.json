@@ -1,0 +1,40 @@
+{    
+"name": "Witty Scepter",    
+"icon": "amethyst_imbuement:witty_scepter",
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 5,
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Tier one wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/witty)Witty$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 426"
+},
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_1",
+"input_item": "amethyst_imbuement:witty_scepter",
+"desc_a": "amethyst_imbuement:scepter_of_summoning",
+"desc_b": "amethyst_imbuement:scepter_of_insight",
+"desc_c": "amethyst_imbuement:travelers_scepter",
+"desc_d": "amethyst_imbuement:scepter_of_recall",
+"desc_e": "amethyst_imbuement:builders_scepter"
+},
+{
+  "type": "amethyst_imbuement:imbuing_recipe",
+  "title": "Witty Scepter Imbuing",
+  "imbue_a_item": "amethyst_imbuement:imbued_lapis",
+  "imbue_b_item": "amethyst_imbuement:inquisitive_gem",
+  "imbue_c_item": "amethyst_imbuement:imbued_lapis",
+  "imbue_d_item": "amethyst_imbuement:imbued_lapis",
+  "craft_a_item": "minecraft:air",
+  "craft_b_item": "minecraft:writable_book",
+  "craft_c_item": "minecraft:air",
+  "craft_d_item": "minecraft:writable_book",
+  "craft_e_item": "amethyst_imbuement:opaline_scepter",
+  "craft_f_item": "minecraft:writable_book",
+  "craft_g_item": "minecraft:air",
+  "craft_h_item": "minecraft:writable_book",
+  "craft_i_item": "minecraft:air",
+  "result_item": "amethyst_imbuement:witty_scepter",
+  "cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}
