@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:citrine"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:healers_gem"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:citrine"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:citrine"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
 	"item": "minecraft:glistering_melon_slice"
@@ -28,7 +28,7 @@
 	"item": "minecraft:glistering_melon_slice"
   },
   "title": "Graceful Scepter",
-  "cost": 7,
+  "cost": 5,
   "resultA": "amethyst_imbuement:graceful_scepter",
   "countA": 1,
   "transferEnchant": true
