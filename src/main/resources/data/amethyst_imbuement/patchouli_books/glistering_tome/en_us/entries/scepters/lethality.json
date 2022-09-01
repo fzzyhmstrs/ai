@@ -1,0 +1,37 @@
+{    
+"name": "lethality",    
+"icon": "amethyst_imbuement:lethality",
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 25,
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Tier three fury scepter focused on close combat. Adds the modifiers $(l:amethyst_imbuement:modifiers/dangerous)Dangerous$() and $(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(). Can be used like a weapon. Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 2876"
+},
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_3",
+"anc_b": "amethyst_imbuement:corrupted_scepter",
+"anc_c": "amethyst_imbuement:scepter_of_blades",
+"input_item": "amethyst_imbuement:lethality"
+},
+{
+  "type": "amethyst_imbuement:imbuing_recipe",
+  "title": "Lethality Imbuing",
+  "imbue_a_item": "minecraft:netherite_ingot",
+  "imbue_b_item": "amethyst_imbuement:glowing_blade",
+  "imbue_c_item": "minecraft:netherite_ingot",
+  "imbue_d_item": "minecraft:netherite_ingot",
+  "craft_a_item": "amethyst_imbuement:garnet_sword",
+  "craft_b_item": "amethyst_imbuement:garnet",
+  "craft_c_item": "amethyst_imbuement:lustrous_sphere",
+  "craft_d_item": "amethyst_imbuement:pyrite",
+  "craft_e_item": "#amethyst_imbuement:lethality_scepters",
+  "craft_f_item": "amethyst_imbuement:pyrite",
+  "craft_g_item": "amethyst_imbuement:lethal_gem",
+  "craft_h_item": "amethyst_imbuement:garnet",
+  "craft_i_item": "amethyst_imbuement:garnet_sword",
+  "result_item": "amethyst_imbuement:lethality",
+  "cost_text": "$(l)Level Cost: $(2)45$()"
+}
+]
+}
