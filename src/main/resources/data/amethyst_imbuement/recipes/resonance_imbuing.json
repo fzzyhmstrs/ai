@@ -13,7 +13,7 @@
 	"item": "minecraft:netherite_ingot"
   },
   "craftA": {
-	"item": "amethyst_imbuement:steel_block"
+	"tag": "c:steel_blocks"
   },
   "craftB": {
 	"item": "amethyst_imbuement:garnet"
@@ -37,7 +37,7 @@
 	"item": "amethyst_imbuement:garnet"
   },
   "craftI": {
-	"item": "amethyst_imbuement:steel_block"
+	"tag": "c:steel_blocks"
   },
   "title": "Resonance",
   "cost": 39,
