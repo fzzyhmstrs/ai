@@ -1,37 +1,56 @@
 {
-"name": "Aegis",
-"icon": "amethyst_imbuement:aegis",
-"category": "amethyst_imbuement:scepters",
-"sortnum": 29,
-"pages": [
-{
-"type": "patchouli:text",
-"text": "Tier three grace scepter focused on protection and righteous warfare. Adds the modifiers $(l:amethyst_imbuement:modifiers/protective)Protective$() and $(l:amethyst_imbuement:modifiers/smiting)Smiting$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of theAegis.$()$(br2)$(l)Mana:$() 2876"
-},
-{
-"type": "amethyst_imbuement:scepter_lineage_tier_3",
-"anc_b": "amethyst_imbuement:scepter_of_the_paladin",
-"anc_c": "amethyst_imbuement:scepter_of_the_vanguard",
-"input_item": "amethyst_imbuement:aegis"
-},
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Aegis Imbuing",
-  "imbue_a_item": "minecraft:netherite_ingot",
-  "imbue_b_item": "amethyst_imbuement:crystalline_heart",
-  "imbue_c_item": "minecraft:netherite_ingot",
-  "imbue_d_item": "minecraft:netherite_ingot",
-  "craft_a_item": "minecraft:diamond_helmet",
-  "craft_b_item": "amethyst_imbuement:garnet",
-  "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-  "craft_d_item": "amethyst_imbuement:pyrite",
-  "craft_e_item": "#amethyst_imbuement:aegis_scepters",
-  "craft_f_item": "amethyst_imbuement:pyrite",
-  "craft_g_item": "amethyst_imbuement:brilliant_diamond",
-  "craft_h_item": "amethyst_imbuement:garnet",
-  "craft_i_item": "minecraft:diamond_helmet",
-  "result_item": "amethyst_imbuement:aegis",
-  "cost_text": "$(l)Level Cost: $(2)39$()"
-}
-]
+  "name": "Aegis",
+  "icon": "amethyst_imbuement:aegis",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 29,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier three grace scepter focused on protection and righteous warfare. Adds the modifiers $(l:amethyst_imbuement:modifiers/protective)Protective$() and $(l:amethyst_imbuement:modifiers/smiting)Smiting$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of theAegis.$()$(br2)$(l)Mana:$() 2876"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_3",
+      "anc_b": "amethyst_imbuement:scepter_of_the_paladin",
+      "anc_c": "amethyst_imbuement:scepter_of_the_vanguard",
+      "input_item": "amethyst_imbuement:aegis"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Aegis Imbuing",
+      "imbue_a_item": "minecraft:netherite_ingot",
+      "imbue_b_item": "amethyst_imbuement:crystalline_heart",
+      "imbue_c_item": "minecraft:netherite_ingot",
+      "imbue_d_item": "minecraft:netherite_ingot",
+      "craft_a_item": "minecraft:diamond_helmet",
+      "craft_b_item": "amethyst_imbuement:garnet",
+      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
+      "craft_d_item": "amethyst_imbuement:pyrite",
+      "craft_e_item": "#amethyst_imbuement:aegis_scepters",
+      "craft_f_item": "amethyst_imbuement:pyrite",
+      "craft_g_item": "amethyst_imbuement:brilliant_diamond",
+      "craft_h_item": "amethyst_imbuement:garnet",
+      "craft_i_item": "minecraft:diamond_helmet",
+      "result_item": "amethyst_imbuement:aegis",
+      "cost_text": "$(l)Level Cost: $(2)39$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Aegis from Lustrous",
+      "imbue_a_item": "minecraft:diamond_helmet",
+      "imbue_b_item": "amethyst_imbuement:crystalline_heart",
+      "imbue_c_item": "minecraft:diamond_helmet",
+      "imbue_d_item": "minecraft:diamond_helmet",
+      "craft_a_item": "amethyst_imbuement:gem_dust",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "amethyst_imbuement:brilliant_diamond",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:lustrous_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "amethyst_imbuement:gem_dust",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "amethyst_imbuement:gem_dust",
+      "result_item": "amethyst_imbuement:aegis",
+      "cost_text": "$(l)Level Cost: $(2)23$()"
+    }
+  ]
 }

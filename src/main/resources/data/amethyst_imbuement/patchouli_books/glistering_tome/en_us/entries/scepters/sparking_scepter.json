@@ -26,13 +26,32 @@
   "craft_b_item": "amethyst_imbuement:imbued_quartz",
   "craft_c_item": "amethyst_imbuement:iridescent_orb",
   "craft_d_item": "amethyst_imbuement:imbued_lapis",
-  "craft_e_item": "#amethyst_imbuement:fury_scepters"
+  "craft_e_item": "#amethyst_imbuement:fury_scepters",
   "craft_f_item": "amethyst_imbuement:imbued_lapis",
   "craft_g_item": "minecraft:lightning_rod",
   "craft_h_item": "amethyst_imbuement:imbued_quartz",
   "craft_i_item": "minecraft:lightning_rod",
   "result_item": "amethyst_imbuement:sparking_scepter",
   "cost_text": "$(l)Level Cost: $(2)19$()"
-}
+},
+  {
+    "type": "amethyst_imbuement:imbuing_recipe",
+    "title": "Sparking from Iridescent",
+    "imbue_a_item": "minecraft:lightning_rod",
+    "imbue_b_item": "amethyst_imbuement:sparking_gem",
+    "imbue_c_item": "minecraft:lightning_rod",
+    "imbue_d_item": "minecraft:lightning_rod",
+    "craft_a_item": "minecraft:air",
+    "craft_b_item": "amethyst_imbuement:gem_dust",
+    "craft_c_item": "minecraft:air",
+    "craft_d_item": "amethyst_imbuement:gem_dust",
+    "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+    "craft_f_item": "amethyst_imbuement:gem_dust",
+    "craft_g_item": "minecraft:air",
+    "craft_h_item": "amethyst_imbuement:gem_dust",
+    "craft_i_item": "minecraft:air",
+    "result_item": "amethyst_imbuement:sparking_scepter",
+    "cost_text": "$(l)Level Cost: $(2)10$()"
+  }
 ]
 }

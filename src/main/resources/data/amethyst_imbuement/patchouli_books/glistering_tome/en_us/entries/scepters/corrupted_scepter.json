@@ -1,38 +1,57 @@
-{    
-"name": "Corrupted Scepter",    
-"icon": "amethyst_imbuement:corrupted_scepter",
-"category": "amethyst_imbuement:scepters", 
-"sortnum": 12,
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/necrotic)Necrotic$() and the spell Soul Missile. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 1056"
-},
-{            
-"type": "amethyst_imbuement:scepter_lineage_tier_2",
-"anc_a": "amethyst_imbuement:dangerous_scepter",
-"anc_b": "amethyst_imbuement:furious_scepter",
-"input_item": "amethyst_imbuement:corrupted_scepter",
-"desc_a": "amethyst_imbuement:lethality"
-},
 {
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Corrupted Scepter Imbuing",
-  "imbue_a_item": "minecraft:gold_ingot",
-  "imbue_b_item": "amethyst_imbuement:wither_rose",
-  "imbue_c_item": "minecraft:gold_ingot",
-  "imbue_d_item": "minecraft:gold_ingot",
-  "craft_a_item": "amethyst_imbuement:wither_rose",
-  "craft_b_item": "amethyst_imbuement:imbued_quartz",
-  "craft_c_item": "amethyst_imbuement:iridescent_orb",
-  "craft_d_item": "amethyst_imbuement:imbued_lapis",
-  "craft_e_item": "#amethyst_imbuement:fury_scepters"
-  "craft_f_item": "amethyst_imbuement:imbued_lapis",
-  "craft_g_item": "amethyst_imbuement:wither_rose",
-  "craft_h_item": "amethyst_imbuement:imbued_quartz",
-  "craft_i_item": "amethyst_imbuement:wither_rose",
-  "result_item": "amethyst_imbuement:corrupted_scepter",
-  "cost_text": "$(l)Level Cost: $(2)25$()"
-}
-]
+  "name": "Corrupted Scepter",
+  "icon": "amethyst_imbuement:corrupted_scepter",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/necrotic)Necrotic$() and the spell Soul Missile. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 1056"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:dangerous_scepter",
+      "anc_b": "amethyst_imbuement:furious_scepter",
+      "input_item": "amethyst_imbuement:corrupted_scepter",
+      "desc_a": "amethyst_imbuement:lethality"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Corrupted Scepter Imbuing",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "amethyst_imbuement:wither_rose",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "amethyst_imbuement:wither_rose",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "#amethyst_imbuement:fury_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "amethyst_imbuement:wither_rose",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "amethyst_imbuement:wither_rose",
+      "result_item": "amethyst_imbuement:corrupted_scepter",
+      "cost_text": "$(l)Level Cost: $(2)25$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Corrupted from Iridescent",
+      "imbue_a_item": "minecraft:wither_rose",
+      "imbue_b_item": "minecraft:wither_rose",
+      "imbue_c_item": "minecraft:wither_rose",
+      "imbue_d_item": "minecraft:wither_rose",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:corrupted_scepter",
+      "cost_text": "$(l)Level Cost: $(2)16$()"
+    }
+  ]
 }

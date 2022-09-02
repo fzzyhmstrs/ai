@@ -40,7 +40,7 @@
 	"item": "amethyst_imbuement:gem_dust"
   },
   "title": "Lethality",
-  "cost": 25,
+  "cost": 29,
   "resultA": "amethyst_imbuement:lethality",
   "countA": 1,
   "transferEnchant": true

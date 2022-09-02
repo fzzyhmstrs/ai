@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:steel_block"
+	"tag": "c:steel_blocks"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:resonant_rod"
@@ -10,7 +10,7 @@
 	"item": "amethyst_imbuement:brilliant_diamond"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:steel_block"
+    "tag": "c:steel_blocks"
   },
   "craftA": {
 	"item": "amethyst_imbuement:gem_dust"

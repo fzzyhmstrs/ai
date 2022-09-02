@@ -1,38 +1,57 @@
-{    
-"name": "Scepter of Blades",    
-"icon": "amethyst_imbuement:scepter_of_blades",
-"category": "amethyst_imbuement:scepters", 
-"sortnum": 13,
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$() and the spell Spectral Slash. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 1056"
-},
-{            
-"type": "amethyst_imbuement:scepter_lineage_tier_2",
-"anc_a": "amethyst_imbuement:dangerous_scepter",
-"anc_b": "amethyst_imbuement:furious_scepter",
-"input_item": "amethyst_imbuement:scepter_of_blades",
-"desc_a": "amethyst_imbuement:lethality"
-},
 {
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Scepter of Blades Imbuing",
-  "imbue_a_item": "minecraft:gold_ingot",
-  "imbue_b_item": "amethyst_imbuement:glowing_blade",
-  "imbue_c_item": "minecraft:gold_ingot",
-  "imbue_d_item": "minecraft:gold_ingot",
-  "craft_a_item": "minecraft:diamond_sword",
-  "craft_b_item": "amethyst_imbuement:imbued_quartz",
-  "craft_c_item": "amethyst_imbuement:iridescent_orb",
-  "craft_d_item": "amethyst_imbuement:imbued_lapis",
-  "craft_e_item": "#amethyst_imbuement:fury_scepters",
-  "craft_f_item": "amethyst_imbuement:imbued_lapis",
-  "craft_g_item": "minecraft:diamond_sword",
-  "craft_h_item": "amethyst_imbuement:imbued_quartz",
-  "craft_i_item": "minecraft:diamond_sword",
-  "result_item": "amethyst_imbuement:scepter_of_blades",
-  "cost_text": "$(l)Level Cost: $(2)23$()"
-}
-]
+  "name": "Scepter of Blades",
+  "icon": "amethyst_imbuement:scepter_of_blades",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$() and the spell Spectral Slash. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 1056"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:dangerous_scepter",
+      "anc_b": "amethyst_imbuement:furious_scepter",
+      "input_item": "amethyst_imbuement:scepter_of_blades",
+      "desc_a": "amethyst_imbuement:lethality"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Scepter of Blades Imbuing",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "amethyst_imbuement:glowing_blade",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:diamond_sword",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "#amethyst_imbuement:fury_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:diamond_sword",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:diamond_sword",
+      "result_item": "amethyst_imbuement:scepter_of_blades",
+      "cost_text": "$(l)Level Cost: $(2)23$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Blades from Iridescent",
+      "imbue_a_item": "minecraft:diamond_sword",
+      "imbue_b_item": "amethyst_imbuement:glowing_blade",
+      "imbue_c_item": "minecraft:diamond_sword",
+      "imbue_d_item": "minecraft:diamond_sword",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:scepter_of_blades",
+      "cost_text": "$(l)Level Cost: $(2)15$()"
+    }
+  ]
 }
