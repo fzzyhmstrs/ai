@@ -1,38 +1,57 @@
-{    
-"name": "Builders Scepter",    
-"icon": "amethyst_imbuement:builders_scepter",
-"category": "amethyst_imbuement:scepters", 
-"sortnum": 18,
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Tier two wit aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/builders_aspect)Builders Aspect$() and $(l:amethyst_imbuement:modifiers/graceful)Graceful$() and the spell Hard Light Bridge. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1056"
-},
-{            
-"type": "amethyst_imbuement:scepter_lineage_tier_2",
-"anc_a": "amethyst_imbuement:skillful_scepter",
-"anc_b": "amethyst_imbuement:witty_scepter",
-"input_item": "amethyst_imbuement:builders_scepter",
-"desc_a": "amethyst_imbuement:sojourn"
-},
 {
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Builders Scepter Imbuing",
-  "imbue_a_item": "minecraft:gold_ingot",
-  "imbue_b_item": "amethyst_imbuement:glowing_pick",
-  "imbue_c_item": "minecraft:gold_ingot",
-  "imbue_d_item": "minecraft:gold_ingot",
-  "craft_a_item": "minecraft:crafting_table",
-  "craft_b_item": "amethyst_imbuement:imbued_quartz",
-  "craft_c_item": "amethyst_imbuement:iridescent_orb",
-  "craft_d_item": "amethyst_imbuement:imbued_lapis",
-  "craft_e_item": "#amethyst_imbuement:wit_scepters",
-  "craft_f_item": "amethyst_imbuement:imbued_lapis",
-  "craft_g_item": "minecraft:crafting_table",
-  "craft_h_item": "amethyst_imbuement:imbued_quartz",
-  "craft_i_item": "minecraft:crafting_table",
-  "result_item": "amethyst_imbuement:builders_scepter",
-  "cost_text": "$(l)Level Cost: $(2)15$()"
-}
-]
+  "name": "Builders Scepter",
+  "icon": "amethyst_imbuement:builders_scepter",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 18,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two wit aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/builders_aspect)Builders Aspect$() and $(l:amethyst_imbuement:modifiers/graceful)Graceful$() and the spell Hard Light Bridge. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1056"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:skillful_scepter",
+      "anc_b": "amethyst_imbuement:witty_scepter",
+      "input_item": "amethyst_imbuement:builders_scepter",
+      "desc_a": "amethyst_imbuement:sojourn"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Builders Scepter Imbuing",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "amethyst_imbuement:glowing_pick",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:crafting_table",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "#amethyst_imbuement:wit_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:crafting_table",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:crafting_table",
+      "result_item": "amethyst_imbuement:builders_scepter",
+      "cost_text": "$(l)Level Cost: $(2)15$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Builders from Iridescent",
+      "imbue_a_item": "minecraft:crafting_table",
+      "imbue_b_item": "amethyst_imbuement:glowing_pick",
+      "imbue_c_item": "minecraft:crafting_table",
+      "imbue_d_item": "minecraft:crafting_table",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:builders_scepter",
+      "cost_text": "$(l)Level Cost: $(2)7$()"
+    }
+  ]
 }

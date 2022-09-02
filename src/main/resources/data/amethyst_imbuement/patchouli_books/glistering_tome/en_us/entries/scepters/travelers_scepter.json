@@ -1,38 +1,57 @@
-{    
-"name": "Travelers Scepter",    
-"icon": "amethyst_imbuement:travelers_scepter",
-"category": "amethyst_imbuement:scepters", 
-"sortnum": 16,
-"pages": [        
 {
-"type": "patchouli:text",            
-"text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and the spells Summon Boat and Summon Strider. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1056"
-},
-{            
-"type": "amethyst_imbuement:scepter_lineage_tier_2",
-"anc_a": "amethyst_imbuement:skillful_scepter",
-"anc_b": "amethyst_imbuement:witty_scepter",
-"input_item": "amethyst_imbuement:travelers_scepter",
-"desc_a": "amethyst_imbuement:sojourn"
-},
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Travelers Scepter Imbuing",
-  "imbue_a_item": "minecraft:gold_ingot",
-  "imbue_b_item": "amethyst_imbuement:inquisitive_gem",
-  "imbue_c_item": "minecraft:gold_ingot",
-  "imbue_d_item": "minecraft:gold_ingot",
-  "craft_a_item": "amethyst_imbuement:mana_potion",
-  "craft_b_item": "amethyst_imbuement:imbued_quartz",
-  "craft_c_item": "amethyst_imbuement:iridescent_orb",
-  "craft_d_item": "amethyst_imbuement:imbued_lapis",
-  "craft_e_item": "#amethyst_imbuement:wit_scepters",
-  "craft_f_item": "amethyst_imbuement:imbued_lapis",
-  "craft_g_item": "amethyst_imbuement:mana_potion",
-  "craft_h_item": "amethyst_imbuement:imbued_quartz",
-  "craft_i_item": "amethyst_imbuement:mana_potion",
-  "result_item": "amethyst_imbuement:travelers_scepter",
-  "cost_text": "$(l)Level Cost: $(2)23$()"
-}
-]
+  "name": "Travelers Scepter",
+  "icon": "amethyst_imbuement:travelers_scepter",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and the spells Summon Boat and Summon Strider. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1056"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:skillful_scepter",
+      "anc_b": "amethyst_imbuement:witty_scepter",
+      "input_item": "amethyst_imbuement:travelers_scepter",
+      "desc_a": "amethyst_imbuement:sojourn"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Travelers Scepter Imbuing",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "amethyst_imbuement:malachite_figurine",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:fern",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "#amethyst_imbuement:wit_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:prismarine_shard",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:cactus",
+      "result_item": "amethyst_imbuement:travelers_scepter",
+      "cost_text": "$(l)Level Cost: $(2)23$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Travelers from Iridescent",
+      "imbue_a_item": "minecraft:fern",
+      "imbue_b_item": "amethyst_imbuement:malachite_figurine",
+      "imbue_c_item": "minecraft:prismarine_shard",
+      "imbue_d_item": "minecraft:cactus",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:travelers_scepter",
+      "cost_text": "$(l)Level Cost: $(2)10$()"
+    }
+  ]
 }

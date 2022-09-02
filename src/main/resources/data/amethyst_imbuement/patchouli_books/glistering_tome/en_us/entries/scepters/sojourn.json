@@ -1,38 +1,57 @@
-{    
-"name": "Sojourn",    
-"icon": "amethyst_imbuement:sojourn",
-"category": "amethyst_imbuement:scepters", 
-"sortnum": 27,
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Tier three wit scepter focused on exploration. Adds the modifiers $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and $(l:amethyst_imbuement:modifiers/witty)Witty$() and the unique spell Survey. Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 2876"
-},
-{            
-"type": "amethyst_imbuement:scepter_lineage_tier_3",
-"anc_a": "amethyst_imbuement:travelers_scepter",
-"anc_b": "amethyst_imbuement:scepter_of_recall",
-"anc_c": "amethyst_imbuement:builders_scepter",
-"input_item": "amethyst_imbuement:sojourn"
-},
 {
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Sojourn Imbuing",
-  "imbue_a_item": "minecraft:netherite_ingot",
-  "imbue_b_item": "minecraft:elytra",
-  "imbue_c_item": "minecraft:netherite_ingot",
-  "imbue_d_item": "minecraft:netherite_ingot",
-  "craft_a_item": "minecraft:cartography_table",
-  "craft_b_item": "amethyst_imbuement:garnet",
-  "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-  "craft_d_item": "amethyst_imbuement:pyrite",
-  "craft_e_item": "#amethyst_imbuement:sojourn_scepters",
-  "craft_f_item": "amethyst_imbuement:pyrite",
-  "craft_g_item": "amethyst_imbuement:inquisitive_gem",
-  "craft_h_item": "amethyst_imbuement:garnet",
-  "craft_i_item": "minecraft:cartography_table",
-  "result_item": "amethyst_imbuement:sojourn",
-  "cost_text": "$(l)Level Cost: $(2)37$()"
-}
-]
+  "name": "Sojourn",
+  "icon": "amethyst_imbuement:sojourn",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 27,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier three wit scepter focused on exploration. Adds the modifiers $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and $(l:amethyst_imbuement:modifiers/witty)Witty$() and the unique spell Survey. Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 2876"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_3",
+      "anc_a": "amethyst_imbuement:travelers_scepter",
+      "anc_b": "amethyst_imbuement:scepter_of_recall",
+      "anc_c": "amethyst_imbuement:builders_scepter",
+      "input_item": "amethyst_imbuement:sojourn"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Sojourn Imbuing",
+      "imbue_a_item": "minecraft:netherite_ingot",
+      "imbue_b_item": "minecraft:elytra",
+      "imbue_c_item": "minecraft:netherite_ingot",
+      "imbue_d_item": "minecraft:netherite_ingot",
+      "craft_a_item": "minecraft:cartography_table",
+      "craft_b_item": "amethyst_imbuement:garnet",
+      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
+      "craft_d_item": "amethyst_imbuement:pyrite",
+      "craft_e_item": "#amethyst_imbuement:sojourn_scepters",
+      "craft_f_item": "amethyst_imbuement:pyrite",
+      "craft_g_item": "amethyst_imbuement:inquisitive_gem",
+      "craft_h_item": "amethyst_imbuement:garnet",
+      "craft_i_item": "minecraft:cartography_table",
+      "result_item": "amethyst_imbuement:sojourn",
+      "cost_text": "$(l)Level Cost: $(2)37$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Sojourn from Lustrous",
+      "imbue_a_item": "minecraft:cartography_table",
+      "imbue_b_item": "minecraft:elytra",
+      "imbue_c_item": "amethyst_imbuement:inquisitive_gem",
+      "imbue_d_item": "minecraft:cartography_table",
+      "craft_a_item": "amethyst_imbuement:gem_dust",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "amethyst_imbuement:gem_dust",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:lustrous_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "amethyst_imbuement:gem_dust",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "amethyst_imbuement:gem_dust",
+      "result_item": "amethyst_imbuement:resonance",
+      "cost_text": "$(l)Level Cost: $(2)20$()"
+    }
+  ]
 }
