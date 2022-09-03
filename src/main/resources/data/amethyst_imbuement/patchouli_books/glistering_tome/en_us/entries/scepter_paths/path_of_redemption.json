@@ -1,6 +1,6 @@
 {    
 "name": "The Path of Redemption",
-"icon": "amethyst_imbuement:lethality",
+"icon": "amethyst_imbuement:redemption",
 "category": "amethyst_imbuement:scepter_paths",
 "pages": [        
 {            
@@ -10,7 +10,7 @@
 {
   "type": "amethyst_imbuement:scepter_path",
   "tier_1": "amethyst_imbuement:graceful_scepter,amethyst_imbuement:enduring_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_the pacifist,amethyst_imbuement:clerics_scepter,amethyst_imbuement:bardic_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist,amethyst_imbuement:clerics_scepter,amethyst_imbuement:bardic_scepter",
   "tier_3": "amethyst_imbuement:redemption",
   "spec": "Healing & Support",
   "spells": "Inspiring Song (Bardic Scepter)",

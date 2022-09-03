@@ -3,12 +3,12 @@
 "icon": "amethyst_imbuement:glowing_blade",    
 "category": "amethyst_imbuement:imbuing",
 "extra_recipe_mappings": {
-"amethyst_imbuement:glaowing_blade": 1,
-"amethyst_imbuement:glaowing_pick": 2,
-"amethyst_imbuement:glaowing_spade": 3,
-"amethyst_imbuement:glaowing_axe": 4,
-"amethyst_imbuement:glaowing_hoe": 5
-}
+"amethyst_imbuement:glowing_blade": 1,
+"amethyst_imbuement:glowing_pick": 2,
+"amethyst_imbuement:glowing_spade": 3,
+"amethyst_imbuement:glowing_axe": 4,
+"amethyst_imbuement:glowing_hoe": 5
+},
 "pages": [        
 {            
 "type": "patchouli:text",            
@@ -106,7 +106,7 @@
 "craft_g_item": "minecraft:air",
 "craft_h_item": "amethyst_imbuement:glowing_fragment",
 "craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:glowing_spade",
+"result_item": "amethyst_imbuement:glowing_hoe",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 }
 ]

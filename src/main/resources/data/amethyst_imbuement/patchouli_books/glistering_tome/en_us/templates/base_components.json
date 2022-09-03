@@ -8,7 +8,7 @@
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 30,
+"y": 10,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -21,19 +21,19 @@
 "type": "patchouli:text", 
 "text": "Gem Dust",
 "x": 49,            
-"y": 35
+"y": 15
 },
 {
 "type": "patchouli:item", 
 "item": "amethyst_imbuement:gem_dust",
 "framed": false,
 "x": 7,            
-"y": 32
+"y": 12
 },
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 51,
+"y": 31,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -46,19 +46,19 @@
 "type": "patchouli:text", 
 "text": "Gem of Promise",
 "x": 49,            
-"y": 56
+"y": 36
 },
 {
 "type": "patchouli:item", 
 "item": "amethyst_imbuement:gem_of_promise",
 "framed": false,
 "x": 7,            
-"y": 53
+"y": 33
 },
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 72,
+"y": 52,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -71,19 +71,19 @@
 "type": "patchouli:text", 
 "text": "Aspect Gems",
 "x": 49,            
-"y": 77
+"y": 57
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:blazing_gem,amethyst_imbuement:sparking_gem,amethyst_imbuement:brutal_gem,amethyst_imbuement:lethal_gem,amethyst_imbuement:inquisitive_gem,amethyst_imbuement:healers_gem,",
+"item": "amethyst_imbuement:blazing_gem,amethyst_imbuement:sparking_gem,amethyst_imbuement:brutal_gem,amethyst_imbuement:lethal_gem,amethyst_imbuement:inquisitive_gem,amethyst_imbuement:healers_gem",
 "framed": false,
 "x": 7,            
-"y": 74
+"y": 54
 },
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 93,
+"y": 73,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -96,19 +96,19 @@
 "type": "patchouli:text", 
 "text": "Malachite Figurine",
 "x": 49,            
-"y": 98
+"y": 78
 },
 {
 "type": "patchouli:item", 
 "item": "amethyst_imbuement:malachite_figurine",
 "framed": false,
 "x": 7,            
-"y": 95
+"y": 75
 },
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 114,
+"y": 94,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -121,19 +121,19 @@
 "type": "patchouli:text", 
 "text": "Charged Crystals",
 "x": 49,            
-"y": 119
+"y": 99
 },
 {
 "type": "patchouli:item", 
 "item": "amethyst_imbuement:charged_moonstone,amethyst_imbuement:energetic_opal",
 "framed": false,
 "x": 7,            
-"y": 116
+"y": 96
 },
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 135,
+"y": 115,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -146,13 +146,13 @@
 "type": "patchouli:text", 
 "text": "Crafted Materials",
 "x": 49,            
-"y": 140
+"y": 120
 },
 {
 "type": "patchouli:item",
 "item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick",
 "framed": false,
 "x": 7,            
-"y": 137
+"y": 117
 }
 ]}

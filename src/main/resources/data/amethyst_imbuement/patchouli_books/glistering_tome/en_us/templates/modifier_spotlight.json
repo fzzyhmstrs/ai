@@ -45,7 +45,7 @@
 "type": "patchouli:text",            
 "text": "Modifier type: #mod_type#",            
 "x": 5,            
-"y": 50       
+"y": 60
 },
 {            
 "type": "patchouli:text",            

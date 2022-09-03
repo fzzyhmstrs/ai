@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Scepters can follow the plain crafting progression, but for the most powerful spellcasting possible an upgraded scepter can't be beat!$(li)Pick an upgrade path to pursue. Once you've started on a path, you can't back out!$(li)Find and create the base components needed to progress.%(li)Craft higher tiers of your scepter path in the imbuing table!"
+      "text": "Scepters can follow the plain crafting progression, but for the most powerful spell-casting possible an upgraded scepter can't be beat!$(li)Pick an (l:amethyst_imbuement:scepter_paths)upgrade path$() to pursue. Once you've started on a path, you can't back out!$(li)Find and create the (l:amethyst_imbuement:scepter_upgrading/gem_materials)base components$() needed to progress.$(li)Craft higher tiers of your scepter path in the (l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()!"
     }
   ]
 }

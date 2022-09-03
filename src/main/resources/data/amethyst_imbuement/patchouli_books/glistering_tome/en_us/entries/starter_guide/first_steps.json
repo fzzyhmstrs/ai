@@ -23,7 +23,7 @@
 "type": "patchouli:spotlight",
 "title": "Experience Farm",
 "item": "amethyst_imbuement:xp_bush_seed,minecraft:spawner,minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:insight\",lvl:3}]}",
-"text": "You will need a LOT of XP!$(br)$(l)$(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bush:$() These bushs grow $(l:amethyst_imbuement:imbuing/bottle-o-enchanting)Bottles-o'-Enchanting$() for you! Imbue up some of these. $(br)$(l)$(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight:$() Enchanting your main weapon with this will churn out experience.$(br)$(l)$(#490)Mob Farm:$() A classic Minecraft endeavor. You may want to set one of these up to farm XP."
+"text": "You will need a LOT of XP!$(br)$(l)$(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bush:$() These bushes grow $(l:amethyst_imbuement:imbuing/bottle-o-enchanting)Bottles-o'-Enchanting$() for you! Imbue up some of these. $(br)$(l)$(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight:$() Enchanting your main weapon with this will churn out experience.$(br)$(l)$(#490)Mob Farm:$() A classic Minecraft endeavor. You may want to set one of these up to farm XP."
 }
 ]
 }

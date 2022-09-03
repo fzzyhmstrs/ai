@@ -8,7 +8,7 @@
 {
 "type": "patchouli:image",                        
 "x": 25,
-"y": 70,
+"y": 80,
 "image": "patchouli:textures/gui/crafting.png",
 "width": 66,
 "height": 26,
@@ -22,7 +22,7 @@
 "item": "#input_item#",
 "framed": false,
 "x": 50,            
-"y": 75
+"y": 85
 },
 {
 "type": "patchouli:item", 
@@ -48,8 +48,8 @@
 
 {
 "type": "patchouli:image",                        
-"x": 56,
-"y": 55,
+"x": 54,
+"y": 62,
 "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
 "width": 9,
 "height": 9,

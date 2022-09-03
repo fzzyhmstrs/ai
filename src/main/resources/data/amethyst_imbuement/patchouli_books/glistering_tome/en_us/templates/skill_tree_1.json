@@ -14,8 +14,8 @@
   },
   {
     "type": "patchouli:image",
-    "x": 36,
-    "y": 73,
+    "x": 35,
+    "y": 70,
     "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
     "width": 9,
     "height": 9,
@@ -27,11 +27,11 @@
   {
     "type": "patchouli:image",
     "x": 36,
-    "y": 23,
-    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "y": 42,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
     "width": 9,
     "height": 9,
-    "u": 20,
+    "u": 10,
     "v": 0,
     "texture_width": 32,
     "texture_height": 16
@@ -39,11 +39,11 @@
   {
     "type": "patchouli:image",
     "x": 36,
-    "y": 125,
-    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "y": 100,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
     "width": 9,
     "height": 9,
-    "u": 20,
+    "u": 0,
     "v": 0,
     "texture_width": 32,
     "texture_height": 16
@@ -52,28 +52,28 @@
     "type": "patchouli:text",
     "text": "Fury",
     "color": "FF5555",
-    "x": 34,
-    "y": 25
+    "x": 67,
+    "y": 38
   },
   {
     "type": "patchouli:text",
     "text": "Wit",
     "color": "00AA00",
-    "x": 34,
-    "y": 62
+    "x": 70,
+    "y": 85
   },
   {
     "type": "patchouli:text",
     "text": "Grace",
     "color": "5555FF",
-    "x": 34,
-    "y": 97
+    "x": 65,
+    "y": 137
   },
   {
     "type": "patchouli:image",
     "x": 99,
-    "y": 73,
-    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "y": 70,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
     "width": 9,
     "height": 9,
     "u": 20,
@@ -84,8 +84,8 @@
   {
     "type": "patchouli:image",
     "x": 99,
-    "y": 23,
-    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "y": 20,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
     "width": 9,
     "height": 9,
     "u": 20,
@@ -96,8 +96,8 @@
   {
     "type": "patchouli:image",
     "x": 99,
-    "y": 125,
-    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "y": 122,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
     "width": 9,
     "height": 9,
     "u": 20,

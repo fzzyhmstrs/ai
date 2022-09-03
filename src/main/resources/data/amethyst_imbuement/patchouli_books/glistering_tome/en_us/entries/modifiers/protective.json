@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Protective",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/protective.png",
-"ancestor": "N/A"
-"descendent": "$(l:amethyst_imbuement:modifiers/champion_of_the_meek)Champion of the Meek$()"
-"mod_type": "$(2)Protection$()"
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/champion_of_the_meek)Champion of the Meek$()",
+"mod_type": "$(2)Protection$()",
 "mod_text": "Your scepter seeks to protect you and those around you from harm. Imbues onto the Scepter of the Paladin as you progress on the Paladins Path of the Aegis"
 }
 ]

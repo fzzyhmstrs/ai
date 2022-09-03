@@ -37,7 +37,7 @@
 "type": "patchouli:text",
 "title": "Imbuing",
 "anchor": "imbue_info",
-"text": "Imbuing is one of the primary tasks you will need to accomplish to progress in your magical journey. Imbuing is a hybrid of crafting and enchanting; it is the act of infusing an object with the essense of other objects, as well as with some of your own soul. In gameplay, your $(#490)Experience$() stands in for your soul."
+"text": "Imbuing is one of the primary tasks you will need to accomplish to progress in your magical journey. Imbuing is a hybrid of crafting and enchanting; it is the act of infusing an object with the essence of other objects, as well as with some of your own soul. In gameplay, your $(#490)Experience$() stands in for your soul."
 },
 {
 "type": "patchouli:text",
