@@ -9,7 +9,7 @@
 "text": "Tier three fury scepter focused on close combat. Adds the modifiers $(l:amethyst_imbuement:modifiers/dangerous)Dangerous$() and $(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(). Can be used like a weapon. Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 2876"
 },
 {            
-"type": "amethyst_imbuement:scepter_lineage_tier_3",
+"type": "amethyst_imbuement:scepter_lineage_tier_3_2",
 "anc_b": "amethyst_imbuement:corrupted_scepter",
 "anc_c": "amethyst_imbuement:scepter_of_blades",
 "input_item": "amethyst_imbuement:lethality"

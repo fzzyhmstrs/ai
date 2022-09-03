@@ -26,7 +26,7 @@
       "craft_b_item": "amethyst_imbuement:garnet",
       "craft_c_item": "amethyst_imbuement:lustrous_sphere",
       "craft_d_item": "amethyst_imbuement:pyrite",
-      "craft_e_item": "#amethyst_imbuement:redemption_scepters",
+      "craft_e_item": "tag:amethyst_imbuement:redemption_scepters",
       "craft_f_item": "amethyst_imbuement:pyrite",
       "craft_g_item": "minecraft:enchanted_golden_apple",
       "craft_h_item": "amethyst_imbuement:garnet",

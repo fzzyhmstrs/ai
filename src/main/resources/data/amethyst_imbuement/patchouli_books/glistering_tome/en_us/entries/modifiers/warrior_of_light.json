@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Smiting",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/warrior_of_light.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/smiting)Smiting$()"
-"descendent": "N/A"
-"mod_type": "$(2)Damage$()"
+"ancestor": "$(l:amethyst_imbuement:modifiers/smiting)Smiting$()",
+"descendant": "N/A",
+"mod_type": "$(2)Damage$()",
 "mod_text": "You and your scepter are devoted to eradicating the monsters of the night. Manifests on the Aegis when you complete the Vanguards Path of the Aegis"
 }
 ]

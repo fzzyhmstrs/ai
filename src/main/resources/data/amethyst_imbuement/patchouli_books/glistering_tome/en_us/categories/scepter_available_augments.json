@@ -1,6 +1,6 @@
 {    
 "name": "Basic Scepter Augments",
 "parent": "amethyst_imbuement:scepter_augments",
-"description": "Recipes for basic augments aviailable right away. They can be added to any scepter as long as you have the ingredients and experience levels, and the scepter is at the proper Level.$(br2)For more powerful augments find books scattered around the world and use them with the $(#490)Scepter Templates$() to imbue your scepter.",
+"description": "Recipes for basic augments available right away. They can be added to any scepter as long as you have the ingredients and experience levels, and the scepter is at the proper Level.$(br2)For more powerful augments find books scattered around the world and use them with the $(#490)Scepter Templates$() to imbue your scepter.",
 "icon": "amethyst_imbuement:book_of_lore"
 }

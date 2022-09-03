@@ -1,6 +1,6 @@
 {    
-"name": "Aspect Gems",
-"icon": "amethyst_imbuement:blazing_gem",    
+"name": "Scepter Upgrade Tree",
+"icon": "minecraft:oak_sapling",
 "category": "amethyst_imbuement:scepter_upgrading",    
 "pages": [
   {

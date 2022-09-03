@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Healing",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healing.png",
-"ancestor": "N/A"
-"descendent": "N/A"
-"mod_type": "$(2)Spell Casting$()"
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter brims with a raw life force that blesses the caster and those around them with good health. Imbues onto the Clerics Scepter as you progress on the Clerics Path of Redemption"
 }
 ]

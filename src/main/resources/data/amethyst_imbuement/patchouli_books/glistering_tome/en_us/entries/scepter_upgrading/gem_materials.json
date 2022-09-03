@@ -1,11 +1,11 @@
 {    
 "name": "Gems and Materials",
-"icon": "amethyst_imbuement:gem_of_promise",    
+"icon": "amethyst_imbuement:gem_dust",
 "category": "amethyst_imbuement:scepter_upgrading",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "In order to progress your scepter there are some magical ingredients you must find, craft, and generate special imbuing materials." 
+"text": "In order to progress your scepter on its upgrade there are some magical ingredients you must find in chests, craft or imbue, or generate by interacting with the world."
 },
 {            
 "type": "amethyst_imbuement:base_components"

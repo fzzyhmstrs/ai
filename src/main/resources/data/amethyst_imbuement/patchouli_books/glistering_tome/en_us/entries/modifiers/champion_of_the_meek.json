@@ -12,9 +12,9 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Champion of the Meek",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/champion_of_the_meek.png",
-"ancestor": "$(l:amethyst_imbuement:modifiers/protective)Protective$()"
-"descendent": "N/A"
-"mod_type": "$(2)Protection$()"
+"ancestor": "$(l:amethyst_imbuement:modifiers/protective)Protective$()",
+"descendant": "N/A",
+"mod_type": "$(2)Protection$()",
 "mod_text": "You and your scepter have become champions to those who can't protect themselves. Manifests on the Aegis when you complete the Paladins Path of the Aegis"
 }
 ]
