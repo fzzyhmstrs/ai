@@ -1,0 +1,20 @@
+{    
+"name": "Dangerous Corruption",
+"icon": "amethyst_imbuement:corrupted_scepter",
+"category": "amethyst_imbuement:scepter_lethality_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of Lethality if you want to wither your opponents away with highly leveled spells. Hitting of affecting your opponents withers them, and your damage is increased by Dangerous. You spells level up two times faster. Less effective at casting non-Fury spells however."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:furious_scepter",
+  "tier_2": "amethyst_imbuement:corrupted_scepter",
+  "tier_3": "amethyst_imbuement:lethality",
+  "spec": "Withering Spell Leveling",
+  "spells": "Soul Missile",
+  "mods": "Dangerous/Pact of Danger, Necrotic, Furious"
+}
+]
+}

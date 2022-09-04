@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The base gem for creating aspect gems. Gems of promise will transmute into various aspect gems depending on what the user experiences in the environment."
+"text": "The base gem for creating aspect gems. Gems of promise will transmute into various aspect gems depending on what the user experiences in the environment.$(br2)$(l:amethyst_imbuement:scepter_upgrading/aspect_gems)Aspect Gems$()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

@@ -8,7 +8,7 @@
 {
 "type": "patchouli:image",                        
 "x": 5,            
-"y": 10,
+"y": 12,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
 "height": 20,
@@ -21,7 +21,7 @@
 "type": "patchouli:text", 
 "text": "Gem Dust",
 "x": 49,            
-"y": 15
+"y": 17
 },
 {
 "type": "patchouli:item", 

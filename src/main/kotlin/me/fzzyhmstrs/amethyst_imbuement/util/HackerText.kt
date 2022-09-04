@@ -5,6 +5,7 @@ import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import java.lang.StringBuilder
 import net.minecraft.world.World
+import java.util.*
 
 class HackerText(private val baseText: String, private val speed: Int) {
     private val wholeText: String
@@ -30,17 +31,13 @@ class HackerText(private val baseText: String, private val speed: Int) {
         baseTextLen = baseText.length
         val len = baseText.length * 2
         val builder = StringBuilder(len)
-        val world: World? = MinecraftClient.getInstance().world
-        val hackerText: String = if (world != null) {
+        val random = Random(System.currentTimeMillis())
             val list = listOf('\\', '/', '<', '>')
             for (i in 0 until len) {
-                val index = world.random.nextInt(4)
+                val index = random.nextInt(4)
                 builder.append(list[index])
             }
-            builder.toString()
-        } else {
-            ""
-        }
+            val hackerText: String = builder.toString()
         wholeText = baseText + hackerText
         wholeTextLen = wholeText.length
         totalCount = hackerText.length * speed

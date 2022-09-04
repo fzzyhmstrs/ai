@@ -1,0 +1,20 @@
+{    
+"name": "Route of Skilled Recall",
+"icon": "amethyst_imbuement:scepter_of_recall",
+"category": "amethyst_imbuement:scepter_redemption_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Sojourn to travel far and wide while always maintaining your connection to home. All spells related to travel are boosted with Traveler, spells are cast one level above normal, and all Wit spells gain double XP. Your spells have much larger range of effect with Greater Reach."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:skillful_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_recall",
+  "tier_3": "amethyst_imbuement:sojourn",
+  "spec": "Expeditions",
+  "spells": "(Unique) Survey, (Unique) Recall",
+  "mods": "Traveler, Witty, Skillful, Greater Reach"
+}
+]
+}

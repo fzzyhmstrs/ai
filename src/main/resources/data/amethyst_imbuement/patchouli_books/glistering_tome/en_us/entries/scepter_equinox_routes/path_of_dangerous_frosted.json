@@ -1,0 +1,20 @@
+{    
+"name": "Route of Frosted Danger",
+"icon": "amethyst_imbuement:frosted_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Equinox if you want to freeze your foes solid with highly damaging ice. Ice-based Augments have a big boost, and damage is increased by Dangerous. Elemental magic of any kind is further boosted by Elemental, and fury spells gain twice the XP as normal thanks to Furious."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:dangerous_scepter",
+  "tier_2": "amethyst_imbuement:frosted_scepter",
+  "tier_3": "amethyst_imbuement:equinox",
+  "spec": "Ice Magic",
+  "spells": "(Unique) Ice Spikes",
+  "mods": "Dangerous/Pact of Danger, Ice Aspect, Elemental, Furious"
+}
+]
+}

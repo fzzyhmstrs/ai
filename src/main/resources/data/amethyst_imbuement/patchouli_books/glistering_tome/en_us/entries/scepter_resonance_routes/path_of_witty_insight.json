@@ -1,0 +1,20 @@
+{    
+"name": "Route of Skilled Insight",
+"icon": "amethyst_imbuement:scepter_of_insight",
+"category": "amethyst_imbuement:scepter_redemption_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of Resonance to gain experience both in combat and with your Wit spells. All your spells have a chance to echo and killing mobs drops extra experience. All of your spells cast a level above normal, and their range is slightly increased. Grace spells gain 2x XP."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:skillful_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_insight",
+  "tier_3": "amethyst_imbuement:resonance",
+  "spec": "Experience Gain",
+  "spells": "Soul Missile, (Unique) Resonate",
+  "mods": "Echoing, Insightful, Skillful, Lesser Reach, Graceful"
+}
+]
+}

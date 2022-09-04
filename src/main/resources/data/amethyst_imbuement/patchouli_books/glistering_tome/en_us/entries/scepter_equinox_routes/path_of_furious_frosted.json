@@ -1,0 +1,20 @@
+{    
+"name": "Route of Frosted Fury",
+"icon": "amethyst_imbuement:frosted_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Equinox if you want to freeze your foes solid with high-tiered ice magic. Ice-based Augments have a big boost, elemental magic of any kind is further boosted by Elemental, and fury spells gain $(o)three times$() the XP as normal thanks to Enraged."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:furious_scepter",
+  "tier_2": "amethyst_imbuement:frosted_scepter",
+  "tier_3": "amethyst_imbuement:equinox",
+  "spec": "Ice Magic",
+  "spells": "(Unique) Ice Spikes",
+  "mods": "Ice Aspect, Elemental, Enraged"
+}
+]
+}

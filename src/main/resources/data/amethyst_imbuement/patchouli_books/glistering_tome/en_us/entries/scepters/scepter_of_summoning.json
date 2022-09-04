@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/summoners_aspect)Summoners Aspect$() and the spell Summon Zombie. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$()$(br2)$(l)Mana:$() 1056"
+      "text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/summoners_aspect)Summoners Aspect$() and the spell Summon Zombie. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$()$(br2)$(l)Mana:$() 550"
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
@@ -17,7 +17,7 @@
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Scepter of Summoning Imbuing",
+      "title": "Scepter of Summoning",
       "imbue_a_item": "minecraft:gold_ingot",
       "imbue_b_item": "#c:skulls",
       "imbue_c_item": "minecraft:gold_ingot",

@@ -1,0 +1,20 @@
+{    
+"name": "Route of Enduring Paladin",
+"icon": "amethyst_imbuement:scepter_of_the_paladin",
+"category": "amethyst_imbuement:scepter_aegis_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Aegis if you want to bolster your allies with long lasting protective magic. As the Champion of the Meek, casting spells shields and protects you and your allies. You spells last longer with Enduring, and damage to the undead is increased with Smiting."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:enduring_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the_paladin",
+  "tier_3": "amethyst_imbuement:aegis",
+  "spec": "Protective Magic",
+  "spells": "Fortify",
+  "mods": "Champion of the Meek, Enduring, Smiting"
+}
+]
+}

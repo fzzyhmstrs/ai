@@ -1,0 +1,43 @@
+{
+  "name": "Resonant Rod",
+  "icon": "amethyst_imbuement:resonant_rod",
+  "category": "amethyst_imbuement:recipes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(o)It chimes beautifully when struck against a surface$()$(br2)Resonant rods are required to imbue the Tier 3 scepter (l:amethyst_imbuement:scepters/resonance)Resonance$() to finish the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_book_of_lore",
+      "recipe2": "amethyst_imbuement:gem_dust_from_book_of_mythos"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_enchanted_book",
+      "recipe2": "amethyst_imbuement:gem_dust_from_iridescent_orb"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_lustrous_sphere",
+      "recipe2": "amethyst_imbuement:gem_dust_from_glowing_fragment"
+
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_blazing_gem",
+      "recipe2": "amethyst_imbuement:gem_dust_from_sparking_gem"
+
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_brutal_gem",
+      "recipe2": "amethyst_imbuement:gem_dust_from_lethal_gem"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_healers_gem",
+      "recipe2": "amethyst_imbuement:gem_dust_from_inquisitive_gem"
+    }
+  ]
+}
