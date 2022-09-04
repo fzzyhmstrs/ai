@@ -1,0 +1,20 @@
+{    
+"name": "Route of Dangerous Blades",
+"icon": "amethyst_imbuement:scepter_of_blades",
+"category": "amethyst_imbuement:scepter_lethality_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of Lethality if you want to specialize in blade combat while dishing out maximum damage. Slashing Augments have a big boost, and your overall damage is boosted by Lethal. Less effective at casting non-Fury spells however."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:dangerous_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_blades",
+  "tier_3": "amethyst_imbuement:lethality",
+  "spec": "Blade Combat",
+  "spells": "Spectral Slash",
+  "mods": "Lethal/Pact of Lethality, Blade Aspect"
+}
+]
+}

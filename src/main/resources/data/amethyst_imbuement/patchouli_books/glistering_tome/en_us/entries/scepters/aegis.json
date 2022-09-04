@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tier three grace scepter focused on protection and righteous warfare. Adds the modifiers $(l:amethyst_imbuement:modifiers/protective)Protective$() and $(l:amethyst_imbuement:modifiers/smiting)Smiting$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of theAegis.$()$(br2)$(l)Mana:$() 2876"
+      "text": "Tier three grace scepter focused on protection and righteous warfare. Adds the modifiers $(l:amethyst_imbuement:modifiers/protective)Protective$() and $(l:amethyst_imbuement:modifiers/smiting)Smiting$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis.$()$(br2)$(l)Mana:$() 1450"
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
@@ -16,7 +16,7 @@
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Aegis Imbuing",
+      "title": "Aegis",
       "imbue_a_item": "minecraft:netherite_ingot",
       "imbue_b_item": "amethyst_imbuement:crystalline_heart",
       "imbue_c_item": "minecraft:netherite_ingot",

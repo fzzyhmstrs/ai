@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$() and the spell Spectral Slash. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 1056"
+      "text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$() and the spell Spectral Slash. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 500"
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",

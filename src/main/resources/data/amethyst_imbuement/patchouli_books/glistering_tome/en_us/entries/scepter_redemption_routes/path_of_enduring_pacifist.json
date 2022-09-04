@@ -1,0 +1,20 @@
+{    
+"name": "Route of Enduring Pacifist",
+"icon": "amethyst_imbuement:scepter_of_the_pacifist",
+"category": "amethyst_imbuement:scepter_redemption_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of Redemption to enter Sainthood. Your healing spells are massively more effective at the expense of other spell types. Spell effects last longer thanks to Enduring."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:enduring_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist",
+  "tier_3": "amethyst_imbuement:redemption",
+  "spec": "Healing Magic",
+  "spells": "Bedazzle",
+  "mods": "Saints Grace/Saints Pact, Enduring"
+}
+]
+}

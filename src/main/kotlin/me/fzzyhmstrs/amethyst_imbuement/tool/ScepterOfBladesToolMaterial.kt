@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.math.max
 
 
@@ -21,7 +23,10 @@ object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
         return AiConfig.scepters.bladesDamage
     }
     fun defaultAttackDamage(): Float {
-        return 6.0f
+        return 5.0f
+    }
+    override fun getAttackSpeed(): Double {
+        return -3.0
     }
     override fun getMiningLevel(): Int {
         return 1

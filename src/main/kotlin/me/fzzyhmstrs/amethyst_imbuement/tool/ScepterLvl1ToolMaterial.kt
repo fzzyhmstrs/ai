@@ -19,6 +19,9 @@ object ScepterLvl1ToolMaterial: ScepterToolMaterial() {
     override fun getAttackDamage(): Float {
         return 2.0f
     }
+    override fun getAttackSpeed(): Double {
+        return -3.0
+    }
     override fun getMiningLevel(): Int {
         return 1
     }

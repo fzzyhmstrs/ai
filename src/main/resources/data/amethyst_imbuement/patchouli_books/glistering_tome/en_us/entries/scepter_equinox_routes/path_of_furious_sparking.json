@@ -1,0 +1,20 @@
+{    
+"name": "Route of Sparking Fury",
+"icon": "amethyst_imbuement:sparking_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Equinox if you want to fry your enemies with high-level lightning spells. Lightning-based Augments have a big boost, elemental magic of any kind is further boosted by Elemental, and fury spells gain $(o)three times$() the XP as normal thanks to Enraged."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:furious_scepter",
+  "tier_2": "amethyst_imbuement:sparking_scepter",
+  "tier_3": "amethyst_imbuement:equinox",
+  "spec": "Lightning Magic",
+  "spells": "Lightning Bolt",
+  "mods": "Lightning Aspect, Elemental, Enraged"
+}
+]
+}

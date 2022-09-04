@@ -1,0 +1,20 @@
+{    
+"name": "Route of Graceful Bard",
+"icon": "amethyst_imbuement:bardic_scepter",
+"category": "amethyst_imbuement:scepter_redemption_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of Redemption to inspire those around you with your songs and tales. Your healing spells are more effective at the expense of other spell types. Your spells are longer lasting thanks to enduring, and cost 15% less with Attuned. Your Grace spells gain 2x the normal XP."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:graceful_scepter",
+  "tier_2": "amethyst_imbuement:bardic_scepter",
+  "tier_3": "amethyst_imbuement:redemption",
+  "spec": "Inspiring Magic",
+  "spells": "(Unique) Inspiring Song",
+  "mods": "Healers Grace/Healers Pact, Enduring, Attuned, Graceful"
+}
+]
+}

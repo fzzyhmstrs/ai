@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and the spells Summon Boat and Summon Strider. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1056"
+      "text": "Tier two wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and the spells Summon Boat and Summon Strider. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 550"
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
@@ -17,7 +17,7 @@
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Travelers Scepter Imbuing",
+      "title": "Travelers Scepter",
       "imbue_a_item": "minecraft:gold_ingot",
       "imbue_b_item": "amethyst_imbuement:malachite_figurine",
       "imbue_c_item": "minecraft:gold_ingot",

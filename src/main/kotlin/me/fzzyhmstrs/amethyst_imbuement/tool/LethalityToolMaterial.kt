@@ -21,6 +21,9 @@ object LethalityToolMaterial: ScepterToolMaterial() {
     override fun getAttackDamage(): Float {
         return AiConfig.scepters.lethalityDamage
     }
+    override fun getAttackSpeed(): Double {
+        return -3.0
+    }
     fun defaultAttackDamage(): Float {
         return 8.0f
     }

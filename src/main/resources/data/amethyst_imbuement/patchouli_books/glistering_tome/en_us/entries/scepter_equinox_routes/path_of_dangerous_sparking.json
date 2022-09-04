@@ -1,0 +1,20 @@
+{    
+"name": "Route of Sparking Danger",
+"icon": "amethyst_imbuement:sparking_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Equinox if you want to fry your enemies with damage-amplified lightning. Lightning-based Augments have a big boost, and damage is increased by Dangerous. Elemental magic of any kind is further boosted by Elemental, and fury spells gain twice the XP as normal thanks to Furious."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:dangerous_scepter",
+  "tier_2": "amethyst_imbuement:sparking_scepter",
+  "tier_3": "amethyst_imbuement:equinox",
+  "spec": "Lightning Magic",
+  "spells": "Lightning Bolt",
+  "mods": "Dangerous/Pact of Danger, Lightning Aspect, Elemental, Furious"
+}
+]
+}

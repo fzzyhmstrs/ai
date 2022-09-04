@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The starter scepter. Can be augmented with tier one spells. The starting point for progressing through a $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)scepter upgrade path.$()$(br2)$(l)Mana:$() 426"
+"text": "The starter scepter. Can be augmented with tier one spells. The starting point for progressing through a $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)scepter upgrade path.$()$(br2)$(l)Mana:$() 250"
 },
 {
 "type": "patchouli:crafting",

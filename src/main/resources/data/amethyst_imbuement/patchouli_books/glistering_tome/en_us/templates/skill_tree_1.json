@@ -52,30 +52,30 @@
     "type": "patchouli:text",
     "text": "Fury",
     "color": "FF5555",
-    "x": 67,
-    "y": 38
+    "x": 65,
+    "y": 37
   },
   {
     "type": "patchouli:text",
     "text": "Wit",
     "color": "00AA00",
-    "x": 70,
-    "y": 85
+    "x": 68,
+    "y": 87
   },
   {
     "type": "patchouli:text",
     "text": "Grace",
     "color": "5555FF",
-    "x": 65,
-    "y": 137
+    "x": 63,
+    "y": 139
   },
   {
     "type": "patchouli:image",
     "x": 99,
     "y": 70,
     "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
-    "width": 9,
-    "height": 9,
+    "width": 10,
+    "height": 10,
     "u": 20,
     "v": 0,
     "texture_width": 32,
@@ -86,8 +86,8 @@
     "x": 99,
     "y": 20,
     "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
-    "width": 9,
-    "height": 9,
+    "width": 10,
+    "height": 10,
     "u": 20,
     "v": 0,
     "texture_width": 32,
@@ -98,8 +98,8 @@
     "x": 99,
     "y": 122,
     "image": "amethyst_imbuement:textures/gui/patchouli/book_icons_2.png",
-    "width": 9,
-    "height": 9,
+    "width": 10,
+    "height": 10,
     "u": 20,
     "v": 0,
     "texture_width": 32,

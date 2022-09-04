@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Tier one wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/witty)Witty$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 426"
+"text": "Tier one wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/witty)Witty$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 250"
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
@@ -19,7 +19,7 @@
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Witty Scepter Imbuing",
+  "title": "Witty Scepter",
   "imbue_a_item": "amethyst_imbuement:imbued_lapis",
   "imbue_b_item": "amethyst_imbuement:inquisitive_gem",
   "imbue_c_item": "amethyst_imbuement:imbued_lapis",

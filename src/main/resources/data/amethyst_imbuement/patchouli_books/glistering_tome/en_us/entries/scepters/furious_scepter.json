@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Tier one fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/furious)Furious$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 426"
+"text": "Tier one fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/furious)Furious$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 250"
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
@@ -19,7 +19,7 @@
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Furious Scepter Imbuing",
+  "title": "Furious Scepter",
   "imbue_a_item": "minecraft:amethyst_shard",
   "imbue_b_item": "amethyst_imbuement:lethal_gem",
   "imbue_c_item": "minecraft:amethyst_shard",

@@ -1,0 +1,20 @@
+{    
+"name": "Route of Enduring Vanguard",
+"icon": "amethyst_imbuement:scepter_of_the_vanguard",
+"category": "amethyst_imbuement:scepter_aegis_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Aegis to take a spot on the front lines against darkness. As the Warrior of Light, spells that affect your enemies smite them and weaken them. Your Grace spells last longer with Enduring and gain double XP with Graceful, and spell casting protects you and your allies with Protective."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:enduring_scepter",
+  "tier_2": "amethyst_imbuement:scepter_of_the_vanguard",
+  "tier_3": "amethyst_imbuement:aegis",
+  "spec": "Holy Warrior Magic",
+  "spells": "(Unique) Barrier",
+  "mods": "Warrior of Light, Lesser Enduring, Graceful, Protective"
+}
+]
+}

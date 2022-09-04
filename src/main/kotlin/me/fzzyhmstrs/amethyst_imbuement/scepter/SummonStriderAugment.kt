@@ -10,6 +10,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.passive.StriderEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
@@ -33,6 +34,7 @@ class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             val yrnd = hit.blockPos.y + 1.0
             val strider = StriderEntity(EntityType.STRIDER, world)
             strider.setPos(xrnd, yrnd, zrnd)
+            strider.saddle(SoundCategory.NEUTRAL)
             if (world.spawnEntity(strider)){
                 successes++
             }

@@ -93,12 +93,6 @@ public abstract class LivingEntityMixin extends Entity {
             float newHealth = this.getHealth() + amount;
             float clampedDelta = newHealth - MathHelper.clamp(newHealth,0.0f,this.getMaxHealth());
             float healed = amount - clampedDelta;
-            /*for (int i = 0; i < 9; i++) {
-                ItemStack stack = inventory.getStack(i);
-                if (stack.getItem() instanceof GemOfPromiseItem) {
-                    GemOfPromiseItem.Companion.healersGemCheck(stack, inventory, healed);
-                }
-            }*/
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.getItem() instanceof GemOfPromiseItem) {
                 GemOfPromiseItem.Companion.healersGemCheck(stack2, inventory, healed);
@@ -111,8 +105,10 @@ public abstract class LivingEntityMixin extends Entity {
         if ((LivingEntity)(Object)this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity)(Object)this;
             PlayerInventory inventory = player.getInventory();
+            System.out.println("oof");
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.getItem() instanceof GemOfPromiseItem) {
+                System.out.println("womp");
                 GemOfPromiseItem.Companion.inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
             }
         }

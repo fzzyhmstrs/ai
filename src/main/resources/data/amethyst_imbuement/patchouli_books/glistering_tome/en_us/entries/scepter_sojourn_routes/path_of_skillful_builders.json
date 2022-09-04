@@ -1,0 +1,20 @@
+{    
+"name": "Route of Skilled Building",
+"icon": "amethyst_imbuement:builders_scepter",
+"category": "amethyst_imbuement:scepter_redemption_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Sojourn to masterfully craft the world around you. All spells related to travel and building are boosted, spells are cast one level above normal, and all Wit spells gain double XP. Spell range is slightly increased."
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:skillful_scepter",
+  "tier_2": "amethyst_imbuement:builders_scepter",
+  "tier_3": "amethyst_imbuement:sojourn",
+  "spec": "Building",
+  "spells": "(Unique) Survey, Hard Light Bridge",
+  "mods": "Traveler, Builders Aspect, Witty, Skillful, Lesser Reach"
+}
+]
+}
