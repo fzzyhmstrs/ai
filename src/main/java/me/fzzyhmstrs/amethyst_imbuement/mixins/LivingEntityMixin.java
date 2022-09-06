@@ -105,10 +105,8 @@ public abstract class LivingEntityMixin extends Entity {
         if ((LivingEntity)(Object)this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity)(Object)this;
             PlayerInventory inventory = player.getInventory();
-            System.out.println("oof");
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.getItem() instanceof GemOfPromiseItem) {
-                System.out.println("womp");
                 GemOfPromiseItem.Companion.inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
             }
         }

@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
@@ -51,29 +52,27 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
                 effect.range(level),
                 0.5,
                 0.5)
-        val bl = entityList.isNotEmpty()
-        if (bl) {
-            entityList.forEach {
-                it.damage(CustomDamageSources.LightningDamageSource(user), effect.damage(level))
-            }
-            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.9F, 1.1F)
+        entityList.forEach {
+            it.damage(CustomDamageSources.LightningDamageSource(user), effect.damage(level))
         }
-        return bl
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.7F, 1.1F)
+        return true
     }
 
     override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+        val random = AIClient.aiRandom()
         val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
         val perpendicularToPosX = 1.0
         val perpendicularToPosZ = (rotation.x/rotation.z) * -1
         val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
         val userPos = user.eyePos.add(0.0,-0.3,0.0)
-        val increment = rotation.multiply(baseEffect.range(level) / 80)
+        val increment = rotation.multiply(baseEffect.range(level) / 60)
         var particleBasePos = userPos
-        for (i in 0..80){
+        for (i in 0..60){
             particleBasePos = particleBasePos.add(increment)
             for (j in 0..3){
-                val rnd1 = world.random.nextDouble() * 0.4 - 0.2
-                val rnd2 = world.random.nextDouble() * 0.4 - 0.2
+                val rnd1 = random.nextDouble() * 0.4 - 0.2
+                val rnd2 = random.nextDouble() * 0.4 - 0.2
                 val particlePos = particleBasePos.add(perpendicularVector.multiply(rnd1))
                 world.addParticle(ParticleTypes.ELECTRIC_SPARK,true, particlePos.x, particlePos.y + rnd2, particlePos.z, 0.0, 0.0, 0.0)
             }

@@ -18,7 +18,7 @@ object ScepterLvl3ToolMaterial: ScepterToolMaterial(){
         return 1.0f
     }
     override fun getAttackDamage(): Float {
-        return 2.0f
+        return 0.0f
     }
     override fun getAttackSpeed(): Double {
         return -3.0

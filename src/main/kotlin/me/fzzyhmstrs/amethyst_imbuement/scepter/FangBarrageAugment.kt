@@ -27,8 +27,8 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
-            .withAmplifier(12,0,0)
-            .withDamage(6.0F)
+            .withAmplifier(9,1,0)
+            .withDamage(5.8F,0.2F)
 
     override val delay = PerLvlI(15,-1,0)
 

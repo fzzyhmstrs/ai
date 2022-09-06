@@ -47,4 +47,7 @@ object AIClient: ClientModInitializer{
         RegisterNetworking.registerClient()
     }
 
+    fun aiRandom(): Random{
+        return Random(System.currentTimeMillis())
+    }
 }

@@ -23,7 +23,7 @@ import kotlin.math.min
 class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), IceAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(15,0,0).withDamage(6.0F)
+        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.25F,0.25F)
 
     override fun effect(
         world: World,

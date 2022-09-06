@@ -15,7 +15,7 @@
 "ancestor": "N/A",
 "descendant": "$(l:amethyst_imbuement:modifiers/saints_pact)Saints Pact$()",
 "mod_type": "$(2)Pact$()",
-"mod_text": "You and your scepter have become fully devoted to the healing arts. Available on Redemption if you complete the Bardic Path of Redemption"
+"mod_text": "You and your scepter have become fully devoted to the healing arts; other varieties of magic are lost to it. Available on Redemption if you complete the Bardic Path of Redemption"
 }
 ]
 }
