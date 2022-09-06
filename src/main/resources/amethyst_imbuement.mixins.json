@@ -24,6 +24,7 @@
     "PersistentProjectileEntityMixin",
     "PiglinBrainMixin",
     "PlayerEntityMixin",
+    "PlayerHitTimerAccessor",
     "PowderSnowBlockMixin",
     "PowderSnowBucketItemMixin",
     "StructureMixin",

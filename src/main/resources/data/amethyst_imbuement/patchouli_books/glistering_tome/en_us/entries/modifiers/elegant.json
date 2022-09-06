@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Affects grace spells only. Triple Grace XP gained on spell-cast, and increases the duration of grace spells by 30%. Affects:$(li)Path of the Aegis$()"
+"text": "Affects grace spells only. Triple Grace XP gained on spell-cast, and increases the duration of grace spells by 30%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

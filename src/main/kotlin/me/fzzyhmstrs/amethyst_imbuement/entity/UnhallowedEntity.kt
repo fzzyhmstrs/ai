@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
@@ -8,8 +11,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
@@ -30,8 +31,6 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.*
-import kotlin.experimental.and
-import kotlin.experimental.or
 
 @Suppress("PrivatePropertyName")
 class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): GolemEntity(entityType,world),
@@ -43,6 +42,10 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         maxAge = ageLimit
         this.createdBy = createdBy?.uuid
         this.owner = createdBy
+        if (createdBy != null) {
+            goalSelector.add(2, FollowSummonerGoal(this,createdBy, 1.0, 10.0f, 2.0f, false))
+            targetSelector.add(1, TrackSummonerAttackerGoal(this,createdBy))
+        }
         bonusEquipment = bonusEquips
         if (world is ServerWorld) {
             initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
@@ -78,16 +81,16 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
 
     override fun initGoals() {
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(2, WanderNearTargetGoal(this, 0.9, 32.0f))
-        goalSelector.add(2, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
+        goalSelector.add(3, WanderNearTargetGoal(this, 0.9, 32.0f))
+        goalSelector.add(3, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
         goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
         goalSelector.add(5, UnhallowedLookGoal(this))
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
-        targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
-        targetSelector.add(2, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
-        targetSelector.add(3, UniversalAngerGoal(this, false))
+        targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
+        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
+        targetSelector.add(4, UniversalAngerGoal(this, false))
     }
 
     override fun initialize(
@@ -242,17 +245,29 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
             2 -> {
                 this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.CHAINMAIL_HELMET))
                 this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.CHAINMAIL_CHESTPLATE))
+                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.WOODEN_SWORD))
             }
             3 -> {
                 this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.IRON_HELMET))
                 this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.IRON_CHESTPLATE))
                 this.equipStack(EquipmentSlot.FEET, ItemStack(Items.IRON_BOOTS))
-                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.WOODEN_SWORD))
+                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.STONE_SWORD))
+            }
+            4 -> {
+                this.equipStack(EquipmentSlot.HEAD, ItemStack(RegisterArmor.STEEL_HELMET))
+                this.equipStack(EquipmentSlot.CHEST, ItemStack(RegisterArmor.STEEL_CHESTPLATE))
+                this.equipStack(EquipmentSlot.LEGS, ItemStack(RegisterArmor.STEEL_LEGGINGS))
+                this.equipStack(EquipmentSlot.FEET, ItemStack(RegisterArmor.STEEL_BOOTS))
+                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterItem.GLOWING_BLADE))
             }
         }
     }
 
     override fun tryAttack(target: Entity): Boolean {
+        val summoner = owner
+        if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
+            (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
+        }
         val bl = super.tryAttack(target)
         if (bl) {
             val f = world.getLocalDifficulty(blockPos).localDifficulty

@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Affects wit spells only. Doubles Wit XP gained on spell-cast, and the range of effect of wit spells. Affects:$(li)Path of the Sojourn$(li)Path of Resonance$()"
+"text": "Affects wit spells only. Doubles Wit XP gained on spell-cast, and the range of effect of wit spells. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

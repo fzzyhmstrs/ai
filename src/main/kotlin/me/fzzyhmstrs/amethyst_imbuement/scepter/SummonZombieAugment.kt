@@ -34,14 +34,14 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        val bonus = max(0,level-3)
+        val bonus = bonus(level)
         var successes = 0
         for(i in 1..min(effects.amplifier(level),level)) {
             val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
             val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
             val zomAmplifier = max(effects.amplifier(level) - baseEffect.amplifier(level), 0)
-            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),user, bonus, effects.damage(level).toDouble(), 4.0* zomAmplifier)
+            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),user, bonus, effects.damage(level).toDouble(), 4.0 * zomAmplifier)
             zom.setPos(xrnd, yrnd, zrnd)
             if (world.spawnEntity(zom)){
                 successes++
@@ -53,11 +53,23 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
         return false
     }
 
+    private fun bonus(level: Int): Int{
+        return if (level <= 4){
+            1
+        } else if (level <= 8){
+            2
+        } else if (level <= 12){
+            3
+        } else {
+            4
+        }
+    }
+
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_ZOMBIE_AMBIENT
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,30,5,imbueLevel,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+        return AugmentDatapoint(SpellType.WIT,1200,80,5,imbueLevel,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
     }
 }

@@ -115,7 +115,7 @@ object RegisterEnchantment {
     val SUMMON_CHICKEN = SummonChickenAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_chicken"] = it}
     val SUMMON_GOLEM = SummonGolemAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["summon_golem"] = it}
     val SUMMON_STRIDER = SummonStriderAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_strider"] = it}
-    val SUMMON_ZOMBIE = SummonZombieAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
+    val SUMMON_ZOMBIE = SummonZombieAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
     val WITHERING_BOLT = WitheringBoltAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["withering_bolt"] = it}

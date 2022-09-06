@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Increases the range of cast spells by 12%. Affects:$(li)Path of Resonance$(li)Path of the Sojourn$()"
+"text": "Increases the range of cast spells by 12%. Affects:$(li)Path of Resonance$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
