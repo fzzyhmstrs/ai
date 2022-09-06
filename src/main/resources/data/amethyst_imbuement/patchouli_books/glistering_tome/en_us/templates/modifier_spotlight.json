@@ -7,15 +7,15 @@
 },
 {
 "type": "patchouli:image",                        
-"x": 35,            
-"y": 10,
+"x": 26,
+"y": 11,
 "image": "amethyst_imbuement:textures/gui/patchouli/modifier_spotlight.png",
-"width": 9,
-"height": 9,
+"width": 64,
+"height": 16,
 "u": 0,
 "v": 0,
-"texture_width": 32,
-"texture_height": 16
+"texture_width": 64,
+"texture_height": 32
 },
 {
 "type": "patchouli:image",                        
