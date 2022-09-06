@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Garnet Tools"
+"text": "Garnet Tools are an alternate smithing upgrade for diamond tools. They have the same damage and usage levels, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_tools)Glowing Tools"
 },
 {
 "type": "amethyst_imbuement:five_smithing_recipe",

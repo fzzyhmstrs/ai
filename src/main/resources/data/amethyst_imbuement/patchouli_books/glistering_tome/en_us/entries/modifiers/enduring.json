@@ -6,16 +6,16 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Increases the duration of spell effects by 30%. Affects:$(li)Path of Redemption$(li)Path of the Equinox$()"
+"text": "Increases the duration of spell effects by 30%. Affects:$(li)Path of Redemption$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
 {            
-"type": "amethyst_imbuement:modifier_spotlight",            
+"type": "amethyst_imbuement:modifier_spotlight_2",
 "mod_head": "Enduring",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enduring.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/lesser_enduring)Lesser Enduring$()",
 "descendant": "$(l:amethyst_imbuement:modifiers/greater_enduring)Greater Enduring$()",
 "mod_type": "$(2)Spell Duration$()",
-"mod_text": "Your scepters spells persist much longer than usual. Manifests on the Bardic Scepter or manifests on the Scepter of the Paladin. Persists on the Path of Redemption or the Path of the Aegis."
+"mod_text": "Your scepters spells persist much longer than usual. Manifests on the Bardic Scepter or the Scepter of the Paladin. Persists on the Path of Redemption or the Path of the Aegis."
 }
 ]
 }

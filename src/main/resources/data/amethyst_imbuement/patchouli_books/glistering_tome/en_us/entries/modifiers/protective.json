@@ -6,10 +6,10 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Casting spells adds half an absorption heart to the caster and/or their targets. Affects:$(li)Path of the Aegis$()"
+"text": "Casting spells adds half an absorption heart to the caster and/or their targets. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
 },
 {            
-"type": "amethyst_imbuement:modifier_spotlight",            
+"type": "amethyst_imbuement:modifier_spotlight_2",
 "mod_head": "Protective",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/protective.png",
 "ancestor": "N/A",

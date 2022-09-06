@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Only affect lightning-type spells. Lightning spells have 10% reduced cooldown, 25% increased range, and their effects are amplified an additional level. Affects:$(li)Path of the Equinox"
+"text": "Only affect lightning-type spells. Lightning spells have 10% reduced cooldown, 25% increased range, and their effects are amplified an additional level. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

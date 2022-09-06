@@ -46,6 +46,6 @@ class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,6000,250,22,imbueLevel,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
+        return AugmentDatapoint(SpellType.WIT,6000,500,22,imbueLevel,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
     }
 }
