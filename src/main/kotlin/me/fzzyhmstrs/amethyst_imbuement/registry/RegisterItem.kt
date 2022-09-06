@@ -104,7 +104,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT))
         .also{ regItem["scepter_of_blades"] = it}
-    val SCEPTER_OF_RECALL = CustomScepterItem(ScepterOfBladesToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
+    val SCEPTER_OF_RECALL = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.RECALL))
         .withModifiers(listOf(RegisterModifier.GREATER_REACH))
         .also{ regItem["scepter_of_recall"] = it}

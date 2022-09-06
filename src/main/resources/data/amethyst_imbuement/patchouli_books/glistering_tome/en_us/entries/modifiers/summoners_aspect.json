@@ -1,0 +1,21 @@
+{    
+"name": "Summoners Aspect",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/summoners_aspect.png",
+"sortnum": 50,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects spells involved with summoning mobs. Affected spells have 10% reduced cooldown, your mobs last 10% longer, and affected spells cast 1 level higher than normal. Affects:$(li)Path of Resonance$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Summoners Aspect",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/summoners_aspect.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Summoning$()",
+"mod_text": "Your scepter has grown a connection with the souls of the worlds creatures. Imbues onto the Scepter of Summoning and persists through the Path of Resonance"
+}
+]
+}

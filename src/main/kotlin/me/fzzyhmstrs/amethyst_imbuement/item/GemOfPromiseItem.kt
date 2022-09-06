@@ -43,7 +43,8 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(Text.literal("%")).formatted(Formatting.RED))
         }
         if (nbt.contains("statuses")){
-            val status = Nbt.readIntNbt("statuses",nbt).toFloat()
+            val compound = nbt.get("statuses") as NbtCompound
+            val status = compound.keys.size.toFloat()
             val progress = status/STATUS_TARGET.toFloat()*100.0F
             tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(Text.literal("%")).formatted(Formatting.BLUE))
         }
@@ -70,7 +71,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         private const val FIRE_TARGET = 120
         private const val HIT_TARGET = 100
         private const val HEAL_TARGET = 250.0F
-        private const val STATUS_TARGET = 10
+        private const val STATUS_TARGET = 8
 
         fun healersGemCheck(stack: ItemStack,inventory: PlayerInventory, healAmount: Float){
             val nbt = stack.orCreateNbt
@@ -129,7 +130,9 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 if (inventory.insertStack(newStack)) {
                     inventory.player.dropItem(newStack, false)
                 }
+                return
             }
+            nbt.put("statuses",compound)
         }
 
         fun sparkingGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){

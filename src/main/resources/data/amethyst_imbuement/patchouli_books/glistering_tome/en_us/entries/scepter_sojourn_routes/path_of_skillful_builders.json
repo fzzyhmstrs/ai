@@ -1,7 +1,7 @@
 {    
 "name": "Route of Skilled Building",
 "icon": "amethyst_imbuement:builders_scepter",
-"category": "amethyst_imbuement:scepter_redemption_routes",
+"category": "amethyst_imbuement:scepter_sojourn_routes",
 "pages": [        
 {            
 "type": "patchouli:text",            

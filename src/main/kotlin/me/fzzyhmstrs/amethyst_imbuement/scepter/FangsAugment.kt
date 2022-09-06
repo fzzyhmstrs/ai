@@ -22,7 +22,7 @@ import kotlin.math.min
 class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(15,0,0).withDamage(6.0F)
+        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.8F,0.2F)
 
     override fun effect(
         world: World,
@@ -37,10 +37,10 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
         val e: Double
         if (target != null){
             d = min(target.y, user.y)
-            e = max(target.y, user.y) + 1.0
+            e = max(target.y, user.y) + 2.0
         } else {
             d = user.y
-            e = user.y + 1.0
+            e = d + 2.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
         for (i in 0..effect.amplifier(level)) {
@@ -61,6 +61,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 successes++
                 d = success
             }
+            println(d)
         }
         val bl = successes > 0
         if (bl){

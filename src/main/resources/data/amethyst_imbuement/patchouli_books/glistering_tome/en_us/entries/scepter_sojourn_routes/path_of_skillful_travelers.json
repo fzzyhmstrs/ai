@@ -1,7 +1,7 @@
 {    
 "name": "Route of Skilled Travel",
 "icon": "amethyst_imbuement:travelers_scepter",
-"category": "amethyst_imbuement:scepter_redemption_routes",
+"category": "amethyst_imbuement:scepter_sojourn_routes",
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -81,8 +81,8 @@ object RegisterEnchantment {
     val DASH = DashAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["dash"] = it}
     val EMPOWERED_SLASH = EmpoweredSlashAugment(2,5, EquipmentSlot.MAINHAND).also{regEnchant["empowered_slash"] = it}
     val EXHAUST = ExhaustAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["exhaust"] = it}
-    val FANG_BARRAGE = FangBarrageAugment(3,1,EquipmentSlot.MAINHAND).also{regEnchant["fang_barrage"] = it}
-    val FANGS = FangsAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["fangs"] = it}
+    val FANG_BARRAGE = FangBarrageAugment(3,6,EquipmentSlot.MAINHAND).also{regEnchant["fang_barrage"] = it}
+    val FANGS = FangsAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["fangs"] = it}
     val FIREBALL = FireballAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
     val FLAMEBOLT = FlameboltAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment(3,11,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
@@ -91,7 +91,7 @@ object RegisterEnchantment {
     val FREEZING = FreezingAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
-    val ICE_SPIKES = IceSpikesAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["ice_spikes"] = it}
+    val ICE_SPIKES = IceSpikesAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["ice_spikes"] = it}
     val INSPIRING_SONG = InspiringSongAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["inspiring_song"] = it}
     val LEVITATING_BULLET = LevitatingBulletAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["levitating_bullet"] = it}
     val LIGHTNING_BOLT = LightningBoltAugment(2,11,EquipmentSlot.MAINHAND).also{regEnchant["lightning_bolt"] = it}
