@@ -13,7 +13,7 @@
 "mod_head": "Furious",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/furious.png",
 "ancestor": "N/A",
-"descendant": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/enraged)Enraged$()",
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter absorbs your inner fury and channels it through its spells. Imbues onto the Furious Scepter and persists on the Path of Lethality and the Path of the Equinox"
 }

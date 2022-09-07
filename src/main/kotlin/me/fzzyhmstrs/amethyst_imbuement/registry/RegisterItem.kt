@@ -170,7 +170,7 @@ object RegisterItem {
     val EQUINOX = EquinoxScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, RegisterModifier.FURIOUS))
         .also{ regItem["equinox"] = it}
-    val SOJOURN = CustomScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
+    val SOJOURN = SojournScepterItem(ScepterLvl3ToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.SURVEY))
         .withModifiers(listOf(RegisterModifier.WITTY,RegisterModifier.TRAVELER))
         .also{ regItem["sojourn"] = it}

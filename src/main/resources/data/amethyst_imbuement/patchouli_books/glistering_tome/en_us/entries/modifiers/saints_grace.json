@@ -1,7 +1,7 @@
 {    
 "name": "Saints Grace",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/saints_grace.png",
-"sortnum": 73,
+"sortnum": 69,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

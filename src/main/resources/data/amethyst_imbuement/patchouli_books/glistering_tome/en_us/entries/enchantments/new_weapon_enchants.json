@@ -9,12 +9,6 @@
 },
 {
 "type": "patchouli:spotlight",
-"title": "Attuned Enchantment",
-"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:attuned\",lvl:3}]}",
-"text": "$(l)Effect:$() Reduces the mana cost of spells cast by scepters.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Max Level:$() 3$(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"
-},
-{
-"type": "patchouli:spotlight",
 "title": "Cleaving Enchantment",
 "item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:cleaving\",lvl:3}]}",
 "text": "$(l)Effect:$() Adds damage to the enchanted axe and disables the opponents shield.$(br)$(l)Enchants:$() $(#490)Axe$()$(br)$(l)Max Level:$() 3 $(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"

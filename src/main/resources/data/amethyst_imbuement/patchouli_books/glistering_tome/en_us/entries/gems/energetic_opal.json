@@ -9,7 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
-"title": "Charged Moonstone Imbuing",
+"title": "Energetic Opal Imbuing",
 "imbue_a_item": "amethyst_imbuement:danburite",
 "imbue_b_item": "amethyst_imbuement:imbued_lapis",
 "imbue_c_item": "amethyst_imbuement:imbued_lapis",
@@ -23,7 +23,7 @@
 "craft_g_item": "minecraft:air",
 "craft_h_item": "amethyst_imbuement:glowing_fragment",
 "craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:charged_moonstone",
+"result_item": "amethyst_imbuement:energetic_opal",
 "cost_text": "$(l)Level Cost: $(2)13$()"
 }      
 ]

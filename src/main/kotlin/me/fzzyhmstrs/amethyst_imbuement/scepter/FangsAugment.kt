@@ -34,10 +34,10 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     ): Boolean {
         var successes = 0
         var d: Double
-        val e: Double
+        var e: Double
         if (target != null){
             d = min(target.y, user.y)
-            e = max(target.y, user.y) + 2.0
+            e = d + 2.0
         } else {
             d = user.y
             e = d + 2.0
@@ -60,6 +60,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
             if (success > 0) {
                 successes++
                 d = success
+                e = d + 2.0
             }
             println(d)
         }

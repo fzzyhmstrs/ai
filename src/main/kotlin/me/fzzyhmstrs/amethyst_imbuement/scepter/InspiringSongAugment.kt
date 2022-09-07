@@ -71,7 +71,7 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,600,75,10,imbueLevel,LoreTier.NO_TIER, Items.NOTE_BLOCK)
+        return AugmentDatapoint(SpellType.GRACE,750,125,10,imbueLevel,LoreTier.NO_TIER, Items.NOTE_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

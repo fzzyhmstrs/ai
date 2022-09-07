@@ -42,7 +42,7 @@
 {
 "type": "patchouli:text",
 "title": "Imbuing",
-"text": "You can find recipes for imbuements throughout this tome that show both the items required as well as the experience levels needed.$(br2)For sections dedicated to various imbuing recipes see the $(#490)$(l)Imbuing$() and $(#490)$(l)Augments$() categories, but there are also other imbuing recipes elsewhere in the book."
+"text": "You can find recipes for imbuements throughout this tome that show both the items required as well as the experience levels needed.$(br2)For sections dedicated to various imbuing recipes see the $(#490)$(l)$(l:amethyst_imbuement:imbuing)Imbuing$() and $(#490)$(l)$(l:amethyst_imbuement:augments)Augments$() categories, but there are also other imbuing recipes elsewhere in the book."
 }
 ]
 }

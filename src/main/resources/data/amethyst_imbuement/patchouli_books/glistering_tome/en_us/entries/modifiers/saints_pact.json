@@ -1,7 +1,7 @@
 {    
 "name": "Saints Pact",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/saints_pact.png",
-"sortnum": 69,
+"sortnum": 73,
 "category": "amethyst_imbuement:modifiers",    
 "pages": [        
 {            

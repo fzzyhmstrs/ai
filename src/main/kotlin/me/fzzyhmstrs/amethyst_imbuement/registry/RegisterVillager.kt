@@ -49,8 +49,9 @@ object RegisterVillager {
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,3) { factories -> factories.add(TradeFactory(Items.EMERALD,12,4,Items.COPPER_INGOT,1,RegisterItem.COPPER_RING,1,2,8))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,4) { factories -> factories.add(TradeFactory(Items.DIAMOND,1,Items.EMERALD,2,8,6))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,4) { factories -> factories.add(TradeFactory(Items.EMERALD,32,8,RegisterItem.OPAL,1,RegisterItem.IRIDESCENT_ORB,1,1,12))}
-        TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,4) { factories -> factories.add(TradeFactory(RegisterItem.GLOWING_FRAGMENT,4,RegisterItem.MALACHITE_FIGURINE,1,1,24))}
-        TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,5) { factories -> factories.add(TradeFactory(Items.DIAMOND,24,RegisterItem.BOOK_OF_LORE,1,RegisterItem.BOOK_OF_MYTHOS,1,1,20))}
+        TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,4) { factories -> factories.add(TradeFactory(Items.EMERALD,12,RegisterItem.GLOWING_FRAGMENT,1,RegisterItem.MALACHITE_FIGURINE,1,1,24))}
+        TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,5) { factories -> factories.add(TradeFactory(Items.DIAMOND,16,RegisterItem.BOOK_OF_LORE,1,RegisterItem.BOOK_OF_MYTHOS,1,1,20))}
+        TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,5) { factories -> factories.add(TradeFactory(Items.EMERALD,24,Items.DIAMOND,1,RegisterItem.BRILLIANT_DIAMOND,1,1,20))}
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER,3) { factories -> factories.add(TradeFactory(Items.EMERALD,16,4,RegisterArmor.STEEL_BOOTS,1,6,4))}
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER,3) { factories -> factories.add(TradeFactory(Items.EMERALD,16,4,RegisterArmor.STEEL_HELMET,1,6,4))}
@@ -121,8 +122,6 @@ object RegisterVillager {
                 val taigaFortId = Identifier(AI.MOD_ID + ":village/taiga_fortified_crystal_workshop")
                 FabricStructurePoolRegistry.register(Identifier("ctov:village/taiga_fortified/house"),taigaFortId,AiConfig.villages.taigaWorkshopWeight, StructureProcessorLists.EMPTY)
 
-                val list = BuiltinRegistries.STRUCTURE_PROCESSOR_LIST.get(Identifier("ctov:detailing/beach/house"))
-                println(list)
                 val beachId = Identifier(AI.MOD_ID + ":village/ctov/beach_crystal_workshop")
                 FabricStructurePoolRegistry.register(Identifier("ctov:village/beach/house"),beachId,AiConfig.villages.ctovBeachWorkshopWeight, StructureProcessorLists.EMPTY)
 

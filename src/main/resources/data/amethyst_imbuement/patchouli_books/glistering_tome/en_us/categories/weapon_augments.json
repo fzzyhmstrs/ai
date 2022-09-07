@@ -1,6 +1,6 @@
 {    
 "name": "Weapon Augments",
 "parent": "amethyst_imbuement:augments",
-"description": "Augments in this list can be applied to weapons. For augments related to other equipment, see $(#490)Equipment Augments$().",
+"description": "Augments in this list can be applied to weapons. For augments related to other equipment, see $(#490)$(l:amethyst_imbuement:equipment_augments)Equipment Augments$().",
 "icon": "amethyst_imbuement:garnet_sword"
 }

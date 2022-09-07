@@ -31,7 +31,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
     private var playingAnimation = false
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withDuration(180)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withDuration(250)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -179,7 +179,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
 
         fun conjureFangs(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
-                         warmup: Int, effect: AugmentEffect, level: Int): Boolean {
+                         warmup: Int, effect: AugmentEffect, level: Int): Double {
             var blockPos = BlockPos(x, y, z)
             var bl = false
             var d = 0.0
@@ -198,7 +198,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
                 }
                 bl = true
                 break
-            } while (blockPos.y >= MathHelper.floor(maxY) - 1)
+            } while (blockPos.y >= MathHelper.floor(maxY) -5)
             if (bl) {
                 //consider a custom fangs entity that can have damage effects
                 val pfe = IceSpikeEntity(
@@ -212,9 +212,9 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
                 )
                 pfe.passEffects(effect, level)
                 world.spawnEntity(pfe)
-                return true
+                return (blockPos.y.toDouble() + d)
             }
-            return false
+            return -1.0
         }
     }
 

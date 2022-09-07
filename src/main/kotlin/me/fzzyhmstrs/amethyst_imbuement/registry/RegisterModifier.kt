@@ -23,8 +23,8 @@ object RegisterModifier {
     val HEALERS_PACT = AugmentModifier(Identifier(AI.MOD_ID,"healers_pact"), cooldownModifier = 35.0, manaCostModifier = 35.0).withSpellToAffect(ModifierPredicates.HEALERS_PACT_PREDICATE).withDescendant(SAINTS_PACT) .also { regMod.add(it) }
     val SAINTS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"saints_grace")).withAmplifier(3).withDuration(durationPercent = 100).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE) .also { regMod.add(it) }
     val HEALERS_GRACE = AugmentModifier(Identifier(AI.MOD_ID,"healers_grace")).withAmplifier(1).withDuration(durationPercent = 50).withSpellToAffect(ModifierPredicates.HEALERS_PREDICATE).withDescendant(SAINTS_GRACE) .also { regMod.add(it) }
-    val LETHAL_PACT = AugmentModifier(Identifier(AI.MOD_ID,"pact_of_danger"), cooldownModifier = 65.0, manaCostModifier = 65.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE) .also { regMod.add(it) }
-    val DANGEROUS_PACT= AugmentModifier(Identifier(AI.MOD_ID,"pact_of_lethality"), cooldownModifier = 25.0, manaCostModifier = 25.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE).withDescendant(
+    val LETHAL_PACT = AugmentModifier(Identifier(AI.MOD_ID,"pact_of_lethality"), cooldownModifier = 65.0, manaCostModifier = 65.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE) .also { regMod.add(it) }
+    val DANGEROUS_PACT= AugmentModifier(Identifier(AI.MOD_ID,"pact_of_danger"), cooldownModifier = 25.0, manaCostModifier = 25.0).withSpellToAffect(ModifierPredicates.DANGER_PACT_PREDICATE).withDescendant(
         LETHAL_PACT) .also { regMod.add(it) }
     val HEALING = AugmentModifier(Identifier(AI.MOD_ID,"healing")).withConsumer(ModifierConsumers.HEALING_CONSUMER).also { regMod.add(it) }
     val WARRIOR_OF_LIGHT = AugmentModifier(Identifier(AI.MOD_ID,"warrior_of_light"), cooldownModifier = -10.0).withConsumer(ModifierConsumers.WARRIORS_CONSUMER).also { regMod.add(it) }

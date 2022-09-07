@@ -131,7 +131,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).trackRangeChunks(6).trackedUpdateRate(2).build()
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.0f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
     val ICE_SPIKE: EntityType<IceSpikeEntity> = Registry.register(
@@ -144,7 +144,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.8f)).trackRangeChunks(6).trackedUpdateRate(2).build()
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.0f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(

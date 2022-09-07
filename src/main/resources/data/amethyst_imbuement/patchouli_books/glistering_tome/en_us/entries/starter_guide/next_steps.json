@@ -11,7 +11,7 @@
 "type": "patchouli:spotlight",
 "title": "Scepter Spellcasting",
 "item": "amethyst_imbuement:opaline_scepter",
-"text": "Scepters are magical sources from which you can cast many offensive and defensive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools."
+"text": "Scepters are magical sources from which you can cast many offensive and defensive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools.$(br2)You can follow an $(l:amethyst_imbuement:scepter_upgrading)upgrade path$() for your scepter to specialize it and increase its power!"
 },
 {
 "type": "patchouli:spotlight",

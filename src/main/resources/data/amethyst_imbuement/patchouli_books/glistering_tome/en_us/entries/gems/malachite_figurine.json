@@ -1,0 +1,18 @@
+{
+  "name": "Malachite_figurine",
+  "icon": "amethyst_imbuement:malachite_figurine",
+  "category": "amethyst_imbuement:gems",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Meaning:$() Peace and Cooperation $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Obtain a malachite figurine of your own by trading with a Crystal Witch villager."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Malachite Figurine",
+      "item": "amethyst_imbuement:malachite_figurine",
+      "link_recipe": true,
+      "text": "$(o)A treasured symbol of cooperation and peace between villages$()"
+    }
+  ]
+}

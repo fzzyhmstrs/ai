@@ -92,6 +92,22 @@
         {
           "type": "minecraft:item",
           "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:glowing_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
           "name": "amethyst_imbuement:copper_ring"
 		},
 		{
@@ -111,12 +127,12 @@
 		},
 		{
           "type": "minecraft:item",
-          "weight": 30,
+          "weight": 35,
           "name": "amethyst_imbuement:book_of_lore"
 		},
 		{
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 15,
           "name": "amethyst_imbuement:book_of_mythos"
 		}
       ]

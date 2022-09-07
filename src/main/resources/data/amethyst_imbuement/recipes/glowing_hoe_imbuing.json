@@ -30,5 +30,6 @@
   "title": "Glowing Hoe",
   "cost": 13,
   "resultA": "amethyst_imbuement:glowing_hoe",
-  "countA": 1
+  "countA": 1,
+  "transferEnchant": true
 }

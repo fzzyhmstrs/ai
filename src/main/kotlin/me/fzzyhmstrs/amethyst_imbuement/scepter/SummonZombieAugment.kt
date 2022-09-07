@@ -36,7 +36,7 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
     ): Boolean {
         val bonus = bonus(level)
         var successes = 0
-        for(i in 1..min(effects.amplifier(level),level)) {
+        for(i in 1..max(min(effects.amplifier(level),level/2),1)) {
             val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
             val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
             val yrnd = hit.blockPos.y + 1.0
@@ -54,9 +54,11 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
     }
 
     private fun bonus(level: Int): Int{
-        return if (level <= 4){
-            1
+        return if (level <= 5){
+            0
         } else if (level <= 8){
+            1
+        } else if (level <= 10){
             2
         } else if (level <= 12){
             3

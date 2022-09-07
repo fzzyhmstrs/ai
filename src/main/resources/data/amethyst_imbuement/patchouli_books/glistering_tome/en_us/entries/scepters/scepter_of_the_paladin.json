@@ -26,7 +26,7 @@
       "craft_b_item": "amethyst_imbuement:imbued_quartz",
       "craft_c_item": "amethyst_imbuement:iridescent_orb",
       "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "#amethyst_imbuement:grace_scepters",
+      "craft_e_item": "tag:amethyst_imbuement:grace_scepters",
       "craft_f_item": "amethyst_imbuement:imbued_lapis",
       "craft_g_item": "minecraft:shield",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",

@@ -1,5 +1,5 @@
 {    
 "name": "Modifiers",
 "description": "Modifiers are alterations that can be made directly to a $(#490)$(l:amethyst_imbuement:scepters/scepter_guide)Scepter$() in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() that affect spell casting and/or spell behavior. They also come pre-modified onto Aspect Scepters.",    
-"icon": "minecraft:writable_book"
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png"
 }
