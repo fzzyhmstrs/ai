@@ -10,7 +10,7 @@
 },
 {
 "type": "patchouli:text",
-"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an Augment.$(li)Cast your spells and add more augments! For more powerful spells, find tomes scattered around the world.$(li)Begin looking into an $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)upgrade path$() for powering up your scepter."
+"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_augments)Augment.$()$(li)Cast your spells and add more augments! For more powerful spells, find tomes scattered around the world.$(li)Begin looking into an $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)upgrade path$() for powering up your scepter."
 },
 {
 "type": "patchouli:text",

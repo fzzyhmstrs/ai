@@ -71,7 +71,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
 
         private const val KILL_TARGET = 30
         private const val FIRE_TARGET = 120
-        private const val HIT_TARGET = 100
+        private const val HIT_TARGET = 80
         private const val HEAL_TARGET = 250.0F
         private const val STATUS_TARGET = 8
 

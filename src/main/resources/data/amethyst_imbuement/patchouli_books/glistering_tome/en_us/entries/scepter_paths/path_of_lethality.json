@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The Path of Lethality is the path of the killer. Dish out major damage, wield scepters that can be used like swords, even wither your opponents away."
+"text": "The Path of Lethality is the path of the killer. Dish out major damage, wield scepters that can be used like swords, even wither your opponents away.$(br2)$(l:amethyst_imbuement:scepter_lethality_routes)Routes on the Path of Lethality$(/l)"
 },
 {
   "type": "amethyst_imbuement:scepter_path",

@@ -23,7 +23,7 @@ import kotlin.math.min
 class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot), IceAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.25F,0.25F)
+        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.25F,0.25F).withDuration(225,25)
 
     override fun effect(
         world: World,
@@ -34,14 +34,14 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-        val d: Double
-        val e: Double
+        var d: Double
+        var e: Double
         if (target != null){
             d = min(target.y, user.y)
-            e = max(target.y, user.y) + 1.0
+            e = d + 2.0
         } else {
             d = user.y
-            e = user.y + 1.0
+            e = d + 2.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
         for (i in 0..effect.amplifier(level)) {
@@ -58,7 +58,12 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
                 effect,
                 level
             )
-            if (success) successes++
+            if (success > 0) {
+                successes++
+                d = success
+                e = d + 2.0
+            }
+
         }
         val bl = successes > 0
         if (bl){

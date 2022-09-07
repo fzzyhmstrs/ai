@@ -11,7 +11,7 @@
 "y": 11,
 "image": "amethyst_imbuement:textures/gui/patchouli/modifier_spotlight.png",
 "width": 64,
-"height": 16,
+"height": 18,
 "u": 0,
 "v": 0,
 "texture_width": 64,
@@ -32,26 +32,26 @@
 {            
 "type": "patchouli:text",            
 "text": "Upgrade from: #ancestor#",            
-"x": 5,            
+"x": 2,
 "y": 40        
 },
 {            
 "type": "patchouli:text",            
 "text": "Upgrades into: #descendant#",
 "max_width": 125,
-"x": 5,            
+"x": 2,
 "y": 50       
 },
 {            
 "type": "patchouli:text",            
 "text": "Modifier type: #mod_type#",            
-"x": 5,            
+"x": 2,
 "y": 60
 },
 {            
 "type": "patchouli:text",            
 "text": "#mod_text#",            
-"x": 5,            
+"x": 2,
 "y": 80
 }
 ]}

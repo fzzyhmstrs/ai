@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The Path of the Aegis is the path of the protector. Rally against the forces of evil, cast powerful protective spells, and shield yourself from harm while saving others from blight."
+"text": "The Path of the Aegis is the path of the protector. Rally against the forces of evil, cast powerful protective spells, and shield yourself from harm while saving others from blight.$(br2)$(l:amethyst_imbuement:scepter_aegis_routes)Routes on the Path of the Aegis$(/l)"
 },
 {
   "type": "amethyst_imbuement:scepter_path",

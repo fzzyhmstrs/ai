@@ -1,6 +1,41 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "amethyst_imbuement:item/sojourn"
-  }
+    "layer0": "amethyst_imbuement:item/sojourn_0"
+  },
+    "overrides": [
+        { "predicate": { "angle": 0.000000 }, "model": "amethyst_imbuement:item/sojourn" },
+        { "predicate": { "angle": 0.015625 }, "model": "amethyst_imbuement:item/sojourn" },
+        { "predicate": { "angle": 0.046875 }, "model": "amethyst_imbuement:item/sojourn" },
+        { "predicate": { "angle": 0.078125 }, "model": "amethyst_imbuement:item/sojourn_1" },
+        { "predicate": { "angle": 0.109375 }, "model": "amethyst_imbuement:item/sojourn_1" },
+        { "predicate": { "angle": 0.140625 }, "model": "amethyst_imbuement:item/sojourn_1" },
+        { "predicate": { "angle": 0.171875 }, "model": "amethyst_imbuement:item/sojourn_1" },
+        { "predicate": { "angle": 0.203125 }, "model": "amethyst_imbuement:item/sojourn_2" },
+        { "predicate": { "angle": 0.234375 }, "model": "amethyst_imbuement:item/sojourn_2" },
+        { "predicate": { "angle": 0.265625 }, "model": "amethyst_imbuement:item/sojourn_2" },
+        { "predicate": { "angle": 0.296875 }, "model": "amethyst_imbuement:item/sojourn_2" },
+        { "predicate": { "angle": 0.328125 }, "model": "amethyst_imbuement:item/sojourn_3" },
+        { "predicate": { "angle": 0.359375 }, "model": "amethyst_imbuement:item/sojourn_3" },
+        { "predicate": { "angle": 0.390625 }, "model": "amethyst_imbuement:item/sojourn_3" },
+        { "predicate": { "angle": 0.421875 }, "model": "amethyst_imbuement:item/sojourn_3" },
+        { "predicate": { "angle": 0.453125 }, "model": "amethyst_imbuement:item/sojourn_4" },
+        { "predicate": { "angle": 0.484375 }, "model": "amethyst_imbuement:item/sojourn_4" },
+        { "predicate": { "angle": 0.515625 }, "model": "amethyst_imbuement:item/sojourn_4" },
+        { "predicate": { "angle": 0.546875 }, "model": "amethyst_imbuement:item/sojourn_4" },
+        { "predicate": { "angle": 0.578125 }, "model": "amethyst_imbuement:item/sojourn_5" },
+        { "predicate": { "angle": 0.609375 }, "model": "amethyst_imbuement:item/sojourn_5" },
+        { "predicate": { "angle": 0.640625 }, "model": "amethyst_imbuement:item/sojourn_5" },
+        { "predicate": { "angle": 0.671875 }, "model": "amethyst_imbuement:item/sojourn_5" },
+        { "predicate": { "angle": 0.703125 }, "model": "amethyst_imbuement:item/sojourn_6" },
+        { "predicate": { "angle": 0.734375 }, "model": "amethyst_imbuement:item/sojourn_6" },
+        { "predicate": { "angle": 0.765625 }, "model": "amethyst_imbuement:item/sojourn_6" },
+        { "predicate": { "angle": 0.796875 }, "model": "amethyst_imbuement:item/sojourn_6" },
+        { "predicate": { "angle": 0.828125 }, "model": "amethyst_imbuement:item/sojourn_7" },
+        { "predicate": { "angle": 0.859375 }, "model": "amethyst_imbuement:item/sojourn_7" },
+        { "predicate": { "angle": 0.890625 }, "model": "amethyst_imbuement:item/sojourn_7" },
+        { "predicate": { "angle": 0.921875 }, "model": "amethyst_imbuement:item/sojourn_7" },
+        { "predicate": { "angle": 0.953125 }, "model": "amethyst_imbuement:item/sojourn" },
+        { "predicate": { "angle": 0.984375 }, "model": "amethyst_imbuement:item/sojourn" }
+    ]
 }

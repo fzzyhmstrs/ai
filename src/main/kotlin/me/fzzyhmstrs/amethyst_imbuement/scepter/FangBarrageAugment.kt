@@ -45,11 +45,11 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         val e: Double
         if (target != null){
             d = min(target.y, user.y)
-            e = max(target.y, user.y) + 1.0
+            e = d + 2.0
             entityList.add(target)
         } else {
             d = user.y
-            e = user.y + 1.0
+            e = d + 2.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
         val successes = conjureBarrage(user,world,d,e,f, effect, level)
@@ -69,11 +69,11 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         if (data.entityList.isNotEmpty()){
             val target = data.entityList[0]
             d = min(target.y, data.user.y)
-            e = max(target.y, data.user.y) + 1.0
+            e = d + 2.0
             data.entityList.add(target)
         } else {
             d = data.user.y
-            e = data.user.y + 1.0
+            e = d + 2.0
         }
         val f = (data.user.yaw + 90) * MathHelper.PI / 180
         conjureBarrage(data.user,data.world,d,e,f, data.effect, data.level)
@@ -89,6 +89,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
 
     private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, effect: AugmentEffect, level: Int): Int{
         var dd = d
+        var ee = e
         var successes = 0
         val fangs = effect.amplifier(level)
         for (i in 0..fangs) {
@@ -100,7 +101,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                     user.x + MathHelper.cos(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
                     user.z + MathHelper.sin(f + (11.0F * MathHelper.PI / 180 * k)).toDouble() * g,
                     dd,
-                    e,
+                    ee,
                     f,
                     i,
                     effect,
@@ -109,6 +110,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                 if (success > 0) {
                     successes++
                     dd = success
+                    ee = dd + 2.0
                 }
             }
         }

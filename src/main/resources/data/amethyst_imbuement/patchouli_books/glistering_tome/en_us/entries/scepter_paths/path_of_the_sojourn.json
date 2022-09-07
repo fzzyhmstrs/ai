@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The Path of the Sojourn is the path of the explorer. Travel with ease, survey your surrounding, warp back home, or build the world around you as you go."
+"text": "The Path of the Sojourn is the path of the explorer. Travel with ease, survey your surrounding, warp back home, or build the world around you as you go.$(br2)$(l:amethyst_imbuement:scepter_sojourn_routes)Routes on the Path of the Sojourn$(/l)"
 },
 {
   "type": "amethyst_imbuement:scepter_path",

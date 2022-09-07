@@ -193,7 +193,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                 }
                 bl = true
                 break
-            } while (blockPos.y >= MathHelper.floor(maxY) - 4)
+            } while (blockPos.y >= MathHelper.floor(maxY) - 5)
             if (bl) {
                 //consider a custom fangs entity that can have damage effects
                 val pfe = PlayerFangsEntity(

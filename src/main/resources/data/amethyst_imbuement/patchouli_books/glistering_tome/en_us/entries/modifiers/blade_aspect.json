@@ -14,8 +14,8 @@
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/blade_aspect.png",
 "ancestor": "N/A",
 "descendant": "N/A",
-"mod_type": "$(2)Damage$()",
-"mod_text": "Your scepter grows a keen edge. It now can deal damage like a sword. Imbues onto the Scepter of Blades and persists through the Path of Lethality"
+"mod_type": "$(2)Blade Magic$()",
+"mod_text": "Your scepter grows a keen edge. Imbues onto the Scepter of Blades and persists through the Path of Lethality"
 }
 ]
 }

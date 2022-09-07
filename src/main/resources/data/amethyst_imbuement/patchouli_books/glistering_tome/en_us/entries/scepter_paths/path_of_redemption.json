@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The Path of Redemption is the path of the healer. Devote yourself to the healing arts, inspire your allies, endure through all hardships, and maybe even forsake the ways of the warrior"
+"text": "The Path of Redemption is the path of the healer. Devote yourself to the healing arts, inspire your allies, endure through all hardships, and maybe even forsake the ways of the warrior$(br2)$(l:amethyst_imbuement:scepter_redemption_routes)Routes on the Path of Redemption$(/l)"
 },
 {
   "type": "amethyst_imbuement:scepter_path",

@@ -98,20 +98,20 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             for (i in 1..16){
                 val rnd1 =  random.nextDouble() - 0.5
                 val rnd2 = random.nextDouble() - 0.5
-                val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x + rnd1,pos.y + 2.3,pos.z + rnd2,0.0,rnd3,0.0)
+                val rnd3 = -1.5 + (random.nextDouble() - 0.5) * 0.1
+                world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.3,pos.z + rnd2,0.0,rnd3,0.0)
             }
             for (i in 1..16){
                 val rnd1 = random.nextDouble() - 0.5
                 val rnd2 = random.nextDouble() - 0.5
                 val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x + rnd1,pos.y + 2.0,pos.z + rnd2,0.0,rnd3,0.0)
+                world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.0,pos.z + rnd2,0.0,rnd3,0.0)
             }
             for (i in 1..16){
                 val rnd1 = random.nextDouble() - 0.5
                 val rnd2 = random.nextDouble() - 0.5
                 val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.ENCHANTED_HIT,true,pos.x +rnd1,pos.y + 2.6,pos.z + rnd2,0.0,rnd3,0.0)
+                world.addParticle(ParticleTypes.SPIT,true,pos.x +rnd1,pos.y + 2.6,pos.z + rnd2,0.0,rnd3,0.0)
             }
         }
     }

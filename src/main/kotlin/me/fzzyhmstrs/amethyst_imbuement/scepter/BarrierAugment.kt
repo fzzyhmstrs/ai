@@ -44,8 +44,7 @@ class BarrierAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
             }
         }
         return if (user is PlayerEntity) {
-            EffectQueue.addStatusToQueue(target as LivingEntity,
-                StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level))
+            EffectQueue.addStatusToQueue(user, StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level))
             effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
             true

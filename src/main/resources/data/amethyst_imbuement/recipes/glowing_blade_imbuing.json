@@ -30,5 +30,6 @@
   "title": "Glowing Blade",
   "cost": 13,
   "resultA": "amethyst_imbuement:glowing_blade",
-  "countA": 1
+  "countA": 1,
+  "transferEnchant": true
 }

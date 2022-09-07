@@ -12,7 +12,7 @@
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Enraged",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enraged.png",
-"ancestor": "N/A",
+"ancestor": "$(l:amethyst_imbuement:modifiers/furious)Furious$()",
 "descendant": "N/A",
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter blazes with your rage and anger. Manifests on the Equinox when you complete the Furious Path of the Equinox."

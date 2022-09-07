@@ -109,7 +109,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         }
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
-        val vel = Vec3d(rndX.toDouble(),(data.blockPos.y + 15).toDouble(),rndZ.toDouble()).subtract(data.user.pos).normalize().multiply(4.0)
+        val vel = Vec3d(rndX.toDouble(),(data.blockPos.y).toDouble(),rndZ.toDouble()).subtract(data.user.pos).normalize().multiply(4.0)
         val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
         data.world.spawnEntity(ce)
     }
