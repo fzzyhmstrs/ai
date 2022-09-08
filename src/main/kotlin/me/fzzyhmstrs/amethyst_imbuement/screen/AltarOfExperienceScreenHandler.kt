@@ -1,16 +1,22 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.*
 import net.minecraft.screen.slot.Slot
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.BlockTags
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
@@ -34,9 +40,9 @@ class AltarOfExperienceScreenHandler(
     private val playInventory = playerInventory
     private val random = Random()
     private val seed = Property.create()
-    private val xp = Property.create()
-    var experienceStored = IntArray(1)
-    var experienceMax = IntArray(1)
+    private var xp = 0
+    var xpStored = 0
+    var xpMax = 0
     //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
 
 
@@ -61,7 +67,7 @@ class AltarOfExperienceScreenHandler(
     }
 
     fun getPlayerXp(): Int{
-        return this.xp.get()
+        return xp
     }
 
     private fun updateMaxXp(candles: Int, wardingCandles: Int): Int{
@@ -74,24 +80,11 @@ class AltarOfExperienceScreenHandler(
     private fun checkCandles(world: World, pos: BlockPos): Pair<Int,Int>{
         var candles = 0
         var wardingCandles = 0
-        for (i in -1..1){
-            for (j in -1..1){
-                if (i == 0 && j == 0 || !world.isAir(pos.add(i, 0, j))) continue
-                if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
-                    wardingCandles++
-                } else if (world.getBlockState(pos.add(i * 2, 0, j * 2)).isIn(BlockTags.CANDLES)) {
-                    candles++
-                }
-                if (world.getBlockState(pos.add(i, 0, j * 2)).isOf(RegisterBlock.WARDING_CANDLE)) {
-                    wardingCandles++
-                } else if (world.getBlockState(pos.add(i, 0, j * 2)).isIn(BlockTags.CANDLES)) {
-                    candles++
-                }
-                if (world.getBlockState(pos.add(i * 2, 0, j)).isOf(RegisterBlock.WARDING_CANDLE)) {
-                    wardingCandles++
-                } else if (world.getBlockState(pos.add(i * 2, 0, j)).isIn(BlockTags.CANDLES)) {
-                    candles++
-                }
+        for (offset in blocks){
+            if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isIn(BlockTags.CANDLES)) {
+                candles++
+            } else if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isOf(RegisterBlock.WARDING_CANDLE)) {
+                wardingCandles++
             }
         }
         return Pair(candles,wardingCandles)
@@ -108,75 +101,131 @@ class AltarOfExperienceScreenHandler(
                 return false
             }
         } else if (id == 2) {
-            if (experienceStored[0] == 0){
+            if (xpStored == 0){
+                return false
+            }
+        } else if (id == 4){
+            if (currentXp <= 5000){
+                return false
+            }
+        }else if (id == 5){
+            if (currentXp == 0){
+                return false
+            }
+        }else if (id == 6) {
+            if (xpStored == 0){
+                return false
+            }
+        }else if (id == 7) {
+            if (xpStored <= 5000){
                 return false
             }
         } else {
-            if (experienceStored[0] <= 50){
+            if (xpStored <= 50){
                 return false
             }
         }
         context.run { world: World, pos: BlockPos ->
             val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
-            val xpMax = updateMaxXp(candleTotal,wardingCandleTotal)
-            experienceMax[0] = xpMax
-            val xpLeft = xpMax - experienceStored[0]
+            xpMax = updateMaxXp(candleTotal,wardingCandleTotal)
+            val xpLeft = xpMax - xpStored
             when (id) {
                 0 -> {
                     if (currentXp >= 500) {
-                        if (xpLeft < 500){
+                        xpStored += if (xpLeft < 500){
                             addExperience(player,-xpLeft)
-                            experienceStored[0] += xpLeft
+                            xpLeft
                         } else {
                             addExperience(player,-500)
-                            experienceStored[0] += 500
+                            500
                         }
                     } else {
-                        if (xpLeft < currentXp){
+                        xpStored += if (xpLeft < currentXp){
                             addExperience(player,-xpLeft)
-                            experienceStored[0] += xpLeft
+                            xpLeft
                         } else {
                             addExperience(player,-currentXp)
-                            experienceStored[0] += currentXp
+                            currentXp
                         }
                     }
                 }
                 1 -> {
                     if (currentXp >= 50) {
-                        if (xpLeft < 50){
+                        xpStored += if (xpLeft < 50){
                             addExperience(player,-xpLeft)
-                            experienceStored[0] += xpLeft
+                            xpLeft
                         } else {
                             addExperience(player,-50)
-                            experienceStored[0] += 50
+                            50
                         }
                     } else {
-                        if (xpLeft < currentXp){
+                        xpStored += if (xpLeft < currentXp){
                             addExperience(player,-xpLeft)
-                            experienceStored[0] += xpLeft
+                            xpLeft
                         } else {
                             addExperience(player,-currentXp)
-                            experienceStored[0] += currentXp
+                            currentXp
                         }
                     }
                 }
                 2 -> {
-                    if (experienceStored[0] < 50){
-                        addExperience(player,experienceStored[0])
-                        experienceStored[0] = 0
+                    if (xpStored < 50){
+                        addExperience(player,xpStored)
+                        xpStored = 0
                     } else {
                         addExperience(player,50)
-                        experienceStored[0] -= 50
+                        xpStored -= 50
                     }
                 }
                 3 -> {
-                    if (experienceStored[0] < 500){
-                        addExperience(player,experienceStored[0])
-                        experienceStored[0] = 0
+                    if (xpStored < 500){
+                        addExperience(player,xpStored)
+                        xpStored = 0
                     } else {
                         addExperience(player,500)
-                        experienceStored[0] -= 500
+                        xpStored -= 500
                     }
+                }
+                4 -> {
+                    xpStored += if (xpLeft < currentXp){
+                        addExperience(player,-xpLeft)
+                        xpLeft
+                    } else {
+                        addExperience(player,-currentXp)
+                        currentXp
+                    }
+                }
+                5 -> {
+                    if (currentXp >= 5000) {
+                        xpStored += if (xpLeft < 5000){
+                            addExperience(player,-xpLeft)
+                            xpLeft
+                        } else {
+                            addExperience(player,-5000)
+                            5000
+                        }
+                    } else {
+                        xpStored += if (xpLeft < currentXp){
+                            addExperience(player,-xpLeft)
+                            xpLeft
+                        } else {
+                            addExperience(player,-currentXp)
+                            currentXp
+                        }
+                    }
+                }
+                6 -> {
+                    if (xpStored < 5000){
+                        addExperience(player,xpStored)
+                        xpStored = 0
+                    } else {
+                        addExperience(player,5000)
+                        xpStored -= 5000
+                    }
+                }
+                7 -> {
+                    addExperience(player,xpStored)
+                    xpStored = 0
                 }
                 else -> {}
             }
@@ -188,8 +237,9 @@ class AltarOfExperienceScreenHandler(
                 1.0f,
                 world.random.nextFloat() * 0.1f + 0.9f
             )
-            setSyncedStoredXp(experienceStored[0])
-            xp.set(getPlayerLvlXp(player))
+            setSyncedStoredXp(xpStored)
+            xp = getPlayerLvlXp(player)
+            sendXpUpdates()
             sendContentUpdates()
         }
         return true
@@ -257,20 +307,82 @@ class AltarOfExperienceScreenHandler(
         }
 
         val totalXp = getPlayerLvlXp(playerInventory.player)
-        addProperty(xp).set(totalXp)
+        xp = totalXp
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
-        addProperty(Property.create(this.experienceStored, 0))
-        addProperty(Property.create(this.experienceMax, 0))
         if (context != ScreenHandlerContext.EMPTY) {
             context.run { world: World, pos: BlockPos ->
                 val (c,wc) = checkCandles(world, pos)
                 val e = updateMaxXp(c, wc)
-                experienceMax[0] = e
-                experienceStored[0] = getSyncedStoredXp()
+                xpMax = e
+                xpStored = getSyncedStoredXp()
+                sendXpUpdates()
                 sendContentUpdates()
             }
         }
     }
 
+    private fun sendXpUpdates(){
+        val player = playInventory.player
+        if (player is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            buf.writeInt(syncId)
+            buf.writeInt(xp)
+            buf.writeInt(xpStored)
+            buf.writeInt(xpMax)
+
+            ServerPlayNetworking.send(player, XP_UPDATE, buf)
+        }
+    }
+
+    fun requestXpUpdates(){
+        val buf = PacketByteBufs.create()
+        ClientPlayNetworking.send(XP_REQUEST,buf)
+    }
+
+    companion object {
+
+        private val XP_UPDATE = Identifier(AI.MOD_ID,"xp_update")
+        private val XP_REQUEST  = Identifier(AI.MOD_ID,"xp_request")
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(XP_UPDATE) {client,_,buf,_ ->
+                val player = client.player?:return@registerGlobalReceiver
+                val syncID = buf.readInt()
+                val handler = player.currentScreenHandler
+                if (handler.syncId != syncID) return@registerGlobalReceiver
+                if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
+                handler.xp = buf.readInt()
+                handler.xpStored = buf.readInt()
+                handler.xpMax = buf.readInt()
+            }
+        }
+
+        fun registerServer(){
+            ServerPlayNetworking.registerGlobalReceiver(XP_REQUEST){_,player,_,_,_ ->
+                val handler = player.currentScreenHandler
+                if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
+                handler.sendXpUpdates()
+            }
+        }
+
+        private val blocks: List<Pair<Int,Int>> = listOf(
+            Pair(-2,-2),
+            Pair(-2,-1),
+            Pair(-2,-0),
+            Pair(-2,1),
+            Pair(-2,2),
+            Pair(2,-2),
+            Pair(2,-1),
+            Pair(2,-0),
+            Pair(2,1),
+            Pair(2,2),
+            Pair(-1,-2),
+            Pair(-1,2),
+            Pair(1,-2),
+            Pair(1,2),
+            Pair(0,-2),
+            Pair(0,2)
+        )
+    }
 
 }
