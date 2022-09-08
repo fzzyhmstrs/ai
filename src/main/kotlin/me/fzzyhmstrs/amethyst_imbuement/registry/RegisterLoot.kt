@@ -39,7 +39,7 @@ object RegisterLoot {
     }
     fun tierTwoGemPool(maxCount: Float, overallChance: Float): LootPool.Builder {
         val actualChance = MathHelper.clamp(overallChance,0.01F,1.0F*maxCount)
-        val airWeight = (40 * ((1.0F + maxCount) / 2) / actualChance) - 40
+        val airWeight = (60 * ((1.0F + maxCount) / 2) / actualChance) - 60
         return LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,maxCount))
             .with(ItemEntry.builder(RegisterItem.MOONSTONE).weight(10))
@@ -47,6 +47,7 @@ object RegisterLoot {
             .with(ItemEntry.builder(RegisterItem.GARNET).weight(10))
             .with(ItemEntry.builder(RegisterItem.PYRITE).weight(10))
             .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(10))
+            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(10))
             .with(ItemEntry.builder(Items.AIR).weight(max(airWeight.toInt(),1)))
     }
 }
