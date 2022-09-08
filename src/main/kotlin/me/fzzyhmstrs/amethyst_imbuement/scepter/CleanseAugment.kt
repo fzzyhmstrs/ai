@@ -26,7 +26,7 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(200,0)
+        get() = super.baseEffect.withDuration(190,10)
 
     override fun supportEffect(
         world: World,

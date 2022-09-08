@@ -22,7 +22,7 @@ class MassCleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(300)
+        get() = super.baseEffect.withDuration(200,100)
 
     override fun effect(
         world: World,

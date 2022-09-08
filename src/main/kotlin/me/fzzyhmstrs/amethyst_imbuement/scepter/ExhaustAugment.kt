@@ -25,7 +25,7 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(200,100,0)
+        get() = super.baseEffect.withDuration(250,50,0)
             .withAmplifier(0,1,0)
 
     override fun supportEffect(
@@ -41,12 +41,12 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
                     target as LivingEntity,
                     StatusEffects.SLOWNESS,
                     effects.duration(level),
-                    effects.amplifier(level+ 1))
+                    effects.amplifier(level+ 1)/2)
                 EffectQueue.addStatusToQueue(
                     target,
                     StatusEffects.WEAKNESS,
                     effects.duration(level),
-                    effects.amplifier(level))
+                    effects.amplifier(level)/2)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 effects.accept(target, AugmentConsumer.Type.HARMFUL)
                 true

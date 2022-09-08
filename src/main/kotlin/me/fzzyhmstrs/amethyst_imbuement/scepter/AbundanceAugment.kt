@@ -17,7 +17,7 @@ import net.minecraft.world.World
 class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(1.0,1.0).withDamage(0.15F,0.05F)
+        get() = super.baseEffect.withRange(1.5,0.5).withDamage(0.18F,0.02F)
 
     override fun effect(
         world: World,
