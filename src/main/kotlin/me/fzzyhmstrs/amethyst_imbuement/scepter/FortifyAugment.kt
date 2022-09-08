@@ -25,7 +25,7 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(0,400).withAmplifier(-1,1)
+        get() = super.baseEffect.withDuration(200,200).withAmplifier(-1,1)
 
     override fun supportEffect(
         world: World,
@@ -36,16 +36,16 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     ): Boolean {
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)))
+                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/2))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/2))
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
         }
         return if (user is PlayerEntity) {
-            user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)))
-            user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)))
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/2))
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/2))
             println(effects.consumers())
             effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)

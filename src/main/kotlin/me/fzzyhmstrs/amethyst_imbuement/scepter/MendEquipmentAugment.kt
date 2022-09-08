@@ -25,7 +25,7 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     ManaItem {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(0,15,0)
+        get() = super.baseEffect.withDuration(10,5,0)
 
     override fun effect(
         world: World,

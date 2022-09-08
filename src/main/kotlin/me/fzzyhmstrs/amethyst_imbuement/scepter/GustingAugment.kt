@@ -72,7 +72,7 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,70,15,1,imbueLevel,LoreTier.LOW_TIER, Items.FEATHER)
+        return AugmentDatapoint(SpellType.WIT,60,15,1,imbueLevel,LoreTier.LOW_TIER, Items.FEATHER)
     }
 
     override fun soundEvent(): SoundEvent {
