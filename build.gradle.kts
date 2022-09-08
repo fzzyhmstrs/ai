@@ -21,6 +21,10 @@ repositories {
         url = uri("https://maven.shedaniel.me")
     }
     maven {
+        name = "Progwml6 maven"
+        url = uri("https://dvs1.progwml6.com/files/maven/")
+    }
+    maven {
         name = "Ladysnake Libs"
         url = uri("https://ladysnake.jfrog.io/artifactory/mods")
     }
@@ -57,6 +61,10 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
 
+    modCompileOnlyApi("mezz.jei:jei-1.19-common-api:11.1.1.236")
+    modCompileOnlyApi("mezz.jei:jei-1.19-fabric-api:11.1.1.236")
+    modRuntimeOnly("mezz.jei:jei-1.19-fabric:11.1.1.236")
+
     modImplementation("dev.emi:emi:0.3.0+1.19")
 
     modImplementation("dev.emi:trinkets:3.4.0"){
@@ -79,10 +87,10 @@ dependencies {
     }
     include("maven.modrinth:amethyst-core:0.2.3+1.19")*/
 
-    modImplementation(":amethyst_core-0.2.4+1.19"){
+    modImplementation(":amethyst_core-0.3.0+1.19"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-0.2.4+1.19")
+    include(":amethyst_core-0.3.0+1.19")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")
