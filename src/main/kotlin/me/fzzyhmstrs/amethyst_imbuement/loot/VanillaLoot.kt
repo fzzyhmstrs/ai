@@ -288,7 +288,8 @@ object VanillaLoot: AbstractModLoot() {
         val poolBuilder2 = FabricLootPoolBuilder.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,5.0F))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(15))
+            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
+            .with(ItemEntry.builder(Items.AIR).weight(14))
         table.pool(poolBuilder2)
     }
 
