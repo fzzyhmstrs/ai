@@ -61,19 +61,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             }
         }
 
-        @Inject(method = "damage", at = @At(value = "HEAD"))
-        private void damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-            damageSource = source;
-            if (!(this.timeUntilRegen > 10)) {
-                ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
-                System.out.println(stack2.getName());
-                if (stack2.isOf(RegisterItem.INSTANCE.getGEM_OF_PROMISE())) {
-                    System.out.println("blah");
-                    GemOfPromiseItem.Companion.sparkingGemCheck(stack2, inventory, source);
-                    GemOfPromiseItem.Companion.blazingGemCheck(stack2, inventory, this, source);
-                    GemOfPromiseItem.Companion.brutalGemCheck(stack2, inventory, source);
-                }
+    @Inject(method = "damage", at = @At(value = "HEAD"))
+    private void damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+        damageSource = source;
+        if (!(this.timeUntilRegen > 10)) {
+            ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
+            System.out.println(stack2.getName());
+            if (stack2.isOf(RegisterItem.INSTANCE.getGEM_OF_PROMISE())) {
+                System.out.println("blah");
+                GemOfPromiseItem.Companion.sparkingGemCheck(stack2, inventory, source);
+                GemOfPromiseItem.Companion.blazingGemCheck(stack2, inventory, this, source);
+                GemOfPromiseItem.Companion.brutalGemCheck(stack2, inventory, source);
             }
+        }
     }
 
     @Inject(method = "damageShield", at = @At(value = "HEAD"))

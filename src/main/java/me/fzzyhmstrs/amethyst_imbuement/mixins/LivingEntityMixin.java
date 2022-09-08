@@ -18,6 +18,9 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -30,6 +33,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -63,6 +67,9 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean clearStatusEffects();
     @Shadow public abstract void setHealth(float v);
 
+    @Shadow @Final
+    private static final TrackedData<Float> HEALTH = DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
     @Shadow protected ItemStack activeItemStack;
@@ -70,6 +77,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract float getHealth();
 
     @Shadow public abstract float getMaxHealth();
+
+    @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
 
     @Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean checkArmorInvisibility(ItemStack instance){
@@ -115,6 +124,17 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "damage", at = @At(value = "HEAD"))
     private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         damageSource = source;
+    }
+
+    @Inject(method = "setHealth", at = @At(value = "HEAD"), cancellable = true)
+    private void setHealthMixin(float health, CallbackInfo ci){
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getINSPIRED())){
+            if (health <= 0.0f){
+                this.removeStatusEffect(RegisterStatus.INSTANCE.getINSPIRED());
+                this.dataTracker.set(HEALTH, 0.5f);
+                ci.cancel();
+            }
+        }
     }
 
     @Inject(method = "damageShield", at = @At(value = "HEAD"))
