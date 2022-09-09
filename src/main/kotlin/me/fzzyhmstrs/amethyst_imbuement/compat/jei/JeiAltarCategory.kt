@@ -11,6 +11,7 @@ import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
+import mezz.jei.api.recipe.RecipeIngredientRole
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -40,7 +41,8 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
     }
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: AltarRecipe, focuses: IFocusGroup) {
-
-        TODO("Not yet implemented")
+        builder.addSlot(RecipeIngredientRole.INPUT,1,1).addIngredients(recipe.base)
+        builder.addSlot(RecipeIngredientRole.INPUT,50,1).addIngredients(recipe.addition)
+        builder.addSlot(RecipeIngredientRole.OUTPUT,108,1).addItemStack(recipe.result)
     }
 }
