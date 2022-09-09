@@ -154,6 +154,8 @@ class ImbuingTableScreenHandler(
             1
         } else if (FabricLoader.getInstance().isModLoaded("roughlyenoughitems")){
             2
+        }else if (FabricLoader.getInstance().isModLoaded("jei")){
+            3
         } else {
             -1
         }
