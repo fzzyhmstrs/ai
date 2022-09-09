@@ -13,7 +13,7 @@ import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
 import java.util.*
 
-class JeiImbuingTranserHandler: IRecipeTransferHandler<ImbuingTableScreenHandler,ImbuingRecipe> {
+class JeiImbuingTransferHandler: IRecipeTransferHandler<ImbuingTableScreenHandler,ImbuingRecipe> {
     override fun getContainerClass(): Class<out ImbuingTableScreenHandler> {
         return ImbuingTableScreenHandler::class.java
     }
