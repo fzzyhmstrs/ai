@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
-import net.minecraft.client.item.CompassAnglePredicateProvider
 import net.minecraft.client.item.UnclampedModelPredicateProvider
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
@@ -26,12 +25,25 @@ import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.world.ClientWorld
+import net.minecraft.entity.Entity
+import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.decoration.ItemFrameEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.CompassItem
 import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtHelper
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
+import net.minecraft.util.registry.RegistryKey
+import net.minecraft.world.World
+import java.util.*
+import kotlin.math.atan2
 
 @Environment(value = EnvType.CLIENT)
 object RegisterRenderer {
@@ -191,11 +203,7 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int -> if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f }
 
         FabricModelPredicateProviderRegistry.register(
-            RegisterItem.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
-                CompassItem.createLodestonePos(stack.orCreateNbt)
-            } else {
-                CompassItem.createSpawnPos(world)
-            }}
+            RegisterItem.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider()
         )
 
         FabricModelPredicateProviderRegistry.register(
@@ -276,6 +284,118 @@ object RegisterRenderer {
             registry.register(DISENCHANTING_TABLE_BOOK_SPRITE_ID)
         }
 
+    }
+
+    private class CompassAnglePredicateProvider: UnclampedModelPredicateProvider {
+        private val aimedInterpolator = AngleInterpolator()
+        private val aimlessInterpolator = AngleInterpolator()
+        override fun unclampedCall(
+            itemStack: ItemStack,
+            world: ClientWorld?,
+            livingEntity: LivingEntity?,
+            i: Int
+        ): Float {
+            var clientWorld = world
+            val g: Double
+            val entity: Entity? = livingEntity ?: itemStack.holder
+            if (entity == null) {
+                return 0.0f
+            }
+            if (clientWorld == null && entity.world is ClientWorld) {
+                clientWorld = entity.world as ClientWorld
+            }
+            val blockPos = if (CompassItem.hasLodestone(itemStack)) getLodestonePos(
+                clientWorld,
+                itemStack.orCreateNbt
+            ) else getSpawnPos(clientWorld)
+            val l = clientWorld!!.time
+            if (blockPos == null || entity.pos.squaredDistanceTo(
+                    blockPos.x.toDouble() + 0.5,
+                    entity.pos.getY(),
+                    blockPos.z.toDouble() + 0.5
+                ) < 1.0E-5
+            ) {
+                if (aimlessInterpolator.shouldUpdate(l)) {
+                    aimlessInterpolator.update(l, Math.random())
+                }
+                val d = aimlessInterpolator.value + (scatter(i).toFloat() / 2.14748365E9f).toDouble()
+                return MathHelper.floorMod(d.toFloat(), 1.0f)
+            }
+            val bl = livingEntity is PlayerEntity && livingEntity.isMainPlayer
+            var e = 0.0
+            if (bl) {
+                e = livingEntity!!.yaw.toDouble()
+            } else if (entity is ItemFrameEntity) {
+                e = getItemFrameAngleOffset(entity)
+            } else if (entity is ItemEntity) {
+                e = (180.0f - entity.getRotation(0.5f) / (Math.PI.toFloat() * 2) * 360.0f).toDouble()
+            } else if (livingEntity != null) {
+                e = livingEntity.bodyYaw.toDouble()
+            }
+            e = MathHelper.floorMod(e / 360.0, 1.0)
+            val f = getAngleToPos(Vec3d.ofCenter(blockPos), entity) / 6.2831854820251465
+            g = if (bl) {
+                if (aimedInterpolator.shouldUpdate(l)) {
+                    aimedInterpolator.update(l, 0.5 - (e - 0.25))
+                }
+                f + aimedInterpolator.value
+            } else {
+                0.5 - (e - 0.25 - f)
+            }
+            return MathHelper.floorMod(g.toFloat(), 1.0f)
+        }
+
+        /**
+         * Scatters a seed by integer overflow in multiplication onto the whole
+         * int domain.
+         */
+        private fun scatter(seed: Int): Int {
+            return seed * 1327217883
+        }
+
+        private fun getSpawnPos(world: ClientWorld?): BlockPos? {
+            return if (world!!.dimension.isNatural) world.spawnPos else null
+        }
+
+        private fun getLodestonePos(world: World?, nbt: NbtCompound): BlockPos? {
+            val optional: Optional<RegistryKey<World?>> = if(nbt.contains("LodestoneDimension")){CompassItem.getLodestoneDimension(nbt)} else Optional.empty()
+            val bl = nbt.contains("LodestonePos")
+            val bl2 = nbt.contains("LodestoneDimension")
+
+            return if (bl && bl2 && optional.isPresent && (world?.registryKey === optional.get())
+            ) {
+                NbtHelper.toBlockPos(nbt.getCompound("LodestonePos"))
+            } else null
+        }
+
+        private fun getItemFrameAngleOffset(itemFrame: ItemFrameEntity): Double {
+            val direction = itemFrame.horizontalFacing
+            val i = if (direction.axis.isVertical) 90 * direction.direction.offset() else 0
+            return MathHelper.wrapDegrees(180 + direction.horizontal * 90 + itemFrame.rotation * 45 + i).toDouble()
+        }
+
+        private fun getAngleToPos(pos: Vec3d, entity: Entity): Double {
+            return atan2(pos.getZ() - entity.z, pos.getX() - entity.x)
+        }
+    }
+
+    @Environment(value = EnvType.CLIENT)
+    private class AngleInterpolator {
+        var value = 0.0
+        private var speed = 0.0
+        private var lastUpdateTime: Long = 0
+        fun shouldUpdate(time: Long): Boolean {
+            return lastUpdateTime != time
+        }
+
+        fun update(time: Long, target: Double) {
+            lastUpdateTime = time
+            var d = target - value
+            d = MathHelper.floorMod(d + 0.5, 1.0) - 0.5
+            speed += d * 0.1
+            speed *= 0.8
+            value = MathHelper.floorMod(value + speed, 1.0)
+        }
     }
 
 }
