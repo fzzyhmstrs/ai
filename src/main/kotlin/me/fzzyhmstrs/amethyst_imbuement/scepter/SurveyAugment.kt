@@ -56,7 +56,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
                 val nbtCompound2: NbtCompound = mapStack.getOrCreateSubNbt("display")
                 nbtCompound2.putInt("MapColor", type.tint)
             }
-            mapStack.setCustomName(Text.translatable(type.nameKey))
+            mapStack.setCustomName(TranslatableText(type.nameKey))
             if (!user.inventory.insertStack(mapStack)) {
                 user.dropItem(mapStack, false)
             }

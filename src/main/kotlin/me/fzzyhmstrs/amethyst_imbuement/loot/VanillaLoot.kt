@@ -45,7 +45,7 @@ object VanillaLoot: AbstractModLoot() {
                         UniformLootNumberProvider.create(0.25f, 0.75f))))
                 .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(8).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f)))
+                        UniformLootNumberProvider.create(0.25f, 0.75f))))
                 .with(ItemEntry.builder(Items.AIR).weight(40))
             table.pool(poolBuilder)
             return true
@@ -54,7 +54,7 @@ object VanillaLoot: AbstractModLoot() {
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1)).apply(
                     SetDamageLootFunction.builder(
-                        UniformLootNumberProvider.create(0.25f, 0.75f))))
+                        UniformLootNumberProvider.create(0.25f, 0.75f)))
                 .with(ItemEntry.builder(Items.AIR).weight(39))
             table.pool(poolBuilder)
             return true
@@ -321,10 +321,10 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f)))
+                    UniformLootNumberProvider.create(0.25f, 0.75f))))
             .with(ItemEntry.builder(RegisterItem.GARNET_SHOVEL).weight(5)).apply(
                 SetDamageLootFunction.builder(
-                    UniformLootNumberProvider.create(0.25f, 0.75f))))
+                    UniformLootNumberProvider.create(0.25f, 0.75f)))
             .with(ItemEntry.builder(Items.AIR).weight(40))
         table.pool(poolBuilder)
         val poolBuilder2 = FabricLootPoolBuilder.builder()

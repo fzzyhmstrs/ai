@@ -13,7 +13,9 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
@@ -40,28 +42,28 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         if (nbt.contains("on_fire")){
             val fire = Nbt.readIntNbt("on_fire",nbt).toFloat()
             val progress = fire/FIRE_TARGET.toFloat()*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(Text.literal("%")).formatted(Formatting.RED))
+            tooltip.add(TranslatableText("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(LiteralText("%")).formatted(Formatting.RED))
         }
         if (nbt.contains("statuses")){
             val compound = nbt.get("statuses") as NbtCompound
             val status = compound.keys.size.toFloat()
             val progress = status/STATUS_TARGET.toFloat()*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(Text.literal("%")).formatted(Formatting.BLUE))
+            tooltip.add(TranslatableText("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(LiteralText("%")).formatted(Formatting.BLUE))
         }
         if (nbt.contains("kill_count")){
             val kills = Nbt.readIntNbt("kill_count",nbt).toFloat()
             val progress = kills/KILL_TARGET.toFloat()*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress).append(Text.literal("%")).formatted(Formatting.DARK_RED))
+            tooltip.add(TranslatableText("item.amethyst_imbuement.gem_of_promise.lethal", progress).append(LiteralText("%")).formatted(Formatting.DARK_RED))
         }
         if (nbt.contains("healed")){
             val healed = nbt.getFloat("healed")
             val progress = healed/HEAL_TARGET*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).append(Text.literal("%")).formatted(Formatting.GREEN))
+            tooltip.add(TranslatableText("item.amethyst_imbuement.gem_of_promise.healers", progress).append(LiteralText("%")).formatted(Formatting.GREEN))
         }
         if (nbt.contains("mob_hit")){
             val hit = Nbt.readIntNbt("mob_hit",nbt).toFloat()
             val progress = hit/HIT_TARGET.toFloat()*100.0F
-            tooltip.add(Text.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(Text.literal("%")).formatted(Formatting.GRAY))
+            tooltip.add(TranslatableText("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(LiteralText("%")).formatted(Formatting.GRAY))
         }
     }
 
