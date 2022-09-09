@@ -22,6 +22,10 @@ import net.minecraft.util.Identifier
 
 class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
+    companion object{
+        val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)
+    }
+    
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/imbuing_background.png"),5,83,125,18)
 
     override fun getRecipeType(): RecipeType<AltarRecipe> {
