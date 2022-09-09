@@ -23,7 +23,8 @@ object JeiPlugin: IModPlugin {
     }
 
     override fun registerRecipeTransferHandlers(registration: IRecipeTransferRegistration) {
-        registration.addRecipeTransferHandler(JeiImbuingTranserHandler(),JeiImbuingCategory.IMBUING_TYPE)
+        registration.addRecipeTransferHandler(ImbuingTableScreen::class.java, RegisterHandler!!.IMBUING_SCREEN_HANDLER, JeiImbuingCategory.IMBUING_TYPE, 0, 12, 6, 36);
+        registration.addRecipeTransferHandler(CrystalAltarScreen::class.java, RegisterHandler!!.CRYSTAL_ALTAR_SCREEN_HANDLER, JeiAltarCategory.ENHANCING_TYPE, 0, 2, 3, 36);
     }
 
 }
