@@ -61,9 +61,9 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:9.0.491")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:9.0.491")
 
-    modCompileOnlyApi("mezz.jei:jei-1.19-common-api:11.1.1.236")
-    modCompileOnlyApi("mezz.jei:jei-1.19-fabric-api:11.1.1.236")
-    modRuntimeOnly("mezz.jei:jei-1.19-fabric:11.1.1.236")
+    modImplementation("mezz.jei:jei-1.19-fabric:11.1.1.236"){
+        exclude ("mezz.jei")
+    }
 
     modImplementation("dev.emi:emi:0.3.0+1.19")
 
