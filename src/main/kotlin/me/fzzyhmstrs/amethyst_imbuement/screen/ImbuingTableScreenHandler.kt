@@ -344,7 +344,7 @@ class ImbuingTableScreenHandler(
                     world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
                 }
                 return true
-            } else if (needsRecipeBook.get() == 2) {
+            } else if (needsRecipeBook.get() == 2 || needsRecipeBook.get() == 3) {
                 context.run { world, pos ->
                     world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
                 }

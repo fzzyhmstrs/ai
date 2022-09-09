@@ -20,10 +20,14 @@ import net.minecraft.util.Identifier
 
 class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
+    companion object{
+        val IMBUING_TYPE = RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
+    }
+
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/imbuing_background.png"),5,5,142,68)
 
     override fun getRecipeType(): RecipeType<ImbuingRecipe> {
-        return RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
+        return IMBUING_TYPE
     }
 
     override fun getTitle(): Text {
