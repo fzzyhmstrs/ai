@@ -36,7 +36,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val IMBUING_TYPE = RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
     }
 
-    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/imbuing_background.png"),5,5,142,68)
+    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,0,135,62)
 
     override fun getRecipeType(): RecipeType<ImbuingRecipe> {
         return IMBUING_TYPE
@@ -67,13 +67,13 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val costOffset: Int
         if(cost > 99){
             costText = Text.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
-            costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
+            costOffset = 113 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         } else{
             costText = Text.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
-            costOffset = 119 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
+            costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         }
 
-        client.textRenderer.drawWithShadow(stack,costText,costOffset.toFloat(),45.0f,Formatting.GREEN.colorIndex)
+        client.textRenderer.drawWithShadow(stack,costText,costOffset.toFloat(),44.0f,Formatting.GREEN.colorIndex)
     }
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {
@@ -131,21 +131,21 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         }
         
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(slots[0])
-        builder.addSlot(RecipeIngredientRole.INPUT, 88, 1).addIngredients(slots[1])
+        builder.addSlot(RecipeIngredientRole.INPUT, 81, 1).addIngredients(slots[1])
         
         builder.addSlot(RecipeIngredientRole.INPUT, 21, 3).addIngredients(slots[2])
-        builder.addSlot(RecipeIngredientRole.INPUT, 44, 3).addIngredients(slots[3])
-        builder.addSlot(RecipeIngredientRole.INPUT, 67, 3).addIngredients(slots[4])
-        builder.addSlot(RecipeIngredientRole.INPUT, 21, 26).addIngredients(slots[5])
-        builder.addSlot(RecipeIngredientRole.INPUT, 44, 26).addIngredients(centerSlot)
-        builder.addSlot(RecipeIngredientRole.INPUT, 67, 26).addIngredients(slots[7])
-        builder.addSlot(RecipeIngredientRole.INPUT, 21, 49).addIngredients(slots[8])
-        builder.addSlot(RecipeIngredientRole.INPUT, 44, 49).addIngredients(slots[9])
-        builder.addSlot(RecipeIngredientRole.INPUT, 67, 49).addIngredients(slots[10])
+        builder.addSlot(RecipeIngredientRole.INPUT, 41, 3).addIngredients(slots[3])
+        builder.addSlot(RecipeIngredientRole.INPUT, 61, 3).addIngredients(slots[4])
+        builder.addSlot(RecipeIngredientRole.INPUT, 21, 23).addIngredients(slots[5])
+        builder.addSlot(RecipeIngredientRole.INPUT, 41, 23).addIngredients(centerSlot)
+        builder.addSlot(RecipeIngredientRole.INPUT, 61, 23).addIngredients(slots[7])
+        builder.addSlot(RecipeIngredientRole.INPUT, 21, 43).addIngredients(slots[8])
+        builder.addSlot(RecipeIngredientRole.INPUT, 41, 43).addIngredients(slots[9])
+        builder.addSlot(RecipeIngredientRole.INPUT, 61, 43).addIngredients(slots[10])
         
-        builder.addSlot(RecipeIngredientRole.INPUT, 1, 51).addIngredients(slots[11])
-        builder.addSlot(RecipeIngredientRole.INPUT, 88, 51).addIngredients(slots[12])
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 45).addIngredients(slots[11])
+        builder.addSlot(RecipeIngredientRole.INPUT, 81, 45).addIngredients(slots[12])
         
-        builder.addSlot(RecipeIngredientRole.OUTPUT,123, 26).addItemStack(resultSlot)
+        builder.addSlot(RecipeIngredientRole.OUTPUT,117, 23).addItemStack(resultSlot)
     }
 }

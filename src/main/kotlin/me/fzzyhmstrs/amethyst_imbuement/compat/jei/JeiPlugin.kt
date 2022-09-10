@@ -35,12 +35,13 @@ object JeiPlugin: IModPlugin {
 
     override fun registerRecipeCatalysts(registration: IRecipeCatalystRegistration) {
         registration.addRecipeCatalyst(ItemStack(RegisterBlock.IMBUING_TABLE.asItem()),JeiImbuingCategory.IMBUING_TYPE)
-        registration.addRecipeCatalyst(ItemStack(RegisterBlock.ALTAR_OF_EXPERIENCE.asItem()),JeiAltarCategory.ENHANCING_TYPE)
+        registration.addRecipeCatalyst(ItemStack(RegisterBlock.CRYSTAL_ALTAR.asItem()),JeiAltarCategory.ENHANCING_TYPE)
     }
 
     override fun registerGuiHandlers(registration: IGuiHandlerRegistration) {
         if (!ModCompatHelper.isViewerSuperseded("jei")) {
-            registration.addRecipeClickArea(ImbuingTableScreen::class.java, 6, 91, 20, 18)
+            println("registered my click area!")
+            registration.addRecipeClickArea(ImbuingTableScreen::class.java, 6, 91, 20, 18, JeiImbuingCategory.IMBUING_TYPE)
         }
     }
 
