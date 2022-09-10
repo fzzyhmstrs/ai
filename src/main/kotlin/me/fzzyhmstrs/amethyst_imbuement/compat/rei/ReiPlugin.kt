@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
@@ -36,7 +37,13 @@ object ReiPlugin: REIClientPlugin {
     }
 
     override fun registerScreens(registry: ScreenRegistry) {
-        val rectangle = Rectangle(6,91,20,18)
-        registry.registerContainerClickArea(rectangle,ImbuingTableScreen::class.java, IMBUING_TABLE_CATEGORY.categoryIdentifier)
+        if (!ModCompatHelper.isViewerSuperseded("roughlyenoughitems")) {
+            val rectangle = Rectangle(6, 91, 20, 18)
+            registry.registerContainerClickArea(
+                rectangle,
+                ImbuingTableScreen::class.java,
+                IMBUING_TABLE_CATEGORY.categoryIdentifier
+            )
+        }
     }
 }
