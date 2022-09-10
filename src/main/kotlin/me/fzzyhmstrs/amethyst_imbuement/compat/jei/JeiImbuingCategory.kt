@@ -1,5 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
@@ -8,15 +14,21 @@ import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
@@ -66,7 +78,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {
         val slots = recipe.getInputs()
-        val centerSlot: Indgredient
+        val centerSlot: Ingredient
         val resultSlot: ItemStack
         val identifier = Identifier(recipe.getAugment())
         val enchant = Registry.ENCHANTMENT.get(identifier)
@@ -101,7 +113,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
                 }
             }
             resultSlot = ItemStack(Items.ENCHANTED_BOOK,1)
-            EnchantedBookItem.addEnchantment(resultSlot,EnchantmentLevelEntry(enchant,1))
+            EnchantedBookItem.addEnchantment(resultSlot, EnchantmentLevelEntry(enchant,1))
         } else if(modifier != null) {
             val stacks = modifier.acceptableItemStacks().toTypedArray()
             centerSlot = Ingredient.ofStacks(*stacks)
@@ -110,7 +122,12 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
             resultSlot = moddedStack
         } else {
             centerSlot = slots[6]
-            resultSlot = if (recipe.getAugment() == ""){recipe.getOutput()} else {ItemStack(Items.BOOK, 1)}
+            resultSlot = if (recipe.getAugment() == "")
+            {
+                recipe.output
+            } else {
+                ItemStack(Items.BOOK, 1)
+            }
         }
         
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(slots[0])
@@ -129,6 +146,6 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 51).addIngredients(slots[11])
         builder.addSlot(RecipeIngredientRole.INPUT, 88, 51).addIngredients(slots[12])
         
-        builder.addSlot(RecipeIngredientRole.OUTPUT, , 26).addItemStack(resultSlot)
+        builder.addSlot(RecipeIngredientRole.OUTPUT,123, 26).addItemStack(resultSlot)
     }
 }
