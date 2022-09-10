@@ -25,6 +25,10 @@ repositories {
         url = uri("https://maven.shedaniel.me")
     }
     maven {
+        name = "Progwml6 maven"
+        url = uri("https://dvs1.progwml6.com/files/maven/")
+    }
+    maven {
         name = "Patchouli Lib"
         url = uri("https://maven.blamejared.com")
     }
@@ -54,6 +58,10 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:8.0.442")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
+
+    modImplementation("mezz.jei:jei-1.18.2-fabric:10.1.4.263"){
+        exclude ("mezz.jei")
+    }
 
     modImplementation("dev.emi:emi:0.3.0+1.18.2")
 

@@ -34,6 +34,8 @@ object ModCompatHelper {
     fun isViewerSuperseded(viewer: String): Boolean{
         val ranking = viewerHierarchy[viewer]?:return true
         for (chk in viewerHierarchy){
+            println(chk.key)
+            println(viewer)
             if (chk.key != viewer && chk.value < ranking) return true
         }
         return false
