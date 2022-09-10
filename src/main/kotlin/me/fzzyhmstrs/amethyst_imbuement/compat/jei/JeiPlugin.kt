@@ -4,16 +4,22 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import mezz.jei.api.IModPlugin
+import mezz.jei.api.gui.handlers.IGuiClickableArea
+import mezz.jei.api.gui.handlers.IGuiContainerHandler
+import mezz.jei.api.recipe.IFocusFactory
 import mezz.jei.api.registration.*
+import mezz.jei.api.runtime.IRecipesGui
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.util.math.Rect2i
 import net.minecraft.item.ItemStack
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
 
 object JeiPlugin: IModPlugin {
@@ -40,8 +46,8 @@ object JeiPlugin: IModPlugin {
 
     override fun registerGuiHandlers(registration: IGuiHandlerRegistration) {
         if (!ModCompatHelper.isViewerSuperseded("jei")) {
-            println("registered my click area!")
-            registration.addRecipeClickArea(ImbuingTableScreen::class.java, 6, 91, 20, 18, JeiImbuingCategory.IMBUING_TYPE)
+            //registration.addRecipeClickArea(ImbuingTableScreen::class.java, 6, 91, 20, 18, JeiImbuingCategory.IMBUING_TYPE)
+            registration.addGuiContainerHandler(ImbuingTableScreen::class.java, guiClickerHandler)
         }
     }
 
@@ -54,4 +60,36 @@ object JeiPlugin: IModPlugin {
         registration.addRecipeTransferHandler(CrystalAltarScreenHandler::class.java, RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER, JeiAltarCategory.ENHANCING_TYPE, 0, 2, 3, 36)
     }
 
+    private val guiClicker = object: IGuiClickableArea{
+        var rect = Rect2i(6, 91, 20, 18)
+        override fun getArea(): Rect2i {
+            return rect
+        }
+
+        override fun onClick(focusFactory: IFocusFactory, recipesGui: IRecipesGui) {
+            val player = MinecraftClient.getInstance().player
+            if (player != null) {
+                MinecraftClient.getInstance().world?.playSound(
+                    player, player.blockPos,
+                    SoundEvents.UI_BUTTON_CLICK,
+                    SoundCategory.BLOCKS,
+                    0.5f,
+                    1.2f
+                )
+            }
+            recipesGui.showTypes(listOf(JeiImbuingCategory.IMBUING_TYPE))
+        }
+
+    }
+
+    private val guiClickerHandler = object: IGuiContainerHandler < ImbuingTableScreen > {
+        override fun getGuiClickableAreas(
+            containerScreen: ImbuingTableScreen,
+            mouseX: Double,
+            mouseY: Double
+        ): Collection<IGuiClickableArea> {
+            val clickableArea = guiClicker
+            return listOf(clickableArea)
+        }
+    }
 }
