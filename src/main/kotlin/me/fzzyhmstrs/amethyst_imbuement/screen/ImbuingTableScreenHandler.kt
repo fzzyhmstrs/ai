@@ -328,9 +328,10 @@ class ImbuingTableScreenHandler(
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
         if (id == -1){
+            println(needsRecipeBook.get())
             if (ModCompatHelper.isValidHandlerOffset(needsRecipeBook.get())){
                 context.run { world, pos ->
-                    world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
+                    world.playSound(player, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
                 }
                 ModCompatHelper.runHandlerViewer(needsRecipeBook.get())
                 return true
