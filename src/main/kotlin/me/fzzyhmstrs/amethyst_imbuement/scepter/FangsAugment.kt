@@ -62,7 +62,6 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
                 d = success
                 e = d + 2.0
             }
-            println(d)
         }
         val bl = successes > 0
         if (bl){

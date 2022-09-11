@@ -46,7 +46,6 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         return if (user is PlayerEntity) {
             user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/2))
             user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/2))
-            println(effects.consumers())
             effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
             true

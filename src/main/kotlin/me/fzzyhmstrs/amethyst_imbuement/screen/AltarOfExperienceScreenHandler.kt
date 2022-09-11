@@ -117,7 +117,6 @@ class AltarOfExperienceScreenHandler(
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
         val currentXp = getPlayerLvlXp(player)
-        println(getSyncedStoredXp())
         if (id == 0){
             if (currentXp <= 50){
                 return false
