@@ -31,7 +31,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        println("eef")
         val i = (width - backgrdWidth) / 2
         val j = (height - backgrdHeight) / 2
 
@@ -64,7 +63,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     )
                 }
                         )) {
-                println("oof")
                 client?.interactionManager?.clickButton(handler.syncId, -1)
                 return true
             }

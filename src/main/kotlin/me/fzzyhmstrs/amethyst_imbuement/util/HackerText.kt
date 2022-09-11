@@ -23,7 +23,6 @@ class HackerText(private val baseText: String, private val speed: Int) {
             val start = wholeTextLen - baseTextLen - indexOffset
             val end = wholeTextLen - indexOffset
             val subStr = wholeText.substring(start, end)
-            println(subStr)
             return Text.literal(subStr)
         }
 
