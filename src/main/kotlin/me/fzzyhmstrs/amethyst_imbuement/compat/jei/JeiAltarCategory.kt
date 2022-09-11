@@ -17,13 +17,16 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
     companion object{
-        val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)
+        val ENCHANCING_UID = Identifier(AI.MOD_ID,"enhancing")
+        val ENHANCING_CLASS = AltarRecipe::class.java
+        val ENHANCING_TYPE = RecipeType(ENCHANCING_UID, ENHANCING_CLASS)
     }
     
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,125,18)
@@ -33,7 +36,7 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
     }
 
     override fun getTitle(): Text {
-        return Text.translatable("recipe.enhancing")
+        return TranslatableText("recipe.enhancing")
     }
 
     override fun getBackground(): IDrawable {
@@ -48,5 +51,23 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
         builder.addSlot(RecipeIngredientRole.INPUT,1,1).addIngredients(recipe.base)
         builder.addSlot(RecipeIngredientRole.INPUT,50,1).addIngredients(recipe.addition)
         builder.addSlot(RecipeIngredientRole.OUTPUT,108,1).addItemStack(recipe.result)
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "ENCHANCING_UID",
+        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiAltarCategory.Companion.ENCHANCING_UID"
+    )
+    )
+    override fun getUid(): Identifier {
+        return ENCHANCING_UID
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "ENHANCING_CLASS",
+        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiAltarCategory.Companion.ENHANCING_CLASS"
+    )
+    )
+    override fun getRecipeClass(): Class<out AltarRecipe> {
+        return ENHANCING_CLASS
     }
 }

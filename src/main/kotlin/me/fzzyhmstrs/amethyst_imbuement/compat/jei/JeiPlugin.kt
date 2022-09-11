@@ -56,8 +56,8 @@ object JeiPlugin: IModPlugin {
     }
 
     override fun registerRecipeTransferHandlers(registration: IRecipeTransferRegistration) {
-        registration.addRecipeTransferHandler(ImbuingTableScreenHandler::class.java, RegisterHandler.IMBUING_SCREEN_HANDLER, JeiImbuingCategory.IMBUING_TYPE, 0, 13, 13, 36)
-        registration.addRecipeTransferHandler(CrystalAltarScreenHandler::class.java, RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER, JeiAltarCategory.ENHANCING_TYPE, 0, 2, 3, 36)
+        registration.addRecipeTransferHandler(ImbuingTableScreenHandler::class.java, JeiImbuingCategory.IMBUING_TYPE, 0, 13, 13, 36)
+        registration.addRecipeTransferHandler(CrystalAltarScreenHandler::class.java, JeiAltarCategory.ENHANCING_TYPE, 0, 2, 3, 36)
     }
 
     private val guiClicker = object: IGuiClickableArea{

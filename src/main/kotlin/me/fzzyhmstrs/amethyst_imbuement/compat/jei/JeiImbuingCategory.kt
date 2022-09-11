@@ -26,6 +26,7 @@ import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -33,7 +34,9 @@ import net.minecraft.util.registry.Registry
 class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
     companion object{
-        val IMBUING_TYPE = RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
+        val IMBUING_UID = Identifier(AI.MOD_ID,"imbuing")
+        val IMBUING_CLASS = ImbuingRecipe::class.java
+        val IMBUING_TYPE = RecipeType(IMBUING_UID, IMBUING_CLASS)
     }
 
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,0,135,62)
@@ -43,7 +46,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
     }
 
     override fun getTitle(): Text {
-        return Text.translatable("recipe.imbuing")
+        return TranslatableText("recipe.imbuing")
     }
 
     override fun getBackground(): IDrawable {
@@ -66,10 +69,10 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val costText: OrderedText
         val costOffset: Int
         if(cost > 99){
-            costText = Text.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = TranslatableText("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 113 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         } else{
-            costText = Text.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = TranslatableText("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         }
 
@@ -147,5 +150,23 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         builder.addSlot(RecipeIngredientRole.INPUT, 81, 45).addIngredients(slots[12])
         
         builder.addSlot(RecipeIngredientRole.OUTPUT,117, 23).addItemStack(resultSlot)
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "IMBUING_UID",
+        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiImbuingCategory.Companion.IMBUING_UID"
+    )
+    )
+    override fun getUid(): Identifier {
+        return IMBUING_UID
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "IMBUING_CLASS",
+        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiImbuingCategory.Companion.IMBUING_CLASS"
+    )
+    )
+    override fun getRecipeClass(): Class<out ImbuingRecipe> {
+        return IMBUING_CLASS
     }
 }
