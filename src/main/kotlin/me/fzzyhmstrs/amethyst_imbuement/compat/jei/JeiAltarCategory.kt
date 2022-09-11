@@ -3,30 +3,24 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
 import mezz.jei.api.recipe.RecipeIngredientRole
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
-import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
     companion object{
-        val ENCHANCING_UID = Identifier(AI.MOD_ID,"enhancing")
+        val ENHANCING_UID = Identifier(AI.MOD_ID,"enhancing")
         val ENHANCING_CLASS = AltarRecipe::class.java
-        val ENHANCING_TYPE = RecipeType(ENCHANCING_UID, ENHANCING_CLASS)
+        val ENHANCING_TYPE = RecipeType(ENHANCING_UID, ENHANCING_CLASS)
     }
     
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,125,18)
@@ -54,12 +48,12 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith(
-        "ENCHANCING_UID",
-        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiAltarCategory.Companion.ENCHANCING_UID"
+        "ENHANCING_UID",
+        "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiAltarCategory.Companion.ENHANCING_UID"
     )
     )
     override fun getUid(): Identifier {
-        return ENCHANCING_UID
+        return ENHANCING_UID
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith(
