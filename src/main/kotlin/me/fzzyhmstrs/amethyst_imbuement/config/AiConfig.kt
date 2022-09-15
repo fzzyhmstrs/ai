@@ -186,7 +186,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     
     class Entities{
         var unhallowedBaseLifespan: Int = 2400
-        var unhallowerBaseHealth: Double = 20.0
+        var unhallowedBaseHealth: Double = 20.0
         var unhallowedBaseDamage: Float = 3.0f
         var crystalGolemSpellBaseLifespan: Int = 5500
         var crystalGolemSpellPerLvlLifespan: Int = 500

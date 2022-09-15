@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +21,8 @@ import net.minecraft.world.World
 class SummonGolemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(5500,500,0)
+        get() = super.baseEffect.withDuration(AiConfig.entities.crystalGolemSpellBaseLifespan,AiConfig.entities.crystalGolemSpellPerLvlLifespan)
+            .withDamage(AiConfig.entities.crystalGolemBaseDamage)
 
     override fun placeEntity(
         world: World,
