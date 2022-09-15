@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.TotemPassiveAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -26,7 +27,7 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             EffectQueue.addStatusToQueue(user, StatusEffects.RESISTANCE, 200, 0)
             RegisterEnchantment.GUSTING.effect(world,null,user,1,null,RegisterEnchantment.GUSTING.baseEffect)
             //spawn the golem right at the player
-            val cge = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world, 900, user)
+            val cge = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world, AiConfig.entities.crystalGolemGuardianLifespan, user)
             cge.setPosition(user.pos)
             world.spawnEntity(cge)
         }

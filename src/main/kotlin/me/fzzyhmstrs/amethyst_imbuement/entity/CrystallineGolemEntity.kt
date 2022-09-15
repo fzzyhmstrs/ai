@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents
@@ -53,7 +54,7 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolemBasehealth)
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolemBaseHealth)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolemBaseDamage.toDouble())
         }

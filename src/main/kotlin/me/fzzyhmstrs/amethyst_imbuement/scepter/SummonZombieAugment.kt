@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EquipmentSlot
@@ -24,8 +25,8 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(3,0,0)
-            .withDuration(2400,0,0)
-            .withDamage(3.0F)
+            .withDuration(AiConfig.entities.unhallowedBaseLifespan,0,0)
+            .withDamage(AiConfig.entities.unhallowedBaseDamage)
 
     override fun placeEntity(
         world: World,

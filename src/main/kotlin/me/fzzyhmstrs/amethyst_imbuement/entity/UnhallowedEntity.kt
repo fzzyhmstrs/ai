@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -52,14 +53,14 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     }
 
     companion object {
-        private const val baseMaxHealth = 20.0
+        private  val baseMaxHealth = AiConfig.entities.unhallowedBaseHealth
         private const val baseMoveSpeed = 0.4
-        private const val baseAttackDamage = 3.0
+        private  val baseAttackDamage = AiConfig.entities.unhallowedBaseDamage
 
         fun createUnhallowedAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
         }
     }
     private var attackTicksLeft = 0
