@@ -19,6 +19,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     var colors: Colors
     var villages: Villages
     var enchantments: Enchantments
+    var entities: Entities
 
     init {
         scepters = readOrCreateUpdated("scepters_v1.json","scepters_v0.json", base = AI.MOD_ID, configClass = { Scepters() }, previousClass = {SceptersV0()})
@@ -28,6 +29,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
         villages = readOrCreateUpdated("villages_v1.json","villages_v0.json", base = AI.MOD_ID, configClass = { Villages() }, previousClass = {VillagesV0()})
         enchantments = readOrCreate("enchantments_v0.json", base = AI.MOD_ID) { Enchantments() }
+        entities = readOrCreate("entities_v0.json", base = AI.MOD_ID) { Entities() }
         ReadmeText.writeReadMe("README.txt", AI.MOD_ID)
     }
 
@@ -180,6 +182,17 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             "rain_of_thorns" to true,
             "vein_miner" to true
         )
+    }
+    
+    class Entities{
+        var unhallowedBaseLifespan: Int = 2400
+        var unhallowerBaseHealth: Double = 20.0
+        var unhallowedBaseDamage: Float = 3.0f
+        var crystalGolemSpellBaseLifespan: Int = 5500
+        var crystalGolemSpellPerLvlLifespan: Int = 500
+        var crystalGolemGuardianLifespan: Int = 900
+        var crystalGolemBaseHealth: Double = 180.0
+        var crystalGolemBaseDamage: Float = 20.0f
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
