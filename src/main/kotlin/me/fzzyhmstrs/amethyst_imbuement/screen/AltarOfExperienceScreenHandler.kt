@@ -116,13 +116,18 @@ class AltarOfExperienceScreenHandler(
     }
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
+        context.run { world: World, pos: BlockPos ->
+            val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
+            setSyncedMaxXp(updateMaxXp(candleTotal,wardingCandleTotal))
+        }
+        val xpLeft = getSyncedMaxXp() - getSyncedStoredXp()
         val currentXp = getPlayerLvlXp(player)
         if (id == 0){
-            if (currentXp <= 50){
+            if (currentXp <= 50 || xpLeft <= 50){
                 return false
             }
         }else if (id == 1){
-            if (currentXp == 0){
+            if (currentXp == 0 || xpLeft == 0){
                 return false
             }
         } else if (id == 2) {
@@ -130,11 +135,11 @@ class AltarOfExperienceScreenHandler(
                 return false
             }
         } else if (id == 4){
-            if (currentXp <= 5000){
+            if (currentXp <= 5000 || xpLeft <= 5000){
                 return false
             }
         }else if (id == 5){
-            if (currentXp == 0){
+            if (currentXp == 0 || xpLeft == 0){
                 return false
             }
         }else if (id == 6) {
@@ -151,9 +156,6 @@ class AltarOfExperienceScreenHandler(
             }
         }
         context.run { world: World, pos: BlockPos ->
-            val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
-            setSyncedMaxXp(updateMaxXp(candleTotal,wardingCandleTotal))
-            val xpLeft = getSyncedMaxXp() - getSyncedStoredXp()
             when (id) {
                 0 -> {
                     var xpTemp = getSyncedStoredXp()
