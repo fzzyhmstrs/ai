@@ -53,9 +53,9 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 180.0)
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolemBasehealth)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolemBaseDamage.toDouble())
         }
     }
     var attackTicksLeft = 0
