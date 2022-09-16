@@ -88,13 +88,9 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     class Colors{
-
         var defaultColorMap: Map<String,String> = DefaultColorMap.defaultColorMap()
-
         var defaultRainbowList: List<String> = DefaultColorMap.defaultRainbowList()
-
         var modColorMap: Map<String,String> = mapOf()
-
         var modRainbowList: List<String> = listOf()
     }
 
