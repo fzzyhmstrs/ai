@@ -87,10 +87,10 @@ dependencies {
     }
     include("maven.modrinth:amethyst-core:0.2.3+1.19")*/
 
-    modImplementation(":amethyst_core-0.3.0+1.19"){
+    modImplementation(":amethyst_core-0.3.1+1.19"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-0.3.0+1.19")
+    include(":amethyst_core-0.3.1+1.19")
 
     modImplementation("maven.modrinth:coloredglowlib:1.3.4"){
         exclude("net.fabricmc.fabric-api")
