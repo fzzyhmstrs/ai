@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -15,6 +16,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import org.slf4j.Logger
 
 //@Suppress("MemberVisibilityCanBePrivate")
 object RegisterEnchantment {
@@ -123,6 +125,8 @@ object RegisterEnchantment {
 
     val DEBUG = DebugAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["debug"] = it}
 
+    private val LOGGER: Logger = LogUtils.getLogger()
+
     private fun checkConfig(check: String, enchant: Enchantment){
         if(AiConfig.enchantments.enabledEnchantments.getOrDefault(check,true)){
             regEnchant[check] = enchant
@@ -132,7 +136,14 @@ object RegisterEnchantment {
 
         for (k in regEnchant.keys){
             val enchant = regEnchant[k]
-            Registry.register(Registry.ENCHANTMENT, Identifier(AI.MOD_ID, k), enchant)
+            val id = Identifier(AI.MOD_ID, k)
+            if (enchant is ScepterAugment) {
+                if (!AugmentHelper.checkIfAugmentEnabled(enchant, id)) {
+                    LOGGER.info("Amethyst Imbuement augment $id is set as disabled in the configs!")
+                    continue
+                }
+            }
+            Registry.register(Registry.ENCHANTMENT, id, enchant)
             if (enchant is ScepterAugment){
                 AugmentHelper.registerAugmentStat(enchant)
             }
