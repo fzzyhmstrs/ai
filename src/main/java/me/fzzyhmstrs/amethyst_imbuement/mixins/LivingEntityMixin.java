@@ -68,7 +68,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract void setHealth(float v);
 
     @Shadow @Final
-    private static final TrackedData<Float> HEALTH = DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static TrackedData<Float> HEALTH;
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
