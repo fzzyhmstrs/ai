@@ -332,7 +332,6 @@ class ImbuingTableScreenHandler(
                 context.run { world, pos ->
                     world.playSound(player, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
                 }
-                ModCompatHelper.runHandlerViewer(needsRecipeBook.get())
                 return true
             }
         }
