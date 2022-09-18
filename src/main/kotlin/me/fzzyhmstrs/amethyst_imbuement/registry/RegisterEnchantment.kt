@@ -140,7 +140,6 @@ object RegisterEnchantment {
             if (enchant is ScepterAugment) {
                 if (!AugmentHelper.checkIfAugmentEnabled(enchant, id)) {
                     LOGGER.info("Amethyst Imbuement augment $id is set as disabled in the configs!")
-                    continue
                 }
             }
             Registry.register(Registry.ENCHANTMENT, id, enchant)
@@ -148,7 +147,6 @@ object RegisterEnchantment {
                 AugmentHelper.registerAugmentStat(enchant)
             }
         }
-
         regEnchant.clear()
     }
 
