@@ -42,12 +42,18 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         buf.writeString(gson.toJson(scepters))
         buf.writeString(gson.toJson(altars))
         buf.writeString(gson.toJson(colors))
+        buf.writeString(gson.toJson(villages))
+        buf.writeString(gson.toJson(enchantments))
+        buf.writeString(gson.toJson(entities))
     }
 
     override fun readFromServer(buf:PacketByteBuf){
         scepters = gson.fromJson(buf.readString(),Scepters::class.java)
         altars = gson.fromJson(buf.readString(),Altars::class.java)
         colors = gson.fromJson(buf.readString(),Colors::class.java)
+        villages = gson.fromJson(buf.readString(),Villages::class.java)
+        enchantments = gson.fromJson(buf.readString(),Enchantments::class.java)
+        entities = gson.fromJson(buf.readString(),Entities::class.java)
     }
 
 
