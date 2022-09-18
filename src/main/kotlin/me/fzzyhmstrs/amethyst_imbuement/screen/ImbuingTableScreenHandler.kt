@@ -77,7 +77,6 @@ class ImbuingTableScreenHandler(
         this.onContentChanged(parentInventory)
     }
 
-    val needsRecipeBook: Property = Property.create()
     private val logger = LogUtils.getLogger()
     private val random = Random()
     private val player = playerInventory.player
@@ -144,8 +143,6 @@ class ImbuingTableScreenHandler(
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
-        val viewerIncluded = ModCompatHelper.getScreenHandlerOffset()
-        addProperty(needsRecipeBook).set(viewerIncluded)
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -323,14 +320,6 @@ class ImbuingTableScreenHandler(
         }
     }
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
-        if (id == -1){
-            if (ModCompatHelper.isValidHandlerOffset(needsRecipeBook.get())){
-                context.run { world, pos ->
-                    world.playSound(player, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.5f, 1.2f)
-                }
-                return true
-            }
-        }
         if (id == 3){
             if (resultsIndexes[0] == 0) return false
             val max = results.size - 1

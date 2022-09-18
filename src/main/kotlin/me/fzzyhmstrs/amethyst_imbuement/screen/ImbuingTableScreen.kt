@@ -2,13 +2,16 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper.runHandlerViewer
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
+import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.*
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -25,6 +28,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val player = playerInventory.player
     private val previousRecipe = LiteralText(TranslatableText("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
     private val nextRecipe = LiteralText(TranslatableText("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val recipesOffset = ModCompatHelper.getScreenHandlerOffset()
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
         return mouseX < left.toDouble() || mouseY < top.toDouble() || mouseX >= (left + backgrdWidth).toDouble() || mouseY >= (top + backgrdHeight).toDouble()
@@ -53,18 +57,12 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             client?.interactionManager?.clickButton(handler.syncId, m)
             return true
         }
-        val recipesOffset = handler.needsRecipeBook.get()
         if(recipesOffset >= 0) {
             val d = mouseX - (i + 6).toDouble()
             val e = mouseY - (j + 91).toDouble()
-            if (!(d < 0.0 || e < 0.0 || d >= 20.0 || e >= 18.0 || !player.let {
-                    (handler as ImbuingTableScreenHandler).onButtonClick(
-                        it, -1
-                    )
-                }
-                        )) {
+            if (!(d < 0.0 || e < 0.0 || d >= 20.0 || e >= 18.0)) {
+                client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
                 runHandlerViewer(recipesOffset)
-                client?.interactionManager?.clickButton(handler.syncId, -1)
                 return true
             }
         }
@@ -273,7 +271,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 powerTextColor
             )
         }
-        val recipesOffset = handler.needsRecipeBook.get()
         if (recipesOffset > 0){
             val u = mouseX - (i + 6)
             val v = mouseY - (j + 91)
