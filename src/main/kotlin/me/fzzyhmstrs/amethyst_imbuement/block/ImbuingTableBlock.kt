@@ -89,8 +89,10 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         if (blockEntity is ImbuingTableBlockEntity) {
             val text = (blockEntity as Nameable).displayName
             return SimpleNamedScreenHandlerFactory({ syncId: Int, inventory: PlayerInventory, _: PlayerEntity ->
+                blockEntity.setInUse(inventory.player.uuid)
                 ImbuingTableScreenHandler(
                     syncId,
+                    blockEntity,
                     inventory,
                     blockEntity.inventory,
                     ScreenHandlerContext.create(world, pos)

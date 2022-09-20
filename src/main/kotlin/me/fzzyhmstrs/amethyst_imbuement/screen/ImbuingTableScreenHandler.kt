@@ -59,6 +59,7 @@ import kotlin.math.roundToInt
 @Suppress("SENSELESS_COMPARISON", "unused", "SameParameterValue")
 class ImbuingTableScreenHandler(
     syncID: Int,
+    private val parentEntity: ImbuingTableBlockEntity?,
     playerInventory: PlayerInventory,
     private val inventory: ImbuingTableBlockEntity.ImbuingInventory,
     private val context: ScreenHandlerContext
@@ -66,6 +67,7 @@ class ImbuingTableScreenHandler(
 
     constructor(syncID: Int, playerInventory: PlayerInventory) : this(
         syncID,
+        null,
         playerInventory,
         ImbuingTableBlockEntity.ImbuingInventory(13, null),
         ScreenHandlerContext.EMPTY,
@@ -88,61 +90,48 @@ class ImbuingTableScreenHandler(
     var resultsCanDown = false
     private val listener = { inventory: Inventory -> onParentChanged(inventory) }
 
+    val canUse: Property = Property.create()
+
     init{
+        canUse.set(if(parentEntity?.checkCanUse(player.uuid) == true) 1 else 0)
         //coordinate system is in pixels, thank god
         //add top two imbuement slots
         val ofst = 0 //offset to get the slots drawing correctly, will attempt to fix later
         val ofst2 = 4 //offset based on guid picture change. 2x change for the inventory slots
-        addSlot(object : ImbuingSlot(inventory, 0, 8+ofst, 9+ofst2) {
-            override fun canInsert(stack: ItemStack): Boolean { return true }
-        })
-        addSlot(object : ImbuingSlot(inventory, 1, 95+ofst, 9+ofst2) {
-            override fun canInsert(stack: ItemStack): Boolean { return true }
-        })
+        addSlot(ImbuingSlot(inventory, 0, 8+ofst, 9+ofst2, canUse))
+        addSlot(ImbuingSlot(inventory, 1, 95+ofst, 9+ofst2, canUse))
         //add main imbuement crafting grid
         for (k in 0..2) {
             for(j in 0..2) {
                 if (2+k+(3*j) == 6) {  //skipping the main middle slot, so I can set max count 1
-                    addSlot(object : ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
-                        override fun canInsert(stack: ItemStack): Boolean {
-                            return true
-                        }
+                    addSlot(object : ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2, canUse) {
                         override fun getMaxItemCount(): Int {
                             return 1
                         }
                     })
                 }else {
-                    addSlot(object : ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2) {
-                        override fun canInsert(stack: ItemStack): Boolean {
-                            return true
-                        }
-                    })
+                    addSlot(ImbuingSlot(inventory, 2 + j + (3 * k), 30 + 21 * j + ofst, 13 + 21 * k + ofst2, canUse))
                 }
             }
         }
-
-
         //add bottom two imbuement slots
-        addSlot(object : ImbuingSlot(inventory, 11, 8+ofst, 59+ofst2) {
-            override fun canInsert(stack: ItemStack): Boolean { return true }
-        })
-        addSlot(object : ImbuingSlot(inventory, 12, 95+ofst, 59+ofst2) {
-            override fun canInsert(stack: ItemStack): Boolean { return true }
-        })
+        addSlot(ImbuingSlot(inventory, 11, 8+ofst, 59+ofst2, canUse) )
+        addSlot(ImbuingSlot(inventory, 12, 95+ofst, 59+ofst2, canUse))
         //add the player main inventory
         for(j in 0..8){
             for(k in 0..2){
-                addSlot(object : Slot(playerInventory, 9+j+(9*k), 38+(18*j)+ofst, 84+(18*k)+ofst2*2) {})
+                addSlot(Slot(playerInventory, 9+j+(9*k), 38+(18*j)+ofst, 84+(18*k)+ofst2*2))
             }
         }
         //add the player hotbar
         for(j in 0..8) {
-            addSlot(object : Slot(playerInventory, j, 38+(18*j)+ofst, 142+ofst2*2) {})
+            addSlot(Slot(playerInventory, j, 38+(18*j)+ofst, 142+ofst2*2))
         }
         inventory.addListener(listener)
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
+        sendContentUpdates()
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -164,9 +153,10 @@ class ImbuingTableScreenHandler(
         return this.seed.get()
     }
 
-    override fun close(player: PlayerEntity?) {
+    override fun close(player: PlayerEntity) {
         super.close(player)
         inventory.removeListener(listener)
+        parentEntity?.clearInUse(player.uuid)
         //context.run { _: World?, _: BlockPos? -> dropInventory(player, inventory) }
     }
 
@@ -628,8 +618,20 @@ class ImbuingTableScreenHandler(
         }
     }
 
-    open class ImbuingSlot(inventory: Inventory, index: Int, x:Int, y: Int): Slot(inventory, index, x, y) {
+    open class ImbuingSlot(inventory: Inventory, index: Int, x:Int, y: Int, private val canUse: Property): Slot(inventory, index, x, y) {
         private var locked = false
+
+        override fun canInsert(stack: ItemStack?): Boolean {
+            return canUse.get() == 1
+        }
+
+        override fun canTakePartial(player: PlayerEntity?): Boolean {
+            return canUse.get() == 1
+        }
+
+        override fun canTakeItems(playerEntity: PlayerEntity?): Boolean {
+            return canUse.get() == 1
+        }
 
         override fun setStack(stack: ItemStack) {
             if (!locked) {

@@ -31,7 +31,28 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     var field_11962 = 0f
     private var customName: Text? = null
     val inventory = ImbuingInventory(13, this)
+    var inUse: Boolean = false
+    var inUseUuid: UUID = UUID(0L,0L)
 
+    fun setInUse(uuid: UUID){
+        if (!inUse){
+            inUseUuid = uuid
+            inUse = true
+            println("block set as in use by $uuid")
+        }
+    }
+
+    fun clearInUse(uuid: UUID){
+        if (uuid == inUseUuid){
+            inUse = false
+            inUseUuid = UUID(0L,0L)
+            println("block cleared for future use by $uuid")
+        }
+    }
+
+    fun checkCanUse(uuid: UUID): Boolean{
+        return uuid == inUseUuid
+    }
 
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
@@ -40,6 +61,8 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         }
         val list = inventory.toNbtList()
         nbt.put("inventory",list)
+        nbt.putBoolean("inUse",inUse)
+        nbt.putUuid("inUseUuid", inUseUuid)
     }
 
     override fun readNbt(nbt: NbtCompound) {
@@ -49,6 +72,8 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         }
         val list = Nbt.readNbtList(nbt,"inventory")
         inventory.readNbtList(list)
+        inUse = nbt.getBoolean("inUse")
+        inUseUuid = nbt.getUuid("inUseUuid")
     }
 
     companion object {
