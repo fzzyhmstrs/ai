@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
 import net.minecraft.util.registry.Registry
 import java.util.*
@@ -49,10 +50,18 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
         fun removeTrinket(entity: LivingEntity, amount: Int){
             val uuid = entity.uuid
+            val deficit = checkShieldingDeficit(entity)
+            var applyBackAmount = 0f
+            if (deficit >= amount.toFloat()){
+                applyBackAmount = entity.absorptionAmount
+            }
             if (entityShielding.containsKey(uuid)) {
                 entityShielding[uuid]?.removeAmount(amount)
             }
             applyEntityShielding(entity)
+            if (applyBackAmount > 0f){
+                entity.absorptionAmount = applyBackAmount
+            }
         }
 
         fun applyEntityShielding(entity: LivingEntity){
@@ -79,13 +88,17 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
             }
         }
 
-        private fun checkShieldingDeficit(entity: LivingEntity): Int{
-            val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.SHIELDING) ?: return 0
-            val statusInstance2: StatusEffectInstance = entity.getStatusEffect(StatusEffects.ABSORPTION)
+        private fun checkShieldingDeficitFloat(entity: LivingEntity): Float{
+            val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.SHIELDING) ?: return 0f
+            val statusInstance2 = entity.getStatusEffect(StatusEffects.ABSORPTION)
             val baseAmount = statusInstance.amplifier + 1
-            val absorpAmount = if (statusInstance2 != null){statusInstance2.amplifier * 4 + 4} else { 0 }
+            val absorptionAmount = if (statusInstance2 != null){statusInstance2.amplifier * 4 + 4} else { 0 }
             val currentAmount = entity.absorptionAmount
-            val delta = baseAmount + absorpAmount - currentAmount
+            return baseAmount + absorptionAmount - currentAmount
+        }
+
+        private fun checkShieldingDeficit(entity: LivingEntity): Int{
+            val delta = checkShieldingDeficitFloat(entity)
             val deltaFloor = floor(delta)
             val deltaCiel = ceil(delta)
             val closer = min(abs(delta - deltaFloor), abs(delta - deltaCiel))

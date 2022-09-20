@@ -19,7 +19,7 @@ import net.minecraft.util.registry.Registry
 object RegisterItem {
 
     private val regItem: MutableMap<String, Item> = mutableMapOf()
-    private val AI_GROUP: ItemGroup = FabricItemGroupBuilder.create(Identifier(AI.MOD_ID,"ai_group")).icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }.build()
+    val AI_GROUP: ItemGroup = FabricItemGroupBuilder.create(Identifier(AI.MOD_ID,"ai_group")).icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }.build()
 
     //declaring the items to add to the game
     val GOLDEN_HEART = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"golden_heart")) .also{ regItem["golden_heart"] = it}
