@@ -81,9 +81,11 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
         private fun checkShieldingDeficit(entity: LivingEntity): Int{
             val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.SHIELDING) ?: return 0
+            val statusInstance2: StatusEffectInstance = entity.getStatusEffect(StatusEffects.ABSORPTION)
             val baseAmount = statusInstance.amplifier + 1
+            val absorpAmount = if (statusInstance2 != null){statusInstance2.amplifier * 4 + 4} else { 0 }
             val currentAmount = entity.absorptionAmount
-            val delta = baseAmount - currentAmount
+            val delta = baseAmount + absorpAmount - currentAmount
             val deltaFloor = floor(delta)
             val deltaCiel = ceil(delta)
             val closer = min(abs(delta - deltaFloor), abs(delta - deltaCiel))
