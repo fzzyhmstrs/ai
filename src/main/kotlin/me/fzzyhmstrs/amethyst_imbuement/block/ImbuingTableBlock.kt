@@ -35,16 +35,20 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return if (world.isClient) checkType(
-            type, RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
-        ) { wrld: World, pos: BlockPos, state2: BlockState, blockEntity: ImbuingTableBlockEntity ->
-            ImbuingTableBlockEntity.tick(
-                wrld,
-                pos,
-                state2,
-                blockEntity
-            )
-        } else null
+        return if (world.isClient) {
+            checkType(
+                type, RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
+            ) { wrld: World, pos: BlockPos, state2: BlockState, blockEntity: ImbuingTableBlockEntity ->
+                ImbuingTableBlockEntity.tick(
+                    wrld,
+                    pos,
+                    state2,
+                    blockEntity
+                )
+            }
+        } else {
+            null
+        }
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {

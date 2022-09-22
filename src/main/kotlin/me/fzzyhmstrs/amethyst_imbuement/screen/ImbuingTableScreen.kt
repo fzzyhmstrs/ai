@@ -272,6 +272,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             )
         }
         if (recipesOffset > 0){
+            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShaderTexture(0, this.texture)
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val u = mouseX - (i + 6)
             val v = mouseY - (j + 91)
             val hovered = (u >= 0 && v >= 0 && u < 20 && v < 18)

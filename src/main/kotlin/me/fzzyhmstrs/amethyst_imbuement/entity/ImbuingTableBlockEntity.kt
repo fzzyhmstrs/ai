@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
@@ -33,12 +34,13 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     val inventory = ImbuingInventory(13, this)
     var inUse: Boolean = false
     var inUseUuid: UUID = UUID(0L,0L)
+    private val logger = LogUtils.getLogger()
 
     fun setInUse(uuid: UUID){
         if (!inUse){
             inUseUuid = uuid
             inUse = true
-            println("block set as in use by $uuid")
+            logger.info("block set as in-use by $uuid")
         }
     }
 
@@ -46,7 +48,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         if (uuid == inUseUuid){
             inUse = false
             inUseUuid = UUID(0L,0L)
-            println("block cleared for future use by $uuid")
+            logger.info("block cleared for future use by $uuid")
         }
     }
 
@@ -72,8 +74,12 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         }
         val list = Nbt.readNbtList(nbt,"inventory")
         inventory.readNbtList(list)
-        inUse = nbt.getBoolean("inUse")
-        inUseUuid = nbt.getUuid("inUseUuid")
+        if (nbt.contains("inUse")) {
+            inUse = nbt.getBoolean("inUse")
+        }
+        if (nbt.contains("inUseUuid")) {
+            inUseUuid = nbt.getUuid("inUseUuid")
+        }
     }
 
     companion object {
