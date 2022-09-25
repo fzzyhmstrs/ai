@@ -137,14 +137,12 @@ object RegisterEnchantment {
         for (k in regEnchant.keys){
             val enchant = regEnchant[k]
             val id = Identifier(AI.MOD_ID, k)
-            if (enchant is ScepterAugment) {
-                if (!AugmentHelper.checkIfAugmentEnabled(enchant, id)) {
-                    LOGGER.info("Amethyst Imbuement augment $id is set as disabled in the configs!")
-                }
-            }
             Registry.register(Registry.ENCHANTMENT, id, enchant)
             if (enchant is ScepterAugment){
                 AugmentHelper.registerAugmentStat(enchant)
+                if (!AugmentHelper.getAugmentEnabled(id.toString())) {
+                    LOGGER.info("Amethyst Imbuement augment $id is set as disabled in the configs!")
+                }
             }
         }
         regEnchant.clear()
