@@ -54,7 +54,8 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
                 val minLevel = AugmentHelper.getAugmentMinLvl(augId)
                 val bookOfLoreTier = AugmentHelper.getAugmentTier(augId)
                 val keyItem = AugmentHelper.getAugmentItem(augId)
-                val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,bookOfLoreTier,keyItem)
+                val enabled = AugmentHelper.getAugmentEnabled(augId)
+                val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,bookOfLoreTier,keyItem,enabled)
                 AugmentHelper.registerAugmentStat(augId,datapoint,true)
             }
         }
