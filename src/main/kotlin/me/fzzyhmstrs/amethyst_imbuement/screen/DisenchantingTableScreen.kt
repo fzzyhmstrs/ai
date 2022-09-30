@@ -245,7 +245,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             } else if ((player.experienceLevel) < handler.disenchantCost[0] && j == 1){
                 Text.translatable("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
             }else if ((!handler.getSlotStack(1).isOf(Items.BOOK)) && j == 1){
-                Text.translatable("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
+                Text.translatable("container.disenchanting_table.tooltip2.book").formatted(Formatting.WHITE)
             } else {
                 if (handler.enchantmentId[j] == -1) continue
                 Text.translatable("container.disenchanting_table.tooltip${j + 1}").formatted(Formatting.WHITE)

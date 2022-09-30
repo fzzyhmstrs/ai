@@ -43,7 +43,8 @@
     "EnchantRespirationMixin",
     "EnchantSweepingMixin",
     "EnchantThornsMixin",
-    "EnchantUnbreakingMixin"
+    "EnchantUnbreakingMixin",
+    "AnvilScreenHandlerMixin"
   ],
   "client": [
     "HeldItemRendererMixin",
