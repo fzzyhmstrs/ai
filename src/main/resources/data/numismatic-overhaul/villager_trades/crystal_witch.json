@@ -1,8 +1,8 @@
 {
-"profession": "crystal_witch",
-"trades":{
-"novice":[
-{
+  "profession": "amethyst_imbuement:crystal_witch",
+  "trades":{
+    "novice":[
+      {
         "type": "numismatic-overhaul:buy_stack",
         "price": 120,
         "buy": {
@@ -11,7 +11,7 @@
         },
         "max_uses": 14
       },
-{
+      {
         "type": "numismatic-overhaul:buy_stack",
         "price": 120,
         "buy": {
@@ -20,7 +20,7 @@
         },
         "max_uses": 10
       },
-{
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 80,
         "sell": {
@@ -30,7 +30,7 @@
         "max_uses": 10,
         "villager_experience": 2
       },
-{
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 80,
         "sell": {
@@ -40,9 +40,9 @@
         "max_uses": 10,
         "villager_experience": 2
       }
-],
-"apprentice":[
-{
+    ],
+    "apprentice":[
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 175,
         "sell": {
@@ -52,7 +52,7 @@
         "max_uses": 8,
         "villager_experience": 8
       },
-{
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 175,
         "sell": {
@@ -62,7 +62,7 @@
         "max_uses": 8,
         "villager_experience": 8
       },
-{
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 175,
         "sell": {
@@ -72,7 +72,7 @@
         "max_uses": 8,
         "villager_experience": 8
       },
-{
+      {
         "type": "numismatic-overhaul:buy_stack",
         "price": 150,
         "buy": {
@@ -82,20 +82,20 @@
         "max_uses": 6,
         "villager_experience": 6
       },
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:book_of_lore"
-  },
-  "buy": {
-    "item": "minecraft:book"
-  },
-  "max_uses": 2,
-  "price": 4400
-},
-],
-"journeyman":[
-{
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:book_of_lore"
+        },
+        "buy": {
+          "item": "minecraft:book"
+        },
+        "max_uses": 2,
+        "price": 4400
+      }
+    ],
+    "journeyman":[
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 3000,
         "sell": {
@@ -105,7 +105,7 @@
         "max_uses": 2,
         "villager_experience": 15
       },
-{
+      {
         "type": "numismatic-overhaul:sell_stack",
         "price": 400,
         "sell": {
@@ -115,45 +115,45 @@
         "max_uses": 12,
         "villager_experience": 6
       },
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:copper_ring"
-  },
-  "buy": {
-    "item": "minecraft:copper_ingot"
-  },
-"max_uses": 2,
-  "price": 2800,
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:copper_ring"
+        },
+        "buy": {
+          "item": "minecraft:copper_ingot"
+        },
+        "max_uses": 2,
+        "price": 2800,
         "villager_experience": 15
-},
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:copper_headband"
-  },
-  "buy": {
-    "item": "minecraft:copper_ingot"
-  },
-"max_uses": 2,
-  "price": 1800,
+      },
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:copper_headband"
+        },
+        "buy": {
+          "item": "minecraft:copper_ingot"
+        },
+        "max_uses": 2,
+        "price": 1800,
         "villager_experience": 15
-},
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:copper_amulet"
-  },
-  "buy": {
-    "item": "minecraft:copper_ingot"
-  },
-"max_uses": 2,
-  "price": 2400,
+      },
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:copper_amulet"
+        },
+        "buy": {
+          "item": "minecraft:copper_ingot"
+        },
+        "max_uses": 2,
+        "price": 2400,
         "villager_experience": 15
-}
-],
-"expert":[
-{
+      }
+    ],
+    "expert":[
+      {
         "type": "numismatic-overhaul:buy_stack",
         "price": 1500,
         "buy": {
@@ -161,58 +161,58 @@
           "count": 1
         },
         "max_uses": 8,
-	"villager_experience": 10
+        "villager_experience": 10
       },
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:iridescent_orb"
-  },
-  "buy": {
-    "item": "amethyst_imbuement:opal"
-  },
-"max_uses": 1,
-  "price": 5750,
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:iridescent_orb"
+        },
+        "buy": {
+          "item": "amethyst_imbuement:opal"
+        },
+        "max_uses": 1,
+        "price": 5750,
         "villager_experience": 25
-},
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:malachite_figurine"
-  },
-  "buy": {
-    "item": "amethyst_imbuement:glowing_fragment"
-  },
-"max_uses": 1,
-  "price": 2800,
+      },
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:malachite_figurine"
+        },
+        "buy": {
+          "item": "amethyst_imbuement:glowing_fragment"
+        },
+        "max_uses": 1,
+        "price": 2800,
         "villager_experience": 30
-}
-],
-"master":[
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:book_of_mythos"
-  },
-  "buy": {
-    "item": "amethyst_imbuement:book_of_lore"
-  },
-"max_uses": 1,
-  "price": 4650,
+      }
+    ],
+    "master":[
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:book_of_mythos"
+        },
+        "buy": {
+          "item": "amethyst_imbuement:book_of_lore"
+        },
+        "max_uses": 1,
+        "price": 4650,
         "villager_experience": 15
-},
-{
-  "type": "numismatic-overhaul:process_item",
-  "sell": {
-    "item": "amethyst_imbuement:brilliant_diamond"
-  },
-  "buy": {
-    "item": "minecraft:diamond"
-  },
-"max_uses": 1,
-  "price": 5250,
+      },
+      {
+        "type": "numismatic-overhaul:process_item",
+        "sell": {
+          "item": "amethyst_imbuement:brilliant_diamond"
+        },
+        "buy": {
+          "item": "minecraft:diamond"
+        },
+        "max_uses": 1,
+        "price": 5250,
         "villager_experience": 15
-}
-]
-}
+      }
+    ]
+  }
 }

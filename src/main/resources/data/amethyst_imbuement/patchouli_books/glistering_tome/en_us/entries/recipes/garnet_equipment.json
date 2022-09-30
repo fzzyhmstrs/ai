@@ -1,0 +1,31 @@
+{
+  "name": "Garnet Equipment",
+  "icon": "amethyst_imbuement:garnet_pickaxe",
+  "category": "amethyst_imbuement:recipes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Garnet Equipment is an alternate smithing upgrade for diamond tools. They have the same damage and usage levels, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_tools)Glowing Tools"
+    },
+    {
+      "type": "amethyst_imbuement:three_smithing_recipe",
+      "smithing_a": "minecraft:diamond_pickaxe",
+      "smithing_b": "minecraft:diamond_sword",
+      "smithing_c": "minecraft:diamond_axe",
+      "addition_item": "amethyst_imbuement:garnet",
+      "result_a": "amethyst_imbuement:garnet_pickaxe",
+      "result_b": "amethyst_imbuement:garnet_sword",
+      "result_c": "amethyst_imbuement:garnet_axe"
+    },
+    {
+      "type": "amethyst_imbuement:three_smithing_recipe",
+      "smithing_a": "minecraft:diamond_shovel",
+      "smithing_b": "minecraft:diamond_hoe",
+      "smithing_c": "minecraft:diamond_horse_armor",
+      "addition_item": "amethyst_imbuement:garnet",
+      "result_a": "amethyst_imbuement:garnet_shovel",
+      "result_b": "amethyst_imbuement:garnet_hoe",
+      "result_c": "amethyst_imbuement:garnet_horse_armor"
+    }
+  ]
+}
