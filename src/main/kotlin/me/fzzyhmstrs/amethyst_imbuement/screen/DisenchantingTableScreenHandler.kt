@@ -131,8 +131,11 @@ class DisenchantingTableScreenHandler(
                             }
                         }
                     }
-                    sendContentUpdates()
+                    println(disenchantCost)
+                    println(enchantmentLevel)
+                    println(enchantmentId)
                 }
+                sendContentUpdates()
             }
         }
     }
@@ -141,6 +144,16 @@ class DisenchantingTableScreenHandler(
         val itemStack = inventory.getStack(0)
         val itemStack2 = inventory.getStack(1)
         if (itemStack.isEmpty) return false
+        val checkNbt = itemStack.nbt
+        if (checkNbt != null && checkNbt.contains(NbtKeys.DISENCHANT_COUNT.str())){
+            var atMax = false
+            context.run { world: World, pos: BlockPos ->
+                val lvl = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),checkNbt)
+                val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
+                if (lvl >= maxLevel) atMax = true;
+            }
+            if (atMax) return false
+        }
         when (id) {
             0 -> {
                 if (enchantmentId[id] == -1) return false
@@ -170,8 +183,9 @@ class DisenchantingTableScreenHandler(
                         1.0f,
                         world.random.nextFloat() * 0.1f + 0.9f
                     )
-                    sendContentUpdates()
                 }
+                onContentChanged(inventory)
+                sendContentUpdates()
             }
             1 -> {
                 if (enchantmentId[id] == -1) return false
@@ -245,8 +259,9 @@ class DisenchantingTableScreenHandler(
                         world.random.nextFloat() * 0.1f + 0.9f
                     )
                     removing = false
-                    sendContentUpdates()
                 }
+                onContentChanged(inventory)
+                sendContentUpdates()
             }
             2 -> {
                 if (enchantmentId[id] == -1) return false
@@ -276,8 +291,9 @@ class DisenchantingTableScreenHandler(
                         1.0f,
                         world.random.nextFloat() * 0.1f + 0.9f
                     )
-                    sendContentUpdates()
                 }
+                onContentChanged(inventory)
+                sendContentUpdates()
             }
         }
 

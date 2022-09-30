@@ -18,12 +18,13 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
+import kotlin.math.max
 
 class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
     HealerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(600,200,0)
+        get() = super.baseEffect.withDuration(700,100,0)
             .withAmplifier(-1,1,0)
             .withRange(9.0,1.0,0.0)
 
@@ -38,16 +39,16 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
 
         if (entityList.isEmpty()){
             successes++
-            EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+2))
-            EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), max(effect.amplifier((level-1)/4+3),3))
+            EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier((level-1)/4))
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
                     successes++
-                    EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level), effect.amplifier(level+1))
-                    EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier(level))
+                    EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level),  max(effect.amplifier((level-1)/4+2),3))
+                    EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier((level-1)/4))
                     effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
                 }
             }

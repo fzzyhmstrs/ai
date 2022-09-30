@@ -67,11 +67,13 @@ object RegisterItem {
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,FabricItemSettings().group(AI_GROUP)).also{ regItem["garnet_pickaxe"] = it}
     val GARNET_AXE = CustomAxeItem(GarnetToolMaterial,5.0f,-3.0f,FabricItemSettings().group(AI_GROUP)).also{ regItem["garnet_axe"] = it}
     val GARNET_HOE = CustomHoeItem(GarnetToolMaterial,-3,0.0f,FabricItemSettings().group(AI_GROUP)).also{ regItem["garnet_hoe"] = it}
+    val GARNET_HORSE_ARMOR = HorseArmorItem(12,"garnet",FabricItemSettings().group(AI_GROUP)).also{ regItem["garnet_horse_armor"] = it}
     val GLOWING_BLADE = CustomSwordItem(GlowingToolMaterial,3 ,-2.4f,FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_blade")) .also{ regItem["glowing_blade"] = it}
     val GLOWING_SPADE = CustomShovelItem(GlowingToolMaterial,1.5f ,-3.0f,FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_spade")) .also{ regItem["glowing_spade"] = it}
     val GLOWING_PICK = CustomPickaxeItem(GlowingToolMaterial,1 ,-2.8f,FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_pick")) .also{ regItem["glowing_pick"] = it}
     val GLOWING_AXE = CustomAxeItem(GlowingToolMaterial,5.0f ,-3.0f,FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_axe")) .also{ regItem["glowing_axe"] = it}
     val GLOWING_HOE = CustomHoeItem(GlowingToolMaterial,-3 ,-3.0f,FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_hoe")) .also{ regItem["glowing_hoe"] = it}
+    val GLOWING_HORSE_ARMOR = FlavorHorseArmorItem(14,"glowing",FabricItemSettings().group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_horse_armor")).also{ regItem["glowing_horse_armor"] = it}
     val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["opaline_scepter"] = it}
     val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["iridescent_scepter"] = it}
     val LUSTROUS_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["lustrous_scepter"] = it}

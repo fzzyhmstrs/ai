@@ -69,7 +69,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     class Altars {
-        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
+        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
         var imbuingTableReplaceEnchantingTable: Boolean = false

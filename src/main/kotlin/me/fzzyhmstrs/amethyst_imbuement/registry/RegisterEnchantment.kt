@@ -100,7 +100,7 @@ object RegisterEnchantment {
     val LIGHTNING_STORM = LightningStormAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["lightning_storm"] = it}
     val MASS_CLEANSE = MassCleanseAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_cleanse"] = it}
     val MASS_EXHAUST = MassExhaustAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["mass_exhaust"] = it}
-    val MASS_FORTIFY = MassFortifyAugment(3,2,EquipmentSlot.MAINHAND).also{regEnchant["mass_fortify"] = it}
+    val MASS_FORTIFY = MassFortifyAugment(3,8,EquipmentSlot.MAINHAND).also{regEnchant["mass_fortify"] = it}
     val MASS_HEAL = MassHealAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_heal"] = it}
     val MASS_REVIVIFY = MassRevivifyAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_revivify"] = it}
     val MEND_EQUIPMENT = MendEquipmentAugment(1,13,EquipmentSlot.MAINHAND).also{regEnchant["mend_equipment"] = it}
