@@ -33,7 +33,7 @@ import kotlin.math.min
 @Suppress("SENSELESS_COMPARISON", "unused", "UnnecessaryVariable")
 class DisenchantingTableScreenHandler(
     syncID: Int,
-    playerInventory: PlayerInventory,
+    private val playerInventory: PlayerInventory,
     private val context: ScreenHandlerContext
 ):  ScreenHandler(RegisterHandler.DISENCHANTING_TABLE_SCREEN_HANDLER, syncID) {
 
@@ -83,6 +83,7 @@ class DisenchantingTableScreenHandler(
     }
 
     override fun onContentChanged(inventory: Inventory) {
+        if (playerInventory.player.world.isClient) return
         if (removing) return
         if (inventory === this.inventory) {
             val itemStack = inventory.getStack(0)
@@ -114,8 +115,9 @@ class DisenchantingTableScreenHandler(
                             enchantmentLevel[2] = defaultEnchantLevel2
                         }
                         activeItem.set(Registry.ITEM.getRawId(itemStack.item))
-                        val nbt = itemStack.nbt
-                        if (!world.isClient) {
+                        /*if (!world.isClient) {
+                            val nbt = itemStack.nbt
+                            println(nbt)
                             if (nbt == null) {
                                 disenchantCost[0] = calculateRequiredExperienceLevel(0)
                             } else if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
@@ -129,11 +131,25 @@ class DisenchantingTableScreenHandler(
                                     disenchantCost[0] = calculateRequiredExperienceLevel(level)
                                 }
                             }
-                        }
+                        }*/
                     }
-                    println(disenchantCost)
-                    println(enchantmentLevel)
-                    println(enchantmentId)
+                        activeItem.set(Registry.ITEM.getRawId(itemStack.item))
+                        if (!world.isClient) {
+                            val nbt = itemStack.nbt
+                            println(nbt)
+                            if (nbt == null) {
+                                disenchantCost[0] = calculateRequiredExperienceLevel(0)
+                            } else if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
+                                disenchantCost[0] = calculateRequiredExperienceLevel(0)
+                            } else {
+                                val level = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
+                                updateDisenchantCost(level,world, pos)
+                            }
+                        }
+
+                    println(disenchantCost[0])
+                    println(enchantmentLevel[0].toString() + ", " + enchantmentLevel[1].toString()+ ", " + enchantmentLevel[2].toString())
+                    println(enchantmentId[0].toString() + ", " + enchantmentId[1].toString()+ ", " + enchantmentId[2].toString())
                 }
                 sendContentUpdates()
             }
@@ -150,7 +166,7 @@ class DisenchantingTableScreenHandler(
             context.run { world: World, pos: BlockPos ->
                 val lvl = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),checkNbt)
                 val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
-                if (lvl >= maxLevel) atMax = true;
+                if (lvl >= maxLevel) atMax = true
             }
             if (atMax) return false
         }
@@ -237,31 +253,36 @@ class DisenchantingTableScreenHandler(
                         val nbt = itemStack.orCreateNbt
                         if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
                             Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(), 1, nbt)
+                            updateDisenchantCost(1,world, pos)
                         } else {
                             val currentLevel = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt)
-                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(),currentLevel + 1,nbt)
+                            val newLevel = currentLevel + 1
+                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(),newLevel,nbt)
+                            updateDisenchantCost(newLevel,world, pos)
                         }
+                        println(disenchantCost[0])
+                        println(itemStack.nbt)
+                        world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_GRINDSTONE_USE,
+                            SoundCategory.BLOCKS,
+                            0.5f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                        world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                            SoundCategory.BLOCKS,
+                            1.0f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                        onContentChanged(inventory)
+                        sendContentUpdates()
                     }
-                    world.playSound(
-                        null,
-                        pos,
-                        SoundEvents.BLOCK_GRINDSTONE_USE,
-                        SoundCategory.BLOCKS,
-                        0.5f,
-                        world.random.nextFloat() * 0.1f + 0.9f
-                    )
-                    world.playSound(
-                        null,
-                        pos,
-                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
-                        SoundCategory.BLOCKS,
-                        1.0f,
-                        world.random.nextFloat() * 0.1f + 0.9f
-                    )
                     removing = false
                 }
-                onContentChanged(inventory)
-                sendContentUpdates()
             }
             2 -> {
                 if (enchantmentId[id] == -1) return false
@@ -349,7 +370,14 @@ class DisenchantingTableScreenHandler(
         return true
     }
 
-
+    private fun updateDisenchantCost(level: Int, world: World, pos: BlockPos){
+        val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
+        if (level >= maxLevel) {
+            disenchantCost[0] = -1
+        } else {
+            disenchantCost[0] = calculateRequiredExperienceLevel(level)
+        }
+    }
     private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
         val index = MathHelper.clamp(disenchantCount,0,AiConfig.altars.disenchantLevelCosts.size - 1)
         return AiConfig.altars.disenchantLevelCosts[index]
