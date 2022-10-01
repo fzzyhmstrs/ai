@@ -20,10 +20,13 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.CompassAnglePredicateProvider
 import net.minecraft.client.item.UnclampedModelPredicateProvider
+import net.minecraft.client.model.Dilation
+import net.minecraft.client.model.TexturedModelData
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
+import net.minecraft.client.render.entity.model.OcelotEntityModel
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.LivingEntity
@@ -39,6 +42,7 @@ object RegisterRenderer {
     val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"draconic_box"),"draconic_box_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
+    val CAT_ARMOR: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"cat_armor"),"cat_armor")
 
     fun registerAll() {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.EXPERIENCE_BUSH, RenderLayer.getCutout())
@@ -57,6 +61,14 @@ object RegisterRenderer {
             RegisterEntity.UNHALLOWED_ENTITY
         ){context: EntityRendererFactory.Context ->
             UnhallowedEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.IMBUED_FAMILIAR_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            ImbuedFamiliarEntityRenderer(
                 context
             )
         }
@@ -185,6 +197,14 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
 
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
+
+        EntityModelLayerRegistry.registerModelLayer(CAT_ARMOR) {
+            TexturedModelData.of(
+                OcelotEntityModel.getModelData(
+                    Dilation(0.1f)
+                ), 64, 32
+            )
+        }
 
         FabricModelPredicateProviderRegistry.register(
             RegisterItem.GLISTERING_TRIDENT, Identifier("throwing")
