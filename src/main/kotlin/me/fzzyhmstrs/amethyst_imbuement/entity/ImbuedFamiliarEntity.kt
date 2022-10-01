@@ -343,7 +343,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         return Vec3d(0.0, (0.875f * standingEyeHeight).toDouble(), (this.width * 0.4f).toDouble())
     }
 
-    override fun openInventory(player: PlayerEntity?) {
+    override fun openInventory(player: PlayerEntity) {
         TODO("Not yet implemented")
     }
 
