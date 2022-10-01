@@ -43,6 +43,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.61f, 1.8f)).trackRangeChunks(8).build()
     )
 
+    val IMBUED_FAMILIAR_ENTITY: EntityType<ImbuedFamiliarEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "imbued_familiar"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<ImbuedFamiliarEntity>, world: World ->
+            ImbuedFamiliarEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.7f, 0.9f)).trackRangeChunks(8).build()
+    )
+
     val DRACONIC_BOX_ENTITY: EntityType<DraconicBoxEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "draconic_box"),
