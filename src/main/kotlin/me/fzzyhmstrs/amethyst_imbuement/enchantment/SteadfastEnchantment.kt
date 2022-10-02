@@ -1,11 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.*
 
-class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.ARMOR,slot) {
+class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.ARMOR,*slot) {
 
 
     override fun getMinPower(level: Int): Int {
@@ -21,7 +20,11 @@ class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return stack.item is ArmorItem
+        return (stack.item is ArmorItem) && enabled
+    }
+
+    fun isEnabled(): Boolean{
+        return enabled
     }
 
 }

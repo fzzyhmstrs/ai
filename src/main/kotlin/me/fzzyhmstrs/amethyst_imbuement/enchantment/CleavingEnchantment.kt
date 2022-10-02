@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
 
-class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight,EnchantmentTarget.WEAPON,slot) {
+class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight,EnchantmentTarget.WEAPON,*slot) {
 
 
     override fun getMinPower(level: Int): Int {
@@ -26,11 +26,15 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantme
     }
 
     override fun getAttackDamage(level: Int, group: EntityGroup): Float {
-        return 1.0F + 1.0F * level
+        return if(enabled) {
+            1.0F + 1.0F * level
+        } else {
+            0.0f
+        }
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (target is PlayerEntity){
+        if (target is PlayerEntity && enabled){
             target.itemCooldownManager.set(Items.SHIELD, 10*level)
         }
     }
@@ -40,6 +44,6 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantme
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is AxeItem)
+        return (stack.item is AxeItem) && enabled
     }
 }

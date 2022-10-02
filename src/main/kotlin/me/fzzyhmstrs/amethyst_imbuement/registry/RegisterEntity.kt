@@ -235,6 +235,7 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
+        FabricDefaultAttributeRegistry.register(IMBUED_FAMILIAR_ENTITY, ImbuedFamiliarEntity.createImbuedFamiliarAttributes())
     }
 
 

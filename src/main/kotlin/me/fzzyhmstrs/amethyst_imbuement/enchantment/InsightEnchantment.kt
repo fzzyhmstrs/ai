@@ -11,7 +11,7 @@ import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.*
 import net.minecraft.server.world.ServerWorld
 
-class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.WEAPON,slot) {
+class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 
     private var xpgiven = false
 
@@ -28,10 +28,11 @@ class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantmen
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && enabled
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
+        if (!enabled) return
         if (!target.isAlive){
             xpgiven = if (target is LivingEntity && !xpgiven){
                 when (target) {

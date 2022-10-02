@@ -5,7 +5,7 @@ import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
 import net.minecraft.entity.passive.GolemEntity
 
-class TrackSummonerAttackerGoal(summoned: GolemEntity, private val summoner: LivingEntity): TrackTargetGoal(summoned,false) {
+open class TrackSummonerAttackerGoal(summoned: GolemEntity, private val summoner: LivingEntity): TrackTargetGoal(summoned,false) {
 
     private var attacker: LivingEntity? = null
     private var lastAttackedTime = 0

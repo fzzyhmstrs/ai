@@ -198,9 +198,13 @@ public abstract class LivingEntityMixin extends Entity {
         ItemStack footStack = instance.getEquippedStack(EquipmentSlot.FEET);
         if (footStack.isEmpty()) return instance.isOnGround();
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getMULTI_JUMP(),footStack) > 0){
-            if (!(instance.hasStatusEffect(RegisterStatus.INSTANCE.getLEAPT())) && ((time - lastTime) > 5)){
-                instance.addStatusEffect(new StatusEffectInstance(RegisterStatus.INSTANCE.getLEAPT(),1200));
-                return true;
+            if(RegisterEnchantment.INSTANCE.getMULTI_JUMP().isEnabled()) {
+                if (!(instance.hasStatusEffect(RegisterStatus.INSTANCE.getLEAPT())) && ((time - lastTime) > 5)) {
+                    instance.addStatusEffect(new StatusEffectInstance(RegisterStatus.INSTANCE.getLEAPT(), 1200));
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -244,11 +248,15 @@ public abstract class LivingEntityMixin extends Entity {
             if (ItemStack.areEqual(stack2, stack1)) continue;
             if (!stack1.isEmpty()) {
                 stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack1);
-                stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack1);
+                if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
+                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack1);
+                }
             }
             if (!stack2.isEmpty()) {
                 stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack2);
-                stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack2);
+                if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
+                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack2);
+                }
             }
         }
         if (stackValAdd == 0) return;

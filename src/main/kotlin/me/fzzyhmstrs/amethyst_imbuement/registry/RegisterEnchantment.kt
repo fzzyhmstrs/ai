@@ -128,9 +128,7 @@ object RegisterEnchantment {
     private val LOGGER: Logger = LogUtils.getLogger()
 
     private fun checkConfig(check: String, enchant: Enchantment){
-        if(AiConfig.enchantments.enabledEnchantments.getOrDefault(check,true)){
-            regEnchant[check] = enchant
-        }
+        regEnchant[check] = enchant
     }
     fun registerAll(){
 

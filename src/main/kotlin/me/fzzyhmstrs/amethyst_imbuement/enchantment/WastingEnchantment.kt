@@ -8,8 +8,9 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.ItemStack
 
-class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight,EnchantmentTarget.WEAPON,slot) {
+class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight,EnchantmentTarget.WEAPON,*slot) {
 
     companion object{
         var applied = false
@@ -27,8 +28,12 @@ class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantmen
         return 4
     }
 
+    override fun isAcceptableItem(stack: ItemStack): Boolean {
+        return super.isAcceptableItem(stack) && enabled
+    }
+
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (target is LivingEntity) {
+        if (target is LivingEntity && enabled) {
             applied = if(!applied){
                 var i = 2
                 if (level > 2) {

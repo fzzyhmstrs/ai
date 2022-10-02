@@ -317,7 +317,7 @@ class AltarOfExperienceScreenHandler(
     }
 
     private fun getPlayerLvlXp(player: PlayerEntity): Int{
-        val lvl = player.experienceLevel
+        val lvl = min(player.experienceLevel,20000)
         val nextLvlXp = player.nextLevelExperience
         val progress = player.experienceProgress
         val progressXp = (nextLvlXp * progress).toInt()
@@ -328,7 +328,7 @@ class AltarOfExperienceScreenHandler(
         } else {
             (4.5*lvl*lvl - 162.5*lvl + 2220).toInt()
         }
-        return lvlXp + progressXp
+        return max(lvlXp + progressXp,0)
     }
 
     init{

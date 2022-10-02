@@ -7,9 +7,10 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ArrowEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 
-class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.BOW,slot) {
+class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.BOW,*slot) {
 
     override fun getMinPower(level: Int): Int {
         return 25 + level * 15
@@ -27,8 +28,12 @@ class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Encha
         return super.canAccept(other) && other !== Enchantments.FLAME && other !== Enchantments.INFINITY
     }
 
+    override fun isAcceptableItem(stack: ItemStack): Boolean {
+        return super.isAcceptableItem(stack) && enabled
+    }
+
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (user.world !is ServerWorld) return
+        if (user.world !is ServerWorld || !enabled) return
         for (i in 1..level) {
             val arrow = ArrowEntity(target.world, target.x, target.eyeY, target.z)
             val rnd = user.world.random.nextInt(360) - 180

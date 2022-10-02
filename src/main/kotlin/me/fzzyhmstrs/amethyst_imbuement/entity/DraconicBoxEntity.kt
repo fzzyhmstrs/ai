@@ -78,7 +78,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
             yaw = 0.0F
         }
         if (this.age >= maxAge || world.getBlockState(blockPos).isOf(Blocks.AIR)) {
-            ColoredGlowLib.setRainbowColorToEntity(this,false)
+            ColoredGlowLib.removeColor(this)
             DraconicVisionAugment.removeBoxFromMap(startingBlockPos)
             //world.playSound(null,blockPos,SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP,SoundCategory.NEUTRAL,1.0F,1.0F)
             this.discard()

@@ -7,7 +7,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.*
 
-class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.TRIDENT,slot) {
+class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.TRIDENT,*slot) {
 
     companion object{
         var time1 = 0L
@@ -28,10 +28,11 @@ class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && enabled
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
+        if (!enabled) return
         applied = if(!applied) {
             time1 = user.world.time
             if ((time1 - 20L) >= time2 && (target is LivingEntity)) {

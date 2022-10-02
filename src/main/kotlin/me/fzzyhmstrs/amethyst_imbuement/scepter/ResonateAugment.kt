@@ -143,7 +143,9 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
                 val targetY = buf.readDouble()
                 val targetZ = buf.readDouble()
                 val targetPos = Vec3d(targetX,targetY,targetZ)
-                noteBlast(userPos,userVel, targetPos, client.world)
+                client.execute {
+                    noteBlast(userPos, userVel, targetPos, client.world)
+                }
             }
         }
 
