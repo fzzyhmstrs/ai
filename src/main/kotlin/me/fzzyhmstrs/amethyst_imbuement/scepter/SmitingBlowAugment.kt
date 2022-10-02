@@ -90,7 +90,9 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                 val posX = buf.readDouble()
                 val posY = buf.readDouble()
                 val posZ = buf.readDouble()
-                generateParticles(world,Vec3d(posX,posY,posZ))
+                client.execute {
+                    generateParticles(world, Vec3d(posX, posY, posZ))
+                }
             }
         }
         private fun generateParticles(world: World, pos: Vec3d){

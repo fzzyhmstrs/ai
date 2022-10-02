@@ -12,7 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
 
-class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.WEARABLE,slot) {
+class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEARABLE,*slot) {
 
     companion object{
         var applied = false
@@ -35,10 +35,11 @@ class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Encha
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && enabled
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
+        if (!enabled) return
         if (target is LivingEntity) {
             if (target.recentDamageSource !is ProjectileDamageSource){
                 return

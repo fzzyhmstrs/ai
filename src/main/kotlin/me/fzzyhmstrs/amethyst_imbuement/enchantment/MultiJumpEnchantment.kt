@@ -4,7 +4,7 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 
-class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.ARMOR_FEET,slot) {
+class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.ARMOR_FEET,*slot) {
 
     override fun getMinPower(level: Int): Int {
         return 30
@@ -28,6 +28,10 @@ class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
 
     override fun isAvailableForEnchantedBookOffer(): Boolean {
         return true
+    }
+
+    fun isEnabled(): Boolean{
+        return enabled
     }
 
 }

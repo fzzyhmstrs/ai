@@ -7,12 +7,13 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
 
-class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight,EnchantmentTarget.DIGGER,slot) {
+class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight,EnchantmentTarget.DIGGER,*slot) {
 
     override fun getMinPower(level: Int): Int {
         return 30 + (level - 1) * 20
@@ -28,6 +29,14 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantm
 
     override fun canAccept(other: Enchantment): Boolean {
         return super.canAccept(other) && other !== Enchantments.FORTUNE
+    }
+
+    override fun isAcceptableItem(stack: ItemStack?): Boolean {
+        return super.isAcceptableItem(stack) && enabled
+    }
+
+    fun isEnabled(): Boolean{
+        return enabled
     }
 
     companion object{

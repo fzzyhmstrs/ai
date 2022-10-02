@@ -49,7 +49,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,260));
                 }
                 cir.setReturnValue(true);
-
             }
         }
     }

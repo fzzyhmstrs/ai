@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.enchantment.DeadlyShotEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
@@ -66,8 +67,8 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
     private fun getSpeed(stack: ItemStack): Float {
         val i = EnchantmentHelper.getLevel(RegisterEnchantment.DEADLY_SHOT, stack)
         return if (hasProjectile(stack, Items.FIREWORK_ROCKET)) {
-            2.2f + (0.35f * i)
-        } else 4.0f + (0.85f * i)
+            RegisterEnchantment.DEADLY_SHOT.getSpeed(i,firework = true,sniper = true)
+        } else RegisterEnchantment.DEADLY_SHOT.getSpeed(i,firework = false,sniper = true)
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {

@@ -11,7 +11,7 @@ import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem
 
-class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchantment(weight, EnchantmentTarget.CROSSBOW,slot) {
+class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.CROSSBOW,*slot) {
 
     override fun getMinPower(level: Int): Int {
         return 20 + level * 10
@@ -30,11 +30,11 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Enchant
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is CrossbowItem) || (stack.item is TridentItem)
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem)) && enabled
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (user.world.isClient) return
+        if (user.world.isClient || !enabled) return
         if (target is LivingEntity) {
             if(!target.isDead){
                 target.setInvulnerable(false) //these two lines take away damage invulnerability

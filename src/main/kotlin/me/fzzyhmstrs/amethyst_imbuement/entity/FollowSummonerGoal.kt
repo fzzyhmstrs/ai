@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.WorldView
 import kotlin.math.abs
 
-class FollowSummonerGoal(
+open class FollowSummonerGoal(
     private val summoned: GolemEntity,
     private val summoner: LivingEntity,
     private val speed: Double,
