@@ -3,9 +3,10 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
+import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 
-open class TrackSummonerAttackerGoal(summoned: GolemEntity, private val summoner: LivingEntity): TrackTargetGoal(summoned,false) {
+open class TrackSummonerAttackerGoal(summoned: PathAwareEntity, private val summoner: LivingEntity): TrackTargetGoal(summoned,false) {
 
     private var attacker: LivingEntity? = null
     private var lastAttackedTime = 0

@@ -34,6 +34,6 @@ class JeiImbuingTransferHandler: IRecipeTransferHandler<ImbuingTableScreenHandle
         maxTransfer: Boolean,
         doTransfer: Boolean
     ): IRecipeTransferError? {
-        TODO("Not yet implemented")
+        return null
     }
 }

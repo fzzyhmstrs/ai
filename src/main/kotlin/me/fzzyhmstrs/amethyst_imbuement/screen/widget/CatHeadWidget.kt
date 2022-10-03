@@ -7,7 +7,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.passive.CatVariant
 import java.util.function.Consumer
 
-class CatHeadWidget(x:Int, y: Int, toggled: Boolean, private val variant: CatVariant, private val listener: Consumer<CatVariant>): ToggleButtonWidget(x,y,7,11,toggled) {
+class CatHeadWidget(x:Int, y: Int, toggled: Boolean, private val variant: CatVariant,private val index: Int, private val listener: Consumer<Pair<Int,CatVariant>>): ToggleButtonWidget(x,y,7,11,toggled) {
 
     init{
         setTextureUV(176,0,7,11, ImbuedFamiliarInventoryScreen.texture)
@@ -15,13 +15,13 @@ class CatHeadWidget(x:Int, y: Int, toggled: Boolean, private val variant: CatVar
 
     override fun onClick(mouseX: Double, mouseY: Double) {
         super.onClick(mouseX, mouseY)
-        listener.accept(variant)
+        listener.accept(Pair(index,variant))
     }
 
     override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
         super.renderButton(matrices, mouseX, mouseY, delta)
         RenderSystem.setShaderTexture(0,variant.texture)
-        drawTexture(matrices, this.x, this.y, 5, 4, 5, 5)
+        drawTexture(matrices, this.x+1, this.y+1, 5f, 4f, 5, 5,64,32)
     }
 
 

@@ -19,7 +19,7 @@ class ImbuedFamiliarInventoryScreenHandlerFactory(
     private val level: Int = 1): ExtendedScreenHandlerFactory {
 
     override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler {
-        return ImbuedFamiliarInventoryScreenHandler(syncId,familiarEntity,familiarEntity.id, player.inventory,
+        return ImbuedFamiliarInventoryScreenHandler(syncId,familiarEntity.id,familiarEntity, player.inventory,
             ScreenHandlerContext.create(familiarEntity.world, familiarEntity.blockPos))
     }
 
@@ -28,13 +28,15 @@ class ImbuedFamiliarInventoryScreenHandlerFactory(
     }
 
     override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
+        buf.writeInt(familiarEntity.id)
+        buf.writeInt(familiarEntity.id)
         buf.writeDouble(modDamage)
         buf.writeDouble(modHealth)
         buf.writeInt(invSlots)
         buf.writeInt(level)
         buf.writeInt(familiarEntity.followMode.index)
-        buf.writeInt(familiarEntity.followMode.index)
-        buf.writeInt(familiarEntity.id)
+        buf.writeInt(familiarEntity.attackMode.index)
+
     }
 
 }

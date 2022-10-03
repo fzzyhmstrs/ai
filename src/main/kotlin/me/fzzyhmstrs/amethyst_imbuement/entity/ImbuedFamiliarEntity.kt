@@ -12,16 +12,13 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.passive.CatEntity
 import net.minecraft.entity.passive.CatVariant
-import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.FluidState
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.InventoryChangedListener
 import net.minecraft.inventory.SimpleInventory
@@ -34,12 +31,8 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
-import net.minecraft.util.TimeHelper
-import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3d
+import net.minecraft.util.*
+import net.minecraft.util.math.*
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -49,7 +42,7 @@ import java.util.*
 
 @Suppress("PrivatePropertyName")
 class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: World):
-    GolemEntity(entityType,world),
+    PathAwareEntity(entityType,world),
     Angerable, PlayerCreatable,
     RideableInventory,
     JumpingMount, InventoryChangedListener{
@@ -87,7 +80,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, baseAttackSpeed.toDouble())
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
-                .add(EntityAttributes.HORSE_JUMP_STRENGTH,1.5)
+                .add(EntityAttributes.HORSE_JUMP_STRENGTH,1.2)
         }
     }
     private var attackTicksLeft = 0
@@ -104,8 +97,8 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     internal var followMode: FollowMode = FollowMode.FOLLOW
     internal var attackMode: AttackMode = AttackMode.ATTACK
     private var level = 1
+    private var variant: CatVariant = CatVariant.ALL_BLACK
     internal var items = FamiliarInventory(1 + inventorySlots)
-    private val CAT_VARIANT = DataTracker.registerData(CatEntity::class.java, TrackedDataHandlerRegistry.CAT_VARIANT)
     internal var catArmorTex = Identifier("empty")
     private var jumpStrength = 0f
     private var inAir = false
@@ -117,21 +110,15 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     }
 
     override fun initGoals() {
-        goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(3, WanderNearTargetGoal(this, 0.9, 32.0f))
-        goalSelector.add(3, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
-        goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
-        goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        goalSelector.add(8, LookAroundGoal(this))
+        goalSelector.add(1, SwimGoal(this))
+        goalSelector.add(2, FamiliarAttackGoal(this))
+        //goalSelector.add(3, WanderAroundGoal(this, 0.7,60,false))
+        goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
+        goalSelector.add(6, LookAroundGoal(this))
         targetSelector.add(2, FamiliarRevengeGoal(this))
-        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) && attackMode == AttackMode.ATTACK })
-        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster && attackMode == AttackMode.ATTACK })
+        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity? -> shouldAngerAt(entity)})
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, true) { entity: LivingEntity? -> canTargetMob(entity) })
         targetSelector.add(4, UniversalAngerGoal(this, false))
-    }
-
-    override fun initDataTracker() {
-        super.initDataTracker()
-        this.dataTracker.startTracking(CAT_VARIANT, CatVariant.ALL_BLACK)
     }
 
     override fun initialize(
@@ -141,7 +128,6 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.initEquipment(world.random, difficulty)
         if (modifiedDamage > baseAttackDamage){
             getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
                 EntityAttributeModifier(
@@ -164,28 +150,31 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     }
 
     private fun updateArmor(){
+        val stack = items.getStack(0)
+        val item = stack.item
+        if (item is HorseArmorItem) {
+            val horseArmorIdString = item.entityTexture.toString()
+            val substring1 = horseArmorIdString.substring(0,horseArmorIdString.length-4)
+            val lastUnderscore = substring1.lastIndexOf('_')
+            val subString2 = if (lastUnderscore > 0){
+                substring1.substring(lastUnderscore + 1,substring1.length)
+            } else {
+                "iron"
+            }
+            catArmorTex = Identifier(CAT_ARMOR_BASE_STRING + subString2)
+            println(catArmorTex)
+        }
         if (world.isClient) {
             return
         }
-        setArmorTypeFromStack(items.getStack(0))
+        setArmorTypeFromStack(stack)
     }
     private fun setArmorTypeFromStack(stack: ItemStack) {
         this.equipArmor(stack)
         if (!world.isClient) {
             getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.removeModifier(HORSE_ARMOR_BONUS_ID)
             if (this.isHorseArmor(stack)) {
-                val item = stack.item
-                if (item is HorseArmorItem) {
-                    val horseArmorIdString = item.entityTexture.toString()
-                    val substring1 = horseArmorIdString.substring(0,horseArmorIdString.length-4)
-                    val lastUnderscore = substring1.lastIndexOf('_')
-                    val subString2 = if (lastUnderscore > 0){
-                        substring1.substring(lastUnderscore,substring1.length)
-                    } else {
-                        "iron"
-                    }
-                    catArmorTex = Identifier(CAT_ARMOR_BASE_STRING + subString2)
-                }
+
                 val bonus = (stack.item as HorseArmorItem).bonus
                 if (bonus != 0) {
                     getAttributeInstance(EntityAttributes.GENERIC_ARMOR)!!.addTemporaryModifier(
@@ -200,6 +189,26 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
             }
         }
     }
+
+    fun getCatArmorTex(stack: ItemStack): Identifier{
+        if (catArmorTex == Identifier("empty")){
+            val item = stack.item
+            if (item is HorseArmorItem) {
+                val horseArmorIdString = item.entityTexture.toString()
+                val substring1 = horseArmorIdString.substring(0,horseArmorIdString.length-4)
+                val lastUnderscore = substring1.lastIndexOf('_')
+                val subString2 = if (lastUnderscore > 0){
+                    substring1.substring(lastUnderscore + 1,substring1.length)
+                } else {
+                    "iron"
+                }
+                val id = Identifier(CAT_ARMOR_BASE_STRING + subString2)
+                catArmorTex = id
+                return id
+            }
+        }
+        return catArmorTex
+    }
     fun getArmorType(): ItemStack {
         return getEquippedStack(EquipmentSlot.CHEST)
     }
@@ -212,13 +221,8 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         return item.item is HorseArmorItem
     }
 
-    override fun tick() {
-        super.tick()
-        if (maxAge > 0){
-            if (age >= maxAge){
-                kill()
-            }
-        }
+    override fun canWalkOnFluid(state: FluidState): Boolean {
+        return true
     }
 
     override fun tickMovement() {
@@ -226,15 +230,12 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         if (attackTicksLeft > 0) {
             --attackTicksLeft
         }
-        if (lookingAtVillagerTicksLeft > 0) {
-            --lookingAtVillagerTicksLeft
-        }
         if (!world.isClient) {
             tickAngerLogic(world as ServerWorld, true)
         }
     }
 
-    override fun travel(movementInput: Vec3d?) {
+    override fun travel(movementInput: Vec3d) {
         if (!this.isAlive) {
             return
         }
@@ -253,7 +254,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         val f = livingEntity.sidewaysSpeed * 0.5f
         var g = livingEntity.forwardSpeed
         if (g <= 0.0f) {
-            g *= 0.25f
+            g *= 0.35f
         }
         if (jumpStrength > 0.0f && !this.isInAir() && onGround) {
             val d: Double = getAttributeValue(EntityAttributes.HORSE_JUMP_STRENGTH) * jumpStrength.toDouble() * this.jumpVelocityMultiplier.toDouble()
@@ -273,7 +274,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         airStrafingSpeed = movementSpeed * 0.1f
         if (this.isLogicalSideForUpdatingMovement) {
             movementSpeed = getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED).toFloat()
-            super.travel(Vec3d(f.toDouble(), movementInput!!.y, g.toDouble()))
+            super.travel(Vec3d(f.toDouble(), movementInput.y, g.toDouble()))
         } else if (livingEntity is PlayerEntity) {
             velocity = Vec3d.ZERO
         }
@@ -283,6 +284,20 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         }
         updateLimbs(this, false)
         tryCheckBlockCollision()
+    }
+
+    override fun getPrimaryPassenger(): LivingEntity? {
+        val entity: Entity? = this.firstPassenger
+        return if (entity is LivingEntity) {
+            entity
+        } else null
+    }
+
+    override fun updatePassengerPosition(passenger: Entity) {
+        super.updatePassengerPosition(passenger)
+        if (passenger is MobEntity) {
+            bodyYaw = passenger.bodyYaw
+        }
     }
 
     override fun chooseRandomAngerTime() {
@@ -306,15 +321,17 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     }
 
     fun getVariant(): CatVariant {
-        return dataTracker.get(CAT_VARIANT)
+        return variant
     }
 
     fun setVariant(variant: CatVariant) {
-        dataTracker.set(CAT_VARIANT, variant)
+        println("whoo!")
+        println(world.isClient)
+        this.variant = variant
     }
 
     fun getTexture(): Identifier {
-        return getVariant().texture()
+        return variant.texture()
     }
 
     fun setLevel(level: Int){
@@ -364,12 +381,24 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     }
 
     override fun canTarget(target: LivingEntity): Boolean {
+        if (attackMode == AttackMode.PASSIVE) return false
         if (!isPlayerCreated()) return super.canTarget(target)
         val uuid = target.uuid
         if (owner != null) {
             if (target.isTeammate(owner)) return false
         }
-        return uuid != createdBy
+        return if (attackMode == AttackMode.REVENGE) {
+            target == recentDamageSource?.source
+        }else {
+            uuid != createdBy
+        }
+    }
+
+    private fun canTargetMob(target: LivingEntity?): Boolean{
+        if (target !is Monster) return false
+        if (attackMode == AttackMode.ATTACK) return true
+        if (attackMode == AttackMode.REVENGE) return target == recentDamageSource?.source
+        return false
     }
 
     override fun handleStatus(status: Byte) {
@@ -389,7 +418,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     }
 
     override fun getAmbientSound(): SoundEvent? {
-        return SoundEvents.ENTITY_ZOMBIE_AMBIENT
+        return SoundEvents.ENTITY_CAT_PURR
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -514,6 +543,53 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         if (isHorseArmor(itemStack2) && itemStack != itemStack2) {
             playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5f, 1.0f)
         }
+    }
+
+    private fun locateSafeDismountingPos(offset: Vec3d, passenger: LivingEntity): Vec3d? {
+        val d = this.x + offset.x
+        val e = boundingBox.minY
+        val f = this.z + offset.z
+        val mutable = BlockPos.Mutable()
+        block0@ for (entityPose in passenger.poses) {
+            mutable[d, e] = f
+            val g = boundingBox.maxY + 0.75
+            do {
+                val h = world.getDismountHeight(mutable)
+                val vec3d = Vec3d(d, mutable.y.toDouble() + h, f)
+                val box: Box = passenger.getBoundingBox(entityPose)
+                if (mutable.y.toDouble() + h > g) continue@block0
+                if (Dismounting.canDismountInBlock(h) && Dismounting.canPlaceEntityAt(
+                        world,
+                        passenger,
+                        box.offset(vec3d)
+                    )
+                ) {
+                    passenger.pose = entityPose
+                    return vec3d
+                }
+                mutable.move(Direction.UP)
+            } while (mutable.y.toDouble() < g)
+        }
+        return null
+    }
+
+    override fun updatePassengerForDismount(passenger: LivingEntity): Vec3d? {
+        val vec3d = getPassengerDismountOffset(
+            this.width.toDouble(),
+            passenger.width.toDouble(),
+            yaw + if (passenger.mainArm == Arm.RIGHT) 90.0f else -90.0f
+        )
+        val vec3d2 = locateSafeDismountingPos(vec3d, passenger)
+        if (vec3d2 != null) {
+            return vec3d2
+        }
+        val vec3d3 = getPassengerDismountOffset(
+            this.width.toDouble(),
+            passenger.width.toDouble(),
+            yaw + if (passenger.mainArm == Arm.LEFT) 90.0f else -90.0f
+        )
+        val vec3d4 = locateSafeDismountingPos(vec3d3, passenger)
+        return vec3d4 ?: pos
     }
 
     private class FamiliarFollowSummonerGoal(private val summoned: ImbuedFamiliarEntity, summoner: LivingEntity):
@@ -659,8 +735,64 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         override fun onClose(player: PlayerEntity?) {
             markDirty()
         }
-
     }
 
 
+    class FamiliarAttackGoal(private val mob: MobEntity) : Goal()
+    {
+        var target: LivingEntity? = null
+        var cooldown = 0
+
+        init{
+            this.setControls(EnumSet.of(Control.MOVE, Control.LOOK))
+        }
+
+        override fun canStart(): Boolean {
+            val livingEntity: LivingEntity = mob.getTarget() ?: return false
+            this.target = livingEntity
+            return true
+        }
+
+        override fun shouldContinue(): Boolean {
+            if (!this.target!!.isAlive) {
+                return false
+            }
+            return if (mob.squaredDistanceTo(this.target) > 225.0) {
+                false
+            } else !mob.getNavigation().isIdle() || canStart()
+        }
+
+        override fun stop() {
+            this.target = null
+            mob.getNavigation().stop()
+        }
+
+        override fun shouldRunEveryTick(): Boolean {
+            return true
+        }
+
+        override fun tick() {
+            mob.getLookControl().lookAt(this.target, 30.0f, 30.0f)
+            val d: Double = (mob.getWidth() * 2.0f * (mob.getWidth() * 2.0f)).toDouble()
+            val e: Double = mob.squaredDistanceTo(this.target!!.x, this.target!!.y, this.target!!.z)
+            var f = 0.8
+            if (e > d && e < 16.0) {
+                f = 1.33
+            } else if (e < 225.0) {
+                f = 0.6
+            }
+            println("blop")
+            mob.getNavigation().startMovingTo(this.target, f)
+            println(System.currentTimeMillis())
+            cooldown = Math.max(cooldown - 1, 0)
+            if (e > d) {
+                return
+            }
+            if (cooldown > 0) {
+                return
+            }
+            cooldown = 20
+            mob.tryAttack(this.target)
+        }
+    }
 }

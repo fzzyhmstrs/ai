@@ -34,8 +34,8 @@ class SummonFamiliarAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(2,1,0)
-            .withDamage(-0.2f,0.2f)
-            .withRange(-0.25,0.25)
+            .withDamage(-0.1f,0.2f)
+            .withRange(-0.5,0.5)
 
     override fun placeEntity(
         world: World,
@@ -45,11 +45,11 @@ class SummonFamiliarAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
         effects: AugmentEffect
     ): Boolean {
         val foundFamiliar = findFamiliar(user, world)
-
         var successes = 0
-        val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
-        val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
-        val yrnd = hit.blockPos.y + 1.0
+        val xrnd: Double = (hit as BlockHitResult).blockPos.x.toDouble()
+        val zrnd: Double = (hit).blockPos.z.toDouble()
+        val yrnd = hit.blockPos.y + 1.1
+        println(foundFamiliar)
         if (foundFamiliar != null && foundFamiliar is ImbuedFamiliarEntity){
             if (foundFamiliar.distanceTo(user) > maxDismissDistance){
                 //teleport your far away familiar to you
@@ -81,7 +81,8 @@ class SummonFamiliarAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
                 }
             familiar.setLevel(level)
             }
-            familiar.refreshPositionAndAngles(xrnd, yrnd, zrnd, 0f, 0f)
+            familiar.setPos(xrnd, yrnd, zrnd)
+            println(familiar)
             if (world.spawnEntity(familiar)){
                 successes++
             }
