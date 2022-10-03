@@ -37,7 +37,7 @@
 	"item": "minecraft:ender_eye"
   },
   "title": "Spectral Vision",
-  "cost": 12,
+  "cost": 19,
   "augment": "amethyst_imbuement:spectral_vision"
 }
 

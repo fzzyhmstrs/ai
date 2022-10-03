@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.scepter.SummonFamiliarAugment
@@ -79,6 +80,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
         private const val baseMoveSpeed = 0.3
         private  val baseAttackDamage = AiConfig.entities.familiarBaseDamage
         private val HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295")
+        private val CAT_ARMOR_BASE_STRING = AI.MOD_ID + ":textures/entity/familiar/armor/cat_armor_"
 
         fun createImbuedFamiliarAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
@@ -104,6 +106,7 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     private var level = 1
     internal var items = FamiliarInventory(1 + inventorySlots)
     private val CAT_VARIANT = DataTracker.registerData(CatEntity::class.java, TrackedDataHandlerRegistry.CAT_VARIANT)
+    internal var catArmorTex = Identifier("empty")
     private var jumpStrength = 0f
     private var inAir = false
 
@@ -169,8 +172,20 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
     private fun setArmorTypeFromStack(stack: ItemStack) {
         this.equipArmor(stack)
         if (!world.isClient) {
-            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)!!.removeModifier(HORSE_ARMOR_BONUS_ID)
+            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.removeModifier(HORSE_ARMOR_BONUS_ID)
             if (this.isHorseArmor(stack)) {
+                val item = stack.item
+                if (item is HorseArmorItem) {
+                    val horseArmorIdString = item.entityTexture.toString()
+                    val substring1 = horseArmorIdString.substring(0,horseArmorIdString.length-4)
+                    val lastUnderscore = substring1.lastIndexOf('_')
+                    val subString2 = if (lastUnderscore > 0){
+                        substring1.substring(lastUnderscore,substring1.length)
+                    } else {
+                        "iron"
+                    }
+                    catArmorTex = Identifier(CAT_ARMOR_BASE_STRING + subString2)
+                }
                 val bonus = (stack.item as HorseArmorItem).bonus
                 if (bonus != 0) {
                     getAttributeInstance(EntityAttributes.GENERIC_ARMOR)!!.addTemporaryModifier(
@@ -185,10 +200,11 @@ class ImbuedFamiliarEntity(entityType: EntityType<ImbuedFamiliarEntity>, world: 
             }
         }
     }
-    private fun getArmorType(): ItemStack {
+    fun getArmorType(): ItemStack {
         return getEquippedStack(EquipmentSlot.CHEST)
     }
     private fun equipArmor(stack: ItemStack) {
+
         equipStack(EquipmentSlot.CHEST, stack)
         setEquipmentDropChance(EquipmentSlot.CHEST, 0.0f)
     }
