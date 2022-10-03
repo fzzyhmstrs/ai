@@ -44,14 +44,5 @@ object RegisterScreen {
                 title
             )
         }
-
-        HandledScreens.register(RegisterHandler.FAMILIAR_SCREEN_HANDLER) {
-                handler: ImbuedFamiliarInventoryScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            ImbuedFamiliarInventoryScreen(
-                handler,
-                playerInventory,
-                title
-            )
-        }
     }
 }
