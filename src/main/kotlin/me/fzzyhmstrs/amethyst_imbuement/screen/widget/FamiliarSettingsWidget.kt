@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen.widget
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuedFamiliarEntity
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuedFamiliarInventoryScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuedFamiliarInventoryScreenHandler
@@ -21,11 +22,11 @@ class FamiliarSettingsWidget(x: Int, y: Int,
                              follow: Int,
                              attack: Int,
                              private val listener: SettingsUpdateListener):
-    ClickableWidget(x,y,113,52, Text.empty()) {
+    ClickableWidget(x,y,113,52, AcText.empty()) {
 
     private var followMode = ImbuedFamiliarEntity.FollowMode.FOLLOW.fromIndex(follow)
     private var attackMode = ImbuedFamiliarEntity.AttackMode.ATTACK.fromIndex(attack)
-    private var textIsEmpty = name == Text.empty()
+    private var textIsEmpty = name == AcText.empty()
     private val client = MinecraftClient.getInstance()
 
     private val textField: TextFieldWidget by lazy{
@@ -56,8 +57,8 @@ class FamiliarSettingsWidget(x: Int, y: Int,
     }
 
     private fun onNameChanged(customName: String){
-        name = Text.literal(customName)
-        textIsEmpty = name == Text.empty()
+        name = AcText.literal(customName)
+        textIsEmpty = name == AcText.empty()
         listener.onNaming(name)
     }
 
@@ -76,25 +77,25 @@ class FamiliarSettingsWidget(x: Int, y: Int,
 
     private fun createFollowButton(): TexturedButtonWidget{
         val widget = TexturedButtonWidget(x+5, y+23,50,14,36,220,ImbuedFamiliarInventoryScreen.texture) { button -> onFollow(button) }
-        widget.message = Text.translatable(followMode.key)
+        widget.message = AcText.translatable(followMode.key)
         return widget
     }
 
     private fun onFollow(button: ButtonWidget){
         followMode = followMode.cycle()
-        followButton.message = Text.translatable(followMode.key)
+        followButton.message = AcText.translatable(followMode.key)
         listener.onFollowMode(followMode.index)
     }
 
     private fun createAttackButton(): TexturedButtonWidget{
         val widget = TexturedButtonWidget(x+58, y+23,50,14,36,220,ImbuedFamiliarInventoryScreen.texture) { button -> onAttack(button) }
-        widget.message = Text.translatable(attackMode.key)
+        widget.message = AcText.translatable(attackMode.key)
         return widget
     }
 
     private fun onAttack(button: ButtonWidget){
         attackMode = attackMode.cycle()
-        attackButton.message = Text.translatable(attackMode.key)
+        attackButton.message = AcText.translatable(attackMode.key)
         listener.onFollowMode(attackMode.index)
     }
 

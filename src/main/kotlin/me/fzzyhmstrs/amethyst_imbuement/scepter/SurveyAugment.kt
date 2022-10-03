@@ -1,5 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
+import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -20,7 +23,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.ConfiguredStructureFeatureTags
 import net.minecraft.tag.TagKey
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -48,12 +51,12 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
             val mapStack = FilledMapItem.createMap(world, blockPos.x, blockPos.z, 2.toByte(), true, true)
             FilledMapItem.fillExplorationMap(world,mapStack)
             MapState.addDecorationsNbt(mapStack,blockPos,"+",type.iconType)
-            mapStack.setCustomName(TranslatableText(type.nameKey))
+            mapStack.setCustomName(AcText.translatable(type.nameKey))
             if (type.tint >= 0){
                 val nbtCompound2: NbtCompound = mapStack.getOrCreateSubNbt("display")
                 nbtCompound2.putInt("MapColor", type.tint)
             }
-            mapStack.setCustomName(TranslatableText(type.nameKey))
+            mapStack.setCustomName(AcText.translatable(type.nameKey))
             if (!user.inventory.insertStack(mapStack)) {
                 user.dropItem(mapStack, false)
             }

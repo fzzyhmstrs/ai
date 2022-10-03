@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
@@ -8,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Nameable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
@@ -149,7 +149,7 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
     override fun getName(): Text? {
         return if (customName != null) {
             customName
-        } else TranslatableText("container.altar_of_experience")
+        } else AcText.translatable("container.altar_of_experience")
     }
 
     fun setCustomName(value: Text?) {

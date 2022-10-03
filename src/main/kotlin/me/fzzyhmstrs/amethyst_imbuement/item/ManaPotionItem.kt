@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
@@ -13,7 +14,6 @@ import net.minecraft.item.PotionItem
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
@@ -77,7 +77,7 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        tooltip.add(TranslatableText("item.amethyst_imbuement.mana_potion.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.mana_potion.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
     }
 
     override fun hasGlint(stack: ItemStack?): Boolean {

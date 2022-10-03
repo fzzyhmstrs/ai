@@ -6,6 +6,7 @@ import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
@@ -20,7 +21,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -40,10 +41,10 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         outputs = initOutputs(recipe)
         val cost = recipe.getCost()
         if(cost > 99){
-            costText = TranslatableText("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         } else{
-            costText = TranslatableText("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 119 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         }
         isEnchantingType = recipe.getAugment() != ""

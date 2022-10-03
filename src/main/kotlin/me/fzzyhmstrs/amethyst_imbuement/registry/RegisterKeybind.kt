@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -16,8 +17,7 @@ import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.text.LiteralText
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -66,11 +66,11 @@ object RegisterKeybind {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                         val activeEnchant = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
-                        val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?:LiteralText(activeEnchant)
-                        client.player?.sendMessage(TranslatableText("scepter.active_spell_key").append(activeEnchantName), true)
+                        val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
+                        client.player?.sendMessage(AcText.translatable("scepter.active_spell_key").append(activeEnchantName), true)
                         client.player?.addScoreboardTag(activeEnchant)
                     } else {
-                        client.player?.sendMessage(TranslatableText("scepter.spells_not_activated"), true)
+                        client.player?.sendMessage(AcText.translatable("scepter.spells_not_activated"), true)
 
                     }
                 }

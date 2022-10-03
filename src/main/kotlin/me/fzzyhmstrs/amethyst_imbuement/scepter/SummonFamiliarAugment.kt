@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import it.unimi.dsi.fastutil.objects.Object2FloatMap
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -57,7 +58,7 @@ class SummonFamiliarAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
             } else {
                 //if close to you, dismisses the entity instead
                 foundFamiliar.remove(Entity.RemovalReason.DISCARDED)
-                user.sendMessage(Text.translatable(""))
+                user.sendMessage(AcText.translatable(""))
                 world.playSound(null, user.blockPos, SoundEvents.BLOCK_RESPAWN_ANCHOR_SET_SPAWN, SoundCategory.PLAYERS, 0.7F, 1.3F)
                 return false
             }

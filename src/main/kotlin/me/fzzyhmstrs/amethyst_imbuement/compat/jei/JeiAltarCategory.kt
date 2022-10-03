@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
@@ -12,7 +13,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory
 import mezz.jei.api.recipe.RecipeIngredientRole
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
@@ -30,7 +31,7 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
     }
 
     override fun getTitle(): Text {
-        return TranslatableText("recipe.enhancing")
+        return AcText.translatable("recipe.enhancing")
     }
 
     override fun getBackground(): IDrawable {

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.mojang.logging.LogUtils
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Nameable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
@@ -175,7 +175,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     override fun getName(): Text? {
         return if (customName != null) {
             customName
-        } else TranslatableText("container.imbuing_table")
+        } else AcText.translatable("container.imbuing_table")
     }
 
     fun setCustomName(value: Text?) {

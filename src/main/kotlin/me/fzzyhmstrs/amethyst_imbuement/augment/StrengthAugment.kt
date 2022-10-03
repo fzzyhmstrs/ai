@@ -1,4 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
@@ -10,7 +11,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 
 class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
 
@@ -20,7 +21,7 @@ class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         val rnd = user.world.random.nextFloat()
         if (rnd <= 0.5) {
             if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)) {
-                RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.STRENGTH,user, TranslatableText("augment_damage.strength.burnout"))
+                RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.STRENGTH,user, AcText.translatable("augment_damage.strength.burnout"))
             }
         }
     }

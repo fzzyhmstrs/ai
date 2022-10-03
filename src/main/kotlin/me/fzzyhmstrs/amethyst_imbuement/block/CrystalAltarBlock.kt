@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import net.minecraft.block.BlockState
 import net.minecraft.block.CraftingTableBlock
@@ -10,7 +11,6 @@ import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -19,7 +19,7 @@ import net.minecraft.world.World
 
 @Suppress("PrivatePropertyName")
 class CrystalAltarBlock(settings: Settings): CraftingTableBlock(settings) {
-    private val SCREEN_TITLE: Text = TranslatableText("container.crystal_altar")
+    private val SCREEN_TITLE: Text = AcText.translatable("container.crystal_altar")
 
     @Deprecated("Deprecated in Java")
     override fun createScreenHandlerFactory(

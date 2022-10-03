@@ -1,7 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import me.emafire003.dev.coloredglowlib.ColoredGlowLib
-import me.emafire003.dev.coloredglowlib.util.Color
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -51,7 +49,6 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                 }
             }
         }
-        ColoredGlowLib.updateData(world.server)
         EffectQueue.addStatusToQueue(user, RegisterStatus.DRACONIC_VISION,260,0)
         world.playSound(null,pos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL,0.3f,0.8f)
     }
@@ -95,7 +92,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
             }
         }
 
-        fun oreGlowColor(block: Block): Color {
+        /*fun oreGlowColor(block: Block): Color {
             val oreId = Registry.BLOCK.getId(block).toString()
             val colorString = AiConfig.colors.modColorMap[oreId]?: AiConfig.colors.defaultColorMap[oreId]?:"#FFFFFF"
             return parseColor(colorString)
@@ -110,7 +107,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
         fun oreIsRainbow(block: Block): Boolean{
             val oreId = Registry.BLOCK.getId(block).toString()
             return AiConfig.colors.defaultRainbowList.contains(oreId) || AiConfig.colors.modRainbowList.contains(oreId)
-        }
+        }*/
 
     }
 }

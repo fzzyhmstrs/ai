@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
@@ -12,7 +13,6 @@ import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 
 
 @Suppress("UnstableApiUsage")
@@ -26,7 +26,7 @@ class CrystalAltarCategory: DisplayCategory<CrystalAltarDisplay> {
     }
 
     override fun getTitle(): Text {
-        return TranslatableText("recipe.enhancing")
+        return AcText.translatable("recipe.enhancing")
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<CrystalAltarDisplay> {

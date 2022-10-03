@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
@@ -13,7 +14,6 @@ import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 
 
@@ -27,7 +27,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
     }
 
     override fun getTitle(): Text {
-        return TranslatableText("recipe.imbuing")
+        return AcText.translatable("recipe.imbuing")
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<ImbuingTableDisplay> {
@@ -114,10 +114,10 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         val textOffset: Int
         val levelBoxText = if(cost > 99) {
             textOffset = 124
-            TranslatableText("display.imbuing.cost.big",cost).formatted(Formatting.GREEN)
+            AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN)
         } else {
             textOffset = 127
-            TranslatableText("display.imbuing.cost.small",cost).formatted(Formatting.GREEN)
+            AcText.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN)
         }
         val levelBox = Widgets.createLabel(Point(bounds.x + xOffset + textOffset, bounds.y + yOffset + 50),levelBoxText)
         widgets.add(levelBox)

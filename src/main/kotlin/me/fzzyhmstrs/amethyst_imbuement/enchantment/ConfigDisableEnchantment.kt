@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -26,7 +27,7 @@ open class ConfigDisableEnchantment(weight: Rarity,target: EnchantmentTarget, va
         val baseText = super.getName(level) as MutableText
         if (!enabled) {
             return baseText
-                .append(Text.translatable("scepter.augment.disabled"))
+                .append(AcText.translatable("scepter.augment.disabled"))
                 .formatted(Formatting.DARK_RED)
                 .formatted(Formatting.STRIKETHROUGH)
         }

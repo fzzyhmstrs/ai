@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 import com.google.common.collect.Lists
 import com.mojang.logging.LogUtils
 import dev.emi.emi.api.EmiApi
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
@@ -727,7 +728,7 @@ class ImbuingTableScreenHandler(
         }
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
-            return LiteralText.EMPTY
+            return AcText.empty()
         }
     }
 
@@ -820,25 +821,25 @@ class ImbuingTableScreenHandler(
             val list: MutableList<Text> = mutableListOf()
             val enchantment = Enchantment.byRawId(id)
             if (enchantment != null) {
-                list.add(TranslatableText("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE))
+                list.add(AcText.translatable("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE))
             }
             if (!player.abilities.creativeMode) {
-                list.add(LiteralText.EMPTY)
+                list.add(AcText.empty())
                 if (player.experienceLevel < power) {
                     list.add(
-                        TranslatableText(
+                        AcText.translatable(
                             "container.enchant.level.requirement",
                             power
                         ).formatted(Formatting.RED)
                     )
                 } else {
-                    val mutableText = if (lapis == 1) TranslatableText("container.enchant.lapis.one") else TranslatableText(
+                    val mutableText = if (lapis == 1) AcText.translatable("container.enchant.lapis.one") else AcText.translatable(
                         "container.enchant.lapis.many",
                         lapis
                     )
                     list.add(mutableText.formatted(if (handler.getLapisCount() >= lapis) Formatting.GRAY else Formatting.RED))
                     val mutableText2 =
-                        if (lapis == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                        if (lapis == 1) AcText.translatable("container.enchant.level.one") else AcText.translatable(
                             "container.enchant.level.many",
                             lapis
                         )
@@ -851,9 +852,9 @@ class ImbuingTableScreenHandler(
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
             val enchantment = Enchantment.byRawId(id)
             return if (enchantment != null) {
-                TranslatableText("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE)
+                AcText.translatable("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE)
             } else {
-                LiteralText.EMPTY
+                AcText.empty()
             }
         }
 
@@ -889,11 +890,11 @@ class ImbuingTableScreenHandler(
             return if(recipe.getAugment() != "") {
                 val augId = Identifier(recipe.getAugment())
                 val str = Registry.ENCHANTMENT.get(augId)?.getName(1)?.string
-                    ?: TranslatableText("container.disenchanting_table.button.missing_enchantment").toString()
-                LiteralText(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
+                    ?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
+                AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             } else {
-                val str = TranslatableText("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name).string
-                LiteralText(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
+                val str = AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name).string
+                AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             }
         }
 
@@ -996,18 +997,18 @@ class ImbuingTableScreenHandler(
             if (recipe.getAugment() != "") {
                 val augment = Registry.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
-                    list.add(TranslatableText("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
-                    list.add(LiteralText.EMPTY)
+                    list.add(AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
+                    list.add(AcText.empty())
                 }
             } else {
-                list.add(TranslatableText("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name))
-                list.add(LiteralText.EMPTY)
+                list.add(AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name))
+                list.add(AcText.empty())
             }
             if (player.experienceLevel < power){
-                list.add(TranslatableText("container.enchant.level.requirement", power).formatted(Formatting.RED))
+                list.add(AcText.translatable("container.enchant.level.requirement", power).formatted(Formatting.RED))
             } else {
                 val mutableText2 =
-                    if (power == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                    if (power == 1) AcText.translatable("container.enchant.level.one") else AcText.translatable(
                         "container.enchant.level.many",
                         power
                     )
@@ -1020,12 +1021,12 @@ class ImbuingTableScreenHandler(
             return if (recipe.getAugment() != "") {
                 val augment = Registry.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
-                    TranslatableText("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE))
+                    AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE))
                 } else {
-                    LiteralText.EMPTY
+                    AcText.empty()
                 }
             } else {
-                TranslatableText("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name)
+                AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name)
             }
         }
 
@@ -1061,8 +1062,8 @@ class ImbuingTableScreenHandler(
         }
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
-            val str = TranslatableText("scepter.modifier.$nextInLine").string
-            return LiteralText(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
+            val str = AcText.translatable("scepter.modifier.$nextInLine").string
+            return AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
         }
 
         override fun isReady(id: Int, player: PlayerEntity, handler: ImbuingTableScreenHandler): Boolean {
@@ -1112,20 +1113,20 @@ class ImbuingTableScreenHandler(
 
         override fun tooltipList(player: PlayerEntity, handler: ImbuingTableScreenHandler): List<Text> {
             val list: MutableList<Text> = mutableListOf()
-            val textName: MutableText = TranslatableText("scepter.modifier.$nextInLine")
+            val textName: MutableText = AcText.translatable("scepter.modifier.$nextInLine")
             if (!lineageMax){
-                list.add(TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE)))
-                list.add(LiteralText.EMPTY)
+                list.add(AcText.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE)))
+                list.add(AcText.empty())
             } else {
-                list.add(TranslatableText("container.imbuing_table.modifier_max").formatted(Formatting.RED))
-                list.add(TranslatableText("container.imbuing_table.next_recipe_1", TranslatableText("scepter.modifier.$nextInLine")).formatted(Formatting.GRAY))
-                list.add(LiteralText.EMPTY)
+                list.add(AcText.translatable("container.imbuing_table.modifier_max").formatted(Formatting.RED))
+                list.add(AcText.translatable("container.imbuing_table.next_recipe_1", AcText.translatable("scepter.modifier.$nextInLine")).formatted(Formatting.GRAY))
+                list.add(AcText.empty())
             }
             if (player.experienceLevel < power){
-                list.add(TranslatableText("container.enchant.level.requirement", power).formatted(Formatting.RED))
+                list.add(AcText.translatable("container.enchant.level.requirement", power).formatted(Formatting.RED))
             } else {
                 val mutableText2 =
-                    if (power == 1) TranslatableText("container.enchant.level.one") else TranslatableText(
+                    if (power == 1) AcText.translatable("container.enchant.level.one") else AcText.translatable(
                         "container.enchant.level.many",
                         power
                     )
@@ -1135,8 +1136,8 @@ class ImbuingTableScreenHandler(
         }
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
-            val textName: MutableText = TranslatableText("scepter.modifier.$nextInLine")
-            return TranslatableText("container.enchant.clue", textName.formatted(Formatting.WHITE))
+            val textName: MutableText = AcText.translatable("scepter.modifier.$nextInLine")
+            return AcText.translatable("container.enchant.clue", textName.formatted(Formatting.WHITE))
         }
     }
 
@@ -1175,9 +1176,9 @@ class ImbuingTableScreenHandler(
 
     }
 
-    class LevelLowErrorResult(private val augment: String,pow: Int): ErrorResult(listOf(TranslatableText("container.imbuing_table.level_low").formatted(Formatting.RED)),
-        LiteralText(augment),
-        LiteralText(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
+    class LevelLowErrorResult(private val augment: String, pow: Int): ErrorResult(listOf(AcText.translatable("container.imbuing_table.level_low").formatted(Formatting.RED)),
+        AcText.literal(augment),
+        AcText.literal(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
         pow,
         pow) {
 
@@ -1195,9 +1196,9 @@ class ImbuingTableScreenHandler(
         }
     }
 
-    class ScepterLowErrorResult(private val augment: String, pow: Int): ErrorResult(listOf(TranslatableText("container.imbuing_table.scepter_low").formatted(Formatting.RED)),
-        LiteralText(augment),
-        LiteralText(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
+    class ScepterLowErrorResult(private val augment: String, pow: Int): ErrorResult(listOf(AcText.translatable("container.imbuing_table.scepter_low").formatted(Formatting.RED)),
+        AcText.literal(augment),
+        AcText.literal(augment).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default"))),
         pow,
         pow) {
 

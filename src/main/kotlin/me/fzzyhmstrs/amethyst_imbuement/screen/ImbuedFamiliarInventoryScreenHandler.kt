@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuedFamiliarEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -152,7 +153,7 @@ class ImbuedFamiliarInventoryScreenHandler(
         val followCheck = familiar.followMode.fromIndex(buf.readByte().toInt())
         val attackCheck = familiar.attackMode.fromIndex(buf.readByte().toInt())
         if (nameCheck != familiar.name.string){
-            familiar.customName = Text.literal(nameCheck)
+            familiar.customName = AcText.literal(nameCheck)
         }
         if (variantCheck != Registry.CAT_VARIANT.getId(familiar.getVariant())){
             familiar.setVariant(Registry.CAT_VARIANT.get(variantCheck)?:familiar.getVariant())

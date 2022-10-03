@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -8,9 +9,7 @@ import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Matrix4f
@@ -156,9 +155,11 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                 val u = mouseX - (i + 34)
                 val v = mouseY - (j + 33 + 11 * b)
                 val button1Text: Text = if(b < 2){
-                    TranslatableText("container.altar_of_experience_button_a").append(LiteralText(xp[b].toString())).append(TranslatableText("container.altar_of_experience_button_b"))
+                    AcText.translatable("container.altar_of_experience_button_a").append(AcText.literal(xp[b].toString())).append(
+                        AcText.translatable("container.altar_of_experience_button_b"))
                 } else {
-                    TranslatableText("container.altar_of_experience_button_c").append(LiteralText(xp[b].toString())).append(TranslatableText("container.altar_of_experience_button_b"))
+                    AcText.translatable("container.altar_of_experience_button_c").append(AcText.literal(xp[b].toString())).append(
+                        AcText.translatable("container.altar_of_experience_button_b"))
                 }
                 if (u >= 0 && v >= 0 && u < 108 && v < 11) {
                     this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 188, 124, 11)
@@ -182,7 +183,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         //super.drawForeground(matrices, mouseX, mouseY)
         val storedXp = handler.getSyncedStoredXp()
         val maxXp = handler.getSyncedMaxXp()
-        val text = TranslatableText("container.altar_of_experience_1").append(LiteralText("$storedXp/$maxXp"))
+        val text = AcText.translatable("container.altar_of_experience_1").append(AcText.literal("$storedXp/$maxXp"))
         if (text != null) {
             val k = backgroundWidth/2.0f - this.textRenderer.getWidth(text)/2.0f
             val k2 = backgroundWidth/2.0f + this.textRenderer.getWidth(text)/2.0f
@@ -219,14 +220,14 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                     mouseY.toDouble()
                 )) continue
             val tooltipText = if (j < 2){
-                TranslatableText("container.altar_of_experience_tooltip_1").formatted(Formatting.WHITE)
+                AcText.translatable("container.altar_of_experience_tooltip_1").formatted(Formatting.WHITE)
             } else {
-                TranslatableText("container.altar_of_experience_tooltip_2").formatted(Formatting.WHITE)
+                AcText.translatable("container.altar_of_experience_tooltip_2").formatted(Formatting.WHITE)
             }
             val tooltipText2 = if (!shifted){
-                TranslatableText("container.altar_of_experience_tooltip_3").formatted(Formatting.ITALIC)
+                AcText.translatable("container.altar_of_experience_tooltip_3").formatted(Formatting.ITALIC)
             } else {
-                TranslatableText("container.altar_of_experience_tooltip_4").formatted(Formatting.ITALIC)
+                AcText.translatable("container.altar_of_experience_tooltip_4").formatted(Formatting.ITALIC)
             }
 
             val tooltipList = listOf(
