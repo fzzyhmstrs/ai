@@ -24,6 +24,6 @@ class ImbuedFamiliarEntityRenderer (context: EntityRendererFactory.Context) :
     }
 
     init {
-        //addFeature(CatCollarFeatureRenderer(this, context.modelLoader))
+        addFeature(ImbuedFamiliarArmorFeatureRenderer(this, context.modelLoader))
     }
 }
