@@ -87,15 +87,15 @@ dependencies {
     }
     include("maven.modrinth:amethyst-core:0.2.3+1.19")*/
 
-    modImplementation(":amethyst_core-0.3.2+1.19"){
+    modImplementation(":amethyst_core-0.3.3+1.19"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-0.3.2+1.19")
+    include(":amethyst_core-0.3.3+1.19")
 
-    modImplementation("maven.modrinth:coloredglowlib:1.4.0"){
+/*    modImplementation("maven.modrinth:coloredglowlib:1.4.0"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:coloredglowlib:1.4.0")
+    include("maven.modrinth:coloredglowlib:1.4.0")*/
 
     modImplementation("io.github.ladysnake:PlayerAbilityLib:1.6.0"){
         exclude("net.fabricmc.fabric-api")
