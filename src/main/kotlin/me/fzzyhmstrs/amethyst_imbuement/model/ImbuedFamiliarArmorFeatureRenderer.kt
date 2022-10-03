@@ -53,7 +53,7 @@ class ImbuedFamiliarArmorFeatureRenderer(
             o = 1.0f
             p = 1.0f
         }
-        val vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(familiarEntity.catArmorTex))
+        val vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(familiarEntity.getCatArmorTex(itemStack)))
         model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, n, o, p, 1.0f)
     }
 }

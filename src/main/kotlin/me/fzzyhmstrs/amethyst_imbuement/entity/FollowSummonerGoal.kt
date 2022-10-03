@@ -6,13 +6,14 @@ import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker
 import net.minecraft.entity.ai.pathing.PathNodeType
+import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.WorldView
 import kotlin.math.abs
 
 open class FollowSummonerGoal(
-    private val summoned: GolemEntity,
+    private val summoned: PathAwareEntity,
     private val summoner: LivingEntity,
     private val speed: Double,
     private val minDistance: Float,

@@ -20,27 +20,36 @@ import net.minecraft.screen.slot.Slot
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
+
+private fun buildFamiliar(buf: PacketByteBuf, world: World): ImbuedFamiliarEntity{
+    val id = buf.readInt() //familiar ID 2
+    val entity = world.getEntityById(id)
+    val fallback = ImbuedFamiliarEntity(RegisterEntity.IMBUED_FAMILIAR_ENTITY,
+        world,
+        null,
+        buf.readDouble(), //modDamage
+        buf.readDouble(), //modHealth
+        buf.readInt(), //invSlots
+        buf.readInt(), //level
+        buf.readInt(), //followMode
+        buf.readInt()) //attackMode
+    return if (entity is ImbuedFamiliarEntity){entity} else {fallback}
+
+}
 
 class ImbuedFamiliarInventoryScreenHandler(
     syncId: Int,
-    private val familiar: ImbuedFamiliarEntity,
     val familiarId: Int,
+    private val familiar: ImbuedFamiliarEntity,
     playerInventory: PlayerInventory,
     private val context: ScreenHandlerContext):
     ScreenHandler(RegisterHandler.FAMILIAR_SCREEN_HANDLER,syncId) {
 
         constructor(syncId: Int, playerInventory: PlayerInventory, buf: PacketByteBuf):
                 this(syncId,
-                    ImbuedFamiliarEntity(RegisterEntity.IMBUED_FAMILIAR_ENTITY,
-                        playerInventory.player.world,
-                        null,
-                        buf.readDouble(), //modDamage
-                        buf.readDouble(), //modHealth
-                        buf.readInt(), //invSlots
-                        buf.readInt(), //level
-                        buf.readInt(), //followMode
-                        buf.readInt()), //attackMode
                     buf.readInt(), //familiarId
+                    buildFamiliar(buf,playerInventory.player.world),
                     playerInventory,
                     ScreenHandlerContext.EMPTY)
 
@@ -51,7 +60,7 @@ class ImbuedFamiliarInventoryScreenHandler(
 
     init{
         cat.set(catMap.getOrDefault(familiar.getVariant(),0))
-        addSlot(object : Slot(inventory, 0, 8, 18) {
+        addSlot(object : FamiliarSlot(inventory, 0, 8, 18) {
             override fun canInsert(stack: ItemStack): Boolean {
                 return familiar.isHorseArmor(stack)
             }
@@ -67,7 +76,7 @@ class ImbuedFamiliarInventoryScreenHandler(
         for (i in 1 until inventory.size()){
             val xOffset = (i-1)/3
             val yOffset = (i-1)%3
-            addSlot(Slot(inventory, i, 80 + xOffset * 18, 18 + yOffset * 18))
+            addSlot(FamiliarSlot(inventory, i, 80 + xOffset * 18, 18 + yOffset * 18))
 
         }
         var k = 0
@@ -137,25 +146,43 @@ class ImbuedFamiliarInventoryScreenHandler(
         return itemStack
     }
 
+    fun disableFamiliarSlots(){
+        for (i in 0 until inventory.size()){
+            val slot = slots[i]
+            if (slot is FamiliarSlot){
+                slot.disable()
+            }
+        }
+    }
+    fun enableFamiliarSlots(){
+        for (i in 0 until inventory.size()){
+            val slot = slots[i]
+            if (slot is FamiliarSlot){
+                slot.enable()
+            }
+        }
+    }
+    fun getChestSlots(): Int{
+        return inventory.size()-1
+    }
+
 
     override fun canUse(player: PlayerEntity): Boolean {
         return true
     }
 
     override fun close(player: PlayerEntity?) {
-        super.close(player)
         this.inventory.onClose(player)
+        super.close(player)
     }
 
-    private fun processUpdate(buf: PacketByteBuf){
-        val nameCheck = buf.readString()
-        val variantCheck = buf.readIdentifier()
-        val followCheck = familiar.followMode.fromIndex(buf.readByte().toInt())
-        val attackCheck = familiar.attackMode.fromIndex(buf.readByte().toInt())
+    internal fun processUpdate(nameCheck: String, variantCheck: Identifier, followCheck: ImbuedFamiliarEntity.FollowMode, attackCheck: ImbuedFamiliarEntity.AttackMode){
+
         if (nameCheck != familiar.name.string){
             familiar.customName = AcText.literal(nameCheck)
         }
         if (variantCheck != Registry.CAT_VARIANT.getId(familiar.getVariant())){
+            println("whee")
             familiar.setVariant(Registry.CAT_VARIANT.get(variantCheck)?:familiar.getVariant())
         }
         if (followCheck != familiar.followMode){
@@ -164,6 +191,23 @@ class ImbuedFamiliarInventoryScreenHandler(
         if (attackCheck != familiar.attackMode){
             familiar.attackMode = attackCheck
         }
+    }
+
+    private open class FamiliarSlot(inventory: Inventory, index: Int, x: Int, y: Int): Slot(inventory,index, x, y){
+        private var enabled = true
+
+        fun disable(){
+            enabled = false
+        }
+
+        fun enable(){
+            enabled = true
+        }
+
+        override fun isEnabled(): Boolean {
+            return enabled
+        }
+
     }
 
     companion object{
@@ -182,14 +226,18 @@ class ImbuedFamiliarInventoryScreenHandler(
             CatVariant.WHITE to 10
         )
 
-
-
         val UPDATE_FAMILIAR =Identifier(AI.MOD_ID,"update_familiar")
         fun registerServer(){
-            ServerPlayNetworking.registerGlobalReceiver(UPDATE_FAMILIAR) { _, player, _, buf, _ ->
+            ServerPlayNetworking.registerGlobalReceiver(UPDATE_FAMILIAR) { server, player, _, buf, _ ->
                 val handler = player.currentScreenHandler
                 if (handler is ImbuedFamiliarInventoryScreenHandler){
-                    handler.processUpdate(buf)
+                    val nameCheck = buf.readString()
+                    val variantCheck = buf.readIdentifier()
+                    val followCheck = handler.familiar.followMode.fromIndex(buf.readByte().toInt())
+                    val attackCheck = handler.familiar.attackMode.fromIndex(buf.readByte().toInt())
+                    server.execute {
+                        handler.processUpdate(nameCheck, variantCheck, followCheck, attackCheck)
+                    }
                 }
             }
         }
