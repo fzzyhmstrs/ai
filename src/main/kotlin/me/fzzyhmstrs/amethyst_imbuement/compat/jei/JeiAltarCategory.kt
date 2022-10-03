@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
@@ -33,7 +34,7 @@ class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Altar
     }
 
     override fun getTitle(): Text {
-        return Text.translatable("recipe.enhancing")
+        return AcText.translatable("recipe.enhancing")
     }
 
     override fun getBackground(): IDrawable {

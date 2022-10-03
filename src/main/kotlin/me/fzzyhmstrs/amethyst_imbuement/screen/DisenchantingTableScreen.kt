@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -89,8 +90,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             }
             val string = "" + handler.disenchantCost[0]
             val s = 86 - textRenderer.getWidth(string)
-            val str = Enchantment.byRawId(r)?.getName(lvl)?.string?: Text.translatable("container.disenchanting_table.button.missing_enchantment").toString()
-            val stringVisitable: StringVisitable = Text.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
+            val str = Enchantment.byRawId(r)?.getName(lvl)?.string?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
+            val stringVisitable: StringVisitable = AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             var t = 6839882
             var t2 = 0x404040//6839882
             val oOfst = handler.disenchantCost[0] - 1
@@ -241,14 +242,14 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         for (j in 0..2) {
             if (!isPointWithinBounds(60, 14 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
             val tooltipText = if (handler.disenchantCost[0] < 0){
-                Text.translatable("container.disenchanting_table.tooltip.limit").formatted(Formatting.WHITE)
+                AcText.translatable("container.disenchanting_table.tooltip.limit").formatted(Formatting.WHITE)
             } else if ((player.experienceLevel) < handler.disenchantCost[0] && j == 1){
-                Text.translatable("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
+                AcText.translatable("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
             }else if ((!handler.getSlotStack(1).isOf(Items.BOOK)) && j == 1){
-                Text.translatable("container.disenchanting_table.tooltip2.book").formatted(Formatting.WHITE)
+                AcText.translatable("container.disenchanting_table.tooltip2.book").formatted(Formatting.WHITE)
             } else {
                 if (handler.enchantmentId[j] == -1) continue
-                Text.translatable("container.disenchanting_table.tooltip${j + 1}").formatted(Formatting.WHITE)
+                AcText.translatable("container.disenchanting_table.tooltip${j + 1}").formatted(Formatting.WHITE)
             }
             this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
             break

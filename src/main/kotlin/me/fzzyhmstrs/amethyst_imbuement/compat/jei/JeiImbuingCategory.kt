@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
@@ -43,7 +44,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
     }
 
     override fun getTitle(): Text {
-        return Text.translatable("recipe.imbuing")
+        return AcText.translatable("recipe.imbuing")
     }
 
     override fun getBackground(): IDrawable {
@@ -66,10 +67,10 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val costText: OrderedText
         val costOffset: Int
         if(cost > 99){
-            costText = Text.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 113 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         } else{
-            costText = Text.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         }
 

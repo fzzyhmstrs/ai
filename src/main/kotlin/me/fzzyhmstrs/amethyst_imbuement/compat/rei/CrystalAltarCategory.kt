@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
@@ -25,7 +26,7 @@ class CrystalAltarCategory: DisplayCategory<CrystalAltarDisplay> {
     }
 
     override fun getTitle(): Text {
-        return Text.translatable("recipe.enhancing")
+        return AcText.translatable("recipe.enhancing")
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<CrystalAltarDisplay> {

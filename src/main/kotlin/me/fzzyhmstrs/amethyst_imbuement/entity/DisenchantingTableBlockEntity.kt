@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -99,7 +100,7 @@ class DisenchantingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEnti
     override fun getName(): Text? {
         return if (customName != null) {
             customName
-        } else Text.translatable("container.disenchanting_table")
+        } else AcText.translatable("container.disenchanting_table")
     }
 
     fun setCustomName(value: Text?) {

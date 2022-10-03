@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
@@ -22,7 +23,7 @@ class SoulOfTheConduitAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equip
                     stack,
                     RegisterEnchantment.SOUL_OF_THE_CONDUIT,
                     user,
-                    Text.translatable("augment_damage.soul_of_the_conduit.burnout")
+                    AcText.translatable("augment_damage.soul_of_the_conduit.burnout")
                 )
             }
         }

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
@@ -16,14 +17,14 @@ class HackerText(private val baseText: String, private val speed: Int) {
     val hackerText: MutableText
         get() {
             if (counter == totalCount) {
-                return Text.literal(baseText)
+                return AcText.literal(baseText)
             }
             counter++
             val indexOffset = counter / speed
             val start = wholeTextLen - baseTextLen - indexOffset
             val end = wholeTextLen - indexOffset
             val subStr = wholeText.substring(start, end)
-            return Text.literal(subStr)
+            return AcText.literal(subStr)
         }
 
     init {

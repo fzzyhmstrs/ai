@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper.runHandlerViewer
@@ -27,8 +28,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player
-    private val previousRecipe = Text.literal(Text.translatable("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
-    private val nextRecipe = Text.literal(Text.translatable("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val previousRecipe = AcText.literal(AcText.translatable("container.imbuing_table.previous_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
+    private val nextRecipe = AcText.literal(AcText.translatable("container.imbuing_table.next_recipe").string).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")).withItalic(true))
     private val recipesOffset = ModCompatHelper.getScreenHandlerOffset()
 
     override fun isClickOutsideBounds(mouseX: Double, mouseY: Double, left: Int, top: Int, button: Int): Boolean {
@@ -314,15 +315,15 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 )) continue
             val list = if(j == 0 && handler.resultsCanUp){
                 val tempList: MutableList<Text> = mutableListOf()
-                tempList.add(Text.translatable("container.imbuing_table.previous_recipe"))
-                tempList.add(Text.empty())
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList.add(AcText.translatable("container.imbuing_table.previous_recipe"))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
                 tempList
             } else if (j == 2 && handler.resultsCanDown){
                 val tempList: MutableList<Text> = mutableListOf()
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe"))
-                tempList.add(Text.empty())
-                tempList.add(Text.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
+                tempList.add(AcText.translatable("container.imbuing_table.next_recipe"))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.next_recipe_1",result.nextRecipeTooltipText(player, handler)).formatted(Formatting.GRAY).formatted(Formatting.ITALIC))
                 tempList
             } else {
                 result.tooltipList(player, handler)

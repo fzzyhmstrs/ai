@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
 import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
@@ -55,7 +56,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
                 val nbtCompound2: NbtCompound = mapStack.getOrCreateSubNbt("display")
                 nbtCompound2.putInt("MapColor", type.tint)
             }
-            mapStack.setCustomName(Text.translatable(type.nameKey))
+            mapStack.setCustomName(AcText.translatable(type.nameKey))
             if (!user.inventory.insertStack(mapStack)) {
                 user.dropItem(mapStack, false)
             }

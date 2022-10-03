@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -31,7 +32,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
         val baseText = super.getName(level) as MutableText
         if (!enabled) {
             return baseText
-                .append(Text.translatable("scepter.augment.disabled"))
+                .append(AcText.translatable("scepter.augment.disabled"))
                 .formatted(Formatting.DARK_RED)
                 .formatted(Formatting.STRIKETHROUGH)
         }

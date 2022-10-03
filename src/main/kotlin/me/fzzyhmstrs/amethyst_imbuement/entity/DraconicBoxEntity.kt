@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.emafire003.dev.coloredglowlib.ColoredGlowLib
 import me.fzzyhmstrs.amethyst_imbuement.augment.DraconicVisionAugment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -32,12 +31,12 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
         entityBlock = block
         maxAge = age
         startingBlockPos = bp
-        if (DraconicVisionAugment.oreIsRainbow(entityBlock)){
+        /*if (DraconicVisionAugment.oreIsRainbow(entityBlock)){
             ColoredGlowLib.setRainbowColorToEntity(this,true)
         } else {
             val color = DraconicVisionAugment.oreGlowColor(entityBlock)
             ColoredGlowLib.setColorToEntity(this, color)
-        }
+        }*/
     }
 
     fun extendBoxLife(time: Int) {
@@ -78,7 +77,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
             yaw = 0.0F
         }
         if (this.age >= maxAge || world.getBlockState(blockPos).isOf(Blocks.AIR)) {
-            ColoredGlowLib.removeColor(this)
+            //ColoredGlowLib.removeColor(this)
             DraconicVisionAugment.removeBoxFromMap(startingBlockPos)
             //world.playSound(null,blockPos,SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP,SoundCategory.NEUTRAL,1.0F,1.0F)
             this.discard()
