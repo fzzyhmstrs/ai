@@ -29,9 +29,4 @@ class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     override fun isAvailableForEnchantedBookOffer(): Boolean {
         return true
     }
-
-    fun isEnabled(): Boolean{
-        return enabled
-    }
-
 }

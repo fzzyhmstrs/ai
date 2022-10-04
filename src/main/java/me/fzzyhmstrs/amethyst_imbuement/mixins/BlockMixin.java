@@ -30,7 +30,7 @@ public class BlockMixin {
         if (!state.isOf(Blocks.SLIME_BLOCK)) {
             if ((entity instanceof PlayerEntity playerEntity)) {
                 if (!playerEntity.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
-                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(), playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0) {
+                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(), playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0 && RegisterEnchantment.INSTANCE.getSLIMY().isEnabled()) {
                         Block slimeBlock = Blocks.SLIME_BLOCK;
                         slimeBlock.onLandedUpon(world, slimeBlock.getDefaultState(), pos, entity, fallDistance);
                         ci.cancel();
@@ -49,7 +49,7 @@ public class BlockMixin {
                     ((PlayerEntity) entity).removeStatusEffect(RegisterStatus.INSTANCE.getLEAPT());
                 }
 
-                if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(), playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0) {
+                if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSLIMY(), playerEntity.getEquippedStack(EquipmentSlot.FEET)) > 0 && RegisterEnchantment.INSTANCE.getSLIMY().isEnabled()) {
                     if (!entity.bypassesLandingEffects()) {
                         bounce(entity);
                         ci.cancel();

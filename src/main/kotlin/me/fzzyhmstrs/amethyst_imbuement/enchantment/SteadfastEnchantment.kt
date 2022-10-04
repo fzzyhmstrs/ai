@@ -23,8 +23,4 @@ class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
         return (stack.item is ArmorItem) && enabled
     }
 
-    fun isEnabled(): Boolean{
-        return enabled
-    }
-
 }

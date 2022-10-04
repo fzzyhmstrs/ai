@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack
 class FriendlyAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl, *slot) {
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
-
+        if (!enabled) return false
         val stacks = TrinketUtil.getTrinketStacks(user)
         stacks.forEach {
             if (it.item is ImbuedJewelryItem){
