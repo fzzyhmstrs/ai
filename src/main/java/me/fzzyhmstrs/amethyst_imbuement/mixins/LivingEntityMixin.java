@@ -247,13 +247,17 @@ public abstract class LivingEntityMixin extends Entity {
             ItemStack stack2 = this.getEquippedStack(equipmentSlot);
             if (ItemStack.areEqual(stack2, stack1)) continue;
             if (!stack1.isEmpty()) {
-                stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack1);
+                if (RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled()) {
+                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack1);
+                }
                 if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
                     stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack1);
                 }
             }
             if (!stack2.isEmpty()) {
-                stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack2);
+                if (RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled()) {
+                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack2);
+                }
                 if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
                     stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack2);
                 }

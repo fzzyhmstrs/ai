@@ -18,25 +18,9 @@ import net.minecraft.util.registry.Registry
 
 class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_HEAD, *slot) {
 
-    private val enabled: Boolean by lazy {
-        checkEnabled()
-    }
-
-    private fun checkEnabled(): Boolean{
+    override fun checkEnabled(): Boolean{
         val id = Registry.ENCHANTMENT.getId(this)?:return true
         return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.path,true)
-    }
-
-
-    override fun getName(level: Int): Text {
-        val baseText = super.getName(level) as MutableText
-        if (!enabled) {
-            return baseText
-                .append(AcText.translatable("scepter.augment.disabled"))
-                .formatted(Formatting.DARK_RED)
-                .formatted(Formatting.STRIKETHROUGH)
-        }
-        return baseText
     }
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {

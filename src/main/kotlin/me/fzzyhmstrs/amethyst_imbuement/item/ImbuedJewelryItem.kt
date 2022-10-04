@@ -35,7 +35,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
     override fun onEquip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         if(entity.world.isClient()) return
         super.onEquip(stack, slot, entity)
-        val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+        val shieldLevel = if(RegisterEnchantment.SHIELDING.isEnabled()) {EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)} else {0}
         //println(ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
         ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
     }
@@ -43,7 +43,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
     override fun onUnequip(stack: ItemStack,slot: SlotReference, entity: LivingEntity) {
         if(entity.world.isClient()) return
         super.onUnequip(stack,slot,entity)
-        val shieldLevel = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+        val shieldLevel = if(RegisterEnchantment.SHIELDING.isEnabled()) {EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)} else {0}
         //println(ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
         ShieldingAugment.removeTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
     }

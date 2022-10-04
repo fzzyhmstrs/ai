@@ -34,10 +34,6 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
         return super.isAcceptableItem(stack) && enabled
     }
 
-    fun isEnabled(): Boolean{
-        return enabled
-    }
-
     companion object{
 
         private val blockMap: MutableMap<Int,MutableList<BlockPos>> = mutableMapOf()

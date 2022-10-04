@@ -76,7 +76,7 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
             if (owner instanceof LivingEntity) {
                 ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
                 int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
-                if (lvl > 0 && headhunterEntity != null){
+                if (lvl > 0 && headhunterEntity != null && RegisterEnchantment.INSTANCE.getHEADHUNTER().isEnabled()){
                     amount = round(HeadhunterAugment.Companion.checkHeadhunterHit(headhunterEntity,(PersistentProjectileEntity)(Object) this,amount));
                     headhunterEntity = null;
                     //System.out.println(amount);

@@ -19,6 +19,7 @@ import net.minecraft.text.Text
 class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
+        if (!enabled) return false
         val world = user.world
         if (RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack, world, user as PlayerEntity, 240, AcText.translatable("augment_damage.guardian.check_can_use"))) {
             if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, world, user, 240)) {
