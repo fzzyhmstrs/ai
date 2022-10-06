@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:furious_scepter",
-  "tier_2": "amethyst_imbuement:sparking_scepter",
-  "tier_3": "amethyst_imbuement:equinox",
+  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"},{modifier_id:\"amethyst_imbuement:lightning_aspect\"},{modifier_id:\"amethyst_imbuement:enraged\"}]}",
   "spec": "Lightning Magic",
   "spells": "Lightning Bolt",
   "mods": "Lightning Aspect, Elemental, Enraged"
