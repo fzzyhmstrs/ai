@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:crafting_table",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "minecraft:crafting_table",
-      "result_item": "amethyst_imbuement:builders_scepter",
+      "result_item": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
       "cost_text": "$(l)Level Cost: $(2)15$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:builders_scepter",
+      "result_item": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
       "cost_text": "$(l)Level Cost: $(2)7$()"
     }
   ]
