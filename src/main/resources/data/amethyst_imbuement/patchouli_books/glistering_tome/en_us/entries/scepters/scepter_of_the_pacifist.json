@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:enduring_scepter",
-      "anc_b": "amethyst_imbuement:graceful_scepter",
-      "input_item": "amethyst_imbuement:scepter_of_the_pacifist",
-      "desc_a": "amethyst_imbuement:redemption"
+      "anc_a": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_b": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]}",
+      "desc_a": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:poppy",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "minecraft:poppy",
-      "result_item": "amethyst_imbuement:scepter_of_the_pacifist",
+      "result_item": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]}",
       "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:scepter_of_the_pacifist",
+      "result_item": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]}",
       "cost_text": "$(l)Level Cost: $(2)7$()"
     }
   ]
