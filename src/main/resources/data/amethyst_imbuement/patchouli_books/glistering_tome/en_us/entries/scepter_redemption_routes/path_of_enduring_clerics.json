@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter",
-  "tier_2": "amethyst_imbuement:clerics_scepter",
-  "tier_3": "amethyst_imbuement:redemption",
+  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_2": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:_enduring\"},{modifier_id:\"amethyst_imbuement:healing\"}]}",
   "spec": "Healing Magic",
   "spells": "Minor Heal",
   "mods": "Healers Grace/Healers Pact, Healing, Enduring"
