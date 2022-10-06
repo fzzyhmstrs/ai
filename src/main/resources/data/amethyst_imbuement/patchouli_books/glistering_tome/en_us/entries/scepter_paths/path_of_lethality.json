@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_path",
-  "tier_1": "amethyst_imbuement:furious_scepter,amethyst_imbuement:dangerous_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_blades,amethyst_imbuement:corrupted_scepter",
-  "tier_3": "amethyst_imbuement:lethality",
+  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]},amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]},amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
   "spec": "Brutal Combat",
   "spells": "No unique spells",
   "mods": "Possible unique modifiers: Lethal/Pact of Lethality, Corrupted, Blade Aspect"
