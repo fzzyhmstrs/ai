@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3",
-      "anc_a": "amethyst_imbuement:travelers_scepter",
-      "anc_b": "amethyst_imbuement:scepter_of_recall",
-      "anc_c": "amethyst_imbuement:builders_scepter",
-      "input_item": "amethyst_imbuement:sojourn"
+      "anc_a": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
+      "anc_b": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+      "anc_c": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+      "input_item": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
@@ -31,7 +31,7 @@
       "craft_g_item": "amethyst_imbuement:inquisitive_gem",
       "craft_h_item": "amethyst_imbuement:garnet",
       "craft_i_item": "minecraft:cartography_table",
-      "result_item": "amethyst_imbuement:sojourn",
+      "result_item": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}",
       "cost_text": "$(l)Level Cost: $(2)37$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "amethyst_imbuement:gem_dust",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:resonance",
+      "result_item": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}",
       "cost_text": "$(l)Level Cost: $(2)20$()"
     }
   ]
