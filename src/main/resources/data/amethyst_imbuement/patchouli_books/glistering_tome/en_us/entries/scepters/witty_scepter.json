@@ -10,12 +10,12 @@
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
-"input_item": "amethyst_imbuement:witty_scepter",
-"desc_a": "amethyst_imbuement:scepter_of_summoning",
-"desc_b": "amethyst_imbuement:scepter_of_insight",
-"desc_c": "amethyst_imbuement:travelers_scepter",
-"desc_d": "amethyst_imbuement:scepter_of_recall",
-"desc_e": "amethyst_imbuement:builders_scepter"
+"input_item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"desc_a": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
+"desc_b": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+"desc_c": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
+"desc_d": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+"desc_e": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}"
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",
@@ -33,7 +33,7 @@
   "craft_g_item": "minecraft:air",
   "craft_h_item": "minecraft:writable_book",
   "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:witty_scepter",
+  "result_item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
   "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]
