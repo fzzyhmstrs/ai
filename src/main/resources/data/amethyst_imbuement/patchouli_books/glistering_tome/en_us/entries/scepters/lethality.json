@@ -10,8 +10,8 @@
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-"anc_b": "amethyst_imbuement:corrupted_scepter",
-"anc_c": "amethyst_imbuement:scepter_of_blades",
+"anc_b": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+"anc_c": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
 "input_item": "amethyst_imbuement:lethality"
 },
 {
@@ -30,7 +30,7 @@
   "craft_g_item": "amethyst_imbuement:lethal_gem",
   "craft_h_item": "amethyst_imbuement:garnet",
   "craft_i_item": "amethyst_imbuement:garnet_sword",
-  "result_item": "amethyst_imbuement:lethality",
+  "result_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
   "cost_text": "$(l)Level Cost: $(2)45$()"
 },
   {
@@ -49,7 +49,7 @@
     "craft_g_item": "amethyst_imbuement:gem_dust",
     "craft_h_item": "amethyst_imbuement:gem_dust",
     "craft_i_item": "amethyst_imbuement:gem_dust",
-    "result_item": "amethyst_imbuement:lethality",
+    "result_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
     "cost_text": "$(l)Level Cost: $(2)29$()"
   }
 ]
