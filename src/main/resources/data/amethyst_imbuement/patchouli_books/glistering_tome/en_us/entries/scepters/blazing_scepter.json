@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:blaze_powder",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "minecraft:blaze_powder",
-      "result_item": "amethyst_imbuement:blazing_scepter",
+      "result_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)19$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:blazing_scepter",
+      "result_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)10$()"
     }
   ]
