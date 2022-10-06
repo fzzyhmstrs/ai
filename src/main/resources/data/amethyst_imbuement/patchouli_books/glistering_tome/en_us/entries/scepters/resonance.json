@@ -10,9 +10,9 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-      "anc_b": "amethyst_imbuement:scepter_of_summoning",
-      "anc_c": "amethyst_imbuement:scepter_of_insight",
-      "input_item": "amethyst_imbuement:resonance"
+      "anc_b": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
+      "anc_c": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+      "input_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
@@ -30,7 +30,7 @@
       "craft_g_item": "amethyst_imbuement:brilliant_diamond",
       "craft_h_item": "amethyst_imbuement:garnet",
       "craft_i_item": "tag:c:steel_blocks",
-      "result_item": "amethyst_imbuement:resonance",
+      "result_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
       "cost_text": "$(l)Level Cost: $(2)39$()"
     },
     {
@@ -49,7 +49,7 @@
       "craft_g_item": "amethyst_imbuement:gem_dust",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:resonance",
+      "result_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
       "cost_text": "$(l)Level Cost: $(2)21$()"
     }
   ]
