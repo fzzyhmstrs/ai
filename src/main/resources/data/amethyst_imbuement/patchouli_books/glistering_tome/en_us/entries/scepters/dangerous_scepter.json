@@ -10,12 +10,12 @@
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
-"input_item": "amethyst_imbuement:dangerous_scepter",
-"desc_a": "amethyst_imbuement:blazing_scepter",
-"desc_b": "amethyst_imbuement:sparking_scepter",
-"desc_c": "amethyst_imbuement:frosted_scepter",
-"desc_d": "amethyst_imbuement:corrupted_scepter",
-"desc_e": "amethyst_imbuement:scepter_of_blades"
+"input_item": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"desc_a": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
+"desc_b": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
+"desc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
+"desc_d": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+"desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}"
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",
