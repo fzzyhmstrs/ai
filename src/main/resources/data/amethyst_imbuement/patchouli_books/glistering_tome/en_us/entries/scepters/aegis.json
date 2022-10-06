@@ -10,9 +10,9 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-      "anc_b": "amethyst_imbuement:scepter_of_the_paladin",
-      "anc_c": "amethyst_imbuement:scepter_of_the_vanguard",
-      "input_item": "amethyst_imbuement:aegis"
+      "anc_b": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_c": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "input_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
