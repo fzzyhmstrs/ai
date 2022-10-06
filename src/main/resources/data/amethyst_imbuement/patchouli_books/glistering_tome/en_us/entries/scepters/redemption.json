@@ -10,9 +10,9 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3",
-      "anc_a": "amethyst_imbuement:scepter_of_the_pacifist",
-      "anc_b": "amethyst_imbuement:bardic_scepter",
-      "anc_c": "amethyst_imbuement:clerics_scepter",
+      "anc_a": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]}",
+      "anc_b": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_c": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"}]}",
       "input_item": "amethyst_imbuement:redemption"
     },
     {
@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:enchanted_golden_apple",
       "craft_h_item": "amethyst_imbuement:garnet",
       "craft_i_item": "minecraft:golden_apple",
-      "result_item": "amethyst_imbuement:redemption",
+      "result_item": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
       "cost_text": "$(l)Level Cost: $(2)37$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "amethyst_imbuement:gem_dust",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:redemption",
+      "result_item": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
       "cost_text": "$(l)Level Cost: $(2)20$()"
     }
   ]
