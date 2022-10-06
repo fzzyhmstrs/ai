@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_path",
-  "tier_1": "amethyst_imbuement:witty_scepter,amethyst_imbuement:skillful_scepter",
-  "tier_2": "amethyst_imbuement:travelers_scepter,amethyst_imbuement:scepter_of_recall,amethyst_imbuement:builders_scepter",
-  "tier_3": "amethyst_imbuement:sojourn",
+  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]},amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]},amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]},amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}",
   "spec": "Exploration",
   "spells": "Survey, Recall (Scepter of Recall)",
   "mods": "Possible unique modifiers: Traveler, Sojourner, Greater Reach, Builders Aspect"
