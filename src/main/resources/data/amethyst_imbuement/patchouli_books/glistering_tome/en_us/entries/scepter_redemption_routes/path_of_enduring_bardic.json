@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter",
-  "tier_2": "amethyst_imbuement:bardic_scepter",
-  "tier_3": "amethyst_imbuement:redemption",
+  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_2": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:greater_enduring\"},{modifier_id:\"amethyst_core:attuned\"}]}",
   "spec": "Inspiring Magic",
   "spells": "(Unique) Inspiring Song",
   "mods": "Healers Grace/Healers Pact, Greater Enduring, Attuned"
