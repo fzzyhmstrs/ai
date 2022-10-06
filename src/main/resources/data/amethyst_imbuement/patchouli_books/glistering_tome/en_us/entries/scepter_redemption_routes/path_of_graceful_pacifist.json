@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:graceful_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist",
-  "tier_3": "amethyst_imbuement:redemption",
+  "tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:saints_grace\"},{modifier_id:\"amethyst_imbuement:saints_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
   "spec": "Healing Magic",
   "spells": "Bedazzle",
   "mods": "Saints Grace/Saints Pact, Lesser Enduring, Graceful"
