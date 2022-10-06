@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:snow_block",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "minecraft:snow_block",
-      "result_item": "amethyst_imbuement:frosted_scepter",
+      "result_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)19$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:frosted_scepter",
+      "result_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)10$()"
     }
   ]
