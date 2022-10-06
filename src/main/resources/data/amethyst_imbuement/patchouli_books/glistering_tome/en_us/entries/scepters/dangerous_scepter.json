@@ -33,7 +33,7 @@
   "craft_g_item": "minecraft:air",
   "craft_h_item": "minecraft:stone_sword",
   "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:dangerous_scepter",
+  "result_item": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
   "cost_text": "$(l)Level Cost: $(2)7$()"
 }
 ]
