@@ -12,7 +12,7 @@
 "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
 "anc_b": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
 "anc_c": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
-"input_item": "amethyst_imbuement:lethality"
+"input_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",
