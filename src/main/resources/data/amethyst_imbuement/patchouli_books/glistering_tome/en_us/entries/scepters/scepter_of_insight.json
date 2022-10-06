@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:skillful_scepter",
-      "anc_b": "amethyst_imbuement:witty_scepter",
-      "input_item": "amethyst_imbuement:scepter_of_insight",
-      "desc_a": "amethyst_imbuement:resonance"
+      "anc_a": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+      "anc_b": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+      "desc_a": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
@@ -31,7 +31,7 @@
       "craft_g_item": "amethyst_imbuement:mana_potion",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "amethyst_imbuement:mana_potion",
-      "result_item": "amethyst_imbuement:scepter_of_insight",
+      "result_item": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
       "cost_text": "$(l)Level Cost: $(2)23$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:scepter_of_insight",
+      "result_item": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
       "cost_text": "$(l)Level Cost: $(2)15$()"
     }
   ]
