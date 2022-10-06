@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_path",
-  "tier_1": "amethyst_imbuement:graceful_scepter,amethyst_imbuement:enduring_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist,amethyst_imbuement:clerics_scepter,amethyst_imbuement:bardic_scepter",
-  "tier_3": "amethyst_imbuement:redemption",
+  "tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]},amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]},amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"}]},amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
   "spec": "Healing & Support",
   "spells": "Inspiring Song (Bardic Scepter)",
   "mods": "Possible unique modifiers: Healers Grace/Pact, Saints Grace/Pact, Healing"
