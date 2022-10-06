@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:dangerous_scepter",
-      "anc_b": "amethyst_imbuement:furious_scepter",
-      "input_item": "amethyst_imbuement:corrupted_scepter",
-      "desc_a": "amethyst_imbuement:lethality"
+      "anc_a": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+      "anc_b": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+      "input_item": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+      "desc_a": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
