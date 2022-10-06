@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:furious_scepter",
-  "tier_2": "amethyst_imbuement:frosted_scepter",
-  "tier_3": "amethyst_imbuement:equinox",
+ "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"},{modifier_id:\"amethyst_imbuement:ice_aspect\"},{modifier_id:\"amethyst_imbuement:enraged\"}]}",
   "spec": "Ice Magic",
   "spells": "(Unique) Ice Spikes",
   "mods": "Ice Aspect, Elemental, Enraged"
