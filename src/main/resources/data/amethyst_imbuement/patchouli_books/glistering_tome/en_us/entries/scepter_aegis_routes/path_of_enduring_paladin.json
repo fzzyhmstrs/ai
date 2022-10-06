@@ -11,7 +11,7 @@
   "type": "amethyst_imbuement:scepter_route",
   "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
   "tier_2": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
-  "tier_3": "amethyst_imbuement:aegis{modifier_id:\"amethyst_imbuement:champion_of_the_meek\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:champion_of_the_meek\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
   "spec": "Protective Magic",
   "spells": "Fortify",
   "mods": "Champion of the Meek, Enduring, Smiting"
