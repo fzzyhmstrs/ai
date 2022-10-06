@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_insight",
-  "tier_3": "amethyst_imbuement:resonance",
+  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"}]}",
   "spec": "Experience Gain",
   "spells": "Soul Missile, (Unique) Resonate",
   "mods": "Echoing, Insightful, Masterful, Lesser Reach"
