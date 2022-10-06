@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_recall",
-  "tier_3": "amethyst_imbuement:sojourn",
+  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
   "spec": "Expeditions",
   "spells": "(Unique) Survey, (Unique) Recall",
   "mods": "Traveler, Witty, Skillful, Greater Reach"
