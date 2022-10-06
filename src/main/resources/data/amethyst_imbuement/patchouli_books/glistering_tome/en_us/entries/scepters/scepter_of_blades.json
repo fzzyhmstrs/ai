@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:dangerous_scepter",
-      "anc_b": "amethyst_imbuement:furious_scepter",
-      "input_item": "amethyst_imbuement:scepter_of_blades",
-      "desc_a": "amethyst_imbuement:lethality"
+      "anc_a": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+      "anc_b": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
+      "desc_a": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
@@ -31,7 +31,7 @@
       "craft_g_item": "minecraft:diamond_sword",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "minecraft:diamond_sword",
-      "result_item": "amethyst_imbuement:scepter_of_blades",
+      "result_item": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)23$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:scepter_of_blades",
+      "result_item": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)15$()"
     }
   ]
