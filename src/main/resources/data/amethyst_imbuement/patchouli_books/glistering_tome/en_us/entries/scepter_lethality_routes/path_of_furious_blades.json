@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:furious_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_blades",
-  "tier_3": "amethyst_imbuement:lethality",
+  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
   "spec": "Slash Spell Leveling",
   "spells": "Spectral Slash",
   "mods": "Dangerous/Pact of Danger, Blade Aspect, Furious"
