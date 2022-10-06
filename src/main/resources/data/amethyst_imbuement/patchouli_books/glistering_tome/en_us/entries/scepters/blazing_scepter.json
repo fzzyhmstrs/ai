@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:dangerous_scepter",
-      "anc_b": "amethyst_imbuement:furious_scepter",
-      "input_item": "amethyst_imbuement:blazing_scepter",
-      "desc_a": "amethyst_imbuement:equinox"
+      "anc_a": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+      "anc_b": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+      "input_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
+      "desc_a": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
