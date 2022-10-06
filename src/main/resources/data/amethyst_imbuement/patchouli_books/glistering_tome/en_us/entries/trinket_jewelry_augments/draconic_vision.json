@@ -11,10 +11,10 @@
 "type": "amethyst_imbuement:imbuing_recipe",
 "title": "Draconic Vision Imbuing",
 "anchor": "draconic_vision",
-"imbue_a_item": "amethyst_imbuement:pyrite",
-"imbue_b_item": "amethyst_imbuement:imbued_lapis",
-"imbue_c_item": "amethyst_imbuement:imbued_lapis",
-"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"imbue_a_item": "amethyst_imbuement:ametrine",
+"imbue_b_item": "amethyst_imbuement:glowing_fragment",
+"imbue_c_item": "amethyst_imbuement:glowing_fragment",
+"imbue_d_item": "amethyst_imbuement:glowing_fragment",
 "craft_a_item": "minecraft:ender_eye",
 "craft_b_item": "minecraft:dragon_head",
 "craft_c_item": "minecraft:ender_eye",
@@ -25,7 +25,7 @@
 "craft_h_item": "minecraft:dragon_breath",
 "craft_i_item": "minecraft:ender_eye",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:draconic_vision\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)18$()"
+"cost_text": "$(l)Level Cost: $(2)27$()"
 }
 ]
 }
