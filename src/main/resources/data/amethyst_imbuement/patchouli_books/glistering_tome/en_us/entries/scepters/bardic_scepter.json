@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:enduring_scepter",
-      "anc_b": "amethyst_imbuement:graceful_scepter",
-      "input_item": "amethyst_imbuement:bardic_scepter",
-      "desc_a": "amethyst_imbuement:redemption"
+      "anc_a": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_b": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "input_item": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "desc_a": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
