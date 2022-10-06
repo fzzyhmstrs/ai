@@ -10,10 +10,10 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3",
-      "anc_a": "amethyst_imbuement:blazing_scepter",
-      "anc_b": "amethyst_imbuement:sparking_scepter",
-      "anc_c": "amethyst_imbuement:frosted_scepter",
-      "input_item": "amethyst_imbuement:equinox"
+      "anc_a": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
+      "anc_b": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
+      "anc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
+      "input_item": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
