@@ -44,12 +44,15 @@
     "EnchantSweepingMixin",
     "EnchantThornsMixin",
     "EnchantUnbreakingMixin",
+    "ServerPlayerEntityMixin",
     "AnvilScreenHandlerMixin"
   ],
   "client": [
     "HeldItemRendererMixin",
     "InGameHudMixin",
     "ClientPlayNetworkHandlerMixin"
+  ],
+  "server": [
   ],
   "injectors": {
     "defaultRequire": 1

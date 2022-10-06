@@ -107,42 +107,42 @@
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:furious_scepter",
+    "item": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
     "framed": true,
     "x": 52,
     "y": 17
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:dangerous_scepter",
+    "item": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
     "framed": true,
     "x": 75,
     "y": 17
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:witty_scepter",
+    "item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
     "framed": true,
     "x": 52,
     "y": 67
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:skillful_scepter",
+    "item": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
     "framed": true,
     "x": 75,
     "y": 67
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:graceful_scepter",
+    "item": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
     "framed": true,
     "x": 52,
     "y": 119
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:enduring_scepter",
+    "item": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
     "framed": true,
     "x": 75,
     "y": 119
