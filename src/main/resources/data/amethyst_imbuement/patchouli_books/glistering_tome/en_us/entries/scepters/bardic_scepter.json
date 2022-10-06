@@ -31,7 +31,7 @@
       "craft_g_item": "tag:minecraft:music_discs",
       "craft_h_item": "amethyst_imbuement:imbued_quartz",
       "craft_i_item": "tag:minecraft:music_discs",
-      "result_item": "amethyst_imbuement:bardic_scepter",
+      "result_item": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
       "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
@@ -50,7 +50,7 @@
       "craft_g_item": "minecraft:air",
       "craft_h_item": "amethyst_imbuement:gem_dust",
       "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:bardic_scepter",
+      "result_item": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
       "cost_text": "$(l)Level Cost: $(2)7$()"
     }
   ]
