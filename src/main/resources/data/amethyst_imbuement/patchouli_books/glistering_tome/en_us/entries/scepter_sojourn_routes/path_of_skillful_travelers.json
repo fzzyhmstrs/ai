@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter",
-  "tier_2": "amethyst_imbuement:travelers_scepter",
-  "tier_3": "amethyst_imbuement:sojourn",
+  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:sojourner\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
   "spec": "Exploration",
   "spells": "(Unique) Survey, Summon Boat, Summon Strider",
   "mods": "Sojourner, Witty, Skillful"
