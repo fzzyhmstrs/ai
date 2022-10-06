@@ -9,9 +9,9 @@
 },
 {
   "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:witty_scepter",
-  "tier_2": "amethyst_imbuement:scepter_of_summoning",
-  "tier_3": "amethyst_imbuement:resonance",
+  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
   "spec": "Summoning",
   "spells": "Summon Zombie, (Unique) Resonate",
   "mods": "Echoing, Summoners Aspect, Skillful, Witty"
