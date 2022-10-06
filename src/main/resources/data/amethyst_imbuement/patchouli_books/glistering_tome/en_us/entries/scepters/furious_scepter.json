@@ -33,7 +33,7 @@
   "craft_g_item": "minecraft:air",
   "craft_h_item": "minecraft:bow",
   "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:furious_scepter",
+  "result_item": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
   "cost_text": "$(l)Level Cost: $(2)5$()"
 }
 ]
