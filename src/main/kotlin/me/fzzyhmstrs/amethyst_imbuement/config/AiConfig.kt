@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.client.MinecraftClient
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
 
@@ -46,6 +47,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         buf.writeString(gson.toJson(colors))
         buf.writeString(gson.toJson(villages))
         buf.writeString(gson.toJson(enchantments))
+        buf.writeString(gson.toJson(trinkets))
         buf.writeString(gson.toJson(entities))
     }
 
@@ -55,6 +57,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         colors = gson.fromJson(buf.readString(),Colors::class.java)
         villages = gson.fromJson(buf.readString(),Villages::class.java)
         enchantments = gson.fromJson(buf.readString(),Enchantments::class.java)
+        trinkets = gson.fromJson(buf.readString(),Trinkets::class.java)
         entities = gson.fromJson(buf.readString(),Entities::class.java)
     }
 
