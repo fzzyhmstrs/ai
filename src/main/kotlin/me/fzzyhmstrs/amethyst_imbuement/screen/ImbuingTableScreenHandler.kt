@@ -197,10 +197,10 @@ class ImbuingTableScreenHandler(
                                 if (augment != null) {
                                     val augCheck = if (augment is ScepterAugment) {
                                         val blA = ScepterHelper.isAcceptableScepterItem(augment, itemStack, player)
-                                        val blB = augment.isAcceptableItem(itemStack)
+                                        val blB = checkAcceptableAugment(augment,itemStack)
                                         Pair(blA, blB)
                                     } else {
-                                        Pair(true, augment.isAcceptableItem(itemStack))
+                                        Pair(true, checkAcceptableAugment(augment,itemStack))
                                     }
                                     if (augCheck.first && augCheck.second) {
                                         val l = EnchantmentHelper.get(itemStack)
@@ -621,6 +621,14 @@ class ImbuingTableScreenHandler(
             }
             return list
         }
+
+        private fun checkAcceptableAugment(augment: Enchantment, stack: ItemStack): Boolean{
+            val stackEnchants = EnchantmentHelper.get(stack)
+            for (entry in stackEnchants){
+                if (!entry.key.canCombine(augment)) return false
+            }
+            return augment.isAcceptableItem(stack)
+        }
     }
 
     open class ImbuingSlot(inventory: Inventory, index: Int, x:Int, y: Int, private val canUse: Property): Slot(inventory, index, x, y) {
@@ -919,7 +927,7 @@ class ImbuingTableScreenHandler(
             if(recipe.getAugment() != ""){
                 val augId = Identifier(recipe.getAugment())
                 val augmentChk = Registry.ENCHANTMENT.get(augId) ?: return false
-                if (augmentChk.isAcceptableItem(itemStack3)){
+                if (checkAcceptableAugment(augmentChk,itemStack3)){
                     val bl = itemStack3.isOf(Items.BOOK)
                     if (bl) {
                         itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
