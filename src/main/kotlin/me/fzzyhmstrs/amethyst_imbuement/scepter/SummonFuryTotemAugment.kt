@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.TotemOfFuryEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.passive.ChickenEntity
@@ -19,6 +21,9 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withDuration(750,50)
+
     override fun placeEntity(
         world: World,
         user: PlayerEntity,
@@ -27,15 +32,13 @@ class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         effects: AugmentEffect
     ): Boolean {
         var successes = 0
-        for(i in 1..level) {
-            val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
-            val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
-            val yrnd = hit.blockPos.y + 1.0
-            val chikin = ChickenEntity(EntityType.CHICKEN, world)
-            chikin.setPos(xrnd, yrnd, zrnd)
-            if (world.spawnEntity(chikin)){
-                successes++
-            }
+        val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
+        val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
+        val yrnd = hit.blockPos.y + 1.0
+        val chikin = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level))
+        chikin.setPos(xrnd, yrnd, zrnd)
+        if (world.spawnEntity(chikin)){
+            successes++
         }
         if (successes > 0) {
             return super.placeEntity(world, user, hit, level, effects)

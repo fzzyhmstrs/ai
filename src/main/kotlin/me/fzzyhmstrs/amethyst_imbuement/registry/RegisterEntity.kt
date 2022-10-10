@@ -56,6 +56,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build()
     )
 
+    val TOTEM_OF_FURY_ENTITY: EntityType<TotemOfFuryEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "totem_of_fury"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<TotemOfFuryEntity>, world: World ->
+            TotemOfFuryEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.5f, 0.75f)).build()
+    )
+
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "glistering_trident"),
