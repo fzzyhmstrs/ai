@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import net.minecraft.entity.Entity
