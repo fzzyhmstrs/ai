@@ -1,23 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-	" B ",
-	"DOD",
-	"OOO"
-  ],
-  "key": {
-	"B": {
-	  "item": "minecraft:emerald"
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"DBD",
+		"OEO",
+		"OIO"
+	],
+	"key": {
+		"D": {
+			"item": "amethyst_imbuement:danburite"
+		},
+		"B": {
+			"item": "minecraft:emerald"
+		},
+		"E": {
+			"item": "minecraft:enchanting_table"
+		},
+		"I": {
+			"item": "amethyst_imbuement:inquisitive_gem"
+		},
+		"O": {
+			"item": "minecraft:obsidian"
+		}
 	},
-	"D": {
-	  "item": "amethyst_imbuement:danburite"
-	},
-	"O": {
-	  "item": "minecraft:obsidian"
+	"result": {
+		"item": "amethyst_imbuement:altar_of_experience"
 	}
-  },
-  "result": {
-	"item": "amethyst_imbuement:altar_of_experience"
-  }
 }
 
