@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
+import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment;
 import me.fzzyhmstrs.amethyst_imbuement.item.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
@@ -29,6 +30,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -121,8 +125,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "damage", at = @At(value = "HEAD"))
+    @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
     private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.world.random)){
+            this.world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.world.random.nextFloat() * 0.4f);
+            cir.setReturnValue(false);
+        }
         damageSource = source;
     }
 

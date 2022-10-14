@@ -1,14 +1,20 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import dev.emi.trinkets.api.TrinketsApi
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
 import java.util.*
 import kotlin.math.*
 
@@ -32,161 +38,30 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     companion object ShieldingObject{
 
-        const val baseAmount = 2
-        private var lastApplied: Long = 0L
-        private const val duration = 18000
-        private val entityShielding: MutableMap<UUID,EntityShieldingInstance> = mutableMapOf()
+        const val baseAmount = 0.025f
+        const val shieldingAmount = 0.02f
+        private var blockChance = 0.0f
 
-        fun addTrinket(entity: LivingEntity, amount: Int){
-            val uuid = entity.uuid
-            if (entityShielding.containsKey(uuid)) {
-                entityShielding[uuid]?.addAmount(amount)
-            } else {
-                val time = entity.world.time
-                entityShielding[uuid] = EntityShieldingInstance(amount,time)
-            }
-            applyEntityShielding(entity)
-        }
-
-        fun removeTrinket(entity: LivingEntity, amount: Int){
-            val uuid = entity.uuid
-            val deficit = checkShieldingDeficit(entity)
-            var applyBackAmount = 0f
-            if (deficit >= amount.toFloat()){
-                applyBackAmount = entity.absorptionAmount
-            }
-            if (entityShielding.containsKey(uuid)) {
-                entityShielding[uuid]?.removeAmount(amount)
-            }
-            applyEntityShielding(entity)
-            if (applyBackAmount > 0f){
-                entity.absorptionAmount = applyBackAmount
-            }
-        }
-
-        fun applyEntityShielding(entity: LivingEntity){
-            val timeCheck = entity.world.time
-            if (timeCheck - lastApplied < 2) return
-            lastApplied = timeCheck
-            val uuid = entity.uuid
-            if (entityShielding.containsKey(uuid)) {
-                val data = entityShielding[uuid]?:return
-                apply(timeCheck, entity, data)
-            }
-        }
-
-        private fun apply(timeCheck: Long, entity: LivingEntity, data: EntityShieldingInstance){
-            val amount = data.amountToApply(timeCheck,entity)
-            if (data.checkAmountZero()){
-                entity.removeStatusEffect(RegisterStatus.SHIELDING)
-            } else {
-                if (data.isDirty()){
-                    entity.removeStatusEffect(RegisterStatus.SHIELDING)
-                    entity.addStatusEffect(StatusEffectInstance(RegisterStatus.SHIELDING,data.getDuration(entity),amount - 1))
-                    data.clean()
+        fun refreshTrinkets(entity: LivingEntity){
+            var chance = 0.0f
+            TrinketsApi.getTrinketComponent(entity).ifPresent {trinkets ->
+                trinkets.forEach { _, stack ->
+                    val item = stack.item
+                    if (item is ImbuedJewelryItem){
+                        val level = if (RegisterEnchantment.SHIELDING.isEnabled()) {
+                            EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+                        } else {
+                            0
+                        }
+                        chance += baseAmount + shieldingAmount * level
+                    }
                 }
             }
+            blockChance = chance
         }
 
-        private fun checkShieldingDeficitFloat(entity: LivingEntity): Float{
-            val statusInstance: StatusEffectInstance = entity.getStatusEffect(RegisterStatus.SHIELDING) ?: return 0f
-            val statusInstance2 = entity.getStatusEffect(StatusEffects.ABSORPTION)
-            val baseAmount = statusInstance.amplifier + 1
-            val absorptionAmount = if (statusInstance2 != null){statusInstance2.amplifier * 4 + 4} else { 0 }
-            val currentAmount = entity.absorptionAmount
-            return baseAmount + absorptionAmount - currentAmount
-        }
-
-        private fun checkShieldingDeficit(entity: LivingEntity): Int{
-            val delta = checkShieldingDeficitFloat(entity)
-            val deltaFloor = floor(delta)
-            val deltaCiel = ceil(delta)
-            val closer = min(abs(delta - deltaFloor), abs(delta - deltaCiel))
-            return if (closer == abs(delta - deltaFloor)){
-                deltaFloor.toInt()
-            } else {
-                deltaCiel.toInt()
-            }
-        }
-
-        private class EntityShieldingInstance(amount: Int, timeApplied: Long){
-            private var a: Int
-            private var d: Int
-            private var t: Long
-            private var fresh: Boolean
-            private var dirty: Boolean
-
-            init{
-                a = amount
-                d = 0
-                t = timeApplied
-                fresh = true
-                dirty = true
-            }
-
-            fun addAmount(newAmount: Int){
-                a += newAmount
-                markDirty()
-            }
-
-            fun removeAmount(oldAmount: Int){
-                a = max(0,a - oldAmount)
-                markDirty()
-            }
-
-            fun isDirty(): Boolean{
-                return dirty
-            }
-
-            fun clean(){
-                dirty = false
-            }
-
-            fun checkAmountZero(): Boolean {
-                return (a == 0)
-            }
-
-            fun amountToApply(timeToCheck: Long, entity: LivingEntity): Int{
-                fresh = if (checkLastTimeApplied(timeToCheck)){
-                    clearDeficit()
-                    updateTimeApplied(timeToCheck)
-                    markDirty()
-                    true
-                } else {
-                    checkDeficit(entity)
-                    false
-                }
-                return max(0,a - d)
-            }
-
-            fun getDuration(entity: LivingEntity): Int{
-                val time = entity.world.time
-                return if (!fresh) {
-                    (t + duration - time).toInt()
-                } else {
-                    duration
-                }
-            }
-
-            private fun markDirty(){
-                dirty = true
-            }
-            private fun checkDeficit(entity: LivingEntity){
-                if (!isDirty()) return
-                val d2 = checkShieldingDeficit(entity)
-                d += d2
-            }
-            private fun clearDeficit(){
-                d = 0
-            }
-            private fun updateTimeApplied(newTimeApplied: Long){
-                t = newTimeApplied
-            }
-            private fun checkLastTimeApplied(timeToCheck: Long): Boolean{
-                return (timeToCheck - t) > (duration * 0.9)
-            }
-
-
+        fun damageIsBlocked(random: Random): Boolean{
+            return random.nextFloat() < blockChance
         }
 
     }
