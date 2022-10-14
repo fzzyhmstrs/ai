@@ -80,9 +80,10 @@
 "entries": [
 "amethyst_imbuement:scepter_template_augments/tier_3_grace",
 "amethyst_imbuement:scepter_template_augments/tier_3_wit",
-"amethyst_imbuement:trinket_totem_augments/undying"
+"amethyst_imbuement:trinket_totem_augments/undying",
+"amethyst_imbuement:scepter_available_augments/zap"
 ],
-"title": "T-U"
+"title": "T-Z"
 }
 ]
 }
