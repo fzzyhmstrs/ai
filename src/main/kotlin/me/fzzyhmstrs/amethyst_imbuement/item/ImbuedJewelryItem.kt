@@ -2,10 +2,12 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
+import dev.emi.trinkets.api.TrinketEnums
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -14,6 +16,7 @@ import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import java.util.*
 
@@ -33,29 +36,19 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         return modifiers
     }
 
+    override fun getDropRule(stack: ItemStack, slot: SlotReference, entity: LivingEntity): TrinketEnums.DropRule {
+        return if (entity.hasStatusEffect(RegisterStatus.SOULBINDING)){
+            TrinketEnums.DropRule.KEEP
+        } else {
+            TrinketEnums.DropRule.DEFAULT
+        }
+    }
+
     override fun onEquip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
-        if(entity.world.isClient()) return
-        super.onEquip(stack, slot, entity)
-        val shieldLevel = if(RegisterEnchantment.SHIELDING.isEnabled()) {EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)} else {0}
-        //println(ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
-        ShieldingAugment.addTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
+        ShieldingAugment.refreshTrinkets(entity)
     }
 
-    override fun onUnequip(stack: ItemStack,slot: SlotReference, entity: LivingEntity) {
-        if(entity.world.isClient()) return
-        super.onUnequip(stack,slot,entity)
-        val shieldLevel = if(RegisterEnchantment.SHIELDING.isEnabled()) {EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)} else {0}
-        //println(ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
-        ShieldingAugment.removeTrinket(entity,ShieldingAugment.baseAmount + shieldLevel + shieldingAdder())
-    }
-
-    override fun intermittentTick(stack: ItemStack, entity: LivingEntity) {
-        super.intermittentTick(stack, entity)
-        if(entity.world.isClient()) return
-        ShieldingAugment.applyEntityShielding(entity)
-    }
-
-    open fun shieldingAdder(): Int{
-        return 0
+    override fun onUnequip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
+        ShieldingAugment.refreshTrinkets(entity)
     }
 }
