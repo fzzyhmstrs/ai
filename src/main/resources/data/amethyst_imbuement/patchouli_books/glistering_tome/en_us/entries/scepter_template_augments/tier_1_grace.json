@@ -18,11 +18,11 @@
 "craft_a_item": "minecraft:air",
 "craft_b_item": "amethyst_imbuement:book_of_lore",
 "craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:glistering_melon_slice,minecraft:egg",
+"craft_d_item": "minecraft:glistering_melon_slice,minecraft:egg,minecraft:fermented_spider_eye",
 "craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"craft_f_item": "minecraft:glistering_melon_slice,minecraft:egg",
+"craft_f_item": "minecraft:glistering_melon_slice,minecraft:egg,minecraft:fermented_spider_eye",
 "craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:glistering_melon_slice,minecraft:egg",
+"craft_h_item": "minecraft:glistering_melon_slice,minecraft:egg,minecraft:fermented_spider_eye",
 "craft_i_item": "minecraft:air",
 "result_item": "minecraft:enchanted_book"
 }

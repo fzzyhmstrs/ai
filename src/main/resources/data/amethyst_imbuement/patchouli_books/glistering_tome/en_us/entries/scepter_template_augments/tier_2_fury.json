@@ -18,11 +18,11 @@
 "craft_a_item": "minecraft:air",
 "craft_b_item": "amethyst_imbuement:book_of_lore",
 "craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull",
+"craft_d_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull,amethyst_imbuement:garnet_sword,amethyst_imbuement:glowing_fragment",
 "craft_e_item": "amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"craft_f_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull",
+"craft_f_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull,amethyst_imbuement:garnet_sword,amethyst_imbuement:glowing_fragment",
 "craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull",
+"craft_h_item": "minecraft:emerald,minecraft:tnt,minecraft:lightning_rod,minecraft:wither_skeleton_skull,amethyst_imbuement:garnet_sword,amethyst_imbuement:glowing_fragment",
 "craft_i_item": "minecraft:air",
 "result_item": "minecraft:enchanted_book"
 }
