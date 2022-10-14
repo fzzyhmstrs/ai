@@ -1,16 +1,12 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.util.Arm
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
