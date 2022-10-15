@@ -127,7 +127,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
     private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.world.random)){
+        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.world.random, (LivingEntity) (Object) this)){
             this.world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.world.random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
         }

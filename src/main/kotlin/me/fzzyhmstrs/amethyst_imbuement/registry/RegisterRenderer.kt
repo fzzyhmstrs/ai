@@ -52,6 +52,7 @@ import kotlin.math.atan2
 object RegisterRenderer {
     val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"glistering_trident"),"glistering_trident_model")
     val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"draconic_box"),"draconic_box_model")
+    val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
 
@@ -80,6 +81,14 @@ object RegisterRenderer {
             RegisterEntity.DRACONIC_BOX_ENTITY
         ){context: EntityRendererFactory.Context ->
             DraconicBoxEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.TOTEM_OF_FURY_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            TotemEntityRenderer(
                 context
             )
         }
@@ -171,6 +180,7 @@ object RegisterRenderer {
             )
         }
 
+        /////////////////////////////////
 
         BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
         ){context: BlockEntityRendererFactory.Context ->
@@ -193,14 +203,15 @@ object RegisterRenderer {
             )
         }
 
+        /////////////////////////////////
+
         EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
-
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
-
+        EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
-
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
 
+        //////////////////////////////////
 
         FabricModelPredicateProviderRegistry.register(
             RegisterItem.GLISTERING_TRIDENT, Identifier("throwing")
@@ -278,6 +289,7 @@ object RegisterRenderer {
             }
         }
 
+        //////////////////////////////////////
 
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {
                 _ , registry ->

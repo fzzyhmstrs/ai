@@ -70,6 +70,8 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(1.5f, 0.75f)).build()
     )
 
+    ////////////////////////////////////////
+
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
         Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "glistering_trident"),
@@ -200,6 +202,7 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).trackRangeChunks(4).trackedUpdateRate(10).build()
     )
 
+    //////////////////////////////////////////
     
     val IMBUING_TABLE_BLOCK_ENTITY: BlockEntityType<ImbuingTableBlockEntity> = Registry.register(
         Registry.BLOCK_ENTITY_TYPE,
