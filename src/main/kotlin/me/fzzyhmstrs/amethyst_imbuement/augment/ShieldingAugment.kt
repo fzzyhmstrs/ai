@@ -40,9 +40,9 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
         const val baseAmount = 0.025f
         const val shieldingAmount = 0.02f
-        private var blockChance = 0.0f
+        private var blockChance: MutableMap<UUID,Float> = mutableMapOf()
 
-        fun refreshTrinkets(entity: LivingEntity){
+        fun refreshTrinkets(entity: LivingEntity): Float{
             var chance = 0.0f
             TrinketsApi.getTrinketComponent(entity).ifPresent {trinkets ->
                 trinkets.forEach { _, stack ->
@@ -57,11 +57,12 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                     }
                 }
             }
-            blockChance = chance
+            blockChance[entity.uuid] = chance
+            return chance
         }
 
-        fun damageIsBlocked(random: Random): Boolean{
-            return random.nextFloat() < blockChance
+        fun damageIsBlocked(random: Random, entity: LivingEntity): Boolean{
+            return random.nextFloat() < (blockChance[entity.uuid] ?: 0.0f)
         }
 
     }

@@ -9,15 +9,11 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.util.math.MatrixStack
 
 
-class DraconicBoxModel() : EntityModel<DraconicBoxEntity>() {
+class DraconicBoxModel(_modelPart: ModelPart) : EntityModel<DraconicBoxEntity>() {
 
-    private var modelPart: ModelPart? = null
-    private var base: ModelPart? = null
+    private var modelPart: ModelPart = _modelPart
+    private var base: ModelPart = modelPart.getChild(EntityModelPartNames.CUBE)
 
-    constructor(_modelPart: ModelPart) : this(){
-        modelPart = _modelPart
-        this.base = modelPart?.getChild(EntityModelPartNames.CUBE)
-    }
 
     override fun render(
         matrices: MatrixStack?,
@@ -29,20 +25,16 @@ class DraconicBoxModel() : EntityModel<DraconicBoxEntity>() {
         blue: Float,
         alpha: Float
     ) {
-        if (base != null) {
-            ImmutableList.of(base as ModelPart).forEach { modelRenderer ->
-                modelRenderer.render(
-                    matrices,
-                    vertices,
-                    light,
-                    overlay,
-                    red,
-                    green,
-                    blue,
-                    alpha
-                )
-            }
-        }
+        base.render(
+                matrices,
+                vertices,
+                light,
+                overlay,
+                red,
+                green,
+                blue,
+                alpha
+            )
     }
 
     override fun setAngles(
