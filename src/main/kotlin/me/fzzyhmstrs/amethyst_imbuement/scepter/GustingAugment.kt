@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +21,8 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)

@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.FlameboltEntity
@@ -16,7 +17,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot),
-    FireAugment {
+    FireAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(5.8F,0.2F,0.0F).withDuration(76,4)

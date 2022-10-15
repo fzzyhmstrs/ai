@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.FireAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity.Companion.createFireball
@@ -18,7 +19,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot),
-    FireAugment {
+    FireAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.75F,0.25f)
