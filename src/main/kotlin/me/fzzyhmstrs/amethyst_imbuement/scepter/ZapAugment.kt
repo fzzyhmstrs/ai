@@ -6,6 +6,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.LightningAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -24,7 +26,8 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
+    LightningAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(5.8,0.2).withDamage(3.4f,0.1f)

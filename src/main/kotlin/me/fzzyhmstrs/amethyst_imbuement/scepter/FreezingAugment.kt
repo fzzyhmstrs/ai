@@ -4,10 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.IceAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.OceanicAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.FreezingEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -19,7 +16,8 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot), OceanicAugment, IceAugment {
+class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot)
+    , OceanicAugment, IceAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(230,50,0).withDamage(2.9F,0.1f).withRange(3.8,0.2)

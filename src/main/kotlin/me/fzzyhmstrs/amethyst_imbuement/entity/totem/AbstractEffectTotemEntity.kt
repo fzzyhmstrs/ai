@@ -29,6 +29,18 @@ abstract class AbstractEffectTotemEntity(
     var ticks = 0
     var lookingRotR = 0f
     private var turningSpeedR = 2f
+    protected val ticker: EventRegistry.Ticker
+
+    init{
+        ticker = initTickerInternal()
+    }
+
+    private fun initTickerInternal(): EventRegistry.Ticker {
+        return initTicker()
+    }
+    open fun initTicker(): EventRegistry.Ticker{
+        return EventRegistry.ticker_30
+    }
 
     override fun shouldRenderName(): Boolean {
         return false
@@ -66,6 +78,10 @@ abstract class AbstractEffectTotemEntity(
         return Arm.RIGHT
     }
 
+    override fun onRemoved() {
+        EventRegistry.removeTickUppable(ticker)
+    }
+
     override fun tick() {
         super.tick()
         if (world.isClient) {
@@ -86,7 +102,7 @@ abstract class AbstractEffectTotemEntity(
 
             return
         }
-        if (EventRegistry.ticker_30.isReady()) {
+        if (!world.isClient() && ticker.isReady()) {
             totemEffect()
         }
         if (age >= maxAge){
