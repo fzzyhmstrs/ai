@@ -24,7 +24,7 @@
 "craft_h_item": "minecraft:redstone",
 "craft_i_item": "amethyst_imbuement:citrine",
 "result_item": "amethyst_imbuement:garnet",
-"cost_text": "$(l)Level Cost: $(2)8$()"
+"cost_text": "$(l)Level Cost: $(2)15$()"
 }
 ]
 }
