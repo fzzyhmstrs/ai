@@ -10,9 +10,7 @@ import net.minecraft.item.*
 class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 
     companion object{
-        var time1 = 0L
-        var time2 = 0L
-        var applied = false
+        val timers: MutableMap<UUID,Long> = mutableMapOf()
     }
 
     override fun getMinPower(level: Int): Int {
@@ -33,15 +31,13 @@ class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!enabled) return
-        applied = if(!applied) {
-            time1 = user.world.time
-            if ((time1 - 20L) >= time2 && (target is LivingEntity)) {
-                user.heal(0.5f * level)
-                time2 = user.world.time
-            }
-            true
-        } else{
-            false
-        }
+        if ((target !is LivingEntity) return
+        if(user.world.isClient()) return
+        val time = user.world.time
+        val uuid = user.uuid
+        if (!timers.containsKey(uuid) || ((time - 20L) >= timers[uuid]?:Long.MAX_VALUE)){
+            timers[uuid] = time
+            user.heal(0.5f * level)
+        }        
     }
 }
