@@ -14,10 +14,6 @@ import net.minecraft.item.*
 
 class DecayedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 
-    companion object{
-        var applied = false
-    }
-
     override fun getMinPower(level: Int): Int {
         return 45
     }
@@ -41,14 +37,8 @@ class DecayedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!enabled) return
         if (target is LivingEntity) {
-            if (target.recentDamageSource !is ProjectileDamageSource){
-                return
-            }
-            applied = if(!applied) {
+            if(!user.world.isClient()) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 100, 1))
-                true
-            } else{
-                false
             }
         }
     }
