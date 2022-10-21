@@ -37,7 +37,7 @@
 	"tag": "c:steel_ingots"
   },
   "title": "Resilience",
-  "cost": 16,
+  "cost": 21,
   "augment": "amethyst_imbuement:resilience"
 }
 
