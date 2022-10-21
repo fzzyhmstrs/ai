@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(l)Effect:$() Increase the protection of your armor. Adds one armor point per piece per level.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Increase the protection of your armor. Adds one armor point per piece per level and 0.5 armor toughness per piece per level.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -25,7 +25,7 @@
 "craft_h_item": "minecraft:obsidian",
 "craft_i_item": "amethyst_imbuement:steel_ingot",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:resilience\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)16$()"
+"cost_text": "$(l)Level Cost: $(2)21$()"
 }
 ]
 }
