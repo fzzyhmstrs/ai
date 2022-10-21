@@ -14,10 +14,6 @@ import net.minecraft.item.*
 
 class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 
-    companion object{
-        var applied = false
-    }
-
     override fun getMinPower(level: Int): Int {
         return 35
     }
@@ -41,15 +37,7 @@ class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!enabled) return
         if (target is LivingEntity) {
-            if (target.recentDamageSource !is ProjectileDamageSource){
-                return
-            }
-            applied = if(!applied) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1))
-                true
-            } else {
-                false
-            }
+            target.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1))
         }
     }
 }
