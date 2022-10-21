@@ -12,10 +12,6 @@ import net.minecraft.item.ItemStack
 
 class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight,EnchantmentTarget.WEAPON,*slot) {
 
-    companion object{
-        var applied = false
-    }
-
     override fun getMinPower(level: Int): Int {
         return 5 + (level - 1) * 15
     }
@@ -34,15 +30,12 @@ class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (target is LivingEntity && enabled) {
-            applied = if(!applied){
+            if(!user.world.isClient()){
                 var i = 2
                 if (level > 2) {
                     i = 3
                 }
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 15+(5*level), i))
-                true
-            } else {
-                false
             }
         }
     }
