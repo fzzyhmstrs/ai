@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.*
+import java.util.*
 
 class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 
@@ -31,11 +31,11 @@ class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!enabled) return
-        if ((target !is LivingEntity) return
+        if (target !is LivingEntity) return
         if(user.world.isClient()) return
         val time = user.world.time
         val uuid = user.uuid
-        if (!timers.containsKey(uuid) || ((time - 20L) >= timers[uuid]?:Long.MAX_VALUE)){
+        if (!timers.containsKey(uuid) || ((time - 20L) >= (timers[uuid] ?: Long.MAX_VALUE))){
             timers[uuid] = time
             user.heal(0.5f * level)
         }        
