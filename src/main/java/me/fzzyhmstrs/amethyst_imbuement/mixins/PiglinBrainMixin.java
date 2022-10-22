@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PiglinBrainMixin {
 
     @Inject(method = "wearsGoldArmor", at = @At(value = "HEAD"), cancellable = true)
-    private static void wearsGoldArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
+    private static void amethyst_imbuement_wearsGoldArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterEnchantment.INSTANCE.getFRIENDLY().specialEffect(entity,1,ItemStack.EMPTY)){
             cir.setReturnValue(true);
         }

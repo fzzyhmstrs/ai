@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EnchantRespirationMixin {
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(5);
     }
 }

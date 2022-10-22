@@ -85,12 +85,12 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
 
     @Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
-    private boolean checkArmorInvisibility(ItemStack instance){
+    private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance){
         return (instance.isEmpty() || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) == 0);
     }
 
     @Inject(method = "canHaveStatusEffect", at = @At(value = "HEAD"), cancellable = true)
-    private void canHaveWithImmunity(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_canHaveWithImmunity(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir){
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getIMMUNITY())){
             if (!effect.getEffectType().isBeneficial()){
                 cir.setReturnValue(false);
@@ -99,7 +99,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "heal", at = @At(value = "HEAD"))
-    private void healMixin(float amount, CallbackInfo ci){
+    private void amethyst_imbuement_healMixin(float amount, CallbackInfo ci){
         if ((LivingEntity)(Object)this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity)(Object)this;
             PlayerInventory inventory = player.getInventory();
@@ -114,7 +114,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At(value = "HEAD"))
-    private void addStatusEffectMixin(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_addStatusEffectMixin(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir){
         if ((LivingEntity)(Object)this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity)(Object)this;
             PlayerInventory inventory = player.getInventory();
@@ -126,7 +126,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
-    private void getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.world.random, (LivingEntity) (Object) this)){
             this.world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.world.random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
@@ -135,7 +135,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "setHealth", at = @At(value = "HEAD"), cancellable = true)
-    private void setHealthMixin(float health, CallbackInfo ci){
+    private void amethyst_imbuement_setHealthMixin(float health, CallbackInfo ci){
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getINSPIRED())){
             if (health <= 0.0f){
                 this.removeStatusEffect(RegisterStatus.INSTANCE.getINSPIRED());
@@ -146,7 +146,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "damageShield", at = @At(value = "HEAD"))
-    private void checkShieldEnchants(float amount, CallbackInfo ci){
+    private void amethyst_imbuement_checkShieldEnchants(float amount, CallbackInfo ci){
         ItemStack activeStack = this.activeItemStack;
         if (activeStack.isOf(Items.SHIELD)){
             int level = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSPIKED(),activeStack);
@@ -171,7 +171,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "tick", at = @At(value = "TAIL"))
-    private void augmentStatusCheck(CallbackInfo ci){
+    private void amethyst_imbuement_augmentStatusCheck(CallbackInfo ci){
         if (!world.isClient) {
 
             //armor effects a little less often because more intensive
@@ -194,7 +194,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 
     @Redirect(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
-    private boolean checkForMultiJump(LivingEntity instance){
+    private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance){
         long time = instance.world.getTime();
         if (instance.isOnGround()) {
             instance.removeStatusEffect(RegisterStatus.INSTANCE.getLEAPT());
@@ -222,7 +222,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "tryUseTotem", at = @At(value = "HEAD"), cancellable = true)
-    private void tryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_tryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir){
         if (source.isOutOfWorld()) {
             cir.setReturnValue(false);
         }
@@ -248,7 +248,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "getEquipmentChanges", at = @At(value = "RETURN"), cancellable = true)
-    private void getEquipmentChangesMixin(CallbackInfoReturnable<@Nullable Map<EquipmentSlot, ItemStack>> cir){
+    private void amethyst_imbuement_getEquipmentChangesMixin(CallbackInfoReturnable<@Nullable Map<EquipmentSlot, ItemStack>> cir){
         int stackValAdd = 0;
         for (EquipmentSlot equipmentSlot : AI.INSTANCE.getSlots()) {
             ItemStack stack1 = this.getSyncedArmorStack(equipmentSlot);

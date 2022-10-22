@@ -36,7 +36,7 @@ public abstract class EntityMixin {
 
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"))
-    private void boostStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
+    private void amethyst_imbuement_boostStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if (!((Object) this instanceof PlayerEntity player)) return;
         if (checkPlayerStriding(player) > 0){
             if (this.stepHeight < 1.0F) {
@@ -47,7 +47,7 @@ public abstract class EntityMixin {
     }
 
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At("RETURN"))
-    private void resetStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
+    private void amethyst_imbuement_resetStepHeight(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if (this.things$prevStepHeight == -1) return;
         this.stepHeight = this.things$prevStepHeight;
         this.things$prevStepHeight = -1;
@@ -56,14 +56,4 @@ public abstract class EntityMixin {
     private int checkPlayerStriding(PlayerEntity player){
         return EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTRIDING(),player.getEquippedStack(EquipmentSlot.FEET));
     }
-
-    /*private void bounce(Entity entity) {
-        Vec3d vec3d = entity.getVelocity();
-        if (vec3d.y < -0.4) {
-            double d = entity instanceof LivingEntity ? 1.0 : 0.8;
-            entity.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
-        } else {
-            entity.setVelocity(vec3d.x, 0.0, vec3d.z);
-        }
-    }*/
 }

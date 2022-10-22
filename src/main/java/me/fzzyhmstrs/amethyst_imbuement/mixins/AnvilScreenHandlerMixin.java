@@ -27,7 +27,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     }
 
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "net/minecraft/enchantment/EnchantmentHelper.set (Ljava/util/Map;Lnet/minecraft/item/ItemStack;)V"))
-    private void transferDisenchantNbt(Map<Enchantment, Integer> enchantments, ItemStack stack){
+    private void amethyst_imbuement_transferDisenchantNbt(Map<Enchantment, Integer> enchantments, ItemStack stack){
         ItemStack stack2 = this.input.getStack(1);
         NbtCompound nbt2 = stack2.getNbt();
         if (nbt2 != null && nbt2.contains(NbtKeys.DISENCHANT_COUNT.str())){

@@ -12,12 +12,12 @@ import net.minecraft.util.math.random.Random;
 public abstract class EnchantThornsMixin {
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(5);
     }
 
     @Inject(method = "getDamageAmount", at = @At(value = "HEAD"), cancellable = true)
-    private static void getDamageAmount(int level, Random random, CallbackInfoReturnable<Integer> cir){
+    private static void amethyst_imbuement_getDamageAmount(int level, Random random, CallbackInfoReturnable<Integer> cir){
         if (level == 4) {
             cir.setReturnValue(2 + random.nextInt(4));
         } else if(level == 5) {

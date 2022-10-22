@@ -22,7 +22,7 @@ public abstract class BucketItemMixin {
     @Shadow @Final private Fluid fluid;
 
     @Redirect(method = "use", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemUsage.exchangeStack (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
-    private ItemStack infinityBucketFill(ItemStack inputStack, PlayerEntity player, ItemStack outputStack){
+    private ItemStack amethyst_imbuement_infinityBucketFill(ItemStack inputStack, PlayerEntity player, ItemStack outputStack){
         int level = EnchantmentHelper.getLevel(Enchantments.INFINITY,inputStack);
         ItemStack tempStack = ItemUsage.exchangeStack(inputStack,player,outputStack);
         if (level > 0){
@@ -34,7 +34,7 @@ public abstract class BucketItemMixin {
     }
 
     @Redirect(method = "use", at = @At(value = "INVOKE", target = "net/minecraft/item/BucketItem.getEmptiedStack (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/item/ItemStack;"))
-    private ItemStack infinityBucket(ItemStack stack, PlayerEntity player){
+    private ItemStack amethyst_imbuement_infinityBucket(ItemStack stack, PlayerEntity player){
         if (EnchantmentHelper.getLevel(Enchantments.INFINITY,stack) > 0){
             Map<Enchantment, Integer> map = new HashMap<>();
             map.put(Enchantments.INFINITY,1);

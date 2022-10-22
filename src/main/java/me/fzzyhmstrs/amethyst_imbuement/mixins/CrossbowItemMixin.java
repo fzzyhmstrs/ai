@@ -20,7 +20,7 @@ public class CrossbowItemMixin {
     public static boolean hasProjectile(ItemStack crossbow, Item projectile){return true;}
 
     @Inject(method = "getSpeed", at = @At(value = "HEAD"), cancellable = true)
-    private static void getSpeed(ItemStack stack, CallbackInfoReturnable<Float> cir){
+    private static void amethyst_imbuement_getSpeed(ItemStack stack, CallbackInfoReturnable<Float> cir){
         int i;
         i = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getDEADLY_SHOT(), stack);
         if (hasProjectile(stack, Items.FIREWORK_ROCKET)) {

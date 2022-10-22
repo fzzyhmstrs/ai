@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class StructureMixin {
 
     @Redirect(method = "loadPalettedBlockInfo", at = @At(value = "INVOKE", target = "net/minecraft/nbt/NbtList.getCompound (I)Lnet/minecraft/nbt/NbtCompound;"))
-    private NbtCompound checkForEnchantingTable(NbtList instance, int index){
+    private NbtCompound amethyst_imbuement_checkForEnchantingTable(NbtList instance, int index){
         NbtCompound nbtCompound = instance.getCompound(index);
         BlockState state = NbtHelper.toBlockState(nbtCompound);
         if (state.isOf(Blocks.ENCHANTING_TABLE) && AiConfig.INSTANCE.getAltars().getImbuingTableReplaceEnchantingTable()){

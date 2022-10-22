@@ -13,12 +13,12 @@ public abstract class EnchantPowerMixin {
 
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(6);
     }
 
     @Inject(method = "getMinPower", at = @At(value = "HEAD"), cancellable = true)
-    public void getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
+    public void amethyst_imbuement_getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
         if (level == 6) {
             cir.setReturnValue(61);
         }

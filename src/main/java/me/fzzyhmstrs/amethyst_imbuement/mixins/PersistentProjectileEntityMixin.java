@@ -39,12 +39,12 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
     @Shadow protected abstract float getDragInWater();
 
     @Inject(method= "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;)V",at = @At(value = "TAIL"))
-    private void constructor(EntityType<? extends PersistentProjectileEntity> type, LivingEntity owner, World world, CallbackInfo ci) {
+    private void amethyst_imbuement_constructor(EntityType<? extends PersistentProjectileEntity> type, LivingEntity owner, World world, CallbackInfo ci) {
         i = EnchantmentHelper.getEquipmentLevel(RegisterEnchantment.INSTANCE.getDEADLY_SHOT(), owner);
     }
 
     @Inject(method="tick",at = @At(value = "TAIL"))
-    private void tick(CallbackInfo ci){
+    private void amethyst_imbuement_tick(CallbackInfo ci){
         if(i > 0) {
             Vec3d vec3d = this.getVelocity();
             if (this.isTouchingWater()) {
@@ -62,12 +62,12 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
     }
 
     @Inject(method = "onEntityHit", at = @At(value = "HEAD"))
-    private void getEntityForHeadhunter(EntityHitResult entityHitResult, CallbackInfo ci){
+    private void amethyst_imbuement_getEntityForHeadhunter(EntityHitResult entityHitResult, CallbackInfo ci){
         headhunterEntity = entityHitResult.getEntity();
     }
 
     @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/util/math/MathHelper.ceil (D)I"))
-    private int checkHeadhunter(double value){
+    private int amethyst_imbuement_checkHeadhunter(double value){
         int amount = MathHelper.ceil(value);
         //System.out.println(amount);
         PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;

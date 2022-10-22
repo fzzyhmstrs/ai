@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EndermanEntityMixin {
 
     @Inject(method = "isPlayerStaring", at = @At(value = "HEAD"), cancellable = true)
-    private void isPlayerWearingFriendly(PlayerEntity player, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_isPlayerWearingFriendly(PlayerEntity player, CallbackInfoReturnable<Boolean> cir){
         if (RegisterEnchantment.INSTANCE.getFRIENDLY().specialEffect(player,1,ItemStack.EMPTY)){
             cir.setReturnValue(false);
         }

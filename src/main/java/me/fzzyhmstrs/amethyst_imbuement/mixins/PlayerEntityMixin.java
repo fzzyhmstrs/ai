@@ -42,7 +42,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)
-    private void isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
         if(super.getActiveItem().isOf(RegisterItem.INSTANCE.getSNIPER_BOW())){
             if (CrossbowItem.isCharged(super.getActiveItem())) {
                 if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getILLUMINATING(),super.getActiveItem()) > 0){
@@ -54,14 +54,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
-        private void checkForSoulbinding(CallbackInfo ci){
+        private void amethyst_imbuement_checkForSoulbinding(CallbackInfo ci){
             if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
                 ci.cancel();
             }
         }
 
     @Inject(method = "damage", at = @At(value = "HEAD"))
-    private void damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         damageSource = source;
         if (!(this.timeUntilRegen > 10)) {
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
@@ -74,7 +74,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "damageShield", at = @At(value = "HEAD"))
-    private void checkShieldEnchants(float amount, CallbackInfo ci){
+    private void amethyst_imbuement_checkShieldEnchants(float amount, CallbackInfo ci){
         ItemStack activeStack = this.activeItemStack;
         if (activeStack.isOf(Items.SHIELD)){
             int level = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSPIKED(),activeStack);
@@ -104,7 +104,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))
-    private void checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir){
         ItemStack stack = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
         if (stack.getItem() instanceof GemOfPromiseItem){
             GemOfPromiseItem.Companion.lethalGemCheck(stack,inventory);

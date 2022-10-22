@@ -28,7 +28,7 @@ public class CreeperEntityMixin extends MobEntity {
     }
 
     @Inject(method = "initGoals", at = @At(value = "HEAD"))
-    private void addFelineGoalSelector(CallbackInfo ci){
+    private void amethyst_imbuement_addFelineGoalSelector(CallbackInfo ci){
         Predicate<LivingEntity> predicate = this::checkForFeline;
         this.goalSelector.add(3, new FleeEntityGoal<>((CreeperEntity) (Object) this, PlayerEntity.class, 6.0f, 1.0, 1.2, predicate));
     }

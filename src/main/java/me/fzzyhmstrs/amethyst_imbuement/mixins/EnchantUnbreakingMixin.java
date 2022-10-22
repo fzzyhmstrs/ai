@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EnchantUnbreakingMixin {
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(5);
     }
 
 
     @Inject(method = "getMinPower", at = @At(value = "HEAD"), cancellable = true)
-    public void getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
+    public void amethyst_imbuement_getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
         if (level > 3) {
             cir.setReturnValue(21 + (level - 3) * 16);
         }

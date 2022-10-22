@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class PowderSnowBlockMixin {
 
     @Redirect(method = "canWalkOnPowderSnow", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
-    private static boolean checkForLightfooted(ItemStack instance, Item item){
+    private static boolean amethyst_imbuement_checkForLightfooted(ItemStack instance, Item item){
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getLIGHTFOOTED(),instance) > 0){
             return true;
         } else {

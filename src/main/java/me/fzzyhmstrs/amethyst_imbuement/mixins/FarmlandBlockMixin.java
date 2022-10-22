@@ -24,7 +24,7 @@ public abstract class FarmlandBlockMixin extends Block {
     }
 
     @Inject(method = "onLandedUpon", at = @At(value = "HEAD"), cancellable = true)
-    private void onLightfootedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci){
+    private void amethyst_imbuement_onLightfootedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci){
         if (entity instanceof LivingEntity){
             ItemStack stack = ((LivingEntity) entity).getEquippedStack(EquipmentSlot.FEET);
             if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getLIGHTFOOTED(), stack) > 0){

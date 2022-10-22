@@ -23,7 +23,7 @@ public abstract class InGameHudMixin {
 
     //altering my method to inject just after the vanilla setTextureShader, so I can hopefully override any other spyglass changes without needing a redirect
     @Inject(method = "renderSpyglassOverlay", at = @At(value = "INVOKE", target = "net/minecraft/client/render/Tessellator.getInstance ()Lnet/minecraft/client/render/Tessellator;"))
-    private void setSniperBowTextureAfterSpyglassImprovements(float scale, CallbackInfo ci){
+    private void amethyst_imbuement_setSniperBowTextureAfterSpyglassImprovements(float scale, CallbackInfo ci){
         if (this.client.player != null){
             if (this.client.player.getActiveItem().getItem() != RegisterItem.INSTANCE.getSNIPER_BOW()){
                 RenderSystem.setShaderTexture(0, SPYGLASS_SCOPE);

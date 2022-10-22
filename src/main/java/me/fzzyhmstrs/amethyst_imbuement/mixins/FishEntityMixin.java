@@ -20,7 +20,7 @@ import java.util.Optional;
 public class FishEntityMixin {
 
     @Inject(method = "interactMob", at = @At(value = "HEAD"), cancellable = true)
-    private void interactInfinityMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+    private void amethyst_imbuement_interactInfinityMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = player.getStackInHand(hand);
         int level = EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack);
         if (level > 0){
