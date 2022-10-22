@@ -7,6 +7,8 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
@@ -25,6 +27,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
+        entityEffects.setRange(ae.range(level))
     }
 
     override fun tick() {
@@ -33,7 +36,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
         val entities = world.getOtherEntities(summoner, box)
         val list: MutableList<LivingEntity> = mutableListOf()
         for (entity in entities) {
-            if (entity is LivingEntity){
+            if (entity is LivingEntity && entity != this){
                 list.add(entity)
             }
         }
@@ -46,10 +49,18 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
     }
 
     override fun totemEffect() {
+        if (target == null) return
+        if (target == this){
+            target = null
+            return
+        }
         target?.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)
-        world.playSound(null,this.blockPos,SoundEvents.ITEM_TRIDENT_THUNDER,SoundCategory.NEUTRAL,1.0f,1.0f)
+        world.playSound(null,this.blockPos,SoundEvents.ITEM_TRIDENT_THUNDER,SoundCategory.NEUTRAL,0.5f,1.0f)
+        if (target?.isAlive != true){
+            target = null
+        }
     }
 
     private fun beam(serverWorld: ServerWorld){
@@ -64,6 +75,10 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
 
     }
 
-
+    companion object Stats: TotemAbstractAttributes{
+        override fun createTotemAttributes(): DefaultAttributeContainer.Builder {
+            return super.createTotemAttributes().add(EntityAttributes.GENERIC_ARMOR,10.0)
+        }
+    }
 
 }

@@ -6,7 +6,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfWitEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
@@ -18,13 +19,13 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot), ElementalAugment {
+class SummonWitTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot), ElementalAugment {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withDuration(750,50)
-            .withDamage(2.75f,0.25f)
-            .withRange(4.5,0.5)
+            .withDuration(1075,125)
+            .withRange(13.75,1.25)
+            .withAmplifier(0,1)
 
     override fun placeEntity(
         world: World,
@@ -34,13 +35,13 @@ class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         effects: AugmentEffect
     ): Boolean {
         var successes = 0
-        val xrnd: Double = (hit as BlockHitResult).blockPos.x.toDouble()
-        val zrnd: Double = hit.blockPos.z.toDouble()
+        val xrnd: Double = (hit as BlockHitResult).blockPos.x + 0.5
+        val zrnd: Double = hit.blockPos.z + 0.5
         val yrnd = hit.blockPos.y + 1.0
-        val furyEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level))
-        furyEntity.passEffects(effects,level)
-        furyEntity.setPos(xrnd, yrnd, zrnd)
-        if (world.spawnEntity(furyEntity)){
+        val graceEntity = TotemOfWitEntity(RegisterEntity.TOTEM_OF_WIT_ENTITY, world,user,effects.duration(level))
+        graceEntity.passEffects(effects,level)
+        graceEntity.setPos(xrnd, yrnd, zrnd)
+        if (world.spawnEntity(graceEntity)){
             successes++
         }
         if (successes > 0) {
@@ -54,6 +55,6 @@ class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2400,100,16,imbueLevel,LoreTier.LOW_TIER, RegisterItem.RESONANT_ROD)
+        return AugmentDatapoint(SpellType.FURY,2400,100,14,imbueLevel,LoreTier.LOW_TIER, RegisterItem.ENERGETIC_OPAL)
     }
 }

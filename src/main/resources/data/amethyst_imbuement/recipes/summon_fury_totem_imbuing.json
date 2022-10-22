@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:lethal_gem"
+  },
+  "imbueB": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueC": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "imbueD": {
+	"item": "minecraft:amethyst_shard"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:resonant_rod"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:resonant_rod"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:resonant_rod"
+  },
+  "title": "Summon Totem of Fury",
+  "cost": 17,
+  "augment": "amethyst_imbuement:summon_fury_totem"
+}
+

@@ -115,9 +115,12 @@ object RegisterEnchantment {
     //val SUMMON_BLAZE = SummonEntityAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonBoatAugment(1,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_boat"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_chicken"] = it}
+    val SUMMON_FURY_TOTEM = SummonFuryTotemAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["summon_fury_totem"] = it}
     //val SUMMON_FAMILIAR = SummonFamiliarAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_familiar"] = it}
     val SUMMON_GOLEM = SummonGolemAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["summon_golem"] = it}
+    val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment(2,11,EquipmentSlot.MAINHAND).also{regEnchant["summon_grace_totem"] = it}
     val SUMMON_STRIDER = SummonStriderAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_strider"] = it}
+    val SUMMON_WIT_TOTEM = SummonWitTotemAugment(2,9,EquipmentSlot.MAINHAND).also{regEnchant["summon_wit_totem"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
