@@ -105,7 +105,7 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,600,60,8,imbueLevel, LoreTier.LOW_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.WIT,600,60,8,imbueLevel, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     companion object{
