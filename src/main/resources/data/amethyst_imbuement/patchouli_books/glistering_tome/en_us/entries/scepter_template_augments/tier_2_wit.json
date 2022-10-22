@@ -18,11 +18,11 @@
 "craft_a_item": "minecraft:air",
 "craft_b_item": "amethyst_imbuement:book_of_lore",
 "craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:blaze_rod,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table",
+"craft_d_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
 "craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"craft_f_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:blaze_rod,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table",
+"craft_f_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
 "craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:blaze_rod,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table",
+"craft_h_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
 "craft_i_item": "minecraft:air",
 "result_item": "minecraft:enchanted_book"
 }
