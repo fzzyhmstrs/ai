@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:healers_gem"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:charged_moonstone"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:charged_moonstone"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:charged_moonstone"
+  },
+  "title": "Summon Totem of Grace",
+  "cost": 17,
+  "augment": "amethyst_imbuement:summon_grace_totem"
+}
+

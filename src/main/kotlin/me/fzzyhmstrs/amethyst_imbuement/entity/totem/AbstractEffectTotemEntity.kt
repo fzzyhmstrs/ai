@@ -7,10 +7,13 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Arm
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.MathHelper
@@ -23,13 +26,18 @@ abstract class AbstractEffectTotemEntity(
     world: World,
     protected val summoner: PlayerEntity? = null,
     private val maxAge: Int = 600,
-    internal val item: Item = Items.AIR)
+    item: Item = Items.AIR)
     : LivingEntity(entityType, world) {
 
     var ticks = 0
     var lookingRotR = 0f
     private var turningSpeedR = 2f
     protected val ticker: EventRegistry.Ticker
+    internal val stack = ItemStack(item)
+    internal val seed = this.blockPos.asLong().toInt()
+    private val init: Int by lazy{
+        firstTick()
+    }
 
     init{
         ticker = initTickerInternal()
@@ -82,8 +90,18 @@ abstract class AbstractEffectTotemEntity(
         EventRegistry.removeTickUppable(ticker)
     }
 
+    private fun firstTick(): Int{
+        totemEffect()
+        return 0
+    }
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.BLOCK_DEEPSLATE_BRICKS_FALL
+    }
+
     override fun tick() {
         super.tick()
+        val i = init
         if (world.isClient) {
             val lookAtTarget = lookAt()
             if (lookAtTarget != null) {
@@ -99,7 +117,6 @@ abstract class AbstractEffectTotemEntity(
                 ticks = 0
             }
             lookingRotR = rotClamp(360, lookingRotR)
-
             return
         }
         if (!world.isClient() && ticker.isReady()) {
@@ -158,9 +175,14 @@ abstract class AbstractEffectTotemEntity(
 
     interface TotemAbstractAttributes{
         fun createTotemAttributes(): DefaultAttributeContainer.Builder{
+            return createBaseTotemAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH,18.0)
+
+        }
+        fun createBaseTotemAttributes(): DefaultAttributeContainer.Builder{
             return createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 1.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.0)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,16.0)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,1.0)
         }
     }
 }

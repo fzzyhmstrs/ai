@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfWitEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -67,7 +69,33 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.5f, 0.75f)).build()
+        }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
+    )
+
+    val TOTEM_OF_GRACE_ENTITY: EntityType<TotemOfGraceEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "totem_of_grace"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<TotemOfGraceEntity>, world: World ->
+            TotemOfGraceEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
+    )
+
+    val TOTEM_OF_WIT_ENTITY: EntityType<TotemOfWitEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "totem_of_wit"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<TotemOfWitEntity>, world: World ->
+            TotemOfWitEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
     )
 
     ////////////////////////////////////////
@@ -239,6 +267,9 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
+        FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())
+        FabricDefaultAttributeRegistry.register(TOTEM_OF_GRACE_ENTITY,TotemOfGraceEntity.createTotemAttributes())
+        FabricDefaultAttributeRegistry.register(TOTEM_OF_WIT_ENTITY,TotemOfWitEntity.createTotemAttributes())
     }
 
 

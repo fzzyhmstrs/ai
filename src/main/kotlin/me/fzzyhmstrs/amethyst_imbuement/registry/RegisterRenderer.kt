@@ -94,6 +94,24 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.TOTEM_OF_GRACE_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            TotemEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.TOTEM_OF_WIT_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            TotemEntityRenderer(
+                context
+            )
+        }
+
+        //////////////////////////////////////////////////////////
+
+        EntityRendererRegistry.register(
             RegisterEntity.GLISTERING_TRIDENT_ENTITY
         ){context: EntityRendererFactory.Context ->
             GlisteringTridentEntityRenderer(
