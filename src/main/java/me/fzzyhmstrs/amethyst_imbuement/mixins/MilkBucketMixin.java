@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MilkBucketMixin {
 
     @Redirect(method = "finishUsing", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.decrement (I)V"))
-    private void infinityNonDecrement(ItemStack instance, int amount){
+    private void amethyst_imbuement_infinityNonDecrement(ItemStack instance, int amount){
         int level = EnchantmentHelper.getLevel(Enchantments.INFINITY, instance);
         if (!(level > 0)) {
             instance.decrement(amount);

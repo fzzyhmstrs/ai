@@ -15,13 +15,13 @@ public abstract class EnchantProtectionMixin {
     @Shadow @Final public ProtectionEnchantment.Type protectionType;
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    public void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    public void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(5);
     }
 
     //making the level 5 protections slightly harder to get
     @Inject(method = "getMinPower", at = @At(value = "HEAD"), cancellable = true)
-    public void getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
+    public void amethyst_imbuement_getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
         if (level > 4) {
             cir.setReturnValue(this.protectionType.getBasePower() + (level - 1) * this.protectionType.getPowerPerLevel() + 12);
         }

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "getActiveTotemOfUndying", at = @At(value = "TAIL"), cancellable = true)
-    private static void checkForTotemOfAmethyst(PlayerEntity player, CallbackInfoReturnable<ItemStack> cir){
+    private static void amethyst_imbuement_checkForTotemOfAmethyst(PlayerEntity player, CallbackInfoReturnable<ItemStack> cir){
         player.getInventory().main.forEach(stack->{
             if (stack.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())){
                 if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getUNDYING(), stack) > 0){

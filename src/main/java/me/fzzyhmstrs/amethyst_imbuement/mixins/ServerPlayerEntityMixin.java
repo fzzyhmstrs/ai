@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract public class ServerPlayerEntityMixin {
 
     @Inject(method = "copyFrom", at= @At(value = "HEAD"))
-    private void copyInventoryIfSoulBound(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci){
+    private void amethyst_imbuement_copyInventoryIfSoulBound(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci){
         if (oldPlayer.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
             ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
             player.getInventory().clone(oldPlayer.getInventory());

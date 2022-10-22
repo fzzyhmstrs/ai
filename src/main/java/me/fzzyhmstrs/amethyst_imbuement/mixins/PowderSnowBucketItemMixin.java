@@ -25,7 +25,7 @@ public class PowderSnowBucketItemMixin {
     private int level = 0;
 
     @Inject(method = "useOnBlock", at = @At(value = "HEAD"))
-    private void getStackForInfinity(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir){
+    private void amethyst_imbuement_getStackForInfinity(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir){
         PlayerEntity playerEntity = context.getPlayer();
         if (playerEntity != null) {
             ItemStack bucketStack = playerEntity.getStackInHand(context.getHand());
@@ -34,7 +34,7 @@ public class PowderSnowBucketItemMixin {
     }
 
     @Redirect(method = "useOnBlock", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.setStackInHand (Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
-    private void setInfinityStackInHand(PlayerEntity instance, Hand hand, ItemStack itemStack){
+    private void amethyst_imbuement_setInfinityStackInHand(PlayerEntity instance, Hand hand, ItemStack itemStack){
         ItemStack outputStack = Items.BUCKET.getDefaultStack();
         if (level > 0){
             Map<Enchantment, Integer> map = new HashMap<>();

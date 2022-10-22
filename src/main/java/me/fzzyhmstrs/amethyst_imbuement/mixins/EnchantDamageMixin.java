@@ -27,7 +27,7 @@ public abstract class EnchantDamageMixin {
     @Shadow public abstract int getMinPower(int level);
 
     @Inject(method = "getMinPower", at = @At(value = "HEAD"), cancellable = true)
-    private void getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
         if(this.typeIndex == ILLAGERS_INDEX){
             int i = 0; //adding a modifier to max the maximum levels a bit harder to show up in the imbuing table
             if (level == 6) i = 8; // may tweak to 6/12
@@ -37,26 +37,26 @@ public abstract class EnchantDamageMixin {
     }
 
     @Inject(method = "getMaxPower", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxPower(int level, CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxPower(int level, CallbackInfoReturnable<Integer> cir) {
         if(this.typeIndex == ILLAGERS_INDEX){
             cir.setReturnValue(this.getMinPower(level) + 20);
         }
     }
 
     @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void getMaxLevel(CallbackInfoReturnable<Integer> cir) {
+    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(7);
     }
 
     @Inject(method = "getAttackDamage", at = @At(value = "HEAD"), cancellable = true)
-    private void getAttackDamage(int level, EntityGroup group, CallbackInfoReturnable<Float> cir){
+    private void amethyst_imbuement_getAttackDamage(int level, EntityGroup group, CallbackInfoReturnable<Float> cir){
         if (typeIndex == 3 && group == EntityGroup.ILLAGER){
             cir.setReturnValue(level * 2.5F);
         }
     }
 
     @Inject(method = "onTargetDamaged", at = @At(value = "HEAD"), cancellable = true)
-    public void onTargetDamaged(LivingEntity user, Entity target, int level, CallbackInfo ci){
+    public void amethyst_imbuement_onTargetDamaged(LivingEntity user, Entity target, int level, CallbackInfo ci){
         if (target instanceof LivingEntity livingEntity) {
             if (this.typeIndex == ILLAGERS_INDEX && level > 0 && livingEntity.getGroup() == EntityGroup.ILLAGER) {
                 int i = 20 + user.getRandom().nextInt(10 * level);

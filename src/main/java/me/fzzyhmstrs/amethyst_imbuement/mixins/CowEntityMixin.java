@@ -18,7 +18,7 @@ import java.util.Map;
 public class CowEntityMixin {
 
     @Redirect(method = "interactMob", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemUsage.exchangeStack (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
-    private ItemStack milkBucketInfinity(ItemStack inputStack, PlayerEntity player, ItemStack outputStack){
+    private ItemStack amethyst_imbuement_milkBucketInfinity(ItemStack inputStack, PlayerEntity player, ItemStack outputStack){
         int level = EnchantmentHelper.getLevel(Enchantments.INFINITY,inputStack);
         ItemStack tempStack = ItemUsage.exchangeStack(inputStack,player,outputStack);
         if (level > 0){

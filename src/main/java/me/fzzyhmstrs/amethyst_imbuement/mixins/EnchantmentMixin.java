@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EnchantmentMixin {
 
     @Inject(method = "isAcceptableItem", at = @At(value = "HEAD"), cancellable = true)
-    private void checkScepterItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_checkScepterItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
         Item item = stack.getItem();
         if (item instanceof ScepterItem) {
             if ((Object) this instanceof MendingEnchantment){

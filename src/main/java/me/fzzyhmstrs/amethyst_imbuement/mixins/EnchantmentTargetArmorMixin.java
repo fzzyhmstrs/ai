@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EnchantmentTargetArmorMixin {
 
     @Inject(method = "isAcceptableItem(Lnet/minecraft/item/Item;)Z", at = @At(value = "HEAD"), cancellable = true)
-    private void elytraArmorEnchant(Item item, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_elytraArmorEnchant(Item item, CallbackInfoReturnable<Boolean> cir){
         if (item instanceof ElytraItem){
             cir.setReturnValue(true);
         }

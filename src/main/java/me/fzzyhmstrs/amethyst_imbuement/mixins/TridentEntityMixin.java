@@ -22,7 +22,7 @@ public abstract class TridentEntityMixin {
     @Shadow protected abstract ItemStack asItemStack();
 
     @Inject(method = "onEntityHit", at = @At(value = "TAIL"))
-    protected void onEntityHit(EntityHitResult entityHitResult, CallbackInfo ci){
+    protected void amethyst_imbuement_onEntityHit(EntityHitResult entityHitResult, CallbackInfo ci){
         Entity chk = entityHitResult.getEntity();
         if (chk instanceof LivingEntity livingEntity2) {
             if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getDECAYED(), this.asItemStack()) > 0) {

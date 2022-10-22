@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ItemMixin {
 
     @Inject(method = "getEnchantability", at = @At(value = "HEAD"), cancellable = true)
-    private void checkForShield(CallbackInfoReturnable<Integer> cir){
+    private void amethyst_imbuement_checkForShield(CallbackInfoReturnable<Integer> cir){
         Object check = this;
         if (check instanceof ShieldItem){
             cir.setReturnValue(1);
@@ -45,7 +45,7 @@ public class ItemMixin {
     }
 
     @Inject(method = "isEnchantable", at = @At(value = "HEAD"), cancellable = true)
-    private void bucketIsEnchantable(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
+    private void amethyst_imbuement_bucketIsEnchantable(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
         if ((Object)this instanceof HorseArmorItem){
             cir.setReturnValue(true);
         }

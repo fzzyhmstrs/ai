@@ -27,7 +27,7 @@ public abstract class ArmorItemMixin {
     @Shadow @Final protected float knockbackResistance;
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
-    private void constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
+    private void amethyst_imbuement_constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
         UUID uUID = MODIFIERS[slot.getEntitySlotId()];
 
         if (material == RegisterArmor.INSTANCE.getSTEEL_ARMOR_MATERIAL() || material == RegisterArmor.INSTANCE.getAMETRINE_ARMOR_MATERIAL()) {

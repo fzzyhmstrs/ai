@@ -26,7 +26,7 @@ public class BlockMixin {
 
 
     @Inject(method = "onLandedUpon", at = @At(value = "HEAD"), cancellable = true)
-    private void onSlimedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci){
+    private void amethyst_imbuement_onSlimedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci){
         if (!state.isOf(Blocks.SLIME_BLOCK)) {
             if ((entity instanceof PlayerEntity playerEntity)) {
                 if (!playerEntity.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
@@ -41,7 +41,7 @@ public class BlockMixin {
     }
 
     @Inject(method = "onEntityLand", at = @At(value = "HEAD"), cancellable = true)
-    private void slimyBounce(BlockView world, Entity entity, CallbackInfo ci){
+    private void amethyst_imbuement_slimyBounce(BlockView world, Entity entity, CallbackInfo ci){
         if ((entity instanceof PlayerEntity playerEntity)) {
             if (!playerEntity.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
 

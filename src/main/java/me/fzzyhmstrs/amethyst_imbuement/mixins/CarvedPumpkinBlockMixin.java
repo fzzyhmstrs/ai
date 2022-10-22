@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CarvedPumpkinBlockMixin {
 
     @Inject(method = "onBlockAdded", at = @At(value = "HEAD"), cancellable = true)
-    private void crystalGolemTest(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci){
+    private void amethyst_imbuement_crystalGolemTest(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci){
         BlockPattern.Result result = CrystallineCoreBlock.Companion.getCrystallineGolemPattern().searchAround(world,pos);
         if (result != null){
             CrystallineCoreBlock.Companion.spawnCrystallineGolem(result,world);
