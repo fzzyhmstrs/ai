@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
@@ -74,52 +75,17 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
             val inputs = recipe.getInputs()
             for (i in inputs.indices){
                 val input = inputs[i]
+                val builder = EntryIngredient.builder()
                 if (recipe.getAugment() != "" && i == 6){
-                    val identifier = Identifier(recipe.getAugment())
-                    val enchant = Registry.ENCHANTMENT.get(identifier)
-                    val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-                    if (enchant != null){
-                        when (enchant) {
-                            is BaseAugment -> {
-                                val builder = EntryIngredient.builder()
-                                enchant.acceptableItemStacks().forEach { builder.add(EntryStacks.of(it)) }
-                                list.add(builder.build())
-                            }
-                            is ScepterAugment -> {
-                                val builder = EntryIngredient.builder()
-                                enchant.acceptableItemStacks().forEach {
-                                    builder.add(EntryStacks.of(it))
-                                }
-                                list.add(builder.build())
-                            }
-                            else -> {
-                                val builder = EntryIngredient.builder()
-                                for (item in Registry.ITEM.iterator()){
-                                    if (enchant.isAcceptableItem(ItemStack(item))){
-                                        builder.add(EntryStacks.of(ItemStack(item)))
-                                    }
-                                }
-                                list.add(builder.build())
-                            }
-                        }
-                    } else if(modifier != null) {
-                        val builder = EntryIngredient.builder()
-                        modifier.acceptableItemStacks().forEach {
-                            builder.add(EntryStacks.of(it))
-                        }
-                        list.add(builder.build())
-                    } else {
-                        list.add(EntryIngredient.empty())
-                    }
+                    val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
+                    ingredient.matchingStacks.forEach { builder.add(EntryStacks.of(it)) }
+                    list.add(builder.build())
                     continue
                 }
-                val builder = EntryIngredient.builder()
                 input.matchingStacks.forEach {
                     val item = it.item
                     val stack = it.copy()
-                    if (item is BookOfLoreItem){
-                        AbstractAugmentBookItem.addLoreKeyForREI(stack,recipe.getAugment())
-                    } else if (item is BookOfMythosItem){
+                    if (item is AbstractAugmentBookItem){
                         AbstractAugmentBookItem.addLoreKeyForREI(stack,recipe.getAugment())
                     }
                     builder.add(EntryStacks.of(stack))
