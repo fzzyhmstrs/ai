@@ -6,44 +6,45 @@ import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.client.item.TooltipData
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.text.Text
+import net.minecraft.text.TextColor
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import java.util.*
 
-class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatable("lore_book.screen")) {
+class KnowledgeBookScreen(private val book: ItemStack, private val player: PlayerEntity): Screen(AcText.translatable("lore_book.screen")) {
 
     private var recipe: ImbuingRecipe? = null
-    private val recipeInputs: Array<StackProvider> by lazy{
-        buildInputProviders()
-    }
+    private var recipeInputs: Array<StackProvider> = Array(13) { EmptyStackProvider() }
     private val recipeOutputs: StackProvider by lazy{
         buildOutputProvider()
     }
     private var tooltipList: List<Text> = listOf()
+    private var imbuingCost: Int = 0
     private var i: Int = 2
     private var j: Int = 2
-
-    private fun buildInputProviders(): Array<StackProvider>{
-        if (recipe == null){
-            return Array(13) { EmptyStackProvider() }
-        }
-        val list: MutableList<StackProvider> = mutableListOf()
-        recipe?.ingredients?.forEach {
-            list.add(StackProvider.getProvider(it))
-        }?: return Array<StackProvider>(13) { EmptyStackProvider() }
-        return list.toTypedArray()
+    val context: TooltipContext by lazy{
+        if(client?.options?.advancedItemTooltips == true){
+        TooltipContext.Default.ADVANCED
+    } else {
+        TooltipContext.Default.NORMAL
+    }
     }
 
     private fun buildOutputProvider(): StackProvider{
@@ -71,7 +72,6 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
             this.close()
             return
         }
-
         val list: MutableList<Text> = mutableListOf()
         item.appendTooltip(book,client?.world,list, TooltipContext.Default.NORMAL)
         if (list.isEmpty()){
@@ -79,7 +79,6 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
             return
         }
         tooltipList = list
-
         val augId = Identifier(Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)).toString()
         val recipeId = augId + "_imbuing"
         val recipeCheck = client?.world?.recipeManager?.get(Identifier(recipeId))
@@ -91,6 +90,12 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
             val recipeCheck2 = recipeCheck.get()
             if (recipeCheck2 is ImbuingRecipe){
                 recipe = recipeCheck2
+                val list2: MutableList<StackProvider> = mutableListOf()
+                recipeCheck2.getInputs().forEach {
+                    list2.add(StackProvider.getProvider(it))
+                }
+                recipeInputs = list2.toTypedArray()
+                imbuingCost = recipeCheck2.getCost()
             }
         }
 
@@ -98,7 +103,7 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
         j = (height - 179)/2
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         super.render(matrices, mouseX, mouseY, delta)
         RenderSystem.setShader { GameRenderer.getPositionTexShader() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
@@ -106,61 +111,125 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
         //the book background
         drawTexture(matrices, i, j, 0, 0, 256, 179)
         //the recipe title on the right page
-        DrawableHelper.drawCenteredText(matrices,textRenderer,title,i + 186,11,0x404040)
+        DrawableHelper.drawCenteredText(matrices,textRenderer,AcText.translatable("lore_book.screen").formatted(Formatting.GOLD),i + 187,j+11,0x404040)
+        //the recipe cost on the right page
+        val imbueCost = AcText.translatable("lore_book.screen.cost",imbuingCost.toString()).formatted(Formatting.GREEN)
+        DrawableHelper.drawCenteredText(matrices,textRenderer,imbueCost,i + 187,j+30,0x404040)
+        val width = textRenderer.getWidth(imbueCost)
+        if (mouseX - (i + 187) in 0..width){
+            if (mouseY - (j+30) in 0..9){
+                renderTooltip(matrices, COST_HINT, Optional.empty(), mouseX, mouseY)
+            }
+        }
         //the 13 inputs, 0 to 12
-        renderItem(i+138,j+38,recipeInputs[0].getStack())
-        renderItem(i+222,j+38,recipeInputs[1].getStack())
-        renderItem(i+161,j+48,recipeInputs[2].getStack())
-        renderItem(i+180,j+48,recipeInputs[3].getStack())
-        renderItem(i+199,j+48,recipeInputs[4].getStack())
-        renderItem(i+161,j+67,recipeInputs[5].getStack())
-        renderItem(i+180,j+67,recipeInputs[6].getStack())
-        renderItem(i+199,j+67,recipeInputs[7].getStack())
-        renderItem(i+161,j+86,recipeInputs[8].getStack())
-        renderItem(i+180,j+86,recipeInputs[9].getStack())
-        renderItem(i+199,j+86,recipeInputs[10].getStack())
-        renderItem(i+138,j+96,recipeInputs[11].getStack())
-        renderItem(i+222,j+96,recipeInputs[12].getStack())
+        renderItem(matrices,i+138,j+38,mouseX, mouseY,recipeInputs[0].getStack())
+        renderItem(matrices,i+222,j+38,mouseX, mouseY,recipeInputs[1].getStack())
+        renderItem(matrices,i+161,j+48,mouseX, mouseY,recipeInputs[2].getStack())
+        renderItem(matrices,i+180,j+48,mouseX, mouseY,recipeInputs[3].getStack())
+        renderItem(matrices,i+199,j+48,mouseX, mouseY,recipeInputs[4].getStack())
+        renderItem(matrices,i+161,j+67,mouseX, mouseY,recipeInputs[5].getStack())
+        renderItem(matrices,i+180,j+67,mouseX, mouseY,recipeInputs[6].getStack())
+        renderItem(matrices,i+199,j+67,mouseX, mouseY,recipeInputs[7].getStack())
+        renderItem(matrices,i+161,j+86,mouseX, mouseY,recipeInputs[8].getStack())
+        renderItem(matrices,i+180,j+86,mouseX, mouseY,recipeInputs[9].getStack())
+        renderItem(matrices,i+199,j+86,mouseX, mouseY,recipeInputs[10].getStack())
+        renderItem(matrices,i+138,j+96,mouseX, mouseY,recipeInputs[11].getStack())
+        renderItem(matrices,i+222,j+96,mouseX, mouseY,recipeInputs[12].getStack())
         //the output item
-        renderItem(i+180,j+141,recipeOutputs.getStack())
+        renderItem(matrices,i+180,j+141,mouseX, mouseY,recipeOutputs.getStack())
         //draw the augment title
+        var offset = j + 11f
+        val x = i+17f
         val augmentTitle = tooltipList.getOrElse(0) { AcText.empty() }
-        DrawableHelper.drawCenteredText(matrices,textRenderer,augmentTitle,i + 65,11,0x404040)
+        offset = addText(matrices,reformatText(augmentTitle),i+67f,offset,11,true)
+        //drawing a horizontal line break
+        offset += 2
+        drawTexture(matrices, i+15, j+offset.toInt(), 0, 179, 105, 4)
+        offset += 6
+        //DrawableHelper.drawCenteredText(matrices,textRenderer,augmentTitle,i + 65,j+11,0x404040)
         //draw the enchantment desc
         val desc = tooltipList.getOrElse(1) { AcText.empty() }
-        val squashedDesc = textRenderer.wrapLines(desc,120)
+        offset = addText(matrices,reformatText(desc),x,offset,11)
+        /*val squashedDesc = textRenderer.wrapLines(desc,120)
         var currentOffset = 0
         for (orderedText in squashedDesc) {
             textRenderer.draw(matrices,orderedText,17f,23f+currentOffset,0x404040)
             currentOffset += 10
-        }
+        }*/
         //spell type
-        val typeOffset = 23f + currentOffset
         val type = tooltipList.getOrElse(2) { AcText.empty() }
-        textRenderer.draw(matrices,type,17f,typeOffset,0x404040)
+        offset = addText(matrices,reformatText(type),x,offset,11)
+        //textRenderer.draw(matrices,type,17f,typeOffset,0x404040)
         //minimum XP level (skipping key item because recipe)
         val listDiff = if(tooltipList.size == 7) -1 else 0
-        val xpOffset = typeOffset + 11f
         val xp = tooltipList.getOrElse(4 + listDiff) { AcText.empty() }
-        textRenderer.draw(matrices,xp,17f,xpOffset,0x404040)
+        offset = addText(matrices,reformatText(xp),x,offset,11)
+        //textRenderer.draw(matrices,xp,17f,xpOffset,0x404040)
         //cooldown text
-        val cooldownOffset = xpOffset + 11f
+        //val cooldownOffset = xpOffset + 11f
         val cooldown = tooltipList.getOrElse(5 + listDiff) { AcText.empty() }
-        textRenderer.draw(matrices,cooldown,17f,cooldownOffset,0x404040)
+        offset = addText(matrices,reformatText(cooldown),x,offset,11)
+        ///textRenderer.draw(matrices,cooldown,17f,cooldownOffset,0x404040)
         //cooldown text
-        val costOffset = cooldownOffset + 11f
+        //val costOffset = cooldownOffset + 11f
         val cost = tooltipList.getOrElse(6 + listDiff) { AcText.empty() }
-        textRenderer.draw(matrices,cost,17f,costOffset,0x404040)
+        offset = addText(matrices,reformatText(cost),x,offset,11)
+        //textRenderer.draw(matrices,cost,17f,costOffset,0x404040)
         //tier text
-        val tierOffset = cooldownOffset + 11f
-        val tier = tooltipList.getOrElse(7 + listDiff) { AcText.empty() }
-        textRenderer.draw(matrices,tier,17f,tierOffset,0x404040)
+        //val tierOffset = costOffset + 11f
+        if (tooltipList.size > 6) {
+            val tier = tooltipList.getOrElse(7 + listDiff) { AcText.empty() }
+            addText(matrices, reformatText(tier), x, offset, 11)
+        }
+        //textRenderer.draw(matrices,tier,17f,tierOffset,0x404040)
 
     }
 
-    private fun renderItem(x: Int, y: Int, stack: ItemStack){
+    private fun reformatText(text: Text): Text{
+        val mutableText = text.copy()
+        val style = text.style
+        val color = style.color ?: return mutableText.setStyle(style.withColor(Formatting.BLACK))
+        if (color == TextColor.fromFormatting(Formatting.WHITE)){
+            return mutableText.setStyle(style.withColor(Formatting.BLACK))
+        }
+        if (color == TextColor.fromFormatting(Formatting.GREEN)){
+            return mutableText.setStyle(style.withColor(Formatting.DARK_GREEN))
+        }
+        return text
+    }
+
+    private fun addText(matrices: MatrixStack,text: Text,x: Float,y: Float, rowOffset: Int, centered: Boolean = false): Float{
+        val widthTextList = textRenderer.wrapLines(text,110)
+
+        var curY = y
+        if (centered){
+            for (orderedText in widthTextList) {
+                DrawableHelper.drawCenteredTextWithShadow(matrices, textRenderer,orderedText, x.toInt(), curY.toInt(),0x404040)
+                curY += rowOffset
+            }
+            return curY
+        }
+        for (orderedText in widthTextList) {
+            textRenderer.draw(matrices,orderedText,x,curY,0xFFFFFF)
+            curY += rowOffset
+        }
+        return curY
+    }
+
+    private fun renderItem(matrices: MatrixStack,x: Int, y: Int, mouseX: Int, mouseY: Int, stack: ItemStack){
         itemRenderer.renderInGuiWithOverrides(client?.player, stack, x, y, x + y * 256)
         itemRenderer.renderGuiItemOverlay(textRenderer, stack, x, y, null)
+        if (mouseX - x in 0..15){
+            if (mouseY - y in 0..15){
+                val data = stack.tooltipData
+                val lines = stack.getTooltip(player, context)
+                renderTooltip(matrices, lines, data, mouseX, mouseY)
+            }
+        }
+    }
+
+    private fun renderBookTooltip(matrices: MatrixStack, mouseX: Int,mouseY: Int, lines: List<Text> = listOf(),data: Optional<TooltipData> = Optional.empty<TooltipData>()){
+
     }
 
     override fun resize(client: MinecraftClient, width: Int, height: Int) {
@@ -215,7 +284,8 @@ class KnowledgeBookScreen(private val book: ItemStack): Screen(AcText.translatab
 
 
     companion object{
-        private val BOOK_TEXTURE = Identifier(AI.MOD_ID,"textures/gui/book.png")
+        private val BOOK_TEXTURE = Identifier(AI.MOD_ID,"textures/gui/knowledge_book.png")
+        private val COST_HINT = listOf<Text>(AcText.translatable("lore_book.screen.cost_hint1"),AcText.translatable("lore_book.screen.cost_hint2"))
     }
 
 
