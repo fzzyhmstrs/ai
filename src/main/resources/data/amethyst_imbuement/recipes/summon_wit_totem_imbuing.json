@@ -16,13 +16,13 @@
 	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
-	"item": "minecraft:energetic_opal"
+	"item": "amethyst_imbuement:energetic_opal"
   },
   "craftF": {
-	"item": "minecraft:energetic_opal"
+	"item": "amethyst_imbuement:energetic_opal"
   },
   "craftH": {
-	"item": "minecraft:energetic_opal"
+	"item": "amethyst_imbuement:energetic_opal"
   },
   "title": "Summon Totem of Wit",
   "cost": 17,
