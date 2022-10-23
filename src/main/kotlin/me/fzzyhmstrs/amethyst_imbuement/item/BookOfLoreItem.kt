@@ -19,8 +19,9 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings) {
+open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings),BookOfKnowledge {
     override val loreTier: LoreTier = LoreTier.LOW_TIER
+    override val bindingUV: Pair<Int, Int> = Pair(45,184)
 
     override fun useAfterWriting(
         stack: ItemStack,
