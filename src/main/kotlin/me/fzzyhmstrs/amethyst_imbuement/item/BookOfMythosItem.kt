@@ -8,6 +8,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
+import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
@@ -19,6 +21,20 @@ import net.minecraft.world.World
 
 class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings) {
     override val loreTier: LoreTier = LoreTier.HIGH_TIER
+
+    override fun useAfterWriting(
+        stack: ItemStack,
+        world: World,
+        user: PlayerEntity,
+        hand: Hand
+    ): TypedActionResult<ItemStack> {
+        if (world.isClient){
+            world.playSound(null,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
+            MinecraftClient.getInstance().setScreen(KnowledgeBookScreen(stack))
+            return TypedActionResult.success(stack)
+        }
+        return super.useAfterWriting(stack, world, user, hand)
+    }
 
     override fun getRandomBookAugment(list: List<String>, user: PlayerEntity, hand: Hand): String {
         val stack = if (hand == Hand.MAIN_HAND){
