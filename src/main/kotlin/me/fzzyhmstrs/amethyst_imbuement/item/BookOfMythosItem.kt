@@ -19,8 +19,9 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings) {
+class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge {
     override val loreTier: LoreTier = LoreTier.HIGH_TIER
+    override val bindingUV: Pair<Int, Int> = Pair(63,184)
 
     override fun useAfterWriting(
         stack: ItemStack,

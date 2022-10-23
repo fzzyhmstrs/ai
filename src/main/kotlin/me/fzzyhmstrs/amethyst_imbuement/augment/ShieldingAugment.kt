@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.ItemStack
 import net.minecraft.util.registry.Registry
 import java.util.*
@@ -37,16 +38,18 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
         fun refreshTrinkets(entity: LivingEntity): Float{
             var chance = 0.0f
-            TrinketsApi.getTrinketComponent(entity).ifPresent {trinkets ->
-                trinkets.forEach { _, stack ->
-                    val item = stack.item
-                    if (item is ImbuedJewelryItem){
-                        val level = if (RegisterEnchantment.SHIELDING.isEnabled()) {
-                            EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-                        } else {
-                            0
+            if (RegisterEnchantment.SHIELDING.isEnabled()) {
+                TrinketsApi.getTrinketComponent(entity).ifPresent { trinkets ->
+                    trinkets.forEach { _, stack ->
+                        val item = stack.item
+                        if (item is ImbuedJewelryItem) {
+                            val level = if (RegisterEnchantment.SHIELDING.isEnabled()) {
+                                EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+                            } else {
+                                0
+                            }
+                            chance += baseAmount + shieldingAmount * level
                         }
-                        chance += baseAmount + shieldingAmount * level
                     }
                 }
             }
@@ -54,7 +57,10 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
             return chance
         }
 
-        fun damageIsBlocked(random: Random, entity: LivingEntity): Boolean{
+        fun damageIsBlocked(random: Random, entity: LivingEntity, damageSource: DamageSource): Boolean{
+            if (damageSource == DamageSource.OUT_OF_WORLD) return false
+            if (damageSource == DamageSource.STARVE) return false
+            if (damageSource == DamageSource.FALL) return false
             return random.nextFloat() < (blockChance[entity.uuid] ?: 0.0f)
         }
 
