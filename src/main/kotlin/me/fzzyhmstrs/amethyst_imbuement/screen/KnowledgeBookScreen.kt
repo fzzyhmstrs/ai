@@ -1,12 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import dev.emi.emi.api.stack.EmiIngredient
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.minecraft.client.MinecraftClient
@@ -100,8 +106,13 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
             if (recipeCheck2 is ImbuingRecipe){
                 recipe = recipeCheck2
                 val list2: MutableList<StackProvider> = mutableListOf()
-                recipeCheck2.getInputs().forEach {
-                    list2.add(StackProvider.getProvider(it))
+                recipeCheck2.getInputs().forEachIndexed { index, it ->
+                    if (index == 6 && recipeCheck2.getAugment() != ""){
+                        val ingredient = ModCompatHelper.centerSlotGenerator(recipeCheck2)
+                        list2.add(StackProvider.getProvider(ingredient))
+                    } else {
+                        list2.add(StackProvider.getProvider(it))
+                    }
                 }
                 recipeInputs = list2.toTypedArray()
                 imbuingCost = recipeCheck2.getCost()
@@ -114,18 +125,24 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         super.render(matrices, mouseX, mouseY, delta)
+        //the book background
         RenderSystem.setShader { GameRenderer.getPositionTexShader() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, BOOK_TEXTURE)
-        //the book background
         drawTexture(matrices, i, j, 0, 0, 256, 179)
+        //the bookmark
+        drawTexture(matrices,i+246,j+52,bookmarkUV.first,bookmarkUV.second,15,19)
+        //the bindings
+        drawTexture(matrices,i+8,j+28,bindingUV.first,bindingUV.second,4,14)
+        drawTexture(matrices,i+244,j+28,bindingUV.first + 4,bindingUV.second,4,14)
+        drawTexture(matrices,i+8,j+132,bindingUV.first + 8,bindingUV.second,5,14)
+        drawTexture(matrices,i+243,j+132,bindingUV.first + 13,bindingUV.second,5,14)
         //the recipe title on the right page
         DrawableHelper.drawCenteredText(matrices,textRenderer,AcText.translatable("lore_book.screen").formatted(Formatting.GOLD),i + 187,j+11,0x404040)
         //the recipe cost on the right page
         val imbueCost = AcText.translatable("lore_book.screen.cost",imbuingCost.toString()).formatted(Formatting.GREEN)
         DrawableHelper.drawCenteredText(matrices,textRenderer,imbueCost,i + 187,j+30,0x404040)
         val imbueWidth = textRenderer.getWidth(imbueCost)
-        //renderBookTooltip(matrices,mouseX,mouseY,i + 187-(imbueWidth/2),j+30,imbueWidth,9, COST_HINT)
 
         val tooltips: MutableList<TooltipBox> = mutableListOf()
         tooltips.add(TooltipBox(i + 187-(imbueWidth/2),j+30,imbueWidth,9, COST_HINT))
@@ -142,58 +159,37 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
         RenderSystem.setShaderTexture(0, BOOK_TEXTURE)
         drawTexture(matrices, i+15, offset.toInt(), 0, 179, 105, 4)
         offset += 6
-        //DrawableHelper.drawCenteredText(matrices,textRenderer,augmentTitle,i + 65,j+11,0x404040)
         //draw the enchantment desc
         val desc = tooltipList.getOrElse(1) { AcText.empty() }
-        offset = addText(matrices,reformatText(desc),x,offset,11)
+        offset = addText(matrices,reformatText(desc),x,offset,11, width = 111)
         offset = renderLine(matrices,x.toInt(),offset)
-        /*val squashedDesc = textRenderer.wrapLines(desc,120)
-        var currentOffset = 0
-        for (orderedText in squashedDesc) {
-            textRenderer.draw(matrices,orderedText,17f,23f+currentOffset,0x404040)
-            currentOffset += 10
-        }*/
         //spell type
         val type = tooltipList.getOrElse(2) { AcText.empty() }
         oldOffset = offset
         offset = addText(matrices,reformatText(type),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), TYPE_HINT))
-        //renderBookTooltip(matrices,mouseX,mouseY,x.toInt(),oldOffset.toInt(),110,(offset-oldOffset).toInt(), TYPE_HINT)
         offset = renderLine(matrices,x.toInt(),offset)
-        //textRenderer.draw(matrices,type,17f,typeOffset,0x404040)
         //minimum XP level (skipping key item because recipe)
         val listDiff = if(tooltipList.size == 7) -1 else 0
-        /*val xp = tooltipList.getOrElse(4 + listDiff) { AcText.empty() }
-        offset = addText(matrices,reformatText(xp),x,offset,11)*/
-        //textRenderer.draw(matrices,xp,17f,xpOffset,0x404040)
         //cooldown text
-        //val cooldownOffset = xpOffset + 11f
         val cooldown = tooltipList.getOrElse(5 + listDiff) { AcText.empty() }
         oldOffset = offset
         offset = addText(matrices,reformatText(cooldown),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), COOLDOWN_HINT))
-        //renderBookTooltip(matrices,mouseX,mouseY,x.toInt(),oldOffset.toInt(),110,(offset-oldOffset).toInt(), COOLDOWN_HINT)
         offset = renderLine(matrices,x.toInt(),offset)
-        ///textRenderer.draw(matrices,cooldown,17f,cooldownOffset,0x404040)
-        //cooldown text
-        //val costOffset = cooldownOffset + 11f
+        //mana cost text
         val cost = tooltipList.getOrElse(6 + listDiff) { AcText.empty() }
         oldOffset = offset
         offset = addText(matrices,reformatText(cost),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), MANA_HINT))
-        //renderBookTooltip(matrices,mouseX,mouseY,x.toInt(),oldOffset.toInt(),110,(offset-oldOffset).toInt(), COST_HINT)
         offset = renderLine(matrices,x.toInt(),offset)
-        //textRenderer.draw(matrices,cost,17f,costOffset,0x404040)
         //tier text
-        //val tierOffset = costOffset + 11f
         if (tooltipList.size > 6) {
             val tier = tooltipList.getOrElse(7 + listDiff) { AcText.empty() }
             oldOffset = offset
             offset = addText(matrices, reformatText(tier), x, offset, 11)
             tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), TIER_HINT))
-            //renderBookTooltip(matrices,mouseX,mouseY,x.toInt(),oldOffset.toInt(),110,(offset-oldOffset).toInt(), TIER_HINT)
         }
-        //textRenderer.draw(matrices,tier,17f,tierOffset,0x404040)
         //the 13 inputs, 0 to 12
         renderItem(matrices,i+138,j+38,mouseX, mouseY,recipeInputs[0].getStack())
         renderItem(matrices,i+222,j+38,mouseX, mouseY,recipeInputs[1].getStack())
@@ -210,9 +206,9 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
         renderItem(matrices,i+222,j+96,mouseX, mouseY,recipeInputs[12].getStack())
         //the output item
         renderItem(matrices,i+180,j+141,mouseX, mouseY,recipeOutputs.getStack())
-        //draw the augment title
-        tooltips.forEach {
-            renderBookTooltip(matrices,mouseX,mouseY,it.x,it.y,it.width,it.height,it.hint)
+        //draw tooltips as applicable to the current mouse pos
+        for (it in tooltips) {
+            if (renderBookTooltip(matrices,mouseX,mouseY,it.x,it.y,it.width,it.height,it.hint)) break
         }
     }
 
@@ -229,8 +225,8 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
         return text
     }
 
-    private fun addText(matrices: MatrixStack,text: Text,x: Float,y: Float, rowOffset: Int, centered: Boolean = false): Float{
-        val widthTextList = textRenderer.wrapLines(text,107)
+    private fun addText(matrices: MatrixStack,text: Text,x: Float,y: Float, rowOffset: Int, centered: Boolean = false, width: Int = 107): Float{
+        val widthTextList = textRenderer.wrapLines(text,width)
 
         var curY = y
         if (centered){
@@ -254,16 +250,19 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
     }
 
     private fun renderBookTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int,x: Int, y: Int, width: Int, height: Int,
-                                  lines: List<Text> = listOf(),data: Optional<TooltipData> = Optional.empty<TooltipData>()){
+                                  lines: List<Text> = listOf(),data: Optional<TooltipData> = Optional.empty<TooltipData>()): Boolean{
         if (mouseX - x in 0..width){
             if (mouseY - y in 0..height){
                 renderTooltip(matrices, lines, data, mouseX, mouseY)
+                return true
             }
         }
+        return false
     }
-    private fun renderBookTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, x: Int, y: Int, stack: ItemStack){
-        if (stack.isEmpty) return
-        renderBookTooltip(matrices, mouseX, mouseY,x,y,15,15,stack.getTooltip(player,context), stack.tooltipData)
+    private fun renderBookTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, x: Int, y: Int, stack: ItemStack): Boolean{
+        if (stack.isEmpty) return false
+        return renderBookTooltip(matrices, mouseX, mouseY,x,y,15,15,stack.getTooltip(player,context), stack.tooltipData)
+
     }
 
     private fun renderLine(matrices: MatrixStack,x: Int,offset: Float): Float{
@@ -297,6 +296,7 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
                 if (currentIndex >= stacks.size){
                     currentIndex = 0
                 }
+                timer = time
             }
             return stacks[currentIndex]
         }

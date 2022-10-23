@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -87,50 +88,24 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val enchant = Registry.ENCHANTMENT.get(identifier)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
         if (enchant != null){
-            when (enchant) {
-                is BaseAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    centerSlot = Ingredient.ofStacks(*stacks)
-                }
-                is ScepterAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    for (chk in stacks.indices){
-                        val item = stacks[chk].item
-                        if (item is AbstractAugmentBookItem) {
-                            val augBookStack = stacks[chk].copy()
-                            AbstractAugmentBookItem.addLoreKeyForREI(augBookStack, recipe.getAugment())
-                            stacks[chk] = augBookStack
-                        }
-                    }
-                    centerSlot = Ingredient.ofStacks(*stacks)
-                }
-                else -> {
-                    val enchantItemList: MutableList<ItemStack> = mutableListOf()
-                    for (item in Registry.ITEM.iterator()){
-                        val stack = ItemStack(item)
-                        if (enchant.isAcceptableItem(stack)){
-                            enchantItemList.add(stack)
-                        }
-                    }
-                    centerSlot = Ingredient.ofStacks(*enchantItemList.toTypedArray())
-                }
-            }
             resultSlot = ItemStack(Items.ENCHANTED_BOOK,1)
             EnchantedBookItem.addEnchantment(resultSlot, EnchantmentLevelEntry(enchant,1))
         } else if(modifier != null) {
-            val stacks = modifier.acceptableItemStacks().toTypedArray()
-            centerSlot = Ingredient.ofStacks(*stacks)
             val moddedStack = modifier.acceptableItemStacks().first().copy()
             ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
             resultSlot = moddedStack
         } else {
-            centerSlot = slots[6]
-            resultSlot = if (recipe.getAugment() == "")
-            {
+            resultSlot = if (recipe.getAugment() == "") {
                 recipe.output
             } else {
                 ItemStack(Items.BOOK, 1)
             }
+        }
+        val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
+        centerSlot = if (ingredient.isEmpty){
+            slots[6]
+        } else {
+            ingredient
         }
         
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(slots[0])
