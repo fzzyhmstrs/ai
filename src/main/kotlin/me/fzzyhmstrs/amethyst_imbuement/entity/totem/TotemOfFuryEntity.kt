@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EntityType
@@ -18,7 +19,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
-class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600):
+class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600, private val attackModifier: Int = 4):
     AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.LETHAL_GEM), ModifiableEffectEntity {
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(5.0)
@@ -28,6 +29,12 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
         entityEffects.setRange(ae.range(level))
+    }
+
+    override fun initTicker(): EventRegistry.Ticker {
+        val ticker = EventRegistry.Ticker(30-attackModifier)
+        EventRegistry.registerTickUppable(ticker)
+        return ticker
     }
 
     override fun tick() {

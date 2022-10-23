@@ -37,10 +37,8 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
     }
 
     override fun totemEffect() {
-        println("effect")
         if (summoner == null) return
         if (summoner.distanceTo(this) > entityEffects.range(0)) return
-        println("effect2")
         summoner.heal(entityEffects.damage(0))
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)

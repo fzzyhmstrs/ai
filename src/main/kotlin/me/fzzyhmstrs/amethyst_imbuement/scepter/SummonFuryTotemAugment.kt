@@ -25,6 +25,7 @@ class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
             .withDuration(750,50)
             .withDamage(2.75f,0.25f)
             .withRange(4.5,0.5)
+            .withAmplifier(8,1)
 
     override fun placeEntity(
         world: World,
@@ -34,10 +35,10 @@ class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         effects: AugmentEffect
     ): Boolean {
         var successes = 0
-        val xrnd: Double = (hit as BlockHitResult).blockPos.x.toDouble()
-        val zrnd: Double = hit.blockPos.z.toDouble()
+        val xrnd: Double = (hit as BlockHitResult).blockPos.x + 0.5
+        val zrnd: Double = hit.blockPos.z.toDouble() + 0.5
         val yrnd = hit.blockPos.y + 1.0
-        val furyEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level))
+        val furyEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level),effects.amplifier(level)/2)
         furyEntity.passEffects(effects,level)
         furyEntity.setPos(xrnd, yrnd, zrnd)
         if (world.spawnEntity(furyEntity)){

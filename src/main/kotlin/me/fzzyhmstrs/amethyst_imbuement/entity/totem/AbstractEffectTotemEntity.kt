@@ -101,7 +101,9 @@ abstract class AbstractEffectTotemEntity(
 
     override fun tick() {
         super.tick()
-        val i = init
+        if (!world.isClient()) {
+            val i = init
+        }
         if (world.isClient) {
             val lookAtTarget = lookAt()
             if (lookAtTarget != null) {
