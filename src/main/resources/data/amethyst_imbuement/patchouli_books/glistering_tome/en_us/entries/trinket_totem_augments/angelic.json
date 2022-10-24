@@ -25,7 +25,7 @@
 "craft_h_item": "minecraft:elytra",
 "craft_i_item": "minecraft:feather",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:angelic\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)35$()"
+"cost_text": "$(l)Level Cost: $(2)49$()"
 }
 ]
 }
