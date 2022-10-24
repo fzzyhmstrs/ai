@@ -63,7 +63,7 @@ dependencies {
         exclude ("mezz.jei")
     }
 
-    modImplementation("dev.emi:emi:0.3.0+1.18.2")
+    modImplementation("dev.emi:emi:0.4.0+1.18.2")
 
     modImplementation("dev.emi:trinkets:3.3.0"){
         exclude("net.fabricmc.fabric-api")
