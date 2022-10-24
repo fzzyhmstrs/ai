@@ -25,7 +25,7 @@
 "craft_h_item": "amethyst_imbuement:citrine",
 "craft_i_item": "amethyst_imbuement:citrine",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:crystalline\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)6$()"
+"cost_text": "$(l)Level Cost: $(2)9$()"
 }
 ]
 }
