@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 import dev.emi.emi.api.EmiRecipeHandler
 import dev.emi.emi.api.recipe.EmiRecipe
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
-import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.minecraft.screen.slot.Slot
 
 class AltarRecipeHandler: EmiRecipeHandler<CrystalAltarScreenHandler> {
