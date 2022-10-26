@@ -43,14 +43,14 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             val bl = if (!entity2.isFireImmune) {
-                (entity2 as LivingEntity).frozenTicks = entityEffects.duration(0)
+                if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
                 entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
             } else {
-                (entity2 as LivingEntity).frozenTicks = (entityEffects.duration() * 1.6).toInt()
+                if (entity2 is LivingEntity) entity2.frozenTicks = (entityEffects.duration() * 1.6).toInt()
                 entity2.damage(CustomDamageSources.FreezingDamageSource(entity), entityEffects.damage(0) * 1.6F)
             }
             if (bl){
-                entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                if (entity2 is LivingEntity) entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                 applyDamageEffects(entity, entity2)
                 entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
             }
