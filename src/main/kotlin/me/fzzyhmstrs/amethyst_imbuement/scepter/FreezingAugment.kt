@@ -39,7 +39,7 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
         hit: HitResult?,
         effects: AugmentEffect
     ) {
-        target.frozenTicks = effects.duration(0)
+        if (target is LivingEntity) target.frozenTicks = effects.duration(0)
         target.damage(CustomDamageSources.FreezingDamageSource(user),effects.damage(0)*2/3)
     }
 
