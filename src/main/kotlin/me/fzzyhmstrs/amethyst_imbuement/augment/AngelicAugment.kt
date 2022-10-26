@@ -29,23 +29,18 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
             if (!abilitySource.grants(user,ability)){
                 abilitySource.grantTo(user,ability)
             }
-            val count = readCountFromQueue(user.uuid, NbtKeys.ANGELIC.str())
-            if (count > 0){
-                val rnd = user.world.random.nextFloat()
-                val dmg: Int = if(count > 13) {
-                    1
-                } else if (count > 6) {
-                    if (rnd > 0.33) {1} else {0}
-                } else {
-                    if (rnd > 0.66) {1} else {0}
-                }
-                if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, dmg)){
-                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.ANGELIC,user, AcText.translatable("augment_damage.angelic.burnout"))
-                    if (abilitySource.grants(user,ability)){
-                        abilitySource.revokeFrom(user,ability)
+            if(user.abilities.flying) {
+                if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 2)) {
+                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
+                        stack,
+                        RegisterEnchantment.ANGELIC,
+                        user,
+                        AcText.translatable("augment_damage.angelic.burnout")
+                    )
+                    if (abilitySource.grants(user, ability)) {
+                        abilitySource.revokeFrom(user, ability)
                     }
                 }
-                addCountToQueue(user.uuid,NbtKeys.ANGELIC.str(),0)
             }
         }
     }
