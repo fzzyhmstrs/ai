@@ -63,12 +63,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         if(world.isClient || entity !is PlayerEntity) return
-        if (EventRegistry.ticker_20.isNotReady()){
-            if (entity.abilities.flying) {
-                val count = BaseAugment.readCountFromQueue(entity.uuid,NbtKeys.ANGELIC.str())
-                BaseAugment.addCountToQueue(entity.uuid,NbtKeys.ANGELIC.str(),count + 1)
-            }
-        } else {
+        if (EventRegistry.ticker_20.isReady()){
             val nbt = stack.orCreateNbt
             passiveEnchantmentTasks(stack,world,entity)
             if (!Nbt.readBoolNbt(NbtKeys.TOTEM.str(),nbt)) return
