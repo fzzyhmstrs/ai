@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Increases spell damage by 25% and adds 0.5 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$()"
+"text": "Increases spell damage by 35% and adds 0.5 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
