@@ -1,0 +1,6 @@
+{    
+"name": "Totem Augments",
+"parent": "amethyst_imbuement:scepter_augments",
+"description": "Certain scepter augments summon special totems that have area of effect abilities centered around the totems themselves. These spells do not follow the standard templating; they use $(l:amethyst_imbuement:scepter_upgrading/aspect_gems)aspect gems$(/l) as their main gem instead of the gems found in the templates.",
+"icon": "amethyst_imbuement:lethal_gem"
+}
