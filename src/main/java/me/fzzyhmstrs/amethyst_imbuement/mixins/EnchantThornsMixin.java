@@ -11,11 +11,6 @@ import net.minecraft.util.math.random.Random;
 @Mixin(ThornsEnchantment.class)
 public abstract class EnchantThornsMixin {
 
-    @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(5);
-    }
-
     @Inject(method = "getDamageAmount", at = @At(value = "HEAD"), cancellable = true)
     private static void amethyst_imbuement_getDamageAmount(int level, Random random, CallbackInfoReturnable<Integer> cir){
         if (level == 4) {
