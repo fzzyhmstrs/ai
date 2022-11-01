@@ -14,11 +14,6 @@ public abstract class EnchantProtectionMixin {
 
     @Shadow @Final public ProtectionEnchantment.Type protectionType;
 
-    @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    public void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(5);
-    }
-
     //making the level 5 protections slightly harder to get
     @Inject(method = "getMinPower", at = @At(value = "HEAD"), cancellable = true)
     public void amethyst_imbuement_getMinPower(int level, CallbackInfoReturnable<Integer> cir) {
