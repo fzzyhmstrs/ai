@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.enchantment.QuickChargeEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(QuickChargeEnchantment.class)
 public abstract class EnchantQuickChargeMixin {
 
-    @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(4);
+    @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
+    private int amethyst_imbuement_updateMaxLevelToFour(int original){
+        return 4;
     }
 
     @Inject(method = "getMaxPower", at = @At(value = "HEAD"), cancellable = true)
