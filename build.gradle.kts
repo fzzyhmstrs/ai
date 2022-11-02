@@ -39,6 +39,10 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven {
+        name = "Jitpack"
+        url = uri("https://jitpack.io")
+    }
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
@@ -99,6 +103,10 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
     include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
+
+    implementation("com.github.LlamaLad7:MixinExtras:0.1.0")
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.0")
+    include("com.github.LlamaLad7:MixinExtras:0.1.0")
 }
 
 tasks {
