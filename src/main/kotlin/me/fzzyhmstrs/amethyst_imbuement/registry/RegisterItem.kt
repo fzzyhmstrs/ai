@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.*
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.tag.ItemTags
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
@@ -92,7 +93,7 @@ object RegisterItem {
     val GRACEFUL_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.GRACEFUL))
         .also{ regItem["graceful_scepter"] = it}
-    val BLAZING_SCEPTER = BlazingScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE))
+    val BLAZING_SCEPTER = ParticleScepterItem(ParticleTypes.SMOKE,10,ScepterLvl2ToolMaterial,FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FIREBALL))
         .withModifiers(listOf(RegisterModifier.FIRE_ASPECT))
         .also{ regItem["blazing_scepter"] = it}
@@ -108,7 +109,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT))
         .also{ regItem["scepter_of_blades"] = it}
-    val SCEPTER_OF_RECALL = CustomScepterItem(ScepterLvl2ToolMaterial,FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE))
+    val SCEPTER_OF_RECALL = ParticleScepterItem(ParticleTypes.PORTAL,10,ScepterLvl2ToolMaterial,FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.RECALL))
         .withModifiers(listOf(RegisterModifier.GREATER_REACH))
         .also{ regItem["scepter_of_recall"] = it}
