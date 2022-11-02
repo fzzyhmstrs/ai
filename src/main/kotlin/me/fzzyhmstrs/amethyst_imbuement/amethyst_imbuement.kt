@@ -2,12 +2,14 @@
 
 package me.fzzyhmstrs.amethyst_imbuement
 
+import com.llamalad7.mixinextras.MixinExtrasBootstrap
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
 import kotlin.random.Random
 
@@ -50,4 +52,12 @@ object AIClient: ClientModInitializer{
     fun aiRandom(): Random{
         return Random(System.currentTimeMillis())
     }
+}
+
+object AIPreLaunch: PreLaunchEntrypoint{
+
+    override fun onPreLaunch() {
+        MixinExtrasBootstrap.init()
+    }
+
 }

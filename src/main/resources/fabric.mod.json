@@ -28,6 +28,12 @@
         "value": "me.fzzyhmstrs.amethyst_imbuement.AIClient"
       }
     ],
+    "preLaunch": [
+      {
+        "adapter": "kotlin",
+        "value": "me.fzzyhmstrs.amethyst_imbuement.AIPreLaunch"
+      }
+    ],
     "rei": [
       {
         "adapter": "kotlin",
