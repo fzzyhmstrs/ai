@@ -1,10 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.enchantment.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({FireAspectEnchantment.class,
         KnockbackEnchantment.class,
@@ -17,9 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
         UnbreakingEnchantment.class})
 public abstract class EnchantMaxLvl5Mixin {
 
-    @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(5);
+    @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
+    private int amethyst_imbuement_updateMaxLevelToFive(int original){
+        return 5;
     }
 
 }

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
@@ -21,8 +22,6 @@ public abstract class EnchantDamageMixin {
     private static final int ILLAGERS_INDEX = 3;
 
     @Shadow @Final public int typeIndex;
-    @Shadow @Final private static int[] BASE_POWERS;
-    @Shadow @Final private static int[] POWERS_PER_LEVEL;
 
     @Shadow public abstract int getMinPower(int level);
 
@@ -43,9 +42,9 @@ public abstract class EnchantDamageMixin {
         }
     }
 
-    @Inject(method = "getMaxLevel", at = @At(value = "HEAD"), cancellable = true)
-    private void amethyst_imbuement_getMaxLevel(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(7);
+    @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
+    private int amethyst_imbuement_updateMaxLevelToSeven(int original){
+        return 7;
     }
 
     @Inject(method = "getAttackDamage", at = @At(value = "HEAD"), cancellable = true)
