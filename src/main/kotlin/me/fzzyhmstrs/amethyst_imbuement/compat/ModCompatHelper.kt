@@ -1,8 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat
 
 import dev.emi.emi.api.EmiApi
+import dev.emi.emi.api.stack.EmiStack
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
@@ -10,7 +12,10 @@ import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.enchantment.EnchantmentLevelEntry
+import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -88,6 +93,25 @@ object ModCompatHelper {
             return Ingredient.ofStacks(*stacks)
         } else {
             return Ingredient.EMPTY
+        }
+    }
+
+    fun outputGenerator(recipe: ImbuingRecipe): ItemStack{
+        if (recipe.getAugment() == "") return recipe.output
+        val identifier = Identifier(recipe.getAugment())
+        val enchant = Registry.ENCHANTMENT.get(identifier)
+        val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
+        return if (enchant != null){
+            val stack = ItemStack(Items.ENCHANTED_BOOK,1)
+            EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
+            stack
+        } else if (modifier != null){
+            val stack = modifier.acceptableItemStacks().first()
+            val moddedStack = stack.copy()
+            ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
+            stack
+        } else {
+            ItemStack(Items.BOOK, 1)
         }
     }
 
