@@ -22,11 +22,13 @@ public class CrossbowItemMixin {
     @Inject(method = "getSpeed", at = @At(value = "HEAD"), cancellable = true)
     private static void amethyst_imbuement_getSpeed(ItemStack stack, CallbackInfoReturnable<Float> cir){
         int i;
-        i = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getDEADLY_SHOT(), stack);
-        if (hasProjectile(stack, Items.FIREWORK_ROCKET)) {
-            cir.setReturnValue(RegisterEnchantment.INSTANCE.getDEADLY_SHOT().getSpeed(i,true,false));
-        } else {
-            cir.setReturnValue(RegisterEnchantment.INSTANCE.getDEADLY_SHOT().getSpeed(i,false,false));
+        i = RegisterEnchantment.INSTANCE.getDEADLY_SHOT().getLevel(stack);
+        if (i > 0) {
+            if (hasProjectile(stack, Items.FIREWORK_ROCKET)) {
+                cir.setReturnValue(RegisterEnchantment.INSTANCE.getDEADLY_SHOT().getSpeed(i, true, false));
+            } else {
+                cir.setReturnValue(RegisterEnchantment.INSTANCE.getDEADLY_SHOT().getSpeed(i, false, false));
+            }
         }
     }
 }

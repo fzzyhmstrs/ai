@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt;
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys;
 import net.minecraft.enchantment.Enchantment;
@@ -26,7 +28,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         super(type, syncId, playerInventory, context);
     }
 
-    @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "net/minecraft/enchantment/EnchantmentHelper.set (Ljava/util/Map;Lnet/minecraft/item/ItemStack;)V"))
+    /*@Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "net/minecraft/enchantment/EnchantmentHelper.set (Ljava/util/Map;Lnet/minecraft/item/ItemStack;)V"))
     private void amethyst_imbuement_transferDisenchantNbt(Map<Enchantment, Integer> enchantments, ItemStack stack){
         ItemStack stack2 = this.input.getStack(1);
         NbtCompound nbt2 = stack2.getNbt();
@@ -36,6 +38,18 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             Nbt.INSTANCE.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(), lvl, nbt);
         }
         EnchantmentHelper.set(enchantments,stack);
+    }*/
+
+    @WrapOperation(method = "updateResult", at = @At(value = "INVOKE", target = "net/minecraft/enchantment/EnchantmentHelper.set (Ljava/util/Map;Lnet/minecraft/item/ItemStack;)V"))
+    private void amethyst_imbuement_transferDisenchantNbt(Map<Enchantment, Integer> enchantments, ItemStack stack, Operation<Void> operation){
+        ItemStack stack2 = this.input.getStack(1);
+        NbtCompound nbt2 = stack2.getNbt();
+        if (nbt2 != null && nbt2.contains(NbtKeys.DISENCHANT_COUNT.str())){
+            NbtCompound nbt = stack.getOrCreateNbt();
+            int lvl = Nbt.INSTANCE.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt2);
+            Nbt.INSTANCE.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(), lvl, nbt);
+        }
+        operation.call(enchantments, stack);
     }
 
 }

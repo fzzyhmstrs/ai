@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment;
 import me.fzzyhmstrs.amethyst_imbuement.AI;
@@ -28,6 +30,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
@@ -84,9 +87,14 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
 
-    @Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
+    /*@Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance){
         return (instance.isEmpty() || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) == 0);
+    }*/
+
+    @WrapOperation(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
+    private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance, Operation<Boolean> operation){
+        return (operation.call(instance) || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) > 0);
     }
 
     @Inject(method = "canHaveStatusEffect", at = @At(value = "HEAD"), cancellable = true)
@@ -193,7 +201,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
 
-    @Redirect(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
+    /*@Redirect(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
     private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance){
         long time = instance.world.getTime();
         if (instance.isOnGround()) {
@@ -219,9 +227,39 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
             return false;
         }
+    }*/
+
+    @WrapOperation(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
+    private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance, Operation<Boolean> operation){
+        long time = instance.world.getTime();
+        if (operation.call(instance)) {
+            instance.removeStatusEffect(RegisterStatus.INSTANCE.getLEAPT());
+            lastTime = time;
+            return true; //don't need to multi-jump if the player is already on the ground
+        }
+        if (!(instance instanceof PlayerEntity)) return operation.call(instance);
+        if (!instance.world.isClient) return operation.call(instance);
+        ItemStack footStack = instance.getEquippedStack(EquipmentSlot.FEET);
+        if (footStack.isEmpty()) return operation.call(instance);
+        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getMULTI_JUMP(),footStack) > 0){
+            if(RegisterEnchantment.INSTANCE.getMULTI_JUMP().isEnabled()) {
+                if (!(instance.hasStatusEffect(RegisterStatus.INSTANCE.getLEAPT())) && ((time - lastTime) > 5)) {
+                    instance.addStatusEffect(new StatusEffectInstance(RegisterStatus.INSTANCE.getLEAPT(), 1200));
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
-    @Inject(method = "tryUseTotem", at = @At(value = "HEAD"), cancellable = true)
+
+
+    /*@Inject(method = "tryUseTotem", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_tryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir){
         if (source.isOutOfWorld()) {
             cir.setReturnValue(false);
@@ -244,10 +282,17 @@ public abstract class LivingEntityMixin extends Entity {
             this.world.sendEntityStatus(this, (byte)35);
             cir.setReturnValue(true);
         }
+    }*/
 
+    @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
+    private boolean amethyst_imbuement_tryUseTotemCheck(ItemStack instance, Item item, Operation<Boolean> operation){
+        if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) return operation.call(instance, item);
+        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getUNDYING(),instance) == 0) return operation.call(instance, item);
+        if (!RegisterEnchantment.INSTANCE.getUNDYING().specialEffect((LivingEntity)(Object)this,1,instance)) return operation.call(instance, item);
+        return true;
     }
 
-    @Inject(method = "getEquipmentChanges", at = @At(value = "RETURN"), cancellable = true)
+    /*@Inject(method = "getEquipmentChanges", at = @At(value = "RETURN"), cancellable = true)
     private void amethyst_imbuement_getEquipmentChangesMixin(CallbackInfoReturnable<@Nullable Map<EquipmentSlot, ItemStack>> cir){
         int stackValAdd = 0;
         for (EquipmentSlot equipmentSlot : AI.INSTANCE.getSlots()) {
@@ -295,69 +340,76 @@ public abstract class LivingEntityMixin extends Entity {
             this.getAttributes().addTemporaryModifiers(provideResilientMultimap(itemStack2,equipmentSlot));
         }
         cir.setReturnValue(map);
+    }*/
+
+    @WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
+    private Multimap<EntityAttribute, EntityAttributeModifier> amethyst_imbuement_getEquipmentChangesMixin(ItemStack instance, EquipmentSlot slot, Operation<Multimap<EntityAttribute, EntityAttributeModifier>> operation){
+        int stackValAdd = RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance) : 0;
+        int stackValAdd2 = RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance) : 0;
+        if (stackValAdd == 0 && stackValAdd2 == 0){
+            return operation.call(instance, slot);
+        } else {
+            return provideResilientMultimap(instance, slot, stackValAdd, stackValAdd2);
+        }
     }
 
 
-    private Multimap<EntityAttribute, EntityAttributeModifier> provideResilientMultimap(ItemStack instance, EquipmentSlot slot){
-        int stackValAdd = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance);
-        int stackValAdd2 = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance);
-        if (stackValAdd == 0 && stackValAdd2 == 0) {
-            return instance.getAttributeModifiers(slot);
-        } else {
-            Multimap<EntityAttribute, EntityAttributeModifier> map = instance.getAttributeModifiers(slot);
-            Multimap<EntityAttribute, EntityAttributeModifier> map2 = HashMultimap.create();
-            for (EntityAttribute key : map.keys()){
-                if (key == EntityAttributes.GENERIC_ARMOR){
-                    if (stackValAdd == 0){
-                        map2.putAll(key,map.get(key));
-                        continue;
-                    }
-                    Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR).stream().findFirst();
-                    if (emo.isPresent()) {
-                        EntityAttributeModifier em = emo.get();
-                        double armor = em.getValue();
-                        UUID uuid = em.getId();
-                        String name = em.getName();
-                        EntityAttributeModifier.Operation operation = em.getOperation();
-                        EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,armor + stackValAdd,operation);
-                        map2.put(EntityAttributes.GENERIC_ARMOR,em2);
-                    }
-                } else if (key == EntityAttributes.GENERIC_ARMOR_TOUGHNESS){
-                    if (stackValAdd == 0){
-                        map2.putAll(key,map.get(key));
-                        continue;
-                    }
-                    Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS).stream().findFirst();
-                    if (emo.isPresent()) {
-                        EntityAttributeModifier em = emo.get();
-                        double tough = em.getValue();
-                        UUID uuid = em.getId();
-                        String name = em.getName();
-                        EntityAttributeModifier.Operation operation = em.getOperation();
-                        EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd/2.0,operation);
-                        map2.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,em2);
-                    }
-                }else if (key == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE){
-                    if (stackValAdd2 == 0){
-                        map2.putAll(key,map.get(key));
-                        continue;
-                    }
-                    Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).stream().findFirst();
-                    if (emo.isPresent()) {
-                        EntityAttributeModifier em = emo.get();
-                        double tough = em.getValue();
-                        UUID uuid = em.getId();
-                        String name = em.getName();
-                        EntityAttributeModifier.Operation operation = em.getOperation();
-                        EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd2 * 0.05,operation);
-                        map2.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,em2);
-                    }
-                } else {
+    private Multimap<EntityAttribute, EntityAttributeModifier> provideResilientMultimap(ItemStack instance, EquipmentSlot slot, int stackValAdd, int stackValAdd2){
+        /*int stackValAdd = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance);
+        int stackValAdd2 = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance);*/
+        Multimap<EntityAttribute, EntityAttributeModifier> map = instance.getAttributeModifiers(slot);
+        Multimap<EntityAttribute, EntityAttributeModifier> map2 = HashMultimap.create();
+        for (EntityAttribute key : map.keys()){
+            if (key == EntityAttributes.GENERIC_ARMOR){
+                if (stackValAdd == 0){
                     map2.putAll(key,map.get(key));
+                    continue;
                 }
+                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR).stream().findFirst();
+                if (emo.isPresent()) {
+                    EntityAttributeModifier em = emo.get();
+                    double armor = em.getValue();
+                    UUID uuid = em.getId();
+                    String name = em.getName();
+                    EntityAttributeModifier.Operation operation = em.getOperation();
+                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,armor + stackValAdd,operation);
+                    map2.put(EntityAttributes.GENERIC_ARMOR,em2);
+                }
+            } else if (key == EntityAttributes.GENERIC_ARMOR_TOUGHNESS){
+                if (stackValAdd == 0){
+                    map2.putAll(key,map.get(key));
+                    continue;
+                }
+                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS).stream().findFirst();
+                if (emo.isPresent()) {
+                    EntityAttributeModifier em = emo.get();
+                    double tough = em.getValue();
+                    UUID uuid = em.getId();
+                    String name = em.getName();
+                    EntityAttributeModifier.Operation operation = em.getOperation();
+                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd/2.0,operation);
+                    map2.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,em2);
+                }
+            }else if (key == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE){
+                if (stackValAdd2 == 0){
+                    map2.putAll(key,map.get(key));
+                    continue;
+                }
+                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).stream().findFirst();
+                if (emo.isPresent()) {
+                    EntityAttributeModifier em = emo.get();
+                    double tough = em.getValue();
+                    UUID uuid = em.getId();
+                    String name = em.getName();
+                    EntityAttributeModifier.Operation operation = em.getOperation();
+                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd2 * 0.05,operation);
+                    map2.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,em2);
+                }
+            } else {
+                map2.putAll(key,map.get(key));
             }
-            return map2;
         }
+        return map2;
     }
 
 

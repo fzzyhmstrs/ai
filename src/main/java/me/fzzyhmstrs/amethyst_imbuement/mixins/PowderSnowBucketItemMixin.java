@@ -1,5 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -33,7 +36,7 @@ public class PowderSnowBucketItemMixin {
         }
     }
 
-    @Redirect(method = "useOnBlock", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.setStackInHand (Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
+    /*@Redirect(method = "useOnBlock", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.setStackInHand (Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
     private void amethyst_imbuement_setInfinityStackInHand(PlayerEntity instance, Hand hand, ItemStack itemStack){
         ItemStack outputStack = Items.BUCKET.getDefaultStack();
         if (level > 0){
@@ -42,6 +45,17 @@ public class PowderSnowBucketItemMixin {
             EnchantmentHelper.set(map,outputStack);
         }
         instance.setStackInHand(hand,outputStack);
+    }*/
+
+    @WrapOperation(method = "useOnBlock", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.setStackInHand (Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
+    private void amethyst_imbuement_setInfinityStackInHand(PlayerEntity instance, Hand hand, ItemStack itemStack, Operation<Void> operation){
+        ItemStack outputStack = Items.BUCKET.getDefaultStack();
+        if (level > 0){
+            Map<Enchantment, Integer> map = new HashMap<>();
+            map.put(Enchantments.INFINITY,1);
+            EnchantmentHelper.set(map,outputStack);
+        }
+        operation.call(instance, hand, outputStack);
     }
 
 }
