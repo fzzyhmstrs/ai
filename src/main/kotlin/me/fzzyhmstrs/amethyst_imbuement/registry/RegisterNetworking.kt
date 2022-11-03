@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.scepter.ResonateAugment
 import me.fzzyhmstrs.amethyst_imbuement.scepter.SmitingBlowAugment
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingRecipeBookScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 
 object RegisterNetworking {
@@ -14,5 +15,6 @@ object RegisterNetworking {
         ImbuingTableScreenHandler.registerClient()
         ResonateAugment.registerClient()
         SmitingBlowAugment.registerClient()
+        ImbuingRecipeBookScreen.registerClient()
     }
 }

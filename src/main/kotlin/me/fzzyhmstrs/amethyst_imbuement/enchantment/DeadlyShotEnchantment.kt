@@ -1,7 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.ItemStack
 
 class DeadlyShotEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.CROSSBOW,*slot) {
 
@@ -16,19 +19,24 @@ class DeadlyShotEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     override fun getMaxLevel(): Int {
         return 3
     }
+
+    fun getLevel(stack: ItemStack): Int{
+        if (!enabled) return 0
+        return EnchantmentHelper.getLevel(RegisterEnchantment.DEADLY_SHOT,stack)
+    }
+
     fun getSpeed(level: Int, firework: Boolean, sniper: Boolean): Float {
-        val actLvl = if (enabled){level}else{0}
         return if (firework) {
             if (sniper) {
-                2.2f + (0.35f * actLvl)
+                2.2f + (0.35f * level)
             } else {
-                1.6f + (0.25f * actLvl)
+                1.6f + (0.25f * level)
             }
         } else {
             if (sniper) {
-                4.0f + (0.85f * actLvl)
+                4.0f + (0.85f * level)
             } else {
-                3.15f + (0.75f * actLvl)
+                3.15f + (0.75f * level)
             }
         }
     }
