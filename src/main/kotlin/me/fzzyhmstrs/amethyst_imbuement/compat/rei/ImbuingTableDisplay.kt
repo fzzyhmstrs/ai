@@ -15,6 +15,7 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
+import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -97,35 +98,9 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
 
         private fun getRecipeOutputEntries(recipe: ImbuingRecipe): MutableList<EntryIngredient>{
             val list: MutableList<EntryIngredient> = mutableListOf()
-            if (recipe.getAugment() == "") {
-                val builder = EntryIngredient.builder()
-                builder.add(EntryStacks.of(recipe.output))
-                list.add(builder.build())
-            } else {
-                val identifier = Identifier(recipe.getAugment())
-                val enchant = Registry.ENCHANTMENT.get(identifier)
-                val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-                val stack: ItemStack
-                val builder = EntryIngredient.builder()
-                if (enchant != null){
-                    stack = ItemStack(Items.ENCHANTED_BOOK,1)
-                    stack.addEnchantment(enchant,1)
-                    builder.add(EntryStacks.of(stack))
-                    list.add(builder.build())
-                } else if (modifier != null){
-                    val builder2 = EntryIngredient.builder()
-                    modifier.acceptableItemStacks().forEach {
-                        val moddedStack = it.copy()
-                        ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
-                        builder2.add(EntryStacks.of(moddedStack))
-                    }
-                    list.add(builder2.build())
-                } else {
-                    stack = ItemStack(Items.BOOK, 1)
-                    builder.add(EntryStacks.of(stack))
-                    list.add(builder.build())
-                }
-            }
+            val builder = EntryIngredient.builder()
+            builder.add(EntryStacks.of(ModCompatHelper.outputGenerator(recipe)))
+            list.add(builder.build())
             return list
         }
     }

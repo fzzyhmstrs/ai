@@ -63,29 +63,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
 
     private fun initOutputs(recipe: ImbuingRecipe): List<EmiStack>{
-        val list: MutableList<EmiStack> = mutableListOf()
-        if (recipe.getAugment() == "") {
-            list.add(EmiStack.of(recipe.output))
-        } else {
-            val identifier = Identifier(recipe.getAugment())
-            val enchant = Registry.ENCHANTMENT.get(identifier)
-            val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-            val stack: ItemStack
-            if (enchant != null){
-                stack = ItemStack(Items.ENCHANTED_BOOK,1)
-                EnchantedBookItem.addEnchantment(stack,EnchantmentLevelEntry(enchant,1))
-                list.add(EmiStack.of(stack))
-            } else if (modifier != null){
-                stack = modifier.acceptableItemStacks().first()
-                val moddedStack = stack.copy()
-                ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
-                list.add(EmiStack.of(moddedStack))
-            } else {
-                stack = ItemStack(Items.BOOK, 1)
-                list.add(EmiStack.of(stack))
-            }
-        }
-        return list
+        return listOf(EmiStack.of(ModCompatHelper.outputGenerator(recipe)))
     }
     
     override fun getCategory(): EmiRecipeCategory{

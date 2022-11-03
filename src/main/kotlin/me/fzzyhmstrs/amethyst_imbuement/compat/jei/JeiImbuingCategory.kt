@@ -83,24 +83,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {
         val slots = recipe.getInputs()
         val centerSlot: Ingredient
-        val resultSlot: ItemStack
-        val identifier = Identifier(recipe.getAugment())
-        val enchant = Registry.ENCHANTMENT.get(identifier)
-        val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-        if (enchant != null){
-            resultSlot = ItemStack(Items.ENCHANTED_BOOK,1)
-            EnchantedBookItem.addEnchantment(resultSlot, EnchantmentLevelEntry(enchant,1))
-        } else if(modifier != null) {
-            val moddedStack = modifier.acceptableItemStacks().first().copy()
-            ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
-            resultSlot = moddedStack
-        } else {
-            resultSlot = if (recipe.getAugment() == "") {
-                recipe.output
-            } else {
-                ItemStack(Items.BOOK, 1)
-            }
-        }
+        val resultSlot: ItemStack = ModCompatHelper.outputGenerator(recipe)
         val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
         centerSlot = if (ingredient.isEmpty){
             slots[6]
