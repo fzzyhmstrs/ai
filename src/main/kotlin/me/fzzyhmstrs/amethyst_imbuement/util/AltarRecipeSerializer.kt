@@ -16,14 +16,14 @@ import net.minecraft.util.JsonHelper
 object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
 
     val ID = Identifier(AI.MOD_ID,"enhancing")
+    private val gson = Gson()
 
     override fun read(id: Identifier, json: JsonObject): AltarRecipe {
-        val recipeJson: AltarRecipeFormat = Gson().fromJson(json, AltarRecipeFormat::class.java)
-        val inputsArray: Array<Ingredient> = arrayOf(Ingredient.EMPTY,Ingredient.EMPTY)
-        if (recipeJson.base != null) {inputsArray[0] = Ingredient.fromJson(recipeJson.base)}
-        if (recipeJson.addition != null) inputsArray[1] = Ingredient.fromJson(recipeJson.addition)
+        val recipeJson: AltarRecipeFormat = gson.fromJson(json, AltarRecipeFormat::class.java)
+        val base = RecipeUtil.ingredientFromJson(recipeJson.base)
+        val addition = RecipeUtil.ingredientFromJson(recipeJson.addition)
         val itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
-        return AltarRecipe(id,inputsArray[0], inputsArray[1],itemStack)
+        return AltarRecipe(id,base, addition,itemStack)
     }
 
     override fun write(buf: PacketByteBuf, recipe: AltarRecipe) {

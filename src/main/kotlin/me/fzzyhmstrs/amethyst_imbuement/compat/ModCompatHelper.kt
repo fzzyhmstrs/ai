@@ -1,24 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat
 
 import dev.emi.emi.api.EmiApi
-import dev.emi.emi.api.stack.EmiStack
-import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
-import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingRecipeBookScreen
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.enchantment.EnchantmentLevelEntry
-import net.minecraft.item.EnchantedBookItem
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.recipe.Ingredient
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.client.MinecraftClient
 
 object ModCompatHelper {
 
@@ -38,10 +25,16 @@ object ModCompatHelper {
                 return chk.value
             }
         }
-        return -1
+        return 0
     }
 
     fun runHandlerViewer(offset: Int){
+        if (offset == 0){
+            val oldScreen = MinecraftClient.getInstance().currentScreen
+            if (oldScreen is ImbuingTableScreen){
+                MinecraftClient.getInstance().setScreen(ImbuingRecipeBookScreen(oldScreen))
+            }
+        }
         if (offset == 1){
             EmiApi.displayRecipeCategory(EmiClientPlugin.IMBUING_CATEGORY)
         }
@@ -53,66 +46,6 @@ object ModCompatHelper {
             if (chk.key != viewer && chk.value < ranking && FabricLoader.getInstance().isModLoaded(chk.key)) return true
         }
         return false
-    }
-
-    fun centerSlotGenerator(recipe: ImbuingRecipe): Ingredient{
-        val identifier = Identifier(recipe.getAugment())
-        val enchant = Registry.ENCHANTMENT.get(identifier)
-        val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-        if (enchant != null){
-            when (enchant) {
-                is BaseAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    return Ingredient.ofStacks(*stacks)
-                }
-                is ScepterAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    for (chk in stacks.indices){
-                        val item = stacks[chk].item
-                        if (item is AbstractAugmentBookItem) {
-                            val augBookStack = stacks[chk].copy()
-                            AbstractAugmentBookItem.addLoreKeyForREI(augBookStack, recipe.getAugment())
-                            stacks[chk] = augBookStack
-                        }
-                    }
-                    return Ingredient.ofStacks(*stacks)
-                }
-                else -> {
-                    val enchantItemList: MutableList<ItemStack> = mutableListOf()
-                    for (item in Registry.ITEM.iterator()){
-                        val stack = ItemStack(item)
-                        if (enchant.isAcceptableItem(stack)){
-                            enchantItemList.add(stack)
-                        }
-                    }
-                    return Ingredient.ofStacks(*enchantItemList.toTypedArray())
-                }
-            }
-        } else if(modifier != null) {
-            val stacks = modifier.acceptableItemStacks().toTypedArray()
-            return Ingredient.ofStacks(*stacks)
-        } else {
-            return Ingredient.EMPTY
-        }
-    }
-
-    fun outputGenerator(recipe: ImbuingRecipe): ItemStack{
-        if (recipe.getAugment() == "") return recipe.output
-        val identifier = Identifier(recipe.getAugment())
-        val enchant = Registry.ENCHANTMENT.get(identifier)
-        val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
-        return if (enchant != null){
-            val stack = ItemStack(Items.ENCHANTED_BOOK,1)
-            EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
-            stack
-        } else if (modifier != null){
-            val stack = modifier.acceptableItemStacks().first()
-            val moddedStack = stack.copy()
-            ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
-            stack
-        } else {
-            ItemStack(Items.BOOK, 1)
-        }
     }
 
 }

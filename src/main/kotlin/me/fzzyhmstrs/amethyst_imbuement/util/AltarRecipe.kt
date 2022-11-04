@@ -2,7 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.recipe.*
+import net.minecraft.recipe.Ingredient
+import net.minecraft.recipe.Recipe
+import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.RecipeType
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -13,11 +16,6 @@ class AltarRecipe(
     val result: ItemStack
 ) :
     Recipe<SimpleInventory> {
-
-    object Type : RecipeType<AltarRecipe> {
-        // This will be needed in step 4
-        const val ID = "altar_recipe"
-    }
 
     override fun matches(inventory: SimpleInventory, world: World): Boolean {
         return base.test(inventory.getStack(0)) && addition.test(inventory.getStack(1))
@@ -50,6 +48,12 @@ class AltarRecipe(
 
     override fun getSerializer(): RecipeSerializer<*> {
         return AltarRecipeSerializer
+    }
+
+
+    object Type : RecipeType<AltarRecipe> {
+        // This will be needed in step 4
+        const val ID = "altar_recipe"
     }
 
     override fun getType(): RecipeType<*> {

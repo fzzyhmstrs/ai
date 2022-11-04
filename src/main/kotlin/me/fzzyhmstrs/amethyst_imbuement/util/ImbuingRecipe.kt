@@ -1,13 +1,20 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
+import net.minecraft.enchantment.EnchantmentLevelEntry
 import net.minecraft.inventory.SimpleInventory
+import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
@@ -18,46 +25,51 @@ import net.minecraft.world.World
 
 
 @Suppress("PropertyName")
-class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_augment: String, _transferEnchant: Boolean,_title: String,_cost: Int, _id: Identifier): Recipe<SimpleInventory> {
-    private val result: String
-    private val count: Int
-    private val augment: String
-    private val transferEnchant: Boolean
-    private val title: String
-    private val cost: Int
-    private val id: Identifier
-    private var inputs: Array<Ingredient> = arrayOf(Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,Ingredient.EMPTY,
-        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,
-        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,
-        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY)
+class ImbuingRecipe(private val inputs: Array<Ingredient>,
+                    private val result: String,
+                    private val count: Int,
+                    private val augment: String,
+                    private val transferEnchant: Boolean,
+                    private val title: String,
+                    private val cost: Int,
+                    private val id: Identifier): Recipe<SimpleInventory> {
+    private val resultId: Identifier = Identifier(result)
+    private val augId: Identifier = Identifier(augment)
+    private val outputItem: ItemStack by lazy{
+        outputGenerator()
+    }
+    private val centerSlot: Ingredient by lazy{
+        val ingredient = centerSlotGenerator()
+        if(ingredient.isEmpty){
+            inputs[6]
+        } else {
+            ingredient
+        }
+    }
     private val imbueA: Ingredient
     private val imbueB: Ingredient
     private val imbueC: Ingredient
     private val imbueD: Ingredient
-    private var crafts: Array<Ingredient> = arrayOf(Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,
-        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,
-        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY)
+    private var crafts: Array<Ingredient>
 
     init{
         if (inputs.size != 13) throw UnsupportedOperationException("Recipe input not the correct size")
         //inputs array is 4 imbuing slots left>right, top>bottom, then the 9 crafting slots left>right,top>bottom
-        imbueA = _inputs[0]
-        imbueB = _inputs[1]
-        imbueC = _inputs[11]
-        imbueD = _inputs[12]
-        for (i in 0..8) {
-            crafts[i] = _inputs[2+i]
-        }
-        for (i in 0..12){
-            inputs[i] = _inputs[i]
-        }
-        result = _result
-        count = _count
-        augment = _augment
-        transferEnchant = _transferEnchant
-        title = _title
-        cost = _cost
-        id = _id
+        imbueA = inputs[0]
+        imbueB = inputs[1]
+        imbueC = inputs[11]
+        imbueD = inputs[12]
+        crafts = arrayOf(
+            inputs[2],
+            inputs[3],
+            inputs[4],
+            inputs[5],
+            inputs[6],
+            inputs[7],
+            inputs[8],
+            inputs[9],
+            inputs[10]
+        )
     }
 
 
@@ -87,7 +99,7 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
                             } else {
                                 val idTest = Identifier(augment)
                                 val pathTest = idTest.toString()
-                                val loreString = readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
+                                val loreString = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
                                 val nbtTest = if (Identifier(loreString).namespace == "minecraft"){
                                     Identifier(AI.MOD_ID,Identifier(loreString).path).toString()
                                 } else {
@@ -118,33 +130,72 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
     override fun getType(): RecipeType<*> {
         return Type
     }
-    fun getImbueA(): Ingredient{
-        return imbueA
-    }
-    fun getImbueB(): Ingredient{
-        return imbueB
-    }
-    fun getImbueC(): Ingredient{
-        return imbueC
-    }
-    fun getImbueD(): Ingredient{
-        return imbueD
-    }
-    fun getCrafts(index: Int): Ingredient{
-        return if (index in 0..8) {
-            crafts[index]
-        } else{
-            Ingredient.EMPTY
-        }
-    }
     fun getInputs(): Array<Ingredient>{
         return inputs
     }
     override fun getOutput(): ItemStack {
-        return ItemStack(Registry.ITEM.getOrEmpty(Identifier(result)).orElse(Items.AIR),count)
+        return outputItem
     }
+    private fun outputGenerator(): ItemStack{
+        if (augment == "") return ItemStack(Registry.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
+        val identifier = Identifier(augment)
+        val enchant = Registry.ENCHANTMENT.get(identifier)
+        val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
+        return if (enchant != null){
+            val stack = ItemStack(Items.ENCHANTED_BOOK,1)
+            EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
+            stack
+        } else if (modifier != null){
+            val stack = modifier.acceptableItemStacks().first()
+            val moddedStack = stack.copy()
+            ModifierHelper.addModifierForREI(modifier.modifierId, moddedStack)
+            stack
+        } else {
+            ItemStack(Items.BOOK, 1)
+        }
+    }
+
+    fun getCenterIngredient(): Ingredient{
+        return centerSlot
+    }
+    private fun centerSlotGenerator(): Ingredient{
+        if (augId.path == "") return Ingredient.EMPTY
+        val enchant = Registry.ENCHANTMENT.get(augId)
+        val modifier = ModifierRegistry.getByType<AugmentModifier>(augId)
+        if (enchant != null){
+            when (enchant) {
+                is BaseAugment -> {
+                    val stacks = enchant.acceptableItemStacks().toTypedArray()
+                    return Ingredient.ofStacks(*stacks)
+                }
+                is ScepterAugment -> {
+                    val stacks = enchant.acceptableItemStacks().toTypedArray()
+                    return Ingredient.ofStacks(*stacks)
+                }
+                else -> {
+                    val enchantItemList: MutableList<ItemStack> = mutableListOf()
+                    for (item in Registry.ITEM.iterator()){
+                        val stack = ItemStack(item)
+                        if (enchant.isAcceptableItem(stack)){
+                            enchantItemList.add(stack)
+                        }
+                    }
+                    return Ingredient.ofStacks(*enchantItemList.toTypedArray())
+                }
+            }
+        } else if(modifier != null) {
+            val stacks = modifier.acceptableItemStacks().toTypedArray()
+            return Ingredient.ofStacks(*stacks)
+        } else {
+            return Ingredient.EMPTY
+        }
+    }
+
     fun getAugment(): String {
         return augment
+    }
+    fun getAugmentId(): Identifier{
+        return augId
     }
     fun getTransferEnchant(): Boolean {
         return transferEnchant
@@ -166,10 +217,6 @@ class ImbuingRecipe(_inputs: Array<Ingredient>, _result: String, _count: Int,_au
     }
     override fun getSerializer(): RecipeSerializer<*> {
         return ImbuingRecipeSerializer
-    }
-
-    private fun readStringNbt(key: String, nbt: NbtCompound): String {
-        return nbt.getString(key)
     }
 
     companion object{
