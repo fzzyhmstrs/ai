@@ -1,13 +1,34 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings;
+import me.fzzyhmstrs.amethyst_imbuement.item.ItemBookCategory;
+import net.fabricmc.fabric.impl.item.FabricItemInternals;
 import net.minecraft.item.*;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
-public class ItemMixin {
+public class ItemMixin implements ItemBookCategory {
+
+    @Unique private AiItemSettings.AiItemGroup aiItemGroup;
+
+    @Nullable
+    @Override
+    public AiItemSettings.AiItemGroup amethyst_imbuement_getAiItemGroup() {
+        return aiItemGroup;
+    }
+
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void onConstruct(Item.Settings settings, CallbackInfo info) {
+        if (settings instanceof AiItemSettings){
+            aiItemGroup = ((AiItemSettings) settings).getAiGroup();
+        }
+    }
 
     @Inject(method = "getEnchantability", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_checkForShield(CallbackInfoReturnable<Integer> cir){
@@ -50,5 +71,4 @@ public class ItemMixin {
             cir.setReturnValue(true);
         }
     }
-
 }
