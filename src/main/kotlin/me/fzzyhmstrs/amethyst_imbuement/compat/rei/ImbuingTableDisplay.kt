@@ -1,27 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
-import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.util.EntryStacks
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import java.util.*
 
 class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: MutableList<EntryIngredient>, location: Optional<Identifier>, tag: NbtCompound):
@@ -48,10 +36,12 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
     }
 
     override fun getCategoryIdentifier(): CategoryIdentifier<*> {
-        return CategoryIdentifier.of<ImbuingTableDisplay>(AI.MOD_ID, ImbuingRecipe.Type.ID)
+        return imbuingCategoryId
     }
 
     companion object{
+
+        private val imbuingCategoryId = CategoryIdentifier.of<ImbuingTableDisplay>(AI.MOD_ID, ImbuingRecipe.Type.ID)
 
         private fun createCostTag(recipe: ImbuingRecipe): NbtCompound{
             val nbt = NbtCompound()
@@ -78,7 +68,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
                 val input = inputs[i]
                 val builder = EntryIngredient.builder()
                 if (recipe.getAugment() != "" && i == 6){
-                    val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
+                    val ingredient = recipe.getCenterIngredient()
                     ingredient.matchingStacks.forEach { builder.add(EntryStacks.of(it)) }
                     list.add(builder.build())
                     continue
@@ -99,7 +89,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         private fun getRecipeOutputEntries(recipe: ImbuingRecipe): MutableList<EntryIngredient>{
             val list: MutableList<EntryIngredient> = mutableListOf()
             val builder = EntryIngredient.builder()
-            builder.add(EntryStacks.of(ModCompatHelper.outputGenerator(recipe)))
+            builder.add(EntryStacks.of(recipe.output))
             list.add(builder.build())
             return list
         }
