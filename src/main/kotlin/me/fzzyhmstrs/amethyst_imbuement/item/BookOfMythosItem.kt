@@ -31,7 +31,7 @@ class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), 
     ): TypedActionResult<ItemStack> {
         if (world.isClient){
             world.playSound(user,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
-            MinecraftClient.getInstance().setScreen(KnowledgeBookScreen(stack,user))
+            MinecraftClient.getInstance().setScreen(KnowledgeBookScreen(stack))
             return TypedActionResult.success(stack)
         }
         return super.useAfterWriting(stack, world, user, hand)
