@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.entity.Entity
@@ -31,7 +32,7 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
     }
 
     override fun getPickStack(world: BlockView?, pos: BlockPos?, state: BlockState?): ItemStack {
-        return ItemStack(Items.EXPERIENCE_BOTTLE)
+        return ItemStack(RegisterItem.XP_BUSH_SEED)
     }
 
     @Deprecated("Deprecated in Java")
