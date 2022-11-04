@@ -447,6 +447,7 @@
 	"tag.amethyst_imbuement.disenchant_pillar_blocks": "Disenchanting Table Pillar Blocks",
 	"emi.category.amethyst_imbuement.imbuing_table": "Imbuing",
 	"emi.category.amethyst_imbuement.crystal_altar": "Enhancing",
+	"imbuing_recipes.screen": "Imbuing Recipes",
 	"augment_damage.check_can_use": "Not enough durability to use augment!",
 	"augment_damage.escape.check_can_use":"Not enough durability to escape!",
 	"augment_damage.guardian.check_can_use": "Not enough durability to summon a guardian!",

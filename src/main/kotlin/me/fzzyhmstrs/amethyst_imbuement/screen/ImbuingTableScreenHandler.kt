@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
 import com.mojang.logging.LogUtils
-import dev.emi.emi.api.EmiApi
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
@@ -11,8 +10,6 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
-import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
@@ -57,7 +54,6 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import java.util.*
 import kotlin.math.max
 import kotlin.math.roundToInt
 
