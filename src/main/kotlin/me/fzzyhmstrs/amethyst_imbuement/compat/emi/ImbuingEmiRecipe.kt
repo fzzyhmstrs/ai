@@ -7,20 +7,13 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import net.minecraft.client.MinecraftClient
-import net.minecraft.enchantment.EnchantmentLevelEntry
-import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.text.OrderedText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     
@@ -53,8 +46,16 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         for (i in inputs.indices){
             val input = inputs[i]
             if (recipe.getAugment() != "" && i == 6){
-                val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
+                val ingredient = recipe.getCenterIngredient()
                 list.add(EmiIngredient.of(ingredient))
+                continue
+            }
+            val stacks = input.matchingStacks
+            val bookIndex = getBookStackIndex(stacks)
+            if (bookIndex >= 0){
+                val stack = stacks[bookIndex].copy()
+                AbstractAugmentBookItem.addLoreKeyForREI(stack,recipe.getAugment())
+                list.add(EmiStack.of(stack))
                 continue
             }
             list.add(EmiIngredient.of(input))
@@ -62,8 +63,17 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         return list
     }
 
+    private fun getBookStackIndex(stacks: Array<ItemStack>?): Int{
+        if (stacks.isNullOrEmpty()) return -1
+        stacks.forEachIndexed { index, itemStack ->
+            val item = itemStack.item
+            if (item is AbstractAugmentBookItem) return index
+        }
+        return -1
+    }
+
     private fun initOutputs(recipe: ImbuingRecipe): List<EmiStack>{
-        return listOf(EmiStack.of(ModCompatHelper.outputGenerator(recipe)))
+        return listOf(EmiStack.of(recipe.output))
     }
     
     override fun getCategory(): EmiRecipeCategory{

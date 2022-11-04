@@ -1,14 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -21,16 +14,12 @@ import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.enchantment.EnchantmentLevelEntry
-import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
@@ -38,6 +27,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
         val IMBUING_TYPE = RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
     }
 
+    private val icon = guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.IMBUING_TABLE.asItem()))
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,0,135,62)
 
     override fun getRecipeType(): RecipeType<ImbuingRecipe> {
@@ -53,7 +43,7 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
     }
 
     override fun getIcon(): IDrawable {
-        return  guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.IMBUING_TABLE.asItem()))
+        return  icon
     }
 
     override fun draw(
@@ -80,14 +70,8 @@ class JeiImbuingCategory(private val guiHelper: IGuiHelper): IRecipeCategory<Imb
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {
         val slots = recipe.getInputs()
-        val centerSlot: Ingredient
-        val resultSlot: ItemStack = ModCompatHelper.outputGenerator(recipe)
-        val ingredient = ModCompatHelper.centerSlotGenerator(recipe)
-        centerSlot = if (ingredient.isEmpty){
-            slots[6]
-        } else {
-            ingredient
-        }
+        val centerSlot: Ingredient = recipe.getCenterIngredient()
+        val resultSlot: ItemStack = recipe.output
         
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(slots[0])
         builder.addSlot(RecipeIngredientRole.INPUT, 81, 1).addIngredients(slots[1])
