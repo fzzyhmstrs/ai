@@ -1,20 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
-import dev.emi.emi.api.stack.EmiIngredient
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
+import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.Screen
@@ -22,32 +18,26 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.item.TooltipData
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.enchantment.EnchantmentLevelEntry
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.recipe.Ingredient
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import java.util.*
 
 class KnowledgeBookScreen(private val book: ItemStack, private val player: PlayerEntity): Screen(AcText.translatable("lore_book.screen")) {
 
     private var recipe: ImbuingRecipe? = null
-    private var recipeInputs: Array<StackProvider> = Array(13) { EmptyStackProvider() }
-    private val recipeOutputs: StackProvider by lazy{
-        buildOutputProvider()
+    private var recipeInputs: Array<RecipeUtil.StackProvider> = Array(13) { RecipeUtil.EmptyStackProvider() }
+    private val recipeOutputs: RecipeUtil.StackProvider by lazy{
+        recipe?.let { buildOutputProvider(it) } ?: RecipeUtil.EmptyStackProvider()
     }
     private var tooltipList: List<Text> = listOf()
     private var imbuingCost: Int = 0
     private var i: Int = 2
     private var j: Int = 2
-    val context: TooltipContext by lazy{
+    private val context: TooltipContext by lazy{
         if(client?.options?.advancedItemTooltips == true){
         TooltipContext.Default.ADVANCED
         } else {
@@ -61,19 +51,6 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
         Pair(230,230)
     }
     private var bookmarkUV = Pair(230,230)
-
-    private fun buildOutputProvider(): StackProvider{
-        if (recipe == null) return EmptyStackProvider()
-        val augment = recipe?.getAugment()?:return EmptyStackProvider()
-        if (augment != ""){
-            val stack = ItemStack(Items.ENCHANTED_BOOK)
-            val enchant = Registry.ENCHANTMENT.get(Identifier(augment))?:return EmptyStackProvider()
-            EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
-            return SingleStackProvider(stack)
-        }
-        val output = recipe?.output?:return EmptyStackProvider()
-        return SingleStackProvider(output)
-    }
 
     override fun init() {
         super.init()
@@ -105,15 +82,7 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
             val recipeCheck2 = recipeCheck.get()
             if (recipeCheck2 is ImbuingRecipe){
                 recipe = recipeCheck2
-                val list2: MutableList<StackProvider> = mutableListOf()
-                recipeCheck2.getInputs().forEachIndexed { index, it ->
-                    if (index == 6 && recipeCheck2.getAugment() != ""){
-                        val ingredient = ModCompatHelper.centerSlotGenerator(recipeCheck2)
-                        list2.add(StackProvider.getProvider(ingredient))
-                    } else {
-                        list2.add(StackProvider.getProvider(it))
-                    }
-                }
+                val list2 = RecipeUtil.buildInputProviders(recipeCheck2)
                 recipeInputs = list2.toTypedArray()
                 imbuingCost = recipeCheck2.getCost()
             }
@@ -283,56 +252,11 @@ class KnowledgeBookScreen(private val book: ItemStack, private val player: Playe
         return false
     }
 
-    private class MultiStackProvider(private val stacks: Array<ItemStack>): StackProvider{
-        var timer = -1L
-        var currentIndex = 0
-
-        override fun getStack(): ItemStack{
-            val time = System.currentTimeMillis()
-            if (timer == -1L){
-                timer = time
-            } else if (time - timer >= 1000L){
-                currentIndex++
-                if (currentIndex >= stacks.size){
-                    currentIndex = 0
-                }
-                timer = time
-            }
-            return stacks[currentIndex]
-        }
-    }
-    private class SingleStackProvider(private val stack: ItemStack): StackProvider{
-        override fun getStack(): ItemStack {
-            return stack
-        }
-
-    }
-    private class EmptyStackProvider(): StackProvider{
-        override fun getStack(): ItemStack {
-            return ItemStack.EMPTY
-        }
-    }
-    private interface StackProvider{
-        fun getStack(): ItemStack
-        companion object{
-            fun getProvider(ingredient: Ingredient): StackProvider{
-                if (ingredient.isEmpty){
-                    return EmptyStackProvider()
-                }
-                val stacks = ingredient.matchingStacks
-                if (stacks.size == 1){
-                    return SingleStackProvider(stacks[0])
-                }
-                return MultiStackProvider(stacks)
-            }
-        }
-    }
-
-    private class TooltipBox(val x: Int, val y: Int, val width: Int, val height: Int, val hint: List<Text>)
+    internal class TooltipBox(val x: Int, val y: Int, val width: Int, val height: Int, val hint: List<Text>)
 
 
     companion object{
-        private val BOOK_TEXTURE = Identifier(AI.MOD_ID,"textures/gui/knowledge_book.png")
+        internal val BOOK_TEXTURE = Identifier(AI.MOD_ID,"textures/gui/knowledge_book.png")
         private val COST_HINT = listOf<Text>(
             AcText.translatable("lore_book.screen.cost_hint1"),
             AcText.translatable("lore_book.screen.cost_hint2")
