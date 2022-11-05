@@ -2,11 +2,14 @@ plugins {
     id("fabric-loom")
     val kotlinVersion: String by System.getProperties()
     kotlin("jvm").version(kotlinVersion)
+    id("com.modrinth.minotaur") version "2.+"
 }
 base {
     val archivesBaseName: String by project
     archivesName.set(archivesBaseName)
 }
+val log: File = file("changelog.md")
+println(log.readText())
 val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
@@ -135,4 +138,24 @@ tasks {
         targetCompatibility = javaVersion
         withSourcesJar()
     }
+    //https://github.com/modrinth/minotaur
+    /*modrinth{
+        token.set(System.getenv("MODRINTH_TOKEN"))
+        projectId.set("amethyst-imbuement")
+        versionNumber.set(modVersion)
+        versionType.set("release")
+        uploadFile.set(remapJar.get())
+        gameVersions.addAll("1.19","1.19.1","1.19.2")
+        loaders.addAll("fabric","quilt")
+        changelog.set(log.readText())
+        dependencies{
+            required.project("fabric-api")
+            required.project("fabric-language-kotlin")
+            optional.project("emi")
+            optional.project("roughly-enough-items")
+            embedded.project("amethyst-core")
+            embedded.project("trinkets")
+            embedded.project("patchouli")
+        }
+    }*/
 }
