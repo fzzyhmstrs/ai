@@ -1,15 +1,88 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import com.google.gson.JsonObject
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
+import it.unimi.dsi.fastutil.ints.IntList
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.enchantment.EnchantmentLevelEntry
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.screen.slot.Slot
 import net.minecraft.util.Identifier
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.registry.Registry
+import java.util.*
 
 object RecipeUtil {
+
+    private val playerFavoritesMap: MutableMap<UUID,List<ItemStack>> = mutableMapOf()
+
+    val FAVORITES_CHECK = Identifier(AI.MOD_ID,"faves_check")
+    val FAVORITES_SEND = Identifier(AI.MOD_ID,"faves_send")
+    val FAVORITES_SAVE = Identifier(AI.MOD_ID,"faves_save")
+
+    fun registerServer(){
+        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_CHECK){server,player,_,buf,_ ->
+            val uuid = buf.readUuid()
+            val sentBuf = PacketByteBufs.create()
+            if (playerFavoritesMap.containsKey(uuid)){
+                val list = playerFavoritesMap.getOrDefault(uuid, listOf())
+                if (list.isEmpty()){
+                    sentBuf.writeBoolean(false)
+                    server.execute {
+                        ServerPlayNetworking.send(player, FAVORITES_SEND, sentBuf)
+                    }
+                } else {
+                    sentBuf.writeBoolean(true)
+                    sentBuf.writeShort(list.size)
+                    list.forEach {
+                        sentBuf.writeItemStack(it)
+                    }
+                    server.execute {
+                        println("sending to client!")
+                        println(list)
+                        ServerPlayNetworking.send(player, FAVORITES_SEND, sentBuf)
+                    }
+                }
+            } else {
+                sentBuf.writeBoolean(false)
+                server.execute {
+                    ServerPlayNetworking.send(player, FAVORITES_SEND, sentBuf)
+                }
+            }
+
+        }
+        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_SAVE){server,_,_,buf,_ ->
+            val uuid = buf.readUuid()
+            val list: MutableList<ItemStack> = mutableListOf()
+            val size = buf.readShort()
+            for (i in 1..size){
+                list.add(buf.readItemStack())
+            }
+            server.execute {
+                println("saving from client!")
+                println(list)
+            }
+            playerFavoritesMap[uuid] = list
+        }
+    }
+
+    fun hasFavorites(uuid: UUID): Boolean{
+        return playerFavoritesMap.containsKey(uuid)
+    }
+
+    fun getFavorites(uuid: UUID): List<ItemStack>{
+        return playerFavoritesMap[uuid]?: listOf()
+    }
+
+    fun setFavorites(uuid: UUID, list: List<ItemStack>){
+        playerFavoritesMap[uuid] = list
+    }
 
     internal fun buildOutputProvider(recipe: ImbuingRecipe): StackProvider{
         val augment = recipe.getAugment()
@@ -60,7 +133,7 @@ object RecipeUtil {
         }
 
     }
-    internal class EmptyStackProvider(): StackProvider{
+    internal class EmptyStackProvider: StackProvider{
         override fun getStack(): ItemStack {
             return ItemStack.EMPTY
         }
@@ -75,6 +148,8 @@ object RecipeUtil {
                 val stacks = ingredient.matchingStacks
                 if (stacks.size == 1){
                     return SingleStackProvider(stacks[0])
+                } else if (stacks.isEmpty()){
+                    return EmptyStackProvider()
                 }
                 return MultiStackProvider(stacks)
             }
@@ -83,6 +158,111 @@ object RecipeUtil {
 
     fun ingredientFromJson(json: JsonObject?): Ingredient{
         return if (json == null) Ingredient.EMPTY else Ingredient.fromJson(json)
+    }
+
+    fun generate(slots: DefaultedList<Slot>): Bom {
+        val map = Int2ObjectOpenHashMap<IdStack>(50,0.75f)
+        val list = mutableListOf<Int>()
+        for (i in 0 until slots.size) {
+            val slot = slots[i]
+            val stack = slot.stack
+
+            if (stack.isEmpty) continue
+            val id = Registry.ITEM.getRawId(stack.item)
+            map[i] = IdStack(id,stack.count)
+            list.add(id)
+        }
+        return Bom(map, IntList.of(*list.toIntArray()))
+    }
+
+    fun test(slotBom: Bom, recipeBom: Int2ObjectOpenHashMap<IntList>): Result {
+        val sortedBom = recipeBom.toSortedMap()
+        val sortedSlots = slotBom.slots.toSortedMap()
+        //map of slot -> how many used from that slot
+        val usedItems = Int2IntOpenHashMap()
+        val matchedItems = Int2IntOpenHashMap()
+        var passed = true
+        sortedBom.forEach { (index, ids) ->
+            println("index: $index")
+            var found = false
+            for (it in ids.listIterator()) {
+                println("id to match: $it")
+                if (slotBom.ids.contains(it)){
+                    for ((slot,stack) in sortedSlots) {
+                        println("slot to check: $slot")
+                        println("stack to check: $stack")
+                        if (stack.id == it){
+                            println(">>>>>>>>>>>>>>>> index: $index, slot: $slot, item id: $it")
+                            val itemsUsed = usedItems.getOrDefault(slot,-1)
+                            println("Items used so far: $usedItems")
+                            if (itemsUsed == -1){
+                                usedItems[slot] = 1
+                                matchedItems[index] = slot
+                                found = true
+                                break
+                            } else {
+                                if (itemsUsed < stack.count){
+                                    usedItems[slot] = itemsUsed + 1
+                                    matchedItems[index] = slot
+                                    found = true
+                                    break
+                                }else{
+                                    continue
+                                }
+                            }
+                        }
+                    }
+                    if (found){
+                        break
+                    }
+                }
+            }
+            if (!found){
+                passed = false
+                matchedItems[index] = -1
+            }
+        }
+        return Result(passed,matchedItems)
+    }
+
+    fun truncate(input: Int2IntOpenHashMap): Int2IntOpenHashMap {
+        val truncated = Int2IntOpenHashMap(input)
+        input.forEach { (key,slot) ->
+            if (key == slot){
+                truncated.remove(key)
+            }
+        }
+        return truncateAfterTrim(truncated)
+    }
+    private fun truncateAfterTrim(input: Int2IntOpenHashMap): Int2IntOpenHashMap {
+        val truncated = Int2IntOpenHashMap(input)
+        input.forEach { (key,slot) ->
+            input.keys.forEach{ index ->
+                if (slot == index){
+                    truncated[key] = truncated[index]
+                    truncated.remove(index)
+                    return truncateAfterTrim(truncated)
+                }
+            }
+        }
+        return truncated
+    }
+
+    class Bom(val slots: Int2ObjectOpenHashMap<IdStack>, val ids: IntList)
+
+    class Result(val passed: Boolean, val matches: Int2IntOpenHashMap){
+        override fun toString(): String {
+            return "[passed: $passed | matches: $matches]"
+        }
+        companion object{
+            val EMPTY = Result(false, Int2IntOpenHashMap())
+        }
+    }
+
+    class IdStack(val id: Int, var count: Int){
+        override fun toString(): String {
+            return "{id: $id, count: $count}"
+        }
     }
 
 }
