@@ -1,5 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
+import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
@@ -50,7 +53,11 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     private val imbueB: Ingredient
     private val imbueC: Ingredient
     private val imbueD: Ingredient
-    private var crafts: Array<Ingredient>
+    private val crafts: Array<Ingredient>
+    private val bomStructure: Int2ObjectOpenHashMap<IntList> by lazy {
+        generateStructure()
+    }
+
 
     init{
         if (inputs.size != 13) throw UnsupportedOperationException("Recipe input not the correct size")
@@ -70,6 +77,21 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
             inputs[9],
             inputs[10]
         )
+    }
+
+    private fun generateStructure():Int2ObjectOpenHashMap<IntList>{
+        val tempStruct = Int2ObjectOpenHashMap<IntList>(16,0.8f)
+        inputs.forEachIndexed { index, ingredient ->
+            if (index == 6 && augment != ""){
+                val centerIngredient = getCenterIngredient()
+                if (!centerIngredient.isEmpty) {
+                    tempStruct[index] = centerIngredient.matchingItemIds
+                }
+            } else if (!ingredient.isEmpty) {
+                tempStruct[index] = ingredient.matchingItemIds
+            }
+        }
+        return tempStruct
     }
 
 
@@ -217,6 +239,9 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     override fun getSerializer(): RecipeSerializer<*> {
         return ImbuingRecipeSerializer
+    }
+    fun getBom(): Int2ObjectOpenHashMap<IntList>{
+        return bomStructure
     }
 
     companion object{
