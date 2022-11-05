@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
+import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
@@ -8,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
+import me.fzzyhmstrs.amethyst_imbuement.util.BomGenerator
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -21,6 +24,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
@@ -35,10 +39,15 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     internal var currentRecipes: List<ImbuingRecipe> = listOf()
     internal var currentStack: ItemStack = ItemStack.EMPTY
     internal var recipeIndex = -1
+    private var recipeMatches: BomGenerator.Result = BomGenerator.Result.EMPTY
+    private val screenBom: BomGenerator.Bom = BomGenerator.generate(oldScreen.screenHandler.slots)
+    private val playerLevels by lazy{ client?.player?.experienceLevel?:0 }
     private val tooltips: MutableList<KnowledgeBookScreen.TooltipBox> = mutableListOf()
     private var recipeInputs: Array<RecipeUtil.StackProvider> = Array(13) { RecipeUtil.EmptyStackProvider() }
     private var recipeOutputs: RecipeUtil.StackProvider = RecipeUtil.EmptyStackProvider()
+    private var recipeBom: Int2ObjectOpenHashMap<IntList> = Int2ObjectOpenHashMap()
     private var imbuingCost: Int = 0
+    private var imbuingCostTooHigh = false
 
     private val leftItemButtonAction = PressAction {
         updateCurrentPage(false)
@@ -94,15 +103,46 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         updateRecipe()
         updateRecipeButtons()
     }
+    private val addRecipeButtonAction: PressAction = PressAction {
+        val manager = client?.interactionManager?:return@PressAction
+        val player = client?.player?:return@PressAction
+        val syncId = oldScreen.screenHandler.syncId
+        if (!recipeMatches.passed) return@PressAction
+        val finalMap = BomGenerator.truncate(recipeMatches.matches)
+        if (finalMap.isEmpty()) return@PressAction
+        finalMap.forEach { (craft, input) ->
+            val stack = oldScreen.screenHandler.slots[input].stack
+            println(stack)
+            val count = stack.count
+            println(count)
+            manager.clickSlot(syncId, input, 0, SlotActionType.PICKUP, player)
+            manager.clickSlot(syncId, craft, 1, SlotActionType.PICKUP, player)
+            if (count > 1){
+                manager.clickSlot(syncId, input, 0, SlotActionType.PICKUP, player)
+            }
+        }
+        this.close()
+    }
+    private val addRecipeTooltipSupplier: TooltipSupplier = object: TooltipSupplier{
+        override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+            tooltips.add(KnowledgeBookScreen.TooltipBox(mouseX,mouseY,15,15,listOf(AcText.translatable("imbuing_recipes_book.move"))))
+        }
+
+        override fun supply(consumer: Consumer<Text>) {
+            consumer.accept(AcText.translatable("imbuing_recipes_book.move"))
+        }
+    }
 
     private val leftRecipeButton = TexturedButtonWidget(i+145,j+152,20,12,22,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,leftRecipeButtonAction,leftButtonTooltipSupplier,AcText.empty())
     private val rightRecipeButton = TexturedButtonWidget(i+211,j+152,20,12,0,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,rightRecipeButtonAction, rightButtonTooltipSupplier, AcText.empty())
 
-    private val allCategoryButton by lazy{ ItemCategoryWidget(i-14,j+17,true, Items.COMPASS,AiItemSettings.AiItemGroup.ALL,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.all"),this)}
-    private val gemCategoryButton by lazy{ ItemCategoryWidget(i-14,j+42,false, RegisterItem.AMETRINE,AiItemSettings.AiItemGroup.GEM,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.gem"),this)}
-    private val scepterCategoryButton by lazy{ ItemCategoryWidget(i-14,j+67,false, RegisterItem.SCEPTER_OF_THE_PACIFIST,AiItemSettings.AiItemGroup.SCEPTER,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.scepter"),this)}
-    private val equipmentCategoryButton by lazy{ ItemCategoryWidget(i-14,j+92,false, RegisterItem.GARNET_SWORD,AiItemSettings.AiItemGroup.EQUIPMENT,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.equipment"),this)}
-    private val bookCategoryButton by lazy{ ItemCategoryWidget(i-14,j+117,false, Items.ENCHANTED_BOOK,AiItemSettings.AiItemGroup.BOOK,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.book"),this)}
+    private val allCategoryButton by lazy{ ItemCategoryWidget(i-14,j+17, currentContainer == AiItemSettings.AiItemGroup.ALL, Items.COMPASS,AiItemSettings.AiItemGroup.ALL,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.all"),this)}
+    private val gemCategoryButton by lazy{ ItemCategoryWidget(i-14,j+42,currentContainer == AiItemSettings.AiItemGroup.GEM, RegisterItem.AMETRINE,AiItemSettings.AiItemGroup.GEM,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.gem"),this)}
+    private val scepterCategoryButton by lazy{ ItemCategoryWidget(i-14,j+67,currentContainer == AiItemSettings.AiItemGroup.SCEPTER, RegisterItem.SCEPTER_OF_THE_PACIFIST,AiItemSettings.AiItemGroup.SCEPTER,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.scepter"),this)}
+    private val equipmentCategoryButton by lazy{ ItemCategoryWidget(i-14,j+92,currentContainer == AiItemSettings.AiItemGroup.EQUIPMENT, RegisterItem.GARNET_SWORD,AiItemSettings.AiItemGroup.EQUIPMENT,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.equipment"),this)}
+    private val bookCategoryButton by lazy{ ItemCategoryWidget(i-14,j+117,currentContainer == AiItemSettings.AiItemGroup.BOOK, Items.ENCHANTED_BOOK,AiItemSettings.AiItemGroup.BOOK,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.book"),this)}
+
+    private val addRecipeButton = TexturedButtonWidget(i+214, j+129,15,15,116,226,15,KnowledgeBookScreen.BOOK_TEXTURE,256,256,addRecipeButtonAction,addRecipeTooltipSupplier,AcText.empty())
 
     private var itemButtons: Array<ItemButtonWidget> = arrayOf()
 
@@ -123,6 +163,10 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         this.addDrawableChild(scepterCategoryButton)
         this.addDrawableChild(equipmentCategoryButton)
         this.addDrawableChild(bookCategoryButton)
+        val bom = screenBom
+        println(bom.ids)
+        println(bom.slots)
+        println("Player Levels: $playerLevels")
     }
 
     private fun generateWidget(index: Int): ItemButtonWidget{
@@ -162,7 +206,17 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         val list2 = RecipeUtil.buildInputProviders(recipe)
         recipeInputs = list2.toTypedArray()
         recipeOutputs = buildOutputProvider(recipe)
+        recipeBom = recipe.getBom()
+        recipeMatches = BomGenerator.test(screenBom,recipeBom)
+        if (recipeMatches.passed){
+            addRecipeButton.setPos(i+214, j+129)
+            this.addDrawableChild(addRecipeButton)
+        } else {
+            this.remove(addRecipeButton)
+        }
         imbuingCost = recipe.getCost()
+        imbuingCostTooHigh = imbuingCost > playerLevels
+
     }
 
     override fun close() {
@@ -205,22 +259,40 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             DrawableHelper.drawCenteredText(matrices,textRenderer,stackName.formatted(
                 Formatting.GOLD),i + 187,j+13,0x404040)
             //the recipe cost on the right page
-            val imbueCost = AcText.translatable("lore_book.screen.cost",imbuingCost.toString()).formatted(Formatting.GREEN)
+            val costFormatting = if(imbuingCostTooHigh) Formatting.RED else Formatting.GREEN
+            val imbueCost = AcText.translatable("lore_book.screen.cost",imbuingCost.toString()).formatted(costFormatting)
             DrawableHelper.drawCenteredText(matrices,textRenderer,imbueCost,i + 187,j+30,0x404040)
+            val imbueWidth = textRenderer.getWidth(imbueCost)
+            val hint = if (imbuingCostTooHigh) {
+                mutableListOf(*KnowledgeBookScreen.COST_HINT.toTypedArray(),AcText.translatable("imbuing_recipes_book.too_high_hint").formatted(Formatting.DARK_RED,Formatting.ITALIC))
+            } else {
+                KnowledgeBookScreen.COST_HINT
+            }
+            tooltips.add(
+                KnowledgeBookScreen.TooltipBox(
+                    i + 187 - (imbueWidth / 2),
+                    j + 30,
+                    imbueWidth,
+                    9,
+                    hint
+                )
+            )
+            //input background highlighting for missing items
+            if (!recipeMatches.passed){
+                val map = recipeMatches.matches
+                for (k in 0..12){
+                    if (map[k] == -1){
+                        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+                        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+                        RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
+                        drawTexture(matrices, i - 1 + rowIndices[k], j - 1 + colIndices[k], 48, 227, 18, 18)
+                    }
+                }
+            }
             //input recipe items
-            renderItem(matrices, i + 138, j + 38, mouseX, mouseY, recipeInputs[0].getStack())
-            renderItem(matrices, i + 222, j + 38, mouseX, mouseY, recipeInputs[1].getStack())
-            renderItem(matrices, i + 161, j + 48, mouseX, mouseY, recipeInputs[2].getStack())
-            renderItem(matrices, i + 180, j + 48, mouseX, mouseY, recipeInputs[3].getStack())
-            renderItem(matrices, i + 199, j + 48, mouseX, mouseY, recipeInputs[4].getStack())
-            renderItem(matrices, i + 161, j + 67, mouseX, mouseY, recipeInputs[5].getStack())
-            renderItem(matrices, i + 180, j + 67, mouseX, mouseY, recipeInputs[6].getStack())
-            renderItem(matrices, i + 199, j + 67, mouseX, mouseY, recipeInputs[7].getStack())
-            renderItem(matrices, i + 161, j + 86, mouseX, mouseY, recipeInputs[8].getStack())
-            renderItem(matrices, i + 180, j + 86, mouseX, mouseY, recipeInputs[9].getStack())
-            renderItem(matrices, i + 199, j + 86, mouseX, mouseY, recipeInputs[10].getStack())
-            renderItem(matrices, i + 138, j + 96, mouseX, mouseY, recipeInputs[11].getStack())
-            renderItem(matrices, i + 222, j + 96, mouseX, mouseY, recipeInputs[12].getStack())
+            for (k in 0..12){
+                renderItem(matrices, i + rowIndices[k], j + colIndices[k], mouseX, mouseY, recipeInputs[k].getStack())
+            }
             //output recipe item
             renderItem(matrices,i+180,j+141,mouseX, mouseY,recipeOutputs.getStack())
         }
@@ -280,7 +352,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             if (hovered) {
                 renderTooltip(matrices, mouseX, mouseY)
             }
-            client.itemRenderer.renderInGuiWithOverrides(client?.player, stack, x + 8, y + 2, x + y * 256)
+            client.itemRenderer.renderInGuiWithOverrides(client?.player, stack, x + 7, y + 2, x + y * 256)
             //client.itemRenderer.renderGuiItemOverlay(client.textRenderer, stack, x + 4, y + 4, null)
         }
     }
@@ -313,6 +385,9 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         override fun onPress() {
             screen.recipeIndex = if (entry.list.isEmpty()) -1 else 0
             screen.currentRecipes = entry.list
+            for (currentRecipe in screen.currentRecipes) {
+                println(currentRecipe.getBom())
+            }
             screen.currentStack = entry.stack
             screen.updateRecipeButtons()
             screen.updateRecipe()
@@ -354,6 +429,15 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     }
 
     companion object RecipeContainer{
+
+        private val rowIndices = arrayOf(
+            138, 222, 161, 180, 199, 161, 180,
+            199, 161, 180, 199, 138, 222
+        )
+        private val colIndices = arrayOf(
+            38, 38, 48, 48, 48, 67, 67,
+            67, 86, 86, 86, 96, 96
+        )
 
         private var recipeList: List<ItemEntry> = listOf()
         private var pages = 0
@@ -407,10 +491,6 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             imbuingList.forEach { recipe ->
                 val output = recipe.output
                 output.count = 1
-                if (AiItemSettings.groupFromItem(output.item) != null){
-                    println("found a non-null setting!")
-                    println(output)
-                }
                 var found = false
                 for (stack in tempMap.keys) {
                     if (ItemStack.areEqual(stack,output)) {

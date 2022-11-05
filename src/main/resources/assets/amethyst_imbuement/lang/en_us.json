@@ -437,6 +437,8 @@
 	"imbuing_recipes_book.page": "%1$s / %2$s",
 	"imbuing_recipes_book.prev": "Previous page",
 	"imbuing_recipes_book.next": "Next page",
+	"imbuing_recipes_book.move": "Transfer recipe to table",
+	"imbuing_recipes_book.too_high_hint": "(Not enough experience for this recipe)",
 	"imbuing_recipes_book.category.all": "All Items",
 	"imbuing_recipes_book.category.gem": "Gems and Materials",
 	"imbuing_recipes_book.category.scepter": "Scepters",
