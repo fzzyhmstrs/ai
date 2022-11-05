@@ -136,24 +136,27 @@ tasks {
         targetCompatibility = javaVersion
         withSourcesJar()
     }
-    //https://github.com/modrinth/minotaur
-    /*modrinth{
-        token.set(System.getenv("MODRINTH_TOKEN"))
-        projectId.set("amethyst-imbuement")
-        versionNumber.set(modVersion)
-        versionType.set("release")
-        uploadFile.set(remapJar.get())
-        gameVersions.addAll("1.19","1.19.1","1.19.2")
-        loaders.addAll("fabric","quilt")
-        changelog.set(log.readText())
-        dependencies{
-            required.project("fabric-api")
-            required.project("fabric-language-kotlin")
-            optional.project("emi")
-            optional.project("roughly-enough-items")
-            embedded.project("amethyst-core")
-            embedded.project("trinkets")
-            embedded.project("patchouli")
-        }
-    }*/
+}
+
+modrinth {
+    token.set(System.getenv("MODRINTH_TOKEN"))
+    projectId.set("amethyst-imbuement")
+    versionNumber.set(modVersion)
+    versionName.set("${base.archivesName.get()}-$modVersion")
+    versionType.set("release")
+    uploadFile.set(tasks.remapJar.get())
+    gameVersions.addAll("1.19","1.19.1","1.19.2")
+    loaders.addAll("fabric","quilt")
+    detectLoaders.set(false)
+    changelog.set(log.readText())
+    dependencies{
+        required.project("fabric-api")
+        required.project("fabric-language-kotlin")
+        optional.project("emi")
+        optional.project("roughly-enough-items")
+        embedded.project("amethyst-core")
+        embedded.project("trinkets")
+        embedded.project("patchouli")
+    }
+    debugMode.set(true)
 }
