@@ -20,6 +20,7 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
@@ -455,23 +456,23 @@ class ImbuingTableScreenHandler(
                         )
                     )
                 ) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
+                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
+                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
                     ++i
                 }
                 if (k == 0 || j == 0) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j)).isIn(RegisterTag.BOOKSHELVES)) {
+                if (world.getBlockState(pos.add(k * 2, 0, j)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k * 2, 1, j)).isIn(RegisterTag.BOOKSHELVES)) {
+                if (world.getBlockState(pos.add(k * 2, 1, j)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
                     ++i
                 }
-                if (world.getBlockState(pos.add(k, 0, j * 2)).isIn(RegisterTag.BOOKSHELVES)) {
+                if (world.getBlockState(pos.add(k, 0, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
                     ++i
                 }
-                if (!world.getBlockState(pos.add(k, 1, j * 2)).isIn(RegisterTag.BOOKSHELVES)) continue
+                if (!world.getBlockState(pos.add(k, 1, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) continue
                 ++i
             }
             ++j
