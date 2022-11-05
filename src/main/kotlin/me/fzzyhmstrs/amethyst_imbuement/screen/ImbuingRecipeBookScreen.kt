@@ -4,13 +4,15 @@ import com.mojang.blaze3d.systems.RenderSystem
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
+import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
-import me.fzzyhmstrs.amethyst_imbuement.util.BomGenerator
+import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -21,6 +23,7 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -39,10 +42,12 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     internal var currentRecipes: List<ImbuingRecipe> = listOf()
     internal var currentStack: ItemStack = ItemStack.EMPTY
     internal var recipeIndex = -1
-    private var recipeMatches: BomGenerator.Result = BomGenerator.Result.EMPTY
-    private val screenBom: BomGenerator.Bom = BomGenerator.generate(oldScreen.screenHandler.slots)
+    private var recipeMatches: RecipeUtil.Result = RecipeUtil.Result.EMPTY
+    private val screenBom: RecipeUtil.Bom = RecipeUtil.generate(oldScreen.screenHandler.slots)
     private val playerLevels by lazy{ client?.player?.experienceLevel?:0 }
     private val tooltips: MutableList<KnowledgeBookScreen.TooltipBox> = mutableListOf()
+    private var favoritesButtonAdded = false
+
     private var recipeInputs: Array<RecipeUtil.StackProvider> = Array(13) { RecipeUtil.EmptyStackProvider() }
     private var recipeOutputs: RecipeUtil.StackProvider = RecipeUtil.EmptyStackProvider()
     private var recipeBom: Int2ObjectOpenHashMap<IntList> = Int2ObjectOpenHashMap()
@@ -52,25 +57,21 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     private val leftItemButtonAction = PressAction {
         updateCurrentPage(false)
         updateItemButtons()
-        //client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
     }
     private val rightItemButtonAction = PressAction {
         updateCurrentPage(true)
         updateItemButtons()
-        //client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
     }
     private val leftRecipeButtonAction = PressAction {
         if (recipeIndex > -1){
             recipeIndex = if (recipeIndex == 0) currentRecipes.lastIndex else recipeIndex - 1
             updateRecipe()
-            //client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
         }
     }
     private val rightRecipeButtonAction = PressAction {
         if (recipeIndex > -1){
             recipeIndex = if (recipeIndex == currentRecipes.lastIndex) 0 else recipeIndex + 1
             updateRecipe()
-            //client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
         }
     }
     private val leftButtonTooltipSupplier = object: TooltipSupplier{
@@ -98,6 +99,10 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         scepterCategoryButton.setSelected(false)
         equipmentCategoryButton.setSelected(false)
         bookCategoryButton.setSelected(false)
+        favoritesCategoryButton.setSelected(false)
+        currentStack = ItemStack.EMPTY
+        currentRecipes = listOf()
+        recipeIndex = -1
         updateContainer(it.container)
         updateItemButtons()
         updateRecipe()
@@ -108,7 +113,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         val player = client?.player?:return@PressAction
         val syncId = oldScreen.screenHandler.syncId
         if (!recipeMatches.passed) return@PressAction
-        val finalMap = BomGenerator.truncate(recipeMatches.matches)
+        val finalMap = RecipeUtil.truncate(recipeMatches.matches)
         if (finalMap.isEmpty()) return@PressAction
         finalMap.forEach { (craft, input) ->
             val stack = oldScreen.screenHandler.slots[input].stack
@@ -132,6 +137,25 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             consumer.accept(AcText.translatable("imbuing_recipes_book.move"))
         }
     }
+    private val addFavoriteButtonAction: PressAction = PressAction {
+        if (it is AddFavoritesWidget) {
+            if (it.toggled){
+                addFavorite(currentStack, currentRecipes)
+            } else {
+                removeFavorite(currentStack)
+                if (currentContainer == AiItemSettings.AiItemGroup.FAVES){
+                    val entry = getCurrentDefaultItemEntry()
+                    currentStack = entry.stack
+                    currentRecipes = entry.list
+                    updateContainer(AiItemSettings.AiItemGroup.FAVES)
+                    updateItemButtons()
+                    updateRecipe()
+                    updateRecipeButtons()
+                }
+            }
+            updateFavoritesButton()
+        }
+    }
 
     private val leftRecipeButton = TexturedButtonWidget(i+145,j+152,20,12,22,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,leftRecipeButtonAction,leftButtonTooltipSupplier,AcText.empty())
     private val rightRecipeButton = TexturedButtonWidget(i+211,j+152,20,12,0,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,rightRecipeButtonAction, rightButtonTooltipSupplier, AcText.empty())
@@ -141,8 +165,10 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     private val scepterCategoryButton by lazy{ ItemCategoryWidget(i-14,j+67,currentContainer == AiItemSettings.AiItemGroup.SCEPTER, RegisterItem.SCEPTER_OF_THE_PACIFIST,AiItemSettings.AiItemGroup.SCEPTER,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.scepter"),this)}
     private val equipmentCategoryButton by lazy{ ItemCategoryWidget(i-14,j+92,currentContainer == AiItemSettings.AiItemGroup.EQUIPMENT, RegisterItem.GARNET_SWORD,AiItemSettings.AiItemGroup.EQUIPMENT,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.equipment"),this)}
     private val bookCategoryButton by lazy{ ItemCategoryWidget(i-14,j+117,currentContainer == AiItemSettings.AiItemGroup.BOOK, Items.ENCHANTED_BOOK,AiItemSettings.AiItemGroup.BOOK,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.book"),this)}
+    private val favoritesCategoryButton by lazy{ ItemCategoryWidget(i-14,j+142,currentContainer == AiItemSettings.AiItemGroup.BOOK, RegisterItem.HEARTSTONE,AiItemSettings.AiItemGroup.FAVES,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.faves"),this)}
 
     private val addRecipeButton = TexturedButtonWidget(i+214, j+129,15,15,116,226,15,KnowledgeBookScreen.BOOK_TEXTURE,256,256,addRecipeButtonAction,addRecipeTooltipSupplier,AcText.empty())
+    private val addFavoriteButton = AddFavoritesWidget(i+147, j+129,false,addFavoriteButtonAction,this)
 
     private var itemButtons: Array<ItemButtonWidget> = arrayOf()
 
@@ -151,9 +177,8 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         if (maxPageIndex < 0) this.close()
         i = (width - 256)/2
         j = (height - 179)/2
-        if (maxPageIndex > 0)
-        this.addDrawableChild(TexturedButtonWidget(i+22,j+152,20,12,22,203,12,KnowledgeBookScreen.BOOK_TEXTURE,leftItemButtonAction))
-        this.addDrawableChild(TexturedButtonWidget(i+94,j+152,20,12,0,203,12,KnowledgeBookScreen.BOOK_TEXTURE,rightItemButtonAction))
+        this.addDrawableChild(TexturedButtonWidget(i+22,j+152,20,12,22,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,leftItemButtonAction,leftButtonTooltipSupplier,AcText.empty()))
+        this.addDrawableChild(TexturedButtonWidget(i+94,j+152,20,12,0,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,rightItemButtonAction,rightButtonTooltipSupplier,AcText.empty()))
         itemButtons = Array(20) { index -> generateWidget(index) }
         itemButtons.forEach {
             this.addDrawableChild(it)
@@ -163,6 +188,11 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         this.addDrawableChild(scepterCategoryButton)
         this.addDrawableChild(equipmentCategoryButton)
         this.addDrawableChild(bookCategoryButton)
+        if (hasFavorites){
+            this.addDrawableChild(favoritesCategoryButton)
+        }
+        updateRecipe()
+        updateRecipeButtons()
         val bom = screenBom
         println(bom.ids)
         println(bom.slots)
@@ -193,6 +223,12 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             this.addDrawableChild(leftRecipeButton)
             this.addDrawableChild(rightRecipeButton)
         }
+        this.remove(addFavoriteButton)
+        if (!currentStack.isEmpty) {
+            addFavoriteButton.setPos(i + 147, j + 129)
+            addFavoriteButton.setToggle(checkFavorite(currentStack))
+            this.addDrawableChild(addFavoriteButton)
+        }
     }
 
     private fun updateRecipe(){
@@ -207,19 +243,34 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         recipeInputs = list2.toTypedArray()
         recipeOutputs = buildOutputProvider(recipe)
         recipeBom = recipe.getBom()
-        recipeMatches = BomGenerator.test(screenBom,recipeBom)
+        recipeMatches = RecipeUtil.test(screenBom,recipeBom)
+        this.remove(addRecipeButton)
         if (recipeMatches.passed){
             addRecipeButton.setPos(i+214, j+129)
             this.addDrawableChild(addRecipeButton)
-        } else {
-            this.remove(addRecipeButton)
         }
+
         imbuingCost = recipe.getCost()
         imbuingCostTooHigh = imbuingCost > playerLevels
 
     }
 
+    private fun updateFavoritesButton(){
+        if (!hasFavorites){
+            this.remove(favoritesCategoryButton)
+            return
+        }
+        if (!favoritesButtonAdded){
+            favoritesButtonAdded = true
+            favoritesCategoryButton.setPos(i-14,j+142)
+            this.addDrawableChild(favoritesCategoryButton)
+        }
+    }
+
     override fun close() {
+        if (hasFavorites){
+            sendFavorites()
+        }
         client?.setScreen(oldScreen)
     }
 
@@ -238,6 +289,9 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         scepterCategoryButton.setPos(i-14,j+67)
         equipmentCategoryButton.setPos(i-14,j+92)
         bookCategoryButton.setPos(i-14,j+117)
+        favoritesCategoryButton.setPos(i-14,j+142)
+        addRecipeButton.setPos(i+214, j+129)
+        addFavoriteButton.setPos(i+147, j+129)
     }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
@@ -302,9 +356,66 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         tooltips.clear()
     }
 
+    private class AddFavoritesWidget(x: Int, y: Int, var toggled: Boolean, pressAction: PressAction, screen: ImbuingRecipeBookScreen):
+        ButtonWidget(x,y,15,15,AcText.empty(),pressAction,
+            FavoritesTooltipSupplier(x,y,screen)){
+
+        fun setToggle(toggle: Boolean){
+            toggled = toggle
+        }
+
+        fun toggle(){
+            toggled = !toggled
+        }
+
+        fun setPos(x: Int, y: Int) {
+            this.x = x
+            this.y = y
+            if (tooltipSupplier is FavoritesTooltipSupplier){
+                tooltipSupplier.setPos(x,y)
+            }
+        }
+
+        override fun onPress() {
+            toggle()
+            super.onPress()
+        }
+
+        override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
+            var xOffset = 0
+            var yOffset = 0
+            if (toggled) {
+                xOffset += 15
+            }
+            if (hovered){
+                yOffset += 15
+            }
+            RenderSystem.enableDepthTest()
+            drawTexture(matrices, x, y, 131 + xOffset, 226 + yOffset, width, height)
+            if (hovered) {
+                renderTooltip(matrices, mouseX, mouseY)
+            }
+        }
+
+        class FavoritesTooltipSupplier(var x: Int, var y: Int, private val screen: ImbuingRecipeBookScreen): TooltipSupplier{
+            override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+                screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,15,15, listOf(AcText.translatable("imbuing_recipes_book.fave"))))
+            }
+            override fun supply(consumer: Consumer<Text>) {
+                consumer.accept(AcText.translatable("imbuing_recipes_book.fave"))
+            }
+            fun setPos(x: Int, y: Int){
+                this.x = x
+                this.y = y
+            }
+        }
+    }
+
     private class ItemCategoryWidget(x: Int, y: Int, private var selected: Boolean, item: Item, val container: AiItemSettings.AiItemGroup, pressAction: PressAction, tooltipText: Text, screen: ImbuingRecipeBookScreen):
         ButtonWidget(x,y,25,24,AcText.empty(),pressAction,
-            TooltipSupplier { _, _, _, _ -> screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,25,24, listOf(tooltipText))) }){
+            CategoryTooltipSupplier(x,y,screen, tooltipText)){
 
         private val client = MinecraftClient.getInstance()
         private val stack = ItemStack(item)
@@ -322,6 +433,9 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         fun setPos(x: Int, y: Int) {
             this.x = x
             this.y = y
+            if (tooltipSupplier is CategoryTooltipSupplier){
+                tooltipSupplier.setPos(x,y)
+            }
         }
 
         override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
@@ -354,6 +468,19 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             }
             client.itemRenderer.renderInGuiWithOverrides(client?.player, stack, x + 7, y + 2, x + y * 256)
             //client.itemRenderer.renderGuiItemOverlay(client.textRenderer, stack, x + 4, y + 4, null)
+        }
+
+        class CategoryTooltipSupplier(var x: Int, var y: Int, private val screen: ImbuingRecipeBookScreen, private val text: Text): TooltipSupplier{
+            override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+                screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,25,24, listOf(text)))
+            }
+            override fun supply(consumer: Consumer<Text>) {
+                consumer.accept(text)
+            }
+            fun setPos(x: Int, y: Int){
+                this.x = x
+                this.y = y
+            }
         }
     }
 
@@ -411,8 +538,8 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         }
 
         private class ItemToolTipSupplier(
-            private val x:Int,
-            private val y:Int,
+            private var x:Int,
+            private var y:Int,
             private var stack: ItemStack,
             private val screen: ImbuingRecipeBookScreen): TooltipSupplier{
             override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
@@ -423,6 +550,10 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             }
             fun updateStack(newStack: ItemStack){
                 this.stack = newStack
+            }
+            fun setPos(x: Int, y: Int){
+                this.x = x
+                this.y = y
             }
         }
 
@@ -444,13 +575,15 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         private var maxPageIndex = -1
         //private var currentItemPage = 0
         private var currentContainer = AiItemSettings.AiItemGroup.ALL
+        private var hasFavorites = false
 
         private val recipeContainer: Map<AiItemSettings.AiItemGroup,RecipeEntries> = mapOf(
             AiItemSettings.AiItemGroup.ALL to RecipeEntries(),
             AiItemSettings.AiItemGroup.SCEPTER to RecipeEntries(),
             AiItemSettings.AiItemGroup.EQUIPMENT to RecipeEntries(),
             AiItemSettings.AiItemGroup.GEM to RecipeEntries(),
-            AiItemSettings.AiItemGroup.BOOK to RecipeEntries()
+            AiItemSettings.AiItemGroup.BOOK to RecipeEntries(),
+            AiItemSettings.AiItemGroup.FAVES to RecipeEntries()
         )
 
         fun updateContainer(newContainer: AiItemSettings.AiItemGroup){
@@ -477,15 +610,94 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             }
         }
 
+        private fun addFavorite(stack: ItemStack, recipes: List<ImbuingRecipe>){
+            hasFavorites = true
+            recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.addToList(stack, recipes)
+            println(recipeContainer[AiItemSettings.AiItemGroup.FAVES])
+        }
+
+        private fun removeFavorite(stack: ItemStack){
+            recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.removeFromList(stack)
+            if (recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.recipeList?.isEmpty() == true){
+                hasFavorites = false
+            }
+        }
+
+        private fun checkFavorite(stack: ItemStack): Boolean{
+            val list = recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.recipeList?:return false
+            list.forEach {
+                if (ItemStack.areEqual(it.stack,stack)) return true
+            }
+            return false
+        }
+        private fun sendFavorites(){
+            val entries = recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.recipeList?:return
+            val uuid = MinecraftClient.getInstance().player?.uuid?:return
+            if (entries.isEmpty()) return
+            println("sending favorites to server!")
+            val buf = PacketByteBufs.create()
+            buf.writeUuid(uuid)
+            buf.writeShort(entries.size)
+            entries.forEach {
+                buf.writeItemStack(it.stack)
+            }
+            ClientPlayNetworking.send(RecipeUtil.FAVORITES_SAVE,buf)
+        }
+
         private fun getItemEntry(index: Int): ItemEntry{
             val newIndex = getCurrentPage() * 20 + index
             return if (newIndex >= recipeList.size) ItemEntry.EMPTY else recipeList[newIndex]
+        }
+        private fun getCurrentDefaultItemEntry(): ItemEntry{
+            val container = recipeContainer[currentContainer]?:throw IllegalArgumentException("Container not present in map!")
+            container.currentItemPage = 0
+            return container.defaultEntry()
+        }
+
+        fun registerClientReceiver(){
+            ClientPlayNetworking.registerGlobalReceiver(RecipeUtil.FAVORITES_SEND){_,_,buf,_->
+                val hasFaves = buf.readBoolean()
+                hasFavorites = hasFaves
+                if (hasFaves){
+                    val list: MutableList<ItemEntry> = mutableListOf()
+                    val entries = recipeContainer[AiItemSettings.AiItemGroup.ALL]?.recipeList?:return@registerGlobalReceiver
+                    println(entries)
+                    println("")
+                    val size = buf.readShort()
+                    for (i in 1..size){
+                        val stack = buf.readItemStack()
+                        println(stack)
+                        for (entry in entries){
+                            println("trying: $stack -> ${entry.stack}")
+                            if (stack.item is EnchantedBookItem){
+                                if (ItemStack.areEqual(stack,entry.stack)){
+                                    println("equality found")
+                                    list.add(entry)
+                                    break
+                                }
+                            } else {
+                                if (stack.isItemEqual(entry.stack)){
+                                    println("equality found")
+                                    list.add(entry)
+                                    break
+                                }
+                            }
+
+                        }
+                    }
+                    recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.setList(list)
+                    println("received data from server!")
+                    println(recipeContainer[AiItemSettings.AiItemGroup.FAVES])
+
+                }
+            }
         }
 
         @Suppress("LocalVariableName")
         fun registerClient(){
             if (ModCompatHelper.getScreenHandlerOffset() != 0) return
             val manager = MinecraftClient.getInstance()?.world?.recipeManager?:return
+            val player = MinecraftClient.getInstance()?.player?:return
             val tempMap: MutableMap<ItemStack,MutableList<ImbuingRecipe>> = mutableMapOf()
             val imbuingList = manager.listAllOfType(ImbuingRecipe.Type)
             imbuingList.forEach { recipe ->
@@ -512,6 +724,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             val tempList_book: MutableList<ItemEntry> = mutableListOf()
             val tempList_equipment: MutableList<ItemEntry> = mutableListOf()
             val tempList_scepter: MutableList<ItemEntry> = mutableListOf()
+
             tempList.forEach {
                 val group = AiItemSettings.groupFromItem(it.first.item)
                 if (group != null){
@@ -527,6 +740,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                     tempList_misc.add(ItemEntry(it.first,it.second))
                 }
             }
+
             tempList_all.addAll(tempList_gem)
             tempList_all.addAll(tempList_scepter)
             tempList_all.addAll(tempList_equipment)
@@ -538,23 +752,66 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             recipeContainer[AiItemSettings.AiItemGroup.GEM]?.setList(tempList_gem)
             recipeContainer[AiItemSettings.AiItemGroup.BOOK]?.setList(tempList_book)
             updateContainer(AiItemSettings.AiItemGroup.ALL)
+            val buf = PacketByteBufs.create()
+            buf.writeUuid(player.uuid)
+            ClientPlayNetworking.send(RecipeUtil.FAVORITES_CHECK,buf)
         }
 
         private class ItemEntry(val stack: ItemStack, val list: List<ImbuingRecipe>, val empty: Boolean = false){
             companion object{
                 val EMPTY = ItemEntry(ItemStack.EMPTY,listOf(), true)
             }
+            override fun toString(): String {
+                return "{stack: $stack, # of recipes: ${list.size}}"
+            }
+            override fun equals(other: Any?): Boolean {
+                if (other == null) return false
+                if (other !is ItemEntry) return false
+                return (ItemStack.areEqual(stack,other.stack) && list == other.list)
+            }
+            override fun hashCode(): Int {
+                var result = stack.hashCode()
+                result = 31 * result + list.hashCode()
+                result = 31 * result + empty.hashCode()
+                return result
+            }
         }
-        private class RecipeEntries(){
+
+        private class RecipeEntries{
             var recipeList: List<ItemEntry> = listOf()
             var pages = 0
             var maxPageIndex = -1
             var currentItemPage = 0
+            private var defaultEntry = ItemEntry.EMPTY
 
             fun setList(list: List<ItemEntry>){
                 recipeList = list
                 pages = ceil(recipeList.size.toFloat()/20f).toInt()
                 maxPageIndex = pages - 1
+                if (list.isNotEmpty()) defaultEntry = recipeList[0]
+            }
+            fun addToList(stack: ItemStack,recipes: List<ImbuingRecipe>){
+                val list: MutableList<ItemEntry> = recipeList.toMutableList()
+                val entry = ItemEntry(stack,recipes)
+                list.addIfDistinct(entry)
+                setList(list)
+
+            }
+            fun removeFromList(stack: ItemStack){
+                val list: MutableList<ItemEntry> = recipeList.toMutableList()
+                recipeList.forEach {
+                    if (ItemStack.areEqual(it.stack,stack)){
+                        list.remove(it)
+                    }
+                }
+                setList(list)
+            }
+            fun defaultEntry(): ItemEntry{
+                return defaultEntry
+            }
+
+            override fun toString(): String {
+                return "[pages: $pages | current page: $currentItemPage | recipes: $recipeList]"
             }
         }
     }
