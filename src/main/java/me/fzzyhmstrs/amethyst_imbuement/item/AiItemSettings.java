@@ -23,7 +23,8 @@ public class AiItemSettings extends FabricItemSettings {
         GEM,
         EQUIPMENT,
         SCEPTER,
-        BOOK
+        BOOK,
+        FAVES
     }
 
     @Nullable
