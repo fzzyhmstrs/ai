@@ -358,14 +358,17 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
 
     private class AddFavoritesWidget(x: Int, y: Int, var toggled: Boolean, pressAction: PressAction, screen: ImbuingRecipeBookScreen):
         ButtonWidget(x,y,15,15,AcText.empty(),pressAction,
-            FavoritesTooltipSupplier(x,y,screen)){
+            FavoritesTooltipSupplier(x,y,screen, toggled)){
 
         fun setToggle(toggle: Boolean){
             toggled = toggle
+            if (tooltipSupplier is FavoritesTooltipSupplier){
+                tooltipSupplier.setToggle(toggle)
+            }
         }
 
         fun toggle(){
-            toggled = !toggled
+            setToggle(!toggled)
         }
 
         fun setPos(x: Int, y: Int) {
@@ -399,9 +402,13 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             }
         }
 
-        class FavoritesTooltipSupplier(var x: Int, var y: Int, private val screen: ImbuingRecipeBookScreen): TooltipSupplier{
+        class FavoritesTooltipSupplier(var x: Int, var y: Int, private val screen: ImbuingRecipeBookScreen, private var toggled: Boolean): TooltipSupplier{
             override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
-                screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,15,15, listOf(AcText.translatable("imbuing_recipes_book.fave"))))
+                if (!toggled){
+                    screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,15,15, listOf(AcText.translatable("imbuing_recipes_book.fave"))))
+                } else {
+                    screen.tooltips.add(KnowledgeBookScreen.TooltipBox(x,y,15,15, listOf(AcText.translatable("imbuing_recipes_book.un_fave"))))
+                }
             }
             override fun supply(consumer: Consumer<Text>) {
                 consumer.accept(AcText.translatable("imbuing_recipes_book.fave"))
@@ -409,6 +416,9 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             fun setPos(x: Int, y: Int){
                 this.x = x
                 this.y = y
+            }
+            fun setToggle(toggle: Boolean){
+                toggled = toggle
             }
         }
     }
