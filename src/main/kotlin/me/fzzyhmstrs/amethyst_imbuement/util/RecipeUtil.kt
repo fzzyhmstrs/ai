@@ -44,8 +44,6 @@ object RecipeUtil {
                         sentBuf.writeItemStack(it)
                     }
                     server.execute {
-                        println("sending to client!")
-                        println(list)
                         ServerPlayNetworking.send(player, FAVORITES_SEND, sentBuf)
                     }
                 }
@@ -63,10 +61,6 @@ object RecipeUtil {
             val size = buf.readShort()
             for (i in 1..size){
                 list.add(buf.readItemStack())
-            }
-            server.execute {
-                println("saving from client!")
-                println(list)
             }
             playerFavoritesMap[uuid] = list
         }
@@ -183,18 +177,12 @@ object RecipeUtil {
         val matchedItems = Int2IntOpenHashMap()
         var passed = true
         sortedBom.forEach { (index, ids) ->
-            println("index: $index")
             var found = false
             for (it in ids.listIterator()) {
-                println("id to match: $it")
                 if (slotBom.ids.contains(it)){
                     for ((slot,stack) in sortedSlots) {
-                        println("slot to check: $slot")
-                        println("stack to check: $stack")
                         if (stack.id == it){
-                            println(">>>>>>>>>>>>>>>> index: $index, slot: $slot, item id: $it")
                             val itemsUsed = usedItems.getOrDefault(slot,-1)
-                            println("Items used so far: $usedItems")
                             if (itemsUsed == -1){
                                 usedItems[slot] = 1
                                 matchedItems[index] = slot

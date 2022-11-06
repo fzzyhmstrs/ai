@@ -21,17 +21,17 @@ public abstract class HeldItemRendererMixin {
 
     private boolean isSniper = false;
 
-    @Inject(method = "renderFirstPersonItem", at = @At(value = "HEAD"))
+    @Inject(method = "renderFirstPersonItem", at = @At(value = "HEAD"), require = 0)
     private void amethyst_imbuement_checkStackForSniper(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
         isSniper = item.isOf(RegisterItem.INSTANCE.getSNIPER_BOW());
     }
 
-    @ModifyArg(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z",ordinal = 1))
-    private Item amethyst_imbuement_updateIfCheckSniper(Item item){
+    @ModifyArg(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z",ordinal = 1), require = 0)
+    private Item amethyst_imbuement_updateIfCheckSniper(Item chkItem){
         if (isSniper){
             return RegisterItem.INSTANCE.getSNIPER_BOW();
         } else {
-            return item;
+            return chkItem;
         }
     }
 }
