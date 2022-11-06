@@ -117,9 +117,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         if (finalMap.isEmpty()) return@PressAction
         finalMap.forEach { (craft, input) ->
             val stack = oldScreen.screenHandler.slots[input].stack
-            println(stack)
             val count = stack.count
-            println(count)
             manager.clickSlot(syncId, input, 0, SlotActionType.PICKUP, player)
             manager.clickSlot(syncId, craft, 1, SlotActionType.PICKUP, player)
             if (count > 1){
@@ -193,10 +191,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         }
         updateRecipe()
         updateRecipeButtons()
-        val bom = screenBom
-        println(bom.ids)
-        println(bom.slots)
-        println("Player Levels: $playerLevels")
+
     }
 
     private fun generateWidget(index: Int): ItemButtonWidget{
@@ -522,9 +517,6 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         override fun onPress() {
             screen.recipeIndex = if (entry.list.isEmpty()) -1 else 0
             screen.currentRecipes = entry.list
-            for (currentRecipe in screen.currentRecipes) {
-                println(currentRecipe.getBom())
-            }
             screen.currentStack = entry.stack
             screen.updateRecipeButtons()
             screen.updateRecipe()
@@ -623,7 +615,6 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         private fun addFavorite(stack: ItemStack, recipes: List<ImbuingRecipe>){
             hasFavorites = true
             recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.addToList(stack, recipes)
-            println(recipeContainer[AiItemSettings.AiItemGroup.FAVES])
         }
 
         private fun removeFavorite(stack: ItemStack){
@@ -644,7 +635,6 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             val entries = recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.recipeList?:return
             val uuid = MinecraftClient.getInstance().player?.uuid?:return
             if (entries.isEmpty()) return
-            println("sending favorites to server!")
             val buf = PacketByteBufs.create()
             buf.writeUuid(uuid)
             buf.writeShort(entries.size)
@@ -671,23 +661,17 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                 if (hasFaves){
                     val list: MutableList<ItemEntry> = mutableListOf()
                     val entries = recipeContainer[AiItemSettings.AiItemGroup.ALL]?.recipeList?:return@registerGlobalReceiver
-                    println(entries)
-                    println("")
                     val size = buf.readShort()
                     for (i in 1..size){
                         val stack = buf.readItemStack()
-                        println(stack)
                         for (entry in entries){
-                            println("trying: $stack -> ${entry.stack}")
                             if (stack.item is EnchantedBookItem){
                                 if (ItemStack.areEqual(stack,entry.stack)){
-                                    println("equality found")
                                     list.add(entry)
                                     break
                                 }
                             } else {
                                 if (stack.isItemEqual(entry.stack)){
-                                    println("equality found")
                                     list.add(entry)
                                     break
                                 }
@@ -696,8 +680,6 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                         }
                     }
                     recipeContainer[AiItemSettings.AiItemGroup.FAVES]?.setList(list)
-                    println("received data from server!")
-                    println(recipeContainer[AiItemSettings.AiItemGroup.FAVES])
 
                 }
             }

@@ -30,7 +30,6 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
         i: Int,
         j: Int
     ) {
-        //println("rendering")
         matrixStack.push()
         matrixStack.translate(0.5, 0.75, 0.5)
         val g = imbuingTableBlockEntity.ticks.toFloat() + f
