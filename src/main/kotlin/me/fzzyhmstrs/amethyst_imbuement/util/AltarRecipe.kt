@@ -35,7 +35,7 @@ class AltarRecipe(
     }
 
     override fun getOutput(): ItemStack {
-        return result
+        return result.copy()
     }
 
     fun testAddition(stack: ItemStack): Boolean {

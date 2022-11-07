@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -54,6 +55,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     private val imbueC: Ingredient
     private val imbueD: Ingredient
     private val crafts: Array<Ingredient>
+    private val bomList: MutableList<Int> = mutableListOf()
     private val bomStructure: Int2ObjectOpenHashMap<IntList> by lazy {
         generateStructure()
     }
@@ -85,10 +87,18 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
             if (index == 6 && augment != ""){
                 val centerIngredient = getCenterIngredient()
                 if (!centerIngredient.isEmpty) {
-                    tempStruct[index] = centerIngredient.matchingItemIds
+                    val ids = centerIngredient.matchingItemIds
+                    tempStruct[index] = ids
+                    ids.forEach {
+                        bomList.addIfDistinct(it)
+                    }
                 }
             } else if (!ingredient.isEmpty) {
-                tempStruct[index] = ingredient.matchingItemIds
+                val ids = ingredient.matchingItemIds
+                tempStruct[index] = ids
+                ids.forEach {
+                    bomList.addIfDistinct(it)
+                }
             }
         }
         return tempStruct
@@ -156,7 +166,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         return inputs
     }
     override fun getOutput(): ItemStack {
-        return outputItem
+        return outputItem.copy()
     }
     private fun outputGenerator(): ItemStack{
         if (augment == "") return ItemStack(Registry.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
@@ -242,6 +252,9 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     fun getBom(): Int2ObjectOpenHashMap<IntList>{
         return bomStructure
+    }
+    fun getBomList(): List<Int>{
+        return bomList
     }
 
     companion object{
