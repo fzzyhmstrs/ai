@@ -145,7 +145,7 @@ modrinth {
     versionName.set("${base.archivesName.get()}-$modVersion")
     versionType.set("release")
     uploadFile.set(tasks.remapJar.get())
-    gameVersions.addAll("1.19","1.19.1","1.19.2")
+    gameVersions.addAll("1.18.2")
     loaders.addAll("fabric","quilt")
     detectLoaders.set(false)
     changelog.set(log.readText())
