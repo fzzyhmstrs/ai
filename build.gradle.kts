@@ -9,11 +9,11 @@ base {
     archivesName.set(archivesBaseName)
 }
 val log: File = file("changelog.md")
-println(log.readText())
 val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
 group = mavenGroup
+println("## Changelog for Amethyst Imbuement $modVersion \n\n" + log.readText())
 repositories {
     maven {
         name = "TerraformersMC"
@@ -150,7 +150,7 @@ modrinth {
     gameVersions.addAll("1.19","1.19.1","1.19.2")
     loaders.addAll("fabric","quilt")
     detectLoaders.set(false)
-    changelog.set(log.readText())
+    changelog.set("## Changelog for Amethyst Imbuement $modVersion \n\n" + log.readText())
     dependencies{
         required.project("fabric-api")
         required.project("fabric-language-kotlin")
