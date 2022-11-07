@@ -175,7 +175,16 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                 addFavorite(currentStack, currentRecipes)
             } else {
                 removeFavorite(currentStack)
-                if (currentContainer == AiItemSettings.AiItemGroup.FAVES){
+                if (!hasFavorites){
+                    updateContainer(AiItemSettings.AiItemGroup.ALL)
+                    val entry = getCurrentDefaultItemEntry()
+                    currentStack = entry.stack
+                    currentRecipes = entry.list
+                    updateItemButtons()
+                    updateRecipe()
+                    updateRecipeButtons()
+                    this.remove(favoritesCategoryButton)
+                } else if (currentContainer == AiItemSettings.AiItemGroup.FAVES){
                     val entry = getCurrentDefaultItemEntry()
                     currentStack = entry.stack
                     currentRecipes = entry.list
@@ -192,6 +201,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
     private val leftRecipeButton = TexturedButtonWidget(i+145,j+152,20,12,22,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,leftRecipeButtonAction,leftButtonTooltipSupplier,AcText.empty())
     private val rightRecipeButton = TexturedButtonWidget(i+211,j+152,20,12,0,203,12,KnowledgeBookScreen.BOOK_TEXTURE,256,256,rightRecipeButtonAction, rightButtonTooltipSupplier, AcText.empty())
 
+    private val categories: MutableMap<AiItemSettings.AiItemGroup, ItemCategoryWidget> = mutableMapOf()
     private val allCategoryButton by lazy{ ItemCategoryWidget(i-14,j+17, currentContainer == AiItemSettings.AiItemGroup.ALL, Items.COMPASS,AiItemSettings.AiItemGroup.ALL,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.all"),this)}
     private val gemCategoryButton by lazy{ ItemCategoryWidget(i-14,j+42,currentContainer == AiItemSettings.AiItemGroup.GEM, RegisterItem.AMETRINE,AiItemSettings.AiItemGroup.GEM,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.gem"),this)}
     private val scepterCategoryButton by lazy{ ItemCategoryWidget(i-14,j+67,currentContainer == AiItemSettings.AiItemGroup.SCEPTER, RegisterItem.SCEPTER_OF_THE_PACIFIST,AiItemSettings.AiItemGroup.SCEPTER,categoryButtonsAction,AcText.translatable("imbuing_recipes_book.category.scepter"),this)}
@@ -216,12 +226,18 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             this.addDrawableChild(it)
         }
         this.addDrawableChild(allCategoryButton)
+        categories[AiItemSettings.AiItemGroup.ALL] = allCategoryButton
         this.addDrawableChild(gemCategoryButton)
+        categories[AiItemSettings.AiItemGroup.GEM] = gemCategoryButton
         this.addDrawableChild(scepterCategoryButton)
+        categories[AiItemSettings.AiItemGroup.SCEPTER] = scepterCategoryButton
         this.addDrawableChild(equipmentCategoryButton)
+        categories[AiItemSettings.AiItemGroup.EQUIPMENT] = equipmentCategoryButton
         this.addDrawableChild(bookCategoryButton)
+        categories[AiItemSettings.AiItemGroup.BOOK] = bookCategoryButton
         if (hasFavorites){
             this.addDrawableChild(favoritesCategoryButton)
+            categories[AiItemSettings.AiItemGroup.FAVES] = favoritesCategoryButton
         }
         if (storedRecipeIndex != -1){
             recipeIndex = storedRecipeIndex
@@ -333,7 +349,53 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         addFavoriteButton.setPos(i+147, j+129)
     }
 
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
+        val x1 = i-14
+        val x2 = x1 + 25
+        val x3 = i + 125
+        val x4 = i + 256
+        val y1 = j + 8
+        val y2 = j + 168
+        if (mouseY >= y1 && mouseY < y2){
+            if (mouseX >= x1 && mouseX < x2){
+                val newContainer = updateCurrentContainer(amount < 0.0)
+                allCategoryButton.setSelected(false)
+                gemCategoryButton.setSelected(false)
+                scepterCategoryButton.setSelected(false)
+                equipmentCategoryButton.setSelected(false)
+                bookCategoryButton.setSelected(false)
+                favoritesCategoryButton.setSelected(false)
+                categories[newContainer]?.setSelected(true)
+                client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0f))
+                currentStack = ItemStack.EMPTY
+                currentRecipes = listOf()
+                recipeIndex = -1
+                updateContainer(newContainer)
+                updateItemButtons()
+                updateRecipe()
+                updateRecipeButtons()
+                return true
+            } else if (mouseX >= x2 && mouseX < x3){
+                if (amount < 0.0){
+                    rightItemButtonAction.onPress(rightRecipeButton)
+                } else {
+                    leftItemButtonAction.onPress(leftRecipeButton)
+                }
+                return true
+            } else if (mouseX >= x3 && mouseX < x4){
+                if (amount < 0.0){
+                    if (currentRecipes.size > 1) rightRecipeButtonAction.onPress(rightRecipeButton)
+                } else {
+                    if (currentRecipes.size > 1) leftRecipeButtonAction.onPress(leftRecipeButton)
+                }
+                return true
+            }
+        }
+        return super.mouseScrolled(mouseX, mouseY, amount)
+    }
+
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(matrices)
         RenderSystem.setShader { GameRenderer.getPositionTexShader() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
@@ -631,9 +693,9 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
 
         private val recipeContainer: Map<AiItemSettings.AiItemGroup,RecipeEntries> = mapOf(
             AiItemSettings.AiItemGroup.ALL to RecipeEntries(),
+            AiItemSettings.AiItemGroup.GEM to RecipeEntries(),
             AiItemSettings.AiItemGroup.SCEPTER to RecipeEntries(),
             AiItemSettings.AiItemGroup.EQUIPMENT to RecipeEntries(),
-            AiItemSettings.AiItemGroup.GEM to RecipeEntries(),
             AiItemSettings.AiItemGroup.BOOK to RecipeEntries(),
             AiItemSettings.AiItemGroup.FAVES to RecipeEntries()
         )
@@ -649,6 +711,25 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         fun getCurrentPage(): Int{
             val container = recipeContainer[currentContainer]?:throw IllegalArgumentException("Container not present in map!")
             return container.currentItemPage
+        }
+
+        fun updateCurrentContainer(up: Boolean): AiItemSettings.AiItemGroup{
+            val keys = recipeContainer.keys.toList()
+            val currentIndex = keys.indexOf(currentContainer)
+            val newContainer = if (up){
+                 if (currentIndex == keys.size - 1) keys[0] else keys[currentIndex + 1]
+            } else {
+                if (currentIndex == 0) keys[keys.size - 1] else keys[currentIndex - 1]
+            }
+            return if (newContainer == AiItemSettings.AiItemGroup.FAVES && !hasFavorites){
+                if (currentContainer == AiItemSettings.AiItemGroup.ALL){
+                    AiItemSettings.AiItemGroup.BOOK
+                } else {
+                    AiItemSettings.AiItemGroup.ALL
+                }
+            } else {
+                newContainer
+            }
         }
 
         fun updateCurrentPage(up: Boolean){
