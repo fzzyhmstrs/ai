@@ -2,6 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
@@ -29,6 +31,19 @@ open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings
         user: PlayerEntity,
         hand: Hand
     ): TypedActionResult<ItemStack> {
+        val nbt = stack.nbt
+        if (nbt != null){
+            val bola = Identifier(Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)).toString()
+            val type = AugmentHelper.getAugmentType(bola)
+            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
+                if (nbt.getString(NbtKeys.LORE_TYPE.str()) != type.str()){
+                    nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+                }
+            } else {
+                nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+            }
+
+        }
         if (world.isClient){
             world.playSound(user,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
             MinecraftClient.getInstance().setScreen(KnowledgeBookScreen(stack))

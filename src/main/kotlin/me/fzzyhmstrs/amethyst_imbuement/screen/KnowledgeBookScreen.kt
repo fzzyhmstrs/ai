@@ -86,6 +86,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
     }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, delta)
         //the book background
         RenderSystem.setShader { GameRenderer.getPositionTexShader() }
