@@ -1,4 +1,4 @@
-## Changelog for Amethyst Imbuement 1.19-18
+## Changelog for Amethyst Imbuement 1.18.2-35
 
 ### Additions
 * Added a recipe book to the imbuing table. If EMI, REI, or JEI are installed, their viewers take precedence. Otherwise a plain recipe book icon will show next to the player inventory which will open the builtin recipe book when clicked.
