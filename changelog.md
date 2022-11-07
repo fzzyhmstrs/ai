@@ -12,3 +12,4 @@
 
 ###Fixes
 * Removed duplicate common bookshelf block tag definition.
+* Fixed crash caused by Optifabric/Optifine.

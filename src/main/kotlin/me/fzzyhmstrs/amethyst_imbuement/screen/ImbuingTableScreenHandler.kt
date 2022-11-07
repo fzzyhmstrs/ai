@@ -129,6 +129,7 @@ class ImbuingTableScreenHandler(
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
+        addProperty(canUse)
         sendContentUpdates()
     }
 

@@ -9,8 +9,8 @@ import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
+import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.minecraft.client.MinecraftClient
@@ -23,6 +23,7 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -32,6 +33,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.registry.Registry
 import java.util.function.Consumer
 import kotlin.math.ceil
 
@@ -115,6 +117,26 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         if (!recipeMatches.passed) return@PressAction
         val finalMap = RecipeUtil.truncate(recipeMatches.matches)
         if (finalMap.isEmpty()) return@PressAction
+        val cloggedItems: MutableList<Int> = mutableListOf()
+        for (i in 0..12){
+            val rawId = Registry.ITEM.getRawId(oldScreen.screenHandler.slots[i].stack.item)
+            if (!currentRecipes[recipeIndex].getBomList().contains(rawId)){
+                cloggedItems.add(i)
+            }
+            if (cloggedItems.isNotEmpty()){
+                val openSlots = generateOpenSlots()
+                for (slot in cloggedItems){
+                    if (openSlots.isNotEmpty()){
+                        val newSlot = openSlots[0]
+                        manager.clickSlot(syncId, slot, 0, SlotActionType.PICKUP, player)
+                        manager.clickSlot(syncId, newSlot, 0, SlotActionType.PICKUP, player)
+                        openSlots.remove(newSlot)
+                    } else {
+                        manager.clickSlot(syncId, slot, 1, SlotActionType.THROW, player)
+                    }
+                }
+            }
+        }
         finalMap.forEach { (craft, input) ->
             val stack = oldScreen.screenHandler.slots[input].stack
             val count = stack.count
@@ -126,6 +148,18 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         }
         this.close()
     }
+    private fun generateOpenSlots(): MutableList<Int> {
+        val list: MutableList<Int> = mutableListOf()
+        oldScreen.screenHandler.slots.forEachIndexed { index, it ->
+            if (it.inventory is PlayerInventory){
+                if (!it.hasStack()){
+                    list.add(index)
+                }
+            }
+        }
+        return list
+    }
+
     private val addRecipeTooltipSupplier: TooltipSupplier = object: TooltipSupplier{
         override fun onTooltip(button: ButtonWidget?, matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
             tooltips.add(KnowledgeBookScreen.TooltipBox(mouseX,mouseY,15,15,listOf(AcText.translatable("imbuing_recipes_book.move"))))
@@ -188,6 +222,12 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         this.addDrawableChild(bookCategoryButton)
         if (hasFavorites){
             this.addDrawableChild(favoritesCategoryButton)
+        }
+        if (storedRecipeIndex != -1){
+            recipeIndex = storedRecipeIndex
+            recipeMatches = storedRecipeMatches
+            currentStack = storedCurrentStack
+            currentRecipes = storedCurrentRecipes
         }
         updateRecipe()
         updateRecipeButtons()
@@ -266,6 +306,10 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         if (hasFavorites){
             sendFavorites()
         }
+        storedRecipeIndex = recipeIndex
+        storedRecipeMatches = recipeMatches
+        storedCurrentStack = currentStack
+        storedCurrentRecipes = currentRecipes
         client?.setScreen(oldScreen)
     }
 
@@ -571,6 +615,12 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
             38, 38, 48, 48, 48, 67, 67,
             67, 86, 86, 86, 96, 96
         )
+
+        //stored values for reopening the screen
+        internal var storedCurrentRecipes: List<ImbuingRecipe> = listOf()
+        internal var storedCurrentStack: ItemStack = ItemStack.EMPTY
+        internal var storedRecipeIndex = -1
+        private var storedRecipeMatches: RecipeUtil.Result = RecipeUtil.Result.EMPTY
 
         private var recipeList: List<ItemEntry> = listOf()
         private var pages = 0
