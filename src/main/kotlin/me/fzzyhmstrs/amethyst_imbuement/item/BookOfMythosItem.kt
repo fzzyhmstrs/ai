@@ -16,6 +16,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
@@ -29,6 +30,19 @@ class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), 
         user: PlayerEntity,
         hand: Hand
     ): TypedActionResult<ItemStack> {
+        val nbt = stack.nbt
+        if (nbt != null){
+            val bola = Identifier(Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)).toString()
+            val type = AugmentHelper.getAugmentType(bola)
+            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
+                if (nbt.getString(NbtKeys.LORE_TYPE.str()) != type.str()){
+                    nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+                }
+            } else {
+                nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+            }
+
+        }
         if (world.isClient){
             world.playSound(user,user.blockPos,SoundEvents.ITEM_BOOK_PAGE_TURN,SoundCategory.NEUTRAL,0.7f,1.0f)
             MinecraftClient.getInstance().setScreen(KnowledgeBookScreen(stack))
