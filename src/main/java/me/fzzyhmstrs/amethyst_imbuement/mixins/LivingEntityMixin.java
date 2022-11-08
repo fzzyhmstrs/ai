@@ -52,7 +52,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.*;
 
 
-@Mixin(LivingEntity.class)
+@Mixin(value = LivingEntity.class, priority = 3000)
 public abstract class LivingEntityMixin extends Entity {
 
 
@@ -290,6 +290,11 @@ public abstract class LivingEntityMixin extends Entity {
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getUNDYING(),instance) == 0) return operation.call(instance, item);
         if (!RegisterEnchantment.INSTANCE.getUNDYING().specialEffect((LivingEntity)(Object)this,1,instance)) return operation.call(instance, item);
         return true;
+    }
+
+    @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.decrement (I)V"))
+    private void amethyst_imbuement_tryUseTotemNoDecrement(ItemStack instance, int i, Operation<Void> operation){
+        if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
     }
 
     /*@Inject(method = "getEquipmentChanges", at = @At(value = "RETURN"), cancellable = true)
