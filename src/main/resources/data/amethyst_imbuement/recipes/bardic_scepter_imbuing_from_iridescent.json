@@ -28,7 +28,7 @@
 	"item": "amethyst_imbuement:gem_dust"
   },
   "title": "Bardic Scepter",
-  "cost": 7,
+  "cost": 9,
   "resultA": "amethyst_imbuement:bardic_scepter",
   "countA": 1,
   "transferEnchant": true
