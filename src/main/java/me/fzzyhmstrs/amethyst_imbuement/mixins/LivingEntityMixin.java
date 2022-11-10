@@ -40,6 +40,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -51,8 +52,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
 
-
-@Mixin(value = LivingEntity.class, priority = 3000)
+@Mixin(value = LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
 
@@ -63,15 +63,10 @@ public abstract class LivingEntityMixin extends Entity {
     private long lastTime = 0;
     private DamageSource damageSource;
 
-    @Shadow protected abstract ItemStack getSyncedArmorStack(EquipmentSlot slot);
-    @Shadow protected abstract ItemStack getSyncedHandStack(EquipmentSlot slot);
-    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot var1);
     @Shadow public abstract int getArmor();
-    @Shadow public abstract AttributeContainer getAttributes();
     @Shadow public abstract Iterable<ItemStack> getArmorItems();
     @Shadow public abstract ItemStack getStackInHand(Hand hand);
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
-    @Shadow public abstract boolean clearStatusEffects();
     @Shadow public abstract void setHealth(float v);
 
     @Shadow @Final
