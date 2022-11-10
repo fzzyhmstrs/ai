@@ -24,7 +24,7 @@ public class ItemMixin implements ItemBookCategory {
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void onConstruct(Item.Settings settings, CallbackInfo info) {
+    private void amethyst_imbuement_onConstructAiSettings(Item.Settings settings, CallbackInfo info) {
         if (settings instanceof AiItemSettings){
             aiItemGroup = ((AiItemSettings) settings).getAiGroup();
         }

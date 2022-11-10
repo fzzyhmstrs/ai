@@ -1,7 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
+import me.fzzyhmstrs.amethyst_core.item_util.DefaultScepterItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -27,12 +32,12 @@ class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     ): Boolean {
         val stack1 = user.getStackInHand(Hand.MAIN_HAND)
         val stack2 = user.getStackInHand(Hand.OFF_HAND)
-        if (stack1.item is ScepterItem) {
+        if (stack1.item is AugmentScepterItem) {
             val nbt = stack1.orCreateNbt
             writeNbt(SpellType.FURY.name+"_lvl", 25, nbt)
             writeNbt(SpellType.WIT.name+"_lvl", 25, nbt)
             writeNbt(SpellType.GRACE.name+"_lvl", 25, nbt)
-        } else if (stack2.item is ScepterItem) {
+        } else if (stack2.item is AugmentScepterItem) {
             val nbt = stack2.orCreateNbt
             writeNbt(SpellType.FURY.name+"_lvl", 25, nbt)
             writeNbt(SpellType.WIT.name+"_lvl", 25, nbt)

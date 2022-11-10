@@ -19,6 +19,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
+import kotlin.math.max
 
 class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
     HealerAugment {
@@ -39,14 +40,14 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
         if (entityList.isEmpty()){
             successes++
-            inspire(user,level+2,effect)
+            inspire(user,level+1,effect)
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
                     successes++
-                    inspire(entity3,level,effect)
+                    inspire(entity3,max(1,level-1),effect)
                     effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
                 }
             }
@@ -66,7 +67,7 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             EffectQueue.addStatusToQueue(entity,StatusEffects.SPEED, effect.duration(level), effect.amplifier(level))
             EffectQueue.addStatusToQueue(entity,StatusEffects.JUMP_BOOST, effect.duration(level), effect.amplifier(level))
             EffectQueue.addStatusToQueue(entity,StatusEffects.REGENERATION, effect.duration(12), effect.amplifier(level))
-            EffectQueue.addStatusToQueue(entity, RegisterStatus.INSPIRED, effect.duration(level), effect.amplifier(level))
+            EffectQueue.addStatusToQueue(entity, RegisterStatus.INSPIRED, effect.duration(level), 0)
         }
     }
 
