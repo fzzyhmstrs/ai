@@ -89,29 +89,19 @@ dependencies {
     }
     include("maven.modrinth:Wd844r7Q:1.19-01")
 
-/*    modImplementation("maven.modrinth:amethyst-core:0.2.3+1.19"){
+    modImplementation(":amethyst_core-0.4.1+1.19"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:amethyst-core:0.2.3+1.19")*/
-
-    modImplementation(":amethyst_core-0.4.0+1.19"){
-        exclude("net.fabricmc.fabric-api")
-    }
-    include(":amethyst_core-0.4.0+1.19")
-
-/*    modImplementation("maven.modrinth:coloredglowlib:1.4.0"){
-        exclude("net.fabricmc.fabric-api")
-    }
-    include("maven.modrinth:coloredglowlib:1.4.0")*/
+    include(":amethyst_core-0.4.1+1.19")
 
     modImplementation("io.github.ladysnake:PlayerAbilityLib:1.6.0"){
         exclude("net.fabricmc.fabric-api")
     }
     include("io.github.ladysnake:PlayerAbilityLib:1.6.0")
 
-    implementation("com.github.LlamaLad7:MixinExtras:0.1.0")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.0")
-    include("com.github.LlamaLad7:MixinExtras:0.1.0")
+    implementation("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
+    include("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
 }
 
 tasks {
