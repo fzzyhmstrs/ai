@@ -33,6 +33,7 @@ class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (!enabled) return
+        if (target.world.isClient) return
         if (!target.isAlive){
             xpgiven = if (target is LivingEntity && !xpgiven){
                 when (target) {

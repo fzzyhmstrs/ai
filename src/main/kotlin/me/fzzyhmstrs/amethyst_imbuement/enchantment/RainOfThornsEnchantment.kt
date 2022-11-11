@@ -33,7 +33,7 @@ class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (user.world !is ServerWorld || !enabled) return
+        if (user.world.isClient || !enabled) return
         for (i in 1..level) {
             val arrow = ArrowEntity(target.world, target.x, target.eyeY, target.z)
             val rnd = user.world.random.nextInt(360) - 180
