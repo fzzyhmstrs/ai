@@ -13,7 +13,7 @@
 	"item": "minecraft:gold_ingot"
   },
   "craftA": {
-	"tag": "minecraft:crafting_table"
+	"item": "minecraft:crafting_table"
   },
   "craftB": {
 	"item": "amethyst_imbuement:imbued_quartz"
@@ -31,13 +31,13 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftG": {
-	"tag": "minecraft:crafting_table"
+	"item": "minecraft:crafting_table"
   },
   "craftH": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftI": {
-	"tag": "minecraft:crafting_table"
+	"item": "minecraft:crafting_table"
   },
   "title": "Builders Scepter",
   "cost": 15,
