@@ -30,11 +30,10 @@ class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     ): Boolean {
         var successes = 0
         for(i in 1..level) {
-            val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
-            val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
-            val yrnd = hit.blockPos.y + 1.0
+            val startPos = (hit as BlockHitResult).blockPos
+            val spawnPos = findSpawnPos(world,startPos,2,2)
             val strider = StriderEntity(EntityType.STRIDER, world)
-            strider.setPos(xrnd, yrnd, zrnd)
+            strider.setPos(spawnPos.x + 0.5, spawnPos.y + 0.05, spawnPos.z + 0.5)
             strider.saddle(SoundCategory.NEUTRAL)
             if (world.spawnEntity(strider)){
                 successes++

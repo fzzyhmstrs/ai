@@ -15,6 +15,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
@@ -42,6 +43,16 @@ class SummonGraceTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
         graceEntity.setPos(xrnd, yrnd, zrnd)
         if (world.spawnEntity(graceEntity)){
             successes++
+        } else {
+            val direction = Direction.Type.HORIZONTAL.random(world.random)
+            val newPos = hit.blockPos.offset(direction,1)
+            val xrnd2: Double = newPos.x + 0.5
+            val zrnd2: Double = newPos.z + 0.5
+            val yrnd2 = newPos.y + 1.0
+            graceEntity.setPos(xrnd2, yrnd2, zrnd2)
+            if (world.spawnEntity(graceEntity)){
+                successes++
+            }
         }
         if (successes > 0) {
             return super.placeEntity(world, user, hit, level, effects)

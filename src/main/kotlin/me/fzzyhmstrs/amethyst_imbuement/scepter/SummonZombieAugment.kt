@@ -17,6 +17,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
@@ -38,12 +39,13 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
         val bonus = bonus(level)
         var successes = 0
         for(i in 1..max(min(effects.amplifier(level),level/2),1)) {
-            val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
-            val zrnd: Double = (hit).blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
-            val yrnd = hit.blockPos.y + 1.0
+            val startPos = (hit as BlockHitResult).blockPos
+            val spawnPos = findSpawnPos(world,startPos,3,2)
+            if (spawnPos == BlockPos.ORIGIN) continue
+
             val zomAmplifier = max(effects.amplifier(level) - baseEffect.amplifier(level), 0)
             val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),user, bonus, effects.damage(level).toDouble(), 4.0 * zomAmplifier)
-            zom.setPos(xrnd, yrnd, zrnd)
+            zom.setPos(spawnPos.x +0.5, spawnPos.y + 0.05, spawnPos.z + 0.5)
             if (world.spawnEntity(zom)){
                 successes++
             }

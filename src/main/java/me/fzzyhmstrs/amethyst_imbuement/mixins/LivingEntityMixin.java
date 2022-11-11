@@ -1,13 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry;
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment;
-import me.fzzyhmstrs.amethyst_imbuement.AI;
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment;
 import me.fzzyhmstrs.amethyst_imbuement.item.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
@@ -15,18 +13,17 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -34,23 +31,21 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 @Mixin(value = LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -81,11 +76,6 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract float getMaxHealth();
 
     @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
-
-    /*@Redirect(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
-    private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance){
-        return (instance.isEmpty() || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) == 0);
-    }*/
 
     @WrapOperation(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance, Operation<Boolean> operation){
@@ -195,35 +185,6 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-
-    /*@Redirect(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
-    private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance){
-        long time = instance.world.getTime();
-        if (instance.isOnGround()) {
-            instance.removeStatusEffect(RegisterStatus.INSTANCE.getLEAPT());
-            lastTime = time;
-            return true; //don't need to multi-jump if the player is already on the ground
-        }
-        if (!(instance instanceof PlayerEntity)) return instance.isOnGround();
-        if (!instance.world.isClient) return instance.isOnGround();
-        ItemStack footStack = instance.getEquippedStack(EquipmentSlot.FEET);
-        if (footStack.isEmpty()) return instance.isOnGround();
-        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getMULTI_JUMP(),footStack) > 0){
-            if(RegisterEnchantment.INSTANCE.getMULTI_JUMP().isEnabled()) {
-                if (!(instance.hasStatusEffect(RegisterStatus.INSTANCE.getLEAPT())) && ((time - lastTime) > 5)) {
-                    instance.addStatusEffect(new StatusEffectInstance(RegisterStatus.INSTANCE.getLEAPT(), 1200));
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }*/
-
     @WrapOperation(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
     private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance, Operation<Boolean> operation){
         long time = instance.world.getTime();
@@ -252,33 +213,6 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-
-
-    /*@Inject(method = "tryUseTotem", at = @At(value = "HEAD"), cancellable = true)
-    private void amethyst_imbuement_tryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir){
-        if (source.isOutOfWorld()) {
-            cir.setReturnValue(false);
-        }
-        ItemStack itemStack = null;
-        for (Hand hand : Hand.values()) {
-            ItemStack itemStack2 = this.getStackInHand(hand);
-            if (!itemStack2.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) continue;
-            if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getUNDYING(),itemStack2) == 0) continue;
-            itemStack = itemStack2.copy();
-            RegisterEnchantment.INSTANCE.getUNDYING().specialEffect((LivingEntity)(Object)this,1,itemStack2);
-            break;
-        }
-        if (itemStack != null) {
-            this.setHealth(1.0f);
-            this.clearStatusEffects();
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 900, 1));
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 800, 0));
-            this.world.sendEntityStatus(this, (byte)35);
-            cir.setReturnValue(true);
-        }
-    }*/
-
     @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
     private boolean amethyst_imbuement_tryUseTotemCheck(ItemStack instance, Item item, Operation<Boolean> operation){
         if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) return operation.call(instance, item);
@@ -291,56 +225,6 @@ public abstract class LivingEntityMixin extends Entity {
     private void amethyst_imbuement_tryUseTotemNoDecrement(ItemStack instance, int i, Operation<Void> operation){
         if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
     }
-
-    /*@Inject(method = "getEquipmentChanges", at = @At(value = "RETURN"), cancellable = true)
-    private void amethyst_imbuement_getEquipmentChangesMixin(CallbackInfoReturnable<@Nullable Map<EquipmentSlot, ItemStack>> cir){
-        int stackValAdd = 0;
-        for (EquipmentSlot equipmentSlot : AI.INSTANCE.getSlots()) {
-            ItemStack stack1 = this.getSyncedArmorStack(equipmentSlot);
-            ItemStack stack2 = this.getEquippedStack(equipmentSlot);
-            if (ItemStack.areEqual(stack2, stack1)) continue;
-            if (!stack1.isEmpty()) {
-                if (RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled()) {
-                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack1);
-                }
-                if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
-                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack1);
-                }
-            }
-            if (!stack2.isEmpty()) {
-                if (RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled()) {
-                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), stack2);
-                }
-                if (RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled()) {
-                    stackValAdd += EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), stack2);
-                }
-            }
-        }
-        if (stackValAdd == 0) return;
-        EnumMap<EquipmentSlot, ItemStack> map = null;
-        block4: for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
-            ItemStack itemStack;
-            switch (equipmentSlot.getType()) {
-                case HAND -> itemStack = this.getSyncedHandStack(equipmentSlot);
-                case ARMOR -> itemStack = this.getSyncedArmorStack(equipmentSlot);
-                default -> {
-                    continue block4;
-                }
-            }
-            ItemStack itemStack2 = this.getEquippedStack(equipmentSlot);
-            if (ItemStack.areEqual(itemStack2, itemStack)) continue;
-            if (map == null) {
-                map = Maps.newEnumMap(EquipmentSlot.class);
-            }
-            map.put(equipmentSlot, itemStack2);
-            if (!itemStack.isEmpty()) {
-                this.getAttributes().removeModifiers(provideResilientMultimap(itemStack,equipmentSlot));
-            }
-            if (itemStack2.isEmpty()) continue;
-            this.getAttributes().addTemporaryModifiers(provideResilientMultimap(itemStack2,equipmentSlot));
-        }
-        cir.setReturnValue(map);
-    }*/
 
     @WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
     private Multimap<EntityAttribute, EntityAttributeModifier> amethyst_imbuement_getEquipmentChangesMixin(ItemStack instance, EquipmentSlot slot, Operation<Multimap<EntityAttribute, EntityAttributeModifier>> operation){
@@ -355,8 +239,6 @@ public abstract class LivingEntityMixin extends Entity {
 
 
     private Multimap<EntityAttribute, EntityAttributeModifier> provideResilientMultimap(ItemStack instance, EquipmentSlot slot, int stackValAdd, int stackValAdd2){
-        /*int stackValAdd = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance);
-        int stackValAdd2 = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance);*/
         Multimap<EntityAttribute, EntityAttributeModifier> map = instance.getAttributeModifiers(slot);
         Multimap<EntityAttribute, EntityAttributeModifier> map2 = HashMultimap.create();
         for (EntityAttribute key : map.keys()){
