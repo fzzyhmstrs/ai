@@ -14,6 +14,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
@@ -28,11 +29,12 @@ class SummonChickenAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     ): Boolean {
         var successes = 0
         for(i in 1..level) {
-            val xrnd: Double = (hit as BlockHitResult).blockPos.x + (world.random.nextDouble() * 4.0 - 2.0)
-            val zrnd: Double = hit.blockPos.z + (world.random.nextDouble() * 4.0 - 2.0)
-            val yrnd = hit.blockPos.y + 1.0
+            val startPos = (hit as BlockHitResult).blockPos
+            val spawnPos = findSpawnPos(world,startPos,2,1)
+            if (spawnPos == BlockPos.ORIGIN) continue
+
             val chikin = ChickenEntity(EntityType.CHICKEN, world)
-            chikin.setPos(xrnd, yrnd, zrnd)
+            chikin.setPos(spawnPos.x + 0.5,spawnPos.y + 0.5, spawnPos.z + 0.5)
             if (world.spawnEntity(chikin)){
                 successes++
             }
