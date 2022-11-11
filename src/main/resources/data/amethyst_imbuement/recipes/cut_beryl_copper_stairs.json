@@ -8,18 +8,12 @@
   "key": {
     "#": [
       {
-        "item": "amethyst_imbuement:chiseled_polished_amethyst_block"
-      },
-      {
-        "item": "amethyst_imbuement:polished_amethyst_block"
-      },
-      {
-        "item": "amethyst_imbuement:polished_amethyst_pillar"
+        "item": "amethyst_imbuement:cut_beryl_copper_block"
       }
     ]
   },
   "result": {
-    "item": "minecraft:quartz_slab",
-    "count": 6
+    "item": "amethyst_imbuement:cut_beryl_copper_stairs",
+    "count": 4
   }
 }
