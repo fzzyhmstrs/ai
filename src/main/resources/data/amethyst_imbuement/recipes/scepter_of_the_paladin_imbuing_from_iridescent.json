@@ -13,19 +13,19 @@
 	"item": "minecraft:shield"
   },
   "craftB": {
-	"item": "amethyst_imbuement:imbued_quartz"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "craftD": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "craftE": {
 	"item": "amethyst_imbuement:iridescent_scepter"
   },
   "craftF": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "craftH": {
-	"item": "amethyst_imbuement:imbued_quartz"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "title": "Scepter of the Paladin",
   "cost": 10,
