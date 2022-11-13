@@ -59,6 +59,6 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,360,16,1,imbueLevel,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
+        return AugmentDatapoint(SpellType.GRACE,360,16,7,imbueLevel,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 }

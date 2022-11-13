@@ -30,7 +30,8 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     SoulAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(13.0,1.0).withDuration(1200,0,0)
+        get() = super.baseEffect.withRange(13.0,1.0)
+            .withDuration(1200,0,0)
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: AugmentEffect): Boolean {
         val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))

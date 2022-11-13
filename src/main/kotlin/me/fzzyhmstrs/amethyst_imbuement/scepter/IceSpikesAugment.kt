@@ -25,7 +25,10 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
     , IceAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.25F,0.25F).withDuration(225,25)
+        get() = super.baseEffect
+            .withAmplifier(11,1,0)
+            .withDamage(5.25F,0.25F)
+            .withDuration(225,25)
 
     override fun effect(
         world: World,

@@ -16,7 +16,9 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
     SoulAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F).withRange(2.625,0.125,0.0)
+        get() = super.baseEffect
+            .withDamage(4.5F,0.5F,0.0F)
+            .withRange(2.625,0.125,0.0)
 
 
     override fun particleType(): DefaultParticleType{

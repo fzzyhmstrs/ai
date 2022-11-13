@@ -32,7 +32,10 @@ import net.minecraft.world.World
 class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.5F,0.5F).withRange(4.5,0.5).withAmplifier(2)
+        get() = super.baseEffect
+            .withDamage(4.5F,0.5F)
+            .withRange(4.5,0.5)
+            .withAmplifier(2)
 
     override fun supportEffect(
         world: World,

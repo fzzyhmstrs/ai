@@ -37,7 +37,7 @@
 	"item": "minecraft:golden_apple"
   },
   "title": "Mass Fortify",
-  "cost": 8,
+  "cost": 18,
   "augment": "amethyst_imbuement:mass_fortify"
 }
 
