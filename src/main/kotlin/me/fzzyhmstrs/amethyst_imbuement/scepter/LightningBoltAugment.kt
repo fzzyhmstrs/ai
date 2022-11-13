@@ -28,7 +28,9 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     LightningAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(13.8,0.2,0.0).withDamage(4.8F,0.2f)
+        get() = super.baseEffect
+            .withRange(13.8,0.2,0.0)
+            .withDamage(4.8F,0.2f)
 
     override fun effect(
         world: World,

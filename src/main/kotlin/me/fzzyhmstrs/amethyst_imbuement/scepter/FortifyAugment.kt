@@ -59,6 +59,6 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,25,1,imbueLevel, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
+        return AugmentDatapoint(SpellType.GRACE,1200,25,8,imbueLevel, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
     }
 }

@@ -79,10 +79,10 @@ object RegisterEnchantment {
     val COMET_STORM = CometStormAugment(3,9,EquipmentSlot.MAINHAND).also{regEnchant["comet_storm"] = it}
     val CREATE_LAVA = CreateLavaAugment(2,1,Items.LAVA_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_lava"] = it}
     val CREATE_SPONGE = CreateSpongeAugment(1,1,Items.SPONGE,EquipmentSlot.MAINHAND).also{regEnchant["create_sponge"] = it}
-    val CREATE_WATER = CreateWaterAugment(2,1,Items.WATER_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_water"] = it}
+    val CREATE_WATER = CreateWaterAugment(1,1,Items.WATER_BUCKET,EquipmentSlot.MAINHAND).also{regEnchant["create_water"] = it}
     val DASH = DashAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["dash"] = it}
     val EMPOWERED_SLASH = EmpoweredSlashAugment(2,5, EquipmentSlot.MAINHAND).also{regEnchant["empowered_slash"] = it}
-    val EXHAUST = ExhaustAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["exhaust"] = it}
+    val EXHAUST = ExhaustAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["exhaust"] = it}
     val FANG_BARRAGE = FangBarrageAugment(3,6,EquipmentSlot.MAINHAND).also{regEnchant["fang_barrage"] = it}
     val FANGS = FangsAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["fangs"] = it}
     val FIREBALL = FireballAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
@@ -122,7 +122,7 @@ object RegisterEnchantment {
     val SUMMON_STRIDER = SummonStriderAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["summon_strider"] = it}
     val SUMMON_WIT_TOTEM = SummonWitTotemAugment(2,9,EquipmentSlot.MAINHAND).also{regEnchant["summon_wit_totem"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
-    val SURVEY = SurveyAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
+    val SURVEY = SurveyAugment(3,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
     val WITHERING_BOLT = WitheringBoltAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment(1,11, EquipmentSlot.MAINHAND).also{regEnchant["zap"] = it}

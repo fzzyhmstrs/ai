@@ -33,7 +33,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
     TravelerAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(16.0,0.0,0.0)
+        get() = super.baseEffect.withRange(100.0,0.0,0.0)
 
     override fun effect(
         world: World,
@@ -46,7 +46,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
         if (user !is PlayerEntity) return false
         if (world !is ServerWorld) return false
         val type = mapList[world.random.nextInt(mapList.size)]
-        val blockPos: BlockPos? = world.locateStructure(type.structure, user.getBlockPos(), 100, true)
+        val blockPos: BlockPos? = world.locateStructure(type.structure, user.getBlockPos(), effect.range(level).toInt(), true)
         return if (blockPos != null) {
             val mapStack = FilledMapItem.createMap(world, blockPos.x, blockPos.z, 2.toByte(), true, true)
             FilledMapItem.fillExplorationMap(world,mapStack)

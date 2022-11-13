@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:moonstone"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
 	"item": "amethyst_imbuement:book_of_lore"

@@ -20,7 +20,10 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     , OceanicAugment, IceAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(230,50,0).withDamage(2.9F,0.1f).withRange(3.8,0.2)
+        get() = super.baseEffect
+            .withDuration(230,50,0)
+            .withDamage(2.9F,0.1f)
+            .withRange(3.8,0.2)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val fe = FreezingEntity(world,user,level)
