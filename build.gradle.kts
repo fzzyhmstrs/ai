@@ -9,6 +9,7 @@ base {
     archivesName.set(archivesBaseName)
 }
 val log: File = file("changelog.md")
+val mcVersions: String by project
 val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
@@ -62,44 +63,55 @@ dependencies {
     val fabricKotlinVersion: String by project
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:8.0.442")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:8.0.442")
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:8.0.442")
+    val reiVersion: String by project
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$reiVersion")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$reiVersion")
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$reiVersion")
 
-    modImplementation("mezz.jei:jei-1.18.2-fabric:10.1.4.263"){
+    val jeiVersion: String by project
+    modImplementation("mezz.jei:$jeiVersion"){
         exclude ("mezz.jei")
     }
 
-    modImplementation("dev.emi:emi:0.4.0+1.18.2")
-
-    modImplementation("dev.emi:trinkets:3.3.0"){
+    val emiVersion: String by project
+    modImplementation("dev.emi:emi:$emiVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("dev.emi:trinkets:3.3.0")
 
-    modImplementation("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC"){
+    val trinketsVersion: String by project
+    modImplementation("dev.emi:trinkets:$trinketsVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("vazkii.patchouli:Patchouli:1.18.2-67-FABRIC")
+    include("dev.emi:trinkets:$trinketsVersion")
 
-    modImplementation("maven.modrinth:Wd844r7Q:1.18.2-02"){
+    val patchouliVersion: String by project
+    modImplementation("vazkii.patchouli:Patchouli:$patchouliVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:Wd844r7Q:1.18.2-02")
+    include("vazkii.patchouli:Patchouli:$patchouliVersion")
 
-    modImplementation(":amethyst_core-0.4.1+1.18.2"){
+    val structurizedVersion: String by project
+    modImplementation("maven.modrinth:Wd844r7Q:$structurizedVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-0.4.1+1.18.2")
+    include("maven.modrinth:Wd844r7Q:$structurizedVersion")
 
-    modImplementation("io.github.ladysnake:PlayerAbilityLib:1.5.0"){
+    val acVersion: String by project
+    modImplementation(":amethyst_core-$acVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("io.github.ladysnake:PlayerAbilityLib:1.5.0")
+    include(":amethyst_core-$acVersion")
 
-    implementation("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
-    include("com.github.LlamaLad7:MixinExtras:0.1.1-rc.4")
+    val palVersion: String by project
+    modImplementation("io.github.ladysnake:PlayerAbilityLib:$palVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("io.github.ladysnake:PlayerAbilityLib:$palVersion")
+
+    val meVersion: String by project
+    implementation("com.github.LlamaLad7:MixinExtras:$meVersion")
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:$meVersion")
+    include("com.github.LlamaLad7:MixinExtras:$meVersion")
 }
 
 tasks {
@@ -135,7 +147,7 @@ modrinth {
     versionName.set("${base.archivesName.get()}-$modVersion")
     versionType.set("release")
     uploadFile.set(tasks.remapJar.get())
-    gameVersions.addAll("1.18.2")
+    gameVersions.addAll(mcVersions.split(","))
     loaders.addAll("fabric","quilt")
     detectLoaders.set(false)
     changelog.set("## Changelog for Amethyst Imbuement $modVersion \n\n" + log.readText())
