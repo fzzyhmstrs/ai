@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:garnet_pickaxe"
+    "amethyst_imbuement:garnet_pickaxe",
+    "amethyst_imbuement:glowing_pick"
   ]
 }

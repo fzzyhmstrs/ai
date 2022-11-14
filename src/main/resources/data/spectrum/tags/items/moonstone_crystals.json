@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:moonstone"
+    "amethyst_imbuement:moonstone",
+    "amethyst_imbuement:charged_moonstone"
   ]
 }
