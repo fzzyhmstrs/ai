@@ -71,7 +71,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
-                val vel = entity3.pos.subtract(user.pos).normalize().multiply(4.0)
+                val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
                 val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level)
                 if (world.spawnEntity(ce)){
                     successes++
@@ -106,7 +106,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         }
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
-        val vel = Vec3d(rndX.toDouble(),(data.blockPos.y).toDouble(),rndZ.toDouble()).subtract(data.user.pos).normalize().multiply(4.0)
+        val vel = Vec3d(rndX.toDouble(),(data.blockPos.y).toDouble(),rndZ.toDouble()).subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
         val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
         data.world.spawnEntity(ce)
     }
