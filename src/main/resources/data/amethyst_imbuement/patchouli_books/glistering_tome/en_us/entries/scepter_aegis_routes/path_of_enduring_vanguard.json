@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow this route on the Path of the Aegis to take a spot on the front lines against darkness. As the Warrior of Light, spells that affect your enemies smite them and weaken them. Your Grace spells last longer with Enduring and gain double XP with Graceful, and spell casting protects you and your allies with Protective."
+"text": "Follow this route on the Path of the Aegis to take a spot on the front lines against darkness. As the Warrior of Light, spells that affect your enemies smite them and weaken them. Your Grace spells last slightly longer with Lesser Enduring and gain double XP with Graceful, and spell casting protects you and your allies with Protective."
 },
 {
   "type": "amethyst_imbuement:scepter_route",
