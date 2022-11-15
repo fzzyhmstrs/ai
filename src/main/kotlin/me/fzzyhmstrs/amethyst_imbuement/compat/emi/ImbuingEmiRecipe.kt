@@ -105,23 +105,21 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
     
     override fun addWidgets(widgets: WidgetHolder){
-        val xOffset = 0
-        val yOffset = 0
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 82, 21)
-        widgets.addSlot(inputs[0], xOffset, yOffset)
-        widgets.addSlot(inputs[1], xOffset + 81, yOffset)
-        widgets.addSlot(inputs[2], xOffset + 20, yOffset + 2)
-        widgets.addSlot(inputs[3], xOffset + 40, yOffset + 2)
-        widgets.addSlot(inputs[4], xOffset + 60, yOffset + 2)
-        widgets.addSlot(inputs[5], xOffset + 20, yOffset + 21)
-        widgets.addSlot(inputs[6], xOffset + 40, yOffset + 21)
-        widgets.addSlot(inputs[7], xOffset + 60, yOffset + 21)
-        widgets.addSlot(inputs[8], xOffset + 20, yOffset + 40)
-        widgets.addSlot(inputs[9], xOffset + 40, yOffset + 40)
-        widgets.addSlot(inputs[10], xOffset + 60, yOffset + 40)
-        widgets.addSlot(inputs[11], xOffset, yOffset + 42)
-        widgets.addSlot(inputs[12], xOffset + 81, yOffset + 42)
-        widgets.addSlot(outputs[0], xOffset + 111, yOffset + 21).recipeContext(this)
+        widgets.addSlot(inputs[0], 0, 0)
+        widgets.addSlot(inputs[1], 81, 0)
+        widgets.addSlot(inputs[2], 20, 2)
+        widgets.addSlot(inputs[3], 40, 2)
+        widgets.addSlot(inputs[4], 60, 2)
+        widgets.addSlot(inputs[5], 20, 21)
+        widgets.addSlot(inputs[6], 40, 21)
+        widgets.addSlot(inputs[7], 60, 21)
+        widgets.addSlot(inputs[8], 20, 40)
+        widgets.addSlot(inputs[9], 40, 40)
+        widgets.addSlot(inputs[10], 60, 40)
+        widgets.addSlot(inputs[11], 0, 42)
+        widgets.addSlot(inputs[12], 81, 42)
+        widgets.addSlot(outputs[0], 111, 21).recipeContext(this)
         widgets.addText(costText,costOffset,42,0x55FF55,true)
     }
 
