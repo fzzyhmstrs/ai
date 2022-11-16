@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
-import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
@@ -10,11 +9,11 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -83,7 +82,7 @@ class ImbuingTableScreenHandler(
 
     private val random = net.minecraft.util.math.random.LocalRandom(0L)
     val player: PlayerEntity = playerInventory.player
-    private val logger = LogUtils.getLogger()
+    private val logger = LOGGER
     private val seed = Property.create()
     val lapisSlot: Property = Property.create()
     var results: List<TableResult> = listOf()
@@ -237,7 +236,7 @@ class ImbuingTableScreenHandler(
                                         tempResults.add(EmptyResult())
                                     }
                                 } else {
-                                    logger.warn("Could not find augment or modifier under the key $id")
+                                    logger.warning("Could not find augment or modifier under the key $id")
                                 }
                             } else {
                                 tempResults.add(ImbuingResult(imbuingRecipe,power))
@@ -527,7 +526,6 @@ class ImbuingTableScreenHandler(
                 handler.resultsIndexes = intArrayOf(int1, int2, int3)
                 handler.resultsCanUp = buf.readBoolean()
                 handler.resultsCanDown = buf.readBoolean()
-                handler.logger.info("synced handler on the client!")
             }
         }
 

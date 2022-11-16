@@ -7,16 +7,22 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
+import me.fzzyhmstrs.amethyst_imbuement.util.LoggerUtil
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
+import org.slf4j.LoggerFactory
+import java.util.logging.Logger
 import kotlin.random.Random
+
+val LOGGER = LoggerUtil.getLogger()
 
 object AI: ModInitializer {
     const val MOD_ID = "amethyst_imbuement"
+
     val slots: Array<EquipmentSlot> = arrayOf(EquipmentSlot.HEAD,EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     override fun onInitialize() {
