@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -34,7 +34,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     val inventory = ImbuingInventory(13, this)
     var inUse: Boolean = false
     var inUseUuid: UUID = UUID(0L,0L)
-    private val logger = LogUtils.getLogger()
+    private val logger = LOGGER
 
     fun setInUse(uuid: UUID){
         if (!inUse){

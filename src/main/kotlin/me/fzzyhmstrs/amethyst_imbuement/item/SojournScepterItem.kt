@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import com.mojang.logging.LogUtils
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
+import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import net.minecraft.block.Blocks
 import net.minecraft.item.CompassItem
 import net.minecraft.item.ItemStack
@@ -20,7 +20,6 @@ import net.minecraft.world.World
 
 class SojournScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
 
-    private val logger = LogUtils.getLogger()
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult? {
         val blockPos = context.blockPos
@@ -53,7 +52,7 @@ class SojournScepterItem(material: ScepterToolMaterial, settings: Settings): Cus
     private fun writeNbt(worldKey: RegistryKey<World>, pos: BlockPos, nbt: NbtCompound) {
         nbt.put(CompassItem.LODESTONE_POS_KEY, NbtHelper.fromBlockPos(pos))
         World.CODEC.encodeStart(NbtOps.INSTANCE, worldKey).resultOrPartial { s: String? ->
-            logger.error(
+            LOGGER.warning(
                 s
             )
         }.ifPresent { nbtElement: NbtElement? ->
