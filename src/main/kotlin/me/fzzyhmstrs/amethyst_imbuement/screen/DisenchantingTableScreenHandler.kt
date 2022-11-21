@@ -17,6 +17,8 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtElement
+import net.minecraft.nbt.NbtList
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -95,7 +97,7 @@ class DisenchantingTableScreenHandler(
                 disenchantCost[0] = -1
             }else {
                 context.run { world: World, pos: BlockPos ->
-                    val enchantList = itemStack.enchantments
+                    val enchantList = getEnchantments(itemStack)
                     //first addition of the item to the table, initialize with a default selection
                     if (enchantmentId[1] == -1 || !checkForEnchantMatch(itemStack)){
                         enchantmentId[0] = -1
@@ -131,6 +133,13 @@ class DisenchantingTableScreenHandler(
                 sendContentUpdates()
             }
         }
+    }
+
+    fun getEnchantments(stack: ItemStack): NbtList {
+        val nbt = stack.nbt
+        return if (nbt != null) {
+            nbt.getList(ItemStack.ENCHANTMENTS_KEY, 10)
+        } else NbtList()
     }
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
