@@ -135,7 +135,7 @@ class DisenchantingTableScreenHandler(
         }
     }
 
-    fun getEnchantments(stack: ItemStack): NbtList {
+    private fun getEnchantments(stack: ItemStack): NbtList {
         val nbt = stack.nbt
         return if (nbt != null) {
             nbt.getList(ItemStack.ENCHANTMENTS_KEY, 10)
