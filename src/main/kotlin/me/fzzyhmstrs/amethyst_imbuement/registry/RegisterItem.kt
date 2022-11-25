@@ -32,8 +32,8 @@ object RegisterItem {
     val OPAL = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["opal"] = it}
     val GARNET = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["garnet"] = it}
     val PYRITE = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["pyrite"] = it}
-    val CHARGED_MOONSTONE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint().withFlavorDefaultPath(Identifier(AI.MOD_ID,"charged_moonstone")).also{ regItem["charged_moonstone"] = it}
-    val ENERGETIC_OPAL = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint().withFlavorDefaultPath(Identifier(AI.MOD_ID,"energetic_opal")).also{ regItem["energetic_opal"] = it}
+    val CHARGED_MOONSTONE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withGlint().withFlavorDefaultPath(Identifier(AI.MOD_ID,"charged_moonstone")).also{ regItem["charged_moonstone"] = it}
+    val ENERGETIC_OPAL = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withGlint().withFlavorDefaultPath(Identifier(AI.MOD_ID,"energetic_opal")).also{ regItem["energetic_opal"] = it}
     val AMETRINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"ametrine")).also{ regItem["ametrine"] = it} // item is custom for flavor text
     val CELESTINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.EPIC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"celestine")).withGlint().also{ regItem["celestine"] = it} // item is custom for flavor text. need texture
     val STEEL_INGOT = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["steel_ingot"] = it}
@@ -46,15 +46,15 @@ object RegisterItem {
         .withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
         .also{ regItem["gem_of_promise"] = it}
     val GEM_DUST = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["gem_dust"] = it}
-    val SPARKING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["sparking_gem"] = it}
-    val BLAZING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["blazing_gem"] = it}
-    val INQUISITIVE_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["inquisitive_gem"] = it}
-    val LETHAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["lethal_gem"] = it}
-    val HEALERS_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["healers_gem"] = it}
-    val BRUTAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["brutal_gem"] = it}
-    val GLOWING_FRAGMENT = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_fragment")).also{ regItem["glowing_fragment"] = it}
+    val SPARKING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["sparking_gem"] = it}
+    val BLAZING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["blazing_gem"] = it}
+    val INQUISITIVE_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["inquisitive_gem"] = it}
+    val LETHAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["lethal_gem"] = it}
+    val HEALERS_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["healers_gem"] = it}
+    val BRUTAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["brutal_gem"] = it}
+    val GLOWING_FRAGMENT = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_fragment")).also{ regItem["glowing_fragment"] = it}
     val BRILLIANT_DIAMOND = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.EPIC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"brilliant_diamond")).withGlint().also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
-    val MALACHITE_FIGURINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"malachite_figurine")).also{ regItem["malachite_figurine"] = it}
+    val MALACHITE_FIGURINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"malachite_figurine")).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"resonant_rod")).also{ regItem["resonant_rod"] = it}
     //val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["survey_map"] = it}
     val HEARTSTONE = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"heartstone")).withGlint() .also{ regItem["heartstone"] = it}
@@ -66,7 +66,7 @@ object RegisterItem {
 
     //tool and weapon items
     val GLISTERING_TRIDENT = GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(550).group(AI_GROUP).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glistering_trident")).also{ regItem["glistering_trident"] = it}
-    val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).group(AI_GROUP)).also{ regItem["sniper_bow"] = it}
+    val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["sniper_bow"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["garnet_shovel"] = it}
     val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["garnet_pickaxe"] = it}
@@ -89,16 +89,16 @@ object RegisterItem {
     val IMBUED_AMULET = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"imbued_amulet")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"imbued_amulet")).also{ regItem["imbued_amulet"] = it}
     val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(360).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
     val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(AI_GROUP).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
+    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(1).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().group(AI_GROUP).maxCount(16)).also{ regItem["mana_potion"] = it}
 
 
     //Basic scepters
-    val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["opaline_scepter"] = it}
-    val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["iridescent_scepter"] = it}
+    val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.COMMON)).also{ regItem["opaline_scepter"] = it}
+    val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_scepter"] = it}
     val LUSTROUS_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["lustrous_scepter"] = it}
-    val DEBUG_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+    val DEBUG_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.DEBUG))
         .withModifiers(listOf(ModifierRegistry.MODIFIER_DEBUG,ModifierRegistry.MODIFIER_DEBUG_2,ModifierRegistry.MODIFIER_DEBUG_3))
         .also{ regItem["debug_scepter"] = it}
@@ -138,7 +138,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT))
         .also{ regItem["scepter_of_blades"] = it}
-    val CORRUPTED_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.UNCOMMON))
+    val CORRUPTED_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.NECROTIC))
         .also{ regItem["corrupted_scepter"] = it}
@@ -170,7 +170,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
-    val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.UNCOMMON))
+    val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
         .withModifiers(listOf(RegisterModifier.HEALERS_GRACE, RegisterModifier.HEALERS_PACT))
         .also{ regItem["scepter_of_the_pacifist"] = it}

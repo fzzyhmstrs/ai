@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:charged_moonstone",
+    "amethyst_imbuement:crystalline_heart",
+    "amethyst_imbuement:glistering_trident",
+    "amethyst_imbuement:sniper_bow",
+    "amethyst_imbuement:lustrous_scepter",
+    "amethyst_imbuement:blazing_scepter",
+    "amethyst_imbuement:sparking_scepter",
+    "amethyst_imbuement:frosted_scepter",
+    "amethyst_imbuement:scepter_of_blades",
+    "amethyst_imbuement:corrupted_scepter",
+    "amethyst_imbuement:scepter_of_insight",
+    "amethyst_imbuement:scepter_of_summoning",
+    "amethyst_imbuement:travelers_scepter",
+    "amethyst_imbuement:scepter_of_recall",
+    "amethyst_imbuement:builders_scepter",
+    "amethyst_imbuement:scepter_of_the_vanguard",
+    "amethyst_imbuement:scepter_of_the_paladin",
+    "amethyst_imbuement:scepter_of_the_pacifist",
+    "amethyst_imbuement:clerics_scepter",
+    "amethyst_imbuement:bardic_scepter",
+    "amethyst_imbuement:sniper_bow",
+    "amethyst_imbuement:energetic_opal"
+  ]
+}
