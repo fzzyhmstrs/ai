@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:moonstone",
+    "amethyst_imbuement:garnet",
+    "amethyst_imbuement:pyrite",
+    "amethyst_imbuement:sparking_gem",
+    "amethyst_imbuement:blazing_gem",
+    "amethyst_imbuement:inquisitive_gem",
+    "amethyst_imbuement:lethal_gem",
+    "amethyst_imbuement:healers_gem",
+    "amethyst_imbuement:brutal_gem",
+    "amethyst_imbuement:heartstone",
+    "amethyst_imbuement:iridescent_orb",
+    "amethyst_imbuement:golden_heart",
+    "amethyst_imbuement:totem_of_amethyst",
+    "amethyst_imbuement:furious_scepter",
+    "amethyst_imbuement:witty_scepter",
+    "amethyst_imbuement:graceful_scepter",
+    "amethyst_imbuement:dangerous_scepter",
+    "amethyst_imbuement:skillful_scepter",
+    "amethyst_imbuement:enduring_scepter",
+    "amethyst_imbuement:opal"
+  ]
+}
