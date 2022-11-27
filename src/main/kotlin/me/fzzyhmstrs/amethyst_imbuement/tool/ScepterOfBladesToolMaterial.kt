@@ -4,14 +4,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
-import java.nio.file.Path
-import java.nio.file.Paths
 import kotlin.math.max
 
 
 object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
     override fun getDurability(): Int {
-        return AiConfig.scepters.bladesDurability
+        return AiConfig.items.bladesDurability
     }
     fun defaultDurability(): Int{
         return 500
@@ -20,7 +18,7 @@ object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
         return 1.0f
     }
     override fun getAttackDamage(): Float {
-        return AiConfig.scepters.bladesDamage
+        return AiConfig.items.bladesDamage
     }
     fun defaultAttackDamage(): Float {
         return 5.0f
@@ -39,7 +37,7 @@ object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
         return Ingredient.ofItems(Items.GOLD_INGOT)
     }
     override fun healCooldown(): Long {
-        return max(AiConfig.scepters.baseRegenRateTicks - 25L,minCooldown())
+        return max(AiConfig.items.baseRegenRateTicks - 25L,minCooldown())
     }
     override fun scepterTier(): Int{
         return 2

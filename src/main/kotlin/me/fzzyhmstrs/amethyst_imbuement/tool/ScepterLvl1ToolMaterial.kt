@@ -8,7 +8,7 @@ import kotlin.math.max
 
 object ScepterLvl1ToolMaterial: ScepterToolMaterial() {
     override fun getDurability(): Int {
-        return AiConfig.scepters.opalineDurability
+        return AiConfig.items.opalineDurability
     }
     fun defaultDurability(): Int{
         return 250
@@ -32,7 +32,7 @@ object ScepterLvl1ToolMaterial: ScepterToolMaterial() {
         return Ingredient.ofItems(RegisterItem.BERYL_COPPER_INGOT)
     }
     override fun healCooldown(): Long {
-        return max(AiConfig.scepters.baseRegenRateTicks,minCooldown())
+        return max(AiConfig.items.baseRegenRateTicks,minCooldown())
     }
     override fun scepterTier(): Int{
         return 1
