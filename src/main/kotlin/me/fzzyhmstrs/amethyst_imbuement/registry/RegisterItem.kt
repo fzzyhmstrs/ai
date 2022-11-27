@@ -5,11 +5,15 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
+import net.minecraft.advancement.criterion.Criteria
+import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.Identifier
@@ -203,8 +207,20 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, RegisterModifier.LESSER_ENDURING))
         .also{ regItem["redemption"] = it}
 
+    //////////////////////////////
+
+    val GIVE_IF_CONFIG = TickCriterion(Identifier(AI.MOD_ID,"give_if_config"))
+
 
     fun registerAll() {
+        Criteria.register(GIVE_IF_CONFIG)
+
+        ServerPlayConnectionEvents.JOIN.register {handler, _, _ ->
+            if (AiConfig.items.giveGlisteringTome){
+                GIVE_IF_CONFIG.trigger(handler.player)
+            }
+        }
+
         for (k in regItem.keys){
             Registry.register(Registry.ITEM,Identifier(AI.MOD_ID,k), regItem[k])
         }

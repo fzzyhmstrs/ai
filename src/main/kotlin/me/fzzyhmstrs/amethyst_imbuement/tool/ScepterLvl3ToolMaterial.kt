@@ -9,7 +9,7 @@ import kotlin.math.max
 
 object ScepterLvl3ToolMaterial: ScepterToolMaterial(){
     override fun getDurability(): Int {
-        return AiConfig.scepters.lustrousDurability
+        return AiConfig.items.lustrousDurability
     }
     fun defaultDurability(): Int{
         return 1450
@@ -33,7 +33,7 @@ object ScepterLvl3ToolMaterial: ScepterToolMaterial(){
         return Ingredient.ofItems(Items.NETHERITE_INGOT)
     }
     override fun healCooldown(): Long {
-        return max(AiConfig.scepters.baseRegenRateTicks - 70L,minCooldown())
+        return max(AiConfig.items.baseRegenRateTicks - 70L,minCooldown())
     }
     override fun scepterTier(): Int{
         return 3

@@ -9,13 +9,12 @@ import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.MinecraftClient
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
 
 object AiConfig: SyncedConfigHelper.SyncedConfig {
 
-    var scepters: Scepters
+    var items: Items
     var altars: Altars
     var colors: Colors
     var villages: Villages
@@ -24,7 +23,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     var entities: Entities
 
     init {
-        scepters = readOrCreateUpdated("scepters_v1.json","scepters_v0.json", base = AI.MOD_ID, configClass = { Scepters() }, previousClass = {SceptersV0()})
+        items = readOrCreateUpdated("items_v0.json","scepters_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {SceptersV1()})
         altars = readOrCreateUpdated("altars_v2.json","altars_v1.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV1()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
@@ -42,7 +41,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     override fun writeToClient(buf:PacketByteBuf){
         val gson = GsonBuilder().create()
-        buf.writeString(gson.toJson(scepters))
+        buf.writeString(gson.toJson(items))
         buf.writeString(gson.toJson(altars))
         buf.writeString(gson.toJson(colors))
         buf.writeString(gson.toJson(villages))
@@ -52,7 +51,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     override fun readFromServer(buf:PacketByteBuf){
-        scepters = gson.fromJson(buf.readString(),Scepters::class.java)
+        items = gson.fromJson(buf.readString(),Items::class.java)
         altars = gson.fromJson(buf.readString(),Altars::class.java)
         colors = gson.fromJson(buf.readString(),Colors::class.java)
         villages = gson.fromJson(buf.readString(),Villages::class.java)
@@ -62,7 +61,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
 
-    class Scepters {
+    class Items {
+        var giveGlisteringTome: Boolean = true
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
@@ -240,18 +240,26 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class SceptersV0: SyncedConfigHelper.OldClass {
+    class SceptersV1: SyncedConfigHelper.OldClass {
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
         var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
+        var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
+        var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
+        var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
+        var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
         override fun generateNewClass(): Any {
-            val scepters = Scepters()
-            scepters.baseRegenRateTicks = baseRegenRateTicks
-            scepters.opalineDurability = opalineDurability
-            scepters.iridescentDurability = iridescentDurability
-            scepters.lustrousDurability = lustrousDurability
-            return scepters
+            val items = Items()
+            items.baseRegenRateTicks = baseRegenRateTicks
+            items.opalineDurability = opalineDurability
+            items.iridescentDurability = iridescentDurability
+            items.lustrousDurability = lustrousDurability
+            items.bladesDurability = bladesDurability
+            items.bladesDamage = bladesDamage
+            items.lethalityDurability = lethalityDurability
+            items.lethalityDamage = lethalityDamage
+            return items
         }
     }
 
