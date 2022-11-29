@@ -115,6 +115,15 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
 
     companion object {
 
+        fun getActive(stack: ItemStack): Boolean{
+            val nbt = stack.nbt ?: return false
+            return if (!nbt.contains(NbtKeys.TOTEM.str())){
+                false
+            } else {
+                Nbt.readBoolNbt(NbtKeys.TOTEM.str(), nbt)
+            }
+        }
+
         private fun checkDamageSource(ds: DamageSource): Boolean{
             return ds != DamageSource.FALL &&
                     ds != DamageSource.CACTUS &&
