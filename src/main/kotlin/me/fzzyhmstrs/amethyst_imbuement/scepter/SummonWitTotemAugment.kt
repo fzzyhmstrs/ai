@@ -65,6 +65,6 @@ class SummonWitTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2400,100,14,imbueLevel,LoreTier.LOW_TIER, RegisterItem.ENERGETIC_OPAL)
+        return AugmentDatapoint(SpellType.WIT,2400,100,14,imbueLevel,LoreTier.LOW_TIER, RegisterItem.ENERGETIC_OPAL)
     }
 }
