@@ -4,9 +4,9 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder
+import net.fabricmc.fabric.api.loot.v2.FabricLootTableBuilder
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier
 object BetterStrongholdsLoot: AbstractModLoot() {
     override val targetNameSpace: String = "betterstrongholds"
 
-    override fun lootBuilder(id: Identifier, table: FabricLootSupplierBuilder): Boolean {
+    override fun lootBuilder(id: Identifier, table: FabricLootTableBuilder): Boolean {
         if (armouryChecker(id)){
             VanillaLoot.villageWeaponsmithLoot(table)
             return true
@@ -31,11 +31,11 @@ object BetterStrongholdsLoot: AbstractModLoot() {
             VanillaLoot.shipwreckTreasureLoot(table)
             return true
         } else if (cryptChecker(id)){
-            val poolBuilder = FabricLootPoolBuilder.builder()
+            val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .with(ItemEntry.builder(RegisterItem.MOONSTONE).weight(1))
                 .with(ItemEntry.builder((Items.AIR)).weight(7))
-            table.pool(poolBuilder)
+            table.pool(poolBuilder.build())
             return true
         }
         return false

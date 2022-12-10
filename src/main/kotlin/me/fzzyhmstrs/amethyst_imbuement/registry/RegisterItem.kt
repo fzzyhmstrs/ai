@@ -209,7 +209,13 @@ object RegisterItem {
 
     //////////////////////////////
 
-    val GIVE_IF_CONFIG = TickCriterion(Identifier(AI.MOD_ID,"give_if_config"))
+    private val GIVE_IF_CONFIG = object: TickCriterion(){
+
+        override fun getId(): Identifier {
+            return Identifier(AI.MOD_ID,"give_if_config")
+        }
+
+    }
 
 
     fun registerAll() {
