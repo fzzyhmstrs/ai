@@ -50,6 +50,9 @@ repositories {
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
+    flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
+    }
     mavenCentral()
 }
 dependencies {
@@ -71,11 +74,6 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$reiVersion")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$reiVersion")
 
-    val jeiVersion: String by project
-    modImplementation("mezz.jei:$jeiVersion"){
-        exclude ("mezz.jei")
-    }
-
     val emiVersion: String by project
     modImplementation("dev.emi:emi:$emiVersion"){
         exclude("net.fabricmc.fabric-api")
@@ -87,17 +85,11 @@ dependencies {
     }
     include("dev.emi:trinkets:$trinketsVersion")
 
-    val patchouliVersion: String by project
-    modImplementation("vazkii.patchouli:Patchouli:$patchouliVersion"){
-        exclude("net.fabricmc.fabric-api")
-    }
-    include("vazkii.patchouli:Patchouli:$patchouliVersion")
-
     val structurizedVersion: String by project
-    modImplementation("maven.modrinth:Wd844r7Q:$structurizedVersion"){
+    modImplementation(":structurized_reborn-$structurizedVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("maven.modrinth:Wd844r7Q:$structurizedVersion")
+    include(":structurized_reborn-$structurizedVersion")
 
     val acVersion: String by project
     modImplementation(":amethyst_core-$acVersion"){
