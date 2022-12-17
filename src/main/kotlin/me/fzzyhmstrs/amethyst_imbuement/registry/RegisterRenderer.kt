@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION", "MemberVisibilityCanBePrivate")
+@file:Suppress("MemberVisibilityCanBePrivate")
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
@@ -19,6 +19,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.CompassAnglePredicateProvider
+import net.minecraft.client.item.ModelPredicateProviderRegistry
 import net.minecraft.client.item.UnclampedModelPredicateProvider
 import net.minecraft.client.model.Dilation
 import net.minecraft.client.model.TexturedModelData
@@ -219,11 +220,11 @@ object RegisterRenderer {
 
         //////////////////////////////////
 
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.GLISTERING_TRIDENT, Identifier("throwing")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int -> if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f }
 
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
                 CompassItem.createLodestonePos(stack.orCreateNbt)
             } else {
@@ -231,7 +232,7 @@ object RegisterRenderer {
             }}
         )
 
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("pulling")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack && !CrossbowItem.isCharged(
@@ -239,7 +240,7 @@ object RegisterRenderer {
                 )
             ) 1.0f else 0.0f
         }
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("charged")
         ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && CrossbowItem.isCharged(
@@ -247,7 +248,7 @@ object RegisterRenderer {
                 )
             ) 1.0f else 0.0f
         }
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("firework")
         ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && CrossbowItem.isCharged(
@@ -255,7 +256,7 @@ object RegisterRenderer {
                 ) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET)
             ) 1.0f else 0.0f
         }
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.SNIPER_BOW, Identifier("pull"),
             UnclampedModelPredicateProvider { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
                 if (entity == null) {
@@ -267,7 +268,7 @@ object RegisterRenderer {
                 (stack.maxUseTime - entity.itemUseTimeLeft).toFloat() / CrossbowItem.getPullTime(stack).toFloat()
         })
 
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_LORE, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
@@ -283,7 +284,7 @@ object RegisterRenderer {
             }
         }
 
-        FabricModelPredicateProviderRegistry.register(
+        ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_MYTHOS, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
