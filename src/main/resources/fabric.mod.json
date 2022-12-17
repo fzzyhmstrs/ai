@@ -57,12 +57,6 @@
         "adapter": "kotlin",
         "value": "me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin"
       }
-    ],
-    "jei_mod_plugin": [
-      {
-        "adapter": "kotlin",
-        "value": "me.fzzyhmstrs.amethyst_imbuement.compat.jei.JeiPlugin"
-      }
     ]
   },
   "mixins": [

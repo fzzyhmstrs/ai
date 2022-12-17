@@ -9,6 +9,9 @@
     }
   ],
   "result": {
-    "item": "amethyst_imbuement:glistering_tome"
+    "item": "patchouli:guide_book",
+    "nbt": {
+      "patchouli:book": "amethyst_imbuement:glistering_tome"
+    }
   }
 }
