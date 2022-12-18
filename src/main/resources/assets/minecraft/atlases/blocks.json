@@ -1,0 +1,12 @@
+{
+	"sources": [
+		{
+			"type": "single",
+			"resource": "amethyst_imbuement:entity/imbuing_table_book"
+		},
+		{
+			"type": "single",
+			"resource": "amethyst_imbuement:entity/disenchanting_table_book"
+		}
+	]
+}
