@@ -92,7 +92,7 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
         return false
     }
 
-    override fun collides(): Boolean {
+    override fun isCollidable(): Boolean {
         return false
     }
 

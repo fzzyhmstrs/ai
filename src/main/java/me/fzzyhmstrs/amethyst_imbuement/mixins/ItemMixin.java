@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings;
 import me.fzzyhmstrs.amethyst_imbuement.item.ItemBookCategory;
-import net.fabricmc.fabric.impl.item.FabricItemInternals;
 import net.minecraft.item.*;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

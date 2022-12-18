@@ -10,10 +10,12 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.Items
-import net.minecraft.text.*
+import net.minecraft.text.StringVisitable
+import net.minecraft.text.Style
+import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.Matrix4f
+import org.joml.Matrix4f
 
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "SpellCheckingInspection")
@@ -44,7 +46,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         DiffuseLighting.disableGuiDepthLighting()
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
@@ -52,8 +54,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
-        val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
-        matrix4f.multiply(Matrix4f.viewboxMatrix(90.0, 1.3333334f, 9.0f, 80.0f))
+        val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
         RenderSystem.backupProjectionMatrix()
         RenderSystem.setProjectionMatrix(matrix4f)
 
@@ -78,7 +79,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
 
         for (o in 0..2) {
             zOffset = 0
-            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val r = handler.enchantmentId[o]

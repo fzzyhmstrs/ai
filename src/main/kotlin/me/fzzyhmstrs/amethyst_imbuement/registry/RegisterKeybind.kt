@@ -12,17 +12,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.text.Text
+import net.minecraft.registry.Registries
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import org.lwjgl.glfw.GLFW
 import java.util.*
 
@@ -70,7 +67,7 @@ object RegisterKeybind {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                         val activeEnchant = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
-                        val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
+                        val activeEnchantName = Registries.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
                         client.player?.sendMessage(AcText.translatable("scepter.active_spell_key").append(activeEnchantName), true)
                         client.player?.addScoreboardTag(activeEnchant)
                     } else {

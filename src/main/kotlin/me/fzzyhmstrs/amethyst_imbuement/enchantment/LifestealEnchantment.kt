@@ -4,7 +4,10 @@ import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.item.*
+import net.minecraft.item.BowItem
+import net.minecraft.item.CrossbowItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.TridentItem
 import java.util.*
 
 class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {

@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
 
 open class TotemPassiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl,*slot) {
 
@@ -13,7 +13,7 @@ open class TotemPassiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equi
     }
 
     override fun checkEnabled(): Boolean{
-        val id = Registry.ENCHANTMENT.getId(this)?:return true
+        val id = Registries.ENCHANTMENT.getId(this)?:return true
         return AiConfig.trinkets.enabledAugments.getOrDefault(id.path,true)
     }
 

@@ -1,22 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.item.*
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.MutableText
-import net.minecraft.text.Text
-import net.minecraft.util.Formatting
-import net.minecraft.util.registry.Registry
+import net.minecraft.item.ItemStack
+import net.minecraft.item.ShieldItem
+import net.minecraft.registry.Registries
 
 class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
     override fun checkEnabled(): Boolean{
-        val id = Registry.ENCHANTMENT.getId(this)?:return true
+        val id = Registries.ENCHANTMENT.getId(this)?:return true
         return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.path,true)
     }
 

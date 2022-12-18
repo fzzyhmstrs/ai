@@ -5,14 +5,15 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentTasks
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.*
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
@@ -128,7 +129,6 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
             return ds != DamageSource.FALL &&
                     ds != DamageSource.CACTUS &&
                     ds != DamageSource.FLY_INTO_WALL &&
-                    ds != DamageSource.FALLING_BLOCK &&
                     ds != DamageSource.HOT_FLOOR &&
                     ds != DamageSource.IN_FIRE &&
                     ds != DamageSource.DROWN &&
@@ -138,7 +138,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
                     ds != DamageSource.FREEZE &&
                     ds != DamageSource.DRYOUT &&
                     ds != DamageSource.STARVE &&
-                    ds != DamageSource.SWEET_BERRY_BUSH
+                    ds != DamageSource.SWEET_BERRY_BUSH && !ds.isFallingBlock
         }
     }
 

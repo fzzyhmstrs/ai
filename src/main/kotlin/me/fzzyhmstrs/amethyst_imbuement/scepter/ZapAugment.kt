@@ -83,7 +83,7 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_RESPAWN_ANCHOR_DEPLETE
+        return SoundEvents.BLOCK_RESPAWN_ANCHOR_DEPLETE.value()
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

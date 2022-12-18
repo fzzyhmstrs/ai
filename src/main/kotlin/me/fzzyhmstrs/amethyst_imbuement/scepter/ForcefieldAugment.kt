@@ -50,31 +50,31 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
                     if (bsX.isAir || bsX.block is PlantBlock){
                         if (!bsX.isAir) world.breakBlock(posX.add(0,j,k),true)
                         world.setBlockState(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(false))
-                        world.createAndScheduleBlockTick(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     } else if (bsX.isOf(Blocks.WATER)){
                         world.setBlockState(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(true))
-                        world.createAndScheduleBlockTick(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(0,j,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     }
                     if (bsY.isAir || bsY.block is PlantBlock ){
                         if (!bsY.isAir) world.breakBlock(posY.add(j,0,k),true)
                         world.setBlockState(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(false))
-                        world.createAndScheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     } else if (bsY.isOf(Blocks.WATER)){
                         world.setBlockState(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(true))
-                        world.createAndScheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     }
                     if (bsZ.isAir || bsZ.block is PlantBlock || bsX.isOf(Blocks.WATER)){
                         if (!bsZ.isAir) world.breakBlock(posZ.add(j,k,0),true)
                         world.setBlockState(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(false))
-                        world.createAndScheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     } else if (bsZ.isOf(Blocks.WATER)){
                         world.setBlockState(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(true))
-                        world.createAndScheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     }
                 }

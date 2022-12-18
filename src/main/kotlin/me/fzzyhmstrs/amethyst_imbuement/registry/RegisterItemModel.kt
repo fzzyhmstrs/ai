@@ -12,11 +12,11 @@ import net.minecraft.client.util.ModelIdentifier
 object RegisterItemModel {
 
     fun registerAll(){
-        val blazingScepterModels = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID + ":blazing_scepter#inventory"))
-            .withHeld(ModelIdentifier(AI.MOD_ID + ":blazing_scepter_in_hand#inventory"), true)
+        val blazingScepterModels = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID, "blazing_scepter","inventory"))
+            .withHeld(ModelIdentifier(AI.MOD_ID, "blazing_scepter_in_hand","inventory"), true)
         ItemModelRegistry.registerItemModelId(RegisterItem.BLAZING_SCEPTER, blazingScepterModels)
-        val modelsPerMode = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID + ":glistering_trident#inventory"))
-            .withHeld(ModelIdentifier(AI.MOD_ID + ":glistering_trident_in_hand#inventory"), true)
+        val modelsPerMode = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID, "glistering_trident","inventory"))
+            .withHeld(ModelIdentifier(AI.MOD_ID, "glistering_trident_in_hand","inventory"), true)
         ItemModelRegistry.registerItemModelId(RegisterItem.GLISTERING_TRIDENT, modelsPerMode)
         ItemModelRegistry.registerItemEntityModel(RegisterItem.GLISTERING_TRIDENT,
             GlisteringTridentItemEntityRenderer,

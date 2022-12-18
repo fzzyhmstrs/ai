@@ -1,13 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
-import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.TravelerAugment
 import net.minecraft.entity.Entity
@@ -19,12 +16,11 @@ import net.minecraft.item.Items
 import net.minecraft.item.map.MapIcon
 import net.minecraft.item.map.MapState
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.StructureTags
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.tag.StructureTags
-import net.minecraft.tag.TagKey
-import net.minecraft.text.Text
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -84,7 +80,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
             MapType(StructureTags.MINESHAFT,MapIcon.Type.TARGET_POINT,"filled_map.mineshaft",0x7F0000)
         )
 
-        private class MapType(val structure: TagKey<Structure>, val iconType: MapIcon.Type,val nameKey: String, val tint: Int = -1)
+        private class MapType(val structure: TagKey<Structure>, val iconType: MapIcon.Type, val nameKey: String, val tint: Int = -1)
     }
 
 

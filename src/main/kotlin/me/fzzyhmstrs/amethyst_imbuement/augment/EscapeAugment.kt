@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.UsedActiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
@@ -11,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.Text
 import net.minecraft.world.Heightmap
 
 class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): UsedActiveAugment(weight,mxLvl, *slot) {

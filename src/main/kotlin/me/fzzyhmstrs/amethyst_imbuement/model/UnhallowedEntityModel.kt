@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
-import net.minecraft.client.model.*
+import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.entity.model.BipedEntityModel
 import net.minecraft.client.render.entity.model.CrossbowPosing
 import net.minecraft.entity.mob.MobEntity

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 

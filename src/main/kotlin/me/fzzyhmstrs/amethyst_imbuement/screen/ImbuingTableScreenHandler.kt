@@ -33,6 +33,7 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.registry.Registries
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -52,7 +53,6 @@ import net.minecraft.util.collection.Weighting
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -190,7 +190,7 @@ class ImbuingTableScreenHandler(
                             val power = MathHelper.ceil(imbuingRecipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
                             if (imbuingRecipe.getAugment() != "") {
                                 val id = Identifier(imbuingRecipe.getAugment())
-                                val augment = Registry.ENCHANTMENT.get(id)
+                                val augment = Registries.ENCHANTMENT.get(id)
                                 if (augment != null) {
                                     val augCheck = if (augment is ScepterAugment) {
                                         val blA = ScepterHelper.isAcceptableScepterItem(augment, itemStack, player)
@@ -274,7 +274,7 @@ class ImbuingTableScreenHandler(
                             }
                             val enchantmentLevelEntry = k[random.nextInt(k.size)]
                             enchantmentId[j] =
-                                Registry.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
+                                Registries.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
                             enchantmentLevel[j] = enchantmentLevelEntry.level
                             ++j
                         }
@@ -324,7 +324,7 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.5f,1.2f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK.value(),SoundCategory.BLOCKS,0.5f,1.2f)
                 world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.6f,0.6f + world.random.nextFloat() * 1.2f)
             }
             return true
@@ -341,7 +341,7 @@ class ImbuingTableScreenHandler(
             resultsCanDown = resultsIndexes[2] < max
             sendPacket(player,this)
             context.run { world,pos->
-                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS,0.5f,1.2f)
+                world.playSound(null,pos,SoundEvents.UI_BUTTON_CLICK.value(),SoundCategory.BLOCKS,0.5f,1.2f)
                 world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.6f,0.6f + world.random.nextFloat() * 1.2f)
             }
             return true
@@ -363,7 +363,7 @@ class ImbuingTableScreenHandler(
         return buttonWorked
     }
 
-    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
+    override fun quickMove(player: PlayerEntity, index: Int): ItemStack? {
         var itemStack = ItemStack.EMPTY
         val slot = this.slots[index]
         if (slot != null && slot.hasStack()) {
@@ -604,7 +604,7 @@ class ImbuingTableScreenHandler(
 
         private fun getPossibleEntries(power: Int, stack: ItemStack, treasureAllowed: Boolean): ArrayList<EnchantmentLevelEntry> {
             val list = Lists.newArrayList<EnchantmentLevelEntry>()
-            block0@ for (enchantment in Registry.ENCHANTMENT) {
+            block0@ for (enchantment in Registries.ENCHANTMENT) {
                 if (enchantment.isTreasure && !treasureAllowed || !enchantment.isAvailableForRandomSelection || !enchantment.isAcceptableItem(
                         stack
                     ) && !stack.isOf(Items.BOOK)
@@ -897,7 +897,7 @@ class ImbuingTableScreenHandler(
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             return if(recipe.getAugment() != "") {
                 val augId = Identifier(recipe.getAugment())
-                val str = Registry.ENCHANTMENT.get(augId)?.getName(1)?.string
+                val str = Registries.ENCHANTMENT.get(augId)?.getName(1)?.string
                     ?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
                 AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             } else {
@@ -922,7 +922,7 @@ class ImbuingTableScreenHandler(
             if ((player.experienceLevel < i || player.experienceLevel < power) && !player.abilities.creativeMode) return false
             if(recipe.getAugment() != ""){
                 val augId = Identifier(recipe.getAugment())
-                val augmentChk = Registry.ENCHANTMENT.get(augId) ?: return false
+                val augmentChk = Registries.ENCHANTMENT.get(augId) ?: return false
                 if (checkAcceptableAugment(augmentChk,itemStack3)){
                     val bl = itemStack3.isOf(Items.BOOK)
                     if (bl) {
@@ -1003,7 +1003,7 @@ class ImbuingTableScreenHandler(
         override fun tooltipList(player: PlayerEntity, handler: ImbuingTableScreenHandler): List<Text> {
             val list: MutableList<Text> = mutableListOf()
             if (recipe.getAugment() != "") {
-                val augment = Registry.ENCHANTMENT.get(Identifier(recipe.getAugment()))
+                val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     list.add(AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
                     list.add(AcText.empty())
@@ -1027,7 +1027,7 @@ class ImbuingTableScreenHandler(
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
             return if (recipe.getAugment() != "") {
-                val augment = Registry.ENCHANTMENT.get(Identifier(recipe.getAugment()))
+                val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE))
                 } else {

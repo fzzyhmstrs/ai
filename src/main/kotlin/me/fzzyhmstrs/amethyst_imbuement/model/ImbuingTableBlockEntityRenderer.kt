@@ -15,7 +15,7 @@ import net.minecraft.client.util.SpriteIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 @Suppress("DEPRECATION")
 @Environment(value = EnvType.CLIENT)
@@ -42,8 +42,8 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
             h += Math.PI.toFloat() * 2
         }
         val k = imbuingTableBlockEntity.field_11963 + h * f
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(-k))
-        matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(80.0f))
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-k))
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(80.0f))
         val l = MathHelper.lerp(f, imbuingTableBlockEntity.pageAngle, imbuingTableBlockEntity.nextPageAngle)
         val m = MathHelper.fractionalPart(l + 0.25f) * 1.6f - 0.3f
         val n = MathHelper.fractionalPart(l + 0.75f) * 1.6f - 0.3f

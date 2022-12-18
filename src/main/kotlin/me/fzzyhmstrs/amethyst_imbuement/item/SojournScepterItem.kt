@@ -11,11 +11,11 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtHelper
 import net.minecraft.nbt.NbtOps
+import net.minecraft.registry.RegistryKey
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.registry.RegistryKey
 import net.minecraft.world.World
 
 class SojournScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {

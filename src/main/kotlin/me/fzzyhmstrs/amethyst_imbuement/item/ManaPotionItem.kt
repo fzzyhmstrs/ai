@@ -7,7 +7,6 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.item.PotionItem
@@ -15,7 +14,6 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 import kotlin.math.max
@@ -82,12 +80,6 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
 
     override fun hasGlint(stack: ItemStack?): Boolean {
         return true
-    }
-
-    override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
-        if (isIn(group)) {
-            stacks.add(ItemStack(this))
-        }
     }
 
 }

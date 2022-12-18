@@ -8,16 +8,16 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
 
 open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractPassiveAugment(weight,mxLvl, *slot) {
 
     override fun canAccept(other: Enchantment): Boolean {
-        return (other !is PassiveAugment || (Registry.ENCHANTMENT.getId(other) == Registry.ENCHANTMENT.getId(this) && this.maxLevel > 1))
+        return (other !is PassiveAugment || (Registries.ENCHANTMENT.getId(other) == Registries.ENCHANTMENT.getId(this) && this.maxLevel > 1))
     }
 
     override fun checkEnabled(): Boolean{
-        val id = Registry.ENCHANTMENT.getId(this)?:return true
+        val id = Registries.ENCHANTMENT.getId(this)?:return true
         return AiConfig.trinkets.enabledAugments.getOrDefault(id.path,true)
     }
 
@@ -27,7 +27,7 @@ open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.indexedEntries
+        val entries = Registries.ITEM.indexedEntries
         list.add(ItemStack(RegisterItem.TOTEM_OF_AMETHYST,1))
         for (entry in entries){
             val item = entry.value()

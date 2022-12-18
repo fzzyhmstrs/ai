@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.MinecraftClient
@@ -14,7 +13,7 @@ import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
                           model: TotemEntityModel, shadowRadius: Float
@@ -36,8 +35,8 @@ class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
         matrixStack.translate(0.0, 2.25, 0.0)
         val t = livingEntity.ticks.toFloat() + f
         matrixStack.translate(0.0, (0.1f + MathHelper.sin(t * 0.1f) * 0.01f).toDouble(), 0.0)
-        matrixStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(livingEntity.lookingRotR))
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90F))
+        matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(livingEntity.lookingRotR))
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90F))
         MinecraftClient.getInstance().itemRenderer.renderItem(
             livingEntity.stack,
             ModelTransformation.Mode.FIXED,

@@ -13,9 +13,9 @@ import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
-import org.slf4j.Logger
 
 object RegisterEnchantment {
     private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()
@@ -135,7 +135,7 @@ object RegisterEnchantment {
         for (k in regEnchant.keys){
             val enchant = regEnchant[k]
             val id = Identifier(AI.MOD_ID, k)
-            Registry.register(Registry.ENCHANTMENT, id, enchant)
+            Registry.register(Registries.ENCHANTMENT, id, enchant)
             if (enchant is ScepterAugment){
                 AugmentHelper.registerAugmentStat(enchant)
                 if (!AugmentHelper.getAugmentEnabled(id.toString())) {

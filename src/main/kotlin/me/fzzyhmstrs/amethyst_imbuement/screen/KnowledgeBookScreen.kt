@@ -13,17 +13,13 @@ import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper
-import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.client.item.TooltipData
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import java.util.*
 
 class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(AcText.translatable("lore_book.screen")) {
 
@@ -56,7 +52,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
             return
         }
         val list: MutableList<Text> = mutableListOf()
-        item.appendTooltip(book,client?.world,list, TooltipContext.Default.NORMAL)
+        item.appendTooltip(book,client?.world,list, TooltipContext.Default.BASIC)
         if (list.isEmpty()){
             this.close()
             return
@@ -88,7 +84,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, delta)
         //the book background
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, BOOK_TEXTURE)
         drawTexture(matrices, i, j, 0, 0, 256, 179)
@@ -116,7 +112,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         offset = addText(matrices,reformatText(augmentTitle),i+67f,offset,11,true)
         //drawing a horizontal line break
         offset += 2
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, BOOK_TEXTURE)
         drawTexture(matrices, i+15, offset.toInt(), 0, 179, 105, 4)
@@ -175,7 +171,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
     }
 
     private fun renderLine(matrices: MatrixStack,x: Int,offset: Float): Float{
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, BOOK_TEXTURE)
         drawTexture(matrices,x,(offset).toInt()-1,0,183,50,1)

@@ -112,7 +112,7 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.EVENT_RAID_HORN
+        return SoundEvents.EVENT_RAID_HORN.value()
     }
 
     private fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): Pair<MutableList<LivingEntity>,Int>{

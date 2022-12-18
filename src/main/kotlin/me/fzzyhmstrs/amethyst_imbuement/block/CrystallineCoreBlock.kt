@@ -4,12 +4,13 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity.CRYSTAL_GOLEM_ENTITY
 import net.minecraft.advancement.criterion.Criteria
-import net.minecraft.block.*
+import net.minecraft.block.AmethystBlock
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.Material
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.block.pattern.BlockPatternBuilder
 import net.minecraft.block.pattern.CachedBlockPosition
-import net.minecraft.entity.ai.TargetPredicate
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.predicate.block.BlockStatePredicate
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.function.MaterialPredicate

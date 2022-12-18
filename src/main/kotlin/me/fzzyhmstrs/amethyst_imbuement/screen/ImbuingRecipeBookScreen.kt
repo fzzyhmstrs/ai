@@ -18,7 +18,6 @@ import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.ButtonWidget.PressAction
-import net.minecraft.client.gui.widget.ButtonWidget.TooltipSupplier
 import net.minecraft.client.gui.widget.TexturedButtonWidget
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
@@ -28,12 +27,12 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.registry.Registries
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import net.minecraft.util.registry.Registry
 import java.util.function.Consumer
 import kotlin.math.ceil
 
@@ -119,7 +118,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         if (finalMap.isEmpty()) return@PressAction
         val cloggedItems: MutableList<Int> = mutableListOf()
         for (i in 0..12){
-            val rawId = Registry.ITEM.getRawId(oldScreen.screenHandler.slots[i].stack.item)
+            val rawId = Registries.ITEM.getRawId(oldScreen.screenHandler.slots[i].stack.item)
             if (!currentRecipes[recipeIndex].getBomList().contains(rawId)){
                 cloggedItems.add(i)
             }
@@ -396,7 +395,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         renderBackground(matrices)
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
         drawTexture(matrices, i, j, 0, 0, 256, 179)
@@ -437,7 +436,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                 val map = recipeMatches.matches
                 for (k in 0..12){
                     if (map[k] == -1){
-                        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+                        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
                         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
                         RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
                         drawTexture(matrices, i - 1 + rowIndices[k], j - 1 + colIndices[k], 48, 227, 18, 18)
@@ -562,7 +561,7 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
         }
 
         override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, KnowledgeBookScreen.BOOK_TEXTURE)
             var xOffset = 0
             var yOffset = 0

@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.modifier
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.*
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import java.util.function.Predicate
 
 object ModifierPredicates {
@@ -22,29 +22,29 @@ object ModifierPredicates {
     }
     val BLADE_PREDICATE = Predicate {id: Identifier -> bladePredicate(id)}
     private fun bladePredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is SlashAugment
     }
     val ICE_PREDICATE = Predicate {id: Identifier -> icePredicate(id)}
     private fun icePredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is IceAugment
     }
     val ELEMENTAL_PREDICATE = Predicate {id: Identifier -> elementalPredicate(id)}
     private fun elementalPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is ElementalAugment
     }
 
     val HEALERS_PREDICATE = Predicate {id: Identifier -> healersPredicate(id)}
     private fun healersPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is HealerAugment
     }
 
     val HEALERS_PACT_PREDICATE = Predicate {id: Identifier -> healersPactPredicate(id)}
     private fun healersPactPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment !is HealerAugment
     }
 
@@ -55,31 +55,31 @@ object ModifierPredicates {
 
     val FIRE_PREDICATE = Predicate {id: Identifier -> firePredicate(id)}
     private fun firePredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is FireAugment
     }
 
     val LIGHTNING_PREDICATE = Predicate {id: Identifier -> lightningPredicate(id)}
     private fun lightningPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is LightningAugment
     }
 
     val SUMMONERS_PREDICATE = Predicate {id: Identifier -> summonersPredicate(id)}
     private fun summonersPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is SummonEntityAugment
     }
 
     val BUILDERS_PREDICATE = Predicate {id: Identifier -> buildersPredicate(id)}
     private fun buildersPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is BuilderAugment
     }
     
     val TRAVELER_PREDICATE = Predicate {id: Identifier -> travelerPredicate(id)}
     private fun travelerPredicate(id: Identifier): Boolean{
-        val augment = Registry.ENCHANTMENT.get(id)?:return false
+        val augment = Registries.ENCHANTMENT.get(id)?:return false
         return augment is TravelerAugment
     }
 

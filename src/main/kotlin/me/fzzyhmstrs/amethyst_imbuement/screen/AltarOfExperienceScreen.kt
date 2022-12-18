@@ -11,7 +11,7 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.Matrix4f
+import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import kotlin.math.min
 
@@ -68,7 +68,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         DiffuseLighting.disableGuiDepthLighting()
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
@@ -76,8 +76,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
-        val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
-        matrix4f.multiply(Matrix4f.viewboxMatrix(90.0, 1.3333334f, 9.0f, 80.0f))
+        val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
         RenderSystem.backupProjectionMatrix()
         RenderSystem.setProjectionMatrix(matrix4f)
 
@@ -142,7 +141,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
         //top button
         for (b in 0..3){
-            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val bl1 = xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)

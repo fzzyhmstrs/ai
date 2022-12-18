@@ -2,22 +2,19 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
-import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.block.OreBlock
+import net.minecraft.block.ExperienceDroppingBlock
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl, *slot) {
@@ -38,7 +35,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                     val bp = pos.add(i,j,k)
                     if (world.isAir(bp)) continue
                     val bs = world.getBlockState(bp)
-                    if (bs.block is OreBlock || bs.isOf(Blocks.ANCIENT_DEBRIS)){
+                    if (bs.block is ExperienceDroppingBlock || bs.isOf(Blocks.ANCIENT_DEBRIS)){
                         if (!extendBoxLife(bp, world)) {
                             val dbe = DraconicBoxEntity(RegisterEntity.DRACONIC_BOX_ENTITY, world, bs.block, 40, bp)
                             dbe.setPosition(ii + 0.5, jj + 0.1, kk + 0.5)

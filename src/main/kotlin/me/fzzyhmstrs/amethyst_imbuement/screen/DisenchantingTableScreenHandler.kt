@@ -17,8 +17,8 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
+import net.minecraft.registry.Registries
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -27,7 +27,6 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
 import kotlin.math.min
@@ -103,21 +102,21 @@ class DisenchantingTableScreenHandler(
                         enchantmentId[0] = -1
                         enchantmentLevel[0] = -1
                         val identifier = EnchantmentHelper.getIdFromNbt(enchantList[0] as NbtCompound)
-                        val defaultEnchant = Registry.ENCHANTMENT.get(identifier)
-                        val defaultEnchantId = Registry.ENCHANTMENT.getRawId(defaultEnchant)
+                        val defaultEnchant = Registries.ENCHANTMENT.get(identifier)
+                        val defaultEnchantId = Registries.ENCHANTMENT.getRawId(defaultEnchant)
                         val defaultEnchantLevel = EnchantmentHelper.getLevel(defaultEnchant,itemStack)
                         enchantmentId[1] = defaultEnchantId
                         enchantmentLevel[1] = defaultEnchantLevel
                         if (enchantList.size > 1){
                             val identifier2 = EnchantmentHelper.getIdFromNbt(enchantList[1] as NbtCompound)
-                            val defaultEnchant2 = Registry.ENCHANTMENT.get(identifier2)
-                            val defaultEnchantId2 = Registry.ENCHANTMENT.getRawId(defaultEnchant2)
+                            val defaultEnchant2 = Registries.ENCHANTMENT.get(identifier2)
+                            val defaultEnchantId2 = Registries.ENCHANTMENT.getRawId(defaultEnchant2)
                             val defaultEnchantLevel2 = EnchantmentHelper.getLevel(defaultEnchant2,itemStack)
                             enchantmentId[2] = defaultEnchantId2
                             enchantmentLevel[2] = defaultEnchantLevel2
                         }
                     }
-                    activeItem.set(Registry.ITEM.getRawId(itemStack.item))
+                    activeItem.set(Registries.ITEM.getRawId(itemStack.item))
                     if (!world.isClient) {
                         val nbt = itemStack.nbt
                         if (nbt == null) {
@@ -171,8 +170,8 @@ class DisenchantingTableScreenHandler(
                         enchantmentLevel[0] = -1
                     } else {
                         val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex-1] as NbtCompound)
-                        val enchant = Registry.ENCHANTMENT.get(identifier)
-                        val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+                        val enchant = Registries.ENCHANTMENT.get(identifier)
+                        val enchantId = Registries.ENCHANTMENT.getRawId(enchant)
                         val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)
                         enchantmentId[0] = enchantId
                         enchantmentLevel[0] = enchantLevel
@@ -180,7 +179,7 @@ class DisenchantingTableScreenHandler(
                     world.playSound(
                         null,
                         pos,
-                        SoundEvents.UI_BUTTON_CLICK,
+                        SoundEvents.UI_BUTTON_CLICK.value(),
                         SoundCategory.BLOCKS,
                         1.0f,
                         world.random.nextFloat() * 0.1f + 0.9f
@@ -195,7 +194,7 @@ class DisenchantingTableScreenHandler(
                 context.run { world: World, pos: BlockPos ->
                     removing = true
                     val enchantList3 = EnchantmentHelper.get(itemStack)
-                    val enchantCheck = Registry.ENCHANTMENT.get(enchantmentId[id])
+                    val enchantCheck = Registries.ENCHANTMENT.get(enchantmentId[id])
                     if (enchantList3.containsKey(enchantCheck)){
                         enchantList3.remove(enchantCheck)
                     } else {
@@ -228,8 +227,8 @@ class DisenchantingTableScreenHandler(
                             enchantmentLevel[2] = -1
                         } else {
                             val identifier2 = EnchantmentHelper.getIdFromNbt(enchantList[refIndex+1] as NbtCompound)
-                            val enchant2 = Registry.ENCHANTMENT.get(identifier2)
-                            val enchantId2 = Registry.ENCHANTMENT.getRawId(enchant2)
+                            val enchant2 = Registries.ENCHANTMENT.get(identifier2)
+                            val enchantId2 = Registries.ENCHANTMENT.getRawId(enchant2)
                             val enchantLevel2 = EnchantmentHelper.getLevel(enchant2,itemStack)
                             enchantmentId[2] = enchantId2
                             enchantmentLevel[2] = enchantLevel2
@@ -282,8 +281,8 @@ class DisenchantingTableScreenHandler(
                         enchantmentLevel[2] = -1
                     } else {
                         val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex+1] as NbtCompound)
-                        val enchant = Registry.ENCHANTMENT.get(identifier)
-                        val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+                        val enchant = Registries.ENCHANTMENT.get(identifier)
+                        val enchantId = Registries.ENCHANTMENT.getRawId(enchant)
                         val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)
                         enchantmentId[2] = enchantId
                         enchantmentLevel[2] = enchantLevel
@@ -291,7 +290,7 @@ class DisenchantingTableScreenHandler(
                     world.playSound(
                         null,
                         pos,
-                        SoundEvents.UI_BUTTON_CLICK,
+                        SoundEvents.UI_BUTTON_CLICK.value(),
                         SoundCategory.BLOCKS,
                         1.0f,
                         world.random.nextFloat() * 0.1f + 0.9f
@@ -307,7 +306,7 @@ class DisenchantingTableScreenHandler(
 
     }
 
-    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack? {
+    override fun quickMove(player: PlayerEntity, index: Int): ItemStack? {
         var itemStack = ItemStack.EMPTY
         val slot = this.slots[index]
         if (slot != null && slot.hasStack()) {
@@ -367,7 +366,7 @@ class DisenchantingTableScreenHandler(
         return AiConfig.altars.disenchantLevelCosts[index]
     }
     private fun checkForEnchantMatch(stack: ItemStack): Boolean{
-        if (Registry.ITEM.getRawId(stack.item) != activeItem.get()) return false
+        if (Registries.ITEM.getRawId(stack.item) != activeItem.get()) return false
         for (i in 0..2){
             if (enchantmentId[i] == -1) continue
             val enchantTest = Enchantment.byRawId(enchantmentId[i])
@@ -382,7 +381,7 @@ class DisenchantingTableScreenHandler(
         if (enchantList2.isEmpty()) return 0
         for (i in enchantList2.indices){
             val enchant = enchantList2.elementAt(i)
-            val enchantId = Registry.ENCHANTMENT.getRawId(enchant)
+            val enchantId = Registries.ENCHANTMENT.getRawId(enchant)
             if (enchantId == enchantmentId[id]){
                 return i
             }

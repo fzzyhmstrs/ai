@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -14,7 +14,6 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
-import net.minecraft.world.explosion.Explosion
 
 class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerFireballEntity?>, world: World): super(entityType, world)
@@ -40,7 +39,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
                 this.z,
                 entityEffects.amplifier(0).toFloat(),
                 bl,
-                if (bl) Explosion.DestructionType.DESTROY else Explosion.DestructionType.NONE
+                if (bl) World.ExplosionSourceType.TNT else World.ExplosionSourceType.NONE
             )
             discard()
         }

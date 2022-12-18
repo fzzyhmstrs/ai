@@ -31,7 +31,7 @@ class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Sum
         val list: List<Entity> = world.getOtherEntities(
             user,
             user.boundingBox.stretch(vec3d.multiply(5.0)).expand(1.0),
-            EntityPredicates.EXCEPT_SPECTATOR.and { obj: Entity -> obj.collides() }
+            EntityPredicates.EXCEPT_SPECTATOR.and { obj: Entity -> obj.isCollidable }
         )
         if (list.isNotEmpty()) {
             vec3d2 = user.eyePos
@@ -42,7 +42,7 @@ class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Sum
             }
         }
         val boat = BoatEntity(world, hit.pos.x, hit.pos.y, hit.pos.z)
-        boat.boatType = BoatEntity.Type.OAK
+        boat.variant = BoatEntity.Type.OAK
         boat.yaw = user.yaw
         if (!world.isSpaceEmpty(boat, boat.boundingBox)) {
             return false

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
@@ -23,8 +22,8 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 
@@ -169,9 +168,9 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         return outputItem.copy()
     }
     private fun outputGenerator(): ItemStack{
-        if (augment == "") return ItemStack(Registry.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
+        if (augment == "") return ItemStack(Registries.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
         val identifier = Identifier(augment)
-        val enchant = Registry.ENCHANTMENT.get(identifier)
+        val enchant = Registries.ENCHANTMENT.get(identifier)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
         return if (enchant != null){
             val stack = ItemStack(Items.ENCHANTED_BOOK,1)
@@ -192,7 +191,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     private fun centerSlotGenerator(): Ingredient{
         if (augId.path == "") return Ingredient.EMPTY
-        val enchant = Registry.ENCHANTMENT.get(augId)
+        val enchant = Registries.ENCHANTMENT.get(augId)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(augId)
         if (enchant != null){
             when (enchant) {
@@ -206,7 +205,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                 }
                 else -> {
                     val enchantItemList: MutableList<ItemStack> = mutableListOf()
-                    for (item in Registry.ITEM.iterator()){
+                    for (item in Registries.ITEM.iterator()){
                         val stack = ItemStack(item)
                         if (enchant.isAcceptableItem(stack)){
                             enchantItemList.add(stack)

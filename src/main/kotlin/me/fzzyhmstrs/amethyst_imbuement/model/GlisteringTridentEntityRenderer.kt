@@ -11,7 +11,7 @@ import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName")
 class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : EntityRenderer<GlisteringTridentEntity>(context) {
@@ -28,7 +28,7 @@ class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : 
     ) {
         matrixStack.push()
         matrixStack.multiply(
-            Vec3f.POSITIVE_Y.getDegreesQuaternion(
+            RotationAxis.POSITIVE_Y.rotationDegrees(
                 MathHelper.lerp(
                     g,
                     glisteringTridentEntity.prevYaw,
@@ -37,7 +37,7 @@ class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : 
             )
         )
         matrixStack.multiply(
-            Vec3f.POSITIVE_Z.getDegreesQuaternion(
+            RotationAxis.POSITIVE_Z.rotationDegrees(
                 MathHelper.lerp(
                     g,
                     glisteringTridentEntity.prevPitch,

@@ -17,7 +17,7 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
         if(client?.options?.advancedItemTooltips == true){
             TooltipContext.Default.ADVANCED
         } else {
-            TooltipContext.Default.NORMAL
+            TooltipContext.Default.BASIC
         }
     }
 

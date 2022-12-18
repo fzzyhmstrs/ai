@@ -54,7 +54,7 @@ abstract class AbstractEffectTotemEntity(
         return false
     }
 
-    override fun collides(): Boolean {
+    override fun isCollidable(): Boolean {
         return false
     }
 

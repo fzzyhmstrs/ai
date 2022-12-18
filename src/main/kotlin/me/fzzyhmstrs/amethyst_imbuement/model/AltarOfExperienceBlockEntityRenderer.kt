@@ -15,7 +15,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 
 @Suppress("DEPRECATION")
@@ -37,8 +37,8 @@ class AltarOfExperienceBlockEntityRenderer(ctx: BlockEntityRendererFactory.Conte
         val g = altarOfExperienceBlockEntity.ticks.toFloat() + f
         matrixStack.translate(0.0, (0.1f + MathHelper.sin(g * 0.1f) * 0.01f).toDouble(), 0.0)
 
-        matrixStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(altarOfExperienceBlockEntity.lookingRotR))
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90F))
+        matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(altarOfExperienceBlockEntity.lookingRotR))
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90F))
 
         val lightAbove = WorldRenderer.getLightmapCoordinates(altarOfExperienceBlockEntity.world, altarOfExperienceBlockEntity.pos.up())
         MinecraftClient.getInstance().itemRenderer.renderItem(

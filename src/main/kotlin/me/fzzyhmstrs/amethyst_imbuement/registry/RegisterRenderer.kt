@@ -8,27 +8,18 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
-import me.fzzyhmstrs.amethyst_imbuement.model.DisenchantingTableBlockEntityRenderer.Companion.DISENCHANTING_TABLE_BOOK_SPRITE_ID
-import me.fzzyhmstrs.amethyst_imbuement.model.ImbuingTableBlockEntityRenderer.Companion.IMBUING_TABLE_BOOK_SPRITE_ID
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.CompassAnglePredicateProvider
 import net.minecraft.client.item.ModelPredicateProviderRegistry
-import net.minecraft.client.item.UnclampedModelPredicateProvider
-import net.minecraft.client.model.Dilation
-import net.minecraft.client.model.TexturedModelData
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
-import net.minecraft.client.render.entity.model.OcelotEntityModel
-import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.CompassItem
@@ -257,16 +248,16 @@ object RegisterRenderer {
             ) 1.0f else 0.0f
         }
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("pull"),
-            UnclampedModelPredicateProvider { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
-                if (entity == null) {
-                    return@UnclampedModelPredicateProvider 0.0f
-                }
-                if (CrossbowItem.isCharged(stack)) {
-                    return@UnclampedModelPredicateProvider 0.0f
-                }
-                (stack.maxUseTime - entity.itemUseTimeLeft).toFloat() / CrossbowItem.getPullTime(stack).toFloat()
-        })
+            RegisterItem.SNIPER_BOW, Identifier("pull")
+        ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity == null) {
+                return@register 0.0f
+            }
+            if (CrossbowItem.isCharged(stack)) {
+                return@register 0.0f
+            }
+            (stack.maxUseTime - entity.itemUseTimeLeft).toFloat() / CrossbowItem.getPullTime(stack).toFloat()
+        }
 
         ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_LORE, Identifier("type")
@@ -299,18 +290,6 @@ object RegisterRenderer {
                 0.0f
             }
         }
-
-        //////////////////////////////////////
-
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {
-                _ , registry ->
-            registry.register(IMBUING_TABLE_BOOK_SPRITE_ID)
-        }
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {
-                _ , registry ->
-            registry.register(DISENCHANTING_TABLE_BOOK_SPRITE_ID)
-        }
-
     }
 
 }

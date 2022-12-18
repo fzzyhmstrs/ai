@@ -12,10 +12,10 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.Registries
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
-import net.minecraft.util.registry.Registry
 import java.util.*
 
 object RecipeUtil {
@@ -82,7 +82,7 @@ object RecipeUtil {
         val augment = recipe.getAugment()
         if (augment != ""){
             val stack = ItemStack(Items.ENCHANTED_BOOK)
-            val enchant = Registry.ENCHANTMENT.get(Identifier(augment))?:return EmptyStackProvider()
+            val enchant = Registries.ENCHANTMENT.get(Identifier(augment))?:return EmptyStackProvider()
             EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
             return SingleStackProvider(stack)
         }
@@ -162,7 +162,7 @@ object RecipeUtil {
             val stack = slot.stack
 
             if (stack.isEmpty) continue
-            val id = Registry.ITEM.getRawId(stack.item)
+            val id = Registries.ITEM.getRawId(stack.item)
             map[i] = IdStack(id,stack.count)
             list.add(id)
         }

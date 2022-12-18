@@ -4,12 +4,9 @@ import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlI
 import me.fzzyhmstrs.amethyst_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.entity.LivingEntity
@@ -19,10 +16,10 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object ModifierConsumers {
 
@@ -150,7 +147,7 @@ object ModifierConsumers {
         val item = stack.item
         if (item is AugmentScepterItem){
             val activeEnchant = item.getActiveEnchant(stack)
-            val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
+            val augment = Registries.ENCHANTMENT.get(Identifier(activeEnchant))
             if (augment != null && augment is ScepterAugment){
                 val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
             }

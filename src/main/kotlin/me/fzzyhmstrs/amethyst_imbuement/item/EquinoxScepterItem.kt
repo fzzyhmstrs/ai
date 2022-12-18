@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.DustParticleEffect
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.Vec3f
 import net.minecraft.world.World
 
 class EquinoxScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
@@ -21,7 +20,7 @@ class EquinoxScepterItem(material: ScepterToolMaterial, settings: Settings): Cus
         val rnd2 = world.random.nextDouble() * 0.2 - 0.1
         val rnd3 = world.random.nextInt(DyeColor.values().size)
         val colorInt = DyeColor.values()[rnd3].signColor
-        val color = Vec3f(Vec3d.unpackRgb(colorInt))
+        val color = Vec3d.unpackRgb(colorInt).toVector3f()
         world.addParticle(DustParticleEffect(color,0.8f),particlePos.x + rnd1, particlePos.y + rnd2, particlePos.z + rnd2, 0.0, 0.0, 0.0)
         super.emitParticles(world,client, user)
     }

@@ -1,12 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.*
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
 
 class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl, EnchantmentTarget.WEAPON, *slot) {
 
@@ -25,7 +24,7 @@ class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.indexedEntries
+        val entries = Registries.ITEM.indexedEntries
         list.addAll(super.acceptableItemStacks().asIterable())
         for (entry in entries){
             val item = entry.value()

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -8,8 +7,8 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ShieldItem
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.registry.Registry
 
 class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
@@ -19,7 +18,7 @@ class SpikedAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): 
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.indexedEntries
+        val entries = Registries.ITEM.indexedEntries
         for (entry in entries){
             val item = entry.value()
             if (item is ShieldItem){

@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import net.minecraft.block.*
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -16,7 +15,6 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
-import net.minecraft.world.World
 
 @Suppress("PrivatePropertyName", "DEPRECATION", "DeprecatedCallableAddReplaceWith")
 class ForcefieldBlock(settings: Settings) : Block(settings) {

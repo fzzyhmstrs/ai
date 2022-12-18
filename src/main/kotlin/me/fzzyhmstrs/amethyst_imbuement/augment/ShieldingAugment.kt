@@ -9,8 +9,8 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import java.util.*
 
 class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
@@ -21,7 +21,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registry.ITEM.indexedEntries
+        val entries = Registries.ITEM.indexedEntries
         for (entry in entries){
             val item = entry.value()
             if (item is ImbuedJewelryItem){

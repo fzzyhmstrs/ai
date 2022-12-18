@@ -7,7 +7,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
 @Suppress("PrivatePropertyName")
@@ -40,6 +40,6 @@ class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
         }
         val j = crystalGolemEntity.limbAngle - crystalGolemEntity.limbDistance * (1.0f - h) + 6.0f
         val k = (abs(j % 13.0f - 6.5f) - 3.25f) / 3.25f
-        matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(6.5f * k))
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(6.5f * k))
     }
 }

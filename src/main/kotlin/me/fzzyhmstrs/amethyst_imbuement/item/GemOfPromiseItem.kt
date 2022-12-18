@@ -14,9 +14,9 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromiseItem> {
@@ -120,7 +120,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if (nbt.contains("statuses")){
                 compound = nbt.get("statuses") as NbtCompound
             }
-            val statusIdentifier = Registry.STATUS_EFFECT.getId(statusEffect)?:return
+            val statusIdentifier = Registries.STATUS_EFFECT.getId(statusEffect)?:return
             val id = statusIdentifier.toString()
             if (compound.contains(id)) return
             Nbt.writeIntNbt(id, 1, compound)

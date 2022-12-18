@@ -13,17 +13,17 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.tag.BlockTags
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
-import net.minecraft.tag.BlockTags
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Nameable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 import net.minecraft.util.math.random.Random
+import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
 class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings) {

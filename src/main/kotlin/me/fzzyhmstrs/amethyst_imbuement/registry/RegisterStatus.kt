@@ -3,8 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.effects.*
 import net.minecraft.entity.effect.StatusEffectCategory
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object RegisterStatus {
 
@@ -20,16 +21,16 @@ object RegisterStatus {
     val RESONATING = ResonatingStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0)
 
     fun registerAll(){
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"draconic_vision"), DRACONIC_VISION)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"spectral_vision"), SPECTRAL_VISION)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"leapt"), LEAPT)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"inspired"), INSPIRED)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"immunity"), IMMUNITY)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"striding"), STRIDING)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"charmed"), CHARMED)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"soulbinding"), SOULBINDING)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"resonating"), RESONATING)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"draconic_vision"), DRACONIC_VISION)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"spectral_vision"), SPECTRAL_VISION)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"leapt"), LEAPT)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"inspired"), INSPIRED)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"immunity"), IMMUNITY)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"striding"), STRIDING)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"charmed"), CHARMED)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"soulbinding"), SOULBINDING)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"resonating"), RESONATING)
     }
 
 }

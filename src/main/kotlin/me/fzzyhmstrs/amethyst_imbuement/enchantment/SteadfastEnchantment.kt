@@ -2,7 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.item.*
+import net.minecraft.item.ArmorItem
+import net.minecraft.item.ItemStack
 
 class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.ARMOR,*slot) {
 
