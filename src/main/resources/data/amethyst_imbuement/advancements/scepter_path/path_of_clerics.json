@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_grace",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:clerics_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_clerics"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_clerics.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:clerics_scepter"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

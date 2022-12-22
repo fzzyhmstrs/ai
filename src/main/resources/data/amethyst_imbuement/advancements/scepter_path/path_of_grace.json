@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:opaline_scepter",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:graceful_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_grace"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_grace.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:graceful_scepter",
+						"amethyst_imbuement:enduring_scepter"
+					]
+				}
+			]
+		}
+	}
+}
+}

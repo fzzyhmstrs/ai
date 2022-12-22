@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_grace",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:aegis"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_aegis"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_aegis.desc"
+	}
+	"frame": "challenge",
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:aegis"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}
