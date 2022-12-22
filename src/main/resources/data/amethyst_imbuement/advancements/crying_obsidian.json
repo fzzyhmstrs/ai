@@ -1,0 +1,28 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"display": {
+	"icon":{
+		"item": "minecraft:crying_obsidian"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.crying_obsidian"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.crying_obsidian.desc"
+	}
+},
+"criteria":{
+	"got_crying_obby":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:crying_obsidian"
+					]
+				}
+			]
+		}
+	}
+}
+}

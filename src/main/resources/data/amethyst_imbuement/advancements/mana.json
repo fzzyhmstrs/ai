@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:mana_potion"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.mana"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.mana.desc"
+	}
+},
+"criteria":{
+	"got_imbuing_table":{
+		"trigger": "minecraft:consume_item",
+		"conditions":{
+			"item":{
+				{
+					"items":[
+						"amethyst_imbuement:mana_potion"
+					]
+				}
+			}
+		}
+	}
+},
+"rewards": {
+	"experience": 5
+}
+}

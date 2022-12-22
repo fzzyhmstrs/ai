@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:crying_obsidian",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:imbuing_table"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.imbuer"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.imbuer.desc"
+	}
+},
+"criteria":{
+	"got_imbuing_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:imbuing_table"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}

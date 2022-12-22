@@ -1,0 +1,36 @@
+{
+"parent": "amethyst_imbuement:gem_of_promise",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:blazing_gem"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.aspect_gem"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.aspect_gem.desc"
+	}
+},
+"criteria":{
+	"got_aspect_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:brutal_gem",
+						"amethyst_imbuement:healers_gem",
+						"amethyst_imbuement:inquisitive_gem",
+						"amethyst_imbuement:lethal_gem",
+						"amethyst_imbuement:sparking_gem",
+						"amethyst_imbuement:blazing_gem"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

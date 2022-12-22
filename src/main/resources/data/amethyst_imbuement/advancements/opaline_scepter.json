@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:opaline_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.scepter_opaline"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.scepter_opaline.desc"
+	}
+},
+"criteria":{
+	"used_scepter":{
+		"trigger": "item_durability_changed",
+		"conditions":{
+			"delta": -1,
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:opaline_scepter"
+					]
+				}
+			]
+		}
+	}
+}
+}

@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:crying_obsidian",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:gem_of_promise"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.gem_of_promise"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.gem_of_promise.desc"
+	}
+},
+"criteria":{
+	"got_gop":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:gem_of_promise"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

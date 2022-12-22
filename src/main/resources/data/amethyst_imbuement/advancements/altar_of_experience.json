@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:gem_of_promise",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:altar_of_experience"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.altar"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.altar.desc"
+	}
+},
+"criteria":{
+	"got_altar":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:altar_of_experience"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}

@@ -1,0 +1,33 @@
+{
+"parent": "amethyst_imbuement:xp_bush",
+"display": {
+	"icon":{
+		"item": "minecraft:experience_bottle"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.xp_bush_stack"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.xp_bush_stack.desc"
+	},
+	"frame": "challenge"
+},
+"criteria":{
+	"got_imbuing_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:experience_bottle"
+					],
+					"count": 64
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 40
+}
+}

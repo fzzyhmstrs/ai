@@ -1,0 +1,27 @@
+{
+"parent": "amethyst_imbuement:aspect_gem",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:inquisitive_gem"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.master_researcher"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.master_researcher.desc"
+	},
+	"frame": "challenge",
+	"hidden": true
+},
+"criteria":{
+	"hard_inquisitive_route":{
+		"trigger": "amethyst_imbuement:master_researcher"
+	}
+},
+"rewards": {
+	"experience": 200,
+	"loot":[
+		"amethyst_imbuement:master_researcher"
+	]
+}
+}

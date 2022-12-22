@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:disenchanter",
+"display": {
+	"icon":{
+		"item": "minecraft:amethyst_block"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.disenchanter"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.disenchanter.desc"
+	}
+},
+"criteria":{
+	"complete_disenchanting_table":{
+		"trigger": "amethyst_imbuement:disenchanting_pillars"
+	}
+},
+"rewards": {
+	"experience": 30
+}
+}

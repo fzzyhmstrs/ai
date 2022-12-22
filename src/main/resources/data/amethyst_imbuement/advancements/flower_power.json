@@ -1,0 +1,40 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"display": {
+	"icon":{
+		"item": "minecraft:lilac"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.flower_power"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.flower_power.desc"
+	}
+},
+"criteria":{
+	"got_lilac":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:lilac"
+					]
+				}
+			]
+		}
+	},
+	"got_rose_bush":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:rose_bush"
+					]
+				}
+			]
+		}
+	}
+}
+}
