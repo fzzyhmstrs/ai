@@ -1,0 +1,28 @@
+{
+"parent": "amethyst_imbuement:opaline_scepter",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:iridescent_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_missed"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_missed.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:iridescent_scepter"
+					]
+				}
+			]
+		}
+	}
+}
+}

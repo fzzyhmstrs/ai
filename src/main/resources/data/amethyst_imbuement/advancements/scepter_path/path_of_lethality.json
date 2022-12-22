@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_fury",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:lethality"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_lethality"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_lethality.desc"
+	}
+	"frame": "challenge",
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:lethality"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}

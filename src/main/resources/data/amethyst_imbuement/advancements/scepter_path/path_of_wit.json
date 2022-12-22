@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:opaline_scepter",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:witty_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_wit"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_wit.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:witty_scepter",
+						"amethyst_imbuement:skillful_scepter"
+					]
+				}
+			]
+		}
+	}
+}
+}

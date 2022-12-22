@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_fury",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:equinox"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_equinox"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_equinox.desc"
+	}
+	"frame": "challenge",
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:equinox"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}
