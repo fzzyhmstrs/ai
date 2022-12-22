@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:heart_of_the_sea",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:golden_heart"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.heart_gold"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.heart_gold.desc"
+	}
+},
+"criteria":{
+	"got_golden_heart":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:golden_heart"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 5
+}
+}

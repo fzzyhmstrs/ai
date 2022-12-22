@@ -1,0 +1,31 @@
+{
+"display": {
+	"icon":{
+		"item": "minecraft:amethyst_shard"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.crystalline_beginnings"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.crystalline_beginnings.desc"
+	},
+	"background": "amethyst_imbuement:textures/gui/advancement_background.png"
+},
+"criteria":{
+	"got_amethyst":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:amethyst_shard"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 5
+}
+}

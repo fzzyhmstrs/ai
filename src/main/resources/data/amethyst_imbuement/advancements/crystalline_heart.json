@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:golden_heart",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:crystalline_heart"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.heart_crystal"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.heart_crystal.desc"
+	}
+},
+"criteria":{
+	"got_crystalline_heart":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:crystalline_heart"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 5
+}
+}

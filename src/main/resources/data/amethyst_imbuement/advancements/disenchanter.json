@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:crying_obsidian",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:disenchanting_table"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.disenchanter"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.disenchanter.desc"
+	}
+},
+"criteria":{
+	"got_disenchanting_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:disenchanting_table"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

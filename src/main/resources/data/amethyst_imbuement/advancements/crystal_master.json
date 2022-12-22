@@ -1,0 +1,33 @@
+{
+"parent": "amethyst_imbuement:crystal_adept",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:ametrine"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.crystal_master"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.crystal_master.desc"
+	}
+},
+"criteria":{
+	"got_crystal":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:ametrine",
+						"amethyst_imbuement:charged_moonstone",
+						"amethyst_imbuement:energetic_opal"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}
