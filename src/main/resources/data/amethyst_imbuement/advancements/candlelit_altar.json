@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:altar_of_experience",
+"display": {
+	"icon":{
+		"item": "minecraft:candle"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.candlelit"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.candlelit.desc"
+	}
+},
+"criteria":{
+	"complete_altar":{
+		"trigger": "amethyst_imbuement:candlelit_altar"
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}

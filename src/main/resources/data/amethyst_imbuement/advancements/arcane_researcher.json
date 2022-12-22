@@ -1,0 +1,19 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:book_of_lore"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.arcane"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.arcane.desc"
+	}
+},
+"criteria":{
+	"used_book":{
+		"trigger": "amethyst_imbuement:used_knowledge_book"
+	}
+}
+}

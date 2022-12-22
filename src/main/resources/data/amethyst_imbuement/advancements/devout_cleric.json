@@ -1,0 +1,27 @@
+{
+"parent": "amethyst_imbuement:aspect_gem",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:healers_gem"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.devout_cleric"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.devout_cleric.desc"
+	},
+	"frame": "challenge",
+	"hidden": true
+},
+"criteria":{
+	"hard_inquisitive_route":{
+		"trigger": "amethyst_imbuement:devout_cleric"
+	}
+},
+"rewards": {
+	"experience": 200,
+	"loot":[
+		"amethyst_imbuement:devout_cleric"
+	]
+}
+}

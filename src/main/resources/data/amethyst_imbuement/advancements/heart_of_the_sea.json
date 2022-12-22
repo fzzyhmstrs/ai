@@ -1,0 +1,28 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"display": {
+	"icon":{
+		"item": "minecraft:heart_of_the_sea"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.heart"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.heart.desc"
+	}
+},
+"criteria":{
+	"got_hots":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:heart_of_the_sea"
+					]
+				}
+			]
+		}
+	}
+}
+}

@@ -1,0 +1,24 @@
+{
+"parent": "amethyst_imbuement:totem",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:totem_of_amethyst",
+		"nbt": "{Enchantments:[{id:\"amethyst_imbuement:undying\",lvl:1}]}"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.undying"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.undying.desc"
+	},
+	"frame": "challenge"
+},
+"criteria":{
+	"totem_with_undying":{
+		"trigger": "amethyst_imbuement:undying"
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}

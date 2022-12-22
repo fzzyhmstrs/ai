@@ -1,0 +1,30 @@
+{
+"parent": "amethyst_imbuement:crystal_novice",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:imbued_ring"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.lapidary"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.lapidary.desc"
+	}
+},
+"criteria":{
+	"got_crystal":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:imbued_amulet",
+						"amethyst_imbuement:imbued_headband",
+						"amethyst_imbuement:imbued_ring"
+					]
+				}
+			]
+		}
+	}
+}
+}

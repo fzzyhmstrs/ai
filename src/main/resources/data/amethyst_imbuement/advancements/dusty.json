@@ -1,0 +1,28 @@
+{
+"parent": "amethyst_imbuement:gem_of_promise",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:gem_dust"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.dusty"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.dusty.desc"
+	}
+},
+"criteria":{
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:gem_dust"
+					]
+				}
+			]
+		}
+	}
+}
+}

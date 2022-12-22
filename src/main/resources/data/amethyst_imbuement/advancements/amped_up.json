@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "minecraft:bookshelf"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.amped_up"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.amped_up.desc"
+	}
+},
+"criteria":{
+	"complete_imbuing_table":{
+		"trigger": "amethyst_imbuement:amped_up"
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}

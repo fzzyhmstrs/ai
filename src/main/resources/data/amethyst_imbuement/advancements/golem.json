@@ -1,0 +1,27 @@
+{
+"parent": "amethyst_imbuement:crystalline_heart",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:crystalline_core"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.golem"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.golem.desc"
+	}
+},
+"criteria":{
+	"got_totem":{
+		"trigger": "minecraft:summoned_entity",
+      		"conditions": {
+        		"entity": {
+          			"type": "amethyst_imbuement:crystal_golem"
+        		}
+      		}
+	}
+},
+"rewards": {
+	"experience": 50
+}
+}
