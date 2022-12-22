@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_grace",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:scepter_of_the_pacifist"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_pacifist"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_pacifist.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:scepter_of_the_pacifist"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

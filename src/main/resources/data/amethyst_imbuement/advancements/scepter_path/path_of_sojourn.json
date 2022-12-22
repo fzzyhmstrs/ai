@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_wit",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:sojourn"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_sojourn"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_sojourn.desc"
+	}
+	"frame": "challenge",
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:sojourn"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}

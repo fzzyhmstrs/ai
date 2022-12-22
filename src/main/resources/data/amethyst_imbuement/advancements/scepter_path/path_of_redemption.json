@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:/scepter_path:path_of_grace",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:redemption"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_redemption"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_redemption.desc"
+	}
+	"frame": "challenge",
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:redemption"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 25
+}
+}
