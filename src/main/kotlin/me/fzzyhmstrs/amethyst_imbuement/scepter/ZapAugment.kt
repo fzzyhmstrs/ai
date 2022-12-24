@@ -30,7 +30,7 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
     LightningAugment, ElementalAugment {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(5.8,0.2).withDamage(3.4f,0.1f)
+        get() = super.baseEffect.withRange(6.8,0.2).withDamage(3.4f,0.1f)
 
     override fun effect(
         world: World,
@@ -53,8 +53,8 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
                 rotation,
                 perpendicularVector,
                 effect.range(level),
-                0.5,
-                0.5)
+                0.8,
+                0.8)
         entityList.forEach {
             it.damage(CustomDamageSources.LightningDamageSource(user), effect.damage(level))
         }

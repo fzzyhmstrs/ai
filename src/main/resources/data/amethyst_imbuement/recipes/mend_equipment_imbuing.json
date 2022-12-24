@@ -13,19 +13,19 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
-	"item": "minecraft:iron_ingot"
+	"item": "minecraft:iron_block"
   },
   "craftD": {
-	"item": "minecraft:iron_ingot"
+	"item": "minecraft:iron_block"
   },
   "craftF": {
-	"item": "minecraft:iron_ingot"
+	"item": "minecraft:iron_block"
   },
   "craftH": {
-	"item": "minecraft:iron_ingot"
+	"item": "minecraft:iron_block"
   },
   "title": "Mend Equipment",
-  "cost": 5,
+  "cost": 9,
   "augment": "amethyst_imbuement:mend_equipment"
 }
 

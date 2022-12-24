@@ -175,7 +175,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
-    val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+    val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
         .withModifiers(listOf(RegisterModifier.HEALERS_GRACE, RegisterModifier.HEALERS_PACT))
         .also{ regItem["scepter_of_the_pacifist"] = it}
