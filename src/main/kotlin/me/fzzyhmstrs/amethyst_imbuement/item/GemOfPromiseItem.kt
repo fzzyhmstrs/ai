@@ -84,9 +84,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if (newHeal >= HEAL_TARGET){
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.HEALERS_GEM)
-                if (inventory.insertStack(newStack)) {
-                    inventory.player.dropItem(newStack, false)
-                }
+                inventory.offerOrDrop(newStack)
             } else {
                 nbt.putFloat("healed",newHeal)
             }
@@ -104,9 +102,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 if (newHit >= HIT_TARGET){
                     stack.decrement(1)
                     val newStack = ItemStack(RegisterItem.BRUTAL_GEM)
-                    if (inventory.insertStack(newStack)) {
-                        inventory.player.dropItem(newStack, false)
-                    }
+                    inventory.offerOrDrop(newStack)
                 } else {
                     Nbt.writeIntNbt("mob_hit",newHit,nbt)
                 }
@@ -128,9 +124,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if (keys.size >= STATUS_TARGET){
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.INQUISITIVE_GEM)
-                if (inventory.insertStack(newStack)) {
-                    inventory.player.dropItem(newStack, false)
-                }
+                inventory.offerOrDrop(newStack)
                 return
             }
             nbt.put("statuses",compound)
@@ -140,9 +134,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if (damageSource == DamageSource.LIGHTNING_BOLT){
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.SPARKING_GEM)
-                if (inventory.insertStack(newStack)) {
-                    inventory.player.dropItem(newStack, false)
-                }
+                inventory.offerOrDrop(newStack)
             }
         }
 
@@ -163,9 +155,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 if (newFire >= FIRE_TARGET){
                     stack.decrement(1)
                     val newStack = ItemStack(RegisterItem.BLAZING_GEM)
-                    if (inventory.insertStack(newStack)) {
-                        inventory.player.dropItem(newStack, false)
-                    }
+                    inventory.offerOrDrop(newStack)
                 } else {
                     Nbt.writeIntNbt("on_fire",newFire,nbt)
                 }
@@ -183,9 +173,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             if (newCount >= KILL_TARGET){
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.LETHAL_GEM)
-                if (inventory.insertStack(newStack)) {
-                    inventory.player.dropItem(newStack, false)
-                }
+                inventory.offerOrDrop(newStack)
             } else {
                 Nbt.writeIntNbt("kill_count", newCount,nbt)
             }
