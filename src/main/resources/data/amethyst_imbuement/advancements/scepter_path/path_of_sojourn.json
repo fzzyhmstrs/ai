@@ -9,8 +9,8 @@
 	},
 	"description": {
 		"translate": "amethyst_imbuement.advancement.path_sojourn.desc"
-	}
-	"frame": "challenge",
+	},
+	"frame": "challenge"
 },
 "criteria":{
 	"got_iridescent":{
