@@ -12,7 +12,7 @@
 	}
 },
 "criteria":{
-	"got_iridescent":{
+	"got_blazing":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
 			"items":[
