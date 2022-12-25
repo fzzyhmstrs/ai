@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry
 open class ActiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractActiveAugment(weight,mxLvl, *slot) {
 
     override fun canAccept(other: Enchantment): Boolean {
-        return (other !is ActiveAugment) || ((Registries.ENCHANTMENT.getId(other) == Registries.ENCHANTMENT.getId(this) && this.maxLevel > 1))
+        return (other !is ActiveAugment) || ((Registry.ENCHANTMENT.getId(other) == Registry.ENCHANTMENT.getId(this) && this.maxLevel > 1))
     }
 
     override fun checkEnabled(): Boolean{
