@@ -60,21 +60,21 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
                     if (bsY.isAir || bsY.block is PlantBlock ){
                         if (!bsY.isAir) world.breakBlock(posY.add(j,0,k),true)
                         world.setBlockState(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(false))
-                        world.scheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     } else if (bsY.isOf(Blocks.WATER)){
                         world.setBlockState(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(true))
-                        world.scheduleBlockTick(posX.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posY.add(j,0,k),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     }
-                    if (bsZ.isAir || bsZ.block is PlantBlock || bsX.isOf(Blocks.WATER)){
+                    if (bsZ.isAir || bsZ.block is PlantBlock){
                         if (!bsZ.isAir) world.breakBlock(posZ.add(j,k,0),true)
                         world.setBlockState(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(false))
-                        world.scheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     } else if (bsZ.isOf(Blocks.WATER)){
                         world.setBlockState(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK.getWaterState(true))
-                        world.scheduleBlockTick(posX.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
+                        world.scheduleBlockTick(posZ.add(j,k,0),RegisterBlock.FORCEFIELD_BLOCK, getAge(world, baseAge))
                         successes++
                     }
                 }
