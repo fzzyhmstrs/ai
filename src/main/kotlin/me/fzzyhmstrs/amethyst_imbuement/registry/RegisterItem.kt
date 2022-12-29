@@ -213,13 +213,6 @@ object RegisterItem {
 
 
     fun registerAll() {
-        Criteria.register(GIVE_IF_CONFIG)
-
-        ServerPlayConnectionEvents.JOIN.register {handler, _, _ ->
-            if (AiConfig.items.giveGlisteringTome){
-                GIVE_IF_CONFIG.trigger(handler.player)
-            }
-        }
 
         for (k in regItem.keys){
             Registry.register(Registry.ITEM,Identifier(AI.MOD_ID,k), regItem[k])
