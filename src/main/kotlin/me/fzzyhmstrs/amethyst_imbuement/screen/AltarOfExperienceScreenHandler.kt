@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
@@ -47,6 +48,7 @@ class AltarOfExperienceScreenHandler(
     private var xp = Property.create()
     var displayXpMax = 0
     var displayXpStored = 0
+    private val maxPossibleXp = updateMaxXp(0,16)
     //private var matchBut: Optional<ImbuingRecipe>? = Optional.empty()
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -120,7 +122,8 @@ class AltarOfExperienceScreenHandler(
             val (candleTotal, wardingCandleTotal) = checkCandles(world,pos)
             setSyncedMaxXp(updateMaxXp(candleTotal,wardingCandleTotal))
         }
-        val xpLeft = getSyncedMaxXp() - getSyncedStoredXp()
+        val syncedMaxXp = getSyncedMaxXp()
+        val xpLeft = syncedMaxXp - getSyncedStoredXp()
         val currentXp = getPlayerLvlXp(player)
         if (id == 0){
             if (currentXp <= 50 || xpLeft <= 50){
@@ -162,6 +165,9 @@ class AltarOfExperienceScreenHandler(
                     if (currentXp >= 500) {
                         xpTemp += if (xpLeft < 500){
                             addExperience(player,-xpLeft)
+                            if (syncedMaxXp == maxPossibleXp && player is ServerPlayerEntity){
+                                RegisterCriteria.CANDLELIT_MAX.trigger(player)
+                            }
                             xpLeft
                         } else {
                             addExperience(player,-500)
@@ -224,6 +230,9 @@ class AltarOfExperienceScreenHandler(
                     var xpTemp = getSyncedStoredXp()
                     xpTemp += if (xpLeft < currentXp){
                         addExperience(player,-xpLeft)
+                        if (syncedMaxXp == maxPossibleXp && player is ServerPlayerEntity){
+                            RegisterCriteria.CANDLELIT_MAX.trigger(player)
+                        }
                         xpLeft
                     } else {
                         addExperience(player,-currentXp)
@@ -346,15 +355,18 @@ class AltarOfExperienceScreenHandler(
         addProperties(storedXp)
         addProperties(maxXp)
         addProperty(xp)
-        val totalXp = getPlayerLvlXp(playerInventory.player)
+        val player = playerInventory.player
+        val totalXp = getPlayerLvlXp(player)
         xp.set(totalXp)
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         if (context != ScreenHandlerContext.EMPTY) {
             context.run { world: World, pos: BlockPos ->
                 val (c,wc) = checkCandles(world, pos)
+                if (wc == 16 && player is ServerPlayerEntity){
+                    RegisterCriteria.CANDLELIT_ALTAR.trigger(player)
+                }
                 val e = updateMaxXp(c, wc)
                 setSyncedMaxXp(e)
-                //sendXpUpdates()
                 sendContentUpdates()
             }
         }
