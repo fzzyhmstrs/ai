@@ -12,17 +12,10 @@
 	}
 },
 "criteria":{
-	"used_scepter":{
-		"trigger": "item_durability_changed",
+	"cast_magic_missile":{
+		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
-			"delta": -1,
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:opaline_scepter"
-					]
-				}
-			]
+			"spell": "amethyst_imbuement:magic_missile"
 		}
 	}
 }

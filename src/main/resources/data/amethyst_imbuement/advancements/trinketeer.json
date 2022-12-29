@@ -1,0 +1,23 @@
+{
+"parent": "amethyst_imbuement:lapidary",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:imbued_headband",
+		"nbt": "{Enchantments:[{id:\"amethyst_imbuement:shielding\",lvl:1}]}"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.trinketeer"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.trinketeer.desc"
+	}
+},
+"criteria":{
+	"augmented":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "jewelry"
+		}
+	}
+}
+}

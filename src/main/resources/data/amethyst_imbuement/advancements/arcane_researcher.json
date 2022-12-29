@@ -13,7 +13,7 @@
 },
 "criteria":{
 	"used_book":{
-		"trigger": "amethyst_imbuement:used_knowledge_book"
+		"trigger": "amethyst_core:used_knowledge_book"
 	}
 }
 }

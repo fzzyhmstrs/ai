@@ -1,5 +1,5 @@
 {
-"parent": "amethyst_imbuement:/scepter_path:path_of_grace",
+"parent": "amethyst_imbuement:scepter_path/protect_or_vanquish",
 "display": {
 	"icon":{
 		"item": "amethyst_imbuement:aegis"
