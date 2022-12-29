@@ -210,9 +210,6 @@ object RegisterItem {
 
     //////////////////////////////
 
-    val GIVE_IF_CONFIG = TickCriterion(Identifier(AI.MOD_ID,"give_if_config"))
-    
-
     val AI_GROUP: ItemGroup by lazy{
         registerItemGroup()
     }
@@ -224,19 +221,15 @@ object RegisterItem {
             .entries { _, entries, _ ->
                 entries.addAll(regItem.values.stream().map { item -> ItemStack(item) }.toList())
                 entries.addAll(RegisterArmor.regArmor.stream().map { item -> ItemStack(item) }.toList())
-                entries.addAll(RegisterBlock.regBlock.values.stream().map { block -> ItemStack(block.asItem()) }.toList())
+                entries.addAll(RegisterBlock.regBlock.values.stream()
+                    .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
+                    .map { block -> ItemStack(block.asItem()) }
+                    .toList())
 
             }.build()
     }
 
     fun registerAll() {
-        Criteria.register(GIVE_IF_CONFIG)
-
-        ServerPlayConnectionEvents.JOIN.register {handler, _, _ ->
-            if (AiConfig.items.giveGlisteringTome){
-                GIVE_IF_CONFIG.trigger(handler.player)
-            }
-        }
 
         for (k in regItem.keys){
             Registry.register(Registries.ITEM,Identifier(AI.MOD_ID,k), regItem[k])
