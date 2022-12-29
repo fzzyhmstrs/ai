@@ -136,15 +136,15 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     class Villages{
         var enableDesertWorkshops: Boolean = true
-        var desertWorkshopWeight: Int = 1
+        var desertWorkshopWeight: Int = 2
         var enablePlainsWorkshops: Boolean = true
-        var plainsWorkshopWeight: Int = 2
+        var plainsWorkshopWeight: Int = 3
         var enableSavannaWorkshops: Boolean = true
-        var savannaWorkshopWeight: Int = 2
+        var savannaWorkshopWeight: Int = 3
         var enableSnowyWorkshops: Boolean = true
-        var snowyWorkshopWeight: Int = 1
+        var snowyWorkshopWeight: Int = 2
         var enableTaigaWorkshops: Boolean = true
-        var taigaWorkshopWeight: Int = 2
+        var taigaWorkshopWeight: Int = 3
         var enableCtovWorkshops: Boolean = true
         var ctovBeachWorkshopWeight: Int = 4
         var ctovDarkForestWorkshopWeight: Int = 4
