@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
@@ -246,6 +247,9 @@ class ImbuingTableScreenHandler(
                         }
                     } else if (AiConfig.altars.imbuingTableEnchantingEnabled && checkLapisAndSlots(inventory)) {
                         val i = checkBookshelves(world, pos)
+                        if (i == 30 && player is ServerPlayerEntity){
+                            RegisterCriteria.AMPED_UP.trigger(player)
+                        }
                         random.setSeed(seed.get().toLong())
                         val enchantmentPower = IntArray(3)
                         val enchantmentId = intArrayOf(-1, -1, -1)
@@ -971,6 +975,7 @@ class ImbuingTableScreenHandler(
                 }
                 player.incrementStat(Stats.ENCHANT_ITEM)
                 if (player is ServerPlayerEntity) {
+                    RegisterCriteria.AUGMENT_ITEM.trigger(player, augmentChk)
                     Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
                 }
             } else{
