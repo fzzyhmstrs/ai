@@ -1,5 +1,5 @@
 {
-"parent": "amethyst_imbuement:/scepter_path:path_of_wit",
+"parent": "amethyst_imbuement:scepter_path/command_or_insight",
 "display": {
 	"icon":{
 		"item": "amethyst_imbuement:resonance"

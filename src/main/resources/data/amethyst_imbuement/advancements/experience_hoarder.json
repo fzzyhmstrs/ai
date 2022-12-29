@@ -1,0 +1,23 @@
+{
+"parent": "amethyst_imbuement:candlelit_altar",
+"display": {
+	"icon":{
+		"item": "minecraft:inquisitive_gem"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.hoarder"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.hoarder.desc"
+	},
+	"frame": "challenge"
+},
+"criteria":{
+	"complete_altar":{
+		"trigger": "amethyst_imbuement:candlelit_max"
+	}
+},
+"rewards": {
+	"experience": 30
+}
+}

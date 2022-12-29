@@ -2,18 +2,21 @@
 "parent": "amethyst_imbuement:imbuing_table",
 "display": {
 	"icon":{
-		"item": "amethyst_imbuement:citrine"
+		"item": "amethyst_imbuement:steel_chestplate"
 	},
 	"title": {
-		"translate": "amethyst_imbuement.advancement.crystal_novice"
+		"translate": "amethyst_imbuement.advancement.augmenter"
 	},
 	"description": {
-		"translate": "amethyst_imbuement.advancement.crystal_novice.desc"
+		"translate": "amethyst_imbuement.advancement.augmenter.desc"
 	}
 },
 "criteria":{
 	"augmented":{
-		"trigger": "amethyst_imbuement:augment_item"
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "equipment"
+		}
 	}
 }
 }

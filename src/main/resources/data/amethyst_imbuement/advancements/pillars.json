@@ -9,7 +9,8 @@
 	},
 	"description": {
 		"translate": "amethyst_imbuement.advancement.disenchanter.desc"
-	}
+	},
+	"frame": "goal"
 },
 "criteria":{
 	"complete_disenchanting_table":{

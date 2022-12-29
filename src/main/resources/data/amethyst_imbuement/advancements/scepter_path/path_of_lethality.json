@@ -1,5 +1,5 @@
 {
-"parent": "amethyst_imbuement:/scepter_path:path_of_fury",
+"parent": "amethyst_imbuement:scepter_path/slice_or_disease",
 "display": {
 	"icon":{
 		"item": "amethyst_imbuement:lethality"
