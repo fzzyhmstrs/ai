@@ -17,6 +17,6 @@ object RegisterNetworking {
         ImbuingTableScreenHandler.registerClient()
         ResonateAugment.registerClient()
         SmitingBlowAugment.registerClient()
-        ImbuingRecipeBookScreen.registerClientReceiver()
+        //ImbuingRecipeBookScreen.registerClientReceiver()
     }
 }

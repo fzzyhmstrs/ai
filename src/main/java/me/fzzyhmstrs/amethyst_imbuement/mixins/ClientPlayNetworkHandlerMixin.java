@@ -17,10 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
 
-    @Inject(method = "onSynchronizeRecipes", at = @At("TAIL"))
+    /*@Inject(method = "onSynchronizeRecipes", at = @At("TAIL"))
     private void amethyst_imbuement_syncImbuingRecipesForBook(SynchronizeRecipesS2CPacket packet, CallbackInfo ci){
         ImbuingRecipeBookScreen.RecipeContainer.registerClient();
-    }
+    }*/
 
     @Inject(method = "getActiveTotemOfUndying", at = @At(value = "TAIL"), cancellable = true)
     private static void amethyst_imbuement_checkForTotemOfAmethyst(PlayerEntity player, CallbackInfoReturnable<ItemStack> cir){

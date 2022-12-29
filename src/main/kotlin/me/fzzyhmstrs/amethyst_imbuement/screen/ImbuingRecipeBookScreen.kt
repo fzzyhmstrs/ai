@@ -38,7 +38,7 @@ import kotlin.math.ceil
 
 class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingRecipeBaseScreen(AcText.translatable("")) {
 
-    private var i: Int = 2
+   /* private var i: Int = 2
     private var j: Int = 2
     internal var currentRecipes: List<ImbuingRecipe> = listOf()
     internal var currentStack: ItemStack = ItemStack.EMPTY
@@ -936,5 +936,5 @@ class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingR
                 return "[pages: $pages | current page: $currentItemPage | recipes: $recipeList]"
             }
         }
-    }
+    }*/
 }

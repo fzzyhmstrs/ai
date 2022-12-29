@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "amethyst_imbuement:book_of_lore",
-	"amethyst_imbuement:book_of_mythos",
-	"amethyst_imbuement:glistering_tome"
+	"amethyst_imbuement:book_of_mythos"
   ]
 }

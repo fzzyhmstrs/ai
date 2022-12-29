@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat
 
 import dev.emi.emi.api.EmiApi
+import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingRecipeBookScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
@@ -32,7 +33,8 @@ object ModCompatHelper {
         if (offset == 0){
             val oldScreen = MinecraftClient.getInstance().currentScreen
             if (oldScreen is ImbuingTableScreen){
-                MinecraftClient.getInstance().setScreen(ImbuingRecipeBookScreen(oldScreen))
+                MinecraftClient.getInstance().player?.sendMessage(AcText.literal("Recipe Book currently down for maintenance"))
+                //MinecraftClient.getInstance().setScreen(ImbuingRecipeBookScreen(oldScreen))
             }
         }
         if (offset == 1){
