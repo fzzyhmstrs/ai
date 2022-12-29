@@ -1,5 +1,5 @@
 {
-"parent": "amethyst_imbuement:/scepter_path:path_of_missed_opportunity",
+"parent": "amethyst_imbuement:scepter_path/path_of_missed_opportunity",
 "display": {
 	"icon":{
 		"item": "amethyst_imbuement:lustrous_scepter"

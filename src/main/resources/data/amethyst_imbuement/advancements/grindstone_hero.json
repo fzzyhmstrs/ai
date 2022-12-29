@@ -1,0 +1,23 @@
+{
+"parent": "amethyst_imbuement:pillars",
+"display": {
+	"icon":{
+		"item": "minecraft:grindstone"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.grindstone_hero"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.grindstone_hero.desc"
+	},
+	"frame": "challenge"
+},
+"criteria":{
+	"complete_disenchanting_table":{
+		"trigger": "amethyst_imbuement:disenchanting_max"
+	}
+},
+"rewards": {
+	"experience": 30
+}
+}

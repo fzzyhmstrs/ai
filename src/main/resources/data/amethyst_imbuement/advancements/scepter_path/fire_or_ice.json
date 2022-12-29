@@ -1,0 +1,33 @@
+{
+"parent": "amethyst_imbuement:scepter_path/path_of_fury",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:blazing_scepter"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.fire_ice"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.fire_ice.desc"
+	}
+},
+"criteria":{
+	"got_blazing":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:blazing_scepter",
+						"amethyst_imbuement:sparking_scepter",
+						"amethyst_imbuement:frosted_scepter"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

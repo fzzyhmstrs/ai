@@ -1,0 +1,32 @@
+{
+"parent": "amethyst_imbuement:scepter_path/path_of_grace",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:scepter_of_the_paladin"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.protect_vanquish"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.protect_vanquish.desc"
+	}
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:scepter_of_the_paladin",
+						"amethyst_imbuement:scepter_of_the_vanguard"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

@@ -15,10 +15,13 @@
 },
 "criteria":{
 	"totem_with_undying":{
-		"trigger": "amethyst_imbuement:undying"
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:undying"
+		}
 	}
 },
 "rewards": {
-	"experience": 25
+	"experience": 50
 }
 }
