@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.enchantment.Enchantment
@@ -23,6 +24,7 @@ import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -57,6 +59,7 @@ class DisenchantingTableScreenHandler(
     var enchantmentLevel = intArrayOf(-1, -1, -1)
     var disenchantCost = IntArray(1)
     private var removing = false
+    private val player = playerInventory.player
 
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -355,6 +358,9 @@ class DisenchantingTableScreenHandler(
 
     private fun updateDisenchantCost(level: Int, world: World, pos: BlockPos){
         val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
+        if (maxLevel == 30 && player is ServerPlayerEntity){
+            RegisterCriteria.DISENCHANTING_PILLARS.trigger(player)
+        }
         if (level >= maxLevel) {
             disenchantCost[0] = -1
         } else {
@@ -363,6 +369,9 @@ class DisenchantingTableScreenHandler(
     }
     private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
         val index = MathHelper.clamp(disenchantCount,0,AiConfig.altars.disenchantLevelCosts.size - 1)
+        if (index == AiConfig.altars.disenchantLevelCosts.size - 1 && player is ServerPlayerEntity){
+            RegisterCriteria.DISENCHANTING_MAX.trigger(player)
+        }
         return AiConfig.altars.disenchantLevelCosts[index]
     }
     private fun checkForEnchantMatch(stack: ItemStack): Boolean{
