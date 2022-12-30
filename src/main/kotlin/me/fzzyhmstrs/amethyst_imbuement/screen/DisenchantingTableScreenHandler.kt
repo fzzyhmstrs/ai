@@ -265,6 +265,9 @@ class DisenchantingTableScreenHandler(
                             1.0f,
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
+                        if (player is ServerPlayerEntity) {
+                            RegisterCriteria.DISENCHANT_USE.trigger(player)
+                        }
                         onContentChanged(inventory)
                         sendContentUpdates()
                     }
@@ -358,10 +361,8 @@ class DisenchantingTableScreenHandler(
     }
 
     private fun updateDisenchantCost(level: Int, world: World, pos: BlockPos){
-        val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
-        if (maxLevel == 30 && player is ServerPlayerEntity){
-            RegisterCriteria.DISENCHANTING_PILLARS.trigger(player)
-        }
+        val pillarPairs = checkPillars(world, pos) / 2
+        val maxLevel = pillarPairs + AiConfig.altars.disenchantBaseDisenchantsAllowed
         if (level >= maxLevel) {
             disenchantCost[0] = -1
         } else {
@@ -516,6 +517,14 @@ class DisenchantingTableScreenHandler(
         addProperty(Property.create(this.enchantmentLevel, 1))
         addProperty(Property.create(this.enchantmentLevel, 2))
         addProperty(Property.create(this.disenchantCost, 0))
+        if (context != ScreenHandlerContext.EMPTY) {
+            context.run { world: World, pos: BlockPos ->
+                val pillarPairs = checkPillars(world, pos) / 2
+                if (pillarPairs == 4 && player is ServerPlayerEntity){
+                    RegisterCriteria.DISENCHANTING_PILLARS.trigger(player)
+                }
+            }
+        }
     }
 
 
