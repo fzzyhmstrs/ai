@@ -5,10 +5,10 @@
 		"item": "minecraft:amethyst_block"
 	},
 	"title": {
-		"translate": "amethyst_imbuement.advancement.disenchanter"
+		"translate": "amethyst_imbuement.advancement.pillars"
 	},
 	"description": {
-		"translate": "amethyst_imbuement.advancement.disenchanter.desc"
+		"translate": "amethyst_imbuement.advancement.pillars.desc"
 	},
 	"frame": "goal"
 },
