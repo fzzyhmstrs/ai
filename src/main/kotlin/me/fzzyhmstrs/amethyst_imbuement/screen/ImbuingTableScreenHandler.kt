@@ -186,6 +186,11 @@ class ImbuingTableScreenHandler(
                             inventory,
                             world)
                     }
+                    val shelves = checkBookshelves(world, pos)
+                    println(shelves)
+                    if (shelves == 30 && player is ServerPlayerEntity){
+                        RegisterCriteria.AMPED_UP.trigger(player)
+                    }
                     if (matches.isNotEmpty()){
                         matches.forEach {  imbuingRecipe ->
                             val power = MathHelper.ceil(imbuingRecipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
@@ -248,10 +253,6 @@ class ImbuingTableScreenHandler(
                             tempResults.add(EmptyResult())
                         }
                     } else if (AiConfig.altars.imbuingTableEnchantingEnabled && checkLapisAndSlots(inventory)) {
-                        val i = checkBookshelves(world, pos)
-                        if (i == 30 && player is ServerPlayerEntity){
-                            RegisterCriteria.AMPED_UP.trigger(player)
-                        }
                         random.setSeed(seed.get().toLong())
                         val enchantmentPower = IntArray(3)
                         val enchantmentId = intArrayOf(-1, -1, -1)
@@ -259,7 +260,7 @@ class ImbuingTableScreenHandler(
                         var j = 0
                         while (j < 3) {
                             enchantmentPower[j] =
-                                this.calculateRequiredExperienceLevel(random, j, i, itemStack)
+                                this.calculateRequiredExperienceLevel(random, j, shelves, itemStack)
                             enchantmentId[j] = -1
                             enchantmentLevel[j] = -1
                             if (enchantmentPower[j] >= j + 1) {
@@ -357,7 +358,8 @@ class ImbuingTableScreenHandler(
         context.run { world: World, pos: BlockPos? ->
             buttonWorked = result.applyResult(player,itemStack,world,pos,this)
             if (buttonWorked) {
-                if (!world.isClient) {
+                if (player is ServerPlayerEntity) {
+                    RegisterCriteria.IMBUING_USE.trigger(player)
                     onContentChanged(inventory)
                     world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.9f, world.random.nextFloat() * 0.1f + 0.9f)
                     world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,SoundCategory.BLOCKS,2.0f,0.5f + world.random.nextFloat() * 1.2f)
