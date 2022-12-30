@@ -286,6 +286,9 @@ class AltarOfExperienceScreenHandler(
                 world.random.nextFloat() * 0.1f + 0.9f
             )
             xp.set(getPlayerLvlXp(player))
+            if (player is ServerPlayerEntity){
+                RegisterCriteria.ALTAR_USE.trigger(player)
+            }
             //sendXpUpdates()
             sendContentUpdates()
         }
