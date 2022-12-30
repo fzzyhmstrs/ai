@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
@@ -14,6 +15,7 @@ import net.minecraft.screen.ForgingScreenHandler
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -83,6 +85,9 @@ class CrystalAltarScreenHandler(
         decrementStack(0)
         decrementStack(1)
         this.context.run { world: World, pos: BlockPos ->
+            if (player is ServerPlayerEntity) {
+                RegisterCriteria.ENHANCE.trigger(player)
+            }
             world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.6f, world.random.nextFloat() * 0.1f + 0.9f)
         }
     }
