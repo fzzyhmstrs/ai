@@ -13,16 +13,7 @@
 },
 "criteria":{
 	"got_disenchanting_table":{
-		"trigger": "minecraft:inventory_changed",
-		"conditions":{
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:disenchanting_table"
-					]
-				}
-			]
-		}
+		"trigger": "amethyst_imbuement:disenchant_use"
 	}
 },
 "rewards": {

@@ -13,21 +13,7 @@
 },
 "criteria":{
 	"got_aspect_gem":{
-		"trigger": "minecraft:inventory_changed",
-		"conditions":{
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:brutal_gem",
-						"amethyst_imbuement:healers_gem",
-						"amethyst_imbuement:inquisitive_gem",
-						"amethyst_imbuement:lethal_gem",
-						"amethyst_imbuement:sparking_gem",
-						"amethyst_imbuement:blazing_gem"
-					]
-				}
-			]
-		}
+		"trigger": "amethyst_imbuement:ignite"
 	}
 },
 "rewards": {
