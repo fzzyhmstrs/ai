@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
 import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
@@ -15,6 +16,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
@@ -73,9 +75,24 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         private const val HIT_TARGET = 80
         private const val HEAL_TARGET = 250.0F
         private const val STATUS_TARGET = 8
+        private val GOAL_STATUSES: List<String> = listOf(
+            "minecraft:darkness",
+            "minecraft:hero_of_the_village",
+            "minecraft:bad_omen",
+            "minecraft:dolphins_grace",
+            "minecraft:conduit_power",
+            "minecraft:levitation",
+            "amethyst_imbuement:draconic_vision",
+            "amethyst_imbuement:leapt"
+        )
 
-        fun healersGemCheck(stack: ItemStack,inventory: PlayerInventory, healAmount: Float){
+
+        fun healersGemCheck(stack: ItemStack, inventory: PlayerInventory, healAmount: Float){
             val nbt = stack.orCreateNbt
+            val player = inventory.player
+            if (!player.hungerManager.isNotFull){
+                nbt.putBoolean("healed_with_food",true)
+            }
             var healed = 0.0F
             if (nbt.contains("healed")){
                 healed = nbt.getFloat("healed")
@@ -85,6 +102,12 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.HEALERS_GEM)
                 inventory.offerOrDrop(newStack)
+                if (player is ServerPlayerEntity) {
+                    RegisterCriteria.IGNITE.trigger(player)
+                    if (!nbt.contains("healed_with_food")) {
+                        RegisterCriteria.DEVOUT_CLERIC.trigger(player)
+                    }
+                }
             } else {
                 nbt.putFloat("healed",newHeal)
             }
@@ -103,6 +126,10 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                     stack.decrement(1)
                     val newStack = ItemStack(RegisterItem.BRUTAL_GEM)
                     inventory.offerOrDrop(newStack)
+                    val player = inventory.player
+                    if (player is ServerPlayerEntity) {
+                        RegisterCriteria.IGNITE.trigger(player)
+                    }
                 } else {
                     Nbt.writeIntNbt("mob_hit",newHit,nbt)
                 }
@@ -125,6 +152,13 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.INQUISITIVE_GEM)
                 inventory.offerOrDrop(newStack)
+                val player = inventory.player
+                if (player is ServerPlayerEntity){
+                    RegisterCriteria.IGNITE.trigger(player)
+                    if (keys.containsAll(GOAL_STATUSES)){
+                        RegisterCriteria.MASTER_RESEARCHER.trigger(player)
+                    }
+                }
                 return
             }
             nbt.put("statuses",compound)
@@ -135,6 +169,10 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.SPARKING_GEM)
                 inventory.offerOrDrop(newStack)
+                val player = inventory.player
+                if (player is ServerPlayerEntity) {
+                    RegisterCriteria.IGNITE.trigger(player)
+                }
             }
         }
 
@@ -156,6 +194,9 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                     stack.decrement(1)
                     val newStack = ItemStack(RegisterItem.BLAZING_GEM)
                     inventory.offerOrDrop(newStack)
+                    if (player is ServerPlayerEntity) {
+                        RegisterCriteria.IGNITE.trigger(player)
+                    }
                 } else {
                     Nbt.writeIntNbt("on_fire",newFire,nbt)
                 }
@@ -174,6 +215,10 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.LETHAL_GEM)
                 inventory.offerOrDrop(newStack)
+                val player = inventory.player
+                if (player is ServerPlayerEntity) {
+                    RegisterCriteria.IGNITE.trigger(player)
+                }
             } else {
                 Nbt.writeIntNbt("kill_count", newCount,nbt)
             }

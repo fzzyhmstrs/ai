@@ -13,16 +13,7 @@
 },
 "criteria":{
 	"got_altar":{
-		"trigger": "minecraft:inventory_changed",
-		"conditions":{
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:altar_of_experience"
-					]
-				}
-			]
-		}
+		"trigger": "amethyst_imbuement:altar_use"
 	}
 },
 "rewards": {

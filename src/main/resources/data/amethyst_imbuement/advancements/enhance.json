@@ -1,0 +1,19 @@
+{
+"parent": "amethyst_imbuement:flower_power",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:crystal_altar"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.enhance"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.enhance.desc"
+	}
+},
+"criteria":{
+	"enhance":{
+		"trigger": "amethyst_imbuement:enhance"
+	}
+}
+}

@@ -13,16 +13,7 @@
 },
 "criteria":{
 	"got_imbuing_table":{
-		"trigger": "minecraft:inventory_changed",
-		"conditions":{
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:imbuing_table"
-					]
-				}
-			]
-		}
+		"trigger": "amethyst_imbuement:imbuing_use"
 	}
 },
 "rewards": {
