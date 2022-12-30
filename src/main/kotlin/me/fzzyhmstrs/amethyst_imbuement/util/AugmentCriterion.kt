@@ -9,9 +9,9 @@ import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
 import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCriterion.AugmentConditions>() {
 
@@ -34,7 +34,7 @@ class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCri
                     return AugmentConditions.jewelryTypeCondition(id,playerPredicate)
                 } else {
                     val augment = Identifier.tryParse(str)?:throw IllegalStateException("Augment $str not found in enchantment registry.")
-                    return AugmentConditions(id,{aug -> aug == Registries.ENCHANTMENT.get(augment)},playerPredicate)
+                    return AugmentConditions(id,{aug -> aug == Registry.ENCHANTMENT.get(augment)},playerPredicate)
                 }
             }else {
                 throw IllegalStateException("Augment Criterion not properly formatted in json object: ${obj.asString}")
