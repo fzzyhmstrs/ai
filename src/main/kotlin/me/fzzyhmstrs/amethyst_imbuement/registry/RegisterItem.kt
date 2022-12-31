@@ -163,7 +163,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.RECALL))
         .withModifiers(listOf(RegisterModifier.GREATER_REACH))
         .also{ regItem["scepter_of_recall"] = it}
-    val BUILDERS_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+    val BUILDERS_SCEPTER = BuilderScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.HARD_LIGHT_BRIDGE))
         .withModifiers(listOf(RegisterModifier.BUILDERS_ASPECT, RegisterModifier.LESSER_REACH))
         .also{ regItem["builders_scepter"] = it}
