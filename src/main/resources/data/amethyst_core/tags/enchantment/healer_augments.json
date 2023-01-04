@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:cleanse",
+		"amethyst_imbuement:fortify",
+		"amethyst_imbuement:inspiring_song",
+		"amethyst_imbuement:mass_cleanse",
+		"amethyst_imbuement:mass_fortify",
+		"amethyst_imbuement:mass_heal",
+		"amethyst_imbuement:mass_revivify",
+		"amethyst_imbuement:minor_heal",
+		"amethyst_imbuement:regenerate"
+	]
+}

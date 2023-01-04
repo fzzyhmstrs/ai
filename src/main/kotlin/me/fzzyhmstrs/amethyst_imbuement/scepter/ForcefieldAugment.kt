@@ -20,8 +20,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    BuilderAugment {
+class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
 
     private val offset = intArrayOf(-2,2)
     override val baseEffect: AugmentEffect

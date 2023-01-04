@@ -17,8 +17,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
-class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot),
-    HealerAugment {
+class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.5F,0.5F,0.0F)

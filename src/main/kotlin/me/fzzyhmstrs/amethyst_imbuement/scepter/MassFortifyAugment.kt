@@ -20,8 +20,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
-    HealerAugment {
+class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(700,100,0)

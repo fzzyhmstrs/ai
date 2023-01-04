@@ -16,8 +16,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot),
-    SoulAugment {
+class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.5f,0.5f)

@@ -29,8 +29,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature
 
-class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
-    TravelerAugment {
+class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(100.0,0.0,0.0)

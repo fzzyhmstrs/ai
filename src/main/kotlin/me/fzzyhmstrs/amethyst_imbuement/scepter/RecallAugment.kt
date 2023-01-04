@@ -21,8 +21,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class RecallAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    TravelerAugment {
+class RecallAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
 
     override fun effect(
         world: World,

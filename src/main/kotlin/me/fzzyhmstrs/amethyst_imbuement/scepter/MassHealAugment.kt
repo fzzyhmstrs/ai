@@ -16,8 +16,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
-    HealerAugment {
+class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(7.0,1.0,0.0)

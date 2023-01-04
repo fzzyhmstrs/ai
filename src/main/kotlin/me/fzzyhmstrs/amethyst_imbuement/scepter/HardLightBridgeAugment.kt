@@ -19,8 +19,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
-    BuilderAugment, TravelerAugment {
+class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0,0.0)

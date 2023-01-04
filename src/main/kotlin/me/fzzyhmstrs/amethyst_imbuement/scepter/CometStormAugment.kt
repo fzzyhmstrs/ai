@@ -24,8 +24,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect,
-    FireAugment, ElementalAugment {
+    PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(70,4)
