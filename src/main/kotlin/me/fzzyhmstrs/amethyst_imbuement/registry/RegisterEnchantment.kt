@@ -87,7 +87,7 @@ object RegisterEnchantment {
     val FLAMEBOLT = FlameboltAugment(1,11,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment(3,11,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
     val FORCE_FIELD = ForcefieldAugment(2,4,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
-    val FORTIFY = FortifyAugment(2,4,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
+    val FORTIFY = FortifyAugment(2,10,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}

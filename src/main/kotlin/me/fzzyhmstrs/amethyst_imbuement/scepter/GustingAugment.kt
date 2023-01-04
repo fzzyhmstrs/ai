@@ -21,8 +21,7 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    ElementalAugment {
+class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)

@@ -21,8 +21,7 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot)
-    , IceAugment, ElementalAugment {
+class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect

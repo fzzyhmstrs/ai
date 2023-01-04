@@ -12,8 +12,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
-class CreateSpongeAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot),
-    OceanicAugment, BuilderAugment {
+class CreateSpongeAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot){
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,30,8,1,imbueLevel, LoreTier.LOW_TIER, Items.SPONGE)
     }

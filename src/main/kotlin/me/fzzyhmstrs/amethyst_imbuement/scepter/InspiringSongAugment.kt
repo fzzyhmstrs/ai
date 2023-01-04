@@ -21,8 +21,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot),
-    HealerAugment {
+class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(175,125,0)

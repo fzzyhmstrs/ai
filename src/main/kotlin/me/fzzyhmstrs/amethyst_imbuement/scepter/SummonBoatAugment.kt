@@ -17,7 +17,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot),OceanicAugment, TravelerAugment {
+class SummonBoatAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override fun placeEntity(
         world: World,

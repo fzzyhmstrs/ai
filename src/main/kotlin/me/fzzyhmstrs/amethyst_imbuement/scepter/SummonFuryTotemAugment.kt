@@ -19,7 +19,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot), ElementalAugment {
+class SummonFuryTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect

@@ -16,8 +16,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot),
-    FireAugment, ElementalAugment {
+class FlameboltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
