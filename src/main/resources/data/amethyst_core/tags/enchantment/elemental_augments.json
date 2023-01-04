@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"#amethyst_core:fire_augments",
+		"#amethyst_core:ice_augments",
+		"#amethyst_core:lightning_augments",
+		"amethyst_imbuement:gusting",
+		"amethyst_imbuement:summon_fury_totem",
+		"amethyst_imbuement:summon_grace_totem",
+		"amethyst_imbuement:summon_wit_totem"
+	]
+}

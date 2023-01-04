@@ -29,8 +29,7 @@ import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
 class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect,
-    LightningAugment, ElementalAugment {
+    PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,1.0,0.0)

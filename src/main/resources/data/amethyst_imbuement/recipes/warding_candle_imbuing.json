@@ -13,31 +13,31 @@
 	"item": "amethyst_imbuement:smoky_quartz"
   },
   "craftA": {
-	"item": "minecraft:candle"
+	"tag": "minecraft:candles"
   },
   "craftB": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftC": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftD": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftE": {
 	"item": "minecraft:obsidian"
   },
   "craftF": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftG": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftH": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "craftI": {
-	"item": "minecraft:candle"
+    "tag": "minecraft:candles"
   },
   "title": "Warding Candle",
   "cost": 3,

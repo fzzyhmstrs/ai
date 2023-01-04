@@ -26,8 +26,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 import kotlin.math.min
 
-class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    SoulAugment {
+class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(13.0,1.0)

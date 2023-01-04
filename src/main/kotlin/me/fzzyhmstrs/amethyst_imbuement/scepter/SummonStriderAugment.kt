@@ -19,7 +19,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot), TravelerAugment {
+class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override fun placeEntity(
         world: World,

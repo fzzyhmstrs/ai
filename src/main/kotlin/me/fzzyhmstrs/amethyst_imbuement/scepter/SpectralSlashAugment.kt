@@ -12,8 +12,7 @@ import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleTypes
 
 @Suppress("SameParameterValue")
-open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot),
-    SoulAugment {
+open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
