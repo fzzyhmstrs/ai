@@ -1,0 +1,61 @@
+{  
+"type": "advancement_reward",  
+"pools": 
+[    
+{      
+"rolls": 2,      
+"entries": [        
+{          
+"type": "item",          
+"name": "minecraft:book",
+"weight": 5
+},
+{          
+"type": "item",       
+"name": "amethyst_imbuement:book_of_lore",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "minecraft:experience_bottle",
+"weight": 2
+}
+]    
+},
+{      
+"rolls": 16,      
+"entries": [        
+{          
+"type": "item",          
+"name": "minecraft:quartz",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "minecraft:experience_bottle",
+"weight": 20
+},
+{          
+"type": "item",          
+"name": "minecraft:redstone",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "amethyst_imbuement:citrine",
+"weight": 5
+},
+{          
+"type": "item",          
+"name": "amethyst_imbuement:danburite",
+"weight": 5
+},
+{          
+"type": "item",          
+"name": "minecraft:golden_apple",
+"weight": 1
+}
+]    
+}
+]
+}
