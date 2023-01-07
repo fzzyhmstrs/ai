@@ -124,7 +124,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.SKILLFUL))
         .also{ regItem["skillful_scepter"] = it}
     val ENDURING_SCEPTER = CustomScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.UNCOMMON))
-        .withModifiers(listOf(RegisterModifier.LESSER_ENDURING))
+        .withModifiers(listOf(ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["enduring_scepter"] = it}
     val BLAZING_SCEPTER = ParticleScepterItem(ParticleTypes.SMOKE,10,ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FIREBALL))
@@ -148,7 +148,7 @@ object RegisterItem {
         .also{ regItem["corrupted_scepter"] = it}
     val SCEPTER_OF_INSIGHT = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
-        .withModifiers(listOf(RegisterModifier.INSIGHTFUL, RegisterModifier.LESSER_REACH))
+        .withModifiers(listOf(RegisterModifier.INSIGHTFUL, ModifierRegistry.LESSER_REACH))
         .also{ regItem["scepter_of_insight"] = it}
     val SCEPTER_OF_SUMMONING = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
@@ -160,11 +160,11 @@ object RegisterItem {
         .also{ regItem["travelers_scepter"] = it}
     val SCEPTER_OF_RECALL = ParticleScepterItem(ParticleTypes.PORTAL,10,ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.RECALL))
-        .withModifiers(listOf(RegisterModifier.GREATER_REACH))
+        .withModifiers(listOf(ModifierRegistry.GREATER_REACH))
         .also{ regItem["scepter_of_recall"] = it}
     val BUILDERS_SCEPTER = BuilderScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.HARD_LIGHT_BRIDGE))
-        .withModifiers(listOf(RegisterModifier.BUILDERS_ASPECT, RegisterModifier.LESSER_REACH))
+        .withModifiers(listOf(RegisterModifier.BUILDERS_ASPECT, ModifierRegistry.LESSER_REACH))
         .also{ regItem["builders_scepter"] = it}
     val SCEPTER_OF_THE_VANGUARD = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BARRIER))
@@ -172,7 +172,7 @@ object RegisterItem {
         .also{ regItem["scepter_of_the_vanguard"] = it}
     val SCEPTER_OF_THE_PALADIN = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
-        .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.LESSER_ENDURING))
+        .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
     val SCEPTER_OF_THE_PACIFIST = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
@@ -184,7 +184,7 @@ object RegisterItem {
         .also{ regItem["clerics_scepter"] = it}
     val BARDIC_SCEPTER = CustomScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.INSPIRING_SONG))
-        .withModifiers(listOf(RegisterModifier.LESSER_ENDURING, ModifierRegistry.ATTUNED))
+        .withModifiers(listOf(ModifierRegistry.LESSER_ENDURING, ModifierRegistry.ATTUNED))
         .also{ regItem["bardic_scepter"] = it}
     val EQUINOX = EquinoxScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, RegisterModifier.FURIOUS))
@@ -204,7 +204,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.SMITING))
         .also{ regItem["aegis"] = it}
     val REDEMPTION = CustomScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.EPIC))
-        .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, RegisterModifier.LESSER_ENDURING))
+        .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["redemption"] = it}
 
     //////////////////////////////
