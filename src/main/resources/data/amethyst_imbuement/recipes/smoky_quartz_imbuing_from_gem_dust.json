@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "minecraft:ink_sac"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Smoky Quartz",
+  "cost": 2,
+  "resultA": "amethyst_imbuement:smoky_quartz",
+  "countA": 4
+}
+
