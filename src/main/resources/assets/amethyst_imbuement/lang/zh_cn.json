@@ -506,7 +506,7 @@
 	"container.altar_of_experience_button_a": "储存 ",
 	"container.altar_of_experience_button_b": " 点经验值",
 	"container.altar_of_experience_button_c": "取出 ",
-    "container.altar_of_experience_tooltip_1": "向祭坛存入经验",
+	"container.altar_of_experience_tooltip_1": "向祭坛存入经验",
 	"container.altar_of_experience_tooltip_2": "从祭坛取出经验",
 	"container.altar_of_experience_tooltip_3": "按住左shift进入快速存取模式",
 	"container.altar_of_experience_tooltip_4": "松开左shift退出快速存取模式",
