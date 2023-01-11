@@ -1,0 +1,31 @@
+{    
+"name": "日辉",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_common_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()使用者在白天时获得力量和速度。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)注魔珠宝$()，$(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 2 $(br)$(l)级别：$()中$(br)$(l)不兼容：$()其他通用或珠宝强化（珠宝），其他通用强化（图腾）"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：日辉",
+"anchor": "suntouched",
+"imbue_a_item": "amethyst_imbuement:pyrite",
+"imbue_b_item": "amethyst_imbuement:pyrite",
+"imbue_c_item": "amethyst_imbuement:pyrite",
+"imbue_d_item": "amethyst_imbuement:pyrite",
+"craft_a_item": "minecraft:sunflower",
+"craft_b_item": "minecraft:blaze_powder",
+"craft_c_item": "minecraft:sunflower",
+"craft_d_item": "minecraft:blaze_powder",
+"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:blaze_powder",
+"craft_g_item": "minecraft:sunflower",
+"craft_h_item": "minecraft:blaze_powder",
+"craft_i_item": "minecraft:sunflower",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:suntouched\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)5$()"
+}
+]
+}

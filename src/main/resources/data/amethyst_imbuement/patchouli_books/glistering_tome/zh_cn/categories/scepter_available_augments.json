@@ -1,0 +1,6 @@
+{    
+"name": "基础法术",
+"parent": "amethyst_imbuement:scepter_augments",
+"description": "只要有足够的材料和经验值且法杖等级足够，基础法术可直接添加到法杖上。$(br2)要想获得更强的法术，请寻找散落在世界各地的书籍并与$(#490)法杖模板$()一同为法杖注魔。",
+"icon": "amethyst_imbuement:book_of_lore"
+}

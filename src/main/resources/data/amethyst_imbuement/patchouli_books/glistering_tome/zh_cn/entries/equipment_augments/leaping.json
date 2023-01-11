@@ -1,0 +1,31 @@
+{    
+"name": "跳跃",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:equipment_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()给予穿戴者跳跃提升。$(br)$(l)适用于：$() $(#490)任意盔甲$()$(br)$(l)最高等级：$() 2 $(br)$(l)级别：$()低$(br)$(l)不兼容：$()无"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：跳跃",
+"anchor": "leaping",
+"imbue_a_item": "amethyst_imbuement:citrine",
+"imbue_b_item": "minecraft:amethyst_shard",
+"imbue_c_item": "minecraft:amethyst_shard",
+"imbue_d_item": "minecraft:amethyst_shard",
+"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_b_item": "minecraft:rabbit_foot",
+"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_d_item": "minecraft:rabbit_foot",
+"craft_e_item": "minecraft:chainmail_boots",
+"craft_f_item": "minecraft:rabbit_foot",
+"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_h_item": "minecraft:rabbit_foot",
+"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:leaping\",lvl:1}]}",
+"cost_text": "$(l消耗等级：$(2)15$()"
+}
+]
+}

@@ -1,0 +1,21 @@
+{    
+"name": "精通",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/masterful.png",
+"sortnum": 55,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "施法等级增加2。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "精通",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/masterful.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/skillful)熟练$()",
+"descendant": "无",
+"mod_type": "$(2)法术施放$()",
+"mod_text": "你的法杖非常精通施法。循尽共鸣之道时自动显现于振之谐。"
+}
+]
+}

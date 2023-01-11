@@ -1,0 +1,30 @@
+{    
+"name": "水晶之心",    
+"icon": "amethyst_imbuement:crystalline_heart",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "一颗轻轻跳动的魔法心脏。它可以为某些物体提供灵魂。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：水晶之心",
+"imbue_a_item": "minecraft:soul_sand",
+"imbue_b_item": "minecraft:soul_sand",
+"imbue_c_item": "minecraft:soul_sand",
+"imbue_d_item": "minecraft:soul_sand",
+"craft_a_item": "minecraft:amethyst_shard",
+"craft_b_item": "minecraft:diamond",
+"craft_c_item": "minecraft:amethyst_shard",
+"craft_d_item": "minecraft:emerald",
+"craft_e_item": "amethyst_imbuement:golden_heart",
+"craft_f_item": "minecraft:emerald",
+"craft_g_item": "minecraft:amethyst_shard",
+"craft_h_item": "minecraft:diamond",
+"craft_i_item": "minecraft:amethyst_shard",
+"result_item": "amethyst_imbuement:crystalline_heart",
+"cost_text": "$(l)消耗等级：$(2)15$()"
+}
+]
+}

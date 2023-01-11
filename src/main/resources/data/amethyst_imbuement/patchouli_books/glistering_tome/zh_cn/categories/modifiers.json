@@ -1,0 +1,5 @@
+{    
+"name": "符文",
+"description": "符文是对$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()中的$(#490)$(l:amethyst_imbuement:scepters/scepter_guide)法杖$()施加的修改，将影响法术的施放和行为。特化法杖自带某些符文。",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png"
+}

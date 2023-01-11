@@ -1,0 +1,20 @@
+{    
+"name": "共鸣之道",
+"icon": "amethyst_imbuement:resonance",
+"category": "amethyst_imbuement:scepter_paths",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "共鸣之道是法师之道。你的法术都有几率加倍施放，召唤猛兽，洞悉万物，回声响震敌人颅脑！$(br2)$(l:amethyst_imbuement:scepter_resonance_routes)共鸣之道路线$(/l)"
+},
+{
+  "type": "amethyst_imbuement:scepter_path",
+  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]},amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]},amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "spec": "势不可挡的法术",
+  "spells": "召唤使魔（召唤师之杖），共鸣",
+  "mods": "可能的特有符文：回响，精通，召唤师，洞悉"
+}
+]
+}

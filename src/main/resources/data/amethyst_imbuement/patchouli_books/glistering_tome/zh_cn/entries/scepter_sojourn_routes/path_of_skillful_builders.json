@@ -1,0 +1,20 @@
+{    
+"name": "熟练建造者路线",
+"icon": "amethyst_imbuement:builders_scepter",
+"category": "amethyst_imbuement:scepter_sojourn_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "沿此路线踏上羁旅之道，熟练地改造你周围的世界。所有与旅行相关的法术得到提升，释放的法术比平时高出一级，所有智慧法术获得双倍施法经验值。法术效果范围略有增加"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "spec": "建造",
+  "spells": "探查（特有），光桥",
+  "mods": "旅人，建造者，智慧，熟练，弱效范围"
+}
+]
+}
