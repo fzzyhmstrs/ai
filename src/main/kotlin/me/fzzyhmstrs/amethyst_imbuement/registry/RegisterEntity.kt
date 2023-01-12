@@ -230,7 +230,7 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).trackRangeChunks(4).trackedUpdateRate(10).build()
     )
     val MANA_POTION: EntityType<ManaPotionEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "mana_potion_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
