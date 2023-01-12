@@ -14,7 +14,7 @@
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/ice_aspect.png",
 "ancestor": "无",
 "descendant": "无",
-"mod_type": "$(2)Elemental Damage$()",
+"mod_type": "$(2)元素伤害$()",
 "mod_text": "你的法杖触感冰凉。坚守均衡之道时自动注入寒霜法杖。"
 }
 ]

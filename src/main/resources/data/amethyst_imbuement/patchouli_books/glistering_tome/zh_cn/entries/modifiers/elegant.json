@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "只影响恩典法术。施法获得三倍的恩典经验值，恩典法术冷却时间减少10%，恩典法术持续时间增加20%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
+"text": "只影响恩典法术。施法获得三倍的恩典经验值，恩典法术冷却时间减少10%，恩典法术持续时间增加20%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)守护之道$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

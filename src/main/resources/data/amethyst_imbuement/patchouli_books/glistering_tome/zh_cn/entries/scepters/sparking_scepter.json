@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "二级愤怒特化法杖，自带符文 $(l:amethyst_imbuement:modifiers/lightning_aspect)Lightning Aspect$() 和法术 闪电。可添加二级及以下的法术。是$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()的第二阶段。$(br2)$(l)魔力容量：$() 550"
+"text": "二级愤怒特化法杖，自带符文 $(l:amethyst_imbuement:modifiers/lightning_aspect)雷电$() 和法术 闪电。可添加二级及以下的法术。是$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()的第二阶段。$(br2)$(l)魔力容量：$() 550"
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_2",

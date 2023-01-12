@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "2级恩典法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()"
+"text": "2级恩典法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/iridescent_scepter)虹彩法杖$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
