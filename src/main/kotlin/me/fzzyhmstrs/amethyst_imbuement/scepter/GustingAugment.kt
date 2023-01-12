@@ -6,7 +6,6 @@ import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ElementalAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
