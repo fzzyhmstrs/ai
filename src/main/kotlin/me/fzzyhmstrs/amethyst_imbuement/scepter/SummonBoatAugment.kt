@@ -4,9 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.OceanicAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.TravelerAugment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
