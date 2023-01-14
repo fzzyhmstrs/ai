@@ -1,0 +1,30 @@
+{    
+"name": "紫黄晶",    
+"icon": "amethyst_imbuement:ametrine",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+	"type": "patchouli:text",            
+	"text": "$(l)含义：$()韧性与毅力$(br)$(l)主要特性：$() $(c)愤怒$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()制造紫黄晶。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：紫黄晶",
+"imbue_a_item": "minecraft:netherite_scrap",
+"imbue_b_item": "minecraft:netherite_scrap",
+"imbue_c_item": "minecraft:netherite_scrap",
+"imbue_d_item": "minecraft:netherite_scrap",
+"craft_a_item": "amethyst_imbuement:citrine",
+"craft_b_item": "minecraft:amethyst_shard",
+"craft_c_item": "amethyst_imbuement:citrine",
+"craft_d_item": "minecraft:amethyst_shard",
+"craft_e_item": "amethyst_imbuement:imbued_quartz",
+"craft_f_item": "minecraft:amethyst_shard",
+"craft_g_item": "amethyst_imbuement:citrine",
+"craft_h_item": "minecraft:amethyst_shard",
+"craft_i_item": "amethyst_imbuement:citrine",
+"result_item": "amethyst_imbuement:ametrine",
+"cost_text": "$(l)消耗等级：$(2)11$()"
+}   
+]
+}

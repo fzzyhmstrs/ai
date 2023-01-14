@@ -1,0 +1,31 @@
+{    
+"name": "守卫",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()低血量时召唤水晶傀儡辅助持有者。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()被动，若不维修只能使用一次$(br)$(l)级别：$()极高$(br)$(l)不兼容：$()其他被动图腾强化"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：守卫",
+"anchor": "guardian",
+"imbue_a_item": "amethyst_imbuement:crystalline_heart",
+"imbue_b_item": "minecraft:diamond",
+"imbue_c_item": "minecraft:diamond",
+"imbue_d_item": "minecraft:diamond",
+"craft_a_item": "minecraft:poppy",
+"craft_b_item": "minecraft:carved_pumpkin",
+"craft_c_item": "minecraft:poppy",
+"craft_d_item": "minecraft:amethyst_block",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:amethyst_block",
+"craft_g_item": "minecraft:poppy",
+"craft_h_item": "minecraft:amethyst_block",
+"craft_i_item": "minecraft:poppy",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:guardian\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)22$()"
+}
+]
+}

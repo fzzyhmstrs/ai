@@ -1,0 +1,20 @@
+{    
+"name": "持久圣骑士路线",
+"icon": "amethyst_imbuement:scepter_of_the_paladin",
+"category": "amethyst_imbuement:scepter_aegis_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果想用长效的保护魔法来支援你的队友，请沿此路线踏上守护之道。有了温柔捍卫者符文，在施法时可以施加护盾保护你和你的队友。法术效果时间在持久符文加持下变得更长，圣光符文提升了对亡灵生物的伤害。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:champion_of_the_meek\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+  "spec": "保护魔法",
+  "spells": "强化",
+  "mods": "温柔捍卫者，持久，圣光"
+}
+]
+}

@@ -1,0 +1,20 @@
+{    
+"name": "危险烈焰路线",
+"icon": "amethyst_imbuement:blazing_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果你想用熊熊烈火让敌人变成余烬，请沿此路线踏上均衡之道。火焰类法术获得极大提升，危险符文能够提升伤害。元素符文进一步强化了所有的元素魔法，愤怒符文使愤怒法术能获得两倍的施法经验值。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+  "tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"},{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+  "spec": "火焰魔法",
+  "spells": "火球",
+  "mods": "危险/危险契约，烈火，元素，愤怒"
+}
+]
+}

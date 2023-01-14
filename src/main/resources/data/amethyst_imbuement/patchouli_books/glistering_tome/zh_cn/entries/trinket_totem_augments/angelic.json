@@ -1,0 +1,31 @@
+{    
+"name": "天使祝福",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()图腾激活时启用创造飞行。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()主动，消耗耐久值。$(br)$(l)级别：$()极高$(br)$(l)不兼容：$()其他主动图腾强化"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：天使祝福",
+"anchor": "angelic",
+"imbue_a_item": "amethyst_imbuement:celestine",
+"imbue_b_item": "amethyst_imbuement:brilliant_diamond",
+"imbue_c_item": "amethyst_imbuement:brilliant_diamond",
+"imbue_d_item": "amethyst_imbuement:celestine",
+"craft_a_item": "minecraft:feather",
+"craft_b_item": "minecraft:elytra",
+"craft_c_item": "minecraft:feather",
+"craft_d_item": "minecraft:feather",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:feather",
+"craft_g_item": "minecraft:feather",
+"craft_h_item": "minecraft:elytra",
+"craft_i_item": "minecraft:feather",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:angelic\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)49$()"
+}
+]
+}

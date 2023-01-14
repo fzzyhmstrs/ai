@@ -1,0 +1,31 @@
+{    
+"name": "跨步",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:equipment_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()提供步行辅助，允许你不用跳跃即可走上一个方块高度。$(br)$(l)适用于：$() $(#490)靴子$()$(br)$(l)最高等级：$() 1 $(br)$(l)级别：$()中$(br)$(l)不兼容：$()无"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：跨步",
+"anchor": "striding",
+"imbue_a_item": "minecraft:diamond",
+"imbue_b_item": "amethyst_imbuement:opal",
+"imbue_c_item": "amethyst_imbuement:opal",
+"imbue_d_item": "amethyst_imbuement:opal",
+"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_b_item": "minecraft:redstone_block",
+"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_d_item": "minecraft:redstone_block",
+"craft_e_item": "minecraft:chainmail_boots",
+"craft_f_item": "minecraft:redstone_block",
+"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
+"craft_h_item": "minecraft:redstone_block",
+"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:striding\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)18$()" 
+}
+]
+}

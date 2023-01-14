@@ -1,0 +1,72 @@
+{    
+"name": "全新武器附魔",    
+"icon": "amethyst_imbuement:glistering_trident",    
+"category": "amethyst_imbuement:enchantments",    
+"pages": [
+{
+"type": "patchouli:text",
+"text": "适用于各种武器的全新附魔。"
+},
+{
+"type": "patchouli:spotlight",
+"title": "劈砍",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:cleaving\",lvl:3}]}",
+"text": "$(l)效果：$()提升附魔斧的伤害并禁用对手的盾牌。$(br)$(l)适用于：$() $(#490)斧$()$(br)$(l)最高等级：$() 3 $(br)$(l)稀有度：$()常见$(br)$(l)不兼容：$()无"
+},
+{
+"type": "patchouli:spotlight",
+"title": "淬毒",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:contaminated\",lvl:1}]}",
+"text": "$(l)效果：$()你的攻击使目标中毒。$(br)$(l)适用于：$() $(#490)任意武器$()$(br)$(l)最高等级：$() 1 $(br)$(l)稀有度：$()非常稀有$(br)$(l)不兼容：$()火矢、火焰附加、缓速、凋亡"
+},
+{
+"type": "patchouli:spotlight",
+"title": "致命射击",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:deadly_shot\",lvl:3}]}",
+"text": "$(l)效果：$()提升弩和$(l:amethyst_imbuement:weapons/sniper_bow)狙击弩$()的弹速。$(br)$(l)适用于：$() $(#490)弩，狙击弩$()$(br)$(l)最高等级：$() 3 $(br)$(l)稀有度：$()常见$(br)$(l)不兼容：$()无"
+},
+{
+"type": "patchouli:spotlight",
+"title": "凋亡",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:decayed\",lvl:1}]}",
+"text": "$(l)效果：$()你的攻击使目标凋零。$(br)$(l)适用于：$() $(#490)任意武器$()$(br)$(l)最高等级：$() 1 $(br)$(l)稀有度：$()非常稀有$(br)$(l)不兼容：$()火矢、火焰附加、缓速、淬毒"
+},
+{
+"type": "patchouli:spotlight",
+"title": "英勇",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:heroic\",lvl:7}]}",
+"text": "$(l)效果：$()提升对灾厄村民的伤害。$(br)$(l)适用于：$() $(#490)剑，斧$()$(br)$(l)最高等级：$() 7 $(br)$(l)稀有度：$()少见$(br)$(l)不兼容：$()锋利、亡灵杀手、节肢杀手"
+},
+{
+"type": "patchouli:spotlight",
+"title": "洞察",
+"anchor": "insight",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:insight\",lvl:3}]}",
+"text": "$(l)效果：$()提升杀死敌人掉落的经验值。$(br)$(l)适用于：$() $(#490)任意武器$()$(br)$(l)最高等级：$() 3 $(br)$(l)稀有度：$()常见$(br)$(l)不兼容：$()无"
+},
+{
+"type": "patchouli:spotlight",
+"title": "生命窃取",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:lifesteal\",lvl:3}]}",
+"text": "$(l)效果：$()你造成的伤害将治疗你。$(br)$(l)适用于：$() $(#490)任意武器$()$(br)$(l)最高等级：$() 3 $(br)$(l)稀有度：$()稀有$(br)$(l)不兼容：$()无"
+},
+{
+"type": "patchouli:spotlight",
+"title": "穿甲",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:puncturing\",lvl:6}]}",
+"text": "$(l)效果：$()为武器增加穿甲伤害。$(br)$(l)适用于：$() $(#490)弩、狙击弩、三叉戟$()$(br)$(l)最高等级：$() 6 $(br)$(l)稀有度：$()稀有$(br)$(l)不兼容：$()穿透、多重射击、穿刺"
+},
+{
+"type": "patchouli:spotlight",
+"title": "箭雨",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:rain_of_thorns\",lvl:3}]}",
+"text": "$(l)效果：$()当箭矢命中目标时，向随机方向散射出箭矢。$(br)$(l)适用于：$() $(#490)弓$()$(br)$(l)最高等级：$() 3 $(br)$(l)稀有度：$()稀有$(br)$(l)不兼容：$()火矢，无限"
+},
+{
+"type": "patchouli:spotlight",
+"title": "缓速",
+"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:wasting\",lvl:4}]}",
+"text": "$(l)效果：$()击中时减速目标。$(br)$(l)适用于：$() $(#490)剑，斧$()$(br)$(l)最高等级：$() 4 $(br)$(l)稀有度：$()稀有$(br)$(l)不兼容：$()无"
+}
+]
+}

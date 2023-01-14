@@ -1,0 +1,16 @@
+{    
+"name": "珠宝指南",
+"priority": true,
+"icon": "amethyst_imbuement:imbued_headband",    
+"category": "amethyst_imbuement:trinkets",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "在此你将学习如何制作珠宝并为其注魔。开始：$(li)首先，注魔一些$(#b0b)$(l:amethyst_imbuement:imbuing/beryl_copper)铍铜锭$()。$(li)然后，用它们和$(#b0b)$(l:amethyst_imbuement:gems/amethyst)紫水晶碎片$()制作一件$(#490)$(l:amethyst_imbuement:trinkets/copper_jewelry)铜制珠宝$()。"
+},
+{            
+"type": "patchouli:text",            
+"text": "$(li)这件珠宝能提供小小的增益，但不足以包含更强大的魔法。将你的珠宝注魔为$(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)注魔珠宝$()。$(li)之后便可以为其施以合适的强化来赋予强大的被动能力！$(br2)$(l)注意：一件珠宝只能同时拥有一个强化！$()"
+}
+]
+}

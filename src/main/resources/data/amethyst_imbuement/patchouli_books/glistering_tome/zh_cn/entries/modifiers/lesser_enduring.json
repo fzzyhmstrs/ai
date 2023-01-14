@@ -1,0 +1,21 @@
+{    
+"name": "弱效持久",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lesser_enduring.png",
+"sortnum": 61,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "增加15%法术效果持续时间。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)守护之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Lesser Enduring",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lesser_enduring.png",
+"ancestor": "无",
+"descendant": "$(l:amethyst_imbuement:modifiers/enduring)持久$()",
+"mod_type": "$(2)法术持续时间$()",
+"mod_text": "你的法杖法术持续时间更久。坚守救赎之道与守护之道时分别自动显现于持久法杖与圣骑士之杖。"
+}
+]
+}

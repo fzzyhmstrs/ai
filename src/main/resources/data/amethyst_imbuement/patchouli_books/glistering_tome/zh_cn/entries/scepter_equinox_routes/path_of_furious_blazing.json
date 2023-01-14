@@ -1,0 +1,20 @@
+{    
+"name": "愤怒烈焰路线",
+"icon": "amethyst_imbuement:blazing_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果想用高等级的烈焰法术让敌人变成余烬。火焰类法术获得极大提升，元素符文进一步强化了所有的元素魔法，暴怒符文使愤怒法术能获得$(o)三倍$()的施法经验值。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"},{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:enraged\"}]}",
+  "spec": "火焰魔法",
+  "spells": "火球",
+  "mods": "烈火，元素，暴怒"
+}
+]
+}

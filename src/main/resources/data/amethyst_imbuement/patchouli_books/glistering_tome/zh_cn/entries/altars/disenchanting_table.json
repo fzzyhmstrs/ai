@@ -1,0 +1,35 @@
+{    
+"name": "祛魔台",    
+"icon": "amethyst_imbuement:disenchanting_table",    
+"category": "amethyst_imbuement:altars",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果想要剥离一件物品的魔法属性，$(#490)祛魔台$()是最佳选择。利用月长石能够消除魔力的敏锐能量，这张台子可以精确地分离任何魔力并将其储存在书本中……$(o)当然是有限度的$()。围绕祛魔台摆放水晶柱可以进一步增强其能力。"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:disenchanting_table"
+},
+{
+"type": "patchouli:multiblock",
+"name": "祛魔台摆放",
+"multiblock": {
+	"pattern": [
+		["B B B","     ","B   B","     ","B B B"],
+		["B B B","     ","B 0 B","     ","B B B"]
+	],
+	"mapping": {                  
+	"B": "#amethyst_imbuement:disenchant_pillar_blocks",         
+	"0": "amethyst_imbuement:disenchanting_table"     
+	}
+},
+"enable_visualize": false,
+"text": "所展示的是最大能力祛魔台的摆放方式，水晶柱越少能力越弱。"
+},
+{            
+"type": "patchouli:text",            
+"text": "没有水晶柱的祛魔台最多只能移除一个附魔并返还附魔书。已祛魔次数是记录于物品的，因此更换祛魔台不能提升祛魔数上限。$(br2)每增加两根水晶柱可以为每个物品增加一次祛魔次数上限。$(br2)任何附魔都可以被移除，$(l)包括强化$()。"
+}
+]
+}

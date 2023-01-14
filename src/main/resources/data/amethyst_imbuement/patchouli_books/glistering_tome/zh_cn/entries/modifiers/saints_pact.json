@@ -1,0 +1,21 @@
+{    
+"name": "圣人契约",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/saints_pact.png",
+"sortnum": 73,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "影响所有非治疗法术。受影响的法术冷却时间增加75%，魔力消耗增加50%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "圣人契约",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/saints_pact.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/healers_pact)医师契约$()",
+"descendant": "无",
+"mod_type": "$(2)契约$()",
+"mod_text": "你和你的法杖已完全献身于治疗术。其他种类的魔法都被它所摒弃。循尽吟游诗人救赎之道时自动显现于罪之赎。"
+}
+]
+}

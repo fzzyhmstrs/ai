@@ -1,0 +1,6 @@
+{    
+"name": "饰品通用强化",
+"parent": "amethyst_imbuement:trinket_augments",
+"description": "此处列出对$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)图腾$()和$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)珠宝$()都适用的强化。",
+"icon": "amethyst_imbuement:imbued_headband"
+}

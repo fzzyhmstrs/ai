@@ -1,0 +1,6 @@
+{    
+"name": "强化索引",
+"parent": "amethyst_imbuement:augments",
+"description": "所有强化的索引，以及可用的过滤分类。",
+"icon": "minecraft:writable_book"
+}
