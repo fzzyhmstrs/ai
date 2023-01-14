@@ -1,15 +1,15 @@
 {    
-"name": "许诺宝石",    
+"name": "机遇宝石",    
 "icon": "amethyst_imbuement:gem_of_promise",    
 "category": "amethyst_imbuement:imbuing",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "用于创造特化宝石的基础宝石。根据持有者在环境中的经历，许诺宝石会转化为不同的特化宝石。$(br2)$(l:amethyst_imbuement:scepter_upgrading/aspect_gems)特化宝石$()"
+"text": "用于创造特化宝石的基础宝石。根据持有者在环境中的经历，机遇宝石会转化为不同的特化宝石。$(br2)$(l:amethyst_imbuement:scepter_upgrading/aspect_gems)特化宝石$()"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
-"title": "注魔：许诺宝石",
+"title": "注魔：机遇宝石",
 "imbue_a_item": "amethyst_imbuement:imbued_quartz",
 "imbue_b_item": "amethyst_imbuement:imbued_quartz",
 "imbue_c_item": "amethyst_imbuement:imbued_quartz",
