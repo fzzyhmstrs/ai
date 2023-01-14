@@ -1,0 +1,18 @@
+{
+  "name": "孔雀石雕像",
+  "icon": "amethyst_imbuement:malachite_figurine",
+  "category": "amethyst_imbuement:gems",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)含义：$()和平与合作$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()与水晶女巫村民交易来获得你自己的孔雀石雕像。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "孔雀石雕像",
+      "item": "amethyst_imbuement:malachite_figurine",
+      "link_recipe": true,
+      "text": "$(o)村庄间合作与和平的珍贵象征$()"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{    
+"name": "生命",    
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_jewelry_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()提升穿戴者最大生命值。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)注魔护身符$()$(br)$(l)最高等级：$() 1 $(br)$(l)级别：$()高$(br)$(l)不兼容：$()其他通用或珠宝强化"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：生命",
+"anchor": "healthy",
+"imbue_a_item": "amethyst_imbuement:heartstone",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:imbued_quartz",
+"craft_a_item": "minecraft:golden_apple",
+"craft_b_item": "minecraft:golden_apple",
+"craft_c_item": "minecraft:golden_apple",
+"craft_d_item": "minecraft:golden_apple",
+"craft_e_item": "amethyst_imbuement:imbued_amulet",
+"craft_f_item": "minecraft:golden_apple",
+"craft_g_item": "minecraft:golden_apple",
+"craft_h_item": "minecraft:golden_apple",
+"craft_i_item": "minecraft:golden_apple",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:healthy\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)20$()"
+}
+]
+}

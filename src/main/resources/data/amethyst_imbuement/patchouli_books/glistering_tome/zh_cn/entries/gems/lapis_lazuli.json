@@ -1,0 +1,16 @@
+{    
+"name": "青金石",    
+"icon": "minecraft:lapis_lazuli",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)含义：$()智慧$(br)$(l)主要特性：$() $(2)智慧$()$(br)$(l)获取：$()青金石盛产于地壳的下层。村民们乐于将这颗美丽的蓝宝石作为礼物赠予英雄人物，牧师村民也会交易青金石。"
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:lapis_lazuli",
+		"text": "$(o)青金石一直被视为皇室和智慧的象征。如果加以抛光打磨并注入魔力，它的能力可以达到新的高度。$()"
+	}
+]
+}

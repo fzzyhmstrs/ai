@@ -1,0 +1,32 @@
+{    
+"name": "法杖入门",
+"priority": true,
+"icon": "amethyst_imbuement:opaline_scepter",    
+"category": "amethyst_imbuement:scepters",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "施法将涉及合成、注魔、探索、坚持不懈地升级你的法杖，解锁更多更强力的魔法$(br2)在开始之前，你需要合成一个$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()$(br2)至此，你的法术大师之路从这里开始……" 
+},
+{
+"type": "patchouli:text",
+"text": "$(li)通过注魔或直接取得一块$(#490)$(l:amethyst_imbuement:gems/opal)欧泊$()$(li)合成一根$(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)欧泊法杖$()$(li)为你的法杖注入$(l:amethyst_imbuement:scepter_augments)强化$()$(li)施展你的法术并添加更多法术！要获得更强大的咒语，可以去寻找散落在世界各地的宝典。$(li)研究$(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)升级之道$()来提升你的法杖。"
+},
+{
+"type": "patchouli:text",
+"text": "既然你拥有了一根法杖，那么你需要了解……$(br2)$(l)魔力$()法杖一次性能施放的法术是有限的。越强的法杖上限越高，物品栏中的蓝条代表法杖剩余的魔力。如果魔力值过低，可以饮用$(#b0b)$(l:amethyst_imbuement:imbuing/mana_potion)魔力药水$()为其恢复活力。"
+},
+{
+"type": "patchouli:text",
+"text": "$(l)激活法术：$()法杖当前激活的法术会在使用法杖(右键点击)时施放。法杖被创造时默认激活的法术是魔法飞弹。当添加新的法术之后，你可以使用潜行+滚轮来切换激活的法术。新激活的法术将显示在屏幕和物品信息中。"
+},
+{
+"type": "patchouli:text",
+"text": "$(l)法杖等级：$()用法杖施法可以提升其魔法潜力，你施展法术的次数越多，就可以施展更多种类的法术！参阅$(#490)$(l:amethyst_imbuement:augment_index/all_augments)强化索引$()了解完整概述。有三种可升级的魔法派系：$(br2)$(l)$(c)愤怒$()：与战斗和进攻法术有关的魔法。$(br)$(l)$(2)智慧$()：聪颖和创造的魔法。$(br)$(l)$(9)恩典$()：与治疗和强化你和你的队友有关的魔法。"
+},
+{
+"type": "amethyst_imbuement:tooltip_image",
+"tooltip_text": "激活法术显示为$(6)金色$()，三种派系分别显示为$(c)红色$()，$(2)绿色$()，和$(9)蓝色$()。在这个例子中，愤怒目前是3级，需要再施9次法术才能达到4级。"
+}
+]
+}

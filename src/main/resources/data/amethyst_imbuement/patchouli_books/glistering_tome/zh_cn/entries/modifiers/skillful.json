@@ -1,0 +1,21 @@
+{    
+"name": "熟练",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/skillful.png",
+"sortnum": 53,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "施法等级增加1。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "熟练",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/skillful.png",
+"ancestor": "无",
+"descendant": "$(l:amethyst_imbuement:modifiers/masterful)精通$()",
+"mod_type": "$(2)法术施放$()",
+"mod_text": "你的法杖已经能熟练地施法。坚守羁旅之道或共鸣之道时自动注入灵巧法杖。"
+}
+]
+}

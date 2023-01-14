@@ -1,0 +1,21 @@
+{    
+"name": "洞悉",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/insightful.png",
+"sortnum": 49,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "生物被施法者杀死时掉落额外经验值，杀死敌对生物时效果最强。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "洞悉",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/insightful.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)世界交互$()",
+"mod_text": "你的权杖渴望理解世界。坚守共鸣之道时自动注入洞察之杖。"
+}
+]
+}

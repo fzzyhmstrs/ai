@@ -1,0 +1,40 @@
+{    
+"name": "智慧法杖",    
+"icon": "amethyst_imbuement:witty_scepter",
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 5,
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "一级智慧特化法杖。自带符文 $(l:amethyst_imbuement:modifiers/witty)智慧$()。可添加一级法术。是$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()或$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$()的起始点。$(br2)$(l)魔力容量：$() 250"
+},
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_1",
+"input_item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"desc_a": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
+"desc_b": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+"desc_c": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
+"desc_d": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+"desc_e": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}"
+},
+{
+  "type": "amethyst_imbuement:imbuing_recipe",
+  "title": "智慧法杖",
+  "imbue_a_item": "amethyst_imbuement:imbued_lapis",
+  "imbue_b_item": "amethyst_imbuement:inquisitive_gem",
+  "imbue_c_item": "amethyst_imbuement:imbued_lapis",
+  "imbue_d_item": "amethyst_imbuement:imbued_lapis",
+  "craft_a_item": "minecraft:air",
+  "craft_b_item": "minecraft:writable_book",
+  "craft_c_item": "minecraft:air",
+  "craft_d_item": "minecraft:writable_book",
+  "craft_e_item": "amethyst_imbuement:opaline_scepter",
+  "craft_f_item": "minecraft:writable_book",
+  "craft_g_item": "minecraft:air",
+  "craft_h_item": "minecraft:writable_book",
+  "craft_i_item": "minecraft:air",
+  "result_item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "cost_text": "$(l)消耗等级：$(2)5$()"
+}
+]
+}

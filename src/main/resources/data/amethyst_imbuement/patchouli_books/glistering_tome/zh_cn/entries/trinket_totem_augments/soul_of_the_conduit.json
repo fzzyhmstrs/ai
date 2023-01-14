@@ -1,0 +1,31 @@
+{    
+"name": "潮涌之魂",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": ".$(l)效果：$()激活图腾时给予水中的持有者潮涌能量。e$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()主动，在水中时消耗耐久值$(br)$(l)级别：$()中$(br)$(l)不兼容：$()其他主动图腾强化"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：潮涌之魂",
+"anchor": "soul_of_the_conduit",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "minecraft:prismarine_crystals",
+"imbue_c_item": "minecraft:prismarine_crystals",
+"imbue_d_item": "minecraft:prismarine_crystals",
+"craft_a_item": "minecraft:prismarine_bricks",
+"craft_b_item": "minecraft:heart_of_the_sea",
+"craft_c_item": "minecraft:prismarine_bricks",
+"craft_d_item": "minecraft:nautilus_shell",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:nautilus_shell",
+"craft_g_item": "minecraft:prismarine_bricks",
+"craft_h_item": "minecraft:heart_of_the_sea",
+"craft_i_item": "minecraft:prismarine_bricks",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soul_of_the_conduit\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)18$()"
+}
+]
+}
