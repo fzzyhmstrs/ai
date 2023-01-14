@@ -1,0 +1,16 @@
+{    
+"name": "紫水晶",    
+"icon": "minecraft:amethyst_shard",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)含义：$()能量与聚焦$(br)$(l)主要特性：$() $(c)愤怒$()$(br)$(l)获取：$()在地底深处的晶洞中开采。"      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:amethyst_shard",
+		"text": "$(o)紫水晶因其集中意志力和激发身体活力的能力而广受追捧。这些强大的晶体有多种用途；据说一些村民甚至会收购它们。$()"       
+	}
+]
+}

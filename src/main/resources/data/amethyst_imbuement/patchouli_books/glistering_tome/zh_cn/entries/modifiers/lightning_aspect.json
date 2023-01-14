@@ -1,0 +1,21 @@
+{    
+"name": "雷电",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lightning_aspect.png",
+"sortnum": 43,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响雷电类法术，雷电法术冷却时间减少10%，法术范围增加25%，法术效果增加一级，法术效果延长1.5秒。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "雷电",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lightning_aspect.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)元素伤害$()",
+"mod_text": "握着法杖的手隐隐刺痛。坚守均衡之道时自动注入电光法杖。"
+}
+]
+}

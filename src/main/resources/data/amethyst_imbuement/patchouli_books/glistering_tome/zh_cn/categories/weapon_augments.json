@@ -1,0 +1,6 @@
+{    
+"name": "武器强化",
+"parent": "amethyst_imbuement:augments",
+"description": "此处列出的强化适用于武器。与装备相关的强化，请参阅$(#490)$(l:amethyst_imbuement:equipment_augments)装备强化$()。",
+"icon": "amethyst_imbuement:garnet_sword"
+}

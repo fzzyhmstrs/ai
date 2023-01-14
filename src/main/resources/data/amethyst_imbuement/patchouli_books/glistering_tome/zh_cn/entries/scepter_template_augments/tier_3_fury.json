@@ -1,0 +1,30 @@
+{    
+"name": "3级愤怒模板",    
+"icon": "minecraft:shulker_shell",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "3级愤怒法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：3级愤怒",
+"anchor": "tier_3_fury",
+"imbue_a_item": "amethyst_imbuement:ametrine",
+"imbue_b_item": "amethyst_imbuement:garnet",
+"imbue_c_item": "amethyst_imbuement:garnet",
+"imbue_d_item": "amethyst_imbuement:garnet",
+"craft_a_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_b_item": "amethyst_imbuement:book_of_mythos",
+"craft_c_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_d_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_e_item": "amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_g_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_h_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"craft_i_item": "minecraft:tnt,minecraft:fire_charge,minecraft:shulker_shell,minecraft:copper_block,minecraft:emerald_block",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

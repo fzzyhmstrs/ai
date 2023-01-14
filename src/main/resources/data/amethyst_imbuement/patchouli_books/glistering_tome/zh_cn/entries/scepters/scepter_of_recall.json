@@ -1,0 +1,57 @@
+{
+  "name": "折返之杖",
+  "icon": "amethyst_imbuement:scepter_of_recall",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "二级智慧特化法杖。自带符文 $(l:amethyst_imbuement:modifiers/greater_reach)强效范围$() 和独有法术 折返. 可添加二级及以下的法术。是$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$()的第二阶段。$(br2)$(l)魔力容量：$() 550"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+      "anc_b": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+      "desc_a": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "折返之杖",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "minecraft:lodestone",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:ender_eye",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "tag:amethyst_imbuement:wit_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:ender_eye",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:ender_eye",
+      "result_item": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+      "cost_text": "$(l)消耗等级：$(2)21$()"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "由虹彩至折返",
+      "imbue_a_item": "minecraft:ender_eye",
+      "imbue_b_item": "minecraft:lodestone",
+      "imbue_c_item": "minecraft:ender_eye",
+      "imbue_d_item": "minecraft:ender_eye",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:gem_dust",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:gem_dust",
+      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
+      "craft_f_item": "amethyst_imbuement:gem_dust",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "amethyst_imbuement:gem_dust",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+      "cost_text": "$(l)消耗等级：$(2)13$()"
+    }
+  ]
+}

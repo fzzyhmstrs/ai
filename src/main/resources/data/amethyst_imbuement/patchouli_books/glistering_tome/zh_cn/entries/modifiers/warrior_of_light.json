@@ -1,0 +1,21 @@
+{    
+"name": "光明战士",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png",
+"sortnum": 79,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "法术冷却时间减少10%，攻击或影响亡灵生物的法术除正常效果外，额外造成4点伤害并使目标虚弱。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)守护之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "光明战士",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/warrior_of_light.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/smiting)圣光$()",
+"descendant": "无",
+"mod_type": "$(2)伤害$()",
+"mod_text": "你和你的法杖致力于斩尽黑夜中的邪恶。循尽先锋守护之道时自动显现于神之护。"
+}
+]
+}

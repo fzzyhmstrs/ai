@@ -1,0 +1,30 @@
+{    
+"name": "充能月长石",
+"icon": "amethyst_imbuement:charged_moonstone",
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+	"type": "patchouli:text",            
+	"text": "$(l)含义：$()超自然力量的强大保护$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()制造充能月长石。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：充能月长石",
+"imbue_a_item": "amethyst_imbuement:smoky_quartz",
+"imbue_b_item": "amethyst_imbuement:imbued_quartz",
+"imbue_c_item": "amethyst_imbuement:imbued_quartz",
+"imbue_d_item": "amethyst_imbuement:smoky_quartz",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:glowing_fragment",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "amethyst_imbuement:glowing_fragment",
+"craft_e_item": "amethyst_imbuement:moonstone",
+"craft_f_item": "amethyst_imbuement:glowing_fragment",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "amethyst_imbuement:glowing_fragment",
+"craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:charged_moonstone",
+"cost_text": "$(l)消耗等级：$(2)13$()"
+}      
+]
+}

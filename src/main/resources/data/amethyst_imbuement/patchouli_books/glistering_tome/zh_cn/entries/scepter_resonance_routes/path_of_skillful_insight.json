@@ -1,0 +1,20 @@
+{    
+"name": "熟练洞察路线",
+"icon": "amethyst_imbuement:scepter_of_insight",
+"category": "amethyst_imbuement:scepter_resonance_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "沿此路线踏上共鸣之道，从战斗中熟练地获取经验。所有法术都有几率二重施放，杀死生物掉落额外经验值。所有法术都比平时高出2级，法术范围也有轻微提升。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+  "spec": "经验获取",
+  "spells": "灵魂飞弹，共鸣（独有）",
+  "mods": "回响，洞悉，精通，弱效范围"
+}
+]
+}

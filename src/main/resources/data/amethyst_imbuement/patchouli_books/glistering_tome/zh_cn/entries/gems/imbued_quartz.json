@@ -1,0 +1,37 @@
+{    
+"name": "注魔石英",    
+"icon": "amethyst_imbuement:imbued_quartz",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+	"type": "patchouli:text",            
+	"text": "$(l)含义：$()治疗与恢复$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()制造注魔石英或用$(#490)$(l:amethyst_imbuement:altars/crystal_altar)水晶祭坛$()强化$(#b0b)下界石英$()得到。"      
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Imbued Quartz Imbuing",
+"imbue_a_item": "minecraft:rose_bush",
+"imbue_b_item": "minecraft:rose_bush",
+"imbue_c_item": "minecraft:rose_bush",
+"imbue_d_item": "minecraft:rose_bush",
+"craft_a_item": "minecraft:quartz",
+"craft_b_item": "minecraft:quartz",
+"craft_c_item": "minecraft:quartz",
+"craft_d_item": "minecraft:quartz",
+"craft_e_item": "minecraft:glistering_melon_slice",
+"craft_f_item": "minecraft:quartz",
+"craft_g_item": "minecraft:quartz",
+"craft_h_item": "minecraft:quartz",
+"craft_i_item": "minecraft:quartz",
+"result_item": "amethyst_imbuement:imbued_quartz#4",
+"cost_text": "$(l)消耗等级：$(2)1$()"
+},
+{
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_quartz",
+"input_item": "minecraft:quartz",
+"addition_item": "minecraft:rose_bush",
+"output_item": "amethyst_imbuement:imbued_quartz"
+}    
+]
+}

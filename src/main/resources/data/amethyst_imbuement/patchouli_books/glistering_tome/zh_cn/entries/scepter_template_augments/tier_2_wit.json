@@ -1,0 +1,30 @@
+{    
+"name": "2级智慧模板",    
+"icon": "minecraft:ender_pearl",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "2级智慧法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/iridescent_scepter)虹彩法杖$()，$(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：2级智慧",
+"anchor": "tier_2_wit",
+"imbue_a_item": "amethyst_imbuement:opal",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:book_of_lore",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:lava_bucket,minecraft:sugar,minecraft:rotten_flesh,minecraft:ender_pearl,minecraft:diamond,minecraft:crafting_table,minecraft:shield",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

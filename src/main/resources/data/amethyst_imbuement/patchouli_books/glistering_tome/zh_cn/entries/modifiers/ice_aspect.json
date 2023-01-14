@@ -1,0 +1,21 @@
+{    
+"name": "寒冰",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/ice_aspect.png",
+"sortnum": 41,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响冰冻类法术。冰冻法术冷却时间减少10%，法术等级增加1，法术效果增加一级，法术效果延长1.5秒。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "寒冰",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/ice_aspect.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)元素伤害$()",
+"mod_text": "你的法杖触感冰凉。坚守均衡之道时自动注入寒霜法杖。"
+}
+]
+}
