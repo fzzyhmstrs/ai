@@ -5,8 +5,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.OceanicAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.TravelerAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -23,7 +21,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot), OceanicAugment, TravelerAugment {
+class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(1,1).withDuration(20)

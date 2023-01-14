@@ -1,0 +1,66 @@
+{  
+"type": "advancement_reward",  
+"pools": 
+[    
+{      
+"rolls": 2,      
+"entries": [        
+{          
+"type": "item",          
+"name": "minecraft:experience_bottle",
+"weight": 6
+},
+{          
+"type": "item",       
+"name": "amethyst_imbuement:book_of_lore",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "amethyst_imbuement:heartstone",
+"weight": 1
+}
+]    
+},
+{      
+"rolls": 16,      
+"entries": [        
+{          
+"type": "item",          
+"name": "minecraft:quartz",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "minecraft:experience_bottle",
+"weight": 20
+},
+{          
+"type": "item",          
+"name": "minecraft:cooked_beef",
+"weight": 10
+},
+{          
+"type": "item",          
+"name": "amethyst_imbuement:smoky_quartz",
+"weight": 5
+},
+{          
+"type": "item",          
+"name": "minecraft:golden_apple",
+"weight": 1
+},
+{          
+"type": "item",          
+"name": "minecraft:heart_of_the_sea",
+"weight": 1
+},
+{          
+"type": "item",          
+"name": "amethyst_imbuement:imbued_ring",
+"weight": 1
+}
+]    
+}
+]
+}

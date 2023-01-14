@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.TravelerAugment
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.passive.StriderEntity
@@ -19,7 +18,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot), TravelerAugment {
+class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
 
     override fun placeEntity(
         world: World,

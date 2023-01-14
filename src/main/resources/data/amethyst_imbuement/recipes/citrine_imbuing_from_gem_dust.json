@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftE": {
+	"item": "minecraft:dandelion"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Citrine",
+  "cost": 2,
+  "resultA": "amethyst_imbuement:citrine",
+  "countA": 4
+}
+

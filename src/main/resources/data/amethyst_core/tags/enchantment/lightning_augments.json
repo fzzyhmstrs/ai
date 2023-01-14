@@ -1,0 +1,8 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:lightning_bolt",
+		"amethyst_imbuement:lightning_storm",
+		"amethyst_imbuement:zap"
+	]
+}

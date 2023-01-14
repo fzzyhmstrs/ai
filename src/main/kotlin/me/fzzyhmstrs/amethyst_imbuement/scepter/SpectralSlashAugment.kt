@@ -5,15 +5,13 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SoulAugment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleTypes
 
 @Suppress("SameParameterValue")
-open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot),
-    SoulAugment {
+open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
