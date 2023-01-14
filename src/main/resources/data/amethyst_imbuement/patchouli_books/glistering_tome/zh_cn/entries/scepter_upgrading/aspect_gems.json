@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "特化宝石是你在升级之道上制作各种法杖的重要道具。它们是通过以各种方式与环境交互而产生的。$(br2)$(bold)任何特化宝石的制造都需要副手拿着$(l:amethyst_imbuement:imbuing/gem_of_promise机遇宝石$(/l)$()。" 
+"text": "特化宝石是你在升级之道上制作各种法杖的重要道具。它们是通过以各种方式与环境交互而产生的。$(br2)$(bold)任何特化宝石的制造都需要副手拿着$(l:amethyst_imbuement:imbuing/gem_of_promise)机遇宝石$(/l)$()。" 
 },
 {            
 "type": "patchouli:spotlight",
