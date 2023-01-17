@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import net.minecraft.block.BlockState
 import net.minecraft.item.ItemStack
-import net.minecraft.tag.BlockTags
+import net.minecraft.registry.tag.BlockTags
 
 class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
 
