@@ -1,5 +1,5 @@
 ### Additions
-* None.
+* Bloop.
 
 ### Changes
 * Mana potions now repair slightly more.
