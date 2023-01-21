@@ -1,5 +1,5 @@
 ### Additions
-* Added advancements.
+* None.
 
 ### Changes
 * None.
