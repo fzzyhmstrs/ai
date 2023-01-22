@@ -1,10 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -41,7 +40,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         addFlavorText(tooltip, context)
         val nbt = stack.orCreateNbt
         if (nbt.contains("on_fire")){
-            val fire = Nbt.readIntNbt("on_fire",nbt).toFloat()
+            val fire = nbt.getInt("on_fire").toFloat()
             val progress = fire/FIRE_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(AcText.literal("%")).formatted(Formatting.RED))
         }
@@ -52,7 +51,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(AcText.literal("%")).formatted(Formatting.BLUE))
         }
         if (nbt.contains("kill_count")){
-            val kills = Nbt.readIntNbt("kill_count",nbt).toFloat()
+            val kills = nbt.getInt("kill_count").toFloat()
             val progress = kills/KILL_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress).append(AcText.literal("%")).formatted(Formatting.DARK_RED))
         }
@@ -62,7 +61,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).append(AcText.literal("%")).formatted(Formatting.GREEN))
         }
         if (nbt.contains("mob_hit")){
-            val hit = Nbt.readIntNbt("mob_hit",nbt).toFloat()
+            val hit = nbt.getInt("mob_hit").toFloat()
             val progress = hit/HIT_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(AcText.literal("%")).formatted(Formatting.GRAY))
         }
@@ -119,7 +118,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 val nbt = stack.orCreateNbt
                 var hit = 0
                 if (nbt.contains("mob_hit")){
-                    hit = Nbt.readIntNbt("mob_hit",nbt)
+                    hit = nbt.getInt("mob_hit")
                 }
                 val newHit = hit + 1
                 if (newHit >= HIT_TARGET){
@@ -131,7 +130,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                         RegisterCriteria.IGNITE.trigger(player)
                     }
                 } else {
-                    Nbt.writeIntNbt("mob_hit",newHit,nbt)
+                    nbt.putInt("mob_hit",newHit)
                 }
 
             }
@@ -146,7 +145,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             val statusIdentifier = Registry.STATUS_EFFECT.getId(statusEffect)?:return
             val id = statusIdentifier.toString()
             if (compound.contains(id)) return
-            Nbt.writeIntNbt(id, 1, compound)
+            compound.putInt(id, 1)
             val keys = compound.keys
             if (keys.size >= STATUS_TARGET){
                 stack.decrement(1)
@@ -187,7 +186,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                 val nbt = stack.orCreateNbt
                 var fire = 0
                 if (nbt.contains("on_fire")){
-                    fire = Nbt.readIntNbt("on_fire",nbt)
+                    fire = nbt.getInt("on_fire")
                 }
                 val newFire = fire + 1
                 if (newFire >= FIRE_TARGET){
@@ -198,7 +197,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                         RegisterCriteria.IGNITE.trigger(player)
                     }
                 } else {
-                    Nbt.writeIntNbt("on_fire",newFire,nbt)
+                    nbt.putInt("on_fire",newFire)
                 }
 
             }
@@ -208,7 +207,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             val nbt = stack.orCreateNbt
             var kills = 0
             if (nbt.contains("kill_count")){
-                kills = Nbt.readIntNbt("kill_count",nbt)
+                kills = nbt.getInt("kill_count")
             }
             val newCount = kills + 1
             if (newCount >= KILL_TARGET){
@@ -220,7 +219,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
                     RegisterCriteria.IGNITE.trigger(player)
                 }
             } else {
-                Nbt.writeIntNbt("kill_count", newCount,nbt)
+                nbt.putInt("kill_count", newCount)
             }
         }
     }

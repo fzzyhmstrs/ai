@@ -1,9 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments

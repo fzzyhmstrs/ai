@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
-import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
+import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot

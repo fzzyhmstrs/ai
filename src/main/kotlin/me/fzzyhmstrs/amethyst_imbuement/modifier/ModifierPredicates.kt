@@ -2,7 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.modifier
 
 import me.fzzyhmstrs.amethyst_core.AC
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.*
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier

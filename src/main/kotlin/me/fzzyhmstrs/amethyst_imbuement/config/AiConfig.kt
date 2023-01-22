@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.gson
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreate
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
-import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.gson
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreate
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
+import me.fzzyhmstrs.fzzy_core.registry.SyncedConfigRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -240,7 +240,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class SceptersV1: SyncedConfigHelper.OldClass {
+    class SceptersV1: SyncedConfigHelper.OldClass<Items> {
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
@@ -249,7 +249,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
         var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
         var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Items {
             val items = Items()
             items.baseRegenRateTicks = baseRegenRateTicks
             items.opalineDurability = opalineDurability
@@ -264,7 +264,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class ColorsV0: SyncedConfigHelper.OldClass{
+    class ColorsV0: SyncedConfigHelper.OldClass<Colors>{
 
         private var defaultColorMap: Map<String,String> = mapOf(
             "minecraft:diamond_ore" to "#1ED0D6",
@@ -300,7 +300,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
         var modRainbowList: List<String> = listOf()
 
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Colors {
             val colors = Colors()
             colors.defaultColorMap = colors.defaultColorMap + defaultColorMap
             colors.defaultRainbowList = colors.defaultRainbowList + defaultRainbowList
@@ -311,7 +311,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class AltarsV1: SyncedConfigHelper.OldClass {
+    class AltarsV1: SyncedConfigHelper.OldClass<Altars> {
         var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
@@ -320,7 +320,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
 
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Altars {
             val altars = Altars()
             altars.disenchantLevelCosts = disenchantLevelCosts
             altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
@@ -334,7 +334,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class VillagesV0: SyncedConfigHelper.OldClass{
+    class VillagesV0: SyncedConfigHelper.OldClass<Villages>{
         var enableDesertWorkshops: Boolean = true
         var desertWorkshopWeight: Int = 1
         var enablePlainsWorkshops: Boolean = true
@@ -345,7 +345,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var snowyWorkshopWeight: Int = 1
         var enableTaigaWorkshops: Boolean = true
         var taigaWorkshopWeight: Int = 2
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Villages {
             val villages = Villages()
             villages.enableDesertWorkshops = enableDesertWorkshops
             villages.desertWorkshopWeight = desertWorkshopWeight

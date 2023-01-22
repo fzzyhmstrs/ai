@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_core.item_util.AbstractModLoot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
+import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.block.Blocks
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool

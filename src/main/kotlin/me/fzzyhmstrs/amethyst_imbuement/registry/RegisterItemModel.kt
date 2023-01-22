@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.registry.ItemModelRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentItemEntityRenderer
+import me.fzzyhmstrs.fzzy_core.registry.ItemModelRegistry
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.util.ModelIdentifier
