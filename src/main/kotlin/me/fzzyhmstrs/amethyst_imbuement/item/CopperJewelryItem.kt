@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference
 import dev.emi.trinkets.api.TrinketItem
-import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
+import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute

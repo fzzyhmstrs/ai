@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
@@ -128,7 +127,7 @@ class DisenchantingTableScreenHandler(
                         } else if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
                             disenchantCost[0] = calculateRequiredExperienceLevel(0)
                         } else {
-                            val level = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(), nbt)
+                            val level = nbt.getInt(NbtKeys.DISENCHANT_COUNT.str())
                             updateDisenchantCost(level,world, pos)
                         }
                     }
@@ -153,7 +152,7 @@ class DisenchantingTableScreenHandler(
         if (checkNbt != null && checkNbt.contains(NbtKeys.DISENCHANT_COUNT.str())){
             var atMax = false
             context.run { world: World, pos: BlockPos ->
-                val lvl = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),checkNbt)
+                val lvl = checkNbt.getInt(NbtKeys.DISENCHANT_COUNT.str())
                 val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchantBaseDisenchantsAllowed
                 if (lvl >= maxLevel) atMax = true
             }
@@ -241,12 +240,12 @@ class DisenchantingTableScreenHandler(
                     if (!world.isClient) {
                         val nbt = itemStack.orCreateNbt
                         if (!nbt.contains(NbtKeys.DISENCHANT_COUNT.str())) {
-                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(), 1, nbt)
+                            nbt.putInt(NbtKeys.DISENCHANT_COUNT.str(), 1)
                             updateDisenchantCost(1,world, pos)
                         } else {
-                            val currentLevel = Nbt.readIntNbt(NbtKeys.DISENCHANT_COUNT.str(),nbt)
+                            val currentLevel = nbt.getInt(NbtKeys.DISENCHANT_COUNT.str())
                             val newLevel = currentLevel + 1
-                            Nbt.writeIntNbt(NbtKeys.DISENCHANT_COUNT.str(),newLevel,nbt)
+                            nbt.putInt(NbtKeys.DISENCHANT_COUNT.str(),newLevel)
                             updateDisenchantCost(newLevel,world, pos)
                         }
                         world.playSound(

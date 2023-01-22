@@ -1,11 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
-import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -65,7 +64,7 @@ object RegisterKeybind {
                 if (stack.item is ScepterItem) {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
-                        val activeEnchant = Nbt.readStringNbt(NbtKeys.ACTIVE_ENCHANT.str(),nbt)
+                        val activeEnchant = nbt.getString(NbtKeys.ACTIVE_ENCHANT.str())
                         val activeEnchantName = Registry.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
                         client.player?.sendMessage(AcText.translatable("scepter.active_spell_key").append(activeEnchantName), true)
                         client.player?.addScoreboardTag(activeEnchant)

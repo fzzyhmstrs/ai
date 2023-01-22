@@ -1,13 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
-import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
-import me.fzzyhmstrs.amethyst_core.trinket_util.AugmentTasks
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
+import me.fzzyhmstrs.fzzy_core.trinket_util.AugmentTasks
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.damage.DamageSource
@@ -38,12 +36,12 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
         usageEnchantmentTasks(stack, world, user)
         val nbt = stack.orCreateNbt
         return if (!nbt.contains(NbtKeys.TOTEM.str())){
-            Nbt.writeBoolNbt(NbtKeys.TOTEM.str(),true,nbt)
+            nbt.putBoolean(NbtKeys.TOTEM.str(),true)
             activeEnchantmentTasks(stack, world, user)
             TypedActionResult.success(stack)
         } else {
-            val bl = !Nbt.readBoolNbt(NbtKeys.TOTEM.str(), nbt)
-            Nbt.writeBoolNbt(NbtKeys.TOTEM.str(), bl, nbt)
+            val bl = !nbt.getBoolean(NbtKeys.TOTEM.str())
+            nbt.putBoolean(NbtKeys.TOTEM.str(), bl)
             if (bl) {
                 activeEnchantmentTasks(stack, world, user)
             } else {
@@ -66,7 +64,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
         if (EventRegistry.ticker_20.isReady()){
             val nbt = stack.orCreateNbt
             passiveEnchantmentTasks(stack,world,entity)
-            if (!Nbt.readBoolNbt(NbtKeys.TOTEM.str(),nbt)) return
+            if (!nbt.getBoolean(NbtKeys.TOTEM.str())) return
             activeEnchantmentTasks(stack,world,entity)
         }
         if (EnchantmentHelper.getLevel(RegisterEnchantment.GUARDIAN,stack) > 0){ //check for guardian every tick for max responsiveness
@@ -120,7 +118,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
             return if (!nbt.contains(NbtKeys.TOTEM.str())){
                 false
             } else {
-                Nbt.readBoolNbt(NbtKeys.TOTEM.str(), nbt)
+                nbt.getBoolean(NbtKeys.TOTEM.str())
             }
         }
 

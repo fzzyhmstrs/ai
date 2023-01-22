@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractActiveAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack

@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.block.BlockState
 import net.minecraft.block.CraftingTableBlock
 import net.minecraft.entity.player.PlayerEntity

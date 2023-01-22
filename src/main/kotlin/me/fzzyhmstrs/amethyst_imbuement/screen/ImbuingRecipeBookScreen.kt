@@ -1,20 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import com.mojang.blaze3d.systems.RenderSystem
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import it.unimi.dsi.fastutil.ints.IntList
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
-import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.ButtonWidget.PressAction

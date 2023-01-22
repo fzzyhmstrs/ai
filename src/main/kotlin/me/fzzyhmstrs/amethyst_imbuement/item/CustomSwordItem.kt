@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.item_util.interfaces.Flavorful
-import net.minecraft.item.AxeItem
+import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.item.SwordItem
 import net.minecraft.item.ToolMaterial
 

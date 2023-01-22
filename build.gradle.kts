@@ -50,6 +50,13 @@ repositories {
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
+    flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
+    }
+    flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
+    }
+    mavenCentral()
 }
 dependencies {
     val minecraftVersion: String by project
@@ -100,7 +107,11 @@ dependencies {
     modImplementation(":amethyst_core-$acVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-$acVersion")
+
+    val fcVersion: String by project
+    modImplementation(":fzzy_core-$fcVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
 
     val palVersion: String by project
     modImplementation("io.github.ladysnake:PlayerAbilityLib:$palVersion"){
