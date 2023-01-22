@@ -4,15 +4,13 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
-import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.BaseAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
+import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment
 import net.minecraft.enchantment.EnchantmentLevelEntry
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.EnchantedBookItem
@@ -125,12 +123,12 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                             return false
                         } else {
                             val nbt = stackTest.orCreateNbt
-                            if (!nbt.contains(NbtKeys.LORE_KEY.str())){
+                            if (!nbt.contains(me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys.LORE_KEY.str())){
                                 return false
                             } else {
                                 val idTest = Identifier(augment)
                                 val pathTest = idTest.toString()
-                                val loreString = Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)
+                                val loreString = nbt.getString(me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys.LORE_KEY.str())
                                 val nbtTest = if (Identifier(loreString).namespace == "minecraft"){
                                     Identifier(AI.MOD_ID,Identifier(loreString).path).toString()
                                 } else {

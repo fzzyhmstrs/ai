@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.ImmutableList
-import me.fzzyhmstrs.amethyst_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType

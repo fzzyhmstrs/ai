@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -30,7 +29,7 @@ class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), 
     ): TypedActionResult<ItemStack> {
         val nbt = stack.nbt
         if (nbt != null){
-            val bola = Identifier(Nbt.readStringNbt(NbtKeys.LORE_KEY.str(),nbt)).toString()
+            val bola = Identifier(nbt.getString(NbtKeys.LORE_KEY.str())).toString()
             val type = AugmentHelper.getAugmentType(bola)
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
                 if (nbt.getString(NbtKeys.LORE_TYPE.str()) != type.str()){

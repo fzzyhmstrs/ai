@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.Renderer

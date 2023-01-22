@@ -3,7 +3,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -272,7 +271,7 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
-                when(Nbt.readStringNbt(NbtKeys.LORE_TYPE.str(), nbt)){
+                when(nbt.getString(NbtKeys.LORE_TYPE.str())){
                     SpellType.FURY.str() ->{ 0.3f }
                     SpellType.GRACE.str() -> { 0.7f }
                     SpellType.WIT.str() -> { 1.0f }
@@ -288,7 +287,7 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
-                when(Nbt.readStringNbt(NbtKeys.LORE_TYPE.str(), nbt)){
+                when(nbt.getString(NbtKeys.LORE_TYPE.str())){
                     SpellType.FURY.str() ->{ 0.3f }
                     SpellType.GRACE.str() -> { 0.7f }
                     SpellType.WIT.str() -> { 1.0f }
