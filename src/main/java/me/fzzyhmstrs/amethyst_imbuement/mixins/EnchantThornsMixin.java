@@ -2,11 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
 import net.minecraft.enchantment.ThornsEnchantment;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import net.minecraft.util.math.random.Random;
 
 @Mixin(ThornsEnchantment.class)
 public abstract class EnchantThornsMixin {

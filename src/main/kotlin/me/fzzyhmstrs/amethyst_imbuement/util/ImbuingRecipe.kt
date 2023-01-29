@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier

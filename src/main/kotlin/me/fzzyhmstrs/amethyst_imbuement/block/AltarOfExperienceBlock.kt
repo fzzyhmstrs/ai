@@ -22,8 +22,8 @@ import net.minecraft.util.Hand
 import net.minecraft.util.Nameable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 import net.minecraft.util.math.random.Random
+import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
 class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings) {
