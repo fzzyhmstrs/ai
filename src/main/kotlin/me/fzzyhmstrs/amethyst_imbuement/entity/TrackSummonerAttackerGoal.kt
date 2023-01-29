@@ -4,7 +4,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.TrackTargetGoal
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.passive.GolemEntity
 
 open class TrackSummonerAttackerGoal(summoned: PathAwareEntity, private val summoner: LivingEntity): TrackTargetGoal(summoned,false) {
 

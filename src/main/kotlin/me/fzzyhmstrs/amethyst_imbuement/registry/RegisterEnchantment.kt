@@ -15,7 +15,6 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
-import org.slf4j.Logger
 
 object RegisterEnchantment {
     private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()

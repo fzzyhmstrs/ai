@@ -14,8 +14,6 @@ import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
-import org.slf4j.LoggerFactory
-import java.util.logging.Logger
 import kotlin.random.Random
 
 val LOGGER = LoggerUtil.getLogger()

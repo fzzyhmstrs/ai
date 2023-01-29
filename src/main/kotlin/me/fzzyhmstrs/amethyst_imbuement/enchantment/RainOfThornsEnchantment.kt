@@ -8,7 +8,6 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ArrowEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.server.world.ServerWorld
 
 class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.BOW,*slot) {
 

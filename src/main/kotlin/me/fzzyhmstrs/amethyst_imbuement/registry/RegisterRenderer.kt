@@ -11,7 +11,6 @@ import me.fzzyhmstrs.amethyst_imbuement.model.DisenchantingTableBlockEntityRende
 import me.fzzyhmstrs.amethyst_imbuement.model.ImbuingTableBlockEntityRenderer.Companion.IMBUING_TABLE_BOOK_SPRITE_ID
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
@@ -19,13 +18,10 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.item.ModelPredicateProviderRegistry
 import net.minecraft.client.item.UnclampedModelPredicateProvider
-import net.minecraft.client.model.Dilation
-import net.minecraft.client.model.TexturedModelData
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.EntityModelLayer
-import net.minecraft.client.render.entity.model.OcelotEntityModel
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity

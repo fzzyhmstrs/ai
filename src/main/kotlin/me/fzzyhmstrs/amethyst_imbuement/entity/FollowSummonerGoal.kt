@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.WorldView
 import kotlin.math.abs

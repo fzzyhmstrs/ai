@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer

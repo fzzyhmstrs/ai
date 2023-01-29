@@ -14,7 +14,6 @@ import net.minecraft.structure.Structure;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Structure.class)
 public class StructureMixin {

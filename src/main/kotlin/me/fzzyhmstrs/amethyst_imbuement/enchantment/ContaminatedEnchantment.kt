@@ -7,10 +7,12 @@ import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.ProjectileDamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.item.*
+import net.minecraft.item.BowItem
+import net.minecraft.item.CrossbowItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.TridentItem
 
 class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisableEnchantment(weight, EnchantmentTarget.WEAPON,*slot) {
 

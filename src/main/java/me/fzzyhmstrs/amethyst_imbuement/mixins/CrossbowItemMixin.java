@@ -1,8 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
-import me.fzzyhmstrs.amethyst_imbuement.enchantment.DeadlyShotEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

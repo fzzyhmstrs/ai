@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import net.minecraft.block.*
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.ProjectileEntity

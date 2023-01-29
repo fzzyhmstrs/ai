@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
+
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -15,7 +17,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.google.common.collect.Multimap;
 
 import java.util.UUID;
 

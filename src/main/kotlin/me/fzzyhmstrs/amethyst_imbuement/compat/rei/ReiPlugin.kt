@@ -11,12 +11,6 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry
-import me.shedaniel.rei.api.client.registry.screen.SimpleClickArea
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
-import net.minecraft.data.server.ItemTagProvider
-import net.minecraft.tag.BlockTags
-import net.minecraft.tag.ItemTags
-import java.util.function.Supplier
 
 object ReiPlugin: REIClientPlugin {
 
