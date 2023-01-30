@@ -19,6 +19,7 @@ import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.Nameable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -65,6 +66,25 @@ class ImbuingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
         if (itemStack.hasCustomName() && blockEntity is ImbuingTableBlockEntity) {
             (blockEntity).customName = itemStack.name
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (state.isOf(newState.block)) {
+            return
+        }
+        val entity = world.getBlockEntity(pos)
+        if (entity is ImbuingTableBlockEntity){
+            ItemScatterer.spawn(world,pos,entity.inventory)
+            world.updateComparators(pos, this)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     @Deprecated("Deprecated in Java")
