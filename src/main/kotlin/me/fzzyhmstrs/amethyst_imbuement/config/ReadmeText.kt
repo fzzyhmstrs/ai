@@ -16,7 +16,7 @@ object ReadmeText: SyncedConfigHelper.ReadMeWriter {
             "1.19-11/1.18.2-28: Added the entities config file.",
             "1.19-14/1.18.2-31: Added the trinkets config file and updated Entities to v1 with (currently unused) selections.",
             "1.19-22/1.18.2-39: changed the scepters config from scepters_v1 to items_v0 and added the glistering tome boolean.",
-            "1.19.3-02/1.19-25/1.18.2-42: Added a config for the chance an experience bush will grow.",
+            "1.19.3-02/1.19-25/1.18.2-42: Added a config for the chance an experience bush will grow (in Altars config v3).",
             "",
             "Note:  Previous versions of updated configs that have new version numbers (v1 from v0, for example) will be read and copied over to the new version, and the old version deleted.",
             "",
