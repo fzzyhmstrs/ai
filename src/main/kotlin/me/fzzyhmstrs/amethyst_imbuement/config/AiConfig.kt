@@ -24,7 +24,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     init {
         items = readOrCreateUpdated("items_v0.json","scepters_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {SceptersV1()})
-        altars = readOrCreateUpdated("altars_v2.json","altars_v1.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV1()})
+        altars = readOrCreateUpdated("altars_v3.json","altars_v2.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV2()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
         //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
@@ -74,6 +74,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     class Altars {
+        var experienceBushBonemealChance: Float = 0.4
         var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
@@ -312,13 +313,30 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
     class AltarsV1: SyncedConfigHelper.OldClass<Altars> {
-        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
+        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
         var imbuingTableReplaceEnchantingTable: Boolean = false
         var imbuingTableDifficultyModifier: Float = 1.0F
+        var imbuingTableMatchEasyMagicBehavior: Boolean = true
+        var imbuingTableEasyMagicRerollEnabled: Boolean = true
+        var imbuingTableEasyMagicLevelCost: Int = 5
+        var imbuingTableEasyMagicLapisCost: Int = 1
+        var imbuingTableEasyMagicShowTooltip: Boolean = true
+        var imbuingTableEasyMagicSingleEnchantTooltip: Boolean = true
+        var imbuingTableEasyMagicLenientBookshelves: Boolean = false
+        var imbuingTableMatchRerollBehavior: Boolean = true
+        var imbuingTableRerollLevelCost: Int = 1
+        var imbuingTableRerollLapisCost: Int = 0
+        var imbuingTableMatchEnhancementBehavior: Boolean = true
+        var imbuingTableEnhancementLevelsPer: Int = 5
+        var imbuingTableEnhancementLapisPer: Int = 5
+        var imbuingTableMatchEasierEnchantingBehavior: Boolean = true
+        var imbuingTableEasierEnchantingLapisCost: Int = 6
+        var imbuingTableMatchBetterEnchantmentBoostingBehavior: Boolean = true
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
+        var altarOfExperienceCustomXpMethod: Boolean = true
 
         override fun generateNewClass(): Altars {
             val altars = Altars()
@@ -327,8 +345,20 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
             altars.imbuingTableReplaceEnchantingTable = imbuingTableReplaceEnchantingTable
             altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
+            altars.imbuingTableMatchEasyMagicBehavior = imbuingTableMatchEasyMagicBehavior
+            altars.imbuingTableEasyMagicRerollEnabled = imbuingTableEasyMagicRerollEnabled
+            altars.imbuingTableEasyMagicLevelCost = imbuingTableEasyMagicLevelCost
+            altars.imbuingTableEasyMagicLapisCost = imbuingTableEasyMagicLapisCost
+            altars.imbuingTableEasyMagicShowTooltip = imbuingTableEasyMagicShowTooltip
+            altars.imbuingTableEasyMagicLenientBookshelves = imbuingTableEasyMagicLenientBookshelves
+            altars.imbuingTableMatchRerollBehavior = imbuingTableMatchRerollBehavior
+            altars.imbuingTableRerollLevelCost = imbuingTableRerollLevelCost
+            altars.imbuingTableRerollLapisCost = imbuingTableRerollLapisCost
+            altars.imbuingTableMatchEasierEnchantingBehavior = imbuingTableMatchEasierEnchantingBehavior
+            altars.imbuingTableEasierEnchantingLapisCost = imbuingTableEasierEnchantingLapisCost
             altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
             altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
+            altars.altarOfExperienceCustomXpMethod = altarOfExperienceCustomXpMethod
             return altars
         }
     }
