@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
@@ -38,7 +39,7 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
     @Deprecated("Deprecated in Java")
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
         val i = state.get(AGE)
-        if (i < 3 && random.nextInt(6) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (i < 3 && random.nextFloat() < AiConfig.altars.experienceBushGrowChance && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(AGE, i + 1) as BlockState, NOTIFY_LISTENERS)
         }
     }
@@ -84,8 +85,9 @@ class ExperienceBushBlock(settings: Settings):SweetBerryBushBlock(settings) {
         return ActionResult.PASS
     }
 
+
     override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState) {
-        if (random.nextFloat() > 0.6) {
+        if (random.nextFloat() < AiConfig.altars.experienceBushGrowChance) {
             val i = 3.coerceAtMost(state.get(AGE) + 1)
             world.setBlockState(pos, state.with(AGE, i) as BlockState, NOTIFY_LISTENERS)
         }
