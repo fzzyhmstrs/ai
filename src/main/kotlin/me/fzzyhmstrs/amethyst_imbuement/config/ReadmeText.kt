@@ -39,6 +39,7 @@ object ReadmeText: SyncedConfigHelper.ReadMeWriter {
             "This json defines functional tweaks for the altars, tables, and blocks in the mod.",
             "",
             "> experienceBushBonemealChance: sets the chance that an experience bush will grow to the next phase when bonemeal is used on it. Set to 0.0 to make experience bushes not grow with bonemeal.",
+            "> experienceBushBonemealChance: chance that an experience bush will grow to the next phase when ticked randomly ('natural' growth). Set to 0.0 to make experience bushes not grow naturally at all.",
             "> disenchantLevelCosts: array of the levels required to disenchant the first, second, third, etc. enchantment off a particular item. You can extend this array if you'd like, but it won't do anything unless you also add to the base disenchants allowed. If you allow 3 base enchants, an array up to 7 long would have practical use.",
             "> disenchantBaseDisenchantsAllowed: the base number of disenchants allowed with just the table present before adding pillars. If you want virtually infinite disenchants, make this number very high. You could make it 0, meaning you have to add pillars before you can disenchant at all, but I don't recommend it.",
             "> imbuingTableEnchantingEnabled: disable this to prevent the player from using the imbuing table as an enchanting table. Use this if you have an alternate enchanting system and don't want the table to allow vanilla style enchanting.",

@@ -74,7 +74,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     class Altars {
-        var experienceBushBonemealChance: Float = 0.4
+        var experienceBushBonemealChance: Float = 0.4f
+        var experienceBushGrowChance: Float = 0.15f
         var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
@@ -312,7 +313,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class AltarsV1: SyncedConfigHelper.OldClass<Altars> {
+    class AltarsV2: SyncedConfigHelper.OldClass<Altars> {
         var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
