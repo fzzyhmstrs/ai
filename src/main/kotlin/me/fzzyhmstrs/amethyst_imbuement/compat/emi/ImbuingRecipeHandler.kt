@@ -26,6 +26,6 @@ class ImbuingRecipeHandler: EmiRecipeHandler<ImbuingTableScreenHandler> {
 
     override fun supportsRecipe(recipe: EmiRecipe): Boolean {
         val category = EmiClientPlugin.IMBUING_CATEGORY
-        return recipe.category === category && recipe.supportsRecipeTree()
+        return recipe.category === category
     }
 }
