@@ -21,6 +21,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
@@ -749,6 +750,7 @@ class ImbuingTableScreenHandler(
     class EnchantingResult(override val power: Int, val id: Int, val level: Int, val slot: Int): TableResult{
 
         override val type: Int = 0
+        private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override val lapis: Int = when(power){
             in 1..10 -> 1
@@ -836,6 +838,13 @@ class ImbuingTableScreenHandler(
             val enchantment = Enchantment.byRawId(id)
             if (enchantment != null) {
                 list.add(AcText.translatable("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE))
+                if (etdLoaded){
+                    val descKey = enchantment.translationKey + ".desc"
+                    val descText = AcText.translatable(descKey)
+                    if (descKey != descText.string){
+                        list.add(descText.formatted(Formatting.DARK_GRAY))
+                    }
+                }
             }
             if (!player.abilities.creativeMode) {
                 list.add(AcText.empty())
@@ -878,6 +887,7 @@ class ImbuingTableScreenHandler(
 
         override val type: Int = 1
         override val lapis = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+        private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeIdentifier(recipe.id)
@@ -1013,6 +1023,13 @@ class ImbuingTableScreenHandler(
                 val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     list.add(AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
+                    if (etdLoaded){
+                        val descKey = augment.translationKey + ".desc"
+                        val descText = AcText.translatable(descKey)
+                        if (descKey != descText.string){
+                            list.add(descText.formatted(Formatting.DARK_GRAY))
+                        }
+                    }
                     list.add(AcText.empty())
                 }
             } else {
