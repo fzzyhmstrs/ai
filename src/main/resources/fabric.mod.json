@@ -69,11 +69,13 @@
     "amethyst_imbuement.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": ">=0.14.11",
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
     "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
-    "minecraft": ">=1.19",
-    "java": ">=17"
+    "minecraft": ">=1.19.3",
+    "java": ">=17",
+    "fzzy_core": ">=0.1.0+1.19.3",
+    "amethyst_core": ">=1.0.0+1.19.3"
   }
 }
