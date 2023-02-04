@@ -549,6 +549,7 @@
 	"imbuing_recipes_book.category.faves": "Favorite Recipes",
 	"key.amethyst_imbuement.vein_mine_key": "Vein Mine",
 	"key.amethyst_imbuement.spell_key": "Current Scepter Spell",
+	"key.amethyst_imbuement.sniper_bow_key": "Change Sniper Bow Scope",
 	"chat.amethyst_imbuement.active_spell": "Active spell is: ",
 	"chat.amethyst_imbuement.no_spell": "Spells not activated yet...",
 	"display.imbuing.cost.small": "%1$s Lvl",
