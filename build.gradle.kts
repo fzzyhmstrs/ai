@@ -156,11 +156,12 @@ modrinth {
     dependencies{
         required.project("fabric-api")
         required.project("fabric-language-kotlin")
+        required.project("amethyst-core")
+        required.project("fzzy-core")
         optional.project("emi")
         optional.project("roughly-enough-items")
-        embedded.project("amethyst-core")
         embedded.project("trinkets")
         embedded.project("patchouli")
     }
-    debugMode.set(true)
+    debugMode.set(false)
 }
