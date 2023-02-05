@@ -186,7 +186,6 @@ class ImbuingTableScreenHandler(
                             world)
                     }
                     val shelves = checkBookshelves(world, pos)
-                    println(shelves)
                     if (shelves == 30 && player is ServerPlayerEntity){
                         RegisterCriteria.AMPED_UP.trigger(player)
                     }
