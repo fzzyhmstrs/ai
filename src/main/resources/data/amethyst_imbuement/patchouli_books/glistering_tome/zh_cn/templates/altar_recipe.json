@@ -1,0 +1,65 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "祭坛强化",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:item", 
+"item": "#input_item#",
+"framed": true,
+"x": 50,            
+"y": 18
+},
+{
+"type": "patchouli:item", 
+"item": "#addition_item#",
+"framed": true,
+"x": 50,            
+"y": 42
+},
+{
+"type": "patchouli:item", 
+"item": "#output_item#",
+"framed": true,
+"x": 50,            
+"y": 66
+},
+{
+"type": "patchouli:image",                        
+"x": 35,            
+"y": 46,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 10,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:image",                        
+"x": 72,            
+"y": 46,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+}
+]}
+
+
+
+
+
+
+
+
+
+
+
+
