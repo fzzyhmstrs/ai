@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.gson
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreate
-import me.fzzyhmstrs.amethyst_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
-import me.fzzyhmstrs.amethyst_core.registry.SyncedConfigRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.gson
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreate
+import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
+import me.fzzyhmstrs.fzzy_core.registry.SyncedConfigRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -24,7 +24,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     init {
         items = readOrCreateUpdated("items_v0.json","scepters_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {SceptersV1()})
-        altars = readOrCreateUpdated("altars_v2.json","altars_v1.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV1()})
+        altars = readOrCreateUpdated("altars_v3.json","altars_v2.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV2()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
         //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
@@ -74,6 +74,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     class Altars {
+        var experienceBushBonemealChance: Float = 0.4f
+        var experienceBushGrowChance: Float = 0.15f
         var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
@@ -240,7 +242,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class SceptersV1: SyncedConfigHelper.OldClass {
+    class SceptersV1: SyncedConfigHelper.OldClass<Items> {
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
@@ -249,7 +251,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
         var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
         var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Items {
             val items = Items()
             items.baseRegenRateTicks = baseRegenRateTicks
             items.opalineDurability = opalineDurability
@@ -264,7 +266,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class ColorsV0: SyncedConfigHelper.OldClass{
+    class ColorsV0: SyncedConfigHelper.OldClass<Colors>{
 
         private var defaultColorMap: Map<String,String> = mapOf(
             "minecraft:diamond_ore" to "#1ED0D6",
@@ -300,7 +302,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
         var modRainbowList: List<String> = listOf()
 
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Colors {
             val colors = Colors()
             colors.defaultColorMap = colors.defaultColorMap + defaultColorMap
             colors.defaultRainbowList = colors.defaultRainbowList + defaultRainbowList
@@ -311,30 +313,59 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class AltarsV1: SyncedConfigHelper.OldClass {
-        var disenchantLevelCosts: List<Int> = listOf(3, 5, 9, 15, 23)
+    class AltarsV2: SyncedConfigHelper.OldClass<Altars> {
+        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
         var disenchantBaseDisenchantsAllowed: Int = 1
         var imbuingTableEnchantingEnabled: Boolean = true
         var imbuingTableReplaceEnchantingTable: Boolean = false
         var imbuingTableDifficultyModifier: Float = 1.0F
+        var imbuingTableMatchEasyMagicBehavior: Boolean = true
+        var imbuingTableEasyMagicRerollEnabled: Boolean = true
+        var imbuingTableEasyMagicLevelCost: Int = 5
+        var imbuingTableEasyMagicLapisCost: Int = 1
+        var imbuingTableEasyMagicShowTooltip: Boolean = true
+        var imbuingTableEasyMagicSingleEnchantTooltip: Boolean = true
+        var imbuingTableEasyMagicLenientBookshelves: Boolean = false
+        var imbuingTableMatchRerollBehavior: Boolean = true
+        var imbuingTableRerollLevelCost: Int = 1
+        var imbuingTableRerollLapisCost: Int = 0
+        var imbuingTableMatchEnhancementBehavior: Boolean = true
+        var imbuingTableEnhancementLevelsPer: Int = 5
+        var imbuingTableEnhancementLapisPer: Int = 5
+        var imbuingTableMatchEasierEnchantingBehavior: Boolean = true
+        var imbuingTableEasierEnchantingLapisCost: Int = 6
+        var imbuingTableMatchBetterEnchantmentBoostingBehavior: Boolean = true
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
+        var altarOfExperienceCustomXpMethod: Boolean = true
 
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Altars {
             val altars = Altars()
             altars.disenchantLevelCosts = disenchantLevelCosts
             altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
             altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
             altars.imbuingTableReplaceEnchantingTable = imbuingTableReplaceEnchantingTable
             altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
+            altars.imbuingTableMatchEasyMagicBehavior = imbuingTableMatchEasyMagicBehavior
+            altars.imbuingTableEasyMagicRerollEnabled = imbuingTableEasyMagicRerollEnabled
+            altars.imbuingTableEasyMagicLevelCost = imbuingTableEasyMagicLevelCost
+            altars.imbuingTableEasyMagicLapisCost = imbuingTableEasyMagicLapisCost
+            altars.imbuingTableEasyMagicShowTooltip = imbuingTableEasyMagicShowTooltip
+            altars.imbuingTableEasyMagicLenientBookshelves = imbuingTableEasyMagicLenientBookshelves
+            altars.imbuingTableMatchRerollBehavior = imbuingTableMatchRerollBehavior
+            altars.imbuingTableRerollLevelCost = imbuingTableRerollLevelCost
+            altars.imbuingTableRerollLapisCost = imbuingTableRerollLapisCost
+            altars.imbuingTableMatchEasierEnchantingBehavior = imbuingTableMatchEasierEnchantingBehavior
+            altars.imbuingTableEasierEnchantingLapisCost = imbuingTableEasierEnchantingLapisCost
             altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
             altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
+            altars.altarOfExperienceCustomXpMethod = altarOfExperienceCustomXpMethod
             return altars
         }
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class VillagesV0: SyncedConfigHelper.OldClass{
+    class VillagesV0: SyncedConfigHelper.OldClass<Villages>{
         var enableDesertWorkshops: Boolean = true
         var desertWorkshopWeight: Int = 1
         var enablePlainsWorkshops: Boolean = true
@@ -345,7 +376,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var snowyWorkshopWeight: Int = 1
         var enableTaigaWorkshops: Boolean = true
         var taigaWorkshopWeight: Int = 2
-        override fun generateNewClass(): Any {
+        override fun generateNewClass(): Villages {
             val villages = Villages()
             villages.enableDesertWorkshops = enableDesertWorkshops
             villages.desertWorkshopWeight = desertWorkshopWeight

@@ -1,11 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -16,11 +13,15 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
+import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
@@ -187,7 +188,6 @@ class ImbuingTableScreenHandler(
                             world)
                     }
                     val shelves = checkBookshelves(world, pos)
-                    println(shelves)
                     if (shelves == 30 && player is ServerPlayerEntity){
                         RegisterCriteria.AMPED_UP.trigger(player)
                     }
@@ -749,6 +749,7 @@ class ImbuingTableScreenHandler(
     class EnchantingResult(override val power: Int, val id: Int, val level: Int, val slot: Int): TableResult{
 
         override val type: Int = 0
+        private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override val lapis: Int = when(power){
             in 1..10 -> 1
@@ -836,6 +837,13 @@ class ImbuingTableScreenHandler(
             val enchantment = Enchantment.byRawId(id)
             if (enchantment != null) {
                 list.add(AcText.translatable("container.enchant.clue", enchantment.getName(level)).formatted(Formatting.WHITE))
+                if (etdLoaded){
+                    val descKey = enchantment.translationKey + ".desc"
+                    val descText = AcText.translatable(descKey)
+                    if (descKey != descText.string){
+                        list.add(descText.formatted(Formatting.DARK_GRAY))
+                    }
+                }
             }
             if (!player.abilities.creativeMode) {
                 list.add(AcText.empty())
@@ -878,6 +886,7 @@ class ImbuingTableScreenHandler(
 
         override val type: Int = 1
         override val lapis = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+        private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeIdentifier(recipe.id)
@@ -1013,6 +1022,13 @@ class ImbuingTableScreenHandler(
                 val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     list.add(AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
+                    if (etdLoaded){
+                        val descKey = augment.translationKey + ".desc"
+                        val descText = AcText.translatable(descKey)
+                        if (descKey != descText.string){
+                            list.add(descText.formatted(Formatting.DARK_GRAY))
+                        }
+                    }
                     list.add(AcText.empty())
                 }
             } else {

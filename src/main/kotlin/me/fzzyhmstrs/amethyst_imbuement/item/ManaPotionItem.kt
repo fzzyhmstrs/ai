@@ -1,17 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
-import me.fzzyhmstrs.amethyst_core.trinket_util.TrinketUtil
 import me.fzzyhmstrs.amethyst_imbuement.entity.ManaPotionEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.ItemCooldownManager
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items

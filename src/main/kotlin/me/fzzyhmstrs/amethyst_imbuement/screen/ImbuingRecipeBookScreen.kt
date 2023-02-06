@@ -1,40 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import com.mojang.blaze3d.systems.RenderSystem
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import it.unimi.dsi.fastutil.ints.IntList
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
-import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
-import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
-import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.screen.ingame.HandledScreen
-import net.minecraft.client.gui.widget.ButtonWidget
-import net.minecraft.client.gui.widget.ButtonWidget.PressAction
-import net.minecraft.client.gui.widget.TexturedButtonWidget
-import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.sound.PositionedSoundInstance
-import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.item.EnchantedBookItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.registry.Registries
-import net.minecraft.screen.slot.SlotActionType
-import net.minecraft.sound.SoundEvents
-import net.minecraft.text.MutableText
-import net.minecraft.text.Text
-import net.minecraft.util.Formatting
-import java.util.function.Consumer
-import kotlin.math.ceil
 
 class ImbuingRecipeBookScreen(private val oldScreen: HandledScreen<*>): ImbuingRecipeBaseScreen(AcText.translatable("")) {
 

@@ -51,6 +51,9 @@ repositories {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
     flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
+    }
+    flatDir {
         dirs("F:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
     }
     mavenCentral()
@@ -95,7 +98,11 @@ dependencies {
     modImplementation(":amethyst_core-$acVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include(":amethyst_core-$acVersion")
+
+    val fcVersion: String by project
+    modImplementation(":fzzy_core-$fcVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
 
     val palVersion: String by project
     modImplementation("io.github.ladysnake:PlayerAbilityLib:$palVersion"){
@@ -149,9 +156,10 @@ modrinth {
     dependencies{
         required.project("fabric-api")
         required.project("fabric-language-kotlin")
+        required.project("amethyst-core")
+        required.project("fzzy-core")
         optional.project("emi")
         optional.project("roughly-enough-items")
-        embedded.project("amethyst-core")
         embedded.project("trinkets")
         embedded.project("patchouli")
     }

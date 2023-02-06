@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import com.google.common.base.Predicate
 import com.google.gson.JsonObject
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractEquipmentAugment
-import me.fzzyhmstrs.amethyst_core.trinket_util.base_augments.AbstractPassiveAugment
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractPassiveAugment
 import net.minecraft.advancement.criterion.AbstractCriterion
 import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.enchantment.Enchantment

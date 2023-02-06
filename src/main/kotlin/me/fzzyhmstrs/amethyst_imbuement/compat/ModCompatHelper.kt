@@ -1,10 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat
 
 import dev.emi.emi.api.EmiApi
-import me.fzzyhmstrs.amethyst_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
-import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingRecipeBookScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 

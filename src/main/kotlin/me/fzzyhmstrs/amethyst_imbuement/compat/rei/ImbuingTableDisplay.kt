@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
-import me.fzzyhmstrs.amethyst_core.nbt_util.Nbt
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
@@ -21,7 +20,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         Optional.ofNullable(recipe.id),
         createCostTag(recipe))
 
-    private val cost = Nbt.readIntNbt("display_cost", tag)
+    private val cost = tag.getInt("display_cost")
 
     override fun getInputEntries(): MutableList<EntryIngredient> {
         return inputs
@@ -46,7 +45,7 @@ class ImbuingTableDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         private fun createCostTag(recipe: ImbuingRecipe): NbtCompound{
             val nbt = NbtCompound()
             val cost = recipe.getCost()
-            Nbt.writeIntNbt("display_cost",cost,nbt)
+            nbt.putInt("display_cost",cost)
             return nbt
         }
 

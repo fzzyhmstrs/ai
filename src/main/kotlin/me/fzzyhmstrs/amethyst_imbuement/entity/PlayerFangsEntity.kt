@@ -56,7 +56,11 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                 val world = this.world
                 if (world is ServerWorld){
                     entity = world.getEntity(ownerUuid)
-                    entity as LivingEntity
+                    if (entity != null){
+                        entity as LivingEntity
+                    } else {
+                        null
+                    }
                 } else {
                     null
                 }
