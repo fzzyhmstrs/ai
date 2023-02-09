@@ -1,0 +1,39 @@
+{
+	"minecraft:emerald":[
+		"amethyst_imbuement:steel_helmet",
+		"amethyst_imbuement:steel_chestplate",
+		"amethyst_imbuement:steel_leggings",
+		"amethyst_imbuement:steel_boots"
+	],
+	"amethyst_imbuement:garnet": [
+		"amethyst_imbuement:glistering_trident",
+		"amethyst_imbuement:sniper_bow",
+		"amethyst_imbuement:garnet_sword",
+		"amethyst_imbuement:garnet_axe",
+		"amethyst_imbuement:garnet_pickaxe",
+		"amethyst_imbuement:garnet_shovel",
+		"amethyst_imbuement:garnet_hoe"
+	],
+	"minecraft:netherite_scrap":[
+		"amethyst_imbuement:ametrine_helmet",
+		"amethyst_imbuement:ametrine_chestplate",
+		"amethyst_imbuement:ametrine_leggings",
+		"amethyst_imbuement:ametrine_boots"
+	],
+	"amethyst_imbuement:glowing_fragment":[
+		"amethyst_imbuement:glowing_blade",
+		"amethyst_imbuement:glowing_pick",
+		"amethyst_imbuement:glowing_spade",
+		"amethyst_imbuement:glowing_hoe",
+		"amethyst_imbuement:glowing_axe",
+		"amethyst_imbuement:imbued_ring",
+		"amethyst_imbuement:imbued_headband",
+		"amethyst_imbuement:imbued_amulet"
+	],
+	"amethyst_imbuement:gem_dust":[
+		"amethyst_imbuement:copper_ring",
+		"amethyst_imbuement:copper_headband",
+		"amethyst_imbuement:copper_amulet"
+	]
+
+}

@@ -1005,13 +1005,13 @@ class ImbuingTableScreenHandler(
                     }
                 }
                 val itemStack4 = recipe.output
-                handler.inventory.setStack(6,itemStack4)
-                if(recipe.getTransferEnchant()){
-                    Nbt.transferNbt(itemStack3,itemStack4)
-                    val l = EnchantmentHelper.get(itemStack3)
-                    EnchantmentHelper.set(l,itemStack4)
+                val itemStack5 = if (recipe.getTransferEnchant()){
+                    Nbt.createItemStackWithNbt(itemStack4.item,itemStack4.count,itemStack3.orCreateNbt)
+                } else {
+                    itemStack4.copy()
                 }
-                itemStack4.item.onCraft(itemStack4,world, player)
+                handler.inventory.setStack(6,itemStack5)
+                itemStack4.item.onCraft(itemStack5,world, player)
             }
             return true
         }
