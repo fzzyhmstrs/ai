@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": ".$(l)效果：$()激活图腾时给予水中的持有者潮涌能量。e$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()主动，在水中时消耗耐久值$(br)$(l)级别：$()中$(br)$(l)不兼容：$()其他主动图腾强化"
+"text": ".$(l)效果：$()激活图腾时给予水中的持有者潮涌能量。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()主动，在水中时消耗耐久值$(br)$(l)级别：$()中$(br)$(l)不兼容：$()其他主动图腾强化"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

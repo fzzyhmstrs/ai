@@ -1,0 +1,56 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "#mod_head#",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:image",                        
+"x": 26,
+"y": 11,
+"image": "amethyst_imbuement:textures/gui/patchouli/modifier_spotlight.png",
+"width": 64,
+"height": 18,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:image",                        
+"x": 42,            
+"y": 12,
+"image": "#mod_image",
+"width": 32,
+"height": 16,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{            
+"type": "patchouli:text",            
+"text": "升级自：#ancestor#",            
+"x": 2,
+"y": 40        
+},
+{            
+"type": "patchouli:text",            
+"text": "升级至：#descendant#",
+"x": 2,
+"y": 50       
+},
+{            
+"type": "patchouli:text",            
+"text": "符文类型：#mod_type#",            
+"x": 2,
+"y": 70
+},
+{            
+"type": "patchouli:text",            
+"text": "#mod_text#",            
+"x": 2,
+"y": 80
+}
+]}
