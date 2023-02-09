@@ -15,7 +15,7 @@
 "ancestor": "无",
 "descendant": "$(l:amethyst_imbuement:modifiers/thrifty)节俭$()",
 "mod_type": "$(2)法术施放$()",
-"mod_text": "你的权杖会有效地利用它的魔法能量。按下一页的配方为任意法杖注魔。"
+"mod_text": "你的法杖会有效地利用它的魔法能量。按下一页的配方为任意法杖注魔。"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",

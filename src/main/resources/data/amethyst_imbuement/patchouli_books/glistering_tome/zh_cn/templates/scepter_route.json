@@ -1,0 +1,85 @@
+{    "components": [
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:opaline_scepter",
+    "framed": true,
+    "x": 10,
+    "y": 5
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_1#",
+    "framed": true,
+    "x": 10,
+    "y": 45
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_2#",
+    "framed": true,
+    "x": 10,
+    "y": 85
+  },
+  {
+    "type": "patchouli:item",
+    "item": "#tier_3#",
+    "framed": true,
+    "x": 10,
+    "y": 125
+  },
+  {
+    "type": "patchouli:text",
+    "text": "$(l)专攻：$()",
+    "x": 40,
+    "y": 1
+  },
+  {
+    "type": "patchouli:text",
+    "text": "#spec#",
+    "x": 40,
+    "y": 10
+  },
+  {
+    "type": "patchouli:text",
+    "text": "$(l)路线法术：$()$(br)#spells#$(br2)$(l)路线符文：$()#mods#",
+    "max_width": 72,
+    "x": 40,
+    "y": 28
+  },
+  {
+    "type": "patchouli:image",
+    "x": 14,
+    "y": 29,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 14,
+    "y": 69,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  },
+  {
+    "type": "patchouli:image",
+    "x": 14,
+    "y": 109,
+    "image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+    "width": 9,
+    "height": 9,
+    "u": 0,
+    "v": 0,
+    "texture_width": 32,
+    "texture_height": 16
+  }
+]}

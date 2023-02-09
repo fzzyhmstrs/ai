@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "增加65%法术效果持续时间。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道n$()"
+"text": "增加65%法术效果持续时间。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
