@@ -77,6 +77,11 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$reiVersion")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$reiVersion")
 
+    val jeiVersion: String by project
+    modImplementation("mezz.jei:$jeiVersion"){
+        exclude ("mezz.jei")
+    }
+
     val emiVersion: String by project
     modImplementation("dev.emi:emi:$emiVersion"){
         exclude("net.fabricmc.fabric-api")
