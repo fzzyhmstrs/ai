@@ -1,15 +1,15 @@
 {    
-"name": "月长石",    
+"name": "月光石",    
 "icon": "amethyst_imbuement:moonstone",    
 "category": "amethyst_imbuement:gems",    
 "pages": [        
 {            
 	"type": "patchouli:text",            
-	"text": "$(l)含义：$()超自然的保护$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()来制造月长石。"      
+	"text": "$(l)含义：$()超自然的保护$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()来制造月光石。"      
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
-"title": "注魔：月长石",
+"title": "注魔：月光石",
 "imbue_a_item": "minecraft:rotten_flesh",
 "imbue_b_item": "minecraft:rotten_flesh",
 "imbue_c_item": "minecraft:rotten_flesh",

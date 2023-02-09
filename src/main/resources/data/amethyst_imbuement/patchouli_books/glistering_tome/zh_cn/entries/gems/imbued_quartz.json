@@ -9,7 +9,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
-"title": "Imbued Quartz Imbuing",
+"title": "注魔：注魔石英",
 "imbue_a_item": "minecraft:rose_bush",
 "imbue_b_item": "minecraft:rose_bush",
 "imbue_c_item": "minecraft:rose_bush",
