@@ -35,6 +35,9 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
         if (!stack2.isEmpty){ //always defer usage if there is an item in the player's other hand (only activate when other hand empty)
             return TypedActionResult.fail(stack)
         }
+        if(!checkCanUse(stack,world,user,10)){
+            return TypedActionResult.fail(stack)
+        }
         usageEnchantmentTasks(stack, world, user)
         val nbt = stack.orCreateNbt
         return if (!nbt.contains(NbtKeys.TOTEM.str())){
