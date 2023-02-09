@@ -23,7 +23,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     var entities: Entities
 
     init {
-        items = readOrCreateUpdated("items_v0.json","scepters_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {SceptersV1()})
+        items = readOrCreateUpdated("items_v1.json","items_v0.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {ItemsV0()})
         altars = readOrCreateUpdated("altars_v3.json","altars_v2.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV2()})
         colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
         colors.trimData()
@@ -63,6 +63,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     class Items {
         var giveGlisteringTome: Boolean = true
+        var totemOfAmethystDurability: Int = 360
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
@@ -242,7 +243,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
 
     @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class SceptersV1: SyncedConfigHelper.OldClass<Items> {
+    class ItemsV0: SyncedConfigHelper.OldClass<Items> {
+        var giveGlisteringTome: Boolean = true
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
         var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
         var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
@@ -253,6 +255,7 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
         override fun generateNewClass(): Items {
             val items = Items()
+            items.giveGlisteringTome = giveGlisteringTome
             items.baseRegenRateTicks = baseRegenRateTicks
             items.opalineDurability = opalineDurability
             items.iridescentDurability = iridescentDurability
