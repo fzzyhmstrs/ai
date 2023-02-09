@@ -25,7 +25,7 @@
 "craft_h_item": "minecraft:rabbit_foot",
 "craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
 "result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:leaping\",lvl:1}]}",
-"cost_text": "$(l消耗等级：$(2)15$()"
+"cost_text": "$(l)消耗等级：$(2)15$()"
 }
 ]
 }
