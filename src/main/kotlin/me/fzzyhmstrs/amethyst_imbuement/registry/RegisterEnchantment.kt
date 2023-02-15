@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.scepter.*
+import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
@@ -135,6 +136,12 @@ object RegisterEnchantment {
             val enchant = regEnchant[k]
             val id = Identifier(AI.MOD_ID, k)
             Registry.register(Registry.ENCHANTMENT, id, enchant)
+            if (enchant is AbstractConfigDisableEnchantment){
+                enchant.updateEnabled()
+                if (!enchant.isEnabled()){
+                    LOGGER.info("Augment $id is set as disabled in the configs!")
+                }
+            }
             if (enchant is ScepterAugment){
                 AugmentHelper.registerAugmentStat(enchant)
                 if (!AugmentHelper.getAugmentEnabled(id.toString())) {
