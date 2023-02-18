@@ -49,11 +49,7 @@ open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings
     }
 
     override fun getRandomBookAugment(list: List<String>, user: PlayerEntity, hand: Hand): String {
-        val stack = if (hand == Hand.MAIN_HAND){
-            user.offHandStack
-        } else {
-            user.mainHandStack
-        }
+        val stack = user.getStackInHand(hand)
         if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)){
             for (i in 1..2){
                 val aug = super.getRandomBookAugment(list, user, hand)
