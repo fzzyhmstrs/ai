@@ -106,7 +106,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
                     effect,
                     level
                 )
-                if (success > 0) {
+                if (success != Double.NEGATIVE_INFINITY) {
                     successes++
                     dd = success
                     ee = dd + 2.0

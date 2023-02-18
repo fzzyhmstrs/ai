@@ -214,7 +214,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
                 world.spawnEntity(pfe)
                 return (blockPos.y.toDouble() + d)
             }
-            return -1.0
+            return Double.NEGATIVE_INFINITY
         }
     }
 

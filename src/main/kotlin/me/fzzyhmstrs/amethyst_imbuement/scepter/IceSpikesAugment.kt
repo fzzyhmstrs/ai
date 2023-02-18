@@ -59,7 +59,7 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
                 effect,
                 level
             )
-            if (success > 0) {
+            if (success != Double.NEGATIVE_INFINITY) {
                 successes++
                 d = success
                 e = d + 2.0
