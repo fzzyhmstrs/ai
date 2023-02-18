@@ -214,7 +214,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                 world.spawnEntity(pfe)
                 return (blockPos.y.toDouble() + d)
             }
-            return -1.0
+            return Double.NEGATIVE_INFINITY
         }
     }
 
