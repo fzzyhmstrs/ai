@@ -1,2 +1,2 @@
 ### Fixes
-* Fixed config-disabled enchants and augments not properly recording that they are disabled in the server-side config.
+* Fixed fang-like spells not taking cooldown into account properly in some situations.
