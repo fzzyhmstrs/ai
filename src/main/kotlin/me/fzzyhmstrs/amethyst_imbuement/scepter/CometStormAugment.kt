@@ -68,7 +68,6 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        user.isInvulnerable = true
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
@@ -80,7 +79,6 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
             }
         }
         effect.accept(toLivingEntityList(entityList),AugmentConsumer.Type.HARMFUL)
-        user.isInvulnerable = false
         return successes > 0
     }
 
