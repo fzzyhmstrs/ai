@@ -90,7 +90,9 @@ object RegisterEnchantment {
     val FORTIFY = FortifyAugment(2,10,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
+    val HAIL_STORM = HailStormAugment(3,12,EquipmentSlot.MAINHAND).also{regEnchant["hail_storm"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
+    val ICE_SHARD = IceShardAugment(2,9,EquipmentSlot.MAINHAND).also{regEnchant["ice_shard"] = it}
     val ICE_SPIKES = IceSpikesAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["ice_spikes"] = it}
     val INSPIRING_SONG = InspiringSongAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["inspiring_song"] = it}
     val LEVITATING_BULLET = LevitatingBulletAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["levitating_bullet"] = it}
