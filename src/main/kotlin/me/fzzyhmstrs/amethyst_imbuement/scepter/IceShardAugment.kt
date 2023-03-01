@@ -33,7 +33,7 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,10,4,10, imbueLevel, LoreTier.LOW_TIER, Items.BLUE_ICE)
+        return AugmentDatapoint(SpellType.FURY,10,7,10, imbueLevel, LoreTier.LOW_TIER, Items.BLUE_ICE)
     }
 
 }
