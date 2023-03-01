@@ -125,6 +125,19 @@ object RegisterEntity {
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
+    
+    val ICE_SHARD_ENTITY: EntityType<IceShardEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "ice_shard_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<IceShardEntity>, world: World ->
+            IceShardEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
 
     val FREEZING_ENTITY: EntityType<FreezingEntity> = Registry.register(
         Registry.ENTITY_TYPE,
