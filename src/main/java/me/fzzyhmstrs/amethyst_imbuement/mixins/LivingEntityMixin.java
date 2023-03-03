@@ -226,7 +226,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
     }
 
-    @WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
+    /*@WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
     private Multimap<EntityAttribute, EntityAttributeModifier> amethyst_imbuement_getEquipmentChangesMixin(ItemStack instance, EquipmentSlot slot, Operation<Multimap<EntityAttribute, EntityAttributeModifier>> operation){
         int stackValAdd = RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance) : 0;
         int stackValAdd2 = RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance) : 0;
@@ -292,7 +292,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
         return map2;
-    }
+    }*/
 
 
 }
