@@ -4,8 +4,8 @@ import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.viscerae.registry.RegisterEnchantment
-import me.fzzyhmstrs.viscerae.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -21,6 +21,8 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import java.util.*
+import kotlin.math.max
 import kotlin.math.min
 
 class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity {
@@ -64,7 +66,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
             val entity2 = entityHitResult.entity
             val bl = entity2.damage(
                 DamageSource.thrownProjectile(this,owner),
-                max(1,entityEffects.damage(0) - struckEntities.size))
+                max(1f,entityEffects.damage(0) - struckEntities.size)
             )
             if (!struckEntities.contains(entity2.uuid)){
                 struckEntities.add(entity2.uuid)
@@ -90,7 +92,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
     }
 
     companion object{
-        fun createIceShard(world: World, user: LivingEntity, speed: Float, div: Float,yaw: Float, effects: AugmentEffect, level: Int): GoreLanceEntity {
+        fun createIceShard(world: World, user: LivingEntity, speed: Float, div: Float,yaw: Float, effects: AugmentEffect, level: Int): IceShardEntity {
             val fbe = IceShardEntity(
                 world, user,yaw, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(

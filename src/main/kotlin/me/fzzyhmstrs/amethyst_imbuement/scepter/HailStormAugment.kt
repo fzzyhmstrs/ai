@@ -7,11 +7,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.IceShardEntity.Companion.createIceShard
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.viscerae.entity.IceShardEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -21,8 +22,6 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
@@ -35,7 +34,7 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             .withDamage(4.66666f,0.333333f)
             .withRange(8.25,0.25)
 
-    override val delay = PerLvlf(8.75f,-0.25f,0)
+    private val hailDelay = PerLvlF(8.75f,-0.25f,0f)
 
     override fun effect(
         world: World,
@@ -52,7 +51,7 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
             PersistentEffectHelper.setPersistentTickerNeed(
                 RegisterEnchantment.HAIL_STORM,
-                delay.value(level).toInt(),
+                hailDelay.value(level).toInt(),
                 effect.duration(level),
                 data
             )
@@ -72,8 +71,9 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
-                val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.5)
-                val ise = createIceShard(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level)
+                val rot = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize()
+                val ise = IceShardEntity(world,user,4.5f,0.4f,user.eyePos.subtract(0.0,0.2,0.0),rot)
+                ise.passEffects(effect, level)
                 if (world.spawnEntity(ise)){
                     successes++
                 }
@@ -83,34 +83,38 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         return successes > 0
     }
 
+    override val delay: PerLvlI
+        get() = PerLvlI()
+
     @Suppress("SpellCheckingInspection")
     override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
         if (data !is AugmentPersistentEffectData) return
         val rnd1 = data.entityList.size
-        val entity: LivingEntity? = null
+        var entity: LivingEntity? = null
         var tries = 3
         do{
             val rnd2 = data.world.random.nextInt(rnd1)
             val entityTmp = data.entityList[rnd2]
-            if (entityTmp.isAlive){
+            if (entityTmp.isAlive && entityTmp is LivingEntity){
                 entity = entityTmp
                 break
             }
             tries--
         } while(tries > 0)
         if (entity == null){
-            for (entityTmp2 in entityList){
-                if (entityTmp2.isAlive){
+            for (entityTmp2 in data.entityList){
+                if (entityTmp2.isAlive && entityTmp2 is LivingEntity){
                     entity = entityTmp2
                     break
                 }
             }
         }
         if (entity == null) return
-        
-        val vel = entity.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.5)
-        val ce = createIceShard(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
-        data.world.spawnEntity(ce)
+
+        val rot = entity.pos.subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize()
+        val ise = IceShardEntity(data.world,data.user,4.5f,0.4f,data.user.eyePos.subtract(0.0,0.2,0.0),rot)
+        ise.passEffects(data.effect, data.level)
+        data.world.spawnEntity(ise)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
