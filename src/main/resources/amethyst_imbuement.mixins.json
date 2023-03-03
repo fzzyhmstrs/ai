@@ -41,7 +41,8 @@
     "PowderSnowBucketItemMixin",
     "ServerPlayerEntityMixin",
     "StructureMixin",
-    "TridentEntityMixin"
+    "TridentEntityMixin",
+    "ItemStackMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",
