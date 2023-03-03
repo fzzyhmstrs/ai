@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.FlameboltEntity
+import me.fzzyhmstrs.viscerae.entity.IceShardEntity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -25,7 +26,7 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = 4.5F
         val div = 0.75F
-        return IceShardEntity.createIceShard(world, user, speed, div, effects, level)
+        return IceShardEntity.createIceShard(world, user, speed, div,user.yaw, effects, level)
     }
 
     override fun soundEvent(): SoundEvent {

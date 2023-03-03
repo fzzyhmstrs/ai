@@ -104,6 +104,14 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.ICE_SHARD_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            IceShardEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
         ){context: EntityRendererFactory.Context ->
             MissileEntityRenderer(
