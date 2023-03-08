@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:opaline_scepter",
+    "amethyst_imbuement:iridescent_scepter",
+    "amethyst_imbuement:lustrous_scepter",
+    "amethyst_imbuement:debug_scepter",
+    "amethyst_imbuement:skillful_scepter",
+    "amethyst_imbuement:witty_scepter",
+	  "#amethyst_imbuement:sojourn_scepters",
+	  "#amethyst_imbuement:resonance_scepters",
+	  "amethyst_imbuement:sojourn",
+	  "amethyst_imbuement:resonance",
+    "amethyst_imbuement:enduring_scepter",
+    "amethyst_imbuement:graceful_scepter",
+	  "#amethyst_imbuement:redemption_scepters",
+	  "#amethyst_imbuement:aegis_scepters",
+	  "amethyst_imbuement:redemption",
+	  "amethyst_imbuement:aegis",
+    "amethyst_imbuement:dangerous_scepter",
+    "amethyst_imbuement:furious_scepter",
+	  "#amethyst_imbuement:lethality_scepters",
+	  "#amethyst_imbuement:equinox_scepters",
+	  "amethyst_imbuement:lethality",
+	  "amethyst_imbuement:equinox"
+  ]
+}
