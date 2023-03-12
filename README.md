@@ -32,4 +32,4 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Make the Totem of Amethyst also act as a weaker focus|Not Started|
 |Add unique scepter modifiers for the focii|In Progress|
 |Change gem of promise into a registration type thingy|Not Started|
-|Add lang descriptions of AC modifiers|In WOrk|
+|Add lang descriptions of AC modifiers|In Progress|
