@@ -91,7 +91,6 @@ dependencies {
     modImplementation("dev.emi:trinkets:$trinketsVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("dev.emi:trinkets:$trinketsVersion")
 
     val patchouliVersion: String by project
     modImplementation("vazkii.patchouli:Patchouli:$patchouliVersion"){
