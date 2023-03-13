@@ -24,7 +24,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Move Mend Equipment to a book of lore spell|Not Started|
 |Mkae sure scepters are properly excluded from Gearifiers|Not Started|
 |Check out spell-switching issue from Discord|Not Started|
-|Fix "Absoprtion" on Mass Revivify desc text|Not Started|
+|Fix "Absoprtion" on Mass Revivify desc text|Complete|
 |Add flare spell|Not Started|
 |Add spell scrolls|Not Started|
 |Add Mystical Gem|Not Started|
@@ -32,4 +32,6 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Make the Totem of Amethyst also act as a weaker focus|Not Started|
 |Add unique scepter modifiers for the focii|In Progress|
 |Change gem of promise into a registration type thingy|Not Started|
-|Add lang descriptions of AC modifiers|In Progress|
+|Add lang descriptions of AC modifiers|Complete|
+|Change implementation of Crystal Altar|In Progress|
+
