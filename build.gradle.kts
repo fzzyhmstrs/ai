@@ -91,7 +91,6 @@ dependencies {
     modImplementation("dev.emi:trinkets:$trinketsVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("dev.emi:trinkets:$trinketsVersion")
 
     val structurizedVersion: String by project
     modImplementation(":structurized_reborn-$structurizedVersion"){
