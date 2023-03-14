@@ -29,6 +29,10 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     private val FOCUS_RECORDS = "focus_records"
     private val FOCUS_XP = "focus_xp"
     private val FOCUS_SPECIAL = "focus_special"
+    private val LEVEL_UP = "ready_for_lvl_up"
+    private val OPTION_1 = "option_1"
+    private val OPTION_2 = "option_2"
+    private val OPTION_3 = "option_3"
     private val tiers: Array<TierData> = arrayOf(
         TierData("", Rarity.UNCOMMON, 500,1),
         TierData(".novice", Rarity.UNCOMMON, 1250,2),
@@ -73,21 +77,24 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val currentRecordedXp = if (records.contains(id)) { records.getInt(id) }else{ 0 }
         val newCurrentRecordedXp = currentRecordedXp + newXp
         if (newCurrentXp > tier.xpToNextTier){
-            nbt.putInt(FOCUS_TIER,tier.nextTier)
-            if (newCurrentRecordedXp/tier.xpToNextTier > 0.9 && !nbt.contains(FOCUS_SPECIAL)){
-                nbt.putBoolean(FOCUS_SPECIAL,true)
-                addSpecialAugmentModifier(stack, spell)
-            } else {
-                if (user is ServerPlayerEntity && world is ServerWorld) {
-                    ModifierHelper.rollScepterModifiers(stack,user,world)
+            if (user is ServerPlayerEntity && world is ServerWorld) {
+                nbt.putInt(FOCUS_TIER,tier.nextTier)
+                val lvlUpNbt = NbtCompound()
+                if (newCurrentRecordedXp/tier.xpToNextTier > 0.9 && !nbt.contains(FOCUS_SPECIAL)){
+                    nbt.putBoolean(FOCUS_SPECIAL,true)
+                    val modifiers1 = listOf(spell.augmentSpecificModifier.modifierId)
+                    val modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    val modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    
+                    //Add code to put into NBT
+                } else {
+                    val modifiers1 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    val modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    val modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    //Add code to put into NBT
                 }
             }
         }
-    }
-
-    private fun addSpecialAugmentModifier(stack: ItemStack,spell: ScepterAugment){
-        val modifier = spell.augmentSpecificModifier
-        ModifierHelper.addModifier(modifier.modifierId,stack)
     }
 
     private fun getTier(nbt: NbtCompound?): TierData{
