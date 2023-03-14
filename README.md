@@ -18,6 +18,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Fix issue with place item spells being usable on claims|Not Started|
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
+|Bring patchouli book up to speed|Not Started|
 |Fortify changes spell top end amplifier in wiki|Not Started|
 |Add patchouli book back to 1.19.3|Not Started|
 |Migrate acceptable scepters to tags|Not Started|
