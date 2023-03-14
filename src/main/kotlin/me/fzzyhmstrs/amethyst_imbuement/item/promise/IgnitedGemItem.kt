@@ -7,6 +7,6 @@ import net.minecraft.nbt.NbtCompound
 
 abstract class IgnitedGemItem(settings: Settings): Item(settings) {
 
-    abstract fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack):List<Text>
+    abstract fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>)
 
 }
