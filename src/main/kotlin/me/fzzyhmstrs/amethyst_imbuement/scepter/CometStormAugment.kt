@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
@@ -25,8 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect{
+class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(70,4)
@@ -35,6 +35,11 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
             .withDamage(7.75f,0.25f)
 
     override val delay = PerLvlI(19,-1,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,PerLvlI(480,-20),75,
+            18,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
+    }
 
     override fun effect(
         world: World,
@@ -108,10 +113,6 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
         val vel = Vec3d(rndX.toDouble(),(data.blockPos.y).toDouble(),rndZ.toDouble()).subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
         val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
         data.world.spawnEntity(ce)
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,PerLvlI(480,-20),75,18,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
     }
 
     override fun soundEvent(): SoundEvent {

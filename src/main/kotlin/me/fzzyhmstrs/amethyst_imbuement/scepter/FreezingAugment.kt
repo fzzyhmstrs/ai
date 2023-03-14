@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
@@ -18,13 +19,18 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot){
+class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(230,50,0)
             .withDamage(2.9F,0.1f)
             .withRange(3.8,0.2)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,
+            4,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
+    }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val fe = FreezingEntity(world,user,level)
@@ -45,10 +51,6 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     ) {
         if (target is LivingEntity) target.frozenTicks = effects.duration(0)
         target.damage(CustomDamageSources.FreezingDamageSource(user),effects.damage(0)*2/3)
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,4,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

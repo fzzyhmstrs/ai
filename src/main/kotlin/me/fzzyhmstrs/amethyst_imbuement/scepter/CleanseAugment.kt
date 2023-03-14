@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
@@ -22,10 +23,15 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot){
+class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(190,10)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(670,-20),25,
+            1, imbueLevel,6, LoreTier.NO_TIER, Items.MILK_BUCKET)
+    }
 
     override fun supportEffect(
         world: World,
@@ -73,10 +79,5 @@ class CleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_EVOKER_PREPARE_SUMMON
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(670,-20),25,1,imbueLevel,6
-            , LoreTier.NO_TIER, Items.MILK_BUCKET)
     }
 }

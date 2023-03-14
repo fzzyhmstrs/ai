@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -19,7 +20,12 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class RecallAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class RecallAugment: MiscAugment(ScepterTier.TWO,1){
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,12000,400,
+            1,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
+    }
 
     override fun effect(
         world: World,
@@ -45,9 +51,5 @@ class RecallAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_PORTAL_TRAVEL
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,12000,400,1,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
     }
 }

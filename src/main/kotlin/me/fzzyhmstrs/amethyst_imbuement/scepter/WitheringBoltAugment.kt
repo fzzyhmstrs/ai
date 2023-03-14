@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
@@ -16,10 +17,14 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot){
+class WitheringBoltAugment: SummonProjectileAugment(ScepterTier.TWO,5){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.5f,0.5f)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,10,imbueLevel,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
+    }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val yaw = user.yaw
@@ -38,9 +43,5 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_WITHER_SHOOT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,10,imbueLevel,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
     }
 }

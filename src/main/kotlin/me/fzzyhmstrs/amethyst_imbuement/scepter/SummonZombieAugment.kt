@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
@@ -23,12 +24,17 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
+class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(3,0,0)
             .withDuration(AiConfig.entities.unhallowedBaseLifespan,0,0)
             .withDamage(AiConfig.entities.unhallowedBaseDamage)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,
+            5,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+    }
 
     override fun placeEntity(
         world: World,
@@ -73,9 +79,5 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_ZOMBIE_AMBIENT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,5,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
     }
 }

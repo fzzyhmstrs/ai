@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
@@ -19,11 +20,16 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
-class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot){
+class ExhaustAugment: MinorSupportAugment(ScepterTier.TWO,6){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(250,50,0)
             .withAmplifier(0,1,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(360,-10),40,
+            7,imbueLevel,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
+    }
 
     override fun supportEffect(
         world: World,
@@ -53,9 +59,5 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         } else {
             false
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(360,-10),40,7,imbueLevel,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 }

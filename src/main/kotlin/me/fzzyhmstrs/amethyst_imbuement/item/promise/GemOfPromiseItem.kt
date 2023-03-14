@@ -62,7 +62,7 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
             "amethyst_imbuement:leapt"
         )
         
-        private val REGISTRY: MutableList<IgnitedGemItem> = mutablelistOf()
+        private val REGISTRY: MutableList<IgnitedGemItem> = mutableListOf()
         
         fun register(gem: IgnitedGemItem){
             REGISTRY.add(gem)

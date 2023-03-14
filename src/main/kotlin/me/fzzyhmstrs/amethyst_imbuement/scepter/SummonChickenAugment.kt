@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
@@ -18,7 +19,12 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonChickenAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
+class SummonChickenAugment: SummonEntityAugment(ScepterTier.ONE,3) {
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,900,50,
+            1,imbueLevel,13,LoreTier.LOW_TIER, Items.EGG)
+    }
 
     override fun placeEntity(
         world: World,
@@ -47,9 +53,5 @@ class SummonChickenAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,900,50,1,imbueLevel,13,LoreTier.LOW_TIER, Items.EGG)
     }
 }

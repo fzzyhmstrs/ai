@@ -19,17 +19,17 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
 |Bring patchouli book up to speed|Not Started|
+|Correct updated scepter durabilities in Wiki|Not Started|
 |Fortify changes spell top end amplifier in wiki|Not Started|
 |Add patchouli book back to 1.19.3|Not Started|
 |Migrate acceptable scepters to tags|Not Started|
 |Fix issue with the Totem of Grace|Complete|
-|Finish adding and testing ice spells|Not Started|
+|Finish adding and testing ice spells|In progress|
 |Move Mend Equipment to a book of lore spell|Complete|
-|Update spells with new cooldowns and XPs|In progress|
 |Make sure scepters are properly excluded from Gearifiers|Complete|
-|Check out spell-switching issue from Discord|Not Started|
+|Check out spell-switching issue from Discord|In progress|
 |Fix "Absoprtion" on Mass Revivify desc text|Complete|
-|Add flare spell|Not Started|
+|Add flare spell|In Progress|
 |Add spell scrolls|Not Started|
 |Implement PVP modes into spells|Not Started|
 |Add Mystical Gem|In progress|

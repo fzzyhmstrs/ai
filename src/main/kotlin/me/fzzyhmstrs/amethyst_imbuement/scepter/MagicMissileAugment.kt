@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
@@ -14,10 +15,15 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
+class MagicMissileAugment: SummonProjectileAugment(ScepterTier.ONE,1) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(3.0F)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.NULL,15,1,
+            1,0,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
+    }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val me = MissileEntity(world, user, false)
@@ -31,9 +37,4 @@ class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_ENDER_DRAGON_SHOOT
     }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.NULL,15,1,1,0,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
-    }
-
 }

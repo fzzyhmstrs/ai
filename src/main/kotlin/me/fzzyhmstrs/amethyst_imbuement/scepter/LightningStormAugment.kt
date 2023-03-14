@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
@@ -30,8 +31,7 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect{
+class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,1.0,0.0)
@@ -39,6 +39,11 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
             .withDamage(5.0f,1.0f)
 
     override val delay = PerLvlI(21,-3,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,400,80,
+            20,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
+    }
 
     override fun applyTasks(
         world: World,
@@ -147,10 +152,6 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
             data.world.spawnEntity(le)
             break
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,80,20,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

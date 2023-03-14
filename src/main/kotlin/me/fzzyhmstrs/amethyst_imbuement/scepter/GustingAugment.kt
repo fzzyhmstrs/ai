@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -20,10 +21,15 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class GustingAugment: MiscAugment(ScepterTier.ONE,3){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,60,15,
+            1,imbueLevel,2,LoreTier.LOW_TIER, Items.FEATHER)
+    }
 
     override fun effect(
         world: World,
@@ -69,10 +75,6 @@ class GustingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAu
         if (target is LivingEntity){
             target.takeKnockback(level,user.x - target.x,user.z - target.z)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,60,15,1,imbueLevel,2,LoreTier.LOW_TIER, Items.FEATHER)
     }
 
     override fun soundEvent(): SoundEvent {

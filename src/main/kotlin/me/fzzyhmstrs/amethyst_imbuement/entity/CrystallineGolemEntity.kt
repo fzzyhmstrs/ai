@@ -5,11 +5,10 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.Angerable
@@ -32,9 +31,7 @@ import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
-import net.minecraft.world.SpawnHelper
-import net.minecraft.world.World
-import net.minecraft.world.WorldView
+import net.minecraft.world.*
 import net.minecraft.world.event.GameEvent
 import java.util.*
 import java.util.stream.Stream
@@ -42,8 +39,10 @@ import java.util.stream.Stream
 @Suppress("PrivatePropertyName")
 class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, world: World): GolemEntity(entityType,world), Angerable, PlayerCreatable {
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : this(entityType, world){
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, modDamage: Double, modHealth: Double, createdBy: LivingEntity?) : this(entityType, world){
         maxAge = ageLimit
+        modifiedDamage = modDamage
+        modifiedHealth = modHealth
         this.createdBy = createdBy?.uuid
     }
 
@@ -62,6 +61,8 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
     override var createdBy: UUID? = null
     override var owner: LivingEntity? = null
     private var angryAt: UUID? = null
+    private var modifiedDamage = 0.0
+    private var modifiedHealth = 0.0
 
     init{
         stepHeight = 1.0f
@@ -112,7 +113,35 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
                 chooseRandomAngerTime()
             }
         }
+    }
 
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        this.initEquipment(world.random, difficulty)
+        if (modifiedDamage - AiConfig.entities.crystalGolemBaseDamage != 0.0){
+            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    "Modified damage bonus",
+                    modifiedDamage - AiConfig.entities.crystalGolemBaseDamage,
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+        }
+        if (modifiedHealth - AiConfig.entities.crystalGolemBaseHealth != 0.0){
+            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    "Modified health bonus",
+                    modifiedHealth - AiConfig.entities.crystalGolemBaseHealth,
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+        }
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun tickMovement() {

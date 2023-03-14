@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -25,11 +26,16 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 import kotlin.math.min
 
-class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class BedazzleAugment: MiscAugment(ScepterTier.TWO,1) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(13.0,1.0)
             .withDuration(1200,0,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,1500,85,
+            5, imbueLevel,40, LoreTier.LOW_TIER, Items.DIAMOND)
+    }
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: AugmentEffect): Boolean {
         val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
@@ -131,9 +137,4 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
             return Pair(list,level)
         }
     }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1500,85,5,imbueLevel,40, LoreTier.LOW_TIER, Items.DIAMOND)
-    }
-
 }

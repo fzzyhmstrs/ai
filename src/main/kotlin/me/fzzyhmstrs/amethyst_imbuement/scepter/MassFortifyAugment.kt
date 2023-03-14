@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -19,12 +20,16 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class MassFortifyAugment: MiscAugment(ScepterTier.THREE,9){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(700,100,0)
             .withAmplifier(-1,1,0)
             .withRange(9.0,1.0,0.0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,1200,155,18,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
+    }
 
     override fun effect(
         world: World,
@@ -52,10 +57,6 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             }
         }
         return successes > 0
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,155,18,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -20,11 +20,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
+class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
     
     private val FIRE_TARGET = 120
 
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("on_fire")){
             val fire = nbt.getInt("on_fire").toFloat()
             val progress = fire/ FIRE_TARGET.toFloat()*100.0F

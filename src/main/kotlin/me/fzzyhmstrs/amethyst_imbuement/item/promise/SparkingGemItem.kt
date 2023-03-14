@@ -20,9 +20,9 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class SparkingGemItem(settings: Settings): IgnitedGemItem(settings) {
+class SparkingGemItem(settings: Settings): IgnitedGemItem(settings) {
 
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
     }
     
     fun sparkingGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){

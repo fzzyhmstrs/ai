@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -25,10 +26,14 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.gen.structure.Structure
 
-class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class SurveyAugment: MiscAugment(ScepterTier.THREE,1){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(100.0,0.0,0.0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,1200,120,5,imbueLevel,5, LoreTier.NO_TIER, Items.MAP)
+    }
 
     override fun effect(
         world: World,
@@ -58,10 +63,6 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
         } else {
             false
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,120,5,imbueLevel,5, LoreTier.NO_TIER, Items.MAP)
     }
 
     override fun soundEvent(): SoundEvent {

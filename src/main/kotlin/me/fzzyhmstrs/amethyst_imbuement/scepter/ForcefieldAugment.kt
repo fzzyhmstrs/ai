@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -20,11 +21,16 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class ForcefieldAugment: MiscAugment(ScepterTier.TWO,6){
 
     private val offset = intArrayOf(-2,2)
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(1800,200)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,
+            8,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
+    }
 
     override fun effect(
         world: World,
@@ -101,10 +107,6 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_BEACON_POWER_SELECT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,8,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     companion object{

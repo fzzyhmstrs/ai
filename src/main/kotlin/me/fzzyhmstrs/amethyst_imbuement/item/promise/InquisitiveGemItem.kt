@@ -20,7 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
+class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
   
     private val STATUS_TARGET = 8
     private val GOAL_STATUSES: List<String> = listOf(
@@ -34,7 +34,7 @@ abstract class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) 
         "amethyst_imbuement:leapt"
     )
 
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("statuses")){
             val compound = nbt.get("statuses") as NbtCompound
             val status = compound.keys.size.toFloat()

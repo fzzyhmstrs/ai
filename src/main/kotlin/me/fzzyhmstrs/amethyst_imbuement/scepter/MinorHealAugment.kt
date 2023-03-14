@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
@@ -17,10 +18,15 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
-class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot){
+class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.5F,0.5F,0.0F)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(130,-10),12,
+            1,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+    }
 
     override fun supportEffect(
         world: World,
@@ -50,10 +56,5 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
                 false
             }
 
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(130,-10),12
-            ,1,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 }

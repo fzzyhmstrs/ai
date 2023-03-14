@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -18,12 +19,16 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
+class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(12.0,0.0,0.0)
             .withDuration(240,100,0)
             .withAmplifier(0,1,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,16,imbueLevel,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
+    }
 
     override fun effect(
         world: World,
@@ -47,10 +52,6 @@ class MassExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
         }
         return bl
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,16,imbueLevel,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun soundEvent(): SoundEvent {

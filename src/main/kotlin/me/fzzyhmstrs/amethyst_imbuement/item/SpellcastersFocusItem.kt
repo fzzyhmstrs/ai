@@ -10,14 +10,13 @@ import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.fzzy_core.modifier_util.AbstractModifier
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
-import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierInitializer
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtList
+import net.minecraft.nbt.NbtString
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import net.minecraft.util.math.MathHelper
@@ -80,19 +79,35 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             if (user is ServerPlayerEntity && world is ServerWorld) {
                 nbt.putInt(FOCUS_TIER,tier.nextTier)
                 val lvlUpNbt = NbtCompound()
+                val modifiers1: List<Identifier>
+                val option1 = NbtList()
+                val modifiers2: List<Identifier>
+                val option2 = NbtList()
+                val modifiers3: List<Identifier>
+                val option3 = NbtList()
                 if (newCurrentRecordedXp/tier.xpToNextTier > 0.9 && !nbt.contains(FOCUS_SPECIAL)){
                     nbt.putBoolean(FOCUS_SPECIAL,true)
-                    val modifiers1 = listOf(spell.augmentSpecificModifier.modifierId)
-                    val modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
-                    val modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
-                    
-                    //Add code to put into NBT
+                    modifiers1 = listOf(spell.augmentSpecificModifier.modifierId)
+                    modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
                 } else {
-                    val modifiers1 = ModifierHelper.rollScepterModifiers(stack,user,world)
-                    val modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
-                    val modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
-                    //Add code to put into NBT
+                    modifiers1 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    modifiers2 = ModifierHelper.rollScepterModifiers(stack,user,world)
+                    modifiers3 = ModifierHelper.rollScepterModifiers(stack,user,world)
                 }
+                for (mod in modifiers1){
+                    option1.add(NbtString.of(mod.toString()))
+                }
+                lvlUpNbt.put(OPTION_1,option1)
+                for (mod in modifiers2){
+                    option2.add(NbtString.of(mod.toString()))
+                }
+                lvlUpNbt.put(OPTION_2,option2)
+                for (mod in modifiers3){
+                    option3.add(NbtString.of(mod.toString()))
+                }
+                lvlUpNbt.put(OPTION_3,option3)
+                nbt.put(LEVEL_UP,lvlUpNbt)
             }
         }
     }

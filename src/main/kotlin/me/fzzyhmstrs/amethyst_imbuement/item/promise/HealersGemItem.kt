@@ -20,11 +20,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
+class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
     
     private val HEAL_TARGET = 250.0F
 
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("healed")){
             val healed = nbt.getFloat("healed")
             val progress = healed/ HEAL_TARGET *100.0F

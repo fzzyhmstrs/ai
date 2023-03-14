@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -18,13 +19,18 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import kotlin.math.min
 
-class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withAmplifier(11,1,0)
             .withDamage(5.25F,0.25F)
             .withDuration(225,25)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,32,14,
+            8, imbueLevel,2, LoreTier.NO_TIER, Items.BLUE_ICE)
+    }
 
     override fun effect(
         world: World,
@@ -71,10 +77,6 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
         return successes > 0
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,14,8, imbueLevel,2, LoreTier.NO_TIER, Items.BLUE_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

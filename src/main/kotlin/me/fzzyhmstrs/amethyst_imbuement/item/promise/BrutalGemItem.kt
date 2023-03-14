@@ -20,11 +20,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
+class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
     private val HIT_TARGET = 80
   
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("mob_hit")){
             val hit = nbt.getInt("mob_hit").toFloat()
             val progress = hit/ HIT_TARGET.toFloat()*100.0F

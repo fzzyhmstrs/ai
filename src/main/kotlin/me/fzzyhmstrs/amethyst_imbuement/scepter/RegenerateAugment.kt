@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
@@ -21,12 +22,16 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot){
+class RegenerateAugment: MinorSupportAugment(ScepterTier.ONE,17){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(384,12)
             .withAmplifier(0)
             .withDamage(-1.0f,0.2f)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),40,1,imbueLevel,10,LoreTier.NO_TIER, Items.GHAST_TEAR)
+    }
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
         if(target != null) {
@@ -49,9 +54,5 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_CONDUIT_AMBIENT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),40,1,imbueLevel,10,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 }

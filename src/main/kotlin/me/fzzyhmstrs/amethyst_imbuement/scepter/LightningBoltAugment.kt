@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -23,12 +24,17 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot){
+class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withRange(13.8,0.2,0.0)
             .withDamage(4.8F,0.2f)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,
+            6,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
+    }
 
     override fun effect(
         world: World,
@@ -73,10 +79,6 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             return bl
         }
         return false
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,6,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
     }
 
     override fun soundEvent(): SoundEvent {
