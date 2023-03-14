@@ -118,7 +118,7 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,100,21,imbueLevel, LoreTier.HIGH_TIER, Items.BLUE_ICE)
+        return AugmentDatapoint(SpellType.FURY,400,100,21,imbueLevel,10, LoreTier.HIGH_TIER, Items.BLUE_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

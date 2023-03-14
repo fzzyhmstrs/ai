@@ -23,7 +23,7 @@ import net.minecraft.world.World
 class BarrierAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier, maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(0,1).withDuration(520,80)
+        get() = super.baseEffect.withAmplifier(0,1).withDuration(540,80)
 
     override fun supportEffect(
         world: World,
@@ -35,7 +35,7 @@ class BarrierAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
                 EffectQueue.addStatusToQueue(target as LivingEntity,
-                    StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level))
+                    StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level)/5)
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 return true
@@ -56,6 +56,6 @@ class BarrierAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,600,35,1,imbueLevel, LoreTier.NO_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.GRACE,600,35,1,imbueLevel,15, LoreTier.NO_TIER, Items.SHIELD)
     }
 }

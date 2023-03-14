@@ -33,7 +33,7 @@ class MagicMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.NULL,15,1,1,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
+        return AugmentDatapoint(SpellType.NULL,15,1,1,0,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
     }
 
 }

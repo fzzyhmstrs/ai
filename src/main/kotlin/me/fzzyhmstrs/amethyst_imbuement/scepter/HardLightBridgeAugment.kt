@@ -20,7 +20,7 @@ import net.minecraft.world.World
 class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(8.0,0.0,0.0)
+        get() = super.baseEffect.withRange(7.8,0.2,0.0)
 
     override fun effect(
         world: World,
@@ -62,7 +62,7 @@ class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,5,1,5,imbueLevel,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
+        return AugmentDatapoint(SpellType.WIT,8,2,5,imbueLevel,1,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -72,7 +72,7 @@ object RegisterEnchantment {
     //Scepter Spells
     val MAGIC_MISSILE = MagicMissileAugment(1,1, EquipmentSlot.MAINHAND).also{regEnchant["magic_missile"] = it}
     val ABUNDANCE = AbundanceAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["abundance"] = it}
-    val BARRIER = BarrierAugment(2,2,EquipmentSlot.MAINHAND).also{regEnchant["barrier"] = it}
+    val BARRIER = BarrierAugment(2,10,EquipmentSlot.MAINHAND).also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["bedazzle"] = it}
     val CLEANSE = CleanseAugment(1,11,EquipmentSlot.MAINHAND).also{regEnchant["cleanse"] = it}
     val COMET_STORM = CometStormAugment(3,9,EquipmentSlot.MAINHAND).also{regEnchant["comet_storm"] = it}
@@ -87,13 +87,13 @@ object RegisterEnchantment {
     val FIREBALL = FireballAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["fireball"] = it}
     val FLAMEBOLT = FlameboltAugment(1,11,EquipmentSlot.MAINHAND).also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment(3,11,EquipmentSlot.MAINHAND).also{regEnchant["flamewave"] = it}
-    val FORCE_FIELD = ForcefieldAugment(2,4,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
-    val FORTIFY = FortifyAugment(2,10,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
+    val FORCE_FIELD = ForcefieldAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["forcefield"] = it}
+    val FORTIFY = FortifyAugment(2,11,EquipmentSlot.MAINHAND).also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment(1,6,EquipmentSlot.MAINHAND).also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment(1,3,EquipmentSlot.MAINHAND).also{regEnchant["gusting"] = it}
     val HAIL_STORM = HailStormAugment(3,12,EquipmentSlot.MAINHAND).also{regEnchant["hail_storm"] = it}
-    val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
-    val ICE_SHARD = IceShardAugment(2,9,EquipmentSlot.MAINHAND).also{regEnchant["ice_shard"] = it}
+    val HARD_LIGHT_BRIDGE = HardLightBridgeAugment(2,11,EquipmentSlot.MAINHAND).also{regEnchant["hard_light_bridge"] = it}
+    val ICE_SHARD = IceShardAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["ice_shard"] = it}
     val ICE_SPIKES = IceSpikesAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["ice_spikes"] = it}
     val INSPIRING_SONG = InspiringSongAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["inspiring_song"] = it}
     val LEVITATING_BULLET = LevitatingBulletAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["levitating_bullet"] = it}
@@ -101,7 +101,7 @@ object RegisterEnchantment {
     val LIGHTNING_STORM = LightningStormAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["lightning_storm"] = it}
     val MASS_CLEANSE = MassCleanseAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_cleanse"] = it}
     val MASS_EXHAUST = MassExhaustAugment(3,3,EquipmentSlot.MAINHAND).also{regEnchant["mass_exhaust"] = it}
-    val MASS_FORTIFY = MassFortifyAugment(3,8,EquipmentSlot.MAINHAND).also{regEnchant["mass_fortify"] = it}
+    val MASS_FORTIFY = MassFortifyAugment(3,9,EquipmentSlot.MAINHAND).also{regEnchant["mass_fortify"] = it}
     val MASS_HEAL = MassHealAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_heal"] = it}
     val MASS_REVIVIFY = MassRevivifyAugment(3,5,EquipmentSlot.MAINHAND).also{regEnchant["mass_revivify"] = it}
     val MEND_EQUIPMENT = MendEquipmentAugment(1,13,EquipmentSlot.MAINHAND).also{regEnchant["mend_equipment"] = it}
@@ -124,7 +124,7 @@ object RegisterEnchantment {
     val SUMMON_WIT_TOTEM = SummonWitTotemAugment(2,9,EquipmentSlot.MAINHAND).also{regEnchant["summon_wit_totem"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment(3,1, EquipmentSlot.MAINHAND).also{regEnchant["survey"] = it}
-    val TELEPORT = TeleportAugment(2,1,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
+    val TELEPORT = TeleportAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["teleport"] = it}
     val WITHERING_BOLT = WitheringBoltAugment(2,5,EquipmentSlot.MAINHAND).also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment(1,11, EquipmentSlot.MAINHAND).also{regEnchant["zap"] = it}
 

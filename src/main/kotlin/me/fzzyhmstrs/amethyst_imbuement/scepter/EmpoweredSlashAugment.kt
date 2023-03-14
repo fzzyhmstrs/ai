@@ -28,6 +28,6 @@ open class EmpoweredSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,15,13,imbueLevel,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
+        return AugmentDatapoint(SpellType.FURY,20,20,15,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
     }
 }

@@ -9,7 +9,7 @@ import java.util.*
 
 class ResilienceAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR, *slot) {
 
-    internal val uuids: EnumMap<EquipmentSlot,UUID> = EnumMap(mapOf(
+    val uuids: EnumMap<EquipmentSlot,UUID> = EnumMap(mapOf(
         EquipmentSlot.HEAD to UUID.fromString("797c99c2-ba09-11ed-afa1-0242ac120002"),
         EquipmentSlot.CHEST to UUID.fromString("797c9c7e-ba09-11ed-afa1-0242ac120002"),
         EquipmentSlot.LEGS to UUID.fromString("797c9e54-ba09-11ed-afa1-0242ac120002"),

@@ -150,7 +150,7 @@ class LightningStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot):
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,50,20,imbueLevel,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,400,80,20,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -23,7 +24,7 @@ import net.minecraft.world.World
 class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorSupportAugment(tier,maxLvl, *slot){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(200,100).withAmplifier(-1,1)
+        get() = super.baseEffect.withDuration(210,90).withAmplifier(-1,1)
 
     override fun supportEffect(
         world: World,
@@ -42,8 +43,8 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
             }
         }
         return if (user is PlayerEntity) {
-            user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/3))
-            user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/3))
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/4))
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
             effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
             true
@@ -57,6 +58,6 @@ class FortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,25,8,imbueLevel, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(1320,-20),135,8,imbueLevel,20, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
     }
 }

@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -54,7 +55,7 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,10,2,1,imbueLevel, LoreTier.NO_TIER, Items.HAY_BLOCK)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,1,imbueLevel,1, LoreTier.NO_TIER, Items.HAY_BLOCK)
     }
 
 }

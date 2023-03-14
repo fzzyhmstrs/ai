@@ -49,6 +49,6 @@ class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,10,1,imbueLevel,LoreTier.LOW_TIER, Items.SADDLE)
+        return AugmentDatapoint(SpellType.GRACE,1200,75,1,imbueLevel,30,LoreTier.LOW_TIER, Items.SADDLE)
     }
 }

@@ -50,7 +50,7 @@ class MassHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,200,25,5,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+        return AugmentDatapoint(SpellType.GRACE,200,50,7,imbueLevel,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 
     override fun soundEvent(): SoundEvent {

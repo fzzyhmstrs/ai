@@ -33,7 +33,7 @@ class SoulMissileAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Su
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,16,3,1,imbueLevel,LoreTier.NO_TIER,Items.SOUL_SAND)
+        return AugmentDatapoint(SpellType.FURY,16,3,1,imbueLevel,1,LoreTier.NO_TIER,Items.SOUL_SAND)
     }
 
 }

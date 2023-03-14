@@ -42,7 +42,7 @@ class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel, LoreTier.NO_TIER, Items.DEBUG_STICK)
+        return AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,1, LoreTier.NO_TIER, Items.DEBUG_STICK)
     }
 
     override fun soundEvent(): SoundEvent {

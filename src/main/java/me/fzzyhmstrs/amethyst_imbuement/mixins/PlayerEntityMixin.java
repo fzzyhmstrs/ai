@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
-import me.fzzyhmstrs.amethyst_imbuement.item.GemOfPromiseItem;
+import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;

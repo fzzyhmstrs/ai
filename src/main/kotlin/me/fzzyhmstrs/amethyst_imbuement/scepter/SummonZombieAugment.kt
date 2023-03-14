@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -75,6 +76,6 @@ class SummonZombieAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): S
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,80,5,imbueLevel,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,5,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
     }
 }

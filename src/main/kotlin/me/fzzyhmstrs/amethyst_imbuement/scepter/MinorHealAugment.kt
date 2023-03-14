@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -52,6 +53,7 @@ class MinorHealAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,100,8,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(130,-10),12
+            ,1,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 }

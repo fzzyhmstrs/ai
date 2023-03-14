@@ -76,7 +76,7 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,14,3,1,imbueLevel,LoreTier.NO_TIER, Items.IRON_INGOT)
+        return AugmentDatapoint(SpellType.GRACE,16,8,8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_BLOCK)
     }
 
     override fun getRepairTime(): Int {

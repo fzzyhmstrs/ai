@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.Blocks
 import net.minecraft.block.PlantBlock
 import net.minecraft.entity.Entity
@@ -23,7 +24,7 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
 
     private val offset = intArrayOf(-2,2)
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(2200,200)
+        get() = super.baseEffect.withDuration(1800,200)
 
     override fun effect(
         world: World,
@@ -103,11 +104,11 @@ class ForcefieldAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,600,60,8,imbueLevel, LoreTier.LOW_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,8,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     companion object{
-        private const val actualBaseAge = 2400
-        var baseAge = 2400
+        private const val actualBaseAge = 2000
+        var baseAge = 2000
     }
 }

@@ -106,7 +106,7 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+        return AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     }
 
     private fun getAxis(user: LivingEntity): Direction.Axis{

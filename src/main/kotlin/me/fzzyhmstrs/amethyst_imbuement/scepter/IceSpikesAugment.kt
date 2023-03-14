@@ -74,7 +74,7 @@ class IceSpikesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,14,8, imbueLevel, LoreTier.NO_TIER, Items.BLUE_ICE)
+        return AugmentDatapoint(SpellType.FURY,32,14,8, imbueLevel,2, LoreTier.NO_TIER, Items.BLUE_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

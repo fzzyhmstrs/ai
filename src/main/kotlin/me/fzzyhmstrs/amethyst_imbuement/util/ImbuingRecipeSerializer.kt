@@ -51,10 +51,12 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
                 val cooldown = AugmentHelper.getAugmentCooldown(augId)
                 val manaCost = AugmentHelper.getAugmentManaCost(augId)
                 val minLevel = AugmentHelper.getAugmentMinLvl(augId)
+                val castXp = AugmentHelper.getAugmentCastXp(augId)
                 val bookOfLoreTier = AugmentHelper.getAugmentTier(augId)
                 val keyItem = AugmentHelper.getAugmentItem(augId)
                 val enabled = AugmentHelper.getAugmentEnabled(augId)
-                val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,bookOfLoreTier,keyItem,enabled)
+                val pvpMode = AugmentHelper.getAugmentPvpMode(augId)
+                val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,castXp,bookOfLoreTier,keyItem,enabled,pvpMode)
                 AugmentHelper.registerAugmentStat(augId,datapoint,true)
             }
         }

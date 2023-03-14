@@ -111,7 +111,7 @@ class CometStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mis
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,50,18,imbueLevel, LoreTier.HIGH_TIER, Items.TNT)
+        return AugmentDatapoint(SpellType.FURY,PerLvlI(480,-20),75,18,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
     }
 
     override fun soundEvent(): SoundEvent {

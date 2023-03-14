@@ -24,6 +24,6 @@ open class SpectralSlashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSl
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,16,4,8,imbueLevel,LoreTier.LOW_TIER, Items.IRON_SWORD)
+        return AugmentDatapoint(SpellType.FURY,18,4,8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
     }
 }

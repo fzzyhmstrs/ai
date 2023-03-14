@@ -30,7 +30,7 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDamage(4.5F,0.5F)
-            .withRange(4.5,0.5)
+            .withRange(7.5,0.5)
             .withAmplifier(2)
 
     override fun supportEffect(
@@ -78,7 +78,7 @@ class SmitingBlowAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,8,10, imbueLevel, LoreTier.LOW_TIER, RegisterItem.GLOWING_FRAGMENT)
+        return AugmentDatapoint(SpellType.FURY,20,8,10, imbueLevel,2, LoreTier.LOW_TIER, RegisterItem.GLOWING_FRAGMENT)
     }
 
     companion object{

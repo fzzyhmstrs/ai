@@ -12,7 +12,7 @@ object ScepterLvl2ToolMaterial: ScepterToolMaterial(){
         return AiConfig.items.iridescentDurability
     }
     fun defaultDurability(): Int{
-        return 550
+        return 650
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 1.0f
