@@ -21,6 +21,8 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 abstract class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
+    
+    private val HEAL_TARGET = 250.0F
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
         if (nbt.contains("healed")){
