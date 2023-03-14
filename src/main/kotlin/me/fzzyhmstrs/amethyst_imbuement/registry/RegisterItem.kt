@@ -7,7 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
-import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem
+import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -50,12 +50,12 @@ object RegisterItem {
         .withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
         .also{ regItem["gem_of_promise"] = it}
     val GEM_DUST = Item(AiItemSettings().aiGroup(AiItemGroup.GEM)).also{ regItem["gem_dust"] = it}
-    val SPARKING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["sparking_gem"] = it}
-    val BLAZING_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["blazing_gem"] = it}
-    val INQUISITIVE_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["inquisitive_gem"] = it}
-    val LETHAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["lethal_gem"] = it}
-    val HEALERS_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["healers_gem"] = it}
-    val BRUTAL_GEM = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["brutal_gem"] = it}
+    val SPARKING_GEM = SparkingGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["sparking_gem"] = it}
+    val BLAZING_GEM = BlazingGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["blazing_gem"] = it}
+    val INQUISITIVE_GEM = InquisitiveGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["inquisitive_gem"] = it}
+    val LETHAL_GEM = LethalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["lethal_gem"] = it}
+    val HEALERS_GEM = HealersGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["healers_gem"] = it}
+    val BRUTAL_GEM = BrutalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["brutal_gem"] = it}
     val GLOWING_FRAGMENT = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"glowing_fragment")).also{ regItem["glowing_fragment"] = it}
     val BRILLIANT_DIAMOND = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"brilliant_diamond")).withGlint().also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
     val MALACHITE_FIGURINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"malachite_figurine")).also{ regItem["malachite_figurine"] = it}
