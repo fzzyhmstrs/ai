@@ -38,7 +38,7 @@ abstract class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
         if (nbt.contains("xp_cast")){
             val xp = nbt.getInt("xp_cast")
             val progress = xp/ SPELL_XP_TARGET * 100.0F
-            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.mystical", progress).append(AcText.literal("%")).formatted(Formatting.DARK_PURPLE))
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.mystical", progress).append(AcText.literal("%")).formatted(Formatting.PURPLE))
         }
     }
     
