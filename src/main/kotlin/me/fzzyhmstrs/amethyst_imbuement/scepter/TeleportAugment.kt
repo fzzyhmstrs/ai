@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
@@ -15,10 +16,15 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class TeleportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
+class TeleportAugment: SummonProjectileAugment(ScepterTier.TWO,5) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(1.4,0.1)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(210,-10),30,
+            7,imbueLevel,5,LoreTier.LOW_TIER, Items.ENDER_PEARL)
+    }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val enderPearlEntity = EnderPearlEntity(world, user)
@@ -28,10 +34,5 @@ class TeleportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_ENDER_PEARL_THROW
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(210,-10),30,7,imbueLevel,5
-            ,LoreTier.LOW_TIER, Items.ENDER_PEARL)
     }
 }

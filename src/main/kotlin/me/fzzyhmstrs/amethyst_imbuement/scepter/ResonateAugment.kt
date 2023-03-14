@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
@@ -32,7 +33,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
-class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SlashAugment(tier, maxLvl, *slot) {
+class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F)
@@ -40,6 +41,10 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
             .withDuration(36,4)
             .withAmplifier(0,1,0)
 
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,18,16,
+            18,imbueLevel,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
+    }
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
         val entityDistance: SortedMap<Double, Entity> = mutableMapOf<Double, Entity>().toSortedMap()
@@ -117,12 +122,6 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
     override fun particleSpeed(): Double {
         return 3.0
     }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,16,18,imbueLevel,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
-    }
-
-
 
     companion object {
 

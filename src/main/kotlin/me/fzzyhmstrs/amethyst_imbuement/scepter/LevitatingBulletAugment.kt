@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
@@ -28,8 +29,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect {
+class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectHelper.PersistentEffect {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(40,20,0)
@@ -37,6 +37,11 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
             .withDamage(4.0f)
 
     override val delay = PerLvlI(16,-2,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,80,20,
+            16,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+    }
 
     override fun effect(
         world: World,
@@ -103,10 +108,6 @@ class LevitatingBulletAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_SHULKER_SHOOT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,80,20,16,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     }
 
     private fun getAxis(user: LivingEntity): Direction.Axis{

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
@@ -18,7 +19,11 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot) {
+class SummonStriderAugment: SummonEntityAugment(ScepterTier.TWO,1) {
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,1200,75,1,imbueLevel,30,LoreTier.LOW_TIER, Items.SADDLE)
+    }
 
     override fun placeEntity(
         world: World,
@@ -46,9 +51,5 @@ class SummonStriderAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_STRIDER_AMBIENT
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,75,1,imbueLevel,30,LoreTier.LOW_TIER, Items.SADDLE)
     }
 }

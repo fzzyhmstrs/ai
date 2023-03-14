@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -21,11 +22,15 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("SpellCheckingInspection")
-class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    ManaItem {
+class MendEquipmentAugment: MiscAugment(ScepterTier.ONE,13), ManaItem {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(10,5,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,16,8,
+            8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_BLOCK)
+    }
 
     override fun effect(
         world: World,
@@ -73,10 +78,6 @@ class MendEquipmentAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_ANVIL_USE
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,16,8,8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_BLOCK)
     }
 
     override fun getRepairTime(): Int {

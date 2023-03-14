@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -17,10 +18,15 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(7.8,0.2,0.0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,8,2,
+            5,imbueLevel,1,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
+    }
 
     override fun effect(
         world: World,
@@ -59,10 +65,6 @@ class HardLightBridgeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot)
         }
         if (successes > 0) world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return successes > 0
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,8,2,5,imbueLevel,1,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
     }
 
     override fun soundEvent(): SoundEvent {

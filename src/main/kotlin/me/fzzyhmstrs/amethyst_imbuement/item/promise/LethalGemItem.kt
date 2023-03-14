@@ -20,9 +20,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class LethalGemItem(settings: Settings): IgnitedGemItem(settings) {
+class LethalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
-    override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
+    private val KILL_TARGET = 30
+
+    override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("kill_count")){
             val kills = nbt.getInt("kill_count").toFloat()
             val progress = kills/ KILL_TARGET.toFloat()*100.0F

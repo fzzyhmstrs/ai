@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -18,10 +19,17 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import kotlin.math.min
 
-class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
+class FangsAugment: MiscAugment(ScepterTier.TWO,6) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.8F,0.2F)
+        get() = super.baseEffect
+            .withRange(11.0,1.0,0.0)
+            .withDamage(5.8F,0.2F)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,34,12,
+            8,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
+    }
 
     override fun effect(
         world: World,
@@ -42,7 +50,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
             e = d + 2.0
         }
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        for (i in 0..effect.amplifier(level)) {
+        for (i in 0..effect.range(level).toInt()) {
             val g = 1.25 * (i + 1).toDouble()
             val success = PlayerFangsEntity.conjureFangs(
                 world,
@@ -67,10 +75,6 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
         return successes > 0
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,34,12,8,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
     }
 
     override fun soundEvent(): SoundEvent {

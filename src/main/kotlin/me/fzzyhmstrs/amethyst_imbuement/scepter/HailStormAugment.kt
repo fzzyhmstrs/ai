@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
@@ -24,8 +25,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect{
+class HailStormAugment: MiscAugment(ScepterTier.THREE,12), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -35,6 +35,11 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
             .withRange(8.25,0.25)
 
     private val hailDelay = PerLvlF(8.75f,-0.25f,0f)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,400,100,
+            21,imbueLevel,10, LoreTier.HIGH_TIER, Items.BLUE_ICE)
+    }
 
     override fun effect(
         world: World,
@@ -115,10 +120,6 @@ class HailStormAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         val ise = IceShardEntity(data.world,data.user,4.5f,0.4f,data.user.eyePos.subtract(0.0,0.2,0.0),rot)
         ise.passEffects(data.effect, data.level)
         data.world.spawnEntity(ise)
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,100,21,imbueLevel,10, LoreTier.HIGH_TIER, Items.BLUE_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

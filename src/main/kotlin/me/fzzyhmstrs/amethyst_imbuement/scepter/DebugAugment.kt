@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -16,7 +17,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.world.World
 
-class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
+class DebugAugment: MiscAugment(ScepterTier.ONE,1) {
 
     override fun effect(
         world: World,
@@ -42,7 +43,8 @@ class DebugAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1,1,1,imbueLevel,1, LoreTier.NO_TIER, Items.DEBUG_STICK)
+        return AugmentDatapoint(SpellType.GRACE,1,1,
+            1,imbueLevel,1, LoreTier.NO_TIER, Items.DEBUG_STICK)
     }
 
     override fun soundEvent(): SoundEvent {

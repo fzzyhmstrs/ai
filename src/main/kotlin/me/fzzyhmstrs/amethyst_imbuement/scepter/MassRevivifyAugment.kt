@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -18,12 +19,17 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(9.0,1.0,0.0)
             .withAmplifier(0,1,0)
             .withDuration(80,180,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,300,150,
+            25,imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
+    }
 
     override fun effect(
         world: World,
@@ -56,11 +62,6 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
         RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level, passedEffect)
         RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level, passedEffect)
         return successes > 0
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,300,150,25,imbueLevel,12
-            ,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun soundEvent(): SoundEvent {

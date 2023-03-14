@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -15,10 +16,15 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot) {
+class AbundanceAugment: MiscAugment(ScepterTier.ONE,6) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(1.5,0.5).withDamage(0.18F,0.02F)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,
+            1,imbueLevel,1, LoreTier.NO_TIER, Items.HAY_BLOCK)
+    }
 
     override fun effect(
         world: World,
@@ -53,9 +59,4 @@ class AbundanceAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Misc
         }
         return successes > 0
     }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,1,imbueLevel,1, LoreTier.NO_TIER, Items.HAY_BLOCK)
-    }
-
 }

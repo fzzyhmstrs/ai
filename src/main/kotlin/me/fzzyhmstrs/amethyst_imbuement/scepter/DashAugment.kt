@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -21,10 +22,15 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class DashAugment: MiscAugment(ScepterTier.TWO,3){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(1,1).withDuration(20)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,32,12,
+            5,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
+    }
 
     override fun effect(
         world: World,
@@ -60,10 +66,6 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
 
     override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
         effect(world, null, user, level, null, baseEffect)
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,32,12,5,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
     }
 
     override fun soundEvent(): SoundEvent {

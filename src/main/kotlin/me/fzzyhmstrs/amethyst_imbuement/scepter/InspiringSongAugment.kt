@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -20,12 +21,17 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier,maxLvl, *slot){
+class InspiringSongAugment: MiscAugment(ScepterTier.TWO,13){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(175,125,0)
             .withAmplifier(0,0,0)
             .withRange(3.5,0.5,0.0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,750,125,
+            10,imbueLevel,20,LoreTier.NO_TIER, Items.NOTE_BLOCK)
+    }
 
     override fun effect(
         world: World,
@@ -67,10 +73,6 @@ class InspiringSongAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
             EffectQueue.addStatusToQueue(entity,StatusEffects.REGENERATION, effect.duration(12), effect.amplifier(level))
             EffectQueue.addStatusToQueue(entity, RegisterStatus.INSPIRED, effect.duration(level), 0)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,750,125,10,imbueLevel,20,LoreTier.NO_TIER, Items.NOTE_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

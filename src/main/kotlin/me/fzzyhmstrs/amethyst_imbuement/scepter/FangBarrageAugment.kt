@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
@@ -23,8 +24,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import kotlin.math.min
 
-class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot),
-    PersistentEffectHelper.PersistentEffect {
+class FangBarrageAugment: MiscAugment(ScepterTier.THREE,6), PersistentEffectHelper.PersistentEffect {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
@@ -32,6 +32,11 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
             .withDamage(5.8F,0.2F)
 
     override val delay = PerLvlI(15,-1,0)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY,100,50,
+            26,imbueLevel,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
+    }
 
     override fun effect(
         world: World,
@@ -78,10 +83,6 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
         }
         val f = (data.user.yaw + 90) * MathHelper.PI / 180
         conjureBarrage(data.user,data.world,d,e,f, data.effect, data.level)
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,100,50,26,imbueLevel,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
@@ -16,7 +17,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot){
+class IceShardAugment: SummonProjectileAugment(ScepterTier.TWO,6){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -24,6 +25,11 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
             .withDuration(180,20)
             .withAmplifier(1)
             .withRange(4.3,0.2)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),
+            7,14, imbueLevel,1, LoreTier.LOW_TIER, Items.BLUE_ICE)
+    }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = effects.range(level).toFloat()
@@ -34,9 +40,4 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ENTITY_BLAZE_SHOOT
     }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),7,14, imbueLevel,1, LoreTier.LOW_TIER, Items.BLUE_ICE)
-    }
-
 }

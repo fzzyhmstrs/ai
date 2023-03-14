@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
@@ -18,13 +19,18 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonGraceTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonEntityAugment(tier, maxLvl, *slot){
+class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(650,50)
             .withDamage(1.8f,0.2f)
             .withRange(6.8,0.2)
+
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.GRACE,2400,240,
+            16,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.CHARGED_MOONSTONE)
+    }
 
     override fun placeEntity(
         world: World,
@@ -61,9 +67,5 @@ class SummonGraceTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,2400,240,16,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.CHARGED_MOONSTONE)
     }
 }
