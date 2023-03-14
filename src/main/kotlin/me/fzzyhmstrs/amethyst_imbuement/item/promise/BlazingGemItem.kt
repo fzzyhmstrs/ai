@@ -21,6 +21,8 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 abstract class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
+    
+    private val FIRE_TARGET = 120
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
         if (nbt.contains("on_fire")){
