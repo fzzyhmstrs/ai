@@ -20,7 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class BlazingGemItem(settings: Settings): Item(settings) {
+abstract class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: Itemstack, tooltip: MutableList<Text>){
         if (nbt.contains("on_fire")){
