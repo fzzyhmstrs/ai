@@ -31,14 +31,14 @@ public abstract class ItemStackMixin {
             int lvlResilience = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(),(ItemStack) (Object)this);
             Multimap<EntityAttribute, EntityAttributeModifier> newMap = ArrayListMultimap.create(original);
             if (lvlResilience > 0){
-                UUID uuid = RegisterEnchantment.INSTANCE.getRESILIENCE().getUuids$ai_main().get(slot);
+                UUID uuid = RegisterEnchantment.INSTANCE.getRESILIENCE().getUuids().get(slot);
                 String name = "resilience_modifier_"+slot.getName();
                 newMap.put(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(uuid,name,0.0+ lvlResilience, EntityAttributeModifier.Operation.ADDITION));
                 newMap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(uuid,name,(0.0 + lvlResilience)/2.0, EntityAttributeModifier.Operation.ADDITION));
             }
             int lvlSteadfast = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(),(ItemStack) (Object)this);
             if (lvlSteadfast > 0){
-                UUID uuid = RegisterEnchantment.INSTANCE.getSTEADFAST().getUuids$ai_main().get(slot);
+                UUID uuid = RegisterEnchantment.INSTANCE.getSTEADFAST().getUuids().get(slot);
                 String name = "steadfast_modifier_"+slot.getName();
                 newMap.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier(uuid,name,lvlSteadfast * 0.05, EntityAttributeModifier.Operation.ADDITION));
             }

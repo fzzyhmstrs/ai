@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -16,9 +17,12 @@ import net.minecraft.world.World
 
 class TeleportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): SummonProjectileAugment(tier, maxLvl, *slot) {
 
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect.withRange(1.4,0.1)
+
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val enderPearlEntity = EnderPearlEntity(world, user)
-        enderPearlEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.5f, 1.0f)
+        enderPearlEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, effects.range(level).toFloat(), 1.0f)
         return enderPearlEntity
     }
 
@@ -27,6 +31,7 @@ class TeleportAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,200,15,7,imbueLevel,LoreTier.LOW_TIER, Items.ENDER_PEARL)
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(210,-10),30,7,imbueLevel,5
+            ,LoreTier.LOW_TIER, Items.ENDER_PEARL)
     }
 }

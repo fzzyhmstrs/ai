@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -51,6 +52,6 @@ class RegenerateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Min
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,800,24,1,imbueLevel,LoreTier.NO_TIER, Items.GHAST_TEAR)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),40,1,imbueLevel,10,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 }

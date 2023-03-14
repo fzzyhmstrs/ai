@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.FreezingEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -47,7 +48,7 @@ class FreezingAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,35,8,4,imbueLevel, LoreTier.LOW_TIER, Items.PACKED_ICE)
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,4,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
     }
 
     override fun soundEvent(): SoundEvent {

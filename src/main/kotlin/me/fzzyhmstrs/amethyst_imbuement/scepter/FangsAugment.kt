@@ -70,7 +70,7 @@ class FangsAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugm
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,34,10,8,imbueLevel, LoreTier.LOW_TIER, Items.EMERALD)
+        return AugmentDatapoint(SpellType.FURY,34,12,8,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -38,6 +38,6 @@ class FireballAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,10,6,imbueLevel, LoreTier.LOW_TIER, Items.TNT)
+        return AugmentDatapoint(SpellType.FURY,32,10,6,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
     }
 }

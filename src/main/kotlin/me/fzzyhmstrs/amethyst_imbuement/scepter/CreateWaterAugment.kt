@@ -13,7 +13,7 @@ import net.minecraft.sound.SoundEvents
 class CreateWaterAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, 30, 8, 1, imbueLevel, LoreTier.NO_TIER, Items.WATER_BUCKET)
+        return AugmentDatapoint(SpellType.WIT, 30, 8, 1, imbueLevel,1, LoreTier.NO_TIER, Items.WATER_BUCKET)
     }
 
     override fun soundEvent(): SoundEvent {

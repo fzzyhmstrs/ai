@@ -57,7 +57,7 @@ class MassCleanseAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,35,7,imbueLevel,LoreTier.LOW_TIER, Items.MILK_BUCKET)
+        return AugmentDatapoint(SpellType.GRACE,1200,120,16,imbueLevel,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
     }
 
     override fun soundEvent(): SoundEvent {

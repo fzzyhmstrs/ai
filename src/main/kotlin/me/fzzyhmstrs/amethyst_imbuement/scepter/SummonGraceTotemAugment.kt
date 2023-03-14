@@ -64,6 +64,6 @@ class SummonGraceTotemAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2400,100,16,imbueLevel,LoreTier.LOW_TIER, RegisterItem.CHARGED_MOONSTONE)
+        return AugmentDatapoint(SpellType.GRACE,2400,240,16,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.CHARGED_MOONSTONE)
     }
 }

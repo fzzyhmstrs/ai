@@ -48,6 +48,6 @@ class RecallAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,12000,125,1,imbueLevel, LoreTier.NO_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.WIT,12000,400,1,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
     }
 }

@@ -12,7 +12,7 @@ import net.minecraft.sound.SoundEvents
 
 class CreateLavaAugment(tier: Int, maxLvl: Int, item: Item, vararg slot: EquipmentSlot): PlaceItemAugment(tier, maxLvl, item, *slot){
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,200,20,1,imbueLevel, LoreTier.LOW_TIER, Items.LAVA_BUCKET)
+        return AugmentDatapoint(SpellType.WIT,200,50,1,imbueLevel,10, LoreTier.LOW_TIER, Items.LAVA_BUCKET)
     }
 
     override fun soundEvent(): SoundEvent {

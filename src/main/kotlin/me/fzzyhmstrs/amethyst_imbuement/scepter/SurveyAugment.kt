@@ -61,7 +61,7 @@ class SurveyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAug
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,100,5,imbueLevel, LoreTier.NO_TIER, Items.MAP)
+        return AugmentDatapoint(SpellType.WIT,1200,120,5,imbueLevel,5, LoreTier.NO_TIER, Items.MAP)
     }
 
     override fun soundEvent(): SoundEvent {

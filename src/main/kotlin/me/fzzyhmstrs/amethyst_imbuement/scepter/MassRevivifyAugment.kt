@@ -59,7 +59,8 @@ class MassRevivifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): M
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,300,100,22,imbueLevel,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
+        return AugmentDatapoint(SpellType.GRACE,300,150,25,imbueLevel,12
+            ,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun soundEvent(): SoundEvent {

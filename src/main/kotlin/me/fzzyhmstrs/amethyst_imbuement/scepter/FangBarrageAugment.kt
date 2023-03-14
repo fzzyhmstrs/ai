@@ -2,6 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
@@ -79,7 +81,7 @@ class FangBarrageAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(me.fzzyhmstrs.amethyst_core.scepter_util.SpellType.FURY,100,40,22,imbueLevel,me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,100,50,26,imbueLevel,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
     }
 
     override fun soundEvent(): SoundEvent {

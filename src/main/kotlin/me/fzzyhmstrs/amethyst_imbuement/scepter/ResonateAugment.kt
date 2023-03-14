@@ -36,7 +36,7 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F)
-            .withRange(3.5,0.25,0.0)
+            .withRange(5.5,0.25,0.0)
             .withDuration(36,4)
             .withAmplifier(0,1,0)
 
@@ -119,8 +119,10 @@ class ResonateAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Slash
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,18,18,imbueLevel, LoreTier.NO_TIER, Items.NOTE_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,18,16,18,imbueLevel,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
     }
+
+
 
     companion object {
 

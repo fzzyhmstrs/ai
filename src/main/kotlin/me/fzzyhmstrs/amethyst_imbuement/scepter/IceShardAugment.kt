@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.FlameboltEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.viscerae.entity.IceShardEntity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -19,12 +20,13 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withDamage(3.75F,0.25F,0.0F)
+            .withDamage(3.6F,0.4F,0.0F)
             .withDuration(180,20)
             .withAmplifier(1)
+            .withRange(4.3,0.2)
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val speed = 4.5F
+        val speed = effects.range(level).toFloat()
         val div = 0.75F
         return IceShardEntity.createIceShard(world, user, speed, div,user.yaw, effects, level)
     }
@@ -34,7 +36,7 @@ class IceShardAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Summo
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,10,7,10, imbueLevel, LoreTier.LOW_TIER, Items.BLUE_ICE)
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),7,14, imbueLevel,1, LoreTier.LOW_TIER, Items.BLUE_ICE)
     }
 
 }

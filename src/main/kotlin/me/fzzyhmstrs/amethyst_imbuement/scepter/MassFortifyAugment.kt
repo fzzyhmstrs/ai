@@ -55,7 +55,7 @@ class MassFortifyAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mi
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,60,16,imbueLevel,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
+        return AugmentDatapoint(SpellType.GRACE,1200,155,18,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun soundEvent(): SoundEvent {

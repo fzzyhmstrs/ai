@@ -50,6 +50,6 @@ class SummonChickenAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,900,10,1,imbueLevel,LoreTier.LOW_TIER, Items.EGG)
+        return AugmentDatapoint(SpellType.GRACE,900,50,1,imbueLevel,13,LoreTier.LOW_TIER, Items.EGG)
     }
 }

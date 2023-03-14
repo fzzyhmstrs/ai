@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -41,28 +41,28 @@ class GemOfPromiseItem(settings: Settings): Item(settings), Flavorful<GemOfPromi
         val nbt = stack.orCreateNbt
         if (nbt.contains("on_fire")){
             val fire = nbt.getInt("on_fire").toFloat()
-            val progress = fire/FIRE_TARGET.toFloat()*100.0F
+            val progress = fire/ FIRE_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(AcText.literal("%")).formatted(Formatting.RED))
         }
         if (nbt.contains("statuses")){
             val compound = nbt.get("statuses") as NbtCompound
             val status = compound.keys.size.toFloat()
-            val progress = status/STATUS_TARGET.toFloat()*100.0F
+            val progress = status/ STATUS_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(AcText.literal("%")).formatted(Formatting.BLUE))
         }
         if (nbt.contains("kill_count")){
             val kills = nbt.getInt("kill_count").toFloat()
-            val progress = kills/KILL_TARGET.toFloat()*100.0F
+            val progress = kills/ KILL_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress).append(AcText.literal("%")).formatted(Formatting.DARK_RED))
         }
         if (nbt.contains("healed")){
             val healed = nbt.getFloat("healed")
-            val progress = healed/HEAL_TARGET*100.0F
+            val progress = healed/ HEAL_TARGET *100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).append(AcText.literal("%")).formatted(Formatting.GREEN))
         }
         if (nbt.contains("mob_hit")){
             val hit = nbt.getInt("mob_hit").toFloat()
-            val progress = hit/HIT_TARGET.toFloat()*100.0F
+            val progress = hit/ HIT_TARGET.toFloat()*100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(AcText.literal("%")).formatted(Formatting.GRAY))
         }
     }

@@ -105,10 +105,6 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         EffectQueue.addStatusToQueue(target,RegisterStatus.CHARMED,duration,0)
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1500,65,5,imbueLevel, LoreTier.LOW_TIER, Items.DIAMOND)
-    }
-
     override fun soundEvent(): SoundEvent {
         return SoundEvents.EVENT_RAID_HORN
     }
@@ -136,6 +132,8 @@ class BedazzleAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscA
         }
     }
 
-
+    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
+        return AugmentDatapoint(SpellType.WIT,1500,85,5,imbueLevel,40, LoreTier.LOW_TIER, Items.DIAMOND)
+    }
 
 }

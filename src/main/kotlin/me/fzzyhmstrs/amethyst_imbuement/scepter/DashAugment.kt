@@ -63,7 +63,7 @@ class DashAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugme
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,32,10,4,imbueLevel, LoreTier.LOW_TIER, Items.SUGAR)
+        return AugmentDatapoint(SpellType.WIT,32,12,5,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
     }
 
     override fun soundEvent(): SoundEvent {

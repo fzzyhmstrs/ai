@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -55,6 +56,6 @@ class ExhaustAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MinorS
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,360,16,7,imbueLevel,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(360,-10),40,7,imbueLevel,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 }

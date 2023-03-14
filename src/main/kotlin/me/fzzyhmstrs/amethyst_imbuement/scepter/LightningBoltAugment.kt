@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -75,7 +76,7 @@ class LightningBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,50,10,5,imbueLevel,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,6,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
     }
 
     override fun soundEvent(): SoundEvent {

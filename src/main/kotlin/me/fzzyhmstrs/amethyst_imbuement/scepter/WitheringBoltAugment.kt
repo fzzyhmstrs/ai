@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerWitherSkullEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -24,7 +25,7 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
         val yaw = user.yaw
         val pitch = user.pitch
         val roll = user.roll
-        val speed = 3.0F
+        val speed = 4.0F
         val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.x
         val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * speed) + user.velocity.y
         val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.z
@@ -40,6 +41,6 @@ class WitheringBoltAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): 
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,28,13,10,imbueLevel,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,10,imbueLevel,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
     }
 }

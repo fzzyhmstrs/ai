@@ -84,7 +84,7 @@ class ZapAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugmen
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,6,1,imbueLevel, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
+        return AugmentDatapoint(SpellType.FURY,18,6,1,imbueLevel,1, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
     }
 
 
