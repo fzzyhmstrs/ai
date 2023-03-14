@@ -42,4 +42,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
 |Overhaul config implementation with fzzy config|Not started|
 |Add config settings for Focus XP and percentages|Not started|
+|Make sure the healers gem is actually checking food|Not started|
 
