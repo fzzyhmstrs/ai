@@ -46,6 +46,8 @@ object RegisterModifier {
     val SOJOURNER = AugmentModifier(Identifier(AI.MOD_ID,"sojourner"), cooldownModifier = -90.0).withRange(rangePercent = 25.0).withConsumer(ModifierConsumers.SOJOURNER_CONSUMER).withSpellToAffect(ModifierPredicates.TRAVELER_PREDICATE) .also { regMod.[it] = 2 }
     val TRAVELER = AugmentModifier(Identifier(AI.MOD_ID,"traveler"), cooldownModifier = -65.0).withRange(rangePercent = 15.0).withConsumer(ModifierConsumers.TRAVELER_CONSUMER).withSpellToAffect(ModifierPredicates.TRAVELER_PREDICATE).withDescendant(SOJOURNER) .also { regMod.[it] = 5 }
 
+    //Modifiers unique to the spellcasters focus and other non-scepter things that might use rolling
+    val SAVANT_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"savant_aspect").withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1) .also { regMod.[it] = 1 }
 
     fun registerAll(){
         regMod.forEach {
