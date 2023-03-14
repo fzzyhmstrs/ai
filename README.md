@@ -32,7 +32,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add flare spell|Not Started|
 |Add spell scrolls|Not Started|
 |Implement PVP modes into spells|Not Started|
-|Add Mystical Gem|Not Started|
+|Add Mystical Gem|In progress|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
 |Add Spellcasters Focus, with special recipe for different attributes|Not Started|
 |Make the Totem of Amethyst also act as a weaker focus|Not Started|
@@ -43,4 +43,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Overhaul config implementation with fzzy config|Not started|
 |Add config settings for Focus XP and percentages|Not started|
 |Make sure the healers gem is actually checking food|Not started|
+|Fix up the translatable text on the gems|Not started|
 
