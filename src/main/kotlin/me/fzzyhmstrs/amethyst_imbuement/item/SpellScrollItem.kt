@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.item_util.SpellCasting
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.item.TooltipContext
@@ -25,13 +26,14 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifiable {
+class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifiable, Reactant {
 
     private val SCROLL_MODIFIER_TOLL = BinomialLootNumberProvider.create(20,0.24f)
     private val SCROLL_LEVEL = "scroll_level"
     private val TOTAL_USES = "total_uses"
     private val SPENT_USES = "spent_uses"
     internal val SPELL = "written_spell"
+    internal val SPELL_TYPE = "written_spell_type"
     internal val MODEL_KEY = "model_predicate_key"
 
     override fun appendTooltip(
@@ -89,6 +91,36 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
         if (player is ServerPlayerEntity && world is ServerWorld){
             val rolls = ModifierHelper.rollScepterModifiers(stack, player, world, SCROLL_MODIFIER_TOLL)
             ModifierHelper.addRolledModifiers(stack,rolls)
+        }
+    }
+    
+    override fun canReact(stack: ItemStack,reagents: List<ItemStack>): Boolean{
+        val nbt = stack.nbt
+        if (nbt?.contains(SPELL) == true) return false
+        var bl = false
+        for (reagent in reagents){
+            if (reagent.item is BookOfKnowledge){
+                val spell = reagent.nbt?.contains(NbtKeys.LORE_KEY.str())?:false
+                val type = reagent.nbt?.contains(NbtKeys.LORE_TYPE.str())?:false
+                if (spell && type){
+                    bl = true
+                    break
+                }
+            }
+        }
+        return bl
+    }
+    
+    override fun react(stack: ItemStack,reagents: List<ItemStack>){
+        val nbt = stack.orCreateNbt
+        for (reagent in reagents){
+            if (nbt.contains(SPELL)) break
+            if (reagent.item is BookOfKnowledge){
+                val spellString = reagent.nbt?.getString(NbtKeys.LORE_KEY.str())?:return
+                val spellType = reagent.nbt?.getString(NbtKeys.LORE_TYPE.str())?:""
+                nbt.putString(SPELL,spellString)
+                nbt.putString(SPELL_TYPE,spellType)
+            }
         }
     }
 
