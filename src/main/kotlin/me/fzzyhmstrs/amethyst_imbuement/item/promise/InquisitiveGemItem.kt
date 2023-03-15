@@ -39,7 +39,7 @@ class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
             val compound = nbt.get("statuses") as NbtCompound
             val status = compound.keys.size.toFloat()
             val progress = status/ STATUS_TARGET.toFloat()*100.0F
-            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).append(AcText.literal("%")).formatted(Formatting.BLUE))
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.inquisitive", progress).formatted(Formatting.BLUE))
         }
     }
     
