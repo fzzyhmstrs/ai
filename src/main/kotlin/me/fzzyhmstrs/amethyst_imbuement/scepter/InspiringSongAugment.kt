@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
@@ -50,6 +51,7 @@ class InspiringSongAugment: MiscAugment(ScepterTier.TWO,13){
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
+                    if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) continue
                     successes++
                     inspire(entity3,max(1,level-1),effect)
                     effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
