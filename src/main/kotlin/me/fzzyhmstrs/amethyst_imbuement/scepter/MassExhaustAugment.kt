@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
@@ -40,11 +41,13 @@ class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
         if (entityList.isEmpty()) return false
         var successes = 0
         for (entity3 in entityList) {
-            if(entity3 is Monster && entity3 is LivingEntity){
-                successes++
-                EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
-                EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
-                effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
+            if(entity3 is Monster || entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
+                if (entity3 is LivingEntity){
+                    successes++
+                    EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
+                    EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
+                    effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
+                }
             }
         }
         val bl = successes > 0
