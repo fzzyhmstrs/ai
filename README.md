@@ -31,16 +31,19 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Fix "Absoprtion" on Mass Revivify desc text|Complete|
 |Add flare spell|In Progress|
 |Add spell scrolls|In progress|
-|Integrate new reagent system into the crystal altar|not started|
-|Implement PVP modes into spells|Not Started|
+|Integrate new reagent system into the crystal altar|Not started|
+|Implement PVP modes into spells|In progress|
 |Add Mystical Gem|In progress|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
 |Add Spellcasters Focus, with special recipe for different attributes|In progress|
+|Impl focus GUI for picking upgrades|In progress|
 |Make the Totem of Amethyst also act as a weaker focus|???|
 |Add unique scepter modifiers for the focii|In Progress|
 |Change gem of promise into a registration type thingy|Complete|
 |Add lang descriptions of AC modifiers|Complete|
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
+|Update plugins to reflect the new Crstal Altar|Not Started|
+|Change altar recipe to take three inputs|Not Started|
 |Overhaul config implementation with fzzy config|Not started|
 |Add config settings all newly added vars|Not started|
 |Make sure the healers gem is actually checking food|Not started|
