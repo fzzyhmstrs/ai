@@ -28,10 +28,10 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     private val FOCUS_RECORDS = "focus_records"
     private val FOCUS_XP = "focus_xp"
     private val FOCUS_SPECIAL = "focus_special"
-    private val LEVEL_UP = "ready_for_lvl_up"
-    private val OPTION_1 = "option_1"
-    private val OPTION_2 = "option_2"
-    private val OPTION_3 = "option_3"
+    internal val LEVEL_UP = "ready_for_lvl_up"
+    internal val OPTION_1 = "option_1"
+    internal val OPTION_2 = "option_2"
+    internal val OPTION_3 = "option_3"
     private val tiers: Array<TierData> = arrayOf(
         TierData("", Rarity.UNCOMMON, 500,1),
         TierData(".novice", Rarity.UNCOMMON, 1250,2),
