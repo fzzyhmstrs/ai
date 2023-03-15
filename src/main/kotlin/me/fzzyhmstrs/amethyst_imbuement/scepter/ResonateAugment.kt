@@ -45,6 +45,19 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
         return AugmentDatapoint(SpellType.FURY,18,16,
             18,imbueLevel,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
     }
+    
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
+        val hostileEntityList: MutableList<Entity> = mutableListOf()
+        if (entityList.isNotEmpty()) {
+            for (entity in entityList) {
+                if (entity !== user) {
+                    if (entity is SpellCastingEntity && isEntityPvpTeammate(user, entity,this)) continue
+                    hostileEntityList.add(entity)
+                }
+            }
+        }
+        return hostileEntityList
+    }
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
         val entityDistance: SortedMap<Double, Entity> = mutableMapOf<Double, Entity>().toSortedMap()
