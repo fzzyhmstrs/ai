@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 import net.minecraft.particle.DefaultParticleType
@@ -22,6 +23,19 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE,9){
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,4,
             8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
+    }
+    
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
+        val hostileEntityList: MutableList<Entity> = mutableListOf()
+        if (entityList.isNotEmpty()) {
+            for (entity in entityList) {
+                if (entity !== user) {
+                    if (entity is SpellCastingEntity && isEntityPvpTeammate(user, entity,this)) continue
+                    hostileEntityList.add(entity)
+                }
+            }
+        }
+        return hostileEntityList
     }
 
     override fun particleType(): DefaultParticleType{
