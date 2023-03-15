@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -48,6 +49,7 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
     ): Boolean {
         return if(target != null) {
             if (target is LivingEntity) {
+                if (target is SpellCastingEntity && isEntityPvpTeammate(user, target,this)) continue
                 val bl = if(target.isUndead) {
                     target.damage(DamageSource.magic(user,user),effects.damage(level) * effects.amplifier(level))
                 } else {
