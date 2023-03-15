@@ -44,5 +44,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Overhaul config implementation with fzzy config|Not started|
 |Add config settings all newly added vars|Not started|
 |Make sure the healers gem is actually checking food|Not started|
-|Fix up the translatable text on the gems|In progress|
+|Fix up the translatable text on the gems|Complete|
 
