@@ -48,4 +48,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add config settings all newly added vars|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Fix up the translatable text on the gems|Complete|
+|Look into making a level tweaking config and-or total disable of bonuses|Not started|
 
