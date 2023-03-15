@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -36,7 +37,7 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
+            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 val healthCheck = (target as LivingEntity).health
                 target.heal(effects.damage(level))
                 if (target.health == healthCheck) return false
@@ -45,16 +46,13 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
                 return true
             }
         }
-        return if (user is PlayerEntity) {
-            val healthCheck = user.health
-                user.heal(effects.damage(level))
-                if (user.health == healthCheck) return false
-                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-                true
-            } else {
-                false
-            }
+
+        val healthCheck = user.health
+        user.heal(effects.damage(level))
+        if (user.health == healthCheck) return false
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        true
 
     }
 }
