@@ -28,7 +28,8 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     private val FOCUS_RECORDS = "focus_records"
     private val FOCUS_XP = "focus_xp"
     private val FOCUS_SPECIAL = "focus_special"
-    internal val LEVEL_UP = "ready_for_lvl_up"
+    internal val LEVEL_UP_READY = "lvl_up_ready"
+    internal val LEVEL_UP = "lvl_up_data"
     internal val OPTION_1 = "option_1"
     internal val OPTION_2 = "option_2"
     internal val OPTION_3 = "option_3"
@@ -62,6 +63,12 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             }
         }
     }
+    
+    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack>{
+        val stack = user.getStackInHand(hand)
+        val nbt = stack.nbt?:return TypedActionResult.fail(stack)
+        if (!nbt.getBoolean(LEVEL_UP_READY)) return TypedActionResult.fail(stack)
+    }
 
     private fun addXpAndLevelUp(stack: ItemStack, spell: ScepterAugment, user: LivingEntity, world: World){
         val nbt = stack.orCreateNbt
@@ -75,7 +82,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val records = nbt.getCompound(FOCUS_RECORDS)
         val currentRecordedXp = if (records.contains(id)) { records.getInt(id) }else{ 0 }
         val newCurrentRecordedXp = currentRecordedXp + newXp
-        if (newCurrentXp > tier.xpToNextTier){
+        if (newCurrentXp > tier.xpToNextTier && !nbt.getBoolean(LEVEL_UP_READY)){
             if (user is ServerPlayerEntity && world is ServerWorld) {
                 nbt.putInt(FOCUS_TIER,tier.nextTier)
                 val lvlUpNbt = NbtCompound()
@@ -107,6 +114,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                     option3.add(NbtString.of(mod.toString()))
                 }
                 lvlUpNbt.put(OPTION_3,option3)
+                nbt.put(LEVEL_UP_READY,true)
                 nbt.put(LEVEL_UP,lvlUpNbt)
             }
         }
