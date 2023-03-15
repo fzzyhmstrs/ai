@@ -28,7 +28,7 @@ class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
         if (nbt.contains("on_fire")){
             val fire = nbt.getInt("on_fire").toFloat()
             val progress = fire/ FIRE_TARGET.toFloat()*100.0F
-            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).append(AcText.literal("%")).formatted(Formatting.RED))
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).formatted(Formatting.RED))
         }
     }
     
