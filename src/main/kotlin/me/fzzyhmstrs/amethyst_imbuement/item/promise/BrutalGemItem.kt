@@ -28,7 +28,7 @@ class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
         if (nbt.contains("mob_hit")){
             val hit = nbt.getInt("mob_hit").toFloat()
             val progress = hit/ HIT_TARGET.toFloat()*100.0F
-            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).append(AcText.literal("%")).formatted(Formatting.GRAY))
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).formatted(Formatting.GRAY))
         }
     }
     
