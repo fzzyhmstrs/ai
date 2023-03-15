@@ -38,85 +38,421 @@
       "predicate": {
         "model_key": 34.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_34"
+      "model": "amethyst_imbuement:item/spell_scroll_34_0"
+    },
+    {
+      "predicate": {
+        "model_key": 34.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_34_2"
+    },
+    {
+      "predicate": {
+        "model_key": 34.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_34_4"
+    },
+    {
+      "predicate": {
+        "model_key": 34.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_34_6"
+    },
+    {
+      "predicate": {
+        "model_key": 34.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_34_8"
     },
     {
       "predicate": {
         "model_key": 35.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_35"
+      "model": "amethyst_imbuement:item/spell_scroll_35_0"
+    },
+    {
+      "predicate": {
+        "model_key": 35.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_35_2"
+    },
+    {
+      "predicate": {
+        "model_key": 35.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_35_4"
+    },
+    {
+      "predicate": {
+        "model_key": 35.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_35_6"
+    },
+    {
+      "predicate": {
+        "model_key": 35.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_35_8"
     },
     {
       "predicate": {
         "model_key": 36.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_36"
+      "model": "amethyst_imbuement:item/spell_scroll_36_0"
+    },
+    {
+      "predicate": {
+        "model_key": 36.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_36_2"
+    },
+    {
+      "predicate": {
+        "model_key": 36.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_36_4"
+    },
+    {
+      "predicate": {
+        "model_key": 36.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_36_6"
+    },
+    {
+      "predicate": {
+        "model_key": 36.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_36_8"
     },
     {
       "predicate": {
         "model_key": 37.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_37"
+      "model": "amethyst_imbuement:item/spell_scroll_37_0"
+    },
+    {
+      "predicate": {
+        "model_key": 37.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_37_2"
+    },
+    {
+      "predicate": {
+        "model_key": 37.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_37_4"
+    },
+    {
+      "predicate": {
+        "model_key": 37.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_37_6"
+    },
+    {
+      "predicate": {
+        "model_key": 37.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_37_8"
     },
     {
       "predicate": {
         "model_key": 65.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_65"
+      "model": "amethyst_imbuement:item/spell_scroll_65_0"
+    },
+    {
+      "predicate": {
+        "model_key": 65.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_65_2"
+    },
+    {
+      "predicate": {
+        "model_key": 65.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_65_4"
+    },
+    {
+      "predicate": {
+        "model_key": 65.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_65_6"
+    },
+    {
+      "predicate": {
+        "model_key": 65.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_65_8"
     },
     {
       "predicate": {
         "model_key": 66.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_66"
+      "model": "amethyst_imbuement:item/spell_scroll_66_0"
+    },
+    {
+      "predicate": {
+        "model_key": 66.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_66_2"
+    },
+    {
+      "predicate": {
+        "model_key": 66.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_66_4"
+    },
+    {
+      "predicate": {
+        "model_key": 66.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_66_6"
+    },
+    {
+      "predicate": {
+        "model_key": 66.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_66_8"
     },
     {
       "predicate": {
         "model_key": 67.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_67"
+      "model": "amethyst_imbuement:item/spell_scroll_67_0"
+    },
+    {
+      "predicate": {
+        "model_key": 67.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_67_2"
+    },
+    {
+      "predicate": {
+        "model_key": 67.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_67_4"
+    },
+    {
+      "predicate": {
+        "model_key": 67.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_67_6"
+    },
+    {
+      "predicate": {
+        "model_key": 67.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_67_8"
     },
     {
       "predicate": {
         "model_key": 68.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_68"
+      "model": "amethyst_imbuement:item/spell_scroll_68_0"
+    },
+    {
+      "predicate": {
+        "model_key": 68.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_68_2"
+    },
+    {
+      "predicate": {
+        "model_key": 68.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_68_4"
+    },
+    {
+      "predicate": {
+        "model_key": 68.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_68_6"
+    },
+    {
+      "predicate": {
+        "model_key": 68.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_68_8"
     },
     {
       "predicate": {
         "model_key": 69.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_69"
+      "model": "amethyst_imbuement:item/spell_scroll_69_0"
+    },
+    {
+      "predicate": {
+        "model_key": 69.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_69_2"
+    },
+    {
+      "predicate": {
+        "model_key": 69.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_69_4"
+    },
+    {
+      "predicate": {
+        "model_key": 69.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_69_6"
+    },
+    {
+      "predicate": {
+        "model_key": 69.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_69_8"
     },
     {
       "predicate": {
         "model_key": 129.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_129"
+      "model": "amethyst_imbuement:item/spell_scroll_129_0"
+    },
+    {
+      "predicate": {
+        "model_key": 129.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_129_2"
+    },
+    {
+      "predicate": {
+        "model_key": 129.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_129_4"
+    },
+    {
+      "predicate": {
+        "model_key": 129.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_129_6"
+    },
+    {
+      "predicate": {
+        "model_key": 129.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_129_8"
     },
     {
       "predicate": {
         "model_key": 130.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_130"
+      "model": "amethyst_imbuement:item/spell_scroll_130_0"
+    },
+    {
+      "predicate": {
+        "model_key": 130.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_130_2"
+    },
+    {
+      "predicate": {
+        "model_key": 130.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_130_4"
+    },
+    {
+      "predicate": {
+        "model_key": 130.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_130_6"
+    },
+    {
+      "predicate": {
+        "model_key": 130.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_130_8"
     },
     {
       "predicate": {
         "model_key": 131.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_131"
+      "model": "amethyst_imbuement:item/spell_scroll_131_0"
+    },
+    {
+      "predicate": {
+        "model_key": 131.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_131_2"
+    },
+    {
+      "predicate": {
+        "model_key": 131.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_131_4"
+    },
+    {
+      "predicate": {
+        "model_key": 131.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_131_6"
+    },
+    {
+      "predicate": {
+        "model_key": 131.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_131_8"
     },
     {
       "predicate": {
         "model_key": 132.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_132"
+      "model": "amethyst_imbuement:item/spell_scroll_132_0"
+    },
+    {
+      "predicate": {
+        "model_key": 132.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_132_2"
+    },
+    {
+      "predicate": {
+        "model_key": 132.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_132_4"
+    },
+    {
+      "predicate": {
+        "model_key": 132.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_132_6"
+    },
+    {
+      "predicate": {
+        "model_key": 132.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_132_8"
     },
     {
       "predicate": {
         "model_key": 133.0
       },
-      "model": "amethyst_imbuement:item/spell_scroll_133"
+      "model": "amethyst_imbuement:item/spell_scroll_133_0"
+    },
+    {
+      "predicate": {
+        "model_key": 133.2
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_133_2"
+    },
+    {
+      "predicate": {
+        "model_key": 133.4
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_133_4"
+    },
+    {
+      "predicate": {
+        "model_key": 133.6
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_133_6"
+    },
+    {
+      "predicate": {
+        "model_key": 133.8
+      },
+      "model": "amethyst_imbuement:item/spell_scroll_133_8"
     }
   ]
 }
