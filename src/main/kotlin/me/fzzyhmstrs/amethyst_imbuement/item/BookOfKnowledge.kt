@@ -1,5 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-interface BookOfKnowledge: Reagant {
+interface BookOfKnowledge: Reagent {
     val bindingUV: Pair<Int,Int>
 }
