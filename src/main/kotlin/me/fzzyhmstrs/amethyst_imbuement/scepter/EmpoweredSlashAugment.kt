@@ -23,6 +23,19 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
         return AugmentDatapoint(SpellType.FURY,20,20,
             15,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
     }
+    
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
+        val hostileEntityList: MutableList<Entity> = mutableListOf()
+        if (entityList.isNotEmpty()) {
+            for (entity in entityList) {
+                if (entity !== user) {
+                    if (entity is SpellCastingEntity && isEntityPvpTeammate(user, entity,this)) continue
+                    hostileEntityList.add(entity)
+                }
+            }
+        }
+        return hostileEntityList
+    }
 
     override fun particleType(): DefaultParticleType{
         return ParticleTypes.CRIT
