@@ -20,23 +20,26 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
 
     override fun read(id: Identifier, json: JsonObject): AltarRecipe {
         val recipeJson: AltarRecipeFormat = gson.fromJson(json, AltarRecipeFormat::class.java)
+        val dust = RecipeUtil.ingredientFromJson(recipeJson.dust)
         val base = RecipeUtil.ingredientFromJson(recipeJson.base)
         val addition = RecipeUtil.ingredientFromJson(recipeJson.addition)
-        val itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
-        return AltarRecipe(id,base, addition,itemStack)
+        val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
+        return AltarRecipe(id,dust,base,flower,result)
     }
 
     override fun write(buf: PacketByteBuf, recipe: AltarRecipe) {
+        recipe.dust.write(buf)
         recipe.base.write(buf)
         recipe.addition.write(buf)
         buf.writeItemStack(recipe.result)
     }
 
     override fun read(id: Identifier, buf: PacketByteBuf): AltarRecipe {
+        val dust = Ingredient.fromPacket(buf)
         val base = Ingredient.fromPacket(buf)
         val addition = Ingredient.fromPacket(buf)
         val result = buf.readItemStack()
-        return AltarRecipe(id,base,addition,result)
+        return AltarRecipe(id,dust,base,addition,result)
     }
 
 
