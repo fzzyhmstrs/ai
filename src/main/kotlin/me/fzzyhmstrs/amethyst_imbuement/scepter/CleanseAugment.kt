@@ -41,7 +41,7 @@ class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
+            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
                 for (effect in (target as LivingEntity).statusEffects){
                     if (effect.effectType.isBeneficial) continue
@@ -57,24 +57,19 @@ class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
                 return true
             }
         }
-        return if (user.isPlayer) {
-                val statuses: MutableList<StatusEffectInstance> = mutableListOf()
-                for (effect in user.statusEffects){
-                    if (effect.effectType.isBeneficial) continue
-                    statuses.add(effect)
-                }
-                for (effect in statuses) {
-                    user.removeStatusEffect(effect.effectType)
-                }
-                user.fireTicks = 0
-                EffectQueue.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
-                world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-                true
-            } else {
-                false
-            }
-
+        val statuses: MutableList<StatusEffectInstance> = mutableListOf()
+        for (effect in user.statusEffects){
+            if (effect.effectType.isBeneficial) continue
+            statuses.add(effect)
+        }
+        for (effect in statuses) {
+            user.removeStatusEffect(effect.effectType)
+        }
+        user.fireTicks = 0
+        EffectQueue.addStatusToQueue(user,RegisterStatus.IMMUNITY,effects.duration(level),effects.amplifier(level))
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+        effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        return true
     }
 
     override fun soundEvent(): SoundEvent {
