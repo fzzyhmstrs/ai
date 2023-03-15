@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -304,6 +305,13 @@ object RegisterRenderer {
             } else {
                 0.0f
             }
+        }
+
+        ModelPredicateProviderRegistry.register(
+            RegisterItem.SPELL_SCROLL, Identifier("model_key")
+        ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
+            val nbt = stack.nbt
+            nbt?.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY)?:0f
         }
     }
 

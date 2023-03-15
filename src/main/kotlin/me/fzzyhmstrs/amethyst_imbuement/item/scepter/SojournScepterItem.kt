@@ -1,7 +1,8 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.LOGGER
+import me.fzzyhmstrs.amethyst_imbuement.item.scepter.CustomScepterItem
 import net.minecraft.block.Blocks
 import net.minecraft.item.CompassItem
 import net.minecraft.item.ItemStack

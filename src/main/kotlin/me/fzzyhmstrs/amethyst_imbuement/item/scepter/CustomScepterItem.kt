@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.item_util.DefaultScepterItem
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial

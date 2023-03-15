@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.custom
 
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.item.ShovelItem
