@@ -311,7 +311,19 @@ object RegisterRenderer {
             RegisterItem.SPELL_SCROLL, Identifier("model_key")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.nbt
-            nbt?.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY)?:0f
+            if (nbt == null){
+                0.0
+            } else {
+                val type = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL_TYPE)
+                val decimel = when (type){
+                    SpellType.FURY.str() ->{ 0.0f }
+                    SpellType.GRACE.str() -> { 0.2f }
+                    SpellType.WIT.str() -> { 0.4f }
+                    else -> { 0.0f }
+                }
+                val value = nbt.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY)
+                value + decimel
+            }
         }
     }
 
