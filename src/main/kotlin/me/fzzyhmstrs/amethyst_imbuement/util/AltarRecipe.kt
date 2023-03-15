@@ -11,6 +11,7 @@ import net.minecraft.world.World
 
 class AltarRecipe(
     private val id: Identifier,
+    val dust: Ingredient,
     val base: Ingredient,
     val addition: Ingredient,
     val result: ItemStack
@@ -18,12 +19,12 @@ class AltarRecipe(
     Recipe<SimpleInventory> {
 
     override fun matches(inventory: SimpleInventory, world: World): Boolean {
-        return base.test(inventory.getStack(0)) && addition.test(inventory.getStack(1))
+        return dust.test(inventory.getStack(0)) && base.test(inventory.getStack(1)) && addition.test(inventory.getStack(2))
     }
 
     override fun craft(inventory: SimpleInventory): ItemStack {
         val itemStack = result.copy()
-        val nbtCompound = inventory.getStack(0).nbt
+        val nbtCompound = inventory.getStack(1).nbt
         if (nbtCompound != null) {
             itemStack.nbt = nbtCompound.copy()
         }
@@ -31,13 +32,17 @@ class AltarRecipe(
     }
 
     override fun fits(width: Int, height: Int): Boolean {
-        return width * height >= 2
+        return width * height >= 3
     }
 
     override fun getOutput(): ItemStack {
         return result.copy()
     }
 
+    fun testDust(stack: ItemStack): Boolean {
+        return dust.test(stack)
+    }
+    
     fun testAddition(stack: ItemStack): Boolean {
         return addition.test(stack)
     }
