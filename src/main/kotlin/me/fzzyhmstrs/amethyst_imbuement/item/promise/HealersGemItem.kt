@@ -28,7 +28,7 @@ class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
         if (nbt.contains("healed")){
             val healed = nbt.getFloat("healed")
             val progress = healed/ HEAL_TARGET *100.0F
-            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).append(AcText.literal("%")).formatted(Formatting.GREEN))
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.healers", progress).formatted(Formatting.GREEN))
         }
     }
     
