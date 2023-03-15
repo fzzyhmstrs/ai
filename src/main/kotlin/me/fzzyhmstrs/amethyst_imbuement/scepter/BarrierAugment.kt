@@ -24,7 +24,9 @@ import net.minecraft.world.World
 class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(0,1).withDuration(540,80)
+        get() = super.baseEffect
+            .withAmplifier(0,1)
+            .withDuration(540,80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,600,35,
@@ -39,7 +41,8 @@ class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is PlayerEntity) {
+            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+                if (target is PlayerEntity
                 EffectQueue.addStatusToQueue(target as LivingEntity,
                     StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level)/5)
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
@@ -47,14 +50,10 @@ class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
                 return true
             }
         }
-        return if (user is PlayerEntity) {
-            EffectQueue.addStatusToQueue(user, StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level))
-            effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-            true
-        } else {
-            false
-        }
+        EffectQueue.addStatusToQueue(user, StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level)/5)
+        effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        return true
     }
 
     override fun soundEvent(): SoundEvent {
