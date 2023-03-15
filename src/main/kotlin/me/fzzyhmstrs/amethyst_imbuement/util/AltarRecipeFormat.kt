@@ -6,7 +6,7 @@ class AltarRecipeFormat {
 
     var dust: JsonObject? = null
     var base: JsonObject? = null
-    var flower: JsonObject? = null
+    var addition: JsonObject? = null
     var result: JsonObject? = null
 
 }
