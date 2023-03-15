@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -36,27 +37,25 @@ import kotlin.math.min
 class SpellcastersFocusScreenHandler(
     syncID: Int,
     private val playerInventory: PlayerInventory,
+    private val stack: ItemStack,
     private val context: ScreenHandlerContext
 ):  ScreenHandler(RegisterHandler.SPELLCASTERS_FOCUS_SCREEN_HANDLER, syncID) {
 
-    constructor(syncID: Int, playerInventory: PlayerInventory) : this(
+    constructor(syncID: Int, playerInventory: PlayerInventory, buf: PacketByteBuf) : this(
         syncID,
         playerInventory,
+        playerInventory.getStack(buf.readByte()),
         ScreenHandlerContext.EMPTY,
     )
     
-    private val random = Random()
-    private val seed = Property.create()
-    private var activeItem = Property.create()
-    var enchantmentId = intArrayOf(-1, -1, -1)
-    var enchantmentLevel = intArrayOf(-1, -1, -1)
-    var disenchantCost = IntArray(1)
-    private var removing = false
     private val player = playerInventory.player
-
+    internal var option1: List<Identifier> = listOf()
+    internal var option2: List<Identifier> = listOf()
+    internal var option3: List<Identifier> = listOf()
+    private var failed = false
 
     override fun canUse(player: PlayerEntity): Boolean {
-        return canUse(this.context, player, RegisterBlock.DISENCHANTING_TABLE)
+        return !failed
     }
 
     fun getSlotStack(index:Int): ItemStack{
@@ -80,27 +79,74 @@ class SpellcastersFocusScreenHandler(
     }
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
-
+        when (id){
+            0 ->{
+                ModifierHelper.addRolledModifiers(stack,option1)
+                context.run{world: World, pos: BlockPos ->
+                    world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                            SoundCategory.BLOCKS,
+                            1.0f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                }
+                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                this.close(player)
+            }
+            1 ->{
+                ModifierHelper.addRolledModifiers(stack,option2)
+                context.run{world: World, pos: BlockPos ->
+                    world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                            SoundCategory.BLOCKS,
+                            1.0f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                }
+                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                this.close(player)
+            }
+            2 ->{
+                ModifierHelper.addRolledModifiers(stack,option3)
+                context.run{world: World, pos: BlockPos ->
+                    world.playSound(
+                            null,
+                            pos,
+                            SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
+                            SoundCategory.BLOCKS,
+                            1.0f,
+                            world.random.nextFloat() * 0.1f + 0.9f
+                        )
+                }
+                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                this.close(player)
+            }
+            else -> {}
+        }
     }
 
     init{
-        //add the properties for the three enchantment bars
-        addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
-        addProperty(activeItem).set(-1)
-        addProperty(Property.create(this.enchantmentId, 0))
-        addProperty(Property.create(this.enchantmentId, 1))
-        addProperty(Property.create(this.enchantmentId, 2))
-        addProperty(Property.create(this.enchantmentLevel, 0))
-        addProperty(Property.create(this.enchantmentLevel, 1))
-        addProperty(Property.create(this.enchantmentLevel, 2))
-        addProperty(Property.create(this.disenchantCost, 0))
-        if (context != ScreenHandlerContext.EMPTY) {
-            context.run { world: World, pos: BlockPos ->
-                val pillarPairs = checkPillars(world, pos) / 2
-                if (pillarPairs == 4 && player is ServerPlayerEntity){
-                    RegisterCriteria.DISENCHANTING_PILLARS.trigger(player)
-                }
-            }
+        val nbt = stack.nbt
+        if (nbt == null){
+            failed = true
+        }
+        val lvlUpNbt = nbt.get(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+        if (lvlUpNbt == null){
+            failed = true
+        } else {
+            val list1 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1)
+            val list2 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2)
+            val list3 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3)
+            option1 = list1.stream().map{it -> Identifier(it)}.toList()
+            option2 = list2.stream().map{it -> Identifier(it)}.toList()
+            option3 = list3.stream().map{it -> Identifier(it)}.toList()
         }
     }
 
