@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -58,7 +59,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
         }
         val hostileEntityList: MutableList<Entity> = mutableListOf()
         for (entity in entityList){
-            if (entity is Monster){
+            if (entity is Monster || entity is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)){
                 hostileEntityList.add(entity)
             }
         }
