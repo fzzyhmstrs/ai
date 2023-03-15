@@ -24,18 +24,6 @@
     },
     {
       "predicate": {
-        "model_key": 33.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_33_6"
-    },
-    {
-      "predicate": {
-        "model_key": 33.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_33_8"
-    },
-    {
-      "predicate": {
         "model_key": 34.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_34_0"
@@ -51,18 +39,6 @@
         "model_key": 34.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_34_4"
-    },
-    {
-      "predicate": {
-        "model_key": 34.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_34_6"
-    },
-    {
-      "predicate": {
-        "model_key": 34.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_34_8"
     },
     {
       "predicate": {
@@ -84,18 +60,6 @@
     },
     {
       "predicate": {
-        "model_key": 35.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_35_6"
-    },
-    {
-      "predicate": {
-        "model_key": 35.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_35_8"
-    },
-    {
-      "predicate": {
         "model_key": 36.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_36_0"
@@ -111,18 +75,6 @@
         "model_key": 36.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_36_4"
-    },
-    {
-      "predicate": {
-        "model_key": 36.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_36_6"
-    },
-    {
-      "predicate": {
-        "model_key": 36.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_36_8"
     },
     {
       "predicate": {
@@ -144,18 +96,6 @@
     },
     {
       "predicate": {
-        "model_key": 37.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_37_6"
-    },
-    {
-      "predicate": {
-        "model_key": 37.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_37_8"
-    },
-    {
-      "predicate": {
         "model_key": 65.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_65_0"
@@ -171,18 +111,6 @@
         "model_key": 65.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_65_4"
-    },
-    {
-      "predicate": {
-        "model_key": 65.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_65_6"
-    },
-    {
-      "predicate": {
-        "model_key": 65.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_65_8"
     },
     {
       "predicate": {
@@ -204,18 +132,6 @@
     },
     {
       "predicate": {
-        "model_key": 66.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_66_6"
-    },
-    {
-      "predicate": {
-        "model_key": 66.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_66_8"
-    },
-    {
-      "predicate": {
         "model_key": 67.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_67_0"
@@ -231,18 +147,6 @@
         "model_key": 67.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_67_4"
-    },
-    {
-      "predicate": {
-        "model_key": 67.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_67_6"
-    },
-    {
-      "predicate": {
-        "model_key": 67.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_67_8"
     },
     {
       "predicate": {
@@ -264,18 +168,6 @@
     },
     {
       "predicate": {
-        "model_key": 68.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_68_6"
-    },
-    {
-      "predicate": {
-        "model_key": 68.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_68_8"
-    },
-    {
-      "predicate": {
         "model_key": 69.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_69_0"
@@ -291,18 +183,6 @@
         "model_key": 69.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_69_4"
-    },
-    {
-      "predicate": {
-        "model_key": 69.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_69_6"
-    },
-    {
-      "predicate": {
-        "model_key": 69.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_69_8"
     },
     {
       "predicate": {
@@ -324,18 +204,6 @@
     },
     {
       "predicate": {
-        "model_key": 129.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_129_6"
-    },
-    {
-      "predicate": {
-        "model_key": 129.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_129_8"
-    },
-    {
-      "predicate": {
         "model_key": 130.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_130_0"
@@ -351,18 +219,6 @@
         "model_key": 130.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_130_4"
-    },
-    {
-      "predicate": {
-        "model_key": 130.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_130_6"
-    },
-    {
-      "predicate": {
-        "model_key": 130.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_130_8"
     },
     {
       "predicate": {
@@ -384,18 +240,6 @@
     },
     {
       "predicate": {
-        "model_key": 131.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_131_6"
-    },
-    {
-      "predicate": {
-        "model_key": 131.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_131_8"
-    },
-    {
-      "predicate": {
         "model_key": 132.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_132_0"
@@ -414,18 +258,6 @@
     },
     {
       "predicate": {
-        "model_key": 132.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_132_6"
-    },
-    {
-      "predicate": {
-        "model_key": 132.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_132_8"
-    },
-    {
-      "predicate": {
         "model_key": 133.0
       },
       "model": "amethyst_imbuement:item/spell_scroll_133_0"
@@ -441,18 +273,6 @@
         "model_key": 133.4
       },
       "model": "amethyst_imbuement:item/spell_scroll_133_4"
-    },
-    {
-      "predicate": {
-        "model_key": 133.6
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_133_6"
-    },
-    {
-      "predicate": {
-        "model_key": 133.8
-      },
-      "model": "amethyst_imbuement:item/spell_scroll_133_8"
     }
   ]
 }
