@@ -16,6 +16,7 @@ object RegisterHandler {
     var ALTAR_OF_EXPERIENCE_SCREEN_HANDLER: ScreenHandlerType<AltarOfExperienceScreenHandler>? = null
     var DISENCHANTING_TABLE_SCREEN_HANDLER: ScreenHandlerType<DisenchantingTableScreenHandler>? = null
     var CRYSTAL_ALTAR_SCREEN_HANDLER: ScreenHandlerType<CrystalAltarScreenHandler>? = null
+    var SPELLCASTERS_FOCUS_SCREEN_HANDLER: ExtendedScreenHandlerType<CrystalAltarScreenHandler>? = null
 
     fun registerAll(){
 
@@ -41,15 +42,24 @@ object RegisterHandler {
         }
 
         CRYSTAL_ALTAR_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
-        CrystalAltarScreenHandler(
-            syncID,
-            playerInventory
-        )
+            CrystalAltarScreenHandler(
+                syncID,
+                playerInventory
+            )
+        }
+        
+        SPELLCASTERS_FOCUS_SCREEN_HANDLER = ExtendedScreenHandlerType { syncID: Int, playerInventory: PlayerInventory, buf: PacketByteBuf ->
+            CrystalAltarScreenHandler(
+                syncID,
+                playerInventory,
+                buf
+            )
         }
 
         Registry.register(Registries.SCREEN_HANDLER,Identifier(AI.MOD_ID,"imbuing_table"), IMBUING_SCREEN_HANDLER)
         Registry.register(Registries.SCREEN_HANDLER,Identifier(AI.MOD_ID,"altar_of_experience"), ALTAR_OF_EXPERIENCE_SCREEN_HANDLER)
         Registry.register(Registries.SCREEN_HANDLER,Identifier(AI.MOD_ID,"disenchanting_table"), DISENCHANTING_TABLE_SCREEN_HANDLER)
         Registry.register(Registries.SCREEN_HANDLER,Identifier(AI.MOD_ID,"crystal_altar"), CRYSTAL_ALTAR_SCREEN_HANDLER)
+        Registry.register(Registries.SCREEN_HANDLER,Identifier(AI.MOD_ID,"spellcasters_focus"), SPELLCASTERS_FOCUS_SCREEN_HANDLER)
     }
 }
