@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.Entity
@@ -40,6 +41,7 @@ class MassCleanseAugment: MiscAugment(ScepterTier.TWO,5){
         var successes = 0
         for (target in entityList) {
             if(target !is Monster){
+                if (target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) continue
                 entityTask(world,target,user,level.toDouble(),null, effect)
                 successes++
             }
