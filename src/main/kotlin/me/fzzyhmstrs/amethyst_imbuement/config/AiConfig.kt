@@ -229,6 +229,15 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     }
     
     class Entities{
+        
+        fun isEntityPvpTeammate(user: LivingEntity, entity: Entity, spell: ScepterAugment): Boolean{
+            if (forcePvpOnAllSpells || spell.getPvpMode()){
+                return user.isTeammate(entity)
+            }
+            return true
+        }
+        
+        var forcePvpOnAllSpells: Boolean = false
         var unhallowedBaseLifespan: Int = 2400
         var unhallowedBaseHealth: Double = 20.0
         var unhallowedBaseDamage: Float = 3.0f
