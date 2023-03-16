@@ -55,5 +55,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Come up with a level resetting feature on the focus, respecing basically. Use altar.|Not started|
 |Add some advancements for the new stuff|Not started|
 |Add empty spell scrolls into some loot|Not started|
-
+|make sure AC has lang for the attributes|Not started|
 
