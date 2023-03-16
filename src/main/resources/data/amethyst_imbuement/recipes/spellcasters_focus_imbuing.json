@@ -1,0 +1,46 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:blazing_gem"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:healers_gem"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:sparking_gem"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:mystical_gem"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:aegis_scepters"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:inquisitive_gem"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:lethal_gem"
+  },
+  "craftH": {
+	"tag": "amethyst_imbuement:focus_reagents"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:brutal_gem"
+  },
+  "title": "Spellcasters Focus",
+  "cost": 39,
+  "resultA": "amethyst_imbuement:spellcasters_focus",
+  "countA": 1
+}
