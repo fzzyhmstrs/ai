@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -52,7 +53,6 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
         if (user.health == healthCheck) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-        true
-
+        return true
     }
 }

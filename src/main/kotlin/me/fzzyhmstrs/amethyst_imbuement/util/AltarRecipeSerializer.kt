@@ -24,7 +24,7 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         val base = RecipeUtil.ingredientFromJson(recipeJson.base)
         val addition = RecipeUtil.ingredientFromJson(recipeJson.addition)
         val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
-        return AltarRecipe(id,dust,base,flower,result)
+        return AltarRecipe(id,dust,base,addition,result)
     }
 
     override fun write(buf: PacketByteBuf, recipe: AltarRecipe) {

@@ -7,8 +7,11 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.SoundEvent
@@ -27,10 +30,10 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
         val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (entityList.isNotEmpty()) {
-            for (entity in entityList) {
+        if (list.isNotEmpty()) {
+            for (entity in list) {
                 if (entity !== user) {
-                    if (entity is SpellCastingEntity && isEntityPvpTeammate(user, entity,this)) continue
+                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
                     hostileEntityList.add(entity)
                 }
             }

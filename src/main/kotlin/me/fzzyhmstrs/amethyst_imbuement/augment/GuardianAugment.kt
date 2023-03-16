@@ -27,7 +27,13 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             EffectQueue.addStatusToQueue(user, StatusEffects.RESISTANCE, 200, 0)
             RegisterEnchantment.GUSTING.effect(world,null,user,1,null,RegisterEnchantment.GUSTING.baseEffect)
             //spawn the golem right at the player
-            val cge = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world, AiConfig.entities.crystalGolemGuardianLifespan, user)
+            val cge = CrystallineGolemEntity(
+                RegisterEntity.CRYSTAL_GOLEM_ENTITY,
+                world,
+                AiConfig.entities.crystalGolemGuardianLifespan,
+                AiConfig.entities.crystalGolemBaseDamage.toDouble(),
+                AiConfig.entities.crystalGolemBaseHealth,
+                user)
             cge.setPosition(user.pos)
             world.spawnEntity(cge)
         }

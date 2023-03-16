@@ -530,6 +530,8 @@
 	"container.altar_of_experience_tooltip_3": "Hold Left Shift to toggle to fast transfer mode",
 	"container.altar_of_experience_tooltip_4": "Release Left Shift to toggle off fast transfer mode",
 	"container.crystal_altar": "Enhance Crystal",
+	"container.spellcasters_focus": "Spellcasters Focus",
+	"container.spellcasters_focus.hint": "Which thread will weave your fate?",
 	"effect.amethyst_imbuement.custom_absorption": "Shielding",
 	"effect.amethyst_imbuement.draconic_vision": "Draconic Vision",
 	"effect.amethyst_imbuement.spectral_vision": "Spectral Vision",

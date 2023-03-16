@@ -42,12 +42,14 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Change gem of promise into a registration type thingy|Complete|
 |Add lang descriptions of AC modifiers|Complete|
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
-|Update plugins to reflect the new Crstal Altar|Not Started|
+|Update plugins to reflect the new Crystal Altar|Not Started|
 |Change altar recipe to take three inputs|Not Started|
-|Overhaul config implementation with fzzy config|Not started|
+|Overhaul config implementation with fzzy config|In progress|
+|Add readme lines to the lang file|Not started|
 |Add config settings all newly added vars|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Fix up the translatable text on the gems|Complete|
 |Impl enchantability attribute|Not started|
+|Add mana to imbued jewelry and impl new Immunity effect|Not started|
 |Look into making a level tweaking config and-or total disable of bonuses|Not started|
 

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -8,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -48,10 +50,10 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
         val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (entityList.isNotEmpty()) {
-            for (entity in entityList) {
+        if (list.isNotEmpty()) {
+            for (entity in list) {
                 if (entity !== user) {
-                    if (entity is SpellCastingEntity && isEntityPvpTeammate(user, entity,this)) continue
+                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
                     hostileEntityList.add(entity)
                 }
             }
