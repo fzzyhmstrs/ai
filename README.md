@@ -52,4 +52,6 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Impl enchantability attribute|Not started|
 |Add mana to imbued jewelry and impl new Immunity effect|Not started|
 |Look into making a level tweaking config and-or total disable of bonuses|Not started|
+|Come up with a level resetting feature on the focus, respectively basically. Use altar.|Not started|
+
 
