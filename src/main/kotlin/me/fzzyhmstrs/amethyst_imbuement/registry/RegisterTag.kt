@@ -18,6 +18,7 @@ object RegisterTag {
     val STEEL_LEGGINGS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_leggings"))
     val STEEL_INGOTS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_ingots"))
     val STEEL_BLOCKS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier("c","steel_blocks"))
+    val FOCUS_REAGENTS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"focus_reagents"))
     val PILLARS_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
     
     val EQUINOX_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"equinox_scepters"))
