@@ -2,7 +2,9 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import SpellcastersReagentFlavorItem
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.*
@@ -15,11 +17,14 @@ import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.advancement.criterion.TickCriterion
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
+
+import java.util.UUID
 
 // don't know if this is better as a class or object. as an object it allows me to call it without needing to initialize an instance of it.
 object RegisterItem {
@@ -59,15 +64,27 @@ object RegisterItem {
     val BRUTAL_GEM = BrutalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["brutal_gem"] = it}
     val MYSTICAL_GEM = MysticalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["mystical_gem"] = it}
     val GLOWING_FRAGMENT = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["glowing_fragment"] = it}
-    val BRILLIANT_DIAMOND = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.EPIC)).withGlint().also{ regItem["brilliant_diamond"] = it} // item is custom for flavor text
-    val MALACHITE_FIGURINE = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["malachite_figurine"] = it}
-    val RESONANT_ROD = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["resonant_rod"] = it}
-    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["survey_map"] = it}
-    val HEARTSTONE = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
+    val BRILLIANT_DIAMOND = SpellcastersReagentFlavorItem(RegisterAttribute.ENCHANTABILITY,
+        EntityAttributeModifier(UUID.fromString("402ea570-c404-11ed-afa1-0242ac120002"),"brilliant_modifier",15.0,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.EPIC)).withGlint().also{ regItem["brilliant_diamond"] = it}
+    val MALACHITE_FIGURINE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DURATION,
+        EntityAttributeModifier(UUID.fromString("402ebf88-c404-11ed-afa1-0242ac120002"),"malachite_modifier",5.0,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["malachite_figurine"] = it}
+    val RESONANT_ROD = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
+        EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",5.0,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["resonant_rod"] = it}
+    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()).also{ regItem["survey_map"] = it}
+    val HEARTSTONE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
+        EntityAttributeModifier(UUID.fromString("402ec528-c404-11ed-afa1-0242ac120002"),"heartstone_modifier",10.0,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_orb"] = it}
-    val LUSTROUS_SPHERE = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
+    val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
+            EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",4.0,EntityAttributeModifier.Operation.ADDITION),
+    FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(AI_GROUP)).also{ regItem["xp_bush_seed"] = it}
-    val GOLDEN_HEART = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["golden_heart"] = it}
+    val GOLDEN_HEART = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
+        EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",5.0,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)) .also{ regItem["golden_heart"] = it}
     val CRYSTALLINE_HEART = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["crystalline_heart"] = it} //item is custom for flavor text
 
     //tool and weapon items
