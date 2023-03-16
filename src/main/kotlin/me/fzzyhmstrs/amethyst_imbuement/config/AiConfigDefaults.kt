@@ -19,6 +19,24 @@ object AiConfigDefaults {
         "rain_of_thorns" to true,
         "vein_miner" to true
     )
+    
+    internal val enchantmentCosts: Map<String,Int> = mapOf(
+        "heroic" to 1,
+        "wasting" to 1,
+        "deadly_shot" to 1,
+        "puncturing" to 1,
+        "insight" to 1,
+        "lifesteal" to 1,
+        "decayed" to 1,
+        "contaminated" to 1,
+        "cleaving" to 1,
+        "bulwark" to 1,
+        "multi_jump" to 1,
+        "night_vision" to 1,
+        "steadfast" to 1,
+        "rain_of_thorns" to 1,
+        "vein_miner" to 1
+    )
 
     internal val enabledAugments: Map<String,Boolean> = mapOf(
         "angelic" to true,
