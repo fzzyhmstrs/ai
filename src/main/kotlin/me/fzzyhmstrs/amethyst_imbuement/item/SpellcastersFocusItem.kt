@@ -78,7 +78,8 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             if (reagent is SpellcastersReagent){
                 val attribute = reagent.getAttributeModifier()
                 val list = NbtList()
-                val nbt = attribute.toNbt()
+                val nbt = attribute.second.toNbt()
+                nbt.putString("AttributeName",attribute.first.getTranslationKey())
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
