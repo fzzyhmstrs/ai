@@ -25,6 +25,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Migrate acceptable scepters to tags|In progress|
 |Fix issue with the Totem of Grace|Complete|
 |Finish adding and testing ice spells|In progress|
+|Add ball lightning spell|In progress|
 |Move Mend Equipment to a book of lore spell|Complete|
 |Make sure scepters are properly excluded from Gearifiers|Complete|
 |Check out spell-switching issue from Discord|In progress|
