@@ -1,0 +1,34 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:sunflower"
+  },
+  "imbueB": {
+	"item": "minecraft:sunflower"
+  },
+  "imbueC": {
+	"item": "minecraft:sunflower"
+  },
+  "imbueD": {
+	"item": "minecraft:sunflower"
+  },
+  "craftB": {
+	"item": "minecraft:paper"
+  },
+  "craftD": {
+	"item": "minecraft:paper"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:gem_dust"
+  },
+  "craftF": {
+	"item": "minecraft:paper"
+  },
+  "craftH": {
+	"item": "minecraft:paper"
+  },
+  "title": "Empty Spell Scroll",
+  "cost": 4,
+  "resultA": "amethyst_imbuement:empty_spell_scroll",
+  "countA": 2
+}
