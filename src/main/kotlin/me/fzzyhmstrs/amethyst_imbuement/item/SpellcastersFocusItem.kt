@@ -26,7 +26,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Modifiable {
+class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Modifiable, Reactant {
 
     private val FOCUS_TIER = "focus_tier"
     private val FOCUS_RECORDS = "focus_records"
@@ -64,6 +64,25 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             val item = offhand.item
             if (item is SpellcastersFocusItem){
                 addXpAndLevelUp(offhand, spell, user, world)
+            }
+        }
+    }
+    
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+        return true
+    }
+    
+    override fun react(stack: ItemStack, reagents: List<ItemStack>){
+        if (stack.nbt?.contains("AttributeModifiers") == true) break
+        for (reagent in reagents){
+            if (reagent is SpellcastersReagent){
+                val attribute = reagent.getAttributeModifier()
+                val list = NbtList()
+                val nbt = attribute.toNbt()
+                nbt.putString("Slot","offhand")
+                list.add(nbt)
+                stack.orCreateNbt.put("AttributeModifiers",list)
+                break
             }
         }
     }
