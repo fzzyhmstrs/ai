@@ -32,12 +32,12 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             val d = mouseX - (i + 60).toDouble()
             val e = mouseY - (j + 14 + 19 * k).toDouble()
             if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || !player.let {
-                    (handler as DisenchantingTableScreenHandler).onButtonClick(
+                    (handler as SpellcastersFocusScreenHandler).onButtonClick(
                         it, k
                     )
                 }
             ) continue
-            client?.interactionManager?.clickButton((handler as DisenchantingTableScreenHandler).syncId, k)
+            client?.interactionManager?.clickButton((handler as SpellcastersFocusScreenHandler).syncId, k)
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
@@ -76,7 +76,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         for (j in 0..2) {
             if (!isPointWithinBounds(60, 14 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
-            val tooltipText = TODO()
+            val tooltipText = AcText.empty()
             this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
             break
         }

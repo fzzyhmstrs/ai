@@ -198,8 +198,13 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                     return Ingredient.ofStacks(*stacks)
                 }
                 is ScepterAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    return Ingredient.ofStacks(*stacks)
+                    val opt = Registries.ITEM.getEntryList(enchant.getTag())
+                    val stacks = if(opt.isPresent){
+                        opt.get().stream().map { entry -> ItemStack(entry.value()) }.toList()
+                    } else {
+                        listOf()
+                    }
+                    return Ingredient.ofStacks(*stacks.toTypedArray())
                 }
                 else -> {
                     val enchantItemList: MutableList<ItemStack> = mutableListOf()

@@ -6,19 +6,23 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.fzzy_core.modifier_util.AbstractModifier
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
+import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
@@ -64,10 +68,13 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         }
     }
     
-    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack>{
+    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
         val nbt = stack.nbt?:return TypedActionResult.fail(stack)
         if (!nbt.getBoolean(LEVEL_UP_READY)) return TypedActionResult.fail(stack)
+        if (!nbt.contains(LEVEL_UP)) return TypedActionResult.fail(stack)
+        user.openHandledScreen(SpellcastersFocusScreenHandlerFactory(stack))
+        return TypedActionResult.success(stack)
     }
 
     private fun addXpAndLevelUp(stack: ItemStack, spell: ScepterAugment, user: LivingEntity, world: World){
@@ -114,7 +121,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                     option3.add(NbtString.of(mod.toString()))
                 }
                 lvlUpNbt.put(OPTION_3,option3)
-                nbt.put(LEVEL_UP_READY,true)
+                nbt.putBoolean(LEVEL_UP_READY,true)
                 nbt.put(LEVEL_UP,lvlUpNbt)
             }
         }

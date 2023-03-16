@@ -54,6 +54,9 @@ repositories {
         dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
     }
     flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\fzzy_config\\build\\libs")
+    }
+    flatDir {
         dirs("F:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
     }
     mavenCentral()
@@ -107,6 +110,12 @@ dependencies {
     modImplementation(":fzzy_core-$fcVersion"){
         exclude("net.fabricmc.fabric-api")
     }
+
+    val fzzyConfigVersion: String by project
+    include(modImplementation(":fzzy_config-$fzzyConfigVersion"){
+            exclude("net.fabricmc.fabric-api")
+        }
+    )
 
     val palVersion: String by project
     modImplementation("io.github.ladysnake:PlayerAbilityLib:$palVersion"){

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute;
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
@@ -15,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffect;
@@ -40,6 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 
+@SuppressWarnings("ConstantConditions")
 @Mixin(value = LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 

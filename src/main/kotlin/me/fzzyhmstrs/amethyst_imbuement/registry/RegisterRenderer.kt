@@ -6,7 +6,6 @@ import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -312,17 +311,16 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.nbt
             if (nbt == null){
-                0.0
+                0.0f
             } else {
-                val type = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL_TYPE)
-                val decimel = when (type){
+                val decimal = when (nbt.getString(RegisterItem.SPELL_SCROLL.SPELL_TYPE)){
                     SpellType.FURY.str() ->{ 0.0f }
                     SpellType.GRACE.str() -> { 0.2f }
                     SpellType.WIT.str() -> { 0.4f }
                     else -> { 0.0f }
                 }
                 val value = nbt.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY)
-                value + decimel
+                value + decimal
             }
         }
     }

@@ -39,6 +39,9 @@ object LethalityToolMaterial: ScepterToolMaterial() {
     override fun healCooldown(): Long {
         return max(AiConfig.items.baseRegenRateTicks - 60L,minCooldown())
     }
+    override fun baseCooldown(): Long {
+        return 90L
+    }
     override fun scepterTier(): Int{
         return 3
     }

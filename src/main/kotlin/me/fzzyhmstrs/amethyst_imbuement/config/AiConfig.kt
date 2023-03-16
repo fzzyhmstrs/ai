@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
 import com.google.gson.GsonBuilder
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper
@@ -9,6 +10,8 @@ import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreate
 import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
 import me.fzzyhmstrs.fzzy_core.registry.SyncedConfigRegistry
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
 
@@ -16,7 +19,6 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
 
     var items: Items
     var altars: Altars
-    var colors: Colors
     var villages: Villages
     var enchantments: Enchantments
     var trinkets: Trinkets
@@ -25,8 +27,8 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     init {
         items = readOrCreateUpdated("items_v1.json","items_v0.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {ItemsV0()})
         altars = readOrCreateUpdated("altars_v3.json","altars_v2.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV2()})
-        colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
-        colors.trimData()
+        //colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
+        //colors.trimData()
         //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
         villages = readOrCreateUpdated("villages_v1.json","villages_v0.json", base = AI.MOD_ID, configClass = { Villages() }, previousClass = {VillagesV0()})
         enchantments = readOrCreate("enchantments_v0.json", base = AI.MOD_ID) { Enchantments() }
@@ -43,7 +45,6 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         val gson = GsonBuilder().create()
         buf.writeString(gson.toJson(items))
         buf.writeString(gson.toJson(altars))
-        buf.writeString(gson.toJson(colors))
         buf.writeString(gson.toJson(villages))
         buf.writeString(gson.toJson(enchantments))
         buf.writeString(gson.toJson(trinkets))
@@ -53,7 +54,6 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
     override fun readFromServer(buf:PacketByteBuf){
         items = gson.fromJson(buf.readString(),Items::class.java)
         altars = gson.fromJson(buf.readString(),Altars::class.java)
-        colors = gson.fromJson(buf.readString(),Colors::class.java)
         villages = gson.fromJson(buf.readString(),Villages::class.java)
         enchantments = gson.fromJson(buf.readString(),Enchantments::class.java)
         trinkets = gson.fromJson(buf.readString(),Trinkets::class.java)
@@ -101,40 +101,6 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
         var altarOfExperienceBaseLevels: Int = 35
         var altarOfExperienceCandleLevelsPer: Int = 5
         var altarOfExperienceCustomXpMethod: Boolean = true
-    }
-
-    class Colors{
-        var defaultColorMap: Map<String,String> = DefaultColorMap.defaultColorMap()
-        var defaultRainbowList: List<String> = DefaultColorMap.defaultRainbowList()
-        var modColorMap: Map<String,String> = mapOf()
-        var modRainbowList: List<String> = listOf()
-    }
-
-    private fun Colors.trimData(){
-        fun colorMapBuilder(rawMap: Map<String,String>): Map<String,String>{
-            val actualMap: MutableMap<String,String> = mutableMapOf()
-            for (entry in rawMap){
-                val id = Identifier(entry.key).namespace
-                if (FabricLoader.getInstance().isModLoaded(id)){
-                    actualMap[entry.key] = entry.value
-                }
-            }
-            return actualMap
-        }
-        fun rainbowListBuilder(rawList: List<String>): List<String>{
-            val actualList: MutableList<String> = mutableListOf()
-            for (entry in rawList){
-                val id = Identifier(entry).namespace
-                if (FabricLoader.getInstance().isModLoaded(id)){
-                    actualList.add(entry)
-                }
-            }
-            return actualList
-        }
-        this.defaultColorMap = colorMapBuilder(this.defaultColorMap)
-        this.defaultRainbowList = rainbowListBuilder(this.defaultRainbowList)
-        this.modColorMap = colorMapBuilder(this.modColorMap)
-        this.modRainbowList = rainbowListBuilder(this.modRainbowList)
     }
 
     class Villages{
@@ -274,53 +240,6 @@ object AiConfig: SyncedConfigHelper.SyncedConfig {
             items.lethalityDurability = lethalityDurability
             items.lethalityDamage = lethalityDamage
             return items
-        }
-    }
-
-    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class ColorsV0: SyncedConfigHelper.OldClass<Colors>{
-
-        private var defaultColorMap: Map<String,String> = mapOf(
-            "minecraft:diamond_ore" to "#1ED0D6",
-            "minecraft:deepslate_diamond_ore" to "#1ED0D6",
-            "minecraft:coal_ore" to "#2A2A2A",
-            "minecraft:deepslate_coal_ore" to "#2A2A2A",
-            "minecraft:copper_ore" to "#E0734D",
-            "minecraft:deepslate_copper_ore" to "#E0734D",
-            "minecraft:emerald_ore" to "#17DD62",
-            "minecraft:deepslate_emerald_ore" to "#17DD62",
-            "minecraft:gold_ore" to "#FCEE4E",
-            "minecraft:deepslate_gold_ore" to "#FCEE4E",
-            "minecraft:iron_ore" to "#D8AF93",
-            "minecraft:deepslate_iron_ore" to "#D8AF93",
-            "minecraft:lapis_ore" to "#1034BD",
-            "minecraft:deepslate_lapis_ore" to "#1034BD",
-            "minecraft:redstone_ore" to "#FF0000",
-            "minecraft:deepslate_redstone_ore" to "#FF0000",
-            "minecraft:nether_gold_ore" to "#FCEE4E",
-            "minecraft:nether_quarts_ore" to "#FFFFFF",
-            "minecraft:amethyst_cluster" to "#A678F1",
-            "minecraft:budding_amethyst" to "#A678F1",
-            "minecraft:small_amethyst_bud" to "#A678F1",
-            "minecraft:medium_amethyst_bud" to "#A678F1",
-            "minecraft:large_amethyst_bud" to "#A678F1"
-        )
-
-        var defaultRainbowList: List<String> = listOf(
-            "minecraft:ancient_debris"
-        )
-
-        var modColorMap: Map<String,String> = mapOf()
-
-        var modRainbowList: List<String> = listOf()
-
-        override fun generateNewClass(): Colors {
-            val colors = Colors()
-            colors.defaultColorMap = colors.defaultColorMap + defaultColorMap
-            colors.defaultRainbowList = colors.defaultRainbowList + defaultRainbowList
-            colors.modColorMap = colors.modColorMap + modColorMap
-            colors.modRainbowList = colors.modRainbowList + modRainbowList
-            return colors
         }
     }
 
