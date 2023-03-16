@@ -34,7 +34,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add spell scrolls|In progress|
 |Integrate new reagent system into the crystal altar|Not started|
 |Implement PVP modes into spells|In progress|
-|Add Mystical Gem|In progress|
+|Add Mystical Gem|Complete|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
 |Add Spellcasters Focus, with special recipe for different attributes|In progress|
 |Impl focus GUI for picking upgrades|In progress|
@@ -44,7 +44,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add lang descriptions of AC modifiers|Complete|
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
 |Update plugins to reflect the new Crystal Altar|Not Started|
-|Change altar recipe to take three inputs|Not Started|
+|Change altar recipe to take three inputs|In progress|
 |Overhaul config implementation with fzzy config|In progress|
 |Add readme lines to the lang file|Not started|
 |Add config settings all newly added vars|Not started|
@@ -56,5 +56,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Come up with a level resetting feature on the focus, respecing basically. Use altar.|Not started|
 |Add some advancements for the new stuff|Not started|
 |Add empty spell scrolls into some loot|Not started|
-|make sure AC has lang for the attributes|Not started|
+|make sure AC has lang for the attributes|In progress|
 
