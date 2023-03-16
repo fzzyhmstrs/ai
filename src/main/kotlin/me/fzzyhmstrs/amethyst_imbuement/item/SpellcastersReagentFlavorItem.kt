@@ -1,15 +1,22 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+ppackage me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.entity.attribute.EntityAttribut
 
-class SpellcastersReagentItem(private val attribute: EntityAttributeModifier,settings: Settings): CustomFlavorItem(settings),SpellcastersReagent {
+class SpellcastersReagentFlavorItem(
+    private val attribute: EntityAttribute,
+    private val modifier: EntityAttributeModifier,
+    settings: Settings)
+    : 
+    CustomFlavorItem(settings),SpellcastersReagent 
+{
 
-    override fun getAttributeModifier(): EntityAttributeModifier{
-        return attribute
+    override fun getAttributeModifier(): Pair<EntityAttribute,EntityAttributeModifier>{
+        return Pair(attribute,modifier)
     }
 
 }
