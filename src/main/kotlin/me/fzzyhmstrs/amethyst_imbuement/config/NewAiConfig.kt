@@ -6,10 +6,8 @@ import me.fzzyhmstrs.fzzy_config.config_util.ConfigClass
 import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
 import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
 import me.fzzyhmstrs.fzzy_config.config_util.SyncedConfigWithReadMe
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedBoolean
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedLong
+import me.fzzyhmstrs.fzzy_config.validated_field.*
+
 
 object NewAiConfig
     :
