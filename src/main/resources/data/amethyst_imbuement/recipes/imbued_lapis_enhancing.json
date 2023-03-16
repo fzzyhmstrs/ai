@@ -1,5 +1,8 @@
 {
   "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "minecraft:redstone"
+  },
   "base": {
     "item": "minecraft:lapis_lazuli"
   },
