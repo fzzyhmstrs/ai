@@ -1,0 +1,15 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "minecraft:redstone"
+  },
+  "base": {
+    "item": "minecraft:lapis_lazuli"
+  },
+  "addition": {
+    "item": "minecraft:rose_bush"
+  },
+  "result": {
+    "item": "amethyst_imbuement:danburite"
+  }
+}
