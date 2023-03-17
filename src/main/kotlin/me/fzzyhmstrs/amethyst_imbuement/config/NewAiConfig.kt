@@ -172,6 +172,16 @@ object NewAiConfig
     
     class Enchants: ConfigClass(enchantsHeader){
 
+        fun getAiMaxLevel(id: String, fallback: Int): Int{
+            if (disableIncreaseMaxLevels.get()) return fallback
+            return aiEnchantMaxLevels[id]?:fallback
+        }
+        
+        fun getVanillaMaxLevel(id: String, fallback: Int): Int{
+            if (disableIncreaseMaxLevels.get()) return fallback
+            return vanillaEnchantMaxLevels[id]?:fallback
+        }
+        
         @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
         var disableIncreaseMaxLevels = ValidatedBoolean(false)
         
