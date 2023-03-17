@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
+import net.minecraft.util.Identifier
 
 object AiConfigOldClasses {
 
@@ -164,11 +165,11 @@ object AiConfigOldClasses {
         }
     }
     
-    class EnchantmentsV0: OldClass<NewAiConfig.Enchantments>{
+    class EnchantmentsV0: OldClass<NewAiConfig.Enchants>{
         var enabledEnchantments: Map<String,Boolean> = mapOf()
         
-        override fun generateNewClass(): NewAiConfig.Enchantments {
-            val enchantments = NewAiConfig.Enchantments()
+        override fun generateNewClass(): NewAiConfig.Enchants {
+            val enchantments = NewAiConfig.Enchants()
             val newMap = enchantments.enabledEnchants.get().toMutableMap()
             for (entry in enabledEnchantments.entries){
                 val key = "amethyst_imbuement:${entry.key}"
@@ -214,11 +215,11 @@ object AiConfigOldClasses {
             entities.unhallowed.baseHealth.validateAndSet(unhallowedBaseHealth)
             entities.unhallowed.baseDamage.validateAndSet(unhallowedBaseDamage)
             
-            entities.unhallowed.spellBaseLifespan.validateAndSet(crystalGolemSpellBaseLifespan)
-            entities.unhallowed.spellPerLvlLifespan.validateAndSet(crystalGolemSpellPerLvlLifespan)
-            entities.unhallowed.guardianLifespan.validateAndSet(crystalGolemGuardianLifespan)
-            entities.unhallowed.baseHealth.validateAndSet(crystalGolemBaseHealth)
-            entities.unhallowed.baseDamage.validateAndSet(crystalGolemBaseDamage)
+            entities.crystalGolem.spellBaseLifespan.validateAndSet(crystalGolemSpellBaseLifespan)
+            entities.crystalGolem.spellPerLvlLifespan.validateAndSet(crystalGolemSpellPerLvlLifespan)
+            entities.crystalGolem.guardianLifespan.validateAndSet(crystalGolemGuardianLifespan)
+            entities.crystalGolem.baseHealth.validateAndSet(crystalGolemBaseHealth)
+            entities.crystalGolem.baseDamage.validateAndSet(crystalGolemBaseDamage)
             return entities
         }
     }
