@@ -59,4 +59,6 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |make sure AC has lang for the attributes|In progress|
 |add some convenience `get` methods for ValidatedMaps and ValidatedLists|In progress|
 |Remove scroll having rendom modifiers, leave that to the focus|Not started|
+|Add cursed potion|Not started|
+|Add cursed figurine item, drops from illagers, used in cursed stuff|Not started|
 
