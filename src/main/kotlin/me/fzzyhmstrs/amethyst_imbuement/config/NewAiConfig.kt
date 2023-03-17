@@ -1,12 +1,21 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.config_util.ConfigClass
 import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
 import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
 import me.fzzyhmstrs.fzzy_config.config_util.SyncedConfigWithReadMe
+import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
+import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
+import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
+import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
+import net.minecraft.registry.Registries
+import net.minecraft.util.Identifier
 
 
 object NewAiConfig
@@ -63,19 +72,19 @@ object NewAiConfig
     private val altarsHeader = buildSectionHeader("altars")
     
     class Altars: ConfigClass(altarsHeader){
-        var xpBush: XpBush()
+        var xpBush = XpBush()
         class XpBush: ConfigSection(Header.Builder().space().add("readme.altars.xp_bush_1").add("readme.altars.xp_bush_2").build()){
             var bonemealChance = ValidatedFloat(0.4f,1f,0f)
             var growChance = ValidatedFloat(0.15f,1f,0f)
         }
         
-        var disenchanter: Disenchanter()
+        var disenchanter = Disenchanter()
         class Disenchanter: ConfigSection(Header.Builder().space().add("readme.altars.disenchant_1").add("readme.altars.disenchant_2").build()){
             var levelCosts = ValidatedIntList(listOf(11, 17, 24, 33, 44), {i -> i >= 0}, "Needs integers greater than or equal to 0")
             var baseDisenchantsAllowed = ValidatedInt(1,Int.MAX_VALUE,0)
         }
         
-        var imbuing: Imbuing()
+        var imbuing = Imbuing()
         class Imbuing: ConfigSection(Header.Builder().space().add("readme.items.imbuing_1").add("readme.items.imbuing_2").build()){
             var enchantingEnabled = ValidatedBoolean(true)
             var replaceEnchantingTable = ValidatedBoolean(false)
@@ -92,15 +101,15 @@ object NewAiConfig
                 var singleEnchantTooltip = ValidatedBoolean(true)
             }
             
-            var reroll: Reroll()
+            var reroll = Reroll()
             class Reroll:ConfigSection(Header.Builder().add("readme.items.imbuing_reroll_1").add("readme.items.imbuing_reroll_2").build()){
                 var matchRerollBehavior = ValidatedBoolean(true)
                 var levelCost = ValidatedInt(1,Int.MAX_VALUE,0)
-                var lapisCost = ValidatedInt(0,INT.MAX_VALUE,0)
+                var lapisCost = ValidatedInt(0,Int.MAX_VALUE,0)
             }
         }
     
-        var altar: Altar()
+        var altar = Altar()
         class Altar: ConfigSection(Header.Builder().space().add("readme.altars.altar_1").add("readme.altars.altar_2").build()){
             var baseLevels: Int = 35
             var candleLevelsPer: Int = 5
@@ -112,7 +121,7 @@ object NewAiConfig
     private val villagesHeader = buildSectionHeader("villages")
     
     class Villages: ConfigClass(villagesHeader){
-        var vanilla: Vanilla()
+        var vanilla = Vanilla()
         class Vanilla: ConfigSection(Header.Builder().space().add("readme.villages.vanilla_1").add("readme.villages.vanilla_2").build()){
             var enableDesertWorkshops = ValidatedBoolean(true)
             var desertWorkshopWeight = ValidatedInt(2,100,1)
@@ -126,7 +135,7 @@ object NewAiConfig
             var taigaWorkshopWeight = ValidatedInt(3,100,1)
         }
         
-        var ctov: Ctov()
+        var ctov = Ctov()
         class Ctov: ConfigSection(Header.Builder().space().add("readme.villages.ctov_1").add("readme.villages.ctov_2").build()){
             var enableCtovWorkshops = ValidatedBoolean(true)
             var beachWorkshopWeight = ValidatedInt(4,100,1)
@@ -142,7 +151,7 @@ object NewAiConfig
             var swampFortifiedWorkshopWeight = ValidatedInt(4,100,1)
         }
         
-        var rs: Rs()
+        var rs = Rs()
         class Rs: ConfigSection(Header.Builder().space().add("readme.villages.ctov_1").add("readme.villages.ctov_2").build()){
             var enableRsWorkshops = ValidatedBoolean(true)
             var badlandsWorkshopWeight = ValidatedInt(2,100,1)
@@ -161,17 +170,59 @@ object NewAiConfig
     
     private val enchantsHeader = buildSectionHeader("enchants")
     
-    class Enchants: Villages: ConfigClass(enchantsHeader){
-        
-        @ReadMeText("readme.enchants.disableExtraEnchantLevels")
-        var disableExtraEnchantLevels = ValidatedBoolean(false)
+    class Enchants: ConfigClass(enchantsHeader){
+
+        @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
+        var disableIncreaseMaxLevels = ValidatedBoolean(false)
         
         @ReadMeText("readme.enchants.enabledEnchants")
         var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
         
-        @ReadMeText("readme.enchants.enchantCosts")
-        var enchantCosts = ValidatedStringIntMap(AiConfigDefaults.enchantmentCosts,{id,i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+        @ReadMeText("readme.enchants.aiEnchantMaxLevels")
+        var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+
+        @ReadMeText("readme.enchants.vanillaEnchantMaxLevels")
+        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
     }
+
+    private val trinketsHeader = buildSectionHeader("trinkets")
+
+    class Trinkets: ConfigClass(trinketsHeader){
+        @ReadMeText("readme.enchants.enabledEnchants")
+        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
+    }
+
+    private val entitiesHeader = buildSectionHeader("entities")
+
+    class Entities: ConfigClass(entitiesHeader){
+        fun isEntityPvpTeammate(user: LivingEntity, entity: Entity, spell: ScepterAugment): Boolean{
+            if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
+                return user.isTeammate(entity)
+            }
+            return true
+        }
+
+        var forcePvpOnAllSpells = ValidatedBoolean(false)
+
+        var unhallowed = Unhallowed()
+        class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").add("readme.entities.unhallowed_1").build()){
+            var baseLifespan = ValidatedInt(2400,180000,20)
+            var baseHealth = ValidatedDouble(20.0,100.0,1.0)
+            var baseDamage = ValidatedFloat(3.0f,20.0f,0.0f)
+        }
+
+        var crystalGolem = CrystalGolem()
+        class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").add("readme.entities.golem_1").build()){
+            var spellBaseLifespan: Int = 5500
+            var spellPerLvlLifespan: Int = 500
+            var guardianLifespan: Int = 900
+            var baseHealth: Double = 180.0
+            var baseDamage: Float = 20.0f
+        }
+    }
+
+
+
 
     private fun buildSectionHeader(name:String): Header{
         return Header.Builder().space().underoverscore("readme.header.$name").add("readme.header.$name.desc").space().build()

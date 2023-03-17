@@ -15,6 +15,7 @@ import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries
@@ -77,7 +78,7 @@ object RegisterItem {
         EntityAttributeModifier(UUID.fromString("402ec528-c404-11ed-afa1-0242ac120002"),"heartstone_modifier",10.0,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_orb"] = it}
-    val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL
+    val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
         EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",4.0,EntityAttributeModifier.Operation.ADDITION),
         FabricItemSettings().rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings()).also{ regItem["xp_bush_seed"] = it}
