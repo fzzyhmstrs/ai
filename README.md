@@ -57,5 +57,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add some advancements for the new stuff|Not started|
 |Add empty spell scrolls into some loot|Not started|
 |make sure AC has lang for the attributes|In progress|
-|add some convenience `get` methods for ValidatedMaps and ValidatedLists|Not started|
+|add some convenience `get` methods for ValidatedMaps and ValidatedLists|In progress|
 
