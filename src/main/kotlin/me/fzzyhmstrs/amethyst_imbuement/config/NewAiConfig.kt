@@ -111,10 +111,10 @@ object NewAiConfig
     
         var altar = Altar()
         class Altar: ConfigSection(Header.Builder().space().add("readme.altars.altar_1").add("readme.altars.altar_2").build()){
-            var baseLevels: Int = 35
-            var candleLevelsPer: Int = 5
+            var baseLevels = ValidatedInt(35,Int.MAX_VALUE,0)
+            var candleLevelsPer = ValidatedInt(5,Int.MAX_VALUE/16,0)
             @ReadMeText("readme.altars.altar.customXpMethod")
-            var customXpMethod: Boolean = true
+            var customXpMethod = ValidatedBoolean(true)
         }
     }
 
@@ -223,11 +223,12 @@ object NewAiConfig
 
         var crystalGolem = CrystalGolem()
         class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").add("readme.entities.golem_1").build()){
-            var spellBaseLifespan: Int = 5500
-            var spellPerLvlLifespan: Int = 500
-            var guardianLifespan: Int = 900
-            var baseHealth: Double = 180.0
-            var baseDamage: Float = 20.0f
+            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
+            var spellBaseLifespan = ValidatedInt(5500, Int.MAX_VALUE,20)
+            var spellPerLvlLifespan = ValidatedInt(500,Int.MAX_VALUE,0)
+            var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
+            var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
+            var baseDamage = ValidatedFloat(20.0f,1000f,0f)
         }
     }
 
