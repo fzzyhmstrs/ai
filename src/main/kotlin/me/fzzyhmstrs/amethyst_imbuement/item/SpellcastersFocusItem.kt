@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
+import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
@@ -73,13 +74,14 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     }
     
     override fun react(stack: ItemStack, reagents: List<ItemStack>){
-        if (stack.nbt?.contains("AttributeModifiers") == true) break
+        if (stack.nbt?.contains("AttributeModifiers") == true) return
         for (reagent in reagents){
-            if (reagent is SpellcastersReagent){
-                val attribute = reagent.getAttributeModifier()
+            val item = reagent.item
+            if (item is SpellcastersReagent){
+                val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName",attribute.first.getTranslationKey())
+                nbt.putString("AttributeName",Registries.ATTRIBUTE.getId(attribute.first).toString())
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)

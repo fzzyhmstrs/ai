@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem;
+import me.fzzyhmstrs.amethyst_imbuement.item.scepter.ScepterItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.InfinityEnchantment;
 import net.minecraft.enchantment.MendingEnchantment;

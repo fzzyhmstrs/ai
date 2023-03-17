@@ -6,5 +6,5 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttribute
 
 interface SpellcastersReagent: Reagent{
-    fun getAttributeModifier(): Pair<Attribute,EntityAttributeModifier>
+    fun getAttributeModifier(): Pair<EntityAttribute,EntityAttributeModifier>
 }

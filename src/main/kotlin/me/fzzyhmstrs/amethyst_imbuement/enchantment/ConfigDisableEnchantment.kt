@@ -11,6 +11,6 @@ open class ConfigDisableEnchantment(weight: Rarity,target: EnchantmentTarget, va
 
     override fun checkEnabled(): Boolean{
         val id = Registry.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.path,true)
+        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.toString(),true)
     }
 }

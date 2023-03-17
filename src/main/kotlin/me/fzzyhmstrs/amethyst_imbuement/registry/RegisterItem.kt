@@ -79,8 +79,8 @@ object RegisterItem {
         AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_orb"] = it}
     val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
-            EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",4.0,EntityAttributeModifier.Operation.ADDITION),
-    FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
+        EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",4.0,EntityAttributeModifier.Operation.ADDITION),
+        FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(AI_GROUP)).also{ regItem["xp_bush_seed"] = it}
     val GOLDEN_HEART = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
         EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",5.0,EntityAttributeModifier.Operation.ADDITION),

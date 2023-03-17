@@ -16,7 +16,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
 
     override fun checkEnabled(): Boolean{
         val id = Registry.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.path,true)
+        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.toString(),true)
     }
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {

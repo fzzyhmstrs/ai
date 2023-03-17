@@ -13,7 +13,7 @@ class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun checkEnabled(): Boolean{
         val id = Registry.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.path,true)
+        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.toString(),true)
     }
 
     override fun getMinPower(level: Int): Int {
