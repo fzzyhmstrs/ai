@@ -1,7 +1,8 @@
-{    
-"name": "Glistering Tome",    
-"landing_text": "item.amethyst_imbuement.glistering_tome.landing_text",
-"version": 2,
-"model": "amethyst_imbuement:glistering_tome",
-"show_progress": false
+{
+  "name": "Glistering Tome",
+  "landing_text": "item.amethyst_imbuement.glistering_tome.landing_text",
+  "version": 3,
+  "dont_generate_book": true,
+  "custom_book_item": "amethyst_imbuement:glistering_tome",
+  "show_progress": false
 }

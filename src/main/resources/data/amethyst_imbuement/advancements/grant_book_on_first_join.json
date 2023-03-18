@@ -7,6 +7,6 @@
   "rewards": {
     "loot":
     [
-      "minecraft:book"
+      "amethyst_imbuement:grant_book_on_first_join"
     ]
   }}
