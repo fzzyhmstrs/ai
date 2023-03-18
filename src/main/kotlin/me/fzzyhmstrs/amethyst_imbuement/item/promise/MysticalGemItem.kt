@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.promise
 import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -26,7 +27,9 @@ import net.minecraft.world.World
 
 class MysticalGemItem(settings: Settings): IgnitedGemItem(settings) {
   
-    private val SPELL_XP_TARGET = 500
+    private val SPELL_XP_TARGET by lazy{
+        NewAiConfig.items.gems.spellXpTarget.get()
+    }
     
     init{
         AfterSpellEvent.EVENT.register{ _, user, _, spell ->

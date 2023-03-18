@@ -65,9 +65,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (!(this.timeUntilRegen > 10)) {
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.isOf(RegisterItem.INSTANCE.getGEM_OF_PROMISE())) {
-                GemOfPromiseItem.Companion.sparkingGemCheck(stack2, inventory, source);
-                GemOfPromiseItem.Companion.blazingGemCheck(stack2, inventory, this, source);
-                GemOfPromiseItem.Companion.brutalGemCheck(stack2, inventory, source);
+                RegisterItem.INSTANCE.getSPARKING_GEM().sparkingGemCheck(stack2, inventory, source);
+                RegisterItem.INSTANCE.getBLAZING_GEM().blazingGemCheck(stack2, inventory, this, source);
+                RegisterItem.INSTANCE.getBRUTAL_GEM().brutalGemCheck(stack2, inventory, source);
             }
         }
     }
@@ -106,7 +106,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void amethyst_imbuement_checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir){
         ItemStack stack = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
         if (stack.getItem() instanceof GemOfPromiseItem){
-            GemOfPromiseItem.Companion.lethalGemCheck(stack,inventory);
+            RegisterItem.INSTANCE.getLETHAL_GEM().lethalGemCheck(stack,inventory);
         }
     }
 }

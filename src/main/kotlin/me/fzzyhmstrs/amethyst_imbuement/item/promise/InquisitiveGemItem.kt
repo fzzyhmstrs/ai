@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -22,7 +23,9 @@ import net.minecraft.world.World
 
 class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
   
-    private val STATUS_TARGET = 8
+    private val STATUS_TARGET by lazy{
+        NewAiConfig.items.gems.statusesTarget.get()
+    }
     private val GOAL_STATUSES: List<String> = listOf(
         "minecraft:darkness",
         "minecraft:hero_of_the_village",
@@ -61,7 +64,7 @@ class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
                 val player = inventory.player
                 if (player is ServerPlayerEntity){
                     RegisterCriteria.IGNITE.trigger(player)
-                    if (keys.containsAll(GOAL_STATUSES)){
+                    if (keys.containsAll(GOAL_STATUSES) || GOAL_STATUSES.containsAll(keys)){
                         RegisterCriteria.MASTER_RESEARCHER.trigger(player)
                     }
                 }

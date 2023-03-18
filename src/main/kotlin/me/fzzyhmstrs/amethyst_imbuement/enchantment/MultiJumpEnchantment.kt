@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 
@@ -14,7 +15,7 @@ class MultiJumpEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun getMaxLevel(): Int {
-        return 1
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),1)
     }
 
     override fun isTreasure(): Boolean {

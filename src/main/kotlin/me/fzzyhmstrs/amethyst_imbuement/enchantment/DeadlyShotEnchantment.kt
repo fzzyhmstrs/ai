@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.EnchantmentTarget
@@ -17,7 +18,7 @@ class DeadlyShotEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     }
 
     override fun getMaxLevel(): Int {
-        return 3
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     fun getLevel(stack: ItemStack): Int{

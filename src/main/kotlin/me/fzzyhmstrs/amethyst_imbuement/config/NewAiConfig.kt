@@ -3,13 +3,11 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
-import me.fzzyhmstrs.fzzy_config.config_util.ConfigClass
-import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
-import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
-import me.fzzyhmstrs.fzzy_config.config_util.SyncedConfigWithReadMe
+import me.fzzyhmstrs.fzzy_config.config_util.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
+import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
 import net.minecraft.entity.Entity
@@ -47,9 +45,11 @@ object NewAiConfig
     private val itemsHeader = buildSectionHeader("items")
 
     class Items: ConfigClass(itemsHeader){
+
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
         var totemOfAmethystDurability = ValidatedInt(360,1000,32)
+
         var scepters = ScepterSection()
         class ScepterSection: ConfigSection(Header.Builder().space().add("readme.items.scepters_1").add("readme.items.scepters_2").add("readme.items.scepters_3").build()){
             var opalineDurability = ValidatedInt(ScepterLvl1ToolMaterial.defaultDurability(),1250,32)
@@ -66,6 +66,27 @@ object NewAiConfig
             var lethalityCooldown = ValidatedLong(LethalityToolMaterial.baseCooldown(), Long.MAX_VALUE,LethalityToolMaterial.minCooldown())
             @ReadMeText("readme.items.lethalityDamage")
             var lethalityDamage = ValidatedFloat(LethalityToolMaterial.defaultAttackDamage(),30f,0f)
+        }
+
+        var gems = Gems()
+        class Gems: ConfigSection(Header.Builder().space().add("readme.items.gem_1").add("readme.items.gems_2").build()){
+            @ReadMeText("readme.items.gems.fireTarget")
+            val fireTarget = ValidatedInt(120,1200,1)
+            @ReadMeText("readme.items.gems.hitTarget")
+            val hitTarget = ValidatedInt(80,800,1)
+            @ReadMeText("readme.items.gems.healTarget")
+            val healTarget = ValidatedFloat(250f,250f,1f)
+            @ReadMeText("readme.items.gems.statusesTarget")
+            val statusesTarget = ValidatedInt(8,42,1)
+            @ReadMeText("readme.items.gems.killTarget")
+            val killTarget = ValidatedInt(30,300,1)
+            @ReadMeText("readme.items.gems.spellXpTarget")
+            val spellXpTarget = ValidatedInt(500,5000,1)
+        }
+
+        var focus = Focus()
+        class Focus: ConfigSection(Header.Builder().space().add("readme.items.focus_1").add("readme.items.focus_2").build()) {
+            var tierXp = ValidatedSeries(arrayOf(500,1500,3000,5000),Int::class.java,{a,b-> b>a},"Xp tier value is a cumulative XP value. Each tier needs higher xp than the last.")
         }
     }
     
@@ -232,7 +253,12 @@ object NewAiConfig
         }
     }
 
-
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v2.json","items_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {AiConfigOldClasses.ItemsV1()})
+    var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
+    var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
+    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v1.json","trinkets_v0.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {AiConfigOldClasses.TrinketsV0()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v1.json","entities_v0.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
 
     private fun buildSectionHeader(name:String): Header{

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -24,7 +25,7 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDis
     }
 
     override fun getMaxLevel(): Int {
-        return 3
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     override fun getAttackDamage(level: Int, group: EntityGroup): Float {

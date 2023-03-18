@@ -7,16 +7,20 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
+import net.minecraft.util.Identifier
 
 open class UsedActiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractUsedActiveAugment(weight,mxLvl,*slot) {
+
+    val id: Identifier by lazy {
+        Registries.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
+    }
 
     override fun canAccept(other: Enchantment): Boolean {
         return (other !is ActiveAugment)
     }
 
     override fun checkEnabled(): Boolean{
-        val id = Registries.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.trinkets.enabledAugments.getOrDefault(id.path,true)
+        return AiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

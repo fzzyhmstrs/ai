@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:opaline_scepter", 
+    "amethyst_imbuement:skillful_scepter",
+    "amethyst_imbuement:witty_scepter",
+    "amethyst_imbuement:enduring_scepter",
+    "amethyst_imbuement:graceful_scepter",
+    "amethyst_imbuement:dangerous_scepter",
+    "amethyst_imbuement:furious_scepter"
+  ]
+}
