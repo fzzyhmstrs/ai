@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -26,7 +27,7 @@ class InsightEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     }
 
     override fun getMaxLevel(): Int {
-        return 3
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

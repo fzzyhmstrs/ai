@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -22,7 +23,9 @@ import net.minecraft.world.World
 
 class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
     
-    private val HEAL_TARGET = 250.0F
+    private val HEAL_TARGET by lazy{
+        NewAiConfig.items.gems.healTarget.get()
+    }
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("healed")){

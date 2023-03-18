@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:iridescent_scepter",
+    "#amethyst_imbuement:sojourn_scepters",
+    "#amethyst_imbuement:resonance_scepters",
+    "#amethyst_imbuement:redemption_scepters",
+    "#amethyst_imbuement:aegis_scepters",
+    "#amethyst_imbuement:lethality_scepters",
+	"#amethyst_imbuement:equinox_scepters"
+  ]
+}

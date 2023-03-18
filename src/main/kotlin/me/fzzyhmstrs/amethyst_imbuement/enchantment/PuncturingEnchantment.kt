@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments
@@ -22,7 +23,7 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     }
 
     override fun getMaxLevel(): Int {
-        return 6
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),6)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

@@ -1,16 +1,21 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.util.registry.Registry
+import net.minecraft.util.Identifier
 
 
 open class ConfigDisableEnchantment(weight: Rarity,target: EnchantmentTarget, vararg slot: EquipmentSlot): AbstractConfigDisableEnchantment(weight, target, *slot) {
 
+    protected val id: Identifier by lazy {
+        Registry.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
+    }
+
     override fun checkEnabled(): Boolean{
-        val id = Registry.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.enchantments.enabledEnchantments.getOrDefault(id.toString(),true)
+        return NewAiConfig.enchants.enabledEnchants.getOrDefault(id.toString(),true)
     }
 }

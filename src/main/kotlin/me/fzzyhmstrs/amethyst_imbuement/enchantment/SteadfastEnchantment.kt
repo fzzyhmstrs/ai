@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ArmorItem
@@ -24,7 +25,7 @@ class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun getMaxLevel(): Int {
-        return 3
+        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -22,7 +23,9 @@ import net.minecraft.world.World
 
 class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
     
-    private val FIRE_TARGET = 120
+    private val FIRE_TARGET by lazy{
+        NewAiConfig.items.gems.fireTarget.get()
+    }
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("on_fire")){

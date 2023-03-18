@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -22,7 +23,9 @@ import net.minecraft.world.World
 
 class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
-    private val HIT_TARGET = 80
+    private val HIT_TARGET by lazy {
+        NewAiConfig.items.gems.hitTarget.get()
+    }
   
     override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("mob_hit")){

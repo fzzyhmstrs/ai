@@ -12,11 +12,6 @@ open class TotemPassiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equi
         return stack.isOf(RegisterItem.TOTEM_OF_AMETHYST)
     }
 
-    override fun checkEnabled(): Boolean{
-        val id = Registry.ENCHANTMENT.getId(this)?:return true
-        return AiConfig.trinkets.enabledAugments.getOrDefault(id.path,true)
-    }
-
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
         list.add(ItemStack(RegisterItem.TOTEM_OF_AMETHYST,1))

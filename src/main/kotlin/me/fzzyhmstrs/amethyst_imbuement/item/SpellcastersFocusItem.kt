@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
@@ -39,10 +40,10 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     internal val OPTION_2 = "option_2"
     internal val OPTION_3 = "option_3"
     private val tiers: Array<TierData> = arrayOf(
-        TierData("", Rarity.UNCOMMON, 500,1),
-        TierData(".novice", Rarity.UNCOMMON, 1250,2),
-        TierData(".adept", Rarity.RARE, 2250,3),
-        TierData(".master", Rarity.RARE, 3500,4),
+        TierData("", Rarity.UNCOMMON, NewAiConfig.items.focus.tierXp.get()[0],1),
+        TierData(".novice", Rarity.UNCOMMON, NewAiConfig.items.focus.tierXp.get()[1],2),
+        TierData(".adept", Rarity.RARE, NewAiConfig.items.focus.tierXp.get()[2],3),
+        TierData(".master", Rarity.RARE, NewAiConfig.items.focus.tierXp.get()[3],4),
         TierData(".savant", Rarity.EPIC, -1,-1)
     )
 

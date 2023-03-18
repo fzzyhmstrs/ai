@@ -97,7 +97,7 @@ public abstract class LivingEntityMixin extends Entity {
             float healed = amount - clampedDelta;
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.getItem() instanceof GemOfPromiseItem) {
-                GemOfPromiseItem.Companion.healersGemCheck(stack2, inventory, healed);
+                RegisterItem.INSTANCE.getHEALERS_GEM().healersGemCheck(stack2, inventory, healed);
             }
         }
     }
@@ -109,7 +109,7 @@ public abstract class LivingEntityMixin extends Entity {
             PlayerInventory inventory = player.getInventory();
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.getItem() instanceof GemOfPromiseItem) {
-                GemOfPromiseItem.Companion.inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
+                RegisterItem.INSTANCE.getINQUISITIVE_GEM().inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
             }
         }
     }
