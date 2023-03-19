@@ -30,9 +30,9 @@ class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             val cge = CrystallineGolemEntity(
                 RegisterEntity.CRYSTAL_GOLEM_ENTITY,
                 world,
-                AiConfig.entities.crystalGolemGuardianLifespan,
-                AiConfig.entities.crystalGolemBaseDamage.toDouble(),
-                AiConfig.entities.crystalGolemBaseHealth,
+                AiConfig.entities.crystalGolem.guardianLifespan.get(),
+                AiConfig.entities.crystalGolem.baseDamage.get().toDouble(),
+                AiConfig.entities.crystalGolem.baseHealth.get(),
                 user)
             cge.setPosition(user.pos)
             world.spawnEntity(cge)

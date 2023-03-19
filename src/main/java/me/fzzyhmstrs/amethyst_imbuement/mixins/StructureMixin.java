@@ -35,7 +35,7 @@ public class StructureMixin {
     private NbtCompound amethyst_imbuement_checkForEnchantingTable(NbtList instance, int index, Operation<NbtCompound> operation, RegistryEntryLookup<Block> blockLookup, NbtList palette, NbtList blocks){
         NbtCompound nbtCompound = operation.call(instance,index);
         BlockState state = NbtHelper.toBlockState(blockLookup,nbtCompound);
-        if (state.isOf(Blocks.ENCHANTING_TABLE) && AiConfig.INSTANCE.getAltars().getImbuingTableReplaceEnchantingTable()){
+        if (state.isOf(Blocks.ENCHANTING_TABLE) && AiConfig.INSTANCE.getAltars().getImbuing().getReplaceEnchantingTable().get()){
             Item table = RegisterBlock.INSTANCE.getIMBUING_TABLE().asItem();
             nbtCompound.putString("Name", Registries.ITEM.getId(table).toString());
         }

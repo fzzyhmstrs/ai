@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.AugmentCriterion
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.minecraft.advancement.criterion.Criteria
@@ -43,7 +42,7 @@ object RegisterCriteria {
         Criteria.register(IGNITE)
 
         ServerPlayConnectionEvents.JOIN.register { handler, _, _ ->
-            if (NewAiConfig.items.giveGlisteringTome.get()){
+            if (AiConfig.items.giveGlisteringTome.get()){
                 GIVE_IF_CONFIG.trigger(handler.player)
             }
         }

@@ -12,7 +12,6 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
@@ -28,8 +27,8 @@ class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(3,0,0)
-            .withDuration(AiConfig.entities.unhallowedBaseLifespan,0,0)
-            .withDamage(AiConfig.entities.unhallowedBaseDamage)
+            .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
+            .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,

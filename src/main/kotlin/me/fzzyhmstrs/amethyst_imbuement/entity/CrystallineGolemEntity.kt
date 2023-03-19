@@ -48,9 +48,9 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolemBaseHealth)
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolem.baseHealth.get())
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolemBaseDamage.toDouble())
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolem.baseDamage.get().toDouble())
         }
     }
     var attackTicksLeft = 0
@@ -123,20 +123,20 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         entityNbt: NbtCompound?
     ): EntityData? {
         this.initEquipment(world.random, difficulty)
-        if (modifiedDamage - AiConfig.entities.crystalGolemBaseDamage != 0.0){
+        if (modifiedDamage - AiConfig.entities.crystalGolem.baseDamage.get() != 0.0){
             getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
                 EntityAttributeModifier(
                     "Modified damage bonus",
-                    modifiedDamage - AiConfig.entities.crystalGolemBaseDamage,
+                    modifiedDamage - AiConfig.entities.crystalGolem.baseDamage.get(),
                     EntityAttributeModifier.Operation.ADDITION
                 )
             )
         }
-        if (modifiedHealth - AiConfig.entities.crystalGolemBaseHealth != 0.0){
+        if (modifiedHealth - AiConfig.entities.crystalGolem.baseHealth.get() != 0.0){
             getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
                 EntityAttributeModifier(
                     "Modified health bonus",
-                    modifiedHealth - AiConfig.entities.crystalGolemBaseHealth,
+                    modifiedHealth - AiConfig.entities.crystalGolem.baseHealth.get(),
                     EntityAttributeModifier.Operation.ADDITION
                 )
             )

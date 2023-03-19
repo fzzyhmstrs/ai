@@ -6,7 +6,8 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
@@ -39,12 +40,13 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     internal val OPTION_1 = "option_1"
     internal val OPTION_2 = "option_2"
     internal val OPTION_3 = "option_3"
+    internal val CHOSEN_OPTION = "last_chosen_option"
     private val tiers: Array<TierData> = arrayOf(
-        TierData("", Rarity.UNCOMMON, NewAiConfig.items.focus.tierXp.get()[0],1),
-        TierData(".novice", Rarity.UNCOMMON, NewAiConfig.items.focus.tierXp.get()[1],2),
-        TierData(".adept", Rarity.RARE, NewAiConfig.items.focus.tierXp.get()[2],3),
-        TierData(".master", Rarity.RARE, NewAiConfig.items.focus.tierXp.get()[3],4),
-        TierData(".savant", Rarity.EPIC, -1,-1)
+        TierData("", Rarity.UNCOMMON,0, AiConfig.items.focus.tierXp.get()[0],1,-1),
+        TierData(".novice", Rarity.UNCOMMON,AiConfig.items.focus.tierXp.get()[0] + 1, AiConfig.items.focus.tierXp.get()[1],2,0),
+        TierData(".adept", Rarity.RARE,AiConfig.items.focus.tierXp.get()[1] + 1, AiConfig.items.focus.tierXp.get()[2],3,1),
+        TierData(".master", Rarity.RARE,AiConfig.items.focus.tierXp.get()[2] + 1, AiConfig.items.focus.tierXp.get()[3],4,2),
+        TierData(".savant", Rarity.EPIC,AiConfig.items.focus.tierXp.get()[3] + 1, -1,-1,3)
     )
 
     init{
@@ -71,14 +73,20 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     }
     
     override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+        for (reagent in reagents) {
+            if (reagent.item is MysticalGemItem) {
+                if (getTier(stack.nbt).previousTier == -1) return false
+            }
+        }
         return true
     }
     
     override fun react(stack: ItemStack, reagents: List<ItemStack>){
-        if (stack.nbt?.contains("AttributeModifiers") == true) return
+
         for (reagent in reagents){
             val item = reagent.item
             if (item is SpellcastersReagent){
+                if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
@@ -87,6 +95,8 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
                 break
+            }else if (item is MysticalGemItem){
+                resetXpAndLevelDown(stack)
             }
         }
     }
@@ -145,9 +155,25 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 }
                 lvlUpNbt.put(OPTION_3,option3)
                 nbt.putBoolean(LEVEL_UP_READY,true)
+                nbt.remove(CHOSEN_OPTION)
                 nbt.put(LEVEL_UP,lvlUpNbt)
             }
         }
+    }
+
+    private fun resetXpAndLevelDown(stack: ItemStack){
+        val nbt = stack.orCreateNbt
+        val tier = getTier(nbt)
+        val prevTier = tiers[tier.previousTier]
+        nbt.putInt(FOCUS_XP,prevTier.startingXp)
+        if (!nbt.getBoolean(LEVEL_UP_READY)) {
+            val list = nbt.getList(CHOSEN_OPTION, 8)
+            val ids = list.stream().map { Identifier(it.asString()) }.toList()
+            ModifierHelper.removeRolledModifiers(stack, ids)
+            nbt.remove(CHOSEN_OPTION)
+        }
+        nbt.putBoolean(LEVEL_UP_READY, false)
+        nbt.remove(LEVEL_UP)
     }
 
     private fun getTier(nbt: NbtCompound?): TierData{
@@ -157,7 +183,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         return tiers[tier.toInt()]
     }
 
-    private data class TierData(val key: String, val rarity: Rarity, val xpToNextTier: Int, val nextTier: Int)
+    private data class TierData(val key: String, val rarity: Rarity, val startingXp: Int, val xpToNextTier: Int, val nextTier: Int, val previousTier: Int)
 
     override fun getRarity(stack: ItemStack): Rarity {
         val tier = getTier(stack.nbt)

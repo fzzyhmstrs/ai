@@ -38,14 +38,16 @@ object RegisterBlock {
     val CHISELED_POLISHED_AMETHYST_BLOCK = AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["chiseled_polished_amethyst_block"] = it }
     val HARD_LIGHT_BLOCK = Block(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
     val FORCEFIELD_BLOCK = ForcefieldBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["forcefield_block"] = it }
+    val GLISTENING_ICE = TransparentBlock(FabricBlockSettings.of(Material.DENSE_ICE).strength(3.0f).slipperiness(0.992f).sounds(BlockSoundGroup.GLASS)).also { regBlock["glistening_ice"] = it }
 
     fun registerAll() {
         for (k in regBlock.keys) {
-            if (k == "experience_bush") continue
+            if (k == "experience_bush" || k =="glistening_ice") continue
             registerBlock(k,regBlock[k])
         }
 
         Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
+        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "glistening_ice"), GLISTENING_ICE)
     }
 
     private fun registerBlock(path: String, block:Block?){

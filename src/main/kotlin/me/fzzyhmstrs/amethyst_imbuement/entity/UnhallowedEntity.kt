@@ -54,9 +54,9 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     }
 
     companion object {
-        private  val baseMaxHealth = AiConfig.entities.unhallowedBaseHealth
+        private  val baseMaxHealth = AiConfig.entities.unhallowed.baseHealth.get()
         private const val baseMoveSpeed = 0.4
-        private  val baseAttackDamage = AiConfig.entities.unhallowedBaseDamage
+        private  val baseAttackDamage = AiConfig.entities.unhallowed.baseDamage.get()
 
         fun createUnhallowedAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)

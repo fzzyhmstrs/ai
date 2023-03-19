@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.block.Block
 import net.minecraft.block.OperatorBlock
 import net.minecraft.enchantment.Enchantment
@@ -25,7 +25,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun getMaxLevel(): Int {
-        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
+        return AiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

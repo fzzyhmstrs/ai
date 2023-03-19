@@ -27,6 +27,7 @@ object AI: ModInitializer {
         AiConfig.initConfig()
         RegisterArmor.registerAll()
         RegisterItem.registerAll()
+        RegisterPotion.registerAll()
         RegisterBlock.registerAll()
         RegisterEnchantment.registerAll()
         RegisterLoot.registerAll()

@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:wither_rose"
+	"item": "amethyst_imbuement:accursed_figurine"
   },
   "imbueB": {
 	"item": "minecraft:wither_rose"

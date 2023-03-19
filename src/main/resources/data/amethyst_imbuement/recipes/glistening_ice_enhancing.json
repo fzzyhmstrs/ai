@@ -1,0 +1,15 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "base": {
+    "item": "minecraft:blue_ice"
+  },
+  "addition": {
+    "item": "minecraft:sunflower"
+  },
+  "result": {
+    "item": "amethyst_imbuement:glistening_ice"
+  }
+}

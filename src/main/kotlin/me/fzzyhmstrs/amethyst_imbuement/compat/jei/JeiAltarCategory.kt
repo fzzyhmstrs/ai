@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
-import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.helpers.IGuiHelper
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
-class JeiAltarCategory(private val guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
+class JeiAltarCategory(guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
     companion object{
         val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)

@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "title": "Hail Storm",
+  "cost": 23,
+  "augment": "amethyst_imbuement:hail_storm"
+}
+

@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractActiveAugment
 import net.minecraft.enchantment.Enchantment
@@ -22,7 +21,7 @@ open class ActiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSl
     }
 
     override fun checkEnabled(): Boolean{
-        return NewAiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
+        return AiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

@@ -12,7 +12,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.Blocks
 import net.minecraft.block.PlantBlock
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory

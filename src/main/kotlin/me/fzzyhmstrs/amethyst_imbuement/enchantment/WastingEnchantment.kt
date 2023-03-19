@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments
@@ -22,7 +22,7 @@ class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     }
 
     override fun getMaxLevel(): Int {
-        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),4)
+        return AiConfig.enchants.getAiMaxLevel(id.toString(),4)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

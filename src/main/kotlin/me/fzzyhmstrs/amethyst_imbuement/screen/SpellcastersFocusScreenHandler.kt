@@ -1,36 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.*
-import net.minecraft.enchantment.Enchantment
-import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.enchantment.EnchantmentLevelEntry
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
-import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtList
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.registry.Registries
-import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.slot.Slot
-import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
-import java.util.*
-import kotlin.math.min
 
 @Suppress("SENSELESS_COMPARISON", "unused", "UnnecessaryVariable")
 class SpellcastersFocusScreenHandler(
@@ -71,8 +54,12 @@ class SpellcastersFocusScreenHandler(
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
                 }
-                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                val nbt = stack.orCreateNbt
+                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                if (!lvlUpNbt.isEmpty){
+                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8))
+                }
                 this.close(player)
                 return true
             }
@@ -88,8 +75,12 @@ class SpellcastersFocusScreenHandler(
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
                 }
-                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                val nbt = stack.orCreateNbt
+                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                if (!lvlUpNbt.isEmpty){
+                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8))
+                }
                 this.close(player)
                 return true
             }
@@ -105,8 +96,12 @@ class SpellcastersFocusScreenHandler(
                             world.random.nextFloat() * 0.1f + 0.9f
                         )
                 }
-                stack.nbt?.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                stack.nbt?.remove(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                val nbt = stack.orCreateNbt
+                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                if (!lvlUpNbt.isEmpty){
+                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8))
+                }
                 this.close(player)
                 return true
             }
@@ -124,13 +119,13 @@ class SpellcastersFocusScreenHandler(
         if (nbt == null){
             failed = true
         }
-        val lvlUpNbt = nbt?.get(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+        val lvlUpNbt = nbt?.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
         if (lvlUpNbt == null){
             failed = true
         } else {
-            val list1 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8)
-            val list2 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8)
-            val list3 = nbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8)
+            val list1 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8)
+            val list2 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8)
+            val list3 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8)
             option1 = list1.stream().map { Identifier(it.asString()) }.toList()
             option2 = list2.stream().map { Identifier(it.asString()) }.toList()
             option3 = list3.stream().map { Identifier(it.asString()) }.toList()

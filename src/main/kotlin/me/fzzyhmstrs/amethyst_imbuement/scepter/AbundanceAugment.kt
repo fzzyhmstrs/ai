@@ -9,7 +9,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld

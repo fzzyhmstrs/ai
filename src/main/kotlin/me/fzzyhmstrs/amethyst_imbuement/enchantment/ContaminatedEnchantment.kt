@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -26,7 +26,7 @@ class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     }
 
     override fun getMaxLevel(): Int {
-        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),1)
+        return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

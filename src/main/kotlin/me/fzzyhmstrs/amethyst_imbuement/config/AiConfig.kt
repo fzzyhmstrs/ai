@@ -1,325 +1,301 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import com.google.gson.GsonBuilder
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
-import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper
-import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.gson
-import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreate
-import me.fzzyhmstrs.fzzy_core.coding_util.SyncedConfigHelper.readOrCreateUpdated
-import me.fzzyhmstrs.fzzy_core.registry.SyncedConfigRegistry
-import net.fabricmc.loader.api.FabricLoader
+import me.fzzyhmstrs.fzzy_config.config_util.*
+import me.fzzyhmstrs.fzzy_config.validated_field.*
+import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
+import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
+import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
+import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.network.PacketByteBuf
+import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
-
-object AiConfig: SyncedConfigHelper.SyncedConfig {
-
-    var items: Items
-    var altars: Altars
-    var villages: Villages
-    var enchantments: Enchantments
-    var trinkets: Trinkets
-    var entities: Entities
-
-    init {
-        items = readOrCreateUpdated("items_v1.json","items_v0.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {ItemsV0()})
-        altars = readOrCreateUpdated("altars_v3.json","altars_v2.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AltarsV2()})
-        //colors = readOrCreateUpdated("colors_v1.json","colors_v0.json", base = AI.MOD_ID, configClass = {Colors()}, previousClass = {ColorsV0()})
-        //colors.trimData()
-        //villages = readOrCreate("villages_v0.json", base = AI.MOD_ID) { Villages() }
-        villages = readOrCreateUpdated("villages_v1.json","villages_v0.json", base = AI.MOD_ID, configClass = { Villages() }, previousClass = {VillagesV0()})
-        enchantments = readOrCreate("enchantments_v0.json", base = AI.MOD_ID) { Enchantments() }
-        trinkets = readOrCreate("trinkets_v0.json", base = AI.MOD_ID) { Trinkets() }
-        entities = readOrCreate("entities_v0.json", base = AI.MOD_ID) { Entities() }
-        ReadmeText.writeReadMe("README.txt", AI.MOD_ID)
-    }
-
-    override fun initConfig(){
-        SyncedConfigRegistry.registerConfig(AI.MOD_ID,this)
-    }
-
-    override fun writeToClient(buf:PacketByteBuf){
-        val gson = GsonBuilder().create()
-        buf.writeString(gson.toJson(items))
-        buf.writeString(gson.toJson(altars))
-        buf.writeString(gson.toJson(villages))
-        buf.writeString(gson.toJson(enchantments))
-        buf.writeString(gson.toJson(trinkets))
-        buf.writeString(gson.toJson(entities))
-    }
-
-    override fun readFromServer(buf:PacketByteBuf){
-        items = gson.fromJson(buf.readString(),Items::class.java)
-        altars = gson.fromJson(buf.readString(),Altars::class.java)
-        villages = gson.fromJson(buf.readString(),Villages::class.java)
-        enchantments = gson.fromJson(buf.readString(),Enchantments::class.java)
-        trinkets = gson.fromJson(buf.readString(),Trinkets::class.java)
-        entities = gson.fromJson(buf.readString(),Entities::class.java)
-    }
+import net.minecraft.util.math.ColorHelper
+import kotlin.math.max
 
 
-    class Items {
-        var giveGlisteringTome: Boolean = true
-        var totemOfAmethystDurability: Int = 360
-        var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
-        var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
-        var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
-        var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
-        var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
-        var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
-        var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
-        var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-    }
+object AiConfig
+    :
+    SyncedConfigWithReadMe(
+        AI.MOD_ID,
+        "README.txt",
+        AI.MOD_ID,
+        Header.Builder()
+            .box("readme.main_header.title")
+            .space()
+            .add("readme.main_header.changelog")
+            .literal()
+            .add("1.18.1-13/1.18.2-14: Added imbuingTableReplaceEnchantingTable to the Altars Config. Config updated to v1.")
+            .add("1.19-09/1.18.2-26: updated Altars to v2 with the addition of many (currently unused) integration options. Updated Villages to v1 with the addition of many options related to CTOV and RS. Updated Scepters to v1 and added default durabilities/damage values for the Scepter of Blades and Lethality.")
+            .add("1.19-11/1.18.2-28: Added the entities config file.")
+            .add("1.19-14/1.18.2-31: Added the trinkets config file and updated Entities to v1 with (currently unused) selections.")
+            .add("1.19-22/1.18.2-39: Changed the scepters config from scepters_v1 to items_v0 and added the glistering tome boolean.")
+            .add("1.19.3-02/1.19-25/1.18.2-42: Added a config for the chance an experience bush will grow (in Altars config v3).")
+            .add("1.19.3-03/1.19-26/1.18.2-43: Added configurable durability for the Totem of Amethyst.")
+            .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
+            .space()
+            .translate()
+            .add("readme.main_header.note")
+            .space()
+            .space()
+            .build())
+{
+    private val itemsHeader = buildSectionHeader("items")
 
-    class Altars {
-        var experienceBushBonemealChance: Float = 0.4f
-        var experienceBushGrowChance: Float = 0.15f
-        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
-        var disenchantBaseDisenchantsAllowed: Int = 1
-        var imbuingTableEnchantingEnabled: Boolean = true
-        var imbuingTableReplaceEnchantingTable: Boolean = false
-        var imbuingTableDifficultyModifier: Float = 1.0F
-        var imbuingTableMatchEasyMagicBehavior: Boolean = true
-        var imbuingTableEasyMagicRerollEnabled: Boolean = true
-        var imbuingTableEasyMagicLevelCost: Int = 5
-        var imbuingTableEasyMagicLapisCost: Int = 1
-        var imbuingTableEasyMagicShowTooltip: Boolean = true
-        var imbuingTableEasyMagicSingleEnchantTooltip: Boolean = true
-        var imbuingTableEasyMagicLenientBookshelves: Boolean = false
-        var imbuingTableMatchRerollBehavior: Boolean = true
-        var imbuingTableRerollLevelCost: Int = 1
-        var imbuingTableRerollLapisCost: Int = 0
-        var imbuingTableMatchEnhancementBehavior: Boolean = true
-        var imbuingTableEnhancementLevelsPer: Int = 5
-        var imbuingTableEnhancementLapisPer: Int = 5
-        var imbuingTableMatchEasierEnchantingBehavior: Boolean = true
-        var imbuingTableEasierEnchantingLapisCost: Int = 6
-        var imbuingTableMatchBetterEnchantmentBoostingBehavior: Boolean = true
-        var altarOfExperienceBaseLevels: Int = 35
-        var altarOfExperienceCandleLevelsPer: Int = 5
-        var altarOfExperienceCustomXpMethod: Boolean = true
-    }
+    class Items: ConfigClass(itemsHeader){
 
-    class Villages{
-        var enableDesertWorkshops: Boolean = true
-        var desertWorkshopWeight: Int = 2
-        var enablePlainsWorkshops: Boolean = true
-        var plainsWorkshopWeight: Int = 3
-        var enableSavannaWorkshops: Boolean = true
-        var savannaWorkshopWeight: Int = 3
-        var enableSnowyWorkshops: Boolean = true
-        var snowyWorkshopWeight: Int = 2
-        var enableTaigaWorkshops: Boolean = true
-        var taigaWorkshopWeight: Int = 3
-        var enableCtovWorkshops: Boolean = true
-        var ctovBeachWorkshopWeight: Int = 4
-        var ctovDarkForestWorkshopWeight: Int = 4
-        var ctovJungleWorkshopWeight: Int = 4
-        var ctovJungleTreeWorkshopWeight: Int = 4
-        var ctovMesaWorkshopWeight: Int = 4
-        var ctovMesaFortifiedWorkshopWeight: Int = 4
-        var ctovMountainWorkshopWeight: Int = 4
-        var ctovMountainAlpineWorkshopWeight: Int = 4
-        var ctovMushroomWorkshopWeight: Int = 4
-        var ctovSwampWorkshopWeight: Int = 4
-        var ctovSwampFortifiedWorkshopWeight: Int = 4
-        var enableRsWorkshops: Boolean = true
-        var rsBadlandsWorkshopWeight: Int = 2
-        var rsBirchWorkshopWeight: Int = 2
-        var rsDarkForestWorkshopWeight: Int = 2
-        var rsGiantTaigaWorkshopWeight: Int = 1
-        var rsJungleWorkshopWeight: Int = 2
-        var rsMountainsWorkshopWeight: Int = 2
-        var rsMushroomsWorkshopWeight: Int = 2
-        var rsOakWorkshopWeight: Int = 2
-        var rsSwampWorkshopWeight: Int = 2
-        var rsCrimsonWorkshopWeight: Int = 2
-        var rsWarpedWorkshopWeight: Int = 2
-    }
+        @ReadMeText("readme.items.giveGlisteringTome")
+        var giveGlisteringTome = ValidatedBoolean(true)
 
-    class Enchantments{
-        var enabledEnchantments: Map<String,Boolean> = mapOf(
-            "heroic" to true,
-            "wasting" to true,
-            "deadly_shot" to true,
-            "puncturing" to true,
-            "insight" to true,
-            "lifesteal" to true,
-            "decayed" to true,
-            "contaminated" to true,
-            "cleaving" to true,
-            "bulwark" to true,
-            "multi_jump" to true,
-            "night_vision" to true,
-            "steadfast" to true,
-            "rain_of_thorns" to true,
-            "vein_miner" to true
-        )
-    }
+        var manaItems = ManaItems()
+        class ManaItems: ConfigSection(Header.Builder().space().add("readme.items.manaItems_1").add("readme.items.manaItems_2").build()) {
+            var totemOfAmethystDurability = ValidatedInt(360, 1000, 32)
+            var imbuedJewelryDurability = ValidatedInt(120, 1000, 32)
+            @ReadMeText("readme.items.manaItems.imbuedJewelryDamagePerSecond")
+            var imbuedJewelryDamagePerSecond = ValidatedInt(1,10,0)
+            @ReadMeText("readme.items.manaItems.fullManaColor")
+            var fullManaColor = ValidatedColor(0,85,255)
+            @ReadMeText("readme.items.manaItems.fullManaColor")
+            var emptyManaColor = ValidatedColor(255,0,85)
 
-    class Trinkets{
-        var enabledAugments: Map<String,Boolean> = mapOf(
-            "angelic" to true,
-            "crystalline" to true,
-            "draconic_vision" to true,
-            "escape" to true,
-            "feline" to true,
-            "friendly" to true,
-            "guardian" to true,
-            "hasting" to true,
-            "headhunter" to true,
-            "healthy" to true,
-            "illuminating" to true,
-            "immunity" to true,
-            "invisibility" to true,
-            "leaping" to true,
-            "lightfooted" to true,
-            "lucky" to true,
-            "moonlit" to true,
-            "resilience" to true,
-            "shielding" to true,
-            "slimy" to true,
-            "soulbinding" to true,
-            "soul_of_the_conduit" to true,
-            "spectral_vision" to true,
-            "spiked" to true,
-            "strength" to true,
-            "striding" to true,
-            "suntouched" to true,
-            "swiftness" to true,
-            "undying" to true
-        )
+            fun getItemBarColor(stack:ItemStack): Int{
+                val f = max(0.0f, (stack.maxDamage.toFloat() - stack.damage.toFloat()) / stack.maxDamage.toFloat())
+                val r = ((f * fullManaColor.r.get()) + ((1-f)*emptyManaColor.r.get())).toInt()
+                val g = ((f * fullManaColor.g.get()) + ((1-f)*emptyManaColor.g.get())).toInt()
+                val b = ((f * fullManaColor.b.get()) + ((1-f)*emptyManaColor.b.get())).toInt()
+                return ColorHelper.Argb.getArgb(255,r,g,b)
+            }
+        }
+
+        var scepters = ScepterSection()
+        class ScepterSection: ConfigSection(Header.Builder().space().add("readme.items.scepters_1").add("readme.items.scepters_2").add("readme.items.scepters_3").build()){
+            var opalineDurability = ValidatedInt(ScepterLvl1ToolMaterial.defaultDurability(),1250,32)
+            var opalineCooldown = ValidatedLong(ScepterLvl1ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl1ToolMaterial.minCooldown())
+            var iridescentDurability = ValidatedInt(ScepterLvl2ToolMaterial.defaultDurability(),1650,64)
+            var iridescentCooldown = ValidatedLong(ScepterLvl2ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl2ToolMaterial.minCooldown())
+            var lustrousDurability = ValidatedInt(ScepterLvl3ToolMaterial.defaultDurability(),3550,128)
+            var lustrousCooldown = ValidatedLong(ScepterLvl3ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl3ToolMaterial.minCooldown())
+            var bladesDurability = ValidatedInt(ScepterOfBladesToolMaterial.defaultDurability(),1250,32)
+            var bladesCooldown = ValidatedLong(ScepterOfBladesToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterOfBladesToolMaterial.minCooldown())
+            @ReadMeText("readme.items.scepters.bladesDamage")
+            var bladesDamage = ValidatedFloat(ScepterOfBladesToolMaterial.defaultAttackDamage(),20f,0f)
+            var lethalityDurability = ValidatedInt(LethalityToolMaterial.defaultDurability(),3250,128)
+            var lethalityCooldown = ValidatedLong(LethalityToolMaterial.baseCooldown(), Long.MAX_VALUE,LethalityToolMaterial.minCooldown())
+            @ReadMeText("readme.items.scepters.lethalityDamage")
+            var lethalityDamage = ValidatedFloat(LethalityToolMaterial.defaultAttackDamage(),30f,0f)
+        }
+
+        var gems = Gems()
+        class Gems: ConfigSection(Header.Builder().space().add("readme.items.gem_1").add("readme.items.gems_2").build()){
+            @ReadMeText("readme.items.gems.fireTarget")
+            val fireTarget = ValidatedInt(120,1200,1)
+            @ReadMeText("readme.items.gems.hitTarget")
+            val hitTarget = ValidatedInt(80,800,1)
+            @ReadMeText("readme.items.gems.healTarget")
+            val healTarget = ValidatedFloat(250f,2500f,1f)
+            @ReadMeText("readme.items.gems.statusesTarget")
+            val statusesTarget = ValidatedInt(8,42,1)
+            @ReadMeText("readme.items.gems.killTarget")
+            val killTarget = ValidatedInt(30,300,1)
+            @ReadMeText("readme.items.gems.spellXpTarget")
+            val spellXpTarget = ValidatedInt(500,5000,1)
+        }
+
+        var focus = Focus()
+        class Focus: ConfigSection(Header.Builder().space().add("readme.items.focus_1").build()) {
+            var tierXp = ValidatedSeries(arrayOf(500,1500,3000,5000),Int::class.java,{a,b-> b>a},"Xp tier value is a cumulative XP value. Each tier needs higher xp than the last.")
+        }
+
+        var scroll = Scroll()
+        class Scroll: ConfigSection(Header.Builder().space().add("readme.items.scroll_1").build()) {
+            @ReadMeText("readme.items.scroll.uses")
+            var uses = ValidatedSeries(arrayOf(32,64,128),Int::class.java,{a,b-> b>a},"Higher tier scrolls need more uses than the previous tier.")
+            @ReadMeText("readme.items.scroll.levels")
+            var levels = ValidatedSeries(arrayOf(1,2,3,5,8),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
+        }
     }
     
-    class Entities{
+    private val altarsHeader = buildSectionHeader("altars")
+    
+    class Altars: ConfigClass(altarsHeader){
+        var xpBush = XpBush()
+        class XpBush: ConfigSection(Header.Builder().space().add("readme.altars.xp_bush_1").add("readme.altars.xp_bush_2").build()){
+            var bonemealChance = ValidatedFloat(0.4f,1f,0f)
+            var growChance = ValidatedFloat(0.15f,1f,0f)
+        }
         
+        var disenchanter = Disenchanter()
+        class Disenchanter: ConfigSection(Header.Builder().space().add("readme.altars.disenchant_1").add("readme.altars.disenchant_2").build()){
+            @ReadMeText("readme.altars.disenchanter.levelCosts")
+            var levelCosts = ValidatedIntList(listOf(11, 17, 24, 33, 44), {i -> i >= 0}, "Needs integers greater than or equal to 0")
+            var baseDisenchantsAllowed = ValidatedInt(1,Int.MAX_VALUE,0)
+        }
+        
+        var imbuing = Imbuing()
+        class Imbuing: ConfigSection(Header.Builder().space().add("readme.items.imbuing_1").add("readme.items.imbuing_2").build()){
+            var enchantingEnabled = ValidatedBoolean(true)
+            var replaceEnchantingTable = ValidatedBoolean(false)
+            @ReadMeText("readme.altars.imbuing.difficultyModifier")
+            var difficultyModifier = ValidatedFloat(1.0F,10f,0f)
+            
+            var easyMagic = EasyMagic()
+            class EasyMagic: ConfigSection(Header.Builder().add("readme.items.imbuing_easy_1").add("readme.items.imbuing_easy_2").build()){
+                var matchEasyMagicBehavior = ValidatedBoolean(true)
+                var rerollEnabled = ValidatedBoolean(true)
+                var levelCost = ValidatedInt(5,Int.MAX_VALUE,0)
+                var lapisCost = ValidatedInt(1,Int.MAX_VALUE,0)
+                var showTooltip = ValidatedBoolean(true)
+                var singleEnchantTooltip = ValidatedBoolean(true)
+            }
+            
+            var reroll = Reroll()
+            class Reroll:ConfigSection(Header.Builder().add("readme.items.imbuing_reroll_1").add("readme.items.imbuing_reroll_2").build()){
+                var matchRerollBehavior = ValidatedBoolean(true)
+                var levelCost = ValidatedInt(1,Int.MAX_VALUE,0)
+                var lapisCost = ValidatedInt(0,Int.MAX_VALUE,0)
+            }
+        }
+    
+        var altar = Altar()
+        class Altar: ConfigSection(Header.Builder().space().add("readme.altars.altar_1").add("readme.altars.altar_2").build()){
+            var baseLevels = ValidatedInt(35,Int.MAX_VALUE,0)
+            var candleLevelsPer = ValidatedInt(5,Int.MAX_VALUE/16,0)
+            @ReadMeText("readme.altars.altar.customXpMethod")
+            var customXpMethod = ValidatedBoolean(true)
+        }
+    }
+
+    private val villagesHeader = buildSectionHeader("villages")
+    
+    class Villages: ConfigClass(villagesHeader){
+        var vanilla = Vanilla()
+        class Vanilla: ConfigSection(Header.Builder().space().add("readme.villages.vanilla_1").build()){
+            var enableDesertWorkshops = ValidatedBoolean(true)
+            var desertWorkshopWeight = ValidatedInt(2,100,1)
+            var enablePlainsWorkshops = ValidatedBoolean(true)
+            var plainsWorkshopWeight = ValidatedInt(3,100,1)
+            var enableSavannaWorkshops = ValidatedBoolean(true)
+            var savannaWorkshopWeight = ValidatedInt(3,100,1)
+            var enableSnowyWorkshops = ValidatedBoolean(true)
+            var snowyWorkshopWeight = ValidatedInt(2,100,1)
+            var enableTaigaWorkshops = ValidatedBoolean(true)
+            var taigaWorkshopWeight = ValidatedInt(3,100,1)
+        }
+        
+        var ctov = Ctov()
+        class Ctov: ConfigSection(Header.Builder().space().add("readme.villages.ctov_1").build()){
+            var enableCtovWorkshops = ValidatedBoolean(true)
+            var beachWorkshopWeight = ValidatedInt(4,100,1)
+            var darkForestWorkshopWeight = ValidatedInt(4,100,1)
+            var jungleWorkshopWeight = ValidatedInt(4,100,1)
+            var jungleTreeWorkshopWeight = ValidatedInt(4,100,1)
+            var mesaWorkshopWeight = ValidatedInt(4,100,1)
+            var mesaFortifiedWorkshopWeight = ValidatedInt(4,100,1)
+            var mountainWorkshopWeight = ValidatedInt(4,100,1)
+            var mountainAlpineWorkshopWeight = ValidatedInt(4,100,1)
+            var mushroomWorkshopWeight = ValidatedInt(4,100,1)
+            var swampWorkshopWeight = ValidatedInt(4,100,1)
+            var swampFortifiedWorkshopWeight = ValidatedInt(4,100,1)
+        }
+        
+        var rs = Rs()
+        class Rs: ConfigSection(Header.Builder().space().add("readme.villages.rs_1").build()){
+            var enableRsWorkshops = ValidatedBoolean(true)
+            var badlandsWorkshopWeight = ValidatedInt(2,100,1)
+            var birchWorkshopWeight = ValidatedInt(2,100,1)
+            var darkForestWorkshopWeight = ValidatedInt(2,100,1)
+            var giantTaigaWorkshopWeight = ValidatedInt(1,100,1)
+            var jungleWorkshopWeight = ValidatedInt(2,100,1)
+            var mountainsWorkshopWeight = ValidatedInt(2,100,1)
+            var mushroomsWorkshopWeight = ValidatedInt(2,100,1)
+            var oakWorkshopWeight = ValidatedInt(2,100,1)
+            var swampWorkshopWeight = ValidatedInt(2,100,1)
+            var crimsonWorkshopWeight = ValidatedInt(2,100,1)
+            var warpedWorkshopWeight = ValidatedInt(2,100,1)
+        }
+    }
+    
+    private val enchantsHeader = buildSectionHeader("enchants")
+    
+    class Enchants: ConfigClass(enchantsHeader){
+
+        fun getAiMaxLevel(id: String, fallback: Int): Int{
+            if (disableIncreaseMaxLevels.get()) return fallback
+            return aiEnchantMaxLevels[id]?:fallback
+        }
+        
+        fun getVanillaMaxLevel(id: String, fallback: Int): Int{
+            if (disableIncreaseMaxLevels.get()) return fallback
+            return vanillaEnchantMaxLevels[id]?:fallback
+        }
+        
+        @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
+        var disableIncreaseMaxLevels = ValidatedBoolean(false)
+        
+        @ReadMeText("readme.enchants.enabledEnchants")
+        var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
+        
+        @ReadMeText("readme.enchants.aiEnchantMaxLevels")
+        var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+
+        @ReadMeText("readme.enchants.vanillaEnchantMaxLevels")
+        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+    }
+
+    private val trinketsHeader = buildSectionHeader("trinkets")
+
+    class Trinkets: ConfigClass(trinketsHeader){
+        @ReadMeText("readme.enchants.enabledAugments")
+        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
+    }
+
+    private val entitiesHeader = buildSectionHeader("entities")
+
+    class Entities: ConfigClass(entitiesHeader){
         fun isEntityPvpTeammate(user: LivingEntity, entity: Entity, spell: ScepterAugment): Boolean{
-            if (forcePvpOnAllSpells || spell.getPvpMode()){
+            if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
                 return user.isTeammate(entity)
             }
             return true
         }
-        
-        var forcePvpOnAllSpells: Boolean = false
-        var unhallowedBaseLifespan: Int = 2400
-        var unhallowedBaseHealth: Double = 20.0
-        var unhallowedBaseDamage: Float = 3.0f
-        var familiarBaseHealth: Double = 20.0
-        var familiarBaseDamage: Float = 5.0f
-        var familiarBaseAttackSpeed: Float = 1.0f
-        var crystalGolemSpellBaseLifespan: Int = 5500
-        var crystalGolemSpellPerLvlLifespan: Int = 500
-        var crystalGolemGuardianLifespan: Int = 900
-        var crystalGolemBaseHealth: Double = 180.0
-        var crystalGolemBaseDamage: Float = 20.0f
-    }
 
-    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class ItemsV0: SyncedConfigHelper.OldClass<Items> {
-        var giveGlisteringTome: Boolean = true
-        var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
-        var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
-        var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
-        var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
-        var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
-        var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
-        var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
-        var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-        override fun generateNewClass(): Items {
-            val items = Items()
-            items.giveGlisteringTome = giveGlisteringTome
-            items.baseRegenRateTicks = baseRegenRateTicks
-            items.opalineDurability = opalineDurability
-            items.iridescentDurability = iridescentDurability
-            items.lustrousDurability = lustrousDurability
-            items.bladesDurability = bladesDurability
-            items.bladesDamage = bladesDamage
-            items.lethalityDurability = lethalityDurability
-            items.lethalityDamage = lethalityDamage
-            return items
+        @ReadMeText("readme.entities.forcePvpOnAllSpells")
+        var forcePvpOnAllSpells = ValidatedBoolean(false)
+
+        var unhallowed = Unhallowed()
+        class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").build()){
+            var baseLifespan = ValidatedInt(2400,180000,20)
+            var baseHealth = ValidatedDouble(20.0,100.0,1.0)
+            var baseDamage = ValidatedFloat(3.0f,20.0f,0.0f)
+        }
+
+        var crystalGolem = CrystalGolem()
+        class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").build()){
+            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
+            var spellBaseLifespan = ValidatedInt(5500, Int.MAX_VALUE-120000,20)
+            @ReadMeText("readme.entities.crystalGolem.spellPerLvlLifespan")
+            var spellPerLvlLifespan = ValidatedInt(500,5000,0)
+            @ReadMeText("readme.entities.crystalGolem.guardianLifespan")
+            var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
+            var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
+            var baseDamage = ValidatedFloat(20.0f,1000f,0f)
         }
     }
 
-    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class AltarsV2: SyncedConfigHelper.OldClass<Altars> {
-        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
-        var disenchantBaseDisenchantsAllowed: Int = 1
-        var imbuingTableEnchantingEnabled: Boolean = true
-        var imbuingTableReplaceEnchantingTable: Boolean = false
-        var imbuingTableDifficultyModifier: Float = 1.0F
-        var imbuingTableMatchEasyMagicBehavior: Boolean = true
-        var imbuingTableEasyMagicRerollEnabled: Boolean = true
-        var imbuingTableEasyMagicLevelCost: Int = 5
-        var imbuingTableEasyMagicLapisCost: Int = 1
-        var imbuingTableEasyMagicShowTooltip: Boolean = true
-        var imbuingTableEasyMagicSingleEnchantTooltip: Boolean = true
-        var imbuingTableEasyMagicLenientBookshelves: Boolean = false
-        var imbuingTableMatchRerollBehavior: Boolean = true
-        var imbuingTableRerollLevelCost: Int = 1
-        var imbuingTableRerollLapisCost: Int = 0
-        var imbuingTableMatchEnhancementBehavior: Boolean = true
-        var imbuingTableEnhancementLevelsPer: Int = 5
-        var imbuingTableEnhancementLapisPer: Int = 5
-        var imbuingTableMatchEasierEnchantingBehavior: Boolean = true
-        var imbuingTableEasierEnchantingLapisCost: Int = 6
-        var imbuingTableMatchBetterEnchantmentBoostingBehavior: Boolean = true
-        var altarOfExperienceBaseLevels: Int = 35
-        var altarOfExperienceCandleLevelsPer: Int = 5
-        var altarOfExperienceCustomXpMethod: Boolean = true
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v2.json","items_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {AiConfigOldClasses.ItemsV1()})
+    var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
+    var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
+    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v1.json","trinkets_v0.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {AiConfigOldClasses.TrinketsV0()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v1.json","entities_v0.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
-        override fun generateNewClass(): Altars {
-            val altars = Altars()
-            altars.disenchantLevelCosts = disenchantLevelCosts
-            altars.disenchantBaseDisenchantsAllowed = disenchantBaseDisenchantsAllowed
-            altars.imbuingTableEnchantingEnabled = imbuingTableEnchantingEnabled
-            altars.imbuingTableReplaceEnchantingTable = imbuingTableReplaceEnchantingTable
-            altars.imbuingTableDifficultyModifier = imbuingTableDifficultyModifier
-            altars.imbuingTableMatchEasyMagicBehavior = imbuingTableMatchEasyMagicBehavior
-            altars.imbuingTableEasyMagicRerollEnabled = imbuingTableEasyMagicRerollEnabled
-            altars.imbuingTableEasyMagicLevelCost = imbuingTableEasyMagicLevelCost
-            altars.imbuingTableEasyMagicLapisCost = imbuingTableEasyMagicLapisCost
-            altars.imbuingTableEasyMagicShowTooltip = imbuingTableEasyMagicShowTooltip
-            altars.imbuingTableEasyMagicLenientBookshelves = imbuingTableEasyMagicLenientBookshelves
-            altars.imbuingTableMatchRerollBehavior = imbuingTableMatchRerollBehavior
-            altars.imbuingTableRerollLevelCost = imbuingTableRerollLevelCost
-            altars.imbuingTableRerollLapisCost = imbuingTableRerollLapisCost
-            altars.imbuingTableMatchEasierEnchantingBehavior = imbuingTableMatchEasierEnchantingBehavior
-            altars.imbuingTableEasierEnchantingLapisCost = imbuingTableEasierEnchantingLapisCost
-            altars.altarOfExperienceBaseLevels = altarOfExperienceBaseLevels
-            altars.altarOfExperienceCandleLevelsPer = altarOfExperienceCandleLevelsPer
-            altars.altarOfExperienceCustomXpMethod = altarOfExperienceCustomXpMethod
-            return altars
-        }
+
+    private fun buildSectionHeader(name:String): Header{
+        return Header.Builder().space().underoverscore("readme.header.$name").add("readme.header.$name.desc").space().build()
     }
 
-    @Deprecated("Removing after assumed adoption of newer versions. Target end of 2022")
-    class VillagesV0: SyncedConfigHelper.OldClass<Villages>{
-        var enableDesertWorkshops: Boolean = true
-        var desertWorkshopWeight: Int = 1
-        var enablePlainsWorkshops: Boolean = true
-        var plainsWorkshopWeight: Int = 2
-        var enableSavannaWorkshops: Boolean = true
-        var savannaWorkshopWeight: Int = 2
-        var enableSnowyWorkshops: Boolean = true
-        var snowyWorkshopWeight: Int = 1
-        var enableTaigaWorkshops: Boolean = true
-        var taigaWorkshopWeight: Int = 2
-        override fun generateNewClass(): Villages {
-            val villages = Villages()
-            villages.enableDesertWorkshops = enableDesertWorkshops
-            villages.desertWorkshopWeight = desertWorkshopWeight
-            villages.enablePlainsWorkshops = enablePlainsWorkshops
-            villages.plainsWorkshopWeight = plainsWorkshopWeight
-            villages.enableSavannaWorkshops = enableSavannaWorkshops
-            villages.savannaWorkshopWeight = savannaWorkshopWeight
-            villages.enableSnowyWorkshops = enableSnowyWorkshops
-            villages.snowyWorkshopWeight = snowyWorkshopWeight
-            villages.enableTaigaWorkshops = enableTaigaWorkshops
-            villages.taigaWorkshopWeight = taigaWorkshopWeight
-            return villages
-        }
-    }
 }
