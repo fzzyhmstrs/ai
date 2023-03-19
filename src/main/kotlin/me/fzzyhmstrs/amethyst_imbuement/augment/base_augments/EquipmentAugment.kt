@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -20,6 +19,6 @@ open class EquipmentAugment(weight: Rarity, mxLvl: Int = 1, target: EnchantmentT
     }
 
     override fun checkEnabled(): Boolean{
-        return NewAiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
+        return AiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
     }
 }

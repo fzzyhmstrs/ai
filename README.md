@@ -24,6 +24,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add patchouli book back to 1.19.3|Not Started|
 |Migrate acceptable scepters to tags|In progress|
 |Fix issue with the Totem of Grace|Complete|
+|Change totem of grace/wit to do AOE effects on all team players (if PVP)|Not started|
 |Finish adding and testing ice spells|In progress|
 |Add ball lightning spell|In progress|
 |Move Mend Equipment to a book of lore spell|Complete|
@@ -33,12 +34,14 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add flare spell|In Progress|
 |Add spell scrolls|In progress|
 |Integrate new reagent system into the crystal altar|Not started|
-|Implement PVP modes into spells|In progress|
+|Integrate new reagent system into the imbuing table|Not started|
+|Implement PVP modes into spells|Complete|
+|Add PVP modes on entities too|Not started|
 |Add Mystical Gem|Complete|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
 |Add Spellcasters Focus, with special recipe for different attributes|In progress|
 |Impl focus GUI for picking upgrades|In progress|
-|Make the Totem of Amethyst also act as a weaker focus|???|
+|~~Make the Totem of Amethyst also act as a weaker focus~~|Dropped|
 |Add unique scepter modifiers for the focii|In Progress|
 |Change gem of promise into a registration type thingy|Complete|
 |Add lang descriptions of AC modifiers|Complete|
@@ -50,15 +53,15 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add config settings all newly added vars|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Fix up the translatable text on the gems|Complete|
-|Impl enchantability attribute|Not started|
-|Add mana to imbued jewelry and impl new Immunity effect|Not started|
-|Look into making a level tweaking config and-or total disable of bonuses|Not started|
-|Come up with a level resetting feature on the focus, respecing basically. Use altar.|Not started|
+|~~Impl enchantability attribute~~|Dropped|
+|Add mana to imbued jewelry and impl new Immunity effect|Complete|
+|Look into making a level tweaking config and-or total disable of bonuses|Complete|
+|Come up with a level resetting feature on the focus, respecing basically. Use altar.|In progress|
 |Add some advancements for the new stuff|Not started|
 |Add empty spell scrolls into some loot|Not started|
-|make sure AC has lang for the attributes|In progress|
-|add some convenience `get` methods for ValidatedMaps and ValidatedLists|In progress|
-|Remove scroll having rendom modifiers, leave that to the focus|Not started|
-|Add cursed potion|Not started|
-|Add cursed figurine item, drops from illagers, used in cursed stuff|Not started|
+|make sure AC has lang for the attributes|Complete|
+|add some convenience `get` methods for ValidatedMaps and ValidatedLists|Complete|
+|Remove scroll having rendom modifiers, leave that to the focus|Complete|
+|Add cursed potion|Complete|
+|Add cursed figurine item, drops from villagers, used in cursed stuff|Complete|
 

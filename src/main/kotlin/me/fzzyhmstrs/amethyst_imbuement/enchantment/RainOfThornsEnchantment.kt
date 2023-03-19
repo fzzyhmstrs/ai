@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments
@@ -21,7 +21,7 @@ class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     }
 
     override fun getMaxLevel(): Int {
-        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),3)
+        return AiConfig.enchants.getAiMaxLevel(id.toString(),3)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

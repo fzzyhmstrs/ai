@@ -193,7 +193,7 @@ class ImbuingTableScreenHandler(
                     }
                     if (matches.isNotEmpty()){
                         matches.forEach {  imbuingRecipe ->
-                            val power = MathHelper.ceil(imbuingRecipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+                            val power = MathHelper.ceil(imbuingRecipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
                             if (imbuingRecipe.getAugment() != "") {
                                 val id = Identifier(imbuingRecipe.getAugment())
                                 val augment = Registry.ENCHANTMENT.get(id)
@@ -252,7 +252,7 @@ class ImbuingTableScreenHandler(
                         for (i in 0..2) {
                             tempResults.add(EmptyResult())
                         }
-                    } else if (AiConfig.altars.imbuingTableEnchantingEnabled && checkLapisAndSlots(inventory)) {
+                    } else if (AiConfig.altars.imbuing.enchantingEnabled.get() && checkLapisAndSlots(inventory)) {
                         random.setSeed(seed.get().toLong())
                         val enchantmentPower = IntArray(3)
                         val enchantmentId = intArrayOf(-1, -1, -1)
@@ -885,7 +885,7 @@ class ImbuingTableScreenHandler(
     class ImbuingResult(val recipe: ImbuingRecipe, override val power: Int): TableResult{
 
         override val type: Int = 1
-        override val lapis = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+        override val lapis = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
         private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override fun bufClassWriter(buf: PacketByteBuf) {
@@ -1065,7 +1065,7 @@ class ImbuingTableScreenHandler(
 
     class ModifierResult(val recipe: ImbuingRecipe, private val nextInLine: String, private val lineageMax: Boolean, override val power: Int): TableResult{
         override val type: Int = 2
-        override val lapis: Int = MathHelper.ceil(recipe.getCost() * MathHelper.clamp(AiConfig.altars.imbuingTableDifficultyModifier,0.0F,10.0F))
+        override val lapis: Int = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
 
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeIdentifier(recipe.id)

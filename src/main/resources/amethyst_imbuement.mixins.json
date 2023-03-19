@@ -30,6 +30,7 @@
     "FarmlandBlockMixin",
     "FishEntityMixin",
     "ItemMixin",
+    "ItemStackMixin",
     "LivingEntityMixin",
     "MilkBucketMixin",
     "MiningToolItemMixin",
@@ -41,8 +42,7 @@
     "PowderSnowBucketItemMixin",
     "ServerPlayerEntityMixin",
     "StructureMixin",
-    "TridentEntityMixin",
-    "ItemStackMixin"
+    "TridentEntityMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",

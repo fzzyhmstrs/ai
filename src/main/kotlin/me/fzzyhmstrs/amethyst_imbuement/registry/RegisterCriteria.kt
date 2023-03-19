@@ -42,8 +42,8 @@ object RegisterCriteria {
         Criteria.register(IGNITE)
 
         ServerPlayConnectionEvents.JOIN.register { handler, _, _ ->
-            if (AiConfig.items.giveGlisteringTome){
-                //GIVE_IF_CONFIG.trigger(handler.player)
+            if (AiConfig.items.giveGlisteringTome.get()){
+                GIVE_IF_CONFIG.trigger(handler.player)
             }
         }
     }

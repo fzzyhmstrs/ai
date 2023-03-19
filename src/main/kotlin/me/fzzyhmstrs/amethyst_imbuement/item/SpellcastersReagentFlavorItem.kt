@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
-import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.attribute.EntityAttributeModifier
 
 class SpellcastersReagentFlavorItem(
     private val attribute: EntityAttribute,

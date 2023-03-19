@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier
 
 object AiConfigOldClasses {
 
-    class ItemsV1: OldClass<NewAiConfig.Items> {
+    class ItemsV1: OldClass<AiConfig.Items> {
         var giveGlisteringTome: Boolean = true
         var totemOfAmethystDurability: Int = 360
         var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
@@ -17,10 +17,10 @@ object AiConfigOldClasses {
         var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
         var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
         var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-        override fun generateNewClass(): NewAiConfig.Items {
-            val items = NewAiConfig.Items()
+        override fun generateNewClass(): AiConfig.Items {
+            val items = AiConfig.Items()
             items.giveGlisteringTome.validateAndSet(giveGlisteringTome)
-            items.totemOfAmethystDurability.validateAndSet(totemOfAmethystDurability)
+            items.manaItems.totemOfAmethystDurability.validateAndSet(totemOfAmethystDurability)
             items.scepters.opalineDurability.validateAndSet(opalineDurability)
             items.scepters.iridescentDurability.validateAndSet(iridescentDurability)
             items.scepters.lustrousDurability.validateAndSet(lustrousDurability)
@@ -33,7 +33,7 @@ object AiConfigOldClasses {
         }
     }
 
-    class AltarsV3: OldClass<NewAiConfig.Altars>{
+    class AltarsV3: OldClass<AiConfig.Altars>{
 
         var experienceBushBonemealChance: Float = 0.4f
         var experienceBushGrowChance: Float = 0.15f
@@ -55,8 +55,8 @@ object AiConfigOldClasses {
         var altarOfExperienceCandleLevelsPer: Int = 5
         var altarOfExperienceCustomXpMethod: Boolean = true
 
-        override fun generateNewClass(): NewAiConfig.Altars {
-            val altars = NewAiConfig.Altars()
+        override fun generateNewClass(): AiConfig.Altars {
+            val altars = AiConfig.Altars()
             altars.xpBush.bonemealChance.validateAndSet(experienceBushBonemealChance)
             altars.xpBush.growChance.validateAndSet(experienceBushGrowChance)
             
@@ -85,7 +85,7 @@ object AiConfigOldClasses {
         }
     }
     
-    class VillagesV1: OldClass<NewAiConfig.Villages>{
+    class VillagesV1: OldClass<AiConfig.Villages>{
     
         var enableDesertWorkshops: Boolean = true
         var desertWorkshopWeight: Int = 2
@@ -122,8 +122,8 @@ object AiConfigOldClasses {
         var rsCrimsonWorkshopWeight: Int = 2
         var rsWarpedWorkshopWeight: Int = 2
         
-        override fun generateNewClass(): NewAiConfig.Villages {
-            val villages = NewAiConfig.Villages()
+        override fun generateNewClass(): AiConfig.Villages {
+            val villages = AiConfig.Villages()
             villages.vanilla.enableDesertWorkshops.validateAndSet(enableDesertWorkshops)
             villages.vanilla.desertWorkshopWeight.validateAndSet(desertWorkshopWeight)
             villages.vanilla.enablePlainsWorkshops.validateAndSet(enablePlainsWorkshops)
@@ -165,11 +165,11 @@ object AiConfigOldClasses {
         }
     }
     
-    class EnchantmentsV0: OldClass<NewAiConfig.Enchants>{
+    class EnchantmentsV0: OldClass<AiConfig.Enchants>{
         var enabledEnchantments: Map<String,Boolean> = mapOf()
         
-        override fun generateNewClass(): NewAiConfig.Enchants {
-            val enchantments = NewAiConfig.Enchants()
+        override fun generateNewClass(): AiConfig.Enchants {
+            val enchantments = AiConfig.Enchants()
             val newMap = enchantments.enabledEnchants.get().toMutableMap()
             for (entry in enabledEnchantments.entries){
                 val key = "amethyst_imbuement:${entry.key}"
@@ -182,11 +182,11 @@ object AiConfigOldClasses {
         }
     }
     
-    class TrinketsV0: OldClass<NewAiConfig.Trinkets>{
+    class TrinketsV0: OldClass<AiConfig.Trinkets>{
         var enabledAugments: Map<String,Boolean> = mapOf()
         
-        override fun generateNewClass(): NewAiConfig.Trinkets {
-            val trinkets = NewAiConfig.Trinkets()
+        override fun generateNewClass(): AiConfig.Trinkets {
+            val trinkets = AiConfig.Trinkets()
             val newMap = trinkets.enabledAugments.get().toMutableMap()
             for (entry in enabledAugments.entries){
                 val key = "amethyst_imbuement:${entry.key}"
@@ -199,7 +199,7 @@ object AiConfigOldClasses {
         }
     }
     
-    class EntitiesV0: OldClass<NewAiConfig.Entities>{
+    class EntitiesV0: OldClass<AiConfig.Entities>{
         var unhallowedBaseLifespan: Int = 2400
         var unhallowedBaseHealth: Double = 20.0
         var unhallowedBaseDamage: Float = 3.0f
@@ -209,8 +209,8 @@ object AiConfigOldClasses {
         var crystalGolemBaseHealth: Double = 180.0
         var crystalGolemBaseDamage: Float = 20.0f
         
-        override fun generateNewClass(): NewAiConfig.Entities {
-            val entities = NewAiConfig.Entities()
+        override fun generateNewClass(): AiConfig.Entities {
+            val entities = AiConfig.Entities()
             entities.unhallowed.baseLifespan.validateAndSet(unhallowedBaseLifespan)
             entities.unhallowed.baseHealth.validateAndSet(unhallowedBaseHealth)
             entities.unhallowed.baseDamage.validateAndSet(unhallowedBaseDamage)

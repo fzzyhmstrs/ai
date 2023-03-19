@@ -4,7 +4,7 @@
 	"item": "minecraft:snow_block"
   },
   "imbueB": {
-	"item": "minecraft:blue_ice"
+	"item": "amethyst_imbuement:glistening_ice"
   },
   "imbueC": {
 	"item": "minecraft:snow_block"

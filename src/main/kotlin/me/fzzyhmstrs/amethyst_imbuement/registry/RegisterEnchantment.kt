@@ -78,6 +78,7 @@ object RegisterEnchantment {
     val CREATE_LAVA = CreateLavaAugment().also{regEnchant["create_lava"] = it}
     val CREATE_SPONGE = CreateSpongeAugment().also{regEnchant["create_sponge"] = it}
     val CREATE_WATER = CreateWaterAugment().also{regEnchant["create_water"] = it}
+    val CURSE = CurseAugment().also{regEnchant["curse"] = it}
     val DASH = DashAugment().also{regEnchant["dash"] = it}
     val EMPOWERED_SLASH = EmpoweredSlashAugment().also{regEnchant["empowered_slash"] = it}
     val EXHAUST = ExhaustAugment().also{regEnchant["exhaust"] = it}
@@ -86,7 +87,7 @@ object RegisterEnchantment {
     val FIREBALL = FireballAugment().also{regEnchant["fireball"] = it}
     val FLAMEBOLT = FlameboltAugment().also{regEnchant["flamebolt"] = it}
     val FLAMEWAVE = FlamewaveAugment().also{regEnchant["flamewave"] = it}
-    val FLARE = FlareAugment().also{regEnchant["flamewave"] = it}
+    val FLARE = FlareAugment().also{regEnchant["flare"] = it}
     val FORCE_FIELD = ForcefieldAugment().also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment().also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment().also{regEnchant["freezing"] = it}

@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.config.NewAiConfig
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -18,7 +17,7 @@ class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun checkEnabled(): Boolean{
-        return NewAiConfig.enchants.enabledEnchants.getOrDefault(id.toString(),true)
+        return AiConfig.enchants.enabledEnchants.getOrDefault(id.toString(),true)
     }
 
     override fun getMinPower(level: Int): Int {
@@ -30,7 +29,7 @@ class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun getMaxLevel(): Int {
-        return NewAiConfig.enchants.getAiMaxLevel(id.toString(),1)
+        return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

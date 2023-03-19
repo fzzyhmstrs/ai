@@ -5,10 +5,12 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.block.Blocks
+import net.minecraft.entity.EntityType
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
+import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.EnchantWithLevelsLootFunction
 import net.minecraft.loot.function.SetDamageLootFunction
@@ -184,6 +186,12 @@ object VanillaLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(Items.AIR).weight(47))
             table.pool(poolBuilder)
             return true
+        } else if (EntityType.VILLAGER.lootTableId.equals(id)){
+            val poolBuilder = LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceWithLootingLootCondition.builder(0.1f,0.025f))
+                .with(ItemEntry.builder(RegisterItem.ACCURSED_FIGURINE).weight(1))
+            table.pool(poolBuilder)
         }
         return false
     }

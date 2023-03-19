@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
@@ -16,7 +17,6 @@ import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
-import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 @Suppress("SameParameterValue")
@@ -57,7 +57,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
     }
 
     override fun getItemBarColor(stack: ItemStack): Int {
-        return MathHelper.hsvToRgb(0.66f,1.0f,1.0f)
+        return AiConfig.items.manaItems.getItemBarColor(stack)
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {

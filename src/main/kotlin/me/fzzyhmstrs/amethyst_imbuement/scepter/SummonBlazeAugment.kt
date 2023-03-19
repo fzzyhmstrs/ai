@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 
 class SummonBlazeAugment: SummonEntityAugment(ScepterTier.TWO,1){

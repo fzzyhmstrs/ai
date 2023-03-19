@@ -1,12 +1,14 @@
 {
   "replace": false,
   "values": [
+    "amethyst_imbuement:accursed_figurine",
+    "amethyst_imbuement:brilliant_diamond",
     "amethyst_imbuement:golden_heart",
     "amethyst_imbuement:heartstone",
     "amethyst_imbuement:resonant_rod",
     "amethyst_imbuement:malachite_figurine",
-    "amethyst_imbuement:brilliant_diamond",
     "amethyst_imbuement:lustrous_sphere",
+    "amethyst_imbuement:glistening_ice",
     "amethyst_imbuement:beryl_copper_ingot",
     "#c:steel_ingots"
   ]

@@ -96,8 +96,8 @@ class AltarOfExperienceScreenHandler(
     }
 
     private fun updateMaxXp(candles: Int, wardingCandles: Int): Int{
-        val base = AiConfig.altars.altarOfExperienceBaseLevels
-        val perCandle = AiConfig.altars.altarOfExperienceCandleLevelsPer
+        val base = AiConfig.altars.altar.baseLevels.get()
+        val perCandle = AiConfig.altars.altar.candleLevelsPer.get()
         val level = base + perCandle * candles + 2 * perCandle * wardingCandles
         return ((4.5 * level * level) - (162.5 * level) + 2220).toInt()
     }
@@ -296,7 +296,7 @@ class AltarOfExperienceScreenHandler(
     }
 
     private fun addExperience(player: PlayerEntity, experience: Int){
-        if (AiConfig.altars.altarOfExperienceCustomXpMethod){
+        if (AiConfig.altars.altar.customXpMethod.get()){
             addCustomExperience(experience, player)
         } else {
             player.addExperience(experience)

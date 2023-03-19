@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.scepter.ScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
+import me.fzzyhmstrs.amethyst_imbuement.item.scepter.ScepterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.fabricmc.api.EnvType

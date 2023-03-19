@@ -5,15 +5,18 @@ import dev.emi.trinkets.api.SlotReference
 import dev.emi.trinkets.api.TrinketEnums
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import java.util.*
 
-open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
+open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), ManaItem {
 
     override fun getModifiers(
         stack: ItemStack,
@@ -43,5 +46,17 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
 
     override fun onUnequip(stack: ItemStack, slot: SlotReference, entity: LivingEntity) {
         ShieldingAugment.refreshTrinkets(entity)
+    }
+
+    override fun getItemBarColor(stack: ItemStack): Int {
+        return AiConfig.items.manaItems.getItemBarColor(stack)
+    }
+
+    override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {
+        return ingredient.isOf(Items.AMETHYST_SHARD) && stack.item is ImbuedJewelryItem
+    }
+
+    override fun getRepairTime(): Int {
+        return 0
     }
 }

@@ -2,9 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.item_util.SpellCasting
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.item.TooltipContext
@@ -28,7 +30,6 @@ import kotlin.math.min
 
 class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifiable, Reactant {
 
-    private val SCROLL_MODIFIER_TOLL = BinomialLootNumberProvider.create(20,0.24f)
     private val SCROLL_LEVEL = "scroll_level"
     private val TOTAL_USES = "total_uses"
     private val SPENT_USES = "spent_uses"
@@ -60,38 +61,34 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
         val rnd = world.random.nextFloat()
         var modelKey = 0f
         modelKey += if (rnd < 0.05){
-            nbt.putInt(TOTAL_USES,128)
+            nbt.putInt(TOTAL_USES,AiConfig.items.scroll.uses.get()[2])
             128f
         } else if (rnd < 0.15){
-            nbt.putInt(TOTAL_USES,64)
+            nbt.putInt(TOTAL_USES,AiConfig.items.scroll.uses.get()[1])
             64f
         } else {
-            nbt.putInt(TOTAL_USES,32)
+            nbt.putInt(TOTAL_USES,AiConfig.items.scroll.uses.get()[0])
             32f
         }
         val rnd2 = world.random.nextFloat()
         modelKey +=if (rnd2 < 0.01){
-            nbt.putInt(SCROLL_LEVEL, 5)
+            nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[4])
             5f
         } else if (rnd2 < 0.025){
-            nbt.putInt(SCROLL_LEVEL, 4)
+            nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[3])
             4f
         }else if (rnd2 < 0.05){
-            nbt.putInt(SCROLL_LEVEL, 3)
+            nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[2])
             3f
         }else if (rnd2 < 0.15){
-            nbt.putInt(SCROLL_LEVEL, 2)
+            nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[1])
             2f
         } else {
-            nbt.putInt(SCROLL_LEVEL, 1)
+            nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[0])
             1f
         }
         nbt.putInt(SPENT_USES,0)
         nbt.putFloat(MODEL_KEY, modelKey)
-        if (player is ServerPlayerEntity && world is ServerWorld){
-            val rolls = ModifierHelper.rollScepterModifiers(stack, player, world, SCROLL_MODIFIER_TOLL)
-            ModifierHelper.addRolledModifiers(stack,rolls)
-        }
     }
     
     override fun canReact(stack: ItemStack,reagents: List<ItemStack>): Boolean{

@@ -9,7 +9,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
@@ -23,9 +22,9 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withDuration(AiConfig.entities.crystalGolemSpellBaseLifespan,AiConfig.entities.crystalGolemSpellPerLvlLifespan)
-            .withAmplifier(AiConfig.entities.crystalGolemBaseHealth.toInt())
-            .withDamage(AiConfig.entities.crystalGolemBaseDamage)
+            .withDuration(AiConfig.entities.crystalGolem.spellBaseLifespan.get(),AiConfig.entities.crystalGolem.spellPerLvlLifespan.get())
+            .withAmplifier(AiConfig.entities.crystalGolem.baseHealth.get().toInt())
+            .withDamage(AiConfig.entities.crystalGolem.baseDamage.get())
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,6000,600,
