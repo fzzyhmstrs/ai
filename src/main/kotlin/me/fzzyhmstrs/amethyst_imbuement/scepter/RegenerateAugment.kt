@@ -30,7 +30,8 @@ class RegenerateAugment: MinorSupportAugment(ScepterTier.ONE,17){
             .withDamage(-1.0f,0.2f)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),40,1,imbueLevel,10,LoreTier.NO_TIER, Items.GHAST_TEAR)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),60,
+            1,imbueLevel,15,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {

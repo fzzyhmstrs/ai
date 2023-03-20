@@ -28,7 +28,7 @@ class MassCleanseAugment: MiscAugment(ScepterTier.TWO,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1200,120,
-            16,imbueLevel,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
+            15,imbueLevel,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
     }
 
     override fun effect(

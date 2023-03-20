@@ -25,7 +25,7 @@ class MassHealAugment: MiscAugment(ScepterTier.TWO,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,200,50,
-            7,imbueLevel,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+            9,imbueLevel,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 
     override fun effect(

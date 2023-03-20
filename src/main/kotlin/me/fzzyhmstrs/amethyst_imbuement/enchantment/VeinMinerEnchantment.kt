@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
+import eu.pb4.common.protection.api.CommonProtection
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.block.Block
@@ -108,7 +109,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
 
         private fun tryBreakBlock(pos: BlockPos, world: World, player: ServerPlayerEntity): Boolean {
             val blockState = world.getBlockState(pos)
-            if (!player.mainHandStack.item.canMine(blockState, world, pos, player)) {
+            if (!player.mainHandStack.item.canMine(blockState, world, pos, player) || !CommonProtection.canBreakBlock(world,pos,player.gameProfile,player)) {
                 return false
             }
             val blockEntity = world.getBlockEntity(pos)

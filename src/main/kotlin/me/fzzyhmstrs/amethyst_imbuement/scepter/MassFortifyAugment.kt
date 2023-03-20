@@ -29,7 +29,8 @@ class MassFortifyAugment: MiscAugment(ScepterTier.THREE,9){
             .withRange(9.0,1.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,155,18,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
+        return AugmentDatapoint(SpellType.GRACE,1200,155,
+            22,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun effect(

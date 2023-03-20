@@ -1,7 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -32,15 +35,17 @@ class SoulMissileEntity: MissileEntity {
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            val bl: Boolean = entity2.damage(
+            if(!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.SOUL_MISSILE))) {
+                val bl: Boolean = entity2.damage(
                     DamageSource.magic(this, entity).setProjectile(),
                     entityEffects.damage(0)
                 )
 
-            if (bl) {
-                applyDamageEffects(entity, entity2)
-                if (entity2 is LivingEntity) {
-                    entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                if (bl) {
+                    applyDamageEffects(entity, entity2)
+                    if (entity2 is LivingEntity) {
+                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                    }
                 }
             }
         }

@@ -24,7 +24,7 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE,9){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,4,
-            8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
+            9,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{

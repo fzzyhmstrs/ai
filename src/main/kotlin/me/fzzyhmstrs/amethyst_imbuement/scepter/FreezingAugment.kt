@@ -28,7 +28,8 @@ class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,
-            4,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
+            5
+            ,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

@@ -32,7 +32,7 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,
-            6,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
+            11,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
     }
 
     override fun effect(

@@ -12,8 +12,8 @@ import net.minecraft.sound.SoundEvents
 class ShineAugment: PlaceItemAugment(ScepterTier.ONE,1,Items.TORCH) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,10
-            ,2,1,imbueLevel,1,LoreTier.NO_TIER, Items.TORCH)
+        return AugmentDatapoint(SpellType.WIT,10,2,
+            1,imbueLevel,1,LoreTier.NO_TIER, Items.TORCH)
     }
 
     override fun soundEvent(): SoundEvent {

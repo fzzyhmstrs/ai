@@ -29,7 +29,7 @@ class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(1320,-20),135,
-            8,imbueLevel,20, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
+            13,imbueLevel,20, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun supportEffect(

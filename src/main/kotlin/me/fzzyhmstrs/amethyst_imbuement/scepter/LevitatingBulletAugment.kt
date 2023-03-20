@@ -41,7 +41,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,80,20,
-            16,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+            18,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     }
 
     override fun effect(

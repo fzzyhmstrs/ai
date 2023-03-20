@@ -33,7 +33,7 @@ class BedazzleAugment: MiscAugment(ScepterTier.TWO,1) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1500,85,
-            5, imbueLevel,40, LoreTier.LOW_TIER, Items.DIAMOND)
+            7, imbueLevel,40, LoreTier.LOW_TIER, Items.DIAMOND)
     }
 
     override fun effect(world: World, target: Entity?, user: LivingEntity, level: Int, hit: HitResult?, effect: AugmentEffect): Boolean {

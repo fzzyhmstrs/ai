@@ -32,7 +32,7 @@ class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,
-            5,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+            11,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
     }
 
     override fun placeEntity(

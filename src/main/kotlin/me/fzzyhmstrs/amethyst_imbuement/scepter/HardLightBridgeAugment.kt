@@ -24,7 +24,7 @@ class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,8,2,
-            5,imbueLevel,1,LoreTier.LOW_TIER, Items.CRAFTING_TABLE)
+            9,imbueLevel,1,LoreTier.LOW_TIER, RegisterBlock.HARD_LIGHT_BLOCK.asItem())
     }
 
     override fun effect(

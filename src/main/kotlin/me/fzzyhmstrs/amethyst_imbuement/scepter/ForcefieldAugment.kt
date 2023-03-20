@@ -28,7 +28,7 @@ class ForcefieldAugment: MiscAugment(ScepterTier.TWO,6){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,
-            8,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
+            13,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     override fun effect(

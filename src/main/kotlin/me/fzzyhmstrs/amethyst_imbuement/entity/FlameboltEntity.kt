@@ -1,8 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -43,7 +46,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
-            if (!entity2.isFireImmune) {
+            if (!entity2.isFireImmune && !(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FLAMEBOLT))) {
                 val i = entity2.fireTicks
                 entity2.setOnFireFor(entityEffects.duration(0))
                 val bl = entity2.damage(

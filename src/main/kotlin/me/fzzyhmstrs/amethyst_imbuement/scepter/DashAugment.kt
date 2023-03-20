@@ -28,7 +28,7 @@ class DashAugment: MiscAugment(ScepterTier.TWO,3){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,32,12,
-            5,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
+            8,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
     }
 
     override fun effect(

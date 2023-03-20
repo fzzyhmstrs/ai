@@ -1,8 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -46,7 +49,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity) {
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.WITHERING_BOLT))) {
             bl = entity.damage(DamageSource.witherSkull(this, entity2), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {

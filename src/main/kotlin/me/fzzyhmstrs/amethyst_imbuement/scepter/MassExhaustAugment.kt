@@ -28,7 +28,8 @@ class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
             .withAmplifier(0,1,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,16,imbueLevel,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,
+            16,imbueLevel,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun effect(

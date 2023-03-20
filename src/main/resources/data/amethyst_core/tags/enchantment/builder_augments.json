@@ -6,6 +6,7 @@
 		"amethyst_imbuement:create_water",
 		"amethyst_imbuement:forcefield",
 		"amethyst_imbuement:hard_light_bridge",
-		"amethyst_imbuement:shine"
+		"amethyst_imbuement:shine",
+		"amethyst_imbuement:create_hard_light"
 	]
 }

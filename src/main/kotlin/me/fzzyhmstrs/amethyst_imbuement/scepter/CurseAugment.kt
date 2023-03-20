@@ -29,7 +29,7 @@ class CurseAugment: MinorSupportAugment(ScepterTier.TWO,15){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),175,
-            15,imbueLevel,25, LoreTier.LOW_TIER, RegisterItem.ACCURSED_FIGURINE)
+            13,imbueLevel,25, LoreTier.LOW_TIER, RegisterItem.ACCURSED_FIGURINE)
     }
 
     override fun supportEffect(
