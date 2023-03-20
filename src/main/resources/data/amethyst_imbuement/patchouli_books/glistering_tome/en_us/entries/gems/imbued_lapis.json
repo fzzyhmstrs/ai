@@ -29,8 +29,9 @@
 {
 "type": "amethyst_imbuement:altar_recipe",
 "anchor": "enhancing_lapis",
-"input_item": "minecraft:lapis_lazuli",
-"addition_item": "minecraft:lilac",
+"input_item": "minecraft:redstone",
+"addition_item": "minecraft:lapis_lazuli",
+"flower_item": "minecraft:lilac",
 "output_item": "amethyst_imbuement:imbued_lapis"
 }
 ]
