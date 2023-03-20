@@ -33,6 +33,11 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
 
     private var level: Int = 1
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0).withDuration(180)
+    private var augment = RegisterEnchantment.FREEZING
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -44,7 +49,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FREEZING))) {
+            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl = if (!entity2.isFireImmune) {
                     if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
                     entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
