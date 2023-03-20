@@ -2,7 +2,7 @@
 "parent": "amethyst_imbuement:imbuing_table",
 "display": {
 	"icon":{
-		"item": "amethyst_imbuement:xp_bush_seed"
+		"item": "amethyst_imbuement:empty_spell_scroll"
 	},
 	"title": {
 		"translate": "amethyst_imbuement.advancement.scroll"
