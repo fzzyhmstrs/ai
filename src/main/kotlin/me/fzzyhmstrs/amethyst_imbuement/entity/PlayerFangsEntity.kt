@@ -35,6 +35,11 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
+    private var augment = RegisterEnchantment.FANGS
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -114,7 +119,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, RegisterEnchantment.FANGS))) {
+        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
             return
         }
         if (livingEntity == null) {
