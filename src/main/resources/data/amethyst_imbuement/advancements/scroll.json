@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:xp_bush_seed"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.scroll"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.scroll.desc"
+	}
+},
+"criteria":{
+	"got_imbuing_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:empty_spell_scroll"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}
