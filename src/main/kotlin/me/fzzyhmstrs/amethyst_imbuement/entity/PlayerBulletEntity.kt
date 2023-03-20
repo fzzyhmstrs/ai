@@ -23,6 +23,11 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
     constructor(world: World, owner: LivingEntity, target: Entity, axis: Direction.Axis): super(world, owner, target, axis)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(4.0f).withDuration(140)
+    private var augment = RegisterEnchantment.LEVITATING_BULLET
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -34,7 +39,7 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
         super.onEntityHit(entityHitResult)
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.LEVITATING_BULLET))) {
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
             val bl = entity.damage(DamageSource.mobProjectile(this, entity2).setProjectile(), entityEffects.damage(0))
             if (bl) {
                 applyDamageEffects(entity2, entity)
