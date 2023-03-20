@@ -1,0 +1,30 @@
+{
+  "name": "Creating your Focus",
+  "icon": "amethyst_imbuement:spellcasters_focus",
+  "category": "amethyst_imbuement:focus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A Spellcaster's Focus offers a glimpse into the very fabric of the creator and wielders being, reflecting both their total commitment to magical crafts as well their personal magical journey.$(br2)Creating a powerful focus is a simple but demanding process. Simply imbue an Unlit SpellCaster's Focus and then start casting spells while holding it in your offhand!"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Spellcasters Focus Imbuing",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "minecraft:gold_ingot",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "amethyst_imbuement:blazing_gem",
+      "craft_b_item": "amethyst_imbuement:healers_gem",
+      "craft_c_item": "amethyst_imbuement:sparking_gem",
+      "craft_d_item": "amethyst_imbuement:mystical_gem",
+      "craft_e_item": "amethyst_imbuement:crystalline_heart",
+      "craft_f_item": "amethyst_imbuement:inquisitive_gem",
+      "craft_g_item": "amethyst_imbuement:lethal_gem",
+      "craft_h_item": "tag:amethyst_imbuement:focus_reagents",
+      "craft_i_item": "amethyst_imbuement:brutal_gem",
+      "result_item": "amethyst_imbuement:spellcasters_focus",
+      "cost_text": "$(l)Level Cost: $(2)39$()"
+    }
+  ]
+}
