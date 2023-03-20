@@ -19,6 +19,13 @@
 "x": 50,            
 "y": 42
 },
+  {
+"type": "patchouli:item", 
+"item": "#flower_item#",
+"framed": true,
+"x": 50,            
+"y": 42
+},
 {
 "type": "patchouli:item", 
 "item": "#output_item#",
