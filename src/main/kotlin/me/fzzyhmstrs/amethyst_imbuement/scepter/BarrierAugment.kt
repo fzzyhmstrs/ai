@@ -29,8 +29,8 @@ class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
             .withDuration(540,80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,600,35,
-            1,imbueLevel,15, LoreTier.NO_TIER, Items.SHIELD)
+        return AugmentDatapoint(SpellType.GRACE,600,50,
+            10,imbueLevel,15, LoreTier.NO_TIER, Items.SHIELD)
     }
 
     override fun supportEffect(

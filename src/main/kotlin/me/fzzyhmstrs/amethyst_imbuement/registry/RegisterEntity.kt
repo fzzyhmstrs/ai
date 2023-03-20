@@ -126,6 +126,19 @@ object RegisterEntity {
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
+
+    val BALL_LIGHTNING_ENTITY: EntityType<BallLightningEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "ball_lightning_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<BallLightningEntity>, world: World ->
+            BallLightningEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+    )
     
     val ICE_SHARD_ENTITY: EntityType<IceShardEntity> = Registry.register(
         Registries.ENTITY_TYPE,

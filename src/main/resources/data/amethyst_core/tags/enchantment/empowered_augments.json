@@ -2,14 +2,15 @@
 	"replace": false,
 	"values": [
 		"amethyst_imbuement:magic_missile",
-    "amethyst_imbuement:soul_missile",
-    "amethyst_imbuement:flamebolt",
-    "amethyst_imbuement:freezing",
-    "amethyst_imbuement:smiting_blow",
-    "amethyst_imbuement:fangs",
-    "amethyst_imbuement:ice_spikes",
-    "amethyst_imbuement:resonate",
-    "amethyst_imbuement:withering_bolt",
-    "amethyst_imbuement:fireball"
+        "amethyst_imbuement:soul_missile",
+        "amethyst_imbuement:flamebolt",
+        "amethyst_imbuement:freezing",
+        "amethyst_imbuement:smiting_blow",
+        "amethyst_imbuement:fangs",
+        "amethyst_imbuement:ice_spikes",
+        "amethyst_imbuement:resonate",
+        "amethyst_imbuement:withering_bolt",
+        "amethyst_imbuement:fireball",
+        "amethyst_imbuement:ice_shard"
 	]
 }

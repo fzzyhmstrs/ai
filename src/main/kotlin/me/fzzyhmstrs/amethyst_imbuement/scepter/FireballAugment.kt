@@ -23,7 +23,7 @@ class FireballAugment: SummonProjectileAugment(ScepterTier.TWO,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,32,10,
-            6,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
+            10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

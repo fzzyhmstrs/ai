@@ -39,7 +39,7 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,PerLvlI(480,-20),75,
-            18,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
+            21,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
     }
 
     override fun effect(

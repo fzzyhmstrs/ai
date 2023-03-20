@@ -41,7 +41,7 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,400,80,
-            20,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
+            23,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
     }
 
     override fun applyTasks(

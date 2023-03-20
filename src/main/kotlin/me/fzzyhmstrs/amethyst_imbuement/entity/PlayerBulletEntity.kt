@@ -2,8 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.base.MoreObjects
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -31,9 +34,8 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
         super.onEntityHit(entityHitResult)
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity) {
-            val bl =
-                entity.damage(DamageSource.mobProjectile(this, entity2).setProjectile(), entityEffects.damage(0))
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.LEVITATING_BULLET))) {
+            val bl = entity.damage(DamageSource.mobProjectile(this, entity2).setProjectile(), entityEffects.damage(0))
             if (bl) {
                 applyDamageEffects(entity2, entity)
                 if (entity is LivingEntity) {

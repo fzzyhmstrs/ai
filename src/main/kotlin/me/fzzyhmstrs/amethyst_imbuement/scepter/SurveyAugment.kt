@@ -31,7 +31,8 @@ class SurveyAugment: MiscAugment(ScepterTier.THREE,1){
         get() = super.baseEffect.withRange(100.0,0.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,120,5,imbueLevel,5, LoreTier.NO_TIER, Items.MAP)
+        return AugmentDatapoint(SpellType.WIT,1200,120,
+            20,imbueLevel,5, LoreTier.NO_TIER, Items.MAP)
     }
 
     override fun effect(

@@ -29,7 +29,7 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,300,150,
-            25,imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
+            29,imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun effect(

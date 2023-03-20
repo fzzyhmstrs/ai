@@ -15,7 +15,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|Fix issue with place item spells being usable on claims|Not Started|
+|Fix issue with place item spells being usable on claims|Complete|
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
 |Bring patchouli book up to speed|Not Started|
@@ -31,12 +31,14 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Make sure scepters are properly excluded from Gearifiers|Complete|
 |Check out spell-switching issue from Discord|In progress|
 |Fix "Absoprtion" on Mass Revivify desc text|Complete|
-|Add flare spell|In Progress|
+|Add flare spell|Complete|
+|Implement system to pass spells into player-created entities for PVP|Not started|
 |Add spell scrolls|In progress|
 |Integrate new reagent system into the crystal altar|Not started|
 |Integrate new reagent system into the imbuing table|Not started|
 |Implement PVP modes into spells|Complete|
 |Add PVP modes on entities too|Not started|
+|Check tag translations in EMI|Not started|
 |Add Mystical Gem|Complete|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
 |Add Spellcasters Focus, with special recipe for different attributes|In progress|
@@ -64,4 +66,5 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Remove scroll having rendom modifiers, leave that to the focus|Complete|
 |Add cursed potion|Complete|
 |Add cursed figurine item, drops from villagers, used in cursed stuff|Complete|
+|Add lang for immunity potion and new spells|Not started|
 

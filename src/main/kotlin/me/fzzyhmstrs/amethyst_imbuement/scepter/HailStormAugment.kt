@@ -37,7 +37,7 @@ class HailStormAugment: MiscAugment(ScepterTier.THREE,12), PersistentEffectHelpe
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,400,100,
-            21,imbueLevel,10, LoreTier.HIGH_TIER, Items.BLUE_ICE)
+            23,imbueLevel,10, LoreTier.HIGH_TIER, Items.BLUE_ICE)
     }
 
     override fun effect(

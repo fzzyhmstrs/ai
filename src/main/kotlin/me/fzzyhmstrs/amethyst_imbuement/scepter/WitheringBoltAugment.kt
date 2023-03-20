@@ -22,7 +22,8 @@ class WitheringBoltAugment: SummonProjectileAugment(ScepterTier.TWO,5){
         get() = super.baseEffect.withDamage(7.5f,0.5f)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,10,imbueLevel,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
+        return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,
+            11,imbueLevel,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

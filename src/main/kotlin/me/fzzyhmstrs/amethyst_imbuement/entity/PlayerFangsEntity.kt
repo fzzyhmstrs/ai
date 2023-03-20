@@ -1,8 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -110,7 +113,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity) {
+        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, RegisterEnchantment.FANGS))) {
             return
         }
         if (livingEntity == null) {

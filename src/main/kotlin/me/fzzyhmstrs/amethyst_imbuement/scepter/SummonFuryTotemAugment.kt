@@ -29,7 +29,7 @@ class SummonFuryTotemAugment: SummonEntityAugment(ScepterTier.TWO,5) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,2400,240,
-            16,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.RESONANT_ROD)
+            14,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.RESONANT_ROD)
     }
 
     override fun placeEntity(

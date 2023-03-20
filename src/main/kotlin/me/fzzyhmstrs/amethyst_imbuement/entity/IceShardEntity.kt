@@ -1,8 +1,11 @@
 package me.fzzyhmstrs.viscerae.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -55,21 +58,23 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            val bl = entity2.damage(
-                DamageSource.thrownProjectile(this,owner),
-                max(1f,entityEffects.damage(0) - struckEntities.size)
-            )
-            if (!struckEntities.contains(entity2.uuid)){
-                struckEntities.add(entity2.uuid)
-            }
-            if (bl) {
-                entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
-                applyDamageEffects(entity as LivingEntity?, entity2)
-                if (entity2 is LivingEntity) {
-                    if (entity2.world.random.nextFloat() < 0.1){
-                        entity2.frozenTicks = entityEffects.duration(0)
+            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FLAMEBOLT))){
+                val bl = entity2.damage(
+                    DamageSource.thrownProjectile(this,owner),
+                    max(1f,entityEffects.damage(0) - struckEntities.size)
+                )
+                if (!struckEntities.contains(entity2.uuid)){
+                    struckEntities.add(entity2.uuid)
+                }
+                if (bl) {
+                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+                    applyDamageEffects(entity as LivingEntity?, entity2)
+                    if (entity2 is LivingEntity) {
+                        if (entity2.world.random.nextFloat() < 0.1){
+                            entity2.frozenTicks = entityEffects.duration(0)
+                        }
+                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                     }
-                    entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                 }
             }
         }

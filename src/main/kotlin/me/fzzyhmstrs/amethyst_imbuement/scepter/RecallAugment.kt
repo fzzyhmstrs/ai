@@ -23,7 +23,7 @@ class RecallAugment: MiscAugment(ScepterTier.TWO,1){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,12000,400,
-            1,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
+            15,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
     }
 
     override fun effect(

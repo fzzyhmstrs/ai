@@ -28,7 +28,7 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,6000,600,
-            22,imbueLevel,100,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
+            25,imbueLevel,100,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
     }
 
     override fun placeEntity(

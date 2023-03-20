@@ -1,8 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -53,13 +56,14 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        entity.damage(DamageSource.fireball(this, entity2), entityEffects.damage(0))
-        if (entity2 is LivingEntity) {
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.FIREBALL))) {
+            entity.damage(DamageSource.fireball(this, entity2), entityEffects.damage(0))
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
             }
             entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
             applyDamageEffects(entity2 as LivingEntity?, entity)
+
         }
     }
 

@@ -2,8 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.Sets
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
@@ -122,7 +125,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
             } else {
                 list = world.getOtherEntities(
                     this, Box(this.x - 3.0, this.y - 3.0, this.z - 3.0, this.x + 3.0, this.y + 6.0 + 3.0, this.z + 3.0)
-                ) { obj: Entity -> obj.isAlive }
+                ) { obj: Entity -> obj.isAlive && !(obj is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, RegisterEnchantment.LIGHTNING_BOLT)) }
                 for (entity2 in list) {
                     entity2.fireTicks++
                     if (entity2.fireTicks == 0){

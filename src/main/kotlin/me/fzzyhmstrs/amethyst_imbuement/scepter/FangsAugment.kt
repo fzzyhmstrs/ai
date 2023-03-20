@@ -27,7 +27,7 @@ class FangsAugment: MiscAugment(ScepterTier.TWO,6) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,34,12,
-            8,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
+            9,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
     }
 
     override fun effect(

@@ -24,7 +24,7 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,20,20,
-            15,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
+            16,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{

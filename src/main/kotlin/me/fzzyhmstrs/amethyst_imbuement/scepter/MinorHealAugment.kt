@@ -25,7 +25,7 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(130,-10),12,
-            1,1,imbueLevel,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
+            1,imbueLevel,5,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 
     override fun supportEffect(

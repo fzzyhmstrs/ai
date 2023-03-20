@@ -30,7 +30,8 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
         get() = super.baseEffect.withRange(6.8,0.2).withDamage(3.4f,0.1f)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,6,1,imbueLevel,1, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
+        return AugmentDatapoint(SpellType.FURY,18,6,
+            1,imbueLevel,1, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
     }
 
     override fun effect(

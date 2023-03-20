@@ -21,8 +21,8 @@ import net.minecraft.world.World
 class SummonChickenAugment: SummonEntityAugment(ScepterTier.ONE,3) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,900,50,
-            1,imbueLevel,13,LoreTier.LOW_TIER, Items.EGG)
+        return AugmentDatapoint(SpellType.GRACE,900,75,
+            1,imbueLevel,20,LoreTier.LOW_TIER, Items.EGG)
     }
 
     override fun placeEntity(

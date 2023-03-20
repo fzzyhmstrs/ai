@@ -71,10 +71,12 @@ object RegisterEnchantment {
     //Scepter Spells
     val MAGIC_MISSILE = MagicMissileAugment().also{regEnchant["magic_missile"] = it}
     val ABUNDANCE = AbundanceAugment().also{regEnchant["abundance"] = it}
+    val BALL_LIGHTNING = BallLightningAugment().also{regEnchant["ball_lightning"] = it}
     val BARRIER = BarrierAugment().also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment().also{regEnchant["bedazzle"] = it}
     val CLEANSE = CleanseAugment().also{regEnchant["cleanse"] = it}
     val COMET_STORM = CometStormAugment().also{regEnchant["comet_storm"] = it}
+    val CREATE_HARD_LIGHT = CreateHardLightAugment().also{regEnchant["create_hard_light"] = it}
     val CREATE_LAVA = CreateLavaAugment().also{regEnchant["create_lava"] = it}
     val CREATE_SPONGE = CreateSpongeAugment().also{regEnchant["create_sponge"] = it}
     val CREATE_WATER = CreateWaterAugment().also{regEnchant["create_water"] = it}

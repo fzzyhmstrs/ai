@@ -1,9 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -42,27 +44,36 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            val bl = if (!entity2.isFireImmune) {
-                if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
-                entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
-            } else {
-                if (entity2 is LivingEntity) entity2.frozenTicks = (entityEffects.duration() * 1.6).toInt()
-                entity2.damage(CustomDamageSources.FreezingDamageSource(entity), entityEffects.damage(0) * 1.6F)
-            }
-            if (bl){
-                if (entity2 is LivingEntity) entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
-                applyDamageEffects(entity, entity2)
-                entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
-            }
-            val entityList = RaycasterUtil.raycastEntityArea(distance = entityEffects.range(0), entityHitResult.entity)
-            if (entityList.isNotEmpty()) {
-                for (entity3 in entityList) {
-                    if (entity3 is Monster) {
-                        RegisterEnchantment.FREEZING.entityTask(entity.world,entity3,entity,level.toDouble(),null,entityEffects)
+            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FREEZING))) {
+                val bl = if (!entity2.isFireImmune) {
+                    if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
+                    entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
+                } else {
+                    if (entity2 is LivingEntity) entity2.frozenTicks = (entityEffects.duration() * 1.6).toInt()
+                    entity2.damage(CustomDamageSources.FreezingDamageSource(entity), entityEffects.damage(0) * 1.6F)
+                }
+                if (bl) {
+                    if (entity2 is LivingEntity) entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
+                    applyDamageEffects(entity, entity2)
+                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+                }
+                val entityList =
+                    RaycasterUtil.raycastEntityArea(distance = entityEffects.range(0), entityHitResult.entity)
+                if (entityList.isNotEmpty()) {
+                    for (entity3 in entityList) {
+                        if (entity3 is Monster) {
+                            RegisterEnchantment.FREEZING.entityTask(
+                                entity.world,
+                                entity3,
+                                entity,
+                                level.toDouble(),
+                                null,
+                                entityEffects
+                            )
+                        }
                     }
                 }
             }
-
 
         }
         discard()
