@@ -620,6 +620,13 @@
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
 	
 	"tag.amethyst_imbuement.disenchant_pillar_blocks": "Disenchanting Table Pillar Blocks",
+	"tag.amethyst_imbuement.aegis_scepters": "Aegis Input Scepters",
+	"tag.amethyst_imbuement.equinox_scepters": "Equinox Input Scepters",
+	"tag.amethyst_imbuement.lethality_scepters": "Lethality Input Scepters",
+	"tag.amethyst_imbuement.redemption_scepters": "Redemption Input Scepters",
+	"tag.amethyst_imbuement.resonance_scepters": "Resonance Input Scepters",
+	"tag.amethyst_imbuement.sojourn_scepters": "Sojourn Input Scepters",
+	"tag.amethyst_imbuement.focus_reagents": "Spellcasters Focus Reagents",
 	
 	"emi.category.amethyst_imbuement.imbuing_table": "Imbuing",
 	"emi.category.amethyst_imbuement.crystal_altar": "Enhancing",
