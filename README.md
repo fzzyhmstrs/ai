@@ -29,7 +29,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Integrate new reagent system into the crystal altar|Not started|
 |Integrate new reagent system into the imbuing table|Not started|
 |Implement system to pass spells into player-created entities for PVP|Not started|
-|In Progress|14|
+|IN PROGRESS|14|
 |Add some advancements for the new stuff|In progress|
 |Migrate acceptable scepters to tags|In progress|
 |Check out spell-switching issue from Discord|In progress|
@@ -44,7 +44,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Overhaul config implementation with fzzy config|In progress|
 |Add config settings all newly added vars|In progress|
 |Come up with a level resetting feature on the focus, respecing basically. Use altar.|In progress|
-|Complete|24|
+|COMPLETE|24|
 |Fix up the translatable text on the gems|Complete|
 |Add readme lines to the lang file|Complete|
 |Add lang descriptions of AC modifiers|Complete|
