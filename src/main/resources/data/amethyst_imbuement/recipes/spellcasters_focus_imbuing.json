@@ -25,7 +25,7 @@
 	"item": "amethyst_imbuement:mystical_gem"
   },
   "craftE": {
-    "tag": "amethyst_imbuement:aegis_scepters"
+        "item": "amethyst_imbuement:crystalline_heart"
   },
   "craftF": {
 	"item": "amethyst_imbuement:inquisitive_gem"
