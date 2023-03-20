@@ -19,6 +19,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
 |Bring patchouli book up to speed|Not Started|
+|Update enhancing template used in zh_cn version|Not Started|
 |Correct updated scepter durabilities in Wiki|Not Started|
 |Fortify changes spell top end amplifier in wiki|Not Started|
 |Add patchouli book back to 1.19.3|Not Started|
