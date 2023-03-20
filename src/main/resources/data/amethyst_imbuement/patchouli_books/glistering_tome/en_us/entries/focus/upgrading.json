@@ -1,0 +1,15 @@
+{
+  "name": "Upgrading your Focus",
+  "icon": "amethyst_imbuement:opaline_scepter",
+  "category": "amethyst_imbuement:focus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An Unlit Focus doesn't do very much on its own, besides its subtle innate attribute (if you picked a reagent with an attribute!). To fully unlock the focus's potential it needs to be upgraded.$(br2)Fortunately upgrading a focus is a very simple process: just start casting spells with it held in your offhand! The focus tooltip will show its current tier and the spell experience it currently has. Also displayed is the progress towards the next tier."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Once a focus reaches the next tier, it will ignite, offering you three different chances to affix it with new modifiers! Made a mistake, or don't like the options available? You can also respec a focus.$(br2)$(l)IMPORTANT: If you devote most of your spellcasting efforts to a specific spell, your focus will attune to that spell, and one of the ignited options will be a spell-specific modifier that provides that spell a large boost.$()"
+    }
+  ]
+}
