@@ -35,7 +35,12 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withDuration(250)
-
+    private var augment = RegisterEnchantment.ICE_SPIKES
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
+    
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
@@ -111,7 +116,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, RegisterEnchantment.FLAMEBOLT))) {
+        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
             return
         }
         if (livingEntity == null) {
