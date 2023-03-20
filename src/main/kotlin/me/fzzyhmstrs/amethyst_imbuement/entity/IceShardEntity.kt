@@ -43,6 +43,11 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withDuration(180).withAmplifier(1)
     private val struckEntities: MutableList<UUID> = mutableListOf()
+    private var augment = RegisterEnchantment.ICE_SHARD
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -58,7 +63,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FLAMEBOLT))){
+            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))){
                 val bl = entity2.damage(
                     DamageSource.thrownProjectile(this,owner),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
