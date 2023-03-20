@@ -47,6 +47,10 @@ repositories {
         name = "Jitpack"
         url = uri("https://jitpack.io")
     }
+    maven {
+        name = "Patbox"
+        url = uri("https://maven.nucleoid.xyz/")
+    }
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
@@ -133,6 +137,12 @@ dependencies {
     implementation("com.github.LlamaLad7:MixinExtras:$meVersion")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:$meVersion")
     include("com.github.LlamaLad7:MixinExtras:$meVersion")
+
+    val cpaVersion: String by project
+    modImplementation("eu.pb4:common-protection-api:$cpaVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("eu.pb4:common-protection-api:$cpaVersion")
 }
 
 tasks {
