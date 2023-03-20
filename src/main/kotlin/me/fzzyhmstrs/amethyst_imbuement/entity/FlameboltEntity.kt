@@ -32,6 +32,11 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
     }
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.8F,0.2F,0.0F).withDuration(80)
+    private var augment = RegisterEnchantment.FLAMEBOLT
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -46,7 +51,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
-            if (!entity2.isFireImmune && !(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.FLAMEBOLT))) {
+            if (!entity2.isFireImmune && !(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val i = entity2.fireTicks
                 entity2.setOnFireFor(entityEffects.duration(0))
                 val bl = entity2.damage(
