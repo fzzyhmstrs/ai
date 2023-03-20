@@ -41,6 +41,8 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         .withDamage(5.4F,0.2F,0.0F)
         .withDuration(19,-1)
         .withRange(3.0,.25)
+    override val maxAge: Int
+        get() = 600
     var ticker = EventRegistry.ticker_20
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
