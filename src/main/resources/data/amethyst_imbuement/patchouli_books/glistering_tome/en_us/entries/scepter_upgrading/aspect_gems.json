@@ -42,6 +42,12 @@
 "item": "amethyst_imbuement:healers_gem",
 "link_recipe": true,
 "text": "A healers gem glows with life.$(br2)Create one by holding a Gem of Promise in your off-hand and healing yourself (a lot). Eating counts."
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:mystical_gem",
+"link_recipe": true,
+"text": "A mystical gem flickers with raw magic.$(br2)Create one by holding a Gem of Promise in your off-hand and casting spells with a scepter or scroll."
 }
 ]
 }
