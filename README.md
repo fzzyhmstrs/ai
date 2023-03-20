@@ -15,25 +15,23 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|14|
-|Add some advancements for the new stuff|Not started|
+|NOT STARTED|13|
 |Add empty spell scrolls into some loot|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
 |Update enhancing template used in zh_cn version|Not Started|
 |Correct updated scepter durabilities in Wiki|Not Started|
-|Fortify changes spell top end amplifier in wiki|Not Started|
+|Update all spells in wiki|Not Started|
 |Add patchouli book back to 1.19.3|Not Started|
 |Update plugins to reflect the new Crystal Altar|Not Started|
 |Change totem of grace/wit to do AOE effects on all team players (if PVP)|Not started|
 |Integrate new reagent system into the crystal altar|Not started|
 |Integrate new reagent system into the imbuing table|Not started|
 |Implement system to pass spells into player-created entities for PVP|Not started|
-|In Progress|15|
+|In Progress|14|
+|Add some advancements for the new stuff|In progress|
 |Migrate acceptable scepters to tags|In progress|
-|Finish adding and testing ice spells|In progress|
-|Add ball lightning spell|In progress|
 |Check out spell-switching issue from Discord|In progress|
 |Add PVP modes on entities too|In progress|
 |Rebalance XP, cooldowns, and mana costs|In Progress|
@@ -46,7 +44,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Overhaul config implementation with fzzy config|In progress|
 |Add config settings all newly added vars|In progress|
 |Come up with a level resetting feature on the focus, respecing basically. Use altar.|In progress|
-|Complete|22|
+|Complete|24|
 |Fix up the translatable text on the gems|Complete|
 |Add readme lines to the lang file|Complete|
 |Add lang descriptions of AC modifiers|Complete|
@@ -69,5 +67,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Implement PVP modes into spells|Complete|
 |Add flare spell|Complete|
 |Add spell scrolls|Complete|
+|Finish addingice spells|Complete|
+|Add ball lightning spell|Complete|
 |~~Impl enchantability attribute~~|Dropped|
 |~~Make the Totem of Amethyst also act as a weaker focus~~|Dropped|
