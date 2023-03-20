@@ -69,5 +69,6 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add spell scrolls|Complete|
 |Finish addingice spells|Complete|
 |Add ball lightning spell|Complete|
+|DROPPED|2|
 |~~Impl enchantability attribute~~|Dropped|
 |~~Make the Totem of Amethyst also act as a weaker focus~~|Dropped|
