@@ -88,6 +88,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
             //consider custom shulker bullet entity for the modifiability
             val sbe = PlayerBulletEntity(world,user,entity,axis)
             sbe.passEffects(effect, level)
+            sbe.setAugment(this)
             if (world.spawnEntity(sbe)){
                 successes++
             }
@@ -104,6 +105,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
         val axis = getAxis(data.user)
         val sbe = PlayerBulletEntity(data.world,data.user,entity,axis)
         sbe.passEffects(data.effect, data.level)
+        sbe.setAugment(this)
         data.world.spawnEntity(sbe)
     }
 
