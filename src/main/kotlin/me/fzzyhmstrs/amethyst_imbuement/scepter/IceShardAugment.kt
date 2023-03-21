@@ -36,6 +36,6 @@ class IceShardAugment: SummonProjectileAugment(ScepterTier.TWO,6){
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_BLAZE_SHOOT
+        return SoundEvents.ENTITY_SNOWBALL_THROW
     }
 }

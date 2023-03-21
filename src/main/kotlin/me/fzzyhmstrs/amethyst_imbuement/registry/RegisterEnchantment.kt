@@ -128,6 +128,7 @@ object RegisterEnchantment {
     val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment().also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment().also{regEnchant["teleport"] = it}
+    val WEIGHTLESSNESS = WeightlessnessAugment().also{regEnchant["weightlessness"] = it}
     val WITHERING_BOLT = WitheringBoltAugment().also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment().also{regEnchant["zap"] = it}
 

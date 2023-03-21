@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -25,7 +26,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
         val posI = pos.x
         val posJ = pos.y
         val posK = pos.z
-        val range = RegisterEnchantment.DRACONIC_VISION.rangeOfEffect()
+        val range = rangeOfEffect()
         for (i in -range..range){
             for (j in -range..range){
                 for (k in -range..range){
@@ -60,8 +61,8 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
         return list
     }
 
-    fun rangeOfEffect(): Int{
-        return 8
+    private fun rangeOfEffect(): Int{
+        return AiConfig.trinkets.draconicVisionRange.get()
     }
 
     companion object {

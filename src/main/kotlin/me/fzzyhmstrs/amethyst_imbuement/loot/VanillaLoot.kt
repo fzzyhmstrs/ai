@@ -10,6 +10,8 @@ import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
+import net.minecraft.loot.condition.KilledByPlayerLootCondition
+import net.minecraft.loot.condition.LootConditionTypes
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.EnchantWithLevelsLootFunction
@@ -190,6 +192,7 @@ object VanillaLoot: AbstractModLoot() {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .conditionally(RandomChanceWithLootingLootCondition.builder(0.1f,0.025f))
+                .conditionally(KilledByPlayerLootCondition.builder())
                 .with(ItemEntry.builder(RegisterItem.ACCURSED_FIGURINE).weight(1))
             table.pool(poolBuilder)
         }

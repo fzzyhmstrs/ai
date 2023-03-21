@@ -7,6 +7,7 @@
       "type": "patchouli:text",
       "text": "A Spellcaster's Focus offers a glimpse into the very fabric of the creator and wielders being, reflecting both their total commitment to magical crafts as well their personal magical journey.$(br2)Creating a powerful focus is a simple but demanding process. Simply imbue an Unlit SpellCaster's Focus and then start casting spells while holding it in your offhand!"
     },
+    {
     "type": "patchouli:spotlight",
       "item": "tag:amethyst_imbuement:focus_reagents",
       "title": "Spellcaster Reagents",
@@ -15,7 +16,7 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Reagent Properties"
+      "title": "Reagent Properties",
       "text": "The following describes the available reagents and their provided properties:$(li)Brilliant Diamond: Reduced spell mana cost$(li)Accursed Figurine: Increases damage the wielder takes$(li)Malachite Figurine: Increases duration of spell effects$(li)Resonant Rod: Increases spell damage$(li)Heartstone: Increases potency of spell effects$(li)Lustrous Sphere: Increases spell level$(li)Golden Heart: Increases spell range and AOE$(li)Glistening Ice: Reduces spell cooldown."
     },
     {

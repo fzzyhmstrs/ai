@@ -60,7 +60,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
         val nbt = stack.orCreateNbt
         val rnd = world.random.nextFloat()
         var modelKey = 0f
-        modelKey += if (rnd < 0.05){
+        modelKey += if (rnd < 0.025){
             nbt.putInt(TOTAL_USES,AiConfig.items.scroll.uses.get()[2])
             128f
         } else if (rnd < 0.15){
@@ -74,13 +74,13 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
         modelKey +=if (rnd2 < 0.01){
             nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[4])
             5f
-        } else if (rnd2 < 0.025){
+        } else if (rnd2 < 0.033333){
             nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[3])
             4f
-        }else if (rnd2 < 0.05){
+        }else if (rnd2 < 0.1){
             nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[2])
             3f
-        }else if (rnd2 < 0.15){
+        }else if (rnd2 < 0.25){
             nbt.putInt(SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[1])
             2f
         } else {
@@ -92,20 +92,20 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
     }
     
     override fun canReact(stack: ItemStack,reagents: List<ItemStack>): Boolean{
+        if (reagents.isEmpty()) return true
         val nbt = stack.nbt
         if (nbt?.contains(SPELL) == true) return false
-        var bl = false
+        var fails = 0
         for (reagent in reagents){
             if (reagent.item is BookOfKnowledge){
                 val spell = reagent.nbt?.contains(NbtKeys.LORE_KEY.str())?:false
                 val type = reagent.nbt?.contains(NbtKeys.LORE_TYPE.str())?:false
-                if (spell && type){
-                    bl = true
-                    break
+                if (!spell || !type){
+                    fails++
                 }
             }
         }
-        return bl
+        return fails == 0
     }
     
     override fun react(stack: ItemStack,reagents: List<ItemStack>){

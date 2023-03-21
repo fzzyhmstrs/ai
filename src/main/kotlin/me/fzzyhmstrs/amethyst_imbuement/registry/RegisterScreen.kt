@@ -44,5 +44,14 @@ object RegisterScreen {
                 title
             )
         }
+
+        HandledScreens.register(RegisterHandler.SPELLCASTERS_FOCUS_SCREEN_HANDLER) {
+                handler: SpellcastersFocusScreenHandler, playerInventory: PlayerInventory, title: Text ->
+            SpellcastersFocusScreen(
+                handler,
+                playerInventory,
+                title
+            )
+        }
     }
 }

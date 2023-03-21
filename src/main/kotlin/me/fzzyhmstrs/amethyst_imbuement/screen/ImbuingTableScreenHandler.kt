@@ -9,6 +9,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
@@ -992,6 +994,14 @@ class ImbuingTableScreenHandler(
                     Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
                 }
             } else{
+                val itemStack4 = recipe.output
+                val item = itemStack4.item
+                if (item is Reactant){
+                    if (!item.canReact(itemStack4.copy(),Reagent.getReagents(handler.inventory))){
+                        println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack4}]!")
+                        return false
+                    }
+                }
                 player.applyEnchantmentCosts(itemStack3, i)
                 for (j in 0..12) {
                     if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new item stack
@@ -1004,11 +1014,14 @@ class ImbuingTableScreenHandler(
                         }
                     }
                 }
-                val itemStack4 = recipe.output
+
                 val itemStack5 = if (recipe.getTransferEnchant()){
                     Nbt.createItemStackWithNbt(itemStack4.item,itemStack4.count,itemStack3.orCreateNbt)
                 } else {
                     itemStack4.copy()
+                }
+                if (item is Reactant){
+                    item.react(itemStack5,Reagent.getReagents(handler.inventory))
                 }
                 handler.inventory.setStack(6,itemStack5)
                 itemStack4.item.onCraft(itemStack5,world, player)

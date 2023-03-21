@@ -113,9 +113,9 @@ object AiConfig
         var scroll = Scroll()
         class Scroll: ConfigSection(Header.Builder().space().add("readme.items.scroll_1").build()) {
             @ReadMeText("readme.items.scroll.uses")
-            var uses = ValidatedSeries(arrayOf(32,64,128),Int::class.java,{a,b-> b>a},"Higher tier scrolls need more uses than the previous tier.")
+            var uses = ValidatedSeries(arrayOf(16,24,32),Int::class.java,{a,b-> b>a},"Higher tier scrolls need more uses than the previous tier.")
             @ReadMeText("readme.items.scroll.levels")
-            var levels = ValidatedSeries(arrayOf(1,2,3,5,8),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
+            var levels = ValidatedSeries(arrayOf(1,2,3,5,7),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
         }
     }
 
@@ -249,7 +249,9 @@ object AiConfig
     private val trinketsHeader = buildSectionHeader("trinkets")
 
     class Trinkets: ConfigClass(trinketsHeader){
-        @ReadMeText("readme.enchants.enabledAugments")
+        @ReadMeText("readme.trinkets.draconicVisionRange")
+        var draconicVisionRange = ValidatedInt(5,16,1)
+        @ReadMeText("readme.trinkets.enabledAugments")
         var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
     }
 

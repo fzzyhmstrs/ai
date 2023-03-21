@@ -25,6 +25,14 @@
 "craft_i_item": "minecraft:bone_meal",
 "result_item": "amethyst_imbuement:danburite#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
-}    
+},
+{
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_danburite",
+"input_item": "minecraft:redstone",
+"addition_item": "minecraft:lapis_lazuli",
+"flower_item": "minecraft:rose_bush",
+"output_item": "amethyst_imbuement:danburite"
+}
 ]
 }
