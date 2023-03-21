@@ -106,7 +106,7 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
         for (entity3 in entityList) {
             if(entity3 is Monster && world.isSkyVisible(entity3.blockPos)){
                 //repalce with a player version that can pass consumers?
-                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), user, effect, level)
+                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), user, effect, level,this)
                 if (world.spawnEntity(le)){
                     successes++
                 }
@@ -147,7 +147,7 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
                 tries--
                 continue
             }
-            val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos),data.user, data.effect, data.level)
+            val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos),data.user, data.effect, data.level,this)
             data.world.spawnEntity(le)
             break
         }
