@@ -69,7 +69,7 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
 
         if (world.isSkyVisible(blockPos)) {
             //replace with a player version that can pass consumers?
-            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),user,effect, level)
+            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),user,effect, level,this)
             val bl = world.spawnEntity(le)
             if (bl) {
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
