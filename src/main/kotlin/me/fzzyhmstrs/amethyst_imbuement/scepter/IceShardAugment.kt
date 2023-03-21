@@ -32,7 +32,7 @@ class IceShardAugment: SummonProjectileAugment(ScepterTier.TWO,6){
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = effects.range(level).toFloat()
         val div = 0.75F
-        return IceShardEntity.createIceShard(world, user, speed, div,user.yaw, effects, level)
+        return IceShardEntity.createIceShard(world, user, speed, div,user.yaw, effects, level,this)
     }
 
     override fun soundEvent(): SoundEvent {
