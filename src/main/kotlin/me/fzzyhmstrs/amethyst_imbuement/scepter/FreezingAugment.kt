@@ -35,6 +35,7 @@ class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val fe = FreezingEntity(world,user,level)
         fe.passEffects(effects, level)
+        fe.setAugment(this)
         fe.setVelocity(user,user.pitch,user.yaw,0.0f,
             1.3f,
             0.5f)
