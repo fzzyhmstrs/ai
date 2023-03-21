@@ -28,15 +28,17 @@ object VanillaLoot: AbstractModLoot() {
         if (Blocks.NETHER_QUARTZ_ORE.lootTableId.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.0333333f))
+                .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))
                 .with(ItemEntry.builder(Items.AMETHYST_SHARD).weight(2))
                 .with(ItemEntry.builder(RegisterItem.CITRINE).weight(1))
                 .with(ItemEntry.builder(RegisterItem.SMOKY_QUARTZ).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(116))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_ARMORER_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.65f))
                 .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(40))
                 .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(8).apply(
                     SetDamageLootFunction.builder(
@@ -50,24 +52,24 @@ object VanillaLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(RegisterArmor.STEEL_BOOTS).weight(8).apply(
                     SetDamageLootFunction.builder(
                         UniformLootNumberProvider.create(0.25f, 0.75f))))
-                .with(ItemEntry.builder(Items.AIR).weight(40))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_FLETCHER_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.025f))
                 .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                     SetDamageLootFunction.builder(
                         UniformLootNumberProvider.create(0.25f, 0.75f))))
-                .with(ItemEntry.builder(Items.AIR).weight(39))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.VILLAGE_TEMPLE_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.5f))
                 .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(5))
-                .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(10))
+                .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(5))
+                .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(3))
             table.pool(poolBuilder)
             val poolBuilder2 = RegisterLoot.tierOneGemPool(3.0F, 0.25F)
             table.pool(poolBuilder2)
@@ -96,19 +98,19 @@ object VanillaLoot: AbstractModLoot() {
         } else if (LootTables.UNDERWATER_RUIN_SMALL_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.1f))
                 .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(29))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.UNDERWATER_RUIN_BIG_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.175f))
                 .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
                 .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(16))
             table.pool(poolBuilder)
             val poolBuilder2 = RegisterLoot.tierOneGemPool(2.0F, 0.5F)
             table.pool(poolBuilder2)
@@ -134,11 +136,11 @@ object VanillaLoot: AbstractModLoot() {
         } else if (LootTables.PIGLIN_BARTERING_GAMEPLAY.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.025f))
                 .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
                 .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(1))
                 .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
                 .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(196))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.SIMPLE_DUNGEON_CHEST.equals(id)) {
@@ -168,24 +170,26 @@ object VanillaLoot: AbstractModLoot() {
         } else if (LootTables.BURIED_TREASURE_CHEST.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
-                .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(1))
-                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
+                .conditionally(RandomChanceLootCondition.builder(0.1f))
+                .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(6))
+                .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(8))
+                .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(8))
                 .with(
-                    ItemEntry.builder(RegisterItem.GLISTERING_TRIDENT).weight(1).apply(
+                    ItemEntry.builder(RegisterItem.GLISTERING_TRIDENT).weight(2).apply(
                         EnchantWithLevelsLootFunction.builder(
                             ConstantLootNumberProvider.create(30.0f)).allowTreasureEnchantments()).apply(
                         SetDamageLootFunction.builder(
                             UniformLootNumberProvider.create(0.05f, 0.35f))))
-                .with(ItemEntry.builder(Items.AIR).weight(36))
             table.pool(poolBuilder)
             return true
         } else if (LootTables.FISHING_TREASURE_GAMEPLAY.equals(id)) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(0.025f))
                 .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
                 .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(1))
                 .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
-                .with(ItemEntry.builder(Items.AIR).weight(47))
+                .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             table.pool(poolBuilder)
             return true
         } else if (EntityType.VILLAGER.lootTableId.equals(id)){
@@ -203,23 +207,23 @@ object VanillaLoot: AbstractModLoot() {
 
     fun bastionGenericLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.IMBUED_QUARTZ).weight(10))
+            .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
+            .conditionally(RandomChanceLootCondition.builder(0.5f))
+            .with(ItemEntry.builder(RegisterItem.IMBUED_QUARTZ).weight(3))
             .with(ItemEntry.builder(RegisterItem.PYRITE).weight(3))
-            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(32))
+            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(2))
         table.pool(poolBuilder)
     }
 
     fun bastionTreasureLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.65f))
             .with(ItemEntry.builder(RegisterItem.GOLDEN_HEART).weight(2))
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(6))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(6))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(6))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(2))
-            .with(ItemEntry.builder(Items.AIR).weight(16))
         table.pool(poolBuilder)
         val poolBuilder2 = RegisterLoot.tierTwoGemPool(3.0F, 0.333F)
         table.pool(poolBuilder2)
@@ -228,18 +232,18 @@ object VanillaLoot: AbstractModLoot() {
     fun jungleTempleLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
-            .with(ItemEntry.builder(RegisterItem.PYRITE).weight(1))
+            .conditionally(RandomChanceLootCondition.builder(0.75f))
             .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(15))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(10))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(19))
         table.pool(poolBuilder)
     }
 
     fun mansionLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
+            .rolls(UniformLootNumberProvider.create(1.0F,3.0f))
+            .conditionally(RandomChanceLootCondition.builder(0.25f))
             .with(
                 ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(3).apply(
                     EnchantWithLevelsLootFunction.builder(
@@ -249,16 +253,15 @@ object VanillaLoot: AbstractModLoot() {
             .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(5).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.05f, 0.35f))))
-            .with(ItemEntry.builder(RegisterItem.TOTEM_OF_AMETHYST).weight(1))
-            .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))
+            .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(2))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(20))
         table.pool(poolBuilder)
     }
 
     fun outpostLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.1f))
             .with(
                 ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                     EnchantWithLevelsLootFunction.builder(
@@ -268,28 +271,30 @@ object VanillaLoot: AbstractModLoot() {
             .with(ItemEntry.builder(RegisterItem.SNIPER_BOW).weight(1).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.05f, 0.35f))))
-            .with(ItemEntry.builder(Items.AIR).weight(18))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
+            .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
+            .conditionally(RandomChanceLootCondition.builder(0.25f))
+            .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(3))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder2)
     }
 
     fun mineshaftLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.5f))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(7))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
-            .with(ItemEntry.builder(Items.AIR).weight(11))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.5f))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(5))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(20))
         table.pool(poolBuilder2)
         val poolBuilder3 = RegisterLoot.tierTwoGemPool(2.0F, 0.20F)
         table.pool(poolBuilder3)
@@ -297,36 +302,38 @@ object VanillaLoot: AbstractModLoot() {
 
     fun ruinedPortalLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
+            .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
+            .conditionally(RandomChanceLootCondition.builder(0.4f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(5))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,5.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.3f))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(5))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(14))
         table.pool(poolBuilder2)
     }
 
     fun shipwreckMapLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
-            .rolls(ConstantLootNumberProvider.create(1.0F))
-            .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(3))
+            .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
+            .conditionally(RandomChanceLootCondition.builder(.375))
+            .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
     }
 
     fun shipwreckTreasureLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(.5f))
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(5))
             .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(5))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(15))
             .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(10))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(10))
-            .with(ItemEntry.builder(Items.AIR).weight(50))
         table.pool(poolBuilder)
         val poolBuilder2 = RegisterLoot.tierOneGemPool(4.0F, 0.75F)
         table.pool(poolBuilder2)
@@ -337,33 +344,33 @@ object VanillaLoot: AbstractModLoot() {
     fun shipwreckSupplyLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.2f))
             .with(ItemEntry.builder(RegisterItem.GARNET_HOE).weight(5).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.25f, 0.75f))))
             .with(ItemEntry.builder(RegisterItem.GARNET_SHOVEL).weight(5).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.25f, 0.75f))))
-            .with(ItemEntry.builder(Items.AIR).weight(40))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.1f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(9))
         table.pool(poolBuilder2)
     }
 
-    fun strongholdGenericLoot(table: LootTable.Builder, brilliantDiamondAirWeight: Int){
+    fun strongholdGenericLoot(table: LootTable.Builder, diamondChance: Float){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.5f))
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(3))
             .with(ItemEntry.builder(RegisterItem.STEEL_INGOT).weight(3))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(6))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(diamondChance))
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(brilliantDiamondAirWeight))
         table.pool(poolBuilder2)
         val poolBuilder3 = RegisterLoot.tierTwoGemPool(3.0F, 0.4F)
         table.pool(poolBuilder3)
@@ -378,9 +385,10 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(0.8f)
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(5))
-            .with(ItemEntry.builder(Items.AIR).weight(5))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder2)
     }
 
@@ -389,41 +397,42 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.66f))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(4))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(2))
         table.pool(poolBuilder2)
         val poolBuilder3 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.5f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(9))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
         table.pool(poolBuilder3)
     }
 
     fun villageHouseLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.125f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(2))
             .with(ItemEntry.builder(RegisterItem.XP_BUSH_SEED).weight(6))
-            .with(ItemEntry.builder(Items.AIR).weight(62))
         table.pool(poolBuilder)
     }
 
     fun villageWeaponsmithLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
+            .conditionally(RandomChanceLootCondition.builder(.25f))
             .with(ItemEntry.builder(RegisterItem.BERYL_COPPER_INGOT).weight(15))
             .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(3))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(3))
-            .with(ItemEntry.builder(Items.AIR).weight(42))
         table.pool(poolBuilder)
     }
 
     fun desertTempleLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,3.0F))
+            .conditionally(RandomChanceLootCondition.builder(.333f))
             .with(ItemEntry.builder(RegisterItem.PYRITE).weight(18))
             .with(ItemEntry.builder(RegisterItem.HEARTSTONE).weight(6))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
@@ -431,6 +440,7 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.33f))
             .with(ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(4).apply(
                 SetDamageLootFunction.builder(
                     UniformLootNumberProvider.create(0.25f, 0.75f))))
@@ -462,39 +472,40 @@ object VanillaLoot: AbstractModLoot() {
                     EnchantWithLevelsLootFunction.builder(
                         UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
                     SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
-            .with(ItemEntry.builder(Items.AIR).weight(40))
         table.pool(poolBuilder2)
         val poolBuilder3 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.25f))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(4))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(17))
         table.pool(poolBuilder3)
     }
 
     fun endCityLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(.33f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(9))
-            .with(ItemEntry.builder(Items.AIR).weight(20))
+            .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
+            .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(18))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(.2f))
             .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
             .with(ItemEntry.builder(RegisterItem.AMETRINE).weight(1))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(16))
         table.pool(poolBuilder2)
         val poolBuilder3 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.33f))
             .with(ItemEntry.builder(RegisterItem.LUSTROUS_SPHERE).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(2))
         table.pool(poolBuilder3)
         val poolBuilder4 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(.2f))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
@@ -531,22 +542,19 @@ object VanillaLoot: AbstractModLoot() {
                 ItemEntry.builder(RegisterItem.GARNET_PICKAXE).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
                         UniformLootNumberProvider.create(20.0f,49.0f)).allowTreasureEnchantments()))
-            .with(ItemEntry.builder(RegisterItem.IMBUED_RING).weight(1))
-            .with(ItemEntry.builder(RegisterItem.IMBUED_HEADBAND).weight(1))
-            .with(ItemEntry.builder(RegisterItem.IMBUED_AMULET).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(32))
         table.pool(poolBuilder4)
     }
 
     fun netherBridgeLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
+            .conditionally(RandomChanceLootCondition.builder(.3333f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(5))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(10))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(ConstantLootNumberProvider.create(1.0F))
+            .conditionally(RandomChanceLootCondition.builder(.25f))
             .with(
                 ItemEntry.builder(RegisterArmor.STEEL_HELMET).weight(2).apply(
                     EnchantWithLevelsLootFunction.builder(
@@ -567,7 +575,6 @@ object VanillaLoot: AbstractModLoot() {
                     EnchantWithLevelsLootFunction.builder(
                         UniformLootNumberProvider.create(15.0f,39.0f)).allowTreasureEnchantments()).apply(
                     SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.25f, 0.95f))))
-            .with(ItemEntry.builder(Items.AIR).weight(24))
         table.pool(poolBuilder2)
         val poolBuilder3 = RegisterLoot.tierTwoGemPool(3.0F, 1.0F)
         table.pool(poolBuilder3)
