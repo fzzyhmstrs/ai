@@ -874,7 +874,7 @@
 	"readme.items.gems.healTarget":"Float between 2500.0 and 1.0. How much you need to regen in order to ignite a Healers Gem.",
 	"readme.items.gems.statusesTarget":"Integer between 42 and 1. How many statuses you need to gain in order ignite an Inquisitive Gem. Capped at the number of statuses in MC and AI combined.",
 	"readme.items.gems.killTarget":"Integer between 300 and 1. How many mobs you need to kill to ignite a Lethal Gem.",
-	"readme.items.gems.spellXpTarget":"Integer between 5000 and 1. How much spell XP you need to gain to ignite a Mystical Gem.",
+	"readme.items.gems.spellXpTarget":"Integer between 3500 and 1. How much spell XP you need to gain to ignite a Mystical Gem.",
 	"readme.items.focus_1": "Spellcasters Focus Tiers",
 	"readme.items.scroll_1": "Spell Scrolls",
 	"readme.items.scroll.uses": "Integer series; three values that increase A < B < C. How many spells each tier of spell scroll can cast before breaking.",
