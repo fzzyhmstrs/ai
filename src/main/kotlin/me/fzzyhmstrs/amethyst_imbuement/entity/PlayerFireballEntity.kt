@@ -86,10 +86,11 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
     }
 
     companion object{
-        fun createFireball(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int): PlayerFireballEntity{
+        fun createFireball(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int, augment:ScepterAugment): PlayerFireballEntity{
             val fbe = PlayerFireballEntity(world, user, vel.x, vel.y, vel.z)
             fbe.passEffects(effects, level)
             fbe.setPos(pos.x,pos.y,pos.z)
+            fbe.setAugment(augment)
             return fbe
         }
     }
