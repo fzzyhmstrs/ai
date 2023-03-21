@@ -186,7 +186,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     companion object{
         fun conjureFangs(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
-                         warmup: Int, effect: AugmentEffect, level: Int): Double{
+                         warmup: Int, effect: AugmentEffect, level: Int, augment: ScepterAugment): Double{
             var blockPos = BlockPos(x, y, z)
             var bl = false
             var d = 0.0
@@ -218,6 +218,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                     user
                 )
                 pfe.passEffects(effect, level)
+                pfe.setAugment(augment)
                 world.spawnEntity(pfe)
                 return (blockPos.y.toDouble() + d)
             }
