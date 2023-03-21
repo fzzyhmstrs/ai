@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(l)Effect:$() Coaxes crops into faster growth, and harvests crops that are mature.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 2$(br)$(l)Cooldown:$() 0.5 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
+"text": "$(l)Effect:$() Coaxes crops into faster growth, and harvests crops that are mature.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 3$(br)$(l)Cooldown:$() 0.7 to 0.5 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
