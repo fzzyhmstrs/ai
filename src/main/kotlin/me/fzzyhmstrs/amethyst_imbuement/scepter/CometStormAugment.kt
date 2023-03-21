@@ -78,7 +78,7 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
         for (entity3 in entityList) {
             if(entity3 is Monster || entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
                 val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
-                val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level)
+                val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level, this)
                 if (world.spawnEntity(ce)){
                     successes++
                 }
@@ -112,7 +112,7 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
         val rndX = bP.x + bpXrnd
         val rndZ = bP.z + bpZrnd
         val vel = Vec3d(rndX.toDouble(),(data.blockPos.y).toDouble(),rndZ.toDouble()).subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
-        val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level)
+        val ce = createFireball(data.world, data.user, vel, data.user.eyePos.subtract(0.0,0.2,0.0), data.effect, data.level, this)
         data.world.spawnEntity(ce)
     }
 
