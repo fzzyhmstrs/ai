@@ -1,16 +1,24 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.ingame.HandledScreen
-import net.minecraft.client.render.DiffuseLighting
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
+import net.minecraft.client.gui.screen.narration.NarrationPart
+import net.minecraft.client.gui.widget.ClickableWidget
+import net.minecraft.client.gui.widget.PressableWidget
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import org.joml.Matrix4f
+import net.minecraft.util.Util
 
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "SpellCheckingInspection")
@@ -19,6 +27,32 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
 
     private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
     private val player = playerInventory.player
+    private val flavor = AcText.translatable("container.spellcasters_focus.hint").formatted(Formatting.ITALIC)
+    private var i = 0
+    private var j = 0
+    private val button1 by lazy{
+        OptionButtonWidget(i + 8, j + 34,AcText.translatable("container.spellcasters_focus.option1"),0,handler.options[0],handler)
+    }
+    private val button2 by lazy{
+        OptionButtonWidget(i + 71, j + 34,AcText.translatable("container.spellcasters_focus.option2"),1,handler.options[1],handler)
+    }
+    private val button3 by lazy{
+        OptionButtonWidget(i + 134, j + 34,AcText.translatable("container.spellcasters_focus.option3"),2,handler.options[2],handler)
+    }
+
+    init {
+        backgroundWidth = 200
+        backgroundHeight = 128
+    }
+
+    override fun init() {
+        super.init()
+        i = (width - backgroundWidth) / 2
+        j = (height - backgroundHeight) / 2
+        addDrawableChild(button1)
+        addDrawableChild(button2)
+        addDrawableChild(button3)
+    }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val i = (width - backgroundWidth) / 2
@@ -38,42 +72,111 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
-
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        DiffuseLighting.disableGuiDepthLighting()
         RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, this.texture)
-        val i = (width - backgroundWidth) / 2
-        val j = (height - backgroundHeight) / 2
+        RenderSystem.setShaderTexture(0, texture)
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        val k = client?.window?.scaleFactor?.toInt()?:1
-        RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
-        val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
-        RenderSystem.backupProjectionMatrix()
-        RenderSystem.setProjectionMatrix(matrix4f)
 
-        client?.window?.framebufferWidth?.let { client?.window?.framebufferHeight?.let { it1 ->
-            RenderSystem.viewport(0, 0, it,
-                it1
-            )
-        } }
+    }
 
-        RenderSystem.restoreProjectionMatrix()
-        DiffuseLighting.enableGuiDepthLighting()
+    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
+        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0x404040)
+        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0x404040)
     }
 
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         val dlta = client?.tickDelta?:delta
         this.renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, dlta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         for (j in 0..2) {
-            if (!isPointWithinBounds(60, 14 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
-            val tooltipText = AcText.empty()
+            if (!isPointWithinBounds(8 + 63 * j, 34, 58, 86, mouseX.toDouble(), mouseY.toDouble())) continue
+            val mods = handler.options[j]
+
+            val tooltipText: MutableList<Text> = mutableListOf(AcText.translatable("container.spellcasters_focus.option${j+1}"))
+            tooltipText.add(AcText.empty())
+            val context = if (client?.options?.advancedItemTooltips == true){
+                TooltipContext.Default.ADVANCED
+            } else {
+                TooltipContext.Default.BASIC
+            }
+            ModifierHelper.addModifierTooltip(mods,tooltipText,context)
             this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
             break
+        }
+    }
+
+    private class OptionButtonWidget(
+        x: Int,
+        y: Int,
+        message: Text,
+        private val id: Int,
+        private val mods: List<Identifier>,
+        private val handler: SpellcastersFocusScreenHandler)
+        :
+        PressableWidget(x,y,58,86,message)
+    {
+        private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
+        private var selected = false
+        private var finalSelected = false
+
+        override fun appendClickableNarrations(builder: NarrationMessageBuilder) {
+            appendDefaultNarrations(builder)
+            for (mod in mods){
+                builder.put(NarrationPart.HINT,AcText.translatable(Util.createTranslationKey("enchantment",mod)))
+            }
+        }
+
+        override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+            val minecraftClient = MinecraftClient.getInstance()
+            val textRenderer = minecraftClient.textRenderer
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShaderTexture(0, texture)
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+            RenderSystem.enableBlend()
+            RenderSystem.defaultBlendFunc()
+            RenderSystem.enableDepthTest()
+            val i = if (hovered || selected) 1 else 0
+            this.drawTexture(matrices, x, y, 0 + 58 * i, 128, width , height)
+            ClickableWidget.drawCenteredTextWithShadow(matrices,textRenderer,message.asOrderedText(),x + (width / 2),y + 5,0xFFFFFF)
+            val drawDots: Boolean
+            val range = if (mods.size <= 3) {
+                drawDots = false
+                mods.indices
+            }else {
+                drawDots = true
+                0..1
+            }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShaderTexture(0, texture)
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+            for (j in range){
+                this.drawTexture(matrices, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
+            }
+            if (drawDots){
+                this.drawTexture(matrices, x + 9, y + 18 + 21 * 2, 116, 146, 40 , 18)
+            }
+            for (j in range){
+                val mod = mods[j]
+                RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+                RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/modifier/${mod.path}.png"))
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+                DrawableHelper.drawTexture(matrices, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
+            }
+
+        }
+
+        override fun onPress() {
+            if (!selected) {
+                selected = true
+            } else {
+                if (!finalSelected) {
+                    finalSelected = true
+                    MinecraftClient.getInstance().interactionManager?.clickButton(handler.syncId, id)
+                }
+            }
         }
     }
 }

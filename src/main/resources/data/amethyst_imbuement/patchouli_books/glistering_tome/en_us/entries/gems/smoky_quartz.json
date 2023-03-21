@@ -25,6 +25,14 @@
 "craft_i_item": "minecraft:quartz",
 "result_item": "amethyst_imbuement:smoky_quartz#4",
 "cost_text": "$(l)Level Cost: $(2)1$()"
-}     
+},
+{
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_smoky",
+"input_item": "minecraft:glowstone_dust",
+"addition_item": "minecraft:quartz",
+"flower_item": "minecraft:lilac",
+"output_item": "amethyst_imbuement:smoky_quartz"
+}
 ]
 }

@@ -22,7 +22,7 @@ class SummonChickenAugment: SummonEntityAugment(ScepterTier.ONE,3) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,900,75,
-            1,imbueLevel,20,LoreTier.LOW_TIER, Items.EGG)
+            5,imbueLevel,20,LoreTier.LOW_TIER, Items.EGG)
     }
 
     override fun placeEntity(

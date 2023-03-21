@@ -1,0 +1,30 @@
+{
+  "name": "Empty Spell Scroll",
+  "icon": "amethyst_imbuement:empty_spell_scroll",
+  "category": "amethyst_imbuement:scrolls",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Spell scrolls are magical parchments that can contain one inscribed spell that the user can cast like a true scepter. To craft a scroll, one must first create an empty one that is ready to accept magic.$(br2)Empty spell scrolls can also be found in certain loot chests, providing one of the earliest opportunities to cast spells if you get lucky with exploration."
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Empty Scroll Imbuing",
+      "imbue_a_item": "minecraft:sunflower",
+      "imbue_b_item": "minecraft:sunflower",
+      "imbue_c_item": "minecraft:sunflower",
+      "imbue_d_item": "minecraft:sunflower",
+      "craft_a_item": "minecraft:air",
+      "craft_b_item": "amethyst_imbuement:healers_gem",
+      "craft_c_item": "minecraft:air",
+      "craft_d_item": "amethyst_imbuement:mystical_gem",
+      "craft_e_item": "amethyst_imbuement:crystalline_heart",
+      "craft_f_item": "amethyst_imbuement:inquisitive_gem",
+      "craft_g_item": "minecraft:air",
+      "craft_h_item": "tag:amethyst_imbuement:focus_reagents",
+      "craft_i_item": "minecraft:air",
+      "result_item": "amethyst_imbuement:empty_spell_scroll#2",
+      "cost_text": "$(l)Level Cost: $(2)4$()"
+    }
+  ]
+}

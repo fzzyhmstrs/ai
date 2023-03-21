@@ -31,9 +31,7 @@ class SpellcastersFocusScreenHandler(
     )
     
     private val player = playerInventory.player
-    internal var option1: List<Identifier> = listOf()
-    internal var option2: List<Identifier> = listOf()
-    internal var option3: List<Identifier> = listOf()
+    internal val options: Array<List<Identifier>> = arrayOf(listOf(),listOf(),listOf())
     private var failed = false
 
     override fun canUse(player: PlayerEntity): Boolean {
@@ -43,7 +41,7 @@ class SpellcastersFocusScreenHandler(
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
         when (id){
             0 ->{
-                ModifierHelper.addRolledModifiers(stack,option1)
+                ModifierHelper.addRolledModifiers(stack,options[0])
                 context.run{world: World, pos: BlockPos ->
                     world.playSound(
                             null,
@@ -64,7 +62,7 @@ class SpellcastersFocusScreenHandler(
                 return true
             }
             1 ->{
-                ModifierHelper.addRolledModifiers(stack,option2)
+                ModifierHelper.addRolledModifiers(stack,options[1])
                 context.run{world: World, pos: BlockPos ->
                     world.playSound(
                             null,
@@ -85,7 +83,7 @@ class SpellcastersFocusScreenHandler(
                 return true
             }
             2 ->{
-                ModifierHelper.addRolledModifiers(stack,option3)
+                ModifierHelper.addRolledModifiers(stack,options[2])
                 context.run{world: World, pos: BlockPos ->
                     world.playSound(
                             null,
@@ -126,9 +124,9 @@ class SpellcastersFocusScreenHandler(
             val list1 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8)
             val list2 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8)
             val list3 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8)
-            option1 = list1.stream().map { Identifier(it.asString()) }.toList()
-            option2 = list2.stream().map { Identifier(it.asString()) }.toList()
-            option3 = list3.stream().map { Identifier(it.asString()) }.toList()
+            options[0] = list1.stream().map { Identifier(it.asString()) }.toList()
+            options[1] = list2.stream().map { Identifier(it.asString()) }.toList()
+            options[2] = list3.stream().map { Identifier(it.asString()) }.toList()
         }
     }
 
