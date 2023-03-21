@@ -15,25 +15,25 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|10|
+|NOT STARTED|9|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Update enhancing template used in zh_cn version|Not Started|
+|Update plugins to reflect the new Crystal Altar|Not Started|
+|Integrate new reagent system into the crystal altar|Not started|
 |Polish up wiki|Not Started|
 |Update all spells in wiki|Not Started|
 |Correct updated scepter durabilities in Wiki|Not Started|
 |Update all spells in wiki|Not Started|
-|Update plugins to reflect the new Crystal Altar|Not Started|
-|Change totem of grace/wit to do AOE effects on all team players (if PVP)|Not started|
-|Integrate new reagent system into the crystal altar|Not started|
-|IN PROGRESS|8|
+|IN PROGRESS|9|
 |Add some advancements for the new stuff|In progress|
+|Change totem of grace/wit to do AOE effects on all team players (if PVP)|In progress|
 |Check out spell-switching issue from Discord|In progress|
-|Add PVP modes on entities too|In progress|
 |Bring patchouli book up to speed|In progress|
 |Add unique scepter modifiers for the focii|In Progress|
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
 |Add config settings all newly added vars|In progress|
+|Add PVP modes on entities too|In progress|
 |Implement system to pass spells into player-created entities for PVP|In progress|
 |COMPLETE|34|
 |Migrate acceptable scepters to tags|Complete|
