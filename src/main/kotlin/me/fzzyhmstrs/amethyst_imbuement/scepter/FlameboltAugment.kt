@@ -29,7 +29,7 @@ class FlameboltAugment: SummonProjectileAugment(ScepterTier.ONE,11){
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = 2.0F
         val div = 0.75F
-        return FlameboltEntity.createFlamebolt(world, user, speed, div, effects, level)
+        return FlameboltEntity.createFlamebolt(world, user, speed, div, effects, level,this)
     }
 
     override fun soundEvent(): SoundEvent {
