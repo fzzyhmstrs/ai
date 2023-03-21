@@ -52,6 +52,12 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         ticker = EventRegistry.Ticker(ae.duration(level))
         EventRegistry.registerTickUppable(ticker)
     }
+    
+    private var augment = RegisterEnchantment.BALL_LIGHTNING
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun tick() {
         super.tick()
@@ -60,7 +66,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         if (owner == null || owner !is LivingEntity) return
         val entities = RaycasterUtil.raycastEntityArea(entityEffects.range(0),this,this.pos)
         for (entity in entities){
-            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,RegisterEnchantment.BALL_LIGHTNING)) continue
+            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
             entity.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
@@ -92,7 +98,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     }
 
     companion object{
-        fun createBallLightning(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int): BallLightningEntity{
+        fun createBallLightning(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int, augment: ScepterAugment): BallLightningEntity{
             val fbe = BallLightningEntity(
                 world, user, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
@@ -104,6 +110,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
                 ),
             )
             fbe.passEffects(effects, level)
+            fbe.setAugment(augment)
             return fbe
         }
     }
