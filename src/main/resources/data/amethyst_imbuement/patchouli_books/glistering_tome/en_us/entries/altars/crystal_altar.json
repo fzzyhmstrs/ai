@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",           
-"text": "The $(#490)Crystal Altar$() is a simple work station developed by industrious villagers. It allows for the concentration of magical energy in certain basic crystals without needing to offer any piece of oneself.$(br2)$(l:amethyst_imbuement:gems/imbued_lapis#enhancing_lapis)Enhancing Lapis$()$(br)$(l:amethyst_imbuement:gems/imbued_quartz#enhancing_quartz)Enhancing Quartz$()"
+"text": "The $(#490)Crystal Altar$() is a simple work station developed by industrious villagers. It allows for the concentration of magical energy in certain basic crystals and other objects without needing to offer any piece of oneself. Some special uses for the altar: $(li)$(l:amethyst_imbuement:scrolls/spell_scroll)Adding spells to spell scrolls$()$(li)$(l:amethyst_imbuement:focus/respec)Respecing a Spellcasters Focus$()"
 },
 {
 "type": "patchouli:crafting",
