@@ -26,9 +26,8 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Update plugins to reflect the new Crystal Altar|Not Started|
 |Change totem of grace/wit to do AOE effects on all team players (if PVP)|Not started|
 |Integrate new reagent system into the crystal altar|Not started|
-|IN PROGRESS|9|
+|IN PROGRESS|8|
 |Add some advancements for the new stuff|In progress|
-|Migrate acceptable scepters to tags|In progress|
 |Check out spell-switching issue from Discord|In progress|
 |Add PVP modes on entities too|In progress|
 |Bring patchouli book up to speed|In progress|
@@ -36,7 +35,8 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Change implementation of Crystal Altar to 3 inputs|In Progress|
 |Add config settings all newly added vars|In progress|
 |Implement system to pass spells into player-created entities for PVP|In progress|
-|COMPLETE|33|
+|COMPLETE|34|
+|Migrate acceptable scepters to tags|Complete|
 |Fix up the translatable text on the gems|Complete|
 |Add empty spell scrolls into some loot|Not started|
 |Impl focus GUI for picking upgrades|Complete|
