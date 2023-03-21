@@ -35,7 +35,7 @@ class FireballAugment: SummonProjectileAugment(ScepterTier.TWO,5){
         val f = (-MathHelper.sin(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed).toDouble()
         val g = (-MathHelper.sin((pitch + roll) * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed).toDouble()
         val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * ((world.random.nextFloat()-0.5F)*div/10 + 1.0F) * speed).toDouble()
-        return createFireball(world, user, Vec3d(f,g,h), user.eyePos.subtract(0.0,0.2,0.0),effects, level)
+        return createFireball(world, user, Vec3d(f,g,h), user.eyePos.subtract(0.0,0.2,0.0),effects, level,this)
     }
 
     override fun soundEvent(): SoundEvent {
