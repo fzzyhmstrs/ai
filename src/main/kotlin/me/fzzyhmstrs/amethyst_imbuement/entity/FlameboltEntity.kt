@@ -81,7 +81,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
     }
 
     companion object{
-        fun createFlamebolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int): FlameboltEntity{
+        fun createFlamebolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int, augment:ScepterAugment): FlameboltEntity{
             val fbe = FlameboltEntity(
                 world, user, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
@@ -93,6 +93,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
                 ),
             )
             fbe.passEffects(effects, level)
+            fbe.setAugment(augment)
             return fbe
         }
     }
