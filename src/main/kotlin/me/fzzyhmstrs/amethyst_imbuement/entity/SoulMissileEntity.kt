@@ -27,6 +27,12 @@ class SoulMissileEntity: MissileEntity {
         )
         this.setRotation(owner.yaw, owner.pitch)
     }
+    
+    private var augment = RegisterEnchantment.SOUL_MISSILE
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         if (world.isClient) {
@@ -35,7 +41,7 @@ class SoulMissileEntity: MissileEntity {
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if(!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, RegisterEnchantment.SOUL_MISSILE))) {
+            if(!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl: Boolean = entity2.damage(
                     DamageSource.magic(this, entity).setProjectile(),
                     entityEffects.damage(0)
