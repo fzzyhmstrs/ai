@@ -40,6 +40,11 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         entityEffects.addAmplifier(ae.amplifier(level))
         entityEffects.addDuration(ae)
     }
+    private var augment = RegisterEnchantment.WITHERING_BOLT
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         val bl: Boolean
@@ -49,7 +54,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.WITHERING_BOLT))) {
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
             bl = entity.damage(DamageSource.witherSkull(this, entity2), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
