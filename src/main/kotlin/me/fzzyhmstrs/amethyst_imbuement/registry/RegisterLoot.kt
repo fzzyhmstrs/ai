@@ -24,29 +24,27 @@ object RegisterLoot {
     }
 
     fun tierOneGemPool(maxCount: Float, overallChance: Float): LootPool.Builder {
-        val actualChance = MathHelper.clamp(overallChance,0.01F,1.0F*maxCount)
-        val airWeight = (50 * ((1.0F + maxCount) / 2) / actualChance) - 50
+        val actualChance = MathHelper.clamp(overallChance/maxCount,0.01F,1.0F)
         return LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,maxCount))
+            .conditionally(RandomChanceLootCondition.builder(actualChance))
             .with(ItemEntry.builder(RegisterItem.CITRINE).weight(10))
             .with(ItemEntry.builder(RegisterItem.DANBURITE).weight(10))
             .with(ItemEntry.builder(RegisterItem.SMOKY_QUARTZ).weight(10))
             .with(ItemEntry.builder(RegisterItem.IMBUED_QUARTZ).weight(10))
             .with(ItemEntry.builder(RegisterItem.IMBUED_LAPIS).weight(10))
             .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(1))
-            .with(ItemEntry.builder(Items.AIR).weight(max(airWeight.toInt(),1)))
     }
     fun tierTwoGemPool(maxCount: Float, overallChance: Float): LootPool.Builder {
-        val actualChance = MathHelper.clamp(overallChance,0.01F,1.0F*maxCount)
-        val airWeight = (60 * ((1.0F + maxCount) / 2) / actualChance) - 60
+        val actualChance = MathHelper.clamp(overallChance/maxCount,0.01F,1.0F)
         return LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,maxCount))
+            .conditionally(RandomChanceLootCondition.builder(actualChance))
             .with(ItemEntry.builder(RegisterItem.MOONSTONE).weight(10))
             .with(ItemEntry.builder(RegisterItem.OPAL).weight(10))
             .with(ItemEntry.builder(RegisterItem.GARNET).weight(10))
             .with(ItemEntry.builder(RegisterItem.PYRITE).weight(10))
-            .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(10))
-            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(10))
-            .with(ItemEntry.builder(Items.AIR).weight(max(airWeight.toInt(),1)))
+            .with(ItemEntry.builder(RegisterItem.GEM_DUST).weight(15))
+            .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(15))
     }
 }
