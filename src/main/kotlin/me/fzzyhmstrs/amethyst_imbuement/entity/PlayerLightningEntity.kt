@@ -234,9 +234,10 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     }
 
     companion object{
-        fun createLightning(world: World, pos: Vec3d, owner: LivingEntity, effect: AugmentEffect, level: Int): PlayerLightningEntity {
+        fun createLightning(world: World, pos: Vec3d, owner: LivingEntity, effect: AugmentEffect, level: Int, augment: ScepterAugment): PlayerLightningEntity {
             val le = PlayerLightningEntity(world, owner)
             le.passEffects(effect, level)
+            le.setAugment(augment)
             le.refreshPositionAfterTeleport(pos)
             return le
         }
