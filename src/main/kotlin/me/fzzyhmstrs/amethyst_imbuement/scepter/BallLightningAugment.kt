@@ -34,7 +34,7 @@ class BallLightningAugment: SummonProjectileAugment(ScepterTier.TWO,8){
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = 2.0F
         val div = 0.75F
-        return BallLightningEntity.createBallLightning(world, user, speed, div, effects, level)
+        return BallLightningEntity.createBallLightning(world, user, speed, div, effects, level, this)
     }
 
     override fun soundEvent(): SoundEvent {
