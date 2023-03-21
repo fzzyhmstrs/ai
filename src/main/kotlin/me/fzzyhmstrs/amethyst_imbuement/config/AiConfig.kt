@@ -102,7 +102,7 @@ object AiConfig
             @ReadMeText("readme.items.gems.killTarget")
             val killTarget = ValidatedInt(30,300,1)
             @ReadMeText("readme.items.gems.spellXpTarget")
-            val spellXpTarget = ValidatedInt(500,5000,1)
+            val spellXpTarget = ValidatedInt(350,3500,1)
         }
 
         var focus = Focus()
