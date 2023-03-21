@@ -33,12 +33,16 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
 
     override fun totemEffect() {
         if (summoner == null) return
+        val range = entityEffects.range(0)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
         val entities = world.getOtherEntities(this, box)
         for (entity in entities){
-            entity.heal(entityEffects.damage(0))
-            val serverWorld: ServerWorld = this.world as ServerWorld
-            beam(entity,serverWorld)
+            if (entity !is LivingEntity) continue
+            if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(summoner,entity,RegisterEnchantment.SUMMON_WIT_TOTEM)) {
+                entity.heal(entityEffects.damage(0))
+                val serverWorld: ServerWorld = this.world as ServerWorld
+                beam(entity,serverWorld)
+            }
         }
         
         world.playSound(null,this.blockPos,SoundEvents.BLOCK_CONDUIT_AMBIENT,SoundCategory.NEUTRAL,0.5f,1.0f)
