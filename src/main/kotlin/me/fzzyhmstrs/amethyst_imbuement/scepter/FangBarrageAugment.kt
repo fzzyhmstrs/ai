@@ -106,7 +106,8 @@ class FangBarrageAugment: MiscAugment(ScepterTier.THREE,6), PersistentEffectHelp
                     f,
                     i,
                     effect,
-                    level
+                    level,
+                    this
                 )
                 if (success != Double.NEGATIVE_INFINITY) {
                     successes++
