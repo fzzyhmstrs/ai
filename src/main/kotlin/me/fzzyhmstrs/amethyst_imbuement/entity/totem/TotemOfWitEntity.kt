@@ -35,17 +35,27 @@ class TotemOfWitEntity(entityType: EntityType<out TotemOfWitEntity>, world: Worl
 
     override fun totemEffect() {
         if (summoner == null) return
-        if (summoner.distanceTo(this) > entityEffects.range(0)) return
-        summoner.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST,240,entityEffects.amplifier(0)))
-        summoner.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,240,entityEffects.amplifier(0)))
+        val range = entityEffects.range(0)
+        val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
+        val entities = world.getOtherEntities(this, box)
+        for (entity in entities){
+            if (entity !is LivingEntity) continue
+            if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(summoner,entity,RegisterEnchantment.SUMMON_WIT_TOTEM)) {
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST,240,entityEffects.amplifier(0)))
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,240,entityEffects.amplifier(0)))
+                val serverWorld: ServerWorld = this.world as ServerWorld
+                beam(entity,serverWorld)
+            }
+        }
+        
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)
         world.playSound(null,this.blockPos,SoundEvents.BLOCK_CONDUIT_AMBIENT,SoundCategory.NEUTRAL,0.5f,1.0f)
     }
 
-    private fun beam(serverWorld: ServerWorld){
+    private fun beam(entity: Entity,serverWorld: ServerWorld){
         val startPos = this.pos.add(0.0,1.2,0.0)
-        val endPos = summoner?.pos?.add(0.0,1.2,0.0)?:startPos.subtract(0.0,2.0,0.0)
+        val endPos = entity?.pos?.add(0.0,1.2,0.0)?:startPos.subtract(0.0,2.0,0.0)
         val vec = endPos.subtract(startPos).multiply(0.1)
         var pos = startPos
         for (i in 1..12){
