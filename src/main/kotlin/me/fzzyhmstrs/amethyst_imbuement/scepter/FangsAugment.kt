@@ -61,7 +61,8 @@ class FangsAugment: MiscAugment(ScepterTier.TWO,6) {
                 f,
                 i,
                 effect,
-                level
+                level,
+                this
             )
             if (success != Double.NEGATIVE_INFINITY) {
                 successes++
