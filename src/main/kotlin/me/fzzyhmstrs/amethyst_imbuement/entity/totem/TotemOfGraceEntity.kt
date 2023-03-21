@@ -33,16 +33,20 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
 
     override fun totemEffect() {
         if (summoner == null) return
-        if (summoner.distanceTo(this) > entityEffects.range(0)) return
-        summoner.heal(entityEffects.damage(0))
-        val serverWorld: ServerWorld = this.world as ServerWorld
-        beam(serverWorld)
+        val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
+        val entities = world.getOtherEntities(this, box)
+        for (entity in entities){
+            entity.heal(entityEffects.damage(0))
+            val serverWorld: ServerWorld = this.world as ServerWorld
+            beam(entity,serverWorld)
+        }
+        
         world.playSound(null,this.blockPos,SoundEvents.BLOCK_CONDUIT_AMBIENT,SoundCategory.NEUTRAL,0.5f,1.0f)
     }
 
-    private fun beam(serverWorld: ServerWorld){
+    private fun beam(target: Entity,serverWorld: ServerWorld){
         val startPos = this.pos.add(0.0,1.2,0.0)
-        val endPos = summoner?.pos?.add(0.0,1.2,0.0)?:startPos.subtract(0.0,2.0,0.0)
+        val endPos = target?.pos?.add(0.0,1.2,0.0)?:startPos.subtract(0.0,2.0,0.0)
         val vec = endPos.subtract(startPos).multiply(0.125)
         var pos = startPos
         for (i in 1..8){
