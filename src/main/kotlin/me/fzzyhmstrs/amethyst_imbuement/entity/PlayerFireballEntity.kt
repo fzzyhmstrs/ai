@@ -30,6 +30,12 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         entityEffects.setDamage(ae.damage(level))
         entityEffects.addAmplifier(ae.amplifier(level))
     }
+    
+    private var augment = RegisterEnchantment.FIREBALL
+    
+    fun setAugment(aug: ScepterAugment){
+        this.augment = aug
+    }
 
     override fun onCollision(hitResult: HitResult) {
         super.onCollision(hitResult)
@@ -55,7 +61,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, RegisterEnchantment.FIREBALL))) {
+        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
             entity.damage(DamageSource.fireball(this, entity2), entityEffects.damage(0))
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
