@@ -52,7 +52,7 @@ class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
         val f = (user.yaw + 90) * MathHelper.PI / 180
         for (i in 0..effect.amplifier(level)) {
             val g = 1.25 * (i + 1).toDouble()
-            val success = conjureFangs(
+            val success = conjureIceSpikes(
                 world,
                 user,
                 user.x + MathHelper.cos(f).toDouble() * g,
@@ -62,7 +62,8 @@ class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
                 f,
                 i,
                 effect,
-                level
+                level,
+                this
             )
             if (success != Double.NEGATIVE_INFINITY) {
                 successes++
