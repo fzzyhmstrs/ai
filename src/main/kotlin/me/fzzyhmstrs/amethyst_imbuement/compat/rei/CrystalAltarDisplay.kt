@@ -45,9 +45,12 @@ class CrystalAltarDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
 
         private fun getRecipeInputEntries(recipe: AltarRecipe): MutableList<EntryIngredient>{
             val list: MutableList<EntryIngredient> = mutableListOf()
-            val builder = EntryIngredient.builder()
-            recipe.base.matchingStacks.forEach { builder.add(EntryStacks.of(it)) }
-            list.add(builder.build())
+            val builder0 = EntryIngredient.builder()
+            recipe.dust.matchingStacks.forEach { builder0.add(EntryStacks.of(it)) }
+            list.add(builder0.build())
+            val builder1 = EntryIngredient.builder()
+            recipe.base.matchingStacks.forEach { builder1.add(EntryStacks.of(it)) }
+            list.add(builder1.build())
             val builder2 = EntryIngredient.builder()
             recipe.addition.matchingStacks.forEach { builder2.add(EntryStacks.of(it)) }
             list.add(builder2.build())
