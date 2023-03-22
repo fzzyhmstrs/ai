@@ -141,6 +141,10 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                 }
             }
         }
+        val item = outputItem.item
+        if (item is Reactant){
+            bl1 = bl1 && item.canReact(outputItem,Reagent.getReagents(inventory))
+        }
         return bl1
     }
 
