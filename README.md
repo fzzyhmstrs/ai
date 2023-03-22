@@ -23,15 +23,15 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Polish up wiki|Not Started|
 |Correct updated scepter durabilities in Wiki|Not Started|
 |Update all spells in wiki|Not Started|
-|IN PROGRESS|7|
-|Update plugins to reflect the new Crystal Altar|Not Started|
+|IN PROGRESS|5|
 |Add some advancements for the new stuff|In progress|
 |Check out spell-switching issue from Discord|In progress|
 |Bring patchouli book up to speed|In progress|
-|Add unique scepter modifiers for the focii|In Progress|
 |Change implementation of Crystal Altar to 3 inputs, work on screen|In Progress|
 |Add config settings all newly added vars|In progress|
-|COMPLETE|40|
+|COMPLETE|42|
+|Update plugins to reflect the new Crystal Altar|Complete|
+|Add unique scepter modifiers for the focii|Complete|
 |Integrate new reagent system into the crystal altar and imbuing recipe|Complete|
 |Add bolt spells into the new tag|Complete|
 |Change totem of grace/wit to do AOE effects on all team players (if PVP)|Complete|
@@ -40,7 +40,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add new modifier lang|Not Started|
 |Migrate acceptable scepters to tags|Complete|
 |Fix up the translatable text on the gems|Complete|
-|Add empty spell scrolls into some loot|Not started|
+|Add empty spell scrolls into some loot|Complete|
 |Impl focus GUI for picking upgrades|Complete|
 |Come up with a level resetting feature on the focus, respecing basically. Use altar.|Complete|
 |Overhaul config implementation with fzzy config|Complete|
