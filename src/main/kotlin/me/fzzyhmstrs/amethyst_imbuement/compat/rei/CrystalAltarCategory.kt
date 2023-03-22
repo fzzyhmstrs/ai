@@ -34,31 +34,37 @@ class CrystalAltarCategory: DisplayCategory<CrystalAltarDisplay> {
     }
 
     override fun setupDisplay(display: CrystalAltarDisplay, bounds: Rectangle): MutableList<Widget> {
-        val startPoint = Point(bounds.centerX - 31, bounds.centerY - 13)
+        val baseX = bounds.x + 5
+        val baseY = bounds.y + 5
         val widgets: MutableList<Widget> = mutableListOf()
         widgets.add(Widgets.createRecipeBase(bounds))
-        widgets.add(Widgets.createArrow(Point(startPoint.x + 27, startPoint.y + 4)))
-        widgets.add(Widgets.createResultSlotBackground(Point(startPoint.x + 61, startPoint.y + 5)))
+        widgets.add(Widgets.createArrow(Point(baseX + 62, baseY)))
+        //widgets.add(Widgets.createResultSlotBackground(Point(startPoint.x + 61, startPoint.y + 5)))
         widgets.add(
-            Widgets.createSlot(Point(startPoint.x + 4 - 22, startPoint.y + 5)).entries(
+            Widgets.createSlot(Point(baseX, baseY)).entries(
                 display.inputEntries[0]
             ).markInput()
         )
         widgets.add(
-            Widgets.createSlot(Point(startPoint.x + 4, startPoint.y + 5)).entries(
+            Widgets.createSlot(Point(baseX, baseY+18)).entries(
                 display.inputEntries[1]
             ).markInput()
         )
         widgets.add(
-            Widgets.createSlot(Point(startPoint.x + 61, startPoint.y + 5)).entries(
+            Widgets.createSlot(Point(baseX, baseY+36)).entries(
+                display.inputEntries[2]
+            ).markInput()
+        )
+        widgets.add(
+            Widgets.createSlot(Point(baseX + 94, baseY)).entries(
                 display.outputEntries[0]
-            ).disableBackground().markOutput()
+            ).markOutput()
         )
         return widgets
     }
 
     override fun getDisplayHeight(): Int {
-        return 36
+        return 28
     }
 
 
