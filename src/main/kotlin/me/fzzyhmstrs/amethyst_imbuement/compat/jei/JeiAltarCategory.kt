@@ -22,7 +22,7 @@ class JeiAltarCategory(guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
     }
 
     private val icon = guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.CRYSTAL_ALTAR.asItem()))
-    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,125,18)
+    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,112,18)
 
     override fun getRecipeType(): RecipeType<AltarRecipe> {
         return RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)
@@ -41,8 +41,9 @@ class JeiAltarCategory(guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
     }
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: AltarRecipe, focuses: IFocusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT,1,1).addIngredients(recipe.base)
-        builder.addSlot(RecipeIngredientRole.INPUT,50,1).addIngredients(recipe.addition)
-        builder.addSlot(RecipeIngredientRole.OUTPUT,108,1).addItemStack(recipe.result)
+        builder.addSlot(RecipeIngredientRole.INPUT,1,1).addIngredients(recipe.dust)
+        builder.addSlot(RecipeIngredientRole.INPUT,19,1).addIngredients(recipe.base)
+        builder.addSlot(RecipeIngredientRole.INPUT,37,1).addIngredients(recipe.addition)
+        builder.addSlot(RecipeIngredientRole.OUTPUT,95,1).addItemStack(recipe.result)
     }
 }
