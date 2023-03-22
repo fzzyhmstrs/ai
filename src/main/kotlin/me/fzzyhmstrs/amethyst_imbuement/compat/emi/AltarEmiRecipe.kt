@@ -12,14 +12,16 @@ import net.minecraft.util.Identifier
 class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     
     private val id: Identifier
+    private val dust: EmiIngredient
     private val base: EmiIngredient
     private val addition: EmiIngredient
     private val result: EmiStack
 
     init{
         id = recipe.id
+        dust = EmiIngredient.of(recipe.dust)
         base = EmiIngredient.of(recipe.base)
-        addition = EmiIngredient.of(recipe.addition)
+		addition = EmiIngredient.of(recipe.addition)
 	    result = EmiStack.of(recipe.result)
     
     }
@@ -33,7 +35,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
     
     override fun getInputs(): List<EmiIngredient>{
-        return listOf(base,addition)
+        return listOf(dust,base,addition)
     }
     
     override fun getOutputs(): List<EmiStack>{
@@ -41,19 +43,19 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
     
     override fun getDisplayWidth(): Int{
-        return 125
+        return 112
     }
     
     override fun getDisplayHeight(): Int{
-        return 40
+        return 18
     }
     
     override fun addWidgets(widgets: WidgetHolder){
-        widgets.addTexture(EmiTexture.PLUS, 27, 14)
-		    widgets.addTexture(EmiTexture.EMPTY_ARROW, 75, 12)
-		    widgets.addSlot(base, 0, 11)
-		    widgets.addSlot(addition, 49, 11)
-		    widgets.addSlot(result, 107, 11).recipeContext(this)
+		    widgets.addTexture(EmiTexture.EMPTY_ARROW, 62, 0)
+		    widgets.addSlot(dust, 0, 0)
+			widgets.addSlot(base, 18, 0)
+		    widgets.addSlot(addition, 36, 0)
+		    widgets.addSlot(result, 94, 0).recipeContext(this)
     }
 
 }
