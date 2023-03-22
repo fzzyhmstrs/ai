@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -53,7 +54,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         EventRegistry.registerTickUppable(ticker)
     }
     
-    private var augment = RegisterEnchantment.BALL_LIGHTNING
+    private var augment: ScepterAugment = RegisterEnchantment.BALL_LIGHTNING
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug

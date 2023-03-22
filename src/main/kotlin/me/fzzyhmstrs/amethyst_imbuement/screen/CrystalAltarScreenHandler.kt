@@ -8,11 +8,12 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.CraftingResultInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ForgingScreenHandler
 import net.minecraft.screen.Property
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.network.ServerPlayerEntity
@@ -27,8 +28,8 @@ import java.util.function.BiFunction
 class CrystalAltarScreenHandler(
     syncID: Int,
     playerInventory: PlayerInventory,
-    handlerContext: ScreenHandlerContext
-): ForgingScreenHandler(RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER,syncID,playerInventory,handlerContext) {
+    private val handlerContext: ScreenHandlerContext
+): ScreenHandler(RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER,syncID) {
 
     constructor(syncID: Int, playerInventory: PlayerInventory) : this(
         syncID,
@@ -41,28 +42,69 @@ class CrystalAltarScreenHandler(
     private var currentRecipe: AltarRecipe? = null
     private var recipes: List<AltarRecipe>
 
+    private val input: Inventory = object : SimpleInventory(3) {
+        override fun markDirty() {
+            super.markDirty()
+            this@CrystalAltarScreenHandler.onContentChanged(this)
+        }
+    }
+
+    private val output = CraftingResultInventory()
+
     init{
-        addProperty(flowerSlot).set(0)
         world = playerInventory.player.world
         recipes = playerInventory.player.world.recipeManager.listAllOfType(AltarRecipe.Type)
+        addSlot(Slot(input, 0, 33, 47))
+        addSlot(Slot(input, 1, 51, 47))
+        addSlot(Slot(input, 2, 69, 47))
+        addSlot(object : Slot(output, 3, 127, 47) {
+            override fun canInsert(stack: ItemStack): Boolean {
+                return false
+            }
+
+            override fun canTakeItems(playerEntity: PlayerEntity): Boolean {
+                return this@CrystalAltarScreenHandler.canTakeOutput(playerEntity, hasStack())
+            }
+
+            override fun onTakeItem(player: PlayerEntity, stack: ItemStack) {
+                this@CrystalAltarScreenHandler.onTakeOutput(player, stack)
+            }
+        })
+        for (i in 0..2) {
+            for (j in 0..8) {
+                addSlot(Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
+            }
+        }
+        for (j in 0..8) {
+            addSlot(Slot(playerInventory, j, 8 + j * 18, 142))
+        }
     }
 
     override fun onContentChanged(inventory: Inventory) {
         super.onContentChanged(inventory)
         if (inventory === this.input){
-            val flowerStack = inventory.getStack(1)
-            val flowerStackFull = if(flowerStack.isEmpty){ 0 }else{ 1 }
-            flowerSlot.set(flowerStackFull)
-            sendContentUpdates()
+            val match: Optional<AltarRecipe> = this.world.recipeManager.getFirstMatch(
+                AltarRecipe.Type,
+                input as SimpleInventory, this.world
+            )
+            if (match.isEmpty) {
+                output.setStack(0, ItemStack.EMPTY)
+            } else {
+                this.currentRecipe = match.get()
+                val recipe = match.get()
+                val itemStack: ItemStack = recipe.craft(input as SimpleInventory)
+                output.lastRecipe = this.currentRecipe
+                output.setStack(0, itemStack)
+            }
         }
     }
 
-    override fun canUse(state: BlockState): Boolean {
+    private fun canUse(state: BlockState): Boolean {
         return state.isOf(RegisterBlock.CRYSTAL_ALTAR)
     }
 
     override fun canUse(player: PlayerEntity): Boolean {
-        return this.context.get(BiFunction { world: World, pos: BlockPos ->
+        return handlerContext.get(BiFunction { world: World, pos: BlockPos ->
             if (!this.canUse(world.getBlockState(pos))) {
                 return@BiFunction false
             }
@@ -74,17 +116,17 @@ class CrystalAltarScreenHandler(
         }, true)
     }
 
-    override fun canTakeOutput(player: PlayerEntity, present: Boolean): Boolean {
+    private fun canTakeOutput(player: PlayerEntity, present: Boolean): Boolean {
         val recipe = this.currentRecipe
         return recipe?.matches(input as SimpleInventory, this.world) ?: false
     }
 
-    override fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
+    private fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
         stack.onCraft(player.world, player, stack.count)
         output.unlockLastRecipe(player)
         decrementStack(0)
         decrementStack(1)
-        this.context.run { world: World, pos: BlockPos ->
+        handlerContext.run { world: World, pos: BlockPos ->
             if (player is ServerPlayerEntity) {
                 RegisterCriteria.ENHANCE.trigger(player)
             }
@@ -98,28 +140,24 @@ class CrystalAltarScreenHandler(
         input.setStack(slot, itemStack)
     }
 
-    override fun updateResult() {
-        val match: Optional<AltarRecipe> = this.world.recipeManager.getFirstMatch(
-            AltarRecipe.Type,
-            input as SimpleInventory, this.world
-        )
-        if (match.isEmpty) {
-            output.setStack(0, ItemStack.EMPTY)
-        } else {
-            this.currentRecipe = match.get()
-            val recipe = match.get()
-            val itemStack: ItemStack = recipe.craft(input as SimpleInventory)
-            output.lastRecipe = this.currentRecipe
-            output.setStack(0, itemStack)
-        }
-    }
-
-    override fun isUsableAsAddition(stack: ItemStack): Boolean {
+    private fun isUsableAsAddition(stack: ItemStack): Boolean {
         return this.recipes.stream().anyMatch { recipe: AltarRecipe ->
             recipe.testAddition(
                 stack
             )
         }
+    }
+
+    private fun isUsableAsDust(stack: ItemStack): Boolean {
+        return this.recipes.stream().anyMatch { recipe: AltarRecipe ->
+            recipe.testDust(
+                stack
+            )
+        }
+    }
+
+    override fun quickMove(player: PlayerEntity?, slot: Int): ItemStack {
+        TODO("Not yet implemented")
     }
 
     override fun canInsertIntoSlot(stack: ItemStack?, slot: Slot): Boolean {
@@ -128,7 +166,7 @@ class CrystalAltarScreenHandler(
 
     override fun close(player: PlayerEntity?) {
         super.close(player)
-        context.run { _: World, _: BlockPos ->
+        handlerContext.run { _: World, _: BlockPos ->
             dropInventory(
                 player,
                 input
@@ -137,7 +175,7 @@ class CrystalAltarScreenHandler(
     }
 
     fun populateRecipeFinder(finder: RecipeFinder) {
-        for (i in 0..1){
+        for (i in 0..2){
             val stack = input.getStack(i)
             finder.addNormalItem(stack)
         }

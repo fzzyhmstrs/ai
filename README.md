@@ -15,12 +15,15 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|8|
+|NOT STARTED|10|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |Make sure the healers gem is actually checking food|Not started|
 |Update enhancing template used in zh_cn version|Not Started|
 |Update plugins to reflect the new Crystal Altar|Not Started|
 |Integrate new reagent system into the crystal altar|Not started|
+|Add bolt spells into the new tag|Not Started|
+|Make splash arts and icons for the new modifiers|Not Started|
+|Add new modifier lang|Not Started|
 |Polish up wiki|Not Started|
 |Correct updated scepter durabilities in Wiki|Not Started|
 |Update all spells in wiki|Not Started|

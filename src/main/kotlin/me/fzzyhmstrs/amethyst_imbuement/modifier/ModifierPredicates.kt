@@ -20,6 +20,7 @@ object ModifierPredicates {
     private val HEALER_AUGMENTS: TagKey<Enchantment> = TagKey.of(Registry.ENCHANTMENT_KEY, Identifier(AC.MOD_ID,"healer_augments"))
     private val BUILDER_AUGMENTS: TagKey<Enchantment> = TagKey.of(Registry.ENCHANTMENT_KEY, Identifier(AC.MOD_ID,"builder_augments"))
     private val TRAVELER_AUGMENTS: TagKey<Enchantment> = TagKey.of(Registry.ENCHANTMENT_KEY, Identifier(AC.MOD_ID,"traveler_augments"))
+    private val BOLT_AUGMENTS: TagKey<Enchantment> = TagKey.of(Registry.ENCHANTMENT_KEY, Identifier(AC.MOD_ID,"bolt_augments"))
 
     val FURIOUS_PREDICATE = Predicate {id: Identifier -> AugmentHelper.getAugmentType(id.toString()) == SpellType.FURY}
     val WITTY_PREDICATE = Predicate {id: Identifier -> AugmentHelper.getAugmentType(id.toString()) == SpellType.WIT}
@@ -35,6 +36,7 @@ object ModifierPredicates {
     val SUMMONERS_PREDICATE = Predicate {id: Identifier -> Registry.ENCHANTMENT.get(id) is SummonEntityAugment}
     val BUILDERS_PREDICATE = Predicate {id: Identifier -> isInTag(id, BUILDER_AUGMENTS)}
     val TRAVELER_PREDICATE = Predicate {id: Identifier -> isInTag(id, TRAVELER_AUGMENTS)}
+    val BOLT_PREDICATE = Predicate {id: Identifier -> isInTag(id, BOLT_AUGMENTS)}
 
     private fun isInTag(id: Identifier,tag: TagKey<Enchantment>): Boolean{
         val augment = Registry.ENCHANTMENT.get(id)?:return false

@@ -19,13 +19,13 @@ object BetterStrongholdsLoot: AbstractModLoot() {
             VanillaLoot.villageWeaponsmithLoot(table)
             return true
         } else if (commonChecker(id)){
-            VanillaLoot.strongholdGenericLoot(table,14)
+            VanillaLoot.strongholdGenericLoot(table,.075f)
             return true
         } else if (libraryChecker(id)){
             VanillaLoot.strongholdLibraryLoot(table)
             return true
         } else if (treasureChecker(id)){
-            VanillaLoot.strongholdGenericLoot(table,1)
+            VanillaLoot.strongholdGenericLoot(table,.5f)
             return true
         } else if (trapChecker(id)){
             VanillaLoot.shipwreckTreasureLoot(table)

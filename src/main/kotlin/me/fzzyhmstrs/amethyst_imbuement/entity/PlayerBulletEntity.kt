@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.Entity
@@ -23,7 +24,7 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
     constructor(world: World, owner: LivingEntity, target: Entity, axis: Direction.Axis): super(world, owner, target, axis)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(4.0f).withDuration(140)
-    private var augment = RegisterEnchantment.LEVITATING_BULLET
+    private var augment: ScepterAugment = RegisterEnchantment.LEVITATING_BULLET
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug

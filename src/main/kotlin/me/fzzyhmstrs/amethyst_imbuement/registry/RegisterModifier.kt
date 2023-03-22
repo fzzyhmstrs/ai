@@ -12,6 +12,17 @@ object RegisterModifier {
 
     private val regMod: MutableMap<AugmentModifier,Int> = mutableMapOf()
 
+    //Modifiers unique to the spellcasters focus and other non-scepter things that might use rolling
+    val SAVANT_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"savant_aspect"), rollToll = 7).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1) .also { regMod[it] = 1 }
+    val FULGUROUS = AugmentModifier(Identifier(AI.MOD_ID,"fulgurous"), levelModifier = 3, cooldownModifier = -40.0, rollToll = 7).withRange(0.0,0.0,50.0).withAmplifier(2).withSpellToAffect(ModifierPredicates.LIGHTNING_PREDICATE) .also { regMod[it] = 1 }
+    val DISARMING = AugmentModifier(Identifier(AI.MOD_ID,"disarming")).withConsumer(ModifierConsumers.DISARMING_CONSUMER).also { regMod[it] = 4 }
+    val TESTAMENT_TO_POWER = AugmentModifier(Identifier(AI.MOD_ID,"testament_to_power"), levelModifier = 1, cooldownModifier = 35.0, rollToll = 8).withDuration(0,0,10).withAmplifier(10).withConsumer(ModifierConsumers.HEALING_CONSUMER).also { regMod[it] = 1 }
+    val SPELL_FRENZIED = AugmentModifier(Identifier(AI.MOD_ID,"spell_frenzied"), cooldownModifier = -50.0,manaCostModifier = 25.0).withDamage(0f,0f,-15f).also { regMod[it] = 5 }
+    val BOLT_SPECIALIST = AugmentModifier(Identifier(AI.MOD_ID,"bolt_specialist"), cooldownModifier = -10.0, rollToll = 6).withDamage(1f).withConsumer(ModifierConsumers.BOLT_CONSUMER).withSpellToAffect(ModifierPredicates.BOLT_PREDICATE).also { regMod[it] = 1 }
+    val BOLSTERING = AugmentModifier(Identifier(AI.MOD_ID,"bolstering"), manaCostModifier = 15.0).withConsumer(ModifierConsumers.BOLSTERING_CONSUMER).also { regMod[it] = 3 }
+    val BOUNDLESS = AugmentModifier(Identifier(AI.MOD_ID,"boundless"), cooldownModifier = 10.0, rollToll = 6).withRange(1.0,0.0,100.0).also { regMod[it] = 2 }
+    val FOWL = AugmentModifier(Identifier(AI.MOD_ID,"fowl")).withConsumer(ModifierConsumers.FOWL_CONSUMER).also { regMod[it] = 1 }
+
     val ENRAGED = AugmentModifier(Identifier(AI.MOD_ID,"enraged"), levelModifier = 1).withDamage(0.4F).withXpMod(SpellType.FURY,2).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 2 }
     val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious")).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 4 }
     val GENIUS = AugmentModifier(Identifier(AI.MOD_ID,"genius"), cooldownModifier = -10.0).withXpMod(SpellType.WIT,2).withRange(0.6,0.0,10.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).also { regMod[it] = 2 }
@@ -40,14 +51,13 @@ object RegisterModifier {
     val BLADE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"blade_aspect"), cooldownModifier = -10.0).withDamage(0.5F).withRange(0.25,0.25).withSpellToAffect(ModifierPredicates.BLADE_PREDICATE) .also { regMod[it] = 6 }
     val FIRE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"fire_aspect"), levelModifier = 1, cooldownModifier = -10.0).withAmplifier(1).withDuration(32).withSpellToAffect(ModifierPredicates.FIRE_PREDICATE).also { regMod[it] = 6 }
     val ICE_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"ice_aspect"), levelModifier = 1, cooldownModifier = -10.0).withAmplifier(1).withDuration(32).withSpellToAffect(ModifierPredicates.ICE_PREDICATE).also { regMod[it] = 6 }
-    val LIGHTNING_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"lightning_aspect"), levelModifier = 1, cooldownModifier = -10.0).withRange(0.0,0.0,25.0).withAmplifier(1).withSpellToAffect(ModifierPredicates.LIGHTNING_PREDICATE).also { regMod[it] = 6 }
+    val LIGHTNING_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"lightning_aspect"), levelModifier = 1, cooldownModifier = -10.0).withDescendant(FULGUROUS).withRange(0.0,0.0,25.0).withAmplifier(1).withSpellToAffect(ModifierPredicates.LIGHTNING_PREDICATE).also { regMod[it] = 6 }
     val SUMMONERS_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"summoners_aspect"), cooldownModifier = -10.0, levelModifier = 1).withDuration(0,0,10).withSpellToAffect(ModifierPredicates.SUMMONERS_PREDICATE).also { regMod[it] = 6 }
     val BUILDERS_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"builders_aspect"), cooldownModifier = -20.0).withRange(0.0,1.0) .withSpellToAffect(ModifierPredicates.BUILDERS_PREDICATE).also { regMod[it] = 4 }
     val SOJOURNER = AugmentModifier(Identifier(AI.MOD_ID,"sojourner"), cooldownModifier = -90.0).withRange(rangePercent = 25.0).withConsumer(ModifierConsumers.SOJOURNER_CONSUMER).withSpellToAffect(ModifierPredicates.TRAVELER_PREDICATE) .also { regMod[it] = 2 }
     val TRAVELER = AugmentModifier(Identifier(AI.MOD_ID,"traveler"), cooldownModifier = -65.0).withRange(rangePercent = 15.0).withConsumer(ModifierConsumers.TRAVELER_CONSUMER).withSpellToAffect(ModifierPredicates.TRAVELER_PREDICATE).withDescendant(SOJOURNER) .also { regMod[it] = 5 }
 
-    //Modifiers unique to the spellcasters focus and other non-scepter things that might use rolling
-    val SAVANT_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"savant_aspect")).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1) .also { regMod[it] = 1 }
+
 
     fun registerAll(){
         regMod.forEach {

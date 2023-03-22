@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.loot.*
 import me.fzzyhmstrs.fzzy_core.registry.LootRegistry.registerModLoot
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
+import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.math.MathHelper

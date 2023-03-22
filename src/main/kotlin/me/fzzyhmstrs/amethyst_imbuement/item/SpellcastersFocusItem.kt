@@ -54,10 +54,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             val offhand = user.offHandStack
             if (offhand.item is SpellcastersFocusItem){
                 val focusMods = ModifierHelper.getActiveModifiers(offhand)
-                val compiledModifiers = modifiers.modifiers.toMutableList()
-                compiledModifiers.addAll(focusMods.modifiers)
-                val compiledData = modifiers.compiledData.plus(focusMods.compiledData)
-                AbstractModifier.CompiledModifiers(compiledModifiers,compiledData)
+                modifiers.combineWith(focusMods)
             } else {
                 modifiers
             }
