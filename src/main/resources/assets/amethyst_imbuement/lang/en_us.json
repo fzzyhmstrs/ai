@@ -695,7 +695,17 @@
 	"scepter.modifier.amethyst_imbuement:builders_aspect": "Builders Aspect",
 	"scepter.modifier.amethyst_imbuement:sojourner": "Sojourner",
 	"scepter.modifier.amethyst_imbuement:traveler": "Traveler",
+	
 	"scepter.modifier.amethyst_imbuement:savant_aspect": "Aspect of the Savant",
+	"scepter.modifier.amethyst_imbuement:fulgurous": "Fulgurous",
+	"scepter.modifier.amethyst_imbuement:disarming": "Disarming",
+	"scepter.modifier.amethyst_imbuement:testament_to_power": "Testament to Power",
+	"scepter.modifier.amethyst_imbuement:spell_frenzied": "Spell-Frenzied",
+	"scepter.modifier.amethyst_imbuement:bolt_Specialist": "Bolt Specialist",
+	"scepter.modifier.amethyst_imbuement:bolstering": "Bolstering",
+	"scepter.modifier.amethyst_imbuement:Boundless": "Boundless",
+	"scepter.modifier.amethyst_imbuement:fowl": "Fowl",
+	
 	"scepter.modifier.amethyst_imbuement:furious.desc": "Doubles fury XP and minor fury bonuses",
 	"scepter.modifier.amethyst_imbuement:enraged.desc": "Triples fury XP and minor fury bonuses",
 	"scepter.modifier.amethyst_imbuement:witty.desc": "Doubles wit XP and minor wit bonuses",
@@ -738,6 +748,13 @@
 
 	"scepter.modifier.amethyst_imbuement:savant_aspect.desc": "Adds one to all spell experience gained",
 	"scepter.modifier.amethyst_imbuement:fulgurous.desc": "Huge bonus to lightning-type spells",
+	"scepter.modifier.amethyst_imbuement:disarming": "Chance to weaken struck or targeted enemies",
+	"scepter.modifier.amethyst_imbuement:testament_to_power": "Immense bonus to spell effect amplifier at the expense of longer cooldowns",
+	"scepter.modifier.amethyst_imbuement:spell_frenzied": "Massively reduces spell cooldowns but spells deal less damage and cost more",
+	"scepter.modifier.amethyst_imbuement:bolt_Specialist": "Big bonuses to bolt-type spells, and bolts have a chance to explode on impact",
+	"scepter.modifier.amethyst_imbuement:bolstering": "Buffs the caster and nearby allies on successful spell cast",
+	"scepter.modifier.amethyst_imbuement:Boundless": "Doubles spell range at the expense of longer cooldowns",
+	"scepter.modifier.amethyst_imbuement:fowl": "Chance to summon a chicken on successful spell cast",
 	
 	"amethyst_imbuement.tip.scepters": "There are 30 scepters in Amethyst Imbuement. Don't just craft a plain scepter; check out the upgrade tree!",
 	"amethyst_imbuement.tip.figurine": "Malachite Figurines can only be obtained by trading with a Crystal Witch villager.",
