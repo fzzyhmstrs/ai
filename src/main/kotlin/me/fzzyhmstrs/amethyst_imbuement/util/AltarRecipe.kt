@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
@@ -19,7 +21,13 @@ class AltarRecipe(
     Recipe<SimpleInventory> {
 
     override fun matches(inventory: SimpleInventory, world: World): Boolean {
-        return dust.test(inventory.getStack(0)) && base.test(inventory.getStack(1)) && addition.test(inventory.getStack(2))
+        var bl = dust.test(inventory.getStack(0)) && base.test(inventory.getStack(1)) && addition.test(inventory.getStack(2))
+        if (!bl) return false
+        val item = result.item
+        if (item is Reactant){
+            bl = bl && item.canReact(result,Reagent.getReagents(inventory))
+        }
+        return bl
     }
 
     override fun craft(inventory: SimpleInventory): ItemStack {
@@ -27,6 +35,10 @@ class AltarRecipe(
         val nbtCompound = inventory.getStack(1).nbt
         if (nbtCompound != null) {
             itemStack.nbt = nbtCompound.copy()
+        }
+        val item = itemStack.item
+        if (item is Reactant){
+            item.react(itemStack,Reagent.getReagents(inventory))
         }
         return itemStack
     }
