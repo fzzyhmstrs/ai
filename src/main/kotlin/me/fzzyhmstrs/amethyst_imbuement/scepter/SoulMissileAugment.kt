@@ -30,6 +30,7 @@ class SoulMissileAugment: SummonProjectileAugment(ScepterTier.ONE,21){
             2.0f,
             0.1f)
         me.passEffects(effects, level)
+        me.setAugment(this)
         return me
     }
 

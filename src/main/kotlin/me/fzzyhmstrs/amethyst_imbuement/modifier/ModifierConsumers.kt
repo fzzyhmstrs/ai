@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
+import net.minecraft.block.BlockState
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -20,8 +21,63 @@ import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
+import net.minecraft.world.World
+import net.minecraft.world.explosion.Explosion
+import net.minecraft.world.explosion.ExplosionBehavior
 
 object ModifierConsumers {
+
+    val DISARMING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> disarmingConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    private fun disarmingConsumer(list: List<LivingEntity>){
+        list.forEach {
+            val rnd1 = it.world.random.nextInt(3)
+            if (rnd1 == 0)
+                EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,300,1)
+        }
+    }
+
+    val BOLT_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> boltConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    private fun boltConsumer(list: List<LivingEntity>){
+        list.forEach {
+            val rnd1 = it.world.random.nextInt(5)
+            if (rnd1 == 0)
+                it.world.createExplosion(null, DamageSource.MAGIC, BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
+        }
+    }
+
+    private object BoltExplosionBehavior:ExplosionBehavior(){
+        override fun canDestroyBlock(
+            explosion: Explosion?,
+            world: BlockView?,
+            pos: BlockPos?,
+            state: BlockState?,
+            power: Float
+        ): Boolean {
+            return false
+        }
+    }
+
+    val BOLSTERING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> bolsteringConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun bolsteringConsumer(list: List<LivingEntity>){
+        list.forEach {
+            val rnd1 = it.world.random.nextInt(5)
+            if (rnd1 == 0)
+                EffectQueue.addStatusToQueue(it,StatusEffects.STRENGTH,300,1)
+        }
+    }
+
+    val FOWL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> fowlConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun fowlConsumer(list: List<LivingEntity>){
+        list.forEach {
+            val rnd1 = it.world.random.nextInt(5)
+            if (rnd1 == 0)
+                EffectQueue.addStatusToQueue(it,StatusEffects.STRENGTH,300,1)
+        }
+    }
+
+    //////////////////
 
     val NECROTIC_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> necroticConsumer(list)}, AugmentConsumer.Type.HARMFUL)
     private fun necroticConsumer(list: List<LivingEntity>){

@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -35,7 +36,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
-    private var augment = RegisterEnchantment.FANGS
+    private var augment: ScepterAugment = RegisterEnchantment.FANGS
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug

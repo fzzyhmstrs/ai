@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.block.Blocks
+import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
@@ -12,8 +13,10 @@ import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.condition.KilledByPlayerLootCondition
 import net.minecraft.loot.condition.LootConditionTypes
+import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition
 import net.minecraft.loot.entry.ItemEntry
+import net.minecraft.loot.function.ApplyBonusLootFunction
 import net.minecraft.loot.function.EnchantWithLevelsLootFunction
 import net.minecraft.loot.function.SetDamageLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
@@ -147,10 +150,10 @@ object VanillaLoot: AbstractModLoot() {
             dungeonLoot(table)
             return true
         } else if (LootTables.STRONGHOLD_CORRIDOR_CHEST.equals(id)) {
-            strongholdGenericLoot(table,4)
+            strongholdGenericLoot(table,.25f)
             return true
         } else if (LootTables.STRONGHOLD_CROSSING_CHEST.equals(id)) {
-            strongholdGenericLoot(table,1)
+            strongholdGenericLoot(table,.75f)
             return true
         } else if (LootTables.STRONGHOLD_LIBRARY_CHEST.equals(id)) {
             strongholdLibraryLoot(table)
@@ -319,7 +322,7 @@ object VanillaLoot: AbstractModLoot() {
     fun shipwreckMapLoot(table: LootTable.Builder){
         val poolBuilder = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
-            .conditionally(RandomChanceLootCondition.builder(.375))
+            .conditionally(RandomChanceLootCondition.builder(.375f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
             .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
@@ -385,7 +388,7 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
-            .conditionally(RandomChanceLootCondition.builder(0.8f)
+            .conditionally(RandomChanceLootCondition.builder(0.8f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(5))
             .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1))

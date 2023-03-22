@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -43,7 +44,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withDuration(180).withAmplifier(1)
     private val struckEntities: MutableList<UUID> = mutableListOf()
-    private var augment = RegisterEnchantment.ICE_SHARD
+    private var augment: ScepterAugment = RegisterEnchantment.ICE_SHARD
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug
@@ -105,7 +106,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
                 ),
             )
             fbe.passEffects(effects, level)
-            fbe.setAugment(this)
+            fbe.setAugment(augment)
             return fbe
         }
     }

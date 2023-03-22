@@ -38,6 +38,7 @@ class WitheringBoltAugment: SummonProjectileAugment(ScepterTier.TWO,5){
         wse.passEffects(effects, level)
         wse.setPos(user.x,user.eyeY-0.2,user.z)
         wse.isCharged = false
+        wse.setAugment(this)
         return wse
     }
 

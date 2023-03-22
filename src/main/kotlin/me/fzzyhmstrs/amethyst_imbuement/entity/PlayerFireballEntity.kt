@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -31,7 +32,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         entityEffects.addAmplifier(ae.amplifier(level))
     }
     
-    private var augment = RegisterEnchantment.FIREBALL
+    private var augment: ScepterAugment = RegisterEnchantment.FIREBALL
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug

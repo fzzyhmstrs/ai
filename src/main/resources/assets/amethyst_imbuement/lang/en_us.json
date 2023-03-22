@@ -735,7 +735,9 @@
 	"scepter.modifier.amethyst_imbuement:builders_aspect.desc": "Bonus to world-affecting spells",
 	"scepter.modifier.amethyst_imbuement:sojourner.desc": "Large bonus to spells that involve movement",
 	"scepter.modifier.amethyst_imbuement:traveler.desc": "Bonus to spells that involve movement",
+
 	"scepter.modifier.amethyst_imbuement:savant_aspect.desc": "Adds one to all spell experience gained",
+	"scepter.modifier.amethyst_imbuement:fulgurous.desc": "Huge bonus to lightning-type spells",
 	
 	"amethyst_imbuement.tip.scepters": "There are 30 scepters in Amethyst Imbuement. Don't just craft a plain scepter; check out the upgrade tree!",
 	"amethyst_imbuement.tip.figurine": "Malachite Figurines can only be obtained by trading with a Crystal Witch villager.",

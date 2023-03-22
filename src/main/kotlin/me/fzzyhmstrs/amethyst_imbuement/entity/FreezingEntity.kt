@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -33,7 +34,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
 
     private var level: Int = 1
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(4.0).withDuration(180)
-    private var augment = RegisterEnchantment.FREEZING
+    private var augment: ScepterAugment = RegisterEnchantment.FREEZING
     
     fun setAugment(aug: ScepterAugment){
         this.augment = aug
