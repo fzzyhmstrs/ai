@@ -1,0 +1,21 @@
+{    
+"name": "Savant Aspect",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/savant_aspect.png",
+"sortnum": 100,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Adds one XP to any spell cast. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented.$(br2)This focus modifier is a good choice for a low-tier focus, as it does not lock you into a particular build, and makes levelling up to higher tiers easier."
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Savant Aspect",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/savant_aspect.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Spell XP Gain$()",
+"mod_text": "You feel as if magic is your true calling while holding your focus. Apears on a Spellcasters Focus on tier ignition."
+}
+]
+}
