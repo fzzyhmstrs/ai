@@ -1,0 +1,21 @@
+{    
+"name": "Fulgurous",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/fulgurous.png",
+"sortnum": 101,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affect lightning spells. Adds three levels to the effective casting level, reduces spell cooldown by 40%, increases effect amplifiers by 2, and increases spell range by 50%. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented, or select Lightning Aspect on a focus that already has that modifier to combine the two into one instance of Fulgurous."
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Fulgurous",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/fulgurous.png",
+"ancestor": "Lightning Aspect",
+"descendant": "N/A",
+"mod_type": "$(2)Lightning Magic$()",
+"mod_text": "Your focus crackles with the very essence of storm clouds. Apears on a Spellcasters Focus on tier ignition or after combining two instances of Lightning Aspect."
+}
+]
+}
