@@ -1,9 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -15,6 +18,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable
+import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.registry.Registries
@@ -22,6 +26,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.explosion.Explosion
@@ -63,8 +68,21 @@ object ModifierConsumers {
     private fun bolsteringConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
-            if (rnd1 == 0)
-                EffectQueue.addStatusToQueue(it,StatusEffects.STRENGTH,300,1)
+            if (rnd1 == 0) {
+                val range = AiConfig.items.focus.bolsteringRange.get()
+                val box = Box(it.pos.add(range, range, range), it.pos.subtract(range, range, range))
+                val list1 = it.world.getOtherEntities(null,box)
+                for (entity in list1){
+                    if (entity !is LivingEntity) continue
+                    if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(it,entity,
+                            RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
+                        EffectQueue.addStatusToQueue(entity, StatusEffects.STRENGTH, 300, 1)
+                        EffectQueue.addStatusToQueue(entity, StatusEffects.SPEED, 300, 1)
+                    }
+                }
+
+
+            }
         }
     }
 

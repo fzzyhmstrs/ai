@@ -107,6 +107,7 @@ object AiConfig
 
         var focus = Focus()
         class Focus: ConfigSection(Header.Builder().space().add("readme.items.focus_1").build()) {
+            var bolsteringRange = ValidatedDouble(5.0,50.0,1.0)
             var tierXp = ValidatedSeries(arrayOf(500,1500,3000,5000),Int::class.java,{a,b-> b>a},"Xp tier value is a cumulative XP value. Each tier needs higher xp than the last.")
         }
 
