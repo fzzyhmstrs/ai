@@ -15,7 +15,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|2|
+|NOT STARTED|3|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |Make splash arts and icons for the new modifiers|Not Started|
 |Make item tex for Mystical gem|Not Started|
@@ -40,7 +40,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Change totem of grace/wit to do AOE effects on all team players (if PVP)|Complete|
 |Add PVP modes on entities too|Complete|
 |Implement system to pass spells into player-created entities for PVP|Complete|
-|Add new modifier lang|Not Started|
+|Add new modifier lang|Complete|
 |Migrate acceptable scepters to tags|Complete|
 |Fix up the translatable text on the gems|Complete|
 |Add empty spell scrolls into some loot|Complete|
