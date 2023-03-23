@@ -18,6 +18,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |NOT STARTED|2|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |Make splash arts and icons for the new modifiers|Not Started|
+|Make item tex for Mystical gem|Not Started|
 |IN PROGRESS|3|
 |Add some advancements for the new stuff|In progress|
 |Check out spell-switching issue from Discord|In progress|
