@@ -15,23 +15,24 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|3|
+|NOT STARTED|2|
 |Add sounds for Ice Shard and HailStorm|Not started|
-|Make sure the healers gem is actually checking food|Not started|
 |Make splash arts and icons for the new modifiers|Not Started|
-|IN PROGRESS|4|
+|IN PROGRESS|3|
 |Add some advancements for the new stuff|In progress|
 |Check out spell-switching issue from Discord|In progress|
-|Change implementation of Crystal Altar to 3 inputs, work on screen|In Progress|
-|Add config settings all newly added vars|In progress|
+|Test devout cleric|In progress|
 |DOCUMENTATION TODO|5|
 |Polish up wiki|Doc Todo|
 |Correct updated scepter durabilities in Wiki|Doc Todo|
 |Update all spells in wiki|Doc Todo|
 |Update enhancing template used in zh_cn version|Doc Todo|
 |Bring patchouli book up to speed|Doc Todo|
-|COMPLETE|42|
+|COMPLETE|44|
 |Update plugins to reflect the new Crystal Altar|Complete|
+|Make sure the healers gem is actually checking food|Complete|
+|Add config settings all newly added vars|Complete|
+|Change implementation of Crystal Altar to 3 inputs, work on screen|Complete|
 |Add unique scepter modifiers for the focii|Complete|
 |Integrate new reagent system into the crystal altar and imbuing recipe|Complete|
 |Add bolt spells into the new tag|Complete|
