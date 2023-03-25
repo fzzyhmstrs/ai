@@ -161,7 +161,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             for (j in range){
                 val mod = mods[j]
                 RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-                RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/modifier/${mod.path}.png"))
+                RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"))
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
                 DrawableHelper.drawTexture(matrices, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
             }

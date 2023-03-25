@@ -11,7 +11,7 @@
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Attuned",
-"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/attuned.png",
+"mod_image": "amethyst_core:textures/gui/patchouli/mod_spotlights/attuned.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/lesser_attuned)Lesser Attuned$()",
 "descendant": "$(l:amethyst_imbuement:modifiers/greater_attuned)Greater Attuned$()",
 "mod_type": "$(2)Spell Casting$()",
