@@ -1,0 +1,30 @@
+{
+"parent": "amethyst_imbuement:opaline_scepter",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:a_scepter_so_fowl"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.path_chimkin"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.path_chimkin.desc"
+	},
+	"frame": "challenge",
+	"hidden": true
+},
+"criteria":{
+	"got_iridescent":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:a_scepter_so_fowl"
+					]
+				}
+			]
+		}
+	}
+}
+}

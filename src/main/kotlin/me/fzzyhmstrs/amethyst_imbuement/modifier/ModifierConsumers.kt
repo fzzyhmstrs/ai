@@ -12,6 +12,7 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.block.BlockState
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -86,12 +87,16 @@ object ModifierConsumers {
         }
     }
 
-    val FOWL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> fowlConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val FOWL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> fowlConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun fowlConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
-            if (rnd1 == 0)
-                EffectQueue.addStatusToQueue(it,StatusEffects.STRENGTH,300,1)
+            if (rnd1 == 0) {
+                val chickenEntity = EntityType.CHICKEN.create(it.world)
+                chickenEntity?.breedingAge = -24000
+                chickenEntity?.refreshPositionAndAngles(it.x, it.y, it.z, it.yaw, 0.0f)
+                it.world.spawnEntity(chickenEntity)
+            }
         }
     }
 

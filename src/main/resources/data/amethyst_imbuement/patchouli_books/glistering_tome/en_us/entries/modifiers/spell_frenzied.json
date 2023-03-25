@@ -1,0 +1,21 @@
+{    
+"name": "Spell-Frenzied",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/spell_frenzied.png",
+"sortnum": 104,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "50% spell cooldown at the expense of 35% increased mana cost and 15% reduced damage. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Spell-Frenzied",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/spell_frenzied.png",
+  "ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Casting Speed$()",
+"mod_text": "You feel a mania begin to set in. You must cast spells! More!! Appears on a Spellcasters Focus on tier ignition."
+}
+]
+}
