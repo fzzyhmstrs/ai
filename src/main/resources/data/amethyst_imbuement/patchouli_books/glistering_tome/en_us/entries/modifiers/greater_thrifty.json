@@ -11,7 +11,7 @@
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            
 "mod_head": "Greater Thrifty",
-"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/greater_thrifty.png",
+"mod_image": "amethyst_core:textures/gui/patchouli/mod_spotlights/greater_thrifty.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/thrifty)Thrifty$()",
 "descendant": "N/A",
 "mod_type": "$(2)Spell Casting$()",

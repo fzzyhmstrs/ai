@@ -40,7 +40,7 @@ object ModifierConsumers {
         list.forEach {
             val rnd1 = it.world.random.nextInt(3)
             if (rnd1 == 0)
-                EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,300,1)
+                EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,300,2)
         }
     }
 

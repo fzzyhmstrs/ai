@@ -9,6 +9,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment
 import net.minecraft.enchantment.EnchantmentLevelEntry
@@ -143,7 +145,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         }
         val item = outputItem.item
         if (item is Reactant){
-            bl1 = bl1 && item.canReact(outputItem,Reagent.getReagents(inventory))
+            bl1 = bl1 && item.canReact(outputItem, Reagent.getReagents(inventory))
         }
         return bl1
     }
