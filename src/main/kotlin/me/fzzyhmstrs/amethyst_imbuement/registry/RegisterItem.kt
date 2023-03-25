@@ -91,6 +91,7 @@ object RegisterItem {
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)) .also{ regItem["golden_heart"] = it}
     val CRYSTALLINE_HEART = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withGlint().also{ regItem["crystalline_heart"] = it} //item is custom for flavor text
 
+
     //tool and weapon items
     val GLISTERING_TRIDENT = GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(550).rarity(Rarity.RARE)).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).rarity(Rarity.RARE)).also{ regItem["sniper_bow"] = it}
@@ -106,6 +107,7 @@ object RegisterItem {
     val GLOWING_AXE = CustomAxeItem(GlowingToolMaterial,5.0f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_axe"] = it}
     val GLOWING_HOE = CustomHoeItem(GlowingToolMaterial,-3 ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_hoe"] = it}
     val GLOWING_HORSE_ARMOR = FlavorHorseArmorItem(14,"glowing",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["glowing_horse_armor"] = it}
+
 
     //trinket and books
     val COPPER_RING = CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)) .also{ regItem["copper_ring"] = it}
@@ -232,6 +234,11 @@ object RegisterItem {
     val REDEMPTION = CustomScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["redemption"] = it}
+
+    val A_SCEPTER_SO_FOWL = CustomScepterItem(ScepterSoFoulToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        .withAugments(listOf(RegisterEnchantment.TORRENT_OF_BEAKS,RegisterEnchantment.CHICKENFORM,RegisterEnchantment.POULTRYMORPH))
+        .withModifiers(listOf(RegisterModifier.FOWL))
+        .also{ regItem["a_scepter_so_fowl"] = it}
 
     //////////////////////////////
 

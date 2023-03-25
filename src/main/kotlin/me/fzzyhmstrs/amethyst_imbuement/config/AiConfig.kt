@@ -87,6 +87,8 @@ object AiConfig
             var lethalityCooldown = ValidatedLong(LethalityToolMaterial.baseCooldown(), Long.MAX_VALUE,LethalityToolMaterial.minCooldown())
             @ReadMeText("readme.items.scepters.lethalityDamage")
             var lethalityDamage = ValidatedFloat(LethalityToolMaterial.defaultAttackDamage(),30f,0f)
+            var fowlDurability = ValidatedInt(ScepterSoFoulToolMaterial.defaultDurability(),1650,32)
+            var fowlCooldown = ValidatedLong(ScepterSoFoulToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterSoFoulToolMaterial.minCooldown())
         }
 
         var gems = Gems()

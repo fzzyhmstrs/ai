@@ -41,6 +41,14 @@ object RegisterRenderer {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.FORCEFIELD_BLOCK, RenderLayer.getTranslucent())
 
         EntityRendererRegistry.register(
+            RegisterEntity.BOOM_CHICKEN_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            ChickenEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.CRYSTAL_GOLEM_ENTITY
         ){context: EntityRendererFactory.Context ->
             CrystallineGolemEntityRenderer(

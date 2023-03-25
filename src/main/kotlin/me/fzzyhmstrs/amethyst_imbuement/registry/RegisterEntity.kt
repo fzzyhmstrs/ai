@@ -22,6 +22,19 @@ import net.minecraft.world.World
 
 object RegisterEntity {
 
+    val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "boom_chicken"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<BoomChickenEntity>, world: World ->
+            BoomChickenEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(10).build()
+    )
+
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "crystal_golem"),
@@ -305,6 +318,7 @@ object RegisterEntity {
 
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
+        FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())

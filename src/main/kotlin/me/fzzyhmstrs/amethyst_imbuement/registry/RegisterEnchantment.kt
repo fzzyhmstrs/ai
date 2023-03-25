@@ -74,6 +74,7 @@ object RegisterEnchantment {
     val BALL_LIGHTNING = BallLightningAugment().also{regEnchant["ball_lightning"] = it}
     val BARRIER = BarrierAugment().also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment().also{regEnchant["bedazzle"] = it}
+    val CHICKENFORM = ChickenformAugment().also{regEnchant["chickenform"] = it}
     val CLEANSE = CleanseAugment().also{regEnchant["cleanse"] = it}
     val COMET_STORM = CometStormAugment().also{regEnchant["comet_storm"] = it}
     val CREATE_HARD_LIGHT = CreateHardLightAugment().also{regEnchant["create_hard_light"] = it}
@@ -109,6 +110,7 @@ object RegisterEnchantment {
     val MASS_REVIVIFY = MassRevivifyAugment().also{regEnchant["mass_revivify"] = it}
     val MEND_EQUIPMENT = MendEquipmentAugment().also{regEnchant["mend_equipment"] = it}
     val MINOR_HEAL = MinorHealAugment().also{regEnchant["minor_heal"] = it}
+    val POULTRYMORPH = PoultrymorphAugment().also{regEnchant["poultrymorph"] = it}
     val RECALL = RecallAugment().also{regEnchant["recall"] = it}
     val REGENERATE = RegenerateAugment().also{regEnchant["regenerate"] = it}
     val RESONATE = ResonateAugment().also{regEnchant["resonate"] = it}
@@ -128,6 +130,7 @@ object RegisterEnchantment {
     val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment().also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment().also{regEnchant["teleport"] = it}
+    val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().also{regEnchant["torrent_of_beaks"] = it}
     val WEIGHTLESSNESS = WeightlessnessAugment().also{regEnchant["weightlessness"] = it}
     val WITHERING_BOLT = WitheringBoltAugment().also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment().also{regEnchant["zap"] = it}
