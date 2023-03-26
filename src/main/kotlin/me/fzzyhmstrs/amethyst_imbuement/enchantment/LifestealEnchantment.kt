@@ -30,11 +30,11 @@ class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && enabled
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && checkEnabled()
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         if (target !is LivingEntity) return
         if(user.world.isClient()) return
         val time = user.world.time

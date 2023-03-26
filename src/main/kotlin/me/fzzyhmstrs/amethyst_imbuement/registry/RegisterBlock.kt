@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.block.*
+import me.fzzyhmstrs.amethyst_imbuement.item.GlisteningIceBlockItem
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
@@ -39,6 +40,7 @@ object RegisterBlock {
     val HARD_LIGHT_BLOCK = Block(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
     val FORCEFIELD_BLOCK = ForcefieldBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["forcefield_block"] = it }
     val GLISTENING_ICE = TransparentBlock(FabricBlockSettings.of(Material.DENSE_ICE).strength(3.0f).slipperiness(0.992f).sounds(BlockSoundGroup.GLASS)).also { regBlock["glistening_ice"] = it }
+    val GLISTENING_ICE_ITEM = GlisteningIceBlockItem(GLISTENING_ICE,FabricItemSettings().group(RegisterItem.AI_GROUP))
 
     fun registerAll() {
         for (k in regBlock.keys) {
@@ -48,6 +50,7 @@ object RegisterBlock {
 
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "glistening_ice"), GLISTENING_ICE)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"glistening_ice"), GLISTENING_ICE_ITEM)
     }
 
     private fun registerBlock(path: String, block:Block?, itemGroup: ItemGroup){

@@ -34,7 +34,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun isAcceptableItem(stack: ItemStack?): Boolean {
-        return super.isAcceptableItem(stack) && enabled
+        return super.isAcceptableItem(stack) && checkEnabled()
     }
 
     companion object{

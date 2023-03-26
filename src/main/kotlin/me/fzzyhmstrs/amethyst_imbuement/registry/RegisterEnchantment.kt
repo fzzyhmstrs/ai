@@ -147,7 +147,6 @@ object RegisterEnchantment {
             val id = Identifier(AI.MOD_ID, k)
             Registry.register(Registry.ENCHANTMENT, id, enchant)
             if (enchant is AbstractConfigDisableEnchantment){
-                enchant.updateEnabled()
                 if (!enchant.isEnabled()){
                     LOGGER.info("Augment $id is set as disabled in the configs!")
                 }

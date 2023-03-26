@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack
 class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_LEGS, *slot) {
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         EffectQueue.addStatusToQueue(user,StatusEffects.SPEED,260,level - 1)
     }
 

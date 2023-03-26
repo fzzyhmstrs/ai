@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack
 class StridingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_FEET, *slot) {
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         EffectQueue.addStatusToQueue(user, RegisterStatus.STRIDING,260,0)
     }
 }

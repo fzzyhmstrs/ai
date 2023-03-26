@@ -38,7 +38,7 @@ class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         //user is the user
-        if (user.world.isClient || !enabled) return false
+        if (user.world.isClient || !checkEnabled()) return false
         user.heal(1.0f)
         return true
     }

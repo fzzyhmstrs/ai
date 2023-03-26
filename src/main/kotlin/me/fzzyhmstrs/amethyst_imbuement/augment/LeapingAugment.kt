@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack
 class LeapingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_FEET, *slot) {
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         EffectQueue.addStatusToQueue(user,StatusEffects.JUMP_BOOST,260,level - 1)
     }
 
