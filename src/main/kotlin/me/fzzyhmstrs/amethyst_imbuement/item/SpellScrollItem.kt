@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.item.TooltipContext
@@ -21,6 +22,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
@@ -33,7 +35,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
     private val SCROLL_LEVEL = "scroll_level"
     private val TOTAL_USES = "total_uses"
     private val SPENT_USES = "spent_uses"
-    internal val SPELL = "written_spell"
+    private val SPELL = "written_spell"
     internal val SPELL_TYPE = "written_spell_type"
     internal val MODEL_KEY = "model_predicate_key"
 
@@ -44,6 +46,15 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Modifia
         context: TooltipContext
     ) {
         super.appendTooltip(stack, world, tooltip, context)
+        val nbt = stack.nbt?:return
+        val spellString = nbt.getString(SPELL)
+        val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+        val level = max(1,nbt.getInt(SCROLL_LEVEL))
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.spell",spell.getName(level)).formatted(Formatting.GOLD))
+        val uses = max(1,nbt.getInt(TOTAL_USES))
+        val spentUses = max(1,nbt.getInt(SPENT_USES))
+        val usesLeft = uses - spentUses
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.uses",usesLeft,uses))
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {

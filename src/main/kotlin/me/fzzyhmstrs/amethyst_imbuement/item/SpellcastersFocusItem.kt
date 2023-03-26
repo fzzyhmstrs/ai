@@ -9,24 +9,30 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PlayerParticlesV2
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.fzzy_core.modifier_util.AbstractModifier
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
+import net.minecraft.client.MinecraftClient
+import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
+import net.minecraft.particle.DustParticleEffect
 import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
-import net.minecraft.util.Rarity
-import net.minecraft.util.TypedActionResult
+import net.minecraft.text.Text
+import net.minecraft.util.*
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Modifiable, Reactant {
@@ -65,6 +71,33 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             val item = offhand.item
             if (item is SpellcastersFocusItem){
                 addXpAndLevelUp(offhand, spell, user, world)
+            }
+        }
+    }
+
+    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
+        super.appendTooltip(stack, world, tooltip, context)
+        val nbt = stack.nbt?:return
+        if (nbt.getBoolean(LEVEL_UP_READY)){
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.spellcasters_focus.ready").formatted(Formatting.GOLD,Formatting.BOLD))
+        }
+        val tier = getTier(nbt)
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.spellcasters_focus.xp",nbt.getInt(FOCUS_XP),tier.xpToNextTier))
+    }
+
+    override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
+        super.inventoryTick(stack, world, entity, slot, selected)
+        if (entity !is PlayerEntity) return
+        if (world.isClient && (selected || slot == PlayerInventory.OFF_HAND_SLOT)){
+            val rnd = world.random.nextInt(5)
+            if (rnd < 1){
+                val particlePos = PlayerParticlesV2.scepterParticlePos(MinecraftClient.getInstance(), entity,slot == PlayerInventory.OFF_HAND_SLOT)
+                val rnd1 = world.random.nextDouble() * 0.1 - 0.05
+                val rnd2 = world.random.nextDouble() * 0.2 - 0.1
+                val rnd3 = world.random.nextInt(DyeColor.values().size)
+                val colorInt = DyeColor.values()[rnd3].signColor
+                val color = Vec3d.unpackRgb(colorInt).toVector3f()
+                world.addParticle(DustParticleEffect(color,0.8f),particlePos.x + rnd1, particlePos.y + rnd2, particlePos.z + rnd2, 0.0, 0.0, 0.0)
             }
         }
     }
@@ -117,8 +150,14 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val newCurrentXp = currentXp + newXp
         nbt.putInt(FOCUS_XP,newCurrentXp)
         val records = nbt.getCompound(FOCUS_RECORDS)
-        val currentRecordedXp = if (records.contains(id)) { records.getInt(id) }else{ 0 }
+        val currentRecordedXp = if(records.contains(id)){
+            records.getInt(id)
+        }else{
+            0
+        }
         val newCurrentRecordedXp = currentRecordedXp + newXp
+        records.putInt(id,newCurrentRecordedXp)
+        nbt.put(FOCUS_RECORDS,records)
         if (newCurrentXp > tier.xpToNextTier && !nbt.getBoolean(LEVEL_UP_READY)){
             if (user is ServerPlayerEntity && world is ServerWorld) {
                 nbt.putInt(FOCUS_TIER,tier.nextTier)
