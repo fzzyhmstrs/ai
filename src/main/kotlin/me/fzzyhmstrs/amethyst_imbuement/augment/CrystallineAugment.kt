@@ -10,7 +10,7 @@ import net.minecraft.registry.Registries
 class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl, EnchantmentTarget.WEAPON, *slot) {
 
     override fun getAttackDamage(level: Int, group: EntityGroup?): Float {
-        if (!enabled) return 0f
+        if (!checkEnabled()) return 0f
         return 0.25F * level
     }
 

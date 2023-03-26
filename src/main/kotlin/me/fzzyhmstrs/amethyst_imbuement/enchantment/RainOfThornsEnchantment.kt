@@ -29,11 +29,11 @@ class RainOfThornsEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return super.isAcceptableItem(stack) && enabled
+        return super.isAcceptableItem(stack) && checkEnabled()
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (user.world.isClient || !enabled) return
+        if (user.world.isClient || !checkEnabled()) return
         for (i in 1..level) {
             val arrow = ArrowEntity(target.world, target.x, target.eyeY, target.z)
             val rnd = user.world.random.nextInt(360) - 180

@@ -31,11 +31,11 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return ((stack.item is CrossbowItem) || (stack.item is TridentItem)) && enabled
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem)) && checkEnabled()
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (user.world.isClient || !enabled) return
+        if (user.world.isClient || !checkEnabled()) return
         if (target is LivingEntity) {
             if(!target.isDead){
                 target.setInvulnerable(false) //these two lines take away damage invulnerability

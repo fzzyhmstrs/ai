@@ -26,11 +26,11 @@ class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return super.isAcceptableItem(stack) && enabled
+        return super.isAcceptableItem(stack) && checkEnabled()
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (target is LivingEntity && enabled) {
+        if (target is LivingEntity && checkEnabled()) {
             if(!user.world.isClient()){
                 var i = 2
                 if (level > 2) {

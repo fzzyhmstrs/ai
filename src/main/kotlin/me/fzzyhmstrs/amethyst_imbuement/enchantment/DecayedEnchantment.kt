@@ -34,11 +34,11 @@ class DecayedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && enabled
+        return ((stack.item is CrossbowItem) || (stack.item is TridentItem) || (stack.item is BowItem) || EnchantmentTarget.WEAPON.isAcceptableItem(stack.item)) && checkEnabled()
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         if (target is LivingEntity) {
             if(!user.world.isClient()) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 100, 1))

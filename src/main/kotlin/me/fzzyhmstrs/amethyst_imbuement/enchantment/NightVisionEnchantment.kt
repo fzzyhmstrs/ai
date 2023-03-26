@@ -24,7 +24,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
     }
 
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        if (!enabled) return
+        if (!checkEnabled()) return
         EffectQueue.addStatusToQueue(user,StatusEffects.NIGHT_VISION,400,0)
     }
 
@@ -57,7 +57,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return super.isAcceptableItem(stack) && enabled
+        return super.isAcceptableItem(stack) && checkEnabled()
     }
 
 }

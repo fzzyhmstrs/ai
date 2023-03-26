@@ -29,7 +29,7 @@ class SteadfastEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is ArmorItem) && enabled
+        return (stack.item is ArmorItem) && checkEnabled()
     }
 
 }

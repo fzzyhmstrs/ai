@@ -24,12 +24,11 @@ object AI: ModInitializer {
     val slots: Array<EquipmentSlot> = arrayOf(EquipmentSlot.HEAD,EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     override fun onInitialize() {
-        AiConfig.initConfig()
+        RegisterBlock.registerAll()
+        RegisterEnchantment.registerAll()
         RegisterArmor.registerAll()
         RegisterItem.registerAll()
         RegisterPotion.registerAll()
-        RegisterBlock.registerAll()
-        RegisterEnchantment.registerAll()
         RegisterLoot.registerAll()
         RegisterEntity.registerAll()
         RegisterHandler.registerAll()
@@ -37,6 +36,7 @@ object AI: ModInitializer {
         RegisterVillager.registerAll()
         RegisterRecipe.registerAll()
         RegisterCriteria.registerAll()
+        AiConfig.initConfig()
         RegisterKeybindServer.registerServer()
         AltarOfExperienceScreenHandler.registerServer()
         RegisterModifier.registerAll()

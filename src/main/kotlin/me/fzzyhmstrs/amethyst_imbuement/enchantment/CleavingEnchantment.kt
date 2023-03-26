@@ -29,7 +29,7 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDis
     }
 
     override fun getAttackDamage(level: Int, group: EntityGroup): Float {
-        return if(enabled) {
+        return if(checkEnabled()) {
             1.0F + 1.0F * level
         } else {
             0.0f
@@ -37,7 +37,7 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDis
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
-        if (target is PlayerEntity && enabled){
+        if (target is PlayerEntity && checkEnabled()){
             target.itemCooldownManager.set(Items.SHIELD, 10*level)
         }
     }
@@ -47,6 +47,6 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDis
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is AxeItem) && enabled
+        return (stack.item is AxeItem) && checkEnabled()
     }
 }

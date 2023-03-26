@@ -22,7 +22,7 @@ class DeadlyShotEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     }
 
     fun getLevel(stack: ItemStack): Int{
-        if (!enabled) return 0
+        if (!checkEnabled()) return 0
         return EnchantmentHelper.getLevel(RegisterEnchantment.DEADLY_SHOT,stack)
     }
 

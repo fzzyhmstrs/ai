@@ -253,10 +253,12 @@ object RegisterItem {
             .entries { _, entries, _ ->
                 entries.addAll(regItem.values.stream().map { item -> ItemStack(item) }.toList())
                 entries.addAll(RegisterArmor.regArmor.stream().map { item -> ItemStack(item) }.toList())
-                entries.addAll(RegisterBlock.regBlock.values.stream()
+                RegisterBlock.regBlock.values.stream()
                     .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
                     .map { block -> ItemStack(block.asItem()) }
-                    .toList())
+                    .forEach {
+                        entries.add(it)
+                    }
 
             }.build()
     }
