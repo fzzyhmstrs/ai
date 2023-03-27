@@ -18,6 +18,10 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Implement crystal altar quick move|In progress|
 |Get the grey "fog" on the crystal altar|In progress|
 
+Check out getting the flavor text raw key to not appear:
+![image](https://user-images.githubusercontent.com/72876796/227993801-d481c4b4-67a8-4bc7-9c60-18e21969bea8.png)
+
+
 ### TODO List
 |Task|Status|
 |----|------|
