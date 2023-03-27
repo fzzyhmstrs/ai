@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.screen.ForgingScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
@@ -29,6 +28,13 @@ class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: Pl
             this.drawTexture(matrices, i + 99, j + 45, backgroundWidth, 0, 28, 21)
         }
 
+    }
+
+    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+        this.renderBackground(matrices)
+        super.render(matrices, mouseX, mouseY, delta)
+        RenderSystem.disableBlend()
+        drawMouseoverTooltip(matrices, mouseX, mouseY)
     }
 
     override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
