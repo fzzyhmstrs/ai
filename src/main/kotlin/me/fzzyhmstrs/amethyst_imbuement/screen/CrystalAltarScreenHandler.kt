@@ -157,7 +157,43 @@ class CrystalAltarScreenHandler(
     }
 
     override fun quickMove(player: PlayerEntity?, slot: Int): ItemStack {
-        TODO("Not yet implemented")
+        var itemStack = ItemStack.EMPTY
+        val slot2 = slots[slot] as Slot
+        if (slot2 != null && slot2.hasStack()) {
+            val itemStack2 = slot2.stack
+            itemStack = itemStack2.copy()
+            if (slot == 3) {
+                if (!insertItem(itemStack2, 4, 40, true)) {
+                    return ItemStack.EMPTY
+                }
+                slot2.onQuickTransfer(itemStack2, itemStack)
+            } else if (slot == 0 || slot == 1 || slot == 2) {
+                if (!insertItem(itemStack2, 4, 40, false)) {
+                    return ItemStack.EMPTY
+                }
+            } else if (slot in 4..39) {
+                val i: Int = if (isUsableAsAddition(itemStack)) {
+                    2
+                } else if (isUsableAsDust(itemStack)){
+                    0
+                } else {
+                    1
+                }
+                if (!insertItem(itemStack2, i, 3, false)) {
+                    return ItemStack.EMPTY
+                }
+            }
+            if (itemStack2.isEmpty) {
+                slot2.stack = ItemStack.EMPTY
+            } else {
+                slot2.markDirty()
+            }
+            if (itemStack2.count == itemStack.count) {
+                return ItemStack.EMPTY
+            }
+            slot2.onTakeItem(player, itemStack2)
+        }
+        return itemStack
     }
 
     override fun canInsertIntoSlot(stack: ItemStack?, slot: Slot): Boolean {

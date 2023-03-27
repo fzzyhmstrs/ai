@@ -16,16 +16,16 @@
 	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
-	"item": "minecraft:crafting_table"
+	"item": "amethyst_imbuement:hard_light_block"
   },
   "craftF": {
-	"item": "minecraft:crafting_table"
+	"item": "amethyst_imbuement:hard_light_block"
   },
   "craftH": {
-	"item": "minecraft:crafting_table"
+	"item": "amethyst_imbuement:hard_light_block"
   },
   "title": "Hard Light Bridge",
-  "cost": 8,
+  "cost": 11,
   "augment": "amethyst_imbuement:hard_light_bridge"
 }
 

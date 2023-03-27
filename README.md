@@ -12,17 +12,18 @@ Create magical crystals with various properties.
 Imbue items with powerful new abilities 
 Channel mana through scepters to unleash devastation upon your enemies, bolster you and your allies, and summon creatures.
 
+### Testing List
+|Task|Status|
+|----|------|
+|Implement crystal altar quick move|In progress|
+|Get the grey "fog" on the crystal altar|In progress|
+
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|3|
+|NOT STARTED|1|
 |Add sounds for Ice Shard and HailStorm|Not started|
-|Make splash arts and icons for the new modifiers|Not Started|
-|Make item tex for Mystical gem|Not Started|
-|Implement crystal altar quick move|Not Started|
-|Get the grey "fog" on the crystal altar|Not Started|
-|IN PROGRESS|3|
-|Add some advancements for the new stuff|In progress|
+|IN PROGRESS|2|
 |Check out spell-switching issue from Discord|In progress|
 |Test devout cleric|In progress|
 |DOCUMENTATION TODO|5|
@@ -31,7 +32,10 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Update all spells in wiki|Doc Todo|
 |Update enhancing template used in zh_cn version|Doc Todo|
 |Bring patchouli book up to speed|Doc Todo|
-|COMPLETE|44|
+|COMPLETE|47|
+|Add some advancements for the new stuff|In progress|
+|Make splash arts and icons for the new modifiers|Not Started|
+|Make item tex for Mystical gem|Not Started|
 |Update plugins to reflect the new Crystal Altar|Complete|
 |Make sure the healers gem is actually checking food|Complete|
 |Add config settings all newly added vars|Complete|
