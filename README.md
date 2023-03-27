@@ -19,7 +19,8 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Get the grey "fog" on the crystal altar|In progress|
 
 Check out getting the flavor text raw key to not appear:
-![image](https://user-images.githubusercontent.com/72876796/227993801-d481c4b4-67a8-4bc7-9c60-18e21969bea8.png)
+![scepter with incorrect flavor text](https://user-images.githubusercontent.com/72876796/227993975-8c92457b-f827-4c9c-99b3-44c954da4b71.png)
+
 
 
 ### TODO List
