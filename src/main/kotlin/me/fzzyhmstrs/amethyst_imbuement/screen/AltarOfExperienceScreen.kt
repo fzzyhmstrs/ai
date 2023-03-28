@@ -204,9 +204,8 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
 
     override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        val dlta = client?.tickDelta?:delta
         this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, dlta)
+        super.render(matrices, mouseX, mouseY, delta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         for (j in 0..3) {
             if (xp[j] == 0) continue
