@@ -9,5 +9,5 @@
   "addition": {
     "item": "amethyst_imbuement:spell_scroll"
   },
-  "react": true
+  "react": "recipe.enhancing.spell_addition"
 }
