@@ -28,8 +28,6 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
     private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
     private val player = playerInventory.player
     private val flavor = AcText.translatable("container.spellcasters_focus.hint").formatted(Formatting.ITALIC)
-    private var i = 0
-    private var j = 0
     private val button1 by lazy{
         OptionButtonWidget(i + 8, j + 34,AcText.translatable("container.spellcasters_focus.option1"),0,handler.options[0],handler)
     }
@@ -47,8 +45,6 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
 
     override fun init() {
         super.init()
-        i = (width - backgroundWidth) / 2
-        j = (height - backgroundHeight) / 2
         addDrawableChild(button1)
         addDrawableChild(button2)
         addDrawableChild(button3)
@@ -73,18 +69,15 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+        val i = (width - backgroundWidth) / 2
+        val j = (height - backgroundHeight) / 2
         RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-
-    }
-
-    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
         DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0x404040)
         DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0x404040)
     }
-
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         val dlta = client?.tickDelta?:delta
