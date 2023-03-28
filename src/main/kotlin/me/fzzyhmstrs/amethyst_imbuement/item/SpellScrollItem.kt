@@ -38,9 +38,10 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
     internal val SPELL = "written_spell"
     internal val SPELL_TYPE = "written_spell_type"
     internal val MODEL_KEY = "model_predicate_key"
+    internal val DISENCHANTED = "disenchanted"
 
     companion object{
-        internal fun createSpellScroll(enchant: ScepterAugment): ItemStack{
+        internal fun createSpellScroll(enchant: ScepterAugment, disenchanted: Boolean = false): ItemStack{
             val stack = ItemStack(RegisterItem.SPELL_SCROLL)
             val nbt = stack.orCreateNbt
             val spellString = Registries.ENCHANTMENT.getId(enchant)?.toString()?: throw IllegalStateException("Enchantment couldn't be found!")
@@ -51,6 +52,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
             nbt.putInt(RegisterItem.SPELL_SCROLL.SPENT_USES,0)
             nbt.putInt(RegisterItem.SPELL_SCROLL.TOTAL_USES,AiConfig.items.scroll.uses.get()[0])
             nbt.putInt(RegisterItem.SPELL_SCROLL.SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[0])
+            if (disenchanted) nbt.putBoolean(DISENCHANTED, true)
             return stack
         }
     }
