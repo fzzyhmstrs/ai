@@ -294,11 +294,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
 
     override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        @Suppress("SpellCheckingInspection")
-        val dlta = client?.tickDelta?:delta
         val ofst2 = 4 //ofst to handle the screen height change
         this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, dlta)
+        super.render(matrices, mouseX, mouseY, delta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
         for (j in 0..2) {
             val r = handler.resultsIndexes[j]
