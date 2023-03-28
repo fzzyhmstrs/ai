@@ -22,6 +22,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     private val base: EmiIngredient
     private val addition: EmiIngredient
     private val result: List<EmiStack>
+    private val text = if(recipe.react) AcText.translatable(recipe.reactMessage).formatted(Formatting.GOLD).asOrderedText() else AcText.empty().asOrderedText()
 
     init{
         id = recipe.id
@@ -76,7 +77,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
     
     override fun getDisplayHeight(): Int{
-        return 18
+        return 28
     }
     
     override fun addWidgets(widgets: WidgetHolder){
@@ -85,6 +86,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
 		widgets.addSlot(base, 18, 0)
 		widgets.addSlot(addition, 36, 0)
 		widgets.addSlot(EmiIngredient.of(result), 94, 0).recipeContext(this)
+		widgets.addText(text,1,19,16755200,true)
     }
 
 }
