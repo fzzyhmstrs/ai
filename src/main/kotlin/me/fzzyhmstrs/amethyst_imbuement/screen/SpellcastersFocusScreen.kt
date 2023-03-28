@@ -50,24 +50,6 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         addDrawableChild(button3)
     }
 
-    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        val i = (width - backgroundWidth) / 2
-        val j = (height - backgroundHeight) / 2
-        for (k in 0..2) {
-            val d = mouseX - (i + 60).toDouble()
-            val e = mouseY - (j + 14 + 19 * k).toDouble()
-            if (d < 0.0 || e < 0.0 || d >= 108.0 || e >= 19.0 || !player.let {
-                    (handler as SpellcastersFocusScreenHandler).onButtonClick(
-                        it, k
-                    )
-                }
-            ) continue
-            client?.interactionManager?.clickButton((handler as SpellcastersFocusScreenHandler).syncId, k)
-            return true
-        }
-        return super.mouseClicked(mouseX, mouseY, button)
-    }
-
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
