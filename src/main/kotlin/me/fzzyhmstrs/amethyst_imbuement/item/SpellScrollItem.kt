@@ -83,6 +83,9 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         val castXp = AugmentHelper.getAugmentCastXp(spellString)
         tooltip.add(AcText.translatable("lore_book.cast_xp",castXp.toString()).formatted(Formatting.WHITE))
         tooltip.add(AcText.empty())
+        if (nbt.contains(DISENCHANTED)){
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.disenchanted").formatted(Formatting.ITALIC, Formatting.AQUA))
+        }
         val uses = max(1,nbt.getInt(TOTAL_USES))
         val spentUses = nbt.getInt(SPENT_USES)
         val usesLeft = uses - spentUses
