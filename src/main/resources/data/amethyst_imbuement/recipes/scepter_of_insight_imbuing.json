@@ -13,7 +13,7 @@
 	"item": "minecraft:gold_ingot"
   },
   "craftA": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftB": {
 	"item": "amethyst_imbuement:imbued_quartz"
@@ -31,13 +31,13 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftG": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftH": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftI": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "title": "Scepter of Insight",
   "cost": 23,

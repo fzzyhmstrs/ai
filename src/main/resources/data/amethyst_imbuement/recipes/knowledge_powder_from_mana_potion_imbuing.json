@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "imbueB": {
+	"item": "minecraft:lilac"
+  },
+  "imbueC": {
+	"item": "minecraft:lilac"
+  },
+  "imbueD": {
+	"item": "minecraft:oxeye_daisy"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftE": {
+	"item": "minecraft:blaze_powder"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "title": "Knowledge Powder",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:knowledge_powder",
+  "countA": 3
+}
+

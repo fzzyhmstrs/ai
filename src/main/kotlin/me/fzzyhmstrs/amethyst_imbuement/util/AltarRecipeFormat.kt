@@ -8,5 +8,6 @@ class AltarRecipeFormat {
     var base: JsonObject? = null
     var addition: JsonObject? = null
     var result: JsonObject? = null
+    var react: Boolean = false
 
 }

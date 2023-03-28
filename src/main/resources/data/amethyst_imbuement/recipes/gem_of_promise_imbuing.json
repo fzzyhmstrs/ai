@@ -1,46 +1,34 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:imbued_quartz"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:imbued_quartz"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:imbued_quartz"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:imbued_quartz"
-  },
-  "craftA": {
 	"item": "amethyst_imbuement:gem_dust"
   },
   "craftB": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftC": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftD": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftE": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
-  "craftF": {
-	"item": "amethyst_imbuement:gem_dust"
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_quartz"
   },
-  "craftG": {
-	"item": "amethyst_imbuement:gem_dust"
+  "craftE": {
+	"item": "amethyst_imbuement:knowledge_powder"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftH": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftI": {
-	"item": "amethyst_imbuement:gem_dust"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "title": "Gem of Promise",
-  "cost": 13,
+  "cost": 15,
   "resultA": "amethyst_imbuement:gem_of_promise",
   "countA": 1
 }

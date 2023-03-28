@@ -17,11 +17,18 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |----|------|
 |Implement crystal altar quick move|In progress|
 |Get the grey "fog" on the crystal altar|In progress|
+|Make sure scepters use the mana bar coloring|In progress|
 
 Check out getting the flavor text raw key to not appear:
 ![scepter with incorrect flavor text](https://user-images.githubusercontent.com/72876796/227993975-8c92457b-f827-4c9c-99b3-44c954da4b71.png)
 
-
+#### Steps Needed To Utilize Spell Scrolls Instead of Enchanted Books for Spells
+- Update how Disenchanting table strips off spells, and require empty spell scroll for that
+- [Done] Add spell scroll addition recipe to Crystal Altar, instead of re-adding spells via anvil
+- [Done] Add a 'knowledge powder' item as the dust input for adding spells.
+- [Done] Knowledge dust comes from imbuing recipe? XP bottles, gem dust, etc
+- [Done] Add item stacks of spells scrolls to the item groups
+- Remove spell enchanted books from creative menu
 
 ### TODO List
 |Task|Status|

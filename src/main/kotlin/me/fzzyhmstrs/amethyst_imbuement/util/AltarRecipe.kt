@@ -16,14 +16,15 @@ class AltarRecipe(
     val dust: Ingredient,
     val base: Ingredient,
     val addition: Ingredient,
-    val result: ItemStack
+    val result: ItemStack,
+    val react: Boolean = false
 ) :
     Recipe<SimpleInventory> {
 
     override fun matches(inventory: SimpleInventory, world: World): Boolean {
         var bl = dust.test(inventory.getStack(0)) && base.test(inventory.getStack(1)) && addition.test(inventory.getStack(2))
         if (!bl) return false
-        val item = result.item
+        val item = inventory.getStack(1).item
         if (item is Reactant){
             bl = bl && item.canReact(result,Reagent.getReagents(inventory))
         }
@@ -31,10 +32,12 @@ class AltarRecipe(
     }
 
     override fun craft(inventory: SimpleInventory): ItemStack {
-        val itemStack = result.copy()
-        val nbtCompound = inventory.getStack(1).nbt
-        if (nbtCompound != null) {
-            itemStack.nbt = nbtCompound.copy()
+        val itemStack = if(!react) result.copy() else inventory.getStack(1).copy()
+        if (!react) {
+            val nbtCompound = inventory.getStack(1).nbt
+            if (nbtCompound != null) {
+                itemStack.nbt = nbtCompound.copy()
+            }
         }
         val item = itemStack.item
         if (item is Reactant){

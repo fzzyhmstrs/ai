@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "amethyst_imbuement:spell_scroll"
+    }
+  ],
+  "result": {
+    "item": "amethyst_imbuement:gem_dust",
+    "count": 1
+  }
+}

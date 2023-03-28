@@ -10,7 +10,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.NbtCompound
@@ -19,8 +18,6 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import vazkii.patchouli.client.base.PersistentData
-import java.util.*
 
 class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEffectHelper.PersistentEffect {
 

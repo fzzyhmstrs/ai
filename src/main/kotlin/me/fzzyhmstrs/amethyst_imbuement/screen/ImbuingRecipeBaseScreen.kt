@@ -1,11 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.item.TooltipData
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
+import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
@@ -34,8 +36,22 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
         return text
     }
 
-    protected fun addText(matrices: MatrixStack, text: Text, x: Float, y: Float, rowOffset: Int, centered: Boolean = false, width: Int = 107): Float{
-        val widthTextList = textRenderer.wrapLines(text,width)
+    protected fun addText(matrices: MatrixStack, text: Text, x: Float, y: Float, rowOffset: Int, centered: Boolean = false,maxRows: Int = 0, width: Int = 107): Float{
+        val rawLines = textRenderer.wrapLines(text,width)
+        val widthTextList = if(maxRows > 0){
+            if (rawLines.size > maxRows){
+                val temp = mutableListOf<OrderedText>()
+                for (i in 0 until maxRows - 1){
+                    temp.add(rawLines[i])
+                }
+                temp.add(AcText.translatable("lore_book.screen.too_much_text").styled { text.style }.asOrderedText())
+                temp
+            } else {
+                rawLines
+            }
+        } else {
+            rawLines
+        }
 
         var curY = y
         if (centered){

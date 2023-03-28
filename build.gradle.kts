@@ -134,9 +134,9 @@ dependencies {
     include("io.github.ladysnake:PlayerAbilityLib:$palVersion")
 
     val meVersion: String by project
-    implementation("com.github.LlamaLad7:MixinExtras:$meVersion")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:$meVersion")
-    include("com.github.LlamaLad7:MixinExtras:$meVersion")
+    implementation("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
+    annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
+    include("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
 
     val cpaVersion: String by project
     modImplementation("eu.pb4:common-protection-api:$cpaVersion"){

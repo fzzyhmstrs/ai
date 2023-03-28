@@ -13,7 +13,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PlayerParticlesV2
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
-import me.fzzyhmstrs.fzzy_core.modifier_util.AbstractModifier
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
@@ -78,6 +77,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.nbt?:return
+        tooltip.add(AcText.empty())
         if (nbt.getBoolean(LEVEL_UP_READY)){
             tooltip.add(AcText.translatable("item.amethyst_imbuement.spellcasters_focus.ready").formatted(Formatting.GOLD,Formatting.BOLD))
         }
@@ -88,10 +88,12 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
         if (entity !is PlayerEntity) return
+        val offhand = entity.offHandStack == stack
+        if (stack.nbt?.getBoolean(LEVEL_UP_READY) != true) return
         if (world.isClient && (selected || slot == PlayerInventory.OFF_HAND_SLOT)){
             val rnd = world.random.nextInt(5)
             if (rnd < 1){
-                val particlePos = PlayerParticlesV2.scepterParticlePos(MinecraftClient.getInstance(), entity,slot == PlayerInventory.OFF_HAND_SLOT)
+                val particlePos = PlayerParticlesV2.scepterParticlePos(MinecraftClient.getInstance(), entity,offhand)
                 val rnd1 = world.random.nextDouble() * 0.1 - 0.05
                 val rnd2 = world.random.nextDouble() * 0.2 - 0.1
                 val rnd3 = world.random.nextInt(DyeColor.values().size)

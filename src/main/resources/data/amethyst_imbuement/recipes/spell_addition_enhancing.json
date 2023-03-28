@@ -1,0 +1,13 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "amethyst_imbuement:knowledge_powder"
+  },
+  "base": {
+    "tag": "amethyst_core:tier_one_spell_scepters"
+  },
+  "addition": {
+    "item": "amethyst_imbuement:spell_scroll"
+  },
+  "react": true
+}

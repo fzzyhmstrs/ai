@@ -325,10 +325,10 @@ object RegisterRenderer {
                     SpellType.FURY.str() ->{ 0.0f }
                     SpellType.GRACE.str() -> { 0.2f }
                     SpellType.WIT.str() -> { 0.4f }
-                    else -> { 0.0f }
+                    else -> { return@register 0.0f }
                 }
-                val value = nbt.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY)
-                value + decimal
+                val value = nbt.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY).takeIf { f -> f > 0f }?:33f
+                (value + decimal)/1000f
             }
         }
     }

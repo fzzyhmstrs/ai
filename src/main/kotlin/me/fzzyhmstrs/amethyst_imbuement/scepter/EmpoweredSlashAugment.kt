@@ -7,9 +7,9 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.Entity
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleTypes

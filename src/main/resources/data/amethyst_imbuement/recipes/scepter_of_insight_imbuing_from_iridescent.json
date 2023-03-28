@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:inquisitive_gem"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:mana_potion"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftB": {
 	"item": "amethyst_imbuement:gem_dust"
