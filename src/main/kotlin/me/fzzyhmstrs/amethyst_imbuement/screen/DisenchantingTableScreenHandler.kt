@@ -213,7 +213,7 @@ class DisenchantingTableScreenHandler(
                         itemStackTemp
                     } else {
                         if (enchantCheck is ScepterAugment) {
-                            SpellScrollItem.createSpellScroll(enchantCheck)
+                            SpellScrollItem.createSpellScroll(enchantCheck,true)
                         } else {
                             val itemStackTemp = ItemStack(Items.ENCHANTED_BOOK)
                             val nbtCompound = itemStack2.nbt
