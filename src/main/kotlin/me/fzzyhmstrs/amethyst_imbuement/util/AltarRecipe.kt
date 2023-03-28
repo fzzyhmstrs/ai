@@ -17,10 +17,12 @@ class AltarRecipe(
     val base: Ingredient,
     val addition: Ingredient,
     val result: ItemStack,
-    val react: Boolean = false
+    val reactMessage: String = ""
 ) :
     Recipe<SimpleInventory> {
 
+    val react = reactMessage != ""
+        
     override fun matches(inventory: SimpleInventory, world: World): Boolean {
         var bl = dust.test(inventory.getStack(0)) && base.test(inventory.getStack(1)) && addition.test(inventory.getStack(2))
         if (!bl) return false
