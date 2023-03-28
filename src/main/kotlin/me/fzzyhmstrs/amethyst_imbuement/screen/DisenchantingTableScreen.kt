@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -52,6 +54,9 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        if (handler.getSlot(1).hasStack()){
+            this.drawTexture(matrices, i + 35, j + 47, 15, 47, 16, 16)
+        }
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f.translate(-0.34f, 0.23f, 0.0f)
@@ -103,7 +108,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             val u = mouseX - (i + 60)
             val v = mouseY - (j + 14 + 19 * o)
             if (o == 1) {
-                if ((((player.experienceLevel) >= cost) || (player.abilities.creativeMode)) && handler.getSlotStack(1).isOf(Items.BOOK)) {
+                if ((((player.experienceLevel) >= cost) || (player.abilities.creativeMode)) && ((Enchantment.byRawId(r) !is ScepterAugment && handler.getSlotStack(1).isOf(Items.BOOK)) || (Enchantment.byRawId(r) is ScepterAugment && handler.getSlotStack(1).isOf(RegisterItem.EMPTY_SPELL_SCROLL)))) {
                     t2 = if (u >= 0 && v >= 0 && u < 108 && v < 19) {
                         this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
                         0xFFFF80
@@ -247,7 +252,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                 AcText.translatable("container.disenchanting_table.tooltip.limit").formatted(Formatting.WHITE)
             } else if ((player.experienceLevel) < handler.disenchantCost[0] && j == 1){
                 AcText.translatable("container.disenchanting_table.tooltip${j+1}.level").formatted(Formatting.WHITE)
-            }else if ((!handler.getSlotStack(1).isOf(Items.BOOK)) && j == 1){
+            }else if ((!(handler.getSlotStack(1).isOf(Items.BOOK) || handler.getSlotStack(1).isOf(RegisterItem.EMPTY_SPELL_SCROLL))) && j == 1){
                 AcText.translatable("container.disenchanting_table.tooltip2.book").formatted(Formatting.WHITE)
             } else {
                 if (handler.enchantmentId[j] == -1) continue

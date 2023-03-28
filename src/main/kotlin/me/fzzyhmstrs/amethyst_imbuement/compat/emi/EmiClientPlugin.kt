@@ -3,11 +3,15 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiRecipeCategory
+import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiStack
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import net.minecraft.item.Items
+import java.util.function.Function
 
 
 object EmiClientPlugin: EmiPlugin{
@@ -30,7 +34,13 @@ object EmiClientPlugin: EmiPlugin{
         }
 
         registry.addRecipeHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, IMBUING_HANDLER)
-        
+
+        val compareNbt =
+            Function { c: Comparison ->
+                c.copy().nbt(true).build()
+            }
+        registry.setDefaultComparison(RegisterItem.SPELL_SCROLL, compareNbt)
+
         registry.addCategory(ALTAR_CATEGORY)
         registry.addWorkstation(ALTAR_CATEGORY, ALTAR_WORKSTATION)
         

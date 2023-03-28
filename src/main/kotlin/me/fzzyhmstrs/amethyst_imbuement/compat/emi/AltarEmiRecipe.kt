@@ -6,7 +6,13 @@ import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import net.minecraft.item.ItemStack
+import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 
 class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
@@ -15,15 +21,38 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     private val dust: EmiIngredient
     private val base: EmiIngredient
     private val addition: EmiIngredient
-    private val result: EmiStack
+    private val result: List<EmiStack>
 
     init{
         id = recipe.id
         dust = EmiIngredient.of(recipe.dust)
         base = EmiIngredient.of(recipe.base)
 		addition = EmiIngredient.of(recipe.addition)
-	    result = EmiStack.of(recipe.result)
-    
+	    result = if(!recipe.react) {
+            if (!recipe.result.isOf(RegisterItem.SPELL_SCROLL)) {
+                listOf(EmiStack.of(recipe.result))
+            } else {
+                generateScrollOutputs(recipe.addition)
+            }
+        } else {
+            base.emiStacks
+        }
+    }
+
+    private fun generateScrollOutputs(addition: Ingredient): List<EmiStack>{
+        val list = mutableListOf(EmiStack.of(ItemStack(RegisterItem.SPELL_SCROLL)))
+        if (addition.test(RegisterItem.BOOK_OF_MYTHOS.defaultStack)){
+            Registries.ENCHANTMENT.stream()
+                .filter { enchant -> enchant is ScepterAugment && enchant.getTier() == 3 }
+                .map {enchant -> EmiStack.of(SpellScrollItem.createSpellScroll(enchant as ScepterAugment))}
+                .forEach { es -> list.add(es) }
+        } else {
+            Registries.ENCHANTMENT.stream()
+                .filter { enchant -> enchant is ScepterAugment && enchant.getTier() < 3 }
+                .map {enchant -> EmiStack.of(SpellScrollItem.createSpellScroll(enchant as ScepterAugment))}
+                .forEach { es -> list.add(es) }
+        }
+        return list
     }
     
     override fun getCategory(): EmiRecipeCategory{
@@ -39,7 +68,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
     
     override fun getOutputs(): List<EmiStack>{
-        return listOf(result)
+        return result
     }
     
     override fun getDisplayWidth(): Int{
@@ -55,7 +84,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
 		widgets.addSlot(dust, 0, 0)
 		widgets.addSlot(base, 18, 0)
 		widgets.addSlot(addition, 36, 0)
-		widgets.addSlot(result, 94, 0).recipeContext(this)
+		widgets.addSlot(EmiIngredient.of(result), 94, 0).recipeContext(this)
     }
 
 }

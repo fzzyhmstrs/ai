@@ -12,7 +12,6 @@ import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.condition.KilledByPlayerLootCondition
-import net.minecraft.loot.condition.LootConditionTypes
 import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition
 import net.minecraft.loot.entry.ItemEntry

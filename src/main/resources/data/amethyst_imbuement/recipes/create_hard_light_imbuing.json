@@ -16,15 +16,15 @@
 	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
-	"item": "minecraft:sponge"
+	"item": "amethyst_imbuement:hard_light_block"
   },
   "craftF": {
-	"item": "minecraft:sponge"
+	"item": "amethyst_imbuement:hard_light_block"
   },
   "craftH": {
-	"item": "minecraft:sponge"
+	"item": "amethyst_imbuement:hard_light_block"
   },
-  "title": "Create Sponge",
+  "title": "Create Hard Light",
   "cost": 8,
   "augment": "amethyst_imbuement:create_hard_light"
 }

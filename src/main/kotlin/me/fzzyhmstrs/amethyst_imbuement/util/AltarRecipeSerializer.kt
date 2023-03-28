@@ -5,6 +5,7 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
@@ -23,8 +24,8 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         val dust = RecipeUtil.ingredientFromJson(recipeJson.dust)
         val base = RecipeUtil.ingredientFromJson(recipeJson.base)
         val addition = RecipeUtil.ingredientFromJson(recipeJson.addition)
-        val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
-        return AltarRecipe(id,dust,base,addition,result)
+        val result = if (json.has("result")) ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result")) else ItemStack.EMPTY
+        return AltarRecipe(id,dust,base,addition,result, recipeJson.react)
     }
 
     override fun write(buf: PacketByteBuf, recipe: AltarRecipe) {
@@ -32,6 +33,7 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         recipe.base.write(buf)
         recipe.addition.write(buf)
         buf.writeItemStack(recipe.result)
+        buf.writeBoolean(recipe.react)
     }
 
     override fun read(id: Identifier, buf: PacketByteBuf): AltarRecipe {
@@ -39,7 +41,8 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         val base = Ingredient.fromPacket(buf)
         val addition = Ingredient.fromPacket(buf)
         val result = buf.readItemStack()
-        return AltarRecipe(id,dust,base,addition,result)
+        val react = buf.readBoolean()
+        return AltarRecipe(id,dust,base,addition,result,react)
     }
 
 

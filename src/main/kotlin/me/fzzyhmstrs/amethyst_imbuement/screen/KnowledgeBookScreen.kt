@@ -118,7 +118,8 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         offset += 6
         //draw the enchantment desc
         val desc = tooltipList.getOrElse(1) { AcText.empty() }
-        offset = addText(matrices,reformatText(desc),x,offset,11, width = 111)
+        val cooldown = tooltipList.getOrElse(5) { AcText.empty() }
+        offset = addText(matrices,reformatText(desc),x,offset,11, maxRows = if(textRenderer.getWidth(cooldown) > 111) 3 else 4, width = 111)
         offset = renderLine(matrices,x.toInt(),offset)
         //spell type
         val type = tooltipList.getOrElse(2) { AcText.empty() }
@@ -126,27 +127,30 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         offset = addText(matrices,reformatText(type),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), TYPE_HINT))
         offset = renderLine(matrices,x.toInt(),offset)
-        //minimum XP level (skipping key item because recipe)
-        val listDiff = if(tooltipList.size == 7) -1 else 0
         //cooldown text
-        val cooldown = tooltipList.getOrElse(5 + listDiff) { AcText.empty() }
+
         oldOffset = offset
         offset = addText(matrices,reformatText(cooldown),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), COOLDOWN_HINT))
         offset = renderLine(matrices,x.toInt(),offset)
         //mana cost text
-        val cost = tooltipList.getOrElse(6 + listDiff) { AcText.empty() }
+        val cost = tooltipList.getOrElse(6) { AcText.empty() }
         oldOffset = offset
         offset = addText(matrices,reformatText(cost),x,offset,11)
         tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), MANA_HINT))
-        offset = renderLine(matrices,x.toInt(),offset)
         //tier text
-        if (tooltipList.size > 6) {
-            val tier = tooltipList.getOrElse(7 + listDiff) { AcText.empty() }
+        if (tooltipList.size > 8) {
+            offset = renderLine(matrices,x.toInt(),offset)
+            val tier = tooltipList.getOrElse(7) { AcText.empty() }
             oldOffset = offset
             offset = addText(matrices, reformatText(tier), x, offset, 11)
             tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), TIER_HINT))
         }
+        offset = renderLine(matrices, x.toInt(), offset)
+        val lastIndex = if (tooltipList.size > 8) 8 else 7
+        val castXp = tooltipList.getOrElse(lastIndex) { AcText.empty() }
+        offset = addText(matrices,reformatText(castXp),x,offset,11)
+        tooltips.add(TooltipBox(x.toInt(),oldOffset.toInt(),107,(offset-oldOffset).toInt(), CAST_XP_HINT))
         //the 13 inputs, 0 to 12
         renderItem(matrices,i+138,j+38,mouseX, mouseY,recipeInputs[0].getStack())
         renderItem(matrices,i+222,j+38,mouseX, mouseY,recipeInputs[1].getStack())
@@ -212,6 +216,9 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         )
         private val TIER_HINT = listOf<Text>(
             AcText.translatable("lore_book.screen.tier_hint1")
+        )
+        private val CAST_XP_HINT = listOf<Text>(
+            AcText.translatable("lore_book.screen.cast_xp_hint1")
         )
     }
 

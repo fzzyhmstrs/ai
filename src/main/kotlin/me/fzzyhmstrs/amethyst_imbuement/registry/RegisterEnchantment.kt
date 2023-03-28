@@ -146,13 +146,17 @@ object RegisterEnchantment {
             val enchant = regEnchant[k]
             val id = Identifier(AI.MOD_ID, k)
             Registry.register(Registry.ENCHANTMENT, id, enchant)
-            if (enchant is AbstractConfigDisableEnchantment){
-                if (!enchant.isEnabled()){
+        }
+        for (enchant in regEnchant){
+            val e = enchant.value
+            val id = Identifier(AI.MOD_ID, enchant.key)
+            if (e is AbstractConfigDisableEnchantment){
+                if (!e.isEnabled()){
                     LOGGER.info("Augment $id is set as disabled in the configs!")
                 }
             }
-            if (enchant is ScepterAugment){
-                AugmentHelper.registerAugmentStat(enchant)
+            if (e is ScepterAugment){
+                AugmentHelper.registerAugmentStat(e)
                 if (!AugmentHelper.getAugmentEnabled(id.toString())) {
                     LOGGER.info("Augment $id is set as disabled in the configs!")
                 }

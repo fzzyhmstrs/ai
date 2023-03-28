@@ -7,10 +7,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfLoreItem
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfMythosItem
-import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment
 import net.minecraft.enchantment.EnchantmentLevelEntry
@@ -177,9 +174,13 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         val enchant = Registry.ENCHANTMENT.get(identifier)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
         return if (enchant != null){
-            val stack = ItemStack(Items.ENCHANTED_BOOK,1)
-            EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
-            stack
+            if (enchant is ScepterAugment){
+                SpellScrollItem.createSpellScroll(enchant)
+            } else {
+                val stack = ItemStack(Items.ENCHANTED_BOOK, 1)
+                EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant, 1))
+                stack
+            }
         } else if (modifier != null){
             val stack = modifier.acceptableItemStacks().first()
             val moddedStack = stack.copy()

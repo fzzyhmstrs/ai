@@ -122,10 +122,13 @@ class CrystalAltarScreenHandler(
     }
 
     private fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
+        println("It happened!")
+
         stack.onCraft(player.world, player, stack.count)
         output.unlockLastRecipe(player)
         decrementStack(0)
         decrementStack(1)
+        decrementStack(2)
         handlerContext.run { world: World, pos: BlockPos ->
             if (player is ServerPlayerEntity) {
                 RegisterCriteria.ENHANCE.trigger(player)
@@ -156,7 +159,7 @@ class CrystalAltarScreenHandler(
         }
     }
 
-    override fun quickMove(player: PlayerEntity?, slot: Int): ItemStack {
+    override fun quickMove(player: PlayerEntity, slot: Int): ItemStack {
         var itemStack = ItemStack.EMPTY
         val slot2 = slots[slot] as Slot
         if (slot2 != null && slot2.hasStack()) {
@@ -188,10 +191,10 @@ class CrystalAltarScreenHandler(
             } else {
                 slot2.markDirty()
             }
+            slot2.onTakeItem(player, itemStack)
             if (itemStack2.count == itemStack.count) {
                 return ItemStack.EMPTY
             }
-            slot2.onTakeItem(player, itemStack2)
         }
         return itemStack
     }

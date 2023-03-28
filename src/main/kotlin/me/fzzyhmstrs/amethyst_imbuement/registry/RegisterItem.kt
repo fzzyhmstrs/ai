@@ -4,10 +4,12 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem.Companion.createSpellScroll
 import me.fzzyhmstrs.amethyst_imbuement.item.custom.*
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.*
@@ -19,6 +21,7 @@ import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
@@ -81,9 +84,12 @@ object RegisterItem {
         AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_orb"] = it}
     val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
-        EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",4.0,EntityAttributeModifier.Operation.ADDITION),
+        EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",0.05,EntityAttributeModifier.Operation.ADDITION),
         FabricItemSettings().group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
-    val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings().group(AI_GROUP)).also{ regItem["xp_bush_seed"] = it}
+    val KNOWLEDGE_POWDER = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
+        EntityAttributeModifier(UUID.fromString("72321934-ccc0-11ed-afa1-0242ac120002"),"knowledge_modifier",0.025,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP)).also{ regItem["knowledge_powder"] = it}
+    val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings()).also{ regItem["xp_bush_seed"] = it}
     val GOLDEN_HEART = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
         EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",5.0,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)) .also{ regItem["golden_heart"] = it}
@@ -116,8 +122,6 @@ object RegisterItem {
     val IMBUED_AMULET = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_amulet"] = it}
     val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
     val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
-    val EMPTY_SPELL_SCROLL = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["empty_spell_scroll"] = it}
-    val SPELL_SCROLL = SpellScrollItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["spell_scroll"] = it}
     val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(AI_GROUP).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
     val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(1).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["glistering_tome"] = it}
@@ -238,7 +242,12 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.FOWL))
         .also{ regItem["a_scepter_so_fowl"] = it}
 
-    //////////////////////////////
+
+    // Spell scrolls
+    val EMPTY_SPELL_SCROLL = CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["empty_spell_scroll"] = it}
+    val SPELL_SCROLL = SpellScrollItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["spell_scroll"] = it}
+
+    ///////////////////////////
 
     val GIVE_IF_CONFIG = TickCriterion(Identifier(AI.MOD_ID,"give_if_config"))
 

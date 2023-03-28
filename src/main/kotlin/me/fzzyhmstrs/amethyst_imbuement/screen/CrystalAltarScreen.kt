@@ -23,9 +23,12 @@ class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: Pl
         val j = (height - backgroundHeight) / 2
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         if ((handler.getSlot(0).hasStack() || handler.getSlot(1).hasStack() || handler.getSlot(2).hasStack())
-            && !handler.getSlot(2).hasStack()
+            && !handler.getSlot(3).hasStack()
         ) {
-            this.drawTexture(matrices, i + 99, j + 45, backgroundWidth, 0, 28, 21)
+            this.drawTexture(matrices, i + 92, j + 45, backgroundWidth, 0, 28, 21)
+        }
+        if (handler.getSlot(0).hasStack()){
+            this.drawTexture(matrices, i + 33, j + 47, 51, 47, 16, 16)
         }
 
     }

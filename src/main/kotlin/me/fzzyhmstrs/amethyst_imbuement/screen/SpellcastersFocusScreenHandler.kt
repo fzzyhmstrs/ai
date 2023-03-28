@@ -58,7 +58,7 @@ class SpellcastersFocusScreenHandler(
                 if (!lvlUpNbt.isEmpty){
                     nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8))
                 }
-                this.close(player)
+                player.closeHandledScreen()
                 return true
             }
             1 ->{
@@ -79,7 +79,7 @@ class SpellcastersFocusScreenHandler(
                 if (!lvlUpNbt.isEmpty){
                     nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8))
                 }
-                this.close(player)
+                player.closeHandledScreen()
                 return true
             }
             2 ->{
@@ -100,7 +100,7 @@ class SpellcastersFocusScreenHandler(
                 if (!lvlUpNbt.isEmpty){
                     nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8))
                 }
-                this.close(player)
+                player.closeHandledScreen()
                 return true
             }
             else -> {}
