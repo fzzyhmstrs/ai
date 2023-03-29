@@ -33,7 +33,7 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         recipe.base.write(buf)
         recipe.addition.write(buf)
         buf.writeItemStack(recipe.result)
-        buf.writeString(recipe.react)
+        buf.writeString(recipe.reactMessage)
     }
 
     override fun read(id: Identifier, buf: PacketByteBuf): AltarRecipe {
@@ -41,8 +41,8 @@ object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
         val base = Ingredient.fromPacket(buf)
         val addition = Ingredient.fromPacket(buf)
         val result = buf.readItemStack()
-        val react = buf.readString()
-        return AltarRecipe(id,dust,base,addition,result,react)
+        val reactMessage = buf.readString()
+        return AltarRecipe(id,dust,base,addition,result,reactMessage)
     }
 
 

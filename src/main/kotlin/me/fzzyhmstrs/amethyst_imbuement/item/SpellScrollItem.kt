@@ -52,7 +52,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
             nbt.putInt(RegisterItem.SPELL_SCROLL.SPENT_USES,0)
             nbt.putInt(RegisterItem.SPELL_SCROLL.TOTAL_USES,AiConfig.items.scroll.uses.get()[0])
             nbt.putInt(RegisterItem.SPELL_SCROLL.SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[0])
-            if (disenchanted) nbt.putBoolean(DISENCHANTED, true)
+            if (disenchanted) nbt.putBoolean(RegisterItem.SPELL_SCROLL.DISENCHANTED, true)
             return stack
         }
     }

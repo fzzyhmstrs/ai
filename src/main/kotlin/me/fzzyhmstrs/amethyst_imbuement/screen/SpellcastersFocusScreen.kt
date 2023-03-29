@@ -26,17 +26,10 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
     HandledScreen<SpellcastersFocusScreenHandler>(handler, playerInventory, title) {
 
     private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
-    private val player = playerInventory.player
     private val flavor = AcText.translatable("container.spellcasters_focus.hint").formatted(Formatting.ITALIC)
-    private val button1 by lazy{
-        OptionButtonWidget(i + 8, j + 34,AcText.translatable("container.spellcasters_focus.option1"),0,handler.options[0],handler)
-    }
-    private val button2 by lazy{
-        OptionButtonWidget(i + 71, j + 34,AcText.translatable("container.spellcasters_focus.option2"),1,handler.options[1],handler)
-    }
-    private val button3 by lazy{
-        OptionButtonWidget(i + 134, j + 34,AcText.translatable("container.spellcasters_focus.option3"),2,handler.options[2],handler)
-    }
+    private lateinit var button1: OptionButtonWidget
+    private lateinit var button2: OptionButtonWidget
+    private lateinit var button3: OptionButtonWidget
 
     init {
         backgroundWidth = 200
@@ -45,6 +38,9 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
 
     override fun init() {
         super.init()
+        button1 = OptionButtonWidget(((width - backgroundWidth) / 2) + 8, ((height - backgroundHeight) / 2) + 34,AcText.translatable("container.spellcasters_focus.option1"),0,handler.options[0],handler)
+        button2 = OptionButtonWidget(((width - backgroundWidth) / 2) + 71, ((height - backgroundHeight) / 2) + 34,AcText.translatable("container.spellcasters_focus.option2"),1,handler.options[1],handler)
+        button3 = OptionButtonWidget(((width - backgroundWidth) / 2) + 134, ((height - backgroundHeight) / 2) + 34,AcText.translatable("container.spellcasters_focus.option3"),2,handler.options[2],handler)
         addDrawableChild(button1)
         addDrawableChild(button2)
         addDrawableChild(button3)
