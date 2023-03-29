@@ -10,9 +10,11 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.Registries
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
