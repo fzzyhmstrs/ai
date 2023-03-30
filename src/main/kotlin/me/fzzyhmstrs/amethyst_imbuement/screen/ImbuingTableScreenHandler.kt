@@ -1003,6 +1003,11 @@ class ImbuingTableScreenHandler(
                     }
                 }
                 player.applyEnchantmentCosts(itemStack3, i)
+                val reagents = if (item is Reactant){
+                    Reagent.getReagents(handler.inventory).stream().map{ it -> it.copy() }.toList()
+                } else {
+                    listOf()
+                }
                 for (j in 0..12) {
                     if (j != 6 && player.abilities.creativeMode) continue //only decrement the middle slot if its creative mode, to make way for the new item stack
                     if (handler.inventory.getStack(j).item.hasRecipeRemainder()){
@@ -1021,7 +1026,7 @@ class ImbuingTableScreenHandler(
                     itemStack4.copy()
                 }
                 if (item is Reactant){
-                    item.react(itemStack5,Reagent.getReagents(handler.inventory))
+                    item.react(itemStack5,reagents)
                 }
                 handler.inventory.setStack(6,itemStack5)
                 itemStack5.onCraft(world, player,itemStack5.count)
