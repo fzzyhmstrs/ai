@@ -88,7 +88,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
 		widgets.addSlot(base, 18, 0)
 		widgets.addSlot(addition, 36, 0)
 		widgets.addSlot(EmiIngredient.of(result), 94, 0).recipeContext(this)
-		widgets.addText(text,1,19,16755200,true)
+		widgets.addText(text,1,19,0x404040,true)
     }
 
 }
