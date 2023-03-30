@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.promise
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 
 class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
     
@@ -27,7 +29,11 @@ class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.blazing", progress).formatted(Formatting.RED))
         }
     }
-    
+
+    override fun getModifier(): Identifier {
+        return RegisterModifier.INNER_FIRE.modifierId
+    }
+
     fun blazingGemCheck(stack: ItemStack, inventory: PlayerInventory, player: LivingEntity, damageSource: DamageSource){
             if ((damageSource == DamageSource.ON_FIRE ||
                         damageSource == DamageSource.IN_FIRE ||

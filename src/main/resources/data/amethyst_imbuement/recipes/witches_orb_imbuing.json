@@ -1,0 +1,46 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "craftA": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:hard_light_block"
+  },
+  "craftC": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:hard_light_block"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:aspect_gems"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:hard_light_block"
+  },
+  "craftG": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:hard_light_block"
+  },
+  "craftI": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "title": "Witches Orb",
+  "cost": 23,
+  "resultA": "amethyst_imbuement:witches_orb",
+  "countA": 1
+}

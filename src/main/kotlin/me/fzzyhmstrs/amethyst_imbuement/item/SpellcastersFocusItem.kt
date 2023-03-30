@@ -232,10 +232,4 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val tier = getTier(stack.nbt)
         return super.getTranslationKey(stack) + tier.key
     }
-
-    override fun canBeModifiedBy(type: ModifierHelperType): Boolean {
-        return type == ModifierRegistry.MODIFIER_TYPE || type.id == Identifier("gear_core","gear_modifier_helper")
-
-    }
-
 }

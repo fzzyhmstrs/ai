@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
@@ -15,6 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
@@ -100,6 +103,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
             }
         }
+    }
+
+
+    @WrapOperation(method = "damageShield", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
+    private boolean amethyst_imbuement_damageWards(ItemStack instance, Item item, Operation<Boolean> operation){
+        return operation.call(instance,item) || instance.isOf(RegisterItem.INSTANCE.getIMBUED_WARD()) || instance.isOf(RegisterItem.INSTANCE.getCOPPER_WARD());
     }
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))

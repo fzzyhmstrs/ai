@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import dev.emi.trinkets.api.TrinketsApi
+import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.util.math.random.Random
 import java.util.*
+import kotlin.math.max
 
 class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
 
@@ -38,7 +40,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
         private var blockChance: MutableMap<UUID,Float> = mutableMapOf()
 
         fun refreshTrinkets(entity: LivingEntity): Float{
-            var chance = 0.0f
+            var chance = entity.getAttributeValue(RegisterAttribute.SHIELDING).toFloat()
             if (RegisterEnchantment.SHIELDING.isEnabled()) {
                 TrinketsApi.getTrinketComponent(entity).ifPresent { trinkets ->
                     trinkets.forEach { _, stack ->
@@ -54,7 +56,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                     }
                 }
             }
-            blockChance[entity.uuid] = chance
+            blockChance[entity.uuid] = max(1f,chance)
             return chance
         }
 

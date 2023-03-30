@@ -19,17 +19,16 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftE": {
-	"item": "amethyst_imbuement:copper_amulet"
+        "item": "amethyst_imbuement:copper_ward"
   },
   "craftF": {
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftH": {
-    "tag": "amethyst_imbuement:focus_reagents"
+	"tag": "amethyst_imbuement:focus_reagents"
   },
-  "title": "Imbued Amulet",
-  "cost": 13,
-  "resultA": "amethyst_imbuement:imbued_amulet",
+  "title": "Imbued Ward",
+  "cost": 17,
+  "resultA": "amethyst_imbuement:imbued_ward",
   "countA": 1
 }
-

@@ -25,10 +25,10 @@
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftH": {
-	"item": "amethyst_imbuement:imbued_quartz"
+    "tag": "amethyst_imbuement:focus_reagents"
   },
   "title": "Imbued Headband",
-  "cost": 9,
+  "cost": 13,
   "resultA": "amethyst_imbuement:imbued_headband",
   "countA": 1
 }
