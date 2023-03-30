@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Copper jewelry is a set of basic trinkets that act as the base for more powerful $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(). Copper jewelry offers you a modest speed bonus, stacking with each piece worn. There are four pieces of base jewelry:$(li)$(#b0b)Copper Headband$()$(li)$(#b0b)Copper Amulet$()$(li)$(#b0b)Copper Ring$()$(li)$(#b0b)Copper Ward$()"
+"text": "Copper jewelry is a set of basic trinkets that act as the base for more powerful $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(). Copper jewelry offers you a modest speed bonus, stacking with each piece worn. There are four pieces of base jewelry:$(li)$(#b0b)Copper Headband$()$(li)$(#b0b)Copper Amulet$()$(li)$(#b0b)Copper Ring$()$(li)$(#b0b)Copper Ward$() (Usable as a shield)"
 },
 {
 "type": "patchouli:crafting",
