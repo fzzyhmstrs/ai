@@ -337,6 +337,18 @@ object RegisterRenderer {
             }
         }
 
+        ModelPredicateProviderRegistry.register(
+            RegisterItem.IMBUED_WARD, Identifier("blocking")
+        ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
+        }
+
+        ModelPredicateProviderRegistry.register(
+            RegisterItem.COPPER_WARD, Identifier("blocking")
+        ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
+        }
+
         //////////////////////////////////////
 
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register {

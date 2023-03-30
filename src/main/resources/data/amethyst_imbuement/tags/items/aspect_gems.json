@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:blazing_gem",
+    "amethyst_imbuement:brutal_gem",
+    "amethyst_imbuement:healers_gem",
+    "amethyst_imbuement:inquisitive_gem",
+    "amethyst_imbuement:lethal_gem",
+    "amethyst_imbuement:mystical_gem",
+    "amethyst_imbuement:sparking_gem"
+  ]
+}

@@ -14,9 +14,11 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtList
+import net.minecraft.registry.Registries
 import java.util.*
 
-open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), ManaItem {
+open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), Reactant, ManaItem {
 
     override fun getModifiers(
         stack: ItemStack,
@@ -25,6 +27,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         uuid: UUID
     ): Multimap<EntityAttribute, EntityAttributeModifier> {
         val modifiers = super.getModifiers(stack, slot, entity, uuid)
+        println(modifiers)
         modifiers.put(
             EntityAttributes.GENERIC_MOVEMENT_SPEED,
             EntityAttributeModifier(uuid, "amethyst_imbuement:movement_speed", 0.03, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -37,6 +40,27 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
             TrinketEnums.DropRule.KEEP
         } else {
             TrinketEnums.DropRule.DEFAULT
+        }
+    }
+
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+        return true
+    }
+
+    override fun react(stack: ItemStack, reagents: List<ItemStack>){
+
+        for (reagent in reagents){
+            val item = reagent.item
+            if (item is SpellcastersReagent){
+                if (stack.nbt?.contains("TrinketAttributeModifiers") == true) return
+                val attribute = item.getAttributeModifier()
+                val list = NbtList()
+                val nbt = attribute.second.toNbt()
+                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                list.add(nbt)
+                stack.orCreateNbt.put("TrinketAttributeModifiers",list)
+                break
+            }
         }
     }
 

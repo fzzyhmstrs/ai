@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.promise
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
@@ -10,6 +11,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 
 class LethalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
@@ -24,7 +26,11 @@ class LethalGemItem(settings: Settings): IgnitedGemItem(settings) {
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.lethal", progress).formatted(Formatting.DARK_RED))
         }
     }
-    
+
+    override fun getModifier(): Identifier {
+        return RegisterModifier.DANGEROUS.modifierId
+    }
+
     fun lethalGemCheck(stack: ItemStack, inventory: PlayerInventory){
             val nbt = stack.orCreateNbt
             var kills = 0

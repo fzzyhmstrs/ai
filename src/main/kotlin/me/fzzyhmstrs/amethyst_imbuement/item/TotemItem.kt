@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.AugmentTasks
@@ -20,7 +21,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
 @Suppress("SameParameterValue")
-class TotemItem(settings: Settings): Item(settings), AugmentTasks, ManaItem {
+class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, ManaItem {
 
     private var lastGuardian = 0L
 

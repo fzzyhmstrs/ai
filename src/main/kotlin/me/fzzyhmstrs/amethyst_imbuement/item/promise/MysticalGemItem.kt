@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -14,8 +15,9 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 
-class MysticalGemItem(settings: Settings): IgnitedGemItem(settings), Reagent {
+class MysticalGemItem(settings: Settings): IgnitedGemItem(settings){
   
     private val SPELL_XP_TARGET by lazy{
         AiConfig.items.gems.spellXpTarget.get()
@@ -38,7 +40,11 @@ class MysticalGemItem(settings: Settings): IgnitedGemItem(settings), Reagent {
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.mystical", progress).formatted(Formatting.LIGHT_PURPLE))
         }
     }
-    
+
+    override fun getModifier(): Identifier {
+        return RegisterModifier.SAVANT_ASPECT.modifierId
+    }
+
     fun mysticalGemCheck(stack: ItemStack, spell: ScepterAugment, user: PlayerEntity){
             val nbt = stack.orCreateNbt
             val id = spell.id?.toString()?:return

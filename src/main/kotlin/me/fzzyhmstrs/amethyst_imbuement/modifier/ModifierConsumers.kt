@@ -44,6 +44,26 @@ object ModifierConsumers {
         }
     }
 
+    val BLESSED_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> blessedConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun blessedConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.hasStatusEffect(RegisterStatus.BLESSED)){
+                val effect = it.getStatusEffect(RegisterStatus.BLESSED)
+                val amp = effect?.amplifier?:0
+                val amp1 = if (it.world.random.nextInt(5) == 0) amp + 1 else amp
+                val duration = effect?.duration?:0
+                if (duration > 0){
+                    val duration2 = if(duration < 100) {100} else {duration}
+                    it.addStatusEffect(StatusEffectInstance(RegisterStatus.BLESSED,duration2,amp1))
+                }
+            } else {
+                it.addStatusEffect(
+                    StatusEffectInstance(RegisterStatus.BLESSED, 100)
+                )
+            }
+        }
+    }
+
     val BOLT_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> boltConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun boltConsumer(list: List<LivingEntity>){
         list.forEach {

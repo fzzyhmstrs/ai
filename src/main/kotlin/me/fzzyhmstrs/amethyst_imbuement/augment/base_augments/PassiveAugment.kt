@@ -26,7 +26,7 @@ open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is AbstractAugmentJewelryItem) || (stack.isOf(RegisterItem.TOTEM_OF_AMETHYST))
+        return (stack.item is AbstractAugmentJewelryItem) || (stack.isOf(RegisterItem.TOTEM_OF_AMETHYST)) || (stack.isOf(RegisterItem.IMBUED_WARD))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {

@@ -1024,7 +1024,7 @@ class ImbuingTableScreenHandler(
                     item.react(itemStack5,Reagent.getReagents(handler.inventory))
                 }
                 handler.inventory.setStack(6,itemStack5)
-                itemStack4.item.onCraft(itemStack5,world, player)
+                itemStack5.onCraft(world, player,itemStack5.count)
             }
             return true
         }

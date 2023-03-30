@@ -23,6 +23,11 @@ object RegisterModifier {
     val BOUNDLESS = AugmentModifier(Identifier(AI.MOD_ID,"boundless"), cooldownModifier = 10.0, rollToll = 6).withRange(1.0,0.0,100.0).also { regMod[it] = 2 }
     val FOWL = AugmentModifier(Identifier(AI.MOD_ID,"fowl")).withConsumer(ModifierConsumers.FOWL_CONSUMER).also { regMod[it] = 1 }
 
+    //custom modifiers for witches orb
+    val INNER_FIRE = AugmentModifier(Identifier(AI.MOD_ID,"inner_fire")).withAmplifier(2,0,10).withDuration(0,0,25).also { regMod[it] = 0 }
+    val BLESSED = AugmentModifier(Identifier(AI.MOD_ID,"blessed")).withRange(0.0,0.0,10.0).withConsumer(ModifierConsumers.BLESSED_CONSUMER).also { regMod[it] = 0 }
+    val DYNAMO = AugmentModifier(Identifier(AI.MOD_ID,"dynamo"), cooldownModifier = -15.0, manaCostModifier = -15.0).also { regMod[it] = 0 }
+
     val ENRAGED = AugmentModifier(Identifier(AI.MOD_ID,"enraged"), levelModifier = 1).withDamage(0.4F).withXpMod(SpellType.FURY,2).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 2 }
     val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious")).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 4 }
     val GENIUS = AugmentModifier(Identifier(AI.MOD_ID,"genius"), cooldownModifier = -10.0).withXpMod(SpellType.WIT,2).withRange(0.6,0.0,10.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).also { regMod[it] = 2 }

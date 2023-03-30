@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 import me.fzzyhmstrs.amethyst_core.item_util.DefaultScepterItem
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -13,6 +14,10 @@ import net.minecraft.util.Identifier
 
 open class ScepterItem(material: ScepterToolMaterial, settings: Settings): DefaultScepterItem(material, settings), Reactant {
     override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
+
+    override fun getItemBarColor(stack: ItemStack): Int {
+        return AiConfig.items.manaItems.getItemBarColor(stack)
+    }
 
     override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
         for (reagent in reagents){

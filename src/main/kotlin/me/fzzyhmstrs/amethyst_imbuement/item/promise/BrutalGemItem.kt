@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.promise
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.HostileEntity
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 
 class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
@@ -26,7 +28,11 @@ class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.brutal", progress).formatted(Formatting.GRAY))
         }
     }
-    
+
+    override fun getModifier(): Identifier {
+        return RegisterModifier.BLESSED.modifierId
+    }
+
     fun brutalGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){
             val source = damageSource.source
             if (damageSource.name == "mob" || (source != null && source is HostileEntity)){

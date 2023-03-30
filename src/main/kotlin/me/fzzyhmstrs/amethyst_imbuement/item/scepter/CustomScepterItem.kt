@@ -10,10 +10,6 @@ import net.minecraft.world.World
 
 open class CustomScepterItem(material: ScepterToolMaterial, settings: Settings): ScepterItem(material, settings) {
 
-    override fun getItemBarColor(stack: ItemStack): Int {
-        return AiConfig.items.manaItems.getItemBarColor(stack)
-    }
-
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
         if (entity !is PlayerEntity) return
