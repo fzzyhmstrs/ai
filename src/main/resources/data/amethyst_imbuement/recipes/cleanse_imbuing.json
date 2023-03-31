@@ -13,7 +13,7 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftB": {
-	"item": "minecraft:milk_bucket"
+	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
 	"item": "minecraft:milk_bucket"
