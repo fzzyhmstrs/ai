@@ -13,14 +13,15 @@ class WitchesOrbItem(settings: Settings)
 {
 
     init{
-        ModifyModifiersEvent.EVENT.register{ _, user, _, modifiers ->
-            val offhand = user.offHandStack
-            if (offhand.item is WitchesOrbItem){
-                val focusMods = ModifierHelper.getActiveModifiers(offhand)
-                modifiers.combineWith(focusMods)
-            } else {
-                modifiers
+        ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
+            for (stack in user.handItems) {
+                if (stack.item is WitchesOrbItem) {
+                    val focusMods = ModifierHelper.getActiveModifiers(stack)
+                    val mods = modifiers.combineWith(focusMods)
+                    return@register mods
+                }
             }
+            modifiers
         }
     }
 

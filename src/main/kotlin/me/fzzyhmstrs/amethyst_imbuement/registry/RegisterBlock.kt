@@ -66,6 +66,7 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings()
     )
+    val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.3f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["shine_light"] = it }
 
     fun registerAll() {
         for (k in regBlock.keys) {

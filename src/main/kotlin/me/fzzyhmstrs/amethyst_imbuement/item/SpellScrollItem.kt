@@ -97,7 +97,6 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         val stack = user.getStackInHand(hand)
         val nbt = stack.orCreateNbt
         val spellString = nbt.getString(SPELL)
-        println(spellString)
         val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return resetCooldown(stack,world,user,spellString)
         if (spell !is ScepterAugment) return resetCooldown(stack,world,user,spellString)
         val level = min(spell.maxLevel,max(1,nbt.getInt(SCROLL_LEVEL)))
@@ -105,7 +104,6 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
             spell.clientTask(world,user,hand,level)
             return TypedActionResult.pass(stack)
         }
-        println("trying to cast")
         return ScepterHelper.castSpell(world,user,hand,stack,spell,spellString,level,this,
             incrementStats = false,
             checkEnchant = false

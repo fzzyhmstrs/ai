@@ -122,8 +122,6 @@ class CrystalAltarScreenHandler(
     }
 
     private fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
-        println("It happened!")
-
         stack.onCraft(player.world, player, stack.count)
         output.unlockLastRecipe(player)
         decrementStack(0)

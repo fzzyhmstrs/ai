@@ -13,16 +13,16 @@
 	"item": "amethyst_imbuement:danburite"
   },
   "craftB": {
-	"item": "minecraft:torch"
+	"item": "amethyst_imbuement:shine_light"
   },
   "craftD": {
-	"item": "minecraft:torch"
+	"item": "amethyst_imbuement:shine_light"
   },
   "craftF": {
-	"item": "minecraft:torch"
+	"item": "amethyst_imbuement:shine_light"
   },
   "craftH": {
-	"item": "minecraft:torch"
+	"item": "amethyst_imbuement:shine_light"
   },
   "title": "Shine",
   "cost": 5,

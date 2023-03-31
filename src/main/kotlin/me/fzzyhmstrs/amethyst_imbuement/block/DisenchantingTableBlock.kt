@@ -28,8 +28,6 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
 class DisenchantingTableBlock(settings: Settings): EnchantingTableBlock(settings) {
 
-    private val SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
-
     override fun <T : BlockEntity> getTicker(
         world: World,
         state: BlockState,

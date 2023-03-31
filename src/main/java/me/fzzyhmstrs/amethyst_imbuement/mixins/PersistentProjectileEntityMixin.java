@@ -69,7 +69,6 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
     @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/util/math/MathHelper.ceil (D)I"))
     private int amethyst_imbuement_checkHeadhunter(double value){
         int amount = MathHelper.ceil(value);
-        //System.out.println(amount);
         PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
         Entity owner = chk.getOwner();
         if (owner != null) {
@@ -79,7 +78,6 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
                 if (lvl > 0 && headhunterEntity != null && RegisterEnchantment.INSTANCE.getHEADHUNTER().isEnabled()){
                     amount = round(HeadhunterAugment.Companion.checkHeadhunterHit(headhunterEntity,(PersistentProjectileEntity)(Object) this,amount));
                     headhunterEntity = null;
-                    //System.out.println(amount);
                 }
             }
         }

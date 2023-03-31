@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -16,6 +17,7 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.ChickenEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.registry.tag.ItemTags
@@ -53,16 +55,22 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
     }
 
     override fun initGoals() {
-        goalSelector.add(0, MeleeAttackGoal(this, 1.0, false))
-        goalSelector.add(1, SwimGoal(this))
-        goalSelector.add(2, EscapeDangerGoal(this, 1.4))
-        goalSelector.add(3, WanderAroundFarGoal(this, 1.0))
-        goalSelector.add(4, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        goalSelector.add(5, LookAroundGoal(this))
+        goalSelector.add(1, MeleeAttackGoal(this, 1.0, false))
+        goalSelector.add(2, SwimGoal(this))
+        goalSelector.add(3, EscapeDangerGoal(this, 1.4))
+        goalSelector.add(4, WanderAroundFarGoal(this, 1.0))
+        goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
+        goalSelector.add(6, LookAroundGoal(this))
         targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) {
             it is Monster || (it is SpellCastingEntity && it !== owner && !AiConfig.entities.isEntityPvpTeammate(owner, it, RegisterEnchantment.TORRENT_OF_BEAKS))
         })
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
+    }
+
+    override fun initDataTracker() {
+        super.initDataTracker()
+        dataTracker.startTracking(FUSE_SPEED, -1)
+        dataTracker.startTracking(IGNITED, false)
     }
 
     override fun tick() {
@@ -123,6 +131,10 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
             return ActionResult.success(world.isClient)
         }
         return super.interactMob(player2, hand)
+    }
+
+    override fun createChild(serverWorld: ServerWorld, passiveEntity: PassiveEntity): ChickenEntity? {
+        return RegisterEntity.BOOM_CHICKEN_ENTITY.create(serverWorld)
     }
 
     override fun tryAttack(target: Entity?): Boolean {

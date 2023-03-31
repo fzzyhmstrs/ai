@@ -57,7 +57,6 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
             vertexConsumerProvider
         ) {texture: Identifier -> RenderLayer.getEntitySolid(texture)}
         book.renderBook(matrixStack, vertexConsumer, i, j, 1.0f, 1.0f, 1.0f, 1.0f)
-        //println("rendered book")
         matrixStack.pop()
     }
 
