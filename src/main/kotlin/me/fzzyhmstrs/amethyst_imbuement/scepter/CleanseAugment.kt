@@ -30,7 +30,7 @@ class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(670,-20),45,
-            1, imbueLevel,15, LoreTier.NO_TIER, Items.MILK_BUCKET)
+            1, imbueLevel,15, LoreTier.LOW_TIER, Items.MILK_BUCKET)
     }
 
     override fun supportEffect(
