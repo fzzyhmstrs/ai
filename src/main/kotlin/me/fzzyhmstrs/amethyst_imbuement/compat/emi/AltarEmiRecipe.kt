@@ -24,7 +24,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     private val base: EmiIngredient
     private val addition: EmiIngredient
     private val result: List<EmiStack>
-    private val text = if(recipe.react) AcText.translatable(recipe.reactMessage).formatted(Formatting.DARK_GREY).asOrderedText() else AcText.empty().asOrderedText()
+    private val text = if(recipe.react) AcText.translatable(recipe.reactMessage).formatted(Formatting.LIGHT_PURPLE).asOrderedText() else AcText.empty().asOrderedText()
 
     init{
         id = recipe.id

@@ -27,7 +27,6 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         uuid: UUID
     ): Multimap<EntityAttribute, EntityAttributeModifier> {
         val modifiers = super.getModifiers(stack, slot, entity, uuid)
-        println(modifiers)
         modifiers.put(
             EntityAttributes.GENERIC_MOVEMENT_SPEED,
             EntityAttributeModifier(uuid, "amethyst_imbuement:movement_speed", 0.03, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)

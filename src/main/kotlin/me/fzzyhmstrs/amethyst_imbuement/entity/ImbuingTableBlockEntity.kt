@@ -85,7 +85,6 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     companion object {
         private val RANDOM = Random()
         fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: ImbuingTableBlockEntity) {
-            //println("ticking")
             blockEntity.pageTurningSpeed = blockEntity.nextPageTurningSpeed
             blockEntity.field_11963 = blockEntity.field_11964
             val playerEntity =

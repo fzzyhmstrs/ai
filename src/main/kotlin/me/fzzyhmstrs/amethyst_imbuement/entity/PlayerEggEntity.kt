@@ -66,7 +66,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
                 }
                 for (j in 0 until i) {
                     val chickenEntity = RegisterEntity.BOOM_CHICKEN_ENTITY.create(world) ?: continue
-                    chickenEntity.breedingAge = -24000
+                    chickenEntity.breedingAge = 0
                     chickenEntity.refreshPositionAndAngles(this.x, this.y, this.z, yaw, 0.0f)
                     if (this.owner is LivingEntity) {
                         chickenEntity.setOwner(this.owner as LivingEntity)
