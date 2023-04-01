@@ -5,10 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LightningEntity
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -20,6 +17,7 @@ import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
@@ -27,6 +25,8 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 import net.minecraft.world.explosion.Explosion
@@ -55,6 +55,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
     }
 
     override fun initGoals() {
+        goalSelector.add(0,CreeperIgniteGoal(this))
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, false))
         goalSelector.add(2, SwimGoal(this))
         goalSelector.add(3, EscapeDangerGoal(this, 1.4))
@@ -135,6 +136,17 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
 
     override fun createChild(serverWorld: ServerWorld, passiveEntity: PassiveEntity): ChickenEntity? {
         return RegisterEntity.BOOM_CHICKEN_ENTITY.create(serverWorld)
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        val passiveData: EntityData = entityData ?: PassiveData(false)
+        return super.initialize(world, difficulty, spawnReason, passiveData, entityNbt)
     }
 
     override fun tryAttack(target: Entity?): Boolean {

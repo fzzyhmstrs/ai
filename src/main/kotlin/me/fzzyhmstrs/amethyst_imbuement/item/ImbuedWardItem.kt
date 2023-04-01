@@ -1,12 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
+import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ItemStack
@@ -75,7 +79,18 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
 
         for (reagent in reagents){
             val item = reagent.item
-            if (item is SpellcastersReagent){
+            if (item is SpellcastersReagent && item !is CopperWardItem){
+                if (stack.nbt?.contains("AttributeModifiers") == true) return
+                val attribute = item.getAttributeModifier()
+                val list = NbtList()
+                val nbt = attribute.second.toNbt()
+                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                nbt.putString("Slot","offhand")
+                list.add(nbt)
+                stack.orCreateNbt.put("AttributeModifiers",list)
+                return
+            }
+            if (item is SpellcastersReagent && item is CopperWardItem){
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
@@ -86,6 +101,12 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 stack.orCreateNbt.put("AttributeModifiers",list)
                 break
             }
+        }
+    }
+
+    override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
+        if (EventRegistry.ticker_30.isReady() && entity is LivingEntity){
+            ShieldingAugment.refreshTrinkets(entity)
         }
     }
 

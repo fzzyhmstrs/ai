@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:magma_block"
+	"item": "minecraft:blaze_powder"
   },
   "imbueB": {
-	"item": "minecraft:magma_block"
+	"item": "minecraft:blaze_powder"
   },
   "imbueC": {
-	"item": "minecraft:magma_block"
+	"item": "minecraft:blaze_powder"
   },
   "imbueD": {
-	"item": "minecraft:magma_block"
+	"item": "minecraft:blaze_powder"
   },
   "craftA": {
 	"item": "minecraft:raw_iron"

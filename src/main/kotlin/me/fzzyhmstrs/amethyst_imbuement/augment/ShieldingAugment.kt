@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.TrinketsApi
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
+import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedWardItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
@@ -35,7 +36,6 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     companion object ShieldingObject{
 
-        const val baseAmount = 0.025f
         const val shieldingAmount = 0.02f
         private var blockChance: MutableMap<UUID,Float> = mutableMapOf()
 
@@ -46,13 +46,16 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                     trinkets.forEach { _, stack ->
                         val item = stack.item
                         if (item is ImbuedJewelryItem) {
-                            val level = if (RegisterEnchantment.SHIELDING.isEnabled()) {
-                                EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
-                            } else {
-                                0
-                            }
-                            chance += baseAmount + shieldingAmount * level
+                            val level = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack)
+                            chance += shieldingAmount * level
                         }
+                    }
+                }
+                for (stack2 in entity.handItems) {
+                    val item2 = stack2.item
+                    if (item2 is ImbuedWardItem) {
+                        val level = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack2)
+                        chance += shieldingAmount * level
                     }
                 }
             }

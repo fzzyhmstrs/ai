@@ -206,6 +206,14 @@ object RegisterRenderer {
             )
         }
 
+        EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_EGG
+        ){context: EntityRendererFactory.Context ->
+            FlyingItemEntityRenderer(
+                context
+            )
+        }
+
         /////////////////////////////////
 
         BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
