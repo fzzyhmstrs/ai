@@ -77,7 +77,7 @@ object RegisterItem {
         EntityAttributeModifier(UUID.fromString("402ebf88-c404-11ed-afa1-0242ac120002"),"malachite_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
-        EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM)).also{ regItem["resonant_rod"] = it}
     //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()).also{ regItem["survey_map"] = it}
     val HEARTSTONE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
@@ -102,9 +102,9 @@ object RegisterItem {
     val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).rarity(Rarity.RARE)).also{ regItem["sniper_bow"] = it}
     val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_sword"] = it}
     val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_shovel"] = it}
-    val GARNET_PICKAXE = CustomPickaxeItem(GarnetToolMaterial,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_pickaxe"] = it}
-    val GARNET_AXE = CustomAxeItem(GarnetToolMaterial,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_axe"] = it}
-    val GARNET_HOE = CustomHoeItem(GarnetToolMaterial,-3,0.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_hoe"] = it}
+    val GARNET_PICKAXE = PickaxeItem(GarnetToolMaterial,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_pickaxe"] = it}
+    val GARNET_AXE = AxeItem(GarnetToolMaterial,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_axe"] = it}
+    val GARNET_HOE = HoeItem(GarnetToolMaterial,-3,0.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_hoe"] = it}
     val GARNET_HORSE_ARMOR = HorseArmorItem(12,"garnet",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_horse_armor"] = it}
     val GLOWING_BLADE = CustomSwordItem(GlowingToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_blade"] = it}
     val GLOWING_SPADE = CustomShovelItem(GlowingToolMaterial,1.5f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_spade"] = it}
@@ -120,7 +120,7 @@ object RegisterItem {
     val COPPER_AMULET = CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)) .also{ regItem["copper_amulet"] = it}
     val COPPER_WARD = CopperWardItem(
         RegisterAttribute.SHIELDING,
-        EntityAttributeModifier(UUID.fromString("c66fd31a-ce6e-11ed-afa1-0242ac120002"),"ward_modifier",0.02,EntityAttributeModifier.Operation.ADDITION),
+        EntityAttributeModifier(UUID.fromString("c66fd31a-ce6e-11ed-afa1-0242ac120002"),"ward_modifier",0.025,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(336)).also{ regItem["copper_ward"] = it}
     val IMBUED_RING = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())) .also{ regItem["imbued_ring"] = it}
     val IMBUED_HEADBAND = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_headband"] = it}

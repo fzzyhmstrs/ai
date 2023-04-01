@@ -19,14 +19,14 @@ import net.minecraft.world.World
 
 class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
 
-    constructor (entityType: EntityType<out EggEntity?>?, world: World?):
-        super(entityType as EntityType<out ThrownItemEntity?>?, world)
+    constructor (entityType: EntityType<out PlayerEggEntity?>?, world: World?):
+        super(entityType, world)
 
     constructor(world: World?, owner: LivingEntity?):
-        super(EntityType.EGG as EntityType<out ThrownItemEntity?>, owner, world)
+        super(RegisterEntity.PLAYER_EGG, owner, world)
 
     constructor(world: World?, x: Double, y: Double, z: Double):
-        super(EntityType.EGG as EntityType<out ThrownItemEntity?>, x, y, z, world)
+        super(RegisterEntity.PLAYER_EGG, x, y, z, world)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0f)
 
@@ -59,15 +59,15 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
     override fun onCollision(hitResult: HitResult?) {
         super.onCollision(hitResult)
         if (!world.isClient) {
-            if (random.nextInt(8) == 0) {
+            if (random.nextInt(5) == 0) {
                 var i = 1
-                if (random.nextInt(32) == 0) {
+                if (random.nextInt(25) == 0) {
                     i = 4
                 }
                 for (j in 0 until i) {
-                    val chickenEntity = RegisterEntity.BOOM_CHICKEN_ENTITY.create(world) ?: continue
-                    chickenEntity.breedingAge = 0
+                    val chickenEntity = RegisterEntity.BOOM_CHICKEN_ENTITY.create(world)?:return
                     chickenEntity.refreshPositionAndAngles(this.x, this.y, this.z, yaw, 0.0f)
+                    chickenEntity.isBaby = false
                     if (this.owner is LivingEntity) {
                         chickenEntity.setOwner(this.owner as LivingEntity)
                     }

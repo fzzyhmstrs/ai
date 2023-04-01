@@ -206,7 +206,7 @@ object VanillaLoot: AbstractModLoot() {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .bonusRolls(ConstantLootNumberProvider.create(1.0F))
-                .conditionally(RandomChanceLootCondition.builder(0.01f))
+                .conditionally(RandomChanceLootCondition.builder(0.025f))
                 .with(ItemEntry.builder(RegisterItem.A_SCEPTER_SO_FOWL).weight(1))
             table.pool(poolBuilder)
             return true

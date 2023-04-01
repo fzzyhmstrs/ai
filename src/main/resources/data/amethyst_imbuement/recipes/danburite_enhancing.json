@@ -4,10 +4,10 @@
     "item": "minecraft:redstone"
   },
   "base": {
-    "item": "minecraft:lapis_lazuli"
+    "item": "minecraft:quartz"
   },
   "addition": {
-    "item": "minecraft:rose_bush"
+    "item": "minecraft:sunflower"
   },
   "result": {
     "item": "amethyst_imbuement:danburite"
