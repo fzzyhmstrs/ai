@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
@@ -79,7 +80,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
 
         for (reagent in reagents){
             val item = reagent.item
-            if (item is SpellcastersReagent && item !is CopperWardItem){
+            if (item is SpellcastersReagent && !reagent.isIn(RegisterTag.BASIC_WARDS_TAG)){
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
@@ -90,7 +91,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 stack.orCreateNbt.put("AttributeModifiers",list)
                 return
             }
-            if (item is SpellcastersReagent && item is CopperWardItem){
+            if (item is SpellcastersReagent && reagent.isIn(RegisterTag.BASIC_WARDS_TAG)){
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
