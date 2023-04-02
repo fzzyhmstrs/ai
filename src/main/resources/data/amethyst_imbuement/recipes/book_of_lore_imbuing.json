@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:gem_of_promise"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:gem_of_promise"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:gem_of_promise"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:gem_of_promise"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftA": {
 	"item": "amethyst_imbuement:gem_dust"

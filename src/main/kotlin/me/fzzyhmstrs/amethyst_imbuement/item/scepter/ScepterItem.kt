@@ -7,6 +7,8 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.minecraft.entity.Entity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
@@ -23,7 +25,7 @@ open class ScepterItem(material: ScepterToolMaterial, settings: Settings): Defau
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
                 if (reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.SPELL) != true) return false
-                if (reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.DISENCHANTED) != true) return false
+                if ((reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.DISENCHANTED) != true)) return false
                 var count = 0
                 for (reagent1 in reagents){
                     if (reagent1.isOf(RegisterItem.KNOWLEDGE_POWDER)){

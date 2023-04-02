@@ -17,7 +17,9 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.Box
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
@@ -42,6 +44,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     override val maxAge: Int
         get() = 600
     var ticker = EventRegistry.ticker_20
+    var initialBeam = false
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -60,9 +63,10 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     override fun tick() {
         super.tick()
         if (world !is ServerWorld) return
-        if (!ticker.isReady()) return
+        if (!ticker.isReady() && initialBeam) return
         if (owner == null || owner !is LivingEntity) return
-        val entities = RaycasterUtil.raycastEntityArea(entityEffects.range(0),this,this.pos)
+        val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
+        val entities = world.getOtherEntities(owner, box)
         for (entity in entities){
             if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
@@ -70,14 +74,15 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
+        initialBeam = true
     }
 
     private fun beam(serverWorld: ServerWorld, entity: LivingEntity){
         val startPos = this.pos.add(0.0,0.25,0.0)
         val endPos = entity.pos.add(0.0,entity.height/2.0,0.0)
-        val vec = endPos.subtract(startPos).multiply(0.2)
+        val vec = endPos.subtract(startPos).multiply(0.1)
         var pos = startPos
-        for (i in 1..5){
+        for (i in 1..10){
             serverWorld.spawnParticles(ParticleTypes.ELECTRIC_SPARK,pos.x,pos.y,pos.z,2,vec.x,vec.y,vec.z,0.0)
             pos = pos.add(vec)
         }
@@ -85,6 +90,21 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
+    }
+
+    override fun onMissileBlockHit(blockHitResult: BlockHitResult) {
+        if (world !is ServerWorld) return
+        if (owner == null || owner !is LivingEntity) return
+        val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
+        val entities = world.getOtherEntities(owner, box)
+        for (entity in entities){
+            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
+            if (entity !is LivingEntity) continue
+            entity.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
+            beam(world as ServerWorld,entity)
+            world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
+        }
+        super.onMissileBlockHit(blockHitResult)
     }
 
     override fun onRemoved() {

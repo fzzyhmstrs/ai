@@ -15,6 +15,7 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import java.util.*
 import kotlin.math.max
+import kotlin.math.min
 
 class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
 
@@ -41,6 +42,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
 
         fun refreshTrinkets(entity: LivingEntity): Float{
             var chance = entity.getAttributeValue(RegisterAttribute.SHIELDING).toFloat()
+
             if (RegisterEnchantment.SHIELDING.isEnabled()) {
                 TrinketsApi.getTrinketComponent(entity).ifPresent { trinkets ->
                     trinkets.forEach { _, stack ->
@@ -59,7 +61,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                     }
                 }
             }
-            blockChance[entity.uuid] = max(1f,chance)
+            blockChance[entity.uuid] = min(1f,chance)
             return chance
         }
 

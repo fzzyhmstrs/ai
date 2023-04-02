@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -42,11 +43,11 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         }
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>){
+    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
 
         for (reagent in reagents){
             val item = reagent.item

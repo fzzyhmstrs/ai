@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.item_util.SpellCasting
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
@@ -9,9 +8,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
-import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -145,7 +143,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         nbt.putFloat(MODEL_KEY, modelKey)
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
         if (reagents.isEmpty()) return true
         if (reagents.size == 1 && reagents[0].item is SpellScrollItem) return true
         val nbt = stack.nbt
@@ -163,7 +161,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         return fails == 0
     }
     
-    override fun react(stack: ItemStack,reagents: List<ItemStack>){
+    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
         val nbt = stack.orCreateNbt
         for (reagent in reagents){
             if (nbt.contains(SPELL)) break

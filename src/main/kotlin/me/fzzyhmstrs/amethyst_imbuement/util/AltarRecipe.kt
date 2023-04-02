@@ -28,7 +28,7 @@ class AltarRecipe(
         if (!bl) return false
         val item = inventory.getStack(1).item
         if (item is Reactant){
-            bl = bl && item.canReact(result,Reagent.getReagents(inventory))
+            bl = bl && item.canReact(result, Reagent.getReagents(inventory))
         }
         return bl
     }
@@ -43,7 +43,7 @@ class AltarRecipe(
         }
         val item = itemStack.item
         if (item is Reactant){
-            item.react(itemStack,Reagent.getReagents(inventory))
+            item.react(itemStack, Reagent.getReagents(inventory))
         }
         return itemStack
     }

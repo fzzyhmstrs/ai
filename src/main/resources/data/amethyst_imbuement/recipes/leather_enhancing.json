@@ -1,0 +1,15 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "minecraft:gunpowder"
+  },
+  "base": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "addition": {
+    "item": "minecraft:dandelion"
+  },
+  "result": {
+    "item": "minecraft:leather"
+  }
+}

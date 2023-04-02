@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import eu.pb4.common.protection.api.CommonProtection
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -7,12 +9,15 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import net.minecraft.block.ShapeContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
@@ -34,34 +39,26 @@ class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
+        if (user !is ServerPlayerEntity) return false
         var successes = 0
-        val dir = user.horizontalFacing
-        val pos = user.blockPos.add(0,-1,0)
-        var xMod = 0
-        var zMod = 0
-        when (dir){
-            Direction.WEST->{
-                xMod = -1
+        var range = effect.range(level)
+        do {
+            val pos = user.pos.subtract(0.0, 0.5, 0.0).add(user.rotationVector.multiply(range))
+            val blockPos = BlockPos(pos)
+            if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
+                val state = RegisterBlock.HARD_LIGHT_BLOCK.defaultState
+                if (world.canPlayerModifyAt(user,blockPos) && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
+                    world.setBlockState(blockPos,state)
+
+                    successes++
+                }
             }
-            Direction.EAST->{
-                xMod = 1
-            }
-            Direction.NORTH->{
-                zMod = -1
-            }
-            Direction.SOUTH->{
-                zMod = 1
-            }
-            else->{return false}
+            range -= 1.0
+        }while (range > 0.0)
+        if (successes > 0) {
+            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         }
-        for (i in 1..effect.range(level).toInt()){
-            val pos2 = pos.add(i * xMod,0,i * zMod)
-            if (world.isAir(pos2)){
-                world.setBlockState(pos2,RegisterBlock.HARD_LIGHT_BLOCK.defaultState)
-                successes++
-            }
-        }
-        if (successes > 0) world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         return successes > 0
     }
 
