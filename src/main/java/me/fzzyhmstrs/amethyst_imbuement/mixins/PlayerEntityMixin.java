@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -108,7 +109,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @WrapOperation(method = "damageShield", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
     private boolean amethyst_imbuement_damageWards(ItemStack instance, Item item, Operation<Boolean> operation){
-        return operation.call(instance,item) || instance.isOf(RegisterItem.INSTANCE.getIMBUED_WARD()) || instance.isOf(RegisterItem.INSTANCE.getCOPPER_WARD());
+        return operation.call(instance,item) || instance.isIn(RegisterTag.INSTANCE.getBASIC_WARDS_TAG()) || instance.isOf(RegisterItem.INSTANCE.getIMBUED_WARD());
     }
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))
