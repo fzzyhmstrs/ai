@@ -65,6 +65,10 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
         return ingredient.isOf(Items.AMETHYST_SHARD) && stack.isOf(RegisterItem.TOTEM_OF_AMETHYST)
     }
 
+    override fun isFireproof(): Boolean {
+        return true
+    }
+
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         if(world.isClient || entity !is PlayerEntity) return
         if (EventRegistry.ticker_20.isReady()){

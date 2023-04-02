@@ -28,8 +28,8 @@ class BallLightningAugment: SummonProjectileAugment(ScepterTier.TWO,8){
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val speed = 2.0F
-        val div = 0.75F
+        val speed = 0.1f
+        val div = 0.25F
         return BallLightningEntity.createBallLightning(world, user, speed, div, effects, level, this)
     }
 

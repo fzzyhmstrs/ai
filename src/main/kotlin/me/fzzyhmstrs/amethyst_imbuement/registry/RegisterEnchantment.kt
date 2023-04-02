@@ -84,6 +84,7 @@ object RegisterEnchantment {
     val CURSE = CurseAugment().also{regEnchant["curse"] = it}
     val DASH = DashAugment().also{regEnchant["dash"] = it}
     val EMPOWERED_SLASH = EmpoweredSlashAugment().also{regEnchant["empowered_slash"] = it}
+    val EXCAVATE = ExcavateAugment().also{regEnchant["excavate"] = it}
     val EXHAUST = ExhaustAugment().also{regEnchant["exhaust"] = it}
     val FANG_BARRAGE = FangBarrageAugment().also{regEnchant["fang_barrage"] = it}
     val FANGS = FangsAugment().also{regEnchant["fangs"] = it}

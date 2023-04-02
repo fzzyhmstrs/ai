@@ -71,11 +71,11 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
         addFlavorText(tooltip, context)
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>){
+    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
 
         for (reagent in reagents){
             val item = reagent.item

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
 
 interface Reactant{

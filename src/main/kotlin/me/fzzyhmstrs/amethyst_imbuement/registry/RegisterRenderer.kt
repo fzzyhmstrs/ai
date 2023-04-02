@@ -138,6 +138,19 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.BALL_LIGHTNING_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            MissileEntityRenderer(
+                context,
+                1.0f,
+                1.0f,
+                0.0f,
+                -2.0F,
+                1.25F
+            )
+        }
+
+        EntityRendererRegistry.register(
             RegisterEntity.SOUL_MISSILE_ENTITY
         ){context: EntityRendererFactory.Context ->
             MissileEntityRenderer(context)

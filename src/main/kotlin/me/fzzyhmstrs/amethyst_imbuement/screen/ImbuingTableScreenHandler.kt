@@ -997,7 +997,7 @@ class ImbuingTableScreenHandler(
                 val itemStack4 = recipe.output
                 val item = itemStack4.item
                 if (item is Reactant){
-                    if (!item.canReact(itemStack4.copy(),Reagent.getReagents(handler.inventory))){
+                    if (!item.canReact(itemStack4.copy(), Reagent.getReagents(handler.inventory))){
                         println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack4}]!")
                         return false
                     }
@@ -1026,7 +1026,7 @@ class ImbuingTableScreenHandler(
                     itemStack4.copy()
                 }
                 if (item is Reactant){
-                    item.react(itemStack5,reagents)
+                    item.react(itemStack5, reagents)
                 }
                 handler.inventory.setStack(6,itemStack5)
                 itemStack5.onCraft(world, player,itemStack5.count)

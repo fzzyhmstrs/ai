@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
 import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -13,7 +12,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PlayerParticlesV2
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
-import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -105,7 +103,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         }
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean{
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
         for (reagent in reagents) {
             if (reagent.item is MysticalGemItem) {
                 if (getTier(stack.nbt).previousTier == -1) return false
@@ -114,7 +112,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         return true
     }
     
-    override fun react(stack: ItemStack, reagents: List<ItemStack>){
+    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
 
         for (reagent in reagents){
             val item = reagent.item
@@ -227,6 +225,10 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     override fun getRarity(stack: ItemStack): Rarity {
         val tier = getTier(stack.nbt)
         return tier.rarity
+    }
+
+    override fun isFireproof(): Boolean {
+        return true
     }
 
     override fun getTranslationKey(stack: ItemStack): String {

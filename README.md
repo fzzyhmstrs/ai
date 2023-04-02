@@ -18,7 +18,8 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Implement crystal altar quick move|In progress|
 |Get the grey "fog" on the crystal altar|In progress|
 |Make sure scepters use the mana bar coloring|In progress|
-|Check on the random provider on switching dimensions|Not started|
+|Check on the random provider on switching dimensions|In progress|
+|Ice Shard shards weird angle/rotation issue?|Not started|
 
 Check out getting the flavor text raw key to not appear:
 ![scepter with incorrect flavor text](https://user-images.githubusercontent.com/72876796/227993975-8c92457b-f827-4c9c-99b3-44c954da4b71.png)

@@ -87,8 +87,8 @@ object RegisterItem {
     val LUSTROUS_SPHERE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
         EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         FabricItemSettings().rarity(Rarity.RARE)).withGlint().also{ regItem["lustrous_sphere"] = it}
-    val KNOWLEDGE_POWDER = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
-        EntityAttributeModifier(UUID.fromString("72321934-ccc0-11ed-afa1-0242ac120002"),"knowledge_modifier",0.025,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+    val KNOWLEDGE_POWDER = SpellcastersReagentFlavorItem(RegisterAttribute.PLAYER_EXPERIENCE,
+        EntityAttributeModifier(UUID.fromString("72321934-ccc0-11ed-afa1-0242ac120002"),"knowledge_modifier",0.05,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM)).also{ regItem["knowledge_powder"] = it}
     val XP_BUSH_SEED = AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings()).also{ regItem["xp_bush_seed"] = it}
     val GOLDEN_HEART = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
