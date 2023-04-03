@@ -75,7 +75,7 @@ class HailStormAugment: MiscAugment(ScepterTier.THREE,12), PersistentEffectHelpe
         var successes = 0
         for (entity3 in entityList) {
             if(entity3 is Monster){
-                val rot = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize()
+                val rot = entity3.pos.add(0.0,entity3.height/2.0,0.0).subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize()
                 val ise = IceShardEntity(world,user,4.5f,0.4f,user.eyePos.subtract(0.0,0.2,0.0),rot)
                 ise.passEffects(effect, level)
                 ise.setAugment(this)
@@ -116,7 +116,7 @@ class HailStormAugment: MiscAugment(ScepterTier.THREE,12), PersistentEffectHelpe
         }
         if (entity == null) return
 
-        val rot = entity.pos.subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize()
+        val rot = entity.pos.add(0.0,entity.height/2.0,0.0).subtract(data.user.pos.add(0.0,data.user.standingEyeHeight.toDouble(),0.0)).normalize()
         val ise = IceShardEntity(data.world,data.user,4.5f,0.4f,data.user.eyePos.subtract(0.0,0.2,0.0),rot)
         ise.passEffects(data.effect, data.level)
         ise.setAugment(this)

@@ -32,6 +32,12 @@ object RegisterBlock {
     val EXPERIENCE_BUSH = ExperienceBushBlock(FabricBlockSettings.of(Material.PLANT, MapColor.LICHEN_GREEN).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)).also { regBlock["experience_bush"] = it }
     val CRYSTALLINE_CORE_BLOCK = AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["crystalline_core"] = it }
     val WARDING_CANDLE = WardingCandleBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.OFF_WHITE).nonOpaque().strength(0.1f).sounds(BlockSoundGroup.CANDLE).luminance(WardingCandleBlock.STATE_TO_LUMINANCE)).also { regBlock["warding_candle"] = it }
+    val WARDING_CANDLE_ITEM = SpellcastersReagentBlockItem(
+        EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
+        EntityAttributeModifier(UUID.fromString("279ce6aa-d1c6-11ed-afa1-0242ac120002"),"warding_modifier",0.5,EntityAttributeModifier.Operation.ADDITION),
+        WARDING_CANDLE,
+        FabricItemSettings()
+    )
     val STEEL_BLOCK = Block(FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["steel_block"] = it }
     val STEEL_BLOCK_ITEM = SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
@@ -66,15 +72,17 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings()
     )
-    val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.3f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["shine_light"] = it }
+    val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.1f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["shine_light"] = it }
 
     fun registerAll() {
         for (k in regBlock.keys) {
-            if (k == "experience_bush" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice") continue
+            if (k == "experience_bush" || k =="warding_candle" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice") continue
             registerBlock(k,regBlock[k]?:continue)
         }
 
         Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
+        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "warding_candle"), WARDING_CANDLE)
+        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"warding_candle"), WARDING_CANDLE_ITEM)
         Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "steel_block"), STEEL_BLOCK)
         Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"steel_block"), STEEL_BLOCK_ITEM)
         Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "beryl_copper_block"), BERYL_COPPER_BLOCK)
