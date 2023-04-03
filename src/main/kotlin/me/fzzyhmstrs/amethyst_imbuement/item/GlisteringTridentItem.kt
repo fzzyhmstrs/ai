@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
@@ -17,10 +18,13 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem
+import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.UseAction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
@@ -34,6 +38,32 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
     override fun getFlavorItem(): GlisteringTridentItem {
         return this
     }
+
+    private val flavorText: MutableText by lazy{
+        makeFlavorText()
+    }
+
+    private val flavorTextDesc: MutableText by lazy{
+        makeFlavorTextDesc()
+    }
+
+    private fun makeFlavorText(): MutableText {
+        val id = Registries.ITEM.getId(this)
+        return AcText.translatable("item.${id.namespace}.${id.path}.flavor").formatted(Formatting.WHITE, Formatting.ITALIC)
+    }
+
+    private fun makeFlavorTextDesc(): MutableText {
+        val id = Registries.ITEM.getId(this)
+        return AcText.translatable("item.${id.namespace}.${id.path}.flavor.desc").formatted(Formatting.WHITE)
+    }
+
+    override fun flavorText(): MutableText{
+        return flavorText
+    }
+    override fun flavorDescText(): MutableText{
+        return flavorTextDesc
+    }
+
     init {
         val builder = ImmutableMultimap.builder<EntityAttribute, EntityAttributeModifier>()
         builder.put(
