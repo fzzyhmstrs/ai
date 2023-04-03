@@ -28,8 +28,8 @@ object RegisterStatus {
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"2c4481ee-c5f1-11ed-afa1-0242ac120002",-1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"94974614-c38a-11ed-afa1-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
     val BLESSED = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
-        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"03c3f40c-ce8e-11ed-afa1-0242ac120002",-1.0,EntityAttributeModifier.Operation.ADDITION)
-        .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"03c3f7ae-ce8e-11ed-afa1-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"03c3f40c-ce8e-11ed-afa1-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"03c3f7ae-ce8e-11ed-afa1-0242ac120002",0.05,EntityAttributeModifier.Operation.ADDITION)
 
     fun registerAll(){
         Registry.register(Registry.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
