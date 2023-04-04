@@ -17,9 +17,9 @@ import net.minecraft.util.Hand
 
 class ImmunityAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl, *slot) {
 
-    override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
+    /*override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         EffectQueue.addStatusToQueue(user,RegisterStatus.IMMUNITY,260,0)
-    }
+    }*/
 
     fun checkAndDamageTrinket(entity: LivingEntity, effect: StatusEffectInstance): Boolean{
         val trinkets = TrinketUtil.getTrinketStacks(entity)
@@ -43,7 +43,7 @@ class ImmunityAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
             }
         }
 
-        val totem2 = entity.getStackInHand(Hand.OFF_HAND)
+        val totem2 = entity.getStackInHand(Hand.MAIN_HAND)
         if (EnchantmentHelper.getLevel(RegisterEnchantment.IMMUNITY,totem2) != 0){
             if(RegisterItem.IMBUED_AMULET.checkCanUse(totem2,world,entity,damage, AcText.empty())){
                 RegisterItem.IMBUED_AMULET.manaDamage(totem2,world,entity,damage)

@@ -104,6 +104,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
+        world.playSound(null,this.blockPos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         super.onMissileBlockHit(blockHitResult)
     }
 
