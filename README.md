@@ -15,30 +15,26 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### Testing List
 |Task|Status|
 |----|------|
-|Implement crystal altar quick move|In progress|
-|Get the grey "fog" on the crystal altar|In progress|
-|Make sure scepters use the mana bar coloring|In progress|
+|Implement crystal altar quick move|Complete|
+|Get the grey "fog" on the crystal altar|Complete|
+|Make sure scepters use the mana bar coloring|Complete|
 |Check on the random provider on switching dimensions|In progress|
 |Ice Shard shards weird angle/rotation issue?|Not started|
 
-Check out getting the flavor text raw key to not appear:
-![scepter with incorrect flavor text](https://user-images.githubusercontent.com/72876796/227993975-8c92457b-f827-4c9c-99b3-44c954da4b71.png)
-
 #### Steps Needed To Utilize Spell Scrolls Instead of Enchanted Books for Spells
-- Update how Disenchanting table strips off spells, and require empty spell scroll for that
+- [Done] Update how Disenchanting table strips off spells, and require empty spell scroll for that
 - [Done] Add spell scroll addition recipe to Crystal Altar, instead of re-adding spells via anvil
 - [Done] Add a 'knowledge powder' item as the dust input for adding spells.
 - [Done] Knowledge dust comes from imbuing recipe? XP bottles, gem dust, etc
 - [Done] Add item stacks of spells scrolls to the item groups
-- Remove spell enchanted books from creative menu
+- [Done] Remove spell enchanted books from creative menu
 
 ### TODO List
 |Task|Status|
 |----|------|
 |NOT STARTED|1|
 |Add sounds for Ice Shard and HailStorm|Not started|
-|IN PROGRESS|2|
-|Check out spell-switching issue from Discord|In progress|
+|IN PROGRESS|1|
 |Test devout cleric|In progress|
 |DOCUMENTATION TODO|5|
 |Polish up wiki|Doc Todo|
@@ -46,10 +42,11 @@ Check out getting the flavor text raw key to not appear:
 |Update all spells in wiki|Doc Todo|
 |Update enhancing template used in zh_cn version|Doc Todo|
 |Bring patchouli book up to speed|Doc Todo|
-|COMPLETE|47|
-|Add some advancements for the new stuff|In progress|
-|Make splash arts and icons for the new modifiers|Not Started|
-|Make item tex for Mystical gem|Not Started|
+|COMPLETE|48|
+|Add some advancements for the new stuff|Complete|
+|Check out spell-switching issue from Discord|Complete|
+|Make splash arts and icons for the new modifiers|COmplete|
+|Make item tex for Mystical gem|Complete|
 |Update plugins to reflect the new Crystal Altar|Complete|
 |Make sure the healers gem is actually checking food|Complete|
 |Add config settings all newly added vars|Complete|
