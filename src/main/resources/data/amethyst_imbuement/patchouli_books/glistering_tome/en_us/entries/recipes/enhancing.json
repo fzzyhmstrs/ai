@@ -1,6 +1,6 @@
 {    
-"name": "Crafting Recipes",    
-"icon": "minecraft:crafting_table",    
+"name": "Enhancing Recipes",    
+"icon": "amethyst_imbuement:crystal_altar",    
 "category": "amethyst_imbuement:recipes",    
 "pages": [        
 {            
