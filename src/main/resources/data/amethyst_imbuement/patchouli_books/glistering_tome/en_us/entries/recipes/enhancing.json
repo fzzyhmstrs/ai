@@ -15,49 +15,53 @@
 "flower_item": "minecraft:peony",
 "output_item": "amethyst_imbuement:hard_light_block"
 },
-{
-"type": "patchouli:crafting",
-"anchor": "steel_helmet",
-"recipe": "amethyst_imbuement:steel_helmet",
-"recipe2": "amethyst_imbuement:steel_chestplate"
+{            
+"type": "patchouli:text",            
+"text": "Spell scrolls hold the magical energy of a spell within paper, waiting to be used up or to be transferred to a more permanent home on a scepter. In order to create a spell scroll, one must start with an empty one."
 },
 {
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:steel_leggings",
-"recipe2": "amethyst_imbuement:steel_boots"
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_empty_spell_scroll",
+"input_item": "amethyst_imbuement:gem_dust",
+"addition_item": "minecraft:paper",
+"flower_item": "minecraft:sunflower",
+"output_item": "amethyst_imbuement:empty_spell_scroll"
+},
+{            
+"type": "patchouli:text",            
+"text": "Blue ice makes for a fantastic skating rink, but with a little magic, it can be made even better! Glistening ice is more slippery than blue ice, and it's useful in magical recipes."
 },
 {
-"type": "patchouli:crafting",
-"anchor": "beryl_copper_block",
-"recipe": "amethyst_imbuement:beryl_copper_block",
-"recipe2": "amethyst_imbuement:cut_beryl_copper_block"
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_glistening_ice",
+"input_item": "amethyst_imbuement:gem_dust",
+"addition_item": "minecraft:blue_ice",
+"flower_item": "minecraft:rose_bush",
+"output_item": "amethyst_imbuement:glistening_ice"
+},
+{            
+"type": "patchouli:text",            
+"text": "More alchemy than simple enhancing, the altar can cure the rotten flesh of fallen undead, converting it into a more useable leathery product."
 },
 {
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:cut_beryl_copper_stairs",
-"recipe2": "amethyst_imbuement:cut_beryl_copper_slab"
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_leather",
+"input_item": "minecraft:gunpowder",
+"addition_item": "minecraft:rotten_flesh",
+"flower_item": "minecraft:dandelion",
+"output_item": "minecraft:leather"
+},
+{            
+"type": "patchouli:text",            
+"text": "Shine lights combine all the sunny characteristics of the sunflower with the literal glowing magic of glowstone dust into a compact and convenient light source."
 },
 {
-"type": "patchouli:crafting",
-"anchor": "chipped_anvil_combine",
-"recipe": "amethyst_imbuement:chipped_anvil_combine",
-"recipe2": "amethyst_imbuement:damaged_anvil_combine"
-},
-{
-"type": "patchouli:crafting",
-"anchor": "polished_amethyst_block",
-"recipe": "amethyst_imbuement:polished_amethyst_block",
-"recipe2": "amethyst_imbuement:polished_amethyst_bricks"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:chiseled_polished_amethyst_block",
-"recipe2": "amethyst_imbuement:polished_amethyst_slab"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:polished_amethyst_stairs",
-"recipe2": "amethyst_imbuement:polished_amethyst_pillar"
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_shine_light",
+"input_item": "minecraft:glowstone_dust",
+"addition_item": "minecraft:torch",
+"flower_item": "minecraft:sunflower",
+"output_item": "amethyst_imbuement:shine_light#2"
 }
 ]
 }
