@@ -38,6 +38,7 @@ class SummonStriderAugment: SummonEntityAugment(ScepterTier.TWO,1) {
             val spawnPos = findSpawnPos(world,startPos,2,2)
             val strider = StriderEntity(EntityType.STRIDER, world)
             strider.setPos(spawnPos.x + 0.5, spawnPos.y + 0.05, spawnPos.z + 0.5)
+            strider.refreshPositionAndAngles(spawnPos.x + 0.5, spawnPos.y + 0.05, spawnPos.z + 0.5,user.yaw,user.pitch)
             strider.saddle(SoundCategory.NEUTRAL)
             if (world.spawnEntity(strider)){
                 successes++

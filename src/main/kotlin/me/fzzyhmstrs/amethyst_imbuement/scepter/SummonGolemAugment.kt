@@ -42,7 +42,7 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
         val spawnPos = findSpawnPos(world,startPos,3,3, tries = 12)
         val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level),effects.damage(level).toDouble(),effects.amplifier(level).toDouble(), user)
         golem.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
-
+        golem.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
         if (world.spawnEntity(golem)) {
             return super.placeEntity(world, user, hit, level, effects)
         }

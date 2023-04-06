@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.viscerae.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.hit.EntityHitResult
@@ -93,8 +94,12 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
         return ItemStack.EMPTY
     }
 
+    override fun tryPickup(player: PlayerEntity): Boolean {
+        return false
+    }
+
     companion object{
-        fun createIceShard(world: World, user: LivingEntity, speed: Float, div: Float,yaw: Float, effects: AugmentEffect, level: Int, augment: ScepterAugment): IceShardEntity {
+        fun createIceShard(world: World, user: LivingEntity, speed: Float, div: Float, yaw: Float, effects: AugmentEffect, level: Int, augment: ScepterAugment): IceShardEntity {
             val fbe = IceShardEntity(
                 world, user,yaw, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
@@ -107,6 +112,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
             )
             fbe.passEffects(effects, level)
             fbe.setAugment(augment)
+            fbe.setRotation(user.yaw,user.pitch)
             return fbe
         }
     }
