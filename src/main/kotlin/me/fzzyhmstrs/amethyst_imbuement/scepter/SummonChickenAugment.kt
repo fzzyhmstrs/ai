@@ -39,7 +39,7 @@ class SummonChickenAugment: SummonEntityAugment(ScepterTier.ONE,3) {
             if (spawnPos == BlockPos.ORIGIN) continue
 
             val chikin = ChickenEntity(EntityType.CHICKEN, world)
-            chikin.setPos(spawnPos.x + 0.5,spawnPos.y + 0.5, spawnPos.z + 0.5)
+            chikin.refreshPositionAndAngles(spawnPos.x + 0.5,spawnPos.y + 0.5, spawnPos.z + 0.5,user.yaw,user.pitch)
             if (world.spawnEntity(chikin)){
                 successes++
             }

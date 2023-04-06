@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.IgnitedGemItem
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
-import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
 
 class WitchesOrbItem(settings: Settings)
@@ -18,8 +18,7 @@ class WitchesOrbItem(settings: Settings)
             for (stack in user.handItems) {
                 if (stack.item is WitchesOrbItem) {
                     val focusMods = ModifierHelper.getActiveModifiers(stack)
-                    val mods = modifiers.combineWith(focusMods)
-                    return@register mods
+                    return@register modifiers.combineWith(focusMods, AugmentModifier())
                 }
             }
             modifiers

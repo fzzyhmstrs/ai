@@ -27,7 +27,7 @@ class MysticalGemItem(settings: Settings): IgnitedGemItem(settings){
         AfterSpellEvent.EVENT.register{ _, user, _, spell ->
             val offhand = user.offHandStack
             val item = offhand.item
-            if (item is MysticalGemItem && user is PlayerEntity){
+            if (item is GemOfPromiseItem && user is PlayerEntity){
                 mysticalGemCheck(offhand, spell, user)
             }
         }
@@ -35,8 +35,8 @@ class MysticalGemItem(settings: Settings): IgnitedGemItem(settings){
 
     override fun giveTooltipHint(nbt: NbtCompound, stack: ItemStack, tooltip: MutableList<Text>){
         if (nbt.contains("xp_cast")){
-            val xp = nbt.getInt("xp_cast")
-            val progress = xp/ SPELL_XP_TARGET * 100.0F
+            val xp = nbt.getInt("xp_cast").toFloat()
+            val progress = xp / SPELL_XP_TARGET.toFloat() * 100.0F
             tooltip.add(AcText.translatable("item.amethyst_imbuement.gem_of_promise.mystical", progress).formatted(Formatting.LIGHT_PURPLE))
         }
     }

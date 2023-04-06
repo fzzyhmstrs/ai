@@ -6,8 +6,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.IceShardEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
-import me.fzzyhmstrs.viscerae.entity.IceShardEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
@@ -32,7 +32,10 @@ class IceShardAugment: SummonProjectileAugment(ScepterTier.TWO,6){
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = effects.range(level).toFloat()
         val div = 0.75F
-        return IceShardEntity.createIceShard(world, user, speed, div,user.yaw, effects, level,this)
+        val ise = IceShardEntity(world,user,speed,div,user.eyePos.subtract(0.0,0.2,0.0),user.rotationVector)
+        ise.passEffects(effects, level)
+        ise.setAugment(this)
+        return ise
     }
 
     override fun soundEvent(): SoundEvent {

@@ -53,8 +53,11 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0x404040)
-        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0x404040)
+        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0xFFFFFF)
+        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0xFFFFFF)
+    }
+
+    override fun drawForeground(matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
     }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {

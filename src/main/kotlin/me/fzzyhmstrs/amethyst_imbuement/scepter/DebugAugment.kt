@@ -43,7 +43,7 @@ class DebugAugment: MiscAugment(ScepterTier.ONE,1) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1,1,
-            1,imbueLevel,1, LoreTier.NO_TIER, Items.DEBUG_STICK)
+            1,imbueLevel,500, LoreTier.NO_TIER, Items.DEBUG_STICK)
     }
 
     override fun soundEvent(): SoundEvent {

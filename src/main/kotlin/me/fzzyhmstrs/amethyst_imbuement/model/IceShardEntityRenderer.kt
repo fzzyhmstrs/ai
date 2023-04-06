@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.viscerae.entity.IceShardEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.IceShardEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
