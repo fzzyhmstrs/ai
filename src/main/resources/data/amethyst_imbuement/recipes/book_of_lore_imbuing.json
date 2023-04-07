@@ -1,46 +1,34 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:knowledge_powder"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:knowledge_powder"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:knowledge_powder"
+	"item": "amethyst_imbuement:gem_dust"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:knowledge_powder"
-  },
-  "craftA": {
 	"item": "amethyst_imbuement:gem_dust"
   },
   "craftB": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftC": {
-	"item": "amethyst_imbuement:gem_dust"
+	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftD": {
-	"item": "amethyst_imbuement:gem_dust"
+	"item": "amethyst_imbuement:citrine"
   },
   "craftE": {
 	"item": "minecraft:enchanted_book"
   },
   "craftF": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftG": {
-	"item": "amethyst_imbuement:gem_dust"
+	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftH": {
-	"item": "amethyst_imbuement:gem_dust"
-  },
-  "craftI": {
-	"item": "amethyst_imbuement:gem_dust"
+	"item": "amethyst_imbuement:imbued_lapis"
   },
   "title": "Book of Lore",
-  "cost": 19,
+  "cost": 13,
   "resultA": "amethyst_imbuement:book_of_lore",
   "countA": 1
 }

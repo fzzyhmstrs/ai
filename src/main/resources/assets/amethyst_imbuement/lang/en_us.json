@@ -857,7 +857,7 @@
 	"enchantment_lore.amethyst_imbuement:create_lava.description": "Create Lava\n\nMax Level: I\n\nMagic School: Wit\n\nPlaces a lava source block.",
 	"enchantment_lore.amethyst_imbuement:create_sponge.description": "Create Sponge\n\nMax Level: I\n\nMagic School: Wit\n\nPlaces a sponge.",
 	"enchantment_lore.amethyst_imbuement:create_water.description": "Create Water\n\nMax Level: I\n\nMagic School: Wit\n\nPlaces a water source block.",
-	"enchantment_lore.amethyst_imbuement:curse.description": "Curse\n\nMax Level: XV\n\nMagic School: Wit\n\nCurses the target, increasing damage taken and reducing armor.",
+	"enchantment_lore.amethyst_imbuement:curse.description": "Curse\n\nMax Level: XVI\n\nMagic School: Wit\n\nCurses the target, increasing damage taken and reducing armor.",
 	"enchantment_lore.amethyst_imbuement:dash.description": "Dash\n\nMax Level: I\n\nMagic School: Wit\n\nDashes the user similarly to Riptide.",
 	"enchantment_lore.amethyst_imbuement:empowered_slash.description": "Empowered Slash\n\nMax Level: V\n\nMagic School: Fury\n\nA powerful energy slash attack.",
 	"enchantment_lore.amethyst_imbuement:excavate.description": "Excavate\n\nMax Level: XXV\n\nMagic School: Wit\n\nMines the targeted block, successfully mining higher and higher tier blocks as as the spell levels up.",

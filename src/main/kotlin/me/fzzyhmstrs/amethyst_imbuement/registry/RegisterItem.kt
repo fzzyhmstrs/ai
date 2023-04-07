@@ -135,8 +135,8 @@ object RegisterItem {
     val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
     val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
     val WITCHES_ORB = WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxCount(1).rarity(Rarity.RARE)).withGlint().also{ regItem["witches_orb"] = it}
-    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(AI_GROUP).maxCount(1)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(1).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
+    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(AI_GROUP).maxCount(8)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
+    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().group(AI_GROUP).maxCount(16)).also{ regItem["mana_potion"] = it}
 

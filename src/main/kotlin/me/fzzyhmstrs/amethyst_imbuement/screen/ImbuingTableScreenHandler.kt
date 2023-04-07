@@ -941,6 +941,13 @@ class ImbuingTableScreenHandler(
                 val augId = Identifier(recipe.getAugment())
                 val augmentChk = Registry.ENCHANTMENT.get(augId) ?: return false
                 if (checkAcceptableAugment(augmentChk,itemStack3)){
+                    val item = itemStack3.item
+                    if (item is Reactant){
+                        if (!item.canReact(itemStack3, Reagent.getReagents(handler.inventory))){
+                            println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack3}]!")
+                            return false
+                        }
+                    }
                     val bl = itemStack3.isOf(Items.BOOK)
                     if (bl) {
                         itemStack3 = ItemStack(Items.ENCHANTED_BOOK)
@@ -974,6 +981,11 @@ class ImbuingTableScreenHandler(
                             itemStack3.addEnchantment(augmentChk,1)
                         }
                     }
+                    val reagents = if (item is Reactant){
+                        Reagent.getReagents(handler.inventory).stream().map{ it.copy() }.toList()
+                    } else {
+                        listOf()
+                    }
                     for (j in 0..12) { //decrement inventory slots even for creative mode!
                         if (j == 6 || player.abilities.creativeMode) continue //avoid bulldozing itemslot 6
                         if (handler.inventory.getStack(j).item.hasRecipeRemainder()){
@@ -984,6 +996,9 @@ class ImbuingTableScreenHandler(
                                 handler.inventory.setStack(j, ItemStack.EMPTY)
                             }
                         }
+                    }
+                    if (item is Reactant){
+                        item.react(itemStack3, reagents)
                     }
                 } else {
                     return false
@@ -997,14 +1012,14 @@ class ImbuingTableScreenHandler(
                 val itemStack4 = recipe.output
                 val item = itemStack4.item
                 if (item is Reactant){
-                    if (!item.canReact(itemStack4.copy(), Reagent.getReagents(handler.inventory))){
+                    if (!item.canReact(itemStack4, Reagent.getReagents(handler.inventory))){
                         println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack4}]!")
                         return false
                     }
                 }
                 player.applyEnchantmentCosts(itemStack3, i)
                 val reagents = if (item is Reactant){
-                    Reagent.getReagents(handler.inventory).stream().map{ it -> it.copy() }.toList()
+                    Reagent.getReagents(handler.inventory).stream().map{ it.copy() }.toList()
                 } else {
                     listOf()
                 }
