@@ -22,14 +22,14 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class CurseAugment: MinorSupportAugment(ScepterTier.TWO,15){
+class CurseAugment: MinorSupportAugment(ScepterTier.THREE,16){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(225,45).withAmplifier(0,1)
+        get() = super.baseEffect.withDuration(360,40).withAmplifier(0,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),175,
-            13,imbueLevel,25, LoreTier.LOW_TIER, RegisterItem.ACCURSED_FIGURINE)
+        return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),400,
+            20,imbueLevel,65, LoreTier.HIGH_TIER, RegisterItem.ACCURSED_FIGURINE)
     }
 
     override fun supportEffect(
@@ -45,7 +45,7 @@ class CurseAugment: MinorSupportAugment(ScepterTier.TWO,15){
                     target as LivingEntity,
                     RegisterStatus.CURSED,
                     effects.duration(level),
-                    effects.amplifier(level)/3)
+                    (effects.amplifier(level + 1)/4) + 1)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                 effects.accept(target, AugmentConsumer.Type.HARMFUL)
                 true

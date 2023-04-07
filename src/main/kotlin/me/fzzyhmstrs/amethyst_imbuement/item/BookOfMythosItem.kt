@@ -29,6 +29,7 @@ class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), 
     ): TypedActionResult<ItemStack> {
         val nbt = stack.nbt
         if (nbt != null){
+            if (!nbt.contains(NbtKeys.LORE_KEY.str())) return super.useAfterWriting(stack, world, user, hand)
             val bola = Identifier(nbt.getString(NbtKeys.LORE_KEY.str())).toString()
             val type = AugmentHelper.getAugmentType(bola)
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
@@ -49,7 +50,7 @@ class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), 
     }
 
     override fun getRandomBookAugment(list: List<String>, user: PlayerEntity, hand: Hand): String {
-        val stack = user.getStackInHand(hand)
+        val stack = if (hand == Hand.MAIN_HAND) user.offHandStack else user.mainHandStack
         if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)){
             for (i in 1..2){
                 val aug = super.getRandomBookAugment(list, user, hand)
