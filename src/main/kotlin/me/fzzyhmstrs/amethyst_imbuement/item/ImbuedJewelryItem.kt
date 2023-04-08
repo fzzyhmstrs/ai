@@ -48,7 +48,6 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
     }
 
     override fun react(stack: ItemStack, reagents: List<ItemStack>) {
-
         for (reagent in reagents){
             val item = reagent.item
             if (item is SpellcastersReagent){

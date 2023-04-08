@@ -198,7 +198,7 @@ object VanillaLoot: AbstractModLoot() {
         } else if (EntityType.VILLAGER.lootTableId.equals(id)){
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
-                .conditionally(RandomChanceWithLootingLootCondition.builder(0.1f,0.025f))
+                .conditionally(RandomChanceWithLootingLootCondition.builder(0.2f,0.05f))
                 .conditionally(KilledByPlayerLootCondition.builder())
                 .with(ItemEntry.builder(RegisterItem.ACCURSED_FIGURINE).weight(1))
             table.pool(poolBuilder)

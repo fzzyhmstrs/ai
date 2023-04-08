@@ -49,12 +49,18 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
 
     private fun makeFlavorText(): MutableText {
         val id = Registries.ITEM.getId(this)
-        return AcText.translatable("item.${id.namespace}.${id.path}.flavor").formatted(Formatting.WHITE, Formatting.ITALIC)
+        val key = "item.${id.namespace}.${id.path}.flavor"
+        val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
+        if (text.string == key) return AcText.empty()
+        return text
     }
 
     private fun makeFlavorTextDesc(): MutableText {
         val id = Registries.ITEM.getId(this)
-        return AcText.translatable("item.${id.namespace}.${id.path}.flavor.desc").formatted(Formatting.WHITE)
+        val key = "item.${id.namespace}.${id.path}.flavor.desc"
+        val text = AcText.translatable(key).formatted(Formatting.WHITE)
+        if (text.string == key) return AcText.empty()
+        return text
     }
 
     override fun flavorText(): MutableText{

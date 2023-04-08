@@ -1,0 +1,33 @@
+{
+  "type": "botanypots:crop",
+  "seed": {
+    "item": "amethyst_imbuement:xp_bush_seed"
+  },
+  "categories":["dirt", "farmland"],
+  "growthTicks": 18000,
+  "growthModifier": 1.0,
+  "display": {
+    "block": "amethyst_imbuement:experience_bush",
+    "properties": {
+      "age": 3
+    }
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "minecraft:experience_bottle"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "item": "minecraft:experience_bottle"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    }
+  ]
+}
