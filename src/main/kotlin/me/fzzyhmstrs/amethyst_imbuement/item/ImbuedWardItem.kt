@@ -91,6 +91,9 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 stack.orCreateNbt.put("AttributeModifiers",list)
                 return
             }
+        }
+        for (reagent in reagents){
+            val item = reagent.item
             if (item is SpellcastersReagent && reagent.isIn(RegisterTag.BASIC_WARDS_TAG)){
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
@@ -100,7 +103,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
-                break
+                return
             }
         }
     }
