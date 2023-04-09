@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -210,7 +211,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         if (group == RegisterItem.AI_GROUP || group == ItemGroup.SEARCH){
             stacks.addAll(
                 Registry.ENCHANTMENT.stream()
-                    .filter { enchant -> enchant is ScepterAugment }
+                    .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
                     .map { enchant ->  createSpellScroll(enchant as ScepterAugment)}
                     .toList()
             )
