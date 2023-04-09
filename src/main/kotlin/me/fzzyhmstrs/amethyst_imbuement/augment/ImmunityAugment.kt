@@ -22,23 +22,24 @@ class ImmunityAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
     }*/
 
     fun checkAndDamageTrinket(entity: LivingEntity, effect: StatusEffectInstance): Boolean{
+        if (effect.effectType.isBeneficial) return true
         val trinkets = TrinketUtil.getTrinketStacks(entity)
         val world = entity.world
-        val duration = effect.duration
-        val damage = duration / 20 * AiConfig.items.manaItems.imbuedJewelryDamagePerSecond.get()
+        val amplifier = effect.amplifier + 1
+        val damage = amplifier * AiConfig.items.manaItems.imbuedJewelryDamagePerAmplifier.get()
         var bl = false
         for (stack in trinkets){
             if (EnchantmentHelper.getLevel(RegisterEnchantment.IMMUNITY,stack) == 0) continue
             if(!RegisterItem.IMBUED_AMULET.checkCanUse(stack,world,entity,damage, AcText.empty())) continue
             RegisterItem.IMBUED_AMULET.manaDamage(stack,world,entity,damage)
-            entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,100))
+            entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,60))
             bl = true
         }
         val totem1 = entity.getStackInHand(Hand.OFF_HAND)
         if (EnchantmentHelper.getLevel(RegisterEnchantment.IMMUNITY,totem1) != 0){
             if(RegisterItem.IMBUED_AMULET.checkCanUse(totem1,world,entity,damage, AcText.empty())){
                 RegisterItem.IMBUED_AMULET.manaDamage(totem1,world,entity,damage)
-                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,100))
+                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,60))
                 bl = true
             }
         }
@@ -47,7 +48,7 @@ class ImmunityAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         if (EnchantmentHelper.getLevel(RegisterEnchantment.IMMUNITY,totem2) != 0){
             if(RegisterItem.IMBUED_AMULET.checkCanUse(totem2,world,entity,damage, AcText.empty())){
                 RegisterItem.IMBUED_AMULET.manaDamage(totem2,world,entity,damage)
-                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,100))
+                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,60))
                 bl = true
             }
         }

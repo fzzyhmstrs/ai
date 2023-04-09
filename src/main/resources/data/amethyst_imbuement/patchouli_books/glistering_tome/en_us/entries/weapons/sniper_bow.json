@@ -24,7 +24,7 @@
 "craft_h_item": "amethyst_imbuement:beryl_copper_ingot",
 "craft_i_item": "minecraft:air",
 "result_item": "amethyst_imbuement:sniper_bow",
-"cost_text": "$(l)Level Cost: $(2)19$()"
+"cost_text": "$(l)Level Cost: $(2)13$()"
 },
 {
 "type": "patchouli:image",

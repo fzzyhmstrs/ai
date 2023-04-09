@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
@@ -40,8 +41,8 @@ class WeightlessnessAugment: MinorSupportAugment(ScepterTier.TWO,5){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.LEVITATION, effects.duration(level), 0))
+            if (target is HostileEntity || !AiConfig.entities.isEntityPvpTeammate(user,target,this) && target is LivingEntity) {
+                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.LEVITATION, effects.duration(level), 0))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level+2), 0))
                 effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.0F)

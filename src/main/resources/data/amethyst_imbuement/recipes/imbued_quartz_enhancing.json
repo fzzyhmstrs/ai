@@ -1,13 +1,13 @@
 {
   "type": "amethyst_imbuement:enhancing",
   "dust": {
-    "item": "minecraft:glowstone_dust"
+    "item": "minecraft:redstone"
   },
   "base": {
     "item": "minecraft:quartz"
   },
   "addition": {
-    "item": "minecraft:lilac"
+    "item": "minecraft:rose_bush"
   },
   "result": {
     "item": "amethyst_imbuement:imbued_quartz"

@@ -19,7 +19,7 @@
 "craft_b_item": "minecraft:oak_boat,minecraft:spruce_boat,minecraft:birch_boat,minecraft:jungle_boat,minecraft:acacia_boat,minecraft:dark_oak_boat",
 "craft_c_item": "minecraft:air",
 "craft_d_item": "minecraft:oak_boat,minecraft:spruce_boat,minecraft:birch_boat,minecraft:jungle_boat,minecraft:acacia_boat,minecraft:dark_oak_boat",
-"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_e_item": "tag:amethyst_core:tier_one_spell_scepters",
 "craft_f_item": "minecraft:oak_boat,minecraft:spruce_boat,minecraft:birch_boat,minecraft:jungle_boat,minecraft:acacia_boat,minecraft:dark_oak_boat",
 "craft_g_item": "minecraft:air",
 "craft_h_item": "minecraft:oak_boat,minecraft:spruce_boat,minecraft:birch_boat,minecraft:jungle_boat,minecraft:acacia_boat,minecraft:dark_oak_boat",

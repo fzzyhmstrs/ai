@@ -127,7 +127,8 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
     }
 
     override fun getAttributeModifier(): Pair<EntityAttribute, EntityAttributeModifier> {
-        return Pair(RegisterAttribute.SHIELDING,EntityAttributeModifier(UUID.fromString("31e9c8aa-ce72-11ed-afa1-0242ac120002"),"imbued_ward_modifier",0.05,EntityAttributeModifier.Operation.ADDITION))
+        return Pair(RegisterAttribute.SHIELDING,
+            EntityAttributeModifier(UUID.fromString("31e9c8aa-ce72-11ed-afa1-0242ac120002"),"imbued_ward_modifier",0.05,EntityAttributeModifier.Operation.ADDITION))
     }
 
     override fun getFlavorItem(): ImbuedWardItem {

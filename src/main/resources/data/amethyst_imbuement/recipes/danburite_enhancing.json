@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:enhancing",
   "dust": {
-    "item": "minecraft:redstone"
+    "item": "minecraft:glowstone_dust"
   },
   "base": {
     "item": "minecraft:quartz"

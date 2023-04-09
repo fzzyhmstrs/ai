@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.effects.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -24,13 +25,15 @@ object RegisterStatus {
     val CHARMED = CharmedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF80FF)
     val SOULBINDING = SoulbindingStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000)
     val RESONATING = ResonatingStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0)
-    val CURSED = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0x000000)
+    val CURSED: StatusEffect = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0x000000)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"94974394-c38a-11ed-afa1-0242ac120002",-2.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"2c4481ee-c5f1-11ed-afa1-0242ac120002",-1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"94974614-c38a-11ed-afa1-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
-    val BLESSED = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
+    val BLESSED: StatusEffect = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"03c3f40c-ce8e-11ed-afa1-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"03c3f7ae-ce8e-11ed-afa1-0242ac120002",0.05,EntityAttributeModifier.Operation.ADDITION)
+    val INSIGHTFUL: StatusEffect = InsightfulStatusEffect(StatusEffectCategory.BENEFICIAL,0xC8FF8F)
+        .addAttributeModifier(RegisterAttribute.PLAYER_EXPERIENCE,"063b1430-d641-11ed-afa1-0242ac120002",0.25,EntityAttributeModifier.Operation.ADDITION)
 
     fun registerAll(){
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"custom_absorption"), SHIELDING)
@@ -45,5 +48,6 @@ object RegisterStatus {
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"resonating"), RESONATING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"cursed"), CURSED)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"blessed"), BLESSED)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"insightful"), INSIGHTFUL)
     }
 }

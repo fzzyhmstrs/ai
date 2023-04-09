@@ -97,6 +97,12 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
                 stacks.add(stack2)
             }
         }
+        val stacks2 = TrinketUtil.getTrinketStacks(user)
+        stacks2.forEach {
+            if (it.item is ManaItem && it.isDamaged){
+                stacks.add(it)
+            }
+        }
         if (stacks.isEmpty()){
             val stack = user.getStackInHand(hand)
             world.playSound(

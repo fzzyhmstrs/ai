@@ -110,6 +110,7 @@ object RegisterEnchantment {
     val MASS_HEAL = MassHealAugment().also{regEnchant["mass_heal"] = it}
     val MASS_REVIVIFY = MassRevivifyAugment().also{regEnchant["mass_revivify"] = it}
     val MEND_EQUIPMENT = MendEquipmentAugment().also{regEnchant["mend_equipment"] = it}
+    val MENTAL_CLARITY = MentalClarityAugment().also{regEnchant["mental_clarity"] = it}
     val MINOR_HEAL = MinorHealAugment().also{regEnchant["minor_heal"] = it}
     val POULTRYMORPH = PoultrymorphAugment().also{regEnchant["poultrymorph"] = it}
     val RECALL = RecallAugment().also{regEnchant["recall"] = it}
@@ -119,11 +120,9 @@ object RegisterEnchantment {
     val SMITING_BLOW = SmitingBlowAugment().also{regEnchant["smiting_blow"] = it}
     val SOUL_MISSILE = SoulMissileAugment().also{regEnchant["soul_missile"] = it}
     val SPECTRAL_SLASH = SpectralSlashAugment().also{regEnchant["spectral_slash"] = it}
-    //val SUMMON_BLAZE = SummonEntityAugment(2,3,EquipmentSlot.MAINHAND).also{regEnchant["summon_blaze"] = it}
     val SUMMON_BOAT = SummonBoatAugment().also{regEnchant["summon_boat"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment().also{regEnchant["summon_chicken"] = it}
     val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().also{regEnchant["summon_fury_totem"] = it}
-    //val SUMMON_FAMILIAR = SummonFamiliarAugment(2,13,EquipmentSlot.MAINHAND).also{regEnchant["summon_familiar"] = it}
     val SUMMON_GOLEM = SummonGolemAugment().also{regEnchant["summon_golem"] = it}
     val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().also{regEnchant["summon_grace_totem"] = it}
     val SUMMON_STRIDER = SummonStriderAugment().also{regEnchant["summon_strider"] = it}
