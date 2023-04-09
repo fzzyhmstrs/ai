@@ -135,7 +135,6 @@ dependencies {
     val meVersion: String by project
     implementation("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
     annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
-    include("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
 
     val cpaVersion: String by project
     modImplementation("eu.pb4:common-protection-api:$cpaVersion"){
