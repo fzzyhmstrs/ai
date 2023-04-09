@@ -49,7 +49,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
@@ -73,7 +73,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             val context = if (client?.options?.advancedItemTooltips == true){
                 TooltipContext.Default.ADVANCED
             } else {
-                TooltipContext.Default.BASIC
+                TooltipContext.Default.NORMAL
             }
             ModifierHelper.addModifierTooltip(mods,tooltipText,context)
             this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
@@ -95,7 +95,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         private var selected = false
         private var finalSelected = false
 
-        override fun appendClickableNarrations(builder: NarrationMessageBuilder) {
+        override fun appendNarrations(builder: NarrationMessageBuilder) {
             appendDefaultNarrations(builder)
             for (mod in mods){
                 builder.put(NarrationPart.HINT,AcText.translatable(Util.createTranslationKey("enchantment",mod)))
@@ -105,7 +105,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
             val minecraftClient = MinecraftClient.getInstance()
             val textRenderer = minecraftClient.textRenderer
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
             RenderSystem.setShaderTexture(0, texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.enableBlend()
@@ -122,7 +122,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
                 drawDots = true
                 0..1
             }
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
             RenderSystem.setShaderTexture(0, texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             for (j in range){
@@ -133,7 +133,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             }
             for (j in range){
                 val mod = mods[j]
-                RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+                RenderSystem.setShader { GameRenderer.getPositionTexShader() }
                 RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"))
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
                 DrawableHelper.drawTexture(matrices, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)

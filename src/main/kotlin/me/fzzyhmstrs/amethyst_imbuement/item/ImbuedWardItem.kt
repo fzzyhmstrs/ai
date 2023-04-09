@@ -18,10 +18,10 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.item.ShieldItem
 import net.minecraft.nbt.NbtList
-import net.minecraft.registry.Registries
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
 
@@ -40,7 +40,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
     }
 
     private fun makeFlavorText(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor"
         val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
         if (text.string == key) return AcText.empty()
@@ -48,7 +48,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
     }
 
     private fun makeFlavorTextDesc(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor.desc"
         val text = AcText.translatable(key).formatted(Formatting.WHITE)
         if (text.string == key) return AcText.empty()
@@ -85,7 +85,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                nbt.putString("AttributeName", Registry.ATTRIBUTE.getId(attribute.first).toString())
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
@@ -99,7 +99,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                nbt.putString("AttributeName", Registry.ATTRIBUTE.getId(attribute.first).toString())
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)

@@ -24,13 +24,14 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
 import net.minecraft.particle.DustParticleEffect
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.*
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.Vec3f
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Modifiable, Reactant {
@@ -55,7 +56,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
 
     init{
         ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
-            for (stack in user.handItems) {
+            for (stack in user.itemsHand) {
                 if (stack.item is SpellcastersFocusItem) {
                     val focusMods = ModifierHelper.getActiveModifiers(stack)
                     val mods = modifiers.combineWith(focusMods, AugmentModifier())
@@ -100,7 +101,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 val rnd2 = world.random.nextDouble() * 0.2 - 0.1
                 val rnd3 = world.random.nextInt(DyeColor.values().size)
                 val colorInt = DyeColor.values()[rnd3].signColor
-                val color = Vec3d.unpackRgb(colorInt).toVector3f()
+                val color = Vec3f(Vec3d.unpackRgb(colorInt))
                 world.addParticle(DustParticleEffect(color,0.8f),particlePos.x + rnd1, particlePos.y + rnd2, particlePos.z + rnd2, 0.0, 0.0, 0.0)
             }
         }
@@ -124,7 +125,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName",Registries.ATTRIBUTE.getId(attribute.first).toString())
+                nbt.putString("AttributeName", Registry.ATTRIBUTE.getId(attribute.first).toString())
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)

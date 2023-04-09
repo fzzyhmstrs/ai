@@ -191,7 +191,7 @@ class DisenchantingTableScreenHandler(
             }
             1 -> {
                 if (enchantmentId[id] == -1) return false
-                if ((itemStack2.isOf(Items.BOOK) && Registries.ENCHANTMENT.get(enchantmentId[id]) is ScepterAugment) || (itemStack2.isOf(RegisterItem.EMPTY_SPELL_SCROLL) && Registries.ENCHANTMENT.get(enchantmentId[id]) !is ScepterAugment) || (player.experienceLevel < disenchantCost[0] && !player.abilities.creativeMode)) return false
+                if ((itemStack2.isOf(Items.BOOK) && Registry.ENCHANTMENT.get(enchantmentId[id]) is ScepterAugment) || (itemStack2.isOf(RegisterItem.EMPTY_SPELL_SCROLL) && Registry.ENCHANTMENT.get(enchantmentId[id]) !is ScepterAugment) || (player.experienceLevel < disenchantCost[0] && !player.abilities.creativeMode)) return false
                 context.run { world: World, pos: BlockPos ->
                     removing = true
                     val enchantList3 = EnchantmentHelper.get(itemStack)

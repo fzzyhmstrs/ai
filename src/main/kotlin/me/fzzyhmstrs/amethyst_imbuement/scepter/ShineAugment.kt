@@ -15,11 +15,11 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -43,9 +43,6 @@ class ShineAugment: ScepterAugment(ScepterTier.ONE,1) {
             /*val item = RegisterBlock.SHINE_LIGHT.asItem() as BlockItem
             if (!item.place(ItemPlacementContext(user, hand, ItemStack(RegisterBlock.SHINE_LIGHT),hit)).isAccepted) return false*/
             val context = ItemPlacementContext(user, hand, ItemStack(RegisterBlock.SHINE_LIGHT),hit)
-            if (!RegisterBlock.SHINE_LIGHT.isEnabled(world.enabledFeatures)) {
-                return false
-            }
             if (!context.canPlace()) {
                 return false
             }

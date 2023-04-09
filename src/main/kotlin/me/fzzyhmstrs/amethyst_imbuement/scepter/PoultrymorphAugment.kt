@@ -23,6 +23,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.Vec3f
 import net.minecraft.world.World
 
 class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEffectHelper.PersistentEffect {
@@ -49,7 +50,7 @@ class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEff
             chickenEntity.refreshPositionAndAngles(pos.x,pos.y,pos.z, target.yaw, target.pitch)
             chickenEntity.isInvulnerable = true
             if (!world.spawnEntity(chickenEntity)) return false
-            val data = PoultrymorphPersistentData(nbt,chickenEntity.id,Vec3d(target.pos.toVector3f()),world)
+            val data = PoultrymorphPersistentData(nbt,chickenEntity.id,Vec3d(Vec3f(target.pos)),world)
             target.discard()
             PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),data)
             if (world is ServerWorld){

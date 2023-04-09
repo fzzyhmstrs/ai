@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 
 class IceShardEntityRenderer(context: EntityRendererFactory.Context): ProjectileEntityRenderer<IceShardEntity>(context) {
     private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/ice_shard.png")
@@ -30,7 +30,7 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
     ) {
         matrixStack.push()
         matrixStack.multiply(
-            RotationAxis.POSITIVE_Y.rotationDegrees(
+            Vec3f.POSITIVE_Y.getDegreesQuaternion(
                 MathHelper.lerp(
                     g,
                     (persistentProjectileEntity as PersistentProjectileEntity).prevYaw,
@@ -39,7 +39,7 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
             )
         )
         matrixStack.multiply(
-            RotationAxis.POSITIVE_Z.rotationDegrees(
+            Vec3f.POSITIVE_Z.getDegreesQuaternion(
                 MathHelper.lerp(
                     g,
                     (persistentProjectileEntity as PersistentProjectileEntity).prevPitch,
@@ -50,9 +50,9 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
         val s = (persistentProjectileEntity as PersistentProjectileEntity).shake.toFloat() - g
         if (s > 0.0f) {
             val t = -MathHelper.sin(s * 3.0f) * s
-            matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(t))
+            matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(t))
         }
-        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(45.0f))
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(45.0f))
         matrixStack.scale(0.05625f, 0.05625f, 0.05625f)
         matrixStack.translate(-4.0, 0.0, 0.0)
         val vertexConsumer =
@@ -69,14 +69,14 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
         vertex(matrix4f, matrix3f, vertexConsumer, -0, -2, 2, 0.15625f, 0.3125f, 1, 0, 0, i)
         vertex(matrix4f, matrix3f, vertexConsumer, -0, -2, -2, 0.0f, 0.3125f, 1, 0, 0, i)
         for (u in 0..1) {
-            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0f))
+            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f))
             vertex(matrix4f, matrix3f, vertexConsumer, -9, -2, 0, 0.0f, 0.0f, 0, 1, 0, i)
             vertex(matrix4f, matrix3f, vertexConsumer, 9, -2, 0, 0.75f, 0.0f, 0, 1, 0, i)
             vertex(matrix4f, matrix3f, vertexConsumer, 9, 2, 0, 0.75f, 0.15625f, 0, 1, 0, i)
             vertex(matrix4f, matrix3f, vertexConsumer, -9, 2, 0, 0.0f, 0.15625f, 0, 1, 0, i)
         }
         for (u in 0..1) {
-            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0f))
+            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f))
             vertex(matrix4f, matrix3f, vertexConsumer, -9, -2, 0, 0.0f, 0.3125f, 0, 1, 0, i)
             vertex(matrix4f, matrix3f, vertexConsumer, 9, -2, 0, 0.75f, 0.3125f, 0, 1, 0, i)
             vertex(matrix4f, matrix3f, vertexConsumer, 9, 2, 0, 0.75f, 0.46875f, 0, 1, 0, i)

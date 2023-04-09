@@ -16,7 +16,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtList
-import net.minecraft.registry.Registries
+import net.minecraft.util.registry.Registry
 import java.util.*
 
 open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), Reactant, ManaItem {
@@ -55,7 +55,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
                 val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                nbt.putString("AttributeName", Registry.ATTRIBUTE.getId(attribute.first).toString())
                 list.add(nbt)
                 stack.orCreateNbt.put("TrinketAttributeModifiers",list)
                 break

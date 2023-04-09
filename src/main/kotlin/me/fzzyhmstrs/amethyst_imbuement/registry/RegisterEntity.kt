@@ -21,7 +21,7 @@ import net.minecraft.world.World
 object RegisterEntity {
 
     val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "boom_chicken"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
@@ -140,7 +140,7 @@ object RegisterEntity {
     )
 
     val BALL_LIGHTNING_ENTITY: EntityType<BallLightningEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "ball_lightning_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
@@ -153,7 +153,7 @@ object RegisterEntity {
     )
     
     val ICE_SHARD_ENTITY: EntityType<IceShardEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "ice_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
@@ -282,7 +282,7 @@ object RegisterEntity {
     )
 
     val PLAYER_EGG: EntityType<PlayerEggEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_egg_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC

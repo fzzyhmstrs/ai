@@ -18,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem
-import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
@@ -28,6 +27,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.UseAction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorful<GlisteringTridentItem> {
@@ -48,7 +48,7 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
     }
 
     private fun makeFlavorText(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor"
         val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
         if (text.string == key) return AcText.empty()
@@ -56,7 +56,7 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
     }
 
     private fun makeFlavorTextDesc(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor.desc"
         val text = AcText.translatable(key).formatted(Formatting.WHITE)
         if (text.string == key) return AcText.empty()

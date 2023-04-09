@@ -157,7 +157,7 @@ class CrystalAltarScreenHandler(
         }
     }
 
-    override fun quickMove(player: PlayerEntity, slot: Int): ItemStack {
+    override fun transferSlot(player: PlayerEntity, slot: Int): ItemStack {
         var itemStack = ItemStack.EMPTY
         val slot2 = slots[slot] as Slot
         if (slot2 != null && slot2.hasStack()) {

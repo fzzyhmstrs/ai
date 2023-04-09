@@ -29,7 +29,6 @@
     "EntityMixin",
     "FarmlandBlockMixin",
     "FishEntityMixin",
-    "ItemGroupsMixin",
     "ItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
@@ -43,7 +42,8 @@
     "PowderSnowBucketItemMixin",
     "ServerPlayerEntityMixin",
     "StructureMixin",
-    "TridentEntityMixin"
+    "TridentEntityMixin",
+    "BrewingRecipeRegistryInvoker"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",

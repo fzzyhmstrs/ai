@@ -10,8 +10,8 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 
 open class ScepterItem(material: ScepterToolMaterial, settings: Settings): DefaultScepterItem(material, settings), Reactant {
@@ -50,7 +50,7 @@ open class ScepterItem(material: ScepterToolMaterial, settings: Settings): Defau
                 if (count == 0) return
                 val nbt = reagent.nbt?:return
                 val spellString = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL)
-                val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+                val spell = Registry.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
                 return
             }

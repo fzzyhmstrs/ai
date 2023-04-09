@@ -53,7 +53,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
                         }
                     }
                 }
-                for (stack2 in entity.handItems) {
+                for (stack2 in entity.itemsHand) {
                     val item2 = stack2.item
                     if (item2 is ImbuedWardItem) {
                         val level = EnchantmentHelper.getLevel(RegisterEnchantment.SHIELDING, stack2)

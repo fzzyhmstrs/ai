@@ -9,10 +9,10 @@ import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ShieldItem
-import net.minecraft.registry.Registries
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 class CopperWardItem(
@@ -36,7 +36,7 @@ class CopperWardItem(
     }
 
     private fun makeFlavorText(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor"
         val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
         if (text.string == key) return AcText.empty()
@@ -44,7 +44,7 @@ class CopperWardItem(
     }
 
     private fun makeFlavorTextDesc(): MutableText {
-        val id = Registries.ITEM.getId(this)
+        val id = Registry.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor.desc"
         val text = AcText.translatable(key).formatted(Formatting.WHITE)
         if (text.string == key) return AcText.empty()

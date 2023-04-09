@@ -16,7 +16,7 @@ class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: Pl
     HandledScreen<CrystalAltarScreenHandler>(handler, playerInventory, title) {
 
     override fun drawBackground(matrices: MatrixStack?, delta: Float, mouseX: Int, mouseY: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, TEXTURE)
         val i = (width - backgroundWidth) / 2

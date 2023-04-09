@@ -108,7 +108,7 @@ class SpellcastersFocusScreenHandler(
         return false
     }
 
-    override fun quickMove(player: PlayerEntity?, slot: Int): ItemStack {
+    override fun transferSlot(player: PlayerEntity?, slot: Int): ItemStack {
         return ItemStack.EMPTY
     }
 

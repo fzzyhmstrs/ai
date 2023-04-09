@@ -69,7 +69,7 @@ object ModifierConsumers {
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
             if (rnd1 == 0)
-                it.world.createExplosion(null, DamageSource.MAGIC, BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
+                it.world.createExplosion(null, DamageSource.MAGIC, BoltExplosionBehavior,it.pos.x,it.pos.y,it.pos.z,0.6f,false,Explosion.DestructionType.NONE)
         }
     }
 

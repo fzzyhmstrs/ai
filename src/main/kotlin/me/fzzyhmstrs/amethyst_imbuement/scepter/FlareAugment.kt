@@ -68,10 +68,12 @@ class FlareAugment: MiscAugment(ScepterTier.ONE,15) {
             nbt.putByte("Type", type.toByte())
             nbtList.add(nbt)
         }
-        FireworkRocketItem.setFlight(stack, (world.random.nextInt(3) + 1).toByte())
+        stack.getOrCreateSubNbt("Fireworks").putByte("Flight", (world.random.nextInt(3) + 1).toByte())
         stack.getOrCreateSubNbt("Fireworks").put("Explosions",nbtList)
         println(stack.nbt)
-        val result = stack.useOnBlock(ItemUsageContext(world,user,hand,stack,hit))
+        val result = stack.useOnBlock(FlareItemUsageContext(world,user,hand,stack,hit))
         return result.isAccepted
     }
+
+    class FlareItemUsageContext(world: World,user: PlayerEntity,hand: Hand,stack: ItemStack,hitResult: BlockHitResult): ItemUsageContext(world,user,hand,stack,hitResult)
 }

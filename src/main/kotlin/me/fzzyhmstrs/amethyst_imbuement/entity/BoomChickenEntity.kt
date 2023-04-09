@@ -18,9 +18,9 @@ import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.ItemTags
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
@@ -101,14 +101,14 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
         if (!world.isClient) {
             dead = true
             world.createExplosion(this, DamageSource.mob(this),
-                BoomChickenExplosionBehavior,this.pos,1.0f,false,World.ExplosionSourceType.NONE)
+                BoomChickenExplosionBehavior,this.pos.x,this.pos.y,this.pos.z,1.0f,false,Explosion.DestructionType.NONE)
             discard()
         }
     }
 
     override fun interactMob(player2: PlayerEntity, hand: Hand?): ActionResult? {
         val itemStack = player2.getStackInHand(hand)
-        if (itemStack.isIn(ItemTags.CREEPER_IGNITERS)) {
+        if (itemStack.isOf(Items.FLINT_AND_STEEL)) {
             val soundEvent =
                 if (itemStack.isOf(Items.FIRE_CHARGE)) SoundEvents.ITEM_FIRECHARGE_USE else SoundEvents.ITEM_FLINTANDSTEEL_USE
             world.playSound(
