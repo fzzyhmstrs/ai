@@ -80,6 +80,8 @@ object RegisterBlock {
         }
 
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
+        Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "warding_candle"), WARDING_CANDLE)
+        Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"warding_candle"), WARDING_CANDLE_ITEM)
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "steel_block"), STEEL_BLOCK)
         Registry.register(Registry.ITEM, Identifier(AI.MOD_ID,"steel_block"), STEEL_BLOCK_ITEM)
         Registry.register(Registry.BLOCK, Identifier(AI.MOD_ID, "beryl_copper_block"), BERYL_COPPER_BLOCK)
