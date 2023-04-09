@@ -207,7 +207,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
     }
 
     override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
-        if (group == RegisterItem.AI_GROUP){
+        if (group == RegisterItem.AI_GROUP || group == ItemGroup.SEARCH){
             stacks.addAll(
                 Registry.ENCHANTMENT.stream()
                     .filter { enchant -> enchant is ScepterAugment }
