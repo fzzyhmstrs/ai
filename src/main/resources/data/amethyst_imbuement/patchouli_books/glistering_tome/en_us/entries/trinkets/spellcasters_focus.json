@@ -16,7 +16,7 @@
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Spellcasters Focus Imbuing",
+      "title": "Focus Imbuing",
       "imbue_a_item": "minecraft:gold_ingot",
       "imbue_b_item": "minecraft:gold_ingot",
       "imbue_c_item": "minecraft:gold_ingot",
@@ -43,7 +43,7 @@
     },
     {
       "type": "amethyst_imbuement:altar_recipe",
-      "anchor": "enhancing_focus",
+      "anchor": "enhancing_focus_respec",
       "input_item": "amethyst_imbuement:gem_dust",
       "addition_item": "amethyst_imbuement:spellcasters_focus",
       "flower_item": "amethyst_imbuement:mystical_gem",

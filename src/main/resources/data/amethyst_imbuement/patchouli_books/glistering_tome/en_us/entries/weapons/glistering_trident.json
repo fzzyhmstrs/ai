@@ -24,7 +24,7 @@
 "craft_h_item": "amethyst_imbuement:garnet",
 "craft_i_item": "minecraft:prismarine_crystals",
 "result_item": "amethyst_imbuement:glistering_trident",
-"cost_text": "$(l)Level Cost: $(2)9$()"
+"cost_text": "$(l)Level Cost: $(2)15$()"
 }
 ]
 }

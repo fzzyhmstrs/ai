@@ -116,6 +116,10 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
         return UseAction.SPEAR
     }
 
+    override fun isFireproof(): Boolean {
+        return true
+    }
+
     override fun getAttributeModifiers(slot: EquipmentSlot): Multimap<EntityAttribute, EntityAttributeModifier> {
         return if (slot == EquipmentSlot.MAINHAND) {
             this.attributeModifiers

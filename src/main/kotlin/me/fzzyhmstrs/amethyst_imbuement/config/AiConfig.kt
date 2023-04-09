@@ -55,8 +55,8 @@ object AiConfig
         class ManaItems: ConfigSection(Header.Builder().space().add("readme.items.manaItems_1").add("readme.items.manaItems_2").build()) {
             var totemOfAmethystDurability = ValidatedInt(360, 1000, 32)
             var imbuedJewelryDurability = ValidatedInt(120, 1000, 32)
-            @ReadMeText("readme.items.manaItems.imbuedJewelryDamagePerSecond")
-            var imbuedJewelryDamagePerSecond = ValidatedInt(1,10,0)
+            @ReadMeText("readme.items.manaItems.imbuedJewelryDamagePerAmplifier")
+            var imbuedJewelryDamagePerAmplifier = ValidatedInt(6,30,0)
             @ReadMeText("readme.items.manaItems.fullManaColor")
             var fullManaColor = ValidatedColor(0,85,255)
             @ReadMeText("readme.items.manaItems.fullManaColor")

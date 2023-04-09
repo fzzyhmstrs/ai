@@ -29,7 +29,7 @@
 {
 "type": "amethyst_imbuement:altar_recipe",
 "anchor": "enhancing_quartz",
-"input_item": "minecraft:glowstone_dust",
+"input_item": "minecraft:redstone",
 "addition_item": "minecraft:quartz",
 "flower_item": "minecraft:rose_bush",
 "output_item": "amethyst_imbuement:imbued_quartz"

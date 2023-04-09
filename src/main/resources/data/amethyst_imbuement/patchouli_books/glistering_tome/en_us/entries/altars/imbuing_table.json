@@ -5,11 +5,12 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power.$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
+"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power."
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:imbuing_table"
+"recipe": "amethyst_imbuement:imbuing_table",
+"text": "More detailed information:$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
 },
 {            
 "type": "patchouli:text",

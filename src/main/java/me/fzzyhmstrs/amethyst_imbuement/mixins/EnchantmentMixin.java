@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
+import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem;
+import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedWardItem;
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.ScepterItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.InfinityEnchantment;
@@ -17,7 +19,7 @@ public class EnchantmentMixin {
     @Inject(method = "isAcceptableItem", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_checkScepterItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
         Item item = stack.getItem();
-        if (item instanceof ScepterItem) {
+        if (item instanceof ScepterItem || item instanceof ImbuedJewelryItem || item instanceof ImbuedWardItem) {
             if ((Object) this instanceof MendingEnchantment){
                 cir.setReturnValue(false);
             }

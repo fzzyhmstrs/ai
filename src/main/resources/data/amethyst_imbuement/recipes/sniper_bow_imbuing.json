@@ -28,7 +28,7 @@
 	"item": "amethyst_imbuement:beryl_copper_ingot"
   },
   "title": "Sniper Bow",
-  "cost": 19,
+  "cost": 13,
   "resultA": "amethyst_imbuement:sniper_bow",
   "countA": 1,
   "transferEnchant": true

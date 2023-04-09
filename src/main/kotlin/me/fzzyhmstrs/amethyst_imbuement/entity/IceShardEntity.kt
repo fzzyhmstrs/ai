@@ -14,6 +14,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
@@ -22,19 +23,6 @@ import java.util.*
 import kotlin.math.max
 
 class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity {
-
-    constructor(world: World, owner: LivingEntity, yaw: Float, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(
-        RegisterEntity.ICE_SHARD_ENTITY,world){
-        this.owner = owner
-        this.setVelocity(owner,
-            owner.pitch,
-            yaw,
-            0.0f,
-            speed,
-            divergence)
-        this.setPosition(x,y,z)
-        this.setRotation(yaw, owner.pitch)
-    }
 
     constructor(world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(
         RegisterEntity.ICE_SHARD_ENTITY,world){
@@ -98,22 +86,37 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
         return false
     }
 
-    companion object{
-        fun createIceShard(world: World, user: LivingEntity, speed: Float, div: Float, yaw: Float, effects: AugmentEffect, level: Int, augment: ScepterAugment): IceShardEntity {
-            val fbe = IceShardEntity(
-                world, user,yaw, speed, div,
-                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
-                    user.pitch * (Math.PI.toFloat() / 180)
-                ),
-                user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
-                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
-                    user.pitch * (Math.PI.toFloat() / 180)
-                ),
-            )
-            fbe.passEffects(effects, level)
-            fbe.setAugment(augment)
-            fbe.setRotation(user.yaw,user.pitch)
-            return fbe
+    override fun tick() {
+        super.tick()
+        if (!inGround)
+            addParticles(velocity.x, velocity.y, velocity.z)
+    }
+
+    private fun addParticles(x2: Double, y2: Double, z2: Double){
+        if (this.isTouchingWater) {
+            for (i in 0..2) {
+                world.addParticle(
+                    ParticleTypes.BUBBLE,
+                    this.x + x2 * (world.random.nextFloat()-0.5f),
+                    this.y + y2 * (world.random.nextFloat()-0.5f),
+                    this.z + z2 * (world.random.nextFloat()-0.5f),
+                    0.0,
+                    0.0,
+                    0.0
+                )
+            }
+        } else {
+            for (i in 0..2) {
+                world.addParticle(
+                    ParticleTypes.SNOWFLAKE,
+                    this.x + x2 * (world.random.nextFloat()-0.5f),
+                    this.y + y2 * (world.random.nextFloat()-0.5f),
+                    this.z + z2 * (world.random.nextFloat()-0.5f),
+                    0.0,
+                    0.0,
+                    0.0
+                )
+            }
         }
     }
 

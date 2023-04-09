@@ -46,8 +46,8 @@ object RegisterBlock {
     )
     val BERYL_COPPER_BLOCK = Block(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)).also { regBlock["beryl_copper_block"] = it }
     val BERYL_COPPER_BLOCK_ITEM = SpellcastersReagentBlockItem(
-        EntityAttributes.GENERIC_MOVEMENT_SPEED,
-        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"beryl_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributes.GENERIC_ATTACK_SPEED,
+        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"beryl_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         BERYL_COPPER_BLOCK,
         FabricItemSettings().group(RegisterItem.AI_GROUP)
     )

@@ -1,0 +1,49 @@
+{    
+"name": "Knowledge Powder",
+"icon": "amethyst_imbuement:knowledge_powder",
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "A reagent for more complex recipes, this powder stores distilled wisdom and experience in powdered form, taming the once fiery blaze powder into something more understanding."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Knowledge Powder Imbuing",
+"imbue_a_item": "minecraft:oxeye_daisy",
+"imbue_b_item": "minecraft:lilac",
+"imbue_c_item": "minecraft:lilac",
+"imbue_d_item": "minecraft:oxeye_daisy",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "minecraft:experience_bottle",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:experience_bottle",
+"craft_e_item": "minecraft:blaze_powder",
+"craft_f_item": "minecraft:experience_bottle",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:experience_bottle",
+"craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:knowledge_powder",
+"cost_text": "$(l)Level Cost: $(2)7$()"
+},
+  {
+    "type": "amethyst_imbuement:imbuing_recipe",
+    "title": "Knowledge Powder Imbuing",
+    "imbue_a_item": "minecraft:oxeye_daisy",
+    "imbue_b_item": "minecraft:lilac",
+    "imbue_c_item": "minecraft:lilac",
+    "imbue_d_item": "minecraft:oxeye_daisy",
+    "craft_a_item": "minecraft:air",
+    "craft_b_item": "amethyst_imbuement:mana_potion",
+    "craft_c_item": "minecraft:air",
+    "craft_d_item": "amethyst_imbuement:mana_potion",
+    "craft_e_item": "minecraft:blaze_powder",
+    "craft_f_item": "amethyst_imbuement:mana_potion",
+    "craft_g_item": "minecraft:air",
+    "craft_h_item": "amethyst_imbuement:mana_potion",
+    "craft_i_item": "minecraft:air",
+    "result_item": "amethyst_imbuement:knowledge_powder#3",
+    "cost_text": "$(l)Level Cost: $(2)7$()"
+  }
+]
+}

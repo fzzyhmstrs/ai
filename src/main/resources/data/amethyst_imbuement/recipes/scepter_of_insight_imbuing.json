@@ -40,7 +40,7 @@
 	"item": "amethyst_imbuement:knowledge_powder"
   },
   "title": "Scepter of Insight",
-  "cost": 23,
+  "cost": 21,
   "resultA": "amethyst_imbuement:scepter_of_insight",
   "countA": 1,
   "transferEnchant": true

@@ -17,6 +17,10 @@ object RegisterPotion {
     val LONG_CURSE_POTION = Potion("curse",StatusEffectInstance(RegisterStatus.CURSED,2400,1))
     val IMMUNITY_POTION = Potion(StatusEffectInstance(RegisterStatus.IMMUNITY,600,0))
     val LONG_IMMUNITY_POTION = Potion("immunity",StatusEffectInstance(RegisterStatus.IMMUNITY,1200,0))
+    val INSIGHT_POTION = Potion(StatusEffectInstance(RegisterStatus.INSIGHTFUL,3600,1))
+    val STRONG_INSIGHT_POTION = Potion("insight",StatusEffectInstance(RegisterStatus.INSIGHTFUL,1800,3))
+    val LONG_INSIGHT_POTION = Potion("insight",StatusEffectInstance(RegisterStatus.INSIGHTFUL,9600,1))
+
 
     fun registerAll(){
         Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"curse"), CURSE_POTION)
@@ -24,6 +28,9 @@ object RegisterPotion {
         Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_curse"), LONG_CURSE_POTION)
         Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"immunity"), IMMUNITY_POTION)
         Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_immunity"), LONG_IMMUNITY_POTION)
+        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"insight"), INSIGHT_POTION)
+        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"strong_insight"), STRONG_INSIGHT_POTION)
+        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_insight"), LONG_INSIGHT_POTION)
 
         BrewingRecipeRegistry.registerPotionRecipe(Potions.POISON,RegisterItem.ACCURSED_FIGURINE, CURSE_POTION)
         BrewingRecipeRegistry.registerPotionRecipe(CURSE_POTION, Items.GLOWSTONE_DUST, STRONG_CURSE_POTION)
