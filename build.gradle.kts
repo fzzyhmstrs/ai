@@ -186,9 +186,8 @@ modrinth {
         required.project("amethyst-core")
         required.project("fzzy-core")
         optional.project("emi")
-        optional.project("roughly-enough-items")
         embedded.project("trinkets")
         embedded.project("patchouli")
     }
-    debugMode.set(true)
+    debugMode.set(false)
 }
