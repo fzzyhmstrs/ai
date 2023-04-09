@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem.Companion.createSpe
 import me.fzzyhmstrs.amethyst_imbuement.item.custom.*
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.*
+import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -274,7 +275,7 @@ object RegisterItem {
                     .filter { item -> item !== SPELL_SCROLL }
                     .map { item -> ItemStack(item) }.toList())
                 entries.addAll(Registries.ENCHANTMENT.stream()
-                    .filter { enchant -> enchant is ScepterAugment }
+                    .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
                     .map { enchant ->  createSpellScroll(enchant as ScepterAugment)}
                     .toList()
                 )
