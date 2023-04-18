@@ -672,11 +672,14 @@
 	"tag.amethyst_imbuement.redemption_scepters": "Redemption Input Scepters",
 	"tag.amethyst_imbuement.resonance_scepters": "Resonance Input Scepters",
 	"tag.amethyst_imbuement.sojourn_scepters": "Sojourn Input Scepters",
-	"tag.amethyst_imbuement.focus_reagents": "Spellcasters Focus Reagents",
+	"tag.amethyst_imbuement.focus_reagents": "Spellcasters Reagents",
 	"tag.amethyst_imbuement.aspect_gems": "Aspect Gems",
 	
 	"emi.category.amethyst_imbuement.imbuing_table": "Imbuing",
 	"emi.category.amethyst_imbuement.crystal_altar": "Enhancing",
+	"emi.alert_slot.alert": "Your choice will have consequences!",
+	"emi.alert_slot.alert.desc1": "The selected ingredient may alter the final output.",
+	"emi.alert_slot.alert.desc2": "See the guide or ingredient tooltip for details.",
 	
 	"augment_damage.check_can_use": "Not enough durability to use augment!",
 	"augment_damage.escape.check_can_use":"Not enough durability to escape!",

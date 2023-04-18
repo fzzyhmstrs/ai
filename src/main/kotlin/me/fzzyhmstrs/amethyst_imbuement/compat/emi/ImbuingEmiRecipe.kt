@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -20,6 +21,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     private val id: Identifier
     private val inputs: List<EmiIngredient>
     private val outputs: List<EmiStack>
+    private val reactantChk: EmiIngredient
     private val costText: OrderedText
     private val costOffset: Int
     private val isEnchantingType: Boolean
@@ -28,6 +30,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         id = recipe.id
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
+        reactantChk = if(recipe.getAugment() != "") EmiIngredient.of(recipe.getInputs()[6]) else EmiIngredient.of(Ingredient.ofStacks(recipe.output))
         val cost = recipe.getCost()
         if(cost > 99){
             costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
@@ -106,19 +109,19 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     
     override fun addWidgets(widgets: WidgetHolder){
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 82, 21)
-        widgets.addSlot(inputs[0], 0, 0)
-        widgets.addSlot(inputs[1], 81, 0)
-        widgets.addSlot(inputs[2], 20, 2)
-        widgets.addSlot(inputs[3], 40, 2)
-        widgets.addSlot(inputs[4], 60, 2)
-        widgets.addSlot(inputs[5], 20, 21)
+        widgets.add(ReagentAlertSlot(inputs[0],reactantChk, 0, 0))
+        widgets.add(ReagentAlertSlot(inputs[1],reactantChk, 81, 0))
+        widgets.add(ReagentAlertSlot(inputs[2],reactantChk, 20, 2))
+        widgets.add(ReagentAlertSlot(inputs[3],reactantChk, 40, 2))
+        widgets.add(ReagentAlertSlot(inputs[4],reactantChk, 60, 2))
+        widgets.add(ReagentAlertSlot(inputs[5],reactantChk, 20, 21))
         widgets.addSlot(inputs[6], 40, 21)
-        widgets.addSlot(inputs[7], 60, 21)
-        widgets.addSlot(inputs[8], 20, 40)
-        widgets.addSlot(inputs[9], 40, 40)
-        widgets.addSlot(inputs[10], 60, 40)
-        widgets.addSlot(inputs[11], 0, 42)
-        widgets.addSlot(inputs[12], 81, 42)
+        widgets.add(ReagentAlertSlot(inputs[7],reactantChk, 60, 21))
+        widgets.add(ReagentAlertSlot(inputs[8],reactantChk, 20, 40))
+        widgets.add(ReagentAlertSlot(inputs[9],reactantChk, 40, 40))
+        widgets.add(ReagentAlertSlot(inputs[10],reactantChk, 60, 40))
+        widgets.add(ReagentAlertSlot(inputs[11],reactantChk, 0, 42))
+        widgets.add(ReagentAlertSlot(inputs[12],reactantChk, 81, 42))
         widgets.addSlot(outputs[0], 111, 21).recipeContext(this)
         widgets.addText(costText,costOffset,42,0x55FF55,true)
     }

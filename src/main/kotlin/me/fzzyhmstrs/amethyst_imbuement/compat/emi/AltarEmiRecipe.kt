@@ -84,9 +84,9 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     
     override fun addWidgets(widgets: WidgetHolder){
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 62, 0)
-		widgets.addSlot(dust, 0, 0)
+		widgets.add(ReagentAlertSlot(dust,base, 0, 0))
 		widgets.addSlot(base, 18, 0)
-		widgets.addSlot(addition, 36, 0)
+		widgets.add(ReagentAlertSlot(addition,base, 36, 0))
 		widgets.addSlot(EmiIngredient.of(result), 94, 0).recipeContext(this)
 		widgets.addText(text,1,19,0x404040,true)
     }
