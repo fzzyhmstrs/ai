@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "amethyst_imbuement:healers_gem"
+      "item": "amethyst_imbuement:aspect_gems"
     }
   ],
   "result": {
