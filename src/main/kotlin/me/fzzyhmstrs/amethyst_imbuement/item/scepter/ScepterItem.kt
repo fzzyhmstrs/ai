@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 
-open class ScepterItem(material: ScepterToolMaterial, settings: Settings): DefaultScepterItem(material, settings), Reactant {
+open class ScepterItem(material: ScepterToolMaterial, settings: Settings): DefaultScepterItem(material, settings), Reactant, Reagent {
     override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
 
     override fun getItemBarColor(stack: ItemStack): Int {
