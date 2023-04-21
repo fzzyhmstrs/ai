@@ -40,7 +40,7 @@ object RegisterBlock {
     val STEEL_BLOCK = Block(FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["steel_block"] = it }
     val STEEL_BLOCK_ITEM = SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
-        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",1.0,EntityAttributeModifier.Operation.ADDITION),
+        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.8,EntityAttributeModifier.Operation.ADDITION),
         STEEL_BLOCK,
         FabricItemSettings().group(RegisterItem.AI_GROUP)
     )
