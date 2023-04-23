@@ -13,6 +13,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtList
@@ -43,11 +44,11 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         }
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
         for (reagent in reagents){
             val item = reagent.item
             if (item is SpellcastersReagent){

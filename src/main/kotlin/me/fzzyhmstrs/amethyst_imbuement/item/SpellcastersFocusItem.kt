@@ -107,7 +107,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         }
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
         for (reagent in reagents) {
             if (reagent.item is MysticalGemItem) {
                 if (getTier(stack.nbt).previousTier == -1) return false
@@ -116,7 +116,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         return true
     }
     
-    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
 
         for (reagent in reagents){
             val item = reagent.item

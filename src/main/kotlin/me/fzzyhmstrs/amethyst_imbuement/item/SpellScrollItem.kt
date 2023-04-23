@@ -146,7 +146,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         nbt.putFloat(MODEL_KEY, modelKey)
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
         if (reagents.isEmpty()) return true
         if (reagents.size == 1 && reagents[0].item is SpellScrollItem) return true
         val nbt = stack.nbt
@@ -164,7 +164,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         return fails == 0
     }
     
-    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
         val nbt = stack.orCreateNbt
         for (reagent in reagents){
             if (nbt.contains(SPELL)) break
