@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.Entity
@@ -14,14 +15,21 @@ import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 
 
-open class ScepterItem(material: ScepterToolMaterial, settings: Settings): DefaultScepterItem(material, settings), Reactant, Reagent {
+open class ScepterItem(
+    material: ScepterToolMaterial,
+    settings: Settings)
+    :
+    DefaultScepterItem(material, settings),
+    Reactant,
+    Reagent
+{
     override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
 
     override fun getItemBarColor(stack: ItemStack): Int {
         return AiConfig.items.manaItems.getItemBarColor(stack)
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
                 if (reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.SPELL) != true) return false
@@ -38,7 +46,7 @@ open class ScepterItem(material: ScepterToolMaterial, settings: Settings): Defau
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
                 var count = 0
