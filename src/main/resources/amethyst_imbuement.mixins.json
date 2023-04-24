@@ -34,6 +34,7 @@
     "LivingEntityMixin",
     "MilkBucketMixin",
     "MiningToolItemMixin",
+    "ModifiableItemMixin",
     "PersistentProjectileEntityMixin",
     "PiglinBrainMixin",
     "PlayerEntityMixin",
@@ -52,6 +53,7 @@
   ],
   "server": [
   ],
+  "plugin": "me.fzzyhmstrs.amethyst_imbuement.plugin.AiMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

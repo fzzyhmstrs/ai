@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtList
 import net.minecraft.util.registry.Registry
+import net.minecraft.recipe.RecipeType
 import java.util.*
 
 open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), Reactant, ManaItem {
@@ -44,11 +45,11 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
         }
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
         for (reagent in reagents){
             val item = reagent.item
             if (item is SpellcastersReagent){

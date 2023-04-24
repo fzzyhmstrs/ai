@@ -8,6 +8,7 @@ import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeType
 
 class WitchesOrbItem(settings: Settings)
     : 
@@ -26,11 +27,11 @@ class WitchesOrbItem(settings: Settings)
         }
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
         for (reagent in reagents){
             val item = reagent.item
             if (item is IgnitedGemItem){

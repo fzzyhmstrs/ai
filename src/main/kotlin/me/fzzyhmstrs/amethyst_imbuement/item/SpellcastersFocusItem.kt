@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
+import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PlayerParticlesV2
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
@@ -24,6 +25,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
 import net.minecraft.particle.DustParticleEffect
+import net.minecraft.recipe.RecipeType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
@@ -107,17 +109,16 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         }
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
         for (reagent in reagents) {
-            if (reagent.item is MysticalGemItem) {
+            if (reagent.item is MysticalGemItem && type == AltarRecipe.Type) {
                 if (getTier(stack.nbt).previousTier == -1) return false
             }
         }
         return true
     }
     
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
-
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
         for (reagent in reagents){
             val item = reagent.item
             if (item is SpellcastersReagent){
@@ -130,7 +131,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
                 break
-            }else if (item is MysticalGemItem){
+            }else if (item is MysticalGemItem && type == AltarRecipe.Type){
                 resetXpAndLevelDown(stack)
             }
         }

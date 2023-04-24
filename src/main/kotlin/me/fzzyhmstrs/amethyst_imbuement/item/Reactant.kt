@@ -3,8 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeType
 
 interface Reactant{
-    fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity? = null): Boolean
-    fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity? = null)
+    fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity? = null, type: RecipeType<*>? = null): Boolean
+    fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity? = null, type: RecipeType<*>? = null)
 }

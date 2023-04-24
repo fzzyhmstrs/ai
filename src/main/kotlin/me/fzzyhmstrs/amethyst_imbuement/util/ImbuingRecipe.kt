@@ -143,7 +143,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         val test = if(augment != "") inventory.getStack(6) else outputItem
         val item = test.item
         if (item is Reactant){
-            bl1 = bl1 && item.canReact(test, Reagent.getReagents(inventory))
+            bl1 = bl1 && item.canReact(test, Reagent.getReagents(inventory),null,Type)
         }
         return bl1
     }
