@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -143,7 +144,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         nbt.putFloat(MODEL_KEY, modelKey)
     }
     
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
         if (reagents.isEmpty()) return true
         if (reagents.size == 1 && reagents[0].item is SpellScrollItem) return true
         val nbt = stack.nbt
@@ -152,8 +153,8 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         for (reagent in reagents){
             if (reagent.item is BookOfKnowledge){
                 val spell = reagent.nbt?.contains(NbtKeys.LORE_KEY.str())?:false
-                val type = reagent.nbt?.contains(NbtKeys.LORE_TYPE.str())?:false
-                if (!spell || !type){
+                val loreType = reagent.nbt?.contains(NbtKeys.LORE_TYPE.str())?:false
+                if (!spell || !loreType){
                     fails++
                 }
             }
@@ -161,7 +162,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         return fails == 0
     }
     
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
         val nbt = stack.orCreateNbt
         for (reagent in reagents){
             if (nbt.contains(SPELL)) break

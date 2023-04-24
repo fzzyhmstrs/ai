@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.item.ShieldItem
 import net.minecraft.nbt.NbtList
+import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.Registries
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
@@ -73,11 +74,11 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
         addFlavorText(tooltip, context)
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
 
         for (reagent in reagents){
             val item = reagent.item

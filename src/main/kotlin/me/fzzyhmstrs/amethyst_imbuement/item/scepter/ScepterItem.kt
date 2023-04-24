@@ -8,9 +8,11 @@ import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 
@@ -29,7 +31,8 @@ open class ScepterItem(
         return AiConfig.items.manaItems.getItemBarColor(stack)
     }
 
-    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?): Boolean {
+    override fun canReact(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?): Boolean {
+        if (type != AltarRecipe.Type) return true
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
                 if (reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.SPELL) != true) return false
@@ -46,7 +49,7 @@ open class ScepterItem(
         return true
     }
 
-    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?) {
+    override fun react(stack: ItemStack, reagents: List<ItemStack>, player: PlayerEntity?, type: RecipeType<*>?) {
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
                 var count = 0

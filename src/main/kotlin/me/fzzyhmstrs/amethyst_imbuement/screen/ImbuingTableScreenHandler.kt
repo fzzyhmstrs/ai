@@ -943,7 +943,7 @@ class ImbuingTableScreenHandler(
                 if (checkAcceptableAugment(augmentChk,itemStack3)){
                     val item = itemStack3.item
                     if (item is Reactant){
-                        if (!item.canReact(itemStack3, Reagent.getReagents(handler.inventory))){
+                        if (!item.canReact(itemStack3, Reagent.getReagents(handler.inventory), player, ImbuingRecipe.Type)){
                             println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack3}]!")
                             return false
                         }
@@ -1012,7 +1012,7 @@ class ImbuingTableScreenHandler(
                 val itemStack4 = recipe.output
                 val item = itemStack4.item
                 if (item is Reactant){
-                    if (!item.canReact(itemStack4, Reagent.getReagents(handler.inventory))){
+                    if (!item.canReact(itemStack4, Reagent.getReagents(handler.inventory), handler.player, ImbuingRecipe.Type)){
                         println("Item recipe has reagents [${Reagent.getReagents(handler.inventory)}] that can't react with the reactant [${itemStack4}]!")
                         return false
                     }
@@ -1041,7 +1041,7 @@ class ImbuingTableScreenHandler(
                     itemStack4.copy()
                 }
                 if (item is Reactant){
-                    item.react(itemStack5, reagents)
+                    item.react(itemStack5, reagents, handler.player,ImbuingRecipe.Type)
                 }
                 handler.inventory.setStack(6,itemStack5)
                 itemStack5.onCraft(world, player,itemStack5.count)
