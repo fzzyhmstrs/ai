@@ -64,7 +64,7 @@ class ShineAugment: ScepterAugment(ScepterTier.ONE,1) {
                 if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
                     val fluid = world.getFluidState(blockPos)
                     val state = RegisterBlock.SHINE_LIGHT.getShineState(fluid.isIn(FluidTags.WATER))
-                    if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
+                    if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                         world.setBlockState(blockPos,state)
                         val group = state.soundGroup
                         val sound = group.placeSound
