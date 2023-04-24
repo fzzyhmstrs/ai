@@ -1,0 +1,12 @@
+{
+  "minecraft:crafting": {
+    "order": -200,
+    "sort": "none",
+    "icon": {
+      "stack": "item:minecraft:stone"
+    },
+    "simplified_icon": {
+      "texture": "minecraft:textures/block/dirt.png"
+    }
+  }
+}
