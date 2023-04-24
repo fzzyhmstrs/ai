@@ -51,7 +51,7 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
                 val blockPos = BlockPos(pos)
                 if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
                     val state = RegisterBlock.HARD_LIGHT_BLOCK.defaultState
-                    if (world.canPlayerModifyAt(user,blockPos) && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
+                    if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                         world.setBlockState(blockPos,state)
                         val group = state.soundGroup
                         val sound = group.placeSound

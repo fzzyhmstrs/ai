@@ -1,0 +1,15 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "minecraft:bone_meal"
+  },
+  "base": {
+    "item": "minecraft:magma_cream"
+  },
+  "addition": {
+    "item": "minecraft:water_bucket"
+  },
+  "result": {
+    "item": "minecraft:slime_ball"
+  }
+}
