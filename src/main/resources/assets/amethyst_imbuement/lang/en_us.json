@@ -233,6 +233,7 @@
 	"item.amethyst_imbuement.spell_scroll": "Spell Scroll",
 	"item.amethyst_imbuement.spell_scroll.spell": "Spell Within: %1$s",
 	"item.amethyst_imbuement.spell_scroll.uses": "Uses: %1$s/%2$s",
+	"item.amethyst_imbuement.spell_scroll.disenchanted": "Disenchanted",
 	"item.amethyst_imbuement.spellcasters_focus": "Unlit Spellcaster's Focus",
 	"item.amethyst_imbuement.spellcasters_focus.novice": "Spellcaster's Focus of the Novice",
 	"item.amethyst_imbuement.spellcasters_focus.adept": "Spellcaster's Focus of the Adept",
