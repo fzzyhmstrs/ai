@@ -16,13 +16,13 @@
 	"item": "amethyst_imbuement:blazing_gem"
   },
   "craftB": {
-	"item": "amethyst_imbuement:healers_gem"
+	"item": "amethyst_imbuement:opal"
   },
   "craftC": {
 	"item": "amethyst_imbuement:sparking_gem"
   },
   "craftD": {
-	"item": "amethyst_imbuement:mystical_gem"
+	"item": "amethyst_imbuement:healers_gem"
   },
   "craftE": {
         "item": "amethyst_imbuement:crystalline_heart"
