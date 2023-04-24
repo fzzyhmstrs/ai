@@ -58,6 +58,9 @@ repositories {
         dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
     }
     flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\gc\\build\\libs")
+    }
+    flatDir {
         dirs("F:\\Documents\\Mod Libraries\\fzzy_config\\build\\libs")
     }
     flatDir {
@@ -120,6 +123,11 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
 
+    val gcVersion: String by project
+    modImplementation(":gear_core-$gcVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+
     val fzzyConfigVersion: String by project
     include(modImplementation(":fzzy_config-$fzzyConfigVersion"){
             exclude("net.fabricmc.fabric-api")
@@ -135,6 +143,10 @@ dependencies {
     val meVersion: String by project
     implementation("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
     annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
+
+    val cmVersion: String by project
+    implementation("com.github.Fallen-Breath:conditional-mixin:$cmVersion")
+    include("com.github.Fallen-Breath:conditional-mixin:$cmVersion")
 
     val cpaVersion: String by project
     modImplementation("eu.pb4:common-protection-api:$cpaVersion"){
