@@ -21,22 +21,22 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Check on the random provider on switching dimensions|In progress|
 |Ice Shard shards weird angle/rotation issue?|Not started|
 
-#### Steps Needed To Utilize Spell Scrolls Instead of Enchanted Books for Spells
-- [Done] Update how Disenchanting table strips off spells, and require empty spell scroll for that
-- [Done] Add spell scroll addition recipe to Crystal Altar, instead of re-adding spells via anvil
-- [Done] Add a 'knowledge powder' item as the dust input for adding spells.
-- [Done] Knowledge dust comes from imbuing recipe? XP bottles, gem dust, etc
-- [Done] Add item stacks of spells scrolls to the item groups
-- [Done] Remove spell enchanted books from creative menu
-
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|1|
+|NOT STARTED|9|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |check on bulwark and maybe make it an augment|Not started|
-|IN PROGRESS|1|
+|Update AC with fzzy-config|Not started|
+|Implement new missile entity|Not started|
+|implement new base spells|Not started|
+|Add spell splicing system|Not started|
+|re-impl all spells with new system|Not started|
+|overhaul lang with new combining system|Not started|
+|Update Enchantment system in MC to account for paired enchants, where needed|In progress|
+|IN PROGRESS|2|
 |Test devout cleric|In progress|
+|Update AC systems to account for paired enchants|In progress|
 |DOCUMENTATION TODO|4|
 |Polish up wiki|Doc Todo|
 |Correct updated scepter durabilities in Wiki|Doc Todo|
