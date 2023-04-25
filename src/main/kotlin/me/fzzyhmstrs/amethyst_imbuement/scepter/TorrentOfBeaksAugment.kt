@@ -21,7 +21,8 @@ class TorrentOfBeaksAugment: SummonProjectileAugment(ScepterTier.TWO,11){
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDamage(2.8F,0.2f)
-            .withAmplifier(14,1)
+            .withAmplifier(9,1)
+            .withRange(12.0,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),2,
@@ -29,10 +30,11 @@ class TorrentOfBeaksAugment: SummonProjectileAugment(ScepterTier.TWO,11){
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val speed = effects.amplifier(level)/10f
+        val speed = effects.amplifier(level+5)/10f
         val div = 1.0F
         val eggEntity = PlayerEggEntity(world, user)
         eggEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, speed, div)
+        eggEntity.passEffects(effects, level)
         return eggEntity
     }
 
