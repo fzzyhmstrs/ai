@@ -28,6 +28,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Add sounds for Ice Shard and HailStorm|Not started|
 |check on bulwark and maybe make it an augment|Not started|
 |Update AC with fzzy-config|Not started|
+|Impl combination modification into augment configs|Not started|
 |Implement new missile entity|Not started|
 |implement new base spells|Not started|
 |Add spell splicing system|Not started|
