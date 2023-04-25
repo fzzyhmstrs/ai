@@ -28,11 +28,12 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
     constructor(world: World?, x: Double, y: Double, z: Double):
         super(RegisterEntity.PLAYER_EGG, x, y, z, world)
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0f)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0f).withAmplifier(10).withRange(12.5)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
+        entityEffects.setAmplifier(ae.amplifier(level))
     }
 
     override fun handleStatus(status: Byte) {
@@ -59,9 +60,9 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
     override fun onCollision(hitResult: HitResult?) {
         super.onCollision(hitResult)
         if (!world.isClient) {
-            if (random.nextInt(5) == 0) {
+            if (random.nextFloat() < (1f-10f/entityEffects.range(0))) {
                 var i = 1
-                if (random.nextInt(25) == 0) {
+                if (random.nextFloat() < (1f-10f/entityEffects.range(0))/5f) {
                     i = 4
                 }
                 for (j in 0 until i) {
@@ -71,6 +72,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
                     if (this.owner is LivingEntity) {
                         chickenEntity.setOwner(this.owner as LivingEntity)
                     }
+                    chickenEntity.passEffects(entityEffects,0)
                     world.spawnEntity(chickenEntity)
                 }
             }

@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -33,7 +35,8 @@ import net.minecraft.world.explosion.Explosion
 import net.minecraft.world.explosion.ExplosionBehavior
 import java.util.*
 
-class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): ChickenEntity(entityType, world) {
+class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): ChickenEntity(entityType, world),
+    ModifiableEffectEntity {
 
     companion object{
 
@@ -49,6 +52,13 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
     private var currentFuseTime = 0
     private val fuseTime = 30
     private var owner: LivingEntity? = null
+
+    override var entityEffects: AugmentEffect = AugmentEffect().withAmplifier(10)
+
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        super.passEffects(ae, level)
+        entityEffects.setAmplifier(ae.amplifier(level))
+    }
 
     fun setOwner(owner:LivingEntity?){
         this.owner = owner
@@ -101,7 +111,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
         if (!world.isClient) {
             dead = true
             world.createExplosion(this, DamageSource.mob(this),
-                BoomChickenExplosionBehavior,this.pos,1.0f,false,World.ExplosionSourceType.NONE)
+                BoomChickenExplosionBehavior,this.pos,entityEffects.amplifier(0)/10f,false,World.ExplosionSourceType.NONE)
             discard()
         }
     }
