@@ -178,15 +178,15 @@ object AiConfig
         var vanilla = Vanilla()
         class Vanilla: ConfigSection(Header.Builder().space().add("readme.villages.vanilla_1").build()){
             var enableDesertWorkshops = ValidatedBoolean(true)
-            var desertWorkshopWeight = ValidatedInt(2,100,1)
+            var desertWorkshopWeight = ValidatedInt(1,100,1)
             var enablePlainsWorkshops = ValidatedBoolean(true)
-            var plainsWorkshopWeight = ValidatedInt(3,100,1)
+            var plainsWorkshopWeight = ValidatedInt(2,100,1)
             var enableSavannaWorkshops = ValidatedBoolean(true)
-            var savannaWorkshopWeight = ValidatedInt(3,100,1)
+            var savannaWorkshopWeight = ValidatedInt(2,100,1)
             var enableSnowyWorkshops = ValidatedBoolean(true)
-            var snowyWorkshopWeight = ValidatedInt(2,100,1)
+            var snowyWorkshopWeight = ValidatedInt(1,100,1)
             var enableTaigaWorkshops = ValidatedBoolean(true)
-            var taigaWorkshopWeight = ValidatedInt(3,100,1)
+            var taigaWorkshopWeight = ValidatedInt(2,100,1)
         }
 
         var ctov = Ctov()
