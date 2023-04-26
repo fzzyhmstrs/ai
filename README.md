@@ -12,15 +12,6 @@ Create magical crystals with various properties.
 Imbue items with powerful new abilities 
 Channel mana through scepters to unleash devastation upon your enemies, bolster you and your allies, and summon creatures.
 
-### Testing List
-|Task|Status|
-|----|------|
-|Implement crystal altar quick move|Complete|
-|Get the grey "fog" on the crystal altar|Complete|
-|Make sure scepters use the mana bar coloring|Complete|
-|Check on the random provider on switching dimensions|In progress|
-|Ice Shard shards weird angle/rotation issue?|Not started|
-
 ### TODO List
 |Task|Status|
 |----|------|
