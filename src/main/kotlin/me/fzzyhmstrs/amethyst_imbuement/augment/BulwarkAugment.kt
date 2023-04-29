@@ -1,5 +1,6 @@
-package me.fzzyhmstrs.amethyst_imbuement.enchantment
+package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -10,26 +11,22 @@ import net.minecraft.item.ShieldItem
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.Identifier
 
-class BulwarkEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
-
-    private val id: Identifier by lazy {
-        Registry.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
-    }
-
-    override fun checkEnabled(): Boolean{
-        return AiConfig.enchants.enabledEnchants.getOrDefault(id.toString(),true)
-    }
-
-    override fun getMinPower(level: Int): Int {
-        return 25
-    }
-
-    override fun getMaxPower(level: Int): Int {
-        return 45
-    }
+class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
     override fun getMaxLevel(): Int {
         return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
+    }
+
+    override fun acceptableItemStacks(): MutableList<ItemStack> {
+        val list = mutableListOf<ItemStack>()
+        val entries = Registries.ITEM.indexedEntries
+        for (entry in entries){
+            val item = entry.value()
+            if (item is ShieldItem){
+                list.add(ItemStack(item,1))
+            }
+        }
+        return list
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
