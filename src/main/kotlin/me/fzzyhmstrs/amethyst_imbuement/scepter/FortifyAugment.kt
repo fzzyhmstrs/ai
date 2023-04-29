@@ -21,6 +21,7 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
+import kotlin.math.max
 
 class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
 
@@ -41,14 +42,14 @@ class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
     ): Boolean {
         if(target != null) {
             if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/4))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
                 return true
             }
         }
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), effects.amplifier(level)/4))
+        user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max((effects.amplifier(level)/4)-1,3)))
         user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
         effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)

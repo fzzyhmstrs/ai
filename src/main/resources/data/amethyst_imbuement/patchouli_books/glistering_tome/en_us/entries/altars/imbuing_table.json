@@ -12,12 +12,6 @@
 "recipe": "amethyst_imbuement:imbuing_table",
 "text": "More detailed information:$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
 },
-{            
-"type": "patchouli:text",
-"title": "Enchanting",
-"anchor": "enchant_info",
-"text": "The imbuing table can function as an advanced $(#490)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than 15. The same bookshelf arrangement requirements apply."
-},
 {
 "type": "patchouli:multiblock",
 "name": "Imbuing Table Setup",
@@ -33,6 +27,17 @@
 },
 "enable_visualize": false,
 "text": "Displayed is the maximum setup for the imbuing table. Fewer shelves yield less power."
+},
+{
+"type": "patchouli:text",
+"title": "Enchanting",
+"anchor": "enchant_info",
+"text": "The imbuing table can function as an advanced $(#490)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than 15. The same bookshelf arrangement requirements apply."
+},
+{
+"type": "patchouli:text",
+"title": "Rerolling",
+"text": "If enabled in the mod configurations (it is enabled by default), you can reroll the enchantments in the imbuing table by clicking the refresh button that shows up between the right two imbuing slots.$(br2)This reroll requires lapis and experience levels, and the button will grey out if you don't have enough of one or both."
 },
 {
 "type": "patchouli:text",

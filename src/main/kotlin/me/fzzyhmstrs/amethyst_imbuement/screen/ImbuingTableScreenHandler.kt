@@ -89,6 +89,7 @@ class ImbuingTableScreenHandler(
     private val logger = LOGGER
     private val seed = Property.create()
     val lapisSlot: Property = Property.create()
+    val reroll: Property = Property.create()
     var results: List<TableResult> = listOf()
     var resultsIndexes =  intArrayOf(-1, -1, -1)
     var resultsCanUp = false
@@ -136,6 +137,7 @@ class ImbuingTableScreenHandler(
         //add the properties for the three enchantment bars
         addProperty(seed).set(playerInventory.player.enchantmentTableSeed)
         addProperty(lapisSlot).set(0)
+        addProperty(reroll).set(0)
         addProperty(canUse)
         sendContentUpdates()
     }
@@ -177,6 +179,7 @@ class ImbuingTableScreenHandler(
             val lapisStack = inventory.getStack(7)
             val lapisStackFull = if(lapisStack.isEmpty) {0} else {1}
             lapisSlot.set(lapisStackFull)
+            reroll.set(0)
             results = listOf()
             resultsIndexes =  intArrayOf(-1, -1, -1)
 
@@ -259,6 +262,10 @@ class ImbuingTableScreenHandler(
                         val enchantmentPower = IntArray(3)
                         val enchantmentId = intArrayOf(-1, -1, -1)
                         val enchantmentLevel = intArrayOf(-1, -1, -1)
+                        if (AiConfig.altars.imbuing.getRerollEnabled()) {
+                            val result = (if (lapisStack.count >= AiConfig.altars.imbuing.getLapisCost()) 0 else -1) + (if (player.experienceLevel >= AiConfig.altars.imbuing.getLevelCost()) 0 else -2)
+                            reroll.set(if (result == 0) 1 else result)
+                        }
                         var j = 0
                         while (j < 3) {
                             enchantmentPower[j] =
@@ -352,6 +359,23 @@ class ImbuingTableScreenHandler(
                 world.playSound(null,pos,SoundEvents.BLOCK_AMETHYST_BLOCK_HIT,SoundCategory.BLOCKS,0.6f,0.6f + world.random.nextFloat() * 1.2f)
             }
             return true
+        }
+        if (id == 5){
+            return if (AiConfig.altars.imbuing.getRerollEnabled()) {
+                val result = inventory.getStack(7).count >= AiConfig.altars.imbuing.getLapisCost() && player.experienceLevel >= AiConfig.altars.imbuing.getLevelCost()
+                if (result){
+                    player.applyEnchantmentCosts(ItemStack.EMPTY,AiConfig.altars.imbuing.getLevelCost())
+                    inventory.getStack(7).decrement(AiConfig.altars.imbuing.getLapisCost())
+                    if (inventory.getStack(7).isEmpty){
+                        inventory.setStack(7, ItemStack.EMPTY)
+                    }
+                    true
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
         }
         if (resultsIndexes[id] == -1) return false
         val itemStack = inventory.getStack(6)

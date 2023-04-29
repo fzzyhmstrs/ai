@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper.runHandlerViewer
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -65,6 +66,20 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             if (!(d < 0.0 || e < 0.0 || d >= 20.0 || e >= 18.0)) {
                 client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
                 runHandlerViewer(recipesOffset)
+                return true
+            }
+        }
+        if (AiConfig.altars.imbuing.getRerollEnabled()){
+            val d = mouseX - (i + 94).toDouble()
+            val e = mouseY - (j + 37).toDouble()
+            if (!(d < 0.0 || e < 0.0 || d >= 18.0 || e >= 18.0 || !player.let {
+                    (handler as ImbuingTableScreenHandler).onButtonClick(
+                        it, 5
+                    )
+                })) {
+                client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
+                client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f))
+                client?.interactionManager?.clickButton(handler.syncId, 5)
                 return true
             }
         }
@@ -289,6 +304,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 20,
                 18
             )
+        }
+        if (handler.reroll.get() != 0){
+
         }
     }
 
