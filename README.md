@@ -15,7 +15,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 ### TODO List
 |Task|Status|
 |----|------|
-|NOT STARTED|12|
+|NOT STARTED|13|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |check on bulwark and maybe make it an augment|Not started|
 |Update AC with fzzy-config|Not started|
@@ -28,6 +28,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Update Enchantment system in MC to account for paired enchants, where needed|Not started|
 |Add attribite modifier modification for summons|Not started|
 |Add on killed event? On completed?|Not started|
+|Add reroll functionality into the imbuing table|Not started|
 |IN PROGRESS|3|
 |Test devout cleric|In progress|
 |Update AC systems to account for paired enchants|In progress|
