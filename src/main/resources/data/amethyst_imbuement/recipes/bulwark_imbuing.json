@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:charged_moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftA": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:heartstone"
+  },
+  "craftC": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftD": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftF": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftG": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftH": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftI": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "title": "Bulwark",
+  "cost": 29,
+  "augment": "amethyst_imbuement:bulwark"
+}
+

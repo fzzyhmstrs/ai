@@ -9,12 +9,6 @@
 },
 {
 "type": "patchouli:spotlight",
-"title": "Bulwark Enchantment",
-"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:bulwark\",lvl:1}]}",
-"text": "$(l)Effect:$() Heals the user when blocking an attack with the enchanted shield.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"
-},
-{
-"type": "patchouli:spotlight",
 "title": "Multi-Jump Enchantment",
 "item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:multi_jump\",lvl:1}]}",
 "text": "$(l)Effect:$() User can double jump once while in the air. resets when the user lands.$(br)$(l)Enchants:$() $(#490)Boots$()$(br)$(l)Max Level:$() 1 $(br)$(l)Rarity:$() Common$(br)$(l)Incompatibilities:$() None"
