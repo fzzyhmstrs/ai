@@ -86,8 +86,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
-                val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                val nbt = SpellcastersReagent.toNbt(attribute)
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)
@@ -100,8 +99,7 @@ class ImbuedWardItem(settings: Settings): ShieldItem(settings), Modifiable, Reac
                 if (stack.nbt?.contains("AttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
-                val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                val nbt = SpellcastersReagent.toNbt(attribute)
                 nbt.putString("Slot","offhand")
                 list.add(nbt)
                 stack.orCreateNbt.put("AttributeModifiers",list)

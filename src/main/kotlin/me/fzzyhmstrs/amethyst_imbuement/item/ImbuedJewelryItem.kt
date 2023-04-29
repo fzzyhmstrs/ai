@@ -56,8 +56,7 @@ open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(set
                 if (stack.nbt?.contains("TrinketAttributeModifiers") == true) return
                 val attribute = item.getAttributeModifier()
                 val list = NbtList()
-                val nbt = attribute.second.toNbt()
-                nbt.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+                val nbt = SpellcastersReagent.toNbt(attribute)
                 list.add(nbt)
                 stack.orCreateNbt.put("TrinketAttributeModifiers",list)
                 break
