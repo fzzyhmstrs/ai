@@ -140,6 +140,26 @@ object AiConfig
         
         var imbuing = Imbuing()
         class Imbuing: ConfigSection(Header.Builder().space().add("readme.items.imbuing_1").add("readme.items.imbuing_2").build()){
+
+            fun getRerollEnabled(): Boolean{
+                return easyMagic.matchEasyMagicBehavior.get() && easyMagic.rerollEnabled.get()
+
+            }
+
+            fun getLapisCost(): Int{
+                if(getRerollEnabled()){
+                    return easyMagic.lapisCost.get()
+                }
+                return 0
+            }
+
+            fun getLevelCost(): Int{
+                if(getRerollEnabled()){
+                    return easyMagic.levelCost.get()
+                }
+                return 0
+            }
+
             var enchantingEnabled = ValidatedBoolean(true)
             var replaceEnchantingTable = ValidatedBoolean(false)
             @ReadMeText("readme.altars.imbuing.difficultyModifier")
@@ -154,7 +174,8 @@ object AiConfig
                 var showTooltip = ValidatedBoolean(true)
                 var singleEnchantTooltip = ValidatedBoolean(true)
             }
-            
+
+            @Deprecated("Don't need this, as I'm not mod-checking any more. Can remove next config update")
             var reroll = Reroll()
             class Reroll:ConfigSection(Header.Builder().add("readme.items.imbuing_reroll_1").add("readme.items.imbuing_reroll_2").build()){
                 var matchRerollBehavior = ValidatedBoolean(true)
