@@ -17,10 +17,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -79,7 +76,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "damageShield", at = @At(value = "HEAD"))
     private void amethyst_imbuement_checkShieldEnchants(float amount, CallbackInfo ci){
         ItemStack activeStack = this.activeItemStack;
-        if (activeStack.isOf(Items.SHIELD)){
+        if (activeStack.getItem() instanceof ShieldItem){
             int level = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSPIKED(),activeStack);
             if (level > 0){
                 Entity source = damageSource.getSource();
