@@ -39,9 +39,6 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
             /*val item = RegisterBlock.HARD_LIGHT_BLOCK.asItem() as BlockItem
             if (!item.place(ItemPlacementContext(user, hand, ItemStack(RegisterBlock.HARD_LIGHT_BLOCK),hit)).isAccepted) return false*/
             val context = ItemPlacementContext(user, hand, ItemStack(RegisterBlock.SHINE_LIGHT),hit)
-            if (!RegisterBlock.HARD_LIGHT_BLOCK.isEnabled(world.enabledFeatures)) {
-                return false
-            }
             if (!context.canPlace()) {
                 return false
             }

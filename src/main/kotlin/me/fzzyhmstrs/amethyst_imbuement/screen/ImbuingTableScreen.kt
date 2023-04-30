@@ -318,7 +318,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else {
                 19
             }
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             this.drawTexture(

@@ -19,7 +19,7 @@ class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registries.ITEM.indexedEntries
+        val entries = Registry.ITEM.indexedEntries
         for (entry in entries){
             val item = entry.value()
             if (item is ShieldItem){
