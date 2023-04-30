@@ -46,7 +46,7 @@ class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
             val pos = user.pos.subtract(0.0, 0.5, 0.0).add(user.rotationVector.multiply(range))
             val blockPos = BlockPos(pos)
             if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
-                val state = RegisterBlock.HARD_LIGHT_BLOCK.defaultState
+                val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
                 if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                     world.setBlockState(blockPos,state)
 

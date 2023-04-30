@@ -363,9 +363,12 @@ class ImbuingTableScreenHandler(
         if (id == 5){
             return if (AiConfig.altars.imbuing.getRerollEnabled()) {
                 val result = inventory.getStack(7).count >= AiConfig.altars.imbuing.getLapisCost() && player.experienceLevel >= AiConfig.altars.imbuing.getLevelCost()
-                if (result){
+                if (result || player.isCreative){
                     player.applyEnchantmentCosts(ItemStack.EMPTY,AiConfig.altars.imbuing.getLevelCost())
-                    inventory.getStack(7).decrement(AiConfig.altars.imbuing.getLapisCost())
+                    seed.set(player.enchantmentTableSeed)
+                    val stack = inventory.getStack(7)
+                    stack.decrement(AiConfig.altars.imbuing.getLapisCost())
+                    inventory.setStack(7,stack)
                     if (inventory.getStack(7).isEmpty){
                         inventory.setStack(7, ItemStack.EMPTY)
                     }

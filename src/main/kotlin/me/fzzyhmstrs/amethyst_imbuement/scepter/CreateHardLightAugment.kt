@@ -36,8 +36,18 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
         if (user !is ServerPlayerEntity) return false
         val hit = RaycasterUtil.raycastHit(effects.range(level),entity = user)
         if (hit is BlockHitResult  && CommonProtection.canPlaceBlock(world,hit.blockPos,user.gameProfile,user)){
-            val item = RegisterBlock.HARD_LIGHT_BLOCK.asItem() as BlockItem
-            if (!item.place(ItemPlacementContext(user, hand, ItemStack(RegisterBlock.HARD_LIGHT_BLOCK),hit)).isAccepted) return false
+            /*val item = RegisterBlock.HARD_LIGHT_BLOCK.asItem() as BlockItem
+            if (!item.place(ItemPlacementContext(user, hand, ItemStack(RegisterBlock.HARD_LIGHT_BLOCK),hit)).isAccepted) return false*/
+            val context = ItemPlacementContext(user, hand, ItemStack(RegisterBlock.SHINE_LIGHT),hit)
+            if (!RegisterBlock.HARD_LIGHT_BLOCK.isEnabled(world.enabledFeatures)) {
+                return false
+            }
+            if (!context.canPlace()) {
+                return false
+            }
+            val blockPos = context.blockPos
+            val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
+            world.setBlockState(blockPos,state)
             val group = RegisterBlock.HARD_LIGHT_BLOCK.defaultState.soundGroup
             val sound = group.placeSound
             world.playSound(null,hit.blockPos,sound, SoundCategory.BLOCKS,(group.volume + 1.0f)/2.0f,group.pitch * 0.8f)
@@ -50,7 +60,7 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
                 val pos = user.eyePos.subtract(0.0, 0.2, 0.0).add(user.rotationVector.multiply(range))
                 val blockPos = BlockPos(pos)
                 if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
-                    val state = RegisterBlock.HARD_LIGHT_BLOCK.defaultState
+                    val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
                     if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                         world.setBlockState(blockPos,state)
                         val group = state.soundGroup
