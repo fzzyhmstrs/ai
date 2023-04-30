@@ -305,7 +305,30 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             )
         }
         if (handler.reroll.get() != 0){
-
+            val offset = if (handler.reroll.get() > 0) {
+                val u = mouseX - (i + 94)
+                val v = mouseY - (j + 37)
+                val hovered = (u >= 0 && v >= 0 && u < 18 && v < 18)
+                if (hovered){
+                    38
+                } else {
+                    0
+                }
+            } else {
+                19
+            }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+            RenderSystem.setShaderTexture(0, this.texture)
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+            this.drawTexture(
+                matrices,
+                i + 94,
+                j + 37,
+                64 + offset,
+                231,
+                18,
+                18
+            )
         }
     }
 
@@ -315,19 +338,42 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         this.renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, delta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
+        if (isPointWithinBounds(94, 37, 18, 18, mouseX.toDouble(), mouseY.toDouble()) && handler.reroll.get() != 0){
+            val list = if(handler.reroll.get() > 0){
+                val tempList: MutableList<Text> = mutableListOf()
+                tempList.add(AcText.translatable("container.imbuing_table.reroll"))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_lapis",AiConfig.altars.imbuing.getLapisCost()).formatted(Formatting.ITALIC, Formatting.BLUE))
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_levels",AiConfig.altars.imbuing.getLevelCost()).formatted(Formatting.ITALIC, Formatting.GREEN))
+                tempList
+            } else if (handler.reroll.get() == -1) {
+                val tempList: MutableList<Text> = mutableListOf()
+                tempList.add(AcText.translatable("container.imbuing_table.reroll").formatted(Formatting.RED))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_lapis_bad").formatted(Formatting.ITALIC, Formatting.RED))
+                tempList
+            } else if (handler.reroll.get() == -2) {
+                val tempList: MutableList<Text> = mutableListOf()
+                tempList.add(AcText.translatable("container.imbuing_table.reroll").formatted(Formatting.RED))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_levels_bad").formatted(Formatting.ITALIC, Formatting.RED))
+                tempList
+            } else {
+                val tempList: MutableList<Text> = mutableListOf()
+                tempList.add(AcText.translatable("container.imbuing_table.reroll").formatted(Formatting.RED))
+                tempList.add(AcText.empty())
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_both_bad").formatted(Formatting.ITALIC, Formatting.RED))
+                tempList
+            }
+            this.renderTooltip(matrices, list, mouseX, mouseY)
+            return
+        }
         for (j in 0..2) {
             val r = handler.resultsIndexes[j]
             if (r < 0) continue
             val result = handler.results.getOrNull(r)?:continue
             if (result.type == -2) continue
-            if (!isPointWithinBounds(
-                    118,
-                    14 + ofst2 + 19 * j,
-                    108,
-                    17,
-                    mouseX.toDouble(),
-                    mouseY.toDouble()
-                )) continue
+            if (!isPointWithinBounds(118, 14 + ofst2 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
             val list = if(j == 0 && handler.resultsCanUp){
                 val tempList: MutableList<Text> = mutableListOf()
                 tempList.add(AcText.translatable("container.imbuing_table.previous_recipe"))
@@ -346,6 +392,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             this.renderTooltip(matrices, list, mouseX, mouseY)
             break
         }
+
     }
 
     override fun init() {
