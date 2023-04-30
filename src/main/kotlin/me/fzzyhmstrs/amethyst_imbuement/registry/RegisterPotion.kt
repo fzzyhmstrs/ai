@@ -37,5 +37,8 @@ object RegisterPotion {
         BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(CURSE_POTION,Items.REDSTONE, LONG_CURSE_POTION)
         BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(Potions.REGENERATION,Items.MILK_BUCKET, IMMUNITY_POTION)
         BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(IMMUNITY_POTION,Items.REDSTONE, LONG_IMMUNITY_POTION)
+        BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(Potions.NIGHT_VISION,RegisterItem.KNOWLEDGE_POWDER, INSIGHT_POTION)
+        BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(INSIGHT_POTION, Items.GLOWSTONE_DUST, STRONG_INSIGHT_POTION)
+        BrewingRecipeRegistryInvoker.amethyst_imbuement_registerPotionRecipe(INSIGHT_POTION,Items.REDSTONE, LONG_INSIGHT_POTION)
     }
 }

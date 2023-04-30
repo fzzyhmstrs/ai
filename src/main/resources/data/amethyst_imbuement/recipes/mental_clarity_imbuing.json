@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:opal"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_lore"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:knowledge_powder"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:knowledge_powder"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:knowledge_powder"
+  },
+  "title": "Mental Clarity",
+  "cost": 17,
+  "augment": "amethyst_imbuement:mental_clarity"
+}
+
