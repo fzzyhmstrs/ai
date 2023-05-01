@@ -46,7 +46,7 @@ object AiConfig
 {
     private val itemsHeader = buildSectionHeader("items")
 
-    class Items: ConfigClass(itemsHeader){
+    class Items: ConfigClass(itemsHeader): OldClass<Items>{
 
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
@@ -119,6 +119,13 @@ object AiConfig
             var uses = ValidatedSeries(arrayOf(16,24,32),Int::class.java,{a,b-> b>a},"Higher tier scrolls need more uses than the previous tier.")
             @ReadMeText("readme.items.scroll.levels")
             var levels = ValidatedSeries(arrayOf(1,2,3,5,7),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
+        }
+        
+        override fun generateNewClass(): AiConfig.Items {
+            val items = Items()
+            items.scepters.bladesDamage.validateAndSet(ScepterOfBladesToolMaterial.defaultAttackDamage())
+            items.scepters.lethalityDamage.validateAndSet(LethalityToolMaterial.defaultAttackDamage())
+            return items
         }
     }
 
@@ -313,7 +320,7 @@ object AiConfig
         }
     }
 
-    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v2.json","items_v1.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {AiConfigOldClasses.ItemsV1()})
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v3.json","items_v2.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
     var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
