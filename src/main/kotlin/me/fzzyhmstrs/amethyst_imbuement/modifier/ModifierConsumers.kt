@@ -1,8 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
+import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -244,8 +245,8 @@ object ModifierConsumers {
         if (rnd != 0) return
         val stack = user.getStackInHand(Hand.MAIN_HAND)
         val item = stack.item
-        if (item is AugmentScepterItem){
-            val activeEnchant = item.getActiveEnchant(stack)
+        if (item is ScepterLike){
+            val activeEnchant = ScepterHelper.getActiveEnchant(stack)
             val augment = Registry.ENCHANTMENT.get(Identifier(activeEnchant))
             if (augment != null && augment is ScepterAugment){
                 val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
