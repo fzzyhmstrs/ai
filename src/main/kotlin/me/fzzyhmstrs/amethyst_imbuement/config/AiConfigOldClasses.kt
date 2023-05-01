@@ -6,33 +6,6 @@ import net.minecraft.util.Identifier
 
 object AiConfigOldClasses {
 
-    class ItemsV1: OldClass<AiConfig.Items> {
-        var giveGlisteringTome: Boolean = true
-        var totemOfAmethystDurability: Int = 360
-        var opalineDurability: Int = ScepterLvl1ToolMaterial.defaultDurability()
-        var iridescentDurability: Int = ScepterLvl2ToolMaterial.defaultDurability()
-        var lustrousDurability: Int = ScepterLvl3ToolMaterial.defaultDurability()
-        var baseRegenRateTicks: Long = ScepterLvl1ToolMaterial.baseCooldown()
-        var bladesDurability: Int = ScepterOfBladesToolMaterial.defaultDurability()
-        var bladesDamage: Float = ScepterOfBladesToolMaterial.defaultAttackDamage()
-        var lethalityDurability: Int = LethalityToolMaterial.defaultDurability()
-        var lethalityDamage: Float = LethalityToolMaterial.defaultAttackDamage()
-        override fun generateNewClass(): AiConfig.Items {
-            val items = AiConfig.Items()
-            items.giveGlisteringTome.validateAndSet(giveGlisteringTome)
-            items.manaItems.totemOfAmethystDurability.validateAndSet(totemOfAmethystDurability)
-            items.scepters.opalineDurability.validateAndSet(opalineDurability)
-            items.scepters.iridescentDurability.validateAndSet(iridescentDurability)
-            items.scepters.lustrousDurability.validateAndSet(lustrousDurability)
-            items.scepters.opalineCooldown.validateAndSet(baseRegenRateTicks)
-            items.scepters.bladesDurability.validateAndSet(bladesDurability)
-            items.scepters.bladesDamage.validateAndSet(bladesDamage)
-            items.scepters.lethalityDurability.validateAndSet(lethalityDurability)
-            items.scepters.lethalityDamage.validateAndSet(lethalityDamage)
-            return items
-        }
-    }
-
     class AltarsV3: OldClass<AiConfig.Altars>{
 
         var experienceBushBonemealChance: Float = 0.4f
