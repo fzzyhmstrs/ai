@@ -20,7 +20,7 @@ object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
         return AiConfig.items.scepters.bladesDamage.get()
     }
     fun defaultAttackDamage(): Float {
-        return 5.0f
+        return 2.0f
     }
     override fun getAttackSpeed(): Double {
         return -3.0
