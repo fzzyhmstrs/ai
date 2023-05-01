@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.item_util.AugmentScepterItem
+import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -27,12 +27,12 @@ class DebugAugment: MiscAugment(ScepterTier.ONE,1) {
     ): Boolean {
         val stack1 = user.getStackInHand(Hand.MAIN_HAND)
         val stack2 = user.getStackInHand(Hand.OFF_HAND)
-        if (stack1.item is AugmentScepterItem) {
+        if (stack1.item is ScepterLike) {
             val nbt = stack1.orCreateNbt
             writeNbt(SpellType.FURY.name+"_lvl", 25, nbt)
             writeNbt(SpellType.WIT.name+"_lvl", 25, nbt)
             writeNbt(SpellType.GRACE.name+"_lvl", 25, nbt)
-        } else if (stack2.item is AugmentScepterItem) {
+        } else if (stack2.item is ScepterLike) {
             val nbt = stack2.orCreateNbt
             writeNbt(SpellType.FURY.name+"_lvl", 25, nbt)
             writeNbt(SpellType.WIT.name+"_lvl", 25, nbt)
