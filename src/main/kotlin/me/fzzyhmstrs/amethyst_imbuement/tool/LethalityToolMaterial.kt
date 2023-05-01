@@ -23,7 +23,7 @@ object LethalityToolMaterial: ScepterToolMaterial() {
         return -3.0
     }
     fun defaultAttackDamage(): Float {
-        return 8.0f
+        return 5.0f
     }
     override fun getMiningLevel(): Int {
         return 1
