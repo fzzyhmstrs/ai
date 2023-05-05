@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.config_util.*
+import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
@@ -46,7 +47,7 @@ object AiConfig
 {
     private val itemsHeader = buildSectionHeader("items")
 
-    class Items: ConfigClass(itemsHeader): OldClass<Items>{
+    class Items: ConfigClass(itemsHeader), OldClass<Items> {
 
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
