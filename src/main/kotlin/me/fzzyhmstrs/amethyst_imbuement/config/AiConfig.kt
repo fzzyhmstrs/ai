@@ -274,7 +274,7 @@ object AiConfig
         var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
 
         @ReadMeText("readme.enchants.vanillaEnchantMaxLevels")
-        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id)) && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
     }
 
     private val trinketsHeader = buildSectionHeader("trinkets")
@@ -283,7 +283,7 @@ object AiConfig
         @ReadMeText("readme.trinkets.draconicVisionRange")
         var draconicVisionRange = ValidatedInt(5,16,1)
         @ReadMeText("readme.trinkets.enabledAugments")
-        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Registries.ENCHANTMENT.containsId(Identifier.tryParse(id))}, "Needs a valid registered enchantment identifier.")
+        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
     }
 
     private val entitiesHeader = buildSectionHeader("entities")
