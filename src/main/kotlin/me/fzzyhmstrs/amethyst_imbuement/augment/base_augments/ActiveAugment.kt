@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractActiveAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.Identifier
@@ -14,6 +15,10 @@ open class ActiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSl
 
     val id: Identifier by lazy {
         Registry.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
+    }
+
+    open fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean{
+        return true
     }
 
     override fun canAccept(other: Enchantment): Boolean {

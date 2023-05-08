@@ -14,7 +14,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
-class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
+class InflammableAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
 
     override fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         return RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,10)
@@ -22,16 +22,16 @@ class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.STRENGTH,stack)
-        EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH,100,lvl-1)
+        EffectQueue.addStatusToQueue(user,StatusEffects.FIRE_RESISTANCE,100,lvl-1)
         val rnd = user.world.random.nextFloat()
-        if (rnd <= 0.5) {
+        if (rnd <= if (user.isInLava) 1f else if (user.isOnFire) 0.5f else -1f) {
             if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)) {
                 if (AiConfig.trinkets.enableBurnout.get()) {
                     RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
                         stack,
                         RegisterEnchantment.STRENGTH,
                         user,
-                        AcText.translatable("augment_damage.strength.burnout")
+                        AcText.translatable("augment_damage.inflammable.burnout")
                     )
                 } else {
                     val item = stack.item

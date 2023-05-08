@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -8,8 +9,10 @@ import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.AugmentTasks
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractActiveAugment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -34,19 +37,25 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
             user.mainHandStack
         }
         if (!stack2.isEmpty){ //always defer usage if there is an item in the player's other hand (only activate when other hand empty)
-            return TypedActionResult.fail(stack)
-        }
-        if(!checkCanUse(stack,world,user,10)){
-            return TypedActionResult.fail(stack)
+            return TypedActionResult.pass(stack)
         }
         usageEnchantmentTasks(stack, world, user)
         val nbt = stack.orCreateNbt
         return if (!nbt.contains(NbtKeys.TOTEM.str())){
-            nbt.putBoolean(NbtKeys.TOTEM.str(),true)
-            activeEnchantmentTasks(stack, world, user)
-            TypedActionResult.success(stack)
+            if (canActivateTasks(stack,world,user)) {
+                nbt.putBoolean(NbtKeys.TOTEM.str(), true)
+                activeEnchantmentTasks(stack, world, user)
+                TypedActionResult.success(stack)
+            } else {
+                TypedActionResult.fail(stack)
+            }
         } else {
             val bl = !nbt.getBoolean(NbtKeys.TOTEM.str())
+            if (bl){
+                if (!canActivateTasks(stack,world,user)){
+                    return TypedActionResult.fail(stack)
+                }
+            }
             nbt.putBoolean(NbtKeys.TOTEM.str(), bl)
             if (bl) {
                 activeEnchantmentTasks(stack, world, user)
@@ -95,6 +104,17 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
 
             }
         }
+    }
+
+    fun canActivateTasks(stack: ItemStack, world: World, entity: LivingEntity): Boolean{
+        val enchants = EnchantmentHelper.get(stack)
+        for (enchant in enchants.keys){
+            if (enchant is ActiveAugment){
+                val lvl = enchants[enchant] ?: 1
+                if (!enchant.canActivate(entity,lvl, stack)) return false
+            }
+        }
+        return true
     }
 
     override fun activeEnchantmentTasks(stack: ItemStack, world: World, entity: Entity){

@@ -20,7 +20,8 @@ import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import java.util.*
 
-class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
+class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings
+): CustomSpellToolItem(material, 1.5f,-3.0f, BlockTags.SHOVEL_MINEABLE, settings) {
 
     override fun getMiningSpeedMultiplier(stack: ItemStack, state: BlockState): Float {
         return if (state.isIn(BlockTags.AXE_MINEABLE) || state.isIn(BlockTags.SHOVEL_MINEABLE)) 6.0f else 1.0f

@@ -9,7 +9,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.DustParticleEffect
 import net.minecraft.world.World
 
-class LethalityScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
+class LethalityScepterItem(material: ScepterToolMaterial, settings: Settings): CustomSpellbladeItem(material,3,-2.7f, settings) {
 
     companion object{
         private val SMALL_DUST = DustParticleEffect(DustParticleEffect.RED,0.8f)

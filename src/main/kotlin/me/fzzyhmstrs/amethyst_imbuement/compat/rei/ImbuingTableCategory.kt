@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.shedaniel.math.Point
@@ -15,6 +16,7 @@ import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.math.MathHelper
 
 
 @Suppress("UnstableApiUsage")
@@ -110,7 +112,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         outputSlot.disableBackground()
         widgets.add(outputSlot)
 
-        val cost = display.getCost()
+        val cost = MathHelper.ceil(display.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
         val textOffset: Int
         val levelBoxText = if(cost > 99) {
             textOffset = 124

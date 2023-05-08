@@ -53,7 +53,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
     }
 
     override fun canAccept(other: Enchantment): Boolean {
-        return super.canAccept(other) && other !== Enchantments.AQUA_AFFINITY && other !== Enchantments.RESPIRATION
+        return super.canAccept(other) && other !== Enchantments.RESPIRATION
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

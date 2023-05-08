@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "minecraft:magma_cream"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftC": {
+    "item": "minecraft:magma_cream"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftG": {
+    "item": "minecraft:magma_cream"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:glistening_ice"
+  },
+  "craftI": {
+    "item": "minecraft:magma_cream"
+  },
+  "title": "Inflammable",
+  "cost": 19,
+  "augment": "amethyst_imbuement:inflammable"
+}
+

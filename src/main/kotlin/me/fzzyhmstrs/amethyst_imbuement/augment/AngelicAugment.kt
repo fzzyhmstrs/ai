@@ -4,8 +4,10 @@ import io.github.ladysnake.pal.AbilitySource
 import io.github.ladysnake.pal.Pal
 import io.github.ladysnake.pal.PlayerAbility
 import io.github.ladysnake.pal.VanillaAbilities
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -26,24 +28,35 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
         private val abilitySource: AbilitySource = Pal.getAbilitySource(Identifier(AI.MOD_ID, "angelic"))
     }
 
+    override fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
+        return user is PlayerEntity && !user.abilities.creativeMode && RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,20)
+    }
+
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         user as PlayerEntity
         AngelicPersistentEffect(user,stack)
-        if (!user.abilities.creativeMode) {
-            if (!abilitySource.grants(user,ability)){
-                abilitySource.grantTo(user,ability)
-            }
-            if(user.abilities.flying) {
-                if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 2)) {
+        if (!abilitySource.grants(user,ability)){
+            abilitySource.grantTo(user,ability)
+        }
+        if(user.abilities.flying) {
+            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 2)) {
+                if (AiConfig.trinkets.enableBurnout.get()) {
                     RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
                         stack,
                         RegisterEnchantment.ANGELIC,
                         user,
                         AcText.translatable("augment_damage.angelic.burnout")
                     )
-                    if (abilitySource.grants(user, ability)) {
-                        abilitySource.revokeFrom(user, ability)
+                } else {
+                    val item = stack.item
+                    if (item is TotemItem){
+                        val nbt = stack.orCreateNbt
+                        item.inactiveEnchantmentTasks(stack,user.world,user)
+                        nbt.putBoolean(NbtKeys.TOTEM.str(), false)
                     }
+                }
+                if (abilitySource.grants(user, ability)) {
+                    abilitySource.revokeFrom(user, ability)
                 }
             }
         }

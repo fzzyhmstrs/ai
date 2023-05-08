@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.tool
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 
 
@@ -11,7 +12,7 @@ object LethalityToolMaterial: ScepterToolMaterial() {
         return AiConfig.items.scepters.lethalityDurability.get()
     }
     fun defaultDurability(): Int{
-        return 1250
+        return 1325
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 1.0f
@@ -20,10 +21,10 @@ object LethalityToolMaterial: ScepterToolMaterial() {
         return AiConfig.items.scepters.lethalityDamage.get()
     }
     override fun getAttackSpeed(): Double {
-        return -3.0
+        return -2.7
     }
     fun defaultAttackDamage(): Float {
-        return 5.0f
+        return 4.0f
     }
     override fun getMiningLevel(): Int {
         return 1
@@ -33,7 +34,7 @@ object LethalityToolMaterial: ScepterToolMaterial() {
     }
 
     override fun getRepairIngredient(): Ingredient {
-        return Ingredient.ofItems(RegisterItem.GLOWING_BLADE)
+        return Ingredient.ofItems(Items.GOLD_INGOT)
     }
     override fun healCooldown(): Long {
         return AiConfig.items.scepters.lethalityCooldown.get()
