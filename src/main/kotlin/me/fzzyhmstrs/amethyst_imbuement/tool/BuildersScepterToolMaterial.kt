@@ -6,24 +6,27 @@ import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 
 
-object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
+object BuildersScepterToolMaterial: ScepterToolMaterial(){
     override fun getDurability(): Int {
-        return AiConfig.items.scepters.bladesDurability.get()
+        return AiConfig.items.scepters.buildersDurability.get()
     }
     fun defaultDurability(): Int{
-        return 550
+        return 650
     }
     override fun getMiningSpeedMultiplier(): Float {
-        return 1.0f
+        return AiConfig.items.scepters.buildersMiningSpeed.get()
+    }
+    fun defaultMiningSpeed(): Float {
+        return 2.0f
     }
     override fun getAttackDamage(): Float {
-        return AiConfig.items.scepters.bladesDamage.get()
+        return AiConfig.items.scepters.buildersDamage.get()
     }
     fun defaultAttackDamage(): Float {
-        return 1.5f
+        return 2.0f
     }
     override fun getAttackSpeed(): Double {
-        return -2.7
+        return -3.0
     }
     override fun getMiningLevel(): Int {
         return 1
@@ -36,7 +39,7 @@ object ScepterOfBladesToolMaterial: ScepterToolMaterial() {
         return Ingredient.ofItems(Items.GOLD_INGOT)
     }
     override fun healCooldown(): Long {
-        return AiConfig.items.scepters.bladesCooldown.get()
+        return AiConfig.items.scepters.buildersCooldown.get()
     }
     override fun baseCooldown(): Long {
         return 125L

@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.UsedActiveAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -21,7 +24,14 @@ class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot):
         val rndY = world.getTopY(Heightmap.Type.MOTION_BLOCKING,rndX,rndZ)
         if(RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack, world, user as PlayerEntity, 120, AcText.translatable("augment_damage.escape.check_can_use"))) {
             if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, world, user, 120)) {
-                RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(stack, RegisterEnchantment.ESCAPE,user, AcText.translatable("augment_damage.escape.burnout"))
+                if (AiConfig.trinkets.enableBurnout.get()) {
+                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
+                        stack,
+                        RegisterEnchantment.ESCAPE,
+                        user,
+                        AcText.translatable("augment_damage.escape.burnout")
+                    )
+                }
             }
             user.teleport(rndX.toDouble(), (rndY + 1).toDouble(), rndZ.toDouble())
             world.playSound(

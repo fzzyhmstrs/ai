@@ -246,7 +246,7 @@ object ModifierConsumers {
         val stack = user.getStackInHand(Hand.MAIN_HAND)
         val item = stack.item
         if (item is ScepterLike){
-            val activeEnchant = ScepterHelper.getActiveEnchant(stack)
+            val activeEnchant = item.getActiveEnchant(stack)
             val augment = Registries.ENCHANTMENT.get(Identifier(activeEnchant))
             if (augment != null && augment is ScepterAugment){
                 val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -20,6 +21,7 @@ import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.MathHelper
 
 class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
@@ -53,7 +55,7 @@ class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> 
         mouseX: Double,
         mouseY: Double
     ) {
-        val cost = recipe.getCost()
+        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
         val client = MinecraftClient.getInstance()
         val costText: OrderedText
         val costOffset: Int

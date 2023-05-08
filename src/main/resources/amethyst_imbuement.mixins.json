@@ -19,6 +19,7 @@
     "EnchantMaxLvl5Mixin",
     "EnchantmentMixin",
     "EnchantmentTargetArmorMixin",
+    "EnchantmentTargetDiggerMixin",
     "EnchantPiercingMixin",
     "EnchantPowerMixin",
     "EnchantProtectionMixin",

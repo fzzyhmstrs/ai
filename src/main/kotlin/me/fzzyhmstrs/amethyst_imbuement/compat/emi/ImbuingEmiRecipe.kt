@@ -7,6 +7,7 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
@@ -15,6 +16,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.text.OrderedText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.MathHelper
 
 class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     
@@ -31,7 +33,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
         reactantChk = if(recipe.getAugment() != "") EmiIngredient.of(recipe.getInputs()[6]) else EmiIngredient.of(Ingredient.ofStacks(recipe.output))
-        val cost = recipe.getCost()
+        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
         if(cost > 99){
             costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2

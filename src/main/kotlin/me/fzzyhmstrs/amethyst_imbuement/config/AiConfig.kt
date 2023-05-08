@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
+import dev.emi.trinkets.api.Trinket
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
@@ -38,6 +39,7 @@ object AiConfig
             .add("1.19.3-02/1.19-25/1.18.2-42: Added a config for the chance an experience bush will grow (in Altars config v3).")
             .add("1.19.3-03/1.19-26/1.18.2-43: Added configurable durability for the Totem of Amethyst.")
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
+            .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -88,6 +90,16 @@ object AiConfig
             var lethalityCooldown = ValidatedLong(LethalityToolMaterial.baseCooldown(), Long.MAX_VALUE,LethalityToolMaterial.minCooldown())
             @ReadMeText("readme.items.scepters.lethalityDamage")
             var lethalityDamage = ValidatedFloat(LethalityToolMaterial.defaultAttackDamage(),30f,0f)
+            var vanguardDurability = ValidatedInt(ScepterOfTheVanguardToolMaterial.defaultDurability(),1650,128)
+            var vanguardCooldown = ValidatedLong(ScepterOfTheVanguardToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterOfTheVanguardToolMaterial.minCooldown())
+            @ReadMeText("readme.items.scepters.vanguardDamage")
+            var vanguardDamage = ValidatedFloat(ScepterOfTheVanguardToolMaterial.defaultAttackDamage(),20f,0f)
+            var buildersDurability = ValidatedInt(BuildersScepterToolMaterial.defaultDurability(),1650,128)
+            var buildersCooldown = ValidatedLong(BuildersScepterToolMaterial.baseCooldown(), Long.MAX_VALUE,BuildersScepterToolMaterial.minCooldown())
+            @ReadMeText("readme.items.scepters.buildersDamage")
+            var buildersDamage = ValidatedFloat(BuildersScepterToolMaterial.defaultAttackDamage(),20f,0f)
+            @ReadMeText("readme.items.scepters.buildersMiningSpeed")
+            var buildersMiningSpeed = ValidatedFloat(BuildersScepterToolMaterial.defaultMiningSpeed(),12f,1f)
             var fowlDurability = ValidatedInt(ScepterSoFoulToolMaterial.defaultDurability(),1650,32)
             var fowlCooldown = ValidatedLong(ScepterSoFoulToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterSoFoulToolMaterial.minCooldown())
         }
@@ -122,10 +134,12 @@ object AiConfig
             var levels = ValidatedSeries(arrayOf(1,2,3,5,7),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
         }
         
-        override fun generateNewClass(): AiConfig.Items {
+        override fun generateNewClass(): Items {
             val items = Items()
             items.scepters.bladesDamage.validateAndSet(ScepterOfBladesToolMaterial.defaultAttackDamage())
+            items.scepters.bladesDurability.validateAndSet(ScepterOfBladesToolMaterial.defaultDurability())
             items.scepters.lethalityDamage.validateAndSet(LethalityToolMaterial.defaultAttackDamage())
+            items.scepters.lethalityDurability.validateAndSet(LethalityToolMaterial.defaultDurability())
             return items
         }
     }
@@ -280,11 +294,20 @@ object AiConfig
 
     private val trinketsHeader = buildSectionHeader("trinkets")
 
-    class Trinkets: ConfigClass(trinketsHeader){
+    class Trinkets: ConfigClass(trinketsHeader), OldClass<Trinkets>{
+        @ReadMeText("readme.trinkets.enableBurnout")
+        var enableBurnout = ValidatedBoolean(true)
         @ReadMeText("readme.trinkets.draconicVisionRange")
         var draconicVisionRange = ValidatedInt(5,16,1)
         @ReadMeText("readme.trinkets.enabledAugments")
         var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
+
+        override fun generateNewClass(): Trinkets {
+            val trinkets = Trinkets()
+            trinkets.draconicVisionRange.validateAndSet(draconicVisionRange.get())
+            trinkets.enabledAugments.validateAndSet(enabledAugments)
+            return trinkets
+        }
     }
 
     private val entitiesHeader = buildSectionHeader("entities")
@@ -325,7 +348,7 @@ object AiConfig
     var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
-    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v1.json","trinkets_v0.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {AiConfigOldClasses.TrinketsV0()})
+    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v1.json","entities_v0.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
 

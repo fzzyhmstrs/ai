@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
@@ -54,11 +55,40 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
-        private void amethyst_imbuement_checkForSoulbinding(CallbackInfo ci){
-            if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
-                ci.cancel();
+    private void amethyst_imbuement_checkForSoulbinding(CallbackInfo ci){
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
+            for (ItemStack stack : this.inventory.main){
+                if (stack.getItem() instanceof TotemItem){
+                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
+                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
+                            ci.cancel();
+                            break;
+                        }
+                    }
+                }
+            }
+            for (ItemStack stack : this.inventory.offHand){
+                if (stack.getItem() instanceof TotemItem){
+                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
+                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
+                            ci.cancel();
+                            break;
+                        }
+                    }
+                }
+            }
+            for (ItemStack stack : this.inventory.armor){
+                if (stack.getItem() instanceof TotemItem){
+                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
+                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
+                            ci.cancel();
+                            break;
+                        }
+                    }
+                }
             }
         }
+    }
 
     @Inject(method = "damage", at = @At(value = "HEAD"))
     private void amethyst_imbuement_damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
