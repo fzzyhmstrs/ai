@@ -76,7 +76,7 @@
     "patchouli": ">=1.19.3-78-FABRIC",
     "minecraft": ">=1.19.3",
     "java": ">=17",
-    "fzzy_core": ">=0.1.2+1.19.3",
-    "amethyst_core": ">=1.0.2+1.19.3"
+    "fzzy_core": ">=0.2.0+1.19.3",
+    "amethyst_core": ">=1.2.0+1.19.3"
   }
 }
