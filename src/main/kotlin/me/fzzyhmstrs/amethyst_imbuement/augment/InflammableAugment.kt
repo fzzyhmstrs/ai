@@ -21,8 +21,7 @@ class InflammableAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
-        val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.STRENGTH,stack)
-        EffectQueue.addStatusToQueue(user,StatusEffects.FIRE_RESISTANCE,100,lvl-1)
+        EffectQueue.addStatusToQueue(user,StatusEffects.FIRE_RESISTANCE,240,0)
         val rnd = user.world.random.nextFloat()
         if (rnd <= if (user.isInLava) 1f else if (user.isOnFire) 0.5f else -1f) {
             if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)) {
