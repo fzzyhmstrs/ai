@@ -15,10 +15,10 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.RecipeType
-import net.minecraft.registry.Registries
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 open class SpellToolItem(
@@ -93,7 +93,7 @@ open class SpellToolItem(
                 if (count == 0) return
                 val nbt = reagent.nbt?:return
                 val spellString = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL)
-                val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+                val spell = Registry.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
                 return
             }

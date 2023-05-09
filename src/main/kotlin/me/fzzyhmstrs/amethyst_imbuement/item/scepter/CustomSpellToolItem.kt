@@ -6,7 +6,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.world.World
 
 open class CustomSpellToolItem(

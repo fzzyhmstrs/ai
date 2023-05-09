@@ -181,7 +181,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.ICE_SPIKES))
         .withModifiers(listOf(RegisterModifier.ICE_ASPECT))
         .also{ regItem["frosted_scepter"] = it}
-    val SCEPTER_OF_BLADES = SpellbladeItem(ScepterOfBladesToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+    val SCEPTER_OF_BLADES = SpellbladeItem(ScepterOfBladesToolMaterial,3,-2.7f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SPECTRAL_SLASH))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT))
         .also{ regItem["scepter_of_blades"] = it}
@@ -209,7 +209,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.HARD_LIGHT_BRIDGE))
         .withModifiers(listOf(RegisterModifier.BUILDERS_ASPECT, ModifierRegistry.LESSER_REACH))
         .also{ regItem["builders_scepter"] = it}
-    val SCEPTER_OF_THE_VANGUARD = SpellbladeItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+    val SCEPTER_OF_THE_VANGUARD = SpellbladeItem(ScepterLvl2ToolMaterial,3,-3.0f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BARRIER))
         .withModifiers(listOf(RegisterModifier.SMITING, RegisterModifier.GRACEFUL))
         .also{ regItem["scepter_of_the_vanguard"] = it}
