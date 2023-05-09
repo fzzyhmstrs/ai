@@ -19,6 +19,7 @@
 		"minecraft:amethyst_shard",
 		"minecraft:prismarine_crystals",
 		"minecraft:quartz",
-		"minecraft:lapis_lazuli"
+		"minecraft:lapis_lazuli",
+		"#amethyst_imbuement:aspect_gems"
 	]
 }
