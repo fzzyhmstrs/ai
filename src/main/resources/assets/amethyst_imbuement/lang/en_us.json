@@ -754,7 +754,7 @@
 	"scepter.modifier.amethyst_imbuement:spell_frenzied": "Spell-Frenzied",
 	"scepter.modifier.amethyst_imbuement:bolt_specialist": "Bolt Specialist",
 	"scepter.modifier.amethyst_imbuement:bolstering": "Bolstering",
-	"scepter.modifier.amethyst_imbuement:Boundless": "Boundless",
+	"scepter.modifier.amethyst_imbuement:boundless": "Boundless",
 	"scepter.modifier.amethyst_imbuement:fowl": "Fowl",
 
 	"scepter.modifier.amethyst_imbuement:inner_fire": "Inner Fire",
@@ -808,7 +808,7 @@
 	"scepter.modifier.amethyst_imbuement:spell_frenzied.desc": "Massively reduces spell cooldowns but spells deal less damage and cost more",
 	"scepter.modifier.amethyst_imbuement:bolt_specialist.desc": "Big bonuses to bolt-type spells, and bolts have a chance to explode on impact",
 	"scepter.modifier.amethyst_imbuement:bolstering.desc": "Buffs the caster and nearby allies on successful spell cast",
-	"scepter.modifier.amethyst_imbuement:Boundless.desc": "Doubles spell range at the expense of longer cooldowns",
+	"scepter.modifier.amethyst_imbuement:boundless.desc": "Doubles spell range at the expense of longer cooldowns",
 	"scepter.modifier.amethyst_imbuement:fowl.desc": "Chance to summon a chicken on successful spell cast",
 
 	"scepter.modifier.amethyst_imbuement:inner_fire.desc": "Increased spell effect amplification and duration",
