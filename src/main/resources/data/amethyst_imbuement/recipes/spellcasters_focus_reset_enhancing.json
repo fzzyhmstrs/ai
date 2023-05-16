@@ -11,5 +11,6 @@
   },
   "result": {
     "item": "amethyst_imbuement:spellcasters_focus"
-  }
+  },
+  "react": "recipe.enhancing.focus_reset"
 }
