@@ -655,6 +655,7 @@
 	"item.minecraft.lingering_potion.effect.insight": "Lingering Potion of Insight",
 	"item.minecraft.tipped_arrow.effect.insight": "Tipped Arrow of Insight",
 	
+	"key.categories.amethyst_imbuement": "Amethyst Imbuement",
 	"key.amethyst_imbuement.vein_mine_key": "Vein Mine",
 	"key.amethyst_imbuement.spell_key": "Current Scepter Spell",
 	"key.amethyst_imbuement.scepter_up_key": "Next Scepter Spell",
@@ -673,6 +674,7 @@
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",
 	"recipe.enhancing.spell_addition": "Disenchanted scrolls",
+	"recipe.enhancing.focus_reset": "Tier >1",
 	
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
 	
