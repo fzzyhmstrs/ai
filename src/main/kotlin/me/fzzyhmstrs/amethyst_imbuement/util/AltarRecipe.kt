@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
+import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
@@ -34,7 +36,7 @@ class AltarRecipe(
     }
 
     override fun craft(inventory: SimpleInventory): ItemStack {
-        val itemStack = if(!react) result.copy() else inventory.getStack(1).copy()
+        val itemStack = if(!react) result.copy() else Nbt.createItemStackWithNbt( inventory.getStack(1).item,inventory.getStack(1).count, inventory.getStack(1).orCreateNbt)
         if (!react) {
             val nbtCompound = inventory.getStack(1).nbt
             if (nbtCompound != null) {
