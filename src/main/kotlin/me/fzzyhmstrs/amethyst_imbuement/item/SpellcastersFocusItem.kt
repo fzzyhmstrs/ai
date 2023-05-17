@@ -94,7 +94,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         if (entity !is PlayerEntity) return
         val offhand = entity.offHandStack == stack
         if (stack.nbt?.getBoolean(LEVEL_UP_READY) != true) return
-        if (world.isClient && (selected || slot == PlayerInventory.OFF_HAND_SLOT)){
+        if (world.isClient && (selected || offhand)){
             val rnd = world.random.nextInt(5)
             if (rnd < 1){
                 val particlePos = PlayerParticlesV2.scepterParticlePos(MinecraftClient.getInstance(), entity,offhand)
@@ -205,6 +205,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val nbt = stack.orCreateNbt
         val tier = getTier(nbt)
         val prevTier = tiers[tier.previousTier]
+        nbt.putInt(FOCUS_TIER,tier.previousTier)
         nbt.putInt(FOCUS_XP,prevTier.startingXp)
         if (!nbt.getBoolean(LEVEL_UP_READY)) {
             val list = nbt.getList(CHOSEN_OPTION, 8)

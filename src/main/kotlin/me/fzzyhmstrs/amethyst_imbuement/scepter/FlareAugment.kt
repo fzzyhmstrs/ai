@@ -35,7 +35,6 @@ class FlareAugment: MiscAugment(ScepterTier.ONE,15) {
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         val hit = RaycasterUtil.raycastHit(distance = effects.range(level),user, includeFluids = false)
-        println(hit)
         if (hit !is BlockHitResult || user !is PlayerEntity) return false
         val stack = ItemStack(Items.FIREWORK_ROCKET)
         val nbtList = NbtList()
@@ -70,7 +69,6 @@ class FlareAugment: MiscAugment(ScepterTier.ONE,15) {
         }
         FireworkRocketItem.setFlight(stack, (world.random.nextInt(3) + 1).toByte())
         stack.getOrCreateSubNbt("Fireworks").put("Explosions",nbtList)
-        println(stack.nbt)
         val result = stack.useOnBlock(ItemUsageContext(world,user,hand,stack,hit))
         return result.isAccepted
     }

@@ -122,8 +122,6 @@ class CrystalAltarScreenHandler(
     }
 
     private fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
-        println(player.world.isClient)
-        println(stack)
         stack.onCraft(player.world, player, stack.count)
         output.unlockLastRecipe(player)
         decrementStack(0)
@@ -165,7 +163,6 @@ class CrystalAltarScreenHandler(
         if (slot2 != null && slot2.hasStack()) {
             val itemStack2 = slot2.stack
             itemStack = itemStack2.copy()
-            println(itemStack)
             if (slot == 3) {
                 itemStack2.onCraft(player.world,player,itemStack2.count)
                 if (!insertItem(itemStack2, 4, 40, true)) {

@@ -16,6 +16,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 |Task|Status|
 |----|------|
 |NOT STARTED|13|
+|Check on Spellcasters Focus not giving the Special Modifier|Not started|
 |Add sounds for Ice Shard and HailStorm|Not started|
 |check on bulwark and maybe make it an augment|Not started|
 |Update AC with fzzy-config|Not started|

@@ -52,8 +52,6 @@ class MentalClarityAugment: MinorSupportAugment(ScepterTier.TWO,16){
             }
         }
 
-        println((effects.amplifier(level)/3) + 1)
-
         EffectQueue.addStatusToQueue(
             user,
             RegisterStatus.INSIGHTFUL,
