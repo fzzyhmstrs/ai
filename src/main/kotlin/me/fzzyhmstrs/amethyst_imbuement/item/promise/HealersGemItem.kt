@@ -34,7 +34,7 @@ class HealersGemItem(settings: Settings): IgnitedGemItem(settings) {
     fun healersGemCheck(stack: ItemStack, inventory: PlayerInventory, healAmount: Float){
             val nbt = stack.orCreateNbt
             val player = inventory.player
-            if (!player.hungerManager.isNotFull){
+            if (player.hungerManager.isNotFull){
                 nbt.putBoolean("healed_with_food",true)
             }
             var healed = 0.0F
