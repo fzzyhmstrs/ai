@@ -44,7 +44,7 @@ class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
         val yrnd = hit.blockPos.y + 1.0
         val graceEntity = TotemOfGraceEntity(RegisterEntity.TOTEM_OF_GRACE_ENTITY, world,user,effects.duration(level))
         graceEntity.passEffects(effects,level)
-        graceEntity.setPos(xrnd, yrnd, zrnd)
+        graceEntity.refreshPositionAndAngles(xrnd, yrnd, zrnd,0.0f,0.0f)
         if (world.spawnEntity(graceEntity)){
             successes++
         } else {
@@ -53,7 +53,7 @@ class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
             val xrnd2: Double = newPos.x + 0.5
             val zrnd2: Double = newPos.z + 0.5
             val yrnd2 = newPos.y + 1.0
-            graceEntity.setPos(xrnd2, yrnd2, zrnd2)
+            graceEntity.refreshPositionAndAngles(xrnd2, yrnd2, zrnd2,0.0f,0.0f)
             if (world.spawnEntity(graceEntity)){
                 successes++
             }
