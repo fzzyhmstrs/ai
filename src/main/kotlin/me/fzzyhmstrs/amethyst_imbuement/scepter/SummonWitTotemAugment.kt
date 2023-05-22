@@ -44,7 +44,7 @@ class SummonWitTotemAugment: SummonEntityAugment(ScepterTier.TWO,9) {
         val yrnd = hit.blockPos.y + 1.0
         val witEntity = TotemOfWitEntity(RegisterEntity.TOTEM_OF_WIT_ENTITY, world,user,effects.duration(level))
         witEntity.passEffects(effects,level)
-        witEntity.setPos(xrnd, yrnd, zrnd)
+        witEntity.refreshPositionAndAngles(xrnd, yrnd, zrnd,0.0f,0.0f)
         if (world.spawnEntity(witEntity)){
             successes++
         } else {
@@ -53,7 +53,7 @@ class SummonWitTotemAugment: SummonEntityAugment(ScepterTier.TWO,9) {
             val xrnd2: Double = newPos.x + 0.5
             val zrnd2: Double = newPos.z + 0.5
             val yrnd2 = newPos.y + 1.0
-            witEntity.setPos(xrnd2, yrnd2, zrnd2)
+            witEntity.refreshPositionAndAngles(xrnd2, yrnd2, zrnd2,0.0f,0.0f)
             if (world.spawnEntity(witEntity)){
                 successes++
             }
