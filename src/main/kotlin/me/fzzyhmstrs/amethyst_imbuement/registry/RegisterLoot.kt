@@ -20,6 +20,7 @@ object RegisterLoot {
         registerModLoot(GraveyardLoot)
         registerModLoot(TowersOfTheWildReworkedLoot)
         registerModLoot(BetterDungeonsLoot)
+        registerModLoot(BetterDesertTemplesLoot)
     }
 
     fun tierOneGemPool(maxCount: Float, overallChance: Float): LootPool.Builder {
