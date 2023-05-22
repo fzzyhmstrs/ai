@@ -565,10 +565,12 @@ class ImbuingTableScreenHandler(
         }
 
         fun registerServer(){
-            ServerPlayNetworking.registerGlobalReceiver(REQUEST_CONTENTS) {_,player,_,_,_ ->
+            ServerPlayNetworking.registerGlobalReceiver(REQUEST_CONTENTS) {server,player,_,_,_ ->
                 val handler = player.currentScreenHandler
                 if (handler is ImbuingTableScreenHandler){
-                    handler.onContentChanged(handler.inventory)
+                    server.execute {
+                        handler.onContentChanged(handler.inventory)
+                    }
                 }
             }
         }
