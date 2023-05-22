@@ -40,6 +40,7 @@ object AiConfig
             .add("1.19.3-03/1.19-26/1.18.2-43: Added configurable durability for the Totem of Amethyst.")
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
+            .add("1.19.4-01/1.19.3-11/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -109,9 +110,9 @@ object AiConfig
             @ReadMeText("readme.items.gems.fireTarget")
             val fireTarget = ValidatedInt(120,1200,1)
             @ReadMeText("readme.items.gems.hitTarget")
-            val hitTarget = ValidatedInt(80,800,1)
+            val hitTarget = ValidatedInt(60,600,1)
             @ReadMeText("readme.items.gems.healTarget")
-            val healTarget = ValidatedFloat(250f,2500f,1f)
+            val healTarget = ValidatedFloat(120f,1200f,1f)
             @ReadMeText("readme.items.gems.statusesTarget")
             val statusesTarget = ValidatedInt(8,42,1)
             @ReadMeText("readme.items.gems.killTarget")
@@ -140,6 +141,8 @@ object AiConfig
             items.scepters.bladesDurability.validateAndSet(ScepterOfBladesToolMaterial.defaultDurability())
             items.scepters.lethalityDamage.validateAndSet(LethalityToolMaterial.defaultAttackDamage())
             items.scepters.lethalityDurability.validateAndSet(LethalityToolMaterial.defaultDurability())
+            items.gems.hitTarget.validateAndSet(this.gems.hitTarget.get()*60/80)
+            items.gems.healTarget.validateAndSet(this.gems.healTarget.get()*120/250)
             return items
         }
     }
@@ -344,7 +347,7 @@ object AiConfig
         }
     }
 
-    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v3.json","items_v2.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v4.json","items_v3.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
     var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
