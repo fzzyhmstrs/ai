@@ -45,7 +45,7 @@ class SummonFuryTotemAugment: SummonEntityAugment(ScepterTier.TWO,5) {
         val yrnd = hit.blockPos.y + 1.0
         val furyEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level),effects.amplifier(level)/2)
         furyEntity.passEffects(effects,level)
-        furyEntity.setPos(xrnd, yrnd, zrnd)
+        furyEntity.refreshPositionAndAngles(xrnd, yrnd, zrnd,0.0f,0.0f)
         if (world.spawnEntity(furyEntity)){
             successes++
         } else {
@@ -54,7 +54,7 @@ class SummonFuryTotemAugment: SummonEntityAugment(ScepterTier.TWO,5) {
             val xrnd2: Double = newPos.x + 0.5
             val zrnd2: Double = newPos.z + 0.5
             val yrnd2 = newPos.y + 1.0
-            furyEntity.setPos(xrnd2, yrnd2, zrnd2)
+            furyEntity.refreshPositionAndAngles(xrnd2, yrnd2, zrnd2,0.0f,0.0f)
             if (world.spawnEntity(furyEntity)){
                 successes++
             }
