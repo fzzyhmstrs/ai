@@ -108,17 +108,17 @@ object AiConfig
         var gems = Gems()
         class Gems: ConfigSection(Header.Builder().space().add("readme.items.gem_1").add("readme.items.gems_2").build()){
             @ReadMeText("readme.items.gems.fireTarget")
-            val fireTarget = ValidatedInt(120,1200,1)
+            var fireTarget = ValidatedInt(120,1200,1)
             @ReadMeText("readme.items.gems.hitTarget")
-            val hitTarget = ValidatedInt(60,600,1)
+            var hitTarget = ValidatedInt(60,600,1)
             @ReadMeText("readme.items.gems.healTarget")
-            val healTarget = ValidatedFloat(120f,1200f,1f)
+            var healTarget = ValidatedFloat(120f,1200f,1f)
             @ReadMeText("readme.items.gems.statusesTarget")
-            val statusesTarget = ValidatedInt(8,42,1)
+            var statusesTarget = ValidatedInt(8,42,1)
             @ReadMeText("readme.items.gems.killTarget")
-            val killTarget = ValidatedInt(30,300,1)
+            var killTarget = ValidatedInt(30,300,1)
             @ReadMeText("readme.items.gems.spellXpTarget")
-            val spellXpTarget = ValidatedInt(350,3500,1)
+            var spellXpTarget = ValidatedInt(350,3500,1)
         }
 
         var focus = Focus()
@@ -329,10 +329,7 @@ object AiConfig
         var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
 
         override fun generateNewClass(): Trinkets {
-            val trinkets = Trinkets()
-            trinkets.draconicVisionRange.validateAndSet(draconicVisionRange.get())
-            trinkets.enabledAugments.validateAndSet(enabledAugments)
-            return trinkets
+            return this
         }
     }
 
