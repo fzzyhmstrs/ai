@@ -40,7 +40,7 @@ object AiConfig
             .add("1.19.3-03/1.19-26/1.18.2-43: Added configurable durability for the Totem of Amethyst.")
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
-            .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4.")
+            .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -136,7 +136,7 @@ object AiConfig
         }
         
         override fun generateNewClass(): Items {
-            val items = Items()
+            val items = this
             items.scepters.bladesDamage.validateAndSet(ScepterOfBladesToolMaterial.defaultAttackDamage())
             items.scepters.bladesDurability.validateAndSet(ScepterOfBladesToolMaterial.defaultDurability())
             items.scepters.lethalityDamage.validateAndSet(LethalityToolMaterial.defaultAttackDamage())
@@ -147,9 +147,19 @@ object AiConfig
         }
     }
     
-    private val altarsHeader = buildSectionHeader("altars")
+    private val blocksHeader = buildSectionHeader("altars")
     
-    class Altars: ConfigClass(altarsHeader){
+    class Blocks: ConfigClass(blocksHeader), OldClass<Blocks>{
+        var hardLight = HardLight()
+        class HardLight: ConfigSection(Header.Builder().space().add("readme.altars.hard_light_1").add("readme.altars.hard_light_2").build()){
+            @ReadMeText("readme.altars.hardLight.bridgeTemporary")
+            var bridgeTemporary = ValidatedBoolean(false)
+            @ReadMeText("readme.altars.hardLight.createTemporary")
+            var createTemporary = ValidatedBoolean(false)
+            @ReadMeText("readme.altars.hardLight.temporaryDuration")
+            var temporaryDuration = ValidatedInt(600,Int.MAX_VALUE)
+        }
+            
         var xpBush = XpBush()
         class XpBush: ConfigSection(Header.Builder().space().add("readme.altars.xp_bush_1").add("readme.altars.xp_bush_2").build()){
             var bonemealChance = ValidatedFloat(0.4f,1f,0f)
@@ -164,7 +174,7 @@ object AiConfig
         }
         
         var imbuing = Imbuing()
-        class Imbuing: ConfigSection(Header.Builder().space().add("readme.items.imbuing_1").add("readme.items.imbuing_2").build()){
+        class Imbuing: ConfigSection(Header.Builder().space().add("readme.altars.imbuing_1").add("readme.altars.imbuing_2").build()){
 
             fun getRerollEnabled(): Boolean{
                 return easyMagic.matchEasyMagicBehavior.get() && easyMagic.rerollEnabled.get()
@@ -191,7 +201,7 @@ object AiConfig
             var difficultyModifier = ValidatedFloat(1.0F,10f,0f)
             
             var easyMagic = EasyMagic()
-            class EasyMagic: ConfigSection(Header.Builder().add("readme.items.imbuing_easy_1").add("readme.items.imbuing_easy_2").build()){
+            class EasyMagic: ConfigSection(Header.Builder().add("readme.altars.imbuing_easy_1").add("readme.altars.imbuing_easy_2").build()){
                 var matchEasyMagicBehavior = ValidatedBoolean(true)
                 var rerollEnabled = ValidatedBoolean(true)
                 var levelCost = ValidatedInt(5,Int.MAX_VALUE,0)
@@ -202,7 +212,7 @@ object AiConfig
 
             @Deprecated("Don't need this, as I'm not mod-checking any more. Can remove next config update")
             var reroll = Reroll()
-            class Reroll:ConfigSection(Header.Builder().add("readme.items.imbuing_reroll_1").add("readme.items.imbuing_reroll_2").build()){
+            class Reroll:ConfigSection(Header.Builder().add("readme.altars.imbuing_reroll_1").add("readme.altars.imbuing_reroll_2").build()){
                 var matchRerollBehavior = ValidatedBoolean(true)
                 var levelCost = ValidatedInt(1,Int.MAX_VALUE,0)
                 var lapisCost = ValidatedInt(0,Int.MAX_VALUE,0)
@@ -215,6 +225,10 @@ object AiConfig
             var candleLevelsPer = ValidatedInt(5,Int.MAX_VALUE/16,0)
             @ReadMeText("readme.altars.altar.customXpMethod")
             var customXpMethod = ValidatedBoolean(true)
+        }
+        
+        override fun generateNewClass(): Blocks {
+            return this
         }
     }
 
@@ -348,7 +362,7 @@ object AiConfig
     }
 
     var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v4.json","items_v3.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
-    var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("altars_v4.json","altars_v3.json", base = AI.MOD_ID, configClass = {Altars()}, previousClass = {AiConfigOldClasses.AltarsV3()})
+    var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
