@@ -40,7 +40,7 @@ object AiConfig
             .add("1.19.3-03/1.19-26/1.18.2-43: Added configurable durability for the Totem of Amethyst.")
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
-            .add("1.19.4-01/1.19.3-11/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4.")
+            .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4.")
             .space()
             .translate()
             .add("readme.main_header.note")
