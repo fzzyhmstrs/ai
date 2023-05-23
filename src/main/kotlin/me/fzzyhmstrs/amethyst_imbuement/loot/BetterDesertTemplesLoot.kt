@@ -8,7 +8,10 @@ import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
+import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.entry.ItemEntry
+import net.minecraft.loot.function.SetCountLootFunction
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.util.Identifier
 
@@ -50,7 +53,7 @@ object BetterDesertTemplesLoot: AbstractModLoot() {
                 table.pool(poolBuilder)
                 val poolBuilder2 = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0F))
-                    .conditionally(RandomChanceLootCondition.builder(0.1))
+                    .conditionally(RandomChanceLootCondition.builder(0.1f))
                     .with(ItemEntry.builder(RegisterItem.BRILLIANT_DIAMOND).weight(2))
                     .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
                 table.pool(poolBuilder2)
