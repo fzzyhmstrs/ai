@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.block.ShapeContext
@@ -48,6 +49,9 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
             val blockPos = context.blockPos
             val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
             world.setBlockState(blockPos,state)
+            if (AiConfig.blocks.isCreateBlockTemporary()){
+                world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
+            }
             val group = RegisterBlock.HARD_LIGHT_BLOCK.defaultState.soundGroup
             val sound = group.placeSound
             world.playSound(null,hit.blockPos,sound, SoundCategory.BLOCKS,(group.volume + 1.0f)/2.0f,group.pitch * 0.8f)
@@ -63,6 +67,9 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
                     val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
                     if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                         world.setBlockState(blockPos,state)
+                        if (AiConfig.blocks.isCreateBlockTemporary()){
+                            world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
+                        }
                         val group = state.soundGroup
                         val sound = group.placeSound
                         world.playSound(null,blockPos,sound, SoundCategory.BLOCKS,(group.volume + 1.0f)/2.0f,group.pitch * 0.8f)

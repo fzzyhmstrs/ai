@@ -33,7 +33,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
         reactantChk = if(recipe.getAugment() != "") EmiIngredient.of(recipe.getInputs()[6]) else EmiIngredient.of(Ingredient.ofStacks(recipe.output))
-        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         if(cost > 99){
             costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2

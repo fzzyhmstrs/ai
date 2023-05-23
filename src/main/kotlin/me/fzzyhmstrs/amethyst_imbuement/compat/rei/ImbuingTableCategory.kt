@@ -112,7 +112,7 @@ class ImbuingTableCategory: DisplayCategory<ImbuingTableDisplay> {
         outputSlot.disableBackground()
         widgets.add(outputSlot)
 
-        val cost = MathHelper.ceil(display.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+        val cost = MathHelper.ceil(display.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         val textOffset: Int
         val levelBoxText = if(cost > 99) {
             textOffset = 124

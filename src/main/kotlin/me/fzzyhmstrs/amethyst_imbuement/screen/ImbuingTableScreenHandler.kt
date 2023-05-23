@@ -198,7 +198,7 @@ class ImbuingTableScreenHandler(
                     }
                     if (matches.isNotEmpty()){
                         matches.forEach {  imbuingRecipe ->
-                            val power = MathHelper.ceil(imbuingRecipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+                            val power = MathHelper.ceil(imbuingRecipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
                             if (imbuingRecipe.getAugment() != "") {
                                 val id = Identifier(imbuingRecipe.getAugment())
                                 val augment = Registries.ENCHANTMENT.get(id)
@@ -257,13 +257,13 @@ class ImbuingTableScreenHandler(
                         for (i in 0..2) {
                             tempResults.add(EmptyResult())
                         }
-                    } else if (AiConfig.altars.imbuing.enchantingEnabled.get() && checkLapisAndSlots(inventory)) {
+                    } else if (AiConfig.blocks.imbuing.enchantingEnabled.get() && checkLapisAndSlots(inventory)) {
                         random.setSeed(seed.get().toLong())
                         val enchantmentPower = IntArray(3)
                         val enchantmentId = intArrayOf(-1, -1, -1)
                         val enchantmentLevel = intArrayOf(-1, -1, -1)
-                        if (AiConfig.altars.imbuing.getRerollEnabled()) {
-                            val result = (if (lapisStack.count >= AiConfig.altars.imbuing.getLapisCost()) 0 else -1) + (if (player.experienceLevel >= AiConfig.altars.imbuing.getLevelCost()) 0 else -2)
+                        if (AiConfig.blocks.imbuing.getRerollEnabled()) {
+                            val result = (if (lapisStack.count >= AiConfig.blocks.imbuing.getLapisCost()) 0 else -1) + (if (player.experienceLevel >= AiConfig.blocks.imbuing.getLevelCost()) 0 else -2)
                             reroll.set(if (result == 0) 1 else result)
                         }
                         var j = 0
@@ -361,13 +361,13 @@ class ImbuingTableScreenHandler(
             return true
         }
         if (id == 5){
-            return if (AiConfig.altars.imbuing.getRerollEnabled()) {
-                val result = inventory.getStack(7).count >= AiConfig.altars.imbuing.getLapisCost() && player.experienceLevel >= AiConfig.altars.imbuing.getLevelCost()
+            return if (AiConfig.blocks.imbuing.getRerollEnabled()) {
+                val result = inventory.getStack(7).count >= AiConfig.blocks.imbuing.getLapisCost() && player.experienceLevel >= AiConfig.blocks.imbuing.getLevelCost()
                 if (result || player.isCreative){
-                    player.applyEnchantmentCosts(ItemStack.EMPTY,AiConfig.altars.imbuing.getLevelCost())
+                    player.applyEnchantmentCosts(ItemStack.EMPTY,AiConfig.blocks.imbuing.getLevelCost())
                     seed.set(player.enchantmentTableSeed)
                     val stack = inventory.getStack(7)
-                    stack.decrement(AiConfig.altars.imbuing.getLapisCost())
+                    stack.decrement(AiConfig.blocks.imbuing.getLapisCost())
                     inventory.setStack(7,stack)
                     if (inventory.getStack(7).isEmpty){
                         inventory.setStack(7, ItemStack.EMPTY)
@@ -916,7 +916,7 @@ class ImbuingTableScreenHandler(
     class ImbuingResult(val recipe: ImbuingRecipe, override val power: Int): TableResult{
 
         override val type: Int = 1
-        override val lapis = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+        override val lapis = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         private val etdLoaded = FabricLoader.getInstance().isModLoaded("enchanting-table-descriptions")
 
         override fun bufClassWriter(buf: PacketByteBuf) {
@@ -1127,7 +1127,7 @@ class ImbuingTableScreenHandler(
 
     class ModifierResult(val recipe: ImbuingRecipe, private val nextInLine: String, private val lineageMax: Boolean, override val power: Int): TableResult{
         override val type: Int = 2
-        override val lapis: Int = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+        override val lapis: Int = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
 
         override fun bufClassWriter(buf: PacketByteBuf) {
             buf.writeIdentifier(recipe.id)

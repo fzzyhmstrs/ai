@@ -69,7 +69,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 return true
             }
         }
-        if (AiConfig.altars.imbuing.getRerollEnabled()){
+        if (AiConfig.blocks.imbuing.getRerollEnabled()){
             val d = mouseX - (i + 94).toDouble()
             val e = mouseY - (j + 37).toDouble()
             if (!(d < 0.0 || e < 0.0 || d >= 18.0 || e >= 18.0 || !player.let {
@@ -343,8 +343,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 val tempList: MutableList<Text> = mutableListOf()
                 tempList.add(AcText.translatable("container.imbuing_table.reroll"))
                 tempList.add(AcText.empty())
-                tempList.add(AcText.translatable("container.imbuing_table.reroll_lapis",AiConfig.altars.imbuing.getLapisCost()).formatted(Formatting.ITALIC, Formatting.BLUE))
-                tempList.add(AcText.translatable("container.imbuing_table.reroll_levels",AiConfig.altars.imbuing.getLevelCost()).formatted(Formatting.ITALIC, Formatting.GREEN))
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_lapis",AiConfig.blocks.imbuing.getLapisCost()).formatted(Formatting.ITALIC, Formatting.BLUE))
+                tempList.add(AcText.translatable("container.imbuing_table.reroll_levels",AiConfig.blocks.imbuing.getLevelCost()).formatted(Formatting.ITALIC, Formatting.GREEN))
                 tempList
             } else if (handler.reroll.get() == -1) {
                 val tempList: MutableList<Text> = mutableListOf()

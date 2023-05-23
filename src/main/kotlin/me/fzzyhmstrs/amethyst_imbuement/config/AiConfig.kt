@@ -150,6 +150,15 @@ object AiConfig
     private val blocksHeader = buildSectionHeader("altars")
     
     class Blocks: ConfigClass(blocksHeader), OldClass<Blocks>{
+
+        fun isCreateBlockTemporary(): Boolean{
+            return hardLight.createTemporary.get() && hardLight.temporaryDuration.get() > 0
+        }
+
+        fun isBridgeBlockTemporary(): Boolean{
+            return hardLight.bridgeTemporary.get() && hardLight.temporaryDuration.get() > 0
+        }
+
         var hardLight = HardLight()
         class HardLight: ConfigSection(Header.Builder().space().add("readme.altars.hard_light_1").add("readme.altars.hard_light_2").build()){
             @ReadMeText("readme.altars.hardLight.bridgeTemporary")
@@ -362,7 +371,7 @@ object AiConfig
     }
 
     var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v4.json","items_v3.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
-    var altars: Altars = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
+    var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
