@@ -55,7 +55,7 @@ class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> 
         mouseX: Double,
         mouseY: Double
     ) {
-        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.altars.imbuing.difficultyModifier.get())
+        val cost = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         val client = MinecraftClient.getInstance()
         val costText: OrderedText
         val costOffset: Int

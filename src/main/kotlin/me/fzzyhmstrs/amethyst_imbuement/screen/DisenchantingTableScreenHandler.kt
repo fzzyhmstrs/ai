@@ -151,7 +151,7 @@ class DisenchantingTableScreenHandler(
             var atMax = false
             context.run { world: World, pos: BlockPos ->
                 val lvl = checkNbt.getInt(NbtKeys.DISENCHANT_COUNT.str())
-                val maxLevel = checkPillars(world, pos) / 2 + AiConfig.altars.disenchanter.baseDisenchantsAllowed.get()
+                val maxLevel = checkPillars(world, pos) / 2 + AiConfig.blocks.disenchanter.baseDisenchantsAllowed.get()
                 if (lvl >= maxLevel) atMax = true
             }
             if (atMax) return false
@@ -375,7 +375,7 @@ class DisenchantingTableScreenHandler(
 
     private fun updateDisenchantCost(level: Int, world: World, pos: BlockPos){
         val pillarPairs = checkPillars(world, pos) / 2
-        val maxLevel = pillarPairs + AiConfig.altars.disenchanter.baseDisenchantsAllowed.get()
+        val maxLevel = pillarPairs + AiConfig.blocks.disenchanter.baseDisenchantsAllowed.get()
         if (level >= maxLevel) {
             disenchantCost[0] = -1
         } else {
@@ -383,11 +383,11 @@ class DisenchantingTableScreenHandler(
         }
     }
     private fun calculateRequiredExperienceLevel(disenchantCount: Int): Int {
-        val index = MathHelper.clamp(disenchantCount,0,AiConfig.altars.disenchanter.levelCosts.size - 1)
-        if (index == AiConfig.altars.disenchanter.levelCosts.size - 1 && player is ServerPlayerEntity){
+        val index = MathHelper.clamp(disenchantCount,0,AiConfig.blocks.disenchanter.levelCosts.size - 1)
+        if (index == AiConfig.blocks.disenchanter.levelCosts.size - 1 && player is ServerPlayerEntity){
             RegisterCriteria.DISENCHANTING_MAX.trigger(player)
         }
-        return AiConfig.altars.disenchanter.levelCosts[index]
+        return AiConfig.blocks.disenchanter.levelCosts[index]
     }
     private fun checkForEnchantMatch(stack: ItemStack): Boolean{
         if (Registry.ITEM.getRawId(stack.item) != activeItem.get()) return false

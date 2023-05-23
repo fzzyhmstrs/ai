@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import net.minecraft.block.ShapeContext
 import net.minecraft.entity.Entity
@@ -49,7 +50,9 @@ class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
                 val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
                 if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                     world.setBlockState(blockPos,state)
-
+                    if (AiConfig.blocks.isBridgeBlockTemporary()){
+                        world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK, AiConfig.blocks.hardLight.temporaryDuration.get())
+                    }
                     successes++
                 }
             }
