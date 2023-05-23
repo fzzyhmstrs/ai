@@ -5,58 +5,6 @@ import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import net.minecraft.util.Identifier
 
 object AiConfigOldClasses {
-
-    class AltarsV3: OldClass<AiConfig.Altars>{
-
-        var experienceBushBonemealChance: Float = 0.4f
-        var experienceBushGrowChance: Float = 0.15f
-        var disenchantLevelCosts: List<Int> = listOf(11, 17, 24, 33, 44)
-        var disenchantBaseDisenchantsAllowed: Int = 1
-        var imbuingTableEnchantingEnabled: Boolean = true
-        var imbuingTableReplaceEnchantingTable: Boolean = false
-        var imbuingTableDifficultyModifier: Float = 1.0F
-        var imbuingTableMatchEasyMagicBehavior: Boolean = true
-        var imbuingTableEasyMagicRerollEnabled: Boolean = true
-        var imbuingTableEasyMagicLevelCost: Int = 5
-        var imbuingTableEasyMagicLapisCost: Int = 1
-        var imbuingTableEasyMagicShowTooltip: Boolean = true
-        var imbuingTableEasyMagicSingleEnchantTooltip: Boolean = true
-        var imbuingTableMatchRerollBehavior: Boolean = true
-        var imbuingTableRerollLevelCost: Int = 1
-        var imbuingTableRerollLapisCost: Int = 0
-        var altarOfExperienceBaseLevels: Int = 35
-        var altarOfExperienceCandleLevelsPer: Int = 5
-        var altarOfExperienceCustomXpMethod: Boolean = true
-
-        override fun generateNewClass(): AiConfig.Altars {
-            val altars = AiConfig.Altars()
-            altars.xpBush.bonemealChance.validateAndSet(experienceBushBonemealChance)
-            altars.xpBush.growChance.validateAndSet(experienceBushGrowChance)
-            
-            altars.disenchanter.levelCosts.validateAndSet(disenchantLevelCosts)
-            altars.disenchanter.baseDisenchantsAllowed.validateAndSet(disenchantBaseDisenchantsAllowed)
-            
-            altars.imbuing.enchantingEnabled.validateAndSet(imbuingTableEnchantingEnabled)
-            altars.imbuing.replaceEnchantingTable.validateAndSet(imbuingTableReplaceEnchantingTable)
-            altars.imbuing.difficultyModifier.validateAndSet(imbuingTableDifficultyModifier)
-            
-            altars.imbuing.easyMagic.matchEasyMagicBehavior.validateAndSet(imbuingTableMatchEasyMagicBehavior)
-            altars.imbuing.easyMagic.rerollEnabled.validateAndSet(imbuingTableEasyMagicRerollEnabled)
-            altars.imbuing.easyMagic.levelCost.validateAndSet(imbuingTableEasyMagicLevelCost)
-            altars.imbuing.easyMagic.lapisCost.validateAndSet(imbuingTableEasyMagicLapisCost)
-            altars.imbuing.easyMagic.showTooltip.validateAndSet(imbuingTableEasyMagicShowTooltip)
-            altars.imbuing.easyMagic.singleEnchantTooltip.validateAndSet(imbuingTableEasyMagicSingleEnchantTooltip)
-            
-            altars.imbuing.reroll.matchRerollBehavior.validateAndSet(imbuingTableMatchRerollBehavior)
-            altars.imbuing.reroll.levelCost.validateAndSet(imbuingTableRerollLevelCost)
-            altars.imbuing.reroll.lapisCost.validateAndSet(imbuingTableRerollLapisCost)
-            
-            altars.altar.baseLevels.validateAndSet(altarOfExperienceBaseLevels)
-            altars.altar.candleLevelsPer.validateAndSet(altarOfExperienceCandleLevelsPer)
-            altars.altar.customXpMethod.validateAndSet(altarOfExperienceCustomXpMethod)
-            return altars
-        }
-    }
     
     class VillagesV1: OldClass<AiConfig.Villages>{
     
