@@ -11,7 +11,7 @@
 "type": "amethyst_imbuement:imbuing_recipe",
 "title": "Hasting Imbuing",
 "anchor": "hasting",
-"imbue_a_item": "minecraft:diamond",
+"imbue_a_item": "amethyst_imbuement:energetic_opal",
 "imbue_b_item": "minecraft:amethyst_shard",
 "imbue_c_item": "minecraft:amethyst_shard",
 "imbue_d_item": "minecraft:amethyst_shard",
