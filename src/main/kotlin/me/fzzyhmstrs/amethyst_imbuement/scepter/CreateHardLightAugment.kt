@@ -47,7 +47,7 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
             val state = RegisterBlock.HARD_LIGHT_BLOCK.getHardLightState()
             world.setBlockState(blockPos,state)
             if (AiConfig.blocks.isCreateBlockTemporary()){
-                world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
+                world.createAndScheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
             }
             val group = RegisterBlock.HARD_LIGHT_BLOCK.defaultState.soundGroup
             val sound = group.placeSound
@@ -65,7 +65,7 @@ class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
                     if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                         world.setBlockState(blockPos,state)
                         if (AiConfig.blocks.isCreateBlockTemporary()){
-                            world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
+                            world.createAndScheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK,AiConfig.blocks.hardLight.temporaryDuration.get())
                         }
                         val group = state.soundGroup
                         val sound = group.placeSound

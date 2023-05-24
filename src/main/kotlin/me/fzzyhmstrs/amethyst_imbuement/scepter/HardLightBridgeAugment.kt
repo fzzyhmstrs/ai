@@ -51,7 +51,7 @@ class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
                 if (world.canPlayerModifyAt(user,blockPos) && world.getBlockState(blockPos).material.isReplaceable && world.canPlace(state,blockPos, ShapeContext.of(user)) && state.canPlaceAt(world,blockPos)){
                     world.setBlockState(blockPos,state)
                     if (AiConfig.blocks.isBridgeBlockTemporary()){
-                        world.scheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK, AiConfig.blocks.hardLight.temporaryDuration.get())
+                        world.createAndScheduleBlockTick(blockPos, RegisterBlock.HARD_LIGHT_BLOCK, AiConfig.blocks.hardLight.temporaryDuration.get())
                     }
                     successes++
                 }
