@@ -1,19 +1,19 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:opal"
+	"item": "amethyst_imbuement:ametrine"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:pyrite"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:pyrite"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:imbued_lapis"
+	"item": "amethyst_imbuement:pyrite"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "amethyst_imbuement:book_of_mythos"
   },
   "craftD": {
 	"item": "amethyst_imbuement:accursed_figurine"
