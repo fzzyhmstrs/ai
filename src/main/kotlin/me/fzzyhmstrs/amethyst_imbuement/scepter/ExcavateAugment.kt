@@ -8,14 +8,15 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.fabricmc.fabric.api.mininglevel.v1.MiningLevelManager
+import net.minecraft.block.AbstractFireBlock
+import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.ShapeContext
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.item.BlockItem
-import net.minecraft.item.ItemPlacementContext
+import net.minecraft.fluid.FluidState
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
@@ -24,6 +25,8 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraft.world.WorldEvents
+import net.minecraft.world.event.GameEvent
 
 class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
 
@@ -72,5 +75,27 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
         }
         val requiredLevel = MiningLevelManager.getRequiredMiningLevel(state)
         return miningLevel >= requiredLevel
+    }
+
+    fun breakBlock(world: World,pos: BlockPos, drop: Boolean, breakingEntity: Entity): Boolean {
+        var bl: Boolean
+        val blockState: BlockState = world.getBlockState(pos)
+        if (blockState.isAir) {
+            return false
+        }
+        val fluidState: FluidState = world.getFluidState(pos)
+        if (blockState.block !is AbstractFireBlock) {
+            world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos, Block.getRawIdFromState(blockState))
+        }
+        if (drop) {
+            val blockEntity: BlockEntity? = if (blockState.hasBlockEntity()) world.getBlockEntity(pos) else null
+            Block.dropStacks(blockState, world, pos, blockEntity, breakingEntity, ItemStack.EMPTY)
+        }
+        if (world.setBlockState(pos, fluidState.blockState, Block.NOTIFY_ALL, 512).also {
+                bl = it
+            }) {
+            world.emitGameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Emitter.of(breakingEntity, blockState))
+        }
+        return bl
     }
 }
