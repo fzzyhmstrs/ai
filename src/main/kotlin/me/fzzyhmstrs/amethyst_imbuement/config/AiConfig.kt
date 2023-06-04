@@ -103,6 +103,12 @@ object AiConfig
             var buildersMiningSpeed = ValidatedFloat(BuildersScepterToolMaterial.defaultMiningSpeed(),12f,1f)
             var fowlDurability = ValidatedInt(ScepterSoFoulToolMaterial.defaultDurability(),1650,32)
             var fowlCooldown = ValidatedLong(ScepterSoFoulToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterSoFoulToolMaterial.minCooldown())
+            var fzzyDurability = ValidatedInt(FzzyhammerToolMaterial.defaultDurability(),1650,128)
+            var fzzyCooldown = ValidatedLong(FzzyhammerToolMaterial.baseCooldown(), Long.MAX_VALUE,FzzyhammerToolMaterial.minCooldown())
+            @ReadMeText("readme.items.scepters.fzzyDamage")
+            var fzzyDamage = ValidatedFloat(FzzyhammerToolMaterial.defaultAttackDamage(),30f,0f)
+            @ReadMeText("readme.items.scepters.fzzyMiningSpeed")
+            var fzzyMiningSpeed = ValidatedFloat(FzzyhammerToolMaterial.defaultMiningSpeed(),12f,1f)
         }
 
         var gems = Gems()
@@ -137,12 +143,7 @@ object AiConfig
         
         override fun generateNewClass(): Items {
             val items = this
-            items.scepters.bladesDamage.validateAndSet(ScepterOfBladesToolMaterial.defaultAttackDamage())
-            items.scepters.bladesDurability.validateAndSet(ScepterOfBladesToolMaterial.defaultDurability())
-            items.scepters.lethalityDamage.validateAndSet(LethalityToolMaterial.defaultAttackDamage())
-            items.scepters.lethalityDurability.validateAndSet(LethalityToolMaterial.defaultDurability())
-            items.gems.hitTarget.validateAndSet(this.gems.hitTarget.get()*60/80)
-            items.gems.healTarget.validateAndSet(this.gems.healTarget.get()*120/250)
+            items.scepters.buildersMiningSpeed.validateAndSet(BuildersScepterToolMaterial.defaultMiningSpeed())
             return items
         }
     }

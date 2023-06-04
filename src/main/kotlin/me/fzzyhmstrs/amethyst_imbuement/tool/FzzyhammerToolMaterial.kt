@@ -6,45 +6,45 @@ import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 
 
-object BuildersScepterToolMaterial: ScepterToolMaterial(){
+object FzzyhammerToolMaterial: ScepterToolMaterial(){
     override fun getDurability(): Int {
-        return AiConfig.items.scepters.buildersDurability.get()
+        return AiConfig.items.scepters.fzzyDurability.get()
     }
     fun defaultDurability(): Int{
-        return 650
+        return 1250
     }
     override fun getMiningSpeedMultiplier(): Float {
-        return AiConfig.items.scepters.buildersMiningSpeed.get()
+        return AiConfig.items.scepters.fzzyMiningSpeed.get()
     }
     fun defaultMiningSpeed(): Float {
         return 6.0f
     }
     override fun getAttackDamage(): Float {
-        return AiConfig.items.scepters.buildersDamage.get()
+        return AiConfig.items.scepters.fzzyDamage.get()
     }
     fun defaultAttackDamage(): Float {
-        return 2.0f
+        return 9.5f
     }
     override fun getAttackSpeed(): Double {
-        return -3.0
+        return -3.2
     }
     override fun getMiningLevel(): Int {
-        return 1
+        return 3
     }
     override fun getEnchantability(): Int {
-        return 25
+        return 15
     }
 
     override fun getRepairIngredient(): Ingredient {
         return Ingredient.ofItems(Items.GOLD_INGOT)
     }
     override fun healCooldown(): Long {
-        return AiConfig.items.scepters.buildersCooldown.get()
+        return AiConfig.items.scepters.fzzyCooldown.get()
     }
     override fun baseCooldown(): Long {
-        return 125L
+        return 90L
     }
     override fun scepterTier(): Int{
-        return 2
+        return 3
     }
 }
