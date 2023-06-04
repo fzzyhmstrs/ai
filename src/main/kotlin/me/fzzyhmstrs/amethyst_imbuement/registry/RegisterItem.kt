@@ -104,6 +104,7 @@ object RegisterItem {
 
 
     //tool and weapon items
+    val FZZYHAMMER = FzzyhammerItem(FabricItemSettings().rarity(Rarity.EPIC).group(AI_GROUP)).also{ regItem["fzzyhammer"] = it}
     val GLISTERING_TRIDENT = GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(550).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["glistering_trident"] = it}
     val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["sniper_bow"] = it}
     val GARNET_SWORD = CustomSwordItem(GarnetToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP)).also{ regItem["garnet_sword"] = it}
