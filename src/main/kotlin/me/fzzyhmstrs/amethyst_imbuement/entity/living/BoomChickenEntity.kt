@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
@@ -35,7 +35,7 @@ import net.minecraft.world.explosion.Explosion
 import net.minecraft.world.explosion.ExplosionBehavior
 import java.util.*
 
-class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): ChickenEntity(entityType, world),
+class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World): ChickenEntity(entityType, world),
     ModifiableEffectEntity {
 
     companion object{
@@ -65,7 +65,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>,world: World): 
     }
 
     override fun initGoals() {
-        goalSelector.add(0,CreeperIgniteGoal(this))
+        goalSelector.add(0, CreeperIgniteGoal(this))
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, false))
         goalSelector.add(2, SwimGoal(this))
         goalSelector.add(3, EscapeDangerGoal(this, 1.4))

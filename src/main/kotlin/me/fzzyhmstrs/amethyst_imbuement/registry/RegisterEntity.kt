@@ -2,6 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfWitEntity

@@ -7,7 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -41,6 +41,7 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
         val startPos = (hit as BlockHitResult).blockPos
         val spawnPos = findSpawnPos(world,startPos,3,3, tries = 12)
         val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level),effects.damage(level).toDouble(),effects.amplifier(level).toDouble(), user)
+        golem.setGolemOwner(user)
         golem.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
         golem.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
         if (world.spawnEntity(golem)) {

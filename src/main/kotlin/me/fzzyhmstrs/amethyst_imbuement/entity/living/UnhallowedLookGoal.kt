@@ -1,11 +1,11 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.passive.VillagerEntity
 
 @Suppress("PrivatePropertyName")
-class CrystallineGolemLookGoal(_golem: CrystallineGolemEntity): Goal() {
+class UnhallowedLookGoal(_golem: UnhallowedEntity): Goal() {
 
     private val CLOSE_VILLAGER_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(6.0)
     private val golem = _golem

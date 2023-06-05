@@ -1,25 +1,20 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
@@ -27,54 +22,49 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.*
 
-@Suppress("PrivatePropertyName")
-class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): GolemEntity(entityType,world),
-    Angerable, PlayerCreatable {
+@Suppress("PrivatePropertyName", "LeakingThis")
+open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
+    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable {
 
-    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, bonusEquips: Int = 0, modDamage: Double = 0.0, modHealth: Double = 0.0) : this(entityType, world){
-        modifiedDamage = modDamage
-        modifiedHealth = modHealth
+    constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : this(entityType, world){
         maxAge = ageLimit
+
         this.createdBy = createdBy?.uuid
         this.owner = createdBy
         if (createdBy != null) {
             goalSelector.add(2, FollowSummonerGoal(this,createdBy, 1.0, 10.0f, 2.0f, false))
             targetSelector.add(1, TrackSummonerAttackerGoal(this,createdBy))
         }
-        bonusEquipment = bonusEquips
+
+        if (augmentEffect != null){
+            this.passEffects(augmentEffect,level)
+        }
+
         if (world is ServerWorld) {
             initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
         }
     }
 
-    companion object {
-        private  val baseMaxHealth = AiConfig.entities.unhallowed.baseHealth.get()
-        private const val baseMoveSpeed = 0.4
-        private  val baseAttackDamage = AiConfig.entities.unhallowed.baseDamage.get()
-
-        fun createUnhallowedAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
-        }
-    }
-    private var attackTicksLeft = 0
-    private var lookingAtVillagerTicksLeft = 0
+    protected var attackTicksLeft = 0
+    protected var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
     override var maxAge = -1
-    private var bonusEquipment = 0
     override var createdBy: UUID? = null
     override var owner: LivingEntity? = null
     private var angryAt: UUID? = null
-    private var modifiedDamage = 0.0
-    private var modifiedHealth = 0.0
+    override var entityEffects: AugmentEffect = AugmentEffect()
+    private var level = 1
+
+    override fun passEffects(ae: AugmentEffect, level: Int) {
+        this.entityEffects = ae.copy()
+        this.level = level
+    }
 
     init{
         stepHeight = 1.0f
@@ -82,10 +72,9 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
 
     override fun initGoals() {
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(3, WanderNearTargetGoal(this, 0.9, 32.0f))
+        goalSelector.add(3, WanderNearTargetGoal(this, 0.9, 16.0f))
         goalSelector.add(3, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
         goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
-        goalSelector.add(5, UnhallowedLookGoal(this))
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
@@ -102,25 +91,35 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         entityNbt: NbtCompound?
     ): EntityData? {
         this.initEquipment(world.random, difficulty)
-        if (modifiedDamage > baseAttackDamage){
-            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
-                EntityAttributeModifier(
-                    "Modified damage bonus",
-                    modifiedDamage - baseAttackDamage,
-                    EntityAttributeModifier.Operation.ADDITION
-                )
-            )
-        }
-        if (modifiedHealth > baseMaxHealth){
+        modifyHealth(entityEffects.amplifier(level).toDouble())
+        modifyDamage(entityEffects.damage(level).toDouble())
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    open fun modifyHealth(modHealth: Double){
+        val baseHealth = this.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH)
+        if (modHealth != baseHealth && modHealth != 0.0){
             getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
                 EntityAttributeModifier(
                     "Modified health bonus",
-                    modifiedHealth - baseMaxHealth,
+                    modHealth - baseHealth,
                     EntityAttributeModifier.Operation.ADDITION
                 )
             )
         }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    open fun modifyDamage(modDamage: Double){
+        val baseDamage = this.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE)
+        if (modDamage != baseDamage && modDamage != 0.0){
+            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    "Modified damage bonus",
+                    modDamage - baseDamage,
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+        }
     }
 
     override fun tick() {
@@ -128,6 +127,14 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         if (maxAge > 0){
             if (age >= maxAge){
                 kill()
+            }
+        }
+        if (owner != null){
+            val attacker = owner?.recentDamageSource?.attacker
+            if (attacker != null && attacker is LivingEntity){
+                this.target = attacker
+                setAngryAt(attacker.uuid)
+                chooseRandomAngerTime()
             }
         }
     }
@@ -167,18 +174,26 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putDouble("ModifiedHealth", modifiedHealth)
-        nbt.putDouble("ModifiedDamage", modifiedDamage)
         writePlayerCreatedNbt(nbt)
         writeAngerToNbt(nbt)
+        nbt.putInt("maximum_age", maxAge)
+        nbt.putInt("effect_level", level)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        modifiedHealth = nbt.getDouble("ModifiedHealth")
-        modifiedDamage = nbt.getDouble("ModifiedDamage")
         readPlayerCreatedNbt(world, nbt)
+        if (owner != null) {
+            try {
+                goalSelector.add(2, FollowSummonerGoal(this, owner!!, 1.0, 10.0f, 2.0f, false))
+                targetSelector.add(1, TrackSummonerAttackerGoal(this, owner!!))
+            } catch (e: Exception){
+                //
+            }
+        }
         readAngerFromNbt(world, nbt)
+        this.maxAge = nbt.getInt("maximum_age").takeIf { it > 0 } ?: -1
+        this.level = nbt.getInt("effect_level").takeIf { it > 0 } ?: 1
     }
 
     fun setLookingAtVillager(lookingAtVillager: Boolean) {
@@ -194,8 +209,8 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
     override fun canTarget(target: LivingEntity): Boolean {
         if (!isPlayerCreated()) return super.canTarget(target)
         val uuid = target.uuid
-        if (owner != null) {
-            if (target.isTeammate(owner)) return false
+        if (getOwner() != null) {
+            if (target.isTeammate(getOwner())) return false
         }
         return uuid != createdBy
     }
@@ -212,19 +227,7 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         }
     }
 
-    override fun getAmbientSound(): SoundEvent? {
-        return SoundEvents.ENTITY_ZOMBIE_AMBIENT
-    }
-
-    override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_ZOMBIE_HURT
-    }
-
-    override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_ZOMBIE_DEATH
-    }
-
-    private fun getStepSound(): SoundEvent {
+    open fun getStepSound(): SoundEvent {
         return SoundEvents.ENTITY_ZOMBIE_STEP
     }
 
@@ -232,40 +235,8 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         playSound(getStepSound(), 0.15f, 1.0f)
     }
 
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.UNDEAD
-    }
-
-
-    override fun initEquipment(random: Random ,difficulty: LocalDifficulty) {
-        when (bonusEquipment) {
-            1 -> {
-                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.LEATHER_HELMET))
-                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.LEATHER_CHESTPLATE))
-            }
-            2 -> {
-                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.CHAINMAIL_HELMET))
-                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.CHAINMAIL_CHESTPLATE))
-                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.WOODEN_SWORD))
-            }
-            3 -> {
-                this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.IRON_HELMET))
-                this.equipStack(EquipmentSlot.CHEST, ItemStack(Items.IRON_CHESTPLATE))
-                this.equipStack(EquipmentSlot.FEET, ItemStack(Items.IRON_BOOTS))
-                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(Items.STONE_SWORD))
-            }
-            4 -> {
-                this.equipStack(EquipmentSlot.HEAD, ItemStack(RegisterArmor.STEEL_HELMET))
-                this.equipStack(EquipmentSlot.CHEST, ItemStack(RegisterArmor.STEEL_CHESTPLATE))
-                this.equipStack(EquipmentSlot.LEGS, ItemStack(RegisterArmor.STEEL_LEGGINGS))
-                this.equipStack(EquipmentSlot.FEET, ItemStack(RegisterArmor.STEEL_BOOTS))
-                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterItem.GLOWING_BLADE))
-            }
-        }
-    }
-
     override fun tryAttack(target: Entity): Boolean {
-        val summoner = owner
+        val summoner = getOwner()
         if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
             (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
         }
@@ -279,12 +250,31 @@ class UnhallowedEntity(entityType: EntityType<UnhallowedEntity>, world: World): 
         return bl
     }
 
-    override fun onDeath(source: DamageSource) {
-        super.onDeath(source)
-    }
-
     override fun getLeashOffset(): Vec3d {
         return Vec3d(0.0, (0.875f * standingEyeHeight).toDouble(), (this.width * 0.4f).toDouble())
+    }
+
+    fun setConstructOwner(owner: LivingEntity?){
+        createdBy = owner?.uuid
+        this.owner = owner
+    }
+
+    override fun getOwnerUuid(): UUID? {
+        return createdBy
+    }
+
+    override fun getOwner(): Entity? {
+        return if (owner != null) {
+            owner
+        } else if (world is ServerWorld && createdBy != null) {
+            val o = (world as ServerWorld).getEntity(createdBy)
+            if (o != null && o is LivingEntity) {
+                owner = o
+            }
+            o
+        }else {
+            null
+        }
     }
 
 }

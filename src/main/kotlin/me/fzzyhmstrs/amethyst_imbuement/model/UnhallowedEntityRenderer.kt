@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.UnhallowedEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
 import net.minecraft.client.render.entity.BipedEntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer
