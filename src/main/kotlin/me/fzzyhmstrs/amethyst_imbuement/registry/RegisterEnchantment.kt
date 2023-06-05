@@ -98,6 +98,7 @@ object RegisterEnchantment {
     val FREEZING = FreezingAugment().also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment().also{regEnchant["gusting"] = it}
     val HAIL_STORM = HailStormAugment().also{regEnchant["hail_storm"] = it}
+    val HAMPTERTIME = HamptertimeAugment().also{regEnchant["hamptertime"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().also{regEnchant["hard_light_bridge"] = it}
     val ICE_SHARD = IceShardAugment().also{regEnchant["ice_shard"] = it}
     val ICE_SPIKES = IceSpikesAugment().also{regEnchant["ice_spikes"] = it}
