@@ -46,13 +46,13 @@ open class SpellToolItem(
     }
     override fun postMine(
         stack: ItemStack,
-        world: World?,
+        world: World,
         state: BlockState,
-        pos: BlockPos?,
+        pos: BlockPos,
         miner: LivingEntity
     ): Boolean {
         if (stack.maxDamage - stack.damage > 1) {
-            if (!world!!.isClient && state.getHardness(world, pos) != 0.0f) {
+            if (!world.isClient && state.getHardness(world, pos) != 0.0f) {
                 stack.damage(1, miner) { e: LivingEntity ->
                     e.sendEquipmentBreakStatus(
                         EquipmentSlot.MAINHAND

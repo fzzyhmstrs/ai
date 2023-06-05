@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate

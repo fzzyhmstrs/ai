@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import net.minecraft.block.LeavesBlock
 import net.minecraft.entity.LivingEntity
@@ -75,7 +75,7 @@ open class FollowSummonerGoal(
     }
 
     private fun tryTeleport() {
-        val blockPos: BlockPos = summoned.blockPos
+        val blockPos: BlockPos = summoner.blockPos
         for (i in 0..9) {
             val j: Int = this.getRandomInt(-3, 3)
             val k: Int = this.getRandomInt(-1, 1)

@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
@@ -69,7 +69,7 @@ class CrystallineGolemEntityModel(_root: ModelPart): SinglePartEntityModel<Cryst
     }
 
     override fun animateModel(crystalGolemEntity: CrystallineGolemEntity, f: Float, g: Float, h: Float) {
-        val i = crystalGolemEntity.attackTicksLeft
+        val i = crystalGolemEntity.getAttackTicks()
         if (i > 0) {
             rightArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)
             leftArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)

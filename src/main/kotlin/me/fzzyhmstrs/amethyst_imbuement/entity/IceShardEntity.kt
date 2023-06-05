@@ -88,6 +88,9 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
 
     override fun tick() {
         super.tick()
+        if (this.age > 1200){
+            discard()
+        }
         if (!inGround)
             addParticles(velocity.x, velocity.y, velocity.z)
     }

@@ -1,6 +1,7 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import com.google.common.collect.ImmutableList
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
@@ -37,14 +38,11 @@ import java.util.*
 import java.util.stream.Stream
 
 @Suppress("PrivatePropertyName")
-class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, world: World): GolemEntity(entityType,world), Angerable, PlayerCreatable {
+class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, modDamage: Double, modHealth: Double, createdBy: LivingEntity?) : this(entityType, world){
-        maxAge = ageLimit
-        modifiedDamage = modDamage
-        modifiedHealth = modHealth
-        this.createdBy = createdBy?.uuid
-    }
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World): super(entityType, world)
+
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?, augmentEffect: AugmentEffect? = null, level: Int = 1) : super(entityType, world, ageLimit, createdBy, augmentEffect, level)
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
@@ -53,38 +51,10 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolem.baseDamage.get().toDouble())
         }
     }
-    var attackTicksLeft = 0
-    private var lookingAtVillagerTicksLeft = 0
-    private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
-    private var angerTime = 0
-    override var maxAge = -1
-    override var createdBy: UUID? = null
-    override var owner: LivingEntity? = null
-    private var angryAt: UUID? = null
-    private var modifiedDamage = 0.0
-    private var modifiedHealth = 0.0
-
-    init{
-        stepHeight = 1.0f
-    }
-
-    fun setGolemOwner(owner: LivingEntity?){
-        createdBy = owner?.uuid
-        this.owner = owner
-    }
 
     override fun initGoals() {
-        goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(2, WanderNearTargetGoal(this, 0.9, 32.0f))
-        goalSelector.add(2, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
-        goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
+        super.initGoals()
         goalSelector.add(5, CrystallineGolemLookGoal(this))
-        goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        goalSelector.add(8, LookAroundGoal(this))
-        targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
-        targetSelector.add(2, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster})
-        targetSelector.add(3, UniversalAngerGoal(this, false))
     }
 
     override fun getNextAirUnderwater(air: Int): Int {
@@ -98,60 +68,8 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         super.pushAway(entity)
     }
 
-    override fun tick() {
-        super.tick()
-        if (maxAge > 0){
-            if (age >= maxAge){
-                kill()
-            }
-        }
-        if (owner != null){
-            val attacker = owner?.recentDamageSource?.attacker
-            if (attacker != null && attacker is LivingEntity){
-                this.target = attacker
-                setAngryAt(attacker.uuid)
-                chooseRandomAngerTime()
-            }
-        }
-    }
-
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
-        this.initEquipment(world.random, difficulty)
-        if (modifiedDamage - AiConfig.entities.crystalGolem.baseDamage.get() != 0.0){
-            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
-                EntityAttributeModifier(
-                    "Modified damage bonus",
-                    modifiedDamage - AiConfig.entities.crystalGolem.baseDamage.get(),
-                    EntityAttributeModifier.Operation.ADDITION
-                )
-            )
-        }
-        if (modifiedHealth - AiConfig.entities.crystalGolem.baseHealth.get() != 0.0){
-            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
-                EntityAttributeModifier(
-                    "Modified health bonus",
-                    modifiedHealth - AiConfig.entities.crystalGolem.baseHealth.get(),
-                    EntityAttributeModifier.Operation.ADDITION
-                )
-            )
-        }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
     override fun tickMovement() {
         super.tickMovement()
-        if (attackTicksLeft > 0) {
-            --attackTicksLeft
-        }
-        if (lookingAtVillagerTicksLeft > 0) {
-            --lookingAtVillagerTicksLeft
-        }
         val blockState: BlockState =
             world.getBlockState(BlockPos(MathHelper.floor(this.x),MathHelper.floor(this.y),MathHelper.floor(this.z)))
         if (velocity.horizontalLengthSquared() > 2.500000277905201E-7 && random.nextInt(5) == 0 && !blockState.isAir) {
@@ -165,43 +83,6 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
                 (random.nextFloat().toDouble() - 0.5) * 4.0
             )
         }
-        if (!world.isClient) {
-            tickAngerLogic(world as ServerWorld, true)
-        }
-    }
-
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
-        writePlayerCreatedNbt(nbt)
-        writeAngerToNbt(nbt)
-    }
-
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
-        readPlayerCreatedNbt(world,nbt)
-        readAngerFromNbt(world, nbt)
-
-    }
-
-
-    override fun chooseRandomAngerTime() {
-        setAngerTime(ANGER_TIME_RANGE[random])
-    }
-
-    override fun setAngerTime(ticks: Int) {
-        angerTime = ticks
-    }
-
-    override fun getAngerTime(): Int {
-        return angerTime
-    }
-
-    override fun setAngryAt(uuid: UUID?) {
-        angryAt = uuid
-    }
-
-    override fun getAngryAt(): UUID? {
-        return angryAt
     }
 
     private fun getAttackDamage(): Float {
@@ -224,26 +105,9 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
 
     override fun handleStatus(status: Byte) {
         if (status.toInt() == 4) {
-            attackTicksLeft = 10
             playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0f, 1.0f)
-        } else if (status.toInt() == 11) {
-            lookingAtVillagerTicksLeft = 400
-        } else if (status.toInt() == 34) {
-            lookingAtVillagerTicksLeft = 0
-        } else {
-            super.handleStatus(status)
         }
-    }
-
-
-    fun setLookingAtVillager(lookingAtVillager: Boolean) {
-        if (lookingAtVillager) {
-            lookingAtVillagerTicksLeft = 400
-            world.sendEntityStatus(this, 11.toByte())
-        } else {
-            lookingAtVillagerTicksLeft = 0
-            world.sendEntityStatus(this, 34.toByte())
-        }
+        super.handleStatus(status)
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -286,15 +150,6 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         return Crack.from(this.health / this.maxHealth)
     }
 
-    override fun canTarget(target: LivingEntity): Boolean {
-        if (!isPlayerCreated()) return super.canTarget(target)
-        val uuid = target.uuid
-        if (owner != null) {
-            if (target.isTeammate(owner)) return false
-        }
-        return uuid != createdBy
-    }
-
     override fun canSpawn(world: WorldView): Boolean {
         val blockPos = blockPos
         val blockPos2 = blockPos.down()
@@ -324,8 +179,12 @@ class CrystallineGolemEntity(entityType: EntityType<CrystallineGolemEntity>, wor
         return false
     }
 
-    override fun playStepSound(pos: BlockPos?, state: BlockState?) {
+    override fun playStepSound(pos: BlockPos, state: BlockState) {
         playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0f, 1.0f)
+    }
+
+    fun getAttackTicks(): Int {
+        return attackTicksLeft
     }
 
     fun getLookingAtVillagerTicks(): Int {
