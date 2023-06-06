@@ -127,6 +127,7 @@ object RegisterEnchantment {
     val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().also{regEnchant["summon_fury_totem"] = it}
     val SUMMON_GOLEM = SummonGolemAugment().also{regEnchant["summon_golem"] = it}
     val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().also{regEnchant["summon_grace_totem"] = it}
+    val SUMMON_HAMSTER = SummonHamsterAugment().also{regEnchant["summon_hamster"] = it}
     val SUMMON_STRIDER = SummonStriderAugment().also{regEnchant["summon_strider"] = it}
     val SUMMON_WIT_TOTEM = SummonWitTotemAugment().also{regEnchant["summon_wit_totem"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
