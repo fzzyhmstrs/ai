@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
-import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor
+import me.fzzyhmstrs.amethyst_imbuement.mixins.AxeItemAccessor
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
