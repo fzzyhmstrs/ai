@@ -70,7 +70,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
                     chickenEntity.refreshPositionAndAngles(this.x, this.y, this.z, yaw, 0.0f)
                     chickenEntity.isBaby = false
                     if (this.owner is LivingEntity) {
-                        chickenEntity.setOwner(this.owner as LivingEntity)
+                        chickenEntity.setChickenOwner(this.owner as LivingEntity)
                     }
                     chickenEntity.passEffects(entityEffects,0)
                     world.spawnEntity(chickenEntity)

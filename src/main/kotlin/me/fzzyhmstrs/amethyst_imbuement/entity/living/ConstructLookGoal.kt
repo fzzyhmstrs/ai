@@ -5,23 +5,22 @@ import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.passive.VillagerEntity
 
 @Suppress("PrivatePropertyName")
-class CrystallineGolemLookGoal(_golem: CrystallineGolemEntity): Goal() {
+class ConstructLookGoal(private val construct: PlayerCreatedConstructEntity): Goal() {
 
     private val CLOSE_VILLAGER_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(6.0)
-    private val golem = _golem
     private var targetVillager: VillagerEntity? = null
     private var lookCountdown = 0
 
     override fun canStart(): Boolean {
-        if (!golem.world.isDay) {
+        if (!construct.world.isDay) {
             return false
         }
-        if (golem.random.nextInt(8000) != 0) {
+        if (construct.random.nextInt(8000) != 0) {
             return false
         }
-        targetVillager = golem.world.getClosestEntity(
+        targetVillager = construct.world.getClosestEntity(
             VillagerEntity::class.java, CLOSE_VILLAGER_PREDICATE,
-            golem, golem.x, golem.y, golem.z, golem.boundingBox.expand(6.0, 2.0, 6.0)
+            construct, construct.x, construct.y, construct.z, construct.boundingBox.expand(6.0, 2.0, 6.0)
         )
         return targetVillager != null
     }
@@ -32,16 +31,16 @@ class CrystallineGolemLookGoal(_golem: CrystallineGolemEntity): Goal() {
 
     override fun start() {
         lookCountdown = getTickCount(400)
-        golem.setLookingAtVillager(true)
+        construct.setLookingAtVillager(true)
     }
 
     override fun stop() {
-        golem.setLookingAtVillager(false)
+        construct.setLookingAtVillager(false)
         targetVillager = null
     }
 
     override fun tick() {
-        golem.lookControl.lookAt(targetVillager, 30.0f, 30.0f)
+        construct.lookControl.lookAt(targetVillager, 30.0f, 30.0f)
         --lookCountdown
     }
 }

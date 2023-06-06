@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
@@ -36,7 +37,7 @@ import net.minecraft.world.explosion.ExplosionBehavior
 import java.util.*
 
 class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World): ChickenEntity(entityType, world),
-    ModifiableEffectEntity {
+    ModifiableEffectEntity, Tameable, PlayerCreatable {
 
     companion object{
 
@@ -51,7 +52,9 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     private var lastFuseTime = 0
     private var currentFuseTime = 0
     private val fuseTime = 30
-    private var owner: LivingEntity? = null
+    override var createdBy: UUID? = null
+    override var maxAge: Int = -1
+    override var owner: LivingEntity? = null
 
     override var entityEffects: AugmentEffect = AugmentEffect().withAmplifier(10)
 
@@ -60,12 +63,13 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         entityEffects.setAmplifier(ae.amplifier(level))
     }
 
-    fun setOwner(owner:LivingEntity?){
+    fun setChickenOwner(owner:LivingEntity?){
+        this.createdBy = owner?.uuid
         this.owner = owner
     }
 
     override fun initGoals() {
-        goalSelector.add(0, CreeperIgniteGoal(this))
+        goalSelector.add(0, BoomChickenIgniteGoal(this))
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, false))
         goalSelector.add(2, SwimGoal(this))
         goalSelector.add(3, EscapeDangerGoal(this, 1.4))
@@ -82,6 +86,16 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         super.initDataTracker()
         dataTracker.startTracking(FUSE_SPEED, -1)
         dataTracker.startTracking(IGNITED, false)
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        writePlayerCreatedNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        readPlayerCreatedNbt(world, nbt)
     }
 
     override fun tick() {
@@ -196,7 +210,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         }
     }
 
-    class CreeperIgniteGoal(private val chicken: BoomChickenEntity) : Goal() {
+    class BoomChickenIgniteGoal(private val chicken: BoomChickenEntity) : Goal() {
         private var target: LivingEntity? = null
 
         override fun canStart(): Boolean {
@@ -237,4 +251,21 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         }
     }
 
+    override fun getOwnerUuid(): UUID? {
+        return createdBy
+    }
+
+    override fun getOwner(): Entity? {
+        return if (owner != null) {
+            owner
+        } else if (world is ServerWorld && createdBy != null) {
+            val o = (world as ServerWorld).getEntity(createdBy)
+            if (o != null && o is LivingEntity) {
+                owner = o
+            }
+            o
+        }else {
+            null
+        }
+    }
 }

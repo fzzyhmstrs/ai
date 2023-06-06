@@ -41,6 +41,7 @@ object AiConfig
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
+            .add("1.19.4-01/1.19.3-13/1.19-36: Added hamster configs in entities_v2.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -336,7 +337,7 @@ object AiConfig
 
     private val entitiesHeader = buildSectionHeader("entities")
 
-    class Entities: ConfigClass(entitiesHeader){
+    class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
             if (user == null) return false
             if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
@@ -365,6 +366,17 @@ object AiConfig
             var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
             var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
             var baseDamage = ValidatedFloat(20.0f,1000f,0f)
+        }
+
+        var hamster = Hamster()
+        class Hamster: ConfigSection(Header.Builder().space().add("readme.entities.hamster_1").build()){
+            var baseLifespan = ValidatedInt(3600,180000,20)
+            var baseHealth = ValidatedDouble(8.0,40.0,1.0)
+            var baseDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+        }
+
+        override fun generateNewClass(): Entities {
+            return this
         }
     }
 
