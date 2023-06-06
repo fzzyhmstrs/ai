@@ -5,6 +5,7 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "ArmorItemMixin",
+    "AxeItemAccessor",
     "AxolotlEntityMixin",
     "BlockMixin",
     "BucketItemMixin",

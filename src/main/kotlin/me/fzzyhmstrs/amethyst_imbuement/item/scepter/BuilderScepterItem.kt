@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
-import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor
+import me.fzzyhmstrs.amethyst_imbuement.mixins.AxeItemAccessor
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -12,7 +12,6 @@ import net.minecraft.item.HoneycombItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.registry.tag.BlockTags
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
