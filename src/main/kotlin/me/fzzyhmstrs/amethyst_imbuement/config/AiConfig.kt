@@ -373,6 +373,7 @@ object AiConfig
             var baseLifespan = ValidatedInt(3600,180000,20)
             var baseHealth = ValidatedDouble(8.0,40.0,1.0)
             var baseDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+            var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
         }
 
         override fun generateNewClass(): Entities {
