@@ -23,6 +23,21 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object RegisterEntity {
+    
+    val BASIC_HAMSTER_ENTITY: EntityType<BaseHamsterEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "basic_hamster"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<BasicHamsterEntity>, world: World ->
+            BaseHamsterEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(8).build()
+    )
+    
+    //
 
     val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -34,7 +49,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(10).build()
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(6).build()
     )
 
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
@@ -333,6 +348,7 @@ object RegisterEntity {
 
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
+        FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
