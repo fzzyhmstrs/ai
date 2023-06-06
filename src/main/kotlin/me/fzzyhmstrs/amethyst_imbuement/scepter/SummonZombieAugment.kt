@@ -26,7 +26,8 @@ import kotlin.math.min
 class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(3,0,0)
+        get() = super.baseEffect
+            .withAmplifier(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0,0)
             .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
             .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
 
@@ -49,8 +50,7 @@ class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
             val spawnPos = findSpawnPos(world,startPos,3,2)
             if (spawnPos == BlockPos.ORIGIN) continue
 
-            val zomAmplifier = max(effects.amplifier(level) - baseEffect.amplifier(level), 0)
-            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level),user, bonus, effects.damage(level).toDouble(), 4.0 * zomAmplifier)
+            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), user, effects, level, bonus)
             zom.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y + 0.05, spawnPos.z + 0.5, user.yaw, user.pitch)
             if (world.spawnEntity(zom)){
                 successes++

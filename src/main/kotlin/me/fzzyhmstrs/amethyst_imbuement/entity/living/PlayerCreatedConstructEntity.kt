@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
@@ -29,7 +30,7 @@ import java.util.*
 
 @Suppress("PrivatePropertyName", "LeakingThis")
 open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
-    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable {
+    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
 
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : this(entityType, world){
         maxAge = ageLimit
@@ -60,6 +61,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     private var angryAt: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect()
     private var level = 1
+    open var entityGroup: EntityGroup = EntityGroup.DEFAULT
+    protected var entityScale: Float = 1f
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
@@ -172,6 +175,14 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         return angryAt
     }
 
+    override fun getGroup(): EntityGroup {
+        return entityGroup
+    }
+
+    open fun setGroup(entityGroup: EntityGroup){
+        this.entityGroup = entityGroup
+    }
+
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         writePlayerCreatedNbt(nbt)
@@ -275,6 +286,14 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         }else {
             null
         }
+    }
+
+    override fun getScale(): Float {
+        return entityScale
+    }
+
+    override fun setScale(scale: Float) {
+        this.entityScale = scale
     }
 
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.World
 
 @Suppress("PrivatePropertyName")
-class UnhallowedEntity: PlayerCreatedConstructEntity {
+open class UnhallowedEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<UnhallowedEntity>, world: World): super(entityType, world)
 
@@ -38,10 +38,11 @@ class UnhallowedEntity: PlayerCreatedConstructEntity {
     }
 
     private var bonusEquipment = 0
+    override var entityGroup: EntityGroup = EntityGroup.UNDEAD
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(5, UnhallowedLookGoal(this))
+        goalSelector.add(5, ConstructLookGoal(this))
     }
 
 
@@ -60,11 +61,6 @@ class UnhallowedEntity: PlayerCreatedConstructEntity {
     override fun getStepSound(): SoundEvent {
         return SoundEvents.ENTITY_ZOMBIE_STEP
     }
-
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.UNDEAD
-    }
-
 
     override fun initEquipment(random: Random ,difficulty: LocalDifficulty) {
         when (bonusEquipment) {

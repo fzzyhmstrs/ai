@@ -38,7 +38,7 @@ import java.util.*
 import java.util.stream.Stream
 
 @Suppress("PrivatePropertyName")
-class CrystallineGolemEntity: PlayerCreatedConstructEntity {
+open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<CrystallineGolemEntity>, world: World): super(entityType, world)
 
@@ -54,7 +54,7 @@ class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(5, CrystallineGolemLookGoal(this))
+        goalSelector.add(5, ConstructLookGoal(this))
     }
 
     override fun getNextAirUnderwater(air: Int): Int {
