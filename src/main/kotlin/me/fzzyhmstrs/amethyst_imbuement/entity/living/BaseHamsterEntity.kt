@@ -31,7 +31,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         private const val baseMoveSpeed = 0.3
         private  val baseAttackDamage = AiConfig.entities.hamster.baseDamage.get()
 
-        fun createBasHamsterAttributes(): DefaultAttributeContainer.Builder {
+        fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
