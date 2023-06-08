@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
@@ -29,7 +30,7 @@ object RegisterEntity {
         Identifier(AI.MOD_ID, "basic_hamster"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
-        ) { entityType: EntityType<BasicHamsterEntity>, world: World ->
+        ) { entityType: EntityType<BaseHamsterEntity>, world: World ->
             BaseHamsterEntity(
                 entityType,
                 world
