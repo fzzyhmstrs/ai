@@ -16,8 +16,8 @@ class BaseHamsterEntityModel(root: ModelPart): EntityModel<BaseHamsterEntity>() 
         body = root.getChild("body")
         left_front_leg = root.getChild("left_front_leg")
         left_hind_leg = root.getChild("left_hind_leg")
-        right_hind_leg = root.getChild("right_hind_leg")
         right_front_leg = root.getChild("right_front_leg")
+        right_hind_leg = root.getChild("right_hind_leg")
     }
 
     companion object {
@@ -96,8 +96,8 @@ class BaseHamsterEntityModel(root: ModelPart): EntityModel<BaseHamsterEntity>() 
         body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
         left_front_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
         left_hind_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
-        right_hind_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
         right_front_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
+        right_hind_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
     }
 
 }
