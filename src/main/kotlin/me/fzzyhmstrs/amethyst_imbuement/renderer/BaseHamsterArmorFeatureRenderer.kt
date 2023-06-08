@@ -21,7 +21,7 @@ FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context)
     object HamsterArmorTextureIdsHolder: SimpleSynchronousResourceReloadListener {
         
         private var hamsterTextures: Map<String,Identifier> = mapOf()
-        private val fallback = Identifier(AI.MOD_ID, )
+        private val fallback = Identifier(AI.MOD_ID, "textures/entity/hamster/armor/iron.png")
         
         fun getHamsterTexture(stack: ItemStack): Identifier{
             val item = stack.item
