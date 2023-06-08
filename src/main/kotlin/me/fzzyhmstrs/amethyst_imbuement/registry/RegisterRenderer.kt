@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.minecraft.client.item.CompassAnglePredicateProvider
 import net.minecraft.client.item.ModelPredicateProviderRegistry
+import net.minecraft.client.model.Dilation
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
@@ -265,8 +266,8 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
         
-        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN,BaseHamsterEntityModel.getTexturedModelData())
-        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR,BaseHamsterEntityModel.getTexturedModelData(Dilation(0.1f)))
+        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN) { BaseHamsterEntityModel.getTexturedModelData() }
+        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.1f)) }
 
         //////////////////////////////////
 
