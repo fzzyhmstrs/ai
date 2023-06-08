@@ -63,6 +63,10 @@ class BaseHamsterEntityModel(root: ModelPart): EntityModel<BaseHamsterEntity>() 
             return modelData
         }
 
+        fun getTexturedModelData(dilation: Dilation = Dilation(0.0f)): TexturedModelData{
+            return getTexturedModelData(getModelData(dilation))
+        }
+        
         fun getTexturedModelData(modelData: ModelData): TexturedModelData{
             return TexturedModelData.of(modelData,32,16)
         }
