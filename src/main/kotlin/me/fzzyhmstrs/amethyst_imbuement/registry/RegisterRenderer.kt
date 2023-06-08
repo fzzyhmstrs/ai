@@ -40,12 +40,23 @@ object RegisterRenderer {
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
+    
+    val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
+    val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_armor")
 
     fun registerAll() {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.EXPERIENCE_BUSH, RenderLayer.getCutout())
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.HARD_LIGHT_BLOCK, RenderLayer.getTranslucent())
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.FORCEFIELD_BLOCK, RenderLayer.getTranslucent())
 
+        EntityRendererRegistry.register(
+            RegisterEntity.BASIC_HAMSTER_ENTITY
+        ){context: EntityRendererFactory.Context ->
+            BaseHamsterEntityRenderer(
+                context
+            )
+        }
+        
         EntityRendererRegistry.register(
             RegisterEntity.BOOM_CHICKEN_ENTITY
         ){context: EntityRendererFactory.Context ->
@@ -258,6 +269,9 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
+        
+        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN,BaseHamsterEntityModel.getTexturedModelData())
+        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR,BaseHamsterEntityModel.getTexturedModelData(Dilation(0.1f)))
 
         //////////////////////////////////
 
