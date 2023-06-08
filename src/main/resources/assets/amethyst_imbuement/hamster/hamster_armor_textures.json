@@ -1,0 +1,11 @@
+{
+  "textures": {
+    "leather": "amethyst_imbuement:textures/entity/hamster/armor/leather.png",
+    "iron": "amethyst_imbuement:textures/entity/hamster/armor/iron.png",
+    "gold": "amethyst_imbuement:textures/entity/hamster/armor/gold.png",
+    "diamond": "amethyst_imbuement:textures/entity/hamster/armor/diamond.png",
+    "netherite": "amethyst_imbuement:textures/entity/hamster/armor/netherite.png",
+    "ai_steel": "amethyst_imbuement:textures/entity/hamster/armor/ai_steel.png",
+    "ai_ametrine": "amethyst_imbuement:textures/entity/hamster/armor/ai_ametrine.png"
+  }
+}
