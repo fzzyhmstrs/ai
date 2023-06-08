@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.HamsterVariant
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
@@ -14,7 +15,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
-import kotlin.random.Random
+import net.minecraft.util.math.random.Random
 
 val LOGGER = LoggerUtil.getLogger()
 
@@ -41,10 +42,11 @@ object AI: ModInitializer {
         AltarOfExperienceScreenHandler.registerServer()
         RegisterModifier.registerAll()
         RegisterNetworking.registerServer()
+        HamsterVariant.registerAll()
     }
 
     fun aiRandom(): Random{
-        return Random(System.currentTimeMillis())
+        return Random.createThreadSafe()
     }
 }
 
@@ -62,7 +64,7 @@ object AIClient: ClientModInitializer{
     }
 
     fun aiRandom(): Random{
-        return Random(System.currentTimeMillis())
+        return Random.createThreadSafe()
     }
 }
 
