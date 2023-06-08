@@ -3,19 +3,28 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import com.google.common.collect.ImmutableMap
+import com.google.gson.JsonParser
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.ArmorItem
+import net.minecraft.item.ItemStack
+import net.minecraft.resource.ResourceManager
+import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
 
-class BaseHamsterArmorFeatureRenderer(context: FeatureRendererContext<out BaseHamsterEntity, out BaseHamsterEntityModel>)
+class BaseHamsterArmorFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>, private val model: BaseHamsterEntityModel<T>)
 : 
-FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context) 
+FeatureRenderer<T, M>(context)
 {
 
     object HamsterArmorTextureIdsHolder: SimpleSynchronousResourceReloadListener {
@@ -27,14 +36,14 @@ FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context)
             val item = stack.item
             if (item is ArmorItem){
                 val armorStr = item.material.name
-                return hamsterTextures.getOrDefault(armorStr) {fallback}
+                return hamsterTextures.getOrDefault(armorStr,fallback)
             }
             return fallback
         }
         
         private fun loadHamsterArmorIds(manager: ResourceManager){
             val map: MutableMap<String, Identifier> = mutableMapOf()
-            resourceManager.findResources("hamster_armor_textures") { path -> path.path.endsWith(".json") }
+            manager.findResources("amethyst_imbuement/hamster") { path -> path.path.endsWith("hamster_armor_textures.json") }
             .forEach { (id,resource) ->
                 try{
                     val reader = resource.reader
@@ -42,7 +51,7 @@ FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context)
                     val jsonTextures = json.get("textures")
                     if (jsonTextures != null){
                         if (jsonTextures.isJsonObject){
-                            for (jsonEntry in jsonTextures.asJsonObject().entrySet()){
+                            for (jsonEntry in jsonTextures.asJsonObject.entrySet()){
                                 val jsonArmorStr = jsonEntry.key
                                 val jsonHamsterStr = jsonEntry.value
                                 if (!jsonHamsterStr.isJsonPrimitive){
@@ -89,7 +98,7 @@ FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context)
         matrixStack: MatrixStack,
         vertexConsumerProvider: VertexConsumerProvider,
         i: Int,
-        hamster: BaseHamsterEntity,
+        hamster: T,
         f: Float,
         g: Float,
         h: Float,
@@ -100,14 +109,18 @@ FeatureRenderer<out BaseHamsterEntity, out BaseHamsterEntityModel>(context)
         if (hamster.isInvisible) {
             return
         }
-
+        val helmet = hamster.getEquippedStack(EquipmentSlot.HEAD)
+        if (helmet.isEmpty){
+            return
+        }
+        val identifier = HamsterArmorTextureIdsHolder.getHamsterTexture(helmet)
         renderModel(
-            this.contextModel,
+            model,
             identifier,
             matrixStack,
             vertexConsumerProvider,
             i,
-            crystalGolemEntity,
+            hamster,
             1.0f,
             1.0f,
             1.0f
