@@ -1,7 +1,8 @@
-package me.fzzyhmstrs.amethyst_imbuement.model
+package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer

@@ -1,7 +1,8 @@
-package me.fzzyhmstrs.amethyst_imbuement.model
+package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
+import me.fzzyhmstrs.amethyst_imbuement.model.UnhallowedEntityModel
 import net.minecraft.client.render.entity.BipedEntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer
@@ -15,7 +16,8 @@ class UnhallowedEntityRenderer(ctx: EntityRendererFactory.Context): BipedEntityR
     init{
         addFeature(ArmorFeatureRenderer(this,
             UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_INNER_ARMOR)),
-            UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_OUTER_ARMOR))))
+            UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_OUTER_ARMOR))
+        ))
     }
 
     override fun getTexture(unhallowedEntity: UnhallowedEntity): Identifier {

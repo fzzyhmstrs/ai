@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.model
+package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentEntityModel.Companion.TEXTURE
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem

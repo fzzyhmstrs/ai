@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER")
 
-package me.fzzyhmstrs.amethyst_imbuement.model
+package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.AltarOfExperienceBlockEntity
 import net.fabricmc.api.EnvType

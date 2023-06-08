@@ -1,7 +1,8 @@
-package me.fzzyhmstrs.amethyst_imbuement.model
+package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
+import me.fzzyhmstrs.amethyst_imbuement.model.TotemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
