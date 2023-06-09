@@ -34,10 +34,10 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(8).build()
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
     )
     
-    //
+    /////////
 
     val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
         Registry.ENTITY_TYPE,

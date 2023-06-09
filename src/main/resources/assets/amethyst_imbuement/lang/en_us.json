@@ -1,7 +1,12 @@
 {
 	"entity.amethyst_imbuement.draconic_box": "Draconic Sprite",
 	"entity.amethyst_imbuement.basic_hamster": "Hamster",
+	"entity.amethyst_imbuement.basic_hamster.jeans": "Jamster",
+	"entity.amethyst_imbuement.crystal_hamster": "Hamethyst",
+	"entity.amethyst_imbuement.frost_hamster": "Hamsicle",
+	"entity.amethyst_imbuement.magma_hamster": "Lampster",
 	"entity.amethyst_imbuement.war_hamster": "War Hamster",
+	"entity.amethyst_imbuement.zombie_hamster": "Hambie",
 	"entity.amethyst_imbuement.boom_chicken": "Boom Chicken",
 	"entity.amethyst_imbuement.crystal_golem": "Crystalline Golem",
 	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
@@ -1023,4 +1028,5 @@
 	"readme.entities.crystalGolem.spellPerLvlLifespan": "Integer between 5000 and 0 ticks. The amount that is added to the golem's base lifespan for each level of Summon Crystalline Golem.",
 	"readme.entities.crystalGolem.guardianLifespan": "Integer that is >= 20 ticks. This is the lifespan used when a golem is summoned via the Guardian augment",
 	"readme.entities.hamster_1": "Hamsters",
+	"readme.entities.hamster.baseLifespan": "Integer between 180000 and -1. Defines the lifespan in ticks of a summoned hamster. If set to -1, the hamster will have infinite life."
 }

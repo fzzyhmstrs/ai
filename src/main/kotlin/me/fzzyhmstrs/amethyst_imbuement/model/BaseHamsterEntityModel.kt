@@ -5,6 +5,7 @@ import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.util.math.MathHelper
 
 open class BaseHamsterEntityModel<T:BaseHamsterEntity>(root: ModelPart): EntityModel<T>() {
     private var body: ModelPart
@@ -30,32 +31,32 @@ open class BaseHamsterEntityModel<T:BaseHamsterEntity>(root: ModelPart): EntityM
                     .uv(20, 0).cuboid(-0.5f, -1.0f, -0.5f, 1.0f, 1.0f, 1.0f, dilation),
                 ModelTransform.pivot(0.0f, 23.0f, 3.0f)
             )
-            val left_ear_r1: ModelPartData = body.addChild(
-                "left_ear_r1",
-                ModelPartBuilder.create().uv(0, -1).cuboid(0.0f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, dilation),
-                ModelTransform.of(2.75f, -1.5f, -5.25f, 0.0f, 0.48f, 0.0f)
-            )
-            val right_ear_r1: ModelPartData = body.addChild(
-                "right_ear_r1",
-                ModelPartBuilder.create().uv(0, 0).cuboid(0.0f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, dilation),
-                ModelTransform.of(-2.75f, -1.5f, -5.25f, 0.0f, -0.48f, 0.0f)
-            )
-            val left_front_leg: ModelPartData = modelPartData.addChild(
+                body.addChild(
+                    "left_ear_r1",
+                    ModelPartBuilder.create().uv(0, -1).cuboid(0.0f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, dilation),
+                    ModelTransform.of(2.75f, -1.5f, -5.25f, 0.0f, 0.48f, 0.0f)
+                )
+                body.addChild(
+                    "right_ear_r1",
+                    ModelPartBuilder.create().uv(0, 0).cuboid(0.0f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, dilation),
+                    ModelTransform.of(-2.75f, -1.5f, -5.25f, 0.0f, -0.48f, 0.0f)
+                )
+            modelPartData.addChild(
                 "left_front_leg",
                 ModelPartBuilder.create().uv(16, 0).cuboid(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, dilation),
                 ModelTransform.pivot(1.5f, 23.5f, -1.5f)
             )
-            val left_hind_leg: ModelPartData = modelPartData.addChild(
+            modelPartData.addChild(
                 "left_hind_leg",
                 ModelPartBuilder.create().uv(16, 0).cuboid(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, dilation),
                 ModelTransform.pivot(1.5f, 23.5f, 1.5f)
             )
-            val right_hind_leg: ModelPartData = modelPartData.addChild(
+            modelPartData.addChild(
                 "right_hind_leg",
                 ModelPartBuilder.create().uv(16, 0).cuboid(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, dilation),
                 ModelTransform.pivot(-1.5f, 23.5f, 1.5f)
             )
-            val right_front_leg: ModelPartData = modelPartData.addChild(
+            modelPartData.addChild(
                 "right_front_leg",
                 ModelPartBuilder.create().uv(16, 0).cuboid(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, dilation),
                 ModelTransform.pivot(-1.5f, 23.5f, -1.5f)
@@ -81,6 +82,10 @@ open class BaseHamsterEntityModel<T:BaseHamsterEntity>(root: ModelPart): EntityM
         netHeadYaw: Float,
         headPitch: Float
     ) {
+        this.left_front_leg.pitch = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount
+        this.left_hind_leg.pitch = MathHelper.cos(limbSwing * 0.6662f + Math.PI.toFloat()) * 1.4f * limbSwingAmount
+        this.right_front_leg.pitch = MathHelper.cos(limbSwing * 0.6662f + Math.PI.toFloat()) * 1.4f * limbSwingAmount
+        this.right_hind_leg.pitch = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount
     }
 
     override fun render(
