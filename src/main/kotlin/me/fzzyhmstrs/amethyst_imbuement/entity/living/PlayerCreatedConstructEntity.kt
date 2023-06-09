@@ -10,6 +10,9 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
@@ -22,6 +25,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -51,6 +55,10 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         }
     }
 
+    companion object{
+        internal val SCALE = DataTracker.registerData(PlayerCreatedConstructEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
+    }
+
     protected var attackTicksLeft = 0
     protected var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
@@ -62,7 +70,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override var entityEffects: AugmentEffect = AugmentEffect()
     private var level = 1
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
-    protected var entityScale: Float = 1f
+    internal var entityScale = 1f
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
@@ -97,6 +105,11 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         modifyHealth(entityEffects.amplifier(level).toDouble())
         modifyDamage(entityEffects.damage(level).toDouble())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun initDataTracker() {
+        super.initDataTracker()
+        dataTracker.startTracking(SCALE,1f)
     }
 
     open fun modifyHealth(modHealth: Double){
@@ -189,6 +202,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         writeAngerToNbt(nbt)
         nbt.putInt("maximum_age", maxAge)
         nbt.putInt("effect_level", level)
+        nbt.putFloat("scale_factor",getScale())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -205,6 +219,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         readAngerFromNbt(world, nbt)
         this.maxAge = nbt.getInt("maximum_age").takeIf { it > 0 } ?: -1
         this.level = nbt.getInt("effect_level").takeIf { it > 0 } ?: 1
+        setScale(nbt.getFloat("scale_factor").takeIf { it > 0f } ?: 1f)
     }
 
     fun setLookingAtVillager(lookingAtVillager: Boolean) {
@@ -288,12 +303,20 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         }
     }
 
-    override fun getScale(): Float {
-        return entityScale
+    override fun onTrackedDataSet(data: TrackedData<*>?) {
+        super.onTrackedDataSet(data)
+        if(SCALE.equals(data)){
+            entityScale = getScale()
+        }
     }
 
+    override fun getScale(): Float {
+        return dataTracker.get(SCALE)
+    }
+
+    //need to also do the bounding boxxxxxxx
     override fun setScale(scale: Float) {
-        this.entityScale = scale
+        dataTracker.set(SCALE,MathHelper.clamp(scale,0.0f,20.0f))
     }
 
 }

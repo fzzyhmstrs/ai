@@ -106,9 +106,6 @@ FeatureRenderer<T, M>(context)
         k: Float,
         l: Float
     ) {
-        if (hamster.isInvisible) {
-            return
-        }
         val helmet = hamster.getEquippedStack(EquipmentSlot.HEAD)
         if (helmet.isEmpty){
             return
