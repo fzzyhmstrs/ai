@@ -377,6 +377,17 @@ object AiConfig
             var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
         }
 
+        var bonestorm = Bonestorm()
+        class Bonestorm: ConfigSection(Header.Builder().space().add("readme.entities.bonestorm_1").build()){
+            @ReadMeText("readme.entities.bonestorm.baseLifespan")
+            var baseLifespan = ValidatedInt(2160,Int.MAX_VALUE-1000000,20)
+            @ReadMeText("readme.entities.bonestorm.perLvlLifespan")
+            var perLvlLifespan = ValidatedInt(240,2400,0)
+            var baseHealth = ValidatedDouble(8.0,40.0,1.0)
+            var baseDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+            var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
+        }
+
         override fun generateNewClass(): Entities {
             return this
         }

@@ -91,7 +91,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
         targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
         targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
-        targetSelector.add(4, UniversalAngerGoal(this, false))
+        targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 
     override fun initialize(

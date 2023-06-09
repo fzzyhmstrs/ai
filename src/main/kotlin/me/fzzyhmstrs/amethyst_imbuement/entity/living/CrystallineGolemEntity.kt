@@ -47,7 +47,8 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolem.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolem.baseDamage.get().toDouble())
         }
     }

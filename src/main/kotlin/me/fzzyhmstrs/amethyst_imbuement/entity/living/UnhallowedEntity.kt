@@ -34,6 +34,7 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
+                .add(EntityAttributes.GENERIC_ARMOR, 2.0)
         }
     }
 

@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -17,6 +18,7 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
@@ -34,7 +36,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     companion object {
         private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
-        private const val baseMoveSpeed = 0.3
+        private const val baseMoveSpeed = 0.25
         private  val baseAttackDamage = AiConfig.entities.hamster.baseDamage.get()
         internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java,HamsterVariant.TRACKED_HAMSTER)
 
@@ -44,6 +46,8 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
         }
     }
+
+    private var jamsterName: Text? = null
 
     override fun initGoals() {
         super.initGoals()
@@ -113,6 +117,16 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     override fun getStepSound(): SoundEvent {
         return SoundEvents.ENTITY_TURTLE_SHAMBLE_BABY
+    }
+
+    override fun getName(): Text {
+        if (getVariant() == HamsterVariant.JAMSTER){
+            if (jamsterName == null){
+                jamsterName = AcText.translatable(this.type.translationKey + ".jeans")
+            }
+            return jamsterName as Text
+        }
+        return super.getName()
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
