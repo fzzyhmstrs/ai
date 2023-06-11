@@ -21,6 +21,8 @@ val LOGGER = LoggerUtil.getLogger()
 
 object AI: ModInitializer {
     const val MOD_ID = "amethyst_imbuement"
+    private val random = Random.createThreadSafe()
+    private val kotlinRandom = kotlin.random.Random(System.currentTimeMillis())
 
     val slots: Array<EquipmentSlot> = arrayOf(EquipmentSlot.HEAD,EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
@@ -47,7 +49,10 @@ object AI: ModInitializer {
     }
 
     fun aiRandom(): Random{
-        return Random.createThreadSafe()
+        return random
+    }
+    fun aiKotlinRandom(): kotlin.random.Random{
+        return kotlinRandom
     }
 }
 
