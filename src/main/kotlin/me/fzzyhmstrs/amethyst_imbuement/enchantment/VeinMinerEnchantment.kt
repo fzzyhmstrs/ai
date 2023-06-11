@@ -66,7 +66,7 @@ class VeinMinerEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
             for (priority in 1..maxDistance) {
                 val priorityList = blockMap[priority]
                 if (priorityList != null) {
-                    priorityList.shuffle(AI.aiRandom())
+                    priorityList.shuffle(AI.aiKotlinRandom())
                     for (bp2 in priorityList){
                         tryBreakBlock(bp2,world,miner)
                         remainingBlockBudget--

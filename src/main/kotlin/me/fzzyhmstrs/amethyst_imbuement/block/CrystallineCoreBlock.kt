@@ -69,7 +69,7 @@ class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
                 0.0f
             )
             val owner = world.getClosestPlayer(cge.x,cge.y,cge.z,6.0,false)
-            cge.setGolemOwner(owner)
+            cge.setConstructOwner(owner)
             world.spawnEntity(cge)
             for (serverPlayerEntity in world.getNonSpectatingEntities(
                 ServerPlayerEntity::class.java, cge.boundingBox.expand(5.0)
