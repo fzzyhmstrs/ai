@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftE": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftF": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftG": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:glistering_melon_slice"
+  },
+  "craftI": {
+	"item": "minecraft:gold_ingot"
+  },
+  "title": "Dazzling Melon Slice",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:dazzling_melon_slice",
+  "countA": 4
+}
+

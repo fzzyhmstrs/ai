@@ -37,7 +37,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
     companion object {
         private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
         private const val baseMoveSpeed = 0.25
-        private  val baseAttackDamage = AiConfig.entities.hamster.baseDamage.get()
+        private  val baseAttackDamage = AiConfig.entities.hamster.baseSummonDamage.get()
         internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java,HamsterVariant.TRACKED_HAMSTER)
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
@@ -90,6 +90,14 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     open fun classEquipment(): Map<EquipmentSlot, ItemStack>{
         return mapOf()
+    }
+
+    fun setMainHand(stack: ItemStack){
+        this.equipStack(EquipmentSlot.MAINHAND,stack)
+    }
+
+    fun setArmor(stack: ItemStack){
+        this.equipStack(EquipmentSlot.HEAD,stack)
     }
 
     override fun getRotationVec3d(): Vec3d {

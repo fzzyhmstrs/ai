@@ -15,6 +15,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
@@ -40,8 +41,9 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
     ): Boolean {
         val startPos = (hit as BlockHitResult).blockPos
         val spawnPos = findSpawnPos(world,startPos,3,3, tries = 12)
-        val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level),effects.damage(level).toDouble(),effects.amplifier(level).toDouble(), user)
-        golem.setGolemOwner(user)
+        if (spawnPos == BlockPos.ORIGIN) return false
+        val golem = CrystallineGolemEntity(RegisterEntity.CRYSTAL_GOLEM_ENTITY, world,effects.duration(level), user, effects)
+        golem.setConstructOwner(user)
         golem.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
         golem.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
         if (world.spawnEntity(golem)) {

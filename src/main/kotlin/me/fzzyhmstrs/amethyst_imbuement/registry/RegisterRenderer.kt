@@ -22,8 +22,10 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry
 import net.minecraft.client.model.Dilation
 import net.minecraft.client.item.UnclampedModelPredicateProvider
 import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.*
+import net.minecraft.client.render.entity.model.BlazeEntityModel
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.world.ClientWorld
@@ -38,6 +40,7 @@ import net.minecraft.util.Identifier
 object RegisterRenderer {
     val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"glistering_trident"),"glistering_trident_model")
     val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"draconic_box"),"draconic_box_model")
+    val BONESTORM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"bonestorm"),"bonestorm_model")
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
@@ -52,221 +55,115 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.BASIC_HAMSTER_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            BaseHamsterEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.BONESTORM_ENTITY
+        ){ context: EntityRendererFactory.Context -> BonestormEntityRenderer(context) }
         
         EntityRendererRegistry.register(
             RegisterEntity.BOOM_CHICKEN_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            ChickenEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.CRYSTAL_GOLEM_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            CrystallineGolemEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.UNHALLOWED_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            UnhallowedEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.DRACONIC_BOX_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            DraconicBoxEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> DraconicBoxEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.TOTEM_OF_FURY_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            TotemEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> TotemEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.TOTEM_OF_GRACE_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            TotemEntityRenderer(
-                context
-            )
-        }
-
-        EntityRendererRegistry.register(
-            RegisterEntity.TOTEM_OF_WIT_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            TotemEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> TotemEntityRenderer(context) }
 
         //////////////////////////////////////////////////////////
 
         EntityRendererRegistry.register(
             RegisterEntity.GLISTERING_TRIDENT_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            GlisteringTridentEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> GlisteringTridentEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SHARD_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            IceShardEntityRenderer(
-                context
-            )
+        ){ context: EntityRendererFactory.Context -> BaseShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/bone_shard.png")) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.ICE_SHARD_ENTITY
+        ){ context: EntityRendererFactory.Context -> BaseShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_shard.png"))
         }
 
         EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            MissileEntityRenderer(
-                context,
-                0.7f,
-                0.7f
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 0.7f, 0.7f) }
 
         EntityRendererRegistry.register(
             RegisterEntity.FLAMEBOLT_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            MissileEntityRenderer(
-                context,
-                1.0f,
-                0.7f,
-                0.3f,
-                0.6666F,
-                1.2F
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 0.7f, 0.3f, 0.6666F, 1.2F) }
 
         EntityRendererRegistry.register(
             RegisterEntity.BALL_LIGHTNING_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            MissileEntityRenderer(
-                context,
-                1.0f,
-                1.0f,
-                0.0f,
-                -2.0F,
-                1.25F
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 1f, 0f, -2F, 1.25F) }
 
         EntityRendererRegistry.register(
             RegisterEntity.SOUL_MISSILE_ENTITY
-        ){context: EntityRendererFactory.Context ->
-            MissileEntityRenderer(context)
-        }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_BULLET
-        ){context: EntityRendererFactory.Context ->
-            ShulkerBulletEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> ShulkerBulletEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FANGS
-        ){context: EntityRendererFactory.Context ->
-            PlayerFangsRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SPIKE
-        ){context: EntityRendererFactory.Context ->
-            IceSpikeRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> IceSpikeRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FIREBALL
-        ){context: EntityRendererFactory.Context ->
-            FlyingItemEntityRenderer(
-                context,
-                3.0f,
-                true
-            )
-        }
+        ){context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context, 3f, true) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_LIGHTNING
-        ){context: EntityRendererFactory.Context ->
-            LightningEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> LightningEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_WITHER_SKULL
-        ){context: EntityRendererFactory.Context ->
-            WitherSkullEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> WitherSkullEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.MANA_POTION
-        ){context: EntityRendererFactory.Context ->
-            FlyingItemEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_EGG
-        ){context: EntityRendererFactory.Context ->
-            FlyingItemEntityRenderer(
-                context
-            )
-        }
+        ){ context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context) }
 
         /////////////////////////////////
 
-        BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
-        ){context: BlockEntityRendererFactory.Context ->
-            ImbuingTableBlockEntityRenderer(
-                context
-            )
-        }
+        BlockEntityRendererFactories.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
+        ){ context: BlockEntityRendererFactory.Context -> ImbuingTableBlockEntityRenderer(context) }
 
-        BlockEntityRendererRegistry.register(RegisterEntity.DISENCHANTING_TABLE_BLOCK_ENTITY
-        ){context: BlockEntityRendererFactory.Context ->
-            DisenchantingTableBlockEntityRenderer(
-                context
-            )
-        }
+        BlockEntityRendererFactories.register(RegisterEntity.DISENCHANTING_TABLE_BLOCK_ENTITY
+        ){ context: BlockEntityRendererFactory.Context -> DisenchantingTableBlockEntityRenderer(context) }
 
-        BlockEntityRendererRegistry.register(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
-        ){context: BlockEntityRendererFactory.Context ->
-           AltarOfExperienceBlockEntityRenderer(
-                context
-            )
-        }
+        BlockEntityRendererFactories.register(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
+        ){ context: BlockEntityRendererFactory.Context -> AltarOfExperienceBlockEntityRenderer(context) }
 
         /////////////////////////////////
 
         EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)

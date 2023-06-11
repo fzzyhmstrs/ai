@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.BaseShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.IceShardEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
@@ -13,15 +14,14 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3f
 
-class IceShardEntityRenderer(context: EntityRendererFactory.Context): ProjectileEntityRenderer<IceShardEntity>(context) {
-    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/ice_shard.png")
+class BaseShardEntityRenderer<T: BaseShardEntity>(context: EntityRendererFactory.Context, private val TEXTURE: Identifier): ProjectileEntityRenderer<T>(context) {
 
-    override fun getTexture(entity: IceShardEntity): Identifier {
+    override fun getTexture(entity: T): Identifier {
         return TEXTURE
     }
 
     override fun render(
-        persistentProjectileEntity: IceShardEntity,
+        persistentProjectileEntity: T,
         f: Float,
         g: Float,
         matrixStack: MatrixStack,
@@ -33,8 +33,8 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
             Vec3f.POSITIVE_Y.getDegreesQuaternion(
                 MathHelper.lerp(
                     g,
-                    (persistentProjectileEntity as PersistentProjectileEntity).prevYaw,
-                    (persistentProjectileEntity as Entity).yaw
+                    persistentProjectileEntity.prevYaw,
+                    persistentProjectileEntity.yaw
                 ) - 90.0f
             )
         )
@@ -42,12 +42,12 @@ class IceShardEntityRenderer(context: EntityRendererFactory.Context): Projectile
             Vec3f.POSITIVE_Z.getDegreesQuaternion(
                 MathHelper.lerp(
                     g,
-                    (persistentProjectileEntity as PersistentProjectileEntity).prevPitch,
-                    (persistentProjectileEntity as Entity).pitch
+                    persistentProjectileEntity.prevPitch,
+                    persistentProjectileEntity.pitch
                 )
             )
         )
-        val s = (persistentProjectileEntity as PersistentProjectileEntity).shake.toFloat() - g
+        val s = persistentProjectileEntity.shake.toFloat() - g
         if (s > 0.0f) {
             val t = -MathHelper.sin(s * 3.0f) * s
             matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(t))

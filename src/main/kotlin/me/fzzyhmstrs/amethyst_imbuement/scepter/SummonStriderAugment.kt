@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.StriderEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -45,6 +46,7 @@ class SummonStriderAugment: SummonEntityAugment(ScepterTier.TWO,1) {
             }
         }
         if (successes > 0) {
+            user.inventory.offerOrDrop(ItemStack(Items.WARPED_FUNGUS_ON_A_STICK))
             return super.placeEntity(world, user, hit, level, effects)
         }
         return false
