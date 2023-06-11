@@ -1,0 +1,6 @@
+{
+	"parent": "amethyst_imbuement:block/shine_light_base",
+	"textures": {
+		"light": "amethyst_imbuement:block/shine_light_brown"
+	}
+}

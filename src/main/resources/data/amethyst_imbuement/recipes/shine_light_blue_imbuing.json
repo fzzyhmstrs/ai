@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:blue_dye"
+  },
+  "imbueB": {
+	"item": "minecraft:blue_dye"
+  },
+  "imbueC": {
+	"item": "minecraft:blue_dye"
+  },
+  "imbueD": {
+	"item": "minecraft:blue_dye"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftE": {
+	"item": "amethyst_imbuement:gem_dust"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:shine_light"
+  },
+  "title": "Blue Shine Light",
+  "cost": 1,
+  "resultA": "amethyst_imbuement:shine_light_blue",
+  "countA": 16
+}
+
