@@ -19,7 +19,7 @@ class SummonBoatAugment: SummonEntityAugment(ScepterTier.ONE,1) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1200,50,
-            1,imbueLevel,5,LoreTier.NO_TIER, Items.OAK_BOAT)
+            1,imbueLevel,5,LoreTier.LOW_TIER, Items.OAK_BOAT)
     }
 
     override fun placeEntity(

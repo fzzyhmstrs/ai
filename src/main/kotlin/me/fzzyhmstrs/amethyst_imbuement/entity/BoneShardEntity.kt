@@ -20,10 +20,10 @@ import net.minecraft.world.World
 import java.util.*
 import kotlin.math.max
 
-class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World): BaseShardEntity(entityType, world), ModifiableEffectEntity {
+class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World): BaseShardEntity(entityType, world), ModifiableEffectEntity {
 
     constructor(world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(
-        RegisterEntity.ICE_SHARD_ENTITY,world){
+        RegisterEntity.BONE_SHARD_ENTITY,world){
         this.owner = owner
         this.setVelocity(rot.x,rot.y,rot.z,speed,divergence)
         this.setPosition(pos)
@@ -44,7 +44,7 @@ class IceShardEntity(entityType: EntityType<out IceShardEntity?>, world: World):
     }
 
     override fun particle(): ParticleEffect {
-        return ParticleTypes.SNOWFLAKE
+        return ParticleTypes.CRIT
     }
 
 

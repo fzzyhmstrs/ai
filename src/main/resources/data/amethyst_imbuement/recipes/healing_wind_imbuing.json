@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "title": "Healing Wind",
+  "cost": 25,
+  "augment": "amethyst_imbuement:healing_wind"
+}
+

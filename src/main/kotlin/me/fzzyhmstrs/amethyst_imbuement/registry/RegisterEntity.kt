@@ -2,13 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfWitEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -39,6 +35,19 @@ object RegisterEntity {
     )
     
     /////////
+
+    val BONESTORM_ENTITY: EntityType<BonestormEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "bonestorm"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<BonestormEntity>, world: World ->
+            BonestormEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.6f, 1.8f)).trackRangeChunks(8).build()
+    )
 
     val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -118,19 +127,6 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
     )
 
-    val TOTEM_OF_WIT_ENTITY: EntityType<TotemOfWitEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "totem_of_wit"),
-        FabricEntityTypeBuilder.create(
-            SpawnGroup.MISC
-        ) { entityType: EntityType<TotemOfWitEntity>, world: World ->
-            TotemOfWitEntity(
-                entityType,
-                world
-            )
-        }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
-    )
-
     ////////////////////////////////////////
 
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
@@ -170,6 +166,19 @@ object RegisterEntity {
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
+    )
+
+    val BONE_SHARD_ENTITY: EntityType<BoneShardEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "bone_shard_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<BoneShardEntity>, world: World ->
+            BoneShardEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
     
     val ICE_SHARD_ENTITY: EntityType<IceShardEntity> = Registry.register(
@@ -350,12 +359,12 @@ object RegisterEntity {
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
+        FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_GRACE_ENTITY,TotemOfGraceEntity.createTotemAttributes())
-        FabricDefaultAttributeRegistry.register(TOTEM_OF_WIT_ENTITY,TotemOfWitEntity.createTotemAttributes())
     }
 
 

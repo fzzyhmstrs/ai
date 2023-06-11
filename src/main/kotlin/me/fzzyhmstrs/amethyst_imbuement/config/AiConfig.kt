@@ -373,7 +373,9 @@ object AiConfig
             @ReadMeText("readme.entities.hamster.baseLifespan")
             var baseLifespan = ValidatedInt(3600,180000,-1)
             var baseHealth = ValidatedDouble(8.0,40.0,1.0)
-            var baseDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+            @ReadMeText("readme.entities.hamster.baseDamage")
+            var baseSummonDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+            var baseHamptertimeDamage = ValidatedFloat(2.0f,10.0f,0.0f)
             var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
         }
 
@@ -383,9 +385,9 @@ object AiConfig
             var baseLifespan = ValidatedInt(2160,Int.MAX_VALUE-1000000,20)
             @ReadMeText("readme.entities.bonestorm.perLvlLifespan")
             var perLvlLifespan = ValidatedInt(240,2400,0)
-            var baseHealth = ValidatedDouble(8.0,40.0,1.0)
-            var baseDamage = ValidatedFloat(1.0f,10.0f,0.0f)
-            var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
+            var baseHealth = ValidatedDouble(24.0,240.0,1.0)
+            var baseDamage = ValidatedFloat(5.0f,10.0f,0.0f)
+            var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
         }
 
         override fun generateNewClass(): Entities {

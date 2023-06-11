@@ -97,9 +97,9 @@ object RegisterEnchantment {
     val FORTIFY = FortifyAugment().also{regEnchant["fortify"] = it}
     val FREEZING = FreezingAugment().also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment().also{regEnchant["gusting"] = it}
-    val HAIL_STORM = HailStormAugment().also{regEnchant["hail_storm"] = it}
     val HAMPTERTIME = HamptertimeAugment().also{regEnchant["hamptertime"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().also{regEnchant["hard_light_bridge"] = it}
+    val HEALING_WIND = HealingWindAugment().also{regEnchant["healing_wind"] = it}
     val ICE_SHARD = IceShardAugment().also{regEnchant["ice_shard"] = it}
     val ICE_SPIKES = IceSpikesAugment().also{regEnchant["ice_spikes"] = it}
     val INSPIRING_SONG = InspiringSongAugment().also{regEnchant["inspiring_song"] = it}
@@ -129,12 +129,12 @@ object RegisterEnchantment {
     val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().also{regEnchant["summon_grace_totem"] = it}
     val SUMMON_HAMSTER = SummonHamsterAugment().also{regEnchant["summon_hamster"] = it}
     val SUMMON_STRIDER = SummonStriderAugment().also{regEnchant["summon_strider"] = it}
-    val SUMMON_WIT_TOTEM = SummonWitTotemAugment().also{regEnchant["summon_wit_totem"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment().also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment().also{regEnchant["teleport"] = it}
     val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().also{regEnchant["torrent_of_beaks"] = it}
     val WEIGHTLESSNESS = WeightlessnessAugment().also{regEnchant["weightlessness"] = it}
+    val WINTERS_GRASP = WintersGraspAugment().also{regEnchant["hail_storm"] = it} //id kept as hail storm to maintain compat
     val WITHERING_BOLT = WitheringBoltAugment().also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment().also{regEnchant["zap"] = it}
 
