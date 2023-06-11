@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.block.*
 import me.fzzyhmstrs.amethyst_imbuement.item.GlisteningIceBlockItem
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagentBlockItem
+import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
@@ -13,6 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemGroup
 import net.minecraft.sound.BlockSoundGroup
+import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
@@ -71,7 +73,23 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings().group(RegisterItem.AI_GROUP)
     )
-    val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.1f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["shine_light"] = it }
+    val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }).also { regBlock["shine_light"] = it }
+    val SHINE_LIGHT_LIGHT_GRAY = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.LIGHT_GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_GRAY)).also { regBlock["shine_light_light_gray"] = it }
+    val SHINE_LIGHT_GRAY = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GRAY)).also { regBlock["shine_light_gray"] = it }
+    val SHINE_LIGHT_BLACK = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.BLACK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLACK)).also { regBlock["shine_light_black"] = it }
+    val SHINE_LIGHT_BROWN = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.BROWN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BROWN)).also { regBlock["shine_light_brown"] = it }
+    val SHINE_LIGHT_RED = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.RED).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.RED)).also { regBlock["shine_light_red"] = it }
+    val SHINE_LIGHT_ORANGE = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.ORANGE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.ORANGE)).also { regBlock["shine_light_orange"] = it }
+    val SHINE_LIGHT_YELLOW = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.YELLOW).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.YELLOW)).also { regBlock["shine_light_yellow"] = it }
+    val SHINE_LIGHT_LIME = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.LIME).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIME)).also { regBlock["shine_light_lime"] = it }
+    val SHINE_LIGHT_GREEN = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.GREEN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GREEN)).also { regBlock["shine_light_green"] = it }
+    val SHINE_LIGHT_CYAN = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.CYAN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.CYAN)).also { regBlock["shine_light_cyan"] = it }
+    val SHINE_LIGHT_LIGHT_BLUE = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.LIGHT_BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_BLUE)).also { regBlock["shine_light_light_blue"] = it }
+    val SHINE_LIGHT_BLUE = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLUE)).also { regBlock["shine_light_blue"] = it }
+    val SHINE_LIGHT_PURPLE = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.PURPLE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PURPLE)).also { regBlock["shine_light_purple"] = it }
+    val SHINE_LIGHT_MAGENTA = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.MAGENTA).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.MAGENTA)).also { regBlock["shine_light_magenta"] = it }
+    val SHINE_LIGHT_PINK = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.PINK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PINK)).also { regBlock["shine_light_pink"] = it }
+    val SHINE_LIGHT_RAINBOW = ShineLightRainbowBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _, _, _ -> never() }.suffocates { _, _, _ -> never() }).also { regBlock["shine_light_rainbow"] = it }
 
     fun registerAll() {
         for (k in regBlock.keys) {

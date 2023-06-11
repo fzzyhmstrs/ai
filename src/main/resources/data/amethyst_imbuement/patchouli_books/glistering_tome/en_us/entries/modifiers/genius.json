@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Affects wit spells. Triples Wit XP gained on spell-cast, increases the range of effect of wit spells, and reduces their cooldown 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
+"text": "Affects wit spells. An additional 2 Wit XP gained on spell-cast, adds 0.6 blocks and then 10% to spell range and AOE, and reduces grace spell cooldown by 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

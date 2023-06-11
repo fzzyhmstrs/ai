@@ -23,6 +23,8 @@ object RegisterTag {
     val BASIC_WARDS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"basic_wards"))
     val PILLARS_ITEM_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
     val PILLARS_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
+    val SHINE_LIGHTS_ITEM_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"shine_lights"))
+    val SHINE_LIGHTS_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY,Identifier(AI.MOD_ID,"shine_lights"))
     
     val EQUINOX_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"equinox_scepters"))
     val LETHALITY_SCEPTERS_TAG: TagKey<Item> = TagKey.of(Registry.ITEM_KEY,Identifier(AI.MOD_ID,"lethality_scepters"))

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:shine_light",
+    "amethyst_imbuement:shine_light_light_gray",
+    "amethyst_imbuement:shine_light_gray",
+    "amethyst_imbuement:shine_light_black",
+    "amethyst_imbuement:shine_light_brown",
+    "amethyst_imbuement:shine_light_red",
+    "amethyst_imbuement:shine_light_orange",
+    "amethyst_imbuement:shine_light_yellow",
+    "amethyst_imbuement:shine_light_lime",
+    "amethyst_imbuement:shine_light_green",
+    "amethyst_imbuement:shine_light_cyan",
+    "amethyst_imbuement:shine_light_light_blue",
+    "amethyst_imbuement:shine_light_blue",
+    "amethyst_imbuement:shine_light_purple",
+    "amethyst_imbuement:shine_light_magenta",
+    "amethyst_imbuement:shine_light_pink"
+  ]
+}

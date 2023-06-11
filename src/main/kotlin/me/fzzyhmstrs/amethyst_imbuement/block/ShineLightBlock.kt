@@ -7,6 +7,8 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleType
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
@@ -21,7 +23,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-class ShineLightBlock(settings:Settings):Block(settings), Waterloggable {
+class ShineLightBlock(settings:Settings,private val particleEffect: ParticleEffect = ParticleTypes.END_ROD):Block(settings), Waterloggable {
 
     private val SHAPE = createCuboidShape(6.0, 6.0, 6.0, 10.0, 10.0, 10.0)
     companion object{
@@ -118,7 +120,7 @@ class ShineLightBlock(settings:Settings):Block(settings), Waterloggable {
         val f = pos.z.toDouble() + 0.6 - (random.nextFloat() * 0.2f).toDouble()
         if (random.nextInt(2) == 0) {
             world.addParticle(
-                ParticleTypes.END_ROD,
+                particleEffect,
                 d,
                 e ,
                 f,
