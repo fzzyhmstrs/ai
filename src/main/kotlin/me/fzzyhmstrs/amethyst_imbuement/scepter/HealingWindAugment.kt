@@ -22,6 +22,8 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.passive.GolemEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -84,17 +86,11 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
     ): Boolean {
         var successes = 0
         for (target in entityList) {
-            if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
-            val bl = target.damage(CustomDamageSources.FreezingDamageSource(user),effect.damage(level))
-            if (bl && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), effect.amplifier(level)))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), effect.amplifier(level)))
-                if(world.random.nextFloat() < 0.2f){
-                    target.frozenTicks = 360
-                }
-                effect.accept(target, AugmentConsumer.Type.HARMFUL)
-            }
-            if (bl) successes++
+            if (!(target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this))) continue
+            if (target !is LivingEntity) continue
+            if (target.health == target.maxHealth) continue
+            target.heal(effect.damage(level))
+            successes++
         }
         return successes > 0
     }

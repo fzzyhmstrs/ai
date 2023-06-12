@@ -42,8 +42,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         this.createdBy = createdBy?.uuid
         this.owner = createdBy
         if (createdBy != null) {
-            goalSelector.add(2, FollowSummonerGoal(this,createdBy, 1.0, 10.0f, 2.0f, false))
-            targetSelector.add(1, TrackSummonerAttackerGoal(this,createdBy))
+            startTrackingOwner(createdBy)
         }
 
         if (augmentEffect != null){
@@ -71,6 +70,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     private var level = 1
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
+    protected var trackingOwner = false
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
@@ -79,6 +79,12 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     init{
         stepHeight = 1.0f
+    }
+
+    private fun startTrackingOwner(currentOwner: LivingEntity){
+        goalSelector.add(2, FollowSummonerGoal(this,currentOwner, 1.0, 10.0f, 2.0f, false))
+        targetSelector.add(1, TrackSummonerAttackerGoal(this,currentOwner))
+        trackingOwner = true
     }
 
     override fun initGoals() {
@@ -296,6 +302,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
             val o = (world as ServerWorld).getEntity(createdBy)
             if (o != null && o is LivingEntity) {
                 owner = o
+                if (!trackingOwner){
+                    startTrackingOwner(o)
+                }
             }
             o
         }else {

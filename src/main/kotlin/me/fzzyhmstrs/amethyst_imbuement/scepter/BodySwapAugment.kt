@@ -58,8 +58,8 @@ class BodySwapAugment: MiscAugment(ScepterTier.THREE,11){
                 rotation,
                 perpendicularVector,
                 effect.range(level),
-                1.5,
-                1.2)
+                2.5,
+                3.0)
         if (entityList.isEmpty()) return false
         val map: SortedMap<Double,Entity> = sortedMapOf()
         entityList.forEach {

@@ -63,7 +63,6 @@ object RegisterBlock {
     val POLISHED_AMETHYST_PILLAR = PolishedAmethystPillarBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_pillar"] = it }
     val POLISHED_AMETHYST_BRICKS = AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_bricks"] = it }
     val CHISELED_POLISHED_AMETHYST_BLOCK = AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["chiseled_polished_amethyst_block"] = it }
-    val HARD_LIGHT_BLOCK = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
     val FORCEFIELD_BLOCK = ForcefieldBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["forcefield_block"] = it }
     val GLISTENING_ICE = TransparentBlock(FabricBlockSettings.of(Material.DENSE_ICE).strength(3.0f).slipperiness(0.992f).sounds(BlockSoundGroup.GLASS)).also { regBlock["glistening_ice"] = it }
     val GLISTENING_ICE_ITEM = SpellcastersReagentBlockItem(
@@ -74,6 +73,25 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings()
     )
+
+    val HARD_LIGHT_BLOCK = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
+    val CRYSTALLIZED_LIGHT_WHITE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.WHITE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_white"] = it }
+    val CRYSTALLIZED_LIGHT_LIGHT_GRAY = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_light_gray"] = it }
+    val CRYSTALLIZED_LIGHT_GRAY = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_gray"] = it }
+    val CRYSTALLIZED_LIGHT_BLACK = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.BLACK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_black"] = it }
+    val CRYSTALLIZED_LIGHT_BROWN = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.BROWN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_brown"] = it }
+    val CRYSTALLIZED_LIGHT_RED = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.RED).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_red"] = it }
+    val CRYSTALLIZED_LIGHT_ORANGE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.ORANGE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_orange"] = it }
+    val CRYSTALLIZED_LIGHT_YELLOW = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.YELLOW).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_yellow"] = it }
+    val CRYSTALLIZED_LIGHT_LIME = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIME).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_lime"] = it }
+    val CRYSTALLIZED_LIGHT_GREEN = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.GREEN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_green"] = it }
+    val CRYSTALLIZED_LIGHT_CYAN = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.CYAN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_cyan"] = it }
+    val CRYSTALLIZED_LIGHT_LIGHT_BLUE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.LIGHT_BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_light_blue"] = it }
+    val CRYSTALLIZED_LIGHT_BLUE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_blue"] = it }
+    val CRYSTALLIZED_LIGHT_PURPLE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.PURPLE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_purple"] = it }
+    val CRYSTALLIZED_LIGHT_MAGENTA = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.MAGENTA).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_magenta"] = it }
+    val CRYSTALLIZED_LIGHT_PINK = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_pink"] = it }
+
     val SHINE_LIGHT = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }).also { regBlock["shine_light"] = it }
     val SHINE_LIGHT_LIGHT_GRAY = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.LIGHT_GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_GRAY)).also { regBlock["shine_light_light_gray"] = it }
     val SHINE_LIGHT_GRAY = ShineLightBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GRAY)).also { regBlock["shine_light_gray"] = it }

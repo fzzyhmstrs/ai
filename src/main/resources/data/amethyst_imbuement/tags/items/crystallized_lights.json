@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:hard_light_block",
+    "amethyst_imbuement:crystallized_light_white",
+    "amethyst_imbuement:crystallized_light_light_gray",
+    "amethyst_imbuement:crystallized_light_gray",
+    "amethyst_imbuement:crystallized_light_black",
+    "amethyst_imbuement:crystallized_light_brown",
+    "amethyst_imbuement:crystallized_light_red",
+    "amethyst_imbuement:crystallized_light_orange",
+    "amethyst_imbuement:crystallized_light_yellow",
+    "amethyst_imbuement:crystallized_light_lime",
+    "amethyst_imbuement:crystallized_light_green",
+    "amethyst_imbuement:crystallized_light_cyan",
+    "amethyst_imbuement:crystallized_light_light_blue",
+    "amethyst_imbuement:crystallized_light_blue",
+    "amethyst_imbuement:crystallized_light_purple",
+    "amethyst_imbuement:crystallized_light_magenta",
+    "amethyst_imbuement:crystallized_light_pink"
+  ]
+}
