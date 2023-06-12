@@ -132,7 +132,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
             } else {
                 list = world.getOtherEntities(
                     this, Box(this.x - 3.0, this.y - 3.0, this.z - 3.0, this.x + 3.0, this.y + 6.0 + 3.0, this.z + 3.0)
-                ) { obj: Entity -> obj.isAlive && !(obj is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment)) }
+                ) { obj: Entity -> obj.isAlive && obj is LivingEntity && !(obj is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment)) }
                 for (entity2 in list) {
                     entity2.fireTicks++
                     if (entity2.fireTicks == 0){

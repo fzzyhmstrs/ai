@@ -1,0 +1,24 @@
+{
+  "hamster_hit": {
+    "subtitle": "subtitles.amethyst_imbuement.hamster_hit",
+    "sounds": [
+      "amethyst_imbuement:hurt_squeak_1",
+      "amethyst_imbuement:hurt_squeak_2"
+    ]
+  },
+  "hamster_die": {
+    "subtitle": "subtitles.amethyst_imbuement.hamster_die",
+    "sounds": [
+      "amethyst_imbuement:death_squeak_1"
+    ]
+  },
+  "hamster_ambient": {
+    "subtitle": "subtitles.amethyst_imbuement.hamster_ambient",
+    "sounds": [
+      "amethyst_imbuement:ambient_squeak_1",
+      "amethyst_imbuement:ambient_squeak_2",
+      "amethyst_imbuement:ambient_squeak_3"
+    ]
+  }
+}
+

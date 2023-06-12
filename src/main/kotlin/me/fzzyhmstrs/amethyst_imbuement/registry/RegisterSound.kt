@@ -21,5 +21,9 @@ object RegisterSound {
         return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))
     }
 
+    fun registerAll(){
+
+    }
+
 
 }

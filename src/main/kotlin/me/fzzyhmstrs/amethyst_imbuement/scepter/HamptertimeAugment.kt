@@ -35,6 +35,7 @@ class HamptertimeAugment: SummonEntityAugment(ScepterTier.THREE,25) {
             .withDuration(AiConfig.entities.hamster.baseLifespan.get())
             .withAmplifier(AiConfig.entities.hamster.baseHealth.get().toInt())
             .withDamage(AiConfig.entities.hamster.baseHamptertimeDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
+            .withRange(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 6000,750,
@@ -49,7 +50,7 @@ class HamptertimeAugment: SummonEntityAugment(ScepterTier.THREE,25) {
         effects: AugmentEffect
     ): Boolean {
         var successes = 0
-        for(i in 1..max(effects.amplifier(level/2),1)) {
+        for(i in 1..max(effects.range(level/2).toInt(),1)) {
             val startPos = (hit as BlockHitResult).blockPos
             val spawnPos = findSpawnPos(world,startPos,5,1)
             if (spawnPos == BlockPos.ORIGIN) continue

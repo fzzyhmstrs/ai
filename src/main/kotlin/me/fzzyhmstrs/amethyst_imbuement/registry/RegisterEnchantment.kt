@@ -123,6 +123,7 @@ object RegisterEnchantment {
     val SOUL_MISSILE = SoulMissileAugment().also{regEnchant["soul_missile"] = it}
     val SPECTRAL_SLASH = SpectralSlashAugment().also{regEnchant["spectral_slash"] = it}
     val SUMMON_BOAT = SummonBoatAugment().also{regEnchant["summon_boat"] = it}
+    val SUMMON_BONESTORM = SummonBonestormAugment().also{regEnchant["summon_bonestorm"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment().also{regEnchant["summon_chicken"] = it}
     val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().also{regEnchant["summon_fury_totem"] = it}
     val SUMMON_GOLEM = SummonGolemAugment().also{regEnchant["summon_golem"] = it}

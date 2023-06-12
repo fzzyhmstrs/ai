@@ -348,6 +348,7 @@
 	"block.amethyst_imbuement.shine_light_lime": "Lime Shine Light",
 	"block.amethyst_imbuement.shine_light_green": "Green Shine Light",
 	"block.amethyst_imbuement.shine_light_cyan": "Cyan Shine Light",
+	"block.amethyst_imbuement.shine_light_light_blue": "Light Blue Shine Light",
 	"block.amethyst_imbuement.shine_light_blue": "Blue Shine Light",
 	"block.amethyst_imbuement.shine_light_purple": "Purple Shine Light",
 	"block.amethyst_imbuement.shine_light_magenta": "Magenta Shine Light",
@@ -455,6 +456,7 @@
 	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.summon_blaze": "Summon Blaze",
 	"enchantment.amethyst_imbuement.summon_boat": "Summon Boat",
+	"enchantment.amethyst_imbuement.summon_bonestorm": "Summon Bonestorm",
 	"enchantment.amethyst_imbuement.summon_chicken": "Summon Chicken",
 	"enchantment.amethyst_imbuement.summon_familiar": "Summon Familiar",
 	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
@@ -571,6 +573,7 @@
 	"enchantment.amethyst_imbuement.spectral_slash.desc": "An energy slash that damages all enemies in front of the caster.",
 	"enchantment.amethyst_imbuement.summon_blaze.desc": "Summons blazes to assist the caster in battle.",
 	"enchantment.amethyst_imbuement.summon_boat.desc": "Summons a boat.",
+	"enchantment.amethyst_imbuement.summon_bonestorm.desc": "Summons a Bonestorm to aid the caster in battle.",
 	"enchantment.amethyst_imbuement.summon_chicken.desc": "Summons chickens to aid the caster in battle ;).",
 	"enchantment.amethyst_imbuement.summon_familiar.desc": "Summons a powerful cat ally to aid you in battle, transport you, and carry your items.",
 	"enchantment.amethyst_imbuement.summon_fury_totem.desc": "Summons a totem that periodically damages nearby enemies.",
@@ -696,6 +699,10 @@
 	
 	"filled_map.village": "Village Map",
 	"filled_map.mineshaft": "Abandoned Mineshaft Map",
+
+	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
+	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",
+	"subtitles.amethyst_imbuement.hamster_ambient": "Hamster squeaks",
 	
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",
@@ -949,6 +956,7 @@
 	"enchantment_lore.amethyst_imbuement:spectral_slash.description": "Spectral Slash\n\nMax Level: IX\n\nMagic School: Fury\n\nAn energy slash that damages all enemies in front of the caster.",
 	"enchantment_lore.amethyst_imbuement:summon_blaze.description": "Summon Blaze\n\nMax Level: III\n\nMagic School: Fury\n\nSummons blazes to assist the caster in battle.",
 	"enchantment_lore.amethyst_imbuement:summon_boat.description": "Summon Boat\n\nMax Level: I\n\nMagic School: Wit\n\nSummons a boat.",
+	"enchantment_lore.amethyst_imbuement:summon_bonestorm.description": "Summon Bonestorm\n\nMax Level: XII\n\nMagic School: Fury\n\nSummons a Bonestorm to aid the caster in battle.",
 	"enchantment_lore.amethyst_imbuement:summon_chicken.description": "Summon Chicken\n\nMax Level: III\n\nMagic School: Grace\n\nSummons chickens to aid the caster in battle ;).",
 	"enchantment_lore.amethyst_imbuement:summon_familiar.description": "Summon Familiar\n\nMax Level: XIII\n\nMagic School: Wit\n\nSummons a powerful cat ally to aid you in battle, transport you, and carry your items.",
 	"enchantment_lore.amethyst_imbuement:summon_fury_totem.description": "Summon Fury Totem\n\nMax Level: V\n\nMagic School: Fury\n\nSummons a totem that periodically damages nearby enemies.",
