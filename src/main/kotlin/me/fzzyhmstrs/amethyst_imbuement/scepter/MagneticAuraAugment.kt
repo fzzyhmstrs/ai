@@ -32,14 +32,12 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHelper.PersistentEffect{
+class MagneticAuraAugment: MiscAugment(ScepterTier.TWO,7), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withAmplifier(1)
-            .withDuration(360,40)
-            .withDamage(1.9f,0.1f)
-            .withRange(11.5,0.5)
+            .withDuration(120,40)
+            .withRange(4.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1200,240,

@@ -377,6 +377,8 @@ object AiConfig
             var baseSummonDamage = ValidatedFloat(1.0f,10.0f,0.0f)
             var baseHamptertimeDamage = ValidatedFloat(2.0f,10.0f,0.0f)
             var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
+            var hamptertimeBaseSpawnCount = ValidatedDouble(10.0,100.0,1.0)
+            var hamptertimePerLvlSpawnCount = ValidatedDouble(0.5,5.0,0.0)
         }
 
         var bonestorm = Bonestorm()
@@ -386,7 +388,7 @@ object AiConfig
             @ReadMeText("readme.entities.bonestorm.perLvlLifespan")
             var perLvlLifespan = ValidatedInt(240,2400,0)
             var baseHealth = ValidatedDouble(24.0,240.0,1.0)
-            var baseDamage = ValidatedFloat(5.0f,10.0f,0.0f)
+            var baseDamage = ValidatedFloat(4.5f,10.0f,0.0f)
             var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
         }
 

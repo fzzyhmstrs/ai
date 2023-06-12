@@ -68,6 +68,9 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
                 effect.duration(level),
                 data
             )
+            if (world is ServerWorld){
+                world.spawnParticles(ParticleTypes.SNOWFLAKE,user.x,user.getBodyY(0.5),user.z,100,effect.range(level),0.8,effect.range(level),0.0)
+            }
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
@@ -81,9 +84,6 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        if (world is ServerWorld){
-            world.spawnParticles(ParticleTypes.SNOWFLAKE,user.x,user.getBodyY(0.5),user.z,100,effect.range(level),0.8,effect.range(level),0.0)
-        }
         world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + world.random.nextFloat()*0.4f)
         var successes = 0
         for (target in entityList) {
@@ -115,6 +115,10 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
         val hitResult = EntityHitResult(data.user, Vec3d(data.user.x,data.user.getBodyY(0.5),data.user.z))
         val (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
         effect(data.world,data.user,entityList,data.level,data.effect)
+        val world = data.world
+        if (world is ServerWorld){
+            world.spawnParticles(ParticleTypes.HAPPY_VILLAGER,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
+        }
     }
 
     override fun soundEvent(): SoundEvent {

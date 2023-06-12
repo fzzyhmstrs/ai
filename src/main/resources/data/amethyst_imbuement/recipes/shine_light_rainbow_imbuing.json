@@ -22,22 +22,22 @@
 	"item": "amethyst_imbuement:shine_light_yellow"
   },
   "craftD": {
-	"item": "amethyst_imbuement:shine_light_lime"
+	"item": "amethyst_imbuement:shine_light_pink"
   },
   "craftE": {
 	"item": "amethyst_imbuement:gem_dust"
   },
   "craftF": {
-	"item": "amethyst_imbuement:shine_light_cyan"
+	"item": "amethyst_imbuement:shine_light_lime"
   },
   "craftG": {
-	"item": "amethyst_imbuement:shine_light_blue"
-  },
-  "craftH": {
 	"item": "amethyst_imbuement:shine_light_purple"
   },
+  "craftH": {
+	"item": "amethyst_imbuement:shine_light_blue"
+  },
   "craftI": {
-	"item": "amethyst_imbuement:shine_light_pink"
+	"item": "amethyst_imbuement:shine_light_cyan"
   },
   "title": "Rainbow Shine Light",
   "cost": 3,

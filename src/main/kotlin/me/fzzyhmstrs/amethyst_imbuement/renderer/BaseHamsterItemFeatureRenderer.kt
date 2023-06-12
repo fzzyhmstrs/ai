@@ -49,8 +49,8 @@ FeatureRenderer<T, M>(context)
             return
         }
         matrixStack.push()
-        matrixStack.translate(0f,0.25f,0f)
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45f))
+        matrixStack.translate(0f,1.27f,0f)
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-135f))
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90F))
         matrixStack.scale(0.5f,0.5f,0.5f)
         MinecraftClient.getInstance().itemRenderer.renderItem(item,ModelTransformation.Mode.FIXED,i,OverlayTexture.DEFAULT_UV,matrixStack,vertexConsumerProvider,hamster.id)

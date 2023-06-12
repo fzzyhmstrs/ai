@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.tool.FzzyhammerToolMaterial
 import net.minecraft.block.BlockState
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
@@ -20,6 +22,9 @@ class FzzyhammerItem(settings: Settings):
     CustomSpellToolItem(FzzyhammerToolMaterial, 1.5f,FzzyhammerToolMaterial.getAttackSpeed().toFloat(), BlockTags.PICKAXE_MINEABLE, settings)
 
 {
+
+    override val fallbackId: Identifier = Identifier(AI.MOD_ID,"hamptertime")
+
     override fun canAcceptAugment(augment: ScepterAugment): Boolean {
         return augment == RegisterEnchantment.HAMPTERTIME
     }

@@ -87,7 +87,7 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> GlisteringTridentEntityRenderer(context) }
 
         EntityRendererRegistry.register(
-            RegisterEntity.ICE_SHARD_ENTITY
+            RegisterEntity.BONE_SHARD_ENTITY
         ){ context: EntityRendererFactory.Context -> BaseShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/bone_shard.png")) }
 
         EntityRendererRegistry.register(

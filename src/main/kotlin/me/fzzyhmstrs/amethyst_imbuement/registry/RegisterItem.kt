@@ -143,7 +143,7 @@ object RegisterItem {
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().maxCount(16)).also{ regItem["mana_potion"] = it}
     val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().alwaysEdible().hunger(4).saturationModifier(1f).statusEffect(
-        StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1),1f).build())).also{ regItem["mana_potion"] = it}
+        StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
 
 
     //Basic scepters

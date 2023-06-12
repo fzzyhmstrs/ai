@@ -51,6 +51,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
     override var entityGroup: EntityGroup = EntityGroup.UNDEAD
 
     override fun initGoals() {
+        goalSelector.add(4,ShootProjectileGoal(this))
         goalSelector.add(5, GoToWalkTargetGoal(this, 1.0))
         goalSelector.add(7, WanderAroundFarGoal(this as PathAwareEntity, 1.0, 0.0f))
         goalSelector.add(8, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
@@ -87,7 +88,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
             for (i in 0..particles) {
                 world.addParticle(
                     ParticleTypes.END_ROD,
-                    getParticleX(0.5), this.randomBodyY, getParticleZ(0.5), 0.0, 0.0, 0.0
+                    getParticleX(0.5), this.getBodyY(world.random.nextDouble() * 0.72), getParticleZ(0.5), 0.0, 0.0, 0.0
                 )
             }
         }
@@ -201,7 +202,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
                         val pos  = Vec3d(bonestorm.x,bonestorm.getBodyY(0.5) + 0.5,bonestorm.z)
                         val bonestormOwner = bonestorm.getOwner()
                         val owner = if(bonestormOwner == null || bonestormOwner !is LivingEntity) bonestorm else bonestormOwner
-                        val bse = BoneShardEntity(bonestorm.world,owner,4.5f,1.25f,pos,rot)
+                        val bse = BoneShardEntity(bonestorm.world,owner,4.5f,1.75f,pos,rot)
                         bonestorm.world.spawnEntity(bse)
 
                     }

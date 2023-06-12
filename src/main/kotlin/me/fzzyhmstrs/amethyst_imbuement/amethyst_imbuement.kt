@@ -40,6 +40,7 @@ object AI: ModInitializer {
         RegisterRecipe.registerAll()
         RegisterCriteria.registerAll()
         RegisterParticle.registerParticleTypes()
+        RegisterSound.registerAll()
         AiConfig.initConfig()
         RegisterKeybindServer.registerServer()
         AltarOfExperienceScreenHandler.registerServer()
