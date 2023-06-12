@@ -1,0 +1,30 @@
+{    
+"name": "Colored Shine Lights",
+"icon": "amethyst_imbuement:shine_light_red",
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Use any of the 16 dyes in minecraft to create colored versions of the Shine Light."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Colored Shine Light",
+"imbue_a_item": "minecraft:red_dye",
+"imbue_b_item": "minecraft:red_dye",
+"imbue_c_item": "minecraft:red_dye",
+"imbue_d_item": "minecraft:red_dye",
+"craft_a_item": "amethyst_imbuement:shine_light",
+"craft_b_item": "amethyst_imbuement:shine_light",
+"craft_c_item": "amethyst_imbuement:shine_light",
+"craft_d_item": "amethyst_imbuement:shine_light",
+"craft_e_item": "amethyst_imbuement:gem_dust",
+"craft_f_item": "amethyst_imbuement:shine_light",
+"craft_g_item": "amethyst_imbuement:shine_light",
+"craft_h_item": "amethyst_imbuement:shine_light",
+"craft_i_item": "amethyst_imbuement:shine_light",
+"result_item": "amethyst_imbuement:shine_light_red#16",
+"cost_text": "$(l)Level Cost: $(2)1$()"
+}
+]
+}

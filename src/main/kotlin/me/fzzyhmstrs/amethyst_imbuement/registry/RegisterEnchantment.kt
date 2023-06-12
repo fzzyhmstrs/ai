@@ -75,6 +75,7 @@ object RegisterEnchantment {
     val BALL_LIGHTNING = BallLightningAugment().also{regEnchant["ball_lightning"] = it}
     val BARRIER = BarrierAugment().also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment().also{regEnchant["bedazzle"] = it}
+    val BODY_SWAP = BodySwapAugment().also{regEnchant["body_swap"] = it}
     val CHICKENFORM = ChickenformAugment().also{regEnchant["chickenform"] = it}
     val CLEANSE = CleanseAugment().also{regEnchant["cleanse"] = it}
     val COMET_STORM = CometStormAugment().also{regEnchant["comet_storm"] = it}
@@ -106,6 +107,7 @@ object RegisterEnchantment {
     val LEVITATING_BULLET = LevitatingBulletAugment().also{regEnchant["levitating_bullet"] = it}
     val LIGHTNING_BOLT = LightningBoltAugment().also{regEnchant["lightning_bolt"] = it}
     val LIGHTNING_STORM = LightningStormAugment().also{regEnchant["lightning_storm"] = it}
+    val MAGNETIC_AURA = MagneticAuraAugment().also{regEnchant["magnetic_aura"] = it}
     val MASS_CLEANSE = MassCleanseAugment().also{regEnchant["mass_cleanse"] = it}
     val MASS_EXHAUST = MassExhaustAugment().also{regEnchant["mass_exhaust"] = it}
     val MASS_FORTIFY = MassFortifyAugment().also{regEnchant["mass_fortify"] = it}

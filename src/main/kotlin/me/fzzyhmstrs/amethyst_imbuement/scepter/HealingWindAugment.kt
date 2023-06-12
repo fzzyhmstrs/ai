@@ -82,7 +82,6 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + world.random.nextFloat()*0.4f)
         var successes = 0
         for (target in entityList) {
             if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
@@ -109,7 +108,7 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         val hitResult = EntityHitResult(data.user, Vec3d(data.user.x,data.user.getBodyY(0.5),data.user.z))
         val (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
         effect(data.world,data.user,entityList,data.level,data.effect)
-        data.world.playSound(null, data.user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        data.world.playSound(null,data.user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + data.world.random.nextFloat()*0.4f)
         val world = data.world
         if (world is ServerWorld){
             world.spawnParticles(ParticleTypes.HAPPY_VILLAGER,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
