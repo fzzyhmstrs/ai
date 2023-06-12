@@ -42,7 +42,7 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
             h += Math.PI.toFloat() * 2
         }
         val k = imbuingTableBlockEntity.field_11963 + h * f
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-k))
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(-k))
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(80.0f))
         val l = MathHelper.lerp(f, imbuingTableBlockEntity.pageAngle, imbuingTableBlockEntity.nextPageAngle)
         val m = MathHelper.fractionalPart(l + 0.25f) * 1.6f - 0.3f
