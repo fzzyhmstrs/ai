@@ -216,6 +216,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         }
         nbt.putBoolean(LEVEL_UP_READY, false)
         nbt.remove(LEVEL_UP)
+        nbt.remove(FOCUS_RECORDS)
     }
 
     private fun getTier(nbt: NbtCompound?): TierData{

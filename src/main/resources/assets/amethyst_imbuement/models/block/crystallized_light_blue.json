@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "amethyst_imbuement:block/crystallized_light_blue"
+  }
+}

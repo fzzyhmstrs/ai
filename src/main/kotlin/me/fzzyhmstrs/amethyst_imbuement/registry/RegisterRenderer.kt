@@ -13,7 +13,6 @@ import me.fzzyhmstrs.amethyst_imbuement.renderer.ImbuingTableBlockEntityRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
@@ -52,6 +51,22 @@ object RegisterRenderer {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.EXPERIENCE_BUSH, RenderLayer.getCutout())
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.HARD_LIGHT_BLOCK, RenderLayer.getTranslucent())
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.FORCEFIELD_BLOCK, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_WHITE, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_LIGHT_GRAY, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_GRAY, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_BLACK, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_BROWN, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_RED, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_ORANGE, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_YELLOW, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_LIME, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_GREEN, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_CYAN, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_LIGHT_BLUE, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_BLUE, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_PURPLE, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_MAGENTA, RenderLayer.getTranslucent())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.CRYSTALLIZED_LIGHT_PINK, RenderLayer.getTranslucent())
 
         EntityRendererRegistry.register(
             RegisterEntity.BASIC_HAMSTER_ENTITY
@@ -169,7 +184,7 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
         
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN) { BaseHamsterEntityModel.getTexturedModelData() }
-        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.1f)) }
+        EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.15f)) }
 
         //////////////////////////////////
 

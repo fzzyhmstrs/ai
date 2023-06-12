@@ -118,7 +118,7 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
         data.world.playSound(null,data.user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + data.world.random.nextFloat()*0.4f)
         val world = data.world
         if (world is ServerWorld){
-            world.spawnParticles(ParticleTypes.HAPPY_VILLAGER,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
+            world.spawnParticles(ParticleTypes.SNOWFLAKE,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
         }
     }
 

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.item.ItemPlacementContext
@@ -35,8 +36,9 @@ class HardLightBlock(settings: Settings): Block(settings) {
     )
     )
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
-        if (state.isOf(RegisterBlock.HARD_LIGHT_BLOCK))
-            world.removeBlock(pos,false)
+        if (state.isIn(RegisterTag.CRYSTALLIZED_LIGHTS_TAG) && !state.get(PERSISTENT)) {
+            world.removeBlock(pos, false)
+        }
     }
 
 
