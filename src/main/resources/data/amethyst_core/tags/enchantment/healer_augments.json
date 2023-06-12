@@ -10,6 +10,7 @@
 		"amethyst_imbuement:mass_heal",
 		"amethyst_imbuement:mass_revivify",
 		"amethyst_imbuement:minor_heal",
-		"amethyst_imbuement:regenerate"
+		"amethyst_imbuement:regenerate",
+		"amethyst_imbuement:healing_wind"
 	]
 }

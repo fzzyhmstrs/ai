@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Reduces spell cooldown and mana costs by 15% each. This modifier is unique to the (l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
+"text": "Reduces spell cooldown and mana costs by 15% each. This modifier is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

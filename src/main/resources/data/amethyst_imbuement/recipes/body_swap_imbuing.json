@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:ametrine"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:pyrite"
+  },
+  "craftA": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_mythos"
+  },
+  "craftC": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftD": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftF": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftG": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftH": {
+	"item": "minecraft:ender_eye"
+  },
+  "craftI": {
+	"item": "minecraft:ender_eye"
+  },
+  "title": "Body Swap",
+  "cost": 21,
+  "augment": "amethyst_imbuement:body_swap"
+}
+

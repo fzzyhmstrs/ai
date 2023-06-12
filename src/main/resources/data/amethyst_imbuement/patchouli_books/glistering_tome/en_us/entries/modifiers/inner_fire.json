@@ -6,7 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Provides +2 as well as +10% to the amplification of spell effects, as well as 25% increased duration of effects. This modifierr is unique to the (l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
+"text": "Provides +2 as well as +10% to the amplification of spell effects, as well as 25% increased duration of effects. This modifierr is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
 },
 {            
 "type": "amethyst_imbuement:modifier_spotlight",            

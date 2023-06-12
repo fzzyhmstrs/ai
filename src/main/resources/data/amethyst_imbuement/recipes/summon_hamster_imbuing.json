@@ -13,19 +13,19 @@
 	"item": "amethyst_imbuement:danburite"
   },
   "craftB": {
-	"item": "amethyst_imbuement:book_of_lore"
+	"item": "minecraft:pumpkin_seeds"
   },
   "craftD": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:pumpkin_seeds"
   },
   "craftF": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:pumpkin_seeds"
   },
   "craftH": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:pumpkin_seeds"
   },
-  "title": "Summon: Boat",
-  "cost": 9,
-  "augment": "amethyst_imbuement:summon_boat"
+  "title": "Summon: Hamster",
+  "cost": 7,
+  "augment": "amethyst_imbuement:summon_hamster"
 }
 

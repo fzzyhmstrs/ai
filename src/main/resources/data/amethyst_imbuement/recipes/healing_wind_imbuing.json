@@ -37,7 +37,7 @@
 	"item": "amethyst_imbuement:dazzling_melon_slice"
   },
   "title": "Healing Wind",
-  "cost": 25,
+  "cost": 21,
   "augment": "amethyst_imbuement:healing_wind"
 }
 

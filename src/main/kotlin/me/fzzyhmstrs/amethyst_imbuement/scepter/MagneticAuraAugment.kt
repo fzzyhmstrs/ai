@@ -19,9 +19,11 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
+import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -29,6 +31,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
@@ -40,8 +43,8 @@ class MagneticAuraAugment: MiscAugment(ScepterTier.TWO,7), PersistentEffectHelpe
             .withRange(4.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,240,
-            24,imbueLevel,65, LoreTier.HIGH_TIER, RegisterItem.DAZZLING_MELON_SLICE)
+        return AugmentDatapoint(SpellType.GRACE,400,60,
+            7,imbueLevel,20, LoreTier.LOW_TIER, RegisterItem.PYRITE)
     }
 
     override fun effect(
@@ -52,20 +55,23 @@ class MagneticAuraAugment: MiscAugment(ScepterTier.TWO,7), PersistentEffectHelpe
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val hitResult = EntityHitResult(user, Vec3d(user.x,user.getBodyY(0.5),user.z))
-        val (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
-        if (entityList.isEmpty()) return false
-        val bl = effect(world, user, entityList, level, effect)
+        if (user !is PlayerEntity) return false
+        val range = effect.range(level)
+        val list = world.getOtherEntities(
+            user, Box(user.x - range, user.y - range, user.z - range, user.x + range, user.y + range, user.z + range)
+        ) { obj: Entity -> obj is ItemEntity }
+        if (list.isEmpty()) return false
+        val bl = effect(world, user, list, level, effect)
         if (bl) {
-            val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
+            val data = AugmentPersistentEffectData(world, user, user.blockPos, list, level, effect)
             PersistentEffectHelper.setPersistentTickerNeed(
-                RegisterEnchantment.HEALING_WIND,
+                RegisterEnchantment.MAGNETIC_AURA,
                 delay.value(level),
                 effect.duration(level),
                 data
             )
             if (world is ServerWorld){
-                world.spawnParticles(ParticleTypes.HAPPY_VILLAGER,user.x,user.getBodyY(0.5),user.z,100,effect.range(level),0.8,effect.range(level),0.0)
+                world.spawnParticles(ParticleTypes.ELECTRIC_SPARK,user.x,user.getBodyY(0.5),user.z,120,effect.range(level),effect.range(level),effect.range(level),0.0)
             }
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
@@ -80,42 +86,36 @@ class MagneticAuraAugment: MiscAugment(ScepterTier.TWO,7), PersistentEffectHelpe
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + world.random.nextFloat()*0.4f)
-        var successes = 0
         for (target in entityList) {
-            if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
-            val bl = target.damage(CustomDamageSources.FreezingDamageSource(user),effect.damage(level))
-            if (bl && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), effect.amplifier(level)))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), effect.amplifier(level)))
-                if(world.random.nextFloat() < 0.2f){
-                    target.frozenTicks = 360
-                }
-                effect.accept(target, AugmentConsumer.Type.HARMFUL)
-            }
-            if (bl) successes++
+            if (target !is ItemEntity) continue
+            if (user !is PlayerEntity) return false
+            val stack = target.stack
+            user.inventory.offerOrDrop(stack)
+            target.discard()
         }
-        return successes > 0
+        return true
     }
 
     override val delay: PerLvlI
-        get() = PerLvlI(36,-1)
+        get() = PerLvlI(10)
 
     @Suppress("SpellCheckingInspection")
     override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
         if (data !is AugmentPersistentEffectData) return
-        val hitResult = EntityHitResult(data.user, Vec3d(data.user.x,data.user.getBodyY(0.5),data.user.z))
-        val (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
-        effect(data.world,data.user,entityList,data.level,data.effect)
-        data.world.playSound(null, data.user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+        val range = data.effect.range(data.level)
+        val list = data.world.getOtherEntities(
+            data.user, Box(data.user.x - range, data.user.y - range, data.user.z - range, data.user.x + range, data.user.y + range, data.user.z + range)
+        ) { obj: Entity -> obj is ItemEntity }
+        effect(data.world,data.user,list,data.level,data.effect)
+        data.world.playSound(null,data.user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + data.world.random.nextFloat()*0.4f)
         val world = data.world
         if (world is ServerWorld){
-            world.spawnParticles(ParticleTypes.HAPPY_VILLAGER,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
+            world.spawnParticles(ParticleTypes.ELECTRIC_SPARK,data.user.x,data.user.getBodyY(0.5),data.user.z,100,data.effect.range(data.level),0.8,data.effect.range(data.level),0.0)
         }
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_CONDUIT_AMBIENT
+        return SoundEvents.ENTITY_WANDERING_TRADER_REAPPEARED
     }
 
 }
