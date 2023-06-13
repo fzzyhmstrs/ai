@@ -216,8 +216,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         readPlayerCreatedNbt(world, nbt)
         if (owner != null) {
             try {
-                goalSelector.add(2, FollowSummonerGoal(this, owner!!, 1.0, 10.0f, 2.0f, false))
-                targetSelector.add(1, TrackSummonerAttackerGoal(this, owner!!))
+                startTrackingOwner(owner!!)
             } catch (e: Exception){
                 //
             }
