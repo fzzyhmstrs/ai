@@ -288,6 +288,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     fun setConstructOwner(owner: LivingEntity?){
         createdBy = owner?.uuid
         this.owner = owner
+        if (!trackingOwner && owner != null){
+            startTrackingOwner(owner)
+        }
     }
 
     override fun getOwnerUuid(): UUID? {
