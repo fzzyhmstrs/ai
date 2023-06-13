@@ -112,6 +112,7 @@ object AiConfig
             @ReadMeText("readme.items.scepters.fzzyMiningSpeed")
             var fzzyMiningSpeed = ValidatedFloat(FzzyhammerToolMaterial.defaultMiningSpeed(),12f,1f)
             var fzzyChestChance = ValidatedFloat(0.002f,1f,0f)
+            @ReadMeText("readme.items.scepters.uniqueWitherChance")
             var uniqueWitherChance = ValidatedFloat(0.01f,1f,0f)
         }
 
