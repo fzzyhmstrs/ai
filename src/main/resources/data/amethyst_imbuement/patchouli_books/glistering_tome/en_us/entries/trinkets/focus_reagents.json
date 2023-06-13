@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(l:amethyst_imbuement:gems/charged_moonstone)Charged Moonstone$(): +15% Knockback Resistance$(li)$(l:amethyst_imbuement:gems/energetic_opal)Energetic Opal$(): +3% Movement Speed$(li)$(l:amethyst_imbuement:gems/glowing_fragment)Glowing Fragment$(): -2% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$(): -6% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/accursed_figurine)Accursed Figurine$(): +10% Damage Taken (This is a negative attribute, the holder takes the additional damage)$(li)$(l:amethyst_imbuement:gems/malachite_figurine)Malachite Figurine$(): +5% Spell Effect Duration"
+      "text": "$(li)$(l:amethyst_imbuement:gems/tigers_eye)Tigers Eye$(): +15% Knockback Resistance$(li)$(l:amethyst_imbuement:gems/energetic_opal)Energetic Opal$(): +3% Movement Speed$(li)$(l:amethyst_imbuement:gems/glowing_fragment)Glowing Fragment$(): -2% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$(): -6% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/accursed_figurine)Accursed Figurine$(): +10% Damage Taken (This is a negative attribute, the holder takes the additional damage)$(li)$(l:amethyst_imbuement:gems/malachite_figurine)Malachite Figurine$(): +5% Spell Effect Duration"
     },
     {
       "type": "patchouli:text",

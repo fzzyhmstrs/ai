@@ -89,9 +89,9 @@ class FzzyhammerItem(settings: Settings):
         if (blockState.isAir) {
             return
         }
-        val bl1 = !blockState.isToolRequired || stack.isSuitableFor(blockState)
+        val bl1 = stack.isSuitableFor(blockState)
         if(bl1){
-            world.removeBlock(pos,false)
+            //world.removeBlock(pos,false)
             val block = blockState.block
             val blockEntity: BlockEntity? = world.getBlockEntity(pos)
             var bl12 = (miner !is ServerPlayerEntity && (block is OperatorBlock || blockEntity != null))
@@ -101,9 +101,13 @@ class FzzyhammerItem(settings: Settings):
                     block.onBreak(world,pos,blockState,miner)
                 }
                 val bl2 = world.removeBlock(pos,false)
+                println("whoooo")
                 if (bl2){
                     block.onBroken(world,pos,blockState)
+                    println("wheeee")
                     if (miner is PlayerEntity) {
+                        println("woo hooooo")
+                        println(stack)
                         block.afterBreak(world,miner,pos,blockState,blockEntity,stack.copy())
                     }
                 }

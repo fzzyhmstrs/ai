@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
@@ -201,14 +202,6 @@ object VanillaLoot: AbstractModLoot() {
                 .conditionally(RandomChanceWithLootingLootCondition.builder(0.2f,0.05f))
                 .conditionally(KilledByPlayerLootCondition.builder())
                 .with(ItemEntry.builder(RegisterItem.ACCURSED_FIGURINE).weight(1))
-            table.pool(poolBuilder)
-            return true
-        } else if (LootTables.VILLAGE_BUTCHER_CHEST.equals(id)) {
-            val poolBuilder = LootPool.builder()
-                .rolls(ConstantLootNumberProvider.create(1.0F))
-                .bonusRolls(ConstantLootNumberProvider.create(1.0F))
-                .conditionally(RandomChanceLootCondition.builder(0.025f))
-                .with(ItemEntry.builder(RegisterItem.A_SCEPTER_SO_FOWL).weight(1))
             table.pool(poolBuilder)
             return true
         }

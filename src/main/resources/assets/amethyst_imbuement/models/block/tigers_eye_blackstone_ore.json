@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "amethyst_imbuement:block/tigers_eye_blackstone_ore_top",
+    "side": "amethyst_imbuement:block/tigers_eye_blackstone_ore"
+  }
+}

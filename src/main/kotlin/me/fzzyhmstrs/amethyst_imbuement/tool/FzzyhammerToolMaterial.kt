@@ -42,7 +42,7 @@ object FzzyhammerToolMaterial: ScepterToolMaterial(){
         return AiConfig.items.scepters.fzzyCooldown.get()
     }
     override fun baseCooldown(): Long {
-        return 90L
+        return 120L
     }
     override fun scepterTier(): Int{
         return 3
