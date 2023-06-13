@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:steel_block"
+    "amethyst_imbuement:steel_block",
+    "amethyst_imbuement:tigers_eye_blackstone_ore",
+    "amethyst_imbuement:tigers_eye_basalt_ore"
   ]
 }

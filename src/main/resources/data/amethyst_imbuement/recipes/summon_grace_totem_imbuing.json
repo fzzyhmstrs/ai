@@ -16,13 +16,13 @@
 	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
-	"item": "amethyst_imbuement:charged_moonstone"
+	"item": "amethyst_imbuement:dazzling_melon_slice"
   },
   "craftF": {
-	"item": "amethyst_imbuement:charged_moonstone"
+	"item": "amethyst_imbuement:dazzling_melon_slice"
   },
   "craftH": {
-	"item": "amethyst_imbuement:charged_moonstone"
+	"item": "amethyst_imbuement:dazzling_melon_slice"
   },
   "title": "Summon Totem of Grace",
   "cost": 17,

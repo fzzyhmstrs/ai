@@ -17,6 +17,7 @@ import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockView
 import java.util.*
@@ -72,6 +73,9 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings().group(RegisterItem.AI_GROUP)
     )
+
+    val TIGERS_EYE_BLACKSTONE_ORE = OreBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_blackstone_ore"] = it }
+    val TIGERS_EYE_BASALT_ORE = PillarExperienceDroppingBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_basalt_ore"] = it }
 
     val HARD_LIGHT_BLOCK = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
     val CRYSTALLIZED_LIGHT_WHITE = HardLightBlock(FabricBlockSettings.of(Material.GLASS, MapColor.WHITE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_white"] = it }

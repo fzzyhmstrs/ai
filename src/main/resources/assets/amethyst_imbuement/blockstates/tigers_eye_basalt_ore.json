@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "amethyst_imbuement:block/tigers_eye_basalt_ore",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "amethyst_imbuement:block/tigers_eye_basalt_ore"
+    },
+    "axis=z": {
+      "model": "amethyst_imbuement:block/tigers_eye_basalt_ore",
+      "x": 90
+    }
+  }
+}

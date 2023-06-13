@@ -28,7 +28,7 @@ class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,2400,240,
-            14,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.CHARGED_MOONSTONE)
+            14,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.DAZZLING_MELON_SLICE)
     }
 
     override fun placeEntity(

@@ -47,9 +47,10 @@ object RegisterItem {
     val OPAL = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["opal"] = it}
     val GARNET = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["garnet"] = it}
     val PYRITE = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["pyrite"] = it}
-    val CHARGED_MOONSTONE = SpellcastersReagentFlavorItem(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-        EntityAttributeModifier(UUID.fromString("64399f14-d25b-11ed-afa1-0242ac120002"),"moonstone_modifier",0.15,EntityAttributeModifier.Operation.ADDITION),
-        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["charged_moonstone"] = it}
+    val TIGERS_EYE = SpellcastersReagentFlavorItem(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+        EntityAttributeModifier(UUID.fromString("64399f14-d25b-11ed-afa1-0242ac120002"),"tigers_eye_modifier",0.15,EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["tigers_eye"] = it}
+    val CHARGED_MOONSTONE = Item(AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).also{ regItem["charged_moonstone"] = it}
     val ENERGETIC_OPAL = SpellcastersReagentFlavorItem(EntityAttributes.GENERIC_MOVEMENT_SPEED,
         EntityAttributeModifier(UUID.fromString("1ac772d4-d25b-11ed-afa1-0242ac120002"),"energetic_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).group(AI_GROUP).rarity(Rarity.RARE)).withGlint().also{ regItem["energetic_opal"] = it}

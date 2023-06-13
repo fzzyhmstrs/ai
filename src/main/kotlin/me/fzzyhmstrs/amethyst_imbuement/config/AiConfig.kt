@@ -41,7 +41,7 @@ object AiConfig
             .add("1.19.4-01/1.19.3-06/1.19-29/1.18.2-46: Completely rebuilt the config system using fzzy config. Added many new config selections as detailed below.")
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
-            .add("1.19.4-01/1.19.3-13/1.19-36: Added hamster configs in entities_v2.")
+            .add("1.19.4-01/1.19.3-13/1.19-36: Added hamster and bonestorm configs in entities_v2. Updated to items_v5 with fzzyhammer info and new loot chances for unique items.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -104,12 +104,15 @@ object AiConfig
             var buildersMiningSpeed = ValidatedFloat(BuildersScepterToolMaterial.defaultMiningSpeed(),12f,1f)
             var fowlDurability = ValidatedInt(ScepterSoFoulToolMaterial.defaultDurability(),1650,32)
             var fowlCooldown = ValidatedLong(ScepterSoFoulToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterSoFoulToolMaterial.minCooldown())
+            var fowlChestChance = ValidatedFloat(0.02f,1f,0f)
             var fzzyDurability = ValidatedInt(FzzyhammerToolMaterial.defaultDurability(),1650,128)
             var fzzyCooldown = ValidatedLong(FzzyhammerToolMaterial.baseCooldown(), Long.MAX_VALUE,FzzyhammerToolMaterial.minCooldown())
             @ReadMeText("readme.items.scepters.fzzyDamage")
             var fzzyDamage = ValidatedFloat(FzzyhammerToolMaterial.defaultAttackDamage(),30f,0f)
             @ReadMeText("readme.items.scepters.fzzyMiningSpeed")
             var fzzyMiningSpeed = ValidatedFloat(FzzyhammerToolMaterial.defaultMiningSpeed(),12f,1f)
+            var fzzyChestChance = ValidatedFloat(0.002f,1f,0f)
+            var uniqueWitherChance = ValidatedFloat(0.01f,1f,0f)
         }
 
         var gems = Gems()
@@ -397,7 +400,7 @@ object AiConfig
         }
     }
 
-    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v4.json","items_v3.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v5.json","items_v4.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})

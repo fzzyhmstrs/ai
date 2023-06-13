@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:charged_moonstone"
+	"item": "amethyst_imbuement:tigers_eye"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:imbued_quartz"

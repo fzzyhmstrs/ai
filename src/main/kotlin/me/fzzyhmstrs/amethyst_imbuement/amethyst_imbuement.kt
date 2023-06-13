@@ -41,6 +41,7 @@ object AI: ModInitializer {
         RegisterCriteria.registerAll()
         RegisterParticle.registerParticleTypes()
         RegisterSound.registerAll()
+        RegisterWorldgen.registerAll()
         AiConfig.initConfig()
         RegisterKeybindServer.registerServer()
         AltarOfExperienceScreenHandler.registerServer()

@@ -15,6 +15,8 @@
 	"amethyst_imbuement:imbuing_table",
 	"amethyst_imbuement:disenchanting_table",
 	"amethyst_imbuement:altar_of_experience",
-	"amethyst_imbuement:crystalline_core"
+	"amethyst_imbuement:crystalline_core",
+    "amethyst_imbuement:tigers_eye_blackstone_ore",
+	  "amethyst_imbuement:tigers_eye_basalt_ore"
   ]
 }
