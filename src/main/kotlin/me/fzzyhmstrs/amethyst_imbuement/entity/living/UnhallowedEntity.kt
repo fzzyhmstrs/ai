@@ -4,7 +4,10 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityGroup
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
@@ -43,7 +46,7 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(5, ConstructLookGoal(this))
+        goalSelector.add(6, ConstructLookGoal(this))
     }
 
 

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt

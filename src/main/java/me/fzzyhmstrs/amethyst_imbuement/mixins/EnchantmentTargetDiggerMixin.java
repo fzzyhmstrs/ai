@@ -1,8 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
-import net.minecraft.item.ElytraItem;
-import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

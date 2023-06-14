@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.minecraft.block.Block
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier

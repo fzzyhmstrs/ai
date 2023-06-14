@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import dev.emi.trinkets.api.Trinket
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*

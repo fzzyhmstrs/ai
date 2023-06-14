@@ -10,6 +10,8 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.damage.EntityDamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
@@ -59,7 +61,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 10.0f, 2.0f, false)
+    private val callForConstructHelpGoal = CallForConstructHelpGoal(this)
     private val trackSummonerAttackerGoal = TrackSummonerAttackerGoal(this,null)
+
 
     protected var attackTicksLeft = 0
     protected var lookingAtVillagerTicksLeft = 0
@@ -88,9 +92,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     override fun initGoals() {
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(3, WanderNearTargetGoal(this, 0.9, 16.0f))
-        goalSelector.add(3, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
-        goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
+        goalSelector.add(4, WanderNearTargetGoal(this, 0.9, 16.0f))
+        goalSelector.add(4, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
+        goalSelector.add(5, IronGolemWanderAroundGoal(this, 0.6))
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
 
@@ -102,6 +106,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     private fun initOwnerGoals(){
         goalSelector.add(2, followSummonerGoal)
+        goalSelector.add(3,callForConstructHelpGoal)
+
         targetSelector.add(1, trackSummonerAttackerGoal)
     }
 
@@ -177,6 +183,16 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (!world.isClient) {
             tickAngerLogic(world as ServerWorld, true)
         }
+    }
+
+    override fun damage(source: DamageSource, amount: Float): Boolean {
+        if (isInvulnerableTo(source)) {
+            return false
+        }
+        if (source is EntityDamageSource || source === DamageSource.MAGIC) {
+            this.callForConstructHelpGoal.onHurt()
+        }
+        return super.damage(source, amount)
     }
 
     override fun chooseRandomAngerTime() {
