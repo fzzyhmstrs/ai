@@ -1019,6 +1019,7 @@
 	"readme.items.scepters.vanguardDamage": "Float between 20.0 and 0.0. Defines the damage the Scepter of the Vanguard deals as a melee weapon.",
 	"readme.items.scepters.buildersDamage": "Float between 10.0 and 0.0. Defines the damage the Builders Scepter deals as a melee weapon.",
 	"readme.items.scepters.buildersMiningSpeed": "Float between 12.0 and 1.0 (the range of mining speeds provided by vanilla tools). Defines the mining speed of the Builders Scepter.",
+	"readme.items.scepters.harvestMiningSpeed": "Float between 12.0 and 1.0 (the range of mining speeds provided by vanilla tools). Defines the mining speed of the Scepter of Harvests.",
 	"readme.items.scepters.uniqueWitherChance": "Float between 1 and 0. Defines the chance that a unique AI item will drop from the wither upon death. In heavily modded environments this value should probably be *very* low, as many late-game players can kill dozens of Withers easily.",
 	"readme.items.gem_1": "Gems",
 	"readme.items.gems_2": "Configures the targets for the ignited gems of promise.",
