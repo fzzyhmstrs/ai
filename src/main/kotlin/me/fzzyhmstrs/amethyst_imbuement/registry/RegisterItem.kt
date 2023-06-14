@@ -261,7 +261,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SURVEY))
         .withModifiers(listOf(RegisterModifier.WITTY,RegisterModifier.TRAVELER))
         .also{ regItem["sojourn"] = it}
-    val AEGIS = ScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.EPIC))
+    val AEGIS = SpellbladeItem(ScepterLvl3ToolMaterial,5,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.SMITING))
         .also{ regItem["aegis"] = it}
     val REDEMPTION = ScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.EPIC))
