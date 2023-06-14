@@ -23,4 +23,7 @@ import java.util.*
 class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings
 ): CustomSpellToolItem(material, 1.5f,-3.0f, BlockTags.HOE_MINEABLE, settings) {
     
+    override fun getMiningSpeedMultiplier(stack: ItemStack, state: BlockState): Float {
+        return if (state.isIn(BlockTags.HOE_MINEABLE) || state.isIn(FabricMineableTags.SHEARS_MINEABLE)) material.miningSpeedMultiplier else 1.0f
+    }
 }
