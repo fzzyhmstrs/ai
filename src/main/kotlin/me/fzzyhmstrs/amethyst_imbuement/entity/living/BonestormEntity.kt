@@ -194,7 +194,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
                         bonestorm.setFireActive(false)
                     }
                     if (fireballsFired > 1) {
-                        val h = sqrt(sqrt(d)) * 0.5
+                        val h = (sqrt(sqrt(d)) * 0.5f).toFloat()
                         if (!bonestorm.isSilent) {
                             bonestorm.world.syncWorldEvent(null, WorldEvents.BLAZE_SHOOTS, bonestorm.blockPos, 0)
                         }
@@ -202,7 +202,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
                         val pos  = Vec3d(bonestorm.x,bonestorm.getBodyY(0.5) + 0.5,bonestorm.z)
                         val bonestormOwner = bonestorm.getOwner()
                         val owner = if(bonestormOwner == null || bonestormOwner !is LivingEntity) bonestorm else bonestormOwner
-                        val bse = BoneShardEntity(bonestorm.world,owner,4.5f,1.75f,pos,rot)
+                        val bse = BoneShardEntity(bonestorm.world,owner,4.0f,1.75f*h,pos,rot)
                         bonestorm.world.spawnEntity(bse)
 
                     }

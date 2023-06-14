@@ -58,6 +58,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         internal val SCALE = DataTracker.registerData(PlayerCreatedConstructEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
     }
 
+    private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 10.0f, 2.0f, false)
+    private val trackSummonerAttackerGoal = TrackSummonerAttackerGoal(this,null)
+
     protected var attackTicksLeft = 0
     protected var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
@@ -79,12 +82,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     init{
         stepHeight = 1.0f
-    }
-
-    private fun startTrackingOwner(currentOwner: LivingEntity){
-        goalSelector.add(2, FollowSummonerGoal(this,currentOwner, 1.0, 10.0f, 2.0f, false))
-        targetSelector.add(1, TrackSummonerAttackerGoal(this,currentOwner))
-        trackingOwner = true
+        if (!world.isClient)
+            initOwnerGoals()
     }
 
     override fun initGoals() {
@@ -94,10 +93,16 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         goalSelector.add(4, IronGolemWanderAroundGoal(this, 0.6))
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
+
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
         targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
         targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
         targetSelector.add(4, UniversalAngerGoal(this, true))
+    }
+
+    private fun initOwnerGoals(){
+        goalSelector.add(2, followSummonerGoal)
+        targetSelector.add(1, trackSummonerAttackerGoal)
     }
 
     override fun initialize(
@@ -312,6 +317,12 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         }else {
             null
         }
+    }
+
+    private fun startTrackingOwner(currentOwner: LivingEntity){
+        followSummonerGoal.setSummoner(currentOwner)
+        trackSummonerAttackerGoal.setSummoner(currentOwner)
+        trackingOwner = true
     }
 
     override fun onTrackedDataSet(data: TrackedData<*>?) {
