@@ -412,11 +412,13 @@ class AltarOfExperienceScreenHandler(
         }
 
         fun registerServer(){
-            ServerPlayNetworking.registerGlobalReceiver(XP_REQUEST){_,player,_,_,_ ->
+            ServerPlayNetworking.registerGlobalReceiver(XP_REQUEST){server,player,_,_,_ ->
                 val handler = player.currentScreenHandler
                 if (handler !is AltarOfExperienceScreenHandler) return@registerGlobalReceiver
                 //handler.sendXpUpdates()
-                handler.sendContentUpdates()
+                server.execute {
+                    handler.sendContentUpdates()
+                }
             }
         }
 

@@ -77,7 +77,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(6, LookAroundGoal(this))
         targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) {
-            it is Monster || (it is SpellCastingEntity && it !== owner && !AiConfig.entities.isEntityPvpTeammate(owner, it, RegisterEnchantment.TORRENT_OF_BEAKS))
+            it is Monster || (it is SpellCastingEntity && it !== getOwner() && !AiConfig.entities.isEntityPvpTeammate(getOwner() as? LivingEntity, it, RegisterEnchantment.TORRENT_OF_BEAKS))
         })
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
     }

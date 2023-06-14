@@ -13,7 +13,7 @@ import kotlin.math.abs
 
 open class FollowSummonerGoal(
     private val summoned: PathAwareEntity,
-    private val summoner: LivingEntity,
+    private var summoner: LivingEntity?,
     private val speed: Double,
     private val minDistance: Float,
     private val maxDistance: Float,
@@ -33,8 +33,9 @@ open class FollowSummonerGoal(
 
 
     override fun canStart(): Boolean {
-        if (summoner.isSpectator) return false
-        if (summoned.squaredDistanceTo(summoner) < (minDistance * minDistance).toDouble()){
+        if (summoner == null) return false
+        if (summoner?.isSpectator == true) return false
+        if (summoned.squaredDistanceTo(summoner) < (minDistance * minDistance).toDouble() || summoner?.velocity?.length() == 0.0){
             return false
         }
         return true
@@ -75,7 +76,7 @@ open class FollowSummonerGoal(
     }
 
     private fun tryTeleport() {
-        val blockPos: BlockPos = summoner.blockPos
+        val blockPos: BlockPos = summoner?.blockPos?:return
         for (i in 0..9) {
             val j: Int = this.getRandomInt(-3, 3)
             val k: Int = this.getRandomInt(-1, 1)
@@ -119,5 +120,9 @@ open class FollowSummonerGoal(
 
     private fun getRandomInt(min: Int, max: Int): Int {
         return summoned.random.nextInt(max - min + 1) + min
+    }
+
+    fun setSummoner(summoner: LivingEntity){
+        this.summoner = summoner
     }
 }
