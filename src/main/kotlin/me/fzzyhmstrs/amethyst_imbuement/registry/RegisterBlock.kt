@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.block.*
-import me.fzzyhmstrs.amethyst_imbuement.item.GlisteningIceBlockItem
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagentBlockItem
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings

@@ -8,7 +8,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -18,8 +17,6 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import kotlin.math.max
-import kotlin.math.min
 
 class SummonBonestormAugment: SummonEntityAugment(ScepterTier.TWO,12){
 

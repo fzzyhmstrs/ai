@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import net.minecraft.util.Identifier
 

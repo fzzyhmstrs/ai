@@ -8,7 +8,6 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
-import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -18,7 +17,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtList
 import net.minecraft.recipe.RecipeType
-import net.minecraft.registry.Registries
 import java.util.*
 
 open class ImbuedJewelryItem(settings: Settings): AbstractAugmentJewelryItem(settings), Reactant, ManaItem {

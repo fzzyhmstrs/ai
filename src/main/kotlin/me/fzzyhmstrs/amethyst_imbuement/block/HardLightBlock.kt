@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

@@ -2,13 +2,10 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
-import com.google.common.collect.ImmutableMap
 import com.google.gson.JsonParser
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
-import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.client.render.VertexConsumerProvider

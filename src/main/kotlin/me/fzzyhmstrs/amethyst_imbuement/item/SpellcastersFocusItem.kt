@@ -19,14 +19,12 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
 import net.minecraft.particle.DustParticleEffect
 import net.minecraft.recipe.RecipeType
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
@@ -137,9 +135,11 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
+        if (hand != Hand.MAIN_HAND) return TypedActionResult.fail(stack)
         val nbt = stack.nbt?:return TypedActionResult.fail(stack)
         if (!nbt.getBoolean(LEVEL_UP_READY)) return TypedActionResult.fail(stack)
         if (!nbt.contains(LEVEL_UP)) return TypedActionResult.fail(stack)
+        if (world.isClient) return TypedActionResult.fail(stack)
         user.openHandledScreen(SpellcastersFocusScreenHandlerFactory(stack))
         return TypedActionResult.success(stack)
     }

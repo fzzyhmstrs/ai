@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.tool
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 

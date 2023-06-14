@@ -4,37 +4,30 @@ import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
-import net.minecraft.entity.*
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.Angerable
-import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.Items
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.BlockStateParticleEffect
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
-import net.minecraft.world.*
+import net.minecraft.world.SpawnHelper
+import net.minecraft.world.World
+import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
-import java.util.*
 import java.util.stream.Stream
 
 @Suppress("PrivatePropertyName")
@@ -55,7 +48,7 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(5, ConstructLookGoal(this))
+        goalSelector.add(6, ConstructLookGoal(this))
     }
 
     override fun getNextAirUnderwater(air: Int): Int {
@@ -138,7 +131,7 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         return ActionResult.success(world.isClient)
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
+    override fun damage(source: DamageSource, amount: Float): Boolean {
         val crack = getCrack()
         val bl = super.damage(source, amount)
         if (bl && getCrack() != crack) {
