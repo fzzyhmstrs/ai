@@ -72,6 +72,7 @@ object RegisterEnchantment {
     //Scepter Spells
     val MAGIC_MISSILE = MagicMissileAugment().also{regEnchant["magic_missile"] = it}
     val ABUNDANCE = AbundanceAugment().also{regEnchant["abundance"] = it}
+    val ANIMAL_HUSBANDRY = AnimalHusbandryAugment().also{regEnchant["animal_husbandry"] = it}
     val BALL_LIGHTNING = BallLightningAugment().also{regEnchant["ball_lightning"] = it}
     val BARRIER = BarrierAugment().also{regEnchant["barrier"] = it}
     val BEDAZZLE = BedazzleAugment().also{regEnchant["bedazzle"] = it}
@@ -83,6 +84,7 @@ object RegisterEnchantment {
     val CREATE_LAVA = CreateLavaAugment().also{regEnchant["create_lava"] = it}
     val CREATE_SPONGE = CreateSpongeAugment().also{regEnchant["create_sponge"] = it}
     val CREATE_WATER = CreateWaterAugment().also{regEnchant["create_water"] = it}
+    val CRIPPLE = CrippleAugment().also{regEnchant["cripple"] = it}
     val CURSE = CurseAugment().also{regEnchant["curse"] = it}
     val DASH = DashAugment().also{regEnchant["dash"] = it}
     val EMPOWERED_SLASH = EmpoweredSlashAugment().also{regEnchant["empowered_slash"] = it}
@@ -116,6 +118,7 @@ object RegisterEnchantment {
     val MEND_EQUIPMENT = MendEquipmentAugment().also{regEnchant["mend_equipment"] = it}
     val MENTAL_CLARITY = MentalClarityAugment().also{regEnchant["mental_clarity"] = it}
     val MINOR_HEAL = MinorHealAugment().also{regEnchant["minor_heal"] = it}
+    val PERSUADE = PersuadeAugment().also{regEnchant["persuade"] = it}
     val POULTRYMORPH = PoultrymorphAugment().also{regEnchant["poultrymorph"] = it}
     val RECALL = RecallAugment().also{regEnchant["recall"] = it}
     val REGENERATE = RegenerateAugment().also{regEnchant["regenerate"] = it}
