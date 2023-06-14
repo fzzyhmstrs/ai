@@ -144,7 +144,7 @@ object RegisterItem {
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().group(AI_GROUP).maxCount(16)).also{ regItem["mana_potion"] = it}
     val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).group(AI_GROUP).food(FoodComponent.Builder().alwaysEdible().hunger(4).saturationModifier(1f).statusEffect(
-        StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
+        StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
 
 
     //Basic scepters
@@ -195,7 +195,11 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.NECROTIC))
         .also{ regItem["corrupted_scepter"] = it}
-    val SCEPTER_OF_INSIGHT = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+    val SCEPTER_OF_AGONIES = SpellbladeItem(ScepterLvl2ToolMaterial,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+        .withAugments(listOf(RegisterEnchantment.CRIPPLE))
+        .withModifiers(listOf(ModifierRegistry.ENDURING))
+        .also{ regItem["scepter_of_agonies"] = it}
+    val SCEPTER_OF_INSIGHT = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MENTAL_CLARITY))
         .withModifiers(listOf(RegisterModifier.INSIGHTFUL, ModifierRegistry.LESSER_REACH))
         .also{ regItem["scepter_of_insight"] = it}
@@ -203,7 +207,11 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
         .withModifiers(listOf(RegisterModifier.SUMMONERS_ASPECT))
         .also{ regItem["scepter_of_summoning"] = it}
-    val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+    val PERSUASIVE_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+        .withAugments(listOf(RegisterEnchantment.PERSUADE))
+        .withModifiers(listOf(RegisterModifier.TRAVELER))
+        .also{ regItem["persuasive_scepter"] = it}
+    val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))
         .withModifiers(listOf(RegisterModifier.TRAVELER))
         .also{ regItem["travelers_scepter"] = it}
@@ -223,6 +231,10 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
+    val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
+        .withAugments(listOf(RegisterEnchantment.FORTIFY))
+        .withModifiers(listOf(ModifierRegistry.REACH))
+        .also{ regItem["scepter_of_harvests"] = it}
     val SCEPTER_OF_THE_PACIFIST = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
         .withModifiers(listOf(RegisterModifier.HEALERS_GRACE, RegisterModifier.HEALERS_PACT))
