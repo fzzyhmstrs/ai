@@ -34,17 +34,17 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
-class CrippleAugment: SlashAugment(ScepterTier.TWO,5) {
+class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F)
-            .withRange(5.5,0.25,0.0)
-            .withDuration(36,4)
-            .withAmplifier(0,1,0)
+            .withRange(7.75,0.25,0.0)
+            .withDuration(110,10)
+            .withAmplifier(-1,1,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,16,
-            18,imbueLevel,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,20,12,
+            13,imbueLevel,1, LoreTier.NO_TIER, Items.STONE_SWORD)
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
@@ -72,57 +72,38 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,5) {
         if (entityDistance.isNotEmpty()) {
             val entityDistance2 = entityDistance.toList()
             val entity1 = entityDistance2[0].second
-            bl = resonateTarget(world,user,entity1,level, effect)
+            bl = critTarget(world,user,entity1,level, effect)
             var nextTarget = 1
             while (entityDistance.size > nextTarget && effect.amplifier(level) > nextTarget){
                 val entity2 = entityDistance2[nextTarget].second
-                bl = bl || resonateTarget(world, user, entity2, level, effect, true)
+                bl = bl || critTarget(world, user, entity2, level, effect, true)
                 nextTarget++
             }
             if (bl){
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
             }
-            effect.accept(toLivingEntityList(entityList), AugmentConsumer.Type.HARMFUL)
         }
         return bl
     }
 
-    private fun resonateTarget(world: World,user: LivingEntity,target: Entity,level: Int,effect: AugmentEffect, splash: Boolean = false): Boolean{
-        val amp = if (target is LivingEntity){
-            val status = target.getStatusEffect(RegisterStatus.RESONATING)
-            status?.amplifier?:-1
-        } else {
-            -1
-        }
+    private fun critTarget(world: World,user: LivingEntity,target: Entity,level: Int,effect: AugmentEffect, splash: Boolean = false): Boolean{
+        val crit = if (world.random.nextFloat() < 0.15) 2f else 1f
         val damage = if(!splash) {
-            effect.damage(level + amp + 1)
+            effect.damage(level) * crit
         } else {
-            effect.damage(level + amp - 1)
+            effect.damage(level)/2 * crit
         }
-        val bl = target.damage(DamageSource.mob(user),damage)
+        val bl = target.damage(if (user is PlayerEntity) DamageSource.player(user) else DamageSource.mob(user), damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))
             }
-            secondaryEffect(world, user, target, level, effect)
+            effect.accept(target,AugmentConsumer.Type.HARMFUL)
+            val amp = if (crit) 4 else 1
+            target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), amp))
+            target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), amp))
         }
         return bl
-    }
-
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
-    }
-
-    override fun secondaryEffect(world: World, user: LivingEntity, target: Entity, level: Int, effect: AugmentEffect) {
-        if (target is LivingEntity){
-            val status = target.getStatusEffect(RegisterStatus.RESONATING)
-            val amp = status?.amplifier?:-1
-            target.addStatusEffect(addStatusInstance(effect,amp + 1))
-        }
-    }
-
-
-    override fun addStatusInstance(effect: AugmentEffect, level: Int): StatusEffectInstance {
-        return StatusEffectInstance(RegisterStatus.RESONATING,effect.duration(level), level)
     }
 
     override fun soundEvent(): SoundEvent {
