@@ -6,7 +6,7 @@ import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 
 
-object ScepterOfHarvestsScepterToolMaterial: ScepterToolMaterial(){
+object ScepterOfHarvestsToolMaterial: ScepterToolMaterial(){
     override fun getDurability(): Int {
         return AiConfig.items.scepters.harvestDurability.get()
     }

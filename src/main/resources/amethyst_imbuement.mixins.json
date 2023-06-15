@@ -37,6 +37,7 @@
     "LivingEntityMixin",
     "MilkBucketMixin",
     "MiningToolItemMixin",
+    "MobEntityAccessor",
     "ModifiableItemMixin",
     "PersistentProjectileEntityMixin",
     "PiglinBrainMixin",

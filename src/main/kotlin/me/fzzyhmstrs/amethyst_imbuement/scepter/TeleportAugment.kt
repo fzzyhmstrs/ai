@@ -22,7 +22,7 @@ class TeleportAugment: SummonProjectileAugment(ScepterTier.TWO,5) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(210,-10),30,
-            13,imbueLevel,5,LoreTier.LOW_TIER, Items.ENDER_PEARL)
+            13,imbueLevel,8,LoreTier.LOW_TIER, Items.ENDER_PEARL)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
