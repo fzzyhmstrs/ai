@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.mixins.AxeItemAccessor
+import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -20,7 +21,7 @@ import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import java.util.*
 
-class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings
+class ScepterOfHarvestsItem(material: ScepterToolMaterial, settings: Settings
 ): CustomSpellToolItem(material, 1.5f,-3.0f, BlockTags.HOE_MINEABLE, settings) {
     
     override fun getMiningSpeedMultiplier(stack: ItemStack, state: BlockState): Float {

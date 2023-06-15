@@ -27,7 +27,7 @@ class WeightlessnessAugment: MinorSupportAugment(ScepterTier.TWO,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(725,-25),125,
-            9,imbueLevel,10, LoreTier.LOW_TIER, Items.PHANTOM_MEMBRANE)
+            9,imbueLevel,20, LoreTier.LOW_TIER, Items.PHANTOM_MEMBRANE)
     }
 
     override fun supportEffect(
