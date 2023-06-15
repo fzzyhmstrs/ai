@@ -13,7 +13,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 
-class SoulbindingAugment(weight: Rarity, mxLvl: Int = 2, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
+class ConsecratedAugment(weight: Rarity, mxLvl: Int = 2, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.CONSECRATED,stack)
