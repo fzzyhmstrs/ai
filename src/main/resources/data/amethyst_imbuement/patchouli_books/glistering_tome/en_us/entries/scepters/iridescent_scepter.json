@@ -6,26 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The second tier of scepters. Can be imbued with either tier one or two spells.$(br2)$(l)Mana:$() 550"
-},
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Iridescent Scepter Imbuing",
-"imbue_a_item": "minecraft:gold_ingot",
-"imbue_b_item": "amethyst_imbuement:iridescent_orb",
-"imbue_c_item": "minecraft:gold_ingot",
-"imbue_d_item": "minecraft:gold_ingot",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "amethyst_imbuement:imbued_quartz",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_e_item": "amethyst_imbuement:opaline_scepter",
-"craft_f_item": "amethyst_imbuement:imbued_lapis",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "amethyst_imbuement:imbued_quartz",
-"craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:iridescent_scepter",
-"cost_text": "$(l)Level Cost: $(2)13$()"
-}   
+"text": "The second tier of scepters. Can be imbued with either tier one or two spells. This scepter is no longer available in survival, but if you still have one, it will still work.$(br2)$(l)Mana:$() 550"
+}
 ]
 }

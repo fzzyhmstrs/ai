@@ -13,7 +13,7 @@
   "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
   "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
   "spec": "Experience Gain",
-  "spells": "Soul Missile, (Unique) Resonate",
+  "spells": "Mental Clarity, (Unique) Resonate",
   "mods": "Echoing, Witty, Skillful, Insightful, Lesser Reach"
 }
 ]

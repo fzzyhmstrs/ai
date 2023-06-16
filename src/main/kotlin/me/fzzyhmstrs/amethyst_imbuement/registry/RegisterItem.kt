@@ -196,7 +196,7 @@ object RegisterItem {
         .also{ regItem["corrupted_scepter"] = it}
     val SCEPTER_OF_AGONIES = SpellbladeItem(ScepterLvl2ToolMaterial,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.CRIPPLE))
-        .withModifiers(listOf(ModifierRegistry.ENDURING))
+        .withModifiers(listOf(ModifierRegistry.ENDURING, ModifierRegistry.LESSER_REACH))
         .also{ regItem["scepter_of_agonies"] = it}    
     val SCEPTER_OF_INSIGHT = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MENTAL_CLARITY))
@@ -232,7 +232,7 @@ object RegisterItem {
         .also{ regItem["scepter_of_the_paladin"] = it}
     val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.ANIMAL_HUSBANDRY))
-        .withModifiers(listOf(ModifierRegistry.REACH))
+        .withModifiers(listOf(ModifierRegistry.REACH, ModifierRegistry.LESSER_THRIFTY))
         .also{ regItem["scepter_of_harvests"] = it}
     val SCEPTER_OF_THE_PACIFIST = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))

@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow this route on the Path of Lethality if you want to specialize in blade combat while leveling your spells up to their maximum potential. Slashing Augments have a big boost, and damage increased by Dangerous. You spells level up two times faster. Less effective at casting non-Fury spells however."
+"text": "Follow this route on the Path of Lethality if you want to specialize in blade combat while leveling your spells up to their maximum potential. Slashing Augments have a big boost, and damage increased by Dangerous. Your spells gain +1 XP. Less effective at casting non-Fury spells however."
 },
 {
   "type": "amethyst_imbuement:scepter_route",

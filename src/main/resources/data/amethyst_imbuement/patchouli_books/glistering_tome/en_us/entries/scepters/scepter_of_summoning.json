@@ -2,7 +2,7 @@
   "name": "Scepter of Summoning",
   "icon": "amethyst_imbuement:scepter_of_summoning",
   "category": "amethyst_imbuement:scepters",
-  "sortnum": 14,
+  "sortnum": 15,
   "pages": [
     {
       "type": "patchouli:text",
@@ -33,25 +33,6 @@
       "craft_i_item": "minecraft:iron_bars",
       "result_item": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
       "cost_text": "$(l)Level Cost: $(2)17$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Summoners from Iridescent",
-      "imbue_a_item": "minecraft:iron_bars",
-      "imbue_b_item": "tag:c:skulls",
-      "imbue_c_item": "minecraft:iron_bars",
-      "imbue_d_item": "minecraft:iron_bars",
-      "craft_a_item": "minecraft:air",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "minecraft:air",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "minecraft:air",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)9$()"
     }
   ]
 }

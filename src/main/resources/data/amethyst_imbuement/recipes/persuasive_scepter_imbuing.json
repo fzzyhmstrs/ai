@@ -4,7 +4,7 @@
 	"item": "minecraft:gold_ingot"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:iridescent_orb"
+	"item": "minecraft:emerald_block"
   },
   "imbueC": {
 	"item": "minecraft:gold_ingot"
@@ -12,25 +12,36 @@
   "imbueD": {
 	"item": "minecraft:gold_ingot"
   },
+  "craftA": {
+	"item": "minecraft:emerald_block"
+  },
   "craftB": {
 	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:iridescent_orb"
   },
   "craftD": {
 	"item": "amethyst_imbuement:imbued_lapis"
   },
   "craftE": {
-	"item": "amethyst_imbuement:opaline_scepter"
+    "tag": "amethyst_imbuement:wit_scepters"
   },
   "craftF": {
 	"item": "amethyst_imbuement:imbued_lapis"
   },
+  "craftG": {
+	"item": "minecraft:emerald_block"
+  },
   "craftH": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
-  "title": "Iridescent Scepter",
-  "cost": 13,
-  "resultA": "amethyst_imbuement:iridescent_scepter",
+  "craftI": {
+	"item": "minecraft:emerald_block"
+  },
+  "title": "persuasive scepter",
+  "cost": 17,
+  "resultA": "amethyst_imbuement:persuasive_scepter",
   "countA": 1,
   "transferEnchant": true
 }
-

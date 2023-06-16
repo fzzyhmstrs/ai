@@ -45,7 +45,7 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
             .withAmplifier(-1,1,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,12,
+        return AugmentDatapoint(SpellType.FURY,20,5,
             13,imbueLevel,1, LoreTier.NO_TIER, Items.STONE_SWORD)
     }
     

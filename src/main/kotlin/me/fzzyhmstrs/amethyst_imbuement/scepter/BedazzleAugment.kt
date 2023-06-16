@@ -114,7 +114,7 @@ class BedazzleAugment: MiscAugment(ScepterTier.TWO,1) {
         return SoundEvents.EVENT_RAID_HORN.value()
     }
 
-    private fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): Pair<MutableList<LivingEntity>,Int>{
+    fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): Pair<MutableList<LivingEntity>,Int>{
         if (list.isNotEmpty()){
             val listTmp: MutableList<LivingEntity> = mutableListOf()
             val startSize = min(level, list.size)

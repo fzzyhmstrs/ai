@@ -2,7 +2,7 @@
   "name": "Resonance",
   "icon": "amethyst_imbuement:resonance",
   "category": "amethyst_imbuement:scepters",
-  "sortnum": 26,
+  "sortnum": 29,
   "pages": [
     {
       "type": "patchouli:text",
@@ -10,8 +10,9 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-      "anc_b": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
-      "anc_c": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+      "anc_a": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
+      "anc_b": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}, {modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+      "anc_c": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
       "input_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}"
     },
     {
@@ -32,25 +33,6 @@
       "craft_i_item": "tag:c:steel_blocks",
       "result_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
       "cost_text": "$(l)Level Cost: $(2)39$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Resonance from Lustrous",
-      "imbue_a_item": "tag:c:steel_blocks",
-      "imbue_b_item": "amethyst_imbuement:resonant_rod",
-      "imbue_c_item": "amethyst_imbuement:brilliant_diamond",
-      "imbue_d_item": "tag:c:steel_blocks",
-      "craft_a_item": "amethyst_imbuement:gem_dust",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "amethyst_imbuement:gem_dust",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:lustrous_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "amethyst_imbuement:gem_dust",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)21$()"
     }
   ]
 }

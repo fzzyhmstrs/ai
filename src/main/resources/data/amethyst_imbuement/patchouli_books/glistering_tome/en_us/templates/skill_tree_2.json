@@ -114,7 +114,7 @@
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+    "item": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
     "framed": true,
     "x": 56,
     "y": 79
@@ -180,7 +180,7 @@
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"}]}",
+    "item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
     "framed": true,
     "x": 56,
     "y": 130

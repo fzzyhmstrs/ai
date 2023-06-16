@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:brutal_gem"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:iridescent_orb"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:fury_scepters"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:garnet"
+  },
+  "title": "Scepter of Agonies",
+  "cost": 21,
+  "resultA": "amethyst_imbuement:scepter_of_agonies",
+  "countA": 1,
+  "transferEnchant": true
+}

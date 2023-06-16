@@ -2,7 +2,7 @@
   "name": "Aegis",
   "icon": "amethyst_imbuement:aegis",
   "category": "amethyst_imbuement:scepters",
-  "sortnum": 29,
+  "sortnum": 31,
   "pages": [
     {
       "type": "patchouli:text",
@@ -10,8 +10,9 @@
     },
     {
       "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-      "anc_b": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-      "anc_c": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "anc_a": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_b": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "anc_c": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
       "input_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}"
     },
     {
@@ -32,25 +33,6 @@
       "craft_i_item": "minecraft:diamond_helmet",
       "result_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}",
       "cost_text": "$(l)Level Cost: $(2)39$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Aegis from Lustrous",
-      "imbue_a_item": "minecraft:diamond_helmet",
-      "imbue_b_item": "amethyst_imbuement:crystalline_heart",
-      "imbue_c_item": "minecraft:diamond_helmet",
-      "imbue_d_item": "minecraft:diamond_helmet",
-      "craft_a_item": "amethyst_imbuement:gem_dust",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "amethyst_imbuement:brilliant_diamond",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:lustrous_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "amethyst_imbuement:gem_dust",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)23$()"
     }
   ]
 }
