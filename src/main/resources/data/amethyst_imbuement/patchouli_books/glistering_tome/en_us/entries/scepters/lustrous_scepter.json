@@ -6,26 +6,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "The third and highest tier of scepters. Can be imbued with any spells.$(br2)$(l)Mana:$() 1450"
-},
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Lustrous Scepter Imbuing",
-"imbue_a_item": "minecraft:netherite_ingot",
-"imbue_b_item": "amethyst_imbuement:lustrous_sphere",
-"imbue_c_item": "minecraft:netherite_ingot",
-"imbue_d_item": "minecraft:netherite_ingot",
-"craft_a_item": "amethyst_imbuement:imbued_lapis",
-"craft_b_item": "amethyst_imbuement:garnet",
-"craft_c_item": "amethyst_imbuement:imbued_lapis",
-"craft_d_item": "amethyst_imbuement:pyrite",
-"craft_e_item": "amethyst_imbuement:iridescent_scepter",
-"craft_f_item": "amethyst_imbuement:pyrite",
-"craft_g_item": "amethyst_imbuement:imbued_lapis",
-"craft_h_item": "amethyst_imbuement:garnet",
-"craft_i_item": "amethyst_imbuement:imbued_lapis",
-"result_item": "amethyst_imbuement:lustrous_scepter",
-"cost_text": "$(l)Level Cost: $(2)33$()"
-}   
+"text": "The third and highest tier of scepters. Can be imbued with any spells. This scepter is no longer available in survival, but if you still have one, it will still work.$(br2)$(l)Mana:$() 1450"
+}
 ]
 }

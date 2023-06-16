@@ -6,23 +6,29 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
-import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.passive.AnimalEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class AnimalHusbandryAugment: MiscAugment(ScepterTier.ONE,6) {
+class AnimalHusbandryAugment: MiscAugment(ScepterTier.TWO,4) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(1.5,0.5).withDamage(0.18F,0.02F)
+        get() = super.baseEffect.withRange(6.0,0.5)
+            .withAmplifier(2,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,
-            1,imbueLevel,1, LoreTier.NO_TIER, Items.HAY_BLOCK)
+        return AugmentDatapoint(SpellType.GRACE, 80,16,
+            7,imbueLevel,4, LoreTier.NO_TIER, Items.HAY_BLOCK)
     }
 
     override fun effect(
@@ -34,28 +40,27 @@ class AnimalHusbandryAugment: MiscAugment(ScepterTier.ONE,6) {
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-        val range = (effect.range(level)).toInt()
-        val userPos = user.blockPos
-        for (i in -range..range) {
-            for (j in -range..range) {
-                for (k in -1..1) {
-                    val bs = world.getBlockState(userPos.add(i, k, j))
-                    val bsb = bs.block
-                    if (bsb is CropBlock) {
-                        val rnd1 = world.random.nextDouble()
-                        if (rnd1 < effect.damage(level)) {
-                            successes++
-                            if (bsb.isMature(bs)) {
-                                world.breakBlock(userPos.add(i, k, j), true)
-                                world.setBlockState(userPos.add(i, k, j), bsb.defaultState)
-                                continue
-                            }
-                            bsb.grow(world as ServerWorld, world.random, userPos.add(i, k, j), bs)
-                        }
-                    }
+        val list = world.getOtherEntities(user,user.boundingBox.expand(effect.range(level))).stream().filter { it is LivingEntity }.toList()
+        val (affectedList,_) = RegisterEnchantment.BEDAZZLE.getRndEntityList(world,toLivingEntityList(list).toMutableList(),effect.amplifier(level))
+        for (entity in affectedList){
+            if (entity is AnimalEntity) {
+                if (entity.isBaby) {
+                    val i = entity.breedingAge
+                    entity.growUp(AnimalEntity.toGrowUpAge(-i), true)
+                } else {
+                    entity.lovePlayer(user as? PlayerEntity)
                 }
+                if (entity.health < entity.maxHealth){
+                    entity.heal(0.5f)
+                }
+                successes++
             }
         }
+        if (successes > 0) world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,1.0f)
         return successes > 0
+    }
+
+    override fun soundEvent(): SoundEvent {
+        return SoundEvents.BLOCK_GRASS_BREAK
     }
 }

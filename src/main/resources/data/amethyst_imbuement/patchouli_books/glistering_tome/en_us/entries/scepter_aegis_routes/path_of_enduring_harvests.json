@@ -1,0 +1,20 @@
+{    
+"name": "Route of Enduring harvests",
+"icon": "amethyst_imbuement:scepter_of_harvests",
+"category": "amethyst_imbuement:scepter_aegis_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Follow this route on the Path of the Aegis to tend to your crops and animals with long lasting harvest magic. Casting spells shields and protects you and your allies, and damage to the undead is increased with Smiting. Your spells last slightly longer with Lesser Enduring, have a larger area of effect with Reach, and cost slightly less with Lesser Thrifty"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
+  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
+  "spec": "Farming Magic",
+  "spells": "(Unique) Animal Husbandry",
+  "mods": "Protective, Smiting, Lesser Enduring, Reach, Lesser Thrifty"
+}
+]
+}
