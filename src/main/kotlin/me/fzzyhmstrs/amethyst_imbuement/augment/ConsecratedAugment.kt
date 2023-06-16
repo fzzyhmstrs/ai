@@ -9,11 +9,12 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 
-class ConsecratedAugment(weight: Rarity, mxLvl: Int = 2, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
+class ConsecratedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
 
     override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         val lvl = EnchantmentHelper.getLevel(RegisterEnchantment.CONSECRATED,stack)

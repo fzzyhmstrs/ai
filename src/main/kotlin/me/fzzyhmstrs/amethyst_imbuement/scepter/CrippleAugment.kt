@@ -19,7 +19,9 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.DefaultParticleType
@@ -98,16 +100,18 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))
             }
-            effect.accept(target,AugmentConsumer.Type.HARMFUL)
-            val amp = if (crit) 4 else 1
-            target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), amp))
-            target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), amp))
+            if (target is LivingEntity) {
+                effect.accept(target, AugmentConsumer.Type.HARMFUL)
+                val amp = if (crit > 1f) 4 else 1
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, effect.duration(level), amp))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, effect.duration(level), amp))
+            }
         }
         return bl
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_BELL_RESONATE
+        return SoundEvents.ENTITY_PLAYER_BIG_FALL
     }
 
     override fun particleType(): DefaultParticleType {

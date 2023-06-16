@@ -10,7 +10,7 @@
 {
   "type": "amethyst_imbuement:scepter_path",
   "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]},amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]},amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]},amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
   "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
   "spec": "Overwhelming Spells",
   "spells": "Summon Familiar (Scepter of Summoning), Resonate",

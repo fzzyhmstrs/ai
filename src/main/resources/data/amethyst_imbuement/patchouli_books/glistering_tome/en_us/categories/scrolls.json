@@ -1,5 +1,5 @@
 {    
-"name": "Spell Scrolls",
-"description": "Guide to the creation and use of temporary spell scrolls",
-"icon": "amethyst_imbuement:empty_spell_scroll"
+"name": "Spells",
+"description": "Guide to spells, spell recipes, and the creation of spell scrolls.",
+"icon": "amethyst_imbuement:spell_scroll"
 }

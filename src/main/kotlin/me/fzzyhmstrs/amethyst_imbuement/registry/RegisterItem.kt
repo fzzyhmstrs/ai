@@ -143,7 +143,7 @@ object RegisterItem {
     val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().maxCount(16)).also{ regItem["mana_potion"] = it}
-    val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().alwaysEdible().hunger(4).saturationModifier(1f).statusEffect(
+    val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
 
 
@@ -208,7 +208,7 @@ object RegisterItem {
         .also{ regItem["scepter_of_summoning"] = it}
     val PERSUASIVE_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.PERSUADE))
-        .withModifiers(listOf(RegisterModifier.TRAVELER))
+        .withModifiers(listOf(RegisterModifier.WITTY))
         .also{ regItem["persuasive_scepter"] = it}
     val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))
@@ -231,7 +231,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
     val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
-        .withAugments(listOf(RegisterEnchantment.FORTIFY))
+        .withAugments(listOf(RegisterEnchantment.ANIMAL_HUSBANDRY))
         .withModifiers(listOf(ModifierRegistry.REACH))
         .also{ regItem["scepter_of_harvests"] = it}
     val SCEPTER_OF_THE_PACIFIST = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))

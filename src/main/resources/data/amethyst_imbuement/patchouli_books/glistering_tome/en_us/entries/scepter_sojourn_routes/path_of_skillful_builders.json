@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow this route on the Path of the Sojourn to masterfully craft the world around you. All spells related to travel and building are boosted, spells are cast one level above normal, and all Wit spells gain double XP. Spell range is slightly increased."
+"text": "Follow this route on the Path of the Sojourn to masterfully craft the world around you. All spells related to travel and building are boosted, spells are cast one level above normal, and all Wit spells gain +1 XP. Spell range is slightly increased."
 },
 {
   "type": "amethyst_imbuement:scepter_route",

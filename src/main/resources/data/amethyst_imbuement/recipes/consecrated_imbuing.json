@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:tigers_eye"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:tigers_eye"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftB": {
+	"item": "minecraft:lily_of_the_valley"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftD": {
+	"tag": "minecraft:lily_of_the_valley"
+  },
+  "craftF": {
+	"tag": "minecraft:lily_of_the_valley"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftH": {
+	"tag": "minecraft:lily_of_the_valley"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "title": "consecrated",
+  "cost": 25,
+  "augment": "amethyst_imbuement:consecrated"
+}
+

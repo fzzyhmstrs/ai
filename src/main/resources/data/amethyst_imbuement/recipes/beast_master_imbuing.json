@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:malachite_figurine"
+  },
+  "imbueB": {
+	"item": "minecraft:emerald_block"
+  },
+  "imbueC": {
+	"item": "minecraft:emerald_block"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:malachite_figurine"
+  },
+  "craftA": {
+	"item": "minecraft:leather"
+  },
+  "craftB": {
+	"item": "minecraft:saddle"
+  },
+  "craftC": {
+	"item": "minecraft:leather"
+  },
+  "craftD": {
+	"tag": "minecraft:wool"
+  },
+  "craftF": {
+	"tag": "minecraft:wool"
+  },
+  "craftG": {
+	"item": "minecraft:leather"
+  },
+  "craftH": {
+	"tag": "minecraft:wool"
+  },
+  "craftI": {
+	"item": "minecraft:leather"
+  },
+  "title": "beast master",
+  "cost": 13,
+  "augment": "amethyst_imbuement:beast_master"
+}
+
