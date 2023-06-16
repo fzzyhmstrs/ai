@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:accursed_figurine"
+  },
+  "imbueB": {
+	"item": "minecraft:coal_block"
+  },
+  "imbueC": {
+	"item": "minecraft:coal_block"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:accursed_figurine"
+  },
+  "craftA": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "craftB": {
+	"item": "minecraft:nether_wart"
+  },
+  "craftC": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "craftD": {
+	"item": "minecraft:nether_wart"
+  },
+  "craftF": {
+	"item": "minecraft:nether_wart"
+  },
+  "craftG": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "craftH": {
+	"item": "minecraft:nether_wart"
+  },
+  "craftI": {
+	"item": "minecraft:rotten_flesh"
+  },
+  "title": "Accursed",
+  "cost": 17,
+  "augment": "amethyst_imbuement:accursed"
+}
+

@@ -47,6 +47,13 @@
     "y": 28
   },
   {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+    "framed": true,
+    "x": 56,
+    "y": 28
+  },
+  {
     "type": "patchouli:image",
     "x": 80,
     "y": 32,
@@ -106,6 +113,13 @@
     "y": 79
   },
   {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+    "framed": true,
+    "x": 56,
+    "y": 79
+  },
+  {
     "type": "patchouli:image",
     "x": 80,
     "y": 83,
@@ -162,6 +176,13 @@
     "item": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
     "framed": true,
     "x": 33,
+    "y": 130
+  },
+  {
+    "type": "patchouli:item",
+    "item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"}]}",
+    "framed": true,
+    "x": 56,
     "y": 130
   },
   {

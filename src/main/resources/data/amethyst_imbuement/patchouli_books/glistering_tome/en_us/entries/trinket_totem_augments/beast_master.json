@@ -1,0 +1,31 @@
+{    
+"name": "Beast Master Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)Effect:$() Buffs summons and pets while the totem is active. Higher levels provide more type of buffs.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 3$(br)$(l)Active/Passive:$() Activated, drains durability while active and summons are nearby$(br)$(l)Tier:$() Medium(br)$(l)Incompatibilities:$() Other active totem augments."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Beast Master Imbuing",
+"anchor": "beast_master",
+"imbue_a_item": "amethyst_imbuement:malachite_figurine",
+"imbue_b_item": "minecraft:coal_block",
+"imbue_c_item": "minecraft:coal_block",
+"imbue_d_item": "amethyst_imbuement:malachite_figurine",
+"craft_a_item": "minecraft:leather",
+"craft_b_item": "minecraft:saddle",
+"craft_c_item": "minecraft:leather",
+"craft_d_item": "tag:minecraft:wool",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "tag:minecraft:wool",
+"craft_g_item": "minecraft:leather",
+"craft_h_item": "tag:minecraft:wool",
+"craft_i_item": "minecraft:leather",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:beast_master\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}

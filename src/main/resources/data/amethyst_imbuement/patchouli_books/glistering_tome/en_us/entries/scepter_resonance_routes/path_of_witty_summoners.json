@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow this route on the Path of Resonance to control hordes of minions with high level spells. All your spells have a chance to echo and your summoning spells have a large boost. All of your spells cast a level above normal and your Wit spells gain double XP."
+"text": "Follow this route on the Path of Resonance to control hordes of minions with high level spells. All your spells have a chance to echo and your summoning spells have a large boost. All of your spells cast a level above normal and your Wit spells gain +1 XP."
 },
 {
   "type": "amethyst_imbuement:scepter_route",

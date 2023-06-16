@@ -1,6 +1,6 @@
 {    
-"name": "Augment Templates",
-"parent": "amethyst_imbuement:scepter_augments",
-"description": "Templates for the more rare and powerful augments hidden around the world. The Book of Lore or Book of Mythos you find will reveal the augment within once used, as well as the $(#b0b)key item$() needed to complete the imbuement.",
+"name": "Spell Templates",
+"parent": "amethyst_imbuement:spells",
+"description": "Templates for the more rare and powerful spells hidden around the world. The Book of Lore or Book of Mythos you find will reveal the spell within once used, as well as the $(#b0b)key item$() and recipe needed to complete the imbuement.",
 "icon": "amethyst_imbuement:book_of_mythos"
 }

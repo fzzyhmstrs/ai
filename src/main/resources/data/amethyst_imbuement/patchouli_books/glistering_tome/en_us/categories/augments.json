@@ -1,5 +1,5 @@
 {    
 "name": "Augments",
-"description": "Augments are advanced enchantments with powerful effects that usually can only be applied in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(). Within this section find descriptions and recipes for the various augmentations available for your scepters, jewelry, totems, and other gear.",
+"description": "Augments are advanced enchantments with powerful effects that usually can only be applied in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(). Within this section find descriptions and recipes for the various augmentations available for your jewelry, totems, and other gear.",
 "icon": "amethyst_imbuement:book_of_lore"
 }

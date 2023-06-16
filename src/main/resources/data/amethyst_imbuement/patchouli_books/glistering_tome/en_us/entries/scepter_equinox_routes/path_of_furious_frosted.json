@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow this route on the Path of the Equinox if you want to freeze your foes solid with high-tiered ice magic. Ice-based Augments have a big boost, elemental magic of any kind is further boosted by Elemental, and fury spells gain $(o)three times$() the XP as normal thanks to Enraged."
+"text": "Follow this route on the Path of the Equinox if you want to freeze your foes solid with high-tiered ice magic. Ice-based Augments have a big boost, elemental magic of any kind is further boosted by Elemental, and fury spells gain $(o)+2$() XP thanks to Enraged."
 },
 {
   "type": "amethyst_imbuement:scepter_route",

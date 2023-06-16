@@ -1,5 +1,5 @@
 {
-  "name": "Malachite_figurine",
+  "name": "Accursed Figurine",
   "icon": "amethyst_imbuement:malachite_figurine",
   "category": "amethyst_imbuement:gems",
   "pages": [
@@ -9,8 +9,8 @@
     },
     {
       "type": "patchouli:spotlight",
-      "title": "Malachite Figurine",
-      "item": "amethyst_imbuement:malachite_figurine",
+      "title": "Accursed Figurine",
+      "item": "amethyst_imbuement:accursed_figurine",
       "link_recipe": true,
       "text": "$(o)A twisted symbol of malice. It's eyes pleadingly ask why? Why?$()"
     }
