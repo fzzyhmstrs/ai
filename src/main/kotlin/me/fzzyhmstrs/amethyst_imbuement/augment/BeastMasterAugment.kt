@@ -34,11 +34,11 @@ class BeastMasterAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
         for (entity in list){
             if (entity !is LivingEntity) continue
             if (level >= 1)
-                entity.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH,240,amplifier + 1))
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH,60,amplifier + 1))
             if (level >= 2)
-                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.BLESSED,240,amplifier))
+                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.BLESSED,60,amplifier))
             if (level >= 3)
-                entity.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,240,amplifier))
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,60,amplifier))
             helped++
         }
         if (helped == 0) return

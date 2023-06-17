@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag;
+import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -23,6 +24,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,34 +62,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "dropInventory", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.dropAll ()V"), cancellable = true)
     private void amethyst_imbuement_checkForSoulbinding(CallbackInfo ci){
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
-            for (ItemStack stack : this.inventory.main){
-                if (stack.getItem() instanceof TotemItem){
-                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
-                            ci.cancel();
-                            break;
-                        }
-                    }
-                }
-            }
-            for (ItemStack stack : this.inventory.offHand){
-                if (stack.getItem() instanceof TotemItem){
-                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
-                            ci.cancel();
-                            break;
-                        }
-                    }
-                }
-            }
-            for (ItemStack stack : this.inventory.armor){
-                if (stack.getItem() instanceof TotemItem){
-                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,stack)){
-                            ci.cancel();
-                            break;
-                        }
-                    }
+            Pair<ItemStack,Integer> chk = BaseAugment.Companion.getEquipmentWithAugment(RegisterEnchantment.INSTANCE.getSOULBINDING(),this.inventory, item -> item instanceof TotemItem);
+            if (chk.getRight() > 0){
+                if (RegisterEnchantment.INSTANCE.getSOULBINDING().specialEffect((PlayerEntity)(Object)this,1,chk.getLeft())){
+                    ci.cancel();
                 }
             }
         }
@@ -96,6 +74,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "damage", at = @At(value = "HEAD"))
     private void amethyst_imbuement_damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         damageSource = source;
+        Entity attacker = damageSource.getSource();
+        if (attacker != null) {
+            if (attacker instanceof LivingEntity) {
+                Pair<ItemStack,Integer> chk = BaseAugment.Companion.getEquipmentWithAugment(RegisterEnchantment.INSTANCE.getACCURSED(),this.inventory,item -> item instanceof TotemItem);
+                if (chk.getRight() > 0){
+                    RegisterEnchantment.INSTANCE.getACCURSED().accursedEffect((PlayerEntity)(Object)this,(LivingEntity) attacker,chk.getRight(),chk.getLeft());
+                }
+            }
+        }
         if (!(this.timeUntilRegen > 10)) {
             ItemStack stack2 = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
             if (stack2.isOf(RegisterItem.INSTANCE.getGEM_OF_PROMISE())) {

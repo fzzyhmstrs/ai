@@ -19,8 +19,7 @@ class AccursedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     fun accursedEffect(user: LivingEntity, attacker: LivingEntity, level: Int, stack: ItemStack) {
         if (user.world.random.nextFloat() > (0.1 * level)) return
-        if (!RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,5)) return
-        if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 5)) {
+        if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 1)) {
             if (AiConfig.trinkets.enableBurnout.get()) {
                 RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
                     stack,
@@ -35,6 +34,8 @@ class AccursedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         var duration = effect?.duration?:160
         if (duration < 160) duration = 160
         attacker.addStatusEffect(StatusEffectInstance(RegisterStatus.CURSED, duration, amp + 1))
+        println("accursed added!")
+        println(attacker.statusEffects)
     }
 
 }

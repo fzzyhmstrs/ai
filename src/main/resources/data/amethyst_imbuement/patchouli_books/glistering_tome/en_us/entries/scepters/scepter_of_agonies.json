@@ -19,7 +19,7 @@
       "type": "amethyst_imbuement:imbuing_recipe",
       "title": "Scepter of Agonies",
       "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "minecraft:brutal_gem",
+      "imbue_b_item": "amethyst_imbuement:brutal_gem",
       "imbue_c_item": "minecraft:gold_ingot",
       "imbue_d_item": "minecraft:gold_ingot",
       "craft_a_item": "amethyst_imbuement:garnet",

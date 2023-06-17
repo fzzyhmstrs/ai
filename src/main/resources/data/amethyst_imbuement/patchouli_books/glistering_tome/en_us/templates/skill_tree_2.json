@@ -180,7 +180,7 @@
   },
   {
     "type": "patchouli:item",
-    "item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
+    "item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
     "framed": true,
     "x": 56,
     "y": 130

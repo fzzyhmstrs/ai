@@ -14,6 +14,7 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.boss.WitherEntity
 import net.minecraft.entity.boss.dragon.EnderDragonEntity
@@ -48,13 +49,19 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
                     val targetSelector = (target as MobEntityAccessor).targetSelector
                     val targets = targetSelector.goals.toMutableSet()
                     targetSelector.clear {true}
+                    target.target = null
                     if (target is PathAwareEntity)
                         targetSelector.add(2, RevengeGoal(target, *arrayOfNulls(0)))
-                    targetSelector.add(3, ActiveTargetGoal(target, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
+                        targetSelector.add(1, ActiveTargetGoal(target, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
+                        val predicate = TargetPredicate.createAttackable()
+                        val newTarget = world.getClosestEntity(world.getEntitiesByClass(MobEntity::class.java,target.boundingBox.expand(16.0,6.0,16.0)) { true },predicate,target,target.x,target.eyeY,target.z)
+                        target.target = newTarget
                     if (target is Angerable) {
-                        targetSelector.add(3, ActiveTargetGoal(target, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> target.shouldAngerAt(entity) })
+                        targetSelector.add(1, ActiveTargetGoal(target, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> target.shouldAngerAt(entity) })
                         targetSelector.add(4, UniversalAngerGoal(target, true))
                     }
+
+
                     PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),PersuadePersistentEffectData(target,targets))
                     world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                     true
