@@ -6,6 +6,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class AiItemSettings extends FabricItemSettings {
 
+    public AiItemSettings(){
+    }
+
     @Nullable
     private AiItemGroup aiGroup;
 
