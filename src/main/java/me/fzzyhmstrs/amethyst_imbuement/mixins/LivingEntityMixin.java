@@ -164,7 +164,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (!world.isClient) {
 
             //armor effects a little less often because more intensive
-            if (EventRegistry.INSTANCE.getTicker_30().isReady()) {
+            if (EventRegistry.INSTANCE.getTicker_20().isReady()) {
                 Iterable<ItemStack> iterable = this.getArmorItems();
                 for (ItemStack stack : iterable) {
                     if (stack.isEmpty()) continue;

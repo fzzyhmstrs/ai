@@ -1,7 +1,7 @@
 {
   "name": "Adding Spells",
   "icon": "amethyst_imbuement:opaline_scepter",
-  "category": "amethyst_imbuement:scrolls",
+  "category": "amethyst_imbuement:spells",
   "pages": [
     {
       "type": "patchouli:text",

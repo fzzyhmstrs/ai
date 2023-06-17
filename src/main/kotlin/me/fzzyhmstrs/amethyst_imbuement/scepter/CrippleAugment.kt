@@ -39,7 +39,7 @@ import java.util.*
 class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.5F,0.5F,0.0F)
+        get() = super.baseEffect.withDamage(3.4F,0.2F,0.0F)
             .withRange(7.75,0.25,0.0)
             .withDuration(110,10)
             .withAmplifier(-1,1,0)
@@ -105,9 +105,13 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
                 val amp = if (crit > 1f) 4 else 1
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, effect.duration(level), amp))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, effect.duration(level), amp))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effect.duration(level), (amp + 1) * -1))
             }
         }
         return bl
+    }
+
+    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
     }
 
     override fun soundEvent(): SoundEvent {
@@ -125,26 +129,6 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
     companion object {
 
         private val NOTE_BLAST = Identifier(AI.MOD_ID, "note_blast")
-
-        internal fun registerClient() {
-            ClientPlayNetworking.registerGlobalReceiver(NOTE_BLAST) { client, _, buf, _ ->
-                val userX = buf.readDouble()
-                val userY = buf.readDouble()
-                val userZ = buf.readDouble()
-                val userPos = Vec3d(userX,userY,userZ)
-                val userVelX = buf.readDouble()
-                val userVelY = buf.readDouble()
-                val userVelZ = buf.readDouble()
-                val userVel = Vec3d(userVelX,userVelY,userVelZ)
-                val targetX = buf.readDouble()
-                val targetY = buf.readDouble()
-                val targetZ = buf.readDouble()
-                val targetPos = Vec3d(targetX,targetY,targetZ)
-                client.execute {
-                    noteBlast(userPos, userVel, targetPos, client.world)
-                }
-            }
-        }
 
         private fun noteBlast(userPos: Vec3d,userVel: Vec3d, targetPos:Vec3d, world: World?){
             if (world == null) return

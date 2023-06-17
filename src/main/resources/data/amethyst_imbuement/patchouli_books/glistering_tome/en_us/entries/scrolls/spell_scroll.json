@@ -1,7 +1,7 @@
 {
   "name": "Spell Scroll",
   "icon": "amethyst_imbuement:spell_scroll",
-  "category": "amethyst_imbuement:scrolls",
+  "category": "amethyst_imbuement:spells",
   "pages": [
     {
       "type": "patchouli:text",

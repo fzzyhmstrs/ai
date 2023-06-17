@@ -208,7 +208,7 @@ object RegisterItem {
         .also{ regItem["scepter_of_summoning"] = it}
     val PERSUASIVE_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.PERSUADE))
-        .withModifiers(listOf(RegisterModifier.WITTY))
+        .withModifiers(listOf(RegisterModifier.WITTY, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["persuasive_scepter"] = it}
     val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))

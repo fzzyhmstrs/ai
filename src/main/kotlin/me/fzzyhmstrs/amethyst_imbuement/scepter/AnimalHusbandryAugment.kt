@@ -47,13 +47,21 @@ class AnimalHusbandryAugment: MiscAugment(ScepterTier.TWO,4) {
                 if (entity.isBaby) {
                     val i = entity.breedingAge
                     entity.growUp(AnimalEntity.toGrowUpAge(-i), true)
+                    successes++
+                    if (entity.health < entity.maxHealth){
+                        entity.heal(0.5f)
+                    }
                 } else {
-                    entity.lovePlayer(user as? PlayerEntity)
+                    if (entity.canEat() && entity.breedingAge == 0) {
+                        entity.lovePlayer(user as? PlayerEntity)
+                        successes++
+                        if (entity.health < entity.maxHealth){
+                            entity.heal(0.5f)
+                        }
+                    }
                 }
-                if (entity.health < entity.maxHealth){
-                    entity.heal(0.5f)
-                }
-                successes++
+
+
             }
         }
         if (successes > 0) world.playSound(null,user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,1.0f)
