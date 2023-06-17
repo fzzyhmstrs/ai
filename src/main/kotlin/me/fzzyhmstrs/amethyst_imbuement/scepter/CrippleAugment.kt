@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.scepter.ResonateAugment.Companion.NOTE_BLAST
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -98,7 +99,7 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         val bl = target.damage(if (user is PlayerEntity) DamageSource.player(user) else DamageSource.mob(user), damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
-                ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))
+                ServerPlayNetworking.send(user, NOTE_BLAST, ResonateAugment.writeBuf(user, target))
             }
             if (target is LivingEntity) {
                 effect.accept(target, AugmentConsumer.Type.HARMFUL)
@@ -124,48 +125,5 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
 
     override fun particleSpeed(): Double {
         return 3.0
-    }
-
-    companion object {
-
-        private val NOTE_BLAST = Identifier(AI.MOD_ID, "note_blast")
-
-        private fun noteBlast(userPos: Vec3d,userVel: Vec3d, targetPos:Vec3d, world: World?){
-            if (world == null) return
-            val random = world.random
-            val direction = targetPos.subtract(userPos).normalize()
-            val perpendicularToPosX = 1.0
-            val perpendicularToPosZ = (direction.x/direction.z) * -1
-            val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
-            for (i in 1..10){
-                val rnd1 = (random.nextDouble() - 0.5)/2.0
-                val rnd2 = (random.nextDouble() - 0.5)/2.0
-                val particlePos = userPos.add(perpendicularVector.multiply(rnd1)).add(0.0, rnd2,0.0)
-                val particleVelocity = direction.multiply(RegisterEnchantment.RESONATE.particleSpeed()).add(userVel)
-                addParticles(world,RegisterEnchantment.RESONATE.particleType(),particlePos,particleVelocity)
-            }
-        }
-
-        private fun addParticles(world: World, particleEffect: ParticleEffect, pos: Vec3d, velocity: Vec3d){
-            world.addParticle(particleEffect,true,pos.x,pos.y,pos.z,velocity.x,velocity.y,velocity.z)
-        }
-
-        internal fun writeBuf(user: LivingEntity, target: Entity): PacketByteBuf{
-            val buf = PacketByteBufs.create()
-            val userPos = user.eyePos.add(0.0,-0.3,0.0)
-            val userVel = user.velocity
-            val targetPos = target.pos .add(0.0,target.height / 1.5,0.0)
-            buf.writeDouble(userPos.x)
-            buf.writeDouble(userPos.y)
-            buf.writeDouble(userPos.z)
-            buf.writeDouble(userVel.x)
-            buf.writeDouble(userVel.y)
-            buf.writeDouble(userVel.z)
-            buf.writeDouble(targetPos.x)
-            buf.writeDouble(targetPos.y)
-            buf.writeDouble(targetPos.z)
-            return buf
-        }
-
     }
 }
