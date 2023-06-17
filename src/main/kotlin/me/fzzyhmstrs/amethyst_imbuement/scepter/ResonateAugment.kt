@@ -139,7 +139,7 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
 
     companion object {
 
-        private val NOTE_BLAST = Identifier(AI.MOD_ID, "note_blast")
+        internal val NOTE_BLAST = Identifier(AI.MOD_ID, "note_blast")
 
         internal fun registerClient() {
             ClientPlayNetworking.registerGlobalReceiver(NOTE_BLAST) { client, _, buf, _ ->
