@@ -161,8 +161,8 @@ class ImbuingTableScreenHandler(
         return this.seed.get()
     }
 
-    override fun close(player: PlayerEntity) {
-        super.close(player)
+    override fun onClosed(player: PlayerEntity) {
+        super.onClosed(player)
         inventory.removeListener(listener)
         parentEntity?.clearInUse(player.uuid)
         //context.run { _: World?, _: BlockPos? -> dropInventory(player, inventory) }
@@ -947,7 +947,7 @@ class ImbuingTableScreenHandler(
                     ?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
                 AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             } else {
-                val str = AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name).string
+                val str = AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.getOutput().item.name).string
                 AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             }
         }
@@ -1038,7 +1038,7 @@ class ImbuingTableScreenHandler(
                     Criteria.ENCHANTED_ITEM.trigger(player, itemStack3, i)
                 }
             } else{
-                val itemStack4 = recipe.output
+                val itemStack4 = recipe.getOutput()
                 val item = itemStack4.item
                 if (item is Reactant){
                     if (!item.canReact(itemStack4, Reagent.getReagents(handler.inventory), handler.player, ImbuingRecipe.Type)){
@@ -1094,7 +1094,7 @@ class ImbuingTableScreenHandler(
                     list.add(AcText.empty())
                 }
             } else {
-                list.add(AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name))
+                list.add(AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.getOutput().item.name))
                 list.add(AcText.empty())
             }
             if (player.experienceLevel < power){
@@ -1119,7 +1119,7 @@ class ImbuingTableScreenHandler(
                     AcText.empty()
                 }
             } else {
-                AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.output.item.name)
+                AcText.translatable("container.imbuing_table.item_result", recipe.getCount(), recipe.getOutput().item.name)
             }
         }
 

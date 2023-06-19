@@ -88,7 +88,7 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
         var successes = 0
         for (target in entityList) {
             if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
-            val bl = target.damage(CustomDamageSources.FreezingDamageSource(user),effect.damage(level))
+            val bl = target.damage(CustomDamageSources.freeze(world,null,user),effect.damage(level))
             if (bl && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), effect.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), effect.amplifier(level)))

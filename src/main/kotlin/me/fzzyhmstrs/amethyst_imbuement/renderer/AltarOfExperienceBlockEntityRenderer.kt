@@ -11,6 +11,7 @@ import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -43,11 +44,12 @@ class AltarOfExperienceBlockEntityRenderer(ctx: BlockEntityRendererFactory.Conte
         val lightAbove = WorldRenderer.getLightmapCoordinates(altarOfExperienceBlockEntity.world, altarOfExperienceBlockEntity.pos.up())
         MinecraftClient.getInstance().itemRenderer.renderItem(
             stack,
-            ModelTransformation.Mode.FIXED,
+            ModelTransformationMode.FIXED,
             lightAbove,
             j,
             matrixStack,
             vertexConsumerProvider,
+            altarOfExperienceBlockEntity.world,
             altarOfExperienceBlockEntity.pos.asLong().toInt()
         )
         matrixStack.pop()

@@ -27,10 +27,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.BlockView
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
-import net.minecraft.world.World
+import net.minecraft.world.*
 import net.minecraft.world.event.GameEvent
 import net.minecraft.world.explosion.Explosion
 import net.minecraft.world.explosion.ExplosionBehavior
@@ -54,7 +51,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     private val fuseTime = 30
     override var createdBy: UUID? = null
     override var maxAge: Int = -1
-    override var owner: LivingEntity? = null
+    override var entityOwner: LivingEntity? = null
 
     override var entityEffects: AugmentEffect = AugmentEffect().withAmplifier(10)
 
@@ -65,7 +62,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
 
     fun setChickenOwner(owner:LivingEntity?){
         this.createdBy = owner?.uuid
-        this.owner = owner
+        this.entityOwner = owner
     }
 
     override fun initGoals() {
@@ -124,7 +121,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     private fun explode() {
         if (!world.isClient) {
             dead = true
-            world.createExplosion(this, DamageSource.mob(this),
+            world.createExplosion(this, this.damageSources.explosion(this,owner),
                 BoomChickenExplosionBehavior,this.pos,entityEffects.amplifier(0)/10f,false,World.ExplosionSourceType.NONE)
             discard()
         }
@@ -255,15 +252,21 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         return createdBy
     }
 
-    override fun getOwner(): Entity? {
-        return if (owner != null) {
-            owner
+    override fun method_48926(): EntityView {
+        return this.world
+    }
+
+    override fun getOwner(): LivingEntity? {
+        return if (entityOwner != null) {
+            entityOwner
         } else if (world is ServerWorld && createdBy != null) {
             val o = (world as ServerWorld).getEntity(createdBy)
             if (o != null && o is LivingEntity) {
-                owner = o
+                entityOwner = o
+                o
+            } else {
+                null
             }
-            o
         }else {
             null
         }

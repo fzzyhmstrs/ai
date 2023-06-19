@@ -59,10 +59,6 @@ class AltarOfExperienceScreenHandler(
         return this.seed.get()
     }
 
-    override fun close(player: PlayerEntity) {
-        super.close(player)
-    }
-
     fun getSyncedStoredXp(): Int{
         val divisor = storedXp.get(0)
         val remainder = storedXp.get(1)

@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 
@@ -18,7 +19,7 @@ object GlisteringTridentItemEntityRenderer: BuiltinItemRendererRegistry.DynamicI
 
     override fun render(
         stack: ItemStack,
-        mode: ModelTransformation.Mode,
+        mode: ModelTransformationMode,
         matrices: MatrixStack,
         vertexConsumers: VertexConsumerProvider,
         light: Int,

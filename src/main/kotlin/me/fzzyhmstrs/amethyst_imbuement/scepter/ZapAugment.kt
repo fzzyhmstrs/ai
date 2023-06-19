@@ -58,7 +58,7 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
                 0.8,
                 0.8)
         entityList.forEach {
-            it.damage(CustomDamageSources.LightningDamageSource(user), effect.damage(level))
+            it.damage(CustomDamageSources.lightningBolt(world,null,user), effect.damage(level))
         }
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.7F, 1.1F)
         return true

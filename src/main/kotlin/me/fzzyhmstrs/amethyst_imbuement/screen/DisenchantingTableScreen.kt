@@ -53,9 +53,9 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         if (handler.getSlot(1).hasStack()){
-            this.drawTexture(matrices, i + 35, j + 47, 15, 47, 16, 16)
+            drawTexture(matrices, i + 35, j + 47, 15, 47, 16, 16)
         }
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
@@ -83,7 +83,6 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         var onesImageOfst = 9
 
         for (o in 0..2) {
-            zOffset = 0
             RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
@@ -91,7 +90,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             val lvl = handler.enchantmentLevel[o]
             if (r == -1 || cost == -1) {
                 //draws the "browned out" no-entry box
-                this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
+                drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
                 continue //jumps to the next enchantment in the list
             }
             val string = "" + handler.disenchantCost[0]
@@ -109,10 +108,10 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             if (o == 1) {
                 if ((((player.experienceLevel) >= cost) || (player.abilities.creativeMode)) && ((Enchantment.byRawId(r) !is ScepterAugment && handler.getSlotStack(1).isOf(Items.BOOK)) || (Enchantment.byRawId(r) is ScepterAugment && handler.getSlotStack(1).isOf(RegisterItem.EMPTY_SPELL_SCROLL)))) {
                     t2 = if (u >= 0 && v >= 0 && u < 108 && v < 19) {
-                        this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
+                        drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
                         0xFFFF80
                     } else {
-                        this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
+                        drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
                         0x404040
                         //6839882
                     }
@@ -120,14 +119,14 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     vertOffset2 = 0
                     t = 8453920
                 } else {
-                    this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
+                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
                     vertOffset = 16
                     vertOffset2 = 10
                     t = 4226832
                     t2 = 0xC0C0C0//0x342F25
                 }
                 if (oOfst <= 6) {
-                    this.drawTexture(
+                    drawTexture(
                         matrices,
                         p + 1,
                         j + 15 + 19 * o,
@@ -138,7 +137,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     )
                 } else {
                     //draw in an empty level 6 experience orb picture as a background for the numbers
-                    this.drawTexture(
+                    drawTexture(
                         matrices,
                         p + 1,
                         j + 15 + 19 * o,
@@ -170,7 +169,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         onesImageOfst = ones - 1
                     }
                     //draw the ones place numeral
-                    this.drawTexture(
+                    drawTexture(
                         matrices,
                         p + 1 + onesOfst,
                         j + 15 + 3 + 19 * o, //three additional offset to align the number with the usual position
@@ -179,7 +178,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         9,
                         9
                     )
-                    if (tens>0) this.drawTexture(
+                    if (tens>0) drawTexture(
                         matrices,
                         p + 1 + tensOfst,
                         j + 15 + 3 + 19 * o, //three additional offset to align the number with the usual position
@@ -191,9 +190,9 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
 
                 }
                 if (textRenderer.getWidth(stringVisitable) > s) {
-                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
                 } else {
-                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
                 }
                 textRenderer.drawWithShadow(
                     matrices,
@@ -205,8 +204,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             } else {
                 val horOffset = o * 8 //0 at o = 0, 16 at o = 2
                 if (u >= 0 && v >= 0 && u < 108 && v < 19) {
-                    this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
-                    this.drawTexture(
+                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
+                    drawTexture(
                         matrices,
                         p + 1,
                         j + 15 + 19 * o,
@@ -217,8 +216,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     )
                     t2 = 0xFFFF80
                 } else {
-                    this.drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
-                    this.drawTexture(
+                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
+                    drawTexture(
                         matrices,
                         p + 1,
                         j + 15 + 19 * o,
@@ -230,9 +229,9 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     t2 = 0x404040
                 }
                 if (textRenderer.getWidth(stringVisitable) > s) {
-                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
                 } else {
-                    textRenderer.drawTrimmed(stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
                 }
             }
 

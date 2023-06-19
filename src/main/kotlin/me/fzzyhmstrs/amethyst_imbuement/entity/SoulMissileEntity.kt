@@ -44,7 +44,7 @@ class SoulMissileEntity: MissileEntity {
             val entity2 = entityHitResult.entity
             if(!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl: Boolean = entity2.damage(
-                    DamageSource.magic(this, entity).setProjectile(),
+                    this.damageSources.indirectMagic(this, entity),
                     entityEffects.damage(0)
                 )
 

@@ -44,7 +44,7 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is Monster || target is HostileEntity || target is PlayerCreatable && target.owner != user && AiConfig.entities.isEntityPvpTeammate(target.owner, user,RegisterEnchantment.PERSUADE)) {
+            if (target is Monster || target is HostileEntity || target is PlayerCreatable && target.entityOwner != user && AiConfig.entities.isEntityPvpTeammate(target.entityOwner, user,RegisterEnchantment.PERSUADE)) {
                 if (target is MobEntity && target !is WitherEntity && target !is EnderDragonEntity ) {
                     val targetSelector = (target as MobEntityAccessor).targetSelector
                     val targets = targetSelector.goals.toMutableSet()

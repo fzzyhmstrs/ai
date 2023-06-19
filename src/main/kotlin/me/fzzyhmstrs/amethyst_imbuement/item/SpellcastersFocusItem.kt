@@ -221,7 +221,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     private fun getTier(nbt: NbtCompound?): TierData{
         if (nbt == null) return tiers[0]
         if(!nbt.contains(FOCUS_TIER)) return tiers[0]
-        val tier = MathHelper.clamp(nbt.getByte(FOCUS_TIER),0,4)
+        val tier = MathHelper.clamp(nbt.getByte(FOCUS_TIER).toInt(),0,4)
         return tiers[tier.toInt()]
     }
 

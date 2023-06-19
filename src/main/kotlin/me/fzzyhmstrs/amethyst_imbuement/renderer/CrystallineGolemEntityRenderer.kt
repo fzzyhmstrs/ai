@@ -36,10 +36,10 @@ class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
         h: Float
     ) {
         super.setupTransforms(crystalGolemEntity, matrixStack, f, g, h)
-        if (crystalGolemEntity.limbDistance.toDouble() < 0.01) {
+        if (crystalGolemEntity.limbAnimator.speed < 0.01) {
             return
         }
-        val j = crystalGolemEntity.limbAngle - crystalGolemEntity.limbDistance * (1.0f - h) + 6.0f
+        val j = crystalGolemEntity.limbAnimator.getPos(h) + 6.0f
         val k = (abs(j % 13.0f - 6.5f) - 3.25f) / 3.25f
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(6.5f * k))
     }

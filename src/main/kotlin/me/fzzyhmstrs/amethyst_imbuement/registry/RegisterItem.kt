@@ -287,7 +287,7 @@ object RegisterItem {
         return FabricItemGroup.builder(Identifier(AI.MOD_ID,"ai_group"))
             .displayName(Text.translatable("itemGroup.amethyst_imbuement.ai_group"))
             .icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }
-            .entries { _, entries, _ ->
+            .entries { _, entries ->
                 entries.addAll(regItem.values.stream()
                     .filter { item -> item !== SPELL_SCROLL }
                     .map { item -> ItemStack(item) }.toList())

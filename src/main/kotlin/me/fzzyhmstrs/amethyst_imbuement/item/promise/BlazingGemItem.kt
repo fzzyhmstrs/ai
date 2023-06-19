@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -35,10 +36,7 @@ class BlazingGemItem(settings: Settings): IgnitedGemItem(settings) {
     }
 
     fun blazingGemCheck(stack: ItemStack, inventory: PlayerInventory, player: LivingEntity, damageSource: DamageSource){
-            if ((damageSource == DamageSource.ON_FIRE ||
-                        damageSource == DamageSource.IN_FIRE ||
-                        damageSource == DamageSource.LAVA ||
-                        damageSource == DamageSource.HOT_FLOOR)
+            if ((damageSource.isIn(DamageTypeTags.IS_FIRE))
                 && !player.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
                 && !player.isFireImmune)
             {

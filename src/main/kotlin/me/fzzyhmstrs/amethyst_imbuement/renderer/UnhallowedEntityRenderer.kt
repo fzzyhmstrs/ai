@@ -16,8 +16,9 @@ class UnhallowedEntityRenderer(ctx: EntityRendererFactory.Context): BipedEntityR
     init{
         addFeature(ArmorFeatureRenderer(this,
             UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_INNER_ARMOR)),
-            UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_OUTER_ARMOR))
-        ))
+            UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE_OUTER_ARMOR)),
+            ctx.modelManager)
+        )
     }
 
     override fun getTexture(unhallowedEntity: UnhallowedEntity): Identifier {

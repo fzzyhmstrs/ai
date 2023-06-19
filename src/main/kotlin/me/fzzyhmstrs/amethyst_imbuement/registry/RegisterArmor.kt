@@ -17,15 +17,15 @@ object RegisterArmor {
     internal val regArmor: MutableList<Item> = mutableListOf()
 
     val STEEL_ARMOR_MATERIAL = SteelArmorMaterial()
-    val STEEL_HELMET = ArmorItem(STEEL_ARMOR_MATERIAL, EquipmentSlot.HEAD,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_CHESTPLATE = ArmorItem(STEEL_ARMOR_MATERIAL, EquipmentSlot.CHEST,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_LEGGINGS = ArmorItem(STEEL_ARMOR_MATERIAL, EquipmentSlot.LEGS,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_BOOTS = ArmorItem(STEEL_ARMOR_MATERIAL, EquipmentSlot.FEET,Item.Settings()).also { regArmor.add(it) }
+    val STEEL_HELMET = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.HELMET,Item.Settings()).also { regArmor.add(it) }
+    val STEEL_CHESTPLATE = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,Item.Settings()).also { regArmor.add(it) }
+    val STEEL_LEGGINGS = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,Item.Settings()).also { regArmor.add(it) }
+    val STEEL_BOOTS = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,Item.Settings()).also { regArmor.add(it) }
     val AMETRINE_ARMOR_MATERIAL = AmetrineArmorMaterial()
-    val AMETRINE_HELMET = ArmorItem(AMETRINE_ARMOR_MATERIAL, EquipmentSlot.HEAD,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_CHESTPLATE = ArmorItem(AMETRINE_ARMOR_MATERIAL, EquipmentSlot.CHEST,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_LEGGINGS = ArmorItem(AMETRINE_ARMOR_MATERIAL, EquipmentSlot.LEGS,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_BOOTS = ArmorItem(AMETRINE_ARMOR_MATERIAL, EquipmentSlot.FEET,Item.Settings()).also { regArmor.add(it) }
+    val AMETRINE_HELMET = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.HELMET,Item.Settings()).also { regArmor.add(it) }
+    val AMETRINE_CHESTPLATE = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,Item.Settings()).also { regArmor.add(it) }
+    val AMETRINE_LEGGINGS = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,Item.Settings()).also { regArmor.add(it) }
+    val AMETRINE_BOOTS = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,Item.Settings()).also { regArmor.add(it) }
 
     fun registerAll() {
         Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"steel_helmet"), STEEL_HELMET)

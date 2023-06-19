@@ -51,9 +51,9 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
             if (target is LivingEntity) {
                 if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
                 val bl = if(target.isUndead) {
-                    target.damage(DamageSource.magic(user,user),effects.damage(level) * effects.amplifier(level))
+                    target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level) * effects.amplifier(level))
                 } else {
-                    target.damage(DamageSource.magic(user,user),effects.damage(level))
+                    target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level))
                 }
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)

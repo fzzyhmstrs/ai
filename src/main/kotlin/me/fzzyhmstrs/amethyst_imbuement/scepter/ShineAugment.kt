@@ -61,7 +61,7 @@ class ShineAugment: ScepterAugment(ScepterTier.ONE,1) {
             var range = effects.range(level)
             do {
                 val pos = user.eyePos.subtract(0.0, 0.2, 0.0).add(user.rotationVector.multiply(range))
-                val blockPos = BlockPos(pos)
+                val blockPos = BlockPos.ofFloored(pos)
                 if (CommonProtection.canPlaceBlock(world,blockPos,user.gameProfile,user)){
                     val fluid = world.getFluidState(blockPos)
                     val state = RegisterBlock.SHINE_LIGHT.getShineState(fluid.isIn(FluidTags.WATER))

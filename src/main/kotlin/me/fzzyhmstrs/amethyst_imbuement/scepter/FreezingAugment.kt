@@ -51,7 +51,7 @@ class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
         effects: AugmentEffect
     ) {
         if (target is LivingEntity) target.frozenTicks = effects.duration(0)
-        target.damage(CustomDamageSources.FreezingDamageSource(user),effects.damage(0)*2/3)
+        target.damage(CustomDamageSources.freeze(world,null,user),effects.damage(0)*2/3)
     }
 
     override fun soundEvent(): SoundEvent {

@@ -96,7 +96,7 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         } else {
             effect.damage(level)/2 * crit
         }
-        val bl = target.damage(if (user is PlayerEntity) DamageSource.player(user) else DamageSource.mob(user), damage)
+        val bl = target.damage(if (user is PlayerEntity) user.damageSources.playerAttack(user) else user.damageSources.mobAttack(user), damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, ResonateAugment.writeBuf(user, target))

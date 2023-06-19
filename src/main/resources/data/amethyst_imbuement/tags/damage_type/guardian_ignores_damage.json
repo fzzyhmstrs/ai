@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:in_fire",
+    "minecraft:on_fire",
+    "minecraft:lava",
+    "minecraft:hot_floor",
+    "minecraft:unattributed_fireball",
+    "minecraft:in_wall",
+    "minecraft:stalagmite",
+    "#minecraft:no_impact",
+    "minecraft:freeze",
+    "minecraft:dry_out",
+    "#minecraft:is_fall",
+    "minecraft:sweet_berry_bush",
+    "minecraft:falling_block",
+    "minecraft:falling_anvil",
+    "minecraft:falling_stalactite",
+    "#minecraft:no_anger",
+    "minecraft:out_of_world",
+    "minecraft:cactus",
+    "minecraft:starve",
+    "minecraft:fly_into_wall"
+  ]
+}

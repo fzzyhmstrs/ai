@@ -11,6 +11,7 @@ import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.LivingEntityRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -40,11 +41,12 @@ class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90F))
         MinecraftClient.getInstance().itemRenderer.renderItem(
             livingEntity.stack,
-            ModelTransformation.Mode.FIXED,
+            ModelTransformationMode.FIXED,
             i,
             OverlayTexture.DEFAULT_UV,
             matrixStack,
             vertexConsumerProvider,
+            livingEntity.world,
             livingEntity.seed
         )
         matrixStack.pop()

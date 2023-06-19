@@ -88,7 +88,14 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         world.sendEntityStatus(this, 4.toByte())
         val f = getAttackDamage()
         val g = if (f.toInt() > 0) f / 2.0f + random.nextInt(f.toInt()).toFloat() else f
-        val bl = target.damage(DamageSource.mob(this), g)
+        val entity = owner
+        val bl = if(entity == null) {
+            target.damage(this.damageSources.mobAttack(this), g)
+        } else if (entity is PlayerEntity) {
+            target.damage(this.damageSources.playerAttack(entity), g)
+        } else {
+            target.damage(this.damageSources.mobAttack(entity), g)
+        }
         if (bl) {
             target.velocity = target.velocity.add(0.0, 0.5, 0.0)
             applyDamageEffects(this, target)

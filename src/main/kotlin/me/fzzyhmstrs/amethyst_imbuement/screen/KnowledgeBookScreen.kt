@@ -95,10 +95,10 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         drawTexture(matrices,i+8,j+132,bindingUV.first + 8,bindingUV.second,5,14)
         drawTexture(matrices,i+243,j+132,bindingUV.first + 13,bindingUV.second,5,14)
         //the recipe title on the right page
-        DrawableHelper.drawCenteredText(matrices,textRenderer,AcText.translatable("lore_book.screen").formatted(Formatting.GOLD),i + 187,j+11,0x404040)
+        DrawableHelper.drawCenteredTextWithShadow(matrices,textRenderer,AcText.translatable("lore_book.screen").formatted(Formatting.GOLD),i + 187,j+11,0x404040)
         //the recipe cost on the right page
         val imbueCost = AcText.translatable("lore_book.screen.cost",imbuingCost.toString()).formatted(Formatting.GREEN)
-        DrawableHelper.drawCenteredText(matrices,textRenderer,imbueCost,i + 187,j+30,0x404040)
+        DrawableHelper.drawCenteredTextWithShadow(matrices,textRenderer,imbueCost,i + 187,j+30,0x404040)
         val imbueWidth = textRenderer.getWidth(imbueCost)
 
         val tooltips: MutableList<TooltipBox> = mutableListOf()

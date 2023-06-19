@@ -92,7 +92,7 @@ class CrystalAltarScreenHandler(
             } else {
                 this.currentRecipe = match.get()
                 val recipe = match.get()
-                val itemStack: ItemStack = recipe.craft(input as SimpleInventory)
+                val itemStack: ItemStack = recipe.craft(input as SimpleInventory, world.registryManager)
                 output.lastRecipe = this.currentRecipe
                 output.setStack(0, itemStack)
             }
@@ -202,8 +202,8 @@ class CrystalAltarScreenHandler(
         return slot.inventory !== output && super.canInsertIntoSlot(stack, slot)
     }
 
-    override fun close(player: PlayerEntity?) {
-        super.close(player)
+    override fun onClosed(player: PlayerEntity?) {
+        super.onClosed(player)
         handlerContext.run { _: World, _: BlockPos ->
             dropInventory(
                 player,

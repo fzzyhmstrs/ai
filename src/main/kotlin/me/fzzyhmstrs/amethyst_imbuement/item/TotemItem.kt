@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
@@ -152,19 +153,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
         }
 
         private fun checkDamageSource(ds: DamageSource): Boolean{
-            return ds != DamageSource.FALL &&
-                    ds != DamageSource.CACTUS &&
-                    ds != DamageSource.FLY_INTO_WALL &&
-                    ds != DamageSource.HOT_FLOOR &&
-                    ds != DamageSource.IN_FIRE &&
-                    ds != DamageSource.DROWN &&
-                    ds != DamageSource.OUT_OF_WORLD &&
-                    ds != DamageSource.STALAGMITE &&
-                    ds != DamageSource.IN_WALL &&
-                    ds != DamageSource.FREEZE &&
-                    ds != DamageSource.DRYOUT &&
-                    ds != DamageSource.STARVE &&
-                    ds != DamageSource.SWEET_BERRY_BUSH && !ds.isFallingBlock
+            return !ds.isIn(RegisterTag.GUARDIAN_IGNORES_DAMAGE_TAG)
         }
     }
 

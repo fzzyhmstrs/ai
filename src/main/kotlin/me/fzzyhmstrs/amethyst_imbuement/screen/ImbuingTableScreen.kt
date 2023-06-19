@@ -95,9 +95,9 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         val i = (width - backgrdWidth) / 2
         val j = (height - backgrdHeight) / 2
         val ofst2 = 4 //ofst to handle the screen height change
-        this.drawTexture(matrices, i, j, 0, 0, backgrdWidth, backgrdHeight)
+        drawTexture(matrices, i, j, 0, 0, backgrdWidth, backgrdHeight)
         if (handler.lapisSlot.get() > 0){
-            this.drawTexture(matrices,i+72,j+38,8,13,16,16)
+            drawTexture(matrices,i+72,j+38,8,13,16,16)
         }
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
@@ -117,7 +117,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         for (o in 0..2) {
             val p = i + 118 //offset from left edge of enchantment boxes
             val q = p + 20
-            zOffset = 0
             RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
@@ -126,7 +125,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             val power = result.power
             if (r == -1 || result.type == 3 || power == 0) {
                 //draws the "browned out" no-entry box
-                this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
+                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 continue //jumps to the next enchantment in the list
             }
             val string = "" + power
@@ -182,12 +181,12 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             }
 
             if (hovered) {
-                this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonHoveredOffset, 108, 19)
+                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonHoveredOffset, 108, 19)
             } else {
-                this.drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonOffset, 108, 19)
+                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonOffset, 108, 19)
             }
             if (o == 0 && handler.resultsCanUp){
-                this.drawTexture(
+                drawTexture(
                     matrices,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
@@ -197,7 +196,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     16
                 )
             } else if (o == 2 && handler.resultsCanDown){
-                this.drawTexture(
+                drawTexture(
                     matrices,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
@@ -207,7 +206,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     16
                 )
             } else if ((lapisOffset) <= 5) {
-                this.drawTexture(
+                drawTexture(
                     matrices,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
@@ -218,7 +217,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 )
             } else {
                 //draw in an empty level 6 experience orb picture as a background for the numbers
-                this.drawTexture(
+                drawTexture(
                     matrices,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
@@ -250,7 +249,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     onesImageOfst = ones - 1
                 }
                 //draw the ones place numeral
-                this.drawTexture(
+                drawTexture(
                     matrices,
                     p + 1 + onesOfst,
                     j + 15 + ofst2 + 3 + 19 * o, //three additional offset to align the number with the usual position
@@ -259,7 +258,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     9,
                     9
                 )
-                if (tens>0) this.drawTexture(
+                if (tens>0) drawTexture(
                     matrices,
                     p + 1 + tensOfst,
                     j + 15 + ofst2 + 3 + 19 * o, //three additional offset to align the number with the usual position
@@ -277,7 +276,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else {
                 0
             }
-            textRenderer.drawTrimmed(stringVisitable, q, j + 16 + ofst2 + ofst3 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
+            textRenderer.drawTrimmed(matrices,stringVisitable, q, j + 16 + ofst2 + ofst3 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
             if (!(o == 0 && handler.resultsCanUp || o == 2 && handler.resultsCanDown))
             textRenderer.drawWithShadow(
                 matrices,
@@ -294,7 +293,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             val u = mouseX - (i + 6)
             val v = mouseY - (j + 91)
             val hovered = (u >= 0 && v >= 0 && u < 20 && v < 18)
-            this.drawTexture(
+            drawTexture(
                 matrices,
                 i + 6,
                 j + 91,
@@ -320,7 +319,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            this.drawTexture(
+            drawTexture(
                 matrices,
                 i + 94,
                 j + 37,

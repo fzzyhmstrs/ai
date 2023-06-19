@@ -52,7 +52,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
-        this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0xFFFFFF)
         DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0xFFFFFF)
     }
@@ -112,7 +112,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             RenderSystem.defaultBlendFunc()
             RenderSystem.enableDepthTest()
             val i = if (hovered || selected) 1 else 0
-            this.drawTexture(matrices, x, y, 0 + 58 * i, 128, width , height)
+            drawTexture(matrices, x, y, 0 + 58 * i, 128, width , height)
             ClickableWidget.drawCenteredTextWithShadow(matrices,textRenderer,message.asOrderedText(),x + (width / 2),y + 5,0xFFFFFF)
             val drawDots: Boolean
             val range = if (mods.size <= 3) {
@@ -126,10 +126,10 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             RenderSystem.setShaderTexture(0, texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             for (j in range){
-                this.drawTexture(matrices, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
+                drawTexture(matrices, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
             }
             if (drawDots){
-                this.drawTexture(matrices, x + 9, y + 18 + 21 * 2, 116, 146, 40 , 18)
+                drawTexture(matrices, x + 9, y + 18 + 21 * 2, 116, 146, 40 , 18)
             }
             for (j in range){
                 val mod = mods[j]

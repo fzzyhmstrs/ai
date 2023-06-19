@@ -86,7 +86,7 @@ object RecipeUtil {
             EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
             return SingleStackProvider(stack)
         }
-        val output = recipe.output
+        val output = recipe.getOutput()
         return SingleStackProvider(output)
     }
 

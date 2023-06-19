@@ -7,6 +7,8 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.resource.featuretoggle.FeatureFlags
+import net.minecraft.resource.featuretoggle.FeatureSet
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
 
@@ -19,33 +21,33 @@ object RegisterHandler {
 
     fun registerAll(){
 
-        IMBUING_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
+        IMBUING_SCREEN_HANDLER = ScreenHandlerType ( { syncID: Int, playerInventory: PlayerInventory ->
             ImbuingTableScreenHandler(
                 syncID,
                 playerInventory
             )
-        }
+        }, FeatureFlags.VANILLA_FEATURES)
 
-        ALTAR_OF_EXPERIENCE_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
+        ALTAR_OF_EXPERIENCE_SCREEN_HANDLER = ScreenHandlerType( { syncID: Int, playerInventory: PlayerInventory ->
             AltarOfExperienceScreenHandler(
                 syncID,
                 playerInventory
             )
-        }
+        }, FeatureFlags.VANILLA_FEATURES)
 
-        DISENCHANTING_TABLE_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
+        DISENCHANTING_TABLE_SCREEN_HANDLER = ScreenHandlerType( { syncID: Int, playerInventory: PlayerInventory ->
             DisenchantingTableScreenHandler(
                 syncID,
                 playerInventory
             )
-        }
+        }, FeatureFlags.VANILLA_FEATURES)
 
-        CRYSTAL_ALTAR_SCREEN_HANDLER = ScreenHandlerType { syncID: Int, playerInventory: PlayerInventory ->
+        CRYSTAL_ALTAR_SCREEN_HANDLER = ScreenHandlerType( { syncID: Int, playerInventory: PlayerInventory ->
             CrystalAltarScreenHandler(
                 syncID,
                 playerInventory
             )
-        }
+        }, FeatureFlags.VANILLA_FEATURES)
         
         SPELLCASTERS_FOCUS_SCREEN_HANDLER = ExtendedScreenHandlerType { syncID: Int, playerInventory: PlayerInventory, buf: PacketByteBuf ->
             SpellcastersFocusScreenHandler(

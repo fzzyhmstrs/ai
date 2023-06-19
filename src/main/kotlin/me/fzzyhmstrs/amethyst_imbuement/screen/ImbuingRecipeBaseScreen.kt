@@ -69,8 +69,8 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
     }
 
     protected fun renderItem(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int, stack: ItemStack){
-        itemRenderer.renderInGuiWithOverrides(client?.player, stack, x, y, x + y * 256)
-        itemRenderer.renderGuiItemOverlay(textRenderer, stack, x, y, null)
+        itemRenderer.renderInGuiWithOverrides(matrices,client?.player, stack, x, y, x + y * 256)
+        itemRenderer.renderGuiItemOverlay(matrices,textRenderer, stack, x, y, null)
         renderBookTooltip(matrices, mouseX, mouseY, x, y, stack)
     }
 

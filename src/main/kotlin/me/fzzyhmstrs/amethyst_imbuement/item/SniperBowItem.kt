@@ -83,7 +83,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
             user.incrementStat(Stats.USED.getOrCreateStat(this))
             return ItemUsage.consumeHeldItem(world, user, hand)
         }
-        if (!user.getArrowType(itemStack).isEmpty) {
+        if (!user.getProjectileType(itemStack).isEmpty) {
             if (!isCharged(itemStack)) {
                 this.charged = false
                 this.loaded = false
@@ -194,7 +194,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
         val i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile)
         val j = if (i == 0) 1 else 3
         val bl = shooter is PlayerEntity && shooter.abilities.creativeMode
-        var itemStack = shooter.getArrowType(projectile)
+        var itemStack = shooter.getProjectileType(projectile)
         var itemStack2 = itemStack.copy()
         for (k in 0 until j) {
             if (k > 0) {

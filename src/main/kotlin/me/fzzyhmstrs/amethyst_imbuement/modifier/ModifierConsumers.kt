@@ -69,7 +69,7 @@ object ModifierConsumers {
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
             if (rnd1 == 0)
-                it.world.createExplosion(null, DamageSource.MAGIC, BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
+                it.world.createExplosion(null, it.damageSources.magic(), BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
         }
     }
 
@@ -153,7 +153,7 @@ object ModifierConsumers {
                 if (!it.isDead) {
                     it.isInvulnerable = false //these two lines take away damage invulnerability
                     it.timeUntilRegen = 0
-                    it.damage(DamageSource.GENERIC, 2.0F)
+                    it.damage(it.damageSources.generic(), 2.0F)
                 }
             }
         }
@@ -165,7 +165,7 @@ object ModifierConsumers {
                 if (!it.isDead) {
                     it.isInvulnerable = false //these two lines take away damage invulnerability
                     it.timeUntilRegen = 0
-                    it.damage(DamageSource.GENERIC, 4.0F)
+                    it.damage(it.damageSources.generic(), 4.0F)
                     val rnd = AI.aiRandom().nextInt(5)
                     if (rnd == 0){
                         EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,60,0)

@@ -7,6 +7,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
@@ -21,7 +22,7 @@ class SparkingGemItem(settings: Settings): IgnitedGemItem(settings) {
     }
 
     fun sparkingGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){
-            if (damageSource == DamageSource.LIGHTNING_BOLT){
+            if (damageSource.isIn(DamageTypeTags.IS_LIGHTNING) ){
                 stack.decrement(1)
                 val newStack = ItemStack(RegisterItem.SPARKING_GEM)
                 inventory.offerOrDrop(newStack)

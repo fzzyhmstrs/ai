@@ -60,7 +60,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
             target = null
             return
         }
-        target?.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
+        target?.damage(CustomDamageSources.lightningBolt(world,this,summoner),entityEffects.damage(0))
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)
         world.playSound(null,this.blockPos,SoundEvents.ITEM_TRIDENT_THUNDER,SoundCategory.NEUTRAL,0.5f,1.0f)

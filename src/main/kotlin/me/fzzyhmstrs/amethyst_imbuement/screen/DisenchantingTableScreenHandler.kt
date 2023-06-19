@@ -74,8 +74,8 @@ class DisenchantingTableScreenHandler(
         return this.seed.get()
     }
 
-    override fun close(player: PlayerEntity) {
-        super.close(player)
+    override fun onClosed(player: PlayerEntity) {
+        super.onClosed(player)
         context.run { _: World, _: BlockPos ->
             dropInventory(
                 player,

@@ -88,7 +88,6 @@ object RegisterKeybind {
                         val activeEnchant = nbt.getString(NbtKeys.ACTIVE_ENCHANT.str())
                         val activeEnchantName = Registries.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
                         client.player?.sendMessage(AcText.translatable("scepter.active_spell_key").append(activeEnchantName), true)
-                        client.player?.addScoreboardTag(activeEnchant)
                     } else {
                         client.player?.sendMessage(AcText.translatable("scepter.spells_not_activated"), true)
 

@@ -20,6 +20,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.DefaultParticleType
@@ -99,7 +100,7 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
         } else {
             effect.damage(level + amp - 1)
         }
-        val bl = target.damage(DamageSource.mob(user),damage)
+        val bl = if(user is PlayerEntity) target.damage(user.damageSources.playerAttack(user),damage) else target.damage(user.damageSources.mobAttack(user),damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))
