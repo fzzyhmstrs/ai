@@ -131,19 +131,19 @@ object RegisterItem {
     val COPPER_WARD = CopperWardItem(
         RegisterAttribute.SHIELDING,
         EntityAttributeModifier(UUID.fromString("c66fd31a-ce6e-11ed-afa1-0242ac120002"),"ward_modifier",0.025,EntityAttributeModifier.Operation.ADDITION),
-        AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(336)).also{ regItem["copper_ward"] = it}
-    val IMBUED_RING = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())) .also{ regItem["imbued_ring"] = it}
-    val IMBUED_HEADBAND = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_headband"] = it}
-    val IMBUED_AMULET = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_amulet"] = it}
-    val IMBUED_WARD = ImbuedWardItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get())).also{ regItem["imbued_ward"] = it}
-    val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
-    val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
-    val WITCHES_ORB = WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1).rarity(Rarity.RARE)).withGlint().also{ regItem["witches_orb"] = it}
-    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
-    val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()).also{ regItem["glistering_tome"] = it}
-    val MANA_POTION = ManaPotionItem(FabricItemSettings().maxCount(16)).also{ regItem["mana_potion"] = it}
-    val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
+        AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(336)).also{ regItem["copper_ward"] = it}
+    val IMBUED_RING = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())) .also{ regItem["imbued_ring"] = it}
+    val IMBUED_HEADBAND = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_headband"] = it}
+    val IMBUED_AMULET = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_amulet"] = it}
+    val IMBUED_WARD = ImbuedWardItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get())).also{ regItem["imbued_ward"] = it}
+    val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
+    val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
+    val WITCHES_ORB = WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).group(AI_GROUP).maxCount(1).rarity(Rarity.RARE)).withGlint().also{ regItem["witches_orb"] = it}
+    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().group(AI_GROUP).maxCount(8)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
+    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().group(AI_GROUP).maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
+    val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings().group(AI_GROUP)).also{ regItem["glistering_tome"] = it}
+    val MANA_POTION = ManaPotionItem(FabricItemSettings().group(AI_GROUP).maxCount(16)).also{ regItem["mana_potion"] = it}
+    val DAZZLING_MELON_SLICE = Item(FabricItemSettings().group(AI_GROUP).rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
 
 
@@ -231,7 +231,7 @@ object RegisterItem {
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["scepter_of_the_paladin"] = it}
-    val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+    val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).group(AI_GROUP).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.ANIMAL_HUSBANDRY))
         .withModifiers(listOf(ModifierRegistry.REACH, ModifierRegistry.LESSER_THRIFTY))
         .also{ regItem["scepter_of_harvests"] = it}
