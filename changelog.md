@@ -3,6 +3,8 @@ This update adds a lot of new colorful and fun things to play around with, some 
 
 As I move forward with parting to 1.19.4 and 1.20+, I will focus my attention on those versions. I have a very foundational spell rework in the makings that will rewrite how all spells work from the core. I sadly don't think I will have the time or energy to port this gigantic undertaking to older versions.
 
+### Port to 1.19.4
+
 ### Fixes
 * Fixed the Curse recipe.
 * Fixed accidental incompat with Quilted FAPI.
