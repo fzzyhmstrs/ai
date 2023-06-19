@@ -18,7 +18,8 @@ As I move forward with parting to 1.19.4 and 1.20+, I will focus my attention on
 * Reworked the Patchouli book some, polishing up typos and moving spells into a more sensible chapter, among other things.
 * Summons now remember their owner across saves, and also remember their lifespan. They should now properly follow the owner after re-logging, and they will remove themselves even after a re-log also. Pre-existing "permanent" summons will stay permanent.
 * Tweaked some spell XP-on-cast
-* Changed the wit starter spells. Summon Hamster is now a starter spell, 
+* Changed the wit starter spells. Summon Hamster is now a starter spell, Summon Boat is no longer a starter spell.
+* Aegis is now a mace.
 
 ### Additions
 * Added Colored Shine Lights! Craft these lights using any dye, and they also emit particles of their corresponding colors. Combine 8 different colors to make a *Rainbow Shine Light*
