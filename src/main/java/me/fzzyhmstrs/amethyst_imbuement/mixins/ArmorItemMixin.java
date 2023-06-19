@@ -18,18 +18,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.EnumMap;
 import java.util.UUID;
 
 
 @Mixin(ArmorItem.class)
 public abstract class ArmorItemMixin {
-    @Shadow @Final private static UUID[] MODIFIERS;
+    @Shadow @Final private static EnumMap<ArmorItem.Type, UUID> MODIFIERS;
     @Shadow @Final @Mutable private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     @Shadow @Final protected float knockbackResistance;
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
-    private void amethyst_imbuement_constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
-        UUID uUID = MODIFIERS[slot.getEntitySlotId()];
+    private void amethyst_imbuement_constructor(ArmorMaterial material, ArmorItem.Type type, Item.Settings settings, CallbackInfo ci) {
+        UUID uUID = MODIFIERS.get(type);
 
         if (material == RegisterArmor.INSTANCE.getSTEEL_ARMOR_MATERIAL() || material == RegisterArmor.INSTANCE.getAMETRINE_ARMOR_MATERIAL()) {
             ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
