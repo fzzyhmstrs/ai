@@ -15,8 +15,8 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
@@ -122,14 +122,14 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.FREEZE, entityEffects.damage(0))
+            target.damage(this.damageSources.freeze(), entityEffects.damage(0))
             target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
                 return
             }
-            target.damage(CustomDamageSources.FreezingDamageSource(livingEntity), entityEffects.damage(0))
+            target.damage(CustomDamageSources.freeze(world,this,livingEntity), entityEffects.damage(0))
             target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }
@@ -190,7 +190,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
         fun conjureIceSpikes(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
                          warmup: Int, effect: AugmentEffect, level: Int, augment:ScepterAugment): Double {
-            var blockPos = BlockPos(x, y, z)
+            var blockPos = BlockPos(x.toInt(), y.toInt(), z.toInt())
             var bl = false
             var d = 0.0
             do {

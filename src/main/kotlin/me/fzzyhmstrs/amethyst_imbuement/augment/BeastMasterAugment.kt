@@ -27,7 +27,7 @@ class BeastMasterAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         //EffectQueue.addStatusToQueue(user,StatusEffects.FIRE_RESISTANCE,240,0)
         val box = user.boundingBox.expand(16.0)
-        val list = user.world.getOtherEntities(user,box).stream().filter { it is PlayerCreatable && it.owner == user || it is Tameable && it.owner == user }.toList()
+        val list = user.world.getOtherEntities(user,box).stream().filter { it is PlayerCreatable && it.entityOwner == user || it is Tameable && it.owner == user }.toList()
         if (list.isEmpty()) return
         val amplifier = if(list.size < 6) 1 else 0
         var helped = 0

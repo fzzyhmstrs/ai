@@ -53,7 +53,12 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
-        entityHitResult.entity.damage(DamageSource.thrownProjectile(this, owner), entityEffects.damage(0))
+        val entity = this.owner
+        if (entity is LivingEntity) {
+            entityHitResult.entity.damage(this.damageSources.mobProjectile(this, entity), entityEffects.damage(0))
+        } else {
+            entityHitResult.entity.damage(this.damageSources.generic(), entityEffects.damage(0))
+        }
     }
 
     override fun onCollision(hitResult: HitResult?) {

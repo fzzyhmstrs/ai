@@ -56,7 +56,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
-            bl = entity.damage(DamageSource.witherSkull(this, entity2), entityEffects.damage(0))
+            bl = entity.damage(this.damageSources.witherSkull(this, entity2), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
                     if (entity is LivingEntity) {
@@ -69,7 +69,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
                 }
             }
         } else {
-            bl = entity.damage(DamageSource.WITHER, 5.0f)
+            bl = entity.damage(this.damageSources.wither(), 5.0f)
         }
         if (bl && entity is LivingEntity) {
             var i = -1

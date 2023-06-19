@@ -53,10 +53,10 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl = if (!entity2.isFireImmune) {
                     if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
-                    entity2.damage(DamageSource.magic(this, entity), entityEffects.damage(0))
+                    entity2.damage(CustomDamageSources.freeze(world,this, entity), entityEffects.damage(0))
                 } else {
                     if (entity2 is LivingEntity) entity2.frozenTicks = (entityEffects.duration() * 1.6).toInt()
-                    entity2.damage(CustomDamageSources.FreezingDamageSource(entity), entityEffects.damage(0) * 1.6F)
+                    entity2.damage(CustomDamageSources.freeze(world,this, entity), entityEffects.damage(0) * 1.6F)
                 }
                 if (bl) {
                     if (entity2 is LivingEntity) entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)

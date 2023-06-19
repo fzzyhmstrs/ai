@@ -14,8 +14,8 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
@@ -124,13 +124,13 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
             return
         }
         if (livingEntity == null) {
-            target.damage(DamageSource.MAGIC, entityEffects.damage(0))
+            target.damage(this.damageSources.magic(), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
                 return
             }
-            target.damage(DamageSource.magic(this, livingEntity), entityEffects.damage(0))
+            target.damage(this.damageSources.indirectMagic(this, livingEntity), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }
     }
@@ -189,7 +189,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         fun conjureFangs(world: World,user: LivingEntity,
                          x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
                          warmup: Int, effect: AugmentEffect, level: Int, augment: ScepterAugment): Double{
-            var blockPos = BlockPos(x, y, z)
+            var blockPos = BlockPos(x.toInt(), y.toInt(), z.toInt())
             var bl = false
             var d = 0.0
             do {

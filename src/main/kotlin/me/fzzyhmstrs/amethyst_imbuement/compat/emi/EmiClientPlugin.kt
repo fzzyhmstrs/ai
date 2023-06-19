@@ -34,11 +34,7 @@ object EmiClientPlugin: EmiPlugin{
 
         registry.addRecipeHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, IMBUING_HANDLER)
 
-        val compareNbt =
-            Function { c: Comparison ->
-                c.copy().nbt(true).build()
-            }
-        registry.setDefaultComparison(RegisterItem.SPELL_SCROLL, compareNbt)
+        registry.setDefaultComparison(RegisterItem.SPELL_SCROLL, Comparison.compareNbt())
 
         registry.addCategory(ALTAR_CATEGORY)
         registry.addWorkstation(ALTAR_CATEGORY, ALTAR_WORKSTATION)

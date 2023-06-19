@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.damage.EntityDamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
@@ -22,6 +21,7 @@ import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -29,6 +29,7 @@ import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
+import net.minecraft.world.EntityView
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
@@ -42,7 +43,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         maxAge = ageLimit
 
         this.createdBy = createdBy?.uuid
-        this.owner = createdBy
+        this.entityOwner = createdBy
         if (createdBy != null) {
             startTrackingOwner(createdBy)
         }
@@ -71,7 +72,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     private var angerTime = 0
     override var maxAge = -1
     override var createdBy: UUID? = null
-    override var owner: LivingEntity? = null
+    override var entityOwner: LivingEntity? = null
     private var angryAt: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect()
     private var level = 1
@@ -189,7 +190,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (isInvulnerableTo(source)) {
             return false
         }
-        if (source is EntityDamageSource || source === DamageSource.MAGIC) {
+        if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()
         }
         return super.damage(source, amount)
@@ -308,7 +309,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     fun setConstructOwner(owner: LivingEntity?){
         createdBy = owner?.uuid
-        this.owner = owner
+        this.entityOwner = owner
         if (!trackingOwner && owner != null){
             startTrackingOwner(owner)
         }
@@ -318,18 +319,25 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         return createdBy
     }
 
-    override fun getOwner(): Entity? {
-        return if (owner != null) {
-            owner
+    override fun method_48926(): EntityView {
+        return this.world
+    }
+
+    override fun getOwner(): LivingEntity? {
+        return if (entityOwner != null) {
+            entityOwner
         } else if (world is ServerWorld && createdBy != null) {
             val o = (world as ServerWorld).getEntity(createdBy)
             if (o != null && o is LivingEntity) {
-                owner = o
+                this.entityOwner = o
                 if (!trackingOwner){
                     startTrackingOwner(o)
                 }
+                o
+            } else {
+                null
             }
-            o
+
         }else {
             null
         }

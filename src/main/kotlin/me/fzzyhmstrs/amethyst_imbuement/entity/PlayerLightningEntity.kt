@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -138,10 +139,10 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     if (entity2.fireTicks == 0){
                         entity2.setOnFireFor(entityEffects.amplifier(0))
                     }
-                    if (owner != null && owner is PlayerEntity) {
-                        entity2.damage(DamageSource.player(owner as PlayerEntity), entityEffects.damage(0))
+                    if (owner != null) {
+                        entity2.damage(CustomDamageSources.lightningBolt(world,this,owner), entityEffects.damage(0))
                     } else {
-                        entity2.damage(DamageSource.LIGHTNING_BOLT, entityEffects.damage(0))
+                        entity2.damage(this.damageSources.lightningBolt(), entityEffects.damage(0))
                     }
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
@@ -165,7 +166,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
 
     private fun getAffectedBlockPos(): BlockPos {
         val vec3d = pos
-        return BlockPos(vec3d.x, vec3d.y - 1.0E-6, vec3d.z)
+        return BlockPos(vec3d.x.toInt(), vec3d.y.toInt() - 1.0E-6.toInt(), vec3d.z.toInt())
     }
 
     private fun spawnFire(spreadAttempts: Int) {

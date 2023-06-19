@@ -113,7 +113,7 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
         if (owner != null){
             livingEntity = owner as Entity
         }
-        val damageSource = DamageSource.trident(this, if (owner == null) this else livingEntity)
+        val damageSource = this.damageSources.trident(this, if (owner == null) this else livingEntity)
         dealtDamage = true
         var soundEvent = SoundEvents.ITEM_TRIDENT_HIT
         if (entity.damage(damageSource, f)) {
