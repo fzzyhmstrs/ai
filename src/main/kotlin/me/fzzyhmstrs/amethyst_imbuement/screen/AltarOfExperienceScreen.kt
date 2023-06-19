@@ -73,7 +73,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        this.drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
         val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
@@ -147,7 +147,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
             val bl1 = xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)
             val bl2 = xp[b] == 0 || (b == 0 && xp[b] <= 5000) || (b == 1 && xp[b] <= 0) || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 5000)
             if ((!shifted && bl1) || (shifted && bl2)){
-                this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 177, 124, 11)
+                drawTexture(matrices, p, j + 33 + 11 * b, 0, 177, 124, 11)
             } else {
                 //base mouse positions (top left corner of buttons)
                 val u = mouseX - (i + 34)
@@ -160,9 +160,9 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                         AcText.translatable("container.altar_of_experience_button_b"))
                 }
                 if (u >= 0 && v >= 0 && u < 108 && v < 11) {
-                    this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 188, 124, 11)
+                    drawTexture(matrices, p, j + 33 + 11 * b, 0, 188, 124, 11)
                 } else {
-                    this.drawTexture(matrices, p, j + 33 + 11 * b, 0, 166, 124, 11)
+                    drawTexture(matrices, p, j + 33 + 11 * b, 0, 166, 124, 11)
                 }
                 textRenderer.drawWithShadow(
                     matrices,

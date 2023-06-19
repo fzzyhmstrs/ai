@@ -9,6 +9,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
+import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -34,7 +35,7 @@ class AltarRecipe(
         return bl
     }
 
-    override fun craft(inventory: SimpleInventory): ItemStack {
+    override fun craft(inventory: SimpleInventory, registryManager: DynamicRegistryManager): ItemStack {
         val itemStack = if(!react) result.copy() else Nbt.createItemStackWithNbt( inventory.getStack(1).item,inventory.getStack(1).count, inventory.getStack(1).orCreateNbt)
         if (!react) {
             val nbtCompound = inventory.getStack(1).nbt
@@ -53,7 +54,10 @@ class AltarRecipe(
         return width * height >= 3
     }
 
-    override fun getOutput(): ItemStack {
+    override fun getOutput(registryManager: DynamicRegistryManager): ItemStack {
+        return result.copy()
+    }
+    fun getOutput():ItemStack{
         return result.copy()
     }
 

@@ -69,7 +69,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
+            entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
@@ -99,7 +99,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(CustomDamageSources.LightningDamageSource(this),entityEffects.damage(0))
+            entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }

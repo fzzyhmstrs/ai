@@ -60,7 +60,7 @@ class CrystalAltarDisplay(inputs: MutableList<EntryIngredient>, outputs: Mutable
         private fun getRecipeOutputEntries(recipe: AltarRecipe): MutableList<EntryIngredient>{
             val list: MutableList<EntryIngredient> = mutableListOf()
             val builder = EntryIngredient.builder()
-            builder.add(EntryStacks.of(recipe.output))
+            builder.add(EntryStacks.of(recipe.getOutput()))
             list.add(builder.build())
             return list
         }

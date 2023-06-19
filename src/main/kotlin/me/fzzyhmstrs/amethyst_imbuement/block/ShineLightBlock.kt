@@ -95,7 +95,7 @@ class ShineLightBlock(settings:Settings,private val particleEffect: ParticleEffe
         return SHAPE
     }
 
-    override fun isTranslucent(state: BlockState?, world: BlockView?, pos: BlockPos?): Boolean {
+    override fun isTransparent(state: BlockState?, world: BlockView?, pos: BlockPos?): Boolean {
         return true
     }
 

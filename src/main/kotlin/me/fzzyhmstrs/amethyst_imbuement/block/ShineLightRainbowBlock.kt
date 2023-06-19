@@ -108,7 +108,7 @@ class ShineLightRainbowBlock(settings:Settings):Block(settings), Waterloggable {
         return SHAPE
     }
 
-    override fun isTranslucent(state: BlockState?, world: BlockView?, pos: BlockPos?): Boolean {
+    override fun isTransparent(state: BlockState?, world: BlockView?, pos: BlockPos?): Boolean {
         return true
     }
 

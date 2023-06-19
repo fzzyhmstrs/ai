@@ -56,7 +56,7 @@ class ForcefieldBlock(settings: Settings) : Block(settings) {
         super.scheduledTick(state, world, pos, random)
     }
 
-    override fun isTranslucent(state: BlockState?, world: BlockView?, pos: BlockPos?): Boolean {
+    override fun isTransparent(state: BlockState, world: BlockView, pos: BlockPos): Boolean {
         return true
     }
 

@@ -10,8 +10,10 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.damage.DamageSources
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
+import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.util.math.random.Random
 import java.util.*
 import kotlin.math.min
@@ -65,9 +67,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
         }
 
         fun damageIsBlocked(random: Random, entity: LivingEntity, damageSource: DamageSource): Boolean{
-            if (damageSource == DamageSource.OUT_OF_WORLD) return false
-            if (damageSource == DamageSource.STARVE) return false
-            if (damageSource == DamageSource.FALL) return false
+            if (damageSource.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) || damageSource.isIn(DamageTypeTags.BYPASSES_EFFECTS) || damageSource.isIn(DamageTypeTags.IS_FALL)) return false
             return random.nextFloat() < (blockChance[entity.uuid] ?: 0.0f)
         }
 

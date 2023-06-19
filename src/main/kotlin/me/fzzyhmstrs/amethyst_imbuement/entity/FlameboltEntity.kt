@@ -52,14 +52,13 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            val fbe = SmallFireballEntity(EntityType.SMALL_FIREBALL,world)
             if (!entity2.isFireImmune && !(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val i = entity2.fireTicks
                 val j = if (entity2 is LivingEntity) ProtectionEnchantment.transformFireDuration(entity2, entityEffects.duration(0)) else entityEffects.duration(0)
                 if (i < j)
                     entity2.fireTicks = j
                 val bl = entity2.damage(
-                    DamageSource.fireball(fbe,owner),
+                    entity.damageSources.fireball(null,owner),
                     entityEffects.damage(0)
                 )
                 if (!bl) {

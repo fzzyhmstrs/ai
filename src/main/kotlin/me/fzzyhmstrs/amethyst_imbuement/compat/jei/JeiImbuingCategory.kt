@@ -73,7 +73,7 @@ class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {
         val slots = recipe.getInputs()
         val centerSlot: Ingredient = recipe.getCenterIngredient()
-        val resultSlot: ItemStack = recipe.output
+        val resultSlot: ItemStack = recipe.getOutput()
 
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(slots[0])
         builder.addSlot(RecipeIngredientRole.INPUT, 81, 1).addIngredients(slots[1])

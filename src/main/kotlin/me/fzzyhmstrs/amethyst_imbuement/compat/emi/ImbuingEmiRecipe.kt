@@ -32,7 +32,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
         id = recipe.id
         inputs = initInputs(recipe)
         outputs = initOutputs(recipe)
-        reactantChk = if(recipe.getAugment() != "") EmiIngredient.of(recipe.getInputs()[6]) else EmiIngredient.of(Ingredient.ofStacks(recipe.output))
+        reactantChk = if(recipe.getAugment() != "") EmiIngredient.of(recipe.getInputs()[6]) else EmiIngredient.of(Ingredient.ofStacks(recipe.getOutput()))
         val cost = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         if(cost > 99){
             costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
@@ -78,7 +78,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
     }
 
     private fun initOutputs(recipe: ImbuingRecipe): List<EmiStack>{
-        return listOf(EmiStack.of(recipe.output))
+        return listOf(EmiStack.of(recipe.getOutput()))
     }
     
     override fun getCategory(): EmiRecipeCategory{

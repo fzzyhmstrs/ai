@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.armor
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
@@ -17,8 +18,8 @@ class SteelArmorMaterial : ArmorMaterial {
     override fun getEquipSound(): SoundEvent = SoundEvents.ITEM_ARMOR_EQUIP_IRON
     override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.STEEL_INGOT)
     override fun getEnchantability(): Int = 10
-    override fun getProtectionAmount(slot: EquipmentSlot): Int = PROTECTION_VALUES[slot.entitySlotId]
-    override fun getDurability(slot: EquipmentSlot): Int = BASE_DURABILITY[slot.entitySlotId] * 20
+    override fun getProtection(type: ArmorItem.Type): Int = PROTECTION_VALUES[type.equipmentSlot.entitySlotId]
+    override fun getDurability(type: ArmorItem.Type): Int = BASE_DURABILITY[type.equipmentSlot.entitySlotId] * 20
     override fun getKnockbackResistance(): Float = 0.0F
     override fun getToughness(): Float = 1.0F
 }

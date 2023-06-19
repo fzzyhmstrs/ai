@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 
-import dev.emi.emi.api.EmiRecipeHandler
 import dev.emi.emi.api.recipe.EmiRecipe
+import dev.emi.emi.api.recipe.handler.StandardRecipeHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import net.minecraft.screen.slot.Slot
 
-class AltarRecipeHandler: EmiRecipeHandler<CrystalAltarScreenHandler> {
+class AltarRecipeHandler: StandardRecipeHandler<CrystalAltarScreenHandler> {
     override fun getInputSources(handler: CrystalAltarScreenHandler): MutableList<Slot> {
         val list: MutableList<Slot> = mutableListOf(handler.slots[0],handler.slots[1],handler.slots[2])
         for (i in 4 until 40){

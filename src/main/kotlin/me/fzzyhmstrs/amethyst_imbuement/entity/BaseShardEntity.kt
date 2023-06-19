@@ -44,8 +44,7 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
-                val bl = entity2.damage(
-                    DamageSource.thrownProjectile(this, owner),
+                val bl = entity2.damage(entity.damageSources.mobProjectile(this,entity),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
                 )
                 if (!struckEntities.contains(entity2.uuid)){

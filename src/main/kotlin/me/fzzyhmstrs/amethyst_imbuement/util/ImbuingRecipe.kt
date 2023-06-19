@@ -19,6 +19,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
+import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
@@ -148,7 +149,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         return bl1
     }
 
-    override fun craft(inventory: SimpleInventory): ItemStack {
+    override fun craft(inventory: SimpleInventory, registryManager: DynamicRegistryManager): ItemStack {
         return ItemStack.EMPTY
     }
     override fun fits(var1: Int, var2: Int): Boolean {
@@ -166,9 +167,13 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     fun getInputs(): Array<Ingredient>{
         return inputs
     }
-    override fun getOutput(): ItemStack {
+    override fun getOutput(registryManager: DynamicRegistryManager): ItemStack {
         return outputItem.copy()
     }
+    fun getOutput(): ItemStack{
+        return outputItem.copy()
+    }
+    fun setOutput(stack: ItemStack){}
     private fun outputGenerator(): ItemStack{
         if (augment == "") return ItemStack(Registries.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
         val identifier = Identifier(augment)

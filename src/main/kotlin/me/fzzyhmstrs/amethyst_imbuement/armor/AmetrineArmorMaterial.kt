@@ -6,6 +6,7 @@ import net.minecraft.item.ArmorMaterial
 import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.item.ArmorItem.Type
 
 @Suppress("PrivatePropertyName")
 class AmetrineArmorMaterial : ArmorMaterial {
@@ -17,8 +18,8 @@ class AmetrineArmorMaterial : ArmorMaterial {
     override fun getEquipSound(): SoundEvent = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND
     override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.AMETRINE)
     override fun getEnchantability(): Int = 18
-    override fun getProtectionAmount(slot: EquipmentSlot): Int = PROTECTION_VALUES[slot.entitySlotId]
-    override fun getDurability(slot: EquipmentSlot): Int = BASE_DURABILITY[slot.entitySlotId] * 39
+    override fun getProtection(type: Type): Int = PROTECTION_VALUES[type.equipmentSlot.entitySlotId]
+    override fun getDurability(type: Type): Int = BASE_DURABILITY[type.equipmentSlot.entitySlotId] * 39
     override fun getKnockbackResistance(): Float = 0.1F
     override fun getToughness(): Float = 3.2F
 }

@@ -40,7 +40,7 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
             if(!target.isDead){
                 target.setInvulnerable(false) //these two lines take away damage invulnerability
                 target.timeUntilRegen = 0
-                target.damage(DamageSource.GENERIC, 0.5f * level) //GENERIC damage bypasses armor
+                target.damage(user.damageSources.generic(), 0.5f * level) //GENERIC damage bypasses armor
             }
         }
 
