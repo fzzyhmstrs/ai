@@ -93,9 +93,8 @@ dependencies {
     }
 
     val emiVersion: String by project
-    modImplementation("dev.emi:emi:$emiVersion"){
-        exclude("net.fabricmc.fabric-api")
-    }
+    modCompileOnly ("dev.emi:emi-fabric:${emiVersion}:api")
+    modLocalRuntime ("dev.emi:emi-fabric:${emiVersion}")
 
     val trinketsVersion: String by project
     modImplementation("dev.emi:trinkets:$trinketsVersion"){
