@@ -17,6 +17,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.Vec3f
 import net.minecraft.world.World
 import java.util.*
 
@@ -59,8 +60,8 @@ class BodySwapAugment: MiscAugment(ScepterTier.THREE,11){
             map[it.squaredDistanceTo(user)] = it
         }
         val entity = map[map.lastKey()]?:return false
-        val pos1 = Vec3d(entity.pos.toVector3f())
-        val pos2 = Vec3d(user.pos.toVector3f())
+        val pos1 = Vec3d(Vec3f(entity.pos))
+        val pos2 = Vec3d(Vec3f(user.pos))
         entity.teleport(pos2.x,pos2.y,pos2.z)
         user.teleport(pos1.x,pos1.y,pos1.z)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.7F, 1.1F)

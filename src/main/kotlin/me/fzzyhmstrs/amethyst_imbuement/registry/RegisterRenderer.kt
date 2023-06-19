@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.renderer.ImbuingTableBlockEntityRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
@@ -165,13 +166,13 @@ object RegisterRenderer {
 
         /////////////////////////////////
 
-        BlockEntityRendererFactories.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
+        BlockEntityRendererRegistry.register(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY
         ){ context: BlockEntityRendererFactory.Context -> ImbuingTableBlockEntityRenderer(context) }
 
-        BlockEntityRendererFactories.register(RegisterEntity.DISENCHANTING_TABLE_BLOCK_ENTITY
+        BlockEntityRendererRegistry.register(RegisterEntity.DISENCHANTING_TABLE_BLOCK_ENTITY
         ){ context: BlockEntityRendererFactory.Context -> DisenchantingTableBlockEntityRenderer(context) }
 
-        BlockEntityRendererFactories.register(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
+        BlockEntityRendererRegistry.register(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
         ){ context: BlockEntityRendererFactory.Context -> AltarOfExperienceBlockEntityRenderer(context) }
 
         /////////////////////////////////

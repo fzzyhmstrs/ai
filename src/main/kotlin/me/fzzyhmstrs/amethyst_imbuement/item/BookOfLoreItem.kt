@@ -10,12 +10,12 @@ import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings),BookOfKnowledge {
@@ -32,7 +32,7 @@ open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings
         if (nbt != null){
             if (!nbt.contains(NbtKeys.LORE_KEY.str())) return super.useAfterWriting(stack, world, user, hand)
             val bolaId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str()))
-            if (Registries.ENCHANTMENT.get(bolaId) == null) return super.useAfterWriting(stack, world, user, hand)
+            if (Registry.ENCHANTMENT.get(bolaId) == null) return super.useAfterWriting(stack, world, user, hand)
             val bola = bolaId.toString()
             val type = AugmentHelper.getAugmentType(bola)
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){

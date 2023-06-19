@@ -21,7 +21,7 @@ import net.minecraft.world.World
 object RegisterEntity {
     
     val BASIC_HAMSTER_ENTITY: EntityType<BaseHamsterEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "basic_hamster"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
@@ -36,7 +36,7 @@ object RegisterEntity {
     /////////
 
     val BONESTORM_ENTITY: EntityType<BonestormEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "bonestorm"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
@@ -168,7 +168,7 @@ object RegisterEntity {
     )
 
     val BONE_SHARD_ENTITY: EntityType<BoneShardEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
+        Registry.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "bone_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC

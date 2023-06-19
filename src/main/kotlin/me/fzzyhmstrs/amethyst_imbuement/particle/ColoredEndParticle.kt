@@ -4,7 +4,7 @@ import net.minecraft.client.particle.AnimatedParticle
 import net.minecraft.client.particle.SpriteProvider
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.util.math.ColorHelper
-import org.joml.Vector3f
+import net.minecraft.util.math.Vec3f
 
 class ColoredEndParticle(
     world: ClientWorld,
@@ -14,8 +14,7 @@ class ColoredEndParticle(
     velocityX: Double,
     velocityY: Double,
     velocityZ: Double,
-    color:
-    Vector3f,
+    color: Vec3f,
     particleScale: Float,
     spriteProvider: SpriteProvider)
     :

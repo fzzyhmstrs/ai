@@ -12,7 +12,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.util.math.RotationAxis
+import net.minecraft.util.math.Vec3f
 
 class BaseHamsterItemFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>)
 : 
@@ -37,9 +37,9 @@ FeatureRenderer<T, M>(context)
             return
         }
         matrixStack.push()
-        matrixStack.translate(0f,1.27f,0f)
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-135f))
-        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90F))
+        matrixStack.translate(0.0,1.27,0.0)
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-135f))
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90F))
         matrixStack.scale(0.5f,0.5f,0.5f)
         MinecraftClient.getInstance().itemRenderer.renderItem(item,ModelTransformation.Mode.FIXED,i,OverlayTexture.DEFAULT_UV,matrixStack,vertexConsumerProvider,hamster.id)
         matrixStack.pop()

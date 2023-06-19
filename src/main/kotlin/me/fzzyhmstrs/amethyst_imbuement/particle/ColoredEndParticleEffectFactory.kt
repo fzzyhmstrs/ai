@@ -5,11 +5,11 @@ import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.AbstractDustParticleEffect
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleType
-import org.joml.Vector3f
+import net.minecraft.util.math.Vec3f
 
 class ColoredEndParticleEffectFactory: ParticleEffect.Factory<ColoredEndParticleEffect> {
     override fun read(type: ParticleType<ColoredEndParticleEffect>, reader: StringReader): ColoredEndParticleEffect {
-        val color: Vector3f = AbstractDustParticleEffect.readColor(reader)
+        val color: Vec3f = AbstractDustParticleEffect.readColor(reader)
         reader.expect(' ')
         val scale: Float = reader.readFloat()
         return ColoredEndParticleEffect(color, scale)

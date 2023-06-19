@@ -1,10 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object RegisterSound {
 
@@ -18,7 +17,7 @@ object RegisterSound {
     val HAMSTER_AMBIENT = soundEvent(HAMSTER_AMBIENT_ID)
 
     private fun soundEvent(identifier: Identifier): SoundEvent{
-        return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))
+        return Registry.register(Registry.SOUND_EVENT,identifier, SoundEvent(identifier))
     }
 
     fun registerAll(){

@@ -48,7 +48,7 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
                 if (target is MobEntity && target !is WitherEntity && target !is EnderDragonEntity ) {
                     val targetSelector = (target as MobEntityAccessor).targetSelector
                     val targets = targetSelector.goals.toMutableSet()
-                    targetSelector.clear {true}
+                    targetSelector.clear()
                     target.target = null
                     if (target is PathAwareEntity)
                         targetSelector.add(2, RevengeGoal(target, *arrayOfNulls(0)))
@@ -85,7 +85,7 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
 
     override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
         if (data !is PersuadePersistentEffectData) return
-        (data.entity as MobEntityAccessor).targetSelector.clear {true}
+        (data.entity as MobEntityAccessor).targetSelector.clear()
         for (prioritizedGoal in data.targets){
             (data.entity as MobEntityAccessor).targetSelector.add(prioritizedGoal.priority,prioritizedGoal.goal)
         }

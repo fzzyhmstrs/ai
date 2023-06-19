@@ -4,16 +4,15 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.minecraft.entity.data.TrackedDataHandler
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.registry.Registry
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.SimpleDefaultedRegistry
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.DefaultedRegistry
+import net.minecraft.util.registry.Registry
+import net.minecraft.util.registry.RegistryKey
 
 class HamsterVariant(val texture: Identifier) {
 
     companion object{
-        val HAMSTERS: SimpleDefaultedRegistry<HamsterVariant> = FabricRegistryBuilder.createDefaulted(RegistryKey.ofRegistry<HamsterVariant>(Identifier(AI.MOD_ID,"hamster_variant")),
-            Identifier(AI.MOD_ID,"dwarf_hamster")).buildAndRegister()
+        val HAMSTERS: DefaultedRegistry<HamsterVariant> = FabricRegistryBuilder.createDefaulted(HamsterVariant::class.java,Identifier(AI.MOD_ID,"hamster_variant"),Identifier(AI.MOD_ID,"dwarf_hamster")).buildAndRegister()
         val TRACKED_HAMSTER = TrackedDataHandler.of(HAMSTERS)
 
         fun registerAll(){
