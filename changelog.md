@@ -23,7 +23,7 @@ As I move forward with parting to 1.19.4 and 1.20+, I will focus my attention on
 ### Additions
 * Added Colored Shine Lights! Craft these lights using any dye, and they also emit particles of their corresponding colors. Combine 8 different colors to make a *Rainbow Shine Light*
 * Added Colored Crystallized Light! An upgraded variant of Hard Light, they come in 16-single color variants, rather than constantly shifting color.
-* Added Dazlling Melon Slice, an upgraded glistering melon that grants blessed when eaten. used as a powerful healing spell ingredient.
+* Added Dazzling Melon Slice, an upgraded glistering melon that grants blessed when eaten. used as a powerful healing spell ingredient.
 * Added a new Easter Egg weapon :3.
 * Added two new Entities, the Hamster (it's a hamster), and the Bonestorm (it's an undead blaze)
 * Added Tigers Eye, a new gem that is taking the place of Charged Moonstone. For the time being, Charged Moonstone still exists in the mod, along with a conversion recipe. In the next update, this conversion recipe and the Moonstone will be completely removed.
