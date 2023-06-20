@@ -1,5 +1,8 @@
 {
-  "type": "minecraft:smithing",
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
   "base": {
     "item": "minecraft:diamond_pickaxe"
   },

@@ -1,5 +1,8 @@
 {
-  "type": "minecraft:smithing",
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "amethyst_imbuement:knowledge_powder"
+  },
   "base": {
     "item": "minecraft:netherite_leggings"
   },
