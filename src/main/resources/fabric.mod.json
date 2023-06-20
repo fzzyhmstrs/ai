@@ -73,7 +73,6 @@
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
     "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
-    "patchouli": ">=1.19.4-79-FABRIC",
     "minecraft": ">=1.19.4",
     "java": ">=17",
     "fzzy_core": ">=0.2.5.1+1.19.4",
