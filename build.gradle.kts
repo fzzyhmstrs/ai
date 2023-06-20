@@ -96,6 +96,10 @@ dependencies {
     modCompileOnly ("dev.emi:emi-fabric:${emiVersion}:api")
     modLocalRuntime ("dev.emi:emi-fabric:${emiVersion}")
 
+    val ccaVersion: String by project
+    modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${ccaVersion}")
+    modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${ccaVersion}")
+
     val trinketsVersion: String by project
     modImplementation("dev.emi:trinkets:$trinketsVersion"){
         exclude("net.fabricmc.fabric-api")
