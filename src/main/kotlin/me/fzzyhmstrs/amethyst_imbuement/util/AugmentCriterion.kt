@@ -9,6 +9,7 @@ import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
 import net.minecraft.predicate.entity.EntityPredicate
+import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
@@ -21,7 +22,7 @@ class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCri
 
     override fun conditionsFromJson(
         obj: JsonObject,
-        playerPredicate: EntityPredicate.Extended,
+        playerPredicate: LootContextPredicate,
         predicateDeserializer: AdvancementEntityPredicateDeserializer
     ): AugmentConditions {
         if (obj.has("augment")){
@@ -49,18 +50,18 @@ class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCri
     }
 
 
-    class AugmentConditions(id: Identifier, private val augmentPredicate: Predicate<Enchantment>,entityPredicate: EntityPredicate.Extended): AbstractCriterionConditions(id,entityPredicate){
+    class AugmentConditions(id: Identifier, private val augmentPredicate: Predicate<Enchantment>,entityPredicate: LootContextPredicate): AbstractCriterionConditions(id,entityPredicate){
 
         fun test(augment: Enchantment): Boolean{
             return augmentPredicate.test(augment)
         }
 
         companion object{
-            fun equipmentTypeCondition(id: Identifier,entityPredicate: EntityPredicate.Extended): AugmentConditions{
+            fun equipmentTypeCondition(id: Identifier,entityPredicate: LootContextPredicate): AugmentConditions{
                 return AugmentConditions(id,{aug -> aug is AbstractEquipmentAugment},entityPredicate)
             }
 
-            fun jewelryTypeCondition(id: Identifier,entityPredicate: EntityPredicate.Extended): AugmentConditions{
+            fun jewelryTypeCondition(id: Identifier,entityPredicate: LootContextPredicate): AugmentConditions{
                 return AugmentConditions(id,{aug -> aug is AbstractPassiveAugment},entityPredicate)
             }
         }

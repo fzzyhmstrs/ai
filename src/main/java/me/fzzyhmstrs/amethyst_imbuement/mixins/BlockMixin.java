@@ -65,10 +65,10 @@ public class BlockMixin {
         if (vec3d.y < -0.45) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
             entity.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
-            entity.world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK, SoundCategory.BLOCKS, 0.5f, 1.0f);
+            entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK, SoundCategory.BLOCKS, 0.5f, 1.0f);
         } else if(vec3d.y <-.25){
             entity.setVelocity(vec3d.x, 0.0, vec3d.z);
-            entity.world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK, SoundCategory.BLOCKS, 0.25f, 1.0f);
+            entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK, SoundCategory.BLOCKS, 0.25f, 1.0f);
         }else {
             entity.setVelocity(vec3d.x, 0.0, vec3d.z);
         }

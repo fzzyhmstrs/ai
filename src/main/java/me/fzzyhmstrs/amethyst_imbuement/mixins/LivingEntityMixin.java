@@ -116,8 +116,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.world.random, (LivingEntity) (Object) this, source)){
-            this.world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.world.random.nextFloat() * 0.4f);
+        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.getWorld().random, (LivingEntity) (Object) this, source)){
+            this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.getWorld().random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
         }
         damageSource = source;
@@ -161,7 +161,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At(value = "TAIL"))
     private void amethyst_imbuement_augmentStatusCheck(CallbackInfo ci){
-        if (!world.isClient) {
+        if (!this.getWorld().isClient) {
 
             //armor effects a little less often because more intensive
             if (EventRegistry.INSTANCE.getTicker_20().isReady()) {
@@ -181,16 +181,16 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @WrapOperation(method = "tickMovement", at = @At(value = "FIELD", target = "net/minecraft/entity/LivingEntity.onGround : Z"))
+    @WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.isOnGround ()Z"))
     private boolean amethyst_imbuement_checkForMultiJump(LivingEntity instance, Operation<Boolean> operation){
-        long time = instance.world.getTime();
+        long time = instance.getWorld().getTime();
         if (operation.call(instance)) {
             instance.removeStatusEffect(RegisterStatus.INSTANCE.getLEAPT());
             lastTime = time;
             return true; //don't need to multi-jump if the player is already on the ground
         }
         if (!(instance instanceof PlayerEntity)) return operation.call(instance);
-        if (!instance.world.isClient) return operation.call(instance);
+        if (!instance.getWorld().isClient) return operation.call(instance);
         ItemStack footStack = instance.getEquippedStack(EquipmentSlot.FEET);
         if (footStack.isEmpty()) return operation.call(instance);
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getMULTI_JUMP(),footStack) > 0){

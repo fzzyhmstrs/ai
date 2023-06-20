@@ -14,6 +14,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
@@ -51,23 +52,23 @@ class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> 
     override fun draw(
         recipe: ImbuingRecipe,
         recipeSlotsView: IRecipeSlotsView,
-        stack: MatrixStack,
+        context: DrawContext,
         mouseX: Double,
         mouseY: Double
     ) {
         val cost = MathHelper.ceil(recipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
         val client = MinecraftClient.getInstance()
-        val costText: OrderedText
+        val costText: Text
         val costOffset: Int
         if(cost > 99){
-            costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.big",cost).formatted(Formatting.GREEN)
             costOffset = 113 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         } else{
-            costText = AcText.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN).asOrderedText()
+            costText = AcText.translatable("display.imbuing.cost.small",cost).formatted(Formatting.GREEN)
             costOffset = 116 - MinecraftClient.getInstance().textRenderer.getWidth(costText) / 2
         }
 
-        client.textRenderer.drawWithShadow(stack,costText,costOffset.toFloat(),44.0f,Formatting.GREEN.colorIndex)
+        context.drawTextWithShadow (client.textRenderer,costText,costOffset,44,Formatting.GREEN.colorIndex)
     }
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ImbuingRecipe, focuses: IFocusGroup) {

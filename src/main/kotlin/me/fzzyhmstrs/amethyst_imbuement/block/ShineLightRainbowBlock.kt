@@ -80,13 +80,6 @@ class ShineLightRainbowBlock(settings:Settings):Block(settings), Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
 
-    @Deprecated("Deprecated in Java",
-        ReplaceWith("PistonBehavior.DESTROY", "net.minecraft.block.piston.PistonBehavior")
-    )
-    override fun getPistonBehavior(state: BlockState?): PistonBehavior {
-        return PistonBehavior.DESTROY
-    }
-
     @Deprecated("Deprecated in Java", ReplaceWith("(context.stack.isEmpty || !context.stack.isOf(this.asItem()))"))
     override fun canReplace(state: BlockState?, context: ItemPlacementContext): Boolean {
         return (context.stack.isEmpty || !context.stack.isOf(this.asItem()))
@@ -112,7 +105,7 @@ class ShineLightRainbowBlock(settings:Settings):Block(settings), Waterloggable {
         return true
     }
 
-    override fun canMobSpawnInside(): Boolean {
+    override fun canMobSpawnInside(state: BlockState): Boolean {
         return false
     }
 

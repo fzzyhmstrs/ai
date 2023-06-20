@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
@@ -66,15 +67,12 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
     }
 
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        DiffuseLighting.disableGuiDepthLighting()
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        val k = client?.window?.scaleFactor?.toInt()?:1
+        context.drawTexture(this.texture, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        /*val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
         RenderSystem.backupProjectionMatrix()
@@ -87,7 +85,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
         } }
 
         RenderSystem.restoreProjectionMatrix()
-        DiffuseLighting.enableGuiDepthLighting()
+        DiffuseLighting.enableGuiDepthLighting()*/
 
         val xpStored = handler.getSyncedStoredXp()
         val xpMax = handler.getSyncedMaxXp()
@@ -141,13 +139,11 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
 
         //top button
         for (b in 0..3){
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val bl1 = xp[b] == 0 || (b == 0 && xp[b] <= 50) || (b == 1 && xp[b] <= 0)  || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 50)
             val bl2 = xp[b] == 0 || (b == 0 && xp[b] <= 5000) || (b == 1 && xp[b] <= 0) || (b == 2 && xp[b] <= 0) || (b == 3 && xp[b] <= 5000)
             if ((!shifted && bl1) || (shifted && bl2)){
-                drawTexture(matrices, p, j + 33 + 11 * b, 0, 177, 124, 11)
+                context.drawTexture(this.texture, p, j + 33 + 11 * b, 0, 177, 124, 11)
             } else {
                 //base mouse positions (top left corner of buttons)
                 val u = mouseX - (i + 34)
@@ -160,32 +156,32 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                         AcText.translatable("container.altar_of_experience_button_b"))
                 }
                 if (u >= 0 && v >= 0 && u < 108 && v < 11) {
-                    drawTexture(matrices, p, j + 33 + 11 * b, 0, 188, 124, 11)
+                    context.drawTexture(this.texture, p, j + 33 + 11 * b, 0, 188, 124, 11)
                 } else {
-                    drawTexture(matrices, p, j + 33 + 11 * b, 0, 166, 124, 11)
+                    context.drawTexture(this.texture, p, j + 33 + 11 * b, 0, 166, 124, 11)
                 }
-                textRenderer.drawWithShadow(
-                    matrices,
+                context.drawTextWithShadow(
+                    textRenderer,
                     button1Text,
-                    (p + 62 - textRenderer.getWidth(button1Text)/2.0f),
-                    (j + 33 + 11 * b + 2).toFloat(),
+                    (p + 62 - textRenderer.getWidth(button1Text)/2),
+                    (j + 33 + 11 * b + 2),
                     t
                 )
             }
         }
     }
 
-    override fun drawForeground(matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+    override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
         RenderSystem.disableBlend()
-        textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), 0x404040)
+        context.drawText(textRenderer, title, titleX, titleY, 0x404040,false)
         //super.drawForeground(matrices, mouseX, mouseY)
         val storedXp = handler.getSyncedStoredXp()
         val maxXp = handler.getSyncedMaxXp()
         val text = AcText.translatable("container.altar_of_experience_1").append(AcText.literal("$storedXp/$maxXp"))
         if (text != null) {
-            val k = backgroundWidth/2.0f - this.textRenderer.getWidth(text)/2.0f
-            val k2 = backgroundWidth/2.0f + this.textRenderer.getWidth(text)/2.0f
-            fill(matrices, (k - 2).toInt(), 17, (k2 + 2).toInt(), 29, 0x4F000000)
+            val k = backgroundWidth/2 - this.textRenderer.getWidth(text)/2
+            val k2 = backgroundWidth/2 + this.textRenderer.getWidth(text)/2
+            context.fill(k - 2, 17, k2 + 2, 29, 0x4F000000)
             val t = when (storedXp) {
                 0 -> {
                     0xFF6060
@@ -197,15 +193,15 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                     8453920
                 }
             }
-            textRenderer.drawWithShadow(matrices, text, k, 19.0f, t)
+            context.drawTextWithShadow(textRenderer, text, k, 19, t)
         }
     }
 
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, delta)
-        drawMouseoverTooltip(matrices, mouseX, mouseY)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        this.renderBackground(context)
+        super.render(context, mouseX, mouseY, delta)
+        drawMouseoverTooltip(context, mouseX, mouseY)
         for (j in 0..3) {
             if (xp[j] == 0) continue
             if (!isPointWithinBounds(
@@ -232,7 +228,7 @@ class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInv
                 tooltipText2
             )
 
-            this.renderTooltip(matrices, tooltipList, mouseX, mouseY)
+            context.drawTooltip(textRenderer, tooltipList, mouseX, mouseY)
             break
         }
     }

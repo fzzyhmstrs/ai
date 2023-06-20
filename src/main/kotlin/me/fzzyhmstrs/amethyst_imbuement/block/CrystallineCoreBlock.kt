@@ -7,13 +7,11 @@ import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.AmethystBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.Material
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.block.pattern.BlockPatternBuilder
 import net.minecraft.block.pattern.CachedBlockPosition
 import net.minecraft.predicate.block.BlockStatePredicate
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.function.MaterialPredicate
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
@@ -37,7 +35,7 @@ class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
                     .where('^', CachedBlockPosition.matchesBlockState(IS_GOLEM_HEAD_PREDICATE))
                     .where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.AMETHYST_BLOCK)))
                     .where('$', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(RegisterBlock.CRYSTALLINE_CORE_BLOCK)))
-                    .where('~', CachedBlockPosition.matchesBlockState(MaterialPredicate.create(Material.AIR))).build()
+                    .where('~') { pos: CachedBlockPosition -> pos.blockState.isAir }.build()
                 pattern = crystallineGolemPattern as BlockPattern
             } else {
                 pattern = crystallineGolemPattern as BlockPattern

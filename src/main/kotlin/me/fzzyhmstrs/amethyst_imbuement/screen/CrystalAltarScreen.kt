@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -15,34 +16,32 @@ import net.minecraft.util.Identifier
 class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: PlayerInventory, title: Text) :
     HandledScreen<CrystalAltarScreenHandler>(handler, playerInventory, title) {
 
-    override fun drawBackground(matrices: MatrixStack?, delta: Float, mouseX: Int, mouseY: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        context.drawTexture(TEXTURE, i, j, 0, 0, backgroundWidth, backgroundHeight)
         if ((handler.getSlot(0).hasStack() || handler.getSlot(1).hasStack() || handler.getSlot(2).hasStack())
             && !handler.getSlot(3).hasStack()
         ) {
-            drawTexture(matrices, i + 92, j + 45, backgroundWidth, 0, 28, 21)
+            context.drawTexture(TEXTURE, i + 92, j + 45, backgroundWidth, 0, 28, 21)
         }
         if (handler.getSlot(0).hasStack()){
-            drawTexture(matrices, i + 33, j + 47, 51, 47, 16, 16)
+            context.drawTexture(TEXTURE, i + 33, j + 47, 51, 47, 16, 16)
         }
 
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, delta)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        this.renderBackground(context)
+        super.render(context, mouseX, mouseY, delta)
         RenderSystem.disableBlend()
-        drawMouseoverTooltip(matrices, mouseX, mouseY)
+        drawMouseoverTooltip(context, mouseX, mouseY)
     }
 
-    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
+    override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
         RenderSystem.disableBlend()
-        super.drawForeground(matrices, mouseX, mouseY)
+        super.drawForeground(context, mouseX, mouseY)
     }
 
     companion object {

@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.item.TooltipData
@@ -36,7 +36,7 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
         return text
     }
 
-    protected fun addText(matrices: MatrixStack, text: Text, x: Float, y: Float, rowOffset: Int, centered: Boolean = false,maxRows: Int = 0, width: Int = 107): Float{
+    protected fun addText(ctx: DrawContext, text: Text, x: Float, y: Float, rowOffset: Int, centered: Boolean = false,maxRows: Int = 0, width: Int = 107): Float{
         val rawLines = textRenderer.wrapLines(text,width)
         val widthTextList = if(maxRows > 0){
             if (rawLines.size > maxRows){
@@ -56,37 +56,36 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
         var curY = y
         if (centered){
             for (orderedText in widthTextList) {
-                DrawableHelper.drawCenteredTextWithShadow(matrices, textRenderer,orderedText, x.toInt(), curY.toInt(),0x404040)
+                ctx.drawCenteredTextWithShadow(textRenderer,orderedText, x.toInt(), curY.toInt(),0x404040)
                 curY += rowOffset
             }
             return curY
         }
         for (orderedText in widthTextList) {
-            textRenderer.draw(matrices,orderedText,x,curY,0xFFFFFF)
+            ctx.drawText(textRenderer,orderedText,x.toInt(),curY.toInt(),0xFFFFFF,false)
             curY += rowOffset
         }
         return curY
     }
 
-    protected fun renderItem(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int, stack: ItemStack){
-        itemRenderer.renderInGuiWithOverrides(matrices,client?.player, stack, x, y, x + y * 256)
-        itemRenderer.renderGuiItemOverlay(matrices,textRenderer, stack, x, y, null)
-        renderBookTooltip(matrices, mouseX, mouseY, x, y, stack)
+    protected fun renderItem(ctx: DrawContext, x: Int, y: Int, mouseX: Int, mouseY: Int, stack: ItemStack){
+        ctx.drawItemInSlot(textRenderer, stack, x, y)
+        renderBookTooltip(ctx, mouseX, mouseY, x, y, stack)
     }
 
-    protected fun renderBookTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, x: Int, y: Int, width: Int, height: Int,
+    protected fun renderBookTooltip(ctx: DrawContext, mouseX: Int, mouseY: Int, x: Int, y: Int, width: Int, height: Int,
                                   lines: List<Text> = listOf(), data: Optional<TooltipData> = Optional.empty<TooltipData>()): Boolean{
         if (mouseX - x in 0..width){
             if (mouseY - y in 0..height){
-                renderTooltip(matrices, lines, data, mouseX, mouseY)
+                ctx.drawTooltip(textRenderer, lines, data, mouseX, mouseY)
                 return true
             }
         }
         return false
     }
-    protected fun renderBookTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, x: Int, y: Int, stack: ItemStack): Boolean{
+    protected fun renderBookTooltip(ctx: DrawContext, mouseX: Int, mouseY: Int, x: Int, y: Int, stack: ItemStack): Boolean{
         if (stack.isEmpty) return false
-        return renderBookTooltip(matrices, mouseX, mouseY,x,y,15,15,stack.getTooltip(null,context), stack.tooltipData)
+        return renderBookTooltip(ctx, mouseX, mouseY,x,y,15,15,stack.getTooltip(null,context), stack.tooltipData)
 
     }
 

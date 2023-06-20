@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
@@ -46,18 +48,16 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
     }
 
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        DiffuseLighting.disableGuiDepthLighting()
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
+        //DiffuseLighting.disableGuiDepthLighting()
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        context.drawTexture(texture, i, j, 0, 0, backgroundWidth, backgroundHeight)
         if (handler.getSlot(1).hasStack()){
-            drawTexture(matrices, i + 35, j + 47, 15, 47, 16, 16)
+            context.drawTexture(texture, i + 35, j + 47, 15, 47, 16, 16)
         }
-        val k = client?.window?.scaleFactor?.toInt()?:1
+        /*val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
         RenderSystem.backupProjectionMatrix()
@@ -70,7 +70,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         } }
 
         RenderSystem.restoreProjectionMatrix()
-        DiffuseLighting.enableGuiDepthLighting()
+        DiffuseLighting.enableGuiDepthLighting()*/
 
         val cost = handler.disenchantCost[0]
         val p = i + 60
@@ -83,14 +83,12 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
         var onesImageOfst = 9
 
         for (o in 0..2) {
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val r = handler.enchantmentId[o]
             val lvl = handler.enchantmentLevel[o]
             if (r == -1 || cost == -1) {
                 //draws the "browned out" no-entry box
-                drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
+                context.drawTexture(texture, p, j + 14 + 19 * o, 0, 185, 108, 19)
                 continue //jumps to the next enchantment in the list
             }
             val string = "" + handler.disenchantCost[0]
@@ -108,10 +106,10 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
             if (o == 1) {
                 if ((((player.experienceLevel) >= cost) || (player.abilities.creativeMode)) && ((Enchantment.byRawId(r) !is ScepterAugment && handler.getSlotStack(1).isOf(Items.BOOK)) || (Enchantment.byRawId(r) is ScepterAugment && handler.getSlotStack(1).isOf(RegisterItem.EMPTY_SPELL_SCROLL)))) {
                     t2 = if (u >= 0 && v >= 0 && u < 108 && v < 19) {
-                        drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
+                        context.drawTexture(texture, p, j + 14 + 19 * o, 0, 204, 108, 19)
                         0xFFFF80
                     } else {
-                        drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
+                        context.drawTexture(texture, p, j + 14 + 19 * o, 0, 166, 108, 19)
                         0x404040
                         //6839882
                     }
@@ -119,15 +117,14 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     vertOffset2 = 0
                     t = 8453920
                 } else {
-                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 185, 108, 19)
+                    context.drawTexture(texture, p, j + 14 + 19 * o, 0, 185, 108, 19)
                     vertOffset = 16
                     vertOffset2 = 10
                     t = 4226832
                     t2 = 0xC0C0C0//0x342F25
                 }
                 if (oOfst <= 6) {
-                    drawTexture(
-                        matrices,
+                    context.drawTexture(texture,
                         p + 1,
                         j + 15 + 19 * o,
                         108 + 16 * oOfst,
@@ -137,8 +134,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     )
                 } else {
                     //draw in an empty level 6 experience orb picture as a background for the numbers
-                    drawTexture(
-                        matrices,
+                    context.drawTexture(texture,
                         p + 1,
                         j + 15 + 19 * o,
                         108 + 16 * 6,
@@ -169,8 +165,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         onesImageOfst = ones - 1
                     }
                     //draw the ones place numeral
-                    drawTexture(
-                        matrices,
+                    context.drawTexture(texture,
                         p + 1 + onesOfst,
                         j + 15 + 3 + 19 * o, //three additional offset to align the number with the usual position
                         108 + 9 * onesImageOfst, //grab the image off the texture, using the 10 abstract numerals
@@ -178,8 +173,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                         9,
                         9
                     )
-                    if (tens>0) drawTexture(
-                        matrices,
+                    if (tens>0) 
+                        context.drawTexture(texture,
                         p + 1 + tensOfst,
                         j + 15 + 3 + 19 * o, //three additional offset to align the number with the usual position
                         108 + 9 * tensImageOfst, //grab the image off the texture, using the 10 abstract numerals
@@ -190,23 +185,22 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
 
                 }
                 if (textRenderer.getWidth(stringVisitable) > s) {
-                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                    context.drawTextWrapped(textRenderer, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
                 } else {
-                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                    context.drawTextWrapped(textRenderer, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
                 }
-                textRenderer.drawWithShadow(
-                    matrices,
+                context.drawTextWithShadow(
+                    textRenderer,
                     string,
-                    (q + 86 - textRenderer.getWidth(string)).toFloat(),
-                    (j + 16 + 19 * o + 7).toFloat(),
+                    (q + 86 - textRenderer.getWidth(string)),
+                    (j + 16 + 19 * o + 7),
                     t
                 )
             } else {
                 val horOffset = o * 8 //0 at o = 0, 16 at o = 2
                 if (u >= 0 && v >= 0 && u < 108 && v < 19) {
-                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 204, 108, 19)
-                    drawTexture(
-                        matrices,
+                    context.drawTexture(texture, p, j + 14 + 19 * o, 0, 204, 108, 19)
+                    context.drawTexture(texture,
                         p + 1,
                         j + 15 + 19 * o,
                         0 + horOffset,
@@ -216,9 +210,8 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     )
                     t2 = 0xFFFF80
                 } else {
-                    drawTexture(matrices, p, j + 14 + 19 * o, 0, 166, 108, 19)
-                    drawTexture(
-                        matrices,
+                    context.drawTexture(texture, p, j + 14 + 19 * o, 0, 166, 108, 19)
+                    context.drawTexture(texture,
                         p + 1,
                         j + 15 + 19 * o,
                         0 + horOffset,
@@ -229,9 +222,9 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                     t2 = 0x404040
                 }
                 if (textRenderer.getWidth(stringVisitable) > s) {
-                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
+                    context.drawTextWrapped(textRenderer, stringVisitable, q, (j + 16 - 1 + 19 * o), s, t2)
                 } else {
-                    textRenderer.drawTrimmed(matrices, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
+                    context.drawTextWrapped(textRenderer, stringVisitable, q, (j + 16 + 3 + 19 * o), s, t2)
                 }
             }
 
@@ -239,10 +232,10 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
     }
 
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, delta)
-        drawMouseoverTooltip(matrices, mouseX, mouseY)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        this.renderBackground(context)
+        super.render(context, mouseX, mouseY, delta)
+        drawMouseoverTooltip(context, mouseX, mouseY)
         for (j in 0..2) {
             if (!isPointWithinBounds(60, 14 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
             val tooltipText = if (handler.disenchantCost[0] < 0){
@@ -255,7 +248,7 @@ class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerI
                 if (handler.enchantmentId[j] == -1) continue
                 AcText.translatable("container.disenchanting_table.tooltip${j + 1}").formatted(Formatting.WHITE)
             }
-            this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
+            context.drawTooltip(textRenderer, tooltipText, mouseX, mouseY)
             break
         }
     }

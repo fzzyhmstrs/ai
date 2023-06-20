@@ -7,7 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.tooltip.TooltipComponent
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -55,15 +55,13 @@ class ReagentAlertSlot(stack:EmiIngredient, output: EmiIngredient, x: Int, y: In
         return list
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-        super.render(matrices, mouseX, mouseY, delta)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        super.render(context, mouseX, mouseY, delta)
         if (containsReagent) {
             val bounds = getBounds()
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            RenderSystem.setShaderTexture(0, alertTexture)
             RenderSystem.disableDepthTest()
-            DrawableHelper.drawTexture(matrices, bounds.x(), bounds.y() - 1, 19, 19, 121f, 231f, 19, 19, 256, 256)
+            context.drawTexture(alertTexture, bounds.x(), bounds.y() - 1, 19, 19, 121f, 231f, 19, 19, 256, 256)
             RenderSystem.enableDepthTest()
         }
     }

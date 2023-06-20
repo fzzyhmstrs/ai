@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper.runHandlerViewer
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.render.DiffuseLighting
@@ -87,19 +88,16 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     }
 
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        DiffuseLighting.disableGuiDepthLighting()
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, this.texture)
         val i = (width - backgrdWidth) / 2
         val j = (height - backgrdHeight) / 2
         val ofst2 = 4 //ofst to handle the screen height change
-        drawTexture(matrices, i, j, 0, 0, backgrdWidth, backgrdHeight)
+        context.drawTexture(this.texture, i, j, 0, 0, backgrdWidth, backgrdHeight)
         if (handler.lapisSlot.get() > 0){
-            drawTexture(matrices,i+72,j+38,8,13,16,16)
+            context.drawTexture(this.texture,i+72,j+38,8,13,16,16)
         }
-        val k = client?.window?.scaleFactor?.toInt()?:1
+        /*val k = client?.window?.scaleFactor?.toInt()?:1
         RenderSystem.viewport((width - 320) / 2 * k, (height - 240) / 2 * k, 320 * k, 240 * k)
         val matrix4f = Matrix4f().translation(-0.34f, 0.23f, 0.0f).perspective(1.5707964f, 1.3333334f, 9.0f, 80.0f)
         RenderSystem.backupProjectionMatrix()
@@ -112,20 +110,18 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
         } }
 
         RenderSystem.restoreProjectionMatrix()
-        DiffuseLighting.enableGuiDepthLighting()
+        DiffuseLighting.enableGuiDepthLighting()*/
         EnchantingPhrases.getInstance().setSeed((handler as ImbuingTableScreenHandler).getSeed().toLong())
         for (o in 0..2) {
             val p = i + 118 //offset from left edge of enchantment boxes
             val q = p + 20
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val r = handler.resultsIndexes[o]
             val result = handler.results.getOrElse(r) { ImbuingTableScreenHandler.EmptyResult() }
             val power = result.power
             if (r == -1 || result.type == 3 || power == 0) {
                 //draws the "browned out" no-entry box
-                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
+                context.drawTexture(this.texture, p, j + 14 + ofst2 + 19 * o, 0, 193, 108, 19)
                 continue //jumps to the next enchantment in the list
             }
             val string = "" + power
@@ -181,13 +177,12 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             }
 
             if (hovered) {
-                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonHoveredOffset, 108, 19)
+                context.drawTexture(this.texture, p, j + 14 + ofst2 + 19 * o, 0, buttonHoveredOffset, 108, 19)
             } else {
-                drawTexture(matrices, p, j + 14 + ofst2 + 19 * o, 0, buttonOffset, 108, 19)
+                context.drawTexture(this.texture, p, j + 14 + ofst2 + 19 * o, 0, buttonOffset, 108, 19)
             }
             if (o == 0 && handler.resultsCanUp){
-                drawTexture(
-                    matrices,
+                context.drawTexture(this.texture,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
                     if(hovered){32} else {0},
@@ -196,8 +191,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     16
                 )
             } else if (o == 2 && handler.resultsCanDown){
-                drawTexture(
-                    matrices,
+                context.drawTexture(this.texture,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
                     if(hovered){48} else {16},
@@ -206,8 +200,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     16
                 )
             } else if ((lapisOffset) <= 5) {
-                drawTexture(
-                    matrices,
+                context.drawTexture(this.texture,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
                     108 + 16 * (lapisOffset),
@@ -217,8 +210,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 )
             } else {
                 //draw in an empty level 6 experience orb picture as a background for the numbers
-                drawTexture(
-                    matrices,
+                context.drawTexture(this.texture,
                     p + 1,
                     j + 15 + ofst2 + 19 * o,
                     108 + 16 * 6,
@@ -249,8 +241,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     onesImageOfst = ones - 1
                 }
                 //draw the ones place numeral
-                drawTexture(
-                    matrices,
+                context.drawTexture(this.texture,
                     p + 1 + onesOfst,
                     j + 15 + ofst2 + 3 + 19 * o, //three additional offset to align the number with the usual position
                     108 + 9 * onesImageOfst, //grab the image off the texture, using the 10 abstract numerals
@@ -258,8 +249,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                     9,
                     9
                 )
-                if (tens>0) drawTexture(
-                    matrices,
+                if (tens>0) context.drawTexture(this.texture,
                     p + 1 + tensOfst,
                     j + 15 + ofst2 + 3 + 19 * o, //three additional offset to align the number with the usual position
                     108 + 9 * tensImageOfst, //grab the image off the texture, using the 10 abstract numerals
@@ -276,25 +266,21 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else {
                 0
             }
-            textRenderer.drawTrimmed(matrices,stringVisitable, q, j + 16 + ofst2 + ofst3 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
+            context.drawTextWrapped(textRenderer,stringVisitable, q, j + 16 + ofst2 + ofst3 + 19 * o, s, descTextColor and 0xFEFEFE shr 1)
             if (!(o == 0 && handler.resultsCanUp || o == 2 && handler.resultsCanDown))
-            textRenderer.drawWithShadow(
-                matrices,
+            context.drawTextWithShadow(textRenderer,
                 string,
-                (q + 86 - textRenderer.getWidth(string)).toFloat(),
-                (j + 16 + 19 * o + 7).toFloat(),
+                (q + 86 - textRenderer.getWidth(string)),
+                (j + 16 + 19 * o + 7),
                 powerTextColor
             )
         }
         if (recipesOffset >= 0){
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             val u = mouseX - (i + 6)
             val v = mouseY - (j + 91)
             val hovered = (u >= 0 && v >= 0 && u < 20 && v < 18)
-            drawTexture(
-                matrices,
+            context.drawTexture(this.texture,
                 i + 6,
                 j + 91,
                 236,
@@ -316,11 +302,8 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else {
                 19
             }
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, this.texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            drawTexture(
-                matrices,
+            context.drawTexture(this.texture,
                 i + 94,
                 j + 37,
                 64 + offset,
@@ -332,11 +315,11 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
     }
 
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         val ofst2 = 4 //ofst to handle the screen height change
-        this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, delta)
-        drawMouseoverTooltip(matrices, mouseX, mouseY)
+        this.renderBackground(context)
+        super.render(context, mouseX, mouseY, delta)
+        drawMouseoverTooltip(context, mouseX, mouseY)
         if (isPointWithinBounds(94, 37, 18, 18, mouseX.toDouble(), mouseY.toDouble()) && handler.reroll.get() != 0){
             val list = if(handler.reroll.get() > 0){
                 val tempList: MutableList<Text> = mutableListOf()
@@ -364,7 +347,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 tempList.add(AcText.translatable("container.imbuing_table.reroll_both_bad").formatted(Formatting.ITALIC, Formatting.RED))
                 tempList
             }
-            this.renderTooltip(matrices, list, mouseX, mouseY)
+            context.drawTooltip(textRenderer, list, mouseX, mouseY)
             return
         }
         for (j in 0..2) {
@@ -388,7 +371,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             } else {
                 result.tooltipList(player, handler)
             }
-            this.renderTooltip(matrices, list, mouseX, mouseY)
+            context.drawTooltip(textRenderer, list, mouseX, mouseY)
             break
         }
 

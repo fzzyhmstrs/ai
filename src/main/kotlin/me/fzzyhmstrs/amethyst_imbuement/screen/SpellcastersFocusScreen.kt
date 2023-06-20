@@ -5,14 +5,13 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.screen.narration.NarrationPart
 import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
@@ -46,37 +45,35 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         addDrawableChild(button3)
     }
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         val i = (width - backgroundWidth) / 2
         val j = (height - backgroundHeight) / 2
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, texture)
-        drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight)
-        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0xFFFFFF)
-        DrawableHelper.drawCenteredTextWithShadow(matrices,MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0xFFFFFF)
+        context.drawTexture(texture, i, j, 0, 0, backgroundWidth, backgroundHeight)
+        context.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer,title.asOrderedText(),i + backgroundWidth/2,j + 7,0xFFFFFF)
+        context.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer,flavor.asOrderedText(),i + backgroundWidth/2,j + 20,0xFFFFFF)
     }
 
-    override fun drawForeground(matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+    override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-        this.renderBackground(matrices)
-        super.render(matrices, mouseX, mouseY, delta)
-        drawMouseoverTooltip(matrices, mouseX, mouseY)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        this.renderBackground(context)
+        super.render(context, mouseX, mouseY, delta)
+        drawMouseoverTooltip(context, mouseX, mouseY)
         for (j in 0..2) {
             if (!isPointWithinBounds(8 + 63 * j, 34, 58, 86, mouseX.toDouble(), mouseY.toDouble())) continue
             val mods = handler.options[j]
 
             val tooltipText: MutableList<Text> = mutableListOf(AcText.translatable("container.spellcasters_focus.option${j+1}"))
             tooltipText.add(AcText.empty())
-            val context = if (client?.options?.advancedItemTooltips == true){
+            val ctx = if (client?.options?.advancedItemTooltips == true){
                 TooltipContext.Default.ADVANCED
             } else {
                 TooltipContext.Default.BASIC
             }
-            ModifierHelper.addModifierTooltip(mods,tooltipText,context)
-            this.renderTooltip(matrices, tooltipText, mouseX, mouseY)
+            ModifierHelper.addModifierTooltip(mods,tooltipText,ctx)
+            context.drawTooltip(textRenderer, tooltipText, mouseX, mouseY)
             break
         }
     }
@@ -102,18 +99,17 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             }
         }
 
-        override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+        override fun renderButton(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             val minecraftClient = MinecraftClient.getInstance()
             val textRenderer = minecraftClient.textRenderer
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.enableBlend()
             RenderSystem.defaultBlendFunc()
             RenderSystem.enableDepthTest()
             val i = if (hovered || selected) 1 else 0
-            drawTexture(matrices, x, y, 0 + 58 * i, 128, width , height)
-            ClickableWidget.drawCenteredTextWithShadow(matrices,textRenderer,message.asOrderedText(),x + (width / 2),y + 5,0xFFFFFF)
+            context.drawTexture(texture, x, y, 0 + 58 * i, 128, width , height)
+            context.drawCenteredTextWithShadow(textRenderer,message.asOrderedText(),x + (width / 2),y + 5,0xFFFFFF)
             val drawDots: Boolean
             val range = if (mods.size <= 3) {
                 drawDots = false
@@ -122,21 +118,18 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
                 drawDots = true
                 0..1
             }
-            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, texture)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             for (j in range){
-                drawTexture(matrices, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
+                context.drawTexture(texture, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
             }
             if (drawDots){
-                drawTexture(matrices, x + 9, y + 18 + 21 * 2, 116, 146, 40 , 18)
+                context.drawTexture(texture, x + 9, y + 18 + 21 * 2, 116, 146, 40 , 18)
             }
             for (j in range){
                 val mod = mods[j]
-                RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
                 RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"))
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-                DrawableHelper.drawTexture(matrices, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
+                context.drawTexture(texture, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
             }
 
         }

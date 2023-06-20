@@ -67,7 +67,7 @@ class ForcefieldBlock(settings: Settings) : Block(settings) {
         } else super.isSideInvisible(state, stateFrom, direction)
     }
 
-    override fun canMobSpawnInside(): Boolean {
+    override fun canMobSpawnInside(state: BlockState): Boolean {
         return false
     }
 

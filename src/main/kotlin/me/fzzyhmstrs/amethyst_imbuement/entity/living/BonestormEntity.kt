@@ -67,7 +67,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
     }
 
     override fun tickMovement() {
-        if (!onGround && velocity.y < 0.0) {
+        if (!isOnGround && velocity.y < 0.0) {
             velocity = velocity.multiply(1.0, 0.6, 1.0)
         }
         if (world.isClient) {

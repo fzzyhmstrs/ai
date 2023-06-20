@@ -42,7 +42,7 @@ class CrystalAltarScreenHandler(
     private var currentRecipe: AltarRecipe? = null
     private var recipes: List<AltarRecipe>
 
-    private val input: Inventory = object : SimpleInventory(3) {
+    private val input: SimpleInventory = object : SimpleInventory(3) {
         override fun markDirty() {
             super.markDirty()
             this@CrystalAltarScreenHandler.onContentChanged(this)
@@ -123,7 +123,7 @@ class CrystalAltarScreenHandler(
 
     private fun onTakeOutput(player: PlayerEntity, stack: ItemStack) {
         stack.onCraft(player.world, player, stack.count)
-        output.unlockLastRecipe(player)
+        output.unlockLastRecipe(player,input.stacks)
         decrementStack(0)
         decrementStack(1)
         decrementStack(2)

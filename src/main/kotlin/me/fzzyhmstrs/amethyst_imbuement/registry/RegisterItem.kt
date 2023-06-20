@@ -284,7 +284,7 @@ object RegisterItem {
     }
 
     fun registerItemGroup(): ItemGroup{
-        return FabricItemGroup.builder(Identifier(AI.MOD_ID,"ai_group"))
+        return Registry.register(Registries.ITEM_GROUP,Identifier(AI.MOD_ID,"ai_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.amethyst_imbuement.ai_group"))
             .icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }
             .entries { _, entries ->
@@ -304,7 +304,7 @@ object RegisterItem {
                         entries.add(it)
                     }
 
-            }.build()
+            }.build())
     }
 
     fun registerAll() {
