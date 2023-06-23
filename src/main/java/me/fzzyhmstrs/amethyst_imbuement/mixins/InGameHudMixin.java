@@ -41,10 +41,10 @@ public abstract class InGameHudMixin {
             if (this.client.player.getActiveItem().getItem() == RegisterItem.INSTANCE.getSNIPER_BOW()) {
                 instance.drawTexture(SniperBowItem.Companion.getSNIPER_BOW_SCOPE(),x,y,z,u,v,width,height,textureWidth,textureHeight);
             } else {
-                operation.call(texture,x,y,z,u,v,width,height,textureWidth,textureHeight);
+                operation.call(instance,texture,x,y,z,u,v,width,height,textureWidth,textureHeight);
             }
         } else {
-            operation.call(texture,x,y,z,u,v,width,height,textureWidth,textureHeight);
+            operation.call(instance,texture,x,y,z,u,v,width,height,textureWidth,textureHeight);
         }
     }
 }
