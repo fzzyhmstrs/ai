@@ -52,19 +52,19 @@ repositories {
         url = uri("https://maven.nucleoid.xyz/")
     }
     flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
+        dirs("E:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
     flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
+        dirs("E:\\Documents\\Mod Libraries\\fc\\build\\libs")
     }
     flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\gc\\build\\libs")
+        dirs("E:\\Documents\\Mod Libraries\\gc\\build\\libs")
     }
     flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\fzzy_config\\build\\libs")
+        dirs("E:\\Documents\\Mod Libraries\\fzzy_config\\build\\libs")
     }
     flatDir {
-        dirs("F:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
+        dirs("E:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
     }
     mavenCentral()
 }
