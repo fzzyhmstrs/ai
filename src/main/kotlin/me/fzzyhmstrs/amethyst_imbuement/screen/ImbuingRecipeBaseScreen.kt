@@ -69,6 +69,7 @@ open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
     }
 
     protected fun renderItem(ctx: DrawContext, x: Int, y: Int, mouseX: Int, mouseY: Int, stack: ItemStack){
+        ctx.drawItem(stack, x, y)
         ctx.drawItemInSlot(textRenderer, stack, x, y)
         renderBookTooltip(ctx, mouseX, mouseY, x, y, stack)
     }
