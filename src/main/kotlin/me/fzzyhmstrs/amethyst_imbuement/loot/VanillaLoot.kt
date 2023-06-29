@@ -280,6 +280,7 @@ object VanillaLoot: AbstractModLoot() {
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(1.0F,2.0f))
+            .conditionally(RandomChanceLootCondition.builder(0.5f))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
             .with(ItemEntry.builder(RegisterItem.EMPTY_SPELL_SCROLL).weight(1).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f,4f))))
