@@ -43,6 +43,7 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
         val hit = RaycasterUtil.raycastHit(effects.range(level),entity = user)
         if (hit is BlockHitResult  && CommonProtection.canBreakBlock(world,hit.blockPos,user.gameProfile,user)){
             val state = world.getBlockState(hit.blockPos)
+            if (state.getHardness(world,hit.blockPos) == -1.0f) return false
             if (canBreak(state, level)) {
                 world.breakBlock(hit.blockPos,true,user)
                 val group = state.soundGroup
