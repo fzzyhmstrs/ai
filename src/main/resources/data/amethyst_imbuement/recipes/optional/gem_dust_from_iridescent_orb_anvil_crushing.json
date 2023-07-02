@@ -1,0 +1,23 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "spectrum"
+      ]
+    }
+  ],
+
+  "type": "spectrum:anvil_crushing",
+  "ingredient": {
+    "item": "amethyst_imbuement:iridescent_orb"
+  },
+  "crushedItemsPerPointOfDamage": 2,
+  "experience": 0.0,
+  "result": {
+    "item": "amethyst_imbuement:gem_dust",
+    "count": 5
+  },
+  "particleEffectIdentifier": "cloud",
+  "soundEventIdentifier": "block.amethyst_block.break"
+}
