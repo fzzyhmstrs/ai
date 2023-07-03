@@ -19,6 +19,7 @@ import net.minecraft.screen.slot.Slot
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
@@ -27,7 +28,7 @@ import java.util.function.BiFunction
 @Suppress("SENSELESS_COMPARISON", "USELESS_CAST")
 class CrystalAltarScreenHandler(
     syncID: Int,
-    playerInventory: PlayerInventory,
+    private val playerInventory: PlayerInventory,
     private val handlerContext: ScreenHandlerContext
 ): ScreenHandler(RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER,syncID) {
 
@@ -136,8 +137,25 @@ class CrystalAltarScreenHandler(
     }
 
     private fun decrementStack(slot: Int) {
-        val itemStack = input.getStack(slot)
+        var itemStack = input.getStack(slot)
+        val item = itemStack.item.recipeRemainder
         itemStack.decrement(1)
+        if (item != null) {
+            println("bleh")
+            val itemStack2 = ItemStack(item)
+            if (itemStack.isEmpty) {
+                itemStack = itemStack2
+            } else {
+                val pos = playerInventory.player.pos
+                ItemScatterer.spawn(
+                    world,
+                    pos.getX(),
+                    pos.getY(),
+                    pos.getZ(),
+                    itemStack2
+                )
+            }
+        }
         input.setStack(slot, itemStack)
     }
 
