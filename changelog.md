@@ -1,8 +1,9 @@
 ### Fixes
-* Fix items not appearing on the recipe page of Books of Lore/Mythos
+* Fixed excavate mining blocks it isn't supposed to.
 
 ### Changes
-* Made certain loot in pillager outposts slightly rarer
+* Botany pot recipes moved to optional recipes folder and use conditional loading via fabric API now
 
 ### Additions
-* 
+* Spectrum integration: Added optional recipes for Anvil Crushing items to get gem dust.
+* The crystal altar now accepts items with recipe remainders without eating the remainder.
