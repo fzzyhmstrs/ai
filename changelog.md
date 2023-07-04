@@ -1,3 +1,5 @@
+# Reminder: Major content updates are no longer supported on this version.
+
 ### Fixes
 * Fixed excavate mining blocks it isn't supposed to.
 
