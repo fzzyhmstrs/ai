@@ -1,8 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.entity.*
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
@@ -37,7 +36,7 @@ import java.util.*
 
 @Suppress("PrivatePropertyName", "LeakingThis")
 open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
-    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
+    Angerable, PlayerCreatable, ModifiableEffectEntity<PlayerCreatedConstructEntity>, Tameable, Scalable {
 
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : this(entityType, world){
         maxAge = ageLimit
@@ -71,19 +70,19 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
     override var maxAge = -1
+    
     override var createdBy: UUID? = null
     override var entityOwner: LivingEntity? = null
     private var angryAt: UUID? = null
+    protected var trackingOwner = false
+        
     override var entityEffects: AugmentEffect = AugmentEffect()
-    private var level = 1
+    override var level = 1
+    override var spells: PairedAugments = PairedAugments()
+    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
+    
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
-    protected var trackingOwner = false
-
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        this.entityEffects = ae.copy()
-        this.level = level
-    }
 
     init{
         stepHeight = 1.0f
@@ -130,6 +129,10 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         dataTracker.startTracking(SCALE,1f)
     }
 
+    override fun tickingEntity(): PlayerCreatedConstructEntity{
+        return this
+    }
+
     open fun modifyHealth(modHealth: Double){
         val baseHealth = this.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH)
         if (modHealth != baseHealth && modHealth != 0.0){
@@ -158,6 +161,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     override fun tick() {
         super.tick()
+        tickTickEffects()
         if (maxAge > 0){
             if (age >= maxAge){
                 kill()
@@ -227,6 +231,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         writePlayerCreatedNbt(nbt)
+        writeModifiableNbt(nbt)
         writeAngerToNbt(nbt)
         nbt.putInt("maximum_age", maxAge)
         nbt.putInt("effect_level", level)
@@ -236,6 +241,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         readPlayerCreatedNbt(world, nbt)
+        readModifiableNbt(nbt)
         if (owner != null) {
             try {
                 startTrackingOwner(owner!!)
