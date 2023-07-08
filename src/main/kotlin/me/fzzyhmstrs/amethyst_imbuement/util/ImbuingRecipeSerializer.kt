@@ -3,8 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
-import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient

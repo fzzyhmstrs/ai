@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
-import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.BallLightningEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity

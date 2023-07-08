@@ -1,13 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
-import dev.emi.trinkets.api.TrinketEnums
-import dev.emi.trinkets.api.event.TrinketDropCallback
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.TotemPassiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
-import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot

@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ShieldItem
 import net.minecraft.registry.Registries

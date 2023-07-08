@@ -1,46 +1,126 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.Scalable
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
+import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.EquipmentSlot
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Arm
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.MathHelper
+import net.minecraft.world.EntityView
 import net.minecraft.world.World
+import java.util.*
 import kotlin.math.atan2
 import kotlin.math.roundToInt
 
+@Suppress("LeakingThis")
 abstract class AbstractEffectTotemEntity(
     entityType: EntityType<out AbstractEffectTotemEntity>,
     world: World,
-    protected val summoner: PlayerEntity? = null,
-    private val maxAge: Int = 600,
+    summoner: LivingEntity? = null,
+    override var maxAge: Int = 600,
     item: Item = Items.AIR)
-    : LivingEntity(entityType, world) {
+    :
+    LivingEntity(entityType, world), ModifiableEffectEntity, PlayerCreatable, Tameable, Scalable
+{
+
+    companion object{
+        private val SCALE = DataTracker.registerData(AbstractEffectTotemEntity::class.java, TrackedDataHandlerRegistry.FLOAT)
+        internal val TOTEM_BEAM = object : ProcessContext.Data<Boolean>("totem_beam_sound",ProcessContext.BooleanDataType){}
+    }
+
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withAmplifier(0)
+    override var level: Int = 1
+    override var spells: PairedAugments = PairedAugments()
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext = ProcessContext.EMPTY_CONTEXT
 
     var ticks = 0
     var lookingRotR = 0f
     private var turningSpeedR = 2f
     protected val ticker: EventRegistry.Ticker
+    override var createdBy: UUID? = null
+    override var entityOwner: LivingEntity? = null
     internal val stack = ItemStack(item)
     internal val seed = this.blockPos.asLong().toInt()
     private val init: Int by lazy{
         firstTick()
     }
 
+    override fun passContext(context: ProcessContext) {
+        super.passContext(context.set(TOTEM_BEAM, true))
+    }
+
     init{
         ticker = initTickerInternal()
+        entityOwner = summoner
+    }
+
+    override fun getOwnerUuid(): UUID? {
+        return createdBy
+    }
+
+    override fun method_48926(): EntityView {
+        return this.world
+    }
+
+    override fun getOwner(): LivingEntity? {
+        return if (entityOwner != null) {
+            entityOwner
+        } else if (world is ServerWorld && createdBy != null) {
+            val o = (world as ServerWorld).getEntity(createdBy)
+            if (o != null && o is LivingEntity) {
+                this.entityOwner = o
+                o
+            } else {
+                null
+            }
+
+        }else {
+            null
+        }
+    }
+
+    override fun getScale(): Float {
+        return dataTracker.get(SCALE)
+    }
+
+    override fun setScale(scale: Float) {
+        dataTracker.set(SCALE,MathHelper.clamp(scale,0.0f,20.0f))
+        this.calculateDimensions()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        writePlayerCreatedNbt(nbt)
+        writeModifiableNbt(nbt)
+        nbt.putFloat("scale_factor",getScale())
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        readPlayerCreatedNbt(world, nbt)
+        readModifiableNbt(nbt)
+        setScale(nbt.getFloat("scale_factor").takeIf { it > 0f } ?: 1f)
     }
 
     private fun initTickerInternal(): EventRegistry.Ticker {
@@ -48,6 +128,11 @@ abstract class AbstractEffectTotemEntity(
     }
     open fun initTicker(): EventRegistry.Ticker{
         return EventRegistry.ticker_30
+    }
+
+    override fun initDataTracker() {
+        super.initDataTracker()
+        dataTracker.startTracking(SCALE, 1f)
     }
 
     override fun shouldRenderName(): Boolean {
@@ -101,6 +186,7 @@ abstract class AbstractEffectTotemEntity(
 
     override fun tick() {
         super.tick()
+        tickTickEffects(this,processContext)
         if (!world.isClient()) {
             val i = init
         }
@@ -178,7 +264,7 @@ abstract class AbstractEffectTotemEntity(
     interface TotemAbstractAttributes{
         fun createTotemAttributes(): DefaultAttributeContainer.Builder{
             return createBaseTotemAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,18.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH,20.0)
 
         }
         fun createBaseTotemAttributes(): DefaultAttributeContainer.Builder{

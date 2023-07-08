@@ -9,10 +9,8 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.screen.narration.NarrationPart
-import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting

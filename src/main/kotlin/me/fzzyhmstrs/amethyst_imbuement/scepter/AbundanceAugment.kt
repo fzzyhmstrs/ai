@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
-import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity

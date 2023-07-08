@@ -9,8 +9,6 @@ import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.tooltip.TooltipComponent
-import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import org.apache.commons.compress.utils.Lists

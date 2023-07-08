@@ -2,12 +2,13 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
+import me.fzzyhmstrs.amethyst_core.entity.Scalable
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
@@ -15,7 +16,6 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Monster
@@ -30,18 +30,20 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.*
 import net.minecraft.world.event.GameEvent
 import net.minecraft.world.explosion.Explosion
 import net.minecraft.world.explosion.ExplosionBehavior
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
 
 class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World): ChickenEntity(entityType, world),
-    ModifiableEffectEntity<BoomChickenEntity>, Tameable, PlayerCreatable {
+    ModifiableEffectEntity, Tameable, PlayerCreatable, Scalable {
 
     companion object{
 
+
+        private val SCALE = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.FLOAT)
         private val FUSE_SPEED = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         private val IGNITED = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
@@ -59,14 +61,9 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
 
     override var entityEffects: AugmentEffect = AugmentEffect().withAmplifier(10)
     override var level: Int = 1
-    override var processContext: ProcessContext = ProcessContext.EMPTY
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY_CONTEXT
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-
-    override fun tickingEntity(): BoomChickenEntity {
-        return this
-    }
-
+    override var modifiableEffects = ModifiableEffectContainer()
 
     fun setChickenOwner(owner:LivingEntity?){
         this.createdBy = owner?.uuid
@@ -89,6 +86,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
 
     override fun initDataTracker() {
         super.initDataTracker()
+        dataTracker.startTracking(SCALE,1f)
         dataTracker.startTracking(FUSE_SPEED, -1)
         dataTracker.startTracking(IGNITED, false)
     }
@@ -103,6 +101,15 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         super.readCustomDataFromNbt(nbt)
         readPlayerCreatedNbt(world, nbt)
         readModifiableNbt(nbt)
+    }
+
+    override fun getScale(): Float {
+        return dataTracker.get(SCALE)
+    }
+
+    override fun setScale(scale: Float) {
+        dataTracker.set(SCALE, MathHelper.clamp(scale,0.0f,20.0f))
+        this.calculateDimensions()
     }
 
     override fun tick() {
@@ -126,7 +133,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
             }
         }
         super.tick()
-        tickTickEffects()
+        tickTickEffects(this, processContext)
     }
 
     private fun explode() {

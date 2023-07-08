@@ -344,9 +344,9 @@ object AiConfig
     private val entitiesHeader = buildSectionHeader("entities")
 
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
-        fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
+        fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment?): Boolean{
             if (user == null) return false
-            if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
+            if (forcePvpOnAllSpells.get() || spell?.getPvpMode() == true){
                 return user.isTeammate(entity)
             }
             return true

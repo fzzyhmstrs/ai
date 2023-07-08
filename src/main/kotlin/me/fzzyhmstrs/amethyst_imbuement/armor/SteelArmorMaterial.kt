@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.armor
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.recipe.Ingredient

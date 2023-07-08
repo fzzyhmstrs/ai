@@ -15,10 +15,8 @@ import mezz.jei.api.recipe.RecipeType
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
-import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier

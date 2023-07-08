@@ -1,18 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -21,7 +18,6 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Box
-import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: World): BasicMissileEntity(entityType, world) {
@@ -54,7 +50,6 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
 
     override fun tick() {
         super.tick()
-        tickTickEffects()
         if (world !is ServerWorld) return
         if (!ticker.isReady() && initialBeam) return
         val augment = spells.primary() ?: return
@@ -70,7 +65,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
                 spells.processOnKill(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             }
             beam(world as ServerWorld,entity)
-            spells.castSoundEvents(world, blockPos)
+            spells.hitSoundEvents(world, blockPos, processContext)
             //world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
         initialBeam = true
@@ -106,9 +101,8 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
                 spells.processOnKill(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             }
             beam(world as ServerWorld,entity)
-            spells.castSoundEvents(world, blockPos)
+            spells.hitSoundEvents(world, blockPos, processContext)
         }
-        world.playSound(null,this.blockPos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         super.onMissileBlockHit(blockHitResult)
     }
 

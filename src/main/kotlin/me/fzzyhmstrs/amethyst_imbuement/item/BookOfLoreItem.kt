@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.item.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
 import net.minecraft.client.MinecraftClient

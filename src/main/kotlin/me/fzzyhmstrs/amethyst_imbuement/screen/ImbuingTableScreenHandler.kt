@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.google.common.collect.Lists
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig

@@ -23,15 +23,7 @@ import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
 class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600):
-    AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.HEALERS_GEM), ModifiableEffectEntity {
-
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(2.0F).withRange(5.0)
-
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        entityEffects.setDamage(ae.damage(level))
-        entityEffects.setRange(ae.range(level))
-    }
+    AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.HEALERS_GEM) {
 
     override fun initTicker(): EventRegistry.Ticker {
         val ticker = EventRegistry.Ticker(60)
@@ -40,14 +32,13 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
     }
 
     override fun totemEffect() {
-        if (summoner == null) return
+        val summoner = owner ?: return
         val range = entityEffects.range(0)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
         val entities = world.getOtherEntities(this, box)
         for (entity in entities){
             if (entity !is LivingEntity) continue
-            if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(summoner,entity,
-                    RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
+            if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(summoner,entity,spells.primary())) {
                 entity.heal(entityEffects.damage(0))
                 val serverWorld: ServerWorld = this.world as ServerWorld
                 beam(entity,serverWorld)

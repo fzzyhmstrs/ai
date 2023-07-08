@@ -1,12 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.armor
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.ArmorItem.Type
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.item.ArmorItem.Type
 
 @Suppress("PrivatePropertyName")
 class AmetrineArmorMaterial : ArmorMaterial {

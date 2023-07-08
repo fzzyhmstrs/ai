@@ -2,10 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.util
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter.addIfDistinct
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry

@@ -10,7 +10,6 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.damage.DamageSources
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.tag.DamageTypeTags

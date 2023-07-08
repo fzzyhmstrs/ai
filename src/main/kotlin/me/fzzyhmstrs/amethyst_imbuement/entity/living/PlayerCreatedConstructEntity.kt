@@ -2,9 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity.Scalable
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
@@ -44,11 +44,10 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
 
 @Suppress("PrivatePropertyName", "LeakingThis")
 open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
-    Angerable, PlayerCreatable, ModifiableEffectEntity<PlayerCreatedConstructEntity>, Tameable, Scalable {
+    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
 
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null) : this(entityType, world){
         maxAge = ageLimit
@@ -58,14 +57,10 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (createdBy != null) {
             startTrackingOwner(createdBy)
         }
-
-        if (world is ServerWorld) {
-            initialize(world,world.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
-        }
     }
 
     companion object{
-        internal val SCALE = DataTracker.registerData(PlayerCreatedConstructEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
+        protected val SCALE = DataTracker.registerData(PlayerCreatedConstructEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
     }
 
     private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 10.0f, 2.0f, false)
@@ -87,11 +82,19 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override var entityEffects: AugmentEffect = AugmentEffect()
     override var level = 1
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY_CONTEXT
     
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
+
+    override fun passEffects(spells: PairedAugments, ae: AugmentEffect, level: Int) {
+        super.passEffects(spells, ae, level)
+        val chk = world
+        if (chk is ServerWorld) {
+            initialize(chk,chk.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
+        }
+    }
 
     init{
         stepHeight = 1.0f
@@ -138,10 +141,6 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         dataTracker.startTracking(SCALE,1f)
     }
 
-    override fun tickingEntity(): PlayerCreatedConstructEntity{
-        return this
-    }
-
     open fun modifyHealth(modHealth: Double){
         val baseHealth = this.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH)
         if (modHealth != baseHealth && modHealth != 0.0){
@@ -170,7 +169,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     override fun tick() {
         super.tick()
-        tickTickEffects()
+        tickTickEffects(this, processContext)
         if (maxAge > 0){
             if (age >= maxAge){
                 kill()
@@ -242,8 +241,6 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         writePlayerCreatedNbt(nbt)
         writeModifiableNbt(nbt)
         writeAngerToNbt(nbt)
-        nbt.putInt("maximum_age", maxAge)
-        nbt.putInt("effect_level", level)
         nbt.putFloat("scale_factor",getScale())
     }
 
@@ -259,8 +256,6 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
             }
         }
         readAngerFromNbt(world, nbt)
-        this.maxAge = nbt.getInt("maximum_age").takeIf { it > 0 } ?: -1
-        this.level = nbt.getInt("effect_level").takeIf { it > 0 } ?: 1
         setScale(nbt.getFloat("scale_factor").takeIf { it > 0f } ?: 1f)
     }
 

@@ -1,19 +1,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
+import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
-import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents

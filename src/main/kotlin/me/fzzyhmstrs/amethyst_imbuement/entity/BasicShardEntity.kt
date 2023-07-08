@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -25,7 +25,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
 open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world: World
-): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity<BasicShardEntity> {
+): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity {
 
     constructor(entityType: EntityType<out BasicShardEntity?>,world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(entityType,world){
         this.owner = owner
@@ -36,15 +36,11 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withAmplifier(0)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-    override var processContext = ProcessContext.EMPTY
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext = ProcessContext.EMPTY_CONTEXT
     private val struckEntities: MutableList<UUID> = mutableListOf()
     private val particle
         get() = spells.getCastParticleType()
-
-    override fun tickingEntity(): BasicShardEntity {
-        return this
-    }
 
     override fun onCollision(hitResult: HitResult) {
         super.onCollision(hitResult)
@@ -63,6 +59,9 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, aug))){
                 if (!struckEntities.contains(entity2.uuid)){
                     struckEntities.add(entity2.uuid)
+                    if (struckEntities.size > entityEffects.amplifier(0)){
+                        processContext.beforeRemoval()
+                    }
                     onShardEntityHit(entityHitResult)
                 }
             }
@@ -108,7 +107,7 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
         if (this.age > 1200){
             discard()
         }
-        tickTickEffects()
+        tickTickEffects(this,processContext)
         if (!inGround)
             addParticles(velocity.x, velocity.y, velocity.z)
     }

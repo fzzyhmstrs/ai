@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
@@ -26,9 +26,8 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.World
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
 
-open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity<PlayerFangsEntity> {
+open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity {
 
     constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
         this.warmup = warmup
@@ -47,14 +46,10 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-    override var processContext: ProcessContext = ProcessContext.EMPTY
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
     private val particle
         get() = spells.getCastParticleType()
-    override fun tickingEntity(): PlayerFangsEntity {
-        return this
-    }
-
 
     private fun setOwner(owner: LivingEntity?) {
         this.owner = owner
@@ -88,7 +83,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
 
     override fun tick() {
         super.tick()
-        tickTickEffects()
+        tickTickEffects(this,processContext)
         if (world.isClient) {
             if (playingAnimation) {
                 --ticksLeft

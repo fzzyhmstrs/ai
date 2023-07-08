@@ -9,17 +9,13 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.client.gui.screen.ingame.HandledScreen
-import net.minecraft.client.render.DiffuseLighting
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import org.joml.Matrix4f
 import kotlin.math.max
 
 

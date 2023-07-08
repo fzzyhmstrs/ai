@@ -85,7 +85,7 @@ internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedCon
                     val owner = constructEntity.owner ?: constructEntity
                     val bse = BasicShardEntity(RegisterEntity.BONE_SHARD_ENTITY, constructEntity.world, owner, 4.0f, 1.75f * h, pos, rot)
                     bse.passEffects(constructEntity.spells,constructEntity.entityEffects,constructEntity.level)
-                    bse.passContext(ProcessContext.FROM_ENTITY)
+                    bse.passContext(constructEntity.processContext.set(ProcessContext.FROM_ENTITY,true))
                     val bseFinal = if (owner is SpellCastingEntity) {
                         constructEntity.spells.provideProjectile(
                             bse,

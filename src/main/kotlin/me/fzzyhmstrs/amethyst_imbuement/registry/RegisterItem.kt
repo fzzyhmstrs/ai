@@ -2,9 +2,9 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.*
@@ -21,7 +21,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries

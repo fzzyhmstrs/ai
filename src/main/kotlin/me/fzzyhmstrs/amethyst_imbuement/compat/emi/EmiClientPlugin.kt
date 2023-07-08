@@ -10,7 +10,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import java.util.function.Function
 
 
 object EmiClientPlugin: EmiPlugin{

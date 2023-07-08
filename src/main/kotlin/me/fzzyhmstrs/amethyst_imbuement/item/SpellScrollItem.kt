@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.item.SpellCasting
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterHelper
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText

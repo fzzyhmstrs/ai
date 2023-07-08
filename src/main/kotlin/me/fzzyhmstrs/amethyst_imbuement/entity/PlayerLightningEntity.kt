@@ -3,8 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import com.google.common.collect.Sets
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -26,7 +26,6 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
-import net.minecraft.world.Difficulty
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
@@ -35,7 +34,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world),
-    ModifiableEffectEntity<PlayerLightningEntity> {
+    ModifiableEffectEntity {
 
     constructor(world: World, attacker: LivingEntity): this(RegisterEntity.PLAYER_LIGHTNING, world){
         owner = attacker
@@ -49,12 +48,8 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withAmplifier(8)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-    override var processContext: ProcessContext = ProcessContext.EMPTY
-
-    override fun tickingEntity(): PlayerLightningEntity {
-        return this
-    }
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
 
     fun getOwner(): LivingEntity? {
         if (owner != null && !owner!!.isRemoved) {
@@ -73,7 +68,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     override fun tick() {
         var list: List<Entity>
         super.tick()
-        tickTickEffects()
+        tickTickEffects(this,processContext)
         val livingEntity = getOwner()
         if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
         val augment = spells.primary() ?: return

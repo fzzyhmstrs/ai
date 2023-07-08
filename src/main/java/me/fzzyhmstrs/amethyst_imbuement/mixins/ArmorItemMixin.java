@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;

@@ -1,15 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.item.ScepterLike
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentModifier
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -18,7 +17,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable

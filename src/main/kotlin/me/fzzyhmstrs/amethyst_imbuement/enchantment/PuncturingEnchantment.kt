@@ -7,7 +7,6 @@ import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem

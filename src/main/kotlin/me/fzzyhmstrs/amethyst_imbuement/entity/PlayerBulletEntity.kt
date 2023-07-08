@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
-import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -17,24 +17,20 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
-import java.util.concurrent.ConcurrentLinkedQueue
 
-open class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity<PlayerBulletEntity> {
+open class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerBulletEntity?>, world: World): super(entityType, world)
     constructor(world: World, owner: LivingEntity, target: Entity, axis: Direction.Axis): super(world, owner, target, axis)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(4.0f).withDuration(140)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
-    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-    override var processContext: ProcessContext = ProcessContext.EMPTY
-    override fun tickingEntity(): PlayerBulletEntity {
-        return this
-    }
+    override var modifiableEffects = ModifiableEffectContainer()
+    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
 
     override fun tick() {
         super.tick()
-        tickTickEffects()
+        tickTickEffects(this,processContext)
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {

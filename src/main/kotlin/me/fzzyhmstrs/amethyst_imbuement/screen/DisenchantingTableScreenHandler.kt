@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
-import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.*

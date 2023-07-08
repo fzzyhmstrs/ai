@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
 import me.fzzyhmstrs.amethyst_core.AC
-import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
+import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKeys

@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.item.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe

@@ -1,11 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ShootProjectileGoal
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -24,9 +21,6 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import net.minecraft.world.WorldEvents
-import java.util.*
-import kotlin.math.sqrt
 
 open class BonestormEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 

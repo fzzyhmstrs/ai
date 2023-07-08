@@ -1,10 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 
-import com.mojang.blaze3d.systems.RenderSystem
 import dev.emi.emi.api.render.EmiRenderable
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
 class AiSimplifiedRenderer(val u: Int, val v: Int): EmiRenderable {

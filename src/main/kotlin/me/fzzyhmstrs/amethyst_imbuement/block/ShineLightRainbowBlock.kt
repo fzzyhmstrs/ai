@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import net.minecraft.block.*
-import net.minecraft.block.piston.PistonBehavior
 import net.minecraft.entity.LivingEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
