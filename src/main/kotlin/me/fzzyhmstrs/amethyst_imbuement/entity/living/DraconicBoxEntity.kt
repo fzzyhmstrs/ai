@@ -31,12 +31,6 @@ class DraconicBoxEntity(entityType: EntityType<DraconicBoxEntity>, world: World,
         entityBlock = block
         maxAge = age
         startingBlockPos = bp
-        /*if (DraconicVisionAugment.oreIsRainbow(entityBlock)){
-            ColoredGlowLib.setRainbowColorToEntity(this,true)
-        } else {
-            val color = DraconicVisionAugment.oreGlowColor(entityBlock)
-            ColoredGlowLib.setColorToEntity(this, color)
-        }*/
     }
 
     fun extendBoxLife(time: Int) {

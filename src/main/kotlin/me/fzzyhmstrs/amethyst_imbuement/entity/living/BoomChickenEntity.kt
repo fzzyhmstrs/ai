@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -32,9 +35,10 @@ import net.minecraft.world.event.GameEvent
 import net.minecraft.world.explosion.Explosion
 import net.minecraft.world.explosion.ExplosionBehavior
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 
 class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World): ChickenEntity(entityType, world),
-    ModifiableEffectEntity, Tameable, PlayerCreatable {
+    ModifiableEffectEntity<BoomChickenEntity>, Tameable, PlayerCreatable {
 
     companion object{
 
@@ -54,11 +58,15 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     override var entityOwner: LivingEntity? = null
 
     override var entityEffects: AugmentEffect = AugmentEffect().withAmplifier(10)
+    override var level: Int = 1
+    override var processContext: ProcessContext = ProcessContext.EMPTY
+    override var spells: PairedAugments = PairedAugments()
+    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
 
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        entityEffects.setAmplifier(ae.amplifier(level))
+    override fun tickingEntity(): BoomChickenEntity {
+        return this
     }
+
 
     fun setChickenOwner(owner:LivingEntity?){
         this.createdBy = owner?.uuid
@@ -74,7 +82,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(6, LookAroundGoal(this))
         targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) {
-            it is Monster || (it is SpellCastingEntity && it !== getOwner() && !AiConfig.entities.isEntityPvpTeammate(getOwner() as? LivingEntity, it, RegisterEnchantment.TORRENT_OF_BEAKS))
+            it is Monster || (it is SpellCastingEntity && it !== owner && !AiConfig.entities.isEntityPvpTeammate(owner, it))
         })
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
     }
@@ -88,11 +96,13 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         writePlayerCreatedNbt(nbt)
+        writeModifiableNbt(nbt)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         readPlayerCreatedNbt(world, nbt)
+        readModifiableNbt(nbt)
     }
 
     override fun tick() {
@@ -116,6 +126,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
             }
         }
         super.tick()
+        tickTickEffects()
     }
 
     private fun explode() {

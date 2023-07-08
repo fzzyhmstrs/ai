@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
@@ -23,12 +23,11 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 
-@Suppress("PrivatePropertyName")
 open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     constructor(entityType: EntityType<BaseHamsterEntity>, world: World): super(entityType, world)
 
-    constructor(entityType: EntityType<BaseHamsterEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : super(entityType, world, ageLimit, createdBy, augmentEffect, level){
+    constructor(entityType: EntityType<BaseHamsterEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy){
     }
 
     companion object {

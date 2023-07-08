@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -33,7 +34,7 @@ open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity<
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-
+    override var processContext: ProcessContext = ProcessContext.EMPTY
     override fun tickingEntity(): PlayerFireballEntity {
         return this
     }

@@ -1,7 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.*
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
@@ -33,22 +38,19 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 
 @Suppress("PrivatePropertyName", "LeakingThis")
 open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
     Angerable, PlayerCreatable, ModifiableEffectEntity<PlayerCreatedConstructEntity>, Tameable, Scalable {
 
-    constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : this(entityType, world){
+    constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null) : this(entityType, world){
         maxAge = ageLimit
 
         this.createdBy = createdBy?.uuid
         this.entityOwner = createdBy
         if (createdBy != null) {
             startTrackingOwner(createdBy)
-        }
-
-        if (augmentEffect != null){
-            this.passEffects(augmentEffect,level)
         }
 
         if (world is ServerWorld) {
@@ -80,6 +82,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override var level = 1
     override var spells: PairedAugments = PairedAugments()
     override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY
     
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
@@ -268,8 +271,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override fun canTarget(target: LivingEntity): Boolean {
         if (!isPlayerCreated()) return super.canTarget(target)
         val uuid = target.uuid
-        if (getOwner() != null) {
-            if (target.isTeammate(getOwner())) return false
+        if (owner != null) {
+            if (target.isTeammate(owner)) return false
         }
         return uuid != createdBy
     }
@@ -295,7 +298,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     override fun tryAttack(target: Entity): Boolean {
-        val summoner = getOwner()
+        val summoner = owner
         if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
             (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
         }
@@ -366,9 +369,13 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         return dataTracker.get(SCALE)
     }
 
-    //need to also do the bounding boxxxxxxx
     override fun setScale(scale: Float) {
         dataTracker.set(SCALE,MathHelper.clamp(scale,0.0f,20.0f))
+        this.calculateDimensions()
+    }
+
+    override fun getDimensions(pose: EntityPose): EntityDimensions? {
+        return super.getDimensions(pose).scaled(getScale())
     }
 
 }

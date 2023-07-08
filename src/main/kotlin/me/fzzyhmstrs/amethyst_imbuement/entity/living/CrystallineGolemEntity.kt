@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import com.google.common.collect.ImmutableList
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -30,12 +30,11 @@ import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
 import java.util.stream.Stream
 
-@Suppress("PrivatePropertyName")
 open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<CrystallineGolemEntity>, world: World): super(entityType, world)
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?, augmentEffect: AugmentEffect? = null, level: Int = 1) : super(entityType, world, ageLimit, createdBy, augmentEffect, level)
+    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {

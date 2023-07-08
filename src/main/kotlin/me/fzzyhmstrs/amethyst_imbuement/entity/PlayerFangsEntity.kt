@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -42,10 +43,12 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     private var playingAnimation = false
     private var owner: LivingEntity? = null
     private var ownerUuid: UUID? = null
+
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
+    override var processContext: ProcessContext = ProcessContext.EMPTY
     private val particle
         get() = spells.getCastParticleType()
     override fun tickingEntity(): PlayerFangsEntity {

@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EntityGroup
@@ -19,12 +19,11 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.World
 
-@Suppress("PrivatePropertyName")
 open class UnhallowedEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<UnhallowedEntity>, world: World): super(entityType, world)
 
-    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1, bonusEquipment: Int = 0) : super(entityType, world, ageLimit, createdBy, augmentEffect, level){
+    constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, bonusEquipment: Int = 0) : super(entityType, world, ageLimit, createdBy){
         this.bonusEquipment = bonusEquipment
     }
 

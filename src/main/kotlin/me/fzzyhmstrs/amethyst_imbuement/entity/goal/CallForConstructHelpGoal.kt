@@ -1,5 +1,6 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.mob.MobEntity

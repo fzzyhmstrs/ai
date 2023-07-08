@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.EntityType
@@ -18,16 +19,25 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
-open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world: World): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity<BasicShardEntity> {
+open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world: World
+): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity<BasicShardEntity> {
+
+    constructor(entityType: EntityType<out BasicShardEntity?>,world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(entityType,world){
+        this.owner = owner
+        this.setVelocity(rot.x,rot.y,rot.z,speed,divergence)
+        this.setPosition(pos)
+    }
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withAmplifier(0)
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
+    override var processContext = ProcessContext.EMPTY
     private val struckEntities: MutableList<UUID> = mutableListOf()
     private val particle
         get() = spells.getCastParticleType()

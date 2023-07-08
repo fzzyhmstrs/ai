@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.Entity
@@ -26,7 +27,7 @@ open class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity<Playe
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
-
+    override var processContext: ProcessContext = ProcessContext.EMPTY
     override fun tickingEntity(): PlayerBulletEntity {
         return this
     }

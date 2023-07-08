@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
 import net.minecraft.block.LeavesBlock
 import net.minecraft.entity.LivingEntity
