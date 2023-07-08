@@ -1,9 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.item.ScepterLike
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentModifier
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -35,7 +38,7 @@ import net.minecraft.world.explosion.ExplosionBehavior
 
 object ModifierConsumers {
 
-    val DISARMING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> disarmingConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    val DISARMING_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"disarming"),{ list: List<LivingEntity> -> disarmingConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun disarmingConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(3)
@@ -44,7 +47,7 @@ object ModifierConsumers {
         }
     }
 
-    val BLESSED_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> blessedConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val BLESSED_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"blessed"),{ list: List<LivingEntity> -> blessedConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun blessedConsumer(list: List<LivingEntity>){
         list.forEach {
             if (it.hasStatusEffect(RegisterStatus.BLESSED)){
@@ -64,7 +67,7 @@ object ModifierConsumers {
         }
     }
 
-    val BOLT_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> boltConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    val BOLT_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"bolt"),{ list: List<LivingEntity> -> boltConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun boltConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
@@ -85,7 +88,7 @@ object ModifierConsumers {
         }
     }
 
-    val BOLSTERING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> bolsteringConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val BOLSTERING_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"bolstering"),{ list: List<LivingEntity> -> bolsteringConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun bolsteringConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
@@ -95,8 +98,7 @@ object ModifierConsumers {
                 val list1 = it.world.getOtherEntities(null,box)
                 for (entity in list1){
                     if (entity !is LivingEntity) continue
-                    if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(it,entity,
-                            RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
+                    if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(it,entity,)) {
                         EffectQueue.addStatusToQueue(entity, StatusEffects.STRENGTH, 300, 1)
                         EffectQueue.addStatusToQueue(entity, StatusEffects.SPEED, 300, 1)
                     }
@@ -107,7 +109,7 @@ object ModifierConsumers {
         }
     }
 
-    val FOWL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> fowlConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    val FOWL_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"fowl"),{ list: List<LivingEntity> -> fowlConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun fowlConsumer(list: List<LivingEntity>){
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
@@ -122,7 +124,7 @@ object ModifierConsumers {
 
     //////////////////
 
-    val NECROTIC_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> necroticConsumer(list)}, AugmentConsumer.Type.HARMFUL)
+    val NECROTIC_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"necrotic"),{ list: List<LivingEntity> -> necroticConsumer(list)}, AugmentConsumer.Type.HARMFUL)
     private fun necroticConsumer(list: List<LivingEntity>){
         list.forEach {
             if (it.hasStatusEffect(StatusEffects.WITHER)){
@@ -140,13 +142,13 @@ object ModifierConsumers {
             }
         }
     }
-    val HEALING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> healingConsumer(list)}, AugmentConsumer.Type.BENEFICIAL)
+    val HEALING_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"healing"),{ list: List<LivingEntity> -> healingConsumer(list)}, AugmentConsumer.Type.BENEFICIAL)
     private fun healingConsumer(list: List<LivingEntity>){
         list.forEach {
             it.heal(0.5F)
         }
     }
-    val SMITING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> smitingConsumer(list)}, AugmentConsumer.Type.HARMFUL)
+    val SMITING_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"smiting"),{ list: List<LivingEntity> -> smitingConsumer(list)}, AugmentConsumer.Type.HARMFUL)
     private fun smitingConsumer(list: List<LivingEntity>){
         list.forEach {
             if(it.isUndead){
@@ -158,7 +160,7 @@ object ModifierConsumers {
             }
         }
     }
-    val WARRIORS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> warriorsConsumer(list)}, AugmentConsumer.Type.HARMFUL)
+    val WARRIORS_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"warriors"),{ list: List<LivingEntity> -> warriorsConsumer(list)}, AugmentConsumer.Type.HARMFUL)
     private fun warriorsConsumer(list: List<LivingEntity>){
         list.forEach {
             if(it.isUndead){
@@ -174,7 +176,7 @@ object ModifierConsumers {
             }
         }
     }
-    val INSIGHTFUL_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> insightfulConsumer(list) }, AugmentConsumer.Type.HARMFUL)
+    val INSIGHTFUL_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"insightful"),{ list: List<LivingEntity> -> insightfulConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun insightfulConsumer(list: List<LivingEntity>){
         list.forEach {
             if (!it.isAlive){
@@ -196,13 +198,13 @@ object ModifierConsumers {
         }
     }
 
-    val PROTECTIVE_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> protectiveConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val PROTECTIVE_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"protective"),{ list: List<LivingEntity> -> protectiveConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun protectiveConsumer(list: List<LivingEntity>){
         list.forEach {
             EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,40,0)
         }
     }
-    val CHAMPIONS_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> championsConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val CHAMPIONS_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"champions"),{ list: List<LivingEntity> -> championsConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun championsConsumer(list: List<LivingEntity>){
         list.forEach {
             EffectQueue.addStatusToQueue(it,RegisterStatus.SHIELDING,100,2)
@@ -213,7 +215,7 @@ object ModifierConsumers {
         }
     }
 
-    val TRAVELER_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> travelerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val TRAVELER_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"traveler"),{ list: List<LivingEntity> -> travelerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun travelerConsumer(list: List<LivingEntity>){
         list.forEach {
             if (it is PlayerEntity){
@@ -224,7 +226,7 @@ object ModifierConsumers {
         }
     }
 
-    val SOJOURNER_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> sojournerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    val SOJOURNER_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"sojourner"),{ list: List<LivingEntity> -> sojournerConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun sojournerConsumer(list: List<LivingEntity>){
         list.forEach {
             if (it is PlayerEntity){
@@ -237,7 +239,7 @@ object ModifierConsumers {
     }
 
 
-    val ECHOING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.AUTOMATIC)
+    val ECHOING_CONSUMER = AugmentConsumer.createAndRegisterConsumer(Identifier(AI.MOD_ID,"echoing"),{ list: List<LivingEntity> -> echoingConsumer(list) }, AugmentConsumer.Type.AUTOMATIC)
     private fun echoingConsumer(list: List<LivingEntity>){
         val user = list[0]
         val rnd = user.world.random.nextInt(3)
@@ -246,17 +248,18 @@ object ModifierConsumers {
         val item = stack.item
         if (item is ScepterLike){
             val activeEnchant = item.getActiveEnchant(stack)
+            val pairedAugments = AugmentHelper.getPairedAugments(activeEnchant,stack)
             val augment = Registries.ENCHANTMENT.get(Identifier(activeEnchant))
-            if (augment != null && augment is ScepterAugment){
-                val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
+            if (augment != null && augment is ScepterAugment && pairedAugments != null){
+                val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment, pairedAugments)
             }
         }
     }
 
-    private class EchoingPersistentEffect(user: LivingEntity,hand: Hand, augment: ScepterAugment): PersistentEffectHelper.PersistentEffect{
+    private class EchoingPersistentEffect(user: LivingEntity,hand: Hand, augment: ScepterAugment, pairedAugments: PairedAugments): PersistentEffectHelper.PersistentEffect{
 
         init{
-            val data = EchoingPersistentData(user, hand, augment)
+            val data = EchoingPersistentData(user, hand, augment, pairedAugments)
             PersistentEffectHelper.setPersistentTickerNeed(this,14,14,data)
         }
 
@@ -265,12 +268,12 @@ object ModifierConsumers {
         override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
             if (data is EchoingPersistentData){
                 val user = data.user
-                data.augment.applyModifiableTasks(user.world,user,data.hand,1)
-
+                if (user is SpellCastingEntity)
+                    data.augment.applyModifiableTasks(user.world,user,data.hand,1, listOf(), AugmentModifier(), data.pairedAugments)
             }
         }
 
-        private class EchoingPersistentData(val user: LivingEntity, val hand: Hand, val augment: ScepterAugment): PersistentEffectHelper.PersistentEffectData
+        private class EchoingPersistentData(val user: LivingEntity, val hand: Hand, val augment: ScepterAugment, val pairedAugments: PairedAugments): PersistentEffectHelper.PersistentEffectData
     }
 
 }

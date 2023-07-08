@@ -1,7 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.entity.PlayerItemEntity
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
@@ -13,6 +17,7 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -142,16 +147,29 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build()
     )
 
-    val FLAMEBOLT_ENTITY: EntityType<FlameboltEntity> = Registry.register(
+    val BASIC_MISSILE_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "basic_missile_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<BasicMissileEntity>, world: World ->
+            BasicMissileEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
+    val FLAMEBOLT_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "flamebolt_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<FlameboltEntity>, world: World ->
-            FlameboltEntity(
+        ) { entityType: EntityType<BasicMissileEntity>, world: World ->
+            BasicMissileEntity(
                 entityType,
                 world
-            )
+            ).burning()
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
@@ -168,52 +186,52 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build()
     )
 
-    val BONE_SHARD_ENTITY: EntityType<BoneShardEntity> = Registry.register(
+    val BONE_SHARD_ENTITY: EntityType<BasicShardEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "bone_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<BoneShardEntity>, world: World ->
-            BoneShardEntity(
+        ) { entityType: EntityType<BasicShardEntity>, world: World ->
+            BasicShardEntity(
                 entityType,
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
     
-    val ICE_SHARD_ENTITY: EntityType<IceShardEntity> = Registry.register(
+    val ICE_SHARD_ENTITY: EntityType<BasicShardEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "ice_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<IceShardEntity>, world: World ->
-            IceShardEntity(
+        ) { entityType: EntityType<BasicShardEntity>, world: World ->
+            BasicShardEntity(
                 entityType,
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
-    val FREEZING_ENTITY: EntityType<FreezingEntity> = Registry.register(
+    val FREEZING_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "freezing_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<FreezingEntity>, world: World ->
-            FreezingEntity(
+        ) { entityType: EntityType<BasicMissileEntity>, world: World ->
+            BasicMissileEntity(
                 entityType,
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
-    val SOUL_MISSILE_ENTITY: EntityType<SoulMissileEntity> = Registry.register(
+    val SOUL_MISSILE_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "soul_missile_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<SoulMissileEntity>, world: World ->
-            SoulMissileEntity(
+        ) { entityType: EntityType<BasicMissileEntity>, world: World ->
+            BasicMissileEntity(
                 entityType,
                 world
             )
@@ -246,13 +264,13 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.7f, 1.0f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
-    val ICE_SPIKE: EntityType<IceSpikeEntity> = Registry.register(
+    val ICE_SPIKE: EntityType<PlayerFangsEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "ice_spike_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<IceSpikeEntity>, world: World ->
-            IceSpikeEntity(
+        ) { entityType: EntityType<PlayerFangsEntity>, world: World ->
+            PlayerFangsEntity(
                 entityType,
                 world
             )
@@ -310,15 +328,16 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).build()
     )
 
-    val PLAYER_EGG: EntityType<PlayerEggEntity> = Registry.register(
+    val PLAYER_EGG: EntityType<PlayerItemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_egg_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
-        ) { entityType: EntityType<PlayerEggEntity>, world: World ->
-            PlayerEggEntity(
+        ) { entityType: EntityType<PlayerItemEntity>, world: World ->
+            PlayerItemEntity(
                 entityType,
-                world
+                world,
+                Items.EGG
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )

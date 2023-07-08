@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.DraconicVisionAugment
 import net.minecraft.block.Block

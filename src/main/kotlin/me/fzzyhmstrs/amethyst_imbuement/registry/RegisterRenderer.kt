@@ -2,9 +2,9 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
-import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.entity.MissileEntityRenderer
+import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
+import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import me.fzzyhmstrs.amethyst_imbuement.renderer.*
@@ -103,24 +103,24 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.BONE_SHARD_ENTITY
-        ){ context: EntityRendererFactory.Context -> BaseShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/bone_shard.png")) }
+        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/bone_shard.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SHARD_ENTITY
-        ){ context: EntityRendererFactory.Context -> BaseShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_shard.png"))
+        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_shard.png"))
         }
 
         EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
-        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 0.7f, 0.7f) }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.FLAMEBOLT_ENTITY
-        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 0.7f, 0.3f, 0.6666F, 1.2F) }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.BALL_LIGHTNING_ENTITY
-        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 1f, 0f, -2F, 1.25F) }
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.SOUL_MISSILE_ENTITY
@@ -132,11 +132,11 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FANGS
-        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context) }
+        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context, Identifier("textures/entity/illager/evoker_fangs.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SPIKE
-        ){ context: EntityRendererFactory.Context -> IceSpikeRenderer(context) }
+        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_spike.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FIREBALL
@@ -235,8 +235,8 @@ object RegisterRenderer {
             RegisterItem.BOOK_OF_LORE, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
-            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
-                when(nbt.getString(NbtKeys.LORE_TYPE.str())){
+            if (nbt.contains(NbtKeys.LORE_TYPE)){
+                when(nbt.getString(NbtKeys.LORE_TYPE)){
                     SpellType.FURY.str() ->{ 0.3f }
                     SpellType.GRACE.str() -> { 0.7f }
                     SpellType.WIT.str() -> { 1.0f }
@@ -251,8 +251,8 @@ object RegisterRenderer {
             RegisterItem.BOOK_OF_MYTHOS, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.orCreateNbt
-            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
-                when(nbt.getString(NbtKeys.LORE_TYPE.str())){
+            if (nbt.contains(NbtKeys.LORE_TYPE)){
+                when(nbt.getString(NbtKeys.LORE_TYPE)){
                     SpellType.FURY.str() ->{ 0.3f }
                     SpellType.GRACE.str() -> { 0.7f }
                     SpellType.WIT.str() -> { 1.0f }

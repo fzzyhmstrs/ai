@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
-import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
+import me.fzzyhmstrs.amethyst_core.item.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier

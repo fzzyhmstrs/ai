@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.AltarOfExperienceBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import net.minecraft.block.BlockState
@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-@Suppress("SpellCheckingInspection", "unused", "PrivatePropertyName")
+@Suppress("SpellCheckingInspection", "unused")
 class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings) {
 
     override fun <T : BlockEntity> getTicker(

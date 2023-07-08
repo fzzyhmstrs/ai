@@ -11,9 +11,8 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
-@Suppress("PrivatePropertyName", "SpellCheckingInspection")
-class PlayerFangsRenderer(context: EntityRendererFactory.Context): EntityRenderer<PlayerFangsEntity>(context) {
-    private val TEXTURE = Identifier("textures/entity/illager/evoker_fangs.png")
+class PlayerFangsRenderer(context: EntityRendererFactory.Context, private val texture: Identifier): EntityRenderer<PlayerFangsEntity>(context) {
+
     private val model: EvokerFangsEntityModel<PlayerFangsEntity> = EvokerFangsEntityModel(context.getPart(
         EntityModelLayers.EVOKER_FANGS
     ))
@@ -40,13 +39,13 @@ class PlayerFangsRenderer(context: EntityRendererFactory.Context): EntityRendere
         matrixStack.translate(0.0, -0.626, 0.0)
         matrixStack.scale(0.5f, 0.5f, 0.5f)
         model.setAngles(playerFangsEntity, h, 0.0f, 0.0f, playerFangsEntity.yaw, playerFangsEntity.pitch)
-        val vertexConsumer = vertexConsumerProvider.getBuffer(model.getLayer(TEXTURE))
+        val vertexConsumer = vertexConsumerProvider.getBuffer(model.getLayer(texture))
         model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f)
         matrixStack.pop()
         super.render(playerFangsEntity, f, g, matrixStack, vertexConsumerProvider, i)
     }
 
     override fun getTexture(entity: PlayerFangsEntity?): Identifier {
-        return TEXTURE
+        return texture
     }
 }

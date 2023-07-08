@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.config_util.*
@@ -347,6 +347,14 @@ object AiConfig
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
             if (user == null) return false
             if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
+                return user.isTeammate(entity)
+            }
+            return true
+        }
+
+        fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity): Boolean{
+            if (user == null) return false
+            if (forcePvpOnAllSpells.get()){
                 return user.isTeammate(entity)
             }
             return true

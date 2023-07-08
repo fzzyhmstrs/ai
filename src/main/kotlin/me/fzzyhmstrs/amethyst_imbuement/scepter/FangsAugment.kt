@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.scepter
 
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
+import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -51,7 +51,7 @@ class FangsAugment: MiscAugment(ScepterTier.TWO,6) {
         val f = (user.yaw + 90) * MathHelper.PI / 180
         for (i in 0..effect.range(level).toInt()) {
             val g = 1.25 * (i + 1).toDouble()
-            val success = PlayerFangsEntity.conjureFangs(
+            val success = PlayerFangsEntity.conjureFang(
                 world,
                 user,
                 user.x + MathHelper.cos(f).toDouble() * g,

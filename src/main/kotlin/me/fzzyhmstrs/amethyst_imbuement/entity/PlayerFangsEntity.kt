@@ -1,51 +1,33 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.World
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 
-open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity {
-
-    private var warmup = 0
-    private var startedAttack = false
-    private var ticksLeft = 22
-    private var playingAnimation = false
-    private var owner: LivingEntity? = null
-    private var ownerUuid: UUID? = null
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
-    private var augment: ScepterAugment = RegisterEnchantment.FANGS
-    
-    fun setAugment(aug: ScepterAugment){
-        this.augment = aug
-    }
-
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        entityEffects.setDamage(ae.damage(level))
-    }
+open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: World): Entity(entityType,world), ModifiableEffectEntity<PlayerFangsEntity> {
 
     constructor(world: World,x: Double, y: Double, z: Double, yaw: Float, warmup: Int, owner: LivingEntity): this(RegisterEntity.PLAYER_FANGS,world){
         this.warmup = warmup
@@ -54,6 +36,23 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         this.setPosition(x, y, z)
     }
 
+    private var warmup = 0
+    private var startedAttack = false
+    private var ticksLeft = 22
+    private var playingAnimation = false
+    private var owner: LivingEntity? = null
+    private var ownerUuid: UUID? = null
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F)
+    override var level: Int = 1
+    override var spells: PairedAugments = PairedAugments()
+    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
+    private val particle
+        get() = spells.getCastParticleType()
+    override fun tickingEntity(): PlayerFangsEntity {
+        return this
+    }
+
+
     private fun setOwner(owner: LivingEntity?) {
         this.owner = owner
         ownerUuid = owner?.uuid
@@ -61,12 +60,12 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     private fun getOwner(): LivingEntity? {
         return if (owner == null){
             if (ownerUuid != null){
-                val entity: Entity?
                 val world = this.world
                 if (world is ServerWorld){
-                    entity = world.getEntity(ownerUuid)
-                    if (entity != null){
-                        entity as LivingEntity
+                    val entity = world.getEntity(ownerUuid)
+                    if (entity is LivingEntity){
+                        owner = entity
+                        entity
                     } else {
                         null
                     }
@@ -81,8 +80,12 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         }
     }
 
+    override fun initDataTracker() {
+    }
+
     override fun tick() {
         super.tick()
+        tickTickEffects()
         if (world.isClient) {
             if (playingAnimation) {
                 --ticksLeft
@@ -94,7 +97,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                         val g = (random.nextDouble() * 2.0 - 1.0) * 0.3
                         val h = 0.3 + random.nextDouble() * 0.3
                         val j = (random.nextDouble() * 2.0 - 1.0) * 0.3
-                        world.addParticle(ParticleTypes.CRIT, d, e + 1.0, f, g, h, j)
+                        world.addParticle(particle, d, e + 1.0, f, g, h, j)
                     }
                 }
             }
@@ -103,10 +106,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                 val list = world.getNonSpectatingEntities(
                     LivingEntity::class.java, boundingBox.expand(0.2, 0.0, 0.2)
                 )
-                for (livingEntity in list) {
-                    this.damage(livingEntity)
-                }
-                entityEffects.accept(list,AugmentConsumer.Type.HARMFUL)
+                damage(list)
             }
             if (!startedAttack) {
                 world.sendEntityStatus(this, 4.toByte())
@@ -118,20 +118,20 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         }
     }
 
-    private fun damage(target: LivingEntity) {
+    private fun damage(targets: List<LivingEntity>) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
-            return
-        }
-        if (livingEntity == null) {
-            target.damage(this.damageSources.magic(), entityEffects.damage(0))
-            entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
-        } else {
-            if (livingEntity.isTeammate(target)) {
-                return
+        val augment = spells.primary() ?: return
+        if (livingEntity !is SpellCastingEntity) return
+        val list: MutableList<EntityHitResult> = mutableListOf()
+        for (target in targets){
+            if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
+                continue
             }
-            target.damage(this.damageSources.indirectMagic(this, livingEntity), entityEffects.damage(0))
-            entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
+            list.add(EntityHitResult(target))
+        }
+        if (list.isNotEmpty()) {
+            spells.processMultipleEntityHits(list, world, this, livingEntity, Hand.MAIN_HAND, level, entityEffects)
+            spells.processMultipleOnKill(list,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
         }
     }
 
@@ -164,10 +164,8 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         } else 1.0f - (i.toFloat() - tickDelta) / 20.0f
     }
 
-    override fun initDataTracker() {
-    }
-
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        readModifiableNbt(nbt)
         warmup = nbt.getInt("Warmup")
         if (nbt.containsUuid("Owner")) {
             ownerUuid = nbt.getUuid("Owner")
@@ -175,6 +173,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        writeModifiableNbt(nbt)
         nbt.putInt("Warmup", warmup)
         if (ownerUuid != null) {
             nbt.putUuid("Owner", ownerUuid)
@@ -186,9 +185,9 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     }
 
     companion object{
-        fun conjureFangs(world: World,user: LivingEntity,
-                         x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
-                         warmup: Int, effect: AugmentEffect, level: Int, augment: ScepterAugment): Double{
+        fun conjureFang(world: World, user: LivingEntity,
+                        x: Double, z: Double, maxY: Double, y: Double, yaw: Float,
+                        warmup: Int, effect: AugmentEffect, level: Int, spells: PairedAugments): Double{
             var blockPos = BlockPos(x.toInt(), y.toInt(), z.toInt())
             var bl = false
             var d = 0.0
@@ -219,8 +218,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
                     warmup,
                     user
                 )
-                pfe.passEffects(effect, level)
-                pfe.setAugment(augment)
+                pfe.passEffects(spells,effect, level)
                 world.spawnEntity(pfe)
                 return (blockPos.y.toDouble() + d)
             }

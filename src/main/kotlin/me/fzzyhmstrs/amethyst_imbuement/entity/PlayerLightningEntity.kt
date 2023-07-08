@@ -1,14 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import com.google.common.collect.Sets
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
@@ -16,50 +14,67 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LightningEntity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
-import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.Direction
 import net.minecraft.world.Difficulty
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 
 class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, world: World): LightningEntity(entityType, world),
-    ModifiableEffectEntity {
+    ModifiableEffectEntity<PlayerLightningEntity> {
 
     constructor(world: World, attacker: LivingEntity): this(RegisterEntity.PLAYER_LIGHTNING, world){
         owner = attacker
     }
 
     private var owner: LivingEntity? = null
+    private var ownerUuid: UUID? = null
     private var ambientTick = 2
     private var remainingActions = this.random.nextInt(3 + 1)
     private val struckEntities: MutableSet<Entity> = Sets.newHashSet()
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(5.0F).withAmplifier(8)
+    override var level: Int = 1
+    override var spells: PairedAugments = PairedAugments()
+    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
 
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        ae.setDamage(ae.damage(level))
-        ae.addAmplifier(ae.amplifier(level))
+    override fun tickingEntity(): PlayerLightningEntity {
+        return this
     }
-    
-    private var augment: ScepterAugment = RegisterEnchantment.LIGHTNING_BOLT
-    
-    fun setAugment(aug: ScepterAugment){
-        this.augment = aug
+
+    fun getOwner(): LivingEntity? {
+        if (owner != null && !owner!!.isRemoved) {
+            return owner
+        }
+        if (this.ownerUuid != null && world is ServerWorld) {
+            val o = (world as ServerWorld).getEntity(this.ownerUuid)
+            if (o is LivingEntity) {
+                owner = o
+                return o
+            }
+        }
+        return null
     }
 
     override fun tick() {
         var list: List<Entity>
         super.tick()
+        tickTickEffects()
+        val livingEntity = getOwner()
+        if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
+        val augment = spells.primary() ?: return
         if (ambientTick == 2) {
             if (world.isClient) {
                 world.playSound(
@@ -83,12 +98,13 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     false
                 )
             } else {
-                val difficulty = world.difficulty
+                /*val difficulty = world.difficulty
                 if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {
                     spawnFire(4)
                 }
                 powerLightningRod()
-                cleanOxidation(world, getAffectedBlockPos())
+                cleanOxidation(world, getAffectedBlockPos())*/
+                spells.processSingleBlockHit(BlockHitResult(this.pos,Direction.UP,getAffectedBlockPos(),false),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 this.emitGameEvent(GameEvent.LIGHTNING_STRIKE)
             }
         }
@@ -134,20 +150,13 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                 list = world.getOtherEntities(
                     this, Box(this.x - 3.0, this.y - 3.0, this.z - 3.0, this.x + 3.0, this.y + 6.0 + 3.0, this.z + 3.0)
                 ) { obj: Entity -> obj.isAlive && obj is LivingEntity && !(obj is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment)) }
-                for (entity2 in list) {
-                    entity2.fireTicks++
-                    if (entity2.fireTicks == 0){
-                        entity2.setOnFireFor(entityEffects.amplifier(0))
-                    }
-                    if (owner != null) {
-                        entity2.damage(CustomDamageSources.lightningBolt(world,this,owner), entityEffects.damage(0))
-                    } else {
-                        entity2.damage(this.damageSources.lightningBolt(), entityEffects.damage(0))
-                    }
-                    if (entity2 is LivingEntity) {
-                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
-                    }
+                val list2: MutableList<EntityHitResult> = mutableListOf()
+                for (target in list){
+                    list2.add(EntityHitResult(target))
                 }
+
+                spells.processMultipleEntityHits(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
+                spells.processMultipleOnKill(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 struckEntities.addAll(list)
                 if (channeler != null) {
                     Criteria.CHANNELED_LIGHTNING.trigger(channeler, list)
@@ -166,7 +175,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
 
     private fun getAffectedBlockPos(): BlockPos {
         val vec3d = pos
-        return BlockPos(vec3d.x.toInt(), vec3d.y.toInt() - 1.0E-6.toInt(), vec3d.z.toInt())
+        return BlockPos.ofFloored(vec3d.x, vec3d.y - 1.0E-6, vec3d.z)
     }
 
     private fun spawnFire(spreadAttempts: Int) {
@@ -235,14 +244,20 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
         return Optional.empty()
     }
 
-    companion object{
-        fun createLightning(world: World, pos: Vec3d, owner: LivingEntity, effect: AugmentEffect, level: Int, augment: ScepterAugment): PlayerLightningEntity {
-            val le = PlayerLightningEntity(world, owner)
-            le.passEffects(effect, level)
-            le.setAugment(augment)
-            le.refreshPositionAfterTeleport(pos)
-            return le
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        if (ownerUuid != null) {
+            nbt.putUuid("Owner", ownerUuid)
         }
+        writeModifiableNbt(nbt)
     }
 
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        if (nbt.containsUuid("Owner")) {
+            ownerUuid = nbt.getUuid("Owner")
+            owner = null
+        }
+        readModifiableNbt(nbt)
+    }
 }

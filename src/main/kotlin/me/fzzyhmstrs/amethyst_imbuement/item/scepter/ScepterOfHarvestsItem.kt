@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
+import me.fzzyhmstrs.amethyst_core.scepter.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.mixins.AxeItemAccessor
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags
 import net.minecraft.advancement.criterion.Criteria

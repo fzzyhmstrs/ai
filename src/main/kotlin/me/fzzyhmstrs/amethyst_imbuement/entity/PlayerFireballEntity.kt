@@ -1,10 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
-import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.entity.TickEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -13,85 +15,82 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.projectile.AbstractFireballEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
+import java.util.concurrent.ConcurrentLinkedQueue
 
-class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
+open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity<PlayerFireballEntity> {
     constructor(entityType: EntityType<out PlayerFireballEntity?>, world: World): super(entityType, world)
     constructor(world: World, owner: LivingEntity, velocityX: Double, velocityY: Double, velocityZ: Double):
             super(RegisterEntity.PLAYER_FIREBALL,owner,velocityX,velocityY,velocityZ, world)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(1)
+    override var level: Int = 1
+    override var spells: PairedAugments = PairedAugments()
+    override val tickEffects: ConcurrentLinkedQueue<TickEffect> = ConcurrentLinkedQueue()
 
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super.passEffects(ae, level)
-        entityEffects.setDamage(ae.damage(level))
-        entityEffects.addAmplifier(ae.amplifier(level))
+    override fun tickingEntity(): PlayerFireballEntity {
+        return this
     }
-    
-    private var augment: ScepterAugment = RegisterEnchantment.FIREBALL
-    
-    fun setAugment(aug: ScepterAugment){
-        this.augment = aug
+
+    override fun tick() {
+        super.tick()
+        tickTickEffects()
     }
 
     override fun onCollision(hitResult: HitResult) {
         super.onCollision(hitResult)
         if (!world.isClient) {
-            val bl = world.gameRules.getBoolean(GameRules.DO_MOB_GRIEFING)
-            world.createExplosion(
-                null,
-                this.x,
-                this.y,
-                this.z,
-                entityEffects.amplifier(0).toFloat(),
-                bl,
-                if (bl) World.ExplosionSourceType.TNT else World.ExplosionSourceType.NONE
-            )
             discard()
         }
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
-        super.onEntityHit(entityHitResult)
         if (world.isClient) {
             return
         }
+        val augment = spells.primary() ?: return
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
-            entity.damage(this.damageSources.fireball(this, entity2), entityEffects.damage(0))
-            if (entity is LivingEntity) {
-                entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
-            }
-            entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
-            applyDamageEffects(entity2 as LivingEntity?, entity)
-
+            onFireballEntityHit(entityHitResult, entity2)
         }
     }
 
+    open fun onFireballEntityHit(entityHitResult: EntityHitResult, entity: LivingEntity?){
+        if (entity is LivingEntity && entity is SpellCastingEntity) {
+            spells.processSingleEntityHit(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
+            if (!entityHitResult.entity.isAlive){
+                spells.processOnKill(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
+            }
+        }
+    }
+
+    override fun onBlockHit(blockHitResult: BlockHitResult) {
+        super.onBlockHit(blockHitResult)
+        onFireballBlockHit(blockHitResult)
+    }
+
+    open fun onFireballBlockHit(blockHitResult: BlockHitResult){
+        val entity = owner
+        if (entity is LivingEntity && entity is SpellCastingEntity) {
+            spells.processSingleBlockHit(blockHitResult,world,this,entity,Hand.MAIN_HAND,level,entityEffects)
+        }
+    }
+
+
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putByte("ExplosionPower", entityEffects.amplifier(0).toByte())
+        writeModifiableNbt(nbt)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        if (nbt.contains("ExplosionPower", 99)) {
-            entityEffects.setAmplifier(nbt.getByte("ExplosionPower").toInt())
-        }
-    }
-
-    companion object{
-        fun createFireball(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int, augment:ScepterAugment): PlayerFireballEntity{
-            val fbe = PlayerFireballEntity(world, user, vel.x, vel.y, vel.z)
-            fbe.passEffects(effects, level)
-            fbe.setPos(pos.x,pos.y,pos.z)
-            fbe.setAugment(augment)
-            return fbe
-        }
+        readModifiableNbt(nbt)
     }
 }

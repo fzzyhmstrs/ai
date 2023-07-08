@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
-import me.fzzyhmstrs.amethyst_core.item_util.DefaultAugmentSwordItem
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
+import me.fzzyhmstrs.amethyst_core.item.DefaultAugmentSwordItem
+import me.fzzyhmstrs.amethyst_core.scepter.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent

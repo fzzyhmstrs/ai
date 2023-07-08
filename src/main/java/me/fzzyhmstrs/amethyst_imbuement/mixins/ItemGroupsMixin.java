@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment;
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.EnchantedBookItem;
