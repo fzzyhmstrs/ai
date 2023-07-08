@@ -2,7 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
-import me.fzzyhmstrs.amethyst_core.entity.*
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
+import me.fzzyhmstrs.amethyst_core.entity.Scalable
+import me.fzzyhmstrs.amethyst_core.entity.TickEffect
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
@@ -10,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -29,7 +33,9 @@ import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Hand
 import net.minecraft.util.TimeHelper
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
@@ -302,6 +308,20 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
             (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
         }
+        var f = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+        var g = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK).toFloat()
+        if (target is LivingEntity) {
+            f += EnchantmentHelper.getAttackDamage(this.mainHandStack, target.group)
+            g += EnchantmentHelper.getKnockback(this).toFloat()
+        }
+        f = if (summoner is SpellCastingEntity) {
+            spells.provideDealtDamage(f, processContext, EntityHitResult(target), summoner, world, Hand.MAIN_HAND, level, entityEffects)
+        } else {
+            f
+        }
+        EnchantmentHelper.getFireAspect(this).also {i -> if (i > 0) target.setOnFireFor(i * 4)}
+
+
         val bl = super.tryAttack(target)
         if (bl) {
             val f = world.getLocalDifficulty(blockPos).localDifficulty
