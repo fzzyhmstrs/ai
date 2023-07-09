@@ -13,7 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem.Companion.createSpe
 import me.fzzyhmstrs.amethyst_imbuement.item.custom.*
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.*
-import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.DebugAugment
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings

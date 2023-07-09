@@ -484,6 +484,7 @@
 	"enchantment.amethyst_imbuement.ball_lightning.desc": "Launches a slow-moving ball of lightning that zaps nearby enemies as it passes them.",
 	"enchantment.amethyst_imbuement.ball_lightning.desc.damage": "Primary spell damage reduced by 10%.",
 	"enchantment.amethyst_imbuement.ball_lightning.desc.damage_type": "Spells deal damage as lightning as well as it's normal type(s).",
+	"enchantment.amethyst_imbuement.ball_lightning.desc.stun": "Adds a 10% chance to stun the target.",
 	"enchantment.amethyst_imbuement.ball_lightning.desc.duration": "Spell duration reduced by 15%.",
 	"enchantment.amethyst_imbuement.ball_lightning.desc.summon": "Summoned entities temporarily shock nearby enemies.",
 	"enchantment.amethyst_imbuement.ball_lightning.desc.projectile": "Projectiles shock nearby enemies as they travel.",
@@ -500,6 +501,7 @@
 
 	"enchantment.amethyst_imbuement.bedazzle": "Bedazzle",
 	"enchantment.amethyst_imbuement.bedazzle.double": "Mass Charm",
+	"enchantment.amethyst_imbuement.bedazzle.double.desc": "Charms enemies to fight for you in place of stunning them. Mana Cost increased 25%.",
 	"enchantment.amethyst_imbuement.bedazzle.combination": "En%1$s",
 	"enchantment.amethyst_imbuement.bedazzle.noun": "En%1$s",
 	"enchantment.amethyst_imbuement.bedazzle.verb": "En%1$s",

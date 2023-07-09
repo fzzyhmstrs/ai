@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_imbuement.scepter.ResonateAugment
-import me.fzzyhmstrs.amethyst_imbuement.scepter.SmitingBlowAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.SmitingBlowAugment
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil
 

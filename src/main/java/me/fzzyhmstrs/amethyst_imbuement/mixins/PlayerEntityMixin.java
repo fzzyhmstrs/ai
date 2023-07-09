@@ -2,6 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments;
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity;
+import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect;
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
@@ -26,6 +31,7 @@ import net.minecraft.item.ShieldItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Pair;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,6 +50,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Unique
     private DamageSource damageSource;
+
+    @Unique
+    ModifiableEffectContainer modifiableEffectContainer = new ModifiableEffectContainer();
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
