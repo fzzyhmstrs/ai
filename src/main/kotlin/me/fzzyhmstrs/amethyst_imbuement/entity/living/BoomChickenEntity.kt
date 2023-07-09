@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
+import me.fzzyhmstrs.amethyst_core.augments.paired.ExplosionBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
@@ -133,14 +134,36 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
             }
         }
         super.tick()
-        tickTickEffects(this, processContext)
+        tickTickEffects(this, owner, processContext)
+    }
+
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
     }
 
     private fun explode() {
         if (!world.isClient) {
             dead = true
-            world.createExplosion(this, this.damageSources.explosion(this,owner),
-                BoomChickenExplosionBehavior,this.pos,entityEffects.amplifier(0)/10f,false,World.ExplosionSourceType.NONE)
+            val augment = spells.primary()
+            val summoner = owner
+            if (augment != null && summoner is SpellCastingEntity) {
+                val damageSourceBuilder = augment.damageSourceBuilder(world,this,summoner)
+                val builder = ExplosionBuilder(damageSourceBuilder,this,this.pos)
+                spells.causeExplosion(builder,processContext,summoner,world,Hand.MAIN_HAND,level,entityEffects)
+            } else {
+                world.createExplosion(
+                    this,
+                    this.damageSources.explosion(this, owner),
+                    BoomChickenExplosionBehavior,
+                    this.pos,
+                    entityEffects.amplifier(0) / 10f,
+                    false,
+                    World.ExplosionSourceType.NONE
+                )
+            }
+            runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
             discard()
         }
     }

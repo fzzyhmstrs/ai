@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -57,8 +58,10 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
         if (summoner !is SpellCastingEntity) return
         val hit = EntityHitResult(entity)
         spells.processSingleEntityHit(hit,processContext,world,this,summoner,Hand.MAIN_HAND,level,entityEffects)
+        runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
         if (!entity.isAlive){
             spells.processOnKill(hit,processContext,world,this,summoner,Hand.MAIN_HAND,level,entityEffects)
+            runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
         }
         spells.hitSoundEvents(world, summoner.blockPos, processContext)
         val serverWorld: ServerWorld = this.world as ServerWorld

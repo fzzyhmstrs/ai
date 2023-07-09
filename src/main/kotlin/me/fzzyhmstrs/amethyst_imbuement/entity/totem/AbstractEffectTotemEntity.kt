@@ -171,13 +171,21 @@ abstract class AbstractEffectTotemEntity(
         return Arm.RIGHT
     }
 
-    override fun onRemoved() {
-        EventRegistry.removeTickUppable(ticker)
-    }
-
     private fun firstTick(): Int{
         totemEffect()
         return 0
+    }
+
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        EventRegistry.removeTickUppable(ticker)
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
+    }
+
+    override fun damage(source: DamageSource?, amount: Float): Boolean {
+        runEffect(ModifiableEffectEntity.ON_DAMAGED,this,owner,processContext)
+        return super.damage(source, amount)
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -186,7 +194,7 @@ abstract class AbstractEffectTotemEntity(
 
     override fun tick() {
         super.tick()
-        tickTickEffects(this,processContext)
+        tickTickEffects(this, owner, processContext)
         if (!world.isClient()) {
             val i = init
         }
@@ -211,6 +219,7 @@ abstract class AbstractEffectTotemEntity(
             totemEffect()
         }
         if (age >= maxAge){
+            runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
             this.kill()
         }
     }

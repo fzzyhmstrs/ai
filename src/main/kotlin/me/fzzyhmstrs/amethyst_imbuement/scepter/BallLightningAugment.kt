@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.*
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
@@ -11,20 +12,16 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.BallLightningEntity
+import me.fzzyhmstrs.amethyst_imbuement.scepter.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.scepter.pieces.explosion_behaviors.StunningExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
-import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
@@ -115,6 +112,56 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     T : LivingEntity
     {
         return builder.modifyPower{power -> power * 1.1f}.withCustomBehavior(StunningExplosionBehavior())
+    }
+
+    override fun <T, U> modifyProjectile(
+        projectile: T,
+        context: ProcessContext,
+        user: U,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    T
+    where
+    T : ModifiableEffectEntity,
+    T : Entity,
+    U : SpellCastingEntity,
+    U : LivingEntity
+    {
+        projectile.addEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT)
+        projectile.addEffect(ModifiableEffectEntity.ON_REMOVED,ModifiableEffects.SHOCKING_EFFECT)
+        return projectile
+    }
+
+    override fun <T, U> modifySummons(
+        summons: List<T>,
+        context: ProcessContext,
+        user: U,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    List<T>
+    where
+    T : ModifiableEffectEntity,
+    T : Entity,
+    U : SpellCastingEntity,
+    U : LivingEntity
+    {
+        for (summon in summons){
+            summon.addEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT)
+            summon.addEffect(ModifiableEffectEntity.ON_REMOVED,ModifiableEffects.SHOCKING_EFFECT)
+        }
+        return summons
     }
 
     /*override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

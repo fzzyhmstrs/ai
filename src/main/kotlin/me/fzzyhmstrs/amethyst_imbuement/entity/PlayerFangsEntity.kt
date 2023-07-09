@@ -81,9 +81,15 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
     override fun initDataTracker() {
     }
 
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
+    }
+
     override fun tick() {
         super.tick()
-        tickTickEffects(this,processContext)
+        tickTickEffects(this,owner,processContext)
         if (world.isClient) {
             if (playingAnimation) {
                 --ticksLeft
@@ -128,7 +134,14 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
             list.add(EntityHitResult(target))
         }
         if (list.isNotEmpty()) {
+            runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
             spells.processMultipleEntityHits(list, world, this, livingEntity, Hand.MAIN_HAND, level, entityEffects)
+            for (hit in list){
+                if (!hit.entity.isAlive){
+                    runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
+                    break
+                }
+            }
             spells.processMultipleOnKill(list,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
         }
     }

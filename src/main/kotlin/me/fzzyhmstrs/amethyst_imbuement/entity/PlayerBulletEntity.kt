@@ -15,6 +15,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
@@ -30,7 +31,13 @@ open class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
 
     override fun tick() {
         super.tick()
-        tickTickEffects(this,processContext)
+        tickTickEffects(this,owner,processContext)
+    }
+
+    override fun onCollision(hitResult: HitResult?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.onCollision(hitResult)
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
@@ -41,14 +48,16 @@ open class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
         val entity2 = owner
         val augment = spells.primary() ?: return
         if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
-            onBlockEntityHit(entityHitResult, entity2)
+            onBulletEntityHit(entityHitResult, entity2)
         }
     }
 
-    open fun onBlockEntityHit(entityHitResult: EntityHitResult, entity: LivingEntity?){
+    open fun onBulletEntityHit(entityHitResult: EntityHitResult, entity: LivingEntity?){
         if (entity is LivingEntity && entity is SpellCastingEntity) {
+            runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
             spells.processSingleEntityHit(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
             if (!entityHitResult.entity.isAlive){
+                runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
                 spells.processOnKill(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
             }
         }

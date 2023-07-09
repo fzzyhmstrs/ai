@@ -26,6 +26,7 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
+import net.minecraft.world.Difficulty
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
@@ -68,7 +69,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     override fun tick() {
         var list: List<Entity>
         super.tick()
-        tickTickEffects(this,processContext)
+        tickTickEffects(this,owner,processContext)
         val livingEntity = getOwner()
         if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
         val augment = spells.primary() ?: return
@@ -95,12 +96,13 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     false
                 )
             } else {
-                /*val difficulty = world.difficulty
+                //may move into the spells, not sure
+                val difficulty = world.difficulty
                 if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {
                     spawnFire(4)
                 }
                 powerLightningRod()
-                cleanOxidation(world, getAffectedBlockPos())*/
+                cleanOxidation(world, getAffectedBlockPos())
                 spells.processSingleBlockHit(BlockHitResult(this.pos,Direction.UP,getAffectedBlockPos(),false),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 this.emitGameEvent(GameEvent.LIGHTNING_STRIKE)
             }
@@ -152,7 +154,14 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     list2.add(EntityHitResult(target))
                 }
 
+                runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
                 spells.processMultipleEntityHits(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
+                for (hit in list2){
+                    if (!hit.entity.isAlive){
+                        runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
+                        break
+                    }
+                }
                 spells.processMultipleOnKill(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 struckEntities.addAll(list)
                 if (channeler != null) {
@@ -239,6 +248,12 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
             return Optional.of(blockPos)
         }
         return Optional.empty()
+    }
+
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

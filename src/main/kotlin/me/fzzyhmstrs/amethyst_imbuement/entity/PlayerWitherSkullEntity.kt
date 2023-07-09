@@ -39,7 +39,7 @@ open class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
 
     override fun tick() {
         super.tick()
-        tickTickEffects(this, processContext)
+        tickTickEffects(this, owner, processContext)
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {

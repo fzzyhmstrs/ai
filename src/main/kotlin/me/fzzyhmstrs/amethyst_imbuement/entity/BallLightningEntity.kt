@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -58,10 +59,12 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
         for (entity in entities){
-            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
+            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, entity, augment)) continue
             if (entity !is LivingEntity) continue
+            runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
             spells.processSingleEntityHit(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             if (!entity.isAlive){
+                runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
                 spells.processOnKill(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             }
             beam(world as ServerWorld,entity)
@@ -76,8 +79,9 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         val endPos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val vec = endPos.subtract(startPos).multiply(0.1)
         var pos = startPos
+        val particle = spells.getHitParticleType(EntityHitResult(entity))
         for (i in 1..10){
-            serverWorld.spawnParticles(ParticleTypes.ELECTRIC_SPARK,pos.x,pos.y,pos.z,2,vec.x,vec.y,vec.z,0.0)
+            serverWorld.spawnParticles(particle,pos.x,pos.y,pos.z,2,vec.x,vec.y,vec.z,0.0)
             pos = pos.add(vec)
         }
 
@@ -96,8 +100,10 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
+            runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
             spells.processSingleEntityHit(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             if (!entity.isAlive){
+                runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
                 spells.processOnKill(EntityHitResult(entity),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
             }
             beam(world as ServerWorld,entity)
@@ -105,6 +111,8 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         }
         super.onMissileBlockHit(blockHitResult)
     }
+
+
 
     override fun onRemoved() {
         EventRegistry.removeTickUppable(ticker)

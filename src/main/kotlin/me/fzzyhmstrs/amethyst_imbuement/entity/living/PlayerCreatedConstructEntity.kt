@@ -28,6 +28,10 @@ import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.AxeItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.item.ShieldItem
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
@@ -169,7 +173,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     override fun tick() {
         super.tick()
-        tickTickEffects(this, processContext)
+        tickTickEffects(this, owner, processContext)
         if (maxAge > 0){
             if (age >= maxAge){
                 kill()
@@ -205,6 +209,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()
         }
+        runEffect(ModifiableEffectEntity.ON_DAMAGED,this,owner,processContext)
         return super.damage(source, amount)
     }
 
@@ -309,22 +314,51 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
             f += EnchantmentHelper.getAttackDamage(this.mainHandStack, target.group)
             g += EnchantmentHelper.getKnockback(this).toFloat()
         }
+        val hit = EntityHitResult(target)
         f = if (summoner is SpellCastingEntity) {
-            spells.provideDealtDamage(f, processContext, EntityHitResult(target), summoner, world, Hand.MAIN_HAND, level, entityEffects)
+            spells.provideDealtDamage(f, processContext, hit, summoner, world, Hand.MAIN_HAND, level, entityEffects)
         } else {
             f
         }
         EnchantmentHelper.getFireAspect(this).also {i -> if (i > 0) target.setOnFireFor(i * 4)}
+        val damageSource = if (summoner is SpellCastingEntity) {
+            spells.provideDamageSource(processContext,hit,this,summoner,world,Hand.MAIN_HAND, level,entityEffects)
+        } else {
+            this.damageSources.mobAttack(this)
+        }
 
-
-        val bl = super.tryAttack(target)
+        val bl = target.damage(damageSource,f)
         if (bl) {
-            val f = world.getLocalDifficulty(blockPos).localDifficulty
-            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f) {
-                target.setOnFireFor(2 * f.toInt())
+            runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
+            val d = world.getLocalDifficulty(blockPos).localDifficulty
+            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f)
+                target.setOnFireFor((2 * d).toInt())
+            if (g > 0.0f && target is LivingEntity) {
+                target.takeKnockback((g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(yaw * (Math.PI.toFloat() / 180)).toDouble())
+                velocity = velocity.multiply(0.6, 1.0, 0.6)
             }
+            if (target is PlayerEntity)
+                disablePlayerShield(target, this.mainHandStack, if (target.isUsingItem) target.activeItem else ItemStack.EMPTY)
+            if (!target.isAlive)
+                runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
         }
         return bl
+    }
+
+    protected fun disablePlayerShield(player: PlayerEntity, mobStack: ItemStack, playerStack: ItemStack) {
+        if (!mobStack.isEmpty && !playerStack.isEmpty && mobStack.item is AxeItem && playerStack.item is ShieldItem) {
+            val f = 0.25f + EnchantmentHelper.getEfficiency(this).toFloat() * 0.05f
+            if (random.nextFloat() < f) {
+                player.itemCooldownManager[playerStack.item] = 100
+                world.sendEntityStatus(player, EntityStatuses.BREAK_SHIELD)
+            }
+        }
+    }
+
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
     }
 
     override fun getLeashOffset(): Vec3d {

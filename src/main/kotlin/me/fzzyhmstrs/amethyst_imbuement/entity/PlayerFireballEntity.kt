@@ -31,7 +31,7 @@ open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity 
 
     override fun tick() {
         super.tick()
-        tickTickEffects(this,processContext)
+        tickTickEffects(this,owner,processContext)
     }
 
     override fun onCollision(hitResult: HitResult) {
@@ -74,6 +74,11 @@ open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity 
         }
     }
 
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
+    }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)

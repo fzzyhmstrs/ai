@@ -94,6 +94,12 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
         }
     }
 
+    override fun remove(reason: RemovalReason?) {
+        processContext.beforeRemoval()
+        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
+        super.remove(reason)
+    }
+
     override fun asItemStack(): ItemStack {
         return ItemStack.EMPTY
     }
@@ -107,7 +113,7 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
         if (this.age > 1200){
             discard()
         }
-        tickTickEffects(this,processContext)
+        tickTickEffects(this,owner,processContext)
         if (!inGround)
             addParticles(velocity.x, velocity.y, velocity.z)
     }
