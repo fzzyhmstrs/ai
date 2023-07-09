@@ -507,6 +507,8 @@
 	"enchantment.amethyst_imbuement.bedazzle.verb": "En%1$s",
 	"enchantment.amethyst_imbuement.bedazzle.adjective": "En%1$s",
 	"enchantment.amethyst_imbuement.bedazzle.desc": "Nearby enemies stop attacking and grants Hero of the Village.",
+	"enchantment.amethyst_imbuement.bedazzle.negative": "Adds high chance to stun target(s).",
+	"enchantment.amethyst_imbuement.bedazzle.positive": "Grants players Hero of the Village.",
 
 	"enchantment.amethyst_imbuement.body_swap": "Body Swap",
 	"enchantment.amethyst_imbuement.body_swap.double": "Trade Realities",

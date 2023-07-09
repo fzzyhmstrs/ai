@@ -2,7 +2,12 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffect;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity;
 import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment;
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
@@ -19,6 +24,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -28,11 +34,13 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -42,14 +50,16 @@ import java.util.Map;
 
 @SuppressWarnings("ConstantConditions")
 @Mixin(value = LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity implements ModifiableEffectMobOrPlayer {
 
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
+    @Unique
     private long lastTime = 0;
+    @Unique
     private DamageSource damageSource;
 
     @Shadow public abstract int getArmor();
@@ -70,6 +80,21 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract float getMaxHealth();
 
     @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
+
+    @Unique
+    final private ProcessContext processContext = ProcessContext.Companion.getEMPTY_CONTEXT();
+    @Unique
+    ModifiableEffectContainer modifiableEffectContainer = new ModifiableEffectContainer();
+
+    @Override
+    public void amethyst_imbuement_addTemporaryEffect(Identifier type, ModifiableEffect effect, int lifespan) {
+        modifiableEffectContainer.addTemporary(type, effect, lifespan);
+    }
+
+    @Inject(method = "tryAttack", at = @At("HEAD"))
+    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfoReturnable<Boolean> cir) {
+        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, null, processContext);
+    }
 
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"), cancellable = true)
@@ -130,6 +155,9 @@ public abstract class LivingEntityMixin extends Entity {
             this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.getWorld().random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
         }
+        if (((LivingEntity)(Object)this) instanceof MobEntity){
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this, null, processContext);
+        }
         damageSource = source;
     }
 
@@ -187,7 +215,9 @@ public abstract class LivingEntityMixin extends Entity {
                     }
                 }
             }
-
+        }
+        if (((LivingEntity)(Object)this) instanceof MobEntity){
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getTICK(), this, null, processContext);
         }
     }
 
@@ -231,74 +261,4 @@ public abstract class LivingEntityMixin extends Entity {
     private void amethyst_imbuement_tryUseTotemNoDecrement(ItemStack instance, int i, Operation<Void> operation){
         if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
     }
-
-    /*@WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
-    private Multimap<EntityAttribute, EntityAttributeModifier> amethyst_imbuement_getEquipmentChangesMixin(ItemStack instance, EquipmentSlot slot, Operation<Multimap<EntityAttribute, EntityAttributeModifier>> operation){
-        int stackValAdd = RegisterEnchantment.INSTANCE.getRESILIENCE().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getRESILIENCE(), instance) : 0;
-        int stackValAdd2 = RegisterEnchantment.INSTANCE.getSTEADFAST().isEnabled() ? EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSTEADFAST(), instance) : 0;
-        if (stackValAdd == 0 && stackValAdd2 == 0){
-            return operation.call(instance, slot);
-        } else {
-            return provideResilientMultimap(instance, slot, stackValAdd, stackValAdd2);
-        }
-    }
-
-
-    private Multimap<EntityAttribute, EntityAttributeModifier> provideResilientMultimap(ItemStack instance, EquipmentSlot slot, int stackValAdd, int stackValAdd2){
-        Multimap<EntityAttribute, EntityAttributeModifier> map = instance.getAttributeModifiers(slot);
-        Multimap<EntityAttribute, EntityAttributeModifier> map2 = HashMultimap.create();
-        for (EntityAttribute key : map.keys()){
-            if (key == EntityAttributes.GENERIC_ARMOR){
-                if (stackValAdd == 0){
-                    map2.putAll(key,map.get(key));
-                    continue;
-                }
-                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR).stream().findFirst();
-                if (emo.isPresent()) {
-                    EntityAttributeModifier em = emo.get();
-                    double armor = em.getValue();
-                    UUID uuid = em.getId();
-                    String name = em.getName();
-                    EntityAttributeModifier.Operation operation = em.getOperation();
-                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,armor + stackValAdd,operation);
-                    map2.put(EntityAttributes.GENERIC_ARMOR,em2);
-                }
-            } else if (key == EntityAttributes.GENERIC_ARMOR_TOUGHNESS){
-                if (stackValAdd == 0){
-                    map2.putAll(key,map.get(key));
-                    continue;
-                }
-                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS).stream().findFirst();
-                if (emo.isPresent()) {
-                    EntityAttributeModifier em = emo.get();
-                    double tough = em.getValue();
-                    UUID uuid = em.getId();
-                    String name = em.getName();
-                    EntityAttributeModifier.Operation operation = em.getOperation();
-                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd/2.0,operation);
-                    map2.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,em2);
-                }
-            }else if (key == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE){
-                if (stackValAdd2 == 0){
-                    map2.putAll(key,map.get(key));
-                    continue;
-                }
-                Optional<EntityAttributeModifier> emo = map.get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).stream().findFirst();
-                if (emo.isPresent()) {
-                    EntityAttributeModifier em = emo.get();
-                    double tough = em.getValue();
-                    UUID uuid = em.getId();
-                    String name = em.getName();
-                    EntityAttributeModifier.Operation operation = em.getOperation();
-                    EntityAttributeModifier em2 = new EntityAttributeModifier(uuid,name,tough + stackValAdd2 * 0.05,operation);
-                    map2.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,em2);
-                }
-            } else {
-                map2.putAll(key,map.get(key));
-            }
-        }
-        return map2;
-    }*/
-
-
 }

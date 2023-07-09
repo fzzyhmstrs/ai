@@ -13,16 +13,21 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.BallLightningEntity
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.StunningExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
@@ -86,9 +91,9 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         spells: PairedAugments
     ): PerLvlF {
         return if (spells.spellsAreEqual()){
-            damage.plus(PerLvlF(0f,0f,-10f))
+            damage.plus(0f,0f,-10f)
         } else if (othersType.has(AugmentType.DAMAGE)){
-            damage.plus(PerLvlF(0f,0f,-15f))
+            damage.plus(0f,0f,-15f)
         } else {
             damage
         }
@@ -100,7 +105,22 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlI {
-        return duration.plus(PerLvlI(0,0,-15))
+        if (spells.spellsAreEqual()){
+            return duration.plus(0,0,-35)
+        }
+        return duration.plus(0,0,-15)
+    }
+
+    override fun modifyRange(
+        range: PerLvlD,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlD {
+        if (spells.spellsAreEqual()){
+            return range.plus(0.0,0.0,25.0)
+        }
+        return range
     }
 
     override fun <T> onEntityHit(
@@ -121,11 +141,18 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     T : SpellCastingEntity,
     T : LivingEntity
     {
+        val livingEntity = entityHitResult.entity
+        FabricLoader.getInstance().allMods
         if (othersType.has(AugmentType.DAMAGE) && !othersType.has(AugmentType.PROJECTILE)){
-            val livingEntity = entityHitResult.entity
             if (AI.aiRandom().nextFloat() < 0.1f && livingEntity is LivingEntity){
                 livingEntity.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,60))
             }
+        }
+        if (othersType.positiveEffect){
+            if (livingEntity is ModifiableEffectMobOrPlayer)
+                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT,400)
+            if (livingEntity is ModifiableEffectEntity)
+                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT,400)
         }
         return SUCCESSFUL_PASS
     }
@@ -169,7 +196,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     U : SpellCastingEntity,
     U : LivingEntity
     {
-        projectile.addEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT)
+        projectile.addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.SHOCKING_EFFECT,600)
         projectile.addEffect(ModifiableEffectEntity.ON_REMOVED,ModifiableEffects.SHOCKING_EFFECT)
         return projectile
     }
@@ -200,6 +227,28 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         return summons
     }
 
+    override fun <T> createProjectileEntities(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    )
+    :
+    List<ProjectileEntity>
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val dir = user.rotationVec3d
+        val pos = user.eyePos.subtract(0.0,0.5,0.0).add(dir.multiply(0.75))
+        val ble = BallLightningEntity(world,user,dir,1.0f,0.25f,pos)
+        ble.passEffects(spells,effects, level)
+        ble.passContext(context)
+        return listOf(ble)
+    }
+
     /*override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = 0.1f
         val div = 0.25F
@@ -226,8 +275,4 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         world.playSound(null,blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
 
     }
-
-    /*override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_BEACON_POWER_SELECT
-    }*/
 }

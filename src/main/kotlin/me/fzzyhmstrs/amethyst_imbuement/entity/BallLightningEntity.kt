@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -11,27 +10,20 @@ import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: World): BasicMissileEntity(entityType, world) {
 
-    constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(RegisterEntity.BALL_LIGHTNING_ENTITY,world){
+    constructor(world: World,owner: LivingEntity, direction: Vec3d, speed: Float, divergence: Float, pos: Vec3d) : this(RegisterEntity.BALL_LIGHTNING_ENTITY,world){
         this.owner = owner
-        this.setVelocity(owner,
-            owner.pitch,
-            owner.yaw,
-            0.0f,
-            speed,
-            divergence)
-        this.setPosition(x,y,z)
+        this.setVelocity(direction.x,direction.y,direction.z,speed, divergence)
+        this.setPosition(pos)
         this.setRotation(owner.yaw, owner.pitch)
     }
 
@@ -111,11 +103,9 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         }
         super.onMissileBlockHit(blockHitResult)
     }
-
-
-
-    override fun onRemoved() {
+    override fun remove(reason: RemovalReason?) {
         EventRegistry.removeTickUppable(ticker)
+        super.remove(reason)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

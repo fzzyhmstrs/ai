@@ -2,11 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments;
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext;
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffect;
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer;
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity;
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect;
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer;
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
@@ -29,9 +29,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,7 +44,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin extends LivingEntity implements ModifiableEffectMobOrPlayer {
 
     @Shadow @Final private PlayerInventory inventory;
 
@@ -52,24 +52,41 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private DamageSource damageSource;
 
     @Unique
+    final private ProcessContext processContext = ProcessContext.Companion.getEMPTY_CONTEXT();
+    @Unique
     ModifiableEffectContainer modifiableEffectContainer = new ModifiableEffectContainer();
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    @Override
+    public void amethyst_imbuement_addTemporaryEffect(Identifier type, ModifiableEffect effect, int lifespan){
+        modifiableEffectContainer.addTemporary(type, effect, lifespan);
+    }
+
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
-        if (((PlayerEntity) (Object) this).hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
             ci.cancel();
+        } else {
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, null, processContext);
         }
     }
 
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
     public void amethyst_imbuement_onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
-        if (((PlayerEntity) (Object) this).hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    public void amethyst_imbuement_runTickingModifiableEffects(CallbackInfo ci) {
+        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getTICK(), this,null, processContext);
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
             ci.cancel();
         }
     }
@@ -100,6 +117,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "damage", at = @At(value = "HEAD"))
     private void amethyst_imbuement_damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this,null, processContext);
         damageSource = source;
         Entity attacker = damageSource.getSource();
         if (attacker != null) {
@@ -158,6 +176,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))
     private void amethyst_imbuement_checkForPromiseGemKill(ServerWorld world, LivingEntity other, CallbackInfoReturnable<Boolean> cir){
+        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getKILL(), this,null, processContext);
         ItemStack stack = inventory.getStack(PlayerInventory.OFF_HAND_SLOT);
         if (stack.getItem() instanceof GemOfPromiseItem){
             RegisterItem.INSTANCE.getLETHAL_GEM().lethalGemCheck(stack,inventory);
