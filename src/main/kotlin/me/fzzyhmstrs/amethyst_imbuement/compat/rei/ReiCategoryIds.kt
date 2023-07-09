@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import net.minecraft.util.Identifier
 

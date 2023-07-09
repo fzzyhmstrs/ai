@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.recipe
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
@@ -144,7 +144,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
         val test = if(augment != "") inventory.getStack(6) else outputItem
         val item = test.item
         if (item is Reactant){
-            bl1 = bl1 && item.canReact(test, Reagent.getReagents(inventory),null,Type)
+            bl1 = bl1 && item.canReact(test, Reagent.getReagents(inventory),null, Type)
         }
         return bl1
     }
@@ -274,7 +274,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
 
     companion object{
 
-        fun blankRecipe(): ImbuingRecipe{
+        fun blankRecipe(): ImbuingRecipe {
             return ImbuingRecipe(arrayOf(Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
                 Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
                 Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,

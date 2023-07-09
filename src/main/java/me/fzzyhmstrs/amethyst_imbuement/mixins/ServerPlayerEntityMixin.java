@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil;
+import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.recipe
 
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
@@ -30,7 +30,7 @@ class AltarRecipe(
         if (!bl) return false
         val item = inventory.getStack(1).item
         if (item is Reactant){
-            bl = bl && item.canReact(inventory.getStack(1), Reagent.getReagents(inventory), null,Type)
+            bl = bl && item.canReact(inventory.getStack(1), Reagent.getReagents(inventory), null, Type)
         }
         return bl
     }

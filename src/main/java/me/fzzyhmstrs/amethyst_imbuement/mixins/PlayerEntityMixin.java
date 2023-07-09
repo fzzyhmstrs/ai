@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -41,10 +42,27 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Shadow @Final private PlayerInventory inventory;
 
+    @Unique
     private DamageSource damageSource;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
+    @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
+    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
+        if (((PlayerEntity) (Object) this).hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
+    }
+
+    //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
+    @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
+    public void amethyst_imbuement_onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
+        if (((PlayerEntity) (Object) this).hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
     }
 
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)

@@ -8,7 +8,7 @@ import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import me.fzzyhmstrs.amethyst_core.item.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
 import net.minecraft.item.ItemStack

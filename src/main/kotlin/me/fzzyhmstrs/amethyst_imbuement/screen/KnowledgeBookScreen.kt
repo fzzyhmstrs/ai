@@ -6,9 +6,9 @@ import me.fzzyhmstrs.amethyst_core.item.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.BookOfKnowledge
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil
+import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil.buildOutputProvider
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext

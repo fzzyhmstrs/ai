@@ -14,7 +14,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry

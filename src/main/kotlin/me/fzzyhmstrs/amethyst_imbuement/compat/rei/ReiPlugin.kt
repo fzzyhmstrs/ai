@@ -4,8 +4,8 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
@@ -28,7 +28,7 @@ object ReiPlugin: REIClientPlugin {
 
     override fun registerDisplays(registry: DisplayRegistry) {
         registry.registerRecipeFiller(ImbuingRecipe::class.java,ImbuingRecipe.Type) { recipe -> ImbuingTableDisplay(recipe)}
-        registry.registerRecipeFiller(AltarRecipe::class.java,AltarRecipe.Type) { recipe -> CrystalAltarDisplay(recipe)}
+        registry.registerRecipeFiller(AltarRecipe::class.java, AltarRecipe.Type) { recipe -> CrystalAltarDisplay(recipe)}
     }
 
     override fun registerScreens(registry: ScreenRegistry) {

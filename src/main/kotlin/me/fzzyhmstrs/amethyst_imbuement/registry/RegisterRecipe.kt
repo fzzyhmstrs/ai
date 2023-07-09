@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipeSerializer
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipeSerializer
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipeSerializer
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipeSerializer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier

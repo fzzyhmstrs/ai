@@ -71,6 +71,16 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract boolean removeStatusEffect(StatusEffect type);
 
+    //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
+    @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"), cancellable = true)
+    public void onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci) {
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
+
+        if (livingEntity.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())) {
+            ci.cancel();
+        }
+    }
+
     @WrapOperation(method = "getArmorVisibility", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isEmpty ()Z"))
     private boolean amethyst_imbuement_checkArmorInvisibility(ItemStack instance, Operation<Boolean> operation){
         return (operation.call(instance) || EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getINVISIBILITY(), instance) > 0);

@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.effects.*
+import me.fzzyhmstrs.amethyst_imbuement.status.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
@@ -23,6 +23,7 @@ object RegisterStatus {
     val IMMUNITY = ImmunityStatusEffect(StatusEffectCategory.BENEFICIAL,0x00000000)
     val STRIDING = StridingStatusEffect(StatusEffectCategory.BENEFICIAL,0x48f369)
     val CHARMED = CharmedStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF80FF)
+    val STUNNED = StunnedStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00)
     val SOULBINDING = SoulbindingStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000)
     val RESONATING = ResonatingStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0)
     val CURSED: StatusEffect = CursedStatusEffect(StatusEffectCategory.BENEFICIAL,0x010101)
@@ -44,6 +45,7 @@ object RegisterStatus {
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"immunity"), IMMUNITY)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"striding"), STRIDING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"charmed"), CHARMED)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"stunned"), STUNNED)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"soulbinding"), SOULBINDING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"resonating"), RESONATING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,"cursed"), CURSED)

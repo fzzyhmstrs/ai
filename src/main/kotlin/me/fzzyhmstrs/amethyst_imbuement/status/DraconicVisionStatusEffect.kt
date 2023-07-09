@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.effects
+package me.fzzyhmstrs.amethyst_imbuement.status
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect

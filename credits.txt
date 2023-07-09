@@ -1,0 +1,3 @@
+Credits for assets:
+
+stunned.png: Sattes (https://github.com/SattesKrokodil)

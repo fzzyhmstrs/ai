@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.recipe
 
 import com.google.gson.JsonObject
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
@@ -27,7 +27,7 @@ object RecipeUtil {
     val FAVORITES_SAVE = Identifier(AI.MOD_ID,"faves_save")
 
     fun registerServer(){
-        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_CHECK){server,player,_,buf,_ ->
+        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_CHECK){ server, player, _, buf, _ ->
             val uuid = buf.readUuid()
             val sentBuf = PacketByteBufs.create()
             if (playerFavoritesMap.containsKey(uuid)){
@@ -55,7 +55,7 @@ object RecipeUtil {
             }
 
         }
-        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_SAVE){server,_,_,buf,_ ->
+        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_SAVE){ server, _, _, buf, _ ->
             val uuid = buf.readUuid()
             val list: MutableList<ItemStack> = mutableListOf()
             val size = buf.readShort()
@@ -78,7 +78,7 @@ object RecipeUtil {
         playerFavoritesMap[uuid] = list
     }
 
-    internal fun buildOutputProvider(recipe: ImbuingRecipe): StackProvider{
+    internal fun buildOutputProvider(recipe: ImbuingRecipe): StackProvider {
         val augment = recipe.getAugment()
         if (augment != ""){
             val stack = ItemStack(Items.ENCHANTED_BOOK)
@@ -103,7 +103,7 @@ object RecipeUtil {
         return list
     }
 
-    internal class MultiStackProvider(private val stacks: Array<ItemStack>): StackProvider{
+    internal class MultiStackProvider(private val stacks: Array<ItemStack>): StackProvider {
         var timer = -1L
         var currentIndex = 0
 
@@ -121,13 +121,13 @@ object RecipeUtil {
             return stacks[currentIndex]
         }
     }
-    internal class SingleStackProvider(private val stack: ItemStack): StackProvider{
+    internal class SingleStackProvider(private val stack: ItemStack): StackProvider {
         override fun getStack(): ItemStack {
             return stack
         }
 
     }
-    internal class EmptyStackProvider: StackProvider{
+    internal class EmptyStackProvider: StackProvider {
         override fun getStack(): ItemStack {
             return ItemStack.EMPTY
         }
@@ -135,7 +135,7 @@ object RecipeUtil {
     internal interface StackProvider{
         fun getStack(): ItemStack
         companion object{
-            fun getProvider(ingredient: Ingredient): StackProvider{
+            fun getProvider(ingredient: Ingredient): StackProvider {
                 if (ingredient.isEmpty){
                     return EmptyStackProvider()
                 }

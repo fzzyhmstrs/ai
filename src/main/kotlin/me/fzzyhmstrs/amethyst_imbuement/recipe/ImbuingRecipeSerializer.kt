@@ -1,10 +1,9 @@
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.recipe
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
@@ -45,20 +44,8 @@ object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
             throw JsonSyntaxException("Can't have both outputs and augments!: $id")
         }
         if (augmentA != ""){
-            val augId = Identifier(augmentA).toString()
-            if (AugmentHelper.checkAugmentStat(augId)){
-                val type = AugmentHelper.getAugmentType(augId)
-                val cooldown = AugmentHelper.getAugmentCooldown(augId)
-                val manaCost = AugmentHelper.getAugmentManaCost(augId)
-                val minLevel = AugmentHelper.getAugmentMinLvl(augId)
-                val castXp = AugmentHelper.getAugmentCastXp(augId)
-                val bookOfLoreTier = AugmentHelper.getAugmentTier(augId)
-                val keyItem = AugmentHelper.getAugmentItem(augId)
-                val enabled = AugmentHelper.getAugmentEnabled(augId)
-                val pvpMode = AugmentHelper.getAugmentPvpMode(augId)
-                val datapoint = AugmentDatapoint(type,cooldown,manaCost,minLevel,costA,castXp,bookOfLoreTier,keyItem,enabled,pvpMode)
-                AugmentHelper.registerAugmentStat(augId,datapoint,true)
-            }
+            val augId = Identifier(augmentA)
+            AugmentHelper.setAugmentImbueLevel(augId, costA)
         }
         val countA: Int = max(1,recipeJson.countA )
         val transferEnchant = recipeJson.transferEnchant

@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.util
+package me.fzzyhmstrs.amethyst_imbuement.recipe
 
 import com.google.gson.JsonObject
 

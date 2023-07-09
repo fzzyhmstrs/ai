@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
@@ -18,14 +18,14 @@ import net.minecraft.util.Identifier
 class JeiAltarCategory(guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
     companion object{
-        val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)
+        val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"), AltarRecipe::class.java)
     }
 
     private val icon = guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.CRYSTAL_ALTAR.asItem()))
     private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,112,18)
 
     override fun getRecipeType(): RecipeType<AltarRecipe> {
-        return RecipeType(Identifier(AI.MOD_ID,"enhancing"),AltarRecipe::class.java)
+        return RecipeType(Identifier(AI.MOD_ID,"enhancing"), AltarRecipe::class.java)
     }
 
     override fun getTitle(): Text {

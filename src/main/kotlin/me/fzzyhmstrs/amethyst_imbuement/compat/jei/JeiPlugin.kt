@@ -7,8 +7,8 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
-import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.gui.handlers.IGuiClickableArea
 import mezz.jei.api.gui.handlers.IGuiContainerHandler
