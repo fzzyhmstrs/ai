@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetOrSelfAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
@@ -21,8 +21,9 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
+class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
 
+    //malvl: 10
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withAmplifier(0,1)

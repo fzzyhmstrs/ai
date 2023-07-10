@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.SlashAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer

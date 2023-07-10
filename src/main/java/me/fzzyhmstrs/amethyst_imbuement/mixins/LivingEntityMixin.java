@@ -46,6 +46,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
 @SuppressWarnings("ConstantConditions")
@@ -91,8 +92,13 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
         modifiableEffectContainer.addTemporary(type, effect, lifespan);
     }
 
-    @Inject(method = "tryAttack", at = @At("HEAD"))
-    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    @Override
+    public void amethyst_imbuement_run(Identifier type, Entity entity, @Nullable Entity owner, ProcessContext processContext){
+        modifiableEffectContainer.run(type, entity, owner, processContext);
+    }
+
+    @Inject(method = "onAttacking", at = @At("HEAD"))
+    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
         modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, null, processContext);
     }
 
@@ -260,5 +266,12 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
     @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.decrement (I)V"))
     private void amethyst_imbuement_tryUseTotemNoDecrement(ItemStack instance, int i, Operation<Void> operation){
         if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
+    }
+
+    @Inject(method = "onKilledBy", at = @At("HEAD"))
+    private void amethyst_imbuement_fireKillEffectsOnKiller(LivingEntity adversary, CallbackInfo ci){
+        if (adversary instanceof ModifiableEffectMobOrPlayer && !(adversary instanceof PlayerEntity)){
+            ((ModifiableEffectMobOrPlayer) adversary).amethyst_imbuement_run(ModifiableEffectEntity.Companion.getKILL(), adversary,null, processContext);
+        }
     }
 }
