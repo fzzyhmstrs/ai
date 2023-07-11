@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SlashAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
@@ -13,14 +15,22 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.text.Text
 
 @Suppress("SameParameterValue")
-open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE,9){
+open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
+    //ml 9
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDamage(4.5F,0.5F,0.0F)
             .withRange(2.625,0.125,0.0)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,4,

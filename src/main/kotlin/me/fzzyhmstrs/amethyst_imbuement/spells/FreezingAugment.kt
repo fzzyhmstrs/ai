@@ -1,9 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -17,8 +16,9 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
+class FreezingAugment: ProjectileAugment(ScepterTier.ONE,6){
 
+    //ml 6
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(230,50,0)

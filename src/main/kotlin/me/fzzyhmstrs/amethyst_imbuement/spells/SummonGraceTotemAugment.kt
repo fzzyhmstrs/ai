@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
@@ -12,19 +14,27 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
-class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
+class SummonGraceTotemAugment: SummonAugment<TotemOfGraceEntity>(ScepterTier.TWO){
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
+    //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(650,50)
             .withDamage(1.8f,0.2f)
             .withRange(6.8,0.2)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,2400,240,

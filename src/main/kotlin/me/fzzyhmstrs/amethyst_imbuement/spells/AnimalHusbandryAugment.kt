@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
@@ -18,8 +19,9 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class AnimalHusbandryAugment: MiscAugment(ScepterTier.TWO,4) {
+class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO) {
 
+    //ml 4
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(6.0,0.5)
             .withAmplifier(2,1)

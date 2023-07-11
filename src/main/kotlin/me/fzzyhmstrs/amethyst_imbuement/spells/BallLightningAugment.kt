@@ -18,6 +18,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.BallLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.StunningExplosionBehavior
@@ -25,10 +26,12 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
@@ -58,31 +61,43 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.has(AugmentType.DAMAGE)){
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage")
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage_type")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage", SpellAdvancementChecks.STAT)
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage_type", SpellAdvancementChecks.DAMAGE_SOURCE)
             if (!othersType.has(AugmentType.PROJECTILE)){
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.stun")
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.stun", SpellAdvancementChecks.STUNS)
             }
         }
-        description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.duration")
+        description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.duration", SpellAdvancementChecks.STAT)
         if (other.augmentData.cooldown.base < 35 && other.augmentData.cooldown.perLevel < 5) {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_small")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_small", SpellAdvancementChecks.STAT)
+        } else if (other == RegisterEnchantment.BEDAZZLE) {
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_bedazzle", SpellAdvancementChecks.or(SpellAdvancementChecks.STAT,SpellAdvancementChecks.DOUBLE))
         } else {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_big")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_big", SpellAdvancementChecks.STAT)
         }
         if (othersType.has(AugmentType.SUMMONS) && !othersType.has(AugmentType.BENEFICIAL))
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.summon")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.summon", SpellAdvancementChecks.or(SpellAdvancementChecks.LIGHTNING, SpellAdvancementChecks.SUMMONS))
         if (othersType.has(AugmentType.PROJECTILE) && !othersType.has(AugmentType.BENEFICIAL))
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.projectile")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.projectile", SpellAdvancementChecks.LIGHTNING)
         if (othersType.positiveEffect)
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.positiveEffect")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.positiveEffect", SpellAdvancementChecks.LIGHTNING)
         if (othersType.has(AugmentType.EXPLODES))
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.explode")
-        if (other == RegisterEnchantment.BARRIER)
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.barrier.desc")
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.explode", SpellAdvancementChecks.or(SpellAdvancementChecks.EXPLODES,SpellAdvancementChecks.STUNS))
+        when(other) {
+            RegisterEnchantment.BARRIER ->
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.barrier.desc", SpellAdvancementChecks.UNIQUE)
+            RegisterEnchantment.CRIPPLE ->
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.cripple.desc", SpellAdvancementChecks.UNIQUE)
+            RegisterEnchantment.BEDAZZLE ->
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.bedazzle.desc", SpellAdvancementChecks.UNIQUE)
+            RegisterEnchantment.INSPIRING_SONG ->
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.inspiring_song.desc", SpellAdvancementChecks.UNIQUE)
+        }
     }
 
     override fun doubleNameDesc(): List<MutableText> {
+        val list: MutableList<Text> = mutableListOf()
+        list.addLang("$orCreateTranslationKey.double.desc1",SpellAdvancementChecks.DOUBLE)
         return listOf(AcText.translatable("$orCreateTranslationKey.double.desc1"),AcText.translatable("$orCreateTranslationKey.double.desc2"))
     }
 
@@ -91,16 +106,29 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     }
 
     override fun specialName(otherSpell: ScepterAugment): MutableText {
-        if (otherSpell == RegisterEnchantment.BARRIER){
-            return AcText.translatable("enchantment.amethyst_imbuement.ball_lightning.barrier")
+        return when(otherSpell) {
+            RegisterEnchantment.BARRIER ->
+                AcText.translatable("enchantment.amethyst_imbuement.ball_lightning.barrier")
+            RegisterEnchantment.CRIPPLE ->
+                AcText.translatable("enchantment.amethyst_imbuement.ball_lightning.cripple")
+            RegisterEnchantment.BEDAZZLE ->
+                AcText.translatable("enchantment.amethyst_imbuement.ball_lightning.bedazzle")
+            RegisterEnchantment.INSPIRING_SONG ->
+                AcText.translatable("enchantment.amethyst_imbuement.ball_lightning.inspiring_song")
+            else ->
+                return super.specialName(otherSpell)
         }
-        return super.specialName(otherSpell)
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         if (pair.spellsAreEqual()){
             SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DOUBLE_TRIGGER)
         }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player,SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.STAT_TRIGGER)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.LIGHTNING_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.STUNNED_TRIGGER)
     }
@@ -113,6 +141,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     ): PerLvlI {
         return if(cooldown.base < 35 && cooldown.perLevel < 5){
             cooldown.plus(10,0,0)
+        } else if (other == RegisterEnchantment.BEDAZZLE) {
+            cooldown.plus(300)
         } else {
             cooldown.plus(0,0,10)
         }
@@ -163,7 +193,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlD {
-        if (spells.spellsAreEqual())
+        if (spells.spellsAreEqual() || other == RegisterEnchantment.CRIPPLE)
             return range.plus(0.0,0.0,25.0)
         return range
     }
@@ -187,6 +217,36 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     T : LivingEntity
     {
         val livingEntity = entityHitResult.entity
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success())
+            return result
+        if (spells.paired() == RegisterEnchantment.BARRIER){
+            if (user is ModifiableEffectMobOrPlayer){
+                user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.ON_DAMAGED,ModifiableEffects.STATIC_SHOCK_EFFECT,effects.duration(level))
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            }
+        } else if (spells.paired() == RegisterEnchantment.CRIPPLE){
+            val amount = spells.provideDealtDamage(effects.damage(level), context, entityHitResult, user, world, hand, level, effects)
+            val damageSource = spells.provideDamageSource(context, entityHitResult, source, user, world, hand, level, effects)
+            val bl  = entityHitResult.entity.damage(damageSource, amount)
+            if (bl) {
+                val critical = context.get(ContextData.CRIT)
+                if (critical && livingEntity is LivingEntity) {
+                    livingEntity.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, effects.duration(level)))
+                    livingEntity.addStatusEffect(StatusEffectInstance(RegisterStatus.CURSED, effects.duration(level), 1))
+                }
+                user.applyDamageEffects(user,entityHitResult.entity)
+                spells.hitSoundEvents(world, entityHitResult.entity.blockPos,context)
+                return if (entityHitResult.entity.isAlive) {
+                    SpellActionResult.overwrite(AugmentHelper.DAMAGED_MOB, AugmentHelper.SLASHED)
+                } else {
+                    spells.processOnKill(entityHitResult,context, world, source, user, hand, level, effects)
+                    SpellActionResult.overwrite(AugmentHelper.DAMAGED_MOB, AugmentHelper.SLASHED, AugmentHelper.KILLED_MOB)
+                }
+            }
+        } else if (spells.paired() == RegisterEnchantment.INSPIRING_SONG){
+
+        }
         if (othersType.has(AugmentType.DAMAGE) && !othersType.has(AugmentType.PROJECTILE)){
             if (AI.aiRandom().nextFloat() < 0.1f && livingEntity is LivingEntity){
                 livingEntity.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,60))
@@ -203,13 +263,38 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
-        if (spells.paired() == RegisterEnchantment.BARRIER){
-            if (user is ModifiableEffectMobOrPlayer){
-                user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.ON_DAMAGED,ModifiableEffects.STATIC_SHOCK_EFFECT,effects.duration(level))
-                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+
+        return SUCCESSFUL_PASS
+    }
+
+    override fun <T> onCast(
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        if (spells.paired() != RegisterEnchantment.BEDAZZLE) return SUCCESSFUL_PASS
+        val entityList = RaycasterUtil.raycastEntityArea(effects.range(level), user)
+        if (entityList.isEmpty()) return FAIL
+        for (entity in entityList){
+            if (entity is LivingEntity && entity !is VillagerEntity){
+                val stunDuration = entity.getStatusEffect(RegisterStatus.CHARMED)?.duration ?: (effects.duration(level)/1.5)
+                entity.removeStatusEffect(RegisterStatus.CHARMED)
+                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,stunDuration.toInt()))
             }
         }
-        return SUCCESSFUL_PASS
+        return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
     }
 
     override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
@@ -307,12 +392,6 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         ble.passContext(context)
         return listOf(ble)
     }
-
-    /*override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val speed = 0.1f
-        val div = 0.25F
-        return BallLightningEntity.createBallLightning(world, user, speed, div, effects, level, this)
-    }*/
 
     override fun castParticleType(): ParticleEffect? {
         return null

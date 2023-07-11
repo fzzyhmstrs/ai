@@ -2,7 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -22,6 +25,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -30,12 +34,19 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectHelper.PersistentEffect {
+class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentEffectHelper.PersistentEffect {
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
+    //ml 3
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(40,20,0)
             .withRange(8.0,1.0,0.0)
             .withDamage(4.0f)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override val delay = PerLvlI(16,-2,0)
 

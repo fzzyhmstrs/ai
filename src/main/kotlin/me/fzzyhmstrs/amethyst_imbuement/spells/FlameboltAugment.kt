@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
@@ -13,8 +14,9 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class FlameboltAugment: SummonProjectileAugment(ScepterTier.ONE,11){
+class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
 
+    //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDamage(5.8F,0.2F,0.0F)

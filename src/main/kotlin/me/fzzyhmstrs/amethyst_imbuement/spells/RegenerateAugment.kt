@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.MinorSupportAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetOrSelfAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -20,14 +22,22 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.world.World
 
-class RegenerateAugment: MinorSupportAugment(ScepterTier.ONE,17){
+class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
+    //ml 17
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(384,12)
             .withAmplifier(0)
             .withDamage(-1.0f,0.2f)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),60,

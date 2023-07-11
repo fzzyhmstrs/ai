@@ -1,7 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
@@ -12,13 +18,34 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class AbundanceAugment: MiscAugment(ScepterTier.ONE,6) {
+class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) {
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
+    //ml 6
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(1.5,0.5).withDamage(0.18F,0.02F)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun <T : LivingEntity> applyTasks(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,

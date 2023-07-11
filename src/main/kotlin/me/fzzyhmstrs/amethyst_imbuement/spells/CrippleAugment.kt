@@ -1,60 +1,179 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SlashAugment
-import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
+import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment.Companion.NOTE_BLAST
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
-import net.minecraft.particle.DefaultParticleType
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.MutableText
+import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.*
 
-class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
+class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
+    override val augmentData: AugmentDatapoint
+        get() = AugmentDatapoint(Identifier(AI.MOD_ID,"cripple"),SpellType.FURY,20,5,
+            13,13,1,1, LoreTier.NO_TIER, Items.STONE_SWORD)
 
+    //maxlvl 13
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(3.4F,0.2F,0.0F)
             .withRange(7.75,0.25,0.0)
             .withDuration(110,10)
             .withAmplifier(-1,1,0)
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,5,
-            13,imbueLevel,1, LoreTier.NO_TIER, Items.STONE_SWORD)
-    }
-    
-    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (list.isNotEmpty()) {
-            for (entity in list) {
-                if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
-                }
-            }
-        }
-        return hostileEntityList
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+
+        TODO("Not yet implemented")
     }
 
-    override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        return arrayOf(pairedSpell.provideVerb(this))
+    }
+
+    override fun specialName(otherSpell: ScepterAugment): MutableText {
+        return when(otherSpell) {
+            RegisterEnchantment.FORTIFY ->
+                AcText.translatable("enchantment.amethyst_imbuement.resonate.fortify")
+            RegisterEnchantment.INSPIRING_SONG ->
+                AcText.translatable("enchantment.amethyst_imbuement.resonate.inspiring_song")
+            else ->
+                return super.specialName(otherSpell)
+        }
+    }
+
+    override fun <T> modifyDealtDamage(
+        amount: Float,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    Float
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val critical = if (context.get(ProcessContext.FROM_ENTITY) || context.get(SummonAugment.SUMMONED_MOB)){
+            world.random.nextFloat() < 0.15
+        } else {
+            context.get(ContextData.CRIT)
+        }
+
+        val criticalAmount = if (critical) {
+            if (othersType.empty) 2f else 1.5f
+        } else {
+            1f
+        }
+        return amount * criticalAmount
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (!result.success())
+            return result
+        if (othersType.empty || othersType.has(AugmentType.DAMAGE)){
+            val target = entityHitResult.entity
+            if (target is LivingEntity) {
+                val amp = if (context.get(ContextData.CRIT)) {
+                    if(othersType.empty) 4 else 2
+                } else {
+                    1
+                }
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, effects.duration(level), amp))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, effects.duration(level), amp))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), (amp + 1) * -1))
+                return SpellActionResult.success(result).withResults(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            }
+        }
+        if (othersType.positiveEffect){
+            val target = entityHitResult.entity
+            if (target is LivingEntity) {
+                target.removeStatusEffect(StatusEffects.SLOWNESS)
+                target.removeStatusEffect(StatusEffects.WEAKNESS)
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            }
+        }
+
+
+
+
+        return SUCCESSFUL_PASS
+    }
+
+    override fun <T> onCast(
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
+        if (world.random.nextFloat() < 0.15) {
+            context.set(ContextData.CRIT, true)
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    /*override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
         val entityDistance: SortedMap<Double, Entity> = mutableMapOf<Double, Entity>().toSortedMap()
         for (entity in entityList){
             if (entity is MobEntity){
@@ -78,9 +197,9 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
             }
         }
         return bl
-    }
+    }*/
 
-    private fun critTarget(world: World,user: LivingEntity,target: Entity,level: Int,effect: AugmentEffect, splash: Boolean = false): Boolean{
+    /*private fun critTarget(world: World,user: LivingEntity,target: Entity,level: Int,effect: AugmentEffect, splash: Boolean = false): Boolean{
         val crit = if (world.random.nextFloat() < 0.15) 2f else 1f
         val damage = if(!splash) {
             effect.damage(level) * crit
@@ -101,17 +220,22 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
             }
         }
         return bl
+    }*/
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos, SoundEvents.EVENT_RAID_HORN.value(), SoundCategory.PLAYERS,1.0f,1.0f)
     }
 
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS,0.4f,0.8f + world.random.nextFloat() * 0.4f)
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_BIG_FALL
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.CRIT
     }
 
-    override fun particleType(): DefaultParticleType {
-        return ParticleTypes.ELECTRIC_SPARK
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.CRIT
     }
 
     override fun particleSpeed(): Double {

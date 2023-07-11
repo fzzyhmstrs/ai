@@ -46,7 +46,7 @@ object ShockingEffect {
     }
 
     //entity is the player in this case
-    fun staticShock(entity: Entity, owner: Entity?, processContext: ProcessContext?){
+    fun staticShock(entity: Entity, owner: Entity?, processContext: ProcessContext){
         val world = entity.world
         val pos = entity.pos
         val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
@@ -67,6 +67,15 @@ object ShockingEffect {
         }
         world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
     }
+
+    fun chainLightning(entity: Entity, owner: Entity?, processContext: ProcessContext){
+        val world = entity.world
+        if (world.time % 30 != 0L && entity.age > 20 && processContext.isBeforeRemoval()) return
+        val pos = entity.pos
+        val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
+        val entities = world.getOtherEntities(owner, box)
+    }
+
 
     private fun beam(pos: Vec3d,serverWorld: ServerWorld, entity: LivingEntity){
         val startPos = pos.add(0.0,0.25,0.0)

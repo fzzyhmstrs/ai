@@ -1,8 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentPersistentEffectData
-import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
@@ -17,18 +22,39 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import kotlin.math.min
 
-class FangBarrageAugment: MiscAugment(ScepterTier.THREE,6), PersistentEffectHelper.PersistentEffect {
+class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED_ENERGY), PersistentEffectHelper.PersistentEffect {
+    //ml 6
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
             .withAmplifier(9,1,0)
             .withDamage(5.8F,0.2F)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun <T : LivingEntity> applyTasks(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity {
+        TODO("Not yet implemented")
+    }
 
     override val delay = PerLvlI(15,-1,0)
 

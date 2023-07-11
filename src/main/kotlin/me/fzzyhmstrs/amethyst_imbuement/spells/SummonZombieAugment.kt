@@ -2,8 +2,11 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper.findSpawnPos
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
@@ -16,6 +19,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
@@ -23,13 +27,20 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
-class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
+class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
 
+    //ml 13
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withAmplifier(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0,0)
             .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
             .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,

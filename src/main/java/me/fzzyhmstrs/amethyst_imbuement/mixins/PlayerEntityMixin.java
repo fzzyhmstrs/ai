@@ -42,7 +42,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
-
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements ModifiableEffectMobOrPlayer {
 
@@ -66,12 +65,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Modifiab
     }
 
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
-    @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.getAttributeValue (Lnet/minecraft/entity/attribute/EntityAttribute;)D"), cancellable = true)
     public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
             ci.cancel();
         } else {
-            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, null, processContext);
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, target, processContext);
         }
     }
 

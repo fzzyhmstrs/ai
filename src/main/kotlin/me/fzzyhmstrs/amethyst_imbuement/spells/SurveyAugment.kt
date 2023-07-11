@@ -1,7 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
@@ -20,15 +26,36 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.gen.structure.Structure
 
-class SurveyAugment: MiscAugment(ScepterTier.THREE,1){
+class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(AugmentType.BENEFICIAL)){
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
+    //ml 1
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(100.0,0.0,0.0)
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun <T : LivingEntity> applyTasks(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1200,120,

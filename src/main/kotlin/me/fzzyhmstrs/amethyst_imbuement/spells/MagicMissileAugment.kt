@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -14,8 +14,9 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MagicMissileAugment: SummonProjectileAugment(ScepterTier.ONE,1) {
+class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
 
+    //ml 1
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(3.0F)
 

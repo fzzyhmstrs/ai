@@ -1,21 +1,35 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.SummonEntityAugment
+import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
+import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.vehicle.BoatEntity
 import net.minecraft.item.Items
 import net.minecraft.predicate.entity.EntityPredicates
+import net.minecraft.text.Text
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class SummonBoatAugment: SummonEntityAugment(ScepterTier.ONE,1) {
+class SummonSeahorseAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE, AugmentType.SUMMON_GOOD) {
+
+    override val augmentData: AugmentDatapoint
+        get() = TODO("Not yet implemented")
+
+    override val baseEffect: AugmentEffect
+        get() = super.baseEffect
+
+    override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1200,50,
@@ -55,4 +69,6 @@ class SummonBoatAugment: SummonEntityAugment(ScepterTier.ONE,1) {
         }
         return false
     }
+
+
 }
