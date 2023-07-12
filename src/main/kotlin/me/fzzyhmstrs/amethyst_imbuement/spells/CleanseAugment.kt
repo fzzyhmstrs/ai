@@ -31,8 +31,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class CleanseAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("cleanse"),SpellType.GRACE, PerLvlI(670,-20),45,
+    override val augmentData: AugmentDatapoint = 
+        AugmentDatapoint(AI.identity("cleanse"),SpellType.GRACE, PerLvlI(670,-20),45,
             1, 11,1,15, LoreTier.LOW_TIER, Items.MILK_BUCKET)
 
     //ml 11
