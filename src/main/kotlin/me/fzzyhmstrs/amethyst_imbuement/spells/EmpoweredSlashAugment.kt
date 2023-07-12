@@ -25,7 +25,8 @@ import net.minecraft.text.Text
 @Suppress("SameParameterValue")
 class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("empowered_slash"),SpellType.FURY,20,20,
+            16,5,1,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -46,11 +47,6 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,20,
-            16,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
