@@ -32,8 +32,9 @@ import net.minecraft.world.World
 import kotlin.math.max
 
 class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("hamptertime"),SpellType.WIT, 6000,750,
+            1,25,1,85,LoreTier.NO_TIER, Items.LEAD)
 
     //ml 25
     override val baseEffect: AugmentEffect
@@ -48,7 +49,7 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -58,11 +59,6 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, 6000,750,
-            1,imbueLevel,85,LoreTier.NO_TIER, Items.LEAD)
     }
 
     override fun placeEntity(
