@@ -39,9 +39,8 @@ import net.minecraft.world.World
 import java.util.EnumMap
 
 class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("create_hard_light"),SpellType.WIT, 7,4,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("create_hard_light"),SpellType.WIT, 7,4,
             5,1,1,1, LoreTier.LOW_TIER, RegisterBlock.HARD_LIGHT_BLOCK.asItem())
 
     override val baseEffect: AugmentEffect
@@ -65,7 +64,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
