@@ -33,8 +33,11 @@ class ForcefieldAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_AREA)
     //ml 6
 
     private val offset = intArrayOf(-2,2)
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("forcefield"),SpellType.WIT, PerLvlI(620,-20),135,
+            13,6,1,15, LoreTier.LOW_TIER, Items.SHIELD)
+        
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(1800,200)
 
@@ -43,7 +46,7 @@ class ForcefieldAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_AREA)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -70,11 +73,6 @@ class ForcefieldAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_AREA)
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,
-            13,imbueLevel,15, LoreTier.LOW_TIER, Items.SHIELD)
     }
 
     override fun effect(
