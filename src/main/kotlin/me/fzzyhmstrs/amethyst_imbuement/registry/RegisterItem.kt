@@ -61,8 +61,8 @@ object RegisterItem {
 
     //scepter update gem and found/crafted items
     val GEM_OF_PROMISE = GemOfPromiseItem(AiItemSettings().aiGroup(AiItemGroup.GEM).maxCount(1))
-        .withFlavorDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
-        .withFlavorDescDefaultPath(Identifier(AI.MOD_ID,"gem_of_promise"))
+        .withFlavorDefaultPath(AI.identity("gem_of_promise"))
+        .withFlavorDescDefaultPath(AI.identity("gem_of_promise"))
         .also{ regItem["gem_of_promise"] = it}
     val GEM_DUST = Item(AiItemSettings().aiGroup(AiItemGroup.GEM)).also{ regItem["gem_dust"] = it}
     val SPARKING_GEM = SparkingGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).also{ regItem["sparking_gem"] = it}
@@ -138,8 +138,8 @@ object RegisterItem {
     val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
     val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
     val WITCHES_ORB = WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1).rarity(Rarity.RARE)).withGlint().also{ regItem["witches_orb"] = it}
-    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
+    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(AI.identity("book_of_lore")) .also{ regItem["book_of_lore"] = it}
+    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(AI.identity("book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
     //val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()).also{ regItem["glistering_tome"] = it}
     val MANA_POTION = ManaPotionItem(FabricItemSettings().maxCount(16)).also{ regItem["mana_potion"] = it}
     val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
@@ -283,7 +283,7 @@ object RegisterItem {
     }
 
     fun registerItemGroup(): ItemGroup{
-        return Registry.register(Registries.ITEM_GROUP,Identifier(AI.MOD_ID,"ai_group"), FabricItemGroup.builder()
+        return Registry.register(Registries.ITEM_GROUP,AI.identity("ai_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.amethyst_imbuement.ai_group"))
             .icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }
             .entries { _, entries ->
@@ -313,7 +313,7 @@ object RegisterItem {
             if (item is IgnitedGemItem){
                 GemOfPromiseItem.register(item)
             }
-            Registry.register(Registries.ITEM,Identifier(AI.MOD_ID,k), item)
+            Registry.register(Registries.ITEM,AI.identity(k), item)
         }
         @Suppress("UNUSED_VARIABLE") val group = AI_GROUP
     }

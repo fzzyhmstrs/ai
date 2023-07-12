@@ -13,9 +13,9 @@ object RegisterRecipe {
 
     fun registerAll(){
         Registry.register(Registries.RECIPE_SERIALIZER, ImbuingRecipeSerializer.ID, ImbuingRecipeSerializer)
-        Registry.register(Registries.RECIPE_TYPE, Identifier(AI.MOD_ID, ImbuingRecipe.Type.ID), ImbuingRecipe.Type)
+        Registry.register(Registries.RECIPE_TYPE, AI.identity( ImbuingRecipe.Type.ID), ImbuingRecipe.Type)
         Registry.register(Registries.RECIPE_SERIALIZER, AltarRecipeSerializer.ID, AltarRecipeSerializer)
-        Registry.register(Registries.RECIPE_TYPE, Identifier(AI.MOD_ID, AltarRecipe.Type.ID), AltarRecipe.Type)
+        Registry.register(Registries.RECIPE_TYPE, AI.identity( AltarRecipe.Type.ID), AltarRecipe.Type)
     }
 
 }

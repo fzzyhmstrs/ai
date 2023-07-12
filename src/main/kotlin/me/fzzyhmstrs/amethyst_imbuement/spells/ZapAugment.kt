@@ -4,31 +4,38 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.BeamAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class ZapAugment: BeamAugment(ScepterTier.ONE){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(
+            AI.identity("zap"),SpellType.FURY,18,6,
+            1,11,1,1, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -38,9 +45,17 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,6,
-            1,imbueLevel,1, LoreTier.NO_TIER, RegisterItem.BERYL_COPPER_INGOT)
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
     }
 
     override fun effect(

@@ -22,7 +22,7 @@ import kotlin.math.max
 class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<ImbuingTableScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/imbuing_table_gui.png")
+    private val texture = AI.identity("textures/gui/container/imbuing_table_gui.png")
     private val backgrdWidth = 234
     private val backgrdHeight = 174
     private val player = playerInventory.player

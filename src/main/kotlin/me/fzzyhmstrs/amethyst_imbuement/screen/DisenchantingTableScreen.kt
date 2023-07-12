@@ -21,7 +21,7 @@ import net.minecraft.util.Identifier
 class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<DisenchantingTableScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/disenchanting_table_gui.png")
+    private val texture = AI.identity("textures/gui/container/disenchanting_table_gui.png")
     private val player = playerInventory.player
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

@@ -26,7 +26,7 @@ import java.util.*
 @Suppress("PrivatePropertyName")
 object RegisterKeybind {
 
-    private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
+    private val VEIN_MINER_PACKET = AI.identity( "vein_miner_packet")
     @Environment(value = EnvType.SERVER)
     private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)

@@ -68,7 +68,7 @@ class ReagentAlertSlot(stack:EmiIngredient, output: EmiIngredient, x: Int, y: In
         private val alertText = AcText.translatable("emi.alert_slot.alert").formatted(Formatting.BOLD,Formatting.ITALIC,Formatting.GOLD)
         private val alertTextDesc1 = AcText.translatable("emi.alert_slot.alert.desc1").formatted(Formatting.GOLD)
         private val alertTextDesc2 = AcText.translatable("emi.alert_slot.alert.desc2").formatted(Formatting.GOLD)
-        private val alertTexture = Identifier(AI.MOD_ID,"textures/gui/container/imbuing_table_gui.png")
+        private val alertTexture = AI.identity("textures/gui/container/imbuing_table_gui.png")
     }
 
 }

@@ -16,7 +16,6 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.DyeColor
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.world.BlockView
@@ -119,29 +118,29 @@ object RegisterBlock {
             registerBlock(k,regBlock[k]?:continue)
         }
 
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "warding_candle"), WARDING_CANDLE)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"warding_candle"), WARDING_CANDLE_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "steel_block"), STEEL_BLOCK)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"steel_block"), STEEL_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "beryl_copper_block"), BERYL_COPPER_BLOCK)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"beryl_copper_block"), BERYL_COPPER_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "glistening_ice"), GLISTENING_ICE)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"glistening_ice"), GLISTENING_ICE_ITEM)
+        Registry.register(Registries.BLOCK, AI.identity( "experience_bush"), EXPERIENCE_BUSH)
+        Registry.register(Registries.BLOCK, AI.identity( "warding_candle"), WARDING_CANDLE)
+        Registry.register(Registries.ITEM, AI.identity("warding_candle"), WARDING_CANDLE_ITEM)
+        Registry.register(Registries.BLOCK, AI.identity( "steel_block"), STEEL_BLOCK)
+        Registry.register(Registries.ITEM, AI.identity("steel_block"), STEEL_BLOCK_ITEM)
+        Registry.register(Registries.BLOCK, AI.identity( "beryl_copper_block"), BERYL_COPPER_BLOCK)
+        Registry.register(Registries.ITEM, AI.identity("beryl_copper_block"), BERYL_COPPER_BLOCK_ITEM)
+        Registry.register(Registries.BLOCK, AI.identity( "glistening_ice"), GLISTENING_ICE)
+        Registry.register(Registries.ITEM, AI.identity("glistening_ice"), GLISTENING_ICE_ITEM)
     }
 
     private fun registerBlock(path: String, block:Block): Block{
         val item = BlockItem(block,FabricItemSettings())
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,path), item)
-        return Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, path), block)
+        Registry.register(Registries.ITEM, AI.identity(path), item)
+        return Registry.register(Registries.BLOCK, AI.identity( path), block)
     }
 
     private fun registerBlockOnly(path: String, block:Block): Block{
-        return Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, path), block)
+        return Registry.register(Registries.BLOCK, AI.identity( path), block)
     }
 
     private fun registerItemOnly(path: String, item: Item): Item{
-        return Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,path), item)
+        return Registry.register(Registries.ITEM, AI.identity(path), item)
     }
 
     @Suppress("unused")

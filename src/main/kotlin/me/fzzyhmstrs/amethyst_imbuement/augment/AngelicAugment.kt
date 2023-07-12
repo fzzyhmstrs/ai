@@ -25,7 +25,7 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
 
     companion object {
         private val ability: PlayerAbility = VanillaAbilities.ALLOW_FLYING
-        private val abilitySource: AbilitySource = Pal.getAbilitySource(Identifier(AI.MOD_ID, "angelic"))
+        private val abilitySource: AbilitySource = Pal.getAbilitySource(AI.identity( "angelic"))
     }
 
     override fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean {

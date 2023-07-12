@@ -5,15 +5,18 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -24,6 +27,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -36,7 +40,8 @@ import net.minecraft.world.World
 
 class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("winters_grasp"),SpellType.FURY,600,120,
+            23,17,1,25, LoreTier.HIGH_TIER, RegisterBlock.GLISTENING_ICE.asItem())
 
     //ml 17
     override val baseEffect: AugmentEffect
@@ -50,12 +55,20 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
         TODO("Not yet implemented")
     }
 
-    private val hailDelay = PerLvlF(20f,-0.5f,0f)
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,600,120,
-            23,imbueLevel,25, LoreTier.HIGH_TIER, RegisterBlock.GLISTENING_ICE.asItem())
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
     }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+
+    private val hailDelay = PerLvlF(20f,-0.5f,0f)
 
     override fun effect(
         world: World,

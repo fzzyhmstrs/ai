@@ -23,7 +23,7 @@ class FzzyhammerItem(settings: Settings):
 
 {
 
-    override val fallbackId: Identifier = Identifier(AI.MOD_ID,"hamptertime")
+    override val fallbackId: Identifier = AI.identity("hamptertime")
 
     override fun canAcceptAugment(augment: ScepterAugment): Boolean {
         return augment == RegisterEnchantment.HAMPTERTIME

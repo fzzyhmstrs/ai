@@ -35,6 +35,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
@@ -49,7 +50,7 @@ import net.minecraft.world.World
 class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
     override val augmentData: AugmentDatapoint
         get() = AugmentDatapoint(
-            Identifier(AI.MOD_ID,"bedazzle"), SpellType.WIT,1500,85,
+            AI.identity("bedazzle"), SpellType.WIT,1500,85,
             7,1, 1,40, LoreTier.LOW_TIER, Items.DIAMOND)
 
     override val baseEffect: AugmentEffect
@@ -139,6 +140,15 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
                 AcText.translatable("enchantment.amethyst_imbuement.resonate.inspiring_song")
             else ->
                 return super.specialName(otherSpell)
+        }
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player,SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
     }
 

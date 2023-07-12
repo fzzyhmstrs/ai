@@ -8,7 +8,7 @@ class GlisteringTomeItem(settings: Settings): Item(settings) {
         import vazkii.patchouli.api.PatchouliAPI
 
         if (!world.isClient) {
-            PatchouliAPI.get().openBookGUI(playerEntity as ServerPlayerEntity, Identifier(AI.MOD_ID,"glistering_tome"))
+            PatchouliAPI.get().openBookGUI(playerEntity as ServerPlayerEntity, AI.identity("glistering_tome"))
             return TypedActionResult.success(playerEntity.getStackInHand(hand))
         }
         return TypedActionResult.consume(playerEntity.getStackInHand(hand))

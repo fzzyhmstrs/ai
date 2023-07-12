@@ -22,7 +22,7 @@ import net.minecraft.util.Util
 class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<SpellcastersFocusScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
+    private val texture = AI.identity("textures/gui/container/spellcasters_focus_gui.png")
     private val flavor = AcText.translatable("container.spellcasters_focus.hint").formatted(Formatting.ITALIC)
     private lateinit var button1: OptionButtonWidget
     private lateinit var button2: OptionButtonWidget
@@ -86,7 +86,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         :
         PressableWidget(x,y,58,86,message)
     {
-        private val texture = Identifier(AI.MOD_ID,"textures/gui/container/spellcasters_focus_gui.png")
+        private val texture = AI.identity("textures/gui/container/spellcasters_focus_gui.png")
         private var selected = false
         private var finalSelected = false
 

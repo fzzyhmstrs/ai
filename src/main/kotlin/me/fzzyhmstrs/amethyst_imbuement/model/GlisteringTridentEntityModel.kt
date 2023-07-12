@@ -11,7 +11,7 @@ class GlisteringTridentEntityModel(private val root: ModelPart) : TridentEntityM
 
 
     companion object {
-        var TEXTURE: Identifier = Identifier(AI.MOD_ID,"textures/entity/glistering_trident.png")
+        var TEXTURE: Identifier = AI.identity("textures/entity/glistering_trident.png")
 
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()

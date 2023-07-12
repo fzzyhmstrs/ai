@@ -15,7 +15,7 @@ object RegisterParticle {
     val COLORED_END_ROD_TYPE = ColoredEndParticleType()
 
     fun registerParticleTypes(){
-        Registry.register(Registries.PARTICLE_TYPE, Identifier(AI.MOD_ID,"colored_end_rod"), COLORED_END_ROD_TYPE)
+        Registry.register(Registries.PARTICLE_TYPE, AI.identity("colored_end_rod"), COLORED_END_ROD_TYPE)
     }
 
     fun registerParticleFactories(){

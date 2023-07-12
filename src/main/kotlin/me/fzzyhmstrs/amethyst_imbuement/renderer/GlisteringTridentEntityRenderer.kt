@@ -16,7 +16,7 @@ import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName")
 class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : EntityRenderer<GlisteringTridentEntity>(context) {
-    private var TEXTURE = Identifier(AI.MOD_ID,"textures/entity/glistering_trident.png")
+    private var TEXTURE = AI.identity("textures/entity/glistering_trident.png")
     var model = GlisteringTridentEntityModel(context.getPart(RegisterRenderer.GLISTERING_TRIDENT))
 
     override fun render(

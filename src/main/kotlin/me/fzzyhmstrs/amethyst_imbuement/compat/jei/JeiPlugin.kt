@@ -25,7 +25,7 @@ import net.minecraft.util.Identifier
 object JeiPlugin: IModPlugin {
 
     override fun getPluginUid(): Identifier {
-        return Identifier(AI.MOD_ID,"jei_plugin")
+        return AI.identity("jei_plugin")
     }
 
     override fun registerRecipes(registration: IRecipeRegistration) {

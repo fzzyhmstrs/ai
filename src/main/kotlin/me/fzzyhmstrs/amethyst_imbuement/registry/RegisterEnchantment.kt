@@ -101,7 +101,7 @@ object RegisterEnchantment {
     val FLARE = FlareAugment().also{regEnchant["flare"] = it}
     val FORCE_FIELD = ForcefieldAugment().also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment().also{regEnchant["fortify"] = it}
-    val FREEZING = FreezingAugment().also{regEnchant["freezing"] = it}
+    val FREEZING = FrostboltAugment().also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment().also{regEnchant["gusting"] = it}
     val HAMPTERTIME = HamptertimeAugment().also{regEnchant["hamptertime"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().also{regEnchant["hard_light_bridge"] = it}
@@ -137,13 +137,12 @@ object RegisterEnchantment {
     val SUMMON_GOLEM = SummonGolemAugment().also{regEnchant["summon_golem"] = it}
     val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().also{regEnchant["summon_grace_totem"] = it}
     val SUMMON_HAMSTER = SummonHamsterAugment().also{regEnchant["summon_hamster"] = it}
-    val SUMMON_STRIDER = SummonStriderAugment().also{regEnchant["summon_strider"] = it}
     val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
     val SURVEY = SurveyAugment().also{regEnchant["survey"] = it}
     val TELEPORT = TeleportAugment().also{regEnchant["teleport"] = it}
     val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().also{regEnchant["torrent_of_beaks"] = it}
     val WEIGHTLESSNESS = WeightlessnessAugment().also{regEnchant["weightlessness"] = it}
-    val WINTERS_GRASP = WintersGraspAugment().also{regEnchant["hail_storm"] = it} //id kept as hail storm to maintain compat
+    val WINTERS_GRASP = WintersGraspAugment().also{regEnchant["winters_grasp"] = it} //id kept as hail storm to maintain compat
     val WITHERING_BOLT = WitheringBoltAugment().also{regEnchant["withering_bolt"] = it}
     val ZAP = ZapAugment().also{regEnchant["zap"] = it}
 
@@ -156,12 +155,12 @@ object RegisterEnchantment {
 
         for (k in regEnchant.keys){
             val enchant = regEnchant[k]
-            val id = Identifier(AI.MOD_ID, k)
+            val id = AI.identity( k)
             Registry.register(Registries.ENCHANTMENT, id, enchant)
         }
         for (enchant in regEnchant){
             val e = enchant.value
-            val id = Identifier(AI.MOD_ID, enchant.key)
+            val id = AI.identity( enchant.key)
             if (e is AbstractConfigDisableEnchantment){
                 if (!e.isEnabled()){
                     LOGGER.info("Augment $id is set as disabled in the configs!")

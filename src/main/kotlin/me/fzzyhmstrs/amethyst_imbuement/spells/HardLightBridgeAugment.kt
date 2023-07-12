@@ -15,6 +15,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.block.ShapeContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -40,7 +41,20 @@ class HardLightBridgeAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_
         TODO("Not yet implemented")
     }
 
-    override fun <T : LivingEntity> applyTasks(
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+
+    override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
         user: T,
@@ -48,7 +62,13 @@ class HardLightBridgeAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_
         level: Int,
         effects: AugmentEffect,
         spells: PairedAugments
-    ): SpellActionResult where T : SpellCastingEntity {
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
         TODO("Not yet implemented")
     }
 

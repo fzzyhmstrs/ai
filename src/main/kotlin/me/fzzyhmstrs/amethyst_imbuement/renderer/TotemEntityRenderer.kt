@@ -52,7 +52,7 @@ class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
     }
 
     override fun getTexture(entity: AbstractEffectTotemEntity): Identifier {
-        return Identifier(AI.MOD_ID, "textures/entity/totem.png")
+        return AI.identity( "textures/entity/totem.png")
     }
 
     override fun hasLabel(livingEntity: AbstractEffectTotemEntity): Boolean {

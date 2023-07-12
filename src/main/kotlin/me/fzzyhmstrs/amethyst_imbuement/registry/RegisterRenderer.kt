@@ -32,15 +32,15 @@ import net.minecraft.util.Identifier
 
 @Environment(value = EnvType.CLIENT)
 object RegisterRenderer {
-    val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"glistering_trident"),"glistering_trident_model")
-    val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"draconic_box"),"draconic_box_model")
-    val BONESTORM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"bonestorm"),"bonestorm_model")
-    val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
-    val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
-    val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
+    val GLISTERING_TRIDENT: EntityModelLayer = EntityModelLayer(AI.identity("glistering_trident"),"glistering_trident_model")
+    val DRACONIC_BOX_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("draconic_box"),"draconic_box_model")
+    val BONESTORM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("bonestorm"),"bonestorm_model")
+    val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("totem"),"totem_model")
+    val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
+    val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("player_wither_skull_entity"),"player_wither_skull_model")
     
-    val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
-    val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_armor")
+    val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_main")
+    val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_armor")
 
     fun registerAll() {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlock.EXPERIENCE_BUSH, RenderLayer.getCutout())
@@ -103,11 +103,11 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.BONE_SHARD_ENTITY
-        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/bone_shard.png")) }
+        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, AI.identity("textures/entity/bone_shard.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SHARD_ENTITY
-        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_shard.png"))
+        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, AI.identity("textures/entity/ice_shard.png"))
         }
 
         EntityRendererRegistry.register(
@@ -136,7 +136,7 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SPIKE
-        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context, Identifier(AI.MOD_ID,"textures/entity/ice_spike.png")) }
+        ){ context: EntityRendererFactory.Context -> PlayerFangsRenderer(context, AI.identity("textures/entity/ice_spike.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.PLAYER_FIREBALL

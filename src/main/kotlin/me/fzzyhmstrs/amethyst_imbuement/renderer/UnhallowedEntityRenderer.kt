@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier
 
 @Suppress("PrivatePropertyName")
 class UnhallowedEntityRenderer(ctx: EntityRendererFactory.Context): BipedEntityRenderer<UnhallowedEntity, UnhallowedEntityModel>(ctx, UnhallowedEntityModel(ctx.getPart(EntityModelLayers.ZOMBIE)), 0.5f) {
-    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/unhallowed.png")
+    private val TEXTURE = AI.identity("textures/entity/unhallowed.png")
 
     init{
         addFeature(ArmorFeatureRenderer(this,

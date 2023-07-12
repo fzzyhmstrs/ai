@@ -7,16 +7,20 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -29,7 +33,8 @@ import kotlin.math.min
 
 class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("summon_zombie"),SpellType.WIT, PerLvlI(1295,-15),150,
+            11,13,1,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
 
     //ml 13
     override val baseEffect: AugmentEffect
@@ -42,9 +47,17 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,
-            11,imbueLevel,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
     }
 
     override fun placeEntity(

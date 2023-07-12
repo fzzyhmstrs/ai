@@ -28,7 +28,7 @@ object RegisterEntity {
     
     val BASIC_HAMSTER_ENTITY: EntityType<BaseHamsterEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "basic_hamster"),
+        AI.identity( "basic_hamster"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<BaseHamsterEntity>, world: World ->
@@ -43,7 +43,7 @@ object RegisterEntity {
 
     val BONESTORM_ENTITY: EntityType<BonestormEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "bonestorm"),
+        AI.identity( "bonestorm"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<BonestormEntity>, world: World ->
@@ -56,7 +56,7 @@ object RegisterEntity {
 
     val BOOM_CHICKEN_ENTITY: EntityType<BoomChickenEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "boom_chicken"),
+        AI.identity( "boom_chicken"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<BoomChickenEntity>, world: World ->
@@ -69,7 +69,7 @@ object RegisterEntity {
 
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "crystal_golem"),
+        AI.identity( "crystal_golem"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<CrystallineGolemEntity>, world: World ->
@@ -82,7 +82,7 @@ object RegisterEntity {
 
     val UNHALLOWED_ENTITY: EntityType<UnhallowedEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "unhallowed"),
+        AI.identity( "unhallowed"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
         ) { entityType: EntityType<UnhallowedEntity>, world: World ->
@@ -95,7 +95,7 @@ object RegisterEntity {
 
     val DRACONIC_BOX_ENTITY: EntityType<DraconicBoxEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "draconic_box"),
+        AI.identity( "draconic_box"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<DraconicBoxEntity>, world: World ->
@@ -108,7 +108,7 @@ object RegisterEntity {
 
     val TOTEM_OF_FURY_ENTITY: EntityType<TotemOfFuryEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "totem_of_fury"),
+        AI.identity( "totem_of_fury"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<TotemOfFuryEntity>, world: World ->
@@ -121,7 +121,7 @@ object RegisterEntity {
 
     val TOTEM_OF_GRACE_ENTITY: EntityType<TotemOfGraceEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "totem_of_grace"),
+        AI.identity( "totem_of_grace"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<TotemOfGraceEntity>, world: World ->
@@ -136,7 +136,7 @@ object RegisterEntity {
 
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "glistering_trident"),
+        AI.identity( "glistering_trident"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<GlisteringTridentEntity>, world: World ->
@@ -149,7 +149,7 @@ object RegisterEntity {
 
     val BASIC_MISSILE_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "basic_missile_entity"),
+        AI.identity( "basic_missile_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicMissileEntity>, world: World ->
@@ -162,7 +162,7 @@ object RegisterEntity {
 
     val FLAMEBOLT_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "flamebolt_entity"),
+        AI.identity( "flamebolt_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicMissileEntity>, world: World ->
@@ -175,7 +175,7 @@ object RegisterEntity {
 
     val BALL_LIGHTNING_ENTITY: EntityType<BallLightningEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "ball_lightning_entity"),
+        AI.identity( "ball_lightning_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BallLightningEntity>, world: World ->
@@ -188,7 +188,7 @@ object RegisterEntity {
 
     val BONE_SHARD_ENTITY: EntityType<BasicShardEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "bone_shard_entity"),
+        AI.identity( "bone_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicShardEntity>, world: World ->
@@ -201,7 +201,7 @@ object RegisterEntity {
     
     val ICE_SHARD_ENTITY: EntityType<BasicShardEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "ice_shard_entity"),
+        AI.identity( "ice_shard_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicShardEntity>, world: World ->
@@ -214,7 +214,7 @@ object RegisterEntity {
 
     val FREEZING_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "freezing_entity"),
+        AI.identity( "freezing_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicMissileEntity>, world: World ->
@@ -227,7 +227,7 @@ object RegisterEntity {
 
     val SOUL_MISSILE_ENTITY: EntityType<BasicMissileEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "soul_missile_entity"),
+        AI.identity( "soul_missile_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<BasicMissileEntity>, world: World ->
@@ -240,7 +240,7 @@ object RegisterEntity {
 
     val PLAYER_BULLET: EntityType<PlayerBulletEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_bullet_entity"),
+        AI.identity( "player_bullet_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerBulletEntity>, world: World ->
@@ -253,7 +253,7 @@ object RegisterEntity {
 
     val PLAYER_FANGS: EntityType<PlayerFangsEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_fangs_entity"),
+        AI.identity( "player_fangs_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerFangsEntity>, world: World ->
@@ -266,7 +266,7 @@ object RegisterEntity {
 
     val ICE_SPIKE: EntityType<PlayerFangsEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "ice_spike_entity"),
+        AI.identity( "ice_spike_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerFangsEntity>, world: World ->
@@ -279,7 +279,7 @@ object RegisterEntity {
 
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_fireball_entity"),
+        AI.identity( "player_fireball_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerFireballEntity>, world: World ->
@@ -292,7 +292,7 @@ object RegisterEntity {
 
     val PLAYER_LIGHTNING: EntityType<PlayerLightningEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_lightning_entity"),
+        AI.identity( "player_lightning_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerLightningEntity>, world: World ->
@@ -305,7 +305,7 @@ object RegisterEntity {
 
     val PLAYER_WITHER_SKULL: EntityType<PlayerWitherSkullEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_wither_skull_entity"),
+        AI.identity( "player_wither_skull_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerWitherSkullEntity>, world: World ->
@@ -317,7 +317,7 @@ object RegisterEntity {
     )
     val MANA_POTION: EntityType<ManaPotionEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "mana_potion_entity"),
+        AI.identity( "mana_potion_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<ManaPotionEntity>, world: World ->
@@ -330,7 +330,7 @@ object RegisterEntity {
 
     val PLAYER_EGG: EntityType<PlayerItemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "player_egg_entity"),
+        AI.identity( "player_egg_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerItemEntity>, world: World ->

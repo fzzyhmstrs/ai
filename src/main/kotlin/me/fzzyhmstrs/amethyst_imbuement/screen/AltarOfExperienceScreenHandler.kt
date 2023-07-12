@@ -391,8 +391,8 @@ class AltarOfExperienceScreenHandler(
 
     companion object {
 
-        private val XP_UPDATE = Identifier(AI.MOD_ID,"xp_update")
-        private val XP_REQUEST  = Identifier(AI.MOD_ID,"xp_request")
+        private val XP_UPDATE = AI.identity("xp_update")
+        private val XP_REQUEST  = AI.identity("xp_request")
 
         fun registerClient(){
             ClientPlayNetworking.registerGlobalReceiver(XP_UPDATE) {client,_,buf,_ ->

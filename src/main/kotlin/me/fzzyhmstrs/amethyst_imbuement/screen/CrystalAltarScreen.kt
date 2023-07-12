@@ -43,7 +43,7 @@ class CrystalAltarScreen(handler: CrystalAltarScreenHandler, playerInventory: Pl
     }
 
     companion object {
-        private val TEXTURE = Identifier(AI.MOD_ID,"textures/gui/container/crystal_altar_gui.png")
+        private val TEXTURE = AI.identity("textures/gui/container/crystal_altar_gui.png")
     }
 
     init {

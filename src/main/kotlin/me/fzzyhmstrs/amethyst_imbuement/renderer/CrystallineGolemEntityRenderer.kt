@@ -22,7 +22,7 @@ class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
         addFeature(CrystallineGolemCrackFeatureRenderer(this))
     }
 
-    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem.png")
+    private val TEXTURE = AI.identity("textures/entity/crystal_golem/crystal_golem.png")
 
     override fun getTexture(entity: CrystallineGolemEntity): Identifier {
         return TEXTURE

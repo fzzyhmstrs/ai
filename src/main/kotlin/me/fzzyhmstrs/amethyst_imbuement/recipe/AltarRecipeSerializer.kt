@@ -16,7 +16,7 @@ import net.minecraft.util.JsonHelper
 @Suppress("PropertyName")
 object AltarRecipeSerializer: RecipeSerializer<AltarRecipe> {
 
-    val ID = Identifier(AI.MOD_ID,"enhancing")
+    val ID = AI.identity("enhancing")
     private val gson = Gson()
 
     override fun read(id: Identifier, json: JsonObject): AltarRecipe {

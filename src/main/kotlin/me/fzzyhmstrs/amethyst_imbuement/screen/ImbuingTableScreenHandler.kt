@@ -530,8 +530,8 @@ class ImbuingTableScreenHandler(
 
     companion object {
 
-        private val RESULTS_PACKET = Identifier(AI.MOD_ID, "results_packet")
-        private val REQUEST_CONTENTS = Identifier(AI.MOD_ID, "request_contents")
+        private val RESULTS_PACKET = AI.identity( "results_packet")
+        private val REQUEST_CONTENTS = AI.identity( "request_contents")
         private var lastPacketTime: Long = 0L
 
         fun registerClient(){

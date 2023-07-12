@@ -24,7 +24,7 @@ open class ScepterItem(
     Reactant,
     Reagent
 {
-    override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
+    override val fallbackId: Identifier = AI.identity( "magic_missile")
 
     override fun getItemBarColor(stack: ItemStack): Int {
         return AiConfig.items.manaItems.getItemBarColor(stack)

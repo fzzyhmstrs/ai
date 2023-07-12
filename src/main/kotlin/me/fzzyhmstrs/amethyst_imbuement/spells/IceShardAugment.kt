@@ -33,6 +33,10 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         TODO("Not yet implemented")
     }
 
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),
             15,14, imbueLevel,1, LoreTier.LOW_TIER, Items.BLUE_ICE)

@@ -32,7 +32,7 @@ open class SpellToolItem(
     Reactant,
     Reagent
 {
-    override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
+    override val fallbackId: Identifier = AI.identity( "magic_missile")
 
     override fun postHit(stack: ItemStack, target: LivingEntity?, attacker: LivingEntity): Boolean {
         if (stack.maxDamage - stack.damage > 2) {

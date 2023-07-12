@@ -16,7 +16,7 @@ class DraconicBoxEntityRenderer(ctx: EntityRendererFactory.Context,
     constructor(ctx: EntityRendererFactory.Context) : this(ctx, DraconicBoxModel(ctx.getPart(RegisterRenderer.DRACONIC_BOX_ENTITY)),0.2F)
 
     override fun getTexture(entity: DraconicBoxEntity): Identifier {
-        return Identifier(AI.MOD_ID, "textures/entity/draconic_box.png")
+        return AI.identity( "textures/entity/draconic_box.png")
     }
 
     override fun hasLabel(livingEntity: DraconicBoxEntity): Boolean {

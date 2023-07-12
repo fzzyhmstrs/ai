@@ -17,6 +17,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -25,6 +26,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
@@ -38,7 +40,7 @@ import net.minecraft.world.World
 
 class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(Identifier(AI.MOD_ID,"cripple"),SpellType.FURY,20,5,
+        get() = AugmentDatapoint(AI.identity("cripple"),SpellType.FURY,20,5,
             13,13,1,1, LoreTier.NO_TIER, Items.STONE_SWORD)
 
     //maxlvl 13
@@ -65,6 +67,15 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
                 AcText.translatable("enchantment.amethyst_imbuement.resonate.inspiring_song")
             else ->
                 return super.specialName(otherSpell)
+        }
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
     }
 

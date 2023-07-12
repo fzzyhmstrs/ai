@@ -5,14 +5,17 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -20,6 +23,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -31,7 +35,8 @@ import net.minecraft.world.World
 
 class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("comet_storm"),SpellType.FURY,PerLvlI(480,-20),75,
+            21,9,1,10, LoreTier.HIGH_TIER, Items.TNT)
 
     //ml 9
     override val baseEffect: AugmentEffect
@@ -44,12 +49,20 @@ class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DA
         TODO("Not yet implemented")
     }
 
-    override val delay = PerLvlI(19,-1,0)
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,PerLvlI(480,-20),75,
-            21,imbueLevel,10, LoreTier.HIGH_TIER, Items.TNT)
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
     }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+
+    override val delay = PerLvlI(19,-1,0)
 
     override fun effect(
         world: World,

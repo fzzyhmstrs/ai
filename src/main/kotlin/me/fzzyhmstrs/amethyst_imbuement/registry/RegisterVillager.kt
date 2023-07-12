@@ -24,7 +24,7 @@ import net.minecraft.village.VillagerProfession
 
 object RegisterVillager {
 
-    private val CRYSTAL_WITCH_IDENTIFIER = Identifier(AI.MOD_ID,"crystal_witch")
+    private val CRYSTAL_WITCH_IDENTIFIER = AI.identity("crystal_witch")
     private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(CRYSTAL_WITCH_IDENTIFIER,1,1,RegisterBlock.CRYSTAL_ALTAR)
     private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(
         Registries.POINT_OF_INTEREST_TYPE.getKey(CRYSTAL_ALTAR_POINT_OF_INTEREST).get()).id(CRYSTAL_WITCH_IDENTIFIER).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()

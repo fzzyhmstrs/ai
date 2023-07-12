@@ -16,16 +16,16 @@
 	"item": "amethyst_imbuement:book_of_lore"
   },
   "craftD": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:nautilus_shell"
   },
   "craftF": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:nautilus_shell"
   },
   "craftH": {
-	"tag": "minecraft:boats"
+	"item": "minecraft:nautilus_shell"
   },
-  "title": "Summon: Boat",
-  "cost": 9,
-  "augment": "amethyst_imbuement:summon_boat"
+  "title": "Summon: Seahorse",
+  "cost": 11,
+  "augment": "amethyst_imbuement:summon_seahorse"
 }
 

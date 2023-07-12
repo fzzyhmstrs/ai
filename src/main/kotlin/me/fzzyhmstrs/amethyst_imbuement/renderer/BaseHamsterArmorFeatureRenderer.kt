@@ -27,7 +27,7 @@ FeatureRenderer<T, M>(context)
     object HamsterArmorTextureIdsHolder: SimpleSynchronousResourceReloadListener {
         
         private var hamsterTextures: Map<String,Identifier> = mapOf()
-        private val fallback = Identifier(AI.MOD_ID, "textures/entity/hamster/armor/iron.png")
+        private val fallback = AI.identity( "textures/entity/hamster/armor/iron.png")
         
         fun getHamsterTexture(stack: ItemStack): Identifier{
             val item = stack.item
@@ -83,7 +83,7 @@ FeatureRenderer<T, M>(context)
         }
 
         override fun getFabricId(): Identifier {
-            return Identifier(AI.MOD_ID,"hamster_armor_loader")
+            return AI.identity("hamster_armor_loader")
         }
         
         fun registerAll(){

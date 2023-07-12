@@ -12,8 +12,8 @@ import net.minecraft.util.Identifier
 class HamsterVariant(val texture: Identifier) {
 
     companion object{
-        val HAMSTERS: SimpleDefaultedRegistry<HamsterVariant> = FabricRegistryBuilder.createDefaulted(RegistryKey.ofRegistry<HamsterVariant>(Identifier(AI.MOD_ID,"hamster_variant")),
-            Identifier(AI.MOD_ID,"dwarf_hamster")).buildAndRegister()
+        val HAMSTERS: SimpleDefaultedRegistry<HamsterVariant> = FabricRegistryBuilder.createDefaulted(RegistryKey.ofRegistry<HamsterVariant>(AI.identity("hamster_variant")),
+            AI.identity("dwarf_hamster")).buildAndRegister()
         val TRACKED_HAMSTER = TrackedDataHandler.of(HAMSTERS)
 
         fun registerAll(){
@@ -33,7 +33,7 @@ class HamsterVariant(val texture: Identifier) {
         ////////////////////////////////
 
         private fun register(name: String, texture: String): HamsterVariant{
-            return Registry.register(HAMSTERS, Identifier(AI.MOD_ID,name), HamsterVariant(Identifier(AI.MOD_ID,texture)))
+            return Registry.register(HAMSTERS, AI.identity(name), HamsterVariant(AI.identity(texture)))
         }
     }
 

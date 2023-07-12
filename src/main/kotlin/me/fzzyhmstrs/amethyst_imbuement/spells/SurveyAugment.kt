@@ -12,6 +12,8 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -23,6 +25,7 @@ import net.minecraft.item.map.MapState
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.StructureTags
 import net.minecraft.registry.tag.TagKey
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -35,7 +38,9 @@ import net.minecraft.world.gen.structure.Structure
 
 class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(AugmentType.BENEFICIAL)){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(
+            AI.identity("survey"),SpellType.WIT,1200,120,
+            20,1,1,80, LoreTier.NO_TIER, Items.MAP)
     //ml 1
 
     override val baseEffect: AugmentEffect
@@ -45,7 +50,20 @@ class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(Augmen
         TODO("Not yet implemented")
     }
 
-    override fun <T : LivingEntity> applyTasks(
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+
+    override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
         user: T,
@@ -53,13 +71,14 @@ class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(Augmen
         level: Int,
         effects: AugmentEffect,
         spells: PairedAugments
-    ): SpellActionResult where T : SpellCastingEntity {
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,120,
-            20,imbueLevel,80, LoreTier.NO_TIER, Items.MAP)
     }
 
     override fun effect(

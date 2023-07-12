@@ -14,10 +14,12 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -37,11 +39,20 @@ class DebugAugment: ScepterAugment(ScepterTier.ONE, AugmentType.EMPTY) {
     }
 
     override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(Identifier(AI.MOD_ID,"debug"),SpellType.GRACE,1,1,
+        get() = AugmentDatapoint(AI.identity("debug"),SpellType.GRACE,1,1,
             1,1,1,500, LoreTier.NO_TIER, Items.DEBUG_STICK)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.add(AcText.translatable("enchantment.amethyst_imbuement.debug.desc.all"))
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
     }
 
     override fun <T> applyTasks(

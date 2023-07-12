@@ -22,9 +22,9 @@ object RecipeUtil {
 
     private val playerFavoritesMap: MutableMap<UUID,List<ItemStack>> = mutableMapOf()
 
-    val FAVORITES_CHECK = Identifier(AI.MOD_ID,"faves_check")
-    val FAVORITES_SEND = Identifier(AI.MOD_ID,"faves_send")
-    val FAVORITES_SAVE = Identifier(AI.MOD_ID,"faves_save")
+    val FAVORITES_CHECK = AI.identity("faves_check")
+    val FAVORITES_SEND = AI.identity("faves_send")
+    val FAVORITES_SAVE = AI.identity("faves_save")
 
     fun registerServer(){
         ServerPlayNetworking.registerGlobalReceiver(FAVORITES_CHECK){ server, player, _, buf, _ ->

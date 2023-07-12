@@ -23,14 +23,14 @@ object RegisterPotion {
 
 
     fun registerAll(){
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"curse"), CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"strong_curse"), STRONG_CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_curse"), LONG_CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"immunity"), IMMUNITY_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_immunity"), LONG_IMMUNITY_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"insight"), INSIGHT_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"strong_insight"), STRONG_INSIGHT_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_insight"), LONG_INSIGHT_POTION)
+        Registry.register(Registries.POTION, AI.identity("curse"), CURSE_POTION)
+        Registry.register(Registries.POTION, AI.identity("strong_curse"), STRONG_CURSE_POTION)
+        Registry.register(Registries.POTION, AI.identity("long_curse"), LONG_CURSE_POTION)
+        Registry.register(Registries.POTION, AI.identity("immunity"), IMMUNITY_POTION)
+        Registry.register(Registries.POTION, AI.identity("long_immunity"), LONG_IMMUNITY_POTION)
+        Registry.register(Registries.POTION, AI.identity("insight"), INSIGHT_POTION)
+        Registry.register(Registries.POTION, AI.identity("strong_insight"), STRONG_INSIGHT_POTION)
+        Registry.register(Registries.POTION, AI.identity("long_insight"), LONG_INSIGHT_POTION)
 
         BrewingRecipeRegistry.registerPotionRecipe(Potions.POISON,RegisterItem.ACCURSED_FIGURINE, CURSE_POTION)
         BrewingRecipeRegistry.registerPotionRecipe(CURSE_POTION, Items.GLOWSTONE_DUST, STRONG_CURSE_POTION)

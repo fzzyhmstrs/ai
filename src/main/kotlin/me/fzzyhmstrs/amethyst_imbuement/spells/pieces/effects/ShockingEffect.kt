@@ -20,7 +20,7 @@ object ShockingEffect {
     fun shock(entity: Entity,owner: Entity?, processContext: ProcessContext){
         val world = entity.world
         if (world.time % 30 != 0L && entity.age > 20 && processContext.isBeforeRemoval()) return
-        val pos = entity.pos
+        val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
         val entities = world.getOtherEntities(owner, box)
         for (target in entities){
@@ -48,7 +48,7 @@ object ShockingEffect {
     //entity is the player in this case
     fun staticShock(entity: Entity, owner: Entity?, processContext: ProcessContext){
         val world = entity.world
-        val pos = entity.pos
+        val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
         if (entity !is LivingEntity) return
         val target = world.getClosestEntity(LivingEntity::class.java, TargetPredicate.DEFAULT, entity,pos.x,pos.y,pos.z, box)
@@ -68,12 +68,32 @@ object ShockingEffect {
         world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
     }
 
+    //entity is the player in this case
+    //owner is a Target in this case
     fun chainLightning(entity: Entity, owner: Entity?, processContext: ProcessContext){
+
         val world = entity.world
         if (world.time % 30 != 0L && entity.age > 20 && processContext.isBeforeRemoval()) return
-        val pos = entity.pos
+        val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
-        val entities = world.getOtherEntities(owner, box)
+        val entities = world.getEntitiesByClass(LivingEntity::class.java,box) {e -> e !== entity && e !== owner}
+        if (entities.isEmpty()) return
+        val chains = world.random.nextInt(entities.size)
+        for (i in 0..chains){
+            val target = entities[i]
+            if (entity is PlayerEntity) {
+                target.damage(entity.damageSources.playerAttack(entity), 5f)
+            } else {
+                target.damage(entity.damageSources.generic(), 5f)
+            }
+            if (world.random.nextFloat() < 0.2f){
+                target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,60))
+            }
+            if (world is ServerWorld){
+                beam(pos,world,target)
+            }
+        }
+        world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
     }
 
 

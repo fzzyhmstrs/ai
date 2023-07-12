@@ -18,6 +18,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment.Companion.writeBuf
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -48,9 +49,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
-class ResonateAugment: SlashAugment(ScepterTier.THREE) {
+class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
     override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(Identifier(AI.MOD_ID, "resonate"),SpellType.FURY,18,18,
+        get() = AugmentDatapoint(AI.identity( "resonate"),SpellType.FURY,18,18,
             18,5,1,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
 
     //ml 5
@@ -146,21 +147,6 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE) {
         entity.removeStatusEffect(RegisterStatus.RESONATING)
         entity.addStatusEffect(StatusEffectInstance(RegisterStatus.RESONATING,80,resonanceLevel))
         return amount + (resonanceLevel * perLvlDamage)
-    }
-
-
-
-    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (list.isNotEmpty()) {
-            for (entity in list) {
-                if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
-                }
-            }
-        }
-        return hostileEntityList
     }
 
     override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {

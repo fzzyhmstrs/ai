@@ -10,9 +10,9 @@ import kotlin.math.min
 object ModifiableEffects {
 
     //used for the ticking of the entity
-    val SHOCKING_EFFECT = ModifiableEffect.createAndRegisterConsumer(Identifier(AI.MOD_ID,"shocking_effect")) {entity,owner,context-> ShockingEffect.shock(entity,owner,context)}
-    val STATIC_SHOCK_EFFECT = ModifiableEffect.createAndRegisterConsumer(Identifier(AI.MOD_ID,"static_shock_effect")) {entity,owner,context-> ShockingEffect.staticShock(entity,owner,context)}
-
+    val SHOCKING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shocking_effect")) {entity,owner,context-> ShockingEffect.shock(entity,owner,context)}
+    val STATIC_SHOCK_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("static_shock_effect")) {entity,owner,context-> ShockingEffect.staticShock(entity,owner,context)}
+    val CHAIN_LIGHTNING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("chain_lightning_effect")) {entity,owner,context-> ShockingEffect.chainLightning(entity,owner,context)}
 
     fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): MutableList<LivingEntity>{
         if (list.isNotEmpty()){

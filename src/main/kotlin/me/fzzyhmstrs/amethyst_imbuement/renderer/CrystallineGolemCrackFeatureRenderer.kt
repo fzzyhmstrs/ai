@@ -18,11 +18,11 @@ class CrystallineGolemCrackFeatureRenderer(context: FeatureRendererContext<Cryst
 
     private val DAMAGE_TO_TEXTURE: Map<CrystallineGolemEntity.Crack, Identifier> = ImmutableMap.of(
         CrystallineGolemEntity.Crack.LOW,
-        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_low.png"),
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_low.png"),
         CrystallineGolemEntity.Crack.MEDIUM,
-        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_medium.png"),
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_medium.png"),
         CrystallineGolemEntity.Crack.HIGH,
-        Identifier(AI.MOD_ID,"textures/entity/crystal_golem/crystal_golem_crackiness_high.png")
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_high.png")
     )
 
     override fun render(

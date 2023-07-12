@@ -25,11 +25,11 @@ import net.minecraft.util.math.MathHelper
 class JeiImbuingCategory(guiHelper: IGuiHelper): IRecipeCategory<ImbuingRecipe> {
 
     companion object{
-        val IMBUING_TYPE = RecipeType(Identifier(AI.MOD_ID,"imbuing"),ImbuingRecipe::class.java)
+        val IMBUING_TYPE = RecipeType(AI.identity("imbuing"),ImbuingRecipe::class.java)
     }
 
     private val icon = guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.IMBUING_TABLE.asItem()))
-    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,0,135,62)
+    private val background = guiHelper.createDrawable(AI.identity("textures/gui/jei_background.png"),0,0,135,62)
 
     override fun getRecipeType(): RecipeType<ImbuingRecipe> {
         return IMBUING_TYPE

@@ -18,14 +18,14 @@ import net.minecraft.util.Identifier
 class JeiAltarCategory(guiHelper: IGuiHelper): IRecipeCategory<AltarRecipe> {
 
     companion object{
-        val ENHANCING_TYPE = RecipeType(Identifier(AI.MOD_ID,"enhancing"), AltarRecipe::class.java)
+        val ENHANCING_TYPE = RecipeType(AI.identity("enhancing"), AltarRecipe::class.java)
     }
 
     private val icon = guiHelper.createDrawableItemStack(ItemStack(RegisterBlock.CRYSTAL_ALTAR.asItem()))
-    private val background = guiHelper.createDrawable(Identifier(AI.MOD_ID,"textures/gui/jei_background.png"),0,62,112,18)
+    private val background = guiHelper.createDrawable(AI.identity("textures/gui/jei_background.png"),0,62,112,18)
 
     override fun getRecipeType(): RecipeType<AltarRecipe> {
-        return RecipeType(Identifier(AI.MOD_ID,"enhancing"), AltarRecipe::class.java)
+        return RecipeType(AI.identity("enhancing"), AltarRecipe::class.java)
     }
 
     override fun getTitle(): Text {

@@ -31,6 +31,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
@@ -42,15 +43,20 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
+/*
+Checklist
+*/
+
 class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
+
+
     override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(Identifier(AI.MOD_ID,"ball_lightning"),SpellType.FURY,80,
+        get() = AugmentDatapoint(AI.identity("ball_lightning"),SpellType.FURY,80,
             25, 14,8, 1,3, LoreTier.LOW_TIER, Items.COPPER_BLOCK)
 
     override val baseEffect: AugmentEffect
@@ -69,11 +75,11 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         }
         description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.duration", SpellAdvancementChecks.STAT)
         if (other.augmentData.cooldown.base < 35 && other.augmentData.cooldown.perLevel < 5) {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_small", SpellAdvancementChecks.STAT)
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_small", SpellAdvancementChecks.COOLDOWN)
         } else if (other == RegisterEnchantment.BEDAZZLE) {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_bedazzle", SpellAdvancementChecks.or(SpellAdvancementChecks.STAT,SpellAdvancementChecks.DOUBLE))
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_bedazzle", SpellAdvancementChecks.or(SpellAdvancementChecks.COOLDOWN,SpellAdvancementChecks.DOUBLE))
         } else {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_big", SpellAdvancementChecks.STAT)
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_big", SpellAdvancementChecks.COOLDOWN)
         }
         if (othersType.has(AugmentType.SUMMONS) && !othersType.has(AugmentType.BENEFICIAL))
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.summon", SpellAdvancementChecks.or(SpellAdvancementChecks.LIGHTNING, SpellAdvancementChecks.SUMMONS))
@@ -131,6 +137,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.LIGHTNING_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.STUNNED_TRIGGER)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
     }
 
     override fun modifyCooldown(
@@ -184,6 +191,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             return duration.plus(0,0,-35)
         if (other == RegisterEnchantment.BARRIER)
             return duration.plus(0,0,25)
+        if (other == RegisterEnchantment.INSPIRING_SONG)
+            return duration.plus(0,-50,0)
         return duration.plus(0,0,-15)
     }
 
@@ -220,12 +229,12 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
-        if (spells.paired() == RegisterEnchantment.BARRIER){
+        if (spells.primary() == RegisterEnchantment.BARRIER){
             if (user is ModifiableEffectMobOrPlayer){
                 user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.ON_DAMAGED,ModifiableEffects.STATIC_SHOCK_EFFECT,effects.duration(level))
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
-        } else if (spells.paired() == RegisterEnchantment.CRIPPLE){
+        } else if (spells.primary() == RegisterEnchantment.CRIPPLE){
             val amount = spells.provideDealtDamage(effects.damage(level), context, entityHitResult, user, world, hand, level, effects)
             val damageSource = spells.provideDamageSource(context, entityHitResult, source, user, world, hand, level, effects)
             val bl  = entityHitResult.entity.damage(damageSource, amount)
@@ -244,8 +253,15 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
                     SpellActionResult.overwrite(AugmentHelper.DAMAGED_MOB, AugmentHelper.SLASHED, AugmentHelper.KILLED_MOB)
                 }
             }
-        } else if (spells.paired() == RegisterEnchantment.INSPIRING_SONG){
-
+        } else if (spells.primary() == RegisterEnchantment.INSPIRING_SONG){
+            if (livingEntity is ModifiableEffectEntity) {
+                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, effects.duration(level))
+                (livingEntity as? LivingEntity)?.addStatusEffect(StatusEffectInstance(StatusEffects.HASTE,effects.duration(level)))
+                return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else if (livingEntity is ModifiableEffectMobOrPlayer) {
+                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, effects.duration(level))
+                return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            }
         }
         if (othersType.has(AugmentType.DAMAGE) && !othersType.has(AugmentType.PROJECTILE)){
             if (AI.aiRandom().nextFloat() < 0.1f && livingEntity is LivingEntity){
@@ -254,12 +270,11 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             }
         }
         if (othersType.positiveEffect){
-            if (livingEntity is ModifiableEffectMobOrPlayer) {
-                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400)
-                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
             if (livingEntity is ModifiableEffectEntity) {
                 livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400)
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else if (livingEntity is ModifiableEffectMobOrPlayer) {
+                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400)
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
@@ -284,7 +299,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     T : SpellCastingEntity,
     T : LivingEntity
     {
-        if (spells.paired() != RegisterEnchantment.BEDAZZLE) return SUCCESSFUL_PASS
+        if (spells.primary() != RegisterEnchantment.BEDAZZLE) return SUCCESSFUL_PASS
         val entityList = RaycasterUtil.raycastEntityArea(effects.range(level), user)
         if (entityList.isEmpty()) return FAIL
         for (entity in entityList){

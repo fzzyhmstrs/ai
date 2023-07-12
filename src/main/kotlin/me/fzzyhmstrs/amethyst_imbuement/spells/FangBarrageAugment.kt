@@ -15,11 +15,13 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -44,7 +46,20 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
         TODO("Not yet implemented")
     }
 
-    override fun <T : LivingEntity> applyTasks(
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+
+    override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
         user: T,
@@ -52,7 +67,13 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
         level: Int,
         effects: AugmentEffect,
         spells: PairedAugments
-    ): SpellActionResult where T : SpellCastingEntity {
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
         TODO("Not yet implemented")
     }
 

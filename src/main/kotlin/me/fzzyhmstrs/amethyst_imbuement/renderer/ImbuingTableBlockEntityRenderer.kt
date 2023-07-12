@@ -61,7 +61,7 @@ class ImbuingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
     }
 
     companion object {
-        val IMBUING_TABLE_BOOK_SPRITE_ID = Identifier(AI.MOD_ID,"entity/imbuing_table_book")
+        val IMBUING_TABLE_BOOK_SPRITE_ID = AI.identity("entity/imbuing_table_book")
         val BOOK_TEXTURE = SpriteIdentifier(
             SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
             IMBUING_TABLE_BOOK_SPRITE_ID

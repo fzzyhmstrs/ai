@@ -26,7 +26,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
-abstract class MultiTargetAugment(tier: ScepterTier): ScepterAugment(tier, AugmentType.AREA_DAMAGE) {
+abstract class MultiTargetAugment(tier: ScepterTier, type: AugmentType = AugmentType.AREA_DAMAGE): ScepterAugment(tier, type) {
     override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
@@ -171,7 +171,7 @@ abstract class MultiTargetAugment(tier: ScepterTier): ScepterAugment(tier, Augme
 
     companion object {
 
-        internal val PARTICLE_BLAST = Identifier(AI.MOD_ID, "particle_blast")
+        internal val PARTICLE_BLAST = AI.identity( "particle_blast")
         private fun particleBlast(userPos: Vec3d, userVel: Vec3d, targetPos:Vec3d, world: World?, effect: ParticleEffect, speed: Double){
             if (world == null) return
             val random = world.random

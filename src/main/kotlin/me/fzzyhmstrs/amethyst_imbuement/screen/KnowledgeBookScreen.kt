@@ -187,7 +187,7 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
 
 
     companion object{
-        internal val BOOK_TEXTURE = Identifier(AI.MOD_ID,"textures/gui/knowledge_book.png")
+        internal val BOOK_TEXTURE = AI.identity("textures/gui/knowledge_book.png")
         internal val COST_HINT = listOf<Text>(
             AcText.translatable("lore_book.screen.cost_hint1"),
             AcText.translatable("lore_book.screen.cost_hint2")

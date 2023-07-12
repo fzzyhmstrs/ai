@@ -130,7 +130,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                                 val pathTest = idTest.toString()
                                 val loreString = nbt.getString(me.fzzyhmstrs.amethyst_core.nbt.NbtKeys.LORE_KEY.str())
                                 val nbtTest = if (Identifier(loreString).namespace == "minecraft"){
-                                    Identifier(AI.MOD_ID,Identifier(loreString).path).toString()
+                                    AI.identity(Identifier(loreString).path).toString()
                                 } else {
                                     loreString
                                 }
@@ -279,7 +279,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                 Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
                 Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
                 Ingredient.EMPTY,Ingredient.EMPTY,Ingredient.EMPTY,
-                Ingredient.EMPTY),"",1,"",false,"",1, Identifier(AI.MOD_ID,"blank_recipe")
+                Ingredient.EMPTY),"",1,"",false,"",1, AI.identity("blank_recipe")
             )
         }
 

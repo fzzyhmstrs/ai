@@ -13,6 +13,8 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.fabricmc.fabric.api.mininglevel.v1.MiningLevelManager
 import net.minecraft.block.AbstractFireBlock
@@ -36,7 +38,8 @@ import net.minecraft.world.event.GameEvent
 
 class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET) {
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("excavate"),SpellType.WIT, 8,6,
+            1,25,1,1, LoreTier.LOW_TIER, Items.IRON_SHOVEL)
 
     //ml 25
     override val baseEffect: AugmentEffect
@@ -46,7 +49,19 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
         TODO("Not yet implemented")
     }
 
-    override fun <T : LivingEntity> applyTasks(
+    override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
+        TODO()
+    }
+
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        if (pair.spellsAreEqual()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
+        }
+        if (pair.spellsAreUnique()){
+            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
+        }
+    }
+    override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
         user: T,
@@ -54,13 +69,18 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
         level: Int,
         effects: AugmentEffect,
         spells: PairedAugments
-    ): SpellActionResult where T : SpellCastingEntity {
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
         TODO("Not yet implemented")
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, 8,6,
-            1,imbueLevel,1, LoreTier.LOW_TIER, Items.IRON_SHOVEL)
+        return
     }
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {

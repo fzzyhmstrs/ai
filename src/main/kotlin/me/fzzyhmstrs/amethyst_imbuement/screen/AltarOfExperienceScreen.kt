@@ -17,7 +17,7 @@ import kotlin.math.min
 class AltarOfExperienceScreen(handler: AltarOfExperienceScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<AltarOfExperienceScreenHandler>(handler, playerInventory, title) {
 
-    private val texture = Identifier(AI.MOD_ID,"textures/gui/container/altar_of_experience_gui.png")
+    private val texture = AI.identity("textures/gui/container/altar_of_experience_gui.png")
     private var xp = IntArray(4)
     private var shifted = false
     private val player = playerInventory.player

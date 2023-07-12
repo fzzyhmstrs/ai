@@ -63,7 +63,7 @@ class DisenchantingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Cont
     }
 
     companion object {
-        val DISENCHANTING_TABLE_BOOK_SPRITE_ID = Identifier(AI.MOD_ID,"entity/disenchanting_table_book")
+        val DISENCHANTING_TABLE_BOOK_SPRITE_ID = AI.identity("entity/disenchanting_table_book")
         val BOOK_TEXTURE = SpriteIdentifier(
             SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
             DISENCHANTING_TABLE_BOOK_SPRITE_ID

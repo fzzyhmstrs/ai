@@ -14,7 +14,7 @@ import kotlin.math.max
 @Suppress("PropertyName","CanBeVal")
 object ImbuingRecipeSerializer: RecipeSerializer<ImbuingRecipe> {
 
-    val ID = Identifier(AI.MOD_ID,"imbuing")
+    val ID = AI.identity("imbuing")
     private val gson = Gson()
 
     override fun read(id: Identifier, json: JsonObject): ImbuingRecipe {
