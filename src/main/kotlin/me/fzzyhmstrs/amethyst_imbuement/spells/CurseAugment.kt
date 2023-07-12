@@ -31,8 +31,9 @@ import net.minecraft.world.World
 class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
 
     //ml 16
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("curse"),SpellType.WIT, PerLvlI(1920,-20),400,
+            20,16,1,65, LoreTier.HIGH_TIER, RegisterItem.ACCURSED_FIGURINE)
 
     //ml 16
     override val baseEffect: AugmentEffect
@@ -53,11 +54,6 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),400,
-            20,imbueLevel,65, LoreTier.HIGH_TIER, RegisterItem.ACCURSED_FIGURINE)
     }
 
     override fun supportEffect(
