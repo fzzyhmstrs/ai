@@ -29,8 +29,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("barrier"),SpellType.GRACE,600,50,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("barrier"),SpellType.GRACE,600,50,
             10,10,1,15, LoreTier.NO_TIER, Items.SHIELD)
 
     //malvl: 10
