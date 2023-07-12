@@ -34,8 +34,8 @@ import kotlin.math.min
 
 class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED_ENERGY), PersistentEffectHelper.PersistentEffect {
     //ml 6
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("fang_barrage"),SpellType.FURY,100,50,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("fang_barrage"),SpellType.FURY,100,50,
             26,6,1,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
 
     override val baseEffect: AugmentEffect
