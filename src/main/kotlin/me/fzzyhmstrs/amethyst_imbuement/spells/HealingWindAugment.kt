@@ -36,8 +36,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class HealingWindAugment: EntityAoeAugment(ScepterTier.THREE,true), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("healing_wind"),SpellType.GRACE,1200,240,
+            24,11,1,65, LoreTier.HIGH_TIER, RegisterItem.DAZZLING_MELON_SLICE)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -52,7 +53,7 @@ class HealingWindAugment: EntityAoeAugment(ScepterTier.THREE,true), PersistentEf
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
