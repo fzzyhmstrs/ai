@@ -24,8 +24,8 @@ import net.minecraft.text.Text
 
 @Suppress("SameParameterValue")
 class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("empowered_slash"),SpellType.FURY,20,20,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("empowered_slash"),SpellType.FURY,20,20,
             16,5,1,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
 
     //ml 5
@@ -37,7 +37,7 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
