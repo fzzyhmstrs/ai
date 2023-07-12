@@ -37,8 +37,8 @@ import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 
 class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("excavate"),SpellType.WIT, 8,6,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("excavate"),SpellType.WIT, 8,6,
             1,25,1,1, LoreTier.LOW_TIER, Items.IRON_SHOVEL)
 
     //ml 25
@@ -50,7 +50,7 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
