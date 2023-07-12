@@ -28,8 +28,8 @@ import net.minecraft.world.World
 import java.util.*
 
 class BodySwapAugment: SingleTargetAugment(ScepterTier.THREE){
-    override val augmentData: AugmentDatapoint
-        get() =  AugmentDatapoint(AI.identity("body_swap"),SpellType.FURY,600,125,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("body_swap"),SpellType.FURY,600,125,
             19,11,1,40, LoreTier.HIGH_TIER, Items.ENDER_EYE)
 
     //ml 11
