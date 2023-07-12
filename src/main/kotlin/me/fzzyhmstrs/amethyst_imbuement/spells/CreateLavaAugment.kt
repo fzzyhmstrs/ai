@@ -18,9 +18,8 @@ import net.minecraft.text.Text
 
 class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
     //ml 1
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("create_lava"),SpellType.WIT,200,50,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("create_lava"),SpellType.WIT,200,50,
             11,1,1,10, LoreTier.LOW_TIER, Items.LAVA_BUCKET)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
@@ -28,7 +27,7 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
