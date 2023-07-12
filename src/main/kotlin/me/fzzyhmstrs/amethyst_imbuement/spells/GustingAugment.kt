@@ -27,8 +27,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 class GustingAugment: EntityAoeAugment(ScepterTier.ONE,false){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("gusting"),SpellType.WIT,60,15,
+            1,3,1,2,LoreTier.LOW_TIER, Items.FEATHER)
 
     //ml 3
     override val baseEffect: AugmentEffect
@@ -39,7 +40,7 @@ class GustingAugment: EntityAoeAugment(ScepterTier.ONE,false){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -52,8 +53,7 @@ class GustingAugment: EntityAoeAugment(ScepterTier.ONE,false){
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,60,15,
-            1,imbueLevel,2,LoreTier.LOW_TIER, Items.FEATHER)
+        return 
     }
 
     override fun effect(
