@@ -55,8 +55,8 @@ Checklist
 class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
 
 
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("ball_lightning"),SpellType.FURY,80,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("ball_lightning"),SpellType.FURY,80,
             25, 14,8, 1,3, LoreTier.LOW_TIER, Items.COPPER_BLOCK)
 
     override val baseEffect: AugmentEffect
