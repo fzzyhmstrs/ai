@@ -27,8 +27,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("exhaust"),SpellType.GRACE, PerLvlI(360,-10),40,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("exhaust"),SpellType.GRACE, PerLvlI(360,-10),40,
             7,6,1,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
 
     //ml 6
