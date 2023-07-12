@@ -30,8 +30,10 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_SELF){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("dash"),SpellType.WIT,32,12,
+            8,1,1,1, LoreTier.LOW_TIER, Items.SUGAR)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(1,1).withDuration(20)
@@ -41,7 +43,7 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -69,11 +71,6 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,32,12,
-            8,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
     }
 
     override fun effect(
