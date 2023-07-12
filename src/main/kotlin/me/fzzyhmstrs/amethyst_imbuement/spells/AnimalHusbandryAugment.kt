@@ -27,9 +27,8 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("animal_husbandry"),SpellType.GRACE, 80,16,
+    override val augmentData: AugmentDatapoint= 
+        AugmentDatapoint(AI.identity("animal_husbandry"),SpellType.GRACE, 80,16,
             7,4,1,4, LoreTier.NO_TIER, Items.HAY_BLOCK)
 
     //ml 4
