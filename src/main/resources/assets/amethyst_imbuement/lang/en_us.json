@@ -742,7 +742,7 @@
 
 	"enchantment.amethyst_imbuement.hard_light_bridge": "Hard Light Bridge",
 	"enchantment.amethyst_imbuement.hard_light_bridge.double": "Hard Light Span",
-	"enchantment.amethyst_imbuement.hard_light_bridge.combination": "Hard Light Bridge",
+	"enchantment.amethyst_imbuement.hard_light_bridge.combination": "%1$s Light Bridge",
 	"enchantment.amethyst_imbuement.hard_light_bridge.noun": "Hard Light",
 	"enchantment.amethyst_imbuement.hard_light_bridge.verb": "Hard-light",
 	"enchantment.amethyst_imbuement.hard_light_bridge.adjective": "Hard Light",
