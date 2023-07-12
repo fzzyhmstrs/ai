@@ -52,8 +52,9 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
     -sound and particles
      */
 
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("freezing"),SpellType.FURY, PerLvlI(36,-2),8,
+            5,6,1,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
 
     //ml 6
     override val baseEffect: AugmentEffect
@@ -77,12 +78,6 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,
-            5
-            ,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
