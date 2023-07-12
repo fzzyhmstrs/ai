@@ -30,8 +30,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI .identity("chickenform"),SpellType.GRACE, PerLvlI(720,-20),65,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI .identity("chickenform"),SpellType.GRACE, PerLvlI(720,-20),65,
             7,11,1,10, LoreTier.NO_TIER, Items.COOKED_CHICKEN)
 
     //ml 11
