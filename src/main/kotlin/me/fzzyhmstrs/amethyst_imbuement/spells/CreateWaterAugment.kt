@@ -18,11 +18,11 @@ import net.minecraft.text.Text
 class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
 
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        AugmentDatapoint(AI.identity("create_water"),SpellType.WIT, 30, 8,
+            1, 1,1,1, LoreTier.NO_TIER, Items.WATER_BUCKET)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, 30, 8,
-            1, imbueLevel,1, LoreTier.NO_TIER, Items.WATER_BUCKET)
+        return 
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
@@ -39,7 +39,7 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun soundEvent(): SoundEvent {
