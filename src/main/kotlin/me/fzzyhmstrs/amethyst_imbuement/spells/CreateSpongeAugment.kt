@@ -17,13 +17,13 @@ import net.minecraft.text.Text
 
 class CreateSpongeAugment: PlaceItemAugment(ScepterTier.ONE,Items.SPONGE){
 
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("create_sponge"),SpellType.WIT,30,8,
+            5,imbueLevel,1, LoreTier.LOW_TIER, Items.SPONGE)
 
     //1
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,30,8,
-            5,imbueLevel,1, LoreTier.LOW_TIER, Items.SPONGE)
+        return 
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
@@ -40,7 +40,7 @@ class CreateSpongeAugment: PlaceItemAugment(ScepterTier.ONE,Items.SPONGE){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun soundEvent(): SoundEvent {
