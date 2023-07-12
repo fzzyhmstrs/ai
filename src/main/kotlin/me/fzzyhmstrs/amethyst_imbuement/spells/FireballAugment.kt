@@ -24,7 +24,8 @@ import net.minecraft.world.World
 class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     //ml 5
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("fireball"),SpellType.FURY,32,10,
+            10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.75F,0.25f)
@@ -34,7 +35,7 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -44,11 +45,6 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,10,
-            10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
