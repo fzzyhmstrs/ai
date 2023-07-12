@@ -29,8 +29,8 @@ import kotlin.math.min
 
 class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY) {
     //ml 6
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("fangs"),SpellType.FURY,34,12,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("fangs"),SpellType.FURY,34,12,
             9,6,1,1, LoreTier.LOW_TIER, Items.EMERALD)
 
     override val baseEffect: AugmentEffect
