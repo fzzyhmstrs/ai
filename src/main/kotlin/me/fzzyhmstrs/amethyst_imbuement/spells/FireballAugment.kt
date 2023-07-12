@@ -23,8 +23,8 @@ import net.minecraft.world.World
 
 class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     //ml 5
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("fireball"),SpellType.FURY,32,10,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("fireball"),SpellType.FURY,32,10,
             10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
 
     override val baseEffect: AugmentEffect
