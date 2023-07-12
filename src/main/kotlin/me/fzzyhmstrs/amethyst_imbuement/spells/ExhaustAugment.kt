@@ -28,7 +28,8 @@ import net.minecraft.world.World
 
 class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("exhaust"),SpellType.GRACE, PerLvlI(360,-10),40,
+            7,6,1,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
 
     //ml 6
     override val baseEffect: AugmentEffect
@@ -40,7 +41,7 @@ class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideVerb(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -50,10 +51,6 @@ class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(360,-10),40,
-            7,imbueLevel,12,LoreTier.LOW_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun supportEffect(
