@@ -21,8 +21,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("flamebolt"),SpellType.FURY,19,4,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("flamebolt"),SpellType.FURY,19,4,
             1, 11,1,1, LoreTier.NO_TIER, Items.FIRE_CHARGE)
 
     //ml 11
@@ -36,7 +36,7 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
