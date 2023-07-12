@@ -22,7 +22,8 @@ import net.minecraft.world.World
 
 class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("flamebolt"),SpellType.FURY,19,4,
+            1, 11,1,1, LoreTier.NO_TIER, Items.FIRE_CHARGE)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -32,11 +33,6 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,19,4,
-            1, imbueLevel,1, LoreTier.NO_TIER, Items.FIRE_CHARGE)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
