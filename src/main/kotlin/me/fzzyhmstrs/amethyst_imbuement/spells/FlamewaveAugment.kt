@@ -20,8 +20,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint = 
+        AugmentDatapoint(AI.identity("flamewave"),SpellType.FURY,2,2,
+            24,11,1,1, LoreTier.HIGH_TIER, Items.FIRE_CHARGE)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -34,7 +35,7 @@ class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -44,11 +45,6 @@ class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2,2,
-            24,imbueLevel,1, LoreTier.HIGH_TIER, Items.FIRE_CHARGE)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
