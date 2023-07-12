@@ -34,8 +34,8 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("comet_storm"),SpellType.FURY,PerLvlI(480,-20),75,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("comet_storm"),SpellType.FURY,PerLvlI(480,-20),75,
             21,9,1,10, LoreTier.HIGH_TIER, Items.TNT)
 
     //ml 9
