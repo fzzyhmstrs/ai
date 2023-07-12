@@ -565,7 +565,7 @@
 
 	"enchantment.amethyst_imbuement.create_lava": "Create Lava",
 	"enchantment.amethyst_imbuement.create_lava.double": "Enhanced Create Lava",
-	"enchantment.amethyst_imbuement.create_lava.combination": "Create %1$s",
+	"enchantment.amethyst_imbuement.create_lava.combination": "Create %1$s Lava",
 	"enchantment.amethyst_imbuement.create_lava.noun": "Lava",
 	"enchantment.amethyst_imbuement.create_lava.verb": "Melt",
 	"enchantment.amethyst_imbuement.create_lava.adjective": "Magmatic",
@@ -573,7 +573,7 @@
 
 	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.double": "Enhanced Create Sponge",
-	"enchantment.amethyst_imbuement.create_sponge.combination": "Create %1$s",
+	"enchantment.amethyst_imbuement.create_sponge.combination": "Create %1$s Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.noun": "Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.verb": "Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.adjective": "Spongy",
@@ -581,7 +581,7 @@
 
 	"enchantment.amethyst_imbuement.create_water": "Create Water",
 	"enchantment.amethyst_imbuement.create_water.double": "Enhanced Create Water",
-	"enchantment.amethyst_imbuement.create_water.combination": "Create %1$s",
+	"enchantment.amethyst_imbuement.create_water.combination": "Create %1$s Water",
 	"enchantment.amethyst_imbuement.create_water.noun": "Water",
 	"enchantment.amethyst_imbuement.create_water.verb": "Water",
 	"enchantment.amethyst_imbuement.create_water.adjective": "Watering",
