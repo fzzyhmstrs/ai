@@ -19,7 +19,7 @@ class CreateSpongeAugment: PlaceItemAugment(ScepterTier.ONE,Items.SPONGE){
 
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("create_sponge"),SpellType.WIT,30,8,
-            5,imbueLevel,1, LoreTier.LOW_TIER, Items.SPONGE)
+            5,1,1,1, LoreTier.LOW_TIER, Items.SPONGE)
 
     //1
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
