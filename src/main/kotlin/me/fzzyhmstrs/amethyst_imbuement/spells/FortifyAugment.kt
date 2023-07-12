@@ -32,9 +32,8 @@ import net.minecraft.world.World
 import kotlin.math.max
 
 class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("fortify"),SpellType.GRACE, PerLvlI(1320,-20),135,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("fortify"),SpellType.GRACE, PerLvlI(1320,-20),135,
             13,11,1,20, LoreTier.LOW_TIER, Items.GOLDEN_APPLE)
 
     //ml 11
@@ -46,7 +45,7 @@ class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
