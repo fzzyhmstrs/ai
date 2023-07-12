@@ -38,8 +38,8 @@ class DebugAugment: ScepterAugment(ScepterTier.ONE, AugmentType.EMPTY) {
         nbt.putInt(key,input)
     }
 
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("debug"),SpellType.GRACE,1,1,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("debug"),SpellType.GRACE,1,1,
             1,1,1,500, LoreTier.NO_TIER, Items.DEBUG_STICK)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
