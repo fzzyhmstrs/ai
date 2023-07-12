@@ -30,7 +30,8 @@ import kotlin.math.min
 class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY) {
     //ml 6
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("fangs"),SpellType.FURY,34,12,
+            9,6,1,1, LoreTier.LOW_TIER, Items.EMERALD)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -42,7 +43,7 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -70,11 +71,6 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,34,12,
-            9,imbueLevel,1, LoreTier.LOW_TIER, Items.EMERALD)
     }
 
     override fun effect(
