@@ -26,8 +26,8 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("abundance"),SpellType.GRACE, PerLvlI(15,-1),3,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("abundance"),SpellType.GRACE, PerLvlI(15,-1),3,
             1,6,1,1, LoreTier.NO_TIER, Items.HAY_BLOCK)
 
     //ml 6
