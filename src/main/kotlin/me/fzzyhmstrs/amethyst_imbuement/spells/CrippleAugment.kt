@@ -39,8 +39,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("cripple"),SpellType.FURY,20,5,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("cripple"),SpellType.FURY,20,5,
             13,13,1,1, LoreTier.NO_TIER, Items.STONE_SWORD)
 
     //maxlvl 13
