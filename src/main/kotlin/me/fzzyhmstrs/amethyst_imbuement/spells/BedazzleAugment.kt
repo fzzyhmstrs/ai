@@ -48,9 +48,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("bedazzle"), SpellType.WIT,1500,85,
+    
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("bedazzle"), SpellType.WIT,1500,85,
             7,1, 1,40, LoreTier.LOW_TIER, Items.DIAMOND)
 
     override val baseEffect: AugmentEffect
