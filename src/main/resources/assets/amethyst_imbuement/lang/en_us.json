@@ -710,7 +710,7 @@
 
 	"enchantment.amethyst_imbuement.freezing": "Frostbolt",
 	"enchantment.amethyst_imbuement.freezing.double": "Winterbolt",
-	"enchantment.amethyst_imbuement.freezing.combination": "%1$sbolt",
+	"enchantment.amethyst_imbuement.freezing.combination": "%1$s-Freeze Bolt",
 	"enchantment.amethyst_imbuement.freezing.noun": "Frost",
 	"enchantment.amethyst_imbuement.freezing.verb": "Frost",
 	"enchantment.amethyst_imbuement.freezing.adjective": "Frosty",
