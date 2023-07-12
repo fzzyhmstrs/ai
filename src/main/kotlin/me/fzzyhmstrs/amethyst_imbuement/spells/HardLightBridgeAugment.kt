@@ -31,8 +31,9 @@ import net.minecraft.world.World
 
 class HardLightBridgeAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_AREA){
     //ml 11
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("hard_light_bridge"),SpellType.WIT,8,2,
+            9,11,1,1,LoreTier.LOW_TIER, RegisterBlock.HARD_LIGHT_BLOCK.asItem())
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(7.8,0.2,0.0)
@@ -42,7 +43,7 @@ class HardLightBridgeAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -70,11 +71,6 @@ class HardLightBridgeAugment: ScepterAugment(ScepterTier.TWO, AugmentType.BLOCK_
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,8,2,
-            9,imbueLevel,1,LoreTier.LOW_TIER, RegisterBlock.HARD_LIGHT_BLOCK.asItem())
     }
 
     override fun effect(
