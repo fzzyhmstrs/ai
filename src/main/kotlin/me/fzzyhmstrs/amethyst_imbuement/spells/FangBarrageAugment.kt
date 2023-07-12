@@ -35,7 +35,8 @@ import kotlin.math.min
 class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED_ENERGY), PersistentEffectHelper.PersistentEffect {
     //ml 6
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        get() = AugmentDatapoint(AI.identity("fang_barrage"),SpellType.FURY,100,50,
+            26,6,1,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(28,0,0)
@@ -47,7 +48,7 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -78,11 +79,6 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
     }
 
     override val delay = PerLvlI(15,-1,0)
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,100,50,
-            26,imbueLevel,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
-    }
 
     override fun effect(
         world: World,
