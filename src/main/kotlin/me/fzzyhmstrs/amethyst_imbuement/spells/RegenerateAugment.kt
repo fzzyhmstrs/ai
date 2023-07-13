@@ -29,8 +29,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("regenerate"),SpellType.GRACE, PerLvlI(835,-5),60,
+            1,17,1,15,LoreTier.NO_TIER, Items.GHAST_TEAR)
 
     //ml 17
     override val baseEffect: AugmentEffect
@@ -43,7 +44,7 @@ class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -53,11 +54,6 @@ class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),60,
-            1,imbueLevel,15,LoreTier.NO_TIER, Items.GHAST_TEAR)
     }
 
     override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
