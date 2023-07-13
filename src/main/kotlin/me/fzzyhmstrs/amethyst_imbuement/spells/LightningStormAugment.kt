@@ -37,8 +37,9 @@ import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
 class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("lightning_storm"),SpellType.FURY,400,80,
+            23,3,1,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
 
     //ml 3
     override val baseEffect: AugmentEffect
@@ -51,7 +52,7 @@ class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.ARE
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -64,11 +65,6 @@ class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.ARE
     }
 
     override val delay = PerLvlI(21,-3,0)
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,400,80,
-            23,imbueLevel,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
-    }
 
     override fun applyTasks(
         world: World,
