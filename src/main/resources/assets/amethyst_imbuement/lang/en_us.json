@@ -451,7 +451,7 @@
 
 	"enchantment.amethyst_imbuement.soul_missile": "Soul Missile",
 	"enchantment.amethyst_imbuement.soul_missile.double": "Soul Blast",
-	"enchantment.amethyst_imbuement.soul_missile.combination": "%1$s Missile",
+	"enchantment.amethyst_imbuement.soul_missile.combination": "Ensouled%1$s Missile",
 	"enchantment.amethyst_imbuement.soul_missile.noun": "Soul",
 	"enchantment.amethyst_imbuement.soul_missile.verb": "Ensoul",
 	"enchantment.amethyst_imbuement.soul_missile.adjective": "Ensouled",
@@ -794,7 +794,7 @@
 
 	"enchantment.amethyst_imbuement.levitating_bullet": "Levitating Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.double": "Levitating Bullet Storm",
-	"enchantment.amethyst_imbuement.levitating_bullet.combination": "Levitating Bullet Storm",
+	"enchantment.amethyst_imbuement.levitating_bullet.combination": "%1$s Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.noun": "Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.verb": "Levitate",
 	"enchantment.amethyst_imbuement.levitating_bullet.adjective": "Levitating",
@@ -818,7 +818,7 @@
 
 	"enchantment.amethyst_imbuement.magnetic_aura": "Magnetic Aura",
 	"enchantment.amethyst_imbuement.magnetic_aura.double": "Gravitational Aura",
-	"enchantment.amethyst_imbuement.magnetic_aura.combination": "Gravitational Aura",
+	"enchantment.amethyst_imbuement.magnetic_aura.combination": "Magnetic %1$s",
 	"enchantment.amethyst_imbuement.magnetic_aura.noun": "Magnet",
 	"enchantment.amethyst_imbuement.magnetic_aura.verb": "Magnetize",
 	"enchantment.amethyst_imbuement.magnetic_aura.adjective": "Magnetic",
@@ -858,7 +858,7 @@
 
 	"enchantment.amethyst_imbuement.mass_revivify": "Mass Revivify",
 	"enchantment.amethyst_imbuement.mass_revivify.double": "Saints Blessing",
-	"enchantment.amethyst_imbuement.mass_revivify.combination": "Mass %1$s Revivify",
+	"enchantment.amethyst_imbuement.mass_revivify.combination": "Revivification of %1$s",
 	"enchantment.amethyst_imbuement.mass_revivify.noun": "Mass Revivification",
 	"enchantment.amethyst_imbuement.mass_revivify.verb": "Mass-revivify",
 	"enchantment.amethyst_imbuement.mass_revivify.adjective": "Mass-revivifying",
@@ -866,7 +866,7 @@
 
 	"enchantment.amethyst_imbuement.mend_equipment": "Mend Equipment",
 	"enchantment.amethyst_imbuement.mend_equipment.double": "Repair Equipment",
-	"enchantment.amethyst_imbuement.mend_equipment.combination": "%1$s Equipment",
+	"enchantment.amethyst_imbuement.mend_equipment.combination": "%1$s Mending",
 	"enchantment.amethyst_imbuement.mend_equipment.noun": "Mend",
 	"enchantment.amethyst_imbuement.mend_equipment.verb": "Mend",
 	"enchantment.amethyst_imbuement.mend_equipment.adjective": "Mending",
@@ -910,7 +910,7 @@
 	
 	"enchantment.amethyst_imbuement.recall": "Recall",
 	"enchantment.amethyst_imbuement.recall.double": "Total Recall",
-	"enchantment.amethyst_imbuement.recall.combination": "Total Recall",
+	"enchantment.amethyst_imbuement.recall.combination": "Memory of %1$s",
 	"enchantment.amethyst_imbuement.recall.noun": "Total Recall",
 	"enchantment.amethyst_imbuement.recall.verb": "Total Recall",
 	"enchantment.amethyst_imbuement.recall.adjective": "Total Recall",
@@ -967,7 +967,7 @@
 
 	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.double": "Ghostly Slash",
-	"enchantment.amethyst_imbuement.spectral_slash.combination": "Ghostly Slash",
+	"enchantment.amethyst_imbuement.spectral_slash.combination": "%1$s Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.noun": "Spectre",
 	"enchantment.amethyst_imbuement.spectral_slash.verb": "Haunt",
 	"enchantment.amethyst_imbuement.spectral_slash.adjective": "Spectral",
@@ -1015,7 +1015,7 @@
 
 	"enchantment.amethyst_imbuement.summon_hamster": "Summon Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.double": "Summon War Hamster",
-	"enchantment.amethyst_imbuement.summon_hamster.combination": "Summon War Hamster",
+	"enchantment.amethyst_imbuement.summon_hamster.combination": "Summon %1$s Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.noun": "Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.verb": "Hamsterfy",
 	"enchantment.amethyst_imbuement.summon_hamster.adjective": "Hamstery",
@@ -1063,7 +1063,7 @@
 
 	"enchantment.amethyst_imbuement.weightlessness": "Weightlessness",
 	"enchantment.amethyst_imbuement.weightlessness.double": "Anti-Gravity",
-	"enchantment.amethyst_imbuement.weightlessness.combination": "Anti-Gravity",
+	"enchantment.amethyst_imbuement.weightlessness.combination": "Floating on %1$s",
 	"enchantment.amethyst_imbuement.weightlessness.noun": "Weightlessness",
 	"enchantment.amethyst_imbuement.weightlessness.verb": "Lighten",
 	"enchantment.amethyst_imbuement.weightlessness.adjective": "Weightless",
