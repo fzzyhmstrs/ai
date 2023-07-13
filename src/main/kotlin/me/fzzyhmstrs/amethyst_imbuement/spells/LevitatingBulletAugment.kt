@@ -38,9 +38,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentEffectHelper.PersistentEffect {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
-
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("levitating_bullet"),SpellType.FURY,80,20,
+            18,3,1,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     //ml 3
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(40,20,0)
@@ -52,7 +52,7 @@ class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentE
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -65,11 +65,6 @@ class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentE
     }
 
     override val delay = PerLvlI(16,-2,0)
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,80,20,
-            18,imbueLevel,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
-    }
 
     override fun effect(
         world: World,
