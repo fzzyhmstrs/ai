@@ -25,7 +25,8 @@ import net.minecraft.world.World
 
 class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        AugmentDatapoint(AI.identity("mass_heal"),SpellType.GRACE,200,50,
+            9,5,1,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -37,7 +38,7 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -47,11 +48,6 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,200,50,
-            9,imbueLevel,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
     }
 
     override fun effect(
