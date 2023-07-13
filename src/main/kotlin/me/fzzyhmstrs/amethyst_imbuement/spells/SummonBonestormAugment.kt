@@ -26,8 +26,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_bonestorm"),SpellType.FURY,2400,320,
+            15,12,1,75,LoreTier.LOW_TIER, Items.BONE_BLOCK)
 
     //ml 12
     override val baseEffect: AugmentEffect
@@ -41,7 +42,7 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -51,11 +52,6 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2400,320,
-            15,imbueLevel,75,LoreTier.LOW_TIER, Items.BONE_BLOCK)
     }
 
     override fun placeEntity(
