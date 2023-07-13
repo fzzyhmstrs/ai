@@ -33,8 +33,9 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_GOOD) {
 
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_chicken"),SpellType.GRACE,900,75,
+            5,3,1,20,LoreTier.LOW_TIER, Items.EGG)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -43,7 +44,7 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -65,11 +66,6 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,900,75,
-            5,imbueLevel,20,LoreTier.LOW_TIER, Items.EGG)
     }
 
     override fun placeEntity(
