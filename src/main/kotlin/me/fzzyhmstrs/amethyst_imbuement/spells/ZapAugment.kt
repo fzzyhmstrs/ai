@@ -42,7 +42,14 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
         get() = super.baseEffect.withRange(6.8,0.2).withDamage(3.4f,0.1f)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        if (othersType.has(AugmentType.DAMAGE))
+            description.addLang("enchantment.amethyst_imbuement.zap.desc.stun", SpellAdvancementChecks.LIGHTNING.or(SpellAdvancementChecks.STUN))
+        if (othersType == AugmentType.SLASH || otherType == AugmentType.BEAM || otherType == AugmentType.AOE_POSITIVE){
+            description.addLang("enchantment.amethyst_imbuement.zap.desc.range", SpellAdvancementChecks.RANGE)
+        if (other.isIn(ModifierPredicates.LIGHTNING_AUGMENTS))
+            description.addLang("enchantment.amethyst_imbuement.zap.desc.lightning", SpellAdvancementChecks.LIGHTNING.or(SpellAdvancementChecks.AMPLIFIER))
+        if (othersType.has(AugmentType.SUMMONS))
+            description.addLang("enchantment.amethyst_imbuement.zap.desc.summons", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.SPEED))
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -56,6 +63,9 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.LIGHTNING_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.RANGE_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.STUNNED_TRIGGER)
     }
 
     override fun effect(
