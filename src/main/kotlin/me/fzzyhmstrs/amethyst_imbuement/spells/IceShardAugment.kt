@@ -18,8 +18,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("ice_shard"),SpellType.FURY, PerLvlI(15,-1),
+            15,14, 6,1,1, LoreTier.LOW_TIER, Items.BLUE_ICE)
 
     //ml 6
     override val baseEffect: AugmentEffect
@@ -34,7 +35,7 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
