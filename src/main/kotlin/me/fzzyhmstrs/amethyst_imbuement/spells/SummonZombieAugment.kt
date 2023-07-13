@@ -48,7 +48,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
