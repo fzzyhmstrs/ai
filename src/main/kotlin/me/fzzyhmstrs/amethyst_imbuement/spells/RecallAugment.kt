@@ -30,15 +30,16 @@ import net.minecraft.world.World
 
 class RecallAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_SELF){
 
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("recall"),SpellType.WIT,12000,400,
+            15,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         TODO("Not yet implemented")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -66,10 +67,6 @@ class RecallAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_O
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,12000,400,
-            15,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
     }
 
     override fun effect(
