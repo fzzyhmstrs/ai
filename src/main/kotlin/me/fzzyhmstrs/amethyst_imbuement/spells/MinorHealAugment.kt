@@ -25,8 +25,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("minor_heal"),SpellType.GRACE, PerLvlI(130,-10),12,
+            1,6,1,5,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
 
     //ml 6
     override val baseEffect: AugmentEffect
@@ -36,13 +37,8 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(130,-10),12,
-            1,imbueLevel,5,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
-    }
-
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
