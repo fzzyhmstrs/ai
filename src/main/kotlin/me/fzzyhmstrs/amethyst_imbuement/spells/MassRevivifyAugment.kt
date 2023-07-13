@@ -42,7 +42,7 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        return arrayOf(pairedSpell.provideAdjective(this))
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
