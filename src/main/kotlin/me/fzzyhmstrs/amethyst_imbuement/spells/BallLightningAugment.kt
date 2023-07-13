@@ -14,12 +14,14 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.BallLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.StunningExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -50,6 +52,7 @@ import net.minecraft.world.World
 
 /*
 Checklist
+- add some canTarget stuff
 */
 
 class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
@@ -65,6 +68,11 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             .withDuration(24,-1)
             .withRange(3.0,.25)
 
+    override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
+    : Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return entityHitResult.entity is LivingEntity && if (entityHitResult.entity is SpellCastingEntity) !AiConfig.entities.isEntityPvpTeammate(user,entityHitResult.entity,this) else true
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.has(AugmentType.DAMAGE)){
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage", SpellAdvancementChecks.STAT)
@@ -77,18 +85,18 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         if (other.augmentData.cooldown.base < 35 && other.augmentData.cooldown.perLevel < 5) {
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_small", SpellAdvancementChecks.COOLDOWN)
         } else if (other == RegisterEnchantment.BEDAZZLE) {
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_bedazzle", SpellAdvancementChecks.or(SpellAdvancementChecks.COOLDOWN,SpellAdvancementChecks.DOUBLE))
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_bedazzle", SpellAdvancementChecks.COOLDOWN.or(SpellAdvancementChecks.DOUBLE))
         } else {
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.cooldown_big", SpellAdvancementChecks.COOLDOWN)
         }
         if (othersType.has(AugmentType.SUMMONS) && !othersType.has(AugmentType.BENEFICIAL))
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.summon", SpellAdvancementChecks.or(SpellAdvancementChecks.LIGHTNING, SpellAdvancementChecks.SUMMONS))
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.summon", SpellAdvancementChecks.LIGHTNING.or(SpellAdvancementChecks.SUMMONS))
         if (othersType.has(AugmentType.PROJECTILE) && !othersType.has(AugmentType.BENEFICIAL))
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.projectile", SpellAdvancementChecks.LIGHTNING)
         if (othersType.positiveEffect)
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.positiveEffect", SpellAdvancementChecks.LIGHTNING)
         if (othersType.has(AugmentType.EXPLODES))
-            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.explode", SpellAdvancementChecks.or(SpellAdvancementChecks.EXPLODES,SpellAdvancementChecks.STUNS))
+            description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.explode", SpellAdvancementChecks.EXPLODES.or(SpellAdvancementChecks.STUNS))
         when(other) {
             RegisterEnchantment.BARRIER ->
                 description.addLang("enchantment.amethyst_imbuement.ball_lightning.barrier.desc", SpellAdvancementChecks.UNIQUE)

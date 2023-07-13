@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.LivingEntity
@@ -30,7 +31,8 @@ import net.minecraft.world.World
 
 class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(AugmentType.ENTITY).with(AugmentType.EXPLODES).with(AugmentType.BENEFICIAL).with(AugmentType.AOE).build()) {
     override val augmentData: AugmentDatapoint = 
-        AugmentDatapoint(AI.identity("flare"),SpellType.GRACE,15,3,
+        AugmentDatapoint(
+            AI.identity("flare"),SpellType.GRACE,15,3,
             1,15,1,1, LoreTier.NO_TIER, Items.FIREWORK_STAR)
 
     //ml 15
@@ -52,6 +54,7 @@ class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(A
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
     }
 
     override fun <T> applyTasks(

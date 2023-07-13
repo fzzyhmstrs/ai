@@ -15,7 +15,6 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterEnchantment {
     private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()
@@ -130,7 +129,7 @@ object RegisterEnchantment {
     val SMITING_BLOW = SmitingBlowAugment().also{regEnchant["smiting_blow"] = it}
     val SOUL_MISSILE = SoulMissileAugment().also{regEnchant["soul_missile"] = it}
     val SPECTRAL_SLASH = SpectralSlashAugment().also{regEnchant["spectral_slash"] = it}
-    val SUMMON_BOAT = SummonSeahorseAugment().also{regEnchant["summon_boat"] = it}
+    val SUMMON_SEAHORSE = SummonSeahorseAugment().also{regEnchant["summon_seahorse"] = it}
     val SUMMON_BONESTORM = SummonBonestormAugment().also{regEnchant["summon_bonestorm"] = it}
     val SUMMON_CHICKEN = SummonChickenAugment().also{regEnchant["summon_chicken"] = it}
     val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().also{regEnchant["summon_fury_totem"] = it}

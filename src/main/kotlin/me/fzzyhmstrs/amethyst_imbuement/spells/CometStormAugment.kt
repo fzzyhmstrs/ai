@@ -60,6 +60,7 @@ class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DA
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
     }
 
     override val delay = PerLvlI(19,-1,0)

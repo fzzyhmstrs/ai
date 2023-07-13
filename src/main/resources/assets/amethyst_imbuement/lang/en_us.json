@@ -472,6 +472,17 @@
 	"enchantment.amethyst_imbuement.animal_husbandry.verb": "Breed",
 	"enchantment.amethyst_imbuement.animal_husbandry.adjective": "Breeding",
 	"enchantment.amethyst_imbuement.animal_husbandry.desc": "Breeds, heals, and grows nearby livestock.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.manaCost": "Mana cost increased 5%.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.range": "Spell range and area of effect increased 30%.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.damage": "Damage against animals is massively increased.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.summons": "Summons spawn with bonus max health.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.aoe_positive": "Affected non-player entities are granted bonus max health.",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc.chicken": "The chicken magic of this spell is nurtured by Animal Husbandry. ",
+	"enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse": "Summon Draft Horse",
+	"enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse.desc": "Summons a beastly Draft Horse to carry you and your belongings.",
+	"enchantment.amethyst_imbuement.animal_husbandry.persuade": "Barnyard Loyalty",
+	"enchantment.amethyst_imbuement.animal_husbandry.persuade.desc": "Nearby animals temporarily follow you as if you are carrying food.",
+	"enchantment.amethyst_imbuement.animal_husbandry.summon_chicken": "LOOK AT ALL THOSE CHICKENS.",
 
 	"enchantment.amethyst_imbuement.ball_lightning": "Ball Lightning",
 	"enchantment.amethyst_imbuement.ball_lightning.double": "Rolling Thunder",
@@ -510,6 +521,7 @@
 	"enchantment.amethyst_imbuement.barrier.verb": "Fortify",
 	"enchantment.amethyst_imbuement.barrier.adjective": "Fortifying",
 	"enchantment.amethyst_imbuement.barrier.desc": "Applies absorption to the caster.",
+	"enchantment.amethyst_imbuement.barrier.desc.barrier": "Absorption is applied to targets.",
 
 	"enchantment.amethyst_imbuement.bedazzle": "Bedazzle",
 	"enchantment.amethyst_imbuement.bedazzle.double": "Mass Charm",
@@ -867,6 +879,7 @@
 	"enchantment.amethyst_imbuement.mental_clarity.verb": "Smarten",
 	"enchantment.amethyst_imbuement.mental_clarity.adjective": "Mental",
 	"enchantment.amethyst_imbuement.mental_clarity.desc": "Grants the target or caster increased experience gain.",
+	"enchantment.amethyst_imbuement.mental_clarity.desc.damage": "Bonus experience dropped on kill.",
 
 	"enchantment.amethyst_imbuement.minor_heal": "Minor Heal",
 	"enchantment.amethyst_imbuement.minor_heal.double": "Vitalize",

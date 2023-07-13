@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -24,7 +25,8 @@ import net.minecraft.world.World
 class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     //ml 5
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("fireball"),SpellType.FURY,32,10,
+        AugmentDatapoint(
+            AI.identity("fireball"),SpellType.FURY,32,10,
             10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
 
     override val baseEffect: AugmentEffect
@@ -45,6 +47,7 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

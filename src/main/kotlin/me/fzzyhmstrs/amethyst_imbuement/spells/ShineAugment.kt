@@ -25,6 +25,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.PlaceBlockAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.boosts.DyeBoost
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.GlowingExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -90,11 +91,11 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
         }
         when(other) {
             RegisterEnchantment.EXCAVATE -> {
-                description.addLang("enchantment.amethyst_imbuement.shine.excavate.desc", SpellAdvancementChecks.or(SpellAdvancementChecks.UNIQUE, SpellAdvancementChecks.BLOCK))
+                description.addLang("enchantment.amethyst_imbuement.shine.excavate.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BLOCK))
                 description.addLang("enchantment.amethyst_imbuement.shine.desc.manaCost", SpellAdvancementChecks.MANA_COST)
             }
             RegisterEnchantment.SURVEY -> {
-                description.addLang("enchantment.amethyst_imbuement.shine.survey.desc", SpellAdvancementChecks.or(SpellAdvancementChecks.UNIQUE, SpellAdvancementChecks.BLOCK))
+                description.addLang("enchantment.amethyst_imbuement.shine.survey.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BLOCK))
                 description.addLang("enchantment.amethyst_imbuement.shine.desc.manaCost", SpellAdvancementChecks.MANA_COST)
             }
         }

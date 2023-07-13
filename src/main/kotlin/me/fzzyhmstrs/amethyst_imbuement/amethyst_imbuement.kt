@@ -49,6 +49,7 @@ object AI: ModInitializer {
         RegisterModifier.registerAll()
         RegisterNetworking.registerServer()
         HamsterVariant.registerAll()
+        RegisterBoost.registerAll()
     }
 
     fun aiRandom(): Random{

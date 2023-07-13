@@ -26,7 +26,6 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import java.util.*
 
@@ -210,7 +209,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.WITTY, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["persuasive_scepter"] = it}
     val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
-        .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))
+        .withAugments(listOf(RegisterEnchantment.SUMMON_SEAHORSE, RegisterEnchantment.SUMMON_STRIDER))
         .withModifiers(listOf(RegisterModifier.TRAVELER))
         .also{ regItem["travelers_scepter"] = it}
     val SCEPTER_OF_RECALL = ParticleScepterItem(ParticleTypes.PORTAL,10,ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))

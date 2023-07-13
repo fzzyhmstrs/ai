@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
@@ -26,15 +27,17 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
 
     /*
     Checklist
+    - canTarget if entity spell
     - Build description for
         - Unique combinations
         - stat modifications
         - other type interactions
+        - add Lang
     - provideArgs
     - special names for uniques
     - onPaired to grant relevant adv.
     - implement all special combinations
-    - Fill up interaction methods
+    - fill up interaction methods
         - onEntityHit?
         - onEntityKill?
         - onBlockHit?
@@ -43,13 +46,13 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
         - modifyDealtDamage for unique interactions
     - modifyDamageSource?
         - remember DamageSourceBuilder for a default damage source
-    -modify other things
+    - modify other things
         - summon?
         - projectile?
         - explosion?
         - drops?
         - count? (affects some things like summon count and projectile count)
-    -sound and particles
+    - sound and particles
      */
 
     override val augmentData: AugmentDatapoint =

@@ -62,6 +62,10 @@ object SpellAdvancementChecks {
     val ICE_TRIGGER = AI.identity("ice")
     val ICE = Supplier<Boolean> {ClientAdvancementContainer.isDone(ICE_ID)}
 
+    private val SOUL_ID = AI.identity("todo")
+    val SOUL_TRIGGER = AI.identity("soul")
+    val SOUL = Supplier<Boolean> {ClientAdvancementContainer.isDone(SOUL_ID)}
+
     private val STUNNED_ID = AI.identity("todo")
     val STUNNED_TRIGGER = AI.identity("stunned")
     val STUNS = Supplier<Boolean> {ClientAdvancementContainer.isDone(STUNNED_ID)}
@@ -74,22 +78,38 @@ object SpellAdvancementChecks {
     val ENTITY_EFFECT_TRIGGER = AI.identity("entity_effect")
     val ENTITY_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(ENTITY_EFFECT_ID)}
 
+    private val PROTECTED_ID = AI.identity("todo")
+    val PROTECTED_TRIGGER = AI.identity("protected")
+    val PROTECTED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(PROTECTED_ID)}
+
+    private val HEALTH_ID = AI.identity("todo")
+    val HEALTH_TRIGGER = AI.identity("health")
+    val HEALTH = Supplier<Boolean> {ClientAdvancementContainer.isDone(HEALTH_ID)}
+
     private val EXPLODES_ID = AI.identity("todo")
     val EXPLODES_TRIGGER = AI.identity("explodes")
     val EXPLODES = Supplier<Boolean> {ClientAdvancementContainer.isDone(EXPLODES_ID)}
+
+    private val SHOOT_ITEM_ID = AI.identity("todo")
+    val SHOOT_ITEM_TRIGGER = AI.identity("shoot_item")
+    val SHOOT_ITEM = Supplier<Boolean> {ClientAdvancementContainer.isDone(SHOOT_ITEM_ID)}
 
     private val BLOCK_ID = AI.identity("todo")
     val BLOCK_TRIGGER = AI.identity("block")
     val BLOCK = Supplier<Boolean> {ClientAdvancementContainer.isDone(BLOCK_ID)}
 
-
-    fun or(a: Supplier<Boolean>, b: Supplier<Boolean>): Supplier<Boolean>{
-        return Supplier<Boolean> {a.get() || b.get()}
-    }
+    private val CHICKEN_ID = AI.identity("todo")
+    val CHICKEN = Supplier<Boolean> {ClientAdvancementContainer.isDone(CHICKEN_ID)}
 
     fun grant(player: ServerPlayerEntity, id: Identifier){
         FeatureCriteria.PAIRED_FEATURE.trigger(player,id)
     }
 
+    fun Supplier<Boolean>.or(other: Supplier<Boolean>): Supplier<Boolean>{
+        return Supplier<Boolean>{ this.get() || other.get() }
+    }
+    fun Supplier<Boolean>.and(other: Supplier<Boolean>): Supplier<Boolean>{
+        return Supplier<Boolean>{ this.get() && other.get() }
+    }
 
 }
