@@ -38,7 +38,7 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
