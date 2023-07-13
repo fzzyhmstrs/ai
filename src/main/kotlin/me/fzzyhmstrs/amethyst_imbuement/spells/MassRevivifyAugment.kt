@@ -28,7 +28,8 @@ import net.minecraft.world.World
 
 class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        AugmentDatapoint(AI.identity("mass_revivify"),SpellType.GRACE,300,150,
+            29,5,1,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -41,7 +42,7 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -51,11 +52,6 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,300,150,
-            29,imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun effect(
