@@ -27,8 +27,9 @@ import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
 class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_hamster"),SpellType.WIT,600,50,
+            1,10,1,10,LoreTier.NO_TIER, Items.WHITE_WOOL)
 
     //ml 10
     override val baseEffect: AugmentEffect
@@ -42,7 +43,7 @@ class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -52,11 +53,6 @@ class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,600,50,
-            1,imbueLevel,10,LoreTier.NO_TIER, Items.WHITE_WOOL)
     }
 
     override fun placeEntity(
