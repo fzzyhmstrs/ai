@@ -33,8 +33,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class PersuadeAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("persuade"),SpellType.WIT, PerLvlI(2240,-40),300,
+            20,imbueLevel,65, LoreTier.NO_TIER, Items.COAL)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -44,13 +45,8 @@ class PersuadeAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffectHel
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, PerLvlI(2240,-40),300,
-            20,imbueLevel,65, LoreTier.NO_TIER, Items.COAL)
-    }
-
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
