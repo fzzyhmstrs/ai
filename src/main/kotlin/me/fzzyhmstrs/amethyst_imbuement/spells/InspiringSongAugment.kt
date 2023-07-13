@@ -31,7 +31,8 @@ import kotlin.math.max
 
 class InspiringSongAugment: EntityAoeAugment(ScepterTier.TWO,true){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        AugmentDatapoint(AI.ientity("inspiring_song"),SpellType.GRACE,750,125,
+            10,13,1,20,LoreTier.NO_TIER, Items.NOTE_BLOCK)
 
     //ml 13
     override val baseEffect: AugmentEffect
@@ -44,12 +45,7 @@ class InspiringSongAugment: EntityAoeAugment(ScepterTier.TWO,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,750,125,
-            10,imbueLevel,20,LoreTier.NO_TIER, Items.NOTE_BLOCK)
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
