@@ -27,8 +27,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("mass_exhaust"),SpellType.GRACE, PerLvlI(450,-50),80,
+            16,3,1,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
 
     //ml 3
     override val baseEffect: AugmentEffect
@@ -41,7 +42,7 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -51,11 +52,6 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,
-            16,imbueLevel,13,LoreTier.HIGH_TIER, Items.FERMENTED_SPIDER_EYE)
     }
 
     override fun effect(
