@@ -21,7 +21,8 @@ import net.minecraft.world.World
 
 class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+        AugmentDatapoint(AI.identity("soul_missile"),SpellType.FURY,16,3,
+            1,21,1,1,LoreTier.NO_TIER,Items.SOUL_SAND)
 
     //ml 21
     override val baseEffect: AugmentEffect
@@ -31,13 +32,8 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,16,3,
-            1,imbueLevel,1,LoreTier.NO_TIER,Items.SOUL_SAND)
-    }
-
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
