@@ -27,8 +27,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class MentalClarityAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("mental_clarity"),SpellType.WIT, PerLvlI(1920,-20),300,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("mental_clarity"),SpellType.WIT, PerLvlI(1920,-20),300,
             13,16,1,45,LoreTier.LOW_TIER, RegisterItem.KNOWLEDGE_POWDER)
 
     //ml 16
