@@ -47,4 +47,11 @@ object ModifierPredicates {
         return bl
     }
 
+    fun ScepterAugment.isIn(tag: TagKey<Enchantment>): Boolean{
+        val opt = Registries.ENCHANTMENT.getEntry(Registries.ENCHANTMENT.getRawId(this))
+        var bl = false
+        opt.ifPresent { entry -> bl = entry.isIn(tag) }
+        return bl
+    }
+
 }
