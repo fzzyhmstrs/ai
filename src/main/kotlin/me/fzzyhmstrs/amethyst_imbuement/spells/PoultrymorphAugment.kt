@@ -32,8 +32,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class PoultrymorphAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffectHelper.PersistentEffect {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("poultrymorph"),SpellType.WIT,1200,200,
+            13, 5,1,35, LoreTier.NO_TIER, Items.FEATHER)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -45,13 +46,8 @@ class PoultrymorphAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffec
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,1200,200,
-            13, imbueLevel,35, LoreTier.NO_TIER, Items.FEATHER)
-    }
-
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
