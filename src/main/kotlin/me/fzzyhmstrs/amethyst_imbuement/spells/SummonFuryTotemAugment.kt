@@ -26,8 +26,9 @@ import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
 class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_fury_totem"),SpellType.FURY,2400,240,
+            14,5,1,50,LoreTier.LOW_TIER, RegisterItem.RESONANT_ROD)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -42,7 +43,7 @@ class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) 
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -52,11 +53,6 @@ class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) 
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,2400,240,
-            14,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.RESONANT_ROD)
     }
 
     override fun placeEntity(
