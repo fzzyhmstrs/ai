@@ -25,8 +25,9 @@ import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
 class SummonGraceTotemAugment: SummonAugment<TotemOfGraceEntity>(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_grace_totem"),SpellType.GRACE,2400,240,
+            14,11,1,50,LoreTier.LOW_TIER, RegisterItem.DAZZLING_MELON_SLICE)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -40,7 +41,7 @@ class SummonGraceTotemAugment: SummonAugment<TotemOfGraceEntity>(ScepterTier.TWO
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -50,11 +51,6 @@ class SummonGraceTotemAugment: SummonAugment<TotemOfGraceEntity>(ScepterTier.TWO
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,2400,240,
-            14,imbueLevel,50,LoreTier.LOW_TIER, RegisterItem.DAZZLING_MELON_SLICE)
     }
 
     override fun placeEntity(
