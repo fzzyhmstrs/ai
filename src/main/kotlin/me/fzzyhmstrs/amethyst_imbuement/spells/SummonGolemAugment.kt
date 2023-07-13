@@ -26,8 +26,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class SummonGolemAugment: SummonAugment<CrystallineGolemEntity>(ScepterTier.THREE) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_golem"),SpellType.WIT,6000,600,
+            25,5,1,100,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -41,7 +42,7 @@ class SummonGolemAugment: SummonAugment<CrystallineGolemEntity>(ScepterTier.THRE
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -51,11 +52,6 @@ class SummonGolemAugment: SummonAugment<CrystallineGolemEntity>(ScepterTier.THRE
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,6000,600,
-            25,imbueLevel,100,LoreTier.HIGH_TIER, Items.AMETHYST_BLOCK)
     }
 
     override fun placeEntity(
