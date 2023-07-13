@@ -26,8 +26,9 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("mass_cleanse"),SpellType.GRACE,1200,120,
+            15,5,1,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -50,11 +51,6 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,120,
-            15,imbueLevel,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
     }
 
     override fun effect(
