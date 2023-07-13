@@ -28,8 +28,9 @@ import net.minecraft.world.World
 import kotlin.math.max
 
 class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("mass_fortify"),SpellType.GRACE,1200,275,
+            22,9,1,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
 
     //ml 9
     override val baseEffect: AugmentEffect
@@ -42,7 +43,7 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -52,11 +53,6 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,1200,275,
-            22,imbueLevel,35,LoreTier.HIGH_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun effect(
