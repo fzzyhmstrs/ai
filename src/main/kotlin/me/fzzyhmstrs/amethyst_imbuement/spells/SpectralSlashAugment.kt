@@ -23,8 +23,9 @@ import net.minecraft.text.Text
 @Suppress("SameParameterValue")
 open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
     //ml 9
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("spectral_slash"),SpellType.FURY,18,4,
+            9,9,1,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -35,13 +36,8 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
         TODO("Not yet implemented")
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,4,
-            9,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_SWORD)
-    }
-
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
