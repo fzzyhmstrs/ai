@@ -37,9 +37,8 @@ import net.minecraft.world.World
 import net.minecraft.world.gen.structure.Structure
 
 class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(AugmentType.BENEFICIAL)){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("survey"),SpellType.WIT,1200,120,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("survey"),SpellType.WIT,1200,120,
             20,1,1,80, LoreTier.NO_TIER, Items.MAP)
     //ml 1
 
@@ -51,7 +50,7 @@ class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(Augmen
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
