@@ -21,8 +21,9 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("magic_missile"),SpellType.NULL,15,1,
+            1,1,0,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
 
     //ml 1
     override val baseEffect: AugmentEffect
@@ -33,12 +34,7 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.NULL,15,1,
-            1,0,0,LoreTier.NO_TIER,Items.GOLD_INGOT)
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
