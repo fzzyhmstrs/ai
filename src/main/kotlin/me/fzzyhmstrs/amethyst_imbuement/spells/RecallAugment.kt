@@ -32,7 +32,7 @@ class RecallAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_O
 
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("recall"),SpellType.WIT,12000,400,
-            15,imbueLevel,40, LoreTier.NO_TIER, Items.SHIELD)
+            15,1,1,40, LoreTier.NO_TIER, Items.SHIELD)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         TODO("Not yet implemented")
