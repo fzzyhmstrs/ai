@@ -30,8 +30,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_TARGET_OR_SELF), ManaItem {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("mend_equipment"),SpellType.GRACE,16,8,
+            8,13,1,1,LoreTier.LOW_TIER, Items.IRON_BLOCK)
 
     //ml 13
     override val baseEffect: AugmentEffect
@@ -42,7 +43,7 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -70,11 +71,6 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,16,8,
-            8,imbueLevel,1,LoreTier.LOW_TIER, Items.IRON_BLOCK)
     }
 
     override fun effect(
