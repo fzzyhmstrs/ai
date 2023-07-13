@@ -32,8 +32,9 @@ import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
 class MagneticAuraAugment: EntityAoeAugment(ScepterTier.TWO,true), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("magnetic_aura"),SpellType.GRACE,400,60,
+            7,7,1,20, LoreTier.LOW_TIER, RegisterItem.PYRITE)
 
     //ml 7
     override val baseEffect: AugmentEffect
@@ -46,12 +47,7 @@ class MagneticAuraAugment: EntityAoeAugment(ScepterTier.TWO,true), PersistentEff
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE,400,60,
-            7,imbueLevel,20, LoreTier.LOW_TIER, RegisterItem.PYRITE)
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
