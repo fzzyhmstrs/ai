@@ -29,8 +29,9 @@ import kotlin.math.min
 
 class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY){
     //ml 5
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("ice_spikes"),SpellType.FURY,32,14,
+            8, 5,1,2, LoreTier.NO_TIER, Items.BLUE_ICE)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
@@ -71,11 +72,6 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,14,
-            8, imbueLevel,2, LoreTier.NO_TIER, Items.BLUE_ICE)
     }
 
     override fun effect(
