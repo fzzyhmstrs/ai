@@ -23,7 +23,7 @@ import net.minecraft.world.World
 class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMMON_BOOM.plus(AugmentType.PROJECTILE)){
     override val augmentData: AugmentDatapoint
         get() = AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),2,
-            19, imbueLevel,1, LoreTier.NO_TIER, Items.CHICKEN)
+            19, 11,1,1, LoreTier.NO_TIER, Items.CHICKEN)
 
     //11
     override val baseEffect: AugmentEffect
@@ -37,7 +37,7 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
