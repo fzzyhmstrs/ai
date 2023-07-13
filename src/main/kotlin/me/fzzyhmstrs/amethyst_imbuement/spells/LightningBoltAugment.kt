@@ -33,8 +33,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_DAMAGE){
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("lightning_bolt"),SpellType.FURY, PerLvlI(51,-1),20,
+            11,11,1,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
 
     //ml 11
     override val baseEffect: AugmentEffect
@@ -47,7 +48,7 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -75,11 +76,6 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
             T : LivingEntity
     {
         TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,
-            11,imbueLevel,3,LoreTier.LOW_TIER, Items.LIGHTNING_ROD)
     }
 
     override fun effect(
