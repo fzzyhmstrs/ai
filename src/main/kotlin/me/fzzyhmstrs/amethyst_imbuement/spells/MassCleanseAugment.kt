@@ -40,7 +40,7 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
