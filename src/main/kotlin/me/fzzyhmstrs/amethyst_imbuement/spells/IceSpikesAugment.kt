@@ -44,7 +44,7 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
