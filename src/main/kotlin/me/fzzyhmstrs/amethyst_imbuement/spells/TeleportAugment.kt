@@ -36,7 +36,7 @@ class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
