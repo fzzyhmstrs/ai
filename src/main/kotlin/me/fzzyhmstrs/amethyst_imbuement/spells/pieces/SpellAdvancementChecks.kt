@@ -86,6 +86,10 @@ object SpellAdvancementChecks {
     val HEALTH_TRIGGER = AI.identity("health")
     val HEALTH = Supplier<Boolean> {ClientAdvancementContainer.isDone(HEALTH_ID)}
 
+    private val SPEED_ID = AI.identity("todo")
+    val SPEED_TRIGGER = AI.identity("speed")
+    val SPEED = Supplier<Boolean> {ClientAdvancementContainer.isDone(SPEED_ID)}
+    
     private val EXPLODES_ID = AI.identity("todo")
     val EXPLODES_TRIGGER = AI.identity("explodes")
     val EXPLODES = Supplier<Boolean> {ClientAdvancementContainer.isDone(EXPLODES_ID)}
