@@ -32,8 +32,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
-    override val augmentData: AugmentDatapoint
-        get() = TODO("Not yet implemented")
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("smiting_blow"),SpellType.FURY,20,8,
+            10, 5,1,2, LoreTier.LOW_TIER, RegisterItem.GLOWING_FRAGMENT)
 
     //ml 5
     override val baseEffect: AugmentEffect
@@ -47,7 +48,7 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideAdjective(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -57,11 +58,6 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,8,
-            10, imbueLevel,2, LoreTier.LOW_TIER, RegisterItem.GLOWING_FRAGMENT)
     }
 
     override fun supportEffect(
