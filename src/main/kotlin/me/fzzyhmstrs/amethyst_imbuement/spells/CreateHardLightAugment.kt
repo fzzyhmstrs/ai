@@ -69,6 +69,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         when(other) {
             RegisterEnchantment.BARRIER ->
                 description.addLang("enchantment.amethyst_imbuement.create_hard_light.barrier.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.PROTECTED_EFFECT))
+            RegisterEnchantment.ICE_SHARD ->
+                description.addLang("enchantment.amethyst_imbuement.create_hard_light.ice_shard.desc", SpellAdvancementChecks.BLOCK)
             RegisterEnchantment.SHINE ->
                 description.addLang("enchantment.amethyst_imbuement.create_hard_light.shine.desc", SpellAdvancementChecks.BLOCK)
         }
@@ -76,8 +78,6 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.item(),itemAfterHardLightTransform(other.item())), SpellAdvancementChecks.BLOCK)
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.damage", SpellAdvancementChecks.DAMAGE)
-
-
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -88,6 +88,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         return when(otherSpell) {
             RegisterEnchantment.BARRIER ->
                 AcText.translatable("enchantment.amethyst_imbuement.create_hard_light.barrier")
+            RegisterEnchantment.ICE_SHARD ->
+                AcText.translatable("enchantment.amethyst_imbuement.create_hard_light.ice_shard")
             else ->
                 return super.specialName(otherSpell)
         }
@@ -125,6 +127,17 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         return super.modifyManaCost(manaCost, other, othersType, spells)
     }
 
+    override fun modifyDamage(
+        damage: PerLvlF,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlF {
+        if (other == RegisterEnchantment.ICE_SHARD)
+            return damage.plus(2)
+        return super.modifyAmplifier(amplifier, other, othersType, spells)
+    }
+
     override fun modifyAmplifier(
         amplifier: PerLvlI,
         other: ScepterAugment,
@@ -133,7 +146,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     ): PerLvlI {
         if (other == RegisterEnchantment.BARRIER)
             return amplifier.plus(3)
-        return super.modifyAmplifier(amplifier, other, othersType, spells)
+        return amplifier
     }
 
     override fun <T> modifyDealtDamage(
