@@ -71,13 +71,16 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
 
     override fun getBlockStateToPlace(context: ProcessContext, world: World, pos: BlockPos, spells: PairedAugments): BlockState {
         val boost = spells.boost()
-        val block = if (boost is DyeBoost){
-            blocks[boost.getDyeColor()]?:RegisterBlock.SHINE_LIGHT
-        } else {
-            RegisterBlock.SHINE_LIGHT
-        }
         val fluid = world.getFluidState(pos)
-        return block.getShineState(fluid.isIn(FluidTags.WATER))
+        val block = if (boost is DyeBoost){
+            (blocks[boost.getDyeColor()]?:RegisterBlock.SHINE_LIGHT).getShineState(fluid.isIn(FluidTags.WATER))
+        }else if (spells.paired() == RegisterEnchantment.CREATE_HARD_LIGHT) {
+            RegisterBlock.CRYSTALLIZED_LIGHT_WHITE.getHardLightState()
+        } else {
+            RegisterBlock.SHINE_LIGHT.getShineState(fluid.isIn(FluidTags.WATER))
+        }
+
+        return block
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
@@ -98,6 +101,8 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
                 description.addLang("enchantment.amethyst_imbuement.shine.survey.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BLOCK))
                 description.addLang("enchantment.amethyst_imbuement.shine.desc.manaCost", SpellAdvancementChecks.MANA_COST)
             }
+            RegisterEnchantment.SHINE ->
+                description.addLang("enchantment.amethyst_imbuement.shine.create_hard_light.desc", SpellAdvancementChecks.BLOCK)
         }
     }
 
@@ -304,7 +309,7 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
         val hits = context.get(ContextData.DRACONIC_BOXES)
         if (hits > 0) {
             val volume = min(hits, 10) / 30f
-            world.playSound(null, blockPos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL, 0.3f, 0.8f)
+            world.playSound(null, blockPos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL, volume, 0.8f)
         }
     }
 

@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
@@ -45,5 +46,16 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ITEM_BUCKET_EMPTY_LAVA
+    }
+
+    private fun itemAfterLavaTransform(item: Item): Item {
+        return CreateHardLightAugment.items[item]?:item
+    }
+
+    companion object{
+        val items: Map<Item, Item> = mapOf(
+            Items.WATER_BUCKET to Items.COBBLESTONE,
+            Items.SPONGE to Items.MAGMA_BLOCK
+        )
     }
 }

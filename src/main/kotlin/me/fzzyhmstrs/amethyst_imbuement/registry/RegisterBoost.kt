@@ -14,6 +14,8 @@ object RegisterBoost {
 
     private val regBoost: MutableSet<AugmentBoost> = mutableSetOf()
 
+
+    val HEARTSTONE_BOOST = ItemAugmentBoost(AI.identity("heartstone_boost"), RegisterItem.HEARTSTONE)
     val ENCHANTED_GOLDEN_APPLE_BOOST = ItemAugmentBoost(AI.identity("enchanted_golden_apple_boost"), Items.ENCHANTED_GOLDEN_APPLE)
     val TNT_BOOST = TntBoost().also { regBoost.add(it) }
 

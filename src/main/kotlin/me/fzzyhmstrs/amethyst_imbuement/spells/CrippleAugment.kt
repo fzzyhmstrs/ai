@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -18,6 +19,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -32,7 +34,6 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
@@ -52,6 +53,18 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
 
+
+
+
+        when(other) {
+            RegisterEnchantment.FORTIFY ->
+                description.addLang("enchantment.amethyst_imbuement.cripple.fortify.desc",SpellAdvancementChecks.UNIQUE)
+            RegisterEnchantment.SUMMON_BONESTORM ->
+                description.addLang("enchantment.amethyst_imbuement.cripple.summon_bonestorm.desc",SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+            RegisterEnchantment.INSPIRING_SONG ->
+                description.addLang("enchantment.amethyst_imbuement.cripple.inspiring_song.desc",SpellAdvancementChecks.UNIQUE)
+        }
+
         TODO("Not yet implemented")
     }
 
@@ -62,9 +75,11 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
     override fun specialName(otherSpell: ScepterAugment): MutableText {
         return when(otherSpell) {
             RegisterEnchantment.FORTIFY ->
-                AcText.translatable("enchantment.amethyst_imbuement.resonate.fortify")
+                AcText.translatable("enchantment.amethyst_imbuement.cripple.fortify")
+            RegisterEnchantment.SUMMON_BONESTORM ->
+                AcText.translatable("enchantment.amethyst_imbuement.cripple.summon_bonestorm")
             RegisterEnchantment.INSPIRING_SONG ->
-                AcText.translatable("enchantment.amethyst_imbuement.resonate.inspiring_song")
+                AcText.translatable("enchantment.amethyst_imbuement.cripple.inspiring_song")
             else ->
                 return super.specialName(otherSpell)
         }
@@ -77,6 +92,7 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.HARMED_TRIGGER)
     }
 
     override fun <T> modifyDealtDamage(
@@ -154,7 +170,14 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
+        if (spells.primary() == RegisterEnchantment.FORTIFY){
+            val target = entityHitResult.entity
+            if (target is LivingEntity){
+                target.removeStatusEffect(StatusEffects.WEAKNESS)
+                target.removeStatusEffect(StatusEffects.SLOWNESS)
+            }
 
+        }
 
 
 

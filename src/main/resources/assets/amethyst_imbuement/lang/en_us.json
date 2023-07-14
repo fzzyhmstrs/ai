@@ -522,6 +522,14 @@
 	"enchantment.amethyst_imbuement.barrier.adjective": "Fortifying",
 	"enchantment.amethyst_imbuement.barrier.desc": "Applies absorption to the caster.",
 	"enchantment.amethyst_imbuement.barrier.desc.barrier": "Absorption is applied to targets.",
+	"enchantment.amethyst_imbuement.barrier.desc.summon": "Summons spawn with absorption.",
+	"enchantment.amethyst_imbuement.barrier.desc.pierce": "Projectiles pierce shields.",
+	"enchantment.amethyst_imbuement.barrier.desc.pierce2": "Projectile or Effect removes some absorption from the target (before damage).",
+	"enchantment.amethyst_imbuement.barrier.create_lava": "Magma Ward",
+	"enchantment.amethyst_imbuement.barrier.create_lava.dec": "Grants the target fire resistance. No longer places lava.",
+	"enchantment.amethyst_imbuement.barrier.cleanse": "Immunization",
+	"enchantment.amethyst_imbuement.barrier.cleanse.dec": "Grants immunity instead of curing existing statuses. Duration increased.",
+	"enchantment.amethyst_imbuement.barrier.soul_missile.desc": "Kills with the soul missile have a chance to grant absorption.",
 
 	"enchantment.amethyst_imbuement.bedazzle": "Bedazzle",
 	"enchantment.amethyst_imbuement.bedazzle.double": "Mass Charm",
@@ -574,6 +582,11 @@
 	"enchantment.amethyst_imbuement.create_hard_light.verb": "Harden",
 	"enchantment.amethyst_imbuement.create_hard_light.adjective": "Hardened",
 	"enchantment.amethyst_imbuement.create_hard_light.desc": "Materializes a block of hard light a few meters out in the direction cast. Can place blocks in midair.",
+	"enchantment.amethyst_imbuement.create_hard_light.desc.block": "",
+	"enchantment.amethyst_imbuement.create_hard_light.desc.damage": "Deals additional damage to glowing targets.",
+	"enchantment.amethyst_imbuement.create_hard_light.barrier": "Shell of Light",
+	"enchantment.amethyst_imbuement.create_hard_light.barrier.desc":"Absorption strength is greatly increased. Mana cost and cooldown also increased.",
+	"enchantment.amethyst_imbuement.create_hard_light.shine.desc": "Shroomlight is placed instead of Hard Light Block",
 
 	"enchantment.amethyst_imbuement.create_lava": "Create Lava",
 	"enchantment.amethyst_imbuement.create_lava.double": "Enhanced Create Lava",
@@ -606,6 +619,7 @@
 	"enchantment.amethyst_imbuement.cripple.verb": "Cripple",
 	"enchantment.amethyst_imbuement.cripple.adjective": "Crippling",
 	"enchantment.amethyst_imbuement.cripple.desc": "Damages, weakens, and slows nearby targets. Has a chance to critical strike, which stuns the target.",
+	"enchantment.amethyst_imbuement.cripple.fortify": "",
 
 	"enchantment.amethyst_imbuement.curse": "Curse",
 	"enchantment.amethyst_imbuement.curse.double": "Afflict",
@@ -956,6 +970,7 @@
 	"enchantment.amethyst_imbuement.shine.excavate.desc": "Highlights ores near the mined block with Draconic Sprites.",
 	"enchantment.amethyst_imbuement.shine.survey": "Mineral Scan",
 	"enchantment.amethyst_imbuement.shine.survey.desc": "Highlights ores in a wide radius around the player with Draconic Sprites.",
+	"enchantment.amethyst_imbuement.shine.create_hard_light.desc": "White Crystallized Light is placed instead of Shine Light",
 
 	"enchantment.amethyst_imbuement.smiting_blow": "Smiting Blow",
 	"enchantment.amethyst_imbuement.smiting_blow.double": "Daybreak Hammer",

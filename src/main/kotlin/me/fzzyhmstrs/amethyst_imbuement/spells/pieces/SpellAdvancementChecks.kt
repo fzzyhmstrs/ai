@@ -82,6 +82,10 @@ object SpellAdvancementChecks {
     val PROTECTED_TRIGGER = AI.identity("protected")
     val PROTECTED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(PROTECTED_ID)}
 
+    private val HARMED_ID = AI.identity("todo")
+    val HARMED_TRIGGER = AI.identity("harmed")
+    val HARMED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(HARMED_ID)}
+
     private val HEALTH_ID = AI.identity("todo")
     val HEALTH_TRIGGER = AI.identity("health")
     val HEALTH = Supplier<Boolean> {ClientAdvancementContainer.isDone(HEALTH_ID)}
@@ -101,6 +105,10 @@ object SpellAdvancementChecks {
     private val BLOCK_ID = AI.identity("todo")
     val BLOCK_TRIGGER = AI.identity("block")
     val BLOCK = Supplier<Boolean> {ClientAdvancementContainer.isDone(BLOCK_ID)}
+
+    private val PROJECTILE_ID = AI.identity("todo")
+    val PROJECTILE_TRIGGER = AI.identity("projectile")
+    val PROJECTILE = Supplier<Boolean> {ClientAdvancementContainer.isDone(PROJECTILE_ID)}
 
     private val CHICKEN_ID = AI.identity("todo")
     val CHICKEN = Supplier<Boolean> {ClientAdvancementContainer.isDone(CHICKEN_ID)}

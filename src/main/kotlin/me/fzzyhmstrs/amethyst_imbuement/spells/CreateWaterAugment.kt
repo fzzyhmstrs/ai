@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
@@ -44,5 +45,16 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.ITEM_BUCKET_EMPTY
+    }
+
+    private fun itemAfterWaterTransform(item: Item): Item {
+        return CreateHardLightAugment.items[item]?:item
+    }
+
+    companion object{
+        val items: Map<Item, Item> = mapOf(
+            Items.SPONGE to Items.MUD,
+            Items.LAVA_BUCKET to Items.STONE
+        )
     }
 }
