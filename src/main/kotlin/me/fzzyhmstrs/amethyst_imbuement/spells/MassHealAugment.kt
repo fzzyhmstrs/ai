@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.Entity
@@ -21,10 +22,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 
 class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
-    override val augmentData: AugmentDatapoint
+    override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("mass_heal"),SpellType.GRACE,200,50,
             9,5,1,10,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
 
@@ -35,6 +37,10 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         TODO("Not yet implemented")
+    }
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
+        return friendlyFilter(list, user)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {

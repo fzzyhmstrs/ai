@@ -34,6 +34,7 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
         - other type interactions
         - add Lang
     - provideArgs
+    - spells are equal check
     - special names for uniques
     - onPaired to grant relevant adv.
     - implement all special combinations

@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffect
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.entity.LivingEntity
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import kotlin.math.min
 
@@ -13,7 +12,7 @@ object ModifiableEffects {
     val SHOCKING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shocking_effect")) {entity,owner,context-> ShockingEffect.shock(entity,owner,context)}
     val STATIC_SHOCK_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("static_shock_effect")) {entity,owner,context-> ShockingEffect.staticShock(entity,owner,context)}
     val CHAIN_LIGHTNING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("chain_lightning_effect")) {entity,owner,context-> ShockingEffect.chainLightning(entity,owner,context)}
-
+    val GROW_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("grow_effect")) {entity,owner,context-> AbundanceEffect.grow(entity,owner,context)}
     fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): MutableList<LivingEntity>{
         if (list.isNotEmpty()){
             val listTmp: MutableList<LivingEntity> = mutableListOf()

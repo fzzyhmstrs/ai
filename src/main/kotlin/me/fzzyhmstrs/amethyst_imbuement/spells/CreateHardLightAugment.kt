@@ -24,11 +24,13 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.boosts.DyeBoost
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
 import net.minecraft.server.network.ServerPlayerEntity
@@ -72,7 +74,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
             RegisterEnchantment.ICE_SHARD ->
                 description.addLang("enchantment.amethyst_imbuement.create_hard_light.ice_shard.desc", SpellAdvancementChecks.BLOCK)
             RegisterEnchantment.SHINE ->
-                description.addLang("enchantment.amethyst_imbuement.create_hard_light.shine.desc", SpellAdvancementChecks.BLOCK)
+                description.addLang("enchantment.amethyst_imbuement.create_hard_light.shine.desc", SpellAdvancementChecks.DAMAGE.or(SpellAdvancementChecks.HARMED_EFFECT))
         }
         if (other is PlaceItemAugment)
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.item(),itemAfterHardLightTransform(other.item())), SpellAdvancementChecks.BLOCK)
@@ -91,7 +93,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
             RegisterEnchantment.ICE_SHARD ->
                 AcText.translatable("enchantment.amethyst_imbuement.create_hard_light.ice_shard")
             else ->
-                return super.specialName(otherSpell)
+                super.specialName(otherSpell)
         }
     }
 
@@ -134,8 +136,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         spells: PairedAugments
     ): PerLvlF {
         if (other == RegisterEnchantment.ICE_SHARD)
-            return damage.plus(2)
-        return super.modifyAmplifier(amplifier, other, othersType, spells)
+            return damage.plus(1f)
+        return damage
     }
 
     override fun modifyAmplifier(
@@ -181,11 +183,11 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         othersType: AugmentType,
         spells: PairedAugments
     )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
     {
         val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
@@ -209,6 +211,34 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
                 else -> {
                     return SUCCESSFUL_PASS
                 }
+            }
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        if (spells.primary() == RegisterEnchantment.ICE_SHARD){
+            val entity = entityHitResult.entity
+            if (entity is LivingEntity && world.random.nextFloat() < 0.1){
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING,120))
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             }
         }
         return SUCCESSFUL_PASS

@@ -20,7 +20,6 @@ import net.minecraft.entity.SpawnGroup
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -78,6 +77,19 @@ object RegisterEntity {
                 world
             )
         }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
+    )
+
+    val FLORAL_CONSTRUCT_ENTITY: EntityType<FloralConstructEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "floral_construct"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<FloralConstructEntity>, world: World ->
+            FloralConstructEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.6f, 0.6f)).trackRangeChunks(8).build()
     )
 
     val UNHALLOWED_ENTITY: EntityType<UnhallowedEntity> = Registry.register(
@@ -380,6 +392,7 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
+        FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, FloralConstructEntity.createFloralAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())

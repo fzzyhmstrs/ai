@@ -200,8 +200,16 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         return SUCCESSFUL_PASS
     }
 
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
+        val list1 = list.stream().filter { it is VillagerEntity }.map { EntityHitResult(it) } .toList()
+        val list2 = hostileFilter(list, user)
+        list2.addAll(list1)
+        return list2
+    }
+
     override fun <T, U> modifySummons(
         summons: List<T>,
+        hit: HitResult,
         context: ProcessContext,
         user: U,
         world: World,
@@ -212,7 +220,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         spells: PairedAugments
     )
     :
-    List<T>
+    List<Entity>
     where
     T : ModifiableEffectEntity,
     T : Entity,

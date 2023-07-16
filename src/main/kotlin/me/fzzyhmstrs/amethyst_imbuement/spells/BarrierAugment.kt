@@ -53,22 +53,16 @@ import kotlin.math.max
 
 /*
     Checklist
-    - modify other things
-        - summon?
-        - projectile?
-        - explosion?
-        - drops?
-        - count? (affects some things like summon count and projectile count)
      */
 class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("barrier"),SpellType.GRACE,600,50,
-            10,10,1,15, LoreTier.NO_TIER, Items.SHIELD)
+            10,11,1,15, LoreTier.NO_TIER, Items.SHIELD)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withAmplifier(0,1)
-            .withDuration(540,80)
+            .withDuration(540,60)
 
     override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
             : Boolean where T : SpellCastingEntity, T : LivingEntity {
@@ -105,7 +99,7 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             RegisterEnchantment.CLEANSE ->
                 AcText.translatable("enchantment.amethyst_imbuement.barrier.cleanse")
             else ->
-                return super.specialName(otherSpell)
+                super.specialName(otherSpell)
         }
     }
 
@@ -121,12 +115,36 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
     }
 
+    override fun modifyManaCost(
+        manaCost: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return manaCost.plus(0,0,25)
+        return manaCost
+    }
+
+    override fun modifyAmplifier(
+        amplifier: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return amplifier.plus(1)
+        return amplifier
+    }
+
     override fun modifyDuration(
         duration: PerLvlI,
         other: ScepterAugment,
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return duration.plus(160,40)
         if (other == RegisterEnchantment.CREATE_LAVA || other == RegisterEnchantment.CLEANSE)
             return PerLvlI(540,80)
         return duration
@@ -291,6 +309,7 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
 
     override fun <T, U> modifySummons(
         summons: List<T>,
+        hit: HitResult,
         context: ProcessContext,
         user: U,
         world: World,
@@ -301,7 +320,7 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         spells: PairedAugments
     )
     :
-    List<T>
+    List<Entity>
     where
     T : ModifiableEffectEntity,
     T : Entity,

@@ -263,11 +263,11 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             }
         } else if (spells.primary() == RegisterEnchantment.INSPIRING_SONG){
             if (livingEntity is ModifiableEffectEntity) {
-                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, effects.duration(level))
+                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.CHAIN_LIGHTNING_EFFECT, effects.duration(level))
                 (livingEntity as? LivingEntity)?.addStatusEffect(StatusEffectInstance(StatusEffects.HASTE,effects.duration(level)))
                 return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             } else if (livingEntity is ModifiableEffectMobOrPlayer) {
-                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, effects.duration(level))
+                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.CHAIN_LIGHTNING_EFFECT, effects.duration(level))
                 return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
@@ -370,6 +370,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
 
     override fun <T, U> modifySummons(
         summons: List<T>,
+        hit: HitResult,
         context: ProcessContext,
         user: U,
         world: World,
@@ -380,7 +381,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         spells: PairedAugments
     )
     :
-    List<T>
+    List<Entity>
     where
     T : ModifiableEffectEntity,
     T : Entity,

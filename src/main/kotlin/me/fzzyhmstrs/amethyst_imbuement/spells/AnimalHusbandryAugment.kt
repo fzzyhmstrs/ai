@@ -138,12 +138,25 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
         return cooldown
     }
 
+    override fun modifyAmplifier(
+        amplifier: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return amplifier.plus(0,1)
+        return amplifier
+    }
+
     override fun modifyRange(
         range: PerLvlD,
         other: ScepterAugment,
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlD {
+        if (spells.spellsAreEqual())
+            return range.plus(0.0,0.0,100.0)
         if (othersType.has(AugmentType.BENEFICIAL)){
             return range.plus(0.0,0.0,25.0)
         }
@@ -277,6 +290,7 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
 
     override fun <T, U> modifySummons(
         summons: List<T>,
+        hit: HitResult,
         context: ProcessContext,
         user: U,
         world: World,
@@ -287,7 +301,7 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
         spells: PairedAugments
     )
     :
-    List<T>
+    List<Entity>
     where
     T : ModifiableEffectEntity,
     T : Entity,

@@ -270,9 +270,9 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
         return SUCCESSFUL_PASS
     }
 
-    override fun <T, U> modifySummons(summons: List<T>, context: ProcessContext, user: U, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
+    override fun <T, U> modifySummons(summons: List<T>,hit: HitResult, context: ProcessContext, user: U, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
     :
-    List<T>
+    List<Entity>
     where
     T : ModifiableEffectEntity,
     T : Entity,

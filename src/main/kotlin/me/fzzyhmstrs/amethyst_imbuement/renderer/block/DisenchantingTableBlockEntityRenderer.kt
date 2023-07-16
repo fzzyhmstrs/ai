@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.renderer
+package me.fzzyhmstrs.amethyst_imbuement.renderer.block
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity

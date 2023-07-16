@@ -8,6 +8,9 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.model.*
 import me.fzzyhmstrs.amethyst_imbuement.renderer.*
+import me.fzzyhmstrs.amethyst_imbuement.renderer.block.AltarOfExperienceBlockEntityRenderer
+import me.fzzyhmstrs.amethyst_imbuement.renderer.block.DisenchantingTableBlockEntityRenderer
+import me.fzzyhmstrs.amethyst_imbuement.renderer.block.ImbuingTableBlockEntityRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -37,6 +40,7 @@ object RegisterRenderer {
     val BONESTORM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("bonestorm"),"bonestorm_model")
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
+    val FLORAL_CONSTRUCT_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("floral_construct"),"floral_construct_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("player_wither_skull_entity"),"player_wither_skull_model")
     
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_main")
@@ -74,6 +78,10 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.BOOM_CHICKEN_ENTITY
         ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.FLORAL_CONSTRUCT_ENTITY
+        ){ context: EntityRendererFactory.Context -> FloralConstructEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.CRYSTAL_GOLEM_ENTITY
@@ -171,6 +179,7 @@ object RegisterRenderer {
 
         /////////////////////////////////
 
+        EntityModelLayerRegistry.registerModelLayer(FLORAL_CONSTRUCT_ENTITY,FloralConstructEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }

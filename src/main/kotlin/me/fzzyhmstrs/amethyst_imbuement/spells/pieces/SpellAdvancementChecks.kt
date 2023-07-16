@@ -38,6 +38,10 @@ object SpellAdvancementChecks {
     val MANA_COST_TRIGGER = AI.identity("mana_cost")
     val MANA_COST = Supplier<Boolean> {ClientAdvancementContainer.isDone(MANA_COST_ID)}
 
+    private val ON_KILL_ID = AI.identity("todo")
+    val ON_KILL_TRIGGER = AI.identity("on_kill")
+    val ON_KILL = Supplier<Boolean> {ClientAdvancementContainer.isDone(ON_KILL_ID)}
+
     private val DAMAGE_SOURCE_ID = AI.identity("todo")
     val DAMAGE_SOURCE_TRIGGER = AI.identity("damage")
     val DAMAGE_SOURCE = Supplier<Boolean> {ClientAdvancementContainer.isDone(DAMAGE_SOURCE_ID)}

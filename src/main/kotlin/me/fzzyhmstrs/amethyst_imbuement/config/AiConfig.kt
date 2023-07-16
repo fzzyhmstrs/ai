@@ -406,6 +406,12 @@ object AiConfig
             var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
         }
 
+        var floralConstruct = FloralConstruct()
+        class FloralConstruct: ConfigSection(Header.Builder().space().add("readme.entities.floral_construct_1").build()){
+            var baseLifespan = ValidatedInt(18000,1800000,20)
+            var baseHealth = ValidatedDouble(8.0,80.0,1.0)
+        }
+
         override fun generateNewClass(): Entities {
             return this
         }

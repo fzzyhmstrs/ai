@@ -30,7 +30,6 @@ import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.AxeItem
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.item.ShieldItem
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.DamageTypeTags
@@ -50,10 +49,10 @@ import net.minecraft.world.World
 import java.util.*
 
 @Suppress("PrivatePropertyName", "LeakingThis")
-open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
+open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, settings: Settings = Settings()): GolemEntity(entityType,world),
     Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
 
-    constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null) : this(entityType, world){
+    constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, settings: Settings = Settings()) : this(entityType, world, settings){
         maxAge = ageLimit
 
         this.createdBy = createdBy?.uuid
@@ -103,7 +102,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     init{
         stepHeight = 1.0f
         if (!world.isClient)
-            initOwnerGoals()
+            initOwnerGoals(settings)
     }
 
     override fun initGoals() {
@@ -120,11 +119,13 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 
-    private fun initOwnerGoals(){
-        goalSelector.add(2, followSummonerGoal)
-        goalSelector.add(3,callForConstructHelpGoal)
-
-        targetSelector.add(1, trackSummonerAttackerGoal)
+    private fun initOwnerGoals(settings: Settings){
+        if (settings.follow)
+            goalSelector.add(2, followSummonerGoal)
+        if (settings.callHelp)
+            goalSelector.add(3,callForConstructHelpGoal)
+        if (settings.track)
+            targetSelector.add(1, trackSummonerAttackerGoal)
     }
 
     override fun initialize(
@@ -426,5 +427,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override fun getDimensions(pose: EntityPose): EntityDimensions? {
         return super.getDimensions(pose).scaled(getScale())
     }
+
+    class Settings(val follow: Boolean = true, val callHelp: Boolean = true, val track: Boolean = true)
 
 }
