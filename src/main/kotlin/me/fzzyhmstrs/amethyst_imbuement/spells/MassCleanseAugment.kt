@@ -29,8 +29,7 @@ import net.minecraft.world.World
 
 class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(
-            AI.identity("mass_cleanse"),SpellType.GRACE,1200,120,
+        AugmentDatapoint(AI.identity("mass_cleanse"),SpellType.GRACE,1200,120,
             15,5,1,30,LoreTier.LOW_TIER, Items.MILK_BUCKET)
 
     //ml 5

@@ -60,9 +60,8 @@ Checklist
 */
 
 class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("shine"),SpellType.WIT,10,2,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("shine"),SpellType.WIT,10,2,
             1,1,1,1,LoreTier.NO_TIER,RegisterBlock.SHINE_LIGHT.asItem())
 
     //ml 1

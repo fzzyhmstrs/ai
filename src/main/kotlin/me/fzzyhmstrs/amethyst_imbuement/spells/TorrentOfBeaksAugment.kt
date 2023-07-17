@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.LivingEntity
@@ -21,8 +22,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMMON_BOOM.plus(AugmentType.PROJECTILE)){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),2,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("torrent_of_beaks"),SpellType.FURY, PerLvlI(15,-1),2,
             19, 11,1,1, LoreTier.NO_TIER, Items.CHICKEN)
 
     //11

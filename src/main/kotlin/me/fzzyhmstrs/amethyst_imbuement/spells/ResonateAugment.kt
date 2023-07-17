@@ -50,8 +50,8 @@ import net.minecraft.world.World
 import java.util.*
 
 class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity( "resonate"),SpellType.FURY,18,18,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity( "resonate"),SpellType.FURY,18,18,
             18,5,1,1, LoreTier.NO_TIER, Items.NOTE_BLOCK)
 
     //ml 5

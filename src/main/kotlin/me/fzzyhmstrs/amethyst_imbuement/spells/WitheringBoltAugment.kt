@@ -25,8 +25,8 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("withering_bolt"),SpellType.FURY, PerLvlI(30,-2),13,
+    override val augmentData: AugmentDatapoint =
+         AugmentDatapoint(AI.identity("withering_bolt"),SpellType.FURY, PerLvlI(30,-2),13,
             11,5,1,2,LoreTier.LOW_TIER, Items.WITHER_SKELETON_SKULL)
 
     //ml 5

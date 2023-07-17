@@ -23,8 +23,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().with(AugmentType.ENTITY).with(AugmentType.PROJECTILE).with(AugmentType.BENEFICIAL).build()) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("teleport"),SpellType.WIT, PerLvlI(210,-10),30,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("teleport"),SpellType.WIT, PerLvlI(210,-10),30,
             13,5,1,8,LoreTier.LOW_TIER, Items.ENDER_PEARL)
 
     //ml 5

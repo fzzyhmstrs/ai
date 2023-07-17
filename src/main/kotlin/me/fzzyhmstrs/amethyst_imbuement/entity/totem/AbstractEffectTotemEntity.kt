@@ -6,8 +6,6 @@ import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.*

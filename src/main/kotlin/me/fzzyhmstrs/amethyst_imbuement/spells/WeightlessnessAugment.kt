@@ -28,8 +28,8 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class WeightlessnessAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("weightlessness"),SpellType.WIT, PerLvlI(725,-25),125,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("weightlessness"),SpellType.WIT, PerLvlI(725,-25),125,
             9,5,1,20, LoreTier.LOW_TIER, Items.PHANTOM_MEMBRANE)
 
     //ml 5

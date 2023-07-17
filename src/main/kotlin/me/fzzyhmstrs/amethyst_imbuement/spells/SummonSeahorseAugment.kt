@@ -25,9 +25,8 @@ import net.minecraft.world.World
 
 class SummonSeahorseAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE, AugmentType.SUMMON_GOOD) {
 
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(
-            AI.identity("summon_seahorse"),SpellType.WIT,1200,100,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_seahorse"),SpellType.WIT,1200,100,
             5,7,1,40,LoreTier.LOW_TIER, Items.NAUTILUS_SHELL)
 
     override val baseEffect: AugmentEffect

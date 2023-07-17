@@ -54,16 +54,6 @@ import net.minecraft.world.World
 
 /*
     Checklist
-        - onEntityHit?
-        - onEntityKill?
-        - onBlockHit?
-        - Remember to call and check results of the super for the "default" behavior
-    - modify stats. don't forget mana cost and cooldown!
-        - modifyDealtDamage for unique interactions
-    - modify other things
-        - drops?
-        - count? (affects some things like summon count and projectile count)
-    - sound and particles
      */
 
 class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) {
@@ -84,9 +74,9 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
         if (othersType.has(AugmentType.DAMAGE) || othersType.has(AugmentType.SUMMONS))
             description.addLang("enchantment.amethyst_imbuement.abundance.desc.kill", SpellAdvancementChecks.ON_KILL.or(SpellAdvancementChecks.SUMMONS))
         when(other) {
-            RegisterEnchantment.SUMMON_CHICKEN -> {
-                description.addLang("enchantment.amethyst_imbuement.abundance.summon_chicken.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
-                description.addLang("enchantment.amethyst_imbuement.abundance.summon_chicken.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+            RegisterEnchantment.SUMMON_BONESTORM -> {
+                description.addLang("enchantment.amethyst_imbuement.abundance.summon_bonestorm.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+                description.addLang("enchantment.amethyst_imbuement.abundance.summon_bonestorm.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
             }
             RegisterEnchantment.FANGS ->
                 description.addLang("enchantment.amethyst_imbuement.abundance.fangs.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
@@ -112,8 +102,8 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
 
     override fun specialName(otherSpell: ScepterAugment): MutableText {
         return when (otherSpell) {
-            RegisterEnchantment.SUMMON_CHICKEN ->
-                AcText.translatable("enchantment.amethyst_imbuement.abundance.summon_chicken")
+            RegisterEnchantment.SUMMON_BONESTORM ->
+                AcText.translatable("enchantment.amethyst_imbuement.abundance.summon_bonestorm")
             RegisterEnchantment.FANGS ->
                 AcText.translatable("enchantment.amethyst_imbuement.abundance.fangs")
             else ->
@@ -353,8 +343,7 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
     U : SpellCastingEntity,
     U : LivingEntity
     {
-        if (spells.primary() == RegisterEnchantment.SUMMON_CHICKEN) {
-
+        if (spells.primary() == RegisterEnchantment.SUMMON_BONESTORM) {
             val fce = FloralConstructEntity(RegisterEntity.FLORAL_CONSTRUCT_ENTITY, world, -1, user)
             val found = AugmentHelper.findSpawnPos(world, BlockPos.ofFloored(hit.pos),fce, tries = 15)
             if (!found){

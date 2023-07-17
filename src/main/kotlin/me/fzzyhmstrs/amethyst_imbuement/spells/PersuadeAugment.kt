@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -35,7 +36,7 @@ import net.minecraft.world.World
 class PersuadeAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("persuade"),SpellType.WIT, PerLvlI(2240,-40),300,
-            20,imbueLevel,65, LoreTier.NO_TIER, Items.COAL)
+            20,11,1,65, LoreTier.NO_TIER, Items.COAL)
 
     //ml 11
     override val baseEffect: AugmentEffect

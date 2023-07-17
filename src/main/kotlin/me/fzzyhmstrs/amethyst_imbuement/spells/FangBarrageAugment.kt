@@ -5,25 +5,32 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
@@ -35,7 +42,8 @@ import kotlin.math.min
 class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED_ENERGY), PersistentEffectHelper.PersistentEffect {
     //ml 6
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("fang_barrage"),SpellType.FURY,100,50,
+        AugmentDatapoint(
+            AI.identity("fang_barrage"),SpellType.FURY,100,50,
             26,6,1,2, LoreTier.HIGH_TIER, Items.EMERALD_BLOCK)
 
     override val baseEffect: AugmentEffect
@@ -44,11 +52,42 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
             .withDamage(5.8F,0.2F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        if (othersType.has(AugmentType.PROJECTILE) && othersType.has(AugmentType.DAMAGE))
+            description.addLang("enchantment.amethyst_imbuement.fang_barrage.desc.projectile", SpellAdvancementChecks.DAMAGE)
+        if (othersType.has(AugmentType.AOE) && othersType.has(AugmentType.ENTITY))
+            description.addLang("enchantment.amethyst_imbuement.fang_barrage.desc.range", SpellAdvancementChecks.RANGE)
+        if (othersType.has(AugmentType.DAMAGE))
+            description.addLang("enchantment.amethyst_imbuement.fang_barrage.desc.damage", SpellAdvancementChecks.DAMAGE_SOURCE)
+        if (othersType.positiveEffect)
+            description.addLang("enchantment.amethyst_imbuement.fang_barrage.desc.retaliation", SpellAdvancementChecks.DAMAGE.or(SpellAdvancementChecks.PROTECTED_EFFECT))
+        when(other) {
+            RegisterEnchantment.SOUL_MISSILE -> {
+                description.addLang("enchantment.amethyst_imbuement.fang_barrage.soul_missile.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                description.addLang("enchantment.amethyst_imbuement.fang_barrage.soul_missile.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+
+            }
+            RegisterEnchantment.MASS_FORTIFY ->
+                description.addLang("enchantment.amethyst_imbuement.fang_barrage.mass_fortify.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BOOSTED_EFFECT))
+            RegisterEnchantment.FLAMEWAVE ->
+                description.addLang("enchantment.amethyst_imbuement.fang_barrage.flamewave.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
+        }
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
         return arrayOf(pairedSpell.provideAdjective(this))
+    }
+
+    override fun specialName(otherSpell: ScepterAugment): MutableText {
+        return when (otherSpell) {
+            RegisterEnchantment.SOUL_MISSILE ->
+                AcText.translatable("enchantment.amethyst_imbuement.fang_barrage.soul_missile")
+            RegisterEnchantment.MASS_FORTIFY ->
+                AcText.translatable("enchantment.amethyst_imbuement.fang_barrage.mass_fortify")
+            RegisterEnchantment.FLAMEWAVE ->
+                AcText.translatable("enchantment.amethyst_imbuement.fang_barrage.flamewave")
+            else ->
+                super.specialName(otherSpell)
+        }
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -127,8 +166,12 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
         conjureBarrage(data.user,data.world,d,e,f, data.effect, data.level)
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+        return DamageSourceBuilder(world, attacker, source).set(DamageTypes.MAGIC)
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_FANGS_ATTACK, SoundCategory.PLAYERS,1.0f,world.random.nextFloat()*0.8f + 0.4f)
     }
 
     private fun conjureBarrage(user: LivingEntity, world: World, d: Double, e: Double, f: Float, effect: AugmentEffect, level: Int): Int{

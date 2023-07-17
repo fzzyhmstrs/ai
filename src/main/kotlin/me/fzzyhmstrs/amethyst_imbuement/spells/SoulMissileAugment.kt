@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -20,7 +21,7 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
-    override val augmentData: AugmentDatapoint
+    override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("soul_missile"),SpellType.FURY,16,3,
             1,21,1,1,LoreTier.NO_TIER,Items.SOUL_SAND)
 

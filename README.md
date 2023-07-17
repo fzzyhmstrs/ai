@@ -12,6 +12,9 @@ Create magical crystals with various properties.
 Imbue items with powerful new abilities 
 Channel mana through scepters to unleash devastation upon your enemies, bolster you and your allies, and summon creatures.
 
+### Spell Update Progress 5/73
+
+
 ### TODO List
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|

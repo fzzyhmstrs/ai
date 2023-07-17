@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.item.Item
 import net.minecraft.item.Items
@@ -18,7 +19,7 @@ import net.minecraft.text.Text
 
 class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
 
-    override val augmentData: AugmentDatapoint
+    override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("create_water"),SpellType.WIT, 30, 8,
             1, 1,1,1, LoreTier.NO_TIER, Items.WATER_BUCKET)
 

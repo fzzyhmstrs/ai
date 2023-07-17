@@ -9,7 +9,6 @@ import me.fzzyhmstrs.amethyst_core.entity.Scalable
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
@@ -71,6 +70,14 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         this.entityOwner = owner
     }
 
+    override fun passEffects(spells: PairedAugments, ae: AugmentEffect, level: Int) {
+        super.passEffects(spells, ae, level)
+        val chk = world
+        if (chk is ServerWorld) {
+            initialize(chk,chk.getLocalDifficulty(this.blockPos),SpawnReason.MOB_SUMMONED,null,null)
+        }
+    }
+
     override fun initGoals() {
         goalSelector.add(0, BoomChickenIgniteGoal(this))
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, false))
@@ -96,12 +103,14 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         super.writeCustomDataToNbt(nbt)
         writePlayerCreatedNbt(nbt)
         writeModifiableNbt(nbt)
+        nbt.putFloat("scale_factor",getScale())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         readPlayerCreatedNbt(world, nbt)
         readModifiableNbt(nbt)
+        setScale(nbt.getFloat("scale_factor").takeIf { it > 0f } ?: 1f)
     }
 
     override fun getScale(): Float {

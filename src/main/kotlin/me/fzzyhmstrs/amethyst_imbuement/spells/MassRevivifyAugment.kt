@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
@@ -24,10 +25,11 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 
 class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
-    override val augmentData: AugmentDatapoint
+    override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("mass_revivify"),SpellType.GRACE,300,150,
             29,5,1,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
 
@@ -38,6 +40,10 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
             .withDuration(80,180,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
         TODO("Not yet implemented")
     }
 

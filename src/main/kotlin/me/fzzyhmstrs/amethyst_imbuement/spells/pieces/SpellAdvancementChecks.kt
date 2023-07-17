@@ -86,6 +86,10 @@ object SpellAdvancementChecks {
     val PROTECTED_TRIGGER = AI.identity("protected")
     val PROTECTED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(PROTECTED_ID)}
 
+    private val BOOSTED_ID = AI.identity("todo")
+    val BOOSTED_TRIGGER = AI.identity("boosted")
+    val BOOSTED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(BOOSTED_ID)}
+
     private val HARMED_ID = AI.identity("todo")
     val HARMED_TRIGGER = AI.identity("harmed")
     val HARMED_EFFECT = Supplier<Boolean> {ClientAdvancementContainer.isDone(HARMED_ID)}

@@ -32,8 +32,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("summon_zombie"),SpellType.WIT, PerLvlI(1295,-15),150,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("summon_zombie"),SpellType.WIT, PerLvlI(1295,-15),150,
             11,13,1,40,LoreTier.LOW_TIER, Items.ROTTEN_FLESH)
 
     //ml 13

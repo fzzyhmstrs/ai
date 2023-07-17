@@ -3,30 +3,25 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.server.world.ServerWorld
+import net.minecraft.item.Items
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
+import kotlin.math.atan2
 
-class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: World, summoner: LivingEntity? = null, maxAge: Int = 600, private val attackModifier: Int = 4):
-    AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.LETHAL_GEM) {
+class TotemOfFangsEntity(entityType: EntityType<out TotemOfFangsEntity>, world: World, summoner: LivingEntity? = null, maxAge: Int = 600):
+    AbstractEffectTotemEntity(entityType, world, summoner, maxAge, Items.EMERALD) {
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(5.0)
     private var target: LivingEntity? = null
-
-    override fun initTicker(): EventRegistry.Ticker {
-        val ticker = EventRegistry.Ticker(30 - attackModifier)
-        EventRegistry.registerTickUppable(ticker)
-        return ticker
-    }
 
     override fun tick() {
         val range = entityEffects.range(0)
@@ -57,6 +52,40 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
             return
         }
 
+        val user = owner?:return
+
+        val x: Double = entity.x - pos.x
+        val z: Double = entity.z - pos.z
+        val rotY = (atan2(z, x).toFloat() / Math.PI * 180 + 180).toFloat()
+
+        var d: Double
+        var e: Double
+
+        d = pos.y
+        e = d + 2.0
+
+        for (i in 0..entityEffects.range(level).toInt()) {
+            val g = 1.25 * (i + 1).toDouble()
+            val success = PlayerFangsEntity.conjureFang(
+                world,
+                user,
+                user.x + MathHelper.cos(rotY).toDouble() * g,
+                user.z + MathHelper.sin(rotY).toDouble() * g,
+                d,
+                e,
+                rotY,
+                i,
+                entityEffects,
+                level,
+                spells
+            )
+            if (success != Double.NEGATIVE_INFINITY) {
+                d = success
+                e = d + 2.0
+            }
+        }
+
+
         val summoner = owner
         if (summoner !is SpellCastingEntity) return
         val hit = EntityHitResult(entity)
@@ -67,26 +96,11 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
             runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
         }
         spells.hitSoundEvents(world, summoner.blockPos, processContext)
-        val serverWorld: ServerWorld = this.world as ServerWorld
-        beam(serverWorld)
-    }
-
-    private fun beam(serverWorld: ServerWorld){
-        val startPos = this.pos.add(0.0,1.2,0.0)
-        val endPos = target?.pos?.add(0.0,1.2,0.0)?:startPos.subtract(0.0,2.0,0.0)
-        val vec = endPos.subtract(startPos).multiply(0.1)
-        var pos = startPos
-        for (i in 1..10){
-            val particle = spells.getCastParticleType()
-            serverWorld.spawnParticles(particle,pos.x,pos.y,pos.z,5,vec.x,vec.y,vec.z,0.0)
-            pos = pos.add(vec)
-        }
-
     }
 
     companion object Stats: TotemAbstractAttributes{
         override fun createTotemAttributes(): DefaultAttributeContainer.Builder {
-            return super.createTotemAttributes().add(EntityAttributes.GENERIC_ARMOR,10.0)
+            return super.createBaseTotemAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,16.0).add(EntityAttributes.GENERIC_ARMOR,16.0)
         }
     }
 

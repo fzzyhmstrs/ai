@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntit
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -79,6 +80,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
     )
 
+    val CHORSE_ENTITY: EntityType<ChorseEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "chorse"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<ChorseEntity>, world: World ->
+            ChorseEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
+    )
+
     val FLORAL_CONSTRUCT_ENTITY: EntityType<FloralConstructEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "floral_construct"),
@@ -125,6 +139,19 @@ object RegisterEntity {
             SpawnGroup.MISC
         ) { entityType: EntityType<TotemOfFuryEntity>, world: World ->
             TotemOfFuryEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
+    )
+
+    val TOTEM_OF_FANGS_ENTITY: EntityType<TotemOfFangsEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "totem_of_fangs"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<TotemOfFangsEntity>, world: World ->
+            TotemOfFangsEntity(
                 entityType,
                 world
             )
@@ -388,6 +415,7 @@ object RegisterEntity {
 
 
     fun registerAll(){
+        FabricDefaultAttributeRegistry.register(CHORSE_ENTITY, ChorseEntity.createChorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())

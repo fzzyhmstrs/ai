@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
@@ -26,12 +27,13 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 import kotlin.math.max
 
 class InspiringSongAugment: EntityAoeAugment(ScepterTier.TWO,true){
-    override val augmentData: AugmentDatapoint
-        AugmentDatapoint(AI.ientity("inspiring_song"),SpellType.GRACE,750,125,
+    override val augmentData: AugmentDatapoint =
+        AugmentDatapoint(AI.identity("inspiring_song"),SpellType.GRACE,750,125,
             10,13,1,20,LoreTier.NO_TIER, Items.NOTE_BLOCK)
 
     //ml 13
@@ -41,6 +43,10 @@ class InspiringSongAugment: EntityAoeAugment(ScepterTier.TWO,true){
             .withRange(3.5,0.5,0.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
         TODO("Not yet implemented")
     }
 

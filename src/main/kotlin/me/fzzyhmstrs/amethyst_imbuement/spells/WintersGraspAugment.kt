@@ -39,8 +39,8 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), PersistentEffectHelper.PersistentEffect{
-    override val augmentData: AugmentDatapoint
-        get() = AugmentDatapoint(AI.identity("winters_grasp"),SpellType.FURY,600,120,
+    override val augmentData: AugmentDatapoint =
+         AugmentDatapoint(AI.identity("winters_grasp"),SpellType.FURY,600,120,
             23,17,1,25, LoreTier.HIGH_TIER, RegisterBlock.GLISTENING_ICE.asItem())
 
     //ml 17
@@ -52,6 +52,10 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
             .withRange(11.75,0.25)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
         TODO("Not yet implemented")
     }
 

@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -24,6 +25,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 
 class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
@@ -38,6 +40,10 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
             .withAmplifier(0,1,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
         TODO("Not yet implemented")
     }
 

@@ -2,8 +2,6 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
@@ -100,7 +98,7 @@ object RegisterEnchantment {
     val FLARE = FlareAugment().also{regEnchant["flare"] = it}
     val FORCE_FIELD = ForcefieldAugment().also{regEnchant["forcefield"] = it}
     val FORTIFY = FortifyAugment().also{regEnchant["fortify"] = it}
-    val FREEZING = FrostboltAugment().also{regEnchant["freezing"] = it}
+    val FROSTBOLT = FrostboltAugment().also{regEnchant["freezing"] = it}
     val GUSTING = GustingAugment().also{regEnchant["gusting"] = it}
     val HAMPTERTIME = HamptertimeAugment().also{regEnchant["hamptertime"] = it}
     val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().also{regEnchant["hard_light_bridge"] = it}
@@ -162,12 +160,6 @@ object RegisterEnchantment {
             val id = AI.identity( enchant.key)
             if (e is AbstractConfigDisableEnchantment){
                 if (!e.isEnabled()){
-                    LOGGER.info("Augment $id is set as disabled in the configs!")
-                }
-            }
-            if (e is ScepterAugment){
-                AugmentHelper.registerAugmentStat(e)
-                if (!AugmentHelper.getAugmentEnabled(id.toString())) {
                     LOGGER.info("Augment $id is set as disabled in the configs!")
                 }
             }
