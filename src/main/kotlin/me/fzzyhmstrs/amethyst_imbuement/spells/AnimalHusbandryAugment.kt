@@ -10,14 +10,18 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_core.item.ScepterLike
+import me.fzzyhmstrs.amethyst_core.item.SpellCasting
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraftHorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBoost
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
@@ -25,15 +29,18 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
@@ -204,6 +211,38 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
         return start
     }
 
+    override fun <T> onCast(
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
+        if (spells.primary() == RegisterEnchantment.SUMMON_SEAHORSE){
+            val scepter = user.getStackInHand(hand)
+            if (scepter.item is ScepterLike && scepter.item is SpellCasting){
+                val nbt = scepter.nbt
+                if (nbt != null){
+                    if (nbt.contains("current_draft_horse") && world is ServerWorld){
+                        val draftHorse = world.getEntity(nbt.getUuid("current_draft_horse"))
+                        val chorseNbt = NbtCompound()
+                        draftHorse?.saveSelfNbt(chorseNbt) ?: return SUCCESSFUL_PASS
+                        nbt.put("stored_draft_horse",chorseNbt)
+                        draftHorse.discard()
+                        nbt.remove("current_draft_horse")
+                        context.set(ProcessContext.COOLDOWN,200)
+                        return SpellActionResult.overwrite(AugmentHelper.DRY_FIRED)
+                    }
+                }
+            }
+        }
+        return SUCCESSFUL_PASS
+    }
+
     override fun <T> onEntityHit(
         entityHitResult: EntityHitResult,
         context: ProcessContext,
@@ -308,6 +347,40 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
     U : SpellCastingEntity,
     U : LivingEntity
     {
+
+        if (spells.primary() == RegisterEnchantment.SUMMON_SEAHORSE){
+            val scepter = user.getStackInHand(hand)
+            var draftHorseLoaded: Entity? = null
+            if (scepter.item is ScepterLike && scepter.item is SpellCasting){
+                val nbt = scepter.nbt
+                if (nbt != null){
+                    if (nbt.contains("stored_draft_horse")){
+                        val storedChorse = nbt.getCompound("stored_draft_horse")
+                        draftHorseLoaded = EntityType.loadEntityWithPassengers(storedChorse,world) { entity -> entity}
+                        nbt.remove("stored_draft_horse")
+                    }
+                }
+            }
+            val chorse = if(draftHorseLoaded is DraftHorseEntity) {
+                draftHorseLoaded
+            } else {
+                RegisterEntity.DRAFT_HORSE_ENTITY.create(world) ?: return summons
+            }
+            val found = AugmentHelper.findSpawnPos(world, BlockPos.ofFloored(hit.pos), chorse, 3, tries = 16)
+            if (!found){
+                return listOf()
+            }
+            chorse.setPlayerHorseOwner(user)
+            chorse.passEffects(spells,effects,level)
+            chorse.passContext(context)
+            if (scepter.item is ScepterLike && scepter.item is SpellCasting){
+                scepter.orCreateNbt.putUuid("current_draft_horse",chorse.uuid)
+            }
+            return listOf(chorse)
+
+
+
+        }
 
         for (summon in summons){
             if (summon is LivingEntity){

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.DraconicBoxModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.RenderLayer

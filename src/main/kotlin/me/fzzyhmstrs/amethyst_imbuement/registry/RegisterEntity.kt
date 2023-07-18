@@ -93,6 +93,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
     )
 
+    val DRAFT_HORSE_ENTITY: EntityType<DraftHorseEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "draft_horse"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<DraftHorseEntity>, world: World ->
+            DraftHorseEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
+    )
+
     val FLORAL_CONSTRUCT_ENTITY: EntityType<FloralConstructEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "floral_construct"),
@@ -416,6 +429,7 @@ object RegisterEntity {
 
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(CHORSE_ENTITY, ChorseEntity.createChorseBaseAttributes())
+        FabricDefaultAttributeRegistry.register(DRAFT_HORSE_ENTITY, DraftHorseEntity.createDraftHorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())

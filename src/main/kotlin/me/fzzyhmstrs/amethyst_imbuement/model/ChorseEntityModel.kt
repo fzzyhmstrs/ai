@@ -18,8 +18,8 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
     private val rightHindLeg: ModelPart
     private val body: ModelPart
     private val head: ModelPart
-    private val left_wing: ModelPart
-    private val right_wing: ModelPart
+    private val leftWing: ModelPart
+    private val rightWing: ModelPart
     init {
         leftFrontLeg = root.getChild("left_front_leg")
         rightFrontLeg = root.getChild("right_front_leg")
@@ -27,8 +27,8 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
         rightHindLeg = root.getChild("right_rear_leg")
         body = root.getChild("body")
         head = root.getChild("head")
-        left_wing = root.getChild("left_wing")
-        right_wing = root.getChild("right_wing")
+        leftWing = root.getChild("left_wing")
+        rightWing = root.getChild("right_wing")
     }
 
     companion object {
@@ -67,17 +67,17 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
                     .cuboid(-2.0f, -13.579f, -4.2847f, 4.0f, 12.0f, 6.0f, Dilation(0.0f)),
                 ModelTransform.of(0.0f, 11.579f, -5.7153f, 0.48f, 0.0f, 0.0f)
             )
-            head.addChild(
-                "cube_r1",
-                ModelPartBuilder.create().uv(54, 60).cuboid(-2.0f, -12.0f, -11.0f, 4.0f, 3.0f, 1.0f, Dilation(0.0f))
-                    .uv(0, 60).cuboid(-3.0f, -14.0f, -12.0f, 6.0f, 2.0f, 2.0f, Dilation(0.0f)),
-                ModelTransform.of(0.0f, 0.0f, 0.0f, -0.48f, 0.0f, 0.0f)
-            )
-            head.addChild(
-                "cube_r2",
-                ModelPartBuilder.create().uv(20, 32).cuboid(-3.0f, -3.0f, -2.0f, 6.0f, 6.0f, 5.0f, Dilation(0.0f)),
-                ModelTransform.of(0.0f, -14.9894f, -1.0975f, -0.48f, 0.0f, 0.0f)
-            )
+                head.addChild(
+                    "cube_r1",
+                    ModelPartBuilder.create().uv(54, 60).cuboid(-2.0f, -12.0f, -11.0f, 4.0f, 3.0f, 1.0f, Dilation(0.0f))
+                        .uv(0, 60).cuboid(-3.0f, -14.0f, -12.0f, 6.0f, 2.0f, 2.0f, Dilation(0.0f)),
+                    ModelTransform.of(0.0f, 0.0f, 0.0f, -0.48f, 0.0f, 0.0f)
+                )
+                head.addChild(
+                    "cube_r2",
+                    ModelPartBuilder.create().uv(20, 32).cuboid(-3.0f, -3.0f, -2.0f, 6.0f, 6.0f, 5.0f, Dilation(0.0f)),
+                    ModelTransform.of(0.0f, -14.9894f, -1.0975f, -0.48f, 0.0f, 0.0f)
+                )
             val left_wing: ModelPartData = modelPartData.addChild(
                 "left_wing",
                 ModelPartBuilder.create().uv(16, 48).cuboid(0.0f, 0.0f, -4.5f, 1.0f, 7.0f, 9.0f, Dilation(0.0f)),
@@ -118,8 +118,8 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
         rightHindLeg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
         body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
         head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
-        left_wing.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
-        right_wing.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
+        leftWing.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
+        rightWing.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha)
     }
 
     override fun animateModel(abstractHorseEntity: ChorseEntity, f: Float, g: Float, h: Float) {
@@ -188,6 +188,18 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
         this.rightFrontLeg.visible = !bl2
         this.leftFrontLeg.visible = !bl2
         body.pivotY = if (bl2) 10.8f else 0.0f
+    }
+
+    override fun setAngles(
+        entity: ChorseEntity,
+        limbAngle: Float,
+        limbDistance: Float,
+        animationProgress: Float,
+        headYaw: Float,
+        headPitch: Float
+    ) {
+        this.rightWing.roll = animationProgress
+        this.leftWing.roll = -animationProgress
     }
 
 }
