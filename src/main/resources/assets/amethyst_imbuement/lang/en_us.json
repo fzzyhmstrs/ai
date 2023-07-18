@@ -1037,6 +1037,7 @@
 	"enchantment.amethyst_imbuement.summon_chicken.desc.falling": "Grants Slow Falling to the target(s).",
 	"enchantment.amethyst_imbuement.summon_chicken.desc.summons": "Summons gain Slow Falling.",
 	"enchantment.amethyst_imbuement.summon_chicken.desc.damage": "Slain enemies have a chance to drop an egg.",
+	"enchantment.amethyst_imbuement.summon_chicken.desc.projectile": "Projectiles summon a chicken on hit.",
 	"enchantment.amethyst_imbuement.summon_chicken.summon_seahorse": "Summon Chorse",
 	"enchantment.amethyst_imbuement.summon_chicken.summon_seahorse.desc1": "Summons a majestic Chorse mount, or stores the existing Chorse in the scepter.",
 	"enchantment.amethyst_imbuement.summon_chicken.summon_seahorse.desc2": "Chorses are fast, jump high, and have slow falling.",
