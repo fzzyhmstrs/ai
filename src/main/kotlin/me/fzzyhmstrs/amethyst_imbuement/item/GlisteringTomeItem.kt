@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 
 class GlisteringTomeItem(settings: Settings): Item(settings) {
-    /*override fun use(world: World, playerEntity: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+    override fun use(world: World, playerEntity: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         import vazkii.patchouli.api.PatchouliAPI
 
         if (!world.isClient) {
@@ -20,5 +20,5 @@ class GlisteringTomeItem(settings: Settings): Item(settings) {
             return TypedActionResult.success(playerEntity.getStackInHand(hand))
         }
         return TypedActionResult.consume(playerEntity.getStackInHand(hand))
-    }*/
+    }
 }
