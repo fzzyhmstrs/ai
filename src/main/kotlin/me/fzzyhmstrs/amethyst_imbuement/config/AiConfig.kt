@@ -355,6 +355,7 @@ object AiConfig
 
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity): Boolean{
             if (user == null) return false
+            if (user === entity) return true
             if (forcePvpOnAllSpells.get()){
                 return user.isTeammate(entity)
             }
