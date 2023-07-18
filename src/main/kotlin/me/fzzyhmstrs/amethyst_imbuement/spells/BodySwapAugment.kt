@@ -40,8 +40,9 @@ class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGE
         when(other) {
             RegisterEnchantment.EMPOWERED_SLASH -> 
                 description.addLang("enchantment.amethyst_imbuement.body_swap.empowered_slash.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
-            RegisterEnchantment.CURSE ->
+            RegisterEnchantment.CURSE -> {
                 description.addLang("enchantment.amethyst_imbuement.body_swap.curse.desc", SpellAdvancementChecks.UNIQUE)
+            }
         }
         if (othersType.has(AugmentType.PROJECTILE))
             description.addLang("enchantment.amethyst_imbuement.body_swap.desc.projectile", SpellAdvancementChecks.ON_KILLED)
@@ -173,7 +174,7 @@ class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGE
             val pos0 = entityHitResult.entity.pos
             val pos1 = Vec3d(pos0.toVector3f())
             user.teleport(pos1.x,pos1.y,pos1.z)
-            SpellActionResult.success(AugmentHelper.DAMAGED_MOB
+            SpellActionResult.success(AugmentHelper.TELEPORTED)
         }
         return SUCCESSFUL_PASS
     }
