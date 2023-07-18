@@ -51,7 +51,6 @@ import net.minecraft.world.World
 
 /*
     Checklist
-    - implement all special combinations
      */
 
 @Suppress("SpellCheckingInspection")
@@ -83,6 +82,8 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
             description.addLang("enchantment.amethyst_imbuement.summon_chicken.desc.summons", SpellAdvancementChecks.SUMMONS)
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.summon_chicken.desc.damage", SpellAdvancementChecks.ON_KILL)
+        if (othersType.has(AugmentType.PROJECTILE))
+            description.addLang("enchantment.amethyst_imbuement.summon_chicken.desc.projectile", SpellAdvancementChecks.DAMAGE)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -171,6 +172,15 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
         othersType: AugmentType,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
+        if (spells.primary() == RegisterEnchantment.GUSTING){
+            if (user is ModifiableEffectMobOrPlayer){
+                user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.GUST_EFFECT, 600)
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else if (user is ModifiableEffectEntity){
+                user.addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.GUST_EFFECT, 600)
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            }
+        }
         if (spells.primary() == RegisterEnchantment.SUMMON_SEAHORSE){
             val scepter = user.getStackInHand(hand)
             if (scepter.item is ScepterLike && scepter.item is SpellCasting){
