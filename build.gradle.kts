@@ -105,10 +105,10 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
 
-    /*val patchouliVersion: String by project
+    val patchouliVersion: String by project
     modImplementation("vazkii.patchouli:Patchouli:$patchouliVersion"){
         exclude("net.fabricmc.fabric-api")
-    }*/
+    }
 
     val structurizedVersion: String by project
     modImplementation(":structurized_reborn-$structurizedVersion"){
