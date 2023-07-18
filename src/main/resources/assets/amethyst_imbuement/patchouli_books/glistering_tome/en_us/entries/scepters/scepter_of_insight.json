@@ -1,0 +1,38 @@
+{
+  "name": "Scepter of Insight",
+  "icon": "amethyst_imbuement:scepter_of_insight",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two wit aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/insightful)Insightful$() and $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$() and the spell Mental Clarity. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$()$(br2)$(l)Mana:$() 550"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+      "anc_b": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+      "desc_a": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Scepter of Insight",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "minecraft:emerald_block",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:emerald_block",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "tag:amethyst_imbuement:wit_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:emerald_block",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:emerald_block",
+      "result_item": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+      "cost_text": "$(l)Level Cost: $(2)17$()"
+    }
+  ]
+}

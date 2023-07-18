@@ -1,0 +1,21 @@
+{    
+"name": "旅人",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/traveler.png",
+"sortnum": 57,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响与移动和探索有关的法术。受影响的法术冷却时间减少65%，效果范围增加15%，施放受影响的法术有12.5%几率给予施法者速度。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "旅人",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/traveler.png",
+"ancestor": "无",
+"descendant": "$(l:amethyst_imbuement:modifiers/sojourner)羁旅者$()",
+"mod_type": "$(2)探索$()",
+"mod_text": "你的法杖渴望环游世界。坚守羁旅之道时自动注入旅人法杖。"
+}
+]
+}

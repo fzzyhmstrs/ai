@@ -1,0 +1,20 @@
+{    
+"name": "铜制珠宝",    
+"icon": "amethyst_imbuement:copper_ring",    
+"category": "amethyst_imbuement:trinkets",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "铜制珠宝是一套基本的饰品，它们是更强大的$(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)注魔珠宝$()的基础。铜制珠宝可以提供些许速度增益，每件穿戴的珠宝效果可以堆叠。共有三件基础珠宝：$(li)$(#b0b)铜头带$()$(li)$(#b0b)铜护身符$()$(li)$(#b0b)铜指环$()"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:copper_headband",
+"recipe2": "amethyst_imbuement:copper_amulet"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:copper_ring"
+}
+]
+}

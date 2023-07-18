@@ -1,0 +1,31 @@
+{    
+"name": "灵魂绑定",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()物品在死亡时不会丢失。$(br)$(l)适用于：$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)紫水晶图腾$()$(br)$(l)最高等级：$() 1$(br)$(l)主动/被动：$()被动$(br)$(l)级别：$()极高$(br)$(l)不兼容：$()其他被动图腾强化"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：灵魂绑定",
+"anchor": "soulbinding",
+"imbue_a_item": "minecraft:emerald",
+"imbue_b_item": "minecraft:emerald",
+"imbue_c_item": "minecraft:emerald",
+"imbue_d_item": "minecraft:emerald",
+"craft_a_item": "minecraft:soul_sand",
+"craft_b_item": "minecraft:soul_sand",
+"craft_c_item": "minecraft:soul_sand",
+"craft_d_item": "minecraft:soul_sand",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "minecraft:soul_sand",
+"craft_g_item": "minecraft:soul_sand",
+"craft_h_item": "minecraft:soul_sand",
+"craft_i_item": "minecraft:soul_sand",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soulbinding\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)8$()"
+}
+]
+}

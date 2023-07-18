@@ -1,0 +1,20 @@
+{    
+"name": "智慧召唤师路线",
+"icon": "amethyst_imbuement:scepter_of_summoning",
+"category": "amethyst_imbuement:scepter_resonance_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "沿此路线踏上共鸣之道，使用高等级法术使役部下。所有法术都有几率二重施放，召唤法术获得很大提升。所有法术都比平时高出一级，智慧法术经验值获取加倍。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "spec": "召唤",
+  "spells": "召唤僵尸，共鸣（独有）",
+  "mods": "回响，召唤师，熟练，智慧"
+}
+]
+}

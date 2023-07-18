@@ -1,0 +1,38 @@
+{
+  "name": "Scepter of the Vanguard",
+  "icon": "amethyst_imbuement:scepter_of_the_vanguard",
+  "category": "amethyst_imbuement:scepters",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tier two grace aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/smiting)Smiting$() and $(l:amethyst_imbuement:modifiers/graceful)Graceful$() and the unique spell Barrier. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis.$()$(br2)$(l)Mana:$() 550"
+    },
+    {
+      "type": "amethyst_imbuement:scepter_lineage_tier_2",
+      "anc_a": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+      "anc_b": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "input_item": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "desc_a": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}"
+    },
+    {
+      "type": "amethyst_imbuement:imbuing_recipe",
+      "title": "Scepter..Vanguard",
+      "imbue_a_item": "minecraft:gold_ingot",
+      "imbue_b_item": "amethyst_imbuement:brutal_gem",
+      "imbue_c_item": "minecraft:gold_ingot",
+      "imbue_d_item": "minecraft:gold_ingot",
+      "craft_a_item": "minecraft:iron_chestplate",
+      "craft_b_item": "amethyst_imbuement:imbued_quartz",
+      "craft_c_item": "amethyst_imbuement:iridescent_orb",
+      "craft_d_item": "amethyst_imbuement:imbued_lapis",
+      "craft_e_item": "tag:amethyst_imbuement:grace_scepters",
+      "craft_f_item": "amethyst_imbuement:imbued_lapis",
+      "craft_g_item": "minecraft:iron_chestplate",
+      "craft_h_item": "amethyst_imbuement:imbued_quartz",
+      "craft_i_item": "minecraft:iron_chestplate",
+      "result_item": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+      "cost_text": "$(l)Level Cost: $(2)19$()"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{    
+"name": "法杖升级树",
+"icon": "minecraft:oak_sapling",
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [
+  {
+    "type": "patchouli:text",
+    "text": "$(o)紫晶魔艺$()包含27根特化的法杖，按其等级排列在这棵“树”中。追随其中一支来根据喜好定制一根极其强大的法杖。$(br2)$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree#scepter_tree)$(bold)查看升级分支$()"
+  },
+  {
+    "type": "patchouli:text",
+    "text": "每根法杖都自带若干符文，以及一些无法通过常规方法制造的法术。可追随的道共有6条，每条道又分为5条子道。本指南概述了所有可循的道及其优点、缺点和独特规定。"
+  },
+  {
+    "type": "amethyst_imbuement:skill_tree_1",
+    "anchor": "scepter_tree"
+  },
+  {
+    "type": "amethyst_imbuement:skill_tree_2"
+  }
+]
+}

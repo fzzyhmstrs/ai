@@ -1,0 +1,30 @@
+{    
+"name": "护卫蜡烛",    
+"icon": "amethyst_imbuement:warding_candle",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "这些蜡烛比一般的蜡烛更亮，可以抵御某些生物。还可以为$(l:amethyst_imbuement:altars/altar_of_experience)经验祭坛$()提供双倍的经验容量。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：护卫蜡烛",
+"imbue_a_item": "amethyst_imbuement:smoky_quartz",
+"imbue_b_item": "amethyst_imbuement:smoky_quartz",
+"imbue_c_item": "amethyst_imbuement:smoky_quartz",
+"imbue_d_item": "amethyst_imbuement:smoky_quartz",
+"craft_a_item": "minecraft:candle",
+"craft_b_item": "minecraft:candle",
+"craft_c_item": "minecraft:candle",
+"craft_d_item": "minecraft:candle",
+"craft_e_item": "minecraft:obsidian",
+"craft_f_item": "minecraft:candle",
+"craft_g_item": "minecraft:candle",
+"craft_h_item": "minecraft:candle",
+"craft_i_item": "minecraft:candle",
+"result_item": "amethyst_imbuement:warding_candle#8",
+"cost_text": "$(l)消耗等级：$(2)3$()"
+}
+]
+}

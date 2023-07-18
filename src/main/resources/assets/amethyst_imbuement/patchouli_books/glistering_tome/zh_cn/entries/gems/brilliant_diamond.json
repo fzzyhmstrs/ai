@@ -1,0 +1,16 @@
+{    
+"name": "璀璨钻石",    
+"icon": "amethyst_imbuement:brilliant_diamond",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)含义：$()光辉与坚毅$(br)$(l)主要特性：$() $(6)所有$()$(br)$(l)获取：$()只能在世界各地的战利品箱中找到，也可以问问村民们是否会出售它。"      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "amethyst_imbuement:brilliant_diamond",
+		"text": "$(o)钻石是非常强大的晶体，这种晶体内部散发着纯净的光辉，这在其他凡品中十分罕见。$()"       
+	}
+]
+}

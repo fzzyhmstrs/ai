@@ -1,0 +1,16 @@
+{    
+"name": "绿宝石",    
+"icon": "minecraft:emerald",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)含义：$()忠诚与怜悯$(br)$(l)主要特性：$() $(2)智慧$()$(br)$(l)获取：$()在高山的地底深处开采或与村民交易获得。"      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "minecraft:emerald",
+		"text": "$(o)自然界的所有绿色都集萃于绿宝石的琢面上。这种自然之力是你坚定的伙伴，在你最需要魔法时伸出援手$()"       
+	}
+]
+}

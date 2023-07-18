@@ -4,5 +4,6 @@
   "version": 3,
   "dont_generate_book": true,
   "custom_book_item": "amethyst_imbuement:glistering_tome",
-  "show_progress": false
+  "show_progress": false,
+  "use_resource_pack": true
 }

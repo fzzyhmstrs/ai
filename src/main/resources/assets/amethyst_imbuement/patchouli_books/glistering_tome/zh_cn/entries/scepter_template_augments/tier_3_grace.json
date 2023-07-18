@@ -1,0 +1,30 @@
+{    
+"name": "3级恩典模板",    
+"icon": "amethyst_imbuement:golden_heart",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "3级恩典法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：3级恩典",
+"anchor": "tier_3_grace",
+"imbue_a_item": "amethyst_imbuement:ametrine",
+"imbue_b_item": "amethyst_imbuement:moonstone",
+"imbue_c_item": "amethyst_imbuement:moonstone",
+"imbue_d_item": "amethyst_imbuement:moonstone",
+"craft_a_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_b_item": "amethyst_imbuement:book_of_mythos",
+"craft_c_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_d_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_e_item": "amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_g_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_h_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"craft_i_item": "minecraft:fermented_spider_eye,minecraft:golden_apple,amethyst_imbuement:golden_heart",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

@@ -1,0 +1,16 @@
+{    
+"name": "光辉之球",    
+"icon": "amethyst_imbuement:lustrous_sphere",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+	{            
+		"type": "patchouli:text",            
+		"text": "$(l)获取：$()制造这些神秘古物的能力早已遗失在时间长河中。光辉之球只能在难以企及的危险之地找到。多找找战利品箱！$(br2)$(o)它的深处反射着数以百万的真实$()"      
+	},
+	{            
+		"type": "patchouli:spotlight",
+		"item": "amethyst_imbuement:lustrous_sphere",
+		"text": "$(o)巨大的能量从光辉之球中放射而出。使用它来创造最强的魔法焦点。$()"       
+	}
+]
+}

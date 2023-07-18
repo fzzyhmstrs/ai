@@ -1,0 +1,21 @@
+{    
+"name": "回响",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/echoing.png",
+"sortnum": 51,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "法术有33%的几率在1秒后再无消耗施放一次。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "回响",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/echoing.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)法术复制$()",
+"mod_text": "你的法杖响起甜美的风铃声。循尽共鸣之道时自动显现于振之谐。"
+}
+]
+}

@@ -1,0 +1,30 @@
+{    
+"name": "经验灌木种子",    
+"icon": "amethyst_imbuement:xp_bush_seed",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "这种种子可以种出一种类似于甜浆果的灌木。成熟后，可以从中收获$(l:amethyst_imbuement:imbuing/bottle-o-enchanting)附魔之瓶$()！种植一个这样的农场来收获源源不断的经验值。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：经验灌木种子",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:sweet_berries",
+"craft_b_item": "minecraft:experience_bottle",
+"craft_c_item": "minecraft:sweet_berries",
+"craft_d_item": "minecraft:experience_bottle",
+"craft_e_item": "minecraft:sweet_berries",
+"craft_f_item": "minecraft:experience_bottle",
+"craft_g_item": "minecraft:sweet_berries",
+"craft_h_item": "minecraft:experience_bottle",
+"craft_i_item": "minecraft:sweet_berries",
+"result_item": "amethyst_imbuement:xp_bush_seed#3",
+"cost_text": "$(l)消耗等级：$(2)3$()"
+}
+]
+}

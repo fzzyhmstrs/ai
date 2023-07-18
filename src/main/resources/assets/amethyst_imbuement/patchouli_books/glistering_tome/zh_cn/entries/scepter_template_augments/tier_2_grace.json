@@ -1,0 +1,30 @@
+{    
+"name": "2级恩典模板",    
+"icon": "minecraft:milk_bucket",    
+"category": "amethyst_imbuement:scepter_template_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "2级恩典法术的注魔模板。所用的学识之书和关键物品必须匹配，你不能随便用一本书和物品来注魔。$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/iridescent_scepter)虹彩法杖$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：2级恩典",
+"anchor": "tier_2_grace",
+"imbue_a_item": "amethyst_imbuement:moonstone",
+"imbue_b_item": "amethyst_imbuement:smoky_quartz",
+"imbue_c_item": "amethyst_imbuement:smoky_quartz",
+"imbue_d_item": "amethyst_imbuement:smoky_quartz",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:book_of_lore",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:golden_apple,minecraft:milk_bucket,minecraft:glistering_melon_slice,minecraft:saddle",
+"craft_e_item": "amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:golden_apple,minecraft:milk_bucket,minecraft:glistering_melon_slice,minecraft:saddle",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:golden_apple,minecraft:milk_bucket,minecraft:glistering_melon_slice,minecraft:saddle",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book"
+}
+]
+}

@@ -1,0 +1,5 @@
+{    
+"name": "饰品",
+"description": "$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()可以将魔法注入各种饰品以获得许多正面效果，甚至可以免于死亡。继续阅读以了解这些神奇的饰品：$(li)$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)珠宝$()$(li)$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)图腾$()",
+"icon": "amethyst_imbuement:totem_of_amethyst"
+}

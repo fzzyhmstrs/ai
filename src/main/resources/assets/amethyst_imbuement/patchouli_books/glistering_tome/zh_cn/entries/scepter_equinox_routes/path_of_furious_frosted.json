@@ -1,0 +1,20 @@
+{    
+"name": "愤怒寒霜路线",
+"icon": "amethyst_imbuement:frosted_scepter",
+"category": "amethyst_imbuement:scepter_equinox_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果你想用高等级的寒冰法术把敌人冻成冰块，请沿此路线踏上均衡之道。寒冰类法术获得极大提升，元素符文进一步强化了所有的元素魔法，暴怒符文使愤怒法术能获得$(o)三倍$()的施法经验值。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+ "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"},{modifier_id:\"amethyst_imbuement:ice_aspect\"},{modifier_id:\"amethyst_imbuement:enraged\"}]}",
+  "spec": "寒冰魔法",
+  "spells": "冰锥（特有）",
+  "mods": "寒冰，元素，暴怒"
+}
+]
+}

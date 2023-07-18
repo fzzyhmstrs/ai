@@ -1,0 +1,6 @@
+{    
+"name": "图腾法术",
+"parent": "amethyst_imbuement:scepter_augments",
+"description": "某些法术可以召唤特殊图腾，这些图腾可以在以自身为中心的区域内施放能力。这些法术与标准模板不同；须使用$(l:amethyst_imbuement:scepter_upgrading/aspect_gems)特化宝石$(/l)而不是模板中的宝石。",
+"icon": "amethyst_imbuement:lethal_gem"
+}

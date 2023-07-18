@@ -1,0 +1,30 @@
+{    
+"name": "烟熏石英",    
+"icon": "amethyst_imbuement:smoky_quartz",    
+"category": "amethyst_imbuement:gems",    
+"pages": [        
+{            
+	"type": "patchouli:text",            
+	"text": "$(l)含义：$()净化与保护$(br)$(l)主要特性：$() $(9)恩典$()$(br)$(l)获取：$()使用$(#490)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()制造烟熏石英或与村民交易获得。"      
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：烟熏石英",
+"imbue_a_item": "minecraft:ink_sac",
+"imbue_b_item": "minecraft:ink_sac",
+"imbue_c_item": "minecraft:ink_sac",
+"imbue_d_item": "minecraft:ink_sac",
+"craft_a_item": "minecraft:quartz",
+"craft_b_item": "minecraft:quartz",
+"craft_c_item": "minecraft:quartz",
+"craft_d_item": "minecraft:quartz",
+"craft_e_item": "minecraft:campfire",
+"craft_f_item": "minecraft:quartz",
+"craft_g_item": "minecraft:quartz",
+"craft_h_item": "minecraft:quartz",
+"craft_i_item": "minecraft:quartz",
+"result_item": "amethyst_imbuement:smoky_quartz#4",
+"cost_text": "$(l)消耗等级：$(2)1$()"
+}     
+]
+}

@@ -1,0 +1,21 @@
+{    
+"name": "暴怒",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/enraged.png",
+"sortnum": 2,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响愤怒法术。施法获得三倍的愤怒经验值，愤怒法术等级增加1，增加0.4基础伤害。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "暴怒",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enraged.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/furious)愤怒$()",
+"descendant": "无",
+"mod_type": "$(2)法术施放$()",
+"mod_text": "你的法杖燃烧着你的怒火。循尽愤怒均衡之道时自动显现于均之衡。"
+}
+]
+}

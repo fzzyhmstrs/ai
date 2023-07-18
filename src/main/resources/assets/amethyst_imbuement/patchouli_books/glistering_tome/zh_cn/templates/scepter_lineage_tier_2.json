@@ -1,0 +1,72 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "合成谱系",
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:item", 
+"item": "#anc_a#",
+"framed": true,
+"x": 25,            
+"y": 22
+},
+{
+"type": "patchouli:item", 
+"item": "#anc_b#",
+"framed": true,
+"x": 75,            
+"y": 22
+},
+{
+"type": "patchouli:image",                        
+"x": 25,
+"y": 59,
+"image": "patchouli:textures/gui/crafting.png",
+"width": 66,
+"height": 26,
+"u": 0,
+"v": 102,
+"texture_width": 128,
+"texture_height": 256
+},
+{
+"type": "patchouli:item", 
+"item": "#input_item#",
+"framed": false,
+"x": 50,            
+"y": 64
+},
+{
+"type": "patchouli:item", 
+"item": "#desc_a#",
+"framed": true,
+"x": 50,
+"y": 111
+},
+{
+"type": "patchouli:image",                        
+"x": 54,
+"y": 44,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+},
+{
+"type": "patchouli:image",                        
+"x": 54,
+"y": 90,
+"image": "amethyst_imbuement:textures/gui/patchouli/book_icons.png",
+"width": 9,
+"height": 9,
+"u": 0,
+"v": 0,
+"texture_width": 32,
+"texture_height": 16
+}
+]}

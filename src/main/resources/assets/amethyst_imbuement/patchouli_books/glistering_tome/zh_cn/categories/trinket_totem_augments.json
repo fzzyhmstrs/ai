@@ -1,0 +1,6 @@
+{    
+"name": "图腾强化",
+"parent": "amethyst_imbuement:trinket_augments",
+"description": "此处列出适用于$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)图腾$()的强化。",
+"icon": "amethyst_imbuement:totem_of_amethyst"
+}

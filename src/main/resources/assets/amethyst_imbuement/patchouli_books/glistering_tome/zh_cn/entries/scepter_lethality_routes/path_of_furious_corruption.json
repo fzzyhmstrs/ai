@@ -1,0 +1,20 @@
+{    
+"name": "愤怒腐化路线",
+"icon": "amethyst_imbuement:corrupted_scepter",
+"category": "amethyst_imbuement:scepter_lethality_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "如果你想在施展高等级法术使你的敌人凋零，请沿此路线踏上致命之道。击中或影响目标时使他们凋零，危险符文能够提升伤害。拥有两倍的施法升级速度。但施放非愤怒类法术的效果变差。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_2": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:necrotic\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+  "spec": "高级凋零法术",
+  "spells": "灵魂飞弹",
+  "mods": "危险/危险契约，坏死，愤怒"
+}
+]
+}
