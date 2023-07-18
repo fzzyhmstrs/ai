@@ -39,11 +39,25 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         get() = super.baseEffect.withDuration(215,35).withAmplifier(1)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        if (othersType.positiveEffect)
+            description.addLang("enchantment.amethyst_imbuement.chickenform.desc.positive", SpellAdvancementChecks.STAT)
+        if (othersType.has(AugmentType.damage)) {
+            description.addLang("enchantment.amethyst_imbuement.chickenform.desc.damage", SpellAdvancementChecks.DAMAGE)
+            description.addLang("enchantment.amethyst_imbuement.chickenform.desc.kill", SpellAdvancementChecks.ON_KILL)
+        }
+        when(other) {
+            RegisterEnchantment.SUMMON_GOLEM -> {
+                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+            }
+            RegisterEnchantment.DASH ->
+                description.addLang("enchantment.amethyst_imbuement.chickenform.dash.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
+
+        }
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -53,34 +67,116 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.ENTITY_EFFECTS_TRIGGER)
     }
 
-    override fun supportEffect(
+    override fun specialName(otherSpell: ScepterAugment): MutableText {
+        return when (otherSpell) {
+            RegisterEnchantment.SUMMON_GOLEM ->
+                AcText.translatable("enchantment.amethyst_imbuement.chickenform.summon_golem")
+            RegisterEnchantment.DASH ->
+                AcText.translatable("enchantment.amethyst_imbuement.chickenform.dash")
+            else ->
+                super.specialName(otherSpell)
+        }
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        if(target != null) {
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success())
+            return result
+        if (othersType.has(AugmentType.DAMAGE) && world.random.nextFloat() < 0.05){
+            if (user.hasStatusEffect(StatusEffects.SPEED)){
+                val effect = user.getStatusEffect(StatusEffects.SPEED)
+                val amp = min(effect?.amplifier?:0,4)
+                val duration = effect?.duration?:0
+                if (duration > 0){
+                    val duration2 = if(duration < 200) {200} else {duration}
+                    user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,duration2,amp + 1))
+                }
+            } else {
+                user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, 200))
+            }
+        }
+
+        return SUCCESSFUL_PASS
+    }
+
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        if (othersType.empty){
+            val target = entityHitResult.entity
             if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                return true
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), effects.amplifier(level)))
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, effects.duration(level), effects.amplifier(level)))
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))
-        effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-        return true
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    override fun <T> onEntityKill(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
+        if (user.hasStatusEffect(StatusEffects.SPEED)){
+            val effect = user.getStatusEffect(StatusEffects.SPEED)
+            val amp = min(effect?.amplifier?:0,4)
+            val duration = effect?.duration?:0
+            if (duration > 0){
+                val duration2 = if(duration < 200) {200} else {duration}
+                user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,duration2,amp + 1))
+            }
+        } else {
+            user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, 200))
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_CHICKEN_AMBIENT,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 }
