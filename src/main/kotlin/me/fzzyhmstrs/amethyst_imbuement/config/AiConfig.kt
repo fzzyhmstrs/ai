@@ -346,6 +346,7 @@ object AiConfig
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment?): Boolean{
             if (user == null) return false
+            if (user === entity) return true
             if (forcePvpOnAllSpells.get() || spell?.getPvpMode() == true){
                 return user.isTeammate(entity)
             }
