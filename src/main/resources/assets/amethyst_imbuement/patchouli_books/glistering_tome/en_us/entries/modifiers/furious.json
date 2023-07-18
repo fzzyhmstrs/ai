@@ -1,0 +1,21 @@
+{    
+"name": "Furious",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/furious.png",
+"sortnum": 1,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects fury spells only. An additional 1 Fury XP gained on spell-cast, and adds 0.2 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Furious",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/furious.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/enraged)Enraged$()",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "Your scepter absorbs your inner fury and channels it through its spells. Imbues onto the Furious Scepter and persists on the Path of Lethality and the Path of the Equinox"
+}
+]
+}

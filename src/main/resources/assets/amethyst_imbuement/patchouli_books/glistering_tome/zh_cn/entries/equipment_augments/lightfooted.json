@@ -1,0 +1,31 @@
+{    
+"name": "轻盈",    
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:equipment_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()不再沉入细雪中，且不会踩坏农作物。$(br)$(l)适用于：$() $(#490)靴子$()$(br)$(l)最高等级：$() 1 $(br)$(l)级别：$()低$(br)$(l)不兼容：$()无"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：轻盈",
+"anchor": "lightfooted",
+"imbue_a_item": "amethyst_imbuement:danburite",
+"imbue_b_item": "amethyst_imbuement:danburite",
+"imbue_c_item": "amethyst_imbuement:danburite",
+"imbue_d_item": "amethyst_imbuement:danburite",
+"craft_a_item": "minecraft:leather",
+"craft_b_item": "minecraft:leather",
+"craft_c_item": "minecraft:leather",
+"craft_d_item": "minecraft:leather",
+"craft_e_item": "minecraft:chainmail_boots",
+"craft_f_item": "minecraft:leather",
+"craft_g_item": "minecraft:leather",
+"craft_h_item": "minecraft:leather",
+"craft_i_item": "minecraft:leather",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:lightfooted\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)8$()"
+}
+]
+}

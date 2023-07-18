@@ -1,0 +1,21 @@
+{    
+"name": "利刃",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/blade_aspect.png",
+"sortnum": 37,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响斩击类法术。斩击造成0.5点额外伤害，法术冷却时间减少10%，略微增加法术效果范围。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)致命之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "利刃",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/blade_aspect.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)利刃魔法$()",
+"mod_text": "你的法杖长出锐利的刀锋，坚守致命之道自动注入利刃之杖。"
+}
+]
+}

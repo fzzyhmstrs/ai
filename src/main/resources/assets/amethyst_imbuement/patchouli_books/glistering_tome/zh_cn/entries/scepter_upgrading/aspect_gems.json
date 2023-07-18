@@ -1,0 +1,47 @@
+{    
+"name": "特化宝石",
+"icon": "amethyst_imbuement:blazing_gem",    
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "特化宝石是你在升级之道上制作各种法杖的重要道具。它们是通过以各种方式与环境交互而产生的。$(br2)$(bold)任何特化宝石的制造都需要副手拿着$(l:amethyst_imbuement:imbuing/gem_of_promise)机遇宝石$(/l)$()。" 
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:blazing_gem",
+"link_recipe": true,
+"text": "烈焰宝石拥有一颗燃烧的心。$(br2)创造它需要副手拿着机遇宝石并承受大量火焰伤害（火，熔岩等）。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:sparking_gem",
+"link_recipe": true,
+"text": "电光宝石充盈着闪电的能量。$(br2)创造它需要副手拿着机遇宝石并遭受雷击。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:brutal_gem",
+"link_recipe": true,
+"text": "坚韧的残酷宝石有着钢铁般的决心。$(br2)创造它需要副手拿着机遇宝石并受到敌对生物的伤害。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:lethal_gem",
+"link_recipe": true,
+"text": "致命宝石渗透出战斗的精华。$(br2)创造它需要副手拿着机遇宝石并杀死生物。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:inquisitive_gem",
+"link_recipe": true,
+"text": "好奇宝石有着求知的意志。$(br2)创造它需要副手拿着机遇宝石并获得许多状态效果。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:healers_gem",
+"link_recipe": true,
+"text": "医师宝石闪耀着生命的光辉。$(br2)创造它需要副手拿着机遇宝石并（大量）治疗自己。吃饭很重要。"
+}
+]
+}

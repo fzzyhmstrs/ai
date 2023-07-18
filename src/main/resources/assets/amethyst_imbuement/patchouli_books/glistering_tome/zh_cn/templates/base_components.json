@@ -1,0 +1,158 @@
+{    "components": [        
+{            
+"type": "patchouli:header",            
+"text": "基本材料",            
+"x": -1,            
+"y": -1        
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 12,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "宝石粉尘",
+"x": 49,            
+"y": 17
+},
+{
+"type": "patchouli:item", 
+"item": "amethyst_imbuement:gem_dust",
+"framed": false,
+"x": 7,            
+"y": 12
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 31,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "机遇宝石",
+"x": 49,            
+"y": 36
+},
+{
+"type": "patchouli:item", 
+"item": "amethyst_imbuement:gem_of_promise",
+"framed": false,
+"x": 7,            
+"y": 33
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 52,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "特化宝石",
+"x": 49,            
+"y": 57
+},
+{
+"type": "patchouli:item", 
+"item": "amethyst_imbuement:blazing_gem,amethyst_imbuement:sparking_gem,amethyst_imbuement:brutal_gem,amethyst_imbuement:lethal_gem,amethyst_imbuement:inquisitive_gem,amethyst_imbuement:healers_gem",
+"framed": false,
+"x": 7,            
+"y": 54
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 73,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "孔雀石雕像",
+"x": 49,            
+"y": 78
+},
+{
+"type": "patchouli:item", 
+"item": "amethyst_imbuement:malachite_figurine",
+"framed": false,
+"x": 7,            
+"y": 75
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 94,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "充能水晶",
+"x": 49,            
+"y": 99
+},
+{
+"type": "patchouli:item", 
+"item": "amethyst_imbuement:tigers_eye,amethyst_imbuement:energetic_opal",
+"framed": false,
+"x": 7,            
+"y": 96
+},
+{
+"type": "patchouli:image",                        
+"x": 5,            
+"y": 115,
+"image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
+"width": 40,
+"height": 20,
+"u": 0,
+"v": 0,
+"texture_width": 64,
+"texture_height": 32
+},
+{
+"type": "patchouli:text", 
+"text": "合成材料",
+"x": 49,            
+"y": 120
+},
+{
+"type": "patchouli:item",
+"item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick",
+"framed": false,
+"x": 7,            
+"y": 117
+}
+]}

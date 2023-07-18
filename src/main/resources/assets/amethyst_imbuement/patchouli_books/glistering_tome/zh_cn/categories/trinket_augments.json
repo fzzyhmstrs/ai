@@ -1,0 +1,6 @@
+{    
+"name": "饰品强化",
+"parent": "amethyst_imbuement:augments",
+"description": "此处列出适用于对珠宝和图腾的强化。有些强化并非通用，因此将其细分为不同类别：",
+"icon": "amethyst_imbuement:totem_of_amethyst"
+}

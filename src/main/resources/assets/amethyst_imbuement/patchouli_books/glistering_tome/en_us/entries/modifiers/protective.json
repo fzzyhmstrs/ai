@@ -1,0 +1,21 @@
+{    
+"name": "Protective",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/protective.png",
+"sortnum": 81,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Casting spells adds half an absorption heart to the caster and/or their targets. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight_2",
+"mod_head": "Protective",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/protective.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/champion_of_the_meek)Champion of the Meek$()",
+"mod_type": "$(2)Protection$()",
+"mod_text": "Your scepter seeks to protect you and those around you from harm. Imbues onto the Scepter of the Paladin as you progress on the Paladins Path of the Aegis"
+}
+]
+}

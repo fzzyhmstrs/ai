@@ -1,0 +1,14 @@
+{    
+"name": "宝石与材料",
+"icon": "amethyst_imbuement:gem_dust",
+"category": "amethyst_imbuement:scepter_upgrading",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "为了升级你的法杖，你需要寻找战利品箱、合成、注魔或与世界交互来获取这些魔法原料。"
+},
+{            
+"type": "amethyst_imbuement:base_components"
+}
+]
+}

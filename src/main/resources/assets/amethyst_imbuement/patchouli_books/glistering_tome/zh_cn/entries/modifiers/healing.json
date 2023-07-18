@@ -1,0 +1,21 @@
+{    
+"name": "治愈",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healing.png",
+"sortnum": 75,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响恩典法术。施法获得三倍的恩典经验值，恩典法术持续时间增加30%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "治愈",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healing.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)法术施放$()",
+"mod_text": "你的法杖充盈着原初的生命力，庇佑施法者及其周围的人健康。循至牧师救赎之道时自动注入牧师法杖。"
+}
+]
+}

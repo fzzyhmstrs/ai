@@ -1,0 +1,20 @@
+{    
+"name": "智慧折返路线",
+"icon": "amethyst_imbuement:scepter_of_recall",
+"category": "amethyst_imbuement:scepter_sojourn_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "沿此路线踏上羁旅之道，远行千里的同时始终心系故乡。旅人符文令所有与旅行相关的法术得到提升，所有智慧法术获得$(o)三倍$()施法经验值。法术效果范围在强效范围符文作用下极大增加。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:genius\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+  "spec": "远征",
+  "spells": "探查（特有），折返（特有）",
+  "mods": "旅人，天才，强效范围"
+}
+]
+}

@@ -1,0 +1,29 @@
+{    
+"name": "第一步",    
+"icon": "minecraft:quartz",    
+"category": "amethyst_imbuement:starter_guide",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "遵照下列步骤，走上在紫晶魔艺中展现您无限潜能的正确道路:$(li)收集重要的基础原料$(li)制作一张注魔台并围绕它摆放书架$(li)建造一个刷怪塔或用其他方式收集经验值"
+},
+{
+"type": "patchouli:spotlight",
+"title": "需要收集的基础物品",
+"item": "minecraft:amethyst_shard,minecraft:quartz,minecraft:crying_obsidian,minecraft:rose_bush,minecraft:lilac,minecraft:oxeye_daisy,minecraft:dandelion",
+"text": "$(l)$(l:amethyst_imbuement:gems/amethyst)紫水晶$()：寻找晶洞或在下界开采石英！$(br)$(l)$(l:amethyst_imbuement:gems/quartz)石英$()：许多配方的关键，让下界传送门呼啸起来吧！$(br)$(l)$(#490)哭泣的黑曜石$()：去废弃传送门找找。$(br)$(l)$(#490)花:$()许多基础的水晶都需要花，去各种田野和森林中寻找。"
+},
+{
+"type": "patchouli:spotlight",
+"title": "注魔台",
+"item": "amethyst_imbuement:imbuing_table,minecraft:bookshelf",
+"text": "$(l)$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()：这种强化的附魔台是模组的核心工作站，制作一个是当务之急。$(br)$(l)$(#490)多方块结构$()：与附魔台类似，环绕其放置书架可以提升其能力，在上面的链接中阅读更多信息。"
+},
+{
+"type": "patchouli:spotlight",
+"title": "经验农场",
+"item": "amethyst_imbuement:xp_bush_seed,minecraft:spawner,minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:insight\",lvl:3}]}",
+"text": "你将会需要 大 量 的经验值！$(br)$(l)$(l:amethyst_imbuement:imbuing/xp_bush_seed)经验灌木$()：种植这些灌木可以为你产出$(l:amethyst_imbuement:imbuing/bottle-o-enchanting)附魔之瓶$()！记得注魔一些。$(br)$(l)$(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)洞察$():用这个给你的主武器附魔以获得大量经验值。$(br)$(l)$(#490)刷怪塔$()：经典MC装置，您可能需要建造一些来生产经验值。"
+}
+]
+}

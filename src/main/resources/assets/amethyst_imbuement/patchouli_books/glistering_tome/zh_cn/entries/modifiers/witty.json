@@ -1,0 +1,21 @@
+{    
+"name": "智慧",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/witty.png",
+"sortnum": 3,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响智慧法术。施法获得三倍的智慧经验值，减少智慧法术冷却时间5%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)共鸣之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "智慧",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/witty.png",
+"ancestor": "无",
+"descendant": "$(l:amethyst_imbuement:modifiers/genius)天才$()",
+"mod_type": "$(2)法术施放$()",
+"mod_text": "你的法杖与你心有灵犀，共享智慧。循至此法杖之道时自动注入智慧法杖。"
+}
+]
+}

@@ -1,0 +1,21 @@
+{    
+"name": "烈火",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/fire_aspect.png",
+"sortnum": 39,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "只影响火焰类法术。火焰法术冷却时间减少10%，法术等级增加1，法术效果增加一级，法术效果延长1.5秒。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "烈火",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/fire_aspect.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)元素伤害$()",
+"mod_text": "你的法杖触感温暖。坚守均衡之道时自动注入烈焰法杖。"
+}
+]
+}

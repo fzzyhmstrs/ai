@@ -1,0 +1,21 @@
+{    
+"name": "Reach",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/reach.png",
+"sortnum": 23,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases the range of cast spells by 12%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Reach",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/reach.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()",
+"descendant": "$(l:amethyst_imbuement:modifiers/greater_reach)Greater Reach$()",
+"mod_type": "$(2)Spell Range$()",
+"mod_text": "Your scepters reach increases. Imbue onto any scepter with the recipe on the next page."
+}
+]
+}

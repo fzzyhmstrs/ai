@@ -1,0 +1,16 @@
+{
+  "name": "法杖升级指南",
+  "priority": true,
+  "icon": "amethyst_imbuement:scepter_of_the_vanguard",
+  "category": "amethyst_imbuement:scepter_upgrading",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "法杖可以用特殊材料升级，使其适应不同的魔法特性和聚焦。这些升级后的法杖更强大、更专业，有些还会具有你平常无法获得的独特法术！"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "法杖可以用简单的合成工艺制造，但只有升级法杖才能施展最强大的法术！$(li)从$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree)升级分支$()中选择你所要追随的$(l:amethyst_imbuement:scepter_paths)升级之道$()。一旦踏上了一条道路，便无法后退！$(li)寻找并制作升级所需的$(l:amethyst_imbuement:scepter_upgrading/gem_materials)基本物件$()。$(li)使用$(l:amethyst_imbuement:altars/imbuing_table)注魔台$()来使你在法杖之道上登峰造极！"
+    }
+  ]
+}

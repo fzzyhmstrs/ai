@@ -1,0 +1,41 @@
+{    
+"name": "Graceful Scepter",    
+"icon": "amethyst_imbuement:graceful_scepter",
+"category": "amethyst_imbuement:scepters", 
+"sortnum": 7,
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Tier one grace aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/graceful)Graceful$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis.$()$(br2)$(l)Mana:$() 250"
+},
+{            
+"type": "amethyst_imbuement:scepter_lineage_tier_1",
+"input_item": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "desc_a": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "desc_b": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
+  "desc_c": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "desc_d": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"}]}",
+  "desc_e": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+  "desc_f": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"}]}"
+},
+{
+  "type": "amethyst_imbuement:imbuing_recipe",
+  "title": "Graceful Scepter",
+  "imbue_a_item": "amethyst_imbuement:imbued_quartz",
+  "imbue_b_item": "amethyst_imbuement:healers_gem",
+  "imbue_c_item": "amethyst_imbuement:imbued_quartz",
+  "imbue_d_item": "amethyst_imbuement:imbued_quartz",
+  "craft_a_item": "minecraft:air",
+  "craft_b_item": "minecraft:glistering_melon_slice",
+  "craft_c_item": "minecraft:air",
+  "craft_d_item": "minecraft:glistering_melon_slice",
+  "craft_e_item": "amethyst_imbuement:opaline_scepter",
+  "craft_f_item": "minecraft:glistering_melon_slice",
+  "craft_g_item": "minecraft:air",
+  "craft_h_item": "minecraft:glistering_melon_slice",
+  "craft_i_item": "minecraft:air",
+  "result_item": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "cost_text": "$(l)Level Cost: $(2)5$()"
+}
+]
+}

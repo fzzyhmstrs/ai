@@ -1,6 +1,0 @@
-{    
-"name": "珠宝强化",
-"parent": "amethyst_imbuement:trinket_augments",
-"description": "此处列出适用于$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)注魔珠宝$()的强化。",
-"icon": "amethyst_imbuement:imbued_ring"
-}

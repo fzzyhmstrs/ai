@@ -1,0 +1,31 @@
+{    
+"name": "召唤愤怒图腾",
+"icon": "amethyst_imbuement:lethal_gem",
+"category": "amethyst_imbuement:scepter_totem_augments",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)效果：$()召唤一个图腾，用能量束伤害附近的敌人。$(br)$(l)法术派系：$() $(c)愤怒$()$(br)$(l)魔力消耗：$() 100$(br)$(l)冷却时间：$() 120 秒$(br)$(l)适用于：$() $(l:amethyst_imbuement:scepters/iridescent_scepter)虹彩法杖$()，$(l:amethyst_imbuement:scepters/lustrous_scepter)光辉法杖$()$(br)$(l)级别：$() 2"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "召唤愤怒图腾",
+"anchor": "summon_fury_totem",
+"imbue_a_item": "amethyst_imbuement:lethal_gem",
+"imbue_b_item": "minecraft:amethyst_shard",
+"imbue_c_item": "minecraft:amethyst_shard",
+"imbue_d_item": "minecraft:amethyst_shard",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "amethyst_imbuement:book_of_lore",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "amethyst_imbuement:resonant_rod",
+"craft_e_item": "amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "amethyst_imbuement:resonant_rod",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "amethyst_imbuement:resonant_rod",
+"craft_i_item": "minecraft:air",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:summon_fury_totem\",lvl:1}]}",
+"cost_text": "$(l)消耗等级：$(2)17$()"
+}
+]
+}

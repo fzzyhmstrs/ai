@@ -1,0 +1,6 @@
+{    
+"name": "法术",
+"parent": "amethyst_imbuement:augments",
+"description": "本节中包含可直接用添加到法杖上的基础法术，以及更高级法术的配方模板。",
+"icon": "amethyst_imbuement:lustrous_scepter"
+}

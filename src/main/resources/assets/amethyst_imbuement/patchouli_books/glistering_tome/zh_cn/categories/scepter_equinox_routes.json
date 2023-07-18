@@ -1,0 +1,6 @@
+{    
+"name": "均衡升级路线",
+"parent": "amethyst_imbuement:scepter_paths",
+"description": "均衡之道共有六条具体路线，这些路线与元素之怒有关。可视作是同一道路下的“子类”。",
+"icon": "amethyst_imbuement:equinox"
+}

@@ -1,0 +1,21 @@
+{    
+"name": "强效范围",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_reach.png",
+"sortnum": 25,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "施法范围增加18%。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Greater Reach",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/greater_reach.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/reach)范围$()",
+"descendant": "无",
+"mod_type": "$(2)法术范围$()",
+"mod_text": "你的法杖现在可以大范围施展魔法。坚守羁旅之道时自动注入折返之杖。"
+}
+]
+}

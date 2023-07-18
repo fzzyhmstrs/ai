@@ -1,0 +1,21 @@
+{    
+"name": "Healing",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healing.png",
+"sortnum": 75,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Heals the caster 0.5 health on every successful spell cast. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Healing",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healing.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "Your scepter brims with a raw life force that blesses the caster and those around them with good health. Imbues onto the Clerics Scepter as you progress on the Clerics Path of Redemption"
+}
+]
+}

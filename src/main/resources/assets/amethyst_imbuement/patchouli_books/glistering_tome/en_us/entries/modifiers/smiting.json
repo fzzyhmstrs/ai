@@ -1,0 +1,21 @@
+{    
+"name": "Smiting",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/smiting.png",
+"sortnum": 77,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Spells that hit or affect an undead mob deal 2 damage in addition to their normal effects. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Smiting",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/smiting.png",
+"ancestor": "N/A",
+"descendant": "$(l:amethyst_imbuement:modifiers/warrior_of_light)Warrior of Light$()",
+"mod_type": "$(2)Damage$()",
+"mod_text": "Your scepter has found divine purpose in ridding the world of monsters. Imbues onto the Scepter of the Vanguard as you progress on the Vanguards Path of the Aegis"
+}
+]
+}

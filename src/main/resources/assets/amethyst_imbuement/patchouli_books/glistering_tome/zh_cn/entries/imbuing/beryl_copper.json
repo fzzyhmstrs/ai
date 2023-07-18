@@ -1,0 +1,30 @@
+{    
+"name": "铍铜",    
+"icon": "amethyst_imbuement:beryl_copper_ingot",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "这种铜和绿柱石的合金因其柔韧性和耐腐蚀性而备受推崇。尤其适合强化武器和其他物品。"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "注魔：铍铜",
+"imbue_a_item": "minecraft:blaze_powder",
+"imbue_b_item": "minecraft:blaze_powder",
+"imbue_c_item": "minecraft:blaze_powder",
+"imbue_d_item": "minecraft:blaze_powder",
+"craft_a_item": "minecraft:emerald",
+"craft_b_item": "minecraft:raw_copper",
+"craft_c_item": "minecraft:emerald",
+"craft_d_item": "minecraft:raw_copper",
+"craft_e_item": "minecraft:raw_copper",
+"craft_f_item": "minecraft:raw_copper",
+"craft_g_item": "minecraft:emerald",
+"craft_h_item": "minecraft:raw_copper",
+"craft_i_item": "minecraft:emerald",
+"result_item": "amethyst_imbuement:beryl_copper_ingot#4",
+"cost_text": "$(l)消耗等级：$(2)1$()"
+}
+]
+}

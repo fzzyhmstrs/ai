@@ -1,0 +1,21 @@
+{    
+"name": "持久",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/enduring.png",
+"sortnum": 63,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "增加30%法术效果持续时间。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)救赎之道$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)均衡之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight_2",
+"mod_head": "持久",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enduring.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_enduring)弱效持久$()",
+"descendant": "$(l:amethyst_imbuement:modifiers/greater_enduring)强效持久$()",
+"mod_type": "$(2)法术持续时间$()",
+"mod_text": "你的法杖法术比平时持久得多。坚守救赎之道与守护之道时分别自动显现于吟游诗人法杖与圣骑士之杖。"
+}
+]
+}

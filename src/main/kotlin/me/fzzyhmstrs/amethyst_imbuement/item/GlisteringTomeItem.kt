@@ -9,12 +9,11 @@ import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
+import vazkii.patchouli.api.PatchouliAPI
 
 
 class GlisteringTomeItem(settings: Settings): Item(settings) {
     override fun use(world: World, playerEntity: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        import vazkii.patchouli.api.PatchouliAPI
-
         if (!world.isClient) {
             PatchouliAPI.get().openBookGUI(playerEntity as ServerPlayerEntity, Identifier(AI.MOD_ID,"glistering_tome"))
             return TypedActionResult.success(playerEntity.getStackInHand(hand))

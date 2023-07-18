@@ -1,0 +1,21 @@
+{    
+"name": "建造者",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/builders_aspect.png",
+"sortnum": 47,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "影响放置类法术。法术冷却时间减少20%，法术效果范围增加。影响：$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)羁旅之道$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "建造者",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/builders_aspect.png",
+"ancestor": "无",
+"descendant": "无",
+"mod_type": "$(2)世界交互$()",
+"mod_text": "你的法杖渴望改造世界。坚守羁旅之道时自动注入建造者法杖。"
+}
+]
+}

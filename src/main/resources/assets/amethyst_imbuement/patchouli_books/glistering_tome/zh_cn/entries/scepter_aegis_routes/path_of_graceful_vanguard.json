@@ -1,0 +1,20 @@
+{    
+"name": "典雅先锋路线",
+"icon": "amethyst_imbuement:scepter_of_the_vanguard",
+"category": "amethyst_imbuement:scepter_aegis_routes",
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "沿此路线踏上守护之道，运用高级的神圣魔法对抗黑暗。有了光明战士符文，影响敌人的法术能够攻击并削弱他们。优雅符文使你能够获得$(o)三倍$()的施法经验值，保护符文让法术能够保护你和你的队友。"
+},
+{
+  "type": "amethyst_imbuement:scepter_route",
+  "tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
+  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:warrior_of_light\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
+  "spec": "神圣战士魔法",
+  "spells": "屏障（特有）",
+  "mods": "光明战士，优雅，保护"
+}
+]
+}

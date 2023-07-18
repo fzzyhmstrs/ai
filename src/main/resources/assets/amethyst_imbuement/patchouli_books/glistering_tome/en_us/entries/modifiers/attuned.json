@@ -1,0 +1,40 @@
+{    
+"name": "Attuned",    
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/attuned.png",
+"sortnum": 11,  
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Reduces the cooldown of your scepter spells by 15%. This modifier is independent of scepter. Affects:$(li)All scepters$()"
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Attuned",
+"mod_image": "amethyst_core:textures/gui/patchouli/mod_spotlights/attuned.png",
+"ancestor": "$(l:amethyst_imbuement:modifiers/lesser_attuned)Lesser Attuned$()",
+"descendant": "$(l:amethyst_imbuement:modifiers/greater_attuned)Greater Attuned$()",
+"mod_type": "$(2)Spell Casting$()",
+"mod_text": "The scepters natural attunement grows. Imbue onto any scepter with the recipe on the next page."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Attuned Imbuing",
+"imbue_a_item": "amethyst_imbuement:imbued_lapis",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "minecraft:air",
+"craft_b_item": "minecraft:clock",
+"craft_c_item": "minecraft:air",
+"craft_d_item": "minecraft:sugar",
+"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"craft_f_item": "minecraft:sugar",
+"craft_g_item": "minecraft:air",
+"craft_h_item": "minecraft:sugar",
+"craft_i_item": "minecraft:air",
+"result_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
+"cost_text": "$(l)Level Cost: $(2)11$()"
+}
+]
+}
