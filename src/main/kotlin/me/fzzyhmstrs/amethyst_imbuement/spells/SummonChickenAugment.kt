@@ -20,10 +20,12 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
@@ -174,7 +176,7 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
     ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
         if (spells.primary() == RegisterEnchantment.GUSTING){
             if (user is ModifiableEffectMobOrPlayer){
-                user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.GUST_EFFECT, 600)
+                user.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.GUST_EFFECT, 600)
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             } else if (user is ModifiableEffectEntity){
                 user.addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.GUST_EFFECT, 600)
