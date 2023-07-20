@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
+import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
@@ -372,7 +373,7 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
             }
             chorse.setPlayerHorseOwner(user)
             chorse.passEffects(spells,effects,level)
-            chorse.passContext(context)
+            chorse.passContext(SummonAugment.summonContext(context))
             if (scepter.item is ScepterLike && scepter.item is SpellCasting){
                 scepter.orCreateNbt.putUuid("current_draft_horse",chorse.uuid)
             }

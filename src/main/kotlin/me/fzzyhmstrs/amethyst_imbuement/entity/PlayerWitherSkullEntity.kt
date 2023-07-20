@@ -57,12 +57,20 @@ open class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     }
 
     open fun onSkullEntityHit(entityHitResult: EntityHitResult, entity: LivingEntity){
-        if (entity is SpellCastingEntity) {
-            spells.processSingleEntityHit(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
+        if (entity is SpellCastingEntity && !spells.empty()) {
+            runEffect(ModifiableEffectEntity.DAMAGE,this,entity,processContext)
+            spells.processSingleEntityHit(entityHitResult,processContext,world,this,entity,Hand.MAIN_HAND,level,entityEffects)
             if (!entityHitResult.entity.isAlive){
-                spells.processOnKill(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
+                runEffect(ModifiableEffectEntity.KILL,this,entity,processContext)
+                spells.processOnKill(entityHitResult,processContext,world,this,entity,Hand.MAIN_HAND,level,entityEffects)
+            }
+        } else {
+            val bl = entityHitResult.entity.damage(this.damageSources.mobProjectile(this,entity),entityEffects.damage(0))
+            if (bl){
+                entity.applyDamageEffects(entity,entityHitResult.entity)
             }
         }
+
     }
 
 }

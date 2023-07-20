@@ -19,7 +19,7 @@ import net.minecraft.util.math.Vec3d
 object ShockingEffect {
     fun shock(entity: Entity,owner: Entity?, processContext: ProcessContext){
         val world = entity.world
-        if (world.time % 30 != 0L && entity.age > 20 && processContext.isBeforeRemoval()) return
+        if (world.time % 30 != 0L && entity.age > 1) return
         val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(3.0,3.0,3.0),pos.subtract(3.0,3.0,3.0))
         val entities = world.getOtherEntities(owner, box)

@@ -6,9 +6,11 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.Hand
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.WorldEvents
 import java.util.*
@@ -44,12 +46,13 @@ internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedCon
         val bl = constructEntity.visibilityCache.canSee(livingEntity)
         targetNotVisibleTicks = if (bl) 0 else ++targetNotVisibleTicks
         val d = constructEntity.squaredDistanceTo(livingEntity)
+        val speed = MathHelper.clamp(constructEntity.processContext.get(ContextData.SPEEDY),0f,0.9f)
         if (d < 4.0) {
             if (!bl) {
                 return
             }
             if (fireballCooldown <= 0) {
-                fireballCooldown = 20
+                fireballCooldown = (20 * (1f-speed)).toInt()
                 constructEntity.tryAttack(livingEntity)
             }
             constructEntity.moveControl.moveTo(livingEntity.x, livingEntity.y, livingEntity.z, 1.0)
@@ -58,7 +61,7 @@ internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedCon
             if (fireballCooldown <= 0) {
                 ++fireballsFired
                 if (fireballsFired == 1) {
-                    fireballCooldown = 60
+                    fireballCooldown = (60 * (1f-speed)).toInt()
                     if (constructEntity is BonestormEntity) {
                         constructEntity.setFireActive(true)
                     }

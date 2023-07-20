@@ -20,11 +20,11 @@ import net.minecraft.world.World
 
 class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: World): BasicMissileEntity(entityType, world) {
 
-    constructor(world: World,owner: LivingEntity, direction: Vec3d, speed: Float, divergence: Float, pos: Vec3d) : this(RegisterEntity.BALL_LIGHTNING_ENTITY,world){
+    constructor(world: World,owner: LivingEntity?, direction: Vec3d, speed: Float, divergence: Float, pos: Vec3d) : this(RegisterEntity.BALL_LIGHTNING_ENTITY,world){
         this.owner = owner
         this.setVelocity(direction.x,direction.y,direction.z,speed, divergence)
         this.setPosition(pos)
-        this.setRotation(owner.yaw, owner.pitch)
+        this.setRotation(owner?.yaw?:0f, owner?.pitch?:0f)
     }
 
     override var entityEffects: AugmentEffect = AugmentEffect()

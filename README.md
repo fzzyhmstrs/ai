@@ -14,12 +14,44 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 
 ### Spell Update Progress 6/73
 
+/*
+Checklist
+- canTarget if entity spell
+- Build description for
+  - Unique combinations
+  - stat modifications
+  - other type interactions
+- add Lang
+- provideArgs
+- spells are equal check
+- special names for uniques
+- onPaired to grant relevant adv.
+- implement all special combinations
+- fill up interaction methods
+  - onEntityHit?
+  - onEntityKill?
+  - onBlockHit?
+  - Remember to call and check results of the super for the "default" behavior
+- modify stats. don't forget mana cost and cooldown!
+- modifyDealtDamage for unique interactions
+- modifyDamageSource?
+- remember DamageSourceBuilder for a default damage source
+- modify other things
+  - summon?
+  - projectile?
+  - explosion?
+  - drops?
+  - count? (affects some things like summon count and projectile count)
+- sound and particles
+*/
 
 ### TODO List
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|
 | NOT STARTED                                                                  | 13          |
 | Add sounds for Ice Shard and HailStorm                                       | Not started |
+| Lightning, Fang, Ball Lightning entities need fallbacks for empty spell      | Not started |
+| Add secondary effects to fallback for fireball/wither skull                  | Not started |
 | Update canTarget methods to account for other owned entities                 | Not started |
 | Add sounds for the Floral Construct                                          | Not started |
 | check on bulwark and maybe make it an augment                                | Not started |

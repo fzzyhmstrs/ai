@@ -22,12 +22,11 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
 
 open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world: World
 ): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity {
 
-    constructor(entityType: EntityType<out BasicShardEntity?>,world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(entityType,world){
+    constructor(entityType: EntityType<out BasicShardEntity?>,world: World, owner: LivingEntity?, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(entityType,world){
         this.owner = owner
         this.setVelocity(rot.x,rot.y,rot.z,speed,divergence)
         this.setPosition(pos)
@@ -59,7 +58,7 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, aug))){
                 if (!struckEntities.contains(entity2.uuid)){
                     struckEntities.add(entity2.uuid)
-                    if (struckEntities.size > entityEffects.amplifier(0)){
+                    if (struckEntities.size > entityEffects.amplifier(level)){
                         processContext.beforeRemoval()
                     }
                     onShardEntityHit(entityHitResult)
@@ -73,10 +72,19 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
 
     open fun onShardEntityHit(entityHitResult: EntityHitResult){
         val entity = owner
-        if (entity is LivingEntity && entity is SpellCastingEntity) {
-            spells.processSingleEntityHit(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
-            if (!entityHitResult.entity.isAlive){
-                spells.processOnKill(entityHitResult,world,this,entity, Hand.MAIN_HAND,level,entityEffects)
+        if (entity is LivingEntity){
+            if (entity is SpellCastingEntity && !spells.empty()) {
+                runEffect(ModifiableEffectEntity.DAMAGE,this,entity,processContext)
+                spells.processSingleEntityHit(entityHitResult,processContext,world,this,entity,Hand.MAIN_HAND,level,entityEffects)
+                if (!entityHitResult.entity.isAlive){
+                    runEffect(ModifiableEffectEntity.KILL,this,entity,processContext)
+                    spells.processOnKill(entityHitResult,processContext,world,this,entity,Hand.MAIN_HAND,level,entityEffects)
+                }
+            } else {
+                val bl = entityHitResult.entity.damage(this.damageSources.mobProjectile(this,entity),entityEffects.damage(0))
+                if (bl){
+                    entity.applyDamageEffects(entity,entityHitResult.entity)
+                }
             }
         }
     }
