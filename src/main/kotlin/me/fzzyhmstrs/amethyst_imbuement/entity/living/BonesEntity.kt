@@ -37,7 +37,7 @@ open class BonesEntity: PlayerCreatedConstructEntity {
     }
 
     override fun initGoals() {
-        goalSelector.add(1, ShootProjectileGoal(this))
+        goalSelector.add(1, ShootProjectileGoal(this,1))
         goalSelector.add(4, WanderNearTargetGoal(this, 0.9, 16.0f))
         goalSelector.add(4, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
         goalSelector.add(5, IronGolemWanderAroundGoal(this, 0.6))
