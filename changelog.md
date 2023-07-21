@@ -1,8 +1,4 @@
+# Reminder: Major content updates are no longer supported on this version.
+
 ### Fixes
-* 
-
-### Changes
-* 
-
-### Additions
-* Re-added patchouli integration.
+* Fixed consecrated recipe
