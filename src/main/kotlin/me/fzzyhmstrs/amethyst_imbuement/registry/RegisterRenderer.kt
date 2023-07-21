@@ -94,7 +94,11 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.UNHALLOWED_ENTITY
-        ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context) }
+        ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context, AI.identity("textures/entity/unhallowed/unhallowed.png")) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.BONES_ENTITY
+        ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context, AI.identity("textures/entity/unhallowed/bones.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.DRACONIC_BOX_ENTITY

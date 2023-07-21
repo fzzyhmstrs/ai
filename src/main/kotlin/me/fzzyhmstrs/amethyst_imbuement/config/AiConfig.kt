@@ -372,6 +372,13 @@ object AiConfig
             var baseDamage = ValidatedFloat(3.0f,20.0f,0.0f)
         }
 
+        var bones = Bones()
+        class Bones: ConfigSection(Header.Builder().space().add("readme.entities.bones_1").build()){
+            var baseLifespan = ValidatedInt(2400,180000,20)
+            var baseHealth = ValidatedDouble(16.0,100.0,1.0)
+            var baseDamage = ValidatedFloat(4.0f,20.0f,0.0f)
+        }
+
         var crystalGolem = CrystalGolem()
         class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").build()){
             @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")

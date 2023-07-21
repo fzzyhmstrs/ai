@@ -16,7 +16,7 @@ import net.minecraft.world.WorldEvents
 import java.util.*
 import kotlin.math.sqrt
 
-internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedConstructEntity) : Goal() {
+internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedConstructEntity, private val projectiles: Int = 3) : Goal() {
     private var fireballsFired = 0
     private var fireballCooldown = 0
     private var targetNotVisibleTicks = 0
@@ -61,14 +61,14 @@ internal class ShootProjectileGoal(private val constructEntity: PlayerCreatedCon
             if (fireballCooldown <= 0) {
                 ++fireballsFired
                 if (fireballsFired == 1) {
-                    fireballCooldown = (60 * (1f-speed)).toInt()
                     if (constructEntity is BonestormEntity) {
+                        fireballCooldown = (60 * (1f-speed)).toInt()
                         constructEntity.setFireActive(true)
                     }
-                } else if (fireballsFired <= 4) {
+                } else if (fireballsFired <= 1 + projectiles) {
                     fireballCooldown = 6
                 } else {
-                    fireballCooldown = 100
+                    fireballCooldown = (100 * (1f-speed)).toInt()
                     fireballsFired = 0
                     if (constructEntity is BonestormEntity) {
                         constructEntity.setFireActive(false)

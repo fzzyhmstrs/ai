@@ -149,6 +149,8 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
     ): PerLvlF {
         if (othersType.has(AugmentType.AOE) && othersType.has(AugmentType.DAMAGE))
             return damage.plus(1f)
+        if (other == RegisterEnchantment.SUMMON_BONESTORM)
+            return PerLvlF(AiConfig.entities.bones.baseDamage.get())
         return super.modifyDamage(damage, other, othersType, spells)
     }
 

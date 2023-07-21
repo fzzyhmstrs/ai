@@ -39,11 +39,6 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         return arrayOf(pairedSpell.provideNoun(this))
     }
 
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),
-            15,14, imbueLevel,1, LoreTier.LOW_TIER, Items.BLUE_ICE)
-    }
-
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
         val speed = effects.range(level).toFloat()
         val div = 0.75F

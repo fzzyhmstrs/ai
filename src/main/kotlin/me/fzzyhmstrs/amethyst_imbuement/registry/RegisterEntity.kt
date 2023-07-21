@@ -132,6 +132,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.61f, 1.8f)).trackRangeChunks(8).build()
     )
 
+    val BONES_ENTITY: EntityType<BonesEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "bones"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<BonesEntity>, world: World ->
+            BonesEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.61f, 1.8f)).trackRangeChunks(8).build()
+    )
+
     val DRACONIC_BOX_ENTITY: EntityType<DraconicBoxEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "draconic_box"),

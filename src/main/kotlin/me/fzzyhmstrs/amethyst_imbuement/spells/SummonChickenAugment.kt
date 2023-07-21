@@ -74,9 +74,9 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
             RegisterEnchantment.GUSTING ->
                 description.addLang("enchantment.amethyst_imbuement.summon_chicken.gusting.desc", SpellAdvancementChecks.UNIQUE)
             RegisterEnchantment.SUMMON_HAMSTER ->
-                description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_hamster.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_hamster.desc", SpellAdvancementChecks.SUMMONS)
             RegisterEnchantment.HAMPTERTIME ->
-                description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_hamster.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_hamster.desc", SpellAdvancementChecks.SUMMONS)
         }
         if (othersType.positiveEffect)
             description.addLang("enchantment.amethyst_imbuement.summon_chicken.desc.falling", SpellAdvancementChecks.ENTITY_EFFECT)
