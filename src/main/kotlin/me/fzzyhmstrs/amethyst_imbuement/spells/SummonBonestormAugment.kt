@@ -273,7 +273,17 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         spells: PairedAugments
     ): List<Entity> where T : ModifiableEffectEntity,T : Entity, U : SpellCastingEntity, U : LivingEntity {
         if (spells.primary() == RegisterEnchantment.SUMMON_ZOMBIE){
-
+            val count = max(1,summons.size - 1)
+            val list: MutableList<BonestormEntity> = mutableListOf()
+            for (i in 1..count){
+                val bone = BonesEntity(RegisterEntity.BONES_ENTITY, world, effects.duration(level), user)
+                val success = findSpawnPos(world, startPos, bone, 4, 12, user.pitch, user.yaw)
+                if (success){
+                    bone.passEffects(spells, effects, level)
+                    list.add(bone)
+                }
+                return list
+            }
         }
         if (spells.spellsAreEqual()){
             for (summon in summons){

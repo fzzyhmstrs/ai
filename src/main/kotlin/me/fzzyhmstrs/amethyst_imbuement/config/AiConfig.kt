@@ -376,7 +376,7 @@ object AiConfig
         class Bones: ConfigSection(Header.Builder().space().add("readme.entities.bones_1").build()){
             var baseLifespan = ValidatedInt(2400,180000,20)
             var baseHealth = ValidatedDouble(16.0,100.0,1.0)
-            var baseDamage = ValidatedFloat(4.0f,20.0f,0.0f)
+            var baseDamage = ValidatedFloat(6.0f,20.0f,0.0f)
         }
 
         var crystalGolem = CrystalGolem()
