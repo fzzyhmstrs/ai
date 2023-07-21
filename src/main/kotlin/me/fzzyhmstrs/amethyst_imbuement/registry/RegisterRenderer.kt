@@ -93,6 +93,10 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.CHOLEM_ENTITY
+        ){ context: EntityRendererFactory.Context -> CholemEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.UNHALLOWED_ENTITY
         ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context, AI.identity("textures/entity/unhallowed/unhallowed.png")) }
 

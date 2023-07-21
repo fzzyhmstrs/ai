@@ -80,6 +80,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
     )
 
+    val CHOLEM_ENTITY: EntityType<CholemEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "cholem"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<CholemEntity>, world: World ->
+            CholemEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.1f)).trackRangeChunks(10).build()
+    )
+
     val CHORSE_ENTITY: EntityType<ChorseEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "chorse"),

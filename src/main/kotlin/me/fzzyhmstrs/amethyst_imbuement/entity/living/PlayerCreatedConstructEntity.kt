@@ -309,7 +309,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
             (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
         }
-        var f = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+        var f = getBaseDamage()
         var g = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK).toFloat()
         if (target is LivingEntity) {
             f += EnchantmentHelper.getAttackDamage(this.mainHandStack, target.group)
@@ -331,19 +331,28 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         val bl = target.damage(damageSource,f)
         if (bl) {
             runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
+            applyDamageEffects(this, target)
             val d = world.getLocalDifficulty(blockPos).localDifficulty
             if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f)
                 target.setOnFireFor((2 * d).toInt())
-            if (g > 0.0f && target is LivingEntity) {
-                target.takeKnockback((g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(yaw * (Math.PI.toFloat() / 180)).toDouble())
-                velocity = velocity.multiply(0.6, 1.0, 0.6)
-            }
+            applyKnockback(g,target)
             if (target is PlayerEntity)
                 disablePlayerShield(target, this.mainHandStack, if (target.isUsingItem) target.activeItem else ItemStack.EMPTY)
             if (!target.isAlive)
                 runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
         }
         return bl
+    }
+
+    protected open fun getBaseDamage(): Float{
+        return this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+    }
+
+    protected open fun applyKnockback(g: Float, target: Entity){
+        if (g > 0.0f && target is LivingEntity) {
+            target.takeKnockback((g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(yaw * (Math.PI.toFloat() / 180)).toDouble())
+            velocity = velocity.multiply(0.6, 1.0, 0.6)
+        }
     }
 
     protected fun disablePlayerShield(player: PlayerEntity, mobStack: ItemStack, playerStack: ItemStack) {

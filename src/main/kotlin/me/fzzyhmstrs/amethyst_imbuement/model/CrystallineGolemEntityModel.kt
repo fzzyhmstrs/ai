@@ -6,9 +6,8 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.util.math.MathHelper
 
-class CrystallineGolemEntityModel(_root: ModelPart): SinglePartEntityModel<CrystallineGolemEntity>() {
+class CrystallineGolemEntityModel(private val root: ModelPart): SinglePartEntityModel<CrystallineGolemEntity>() {
 
-    private val root = _root
     private val head: ModelPart = root.getChild(EntityModelPartNames.HEAD)
     private val rightArm: ModelPart = root.getChild(EntityModelPartNames.RIGHT_ARM)
     private val leftArm: ModelPart = root.getChild(EntityModelPartNames.LEFT_ARM)

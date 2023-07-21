@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
@@ -41,6 +42,37 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.math.min
 
+/*
+    Checklist
+    - canTarget if entity spell
+    - Build description for
+        - Unique combinations
+        - stat modifications
+        - other type interactions
+        - add Lang
+    - provideArgs
+    - spells are equal check
+    - special names for uniques
+    - onPaired to grant relevant adv.
+    - implement all special combinations
+    - fill up interaction methods
+        - onEntityHit?
+        - onEntityKill?
+        - onBlockHit?
+        - Remember to call and check results of the super for the "default" behavior
+    - modify stats. don't forget mana cost and cooldown!
+        - modifyDealtDamage for unique interactions
+    - modifyDamageSource?
+        - remember DamageSourceBuilder for a default damage source
+    - modify other things
+        - summon?
+        - projectile?
+        - explosion?
+        - drops?
+        - count? (affects some things like summon count and projectile count)
+    - sound and particles
+     */
+
 class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI .identity("chickenform"),SpellType.GRACE, PerLvlI(720,-20),65,
@@ -49,6 +81,17 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(215,35).withAmplifier(1)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return SpellHelper.friendlyTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.positiveEffect)
@@ -91,6 +134,17 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             else ->
                 super.specialName(otherSpell)
         }
+    }
+
+    override fun modifyDuration(
+        duration: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (other == RegisterEnchantment.SUMMON_GOLEM)
+            return PerLvlI(AiConfig.entities.cholem.baseLifespan.get())
+        return duration
     }
 
     override fun <T> onEntityHit(
@@ -203,7 +257,7 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
 
         if (spells.primary() == RegisterEnchantment.SUMMON_GOLEM){
             for (i in 1..3){
-
+                val cholem = TODO()
             }
         }
 

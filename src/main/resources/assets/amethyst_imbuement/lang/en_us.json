@@ -585,9 +585,9 @@
 	"enchantment.amethyst_imbuement.chickenform.desc.positive":"Also grants Jump Boost and Slow Falling.",
 	"enchantment.amethyst_imbuement.chickenform.desc.damage":"Small chance hitting an enemy grants stacking speed.",
 	"enchantment.amethyst_imbuement.chickenform.desc.kill":"Kills grant stacking speed.",
-	"enchantment.amethyst_imbuement.chickenform.summon_golem": "Summon Giga-Chicken",
-	"enchantment.amethyst_imbuement.chickenform.summon_golem.desc1": "Summons a gigantic chicken to aid you in combat.",
-	"enchantment.amethyst_imbuement.chickenform.summon_golem.desc2": "Pecks nearby enemies and shoots eggs at further targets.",
+	"enchantment.amethyst_imbuement.chickenform.summon_golem": "Summon Cholem",
+	"enchantment.amethyst_imbuement.chickenform.summon_golem.desc1": "Summons three gigantic chicken... things to aid you in combat.",
+	"enchantment.amethyst_imbuement.chickenform.summon_golem.desc2": "Bashes enemies and goes into berserk mode if one of it's brethren falls in battle.",
 	"enchantment.amethyst_imbuement.chickenform.dash": "Yeet",
 	"enchantment.amethyst_imbuement.chickenform.dash.desc": "Tosses the target or caster straight up at high velocity and grants Slow Falling.",
 
@@ -1699,12 +1699,17 @@
 	"readme.header.entities.desc": "Defines various base attributes of various mobs that are spawnable with AI.",
 	"readme.entities.forcePvpOnAllSpells": "[true/false]. If true, all AI spells will enter PVP mode, regardless of the specific settings in the Augment configs.",
 	"readme.entities.unhallowed_1": "Unhallowed",
-	"readme.entities.floral_construct_1": "Floral Construct",
+	"readme.entities.bones_1": "Bones",
 	"readme.entities.golem_1": "Crystalline Golem",
 	"readme.entities.crystalGolem.spellBaseLifespan": "Integer that is >= 20 ticks. This is the lifespan used when a golem is summoned via Summon Crystalline Golem",
 	"readme.entities.crystalGolem.spellPerLvlLifespan": "Integer between 5000 and 0 ticks. The amount that is added to the golem's base lifespan for each level of Summon Crystalline Golem.",
 	"readme.entities.crystalGolem.guardianLifespan": "Integer that is >= 20 ticks. This is the lifespan used when a golem is summoned via the Guardian augment",
+	"readme.entities.cholem_1": "Cholem",
 	"readme.entities.hamster_1": "Hamsters",
 	"readme.entities.hamster.baseLifespan": "Integer between 180000 and -1. Defines the lifespan in ticks of a summoned hamster. If set to -1, the hamster will have infinite life.",
-	"readme.entities.hamster.baseDamage": "Float between 10 and 0. Defines the damage hamsters summoned with Summon Hamster deal. For hamsters summoned via Hamptertime, change baseHamptertimeDamage."
+	"readme.entities.hamster.baseDamage": "Float between 10 and 0. Defines the damage hamsters summoned with Summon Hamster deal. For hamsters summoned via Hamptertime, change baseHamptertimeDamage.",
+	"readme.entities.bonestorm_1": "Bonestorm",
+	"readme.entities.bonestorm.baseLifespan": "Integer greater than 20. Defines the base lifespan of a summoned Bonestorm Entity.",
+	"readme.entities.bonestorm.perLvlLifespan": "Integer between 0 and 2400. Defines the additional lifespan of a Bonestorm per level of Summon Bonestorm.",
+	"readme.entities.floral_construct_1": "Floral Construct"
 }

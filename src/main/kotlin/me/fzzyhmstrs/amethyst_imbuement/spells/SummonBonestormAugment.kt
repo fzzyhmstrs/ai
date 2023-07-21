@@ -50,6 +50,37 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
 
+/*
+    Checklist
+    - canTarget if entity spell
+    - Build description for
+        - Unique combinations
+        - stat modifications
+        - other type interactions
+        - add Lang
+    - provideArgs
+    - spells are equal check
+    - special names for uniques
+    - onPaired to grant relevant adv.
+    - implement all special combinations
+    - fill up interaction methods
+        - onEntityHit?
+        - onEntityKill?
+        - onBlockHit?
+        - Remember to call and check results of the super for the "default" behavior
+    - modify stats. don't forget mana cost and cooldown!
+        - modifyDealtDamage for unique interactions
+    - modifyDamageSource?
+        - remember DamageSourceBuilder for a default damage source
+    - modify other things
+        - summon?
+        - projectile?
+        - explosion?
+        - drops?
+        - count? (affects some things like summon count and projectile count)
+    - sound and particles
+     */
+
 class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
 
     private val uuid = UUID.fromString("bb56e04c-2691-11ee-be56-0242ac120002")

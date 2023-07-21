@@ -374,7 +374,6 @@ object AiConfig
 
         var bones = Bones()
         class Bones: ConfigSection(Header.Builder().space().add("readme.entities.bones_1").build()){
-            var baseLifespan = ValidatedInt(2400,180000,20)
             var baseHealth = ValidatedDouble(16.0,100.0,1.0)
             var baseDamage = ValidatedFloat(6.0f,20.0f,0.0f)
         }
@@ -389,6 +388,14 @@ object AiConfig
             var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
             var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
             var baseDamage = ValidatedFloat(20.0f,1000f,0f)
+        }
+
+        var cholem = Cholem()
+        class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
+            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
+            var baseLifespan = ValidatedInt(3600, Int.MAX_VALUE-120000,20)
+            var baseHealth = ValidatedDouble(80.0,512.0,1.0)
+            var baseDamage = ValidatedFloat(10.0f,500f,0f)
         }
 
         var hamster = Hamster()
