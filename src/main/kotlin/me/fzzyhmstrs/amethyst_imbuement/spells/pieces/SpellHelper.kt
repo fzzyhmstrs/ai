@@ -9,6 +9,8 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.hit.EntityHitResult
 
 object SpellHelper {
 
@@ -27,7 +29,7 @@ object SpellHelper {
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (entity is PlayerEntity && !getPvpMode()) continue
+                    if (entity is PlayerEntity && !spell.getPvpMode()) continue
                     if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,entity,spell)) continue
                     hostileEntityList.add(EntityHitResult(entity))
                 }

@@ -44,7 +44,6 @@ import kotlin.math.min
 
 /*
     Checklist
-    - canTarget if entity spell
     - Build description for
         - Unique combinations
         - stat modifications
