@@ -87,22 +87,8 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
     override fun tryAttack(target: Entity): Boolean {
         attackTicksLeft = 10
         world.sendEntityStatus(this, 4.toByte())
-        val g = getBaseDamage()
-
-        val entity = owner
-        val bl = if(entity == null) {
-            target.damage(this.damageSources.mobAttack(this), g)
-        } else if (entity is PlayerEntity) {
-            target.damage(this.damageSources.playerAttack(entity), g)
-        } else {
-            target.damage(this.damageSources.mobAttack(entity), g)
-        }
-        if (bl) {
-            target.velocity = target.velocity.add(0.0, 0.5, 0.0)
-            applyDamageEffects(this, target)
-        }
         playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0f, 1.0f)
-        return bl
+        return super.tryAttack(target)
     }
 
     override fun handleStatus(status: Byte) {

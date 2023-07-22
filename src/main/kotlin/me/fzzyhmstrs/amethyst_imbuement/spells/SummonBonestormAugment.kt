@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonesEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBoost
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -38,6 +39,8 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -49,36 +52,10 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
+import kotlin.math.max
 
 /*
     Checklist
-    - canTarget if entity spell
-    - Build description for
-        - Unique combinations
-        - stat modifications
-        - other type interactions
-        - add Lang
-    - provideArgs
-    - spells are equal check
-    - special names for uniques
-    - onPaired to grant relevant adv.
-    - implement all special combinations
-    - fill up interaction methods
-        - onEntityHit?
-        - onEntityKill?
-        - onBlockHit?
-        - Remember to call and check results of the super for the "default" behavior
-    - modify stats. don't forget mana cost and cooldown!
-        - modifyDealtDamage for unique interactions
-    - modifyDamageSource?
-        - remember DamageSourceBuilder for a default damage source
-    - modify other things
-        - summon?
-        - projectile?
-        - explosion?
-        - drops?
-        - count? (affects some things like summon count and projectile count)
-    - sound and particles
      */
 
 class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
@@ -196,6 +173,22 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         return amplifier
     }
 
+    override fun <T> modifyCount(
+        start: Int,
+        context: ProcessContext,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Int where T : SpellCastingEntity, T : LivingEntity {
+        if (spells.primary() == RegisterEnchantment.ICE_SHARD)
+            return start + 4
+        return start
+    }
+
     override fun entitiesToSpawn(
         world: World,
         user: LivingEntity,
@@ -218,7 +211,7 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         return list
     }
 
-    override fun <T> spawnCount(
+    override fun <T> startCount(
         user: T,
         effects: AugmentEffect,
         othersType: AugmentType,
@@ -305,10 +298,10 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
     ): List<Entity> where T : ModifiableEffectEntity,T : Entity, U : SpellCastingEntity, U : LivingEntity {
         if (spells.primary() == RegisterEnchantment.SUMMON_ZOMBIE){
             val count = max(1,summons.size - 1)
-            val list: MutableList<BonestormEntity> = mutableListOf()
+            val list: MutableList<BonesEntity> = mutableListOf()
             for (i in 1..count){
                 val bone = BonesEntity(RegisterEntity.BONES_ENTITY, world, effects.duration(level), user)
-                val success = findSpawnPos(world, startPos, bone, 4, 12, user.pitch, user.yaw)
+                val success = findSpawnPos(world, BlockPos.ofFloored(hit.pos), bone, 4, 12, user.pitch, user.yaw)
                 if (success){
                     bone.passEffects(spells, effects, level)
                     list.add(bone)
@@ -334,7 +327,7 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
                 summon.customName = AcText.translatable("entity.amethyst_imbuement.bonestorm.double")
             }
         } else {
-            if (spells.spellsAreEqual()){
+            if (othersType.has(AugmentType.SUMMONS)){
                 for (summon in summons){
                     summon.processContext.set(ContextData.SPEEDY,0.2f)
                     if (summon is LivingEntity){
@@ -364,6 +357,18 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         spells: PairedAugments
     ): ExplosionBuilder where T : SpellCastingEntity,T : LivingEntity {
         return builder.withCustomBehavior(BonestormExplosionBehavior())
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.END_ROD
+    }
+
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.END_ROD
+    }
+
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

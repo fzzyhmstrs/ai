@@ -1,10 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -20,6 +22,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
@@ -27,7 +30,9 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
@@ -58,6 +63,24 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+    }
+
+    override fun <T> modifyDealtDamage(
+        amount: Float,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Float where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if (entity is LivingEntity && entity.group == EntityGroup.UNDEAD)
+            return amount * 1.5f
+        return amount
     }
 
     override fun supportEffect(

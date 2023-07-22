@@ -41,6 +41,7 @@ object RegisterRenderer {
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("totem"),"totem_model")
     val CHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
+    val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
     val FLORAL_CONSTRUCT_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("floral_construct"),"floral_construct_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("player_wither_skull_entity"),"player_wither_skull_model")
     
@@ -195,6 +196,7 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(FLORAL_CONSTRUCT_ENTITY,FloralConstructEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY,ChorseEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(CHOLEM_ENTITY,CholemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
