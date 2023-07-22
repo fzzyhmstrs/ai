@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:amethyst_imbuement:mystical_gem"
+  ],
+  "text": "item.amethyst_imbuement.mystical_gem.recipe"
+}
