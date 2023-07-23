@@ -23,6 +23,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects.getRndEntityList
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -46,6 +47,29 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+
+/*
+    Checklist
+    - Build description for
+        - Unique combinations
+        - add Lang
+    - special names for uniques
+    - onPaired to grant relevant adv.
+    - implement all special combinations
+    - fill up interaction methods
+        - onEntityHit?
+        - onEntityKill?
+        - onBlockHit?
+        - Remember to call and check results of the super for the "default" behavior
+    - modify stats. don't forget mana cost and cooldown!
+        - modifyDealtDamage for unique interactions
+    - modify other things
+        - summon?
+        - projectile?
+        - explosion?
+        - drops?
+        - count? (affects some things like summon count and projectile count)
+     */
 
 class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
     
@@ -119,12 +143,6 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         when(other) {
             RegisterEnchantment.PERSUADE ->
                 description.addLang("enchantment.amethyst_imbuement.bedazzle.persuade.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.CRIPPLE ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.cripple.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.BEDAZZLE ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.bedazzle.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.INSPIRING_SONG ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.inspiring_song.desc", SpellAdvancementChecks.UNIQUE)
         }
     }
 
@@ -134,10 +152,8 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
 
     override fun specialName(otherSpell: ScepterAugment): MutableText {
         return when(otherSpell) {
-            RegisterEnchantment.FORTIFY ->
-                AcText.translatable("enchantment.amethyst_imbuement.resonate.fortify")
-            RegisterEnchantment.INSPIRING_SONG ->
-                AcText.translatable("enchantment.amethyst_imbuement.resonate.inspiring_song")
+            RegisterEnchantment.PERSUADE ->
+                AcText.translatable("enchantment.amethyst_imbuement.bedazzle.persuade")
             else ->
                 return super.specialName(otherSpell)
         }
@@ -150,6 +166,17 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player,SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+    }
+
+    override fun modifyManaCost(
+        manaCost: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return manaCost.plus(0,0,25)
+        return manaCost
     }
 
     override fun <T> entityEffects(
@@ -190,10 +217,14 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
                 }
             }
         }
-        if (othersType.empty) {
+        if (othersType.empty || spells.spellsAreEqual()) {
             val entity = entityHitResult.entity
             if (entity is HostileEntity && entity !is WitherEntity) {
-                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CHARMED, effects.duration(level)/2))
+                if (spells.spellsAreEqual()) {
+                    PersuadeAugment.persuadeMob(entity, world, effects, level)
+                } else {
+                    entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CHARMED, effects.duration(level) / 2))
+                }
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             }
         }

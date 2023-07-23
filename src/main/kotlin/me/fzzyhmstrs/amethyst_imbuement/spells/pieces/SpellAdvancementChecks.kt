@@ -119,6 +119,7 @@ object SpellAdvancementChecks {
     val PROJECTILE = Supplier<Boolean> {ClientAdvancementContainer.isDone(PROJECTILE_ID)}
 
     private val CHICKEN_ID = AI.identity("todo")
+    val CHICKEN_TRIGGER = AI.identity("chicken")
     val CHICKEN = Supplier<Boolean> {ClientAdvancementContainer.isDone(CHICKEN_ID)}
 
     fun grant(player: ServerPlayerEntity, id: Identifier){

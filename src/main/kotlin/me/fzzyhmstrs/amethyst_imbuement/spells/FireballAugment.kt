@@ -27,7 +27,7 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(
             AI.identity("fireball"),SpellType.FURY,32,10,
-            10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
+            10,5,1,2, LoreTier.LOW_TIER, Items.TNT)
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.75F,0.25f)

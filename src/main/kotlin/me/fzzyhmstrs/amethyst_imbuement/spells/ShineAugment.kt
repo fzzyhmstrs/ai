@@ -27,6 +27,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.PlaceBlockAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.boosts.DyeBoost
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.GlowingExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -88,9 +89,10 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
         } else {
             description.addLang("enchantment.amethyst_imbuement.shine.desc.entity", SpellAdvancementChecks.ENTITY_EFFECT)
         }
-        if (other is PlaceItemAugment) {
+        if (other is PlaceItemAugment)
             description.addLang("enchantment.amethyst_imbuement.shine.desc.block", arrayOf(other.item(),itemAfterShineTransform(other.item())), SpellAdvancementChecks.BLOCK)
-        }
+        if (othersType.has(AugmentType.SUMMONS))
+            description.addLang("enchantment.amethyst_imbuement.shine.desc.summons", SpellAdvancementChecks.SUMMONS)
         when(other) {
             RegisterEnchantment.EXCAVATE -> {
                 description.addLang("enchantment.amethyst_imbuement.shine.excavate.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BLOCK))
@@ -279,9 +281,7 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
     U : LivingEntity
     {
         for (summon in summons){
-            if (summon is LivingEntity){
-                summon.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING,6000))
-            }
+            summon.addEffect(ModifiableEffectEntity.DAMAGE,ModifiableEffects.SHINE_EFFECT)
         }
         return summons
     }

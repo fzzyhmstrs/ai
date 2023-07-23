@@ -17,11 +17,17 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierPredicates
+import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierPredicates.isIn
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -44,32 +50,6 @@ import kotlin.math.min
 
 /*
     Checklist
-    - Build description for
-        - Unique combinations
-        - stat modifications
-        - other type interactions
-        - add Lang
-    - provideArgs
-    - spells are equal check
-    - special names for uniques
-    - onPaired to grant relevant adv.
-    - implement all special combinations
-    - fill up interaction methods
-        - onEntityHit?
-        - onEntityKill?
-        - onBlockHit?
-        - Remember to call and check results of the super for the "default" behavior
-    - modify stats. don't forget mana cost and cooldown!
-        - modifyDealtDamage for unique interactions
-    - modifyDamageSource?
-        - remember DamageSourceBuilder for a default damage source
-    - modify other things
-        - summon?
-        - projectile?
-        - explosion?
-        - drops?
-        - count? (affects some things like summon count and projectile count)
-    - sound and particles
      */
 
 class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
@@ -95,6 +75,8 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.positiveEffect)
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.positive", SpellAdvancementChecks.STAT)
+        if (other.isIn(ModifierPredicates.CHICKEN_AUGMENTS))
+            description.addLang("enchantment.amethyst_imbuement.chickenform.desc.chicken", SpellAdvancementChecks.CHICKEN)
         if (othersType.has(AugmentType.DAMAGE)) {
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.damage", SpellAdvancementChecks.DAMAGE)
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.kill", SpellAdvancementChecks.ON_KILL)
@@ -122,6 +104,8 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.CHICKEN_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DAMAGE_TRIGGER)
     }
 
     override fun specialName(otherSpell: ScepterAugment): MutableText {
@@ -135,15 +119,68 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         }
     }
 
+    override fun modifyDamage(
+        damage: PerLvlF,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlF {
+        if (other.isIn(ModifierPredicates.CHICKEN_AUGMENTS))
+            damage.plus(1f)
+        return damage
+    }
+
+    override fun modifyAmplifier(
+        amplifier: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return amplifier.plus(1)
+        return amplifier
+    }
+
     override fun modifyDuration(
         duration: PerLvlI,
         other: ScepterAugment,
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return duration.plus(0,0,100)
+        if (other.isIn(ModifierPredicates.CHICKEN_AUGMENTS))
+            return duration.plus(0,0,10)
         if (other == RegisterEnchantment.SUMMON_GOLEM)
             return PerLvlI(AiConfig.entities.cholem.baseLifespan.get())
         return duration
+    }
+
+    override fun modifyRange(
+        range: PerLvlD,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlD {
+        if (other.isIn(ModifierPredicates.CHICKEN_AUGMENTS))
+            range.plus(0.0,0.0,33.3)
+        return range
+    }
+
+    override fun <T> modifyCount(
+        start: Int,
+        context: ProcessContext,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Int where T : SpellCastingEntity, T : LivingEntity {
+        if (spells.primary()?.isIn(ModifierPredicates.CHICKEN_AUGMENTS) == true)
+            return start + 2
+        return start
     }
 
     override fun <T> onEntityHit(
@@ -159,12 +196,11 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         spells: PairedAugments
     )
     :
-            SpellActionResult
+    SpellActionResult
     where
     T : SpellCastingEntity,
     T : LivingEntity
     {
-        
         val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
@@ -179,6 +215,23 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
                 }
             } else {
                 user.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, 200))
+            }
+            return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+        }
+        if (spells.primary() == RegisterEnchantment.DASH){
+            val target = entityHitResult.entity
+            target.addVelocity(0.0,2.0,0.0)
+            if (target is LivingEntity){
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, 200))
+                return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            }
+        }
+        if (othersType.positiveEffect){
+            val target = entityHitResult.entity
+            if (target is LivingEntity){
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), min(2,effects.amplifier(level))))
+                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
 
@@ -255,9 +308,17 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     ): List<Entity> where T : ModifiableEffectEntity, T : Entity, U : SpellCastingEntity, U : LivingEntity {
 
         if (spells.primary() == RegisterEnchantment.SUMMON_GOLEM){
+            val list: MutableList<CholemEntity> = mutableListOf()
             for (i in 1..3){
-                val cholem = TODO()
+                val cholem = CholemEntity(RegisterEntity.CHOLEM_ENTITY,world,effects.duration(level),user)
+                val startPos = BlockPos.ofFloored(hit.pos)
+                val bl = AugmentHelper.findSpawnPos(world,startPos,cholem,4,16,user.pitch,user.yaw)
+                if (bl){
+                    cholem.passEffects(spells,effects,level)
+                    list.add(cholem)
+                }
             }
+            return list
         }
 
         return summons

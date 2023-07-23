@@ -14,7 +14,9 @@ object ModifiableEffects {
     val CHAIN_LIGHTNING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("chain_lightning_effect")) {entity,owner,context-> ShockingEffect.chainLightning(entity,owner,context)}
     val GROW_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("grow_effect")) {entity,owner,context-> AbundanceEffect.grow(entity,owner,context)}
     val GUST_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("gust_effect")) {entity,owner,context-> SummonChickenEffect.gust(entity,owner,context)}
-    
+    val CALL_HOSTILES_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("call_hostiles_effect")) {entity,owner,context-> BodySwapEffect.callHostiles(entity,owner,context)}
+    val CALL_SUMMONS_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("call_summons_effect")) {entity,owner,context-> BodySwapEffect.callSummons(entity,owner,context)}
+    val SHINE_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shine_effect")) {entity,owner,context-> ShineEffect.shine(entity,owner,context)}
     fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): MutableList<LivingEntity>{
         if (list.isNotEmpty()){
             val listTmp: MutableList<LivingEntity> = mutableListOf()

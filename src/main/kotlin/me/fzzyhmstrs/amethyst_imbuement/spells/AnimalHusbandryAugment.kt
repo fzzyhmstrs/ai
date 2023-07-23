@@ -19,7 +19,9 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CustomTemptGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraftHorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBoost
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -29,9 +31,11 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.passive.AnimalEntity
@@ -55,10 +59,9 @@ import java.util.*
 
 /*
     Checklist
-    - implement all special combinations
      */
 
-class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
+class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true), PersistentEffectHelper.PersistentEffect {
 
     private val uuid = UUID.fromString("be9acea0-2112-11ee-be56-0242ac120002")
 
@@ -68,8 +71,10 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
 
     //ml 4
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(6.0,0.5)
+        get() = super.baseEffect
+            .withRange(6.0,0.5)
             .withAmplifier(2,1)
+            .withDuration(1200,200)
 
     override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
             : Boolean where T : SpellCastingEntity, T : LivingEntity {
@@ -108,6 +113,8 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
                 AcText.translatable("enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse")
             RegisterEnchantment.PERSUADE ->
                 AcText.translatable("enchantment.amethyst_imbuement.animal_husbandry.persuade")
+            RegisterEnchantment.SUMMON_CHICKEN ->
+                AcText.translatable("enchantment.amethyst_imbuement.animal_husbandry.summon_chicken")
         }
         return super.specialName(otherSpell)
     }
@@ -265,6 +272,14 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
         val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
+        if (spells.primary() == RegisterEnchantment.PERSUADE){
+            val entity = entityHitResult.entity
+            if (entity is AnimalEntity){
+                (entity as MobEntityAccessor).goalSelector.add(2,CustomTemptGoal(entity))
+                val data = AnimalHusbandryPersistentData(entity)
+                PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),data)
+            }
+        }
         if (othersType == AugmentType.AOE_POSITIVE){
             val entity = entityHitResult.entity
             if (entity is LivingEntity){
@@ -362,22 +377,22 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
                     }
                 }
             }
-            val chorse = if(draftHorseLoaded is DraftHorseEntity) {
+            val draftHorseEntity = if(draftHorseLoaded is DraftHorseEntity) {
                 draftHorseLoaded
             } else {
                 RegisterEntity.DRAFT_HORSE_ENTITY.create(world) ?: return summons
             }
-            val found = AugmentHelper.findSpawnPos(world, BlockPos.ofFloored(hit.pos), chorse, 3, tries = 16)
+            val found = AugmentHelper.findSpawnPos(world, BlockPos.ofFloored(hit.pos), draftHorseEntity, 3, tries = 16)
             if (!found){
                 return listOf()
             }
-            chorse.setPlayerHorseOwner(user)
-            chorse.passEffects(spells,effects,level)
-            chorse.passContext(SummonAugment.summonContext(context))
+            draftHorseEntity.setPlayerHorseOwner(user)
+            draftHorseEntity.passEffects(spells,effects,level)
+            draftHorseEntity.passContext(SummonAugment.summonContext(context))
             if (scepter.item is ScepterLike && scepter.item is SpellCasting){
-                scepter.orCreateNbt.putUuid("current_draft_horse",chorse.uuid)
+                scepter.orCreateNbt.putUuid("current_draft_horse",draftHorseEntity.uuid)
             }
-            return listOf(chorse)
+            return listOf(draftHorseEntity)
 
 
 
@@ -415,4 +430,22 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true) {
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
         world.playSound(null,blockPos,SoundEvents.BLOCK_GRASS_BREAK,SoundCategory.PLAYERS,1.0f,1.0f)
     }
+
+    override val delay: PerLvlI = PerLvlI()
+
+    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
+        if (data is AnimalHusbandryPersistentData){
+            var goal: Goal? = null
+            for (prioritizedGoal in (data.entity as MobEntityAccessor).goalSelector.goals) {
+                if (prioritizedGoal.goal is CustomTemptGoal){
+                    goal = prioritizedGoal.goal
+                    break
+                }
+            }
+            if (goal != null)
+                (data.entity as MobEntityAccessor).goalSelector.remove(goal)
+        }
+    }
+
+    class AnimalHusbandryPersistentData(val entity: AnimalEntity): PersistentEffectHelper.PersistentEffectData
 }

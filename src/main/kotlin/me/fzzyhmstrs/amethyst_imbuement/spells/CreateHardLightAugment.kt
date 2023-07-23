@@ -24,6 +24,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.boosts.DyeBoost
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.block.BlockState
@@ -33,6 +34,8 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
@@ -40,9 +43,14 @@ import net.minecraft.util.DyeColor
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
+
+/*
+    Checklist
+     */
 
 class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     override val augmentData: AugmentDatapoint =
@@ -151,6 +159,17 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         return amplifier
     }
 
+    override fun modifyRange(
+        range: PerLvlD,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlD {
+        if (spells.spellsAreEqual())
+            return range.plus(2.5)
+        return range
+    }
+
     override fun <T> modifyDealtDamage(
         amount: Float,
         context: ProcessContext,
@@ -236,12 +255,16 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     {
         if (spells.primary() == RegisterEnchantment.ICE_SHARD){
             val entity = entityHitResult.entity
-            if (entity is LivingEntity && world.random.nextFloat() < 0.1){
+            if (entity is LivingEntity && world.random.nextFloat() < 0.15){
                 entity.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING,120))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             }
         }
         return SUCCESSFUL_PASS
+    }
+
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.END_ROD
     }
 
     private fun itemAfterHardLightTransform(item: Item): Item {

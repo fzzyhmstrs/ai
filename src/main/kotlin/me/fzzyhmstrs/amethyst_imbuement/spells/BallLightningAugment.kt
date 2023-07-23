@@ -52,7 +52,6 @@ import net.minecraft.world.World
 
 /*
 Checklist
-- add some canTarget stuff
 */
 
 class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
@@ -401,7 +400,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         user: T,
         level: Int,
         effects: AugmentEffect,
-        spells: PairedAugments
+        spells: PairedAugments,
+        count: Int
     )
     :
     List<ProjectileEntity>
@@ -411,10 +411,14 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     {
         val dir = user.rotationVec3d
         val pos = user.eyePos.subtract(0.0,0.5,0.0).add(dir.multiply(0.75))
-        val ble = BallLightningEntity(world,user,dir,1.0f,0.25f,pos)
-        ble.passEffects(spells,effects, level)
-        ble.passContext(context)
-        return listOf(ble)
+        val list: MutableList<BallLightningEntity> = mutableListOf()
+        for (i in 1..count) {
+            val ble = BallLightningEntity(world, user, dir, 1.0f, 0.25f, pos)
+            ble.passEffects(spells, effects, level)
+            ble.passContext(context)
+            list.add(ble)
+        }
+        return list
     }
 
     override fun castParticleType(): ParticleEffect? {

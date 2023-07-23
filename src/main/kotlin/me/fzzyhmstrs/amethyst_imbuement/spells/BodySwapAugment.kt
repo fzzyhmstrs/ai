@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
@@ -15,15 +16,20 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
@@ -42,6 +48,10 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
+
+/*
+    Checklist
+     */
 
 class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGET){
     override val augmentData: AugmentDatapoint =
@@ -149,6 +159,17 @@ class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGE
         return map[map.lastKey()]?:return null
     }
 
+    override fun modifyManaCost(
+        manaCost: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return manaCost.plus(15)
+        return manaCost
+    }
+
     override fun modifyDamage(
         damage: PerLvlF,
         other: ScepterAugment,
@@ -245,6 +266,23 @@ class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGE
     T : SpellCastingEntity,
     T : LivingEntity
     {
+        if (spells.primary() == RegisterEnchantment.CURSE){
+            return when (val entity = entityHitResult.entity) {
+                is PlayerEntity -> {
+                    (entity as ModifiableEffectMobOrPlayer).amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.CALL_HOSTILES_EFFECT,1200)
+                    SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+                }
+
+                is HostileEntity -> {
+                    (entity as ModifiableEffectMobOrPlayer).amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK,ModifiableEffects.CALL_SUMMONS_EFFECT,1200)
+                    SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+                }
+
+                else -> {
+                    FAIL
+                }
+            }
+        }
         if (othersType.empty){
             val pos0 = entityHitResult.entity.pos
             val pos1 = Vec3d(pos0.toVector3f())

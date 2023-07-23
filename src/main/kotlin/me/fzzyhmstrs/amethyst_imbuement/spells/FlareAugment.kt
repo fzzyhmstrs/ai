@@ -31,8 +31,7 @@ import net.minecraft.world.World
 
 class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(AugmentType.ENTITY).with(AugmentType.EXPLODES).with(AugmentType.BENEFICIAL).with(AugmentType.AOE).build()) {
     override val augmentData: AugmentDatapoint = 
-        AugmentDatapoint(
-            AI.identity("flare"),SpellType.GRACE,15,3,
+        AugmentDatapoint(AI.identity("flare"),SpellType.GRACE,15,3,
             1,15,1,1, LoreTier.NO_TIER, Items.FIREWORK_STAR)
 
     //ml 15

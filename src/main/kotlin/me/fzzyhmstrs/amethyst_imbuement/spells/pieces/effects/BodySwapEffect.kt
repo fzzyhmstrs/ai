@@ -21,7 +21,7 @@ object BodySwapEffect {
 
     fun callSummons(entity: Entity, owner: Entity?, processContext: ProcessContext){
         val world = entity.world
-        if (world.time % 22 != 0L || processContext.isBeforeRemoval()) return
+        if (world.time % 25 != 0L || processContext.isBeforeRemoval()) return
         val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(24.0,3.0,24.0),pos.subtract(24.0,3.0,24.0))
         val entities = world.getOtherEntities(entity, box) {it is Tameable}
