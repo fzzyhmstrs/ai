@@ -70,22 +70,25 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        when(other) {
+            RegisterEnchantment.CREATE_LAVA -> {
+                description.addLang("enchantment.amethyst_imbuement.barrier.create_lava.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.FLAME))
+                return
+            }
+            RegisterEnchantment.CLEANSE -> {
+                description.addLang("enchantment.amethyst_imbuement.barrier.cleanse.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.HEALTH))
+                return
+            }
+            RegisterEnchantment.SOUL_MISSILE ->
+                description.addLang("enchantment.amethyst_imbuement.barrier.soul_missile.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.PROJECTILE))
+        }
         if (othersType.has(AugmentType.BENEFICIAL) && othersType.has(AugmentType.ENTITY))
             description.addLang("enchantment.amethyst_imbuement.barrier.desc.barrier", SpellAdvancementChecks.ENTITY_EFFECT.or(PROTECTED_EFFECT))
         if (othersType.has(AugmentType.SUMMONS))
             description.addLang("enchantment.amethyst_imbuement.barrier.desc.summon", SpellAdvancementChecks.SUMMONS.or(PROTECTED_EFFECT))
-        if (othersType.has(AugmentType.PROJECTILE))
-            description.addLang("enchantment.amethyst_imbuement.barrier.desc.pierce", SpellAdvancementChecks.ENTITY_EFFECT.or(SpellAdvancementChecks.DAMAGE))
+        description.addLang("enchantment.amethyst_imbuement.barrier.desc.pierce", SpellAdvancementChecks.ENTITY_EFFECT.or(SpellAdvancementChecks.DAMAGE))
         if (othersType.has(AugmentType.PROJECTILE) || othersType.negativeEffect)
             description.addLang("enchantment.amethyst_imbuement.barrier.desc.pierce2", SpellAdvancementChecks.HARMED_EFFECT)
-        when(other) {
-            RegisterEnchantment.CREATE_LAVA ->
-                description.addLang("enchantment.amethyst_imbuement.barrier.create_lava.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.FLAME))
-            RegisterEnchantment.CLEANSE ->
-                description.addLang("enchantment.amethyst_imbuement.barrier.cleanse.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.HEALTH))
-            RegisterEnchantment.SOUL_MISSILE ->
-                description.addLang("enchantment.amethyst_imbuement.barrier.soul_missile.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.PROJECTILE))
-        }
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {

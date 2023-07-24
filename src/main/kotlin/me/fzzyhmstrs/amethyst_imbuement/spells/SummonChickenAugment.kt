@@ -69,6 +69,7 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
             RegisterEnchantment.SUMMON_SEAHORSE -> {
                 description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_seahorse.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
                 description.addLang("enchantment.amethyst_imbuement.summon_chicken.summon_seahorse.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                return
 
             }
             RegisterEnchantment.GUSTING ->

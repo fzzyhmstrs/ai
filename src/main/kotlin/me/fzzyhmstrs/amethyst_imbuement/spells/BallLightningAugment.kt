@@ -73,6 +73,23 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        when(other) {
+            RegisterEnchantment.BARRIER -> {
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.barrier.desc", SpellAdvancementChecks.UNIQUE)
+                return
+            }
+            RegisterEnchantment.CRIPPLE -> {
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.duration", SpellAdvancementChecks.STAT)
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.cripple.desc", SpellAdvancementChecks.UNIQUE)
+                return
+            }
+            RegisterEnchantment.BEDAZZLE ->
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.bedazzle.desc", SpellAdvancementChecks.UNIQUE)
+            RegisterEnchantment.INSPIRING_SONG -> {
+                description.addLang("enchantment.amethyst_imbuement.ball_lightning.inspiring_song.desc", SpellAdvancementChecks.UNIQUE)
+                return
+            }
+        }
         if (othersType.has(AugmentType.DAMAGE)){
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage", SpellAdvancementChecks.STAT)
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.damage_type", SpellAdvancementChecks.DAMAGE_SOURCE)
@@ -96,16 +113,6 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.positiveEffect", SpellAdvancementChecks.LIGHTNING)
         if (othersType.has(AugmentType.EXPLODES))
             description.addLang("enchantment.amethyst_imbuement.ball_lightning.desc.explode", SpellAdvancementChecks.EXPLODES.or(SpellAdvancementChecks.STUNS))
-        when(other) {
-            RegisterEnchantment.BARRIER ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.barrier.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.CRIPPLE ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.cripple.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.BEDAZZLE ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.bedazzle.desc", SpellAdvancementChecks.UNIQUE)
-            RegisterEnchantment.INSPIRING_SONG ->
-                description.addLang("enchantment.amethyst_imbuement.ball_lightning.inspiring_song.desc", SpellAdvancementChecks.UNIQUE)
-        }
     }
 
     override fun doubleNameDesc(): List<MutableText> {
@@ -259,6 +266,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
                     spells.processOnKill(entityHitResult,context, world, source, user, hand, level, effects)
                     SpellActionResult.overwrite(AugmentHelper.DAMAGED_MOB, AugmentHelper.SLASHED, AugmentHelper.KILLED_MOB)
                 }
+            } else {
+                return FAIL
             }
         } else if (spells.primary() == RegisterEnchantment.INSPIRING_SONG){
             if (livingEntity is ModifiableEffectEntity) {

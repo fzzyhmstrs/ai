@@ -102,7 +102,7 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
                 description.addLang("enchantment.amethyst_imbuement.shine.survey.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.BLOCK))
                 description.addLang("enchantment.amethyst_imbuement.shine.desc.manaCost", SpellAdvancementChecks.MANA_COST)
             }
-            RegisterEnchantment.SHINE ->
+            RegisterEnchantment.CREATE_HARD_LIGHT ->
                 description.addLang("enchantment.amethyst_imbuement.shine.create_hard_light.desc", SpellAdvancementChecks.BLOCK)
         }
     }

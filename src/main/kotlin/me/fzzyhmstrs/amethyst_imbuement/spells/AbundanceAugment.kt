@@ -351,6 +351,7 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
             }
             fce.passEffects(spells,effects,level)
             fce.passContext(context)
+            fce.addEffect(ModifiableEffectEntity.ON_REMOVED,ModifiableEffects.GROW_EFFECT)
             return listOf(fce)
         }
         for (summon in summons){

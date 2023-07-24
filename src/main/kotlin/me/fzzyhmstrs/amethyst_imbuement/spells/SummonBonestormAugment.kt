@@ -74,6 +74,16 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
             .withDamage(AiConfig.entities.bonestorm.baseDamage.get(),AiConfig.entities.bonestorm.perLvlDamage.get())
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        when(other) {
+            RegisterEnchantment.SUMMON_ZOMBIE -> {
+                description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.summon_zombie.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                return
+            }
+
+            RegisterEnchantment.ICE_SHARD ->
+                description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.ice_shard.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
+
+        }
         if (othersType.has(AugmentType.EXPLODES)) {
             description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.desc.explodes1", SpellAdvancementChecks.EXPLODES.or(SpellAdvancementChecks.MANA_COST))
             description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.desc.explodes2", SpellAdvancementChecks.EXPLODES)
@@ -85,14 +95,6 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
                 description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.desc.damage", SpellAdvancementChecks.DAMAGE)
             if(othersType.has(AugmentType.BENEFICIAL))
                 description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.desc.armor", SpellAdvancementChecks.DAMAGE)
-        }
-        when(other) {
-            RegisterEnchantment.SUMMON_ZOMBIE ->
-                description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.summon_zombie.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
-
-            RegisterEnchantment.ICE_SHARD ->
-                description.addLang("enchantment.amethyst_imbuement.summon_bonestorm.ice_shard.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
-
         }
     }
 

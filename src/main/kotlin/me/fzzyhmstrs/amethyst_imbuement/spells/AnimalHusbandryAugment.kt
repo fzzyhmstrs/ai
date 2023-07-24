@@ -87,20 +87,24 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true), Persistent
             description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.range", SpellAdvancementChecks.RANGE)
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.damage", SpellAdvancementChecks.DAMAGE)
+        if (othersType.has(SpellHelper.CHICKEN))
+            description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.chicken", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.CHICKEN).or(SpellAdvancementChecks.SHOOT_ITEM))
+        when(other) {
+            RegisterEnchantment.SUMMON_SEAHORSE -> {
+                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
+                return
+                }
+            RegisterEnchantment.PERSUADE -> {
+                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.persuade.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.STUNS))
+                return
+            }
+            RegisterEnchantment.SUMMON_CHICKEN ->
+                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.summon_chicken.desc", SpellAdvancementChecks.AMPLIFIER.or(SpellAdvancementChecks.CHICKEN))
+        }
         if (othersType.has(AugmentType.SUMMONS))
             description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.summons", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.HEALTH))
         if (othersType == AugmentType.AOE_POSITIVE)
             description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.aoe_positive", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.HEALTH))
-        if (othersType.has(SpellHelper.CHICKEN))
-            description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.chicken", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.CHICKEN).or(SpellAdvancementChecks.SHOOT_ITEM))
-        when(other) {
-            RegisterEnchantment.SUMMON_SEAHORSE ->
-                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))
-            RegisterEnchantment.PERSUADE ->
-                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.persuade.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.STUNS))
-            RegisterEnchantment.SUMMON_CHICKEN ->
-                description.addLang("enchantment.amethyst_imbuement.animal_husbandry.summon_chicken.desc", SpellAdvancementChecks.AMPLIFIER.or(SpellAdvancementChecks.CHICKEN))
-        }
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -393,9 +397,6 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true), Persistent
                 scepter.orCreateNbt.putUuid("current_draft_horse",draftHorseEntity.uuid)
             }
             return listOf(draftHorseEntity)
-
-
-
         }
 
         for (summon in summons){

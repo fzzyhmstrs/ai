@@ -1,11 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
 import me.fzzyhmstrs.amethyst_core.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -28,12 +31,13 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
+class CometStormAugment: ScepterAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("comet_storm"),SpellType.FURY,PerLvlI(480,-20),75,
             21,9,1,10, LoreTier.HIGH_TIER, Items.TNT)
@@ -49,8 +53,20 @@ class CometStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DA
         TODO("Not yet implemented")
     }
 
+    override fun <T> applyTasks(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        TODO("Not yet implemented")
+    }
+
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
-        TODO()
+        return arrayOf(pairedSpell.provideNoun(this))
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {

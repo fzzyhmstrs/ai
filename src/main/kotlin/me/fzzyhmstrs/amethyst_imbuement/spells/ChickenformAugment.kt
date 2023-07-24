@@ -73,6 +73,17 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        when(other) {
+            RegisterEnchantment.SUMMON_GOLEM -> {
+                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
+            }
+            RegisterEnchantment.DASH -> {
+                description.addLang("enchantment.amethyst_imbuement.chickenform.dash.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
+                return
+            }
+
+        }
         if (othersType.positiveEffect)
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.positive", SpellAdvancementChecks.STAT)
         if (other.isIn(ModifierPredicates.CHICKEN_AUGMENTS))
@@ -81,15 +92,7 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.damage", SpellAdvancementChecks.DAMAGE)
             description.addLang("enchantment.amethyst_imbuement.chickenform.desc.kill", SpellAdvancementChecks.ON_KILL)
         }
-        when(other) {
-            RegisterEnchantment.SUMMON_GOLEM -> {
-                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc1", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
-                description.addLang("enchantment.amethyst_imbuement.chickenform.summon_golem.desc2", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.CHICKEN))
-            }
-            RegisterEnchantment.DASH ->
-                description.addLang("enchantment.amethyst_imbuement.chickenform.dash.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.DAMAGE))
 
-        }
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
