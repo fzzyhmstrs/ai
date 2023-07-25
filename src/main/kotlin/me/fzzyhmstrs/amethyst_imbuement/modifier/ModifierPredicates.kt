@@ -43,17 +43,13 @@ object ModifierPredicates {
 
     private fun isInTag(id: Identifier,tag: TagKey<Enchantment>): Boolean{
         val augment = Registries.ENCHANTMENT.get(id)?:return false
-        val opt = Registries.ENCHANTMENT.getEntry(Registries.ENCHANTMENT.getRawId(augment))
-        var bl = false
-        opt.ifPresent { entry -> bl = entry.isIn(tag) }
-        return bl
+        val entry = Registries.ENCHANTMENT.getEntry(augment)
+        return entry.isIn(tag)
     }
 
     fun ScepterAugment.isIn(tag: TagKey<Enchantment>): Boolean{
-        val opt = Registries.ENCHANTMENT.getEntry(Registries.ENCHANTMENT.getRawId(this))
-        var bl = false
-        opt.ifPresent { entry -> bl = entry.isIn(tag) }
-        return bl
+        val entry = Registries.ENCHANTMENT.getEntry(this)
+        return entry.isIn(tag)
     }
 
 }

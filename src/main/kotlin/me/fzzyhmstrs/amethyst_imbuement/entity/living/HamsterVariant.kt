@@ -8,13 +8,20 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.SimpleDefaultedRegistry
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.random.Random
 
-class HamsterVariant(val texture: Identifier) {
+class HamsterVariant(val texture: Identifier, private val randomlySelectable: Boolean = true) {
 
     companion object{
         val HAMSTERS: SimpleDefaultedRegistry<HamsterVariant> = FabricRegistryBuilder.createDefaulted(RegistryKey.ofRegistry<HamsterVariant>(AI.identity("hamster_variant")),
             AI.identity("dwarf_hamster")).buildAndRegister()
         val TRACKED_HAMSTER = TrackedDataHandler.of(HAMSTERS)
+
+        private val SELECTABLE_HAMSTERS: MutableList<HamsterVariant> = mutableListOf()
+
+        fun randomVariant(random: Random): HamsterVariant?{
+            return if (SELECTABLE_HAMSTERS.isEmpty()) null else SELECTABLE_HAMSTERS[random.nextInt(SELECTABLE_HAMSTERS.size)]
+        }
 
         fun registerAll(){
             TrackedDataHandlerRegistry.register(TRACKED_HAMSTER)
@@ -30,10 +37,15 @@ class HamsterVariant(val texture: Identifier) {
         val SIBERIAN = register("siberian_hamster","textures/entity/hamster/siberian.png")
         val SYRIAN = register("syrian_hamster","textures/entity/hamster/syrian.png")
 
+        val MAGMA = register("magma_hamster","textures/entity/hamster/magma.png", false)
+        val FROST = register("frost_hamster","textures/entity/hamster/frost.png", false)
+        val CRYSTAL = register("crystal_hamster","textures/entity/hamster/crystal.png", false)
+        val ZOMBIE = register("zombie_hamster","textures/entity/hamster/zombie.png", false)
+
         ////////////////////////////////
 
-        private fun register(name: String, texture: String): HamsterVariant{
-            return Registry.register(HAMSTERS, AI.identity(name), HamsterVariant(AI.identity(texture)))
+        private fun register(name: String, texture: String, randomlySelectable: Boolean = true): HamsterVariant{
+            return Registry.register(HAMSTERS, AI.identity(name), HamsterVariant(AI.identity(texture),randomlySelectable)).also { if(randomlySelectable) SELECTABLE_HAMSTERS.add(it) }
         }
     }
 

@@ -644,6 +644,8 @@
 	"enchantment.amethyst_imbuement.create_lava.verb": "Melt",
 	"enchantment.amethyst_imbuement.create_lava.adjective": "Magmatic",
 	"enchantment.amethyst_imbuement.create_lava.desc": "Places a lava source block.",
+	"enchantment.amethyst_imbuement.create_lava.summon_hamster": "Summon Lampster",
+	"enchantment.amethyst_imbuement.create_lava.summon_hamster.desc": "Summons a Lava-infused hamster to fight alongside you. This hamster ",
 
 	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.double": "Enhanced Create Sponge",

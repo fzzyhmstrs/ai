@@ -74,7 +74,7 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
             val spawnPos = findSpawnPos(world,startPos,5,1)
             if (spawnPos == BlockPos.ORIGIN) continue
 
-            val hampter = BaseHamsterEntity(RegisterEntity.BASIC_HAMSTER_ENTITY, world, effects.duration(level), user, effects, level)
+            val hampter = BaseHamsterEntity(RegisterEntity.BASIC_HAMSTER_ENTITY, world, effects.duration(level), user)
 
             val rnd1 = world.random.nextFloat()
             if (rnd1 < (0.2f + 0.005f * level)){
