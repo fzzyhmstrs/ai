@@ -101,13 +101,9 @@ class FzzyhammerItem(settings: Settings):
                     block.onBreak(world,pos,blockState,miner)
                 }
                 val bl2 = world.removeBlock(pos,false)
-                println("whoooo")
                 if (bl2){
                     block.onBroken(world,pos,blockState)
-                    println("wheeee")
                     if (miner is PlayerEntity) {
-                        println("woo hooooo")
-                        println(stack)
                         block.afterBreak(world,miner,pos,blockState,blockEntity,stack.copy())
                     }
                 }

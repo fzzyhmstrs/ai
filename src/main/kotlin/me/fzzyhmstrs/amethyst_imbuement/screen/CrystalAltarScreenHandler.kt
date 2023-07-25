@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -141,7 +141,6 @@ class CrystalAltarScreenHandler(
         val item = itemStack.item.recipeRemainder
         itemStack.decrement(1)
         if (item != null) {
-            println("bleh")
             val itemStack2 = ItemStack(item)
             if (itemStack.isEmpty) {
                 itemStack = itemStack2

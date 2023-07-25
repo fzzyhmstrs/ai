@@ -30,8 +30,6 @@ class AccursedAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         var duration = effect?.duration?:160
         if (duration < 160) duration = 160
         attacker.addStatusEffect(StatusEffectInstance(RegisterStatus.CURSED, duration, amp + 1))
-        println("accursed added!")
-        println(attacker.statusEffects)
     }
 
 }
