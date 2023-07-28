@@ -1,9 +1,9 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 
-import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -78,15 +78,15 @@ open class CholemEntity: PlayerCreatedConstructEntity {
         return g
     }
 
+    override fun applyKnockback(g: Float, target: Entity){
+        target.velocity = target.velocity.add(0.0, 0.5, 0.0)
+    }
+
     override fun tryAttack(target: Entity): Boolean {
         attackTicksLeft = 10
         world.sendEntityStatus(this, 4.toByte())
         playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0f, 1.0f)
         return super.tryAttack(target)
-    }
-
-    override fun applyKnockback(g: Float, target: Entity){
-        target.velocity = target.velocity.add(0.0, 0.5, 0.0)
     }
 
     override fun handleStatus(status: Byte) {
@@ -130,12 +130,6 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     fun getLookingAtVillagerTicks(): Int {
         return lookingAtVillagerTicksLeft
-    }
-
-    override fun remove(reason: RemovalReason?) {
-        processContext.beforeRemoval()
-        runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
-        super.remove(reason)
     }
 
     override fun getLeashOffset(): Vec3d {

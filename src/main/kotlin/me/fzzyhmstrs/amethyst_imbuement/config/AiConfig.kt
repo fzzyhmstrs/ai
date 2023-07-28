@@ -398,8 +398,16 @@ object AiConfig
             var baseDamage = ValidatedFloat(10.0f,500f,0f)
         }
 
+        var lavaGolem = Cholem()
+        class LavaGolem: ConfigSection(Header.Builder().space().add("readme.entities.lavaGolem_1").build()){
+            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
+            var baseLifespan = ValidatedInt(4800, Int.MAX_VALUE-120000,20)
+            var baseHealth = ValidatedDouble(120.0,800.0,1.0)
+            var baseDamage = ValidatedFloat(16.0f,500f,0f)
+        }
+
         var hamster = Hamster()
-        class Hamster: ConfigSection(Header.Builder().space().add("readme.entities.hamster_1").build()){
+        class Hamster: ConfigSection(Header.Builder().space().add("readme.entities.hamster_1").add("readme.entities.hamster_2").build()){
             @ReadMeText("readme.entities.hamster.baseLifespan")
             var baseLifespan = ValidatedInt(3600,180000,-1)
             var baseHealth = ValidatedDouble(8.0,40.0,1.0)
@@ -409,6 +417,22 @@ object AiConfig
             var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
             var hamptertimeBaseSpawnCount = ValidatedDouble(10.0,100.0,1.0)
             var hamptertimePerLvlSpawnCount = ValidatedDouble(0.5,5.0,0.0)
+        }
+
+        var hamethyst = Hamethyst()
+        class Hamethyst: ConfigSection(Header.Builder().space().add("readme.entities.hamethyst_1").add("readme.entities.hamethyst_2").build()){
+            @ReadMeText("readme.entities.hamethyst.baseLifespan")
+            var baseLifespan = ValidatedInt(6000,360000,-1)
+            var baseHealth = ValidatedDouble(32.0,40.0,1.0)
+            var baseDamage = ValidatedFloat(8.0f,40.0f,0.0f)
+        }
+
+        var zambie = Zambie()
+        class Zambie: ConfigSection(Header.Builder().space().add("readme.entities.zambie_1").add("readme.entities.zambie_2").build()){
+            @ReadMeText("readme.entities.zambie.baseLifespan")
+            var baseLifespan = ValidatedInt(2400,180000,-1)
+            var baseHealth = ValidatedDouble(12.0,40.0,1.0)
+            var baseDamage = ValidatedFloat(2.5f,20.0f,0.0f)
         }
 
         var bonestorm = Bonestorm()

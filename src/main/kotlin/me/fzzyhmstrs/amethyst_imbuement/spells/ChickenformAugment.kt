@@ -17,7 +17,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CholemEntity
 import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierPredicates
 import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierPredicates.isIn
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment

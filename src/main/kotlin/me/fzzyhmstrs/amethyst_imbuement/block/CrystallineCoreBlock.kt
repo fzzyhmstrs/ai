@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity.CRYSTAL_GOLEM_ENTITY
 import net.minecraft.advancement.criterion.Criteria

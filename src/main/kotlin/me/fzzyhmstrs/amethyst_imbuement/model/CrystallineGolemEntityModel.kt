@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.render.entity.model.SinglePartEntityModel

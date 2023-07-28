@@ -4,7 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import com.google.common.collect.ImmutableMap
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer

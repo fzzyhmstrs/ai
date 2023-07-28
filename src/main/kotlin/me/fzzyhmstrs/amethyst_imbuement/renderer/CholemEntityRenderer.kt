@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CholemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CholemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory

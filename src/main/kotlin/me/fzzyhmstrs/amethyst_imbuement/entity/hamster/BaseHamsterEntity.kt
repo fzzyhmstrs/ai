@@ -1,8 +1,9 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.hamster
 
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
@@ -24,21 +25,21 @@ import net.minecraft.world.World
 
 open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
-    constructor(entityType: EntityType<BaseHamsterEntity>, world: World): super(entityType, world)
+    constructor(entityType: EntityType<out BaseHamsterEntity>, world: World): super(entityType, world)
 
-    constructor(entityType: EntityType<BaseHamsterEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy){
+    constructor(entityType: EntityType<out BaseHamsterEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy){
     }
 
     companion object {
-        private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
-        private const val baseMoveSpeed = 0.25
-        private  val baseAttackDamage = AiConfig.entities.hamster.baseSummonDamage.get()
-        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java,HamsterVariant.TRACKED_HAMSTER)
+        internal val HAMSTER_VARIANT = DataTracker.registerData(
+            BaseHamsterEntity::class.java,
+            HamsterVariant.TRACKED_HAMSTER
+        )
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.hamster.baseHealth.get())
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.hamster.baseSummonDamage.get().toDouble())
         }
     }
 
@@ -57,7 +58,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         entityNbt: NbtCompound?
     ): EntityData? {
 
-        val hamster = HamsterVariant.randomVariant(world.random)?:return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        val hamster = HamsterVariant.randomVariant(world.random) ?:return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
         setVariant(hamster)
 
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
@@ -65,10 +66,10 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(HAMSTER_VARIANT,HamsterVariant.DWARF)
+        dataTracker.startTracking(HAMSTER_VARIANT, HamsterVariant.DWARF)
     }
 
-    fun getVariant(): HamsterVariant{
+    fun getVariant(): HamsterVariant {
         return dataTracker.get(HAMSTER_VARIANT)
     }
 

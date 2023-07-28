@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 
-open class BaseHamsterEntityModel<T:BaseHamsterEntity>(root: ModelPart): EntityModel<T>() {
+open class BaseHamsterEntityModel<T: BaseHamsterEntity>(root: ModelPart): EntityModel<T>() {
     private var body: ModelPart
     private var left_front_leg: ModelPart
     private var left_hind_leg: ModelPart

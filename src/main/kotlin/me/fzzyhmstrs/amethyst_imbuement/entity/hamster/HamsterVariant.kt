@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.hamster
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
@@ -44,7 +44,7 @@ class HamsterVariant(val texture: Identifier, private val randomlySelectable: Bo
 
         ////////////////////////////////
 
-        private fun register(name: String, texture: String, randomlySelectable: Boolean = true): HamsterVariant{
+        private fun register(name: String, texture: String, randomlySelectable: Boolean = true): HamsterVariant {
             return Registry.register(HAMSTERS, AI.identity(name), HamsterVariant(AI.identity(texture),randomlySelectable)).also { if(randomlySelectable) SELECTABLE_HAMSTERS.add(it) }
         }
     }

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import eu.pb4.common.protection.api.CommonProtection
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.PlaceItemAugment
@@ -17,7 +18,9 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.LampsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -206,7 +209,14 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
         spells: PairedAugments
     ): List<Entity> where T : ModifiableEffectEntity, T : Entity, U : SpellCastingEntity,U : LivingEntity {
         if (spells.primary() == RegisterEnchantment.SUMMON_HAMSTER){
-
+            val le = LampsterEntity(RegisterEntity.LAMPSTER_ENTITY, world, -1, user)
+            val found = AugmentHelper.findSpawnPos(world, BlockPos.ofFloored(hit.pos),le, tries = 15)
+            if (!found){
+                return listOf()
+            }
+            le.passEffects(spells,effects,level)
+            le.passContext(context)
+            return listOf(le)
         } else if (spells.primary() == RegisterEnchantment.SUMMON_GOLEM){
 
         }

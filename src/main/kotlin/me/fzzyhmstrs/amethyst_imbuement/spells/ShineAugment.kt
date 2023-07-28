@@ -286,12 +286,9 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
         return summons
     }
 
-    override fun <T> modifyExplosion(builder: ExplosionBuilder, context: ProcessContext, user: T, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
+    override fun modifyExplosion(builder: ExplosionBuilder, context: ProcessContext, user: LivingEntity?, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
     :
     ExplosionBuilder
-    where
-    T : SpellCastingEntity,
-    T : LivingEntity
     {
         return builder.withCustomBehavior(GlowingExplosionBehavior())
     }

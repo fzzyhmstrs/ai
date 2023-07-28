@@ -1,8 +1,9 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 
 import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -32,9 +33,9 @@ import java.util.stream.Stream
 
 open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World): super(entityType, world)
+    constructor(entityType: EntityType<out CrystallineGolemEntity>, world: World): super(entityType, world)
 
-    constructor(entityType: EntityType<CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
+    constructor(entityType: EntityType<out CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
 
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
@@ -82,6 +83,10 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         val f = super.getBaseDamage()
         val g = if (f.toInt() > 0) f / 2.0f + random.nextInt(f.toInt()).toFloat() else f
         return g
+    }
+
+    override fun applyKnockback(g: Float, target: Entity){
+        target.velocity = target.velocity.add(0.0, 0.5, 0.0)
     }
 
     override fun tryAttack(target: Entity): Boolean {

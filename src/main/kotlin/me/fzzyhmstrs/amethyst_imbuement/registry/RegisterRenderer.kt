@@ -74,6 +74,22 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.LAMPSTER_ENTITY
+        ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.HAMSICLE_ENTITY
+        ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.ZAMBIE_ENTITY
+        ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.HAMETHYST_ENTITY
+        ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.BONESTORM_ENTITY
         ){ context: EntityRendererFactory.Context -> BonestormEntityRenderer(context) }
         

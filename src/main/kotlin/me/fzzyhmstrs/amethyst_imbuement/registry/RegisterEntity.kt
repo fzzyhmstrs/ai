@@ -6,6 +6,9 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
@@ -33,6 +36,58 @@ object RegisterEntity {
             SpawnGroup.CREATURE
         ) { entityType: EntityType<BaseHamsterEntity>, world: World ->
             BaseHamsterEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
+    )
+
+    val LAMPSTER_ENTITY: EntityType<LampsterEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "lampster"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<LampsterEntity>, world: World ->
+            LampsterEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
+    )
+
+    val HAMSICLE_ENTITY: EntityType<HamsicleEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "hamsicle"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<HamsicleEntity>, world: World ->
+            HamsicleEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
+    )
+
+    val HAMETHYST_ENTITY: EntityType<HamethystEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "hamethyst"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<HamethystEntity>, world: World ->
+            HamethystEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
+    )
+
+    val ZAMBIE_ENTITY: EntityType<ZambieEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "zambie"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<ZambieEntity>, world: World ->
+            ZambieEntity(
                 entityType,
                 world
             )
@@ -458,6 +513,10 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(DRAFT_HORSE_ENTITY, DraftHorseEntity.createDraftHorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
+        FabricDefaultAttributeRegistry.register(LAMPSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
+        FabricDefaultAttributeRegistry.register(HAMSICLE_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
+        FabricDefaultAttributeRegistry.register(ZAMBIE_ENTITY, ZambieEntity.createZambieAttributes())
+        FabricDefaultAttributeRegistry.register(HAMETHYST_ENTITY, HamethystEntity.createHamethystAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, FloralConstructEntity.createFloralAttributes())

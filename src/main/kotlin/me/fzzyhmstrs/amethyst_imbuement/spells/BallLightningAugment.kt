@@ -342,12 +342,9 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         return builder.add(DamageTypes.LIGHTNING_BOLT)
     }
 
-    override fun <T> modifyExplosion(builder: ExplosionBuilder, context: ProcessContext, user: T, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
+    override fun modifyExplosion(builder: ExplosionBuilder, context: ProcessContext, user: LivingEntity?, world: World, hand: Hand, level: Int, effects: AugmentEffect, othersType: AugmentType, spells: PairedAugments)
     :
     ExplosionBuilder
-    where
-    T : SpellCastingEntity,
-    T : LivingEntity
     {
         return builder.modifyPower{power -> power * 1.1f}.withCustomBehavior(StunningExplosionBehavior())
     }

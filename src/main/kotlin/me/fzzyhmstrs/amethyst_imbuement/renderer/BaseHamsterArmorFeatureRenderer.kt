@@ -4,7 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import com.google.gson.JsonParser
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
@@ -19,7 +19,7 @@ import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
 
-class BaseHamsterArmorFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>, private val model: BaseHamsterEntityModel<T>)
+class BaseHamsterArmorFeatureRenderer<T: BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>, private val model: BaseHamsterEntityModel<T>)
 : 
 FeatureRenderer<T, M>(context)
 {

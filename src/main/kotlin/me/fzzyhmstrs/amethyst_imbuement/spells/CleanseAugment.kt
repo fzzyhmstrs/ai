@@ -32,6 +32,37 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
+/*
+    Checklist
+    - canTarget if entity spell
+    - Build description for
+        - Unique combinations
+        - stat modifications
+        - other type interactions
+        - add Lang
+    - provideArgs
+    - spells are equal check
+    - special names for uniques
+    - onPaired to grant relevant adv.
+    - implement all special combinations
+    - fill up interaction methods
+        - onEntityHit?
+        - onEntityKill?
+        - onBlockHit?
+        - Remember to call and check results of the super for the "default" behavior
+    - modify stats. don't forget mana cost and cooldown!
+        - modifyDealtDamage for unique interactions
+    - modifyDamageSource?
+        - remember DamageSourceBuilder for a default damage source
+    - modify other things
+        - summon?
+        - projectile?
+        - explosion?
+        - drops?
+        - count? (affects some things like summon count and projectile count)
+    - sound and particles
+     */
+
 class CleanseAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     override val augmentData: AugmentDatapoint = 
         AugmentDatapoint(AI.identity("cleanse"),SpellType.GRACE, PerLvlI(670,-20),45,

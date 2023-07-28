@@ -360,17 +360,20 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
         return summons
     }
 
-    override fun <T> modifyExplosion(
+    override fun modifyExplosion(
         builder: ExplosionBuilder,
         context: ProcessContext,
-        user: T,
+        user: LivingEntity?,
         world: World,
         hand: Hand,
         level: Int,
         effects: AugmentEffect,
         othersType: AugmentType,
         spells: PairedAugments
-    ): ExplosionBuilder where T : SpellCastingEntity, T : LivingEntity {
+    )
+    :
+    ExplosionBuilder
+    {
         return builder.withCustomBehavior(AbundanceExplosionBehavior())
     }
 

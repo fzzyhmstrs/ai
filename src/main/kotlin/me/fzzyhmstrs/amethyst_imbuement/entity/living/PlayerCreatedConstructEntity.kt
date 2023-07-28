@@ -344,6 +344,10 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         return bl
     }
 
+    protected open fun attackEffects(target: Entity,damageSource: DamageSource, damage: Float){
+
+    }
+
     protected open fun getBaseDamage(): Float{
         return this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
     }
@@ -365,7 +369,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         }
     }
 
-    override fun remove(reason: RemovalReason?) {
+    override fun remove(reason: RemovalReason) {
         processContext.beforeRemoval()
         runEffect(ModifiableEffectEntity.ON_REMOVED,this,owner,processContext)
         super.remove(reason)
