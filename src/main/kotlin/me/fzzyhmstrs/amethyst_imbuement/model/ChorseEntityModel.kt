@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.ChorseEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
@@ -32,60 +32,60 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
     }
 
     companion object {
-        fun getTexturedModelData(): TexturedModelData {
+        fun getTexturedModelData(dilation: Dilation = Dilation.NONE): TexturedModelData {
             val modelData = ModelData()
             val modelPartData: ModelPartData = modelData.root
             val left_front_leg: ModelPartData = modelPartData.addChild(
                 "left_front_leg",
-                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, dilation),
                 ModelTransform.pivot(3.0f, 13.0f, -9.0f)
             )
             val right_front_leg: ModelPartData = modelPartData.addChild(
                 "right_front_leg",
-                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, dilation),
                 ModelTransform.pivot(-3.0f, 13.0f, -9.0f)
             )
             val left_rear_leg: ModelPartData = modelPartData.addChild(
                 "left_rear_leg",
-                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, dilation),
                 ModelTransform.pivot(3.0f, 13.0f, 9.0f)
             )
             val right_rear_leg: ModelPartData = modelPartData.addChild(
                 "right_rear_leg",
-                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(2, 2).cuboid(-1.0f, 0.0f, -1.0f, 2.0f, 11.0f, 2.0f, dilation),
                 ModelTransform.pivot(-3.0f, 13.0f, 9.0f)
             )
             val body: ModelPartData = modelPartData.addChild(
                 "body",
-                ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -21.0f, -11.0f, 10.0f, 10.0f, 22.0f, Dilation(0.0f))
-                    .uv(48, 58).cuboid(0.0f, -19.0f, 11.0f, 0.0f, 3.0f, 3.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -21.0f, -11.0f, 10.0f, 10.0f, 22.0f, dilation)
+                    .uv(48, 58).cuboid(0.0f, -19.0f, 11.0f, 0.0f, 3.0f, 3.0f, dilation),
                 ModelTransform.pivot(0.0f, 24.0f, 0.0f)
             )
             val head: ModelPartData = modelPartData.addChild(
                 "head",
                 ModelPartBuilder.create().uv(0, 32)
-                    .cuboid(-2.0f, -13.579f, -4.2847f, 4.0f, 12.0f, 6.0f, Dilation(0.0f)),
+                    .cuboid(-2.0f, -13.579f, -4.2847f, 4.0f, 12.0f, 6.0f, dilation),
                 ModelTransform.of(0.0f, 11.579f, -5.7153f, 0.48f, 0.0f, 0.0f)
             )
                 head.addChild(
                     "cube_r1",
-                    ModelPartBuilder.create().uv(54, 60).cuboid(-2.0f, -12.0f, -11.0f, 4.0f, 3.0f, 1.0f, Dilation(0.0f))
-                        .uv(0, 60).cuboid(-3.0f, -14.0f, -12.0f, 6.0f, 2.0f, 2.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(54, 60).cuboid(-2.0f, -12.0f, -11.0f, 4.0f, 3.0f, 1.0f, dilation)
+                        .uv(0, 60).cuboid(-3.0f, -14.0f, -12.0f, 6.0f, 2.0f, 2.0f, dilation),
                     ModelTransform.of(0.0f, 0.0f, 0.0f, -0.48f, 0.0f, 0.0f)
                 )
                 head.addChild(
                     "cube_r2",
-                    ModelPartBuilder.create().uv(20, 32).cuboid(-3.0f, -3.0f, -2.0f, 6.0f, 6.0f, 5.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(20, 32).cuboid(-3.0f, -3.0f, -2.0f, 6.0f, 6.0f, 5.0f, dilation),
                     ModelTransform.of(0.0f, -14.9894f, -1.0975f, -0.48f, 0.0f, 0.0f)
                 )
             val left_wing: ModelPartData = modelPartData.addChild(
                 "left_wing",
-                ModelPartBuilder.create().uv(16, 48).cuboid(0.0f, 0.0f, -4.5f, 1.0f, 7.0f, 9.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(16, 48).cuboid(0.0f, 0.0f, -4.5f, 1.0f, 7.0f, 9.0f, dilation),
                 ModelTransform.pivot(5.0f, 4.0f, -4.5f)
             )
             val right_wing: ModelPartData = modelPartData.addChild(
                 "right_wing",
-                ModelPartBuilder.create().uv(16, 48).cuboid(-1.0f, 0.0f, -4.5f, 1.0f, 7.0f, 9.0f, Dilation(0.0f)),
+                ModelPartBuilder.create().uv(16, 48).cuboid(-1.0f, 0.0f, -4.5f, 1.0f, 7.0f, 9.0f, dilation),
                 ModelTransform.pivot(-5.0f, 4.0f, -4.5f)
             )
             return TexturedModelData.of(modelData, 64, 64)

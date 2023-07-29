@@ -9,18 +9,25 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Monster
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import java.util.*
 
 open class CholemEntity: PlayerCreatedConstructEntity {
 
@@ -30,7 +37,10 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     companion object {
 
-        protected val ENRAGED = DataTracker.registerData(CholemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        protected val DAMAGE_UUID = UUID.fromString("71c5ccf4-2d8a-11ee-be56-0242ac120002")
+        protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
+
+        protected val ENRAGED: TrackedData<Boolean> = DataTracker.registerData(CholemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.cholem.baseHealth.get())
@@ -40,6 +50,17 @@ open class CholemEntity: PlayerCreatedConstructEntity {
                 .add(EntityAttributes.GENERIC_ARMOR,4.0)
         }
     }
+
+    val damageModifier = EntityAttributeModifier(
+        DAMAGE_UUID,
+        "Cholem Damage Bonus",
+        AiConfig.entities.cholem.enragedDamage.get(),
+        EntityAttributeModifier.Operation.ADDITION)
+    val speedModifier = EntityAttributeModifier(
+        SPEED_UUID,
+        "Cholem Speed Bonus",
+        AiConfig.entities.cholem.enragedSpeed.get(),
+        EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
 
     override fun initGoals() {
         super.initGoals()
@@ -121,7 +142,30 @@ open class CholemEntity: PlayerCreatedConstructEntity {
     }
 
     fun setEnraged(bl: Boolean){
+        if (bl && !getEnraged()) {
+            this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(damageModifier)
+            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.addPersistentModifier(speedModifier)
+            val entityWorld = world
+            if (entityWorld is ServerWorld){
+                entityWorld.spawnParticles(ParticleTypes.ANGRY_VILLAGER,this.x,this.eyeY,this.z,15,.25,.25,.25,0.2)
+            }
+            world.playSound(null,blockPos,SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE,SoundCategory.PLAYERS,0.4f,1.0f)
+        } else if (!bl && getEnraged()) {
+            this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.removeModifier(damageModifier)
+            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.removeModifier(speedModifier)
+        }
         dataTracker.set(ENRAGED, bl)
+    }
+
+    override fun remove(reason: RemovalReason) {
+        if (reason.shouldDestroy()) {
+            val box = Box(pos.x + 16.0, pos.y + 16.0, pos.z + 16.0, pos.x - 16.0, pos.y - 16.0, pos.z - 16.0)
+            val entities = world.getOtherEntities(this, box) { it is CholemEntity }.stream().map { it as CholemEntity }
+            for (cholem in entities) {
+                cholem.setEnraged(true)
+            }
+        }
+        super.remove(reason)
     }
 
     fun getAttackTicks(): Int {

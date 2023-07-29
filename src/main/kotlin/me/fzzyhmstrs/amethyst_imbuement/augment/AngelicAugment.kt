@@ -18,7 +18,6 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 
 class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
@@ -52,7 +51,7 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
                     if (item is TotemItem){
                         val nbt = stack.orCreateNbt
                         item.inactiveEnchantmentTasks(stack,user.world,user)
-                        nbt.putBoolean(NbtKeys.TOTEM.str(), false)
+                        nbt.putBoolean(NbtKeys.TOTEM, false)
                     }
                 }
                 if (abilitySource.grants(user, ability)) {

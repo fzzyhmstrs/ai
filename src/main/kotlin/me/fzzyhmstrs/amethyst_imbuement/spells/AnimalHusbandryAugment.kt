@@ -20,7 +20,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CustomTemptGoal
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraftHorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.DraftHorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBoost
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment

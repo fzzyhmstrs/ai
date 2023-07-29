@@ -1,6 +1,6 @@
 @file:Suppress("PrivatePropertyName")
 
-package me.fzzyhmstrs.amethyst_imbuement.renderer
+package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import com.google.common.collect.ImmutableMap
 import me.fzzyhmstrs.amethyst_imbuement.AI

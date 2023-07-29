@@ -8,11 +8,21 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEnti
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CholemEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.FleshGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.LavaGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.*
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.ChorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.DraftHorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.SeahorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraconicBoxEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.FloralConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.BonesEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.UnhallowedEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -94,7 +104,7 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
     )
     
-    /////////
+    ///////////////////////////////
 
     val BONESTORM_ENTITY: EntityType<BonestormEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -122,6 +132,8 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(6).build()
     )
 
+    ////////////////////////
+
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "crystal_golem"),
@@ -148,6 +160,34 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.7f, 1.1f)).trackRangeChunks(10).build()
     )
 
+    val LAVA_GOLEM_ENTITY: EntityType<LavaGolemEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "lava_golem"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<LavaGolemEntity>, world: World ->
+            LavaGolemEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
+    )
+
+    val FLESH_GOLEM_ENTITY: EntityType<FleshGolemEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "flesh_golem"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<FleshGolemEntity>, world: World ->
+            FleshGolemEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.4f, 2.7f)).trackRangeChunks(10).build()
+    )
+
+    ///////////////////
+
     val CHORSE_ENTITY: EntityType<ChorseEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "chorse"),
@@ -168,6 +208,19 @@ object RegisterEntity {
             SpawnGroup.CREATURE
         ) { entityType: EntityType<DraftHorseEntity>, world: World ->
             DraftHorseEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
+    )
+
+    val SEAHORSE_ENTITY: EntityType<SeahorseEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "seahorse"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<SeahorseEntity>, world: World ->
+            SeahorseEntity(
                 entityType,
                 world
             )
@@ -511,18 +564,24 @@ object RegisterEntity {
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(CHORSE_ENTITY, ChorseEntity.createChorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(DRAFT_HORSE_ENTITY, DraftHorseEntity.createDraftHorseBaseAttributes())
+        FabricDefaultAttributeRegistry.register(SEAHORSE_ENTITY, SeahorseEntity.createSeahorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(LAMPSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(HAMSICLE_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
-        FabricDefaultAttributeRegistry.register(ZAMBIE_ENTITY, ZambieEntity.createZambieAttributes())
         FabricDefaultAttributeRegistry.register(HAMETHYST_ENTITY, HamethystEntity.createHamethystAttributes())
+        FabricDefaultAttributeRegistry.register(ZAMBIE_ENTITY, ZambieEntity.createZambieAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, FloralConstructEntity.createFloralAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
+        FabricDefaultAttributeRegistry.register(CHOLEM_ENTITY, CholemEntity.createGolemAttributes())
+        FabricDefaultAttributeRegistry.register(LAVA_GOLEM_ENTITY, LavaGolemEntity.createGolemAttributes())
+        FabricDefaultAttributeRegistry.register(FLESH_GOLEM_ENTITY, FleshGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
+        FabricDefaultAttributeRegistry.register(BONES_ENTITY, BonesEntity.createBonesAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())
+        FabricDefaultAttributeRegistry.register(TOTEM_OF_FANGS_ENTITY,TotemOfFangsEntity.createTotemAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_GRACE_ENTITY,TotemOfGraceEntity.createTotemAttributes())
     }
 

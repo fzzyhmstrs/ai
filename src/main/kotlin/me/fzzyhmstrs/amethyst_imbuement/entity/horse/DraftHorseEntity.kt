@@ -1,7 +1,8 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.horse
 
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity.Scalable
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedHorseEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType

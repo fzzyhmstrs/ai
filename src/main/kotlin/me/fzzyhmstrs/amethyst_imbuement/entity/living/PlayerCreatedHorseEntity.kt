@@ -35,9 +35,7 @@ import java.util.*
 open class PlayerCreatedHorseEntity(entityType: EntityType<out AbstractHorseEntity>?, world: World?) : AbstractHorseEntity(entityType, world),
     ModifiableEffectEntity, PlayerCreatable, Scalable {
     companion object{
-
         protected val HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295")
-
         protected val SCALE = DataTracker.registerData(PlayerCreatedHorseEntity::class.java, TrackedDataHandlerRegistry.FLOAT)
     }
 

@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterArmorFeatureRenderer
+import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterItemFeatureRenderer
 import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.LivingEntityRenderer

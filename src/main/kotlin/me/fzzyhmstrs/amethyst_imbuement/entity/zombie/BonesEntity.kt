@@ -1,8 +1,9 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.zombie
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ShootProjectileGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity

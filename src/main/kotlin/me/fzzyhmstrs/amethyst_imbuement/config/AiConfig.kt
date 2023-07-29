@@ -392,18 +392,29 @@ object AiConfig
 
         var cholem = Cholem()
         class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
-            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
             var baseLifespan = ValidatedInt(3600, Int.MAX_VALUE-120000,20)
             var baseHealth = ValidatedDouble(80.0,512.0,1.0)
             var baseDamage = ValidatedFloat(10.0f,500f,0f)
+            @ReadMeText("readme.entities.cholem.enragedDamage")
+            var enragedDamage = ValidatedDouble(4.0,125.0,0.0)
+            @ReadMeText("readme.entities.cholem.enragedSpeed")
+            var enragedSpeed = ValidatedDouble(0.15,1.0,0.0)
         }
 
         var lavaGolem = Cholem()
         class LavaGolem: ConfigSection(Header.Builder().space().add("readme.entities.lavaGolem_1").build()){
-            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
             var baseLifespan = ValidatedInt(4800, Int.MAX_VALUE-120000,20)
             var baseHealth = ValidatedDouble(120.0,800.0,1.0)
             var baseDamage = ValidatedFloat(16.0f,500f,0f)
+        }
+
+        var fleshGolem = FleshGolem()
+        class FleshGolem: ConfigSection(Header.Builder().space().add("readme.entities.fleshGolem_1").build()){
+            var baseLifespan = ValidatedInt(7200, Int.MAX_VALUE-120000,20)
+            @ReadMeText("readme.entities.fleshGolem.zombieLifespan")
+            var zombieLifespan = ValidatedInt(600, Int.MAX_VALUE-120000,20)
+            var baseHealth = ValidatedDouble(300.0,800.0,1.0)
+            var baseDamage = ValidatedFloat(7.5f,500f,0f)
         }
 
         var hamster = Hamster()

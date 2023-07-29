@@ -49,6 +49,10 @@ Checklist
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|
 | NOT STARTED                                                                  | 13          |
+| Yeet and Dash need custom logic for client                                   | Not started |
+| Add Iridescent Robes, Garnet Armor, Glowing Armor, Void Mail                 | Not started |
+| Check if any uses of context passed to entities need to .copy()              | Not started |
+| Add steel and ametrine tools                                                 | Not started |
 | Add sounds for Ice Shard and HailStorm                                       | Not started |
 | Lightning, Fang, Ball Lightning entities need fallbacks for empty spell      | Not started |
 | Add secondary effects to fallback for fireball/wither skull                  | Not started |

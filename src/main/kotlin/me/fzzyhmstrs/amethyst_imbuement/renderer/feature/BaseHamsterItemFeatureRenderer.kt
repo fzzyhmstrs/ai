@@ -1,6 +1,6 @@
 @file:Suppress("PrivatePropertyName")
 
-package me.fzzyhmstrs.amethyst_imbuement.renderer
+package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
