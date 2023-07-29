@@ -4,19 +4,20 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
@@ -33,6 +34,17 @@ open class FleshGolemEntity: CrystallineGolemEntity {
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.fleshGolem.baseDamage.get().toDouble())
         }
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        this.entityGroup = EntityGroup.UNDEAD
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun attackEffects(target: Entity, damageSource: DamageSource, damage: Float) {

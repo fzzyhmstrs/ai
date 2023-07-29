@@ -1,21 +1,19 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.CrystallineGolemCrackFeatureRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
+import net.minecraft.client.render.entity.model.EntityModelLayers
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
-@Suppress("PrivatePropertyName")
-class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
-    MobEntityRenderer<CrystallineGolemEntity, CrystallineGolemEntityModel>(context,
-        CrystallineGolemEntityModel(context.getPart(RegisterRenderer.CRYSTAL_GOLEM_ENTITY)),
+class CrystallineGolemEntityRenderer<T: CrystallineGolemEntity>(context: EntityRendererFactory.Context, private val texture: Identifier) :
+    MobEntityRenderer<T, CrystallineGolemEntityModel<T>>(context,
+        CrystallineGolemEntityModel(context.getPart(EntityModelLayers.IRON_GOLEM)),
         0.7f
     ) {
 
@@ -23,14 +21,12 @@ class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
         addFeature(CrystallineGolemCrackFeatureRenderer(this))
     }
 
-    private val TEXTURE = AI.identity("textures/entity/crystal_golem/crystal_golem.png")
-
-    override fun getTexture(entity: CrystallineGolemEntity): Identifier {
-        return TEXTURE
+    override fun getTexture(entity: T): Identifier {
+        return texture
     }
 
     override fun setupTransforms(
-        crystalGolemEntity: CrystallineGolemEntity,
+        crystalGolemEntity: T,
         matrixStack: MatrixStack,
         f: Float,
         g: Float,

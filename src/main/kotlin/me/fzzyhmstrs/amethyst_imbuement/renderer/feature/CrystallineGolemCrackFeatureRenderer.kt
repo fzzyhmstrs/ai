@@ -12,7 +12,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
-class CrystallineGolemCrackFeatureRenderer(context: FeatureRendererContext<CrystallineGolemEntity, CrystallineGolemEntityModel>) : FeatureRenderer<CrystallineGolemEntity, CrystallineGolemEntityModel>(
+class CrystallineGolemCrackFeatureRenderer<T: CrystallineGolemEntity>(context: FeatureRendererContext<T, CrystallineGolemEntityModel<T>>) : FeatureRenderer<T, CrystallineGolemEntityModel<T>>(
     context
 ) {
 
@@ -29,7 +29,7 @@ class CrystallineGolemCrackFeatureRenderer(context: FeatureRendererContext<Cryst
         matrixStack: MatrixStack,
         vertexConsumerProvider: VertexConsumerProvider,
         i: Int,
-        crystalGolemEntity: CrystallineGolemEntity,
+        crystalGolemEntity: T,
         f: Float,
         g: Float,
         h: Float,

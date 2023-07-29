@@ -41,11 +41,12 @@ object RegisterRenderer {
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("totem"),"totem_model")
     val CHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model")
     val CHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model_armor")
-    val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
+    val SEAHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("seahorse"),"seahorse_model")
+    val SEAHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("seahorse"),"seahorse_model_armor")
+    //val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
     val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
     val FLORAL_CONSTRUCT_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("floral_construct"),"floral_construct_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("player_wither_skull_entity"),"player_wither_skull_model")
-    
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_main")
     val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_armor")
 
@@ -90,17 +91,7 @@ object RegisterRenderer {
             RegisterEntity.HAMETHYST_ENTITY
         ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
 
-        EntityRendererRegistry.register(
-            RegisterEntity.BONESTORM_ENTITY
-        ){ context: EntityRendererFactory.Context -> BonestormEntityRenderer(context) }
-        
-        EntityRendererRegistry.register(
-            RegisterEntity.BOOM_CHICKEN_ENTITY
-        ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
-
-        EntityRendererRegistry.register(
-            RegisterEntity.FLORAL_CONSTRUCT_ENTITY
-        ){ context: EntityRendererFactory.Context -> FloralConstructEntityRenderer(context) }
+        ///////
 
         EntityRendererRegistry.register(
             RegisterEntity.CHORSE_ENTITY
@@ -111,12 +102,28 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> DraftHorseEntityRenderer(context) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.SEAHORSE_ENTITY
+        ){ context: EntityRendererFactory.Context -> SeahorseEntityRenderer(context) }
+
+        ///////
+
+        EntityRendererRegistry.register(
             RegisterEntity.CRYSTAL_GOLEM_ENTITY
-        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context) }
+        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context, AI.identity("textures/entity/crystal_golem/crystal_golem.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.CHOLEM_ENTITY
         ){ context: EntityRendererFactory.Context -> CholemEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.LAVA_GOLEM_ENTITY
+        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context, AI.identity("textures/entity/crystal_golem/lava_golem.png")) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.FLESH_GOLEM_ENTITY
+        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context, AI.identity("textures/entity/crystal_golem/flesh_golem.png")) }
+
+        ///////
 
         EntityRendererRegistry.register(
             RegisterEntity.UNHALLOWED_ENTITY
@@ -125,6 +132,8 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.BONES_ENTITY
         ){ context: EntityRendererFactory.Context -> UnhallowedEntityRenderer(context, AI.identity("textures/entity/unhallowed/bones.png")) }
+
+        //////
 
         EntityRendererRegistry.register(
             RegisterEntity.DRACONIC_BOX_ENTITY
@@ -138,6 +147,18 @@ object RegisterRenderer {
             RegisterEntity.TOTEM_OF_GRACE_ENTITY
         ){ context: EntityRendererFactory.Context -> TotemEntityRenderer(context) }
 
+        EntityRendererRegistry.register(
+            RegisterEntity.BONESTORM_ENTITY
+        ){ context: EntityRendererFactory.Context -> BonestormEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.BOOM_CHICKEN_ENTITY
+        ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.FLORAL_CONSTRUCT_ENTITY
+        ){ context: EntityRendererFactory.Context -> FloralConstructEntityRenderer(context) }
+
         //////////////////////////////////////////////////////////
 
         EntityRendererRegistry.register(
@@ -150,8 +171,7 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.ICE_SHARD_ENTITY
-        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, AI.identity("textures/entity/ice_shard.png"))
-        }
+        ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, AI.identity("textures/entity/ice_shard.png")) }
 
         EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
@@ -217,7 +237,9 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(FLORAL_CONSTRUCT_ENTITY,FloralConstructEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY,ChorseEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_ARMOR) { ChorseEntityModel.getTexturedModelData(Dilation(0.1f)) }
-        EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(SEAHORSE_ENTITY,SeahorseEntityModel::getTexturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(SEAHORSE_ENTITY_ARMOR) { SeahorseEntityModel.getTexturedModelData(Dilation(0.1f)) }
+        //.registerModelLayer(CRYSTAL_GOLEM_ENTITY) { CrystallineGolemEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(CHOLEM_ENTITY,CholemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }

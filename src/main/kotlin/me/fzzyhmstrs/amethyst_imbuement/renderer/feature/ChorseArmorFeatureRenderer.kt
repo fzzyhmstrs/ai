@@ -2,6 +2,7 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.horse.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.ChorseEntityModel
 import net.minecraft.client.render.OverlayTexture
@@ -56,7 +57,7 @@ FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
             o = 1.0f
             p = 1.0f
         }
-        val id = ENTITY_TEXTURE_CACHE.computeIfAbsent(horseArmorItem) { Identifier("textures/entity/chorse/" + it.entityTexture.path.substring(ENTITY_TEXTURE_PREFIX_LENGTH)) }
+        val id = ENTITY_TEXTURE_CACHE.computeIfAbsent(horseArmorItem) { AI.identity("textures/entity/chorse/" + it.entityTexture.path.substring(ENTITY_TEXTURE_PREFIX_LENGTH)) }
 
         val vertexConsumer =
             vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(id))

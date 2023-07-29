@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraconicBoxEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
@@ -8,10 +8,9 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.util.math.MatrixStack
 
 
-class DraconicBoxModel(_modelPart: ModelPart) : EntityModel<DraconicBoxEntity>() {
+class DraconicBoxModel(modelPart: ModelPart) : EntityModel<DraconicBoxEntity>() {
 
-    private var modelPart: ModelPart = _modelPart
-    private var base: ModelPart = modelPart.getChild(EntityModelPartNames.CUBE)
+    private val base: ModelPart = modelPart.getChild(EntityModelPartNames.CUBE)
 
 
     override fun render(

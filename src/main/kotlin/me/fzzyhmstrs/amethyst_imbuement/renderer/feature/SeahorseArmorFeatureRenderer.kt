@@ -2,8 +2,9 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.horse.DraftHorseEntity
-import me.fzzyhmstrs.amethyst_imbuement.model.DraftHorseEntityModel
+import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.SeahorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.model.SeahorseEntityModel
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
@@ -12,17 +13,22 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.DyeableHorseArmorItem
 import net.minecraft.item.HorseArmorItem
+import net.minecraft.util.Identifier
 
-class DraftHorseArmorFeatureRenderer(context: FeatureRendererContext<DraftHorseEntity, DraftHorseEntityModel>, private val model: DraftHorseEntityModel)
+class SeahorseArmorFeatureRenderer(context: FeatureRendererContext<SeahorseEntity, SeahorseEntityModel>, private val model: SeahorseEntityModel)
 : 
-FeatureRenderer<DraftHorseEntity, DraftHorseEntityModel>(context)
+FeatureRenderer<SeahorseEntity, SeahorseEntityModel>(context)
 {
+
+    private val ENTITY_TEXTURE_PREFIX_LENGTH = "textures/entity/horse/".length
+
+    private val ENTITY_TEXTURE_CACHE: MutableMap<HorseArmorItem, Identifier> = mutableMapOf()
 
     override fun render(
         matrixStack: MatrixStack,
         vertexConsumerProvider: VertexConsumerProvider,
         i: Int,
-        draftHorse: DraftHorseEntity,
+        draftHorse: SeahorseEntity,
         f: Float,
         g: Float,
         h: Float,
@@ -51,8 +57,10 @@ FeatureRenderer<DraftHorseEntity, DraftHorseEntityModel>(context)
             o = 1.0f
             p = 1.0f
         }
+        val id = ENTITY_TEXTURE_CACHE.computeIfAbsent(horseArmorItem) { AI.identity("textures/entity/seahorse/" + it.entityTexture.path.substring(ENTITY_TEXTURE_PREFIX_LENGTH)) }
+
         val vertexConsumer =
-            vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(horseArmorItem.entityTexture))
+            vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(id))
         model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, n, o, p, 1.0f)
     }
 }

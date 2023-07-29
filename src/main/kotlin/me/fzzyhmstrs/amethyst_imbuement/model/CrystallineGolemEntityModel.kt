@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
-import net.minecraft.client.model.*
+import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.util.math.MathHelper
 
-class CrystallineGolemEntityModel(private val root: ModelPart): SinglePartEntityModel<CrystallineGolemEntity>() {
+class CrystallineGolemEntityModel<T: CrystallineGolemEntity>(private val root: ModelPart): SinglePartEntityModel<T>() {
 
     private val head: ModelPart = root.getChild(EntityModelPartNames.HEAD)
     private val rightArm: ModelPart = root.getChild(EntityModelPartNames.RIGHT_ARM)
@@ -14,7 +14,7 @@ class CrystallineGolemEntityModel(private val root: ModelPart): SinglePartEntity
     private val rightLeg: ModelPart = root.getChild(EntityModelPartNames.RIGHT_LEG)
     private val leftLeg: ModelPart = root.getChild(EntityModelPartNames.LEFT_LEG)
 
-    companion object {
+    /*companion object {
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()
             val modelPartData = modelData.root
@@ -52,13 +52,13 @@ class CrystallineGolemEntityModel(private val root: ModelPart): SinglePartEntity
             )
             return TexturedModelData.of(modelData, 128, 128)
         }
-    }
+    }*/
 
     override fun getPart(): ModelPart {
         return this.root
     }
 
-    override fun setAngles(crystalGolemEntity: CrystallineGolemEntity, f: Float, g: Float, h: Float, i: Float, j: Float) {
+    override fun setAngles(crystalGolemEntity: T, f: Float, g: Float, h: Float, i: Float, j: Float) {
         head.yaw = i * (Math.PI.toFloat() / 180)
         head.pitch = j * (Math.PI.toFloat() / 180)
         rightLeg.pitch = -1.5f * MathHelper.wrap(f, 13.0f) * g
@@ -67,7 +67,7 @@ class CrystallineGolemEntityModel(private val root: ModelPart): SinglePartEntity
         leftLeg.yaw = 0.0f
     }
 
-    override fun animateModel(crystalGolemEntity: CrystallineGolemEntity, f: Float, g: Float, h: Float) {
+    override fun animateModel(crystalGolemEntity: T, f: Float, g: Float, h: Float) {
         val i = crystalGolemEntity.getAttackTicks()
         if (i > 0) {
             rightArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)

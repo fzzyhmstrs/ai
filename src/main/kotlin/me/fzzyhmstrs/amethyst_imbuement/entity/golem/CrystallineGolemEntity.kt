@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 
 import com.google.common.collect.ImmutableList
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
@@ -22,6 +23,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d

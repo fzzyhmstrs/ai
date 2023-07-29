@@ -4,16 +4,24 @@ import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity.Scalable
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedHorseEntity
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
+import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.passive.AbstractHorseEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
+import net.minecraft.sound.SoundEvents
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.LocalDifficulty
@@ -24,6 +32,8 @@ import net.minecraft.world.World
 class SeahorseEntity(entityType: EntityType<out AbstractHorseEntity>?, world: World?) : PlayerCreatedHorseEntity(entityType, world),
     ModifiableEffectEntity, PlayerCreatable, Scalable {
     companion object{
+
+        private val CHEST: TrackedData<Boolean> = DataTracker.registerData(SeahorseEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         fun createSeahorseBaseAttributes(): DefaultAttributeContainer.Builder{
             return createMobAttributes()
                 .add(EntityAttributes.HORSE_JUMP_STRENGTH,0.6)
@@ -32,33 +42,77 @@ class SeahorseEntity(entityType: EntityType<out AbstractHorseEntity>?, world: Wo
         }
     }
 
+    override fun canBreatheInWater(): Boolean {
+        return true
+    }
+
+    override fun hurtByWater(): Boolean {
+        return false
+    }
+
+    override fun getNextAirUnderwater(air: Int): Int {
+        return air
+    }
+
+    override fun initDataTracker() {
+        super.initDataTracker()
+        dataTracker.startTracking(CHEST, false)
+    }
+
+    fun hasChest(): Boolean {
+        return dataTracker.get(CHEST)
+    }
+
+    fun setHasChest(hasChest: Boolean) {
+        dataTracker.set(CHEST, hasChest)
+    }
+
+    override fun getInventorySize(): Int {
+        return if (hasChest()) {
+            7
+        } else super.getInventorySize()
+    }
+
+    override fun dropInventory() {
+        super.dropInventory()
+        if (hasChest()) {
+            if (!world.isClient) {
+                this.dropItem(Blocks.CHEST)
+            }
+            setHasChest(false)
+        }
+    }
+
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        val nbtList = NbtList()
-        for (i in 2 until items.size()) {
-            val itemStack = items.getStack(i)
-            if (itemStack.isEmpty) continue
-            val nbtCompound = NbtCompound()
-            nbtCompound.putByte("Slot", i.toByte())
-            itemStack.writeNbt(nbtCompound)
-            nbtList.add(nbtCompound)
+        nbt.putBoolean("ChestedHorse", hasChest())
+        if (this.hasChest()) {
+            val nbtList = NbtList()
+            for (i in 2 until items.size()) {
+                val itemStack = items.getStack(i)
+                if (itemStack.isEmpty) continue
+                val nbtCompound = NbtCompound()
+                nbtCompound.putByte("Slot", i.toByte())
+                itemStack.writeNbt(nbtCompound)
+                nbtList.add(nbtCompound)
+            }
+            nbt.put("Items", nbtList)
         }
-        nbt.put("Items", nbtList)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        val nbtList = nbt.getList("Items", NbtElement.COMPOUND_TYPE.toInt())
-        for (i in nbtList.indices) {
-            val nbtCompound = nbtList.getCompound(i)
-            val j = nbtCompound.getByte("Slot").toInt() and 0xFF
-            if (j < 2 || j >= items.size()) continue
-            items.setStack(j, ItemStack.fromNbt(nbtCompound))
+        setHasChest(nbt.getBoolean("ChestedHorse"))
+        onChestedStatusChanged()
+        if (this.hasChest()) {
+            val nbtList = nbt.getList("Items", NbtElement.COMPOUND_TYPE.toInt())
+            for (i in nbtList.indices) {
+                val nbtCompound = nbtList.getCompound(i)
+                val j = nbtCompound.getByte("Slot").toInt() and 0xFF
+                if (j < 2 || j >= items.size()) continue
+                items.setStack(j, ItemStack.fromNbt(nbtCompound))
+            }
         }
-    }
-
-    override fun getInventorySize(): Int {
-        return 17
     }
 
     override fun initialize(
@@ -165,6 +219,30 @@ class SeahorseEntity(entityType: EntityType<out AbstractHorseEntity>?, world: Wo
         } else {
             super.travel(movementInput)
         }
+    }
+
+    override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult? {
+        val itemStack = player.getStackInHand(hand)
+        if (!itemStack.isEmpty) {
+            if (!hasChest() && itemStack.isOf(Items.CHEST)) {
+                addChest(player, itemStack)
+                return ActionResult.success(world.isClient)
+            }
+        }
+        return super.interactMob(player, hand)
+    }
+
+    private fun addChest(player: PlayerEntity, chest: ItemStack) {
+        setHasChest(true)
+        playAddChestSound()
+        if (!player.abilities.creativeMode) {
+            chest.decrement(1)
+        }
+        onChestedStatusChanged()
+    }
+
+    protected fun playAddChestSound() {
+        playSound(SoundEvents.ENTITY_DONKEY_CHEST, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f)
     }
 
 }
