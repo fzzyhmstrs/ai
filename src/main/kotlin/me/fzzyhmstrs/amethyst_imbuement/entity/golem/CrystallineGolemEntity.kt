@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 
-import com.google.common.collect.ImmutableList
+import com.google.common.collect.ImmutableMap
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
@@ -31,7 +31,9 @@ import net.minecraft.world.SpawnHelper
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
+import java.util.stream.Collectors
 import java.util.stream.Stream
+import kotlin.math.max
 
 open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
@@ -47,6 +49,15 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolem.baseDamage.get().toDouble())
         }
     }
+
+    private val crackIdentifierMap: Map<Crack, Identifier> = ImmutableMap.of(
+        CrystallineGolemEntity.Crack.LOW,
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_low.png"),
+        CrystallineGolemEntity.Crack.MEDIUM,
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_medium.png"),
+        CrystallineGolemEntity.Crack.HIGH,
+        AI.identity("textures/entity/crystal_golem/crystal_golem_crackiness_high.png")
+    )
 
     override fun initGoals() {
         super.initGoals()
@@ -141,8 +152,17 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         return bl
     }
 
+    open fun getCrackTextureMap(): Map<Crack,Identifier>{
+        return crackIdentifierMap
+    }
+
+    fun getCrackTexture(): Identifier?{
+        return getCrackTextureMap()[getCrack()]
+    }
+
     fun getCrack(): Crack {
-        return Crack.from(this.health / this.maxHealth)
+        val healthFraction = this.health / this.maxHealth
+        return Crack.getCrackFromIndex(max(3,((healthFraction - 0.00001f)/0.25f).toInt()))
     }
 
     override fun canSpawn(world: WorldView): Boolean {
@@ -190,22 +210,18 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         return Vec3d(0.0, (0.875f * standingEyeHeight).toDouble(), (this.width * 0.4f).toDouble())
     }
 
-    enum class Crack(private val maxHealthFraction: Float) {
-        NONE(1.0f), LOW(0.75f), MEDIUM(0.5f), HIGH(0.25f);
+    enum class Crack(maxHealthFraction: Float, private val index: Int) {
+        NONE(1.0f,0),
+        LOW(0.75f,1),
+        MEDIUM(0.5f,2),
+        HIGH(0.25f,3);
 
         companion object {
-            private var VALUES: List<Crack> = Stream.of(*values()).sorted(
-                Comparator.comparingDouble { crack: Crack -> crack.maxHealthFraction.toDouble() }
-            ).collect(ImmutableList.toImmutableList())
+            private val CRACKS = Stream.of(*values()).collect(Collectors.toMap({crack: Crack -> crack.index}, {crack -> crack}))
 
-            fun from(healthFraction: Float): Crack {
-                for (crack in VALUES) {
-                    if (healthFraction >= crack.maxHealthFraction) continue
-                    return crack
-                }
-                return NONE
+            fun getCrackFromIndex(index: Int): Crack{
+                return CRACKS[index]?:NONE
             }
-
         }
     }
 }

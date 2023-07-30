@@ -1,13 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.FloralConstructEntity
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.ai.NoPenaltyTargeting
 import net.minecraft.entity.ai.goal.WanderAroundGoal
-import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 
-class FloralConstructWanderGoal(mob: PathAwareEntity, speed: Double) : WanderAroundGoal(mob, speed,300,true) {
+class FloralConstructWanderGoal(mob: FloralConstructEntity, speed: Double) : WanderAroundGoal(mob, speed,300,true) {
 
     override fun getWanderTarget(): Vec3d? {
         val targets: MutableList<BlockPos> = mutableListOf()

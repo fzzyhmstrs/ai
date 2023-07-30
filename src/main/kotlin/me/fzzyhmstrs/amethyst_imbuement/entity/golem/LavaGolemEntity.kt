@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 
+import com.google.common.collect.ImmutableMap
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -13,6 +15,7 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
@@ -31,6 +34,15 @@ open class LavaGolemEntity: CrystallineGolemEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.lavaGolem.baseDamage.get().toDouble())
         }
     }
+
+    private val crackIdentifierMap: Map<Crack, Identifier> = ImmutableMap.of(
+        CrystallineGolemEntity.Crack.LOW,
+        AI.identity("textures/entity/crystal_golem/lava_golem_crackiness_low.png"),
+        CrystallineGolemEntity.Crack.MEDIUM,
+        AI.identity("textures/entity/crystal_golem/lava_golem_crackiness_medium.png"),
+        CrystallineGolemEntity.Crack.HIGH,
+        AI.identity("textures/entity/crystal_golem/lava_golem_crackiness_high.png")
+    )
 
     override fun attackEffects(target: Entity, damageSource: DamageSource, damage: Float) {
         target.setOnFireFor(10)
@@ -57,5 +69,9 @@ open class LavaGolemEntity: CrystallineGolemEntity {
 
     override fun playStepSound(pos: BlockPos, state: BlockState) {
         playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0f, 1.0f)
+    }
+
+    override fun getCrackTextureMap(): Map<Crack, Identifier> {
+        return crackIdentifierMap
     }
 }

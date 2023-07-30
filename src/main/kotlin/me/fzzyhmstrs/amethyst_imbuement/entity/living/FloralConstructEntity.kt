@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FloralConstructWanderGoal
 import net.minecraft.block.Block
 import net.minecraft.block.CropBlock
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -13,7 +14,6 @@ import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
@@ -48,7 +48,7 @@ class FloralConstructEntity: PlayerCreatedConstructEntity {
     }
 
     private val inventory = SimpleInventory(9)
-    internal var full = false
+    private var full = false
     internal var texture: Identifier = when(AI.aiRandom().nextInt(5)){
             0 -> AI.identity("textures/entity/floral_construct/floral_construct.png")
             1 -> AI.identity("textures/entity/floral_construct/floral_construct_daisy.png")
@@ -61,7 +61,7 @@ class FloralConstructEntity: PlayerCreatedConstructEntity {
         goalSelector.add(0, SwimGoal(this))
         goalSelector.add(1, EscapeDangerGoal(this, 2.0))
         goalSelector.add(3, TemptGoal(this, 1.25, Ingredient.ofItems(Items.EXPERIENCE_BOTTLE), false))
-        goalSelector.add(4, FloralConstructWanderGoal(this as PathAwareEntity, 0.6))
+        goalSelector.add(4, FloralConstructWanderGoal(this, 0.6))
         goalSelector.add(5, IronGolemWanderAroundGoal(this, 0.6))
         goalSelector.add(7, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
@@ -131,6 +131,14 @@ class FloralConstructEntity: PlayerCreatedConstructEntity {
         full = false
         this.discard()
         return ActionResult.SUCCESS
+    }
+
+    override fun dropInventory() {
+        for (i in 0 until inventory.size()) {
+            val itemStack: ItemStack = inventory.getStack(i)
+            if (itemStack.isEmpty || EnchantmentHelper.hasVanishingCurse(itemStack)) continue
+            this.dropStack(itemStack)
+        }
     }
 
     override fun getAmbientSound(): SoundEvent? {

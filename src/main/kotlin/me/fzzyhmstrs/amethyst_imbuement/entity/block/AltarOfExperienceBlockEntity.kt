@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.block
 
-import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.block.BlockState
@@ -62,7 +61,7 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
         if (hasCustomName()) {
             nbt.putString("CustomName", Text.Serializer.toJson(customName))
         }
-        nbt.putInt(NbtKeys.ALTAR_KEY.str(),xpStored[0])
+        nbt.putInt("altar_used",xpStored[0])
         nbt.putInt("altar_used_1",xpStored[1])
         nbt.putInt("max_xp",xpMax[0])
         nbt.putInt("max_xp_1",xpMax[1])
@@ -73,8 +72,8 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
         if (nbt.contains("CustomName", 8)) {
             customName = Text.Serializer.fromJson(nbt.getString("CustomName"))
         }
-        if (nbt.contains(NbtKeys.ALTAR_KEY.str())) {
-            xpStored[0] = nbt.getInt(NbtKeys.ALTAR_KEY.str())
+        if (nbt.contains("altar_used")) {
+            xpStored[0] = nbt.getInt("altar_used")
             xpStored[1] = nbt.getInt("altar_used_1")
             xpMax[0] = nbt.getInt("max_xp")
             xpMax[1] = nbt.getInt("max_xp_1")
