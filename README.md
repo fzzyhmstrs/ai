@@ -49,6 +49,7 @@ Checklist
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|
 | NOT STARTED                                                                  | 13          |
+| Add clumps compat                                                            | Not started |
 | Mixin to Horsescreen to get custom horsey                                    | Not started |
 | Yeet and Dash need custom logic for client                                   | Not started |
 | Add Iridescent Robes, Garnet Armor, Glowing Armor, Void Mail                 | Not started |
