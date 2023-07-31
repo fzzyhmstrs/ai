@@ -45,7 +45,11 @@ open class LavaGolemEntity: CrystallineGolemEntity {
     )
 
     override fun attackEffects(target: Entity, damageSource: DamageSource, damage: Float) {
-        target.setOnFireFor(10)
+        target.setOnFireFor(5 * (getCrack().index + 1))
+    }
+
+    override fun getBaseDamage(): Float {
+        return super.getBaseDamage() + getCrack().index.toFloat()
     }
 
     override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult? {
@@ -54,7 +58,7 @@ open class LavaGolemEntity: CrystallineGolemEntity {
             return ActionResult.PASS
         }
         val f = this.health
-        heal(20.0f)
+        heal(7.5f)
         if (this.health == f) {
             return ActionResult.PASS
         }

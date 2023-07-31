@@ -3,13 +3,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
-import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext
+import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.client.util.math.MatrixStack
 
-class CrystallineGolemCrackFeatureRenderer<T: CrystallineGolemEntity>(context: FeatureRendererContext<T, CrystallineGolemEntityModel<T>>) : FeatureRenderer<T, CrystallineGolemEntityModel<T>>(
+class CrystallineGolemCrackFeatureRenderer<T: CrystallineGolemEntity, M: SinglePartEntityModel<T>>(context: FeatureRendererContext<T, M>) : FeatureRenderer<T, M>(
     context
 ) {
 

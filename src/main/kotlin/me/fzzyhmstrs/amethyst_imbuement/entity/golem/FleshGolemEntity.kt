@@ -9,7 +9,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
@@ -59,8 +58,8 @@ open class FleshGolemEntity: CrystallineGolemEntity {
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun attackEffects(target: Entity, damageSource: DamageSource, damage: Float) {
-        target.setOnFireFor(10)
+    override fun getBaseDamage(): Float {
+        return super.getBaseDamage() - (getCrack().index * 0.5f)
     }
 
     override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult? {

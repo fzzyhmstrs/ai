@@ -210,7 +210,7 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         return Vec3d(0.0, (0.875f * standingEyeHeight).toDouble(), (this.width * 0.4f).toDouble())
     }
 
-    enum class Crack(maxHealthFraction: Float, private val index: Int) {
+    enum class Crack(maxHealthFraction: Float, val index: Int) {
         NONE(1.0f,0),
         LOW(0.75f,1),
         MEDIUM(0.5f,2),

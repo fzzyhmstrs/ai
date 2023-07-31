@@ -45,6 +45,7 @@ object RegisterRenderer {
     val SEAHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("seahorse"),"seahorse_model_armor")
     //val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("crystal_golem"),"crystal_golem_model")
     val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
+    val FLESH_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("flesh_golem"),"flesh_golem_model")
     val FLORAL_CONSTRUCT_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("floral_construct"),"floral_construct_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("player_wither_skull_entity"),"player_wither_skull_model")
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(AI.identity("base_hamster"),"hamster_main")
@@ -121,7 +122,7 @@ object RegisterRenderer {
 
         EntityRendererRegistry.register(
             RegisterEntity.FLESH_GOLEM_ENTITY
-        ){ context: EntityRendererFactory.Context -> CrystallineGolemEntityRenderer(context, AI.identity("textures/entity/crystal_golem/flesh_golem.png")) }
+        ){ context: EntityRendererFactory.Context -> FleshGolemEntityRenderer(context) }
 
         ///////
 
@@ -241,6 +242,7 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(SEAHORSE_ENTITY_ARMOR) { SeahorseEntityModel.getTexturedModelData(Dilation(0.1f)) }
         //.registerModelLayer(CRYSTAL_GOLEM_ENTITY) { CrystallineGolemEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(CHOLEM_ENTITY,CholemEntityModel::getTexturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(FLESH_GOLEM_ENTITY,FleshGolemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
