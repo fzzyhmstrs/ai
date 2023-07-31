@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FloralConstructWanderGoal
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
 import net.minecraft.block.Block
 import net.minecraft.block.CropBlock
 import net.minecraft.block.entity.BlockEntity
@@ -37,13 +39,15 @@ class FloralConstructEntity: PlayerCreatedConstructEntity {
     constructor(entityType: EntityType<out FloralConstructEntity>, world: World): super(entityType, world, Settings(false, true, false))
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null): super(entityType, world, ageLimit, createdBy, Settings(false, true, false))
 
-    companion object {
-        private  val baseMaxHealth = AiConfig.entities.floralConstruct.baseHealth.get()
-        private const val baseMoveSpeed = 0.15
+    class FloralConstruct: ConfigSection(Header.Builder().space().add("readme.entities.floral_construct_1").build()){
+        var baseHealth = ValidatedDouble(8.0,80.0,1.0)
+        var baseMoveSpeed = ValidatedDouble(0.15,1.0,0.01)
+    }
 
+    companion object {
         fun createFloralAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, baseMoveSpeed)
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.floralConstruct.baseHealth.get())
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.floralConstruct.baseMoveSpeed.get())
         }
     }
 

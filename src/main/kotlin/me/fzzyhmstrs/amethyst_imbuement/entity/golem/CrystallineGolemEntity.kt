@@ -6,6 +6,11 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -41,11 +46,24 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<out CrystallineGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
 
+    class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").build()){
+        @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
+        var spellBaseLifespan = ValidatedInt(5500, Int.MAX_VALUE-120000,20)
+        @ReadMeText("readme.entities.crystalGolem.spellPerLvlLifespan")
+        var spellPerLvlLifespan = ValidatedInt(500,5000,0)
+        @ReadMeText("readme.entities.crystalGolem.guardianLifespan")
+        var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
+        var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
+        var baseMoveSpeed = ValidatedDouble(0.4,1.0,0.01)
+        var baseKnockbackResist = ValidatedDouble(1.0,1.0,0.0)
+        var baseDamage = ValidatedFloat(20.0f,1000f,0f)
+    }
+
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.crystalGolem.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.crystalGolem.baseMoveSpeed.get())
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, AiConfig.entities.crystalGolem.baseKnockbackResist.get())
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.crystalGolem.baseDamage.get().toDouble())
         }
     }
@@ -196,10 +214,6 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
 
     override fun playStepSound(pos: BlockPos, state: BlockState) {
         playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0f, 1.0f)
-    }
-
-    fun getAttackTicks(): Int {
-        return attackTicksLeft
     }
 
     fun getLookingAtVillagerTicks(): Int {

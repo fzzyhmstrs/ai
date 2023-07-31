@@ -4,6 +4,11 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -35,6 +40,19 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<CholemEntity>, world: World, ageLimit: Int = AiConfig.entities.cholem.baseLifespan.get(), createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
 
+    class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
+        var baseLifespan = ValidatedInt(3600, Int.MAX_VALUE-120000,20)
+        var baseHealth = ValidatedDouble(80.0,512.0,1.0)
+        var baseArmor = ValidatedDouble(4.0,30.0,0.0)
+        var baseKnockbackResist = ValidatedDouble(0.8,1.0,0.0)
+        var baseMoveSpeed = ValidatedDouble(0.3,1.0,0.01)
+        var baseDamage = ValidatedFloat(10.0f,500f,0f)
+        @ReadMeText("readme.entities.cholem.enragedDamage")
+        var enragedDamage = ValidatedDouble(4.0,125.0,0.0)
+        @ReadMeText("readme.entities.cholem.enragedSpeed")
+        var enragedSpeed = ValidatedDouble(0.15,1.0,0.0)
+    }
+
     companion object {
 
         protected val DAMAGE_UUID = UUID.fromString("71c5ccf4-2d8a-11ee-be56-0242ac120002")
@@ -44,10 +62,10 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.cholem.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.8)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.cholem.baseMoveSpeed.get())
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, AiConfig.entities.cholem.baseKnockbackResist.get())
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.cholem.baseDamage.get().toDouble())
-                .add(EntityAttributes.GENERIC_ARMOR,4.0)
+                .add(EntityAttributes.GENERIC_ARMOR,AiConfig.entities.cholem.baseArmor.get())
         }
     }
 
@@ -166,10 +184,6 @@ open class CholemEntity: PlayerCreatedConstructEntity {
             }
         }
         super.remove(reason)
-    }
-
-    fun getAttackTicks(): Int {
-        return attackTicksLeft
     }
 
     fun getLookingAtVillagerTicks(): Int {

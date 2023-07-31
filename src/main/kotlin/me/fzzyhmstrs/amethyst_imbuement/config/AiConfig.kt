@@ -2,6 +2,20 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.CrystallineGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.FleshGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.golem.LavaGolemEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HambieEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HamethystEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.ChorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.DraftHorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.horse.SeahorseEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.FloralConstructEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.BonesEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.tool.*
 import me.fzzyhmstrs.fzzy_config.config_util.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
@@ -365,103 +379,20 @@ object AiConfig
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
         var forcePvpOnAllSpells = ValidatedBoolean(false)
 
-        var unhallowed = Unhallowed()
-        class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").build()){
-            var baseLifespan = ValidatedInt(2400,180000,20)
-            var baseHealth = ValidatedDouble(20.0,100.0,1.0)
-            var baseDamage = ValidatedFloat(3.0f,20.0f,0.0f)
-        }
-
-        var bones = Bones()
-        class Bones: ConfigSection(Header.Builder().space().add("readme.entities.bones_1").build()){
-            var baseHealth = ValidatedDouble(16.0,100.0,1.0)
-            var baseDamage = ValidatedFloat(6.0f,20.0f,0.0f)
-        }
-
-        var crystalGolem = CrystalGolem()
-        class CrystalGolem: ConfigSection(Header.Builder().space().add("readme.entities.golem_1").build()){
-            @ReadMeText("readme.entities.crystalGolem.spellBaseLifespan")
-            var spellBaseLifespan = ValidatedInt(5500, Int.MAX_VALUE-120000,20)
-            @ReadMeText("readme.entities.crystalGolem.spellPerLvlLifespan")
-            var spellPerLvlLifespan = ValidatedInt(500,5000,0)
-            @ReadMeText("readme.entities.crystalGolem.guardianLifespan")
-            var guardianLifespan = ValidatedInt(900, Int.MAX_VALUE,20)
-            var baseHealth = ValidatedDouble(180.0,1024.0,1.0)
-            var baseDamage = ValidatedFloat(20.0f,1000f,0f)
-        }
-
-        var cholem = Cholem()
-        class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
-            var baseLifespan = ValidatedInt(3600, Int.MAX_VALUE-120000,20)
-            var baseHealth = ValidatedDouble(80.0,512.0,1.0)
-            var baseDamage = ValidatedFloat(10.0f,500f,0f)
-            @ReadMeText("readme.entities.cholem.enragedDamage")
-            var enragedDamage = ValidatedDouble(4.0,125.0,0.0)
-            @ReadMeText("readme.entities.cholem.enragedSpeed")
-            var enragedSpeed = ValidatedDouble(0.15,1.0,0.0)
-        }
-
-        var lavaGolem = Cholem()
-        class LavaGolem: ConfigSection(Header.Builder().space().add("readme.entities.lavaGolem_1").build()){
-            var baseLifespan = ValidatedInt(4800, Int.MAX_VALUE-120000,20)
-            var baseHealth = ValidatedDouble(120.0,800.0,1.0)
-            var baseDamage = ValidatedFloat(16.0f,500f,0f)
-        }
-
-        var fleshGolem = FleshGolem()
-        class FleshGolem: ConfigSection(Header.Builder().space().add("readme.entities.fleshGolem_1").build()){
-            var baseLifespan = ValidatedInt(7200, Int.MAX_VALUE-120000,20)
-            @ReadMeText("readme.entities.fleshGolem.zombieLifespan")
-            var zombieLifespan = ValidatedInt(600, Int.MAX_VALUE-120000,20)
-            var baseHealth = ValidatedDouble(300.0,800.0,1.0)
-            var baseDamage = ValidatedFloat(7.5f,500f,0f)
-        }
-
-        var hamster = Hamster()
-        class Hamster: ConfigSection(Header.Builder().space().add("readme.entities.hamster_1").add("readme.entities.hamster_2").build()){
-            @ReadMeText("readme.entities.hamster.baseLifespan")
-            var baseLifespan = ValidatedInt(3600,180000,-1)
-            var baseHealth = ValidatedDouble(8.0,40.0,1.0)
-            @ReadMeText("readme.entities.hamster.baseDamage")
-            var baseSummonDamage = ValidatedFloat(1.0f,10.0f,0.0f)
-            var baseHamptertimeDamage = ValidatedFloat(2.0f,10.0f,0.0f)
-            var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
-            var hamptertimeBaseSpawnCount = ValidatedDouble(10.0,100.0,1.0)
-            var hamptertimePerLvlSpawnCount = ValidatedDouble(0.5,5.0,0.0)
-        }
-
-        var hamethyst = Hamethyst()
-        class Hamethyst: ConfigSection(Header.Builder().space().add("readme.entities.hamethyst_1").add("readme.entities.hamethyst_2").build()){
-            @ReadMeText("readme.entities.hamethyst.baseLifespan")
-            var baseLifespan = ValidatedInt(6000,360000,-1)
-            var baseHealth = ValidatedDouble(32.0,40.0,1.0)
-            var baseDamage = ValidatedFloat(8.0f,40.0f,0.0f)
-        }
-
-        var zambie = Zambie()
-        class Zambie: ConfigSection(Header.Builder().space().add("readme.entities.zambie_1").add("readme.entities.zambie_2").build()){
-            @ReadMeText("readme.entities.zambie.baseLifespan")
-            var baseLifespan = ValidatedInt(2400,180000,-1)
-            var baseHealth = ValidatedDouble(12.0,40.0,1.0)
-            var baseDamage = ValidatedFloat(2.5f,20.0f,0.0f)
-        }
-
-        var bonestorm = Bonestorm()
-        class Bonestorm: ConfigSection(Header.Builder().space().add("readme.entities.bonestorm_1").build()){
-            @ReadMeText("readme.entities.bonestorm.baseLifespan")
-            var baseLifespan = ValidatedInt(2160,Int.MAX_VALUE-1000000,20)
-            @ReadMeText("readme.entities.bonestorm.perLvlLifespan")
-            var perLvlLifespan = ValidatedInt(240,2400,0)
-            var baseHealth = ValidatedDouble(24.0,240.0,1.0)
-            var baseDamage = ValidatedFloat(4.5f,10.0f,0.0f)
-            var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
-        }
-
-        var floralConstruct = FloralConstruct()
-        class FloralConstruct: ConfigSection(Header.Builder().space().add("readme.entities.floral_construct_1").build()){
-            var baseLifespan = ValidatedInt(18000,1800000,20)
-            var baseHealth = ValidatedDouble(8.0,80.0,1.0)
-        }
+        var unhallowed = UnhallowedEntity.Unhallowed()
+        var bones = BonesEntity.Bones()
+        var crystalGolem = CrystallineGolemEntity.CrystalGolem()
+        var cholem = CholemEntity.Cholem()
+        var lavaGolem = LavaGolemEntity.LavaGolem()
+        var fleshGolem = FleshGolemEntity.FleshGolem()
+        var hamster = BaseHamsterEntity.Hamster()
+        var hamethyst = HamethystEntity.Hamethyst()
+        var hambie = HambieEntity.Hambie()
+        var bonestorm = BonestormEntity.Bonestorm()
+        var floralConstruct = FloralConstructEntity.FloralConstruct()
+        var chorse = ChorseEntity.Chorse()
+        var draftHorse = DraftHorseEntity.DraftHorse()
+        var seahorse = SeahorseEntity.Seahorse()
 
         override fun generateNewClass(): Entities {
             return this

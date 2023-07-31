@@ -5,6 +5,11 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -30,6 +35,19 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
     constructor(entityType: EntityType<out BaseHamsterEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy){
     }
 
+    class Hamster: ConfigSection(Header.Builder().space().add("readme.entities.hamster_1").add("readme.entities.hamster_2").build()){
+        @ReadMeText("readme.entities.hamster.baseLifespan")
+        var baseLifespan = ValidatedInt(3600,180000,-1)
+        var baseMoveSpeed = ValidatedDouble(0.25,1.0,0.01)
+        var baseHealth = ValidatedDouble(8.0,40.0,1.0)
+        @ReadMeText("readme.entities.hamster.baseDamage")
+        var baseSummonDamage = ValidatedFloat(1.0f,10.0f,0.0f)
+        var baseHamptertimeDamage = ValidatedFloat(2.0f,10.0f,0.0f)
+        var perLvlDamage = ValidatedFloat(0.1f,1.0f,0.0f)
+        var hamptertimeBaseSpawnCount = ValidatedDouble(10.0,100.0,1.0)
+        var hamptertimePerLvlSpawnCount = ValidatedDouble(0.5,5.0,0.0)
+    }
+
     companion object {
         internal val HAMSTER_VARIANT = DataTracker.registerData(
             BaseHamsterEntity::class.java,
@@ -38,7 +56,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.hamster.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.hamster.baseMoveSpeed.get())
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.hamster.baseSummonDamage.get().toDouble())
         }
     }

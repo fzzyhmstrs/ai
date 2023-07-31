@@ -85,7 +85,7 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
 
         EntityRendererRegistry.register(
-            RegisterEntity.ZAMBIE_ENTITY
+            RegisterEntity.HAMBIE_ENTITY
         ){ context: EntityRendererFactory.Context -> BaseHamsterEntityRenderer(context) }
 
         EntityRendererRegistry.register(

@@ -3,6 +3,11 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ShootProjectileGoal
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -28,15 +33,24 @@ open class BonestormEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     constructor(entityType: EntityType<BonestormEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy)
 
+    class Bonestorm: ConfigSection(Header.Builder().space().add("readme.entities.bonestorm_1").build()){
+        @ReadMeText("readme.entities.bonestorm.baseLifespan")
+        var baseLifespan = ValidatedInt(2160,Int.MAX_VALUE-1000000,20)
+        @ReadMeText("readme.entities.bonestorm.perLvlLifespan")
+        var perLvlLifespan = ValidatedInt(240,2400,0)
+        var baseHealth = ValidatedDouble(24.0,240.0,1.0)
+        var baseMoveSpeed = ValidatedDouble(0.23,1.0,0.01)
+        var baseDamage = ValidatedFloat(4.5f,10.0f,0.0f)
+        var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
+    }
+
     companion object {
-        private  val baseMaxHealth = AiConfig.entities.bonestorm.baseHealth.get()
-        private  val baseAttackDamage = AiConfig.entities.bonestorm.baseDamage.get()
         private val BONESTORM_FLAGS = DataTracker.registerData(BonestormEntity::class.java,TrackedDataHandlerRegistry.BOOLEAN)
 
         fun createBonestormAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
+            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.bonestorm.baseHealth.get())
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.bonestorm.baseMoveSpeed.get())
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.bonestorm.baseDamage.get().toDouble())
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 24.0)
         }
     }

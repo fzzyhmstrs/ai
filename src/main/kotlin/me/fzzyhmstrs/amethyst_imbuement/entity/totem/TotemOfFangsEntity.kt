@@ -100,7 +100,9 @@ class TotemOfFangsEntity(entityType: EntityType<out TotemOfFangsEntity>, world: 
 
     companion object Stats: TotemAbstractAttributes{
         override fun createTotemAttributes(): DefaultAttributeContainer.Builder {
-            return super.createBaseTotemAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,16.0).add(EntityAttributes.GENERIC_ARMOR,16.0)
+            return super.createBaseTotemAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH,16.0)
+                .add(EntityAttributes.GENERIC_ARMOR,16.0)
         }
     }
 

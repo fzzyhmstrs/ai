@@ -3,6 +3,10 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.golem
 import com.google.common.collect.ImmutableMap
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -26,11 +30,19 @@ open class LavaGolemEntity: CrystallineGolemEntity {
 
     constructor(entityType: EntityType<LavaGolemEntity>, world: World, ageLimit: Int, createdBy: LivingEntity?) : super(entityType, world, ageLimit, createdBy)
 
+    class LavaGolem: ConfigSection(Header.Builder().space().add("readme.entities.lavaGolem_1").build()){
+        var baseLifespan = ValidatedInt(4800, Int.MAX_VALUE-120000,20)
+        var baseHealth = ValidatedDouble(120.0,800.0,1.0)
+        var baseDamage = ValidatedFloat(16.0f,500f,0f)
+        var baseMoveSpeed = ValidatedDouble(0.4,1.0,0.01)
+        var baseKnockbackResist = ValidatedDouble(1.0,1.0,0.0)
+    }
+
     companion object {
         fun createGolemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.lavaGolem.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.lavaGolem.baseMoveSpeed.get())
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, AiConfig.entities.lavaGolem.baseKnockbackResist.get())
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.lavaGolem.baseDamage.get().toDouble())
         }
     }

@@ -5,6 +5,10 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -26,6 +30,12 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
 
     constructor(entityType: EntityType<UnhallowedEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null, bonusEquipment: Int = 0) : super(entityType, world, ageLimit, createdBy){
         this.bonusEquipment = bonusEquipment
+    }
+
+    class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").build()){
+        var baseLifespan = ValidatedInt(2400,180000,20)
+        var baseHealth = ValidatedDouble(20.0,100.0,1.0)
+        var baseDamage = ValidatedFloat(3.0f,20.0f,0.0f)
     }
 
     companion object {

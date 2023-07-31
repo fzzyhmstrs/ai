@@ -4,6 +4,9 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ShootProjectileGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -24,6 +27,12 @@ open class BonesEntity: PlayerCreatedConstructEntity {
     constructor(entityType: EntityType<BonesEntity>, world: World): super(entityType, world)
 
     constructor(entityType: EntityType<BonesEntity>, world: World, ageLimit: Int, createdBy: LivingEntity? = null) : super(entityType, world, ageLimit, createdBy)
+
+    class Bones: ConfigSection(Header.Builder().space().add("readme.entities.bones_1").build()){
+        var baseHealth = ValidatedDouble(16.0,100.0,1.0)
+        var baseDamage = ValidatedFloat(6.0f,20.0f,0.0f)
+        var baseMoveSpeed = ValidatedDouble(0.4,1.0,0.01)
+    }
 
     companion object {
         private  val baseMaxHealth = AiConfig.entities.bones.baseHealth.get()

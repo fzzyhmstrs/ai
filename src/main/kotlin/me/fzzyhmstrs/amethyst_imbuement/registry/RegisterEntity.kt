@@ -91,13 +91,13 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
     )
 
-    val ZAMBIE_ENTITY: EntityType<ZambieEntity> = Registry.register(
+    val HAMBIE_ENTITY: EntityType<HambieEntity> = Registry.register(
         Registries.ENTITY_TYPE,
-        AI.identity( "zambie"),
+        AI.identity( "hambie"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.CREATURE
-        ) { entityType: EntityType<ZambieEntity>, world: World ->
-            ZambieEntity(
+        ) { entityType: EntityType<HambieEntity>, world: World ->
+            HambieEntity(
                 entityType,
                 world
             )
@@ -570,7 +570,7 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(LAMPSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(HAMSICLE_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(HAMETHYST_ENTITY, HamethystEntity.createHamethystAttributes())
-        FabricDefaultAttributeRegistry.register(ZAMBIE_ENTITY, ZambieEntity.createZambieAttributes())
+        FabricDefaultAttributeRegistry.register(HAMBIE_ENTITY, HambieEntity.createZambieAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
         FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, FloralConstructEntity.createFloralAttributes())
