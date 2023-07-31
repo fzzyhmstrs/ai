@@ -49,6 +49,7 @@ Checklist
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|
 | NOT STARTED                                                                  | 13          |
+| Add shielding functionality into FC/AC natively                              | Not started |
 | Add clumps compat                                                            | Not started |
 | Mixin to Horsescreen to get custom horsey                                    | Not started |
 | Yeet and Dash need custom logic for client                                   | Not started |
