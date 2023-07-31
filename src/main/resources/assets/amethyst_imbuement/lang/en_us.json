@@ -1,27 +1,26 @@
 {
+	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
+	"entity.amethyst_imbuement.sardonyx_elemental": "Sardonyx Elemental",
+	"entity.amethyst_imbuement.sardonyx_fragment": "Sardonyx Fragment",
 	"entity.amethyst_imbuement.draconic_box": "Draconic Sprite",
 	"entity.amethyst_imbuement.floral_construct": "Floral Construct",
 	"entity.amethyst_imbuement.bonestorm": "Bonestorm",
 	"entity.amethyst_imbuement.bonestorm.double": "Bone Tempest",
 	"entity.amethyst_imbuement.lightning_wraith": "Lightning Wraith",
-	"entity.amethyst_imbuement.blaze": "Blaze",
 	"entity.amethyst_imbuement.basic_hamster": "Hamster",
 	"entity.amethyst_imbuement.basic_hamster.jeans": "Jamster",
 	"entity.amethyst_imbuement.crystal_hamster": "Hamethyst",
 	"entity.amethyst_imbuement.cleric_hamster": "Hammer",
 	"entity.amethyst_imbuement.frost_hamster": "Hamsicle",
 	"entity.amethyst_imbuement.magma_hamster": "Lampster",
-	"entity.amethyst_imbuement.war_hamster": "War Hamster",
 	"entity.amethyst_imbuement.zombie_hamster": "Hambie",
 	"entity.amethyst_imbuement.boom_chicken": "Boom Chicken",
 	"entity.amethyst_imbuement.crystal_golem": "Crystalline Golem",
 	"entity.amethyst_imbuement.crystal_goliath": "Crystalline Goliath",
 	"entity.amethyst_imbuement.flesh_golem": "Flesh Golem",
 	"entity.amethyst_imbuement.lava_golem": "Lava Golem",
-	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
 	"entity.amethyst_imbuement.unhallowed": "Unhallowed",
 	"entity.amethyst_imbuement.frost_remnant": "Frost Remnant",
-	"entity.amethyst_imbuement.lightning_reaver": "Lightning Reaver",
 	"entity.amethyst_imbuement.bones": "Bones",
 	"entity.amethyst_imbuement.totem_of_fury": "Totem of Fury",
 	"entity.amethyst_imbuement.totem_of_fangs": "Totem of Fangs",
@@ -453,6 +452,7 @@
 	
 	"enchantment.amethyst_imbuement.magic_missile": "Magic Missile",
 	"enchantment.amethyst_imbuement.magic_missile.double": "Arcane Missile",
+	"enchantment.amethyst_imbuement.magic_missile.double.desc": "Damage increased.",
 	"enchantment.amethyst_imbuement.magic_missile.combination": "%1$s Missile",
 	"enchantment.amethyst_imbuement.magic_missile.noun": "Magic",
 	"enchantment.amethyst_imbuement.magic_missile.verb": "Imbue",
@@ -461,6 +461,7 @@
 
 	"enchantment.amethyst_imbuement.soul_missile": "Soul Missile",
 	"enchantment.amethyst_imbuement.soul_missile.double": "Soul Blast",
+	"enchantment.amethyst_imbuement.soul_missile.double.desc": "Damage increased and deals a small AoE burst of damage around the target.",
 	"enchantment.amethyst_imbuement.soul_missile.combination": "Ensouled%1$s Missile",
 	"enchantment.amethyst_imbuement.soul_missile.noun": "Soul",
 	"enchantment.amethyst_imbuement.soul_missile.verb": "Ensoul",
@@ -615,6 +616,7 @@
 
 	"enchantment.amethyst_imbuement.comet_storm": "Comet Storm",
 	"enchantment.amethyst_imbuement.comet_storm.double": "Rain of Hellfire",
+	"enchantment.amethyst_imbuement.comet_storm.double.desc": "AoE and duration of the storm increased. Fireball explosion power increased. Mana cost increased.",
 	"enchantment.amethyst_imbuement.comet_storm.combination": "%1$s Storm",
 	"enchantment.amethyst_imbuement.comet_storm.noun": "Comet",
 	"enchantment.amethyst_imbuement.comet_storm.verb": "Enmeteor",
@@ -639,6 +641,7 @@
 
 	"enchantment.amethyst_imbuement.create_lava": "Create Lava",
 	"enchantment.amethyst_imbuement.create_lava.double": "Enhanced Create Lava",
+	"enchantment.amethyst_imbuement.create_lava.double.desc": "Mana cost and cooldown decreased.",
 	"enchantment.amethyst_imbuement.create_lava.combination": "Create %1$s Lava",
 	"enchantment.amethyst_imbuement.create_lava.noun": "Lava",
 	"enchantment.amethyst_imbuement.create_lava.verb": "Melt",
@@ -649,6 +652,7 @@
 
 	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.double": "Enhanced Create Sponge",
+	"enchantment.amethyst_imbuement.create_sponge.double.desc": "Mana cost and cooldown decreased.",
 	"enchantment.amethyst_imbuement.create_sponge.combination": "Create %1$s Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.noun": "Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.verb": "Sponge",
@@ -657,6 +661,7 @@
 
 	"enchantment.amethyst_imbuement.create_water": "Create Water",
 	"enchantment.amethyst_imbuement.create_water.double": "Enhanced Create Water",
+	"enchantment.amethyst_imbuement.create_water.double.desc": "Mana cost and cooldown decreased.",
 	"enchantment.amethyst_imbuement.create_water.combination": "Create %1$s Water",
 	"enchantment.amethyst_imbuement.create_water.noun": "Water",
 	"enchantment.amethyst_imbuement.create_water.verb": "Water",
@@ -665,6 +670,7 @@
 
 	"enchantment.amethyst_imbuement.cripple": "Cripple",
 	"enchantment.amethyst_imbuement.cripple.double": "Maim",
+	"enchantment.amethyst_imbuement.cripple.double.desc": "Chance of critical strike much higher. Range of effect and number of possible targets increased. Mana Cost increased.",
 	"enchantment.amethyst_imbuement.cripple.combination": "Cripple and %1$s",
 	"enchantment.amethyst_imbuement.cripple.noun": "Cripple",
 	"enchantment.amethyst_imbuement.cripple.verb": "Cripple",
@@ -674,6 +680,7 @@
 
 	"enchantment.amethyst_imbuement.curse": "Curse",
 	"enchantment.amethyst_imbuement.curse.double": "Afflict",
+	"enchantment.amethyst_imbuement.curse.double.desc": "Amplification and duration of the curse is greatly increased. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.curse.combination": "Curse of %1$s",
 	"enchantment.amethyst_imbuement.curse.noun": "Curse",
 	"enchantment.amethyst_imbuement.curse.verb": "Curse",
@@ -682,6 +689,7 @@
 
 	"enchantment.amethyst_imbuement.dash": "Dash",
 	"enchantment.amethyst_imbuement.dash.double": "Sprint",
+	"enchantment.amethyst_imbuement.dash.double.desc": "Applies speed as well as dashing the player.",
 	"enchantment.amethyst_imbuement.dash.combination": "%1$s Dash",
 	"enchantment.amethyst_imbuement.dash.noun": "Dash",
 	"enchantment.amethyst_imbuement.dash.verb": "Dash",
@@ -715,6 +723,7 @@
 
 	"enchantment.amethyst_imbuement.exhaust": "Exhaust",
 	"enchantment.amethyst_imbuement.exhaust.double": "Enfeeble",
+	"enchantment.amethyst_imbuement.exhaust.double.desc": "Also applies Blindness and Mining Fatigue.",
 	"enchantment.amethyst_imbuement.exhaust.combination": "Exhaust and %1$s",
 	"enchantment.amethyst_imbuement.exhaust.noun": "Exhaustion",
 	"enchantment.amethyst_imbuement.exhaust.verb": "Exhaust",
@@ -737,7 +746,7 @@
 
 	"enchantment.amethyst_imbuement.fangs": "Fangs",
 	"enchantment.amethyst_imbuement.fangs.double": "Fang Wave",
-	"enchantment.amethyst_imbuement.fangs.double.desc": "summons two rows of fangs instead of one",
+	"enchantment.amethyst_imbuement.fangs.double.desc": "summons two rows of fangs instead of one.",
 	"enchantment.amethyst_imbuement.fangs.combination": "%1$s Fangs",
 	"enchantment.amethyst_imbuement.fangs.noun": "Fang",
 	"enchantment.amethyst_imbuement.fangs.verb": "Bite",
@@ -754,6 +763,7 @@
 
 	"enchantment.amethyst_imbuement.fireball": "Fireball",
 	"enchantment.amethyst_imbuement.fireball.double": "Comet",
+	"enchantment.amethyst_imbuement.fireball.double.desc": "Explosion power greatly increased. Mana cost and cooldown increased.",
 	"enchantment.amethyst_imbuement.fireball.combination": "%1$sball",
 	"enchantment.amethyst_imbuement.fireball.noun": "Fireball",
 	"enchantment.amethyst_imbuement.fireball.verb": "Alight",
@@ -762,6 +772,7 @@
 
 	"enchantment.amethyst_imbuement.flamebolt": "Flamebolt",
 	"enchantment.amethyst_imbuement.flamebolt.double": "Blazebolt",
+	"enchantment.amethyst_imbuement.flamebolt.double.desc": "Damage and duration of fire increased. Mana cost increased.",
 	"enchantment.amethyst_imbuement.flamebolt.combination": "%1$sbolt",
 	"enchantment.amethyst_imbuement.flamebolt.noun": "Flame",
 	"enchantment.amethyst_imbuement.flamebolt.verb": "Inflame",
@@ -770,6 +781,7 @@
 
 	"enchantment.amethyst_imbuement.flamewave": "Flamewave",
 	"enchantment.amethyst_imbuement.flamewave.double": "Blazewave",
+	"enchantment.amethyst_imbuement.flamewave.double.desc": "Each cast fires 3 projectiles instead of 1. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.flamewave.combination": "%1$swave",
 	"enchantment.amethyst_imbuement.flamewave.noun": "Flame",
 	"enchantment.amethyst_imbuement.flamewave.verb": "Inflame",
@@ -778,6 +790,7 @@
 
 	"enchantment.amethyst_imbuement.flare": "Flare",
 	"enchantment.amethyst_imbuement.flare.double": "Fireworks Show",
+	"enchantment.amethyst_imbuement.flare.double.desc": "Launches off a series of fireworks in succession.",
 	"enchantment.amethyst_imbuement.flare.combination": "%1$s Flare",
 	"enchantment.amethyst_imbuement.flare.noun": "Flare",
 	"enchantment.amethyst_imbuement.flare.verb": "Flare",
@@ -786,14 +799,18 @@
 
 	"enchantment.amethyst_imbuement.forcefield": "Forcefield",
 	"enchantment.amethyst_imbuement.forcefield.double": "Arcane Barrier",
+	"enchantment.amethyst_imbuement.forcefield.double.desc": "Size and duration of the forcefield is increased. Mana cost increased.",
 	"enchantment.amethyst_imbuement.forcefield.combination": "%1$s Barrier",
 	"enchantment.amethyst_imbuement.forcefield.noun": "Shield",
 	"enchantment.amethyst_imbuement.forcefield.verb": "Shield",
 	"enchantment.amethyst_imbuement.forcefield.adjective": "Shielding",
+	"enchantment.amethyst_imbuement.forcefield.create_lava": "Flame Bulwark",
+	"enchantment.amethyst_imbuement.forcefield.create_lava.desc": "forcefield can be created in lava, displacing the lava and holding it at bay. Field duration increased.",
 	"enchantment.amethyst_imbuement.forcefield.desc": "Places a forcefield the user can pass through but harmful entities can't.",
 
 	"enchantment.amethyst_imbuement.fortify": "Fortify",
 	"enchantment.amethyst_imbuement.fortify.double": "Reinforce",
+	"enchantment.amethyst_imbuement.fortify.double.desc": "Also grants Bone Armor. Durations are increased. Mana cost and cooldown increased.",
 	"enchantment.amethyst_imbuement.fortify.combination": "%1$s Fortification",
 	"enchantment.amethyst_imbuement.fortify.noun": "Fortification",
 	"enchantment.amethyst_imbuement.fortify.verb": "Fortify",
@@ -802,6 +819,7 @@
 
 	"enchantment.amethyst_imbuement.freezing": "Frostbolt",
 	"enchantment.amethyst_imbuement.freezing.double": "Winterbolt",
+	"enchantment.amethyst_imbuement.freezing.double.desc": "Bolt damage and duration of freezing effect increased.",
 	"enchantment.amethyst_imbuement.freezing.combination": "%1$s-Freeze Bolt",
 	"enchantment.amethyst_imbuement.freezing.noun": "Frost",
 	"enchantment.amethyst_imbuement.freezing.verb": "Frost",
@@ -810,6 +828,7 @@
 
 	"enchantment.amethyst_imbuement.gusting": "Gusting",
 	"enchantment.amethyst_imbuement.gusting.double": "Gale",
+	"enchantment.amethyst_imbuement.gusting.double.desc": "Range and power of the knockback increased.",
 	"enchantment.amethyst_imbuement.gusting.combination": "%1$s Gust",
 	"enchantment.amethyst_imbuement.gusting.noun": "Gust",
 	"enchantment.amethyst_imbuement.gusting.verb": "Gust",
@@ -818,6 +837,7 @@
 
 	"enchantment.amethyst_imbuement.winters_grasp": "Winters Grasp",
 	"enchantment.amethyst_imbuement.winters_grasp.double": "Deep Freeze",
+	"enchantment.amethyst_imbuement.winters_grasp.double": "AoE and duration of the freezing aura is greatly increased. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.winters_grasp.combination": "Aura of %1$s",
 	"enchantment.amethyst_imbuement.winters_grasp.noun": "Winter",
 	"enchantment.amethyst_imbuement.winters_grasp.verb": "Winterize",
@@ -826,6 +846,7 @@
 
 	"enchantment.amethyst_imbuement.hamptertime": "Hamptertime",
 	"enchantment.amethyst_imbuement.hamptertime.double": "Hampterpocalypse",
+	"enchantment.amethyst_imbuement.hamptertime.double.desc": "Number of hamsters greatly increased, and higher chance hamsters spawn with equipment.",
 	"enchantment.amethyst_imbuement.hamptertime.combination": "Horde of Fluff and %1$s",
 	"enchantment.amethyst_imbuement.hamptertime.noun": "Hampter",
 	"enchantment.amethyst_imbuement.hamptertime.verb": "Hampterize",
@@ -834,6 +855,7 @@
 
 	"enchantment.amethyst_imbuement.hard_light_bridge": "Hard Light Bridge",
 	"enchantment.amethyst_imbuement.hard_light_bridge.double": "Hard Light Span",
+	"enchantment.amethyst_imbuement.hard_light_bridge.double.desc": "Range of the bridge greatly increased.",
 	"enchantment.amethyst_imbuement.hard_light_bridge.combination": "%1$s Light Bridge",
 	"enchantment.amethyst_imbuement.hard_light_bridge.noun": "Hard Light",
 	"enchantment.amethyst_imbuement.hard_light_bridge.verb": "Hard-light",
@@ -842,6 +864,7 @@
 
 	"enchantment.amethyst_imbuement.healing_wind": "Soothing Wind",
 	"enchantment.amethyst_imbuement.healing_wind.double": "Vitalizing Wind",
+	"enchantment.amethyst_imbuement.healing_wind.double.desc": "Amount healed increased, and duration of the wind greatly increased. Mana cost and cooldown greatly increased.",
 	"enchantment.amethyst_imbuement.healing_wind.combination": "%1$s Wind",
 	"enchantment.amethyst_imbuement.healing_wind.noun": "Soothing Wind",
 	"enchantment.amethyst_imbuement.healing_wind.verb": "Sooth",
@@ -850,6 +873,7 @@
 
 	"enchantment.amethyst_imbuement.ice_shard": "Ice Shard",
 	"enchantment.amethyst_imbuement.ice_shard.double": "Rime Shard",
+	"enchantment.amethyst_imbuement.ice_shard.double": "Ice Shards pierce many more mobs per shot and explode into a cloud of frost on impact. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.ice_shard.combination": "%1$s Shard",
 	"enchantment.amethyst_imbuement.ice_shard.noun": "Ice",
 	"enchantment.amethyst_imbuement.ice_shard.verb": "Ice",
@@ -858,6 +882,7 @@
 
 	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.double": "Rime Spikes",
+	"enchantment.amethyst_imbuement.ice_spikes.double.desc": "Two rows of spikes are created instead of one.",
 	"enchantment.amethyst_imbuement.ice_spikes.combination": "%1$s Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.noun": "Rime Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.verb": "Rime Spikes",
@@ -866,6 +891,7 @@
 
 	"enchantment.amethyst_imbuement.inspiring_song": "Inspiring Song",
 	"enchantment.amethyst_imbuement.inspiring_song.double": "Inspiring Ballad",
+	"enchantment.amethyst_imbuement.inspiring_song.double.desc": "Provides short temporary damage immunity, and affected entities attacks have a chance to deal bonus damage.",
 	"enchantment.amethyst_imbuement.inspiring_song.combination": "Song of %1$s",
 	"enchantment.amethyst_imbuement.inspiring_song.noun": "Inspiration",
 	"enchantment.amethyst_imbuement.inspiring_song.verb": "Inspire",
@@ -874,6 +900,7 @@
 
 	"enchantment.amethyst_imbuement.levitating_bullet": "Levitating Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.double": "Levitating Bullet Storm",
+	"enchantment.amethyst_imbuement.levitating_bullet.double.desc": "Range, AoE, and duration of the bullets is greatly increased. Cooldown greatly increased.",
 	"enchantment.amethyst_imbuement.levitating_bullet.combination": "%1$s Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.noun": "Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.verb": "Levitate",
@@ -882,6 +909,7 @@
 
 	"enchantment.amethyst_imbuement.lightning_bolt": "Lightning Bolt",
 	"enchantment.amethyst_imbuement.lightning_bolt.double": "Fulgurous Bolt",
+	"enchantment.amethyst_imbuement.lightning_bolt.double.desc": "Bolt damage is greatly increased. Cooldown and mana cost increased.",
 	"enchantment.amethyst_imbuement.lightning_bolt.combination": "Bolt of %1$s",
 	"enchantment.amethyst_imbuement.lightning_bolt.noun": "Lightning",
 	"enchantment.amethyst_imbuement.lightning_bolt.verb": "Fry",
@@ -890,6 +918,7 @@
 
 	"enchantment.amethyst_imbuement.lightning_storm": "Lightning Storm",
 	"enchantment.amethyst_imbuement.lightning_storm.double": "Fulgurous Storm",
+	"enchantment.amethyst_imbuement.lightning_storm.double.desc": "Range and AoE of the storm is greatly increased.",
 	"enchantment.amethyst_imbuement.lightning_storm.combination": "Storm of %1$s",
 	"enchantment.amethyst_imbuement.lightning_storm.noun": "Storm",
 	"enchantment.amethyst_imbuement.lightning_storm.verb": "Fulgurate",
@@ -898,6 +927,7 @@
 
 	"enchantment.amethyst_imbuement.magnetic_aura": "Magnetic Aura",
 	"enchantment.amethyst_imbuement.magnetic_aura.double": "Gravitational Aura",
+	"enchantment.amethyst_imbuement.magnetic_aura.double": "Range is increased, and also knocks nearby entities towards the caster. Mana cost increased.",
 	"enchantment.amethyst_imbuement.magnetic_aura.combination": "Magnetic %1$s",
 	"enchantment.amethyst_imbuement.magnetic_aura.noun": "Magnet",
 	"enchantment.amethyst_imbuement.magnetic_aura.verb": "Magnetize",
@@ -906,6 +936,7 @@
 
 	"enchantment.amethyst_imbuement.mass_cleanse": "Mass Cleanse",
 	"enchantment.amethyst_imbuement.mass_cleanse.double": "Mass Purify",
+	"enchantment.amethyst_imbuement.mass_cleanse.double.desc": "Duration of immunity is greatly increased. Removes Cursed.",
 	"enchantment.amethyst_imbuement.mass_cleanse.combination": "Mass %1$s Cleanse",
 	"enchantment.amethyst_imbuement.mass_cleanse.noun": "Mass Cleanse",
 	"enchantment.amethyst_imbuement.mass_cleanse.verb": "Mass-cleanse",
@@ -914,6 +945,7 @@
 
 	"enchantment.amethyst_imbuement.mass_exhaust": "Mass Exhaust",
 	"enchantment.amethyst_imbuement.mass_exhaust.double": "Mass Enfeeble",
+	"enchantment.amethyst_imbuement.mass_exhaust.double.desc": "Also applies Blindness and Mining Fatigue. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.mass_exhaust.combination": "Mass %1$s Exhaust",
 	"enchantment.amethyst_imbuement.mass_exhaust.noun": "Mass Exhaustion",
 	"enchantment.amethyst_imbuement.mass_exhaust.verb": "Mass-exhaust",
@@ -922,6 +954,7 @@
 
 	"enchantment.amethyst_imbuement.mass_fortify": "Mass Fortify",
 	"enchantment.amethyst_imbuement.mass_fortify.double": "Mass Reinforce",
+	"enchantment.amethyst_imbuement.mass_fortify.double.desc": "Also grants Bone Armor. Durations are increased. Mana cost and cooldown increased.",
 	"enchantment.amethyst_imbuement.mass_fortify.combination": "Mass %1$s Fortify",
 	"enchantment.amethyst_imbuement.mass_fortify.noun": "Mass Fortification",
 	"enchantment.amethyst_imbuement.mass_fortify.verb": "Mass-fortify",
@@ -930,6 +963,7 @@
 
 	"enchantment.amethyst_imbuement.mass_heal": "Mass Heal",
 	"enchantment.amethyst_imbuement.mass_heal.double": "Mass Vitalize",
+	"enchantment.amethyst_imbuement.mass_heal.double.desc": "Amount healed is increased, and spell cooldown is decreased. Mana cost increases.",
 	"enchantment.amethyst_imbuement.mass_heal.combination": "Mass %1$s Heal",
 	"enchantment.amethyst_imbuement.mass_heal.noun": "Mass Vitality",
 	"enchantment.amethyst_imbuement.mass_heal.verb": "Mass-vitalize",
@@ -938,6 +972,7 @@
 
 	"enchantment.amethyst_imbuement.mass_revivify": "Mass Revivify",
 	"enchantment.amethyst_imbuement.mass_revivify.double": "Saints Blessing",
+	"enchantment.amethyst_imbuement.mass_revivify.double": "Also grants Blessed. Amplification and duration of all effects increased. Mana cost greatly increased.",
 	"enchantment.amethyst_imbuement.mass_revivify.combination": "Revivification of %1$s",
 	"enchantment.amethyst_imbuement.mass_revivify.noun": "Mass Revivification",
 	"enchantment.amethyst_imbuement.mass_revivify.verb": "Mass-revivify",
@@ -946,6 +981,7 @@
 
 	"enchantment.amethyst_imbuement.mend_equipment": "Mend Equipment",
 	"enchantment.amethyst_imbuement.mend_equipment.double": "Repair Equipment",
+	"enchantment.amethyst_imbuement.mend_equipment.double.desc": "Amount repaired is greatly increased. Mana cost increased.",
 	"enchantment.amethyst_imbuement.mend_equipment.combination": "%1$s Mending",
 	"enchantment.amethyst_imbuement.mend_equipment.noun": "Mend",
 	"enchantment.amethyst_imbuement.mend_equipment.verb": "Mend",
@@ -954,6 +990,7 @@
 	
 	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.double": "Mental Breakthrough",
+	"enchantment.amethyst_imbuement.mental_clarity.double.desc": "Duration of the experience bonus is reduced, but the amplification of the effect is greatly increased.",
 	"enchantment.amethyst_imbuement.mental_clarity.combination": "%1$s Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.noun": "Mind",
 	"enchantment.amethyst_imbuement.mental_clarity.verb": "Smarten",
@@ -963,6 +1000,7 @@
 
 	"enchantment.amethyst_imbuement.minor_heal": "Minor Heal",
 	"enchantment.amethyst_imbuement.minor_heal.double": "Vitalize",
+	"enchantment.amethyst_imbuement.minor_heal.double.desc": "Amount healed is increased, and spell cooldown is decreased. Mana cost increases.",
 	"enchantment.amethyst_imbuement.minor_heal.combination": "%1$s Heal",
 	"enchantment.amethyst_imbuement.minor_heal.noun": "Health",
 	"enchantment.amethyst_imbuement.minor_heal.verb": "Heal",
@@ -974,6 +1012,7 @@
 
 	"enchantment.amethyst_imbuement.persuade": "Persuade",
 	"enchantment.amethyst_imbuement.persuade.double": "Dominate Mind",
+	"enchantment.amethyst_imbuement.persuade.double.desc": "The altered AI becomes permanent, persisting across game loads with no limited duration.",
 	"enchantment.amethyst_imbuement.persuade.combination": "Convince with %1$s",
 	"enchantment.amethyst_imbuement.persuade.noun": "Persuasion",
 	"enchantment.amethyst_imbuement.persuade.verb": "Persuade",
@@ -982,6 +1021,7 @@
 
 	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
 	"enchantment.amethyst_imbuement.poultrymorph.double": "Chicken Upon Ye",
+	"enchantment.amethyst_imbuement.poultrymorph.double.desc": "Duration of the poultrymorph state is greatly increased.",
 	"enchantment.amethyst_imbuement.poultrymorph.combination": "%1$smorph",
 	"enchantment.amethyst_imbuement.poultrymorph.noun": "Chicken",
 	"enchantment.amethyst_imbuement.poultrymorph.verb": "Chickenize",
@@ -990,6 +1030,7 @@
 	
 	"enchantment.amethyst_imbuement.recall": "Recall",
 	"enchantment.amethyst_imbuement.recall.double": "Total Recall",
+	"enchantment.amethyst_imbuement.recall.double.desc": "Total Recall",
 	"enchantment.amethyst_imbuement.recall.combination": "Memory of %1$s",
 	"enchantment.amethyst_imbuement.recall.noun": "Total Recall",
 	"enchantment.amethyst_imbuement.recall.verb": "Total Recall",
@@ -998,6 +1039,7 @@
 
 	"enchantment.amethyst_imbuement.regenerate": "Regenerate",
 	"enchantment.amethyst_imbuement.regenerate.double": "Rejuvenate",
+	"enchantment.amethyst_imbuement.regenerate.double.desc": "Regeneration amplification and duration increased.",
 	"enchantment.amethyst_imbuement.regenerate.combination": "%1$s Regeneration",
 	"enchantment.amethyst_imbuement.regenerate.noun": "Regeneration",
 	"enchantment.amethyst_imbuement.regenerate.verb": "Regenerate",
@@ -1006,6 +1048,7 @@
 
 	"enchantment.amethyst_imbuement.resonate": "Resonate",
 	"enchantment.amethyst_imbuement.resonate.double": "Harmonize",
+	"enchantment.amethyst_imbuement.resonate.double.desc": "Amplifier of Resonating is increased at twice the normal rate. Spell Cooldown is decreased.",
 	"enchantment.amethyst_imbuement.resonate.combination": "%1$s Resonance",
 	"enchantment.amethyst_imbuement.resonate.noun": "Resonance",
 	"enchantment.amethyst_imbuement.resonate.verb": "Resonate",
@@ -1041,6 +1084,7 @@
 
 	"enchantment.amethyst_imbuement.smiting_blow": "Smiting Blow",
 	"enchantment.amethyst_imbuement.smiting_blow.double": "Daybreak Hammer",
+	"enchantment.amethyst_imbuement.smiting_blow.double.desc": "Damage against undead greatly increased, deals AoE damage around the target, and damage to undead has a chance to stun.",
 	"enchantment.amethyst_imbuement.smiting_blow.combination": "%1$s Blow",
 	"enchantment.amethyst_imbuement.smiting_blow.noun": "Smite",
 	"enchantment.amethyst_imbuement.smiting_blow.verb": "Smite",
@@ -1049,6 +1093,7 @@
 
 	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.double": "Ghostly Slash",
+	"enchantment.amethyst_imbuement.spectral_slash.double.desc": "Slash deals true damage, bypassing shields, armor, and enchantments.",
 	"enchantment.amethyst_imbuement.spectral_slash.combination": "%1$s Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.noun": "Spectre",
 	"enchantment.amethyst_imbuement.spectral_slash.verb": "Haunt",
@@ -1094,6 +1139,7 @@
 
 	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
 	"enchantment.amethyst_imbuement.summon_fury_totem.double": "Summon Totem of Rage",
+	"enchantment.amethyst_imbuement.summon_fury_totem.double.desc": "Totem attack speed and health is increased.",
 	"enchantment.amethyst_imbuement.summon_fury_totem.combination": "Summon Totem of %1$s",
 	"enchantment.amethyst_imbuement.summon_fury_totem.noun": "Totem",
 	"enchantment.amethyst_imbuement.summon_fury_totem.verb": "Totemize",
@@ -1102,6 +1148,7 @@
 
 	"enchantment.amethyst_imbuement.summon_golem": "Summon Crystalline Golem",
 	"enchantment.amethyst_imbuement.summon_golem.double": "Summon Crystalline Goliath",
+	"enchantment.amethyst_imbuement.summon_golem.double.desc": "Summons a Crystalline Goliath instead of a golem. Goliath has massive health, damage, and AoE attacks.",
 	"enchantment.amethyst_imbuement.summon_golem.combination": "Summon %1$s Crystalline Golem",
 	"enchantment.amethyst_imbuement.summon_golem.noun": "Crystal",
 	"enchantment.amethyst_imbuement.summon_golem.verb": "Crystallize",
@@ -1110,6 +1157,7 @@
 
 	"enchantment.amethyst_imbuement.summon_grace_totem": "Summon Graceful Totem",
 	"enchantment.amethyst_imbuement.summon_grace_totem.double": "Summon Totem of the Saint",
+	"enchantment.amethyst_imbuement.summon_grace_totem.double.desc": "Healing effect also grants Blessed, and effect range is greatly increased.",
 	"enchantment.amethyst_imbuement.summon_grace_totem.combination": "Summon %1$s Totem",
 	"enchantment.amethyst_imbuement.summon_grace_totem.noun": "Totem",
 	"enchantment.amethyst_imbuement.summon_grace_totem.verb": "Totemize",
@@ -1118,6 +1166,7 @@
 
 	"enchantment.amethyst_imbuement.summon_hamster": "Summon Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.double": "Summon War Hamster",
+	"enchantment.amethyst_imbuement.summon_hamster.double.desc": "Hamster spawns armored and equipped with a sword.",
 	"enchantment.amethyst_imbuement.summon_hamster.combination": "Summon %1$s Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.noun": "Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.verb": "Hamsterfy",
@@ -1126,6 +1175,7 @@
 
 	"enchantment.amethyst_imbuement.summon_seahorse": "Summon Seahorse",
 	"enchantment.amethyst_imbuement.summon_seahorse.double": "Summon Sea Steed",
+	"enchantment.amethyst_imbuement.summon_seahorse.double.desc": "Seahorse spawns with extra health, jump height, and speed.",
 	"enchantment.amethyst_imbuement.summon_seahorse.combination": "Summon %1$shorse",
 	"enchantment.amethyst_imbuement.summon_seahorse.noun": "Horse",
 	"enchantment.amethyst_imbuement.summon_seahorse.verb": "Equify",
@@ -1134,6 +1184,7 @@
 
 	"enchantment.amethyst_imbuement.summon_zombie": "Summon Zombie",
 	"enchantment.amethyst_imbuement.summon_zombie.double": "Call from the Grave",
+	"enchantment.amethyst_imbuement.summon_zombie.double.desc": "Number of Zombies summoned is greatly increased.",
 	"enchantment.amethyst_imbuement.summon_zombie.combination": "Summon %1$s Zombie",
 	"enchantment.amethyst_imbuement.summon_zombie.noun": "Zombie",
 	"enchantment.amethyst_imbuement.summon_zombie.verb": "Zombify",
@@ -1150,6 +1201,7 @@
 
 	"enchantment.amethyst_imbuement.teleport": "Teleport",
 	"enchantment.amethyst_imbuement.teleport.double": "Teleportal",
+	"enchantment.amethyst_imbuement.teleport.double.desc": "Opens a portal between the struck block and the player that lasts a minute and allows any allies to pass back and forth through.",
 	"enchantment.amethyst_imbuement.teleport.combination": "Eye of %1$s",
 	"enchantment.amethyst_imbuement.teleport.noun": "Teleportal",
 	"enchantment.amethyst_imbuement.teleport.verb": "Teleport",
@@ -1158,6 +1210,7 @@
 
 	"enchantment.amethyst_imbuement.torrent_of_beaks": "Torrent of Beaks",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.double": "Deluge of Beaks",
+	"enchantment.amethyst_imbuement.torrent_of_beaks.double.desc": "Cooldown is massively decreased.",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.combination": "Torrent of %1$s",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.noun": "Beak",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.verb": "Peck",
@@ -1166,6 +1219,7 @@
 
 	"enchantment.amethyst_imbuement.weightlessness": "Weightlessness",
 	"enchantment.amethyst_imbuement.weightlessness.double": "Anti-Gravity",
+	"enchantment.amethyst_imbuement.weightlessness.double.desc": "Duration is massively increased.",
 	"enchantment.amethyst_imbuement.weightlessness.combination": "Floating on %1$s",
 	"enchantment.amethyst_imbuement.weightlessness.noun": "Weightlessness",
 	"enchantment.amethyst_imbuement.weightlessness.verb": "Lighten",
@@ -1174,6 +1228,7 @@
 
 	"enchantment.amethyst_imbuement.withering_bolt": "Withering Skull",
 	"enchantment.amethyst_imbuement.withering_bolt.double": "Skull of Evil",
+	"enchantment.amethyst_imbuement.withering_bolt.double.desc": "Damage is increased, explosion power increased, leaves behind a pool of withering energy.",
 	"enchantment.amethyst_imbuement.withering_bolt.combination": "%1$s Skull",
 	"enchantment.amethyst_imbuement.withering_bolt.noun": "Skull",
 	"enchantment.amethyst_imbuement.withering_bolt.verb": "Wither",
