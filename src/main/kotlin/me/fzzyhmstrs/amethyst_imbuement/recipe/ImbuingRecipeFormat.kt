@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.recipe
 import com.google.gson.JsonObject
 
 class ImbuingRecipeFormat {
-
     var type: String = "amethyst_imbuement:imbuing"
     var imbueA: JsonObject? = null
     var imbueB: JsonObject? = null
@@ -24,6 +23,4 @@ class ImbuingRecipeFormat {
     var resultA: String = ""
     var countA: Int = 0
     var transferEnchant: Boolean = false
-
-
 }
