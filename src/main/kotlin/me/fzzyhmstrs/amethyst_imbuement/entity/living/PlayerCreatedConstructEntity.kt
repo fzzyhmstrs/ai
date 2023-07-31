@@ -26,7 +26,6 @@ import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.AxeItem
 import net.minecraft.item.ItemStack
@@ -49,7 +48,7 @@ import net.minecraft.world.World
 import java.util.*
 
 @Suppress("PrivatePropertyName", "LeakingThis")
-open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, settings: Settings = Settings()): GolemEntity(entityType,world),
+open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, settings: Settings = Settings()): AttackTicksGolemEntity(entityType,world),
     Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
 
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, settings: Settings = Settings()) : this(entityType, world, settings){
@@ -71,7 +70,6 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     private val trackSummonerAttackerGoal = TrackSummonerAttackerGoal(this,null)
 
 
-    protected var attackTicksLeft = 0
     protected var lookingAtVillagerTicksLeft = 0
     private val ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39)
     private var angerTime = 0
@@ -192,9 +190,6 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
     override fun tickMovement() {
         super.tickMovement()
-        if (attackTicksLeft > 0) {
-            --attackTicksLeft
-        }
         if (lookingAtVillagerTicksLeft > 0) {
             --lookingAtVillagerTicksLeft
         }
@@ -285,9 +280,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     override fun handleStatus(status: Byte) {
-        if (status.toInt() == 4) {
-            attackTicksLeft = 10
-        } else if (status.toInt() == 11) {
+        if (status.toInt() == 11) {
             lookingAtVillagerTicksLeft = 400
         } else if (status.toInt() == 34) {
             lookingAtVillagerTicksLeft = 0
