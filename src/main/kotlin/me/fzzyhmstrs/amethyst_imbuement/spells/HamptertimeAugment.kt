@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
@@ -33,7 +34,8 @@ import kotlin.math.max
 
 class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("hamptertime"),SpellType.WIT, 6000,750,
+        AugmentDatapoint(
+            AI.identity("hamptertime"),SpellType.WIT, 6000,750,
             1,25,1,85,LoreTier.NO_TIER, Items.LEAD)
 
     //ml 25

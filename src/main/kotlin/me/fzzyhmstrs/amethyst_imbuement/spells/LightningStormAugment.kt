@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerLightningEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
@@ -38,7 +39,8 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.AREA_DAMAGE), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("lightning_storm"),SpellType.FURY,400,80,
+        AugmentDatapoint(
+            AI.identity("lightning_storm"),SpellType.FURY,400,80,
             23,3,1,10,LoreTier.HIGH_TIER, Items.COPPER_BLOCK)
 
     //ml 3

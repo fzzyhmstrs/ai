@@ -6,7 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -35,7 +35,7 @@ class BrutalGemItem(settings: Settings): IgnitedGemItem(settings) {
 
     fun brutalGemCheck(stack: ItemStack, inventory: PlayerInventory, damageSource: DamageSource){
             val source = damageSource.source
-            if (damageSource.name == "mob" || (source != null && source is HostileEntity)){
+            if (damageSource.name == "mob" || (source != null && source is Monster)){
                 val nbt = stack.orCreateNbt
                 var hit = 0
                 if (nbt.contains("mob_hit")){

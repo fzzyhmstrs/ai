@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
@@ -33,7 +34,8 @@ import net.minecraft.world.World
 
 class MagneticAuraAugment: EntityAoeAugment(ScepterTier.TWO,true), PersistentEffectHelper.PersistentEffect{
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("magnetic_aura"),SpellType.GRACE,400,60,
+        AugmentDatapoint(
+            AI.identity("magnetic_aura"),SpellType.GRACE,400,60,
             7,7,1,20, LoreTier.LOW_TIER, RegisterItem.PYRITE)
 
     //ml 7

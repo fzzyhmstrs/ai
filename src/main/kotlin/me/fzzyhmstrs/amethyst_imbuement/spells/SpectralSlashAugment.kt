@@ -1,25 +1,25 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
-import net.minecraft.particle.DefaultParticleType
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
 
 @Suppress("SameParameterValue")
 open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
@@ -50,20 +50,11 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
         }
     }
     
-    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (list.isNotEmpty()) {
-            for (entity in list) {
-                if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
-                }
-            }
-        }
-        return hostileEntityList
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult>{
+        return AugmentHelper.hostileFilter(list, user,this)
     }
 
-    override fun particleType(): DefaultParticleType{
+    override fun castParticleType(): ParticleEffect? {
         return ParticleTypes.ELECTRIC_SPARK
     }
 }

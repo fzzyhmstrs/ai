@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-import net.minecraft.util.Identifier
 import java.util.*
 
 object RegisterKeybindServer {

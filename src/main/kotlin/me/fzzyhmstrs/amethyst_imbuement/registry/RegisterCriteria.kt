@@ -6,7 +6,6 @@ import me.fzzyhmstrs.amethyst_imbuement.util.AugmentCriterion
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.advancement.criterion.TickCriterion
-import net.minecraft.util.Identifier
 
 object RegisterCriteria {
 

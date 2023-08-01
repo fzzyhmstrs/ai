@@ -20,8 +20,8 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.BonesEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.BonesEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBoost
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity

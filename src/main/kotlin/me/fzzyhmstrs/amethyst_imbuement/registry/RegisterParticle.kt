@@ -7,7 +7,6 @@ import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleType
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterParticle {
 

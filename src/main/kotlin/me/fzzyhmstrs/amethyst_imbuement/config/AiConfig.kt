@@ -331,13 +331,13 @@ object AiConfig
         var disableIncreaseMaxLevels = ValidatedBoolean(false)
         
         @ReadMeText("readme.enchants.enabledEnchants")
-        var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
+        var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Identifier.tryParse(id) != null}, invalidEntryMessage = "Needs a valid registered enchantment identifier.")
         
         @ReadMeText("readme.enchants.aiEnchantMaxLevels")
-        var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+        var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, invalidEntryMessage = "Needs a valid registered enchantment identifier and a level greater than 0.")
 
         @ReadMeText("readme.enchants.vanillaEnchantMaxLevels")
-        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+        var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, invalidEntryMessage = "Needs a valid registered enchantment identifier and a level greater than 0.")
     }
 
     private val trinketsHeader = buildSectionHeader("trinkets")
@@ -348,7 +348,7 @@ object AiConfig
         @ReadMeText("readme.trinkets.draconicVisionRange")
         var draconicVisionRange = ValidatedInt(5,16,1)
         @ReadMeText("readme.trinkets.enabledAugments")
-        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
+        var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, invalidEntryMessage = "Needs a valid registered enchantment identifier.")
 
         override fun generateNewClass(): Trinkets {
             return this

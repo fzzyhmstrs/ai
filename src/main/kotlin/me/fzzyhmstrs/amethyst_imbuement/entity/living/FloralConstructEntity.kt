@@ -1,10 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FloralConstructWanderGoal
 import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedEntityAttributes
 import net.minecraft.block.Block
 import net.minecraft.block.CropBlock
 import net.minecraft.block.entity.BlockEntity
@@ -13,7 +12,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
@@ -40,15 +38,9 @@ class FloralConstructEntity: PlayerCreatedConstructEntity {
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null): super(entityType, world, ageLimit, createdBy, Settings(false, true, false))
 
     class FloralConstruct: ConfigSection(Header.Builder().space().add("readme.entities.floral_construct_1").build()){
-        var baseHealth = ValidatedDouble(8.0,80.0,1.0)
-        var baseMoveSpeed = ValidatedDouble(0.15,1.0,0.01)
-    }
-
-    companion object {
-        fun createFloralAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.floralConstruct.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.floralConstruct.baseMoveSpeed.get())
-        }
+        var baseAttributes = ValidatedEntityAttributes(mapOf(
+            EntityAttributes.GENERIC_MAX_HEALTH to 8.0,
+            EntityAttributes.GENERIC_MOVEMENT_SPEED to 0.15))
     }
 
     private val inventory = SimpleInventory(9)

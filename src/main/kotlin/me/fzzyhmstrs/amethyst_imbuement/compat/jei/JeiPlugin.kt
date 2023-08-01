@@ -2,13 +2,13 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.jei
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.CrystalAltarScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
-import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.gui.handlers.IGuiClickableArea
 import mezz.jei.api.gui.handlers.IGuiContainerHandler

@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -26,7 +27,8 @@ import net.minecraft.world.World
 
 class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("minor_heal"),SpellType.GRACE, PerLvlI(130,-10),12,
+        AugmentDatapoint(
+            AI.identity("minor_heal"),SpellType.GRACE, PerLvlI(130,-10),12,
             1,6,1,5,LoreTier.LOW_TIER, Items.GLISTERING_MELON_SLICE)
 
     //ml 6

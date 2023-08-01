@@ -7,7 +7,6 @@ import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipeSerializer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterRecipe {
 

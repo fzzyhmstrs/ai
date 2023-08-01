@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.entity.PlayerItemEntity
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
@@ -14,10 +15,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.horse.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.horse.DraftHorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.horse.SeahorseEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.BoomChickenEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraconicBoxEntity
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.FloralConstructEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
@@ -31,6 +29,7 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -38,7 +37,22 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object RegisterEntity {
-    
+
+    val SARDONYX_ELEMENTAL_ENTITY: EntityType<SardonyxElementalEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "sardonyx_elemental"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<SardonyxElementalEntity>, world: World ->
+            SardonyxElementalEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(2.0f, 3.1f)).trackRangeChunks(10).build()
+    )
+
+    ///////////////
+
     val BASIC_HAMSTER_ENTITY: EntityType<BaseHamsterEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         AI.identity( "basic_hamster"),
@@ -226,6 +240,8 @@ object RegisterEntity {
             )
         }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
     )
+
+    ////////////////////
 
     val FLORAL_CONSTRUCT_ENTITY: EntityType<FloralConstructEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -573,9 +589,9 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(HAMBIE_ENTITY, HambieEntity.createZambieAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
-        FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, FloralConstructEntity.createFloralAttributes())
+        FabricDefaultAttributeRegistry.register(FLORAL_CONSTRUCT_ENTITY, AiConfig.entities.floralConstruct.baseAttributes.buildAttributes { GolemEntity.createMobAttributes() })
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
-        FabricDefaultAttributeRegistry.register(CHOLEM_ENTITY, CholemEntity.createGolemAttributes())
+        FabricDefaultAttributeRegistry.register(CHOLEM_ENTITY, AiConfig.entities.cholem.baseAttributes.buildAttributes { GolemEntity.createMobAttributes() })
         FabricDefaultAttributeRegistry.register(LAVA_GOLEM_ENTITY, LavaGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(FLESH_GOLEM_ENTITY, FleshGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())

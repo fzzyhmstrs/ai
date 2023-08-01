@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
 import me.fzzyhmstrs.amethyst_core.augments.AugmentPersistentEffectData
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult

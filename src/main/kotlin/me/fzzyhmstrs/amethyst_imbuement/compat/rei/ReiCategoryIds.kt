@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
-import net.minecraft.util.Identifier
 
 object ReiCategoryIds {
 

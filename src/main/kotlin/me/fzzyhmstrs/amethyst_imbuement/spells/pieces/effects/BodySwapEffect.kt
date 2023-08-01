@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.Tameable
-import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.util.math.Box
 
 object BodySwapEffect {
@@ -13,7 +13,7 @@ object BodySwapEffect {
         if (world.time % 22 != 0L || processContext.isBeforeRemoval()) return
         val pos = entity.pos.add(0.0,entity.height/2.0,0.0)
         val box = Box(pos.add(24.0,3.0,24.0),pos.subtract(24.0,3.0,24.0))
-        val entities = world.getOtherEntities(entity, box) {it is HostileEntity}
+        val entities = world.getOtherEntities(entity, box) {it is Monster}
         for (target in entities){
             target.teleport(pos.x,pos.y,pos.z)
         }

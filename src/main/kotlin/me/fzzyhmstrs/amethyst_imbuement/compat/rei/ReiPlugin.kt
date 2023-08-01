@@ -3,9 +3,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.compat.rei
 
 import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
-import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
+import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry

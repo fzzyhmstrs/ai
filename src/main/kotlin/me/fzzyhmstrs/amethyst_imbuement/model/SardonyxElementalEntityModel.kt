@@ -8,7 +8,7 @@ import net.minecraft.util.math.MathHelper
 // Made with Blockbench 4.8.1
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-class SardonyxElemental(private val root: ModelPart) : SinglePartEntityModel<AttackTicksGolemEntity>() {
+class SardonyxElementalEntityModel(private val root: ModelPart) : SinglePartEntityModel<AttackTicksGolemEntity>() {
     private val head: ModelPart = root.getChild("head")
     private val jaw: ModelPart = head.getChild("jaw")
     private val rightArm: ModelPart = root.getChild("rightArm")

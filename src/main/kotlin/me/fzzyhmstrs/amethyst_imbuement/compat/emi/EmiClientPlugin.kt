@@ -5,11 +5,11 @@ import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiStack
+import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
+import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
-import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 
 
 object EmiClientPlugin: EmiPlugin{

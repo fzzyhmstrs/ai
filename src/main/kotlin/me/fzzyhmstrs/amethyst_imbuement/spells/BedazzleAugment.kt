@@ -30,7 +30,8 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.boss.WitherEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -102,7 +103,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         val entityList = RaycasterUtil.raycastEntityArea(effects.range(level), user)
         var hostileEntities: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
-            if (entity2 is HostileEntity && entity2 !is WitherEntity){
+            if (entity2 is Monster && entity2 !is WitherEntity && entity2 is LivingEntity){
                 hostileEntities.add(entity2)
             }
         }
@@ -211,7 +212,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
             val tier = (spells.paired()?.getTier() ?: 1).toFloat()
             if (world.random.nextFloat() < (0.2f * tier)){
                 val entity = entityHitResult.entity
-                if (entity is HostileEntity && entity !is WitherEntity) {
+                if (entity is Monster && entity !is WitherEntity && entity is LivingEntity) {
                     entity.addStatusEffect(StatusEffectInstance(RegisterStatus.CHARMED, 400))
                     return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
                 }
@@ -219,7 +220,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
         }
         if (othersType.empty || spells.spellsAreEqual()) {
             val entity = entityHitResult.entity
-            if (entity is HostileEntity && entity !is WitherEntity) {
+            if (entity is Monster && entity !is WitherEntity && entity is MobEntity) {
                 if (spells.spellsAreEqual()) {
                     PersuadeAugment.persuadeMob(entity, world, effects, level)
                 } else {

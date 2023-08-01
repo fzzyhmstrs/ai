@@ -8,7 +8,6 @@ import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterPotion {
 

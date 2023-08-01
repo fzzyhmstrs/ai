@@ -6,7 +6,6 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierConsumers
 import me.fzzyhmstrs.amethyst_imbuement.modifier.ModifierPredicates
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
-import net.minecraft.util.Identifier
 
 object RegisterModifier {
 

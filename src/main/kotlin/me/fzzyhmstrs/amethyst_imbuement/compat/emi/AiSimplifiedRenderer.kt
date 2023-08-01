@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.compat.emi
 import dev.emi.emi.api.render.EmiRenderable
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.util.Identifier
 
 class AiSimplifiedRenderer(val u: Int, val v: Int): EmiRenderable {
     private val SPRITE_SHEET = AI.identity("textures/gui/emi_recipe_textures.png")

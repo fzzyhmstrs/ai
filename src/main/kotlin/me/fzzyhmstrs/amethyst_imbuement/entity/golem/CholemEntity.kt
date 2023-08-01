@@ -7,13 +7,12 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEnti
 import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
 import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
 import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedDouble
-import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedEntityAttributes
 import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
@@ -42,11 +41,12 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
         var baseLifespan = ValidatedInt(3600, Int.MAX_VALUE-120000,20)
-        var baseHealth = ValidatedDouble(80.0,512.0,1.0)
-        var baseArmor = ValidatedDouble(4.0,30.0,0.0)
-        var baseKnockbackResist = ValidatedDouble(0.8,1.0,0.0)
-        var baseMoveSpeed = ValidatedDouble(0.3,1.0,0.01)
-        var baseDamage = ValidatedFloat(10.0f,500f,0f)
+        var baseAttributes = ValidatedEntityAttributes(mapOf(
+            EntityAttributes.GENERIC_MAX_HEALTH to 80.0,
+            EntityAttributes.GENERIC_MOVEMENT_SPEED to 0.3,
+            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE to 0.8,
+            EntityAttributes.GENERIC_ATTACK_DAMAGE to 10.0,
+            EntityAttributes.GENERIC_ARMOR to 4.0))
         @ReadMeText("readme.entities.cholem.enragedDamage")
         var enragedDamage = ValidatedDouble(4.0,125.0,0.0)
         @ReadMeText("readme.entities.cholem.enragedSpeed")
@@ -59,14 +59,6 @@ open class CholemEntity: PlayerCreatedConstructEntity {
         protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
 
         protected val ENRAGED: TrackedData<Boolean> = DataTracker.registerData(CholemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
-
-        fun createGolemAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.cholem.baseHealth.get())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AiConfig.entities.cholem.baseMoveSpeed.get())
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, AiConfig.entities.cholem.baseKnockbackResist.get())
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.cholem.baseDamage.get().toDouble())
-                .add(EntityAttributes.GENERIC_ARMOR,AiConfig.entities.cholem.baseArmor.get())
-        }
     }
 
     val damageModifier = EntityAttributeModifier(

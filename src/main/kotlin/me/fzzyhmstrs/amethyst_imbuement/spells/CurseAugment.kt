@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -20,13 +21,12 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
@@ -65,7 +65,7 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is Monster || target is HostileEntity || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (target is Monster || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 EffectQueue.addStatusToQueue(
                     target as LivingEntity,
                     RegisterStatus.CURSED,
@@ -82,7 +82,7 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         }
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_RESPAWN_ANCHOR_SET_SPAWN
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_RESPAWN_ANCHOR_SET_SPAWN,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 }

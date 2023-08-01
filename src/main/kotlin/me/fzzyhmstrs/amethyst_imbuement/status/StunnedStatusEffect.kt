@@ -5,7 +5,6 @@ import net.minecraft.entity.attribute.AttributeContainer
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.passive.VillagerEntity
 
 class StunnedStatusEffect(statusEffectCategory:StatusEffectCategory, i: Int):
     StatusEffect(statusEffectCategory,i) {

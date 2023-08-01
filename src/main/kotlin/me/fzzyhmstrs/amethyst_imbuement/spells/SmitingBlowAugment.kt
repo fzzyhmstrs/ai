@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -31,7 +30,6 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
