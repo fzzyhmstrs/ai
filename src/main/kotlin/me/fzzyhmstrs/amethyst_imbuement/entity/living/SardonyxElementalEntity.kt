@@ -12,6 +12,8 @@ class SardonyxElementalEntity(entityType: EntityType<out AttackTicksGolemEntity>
     AOE Spikes - expanding rings of spikes like the illager AOE attack. Announced with a special sound. 25 Mana
     Chest Laser Beam - extremely damaging beam, telegraphs it's direction for a bit before. 50 mana
     Crystal Shard Fan - relatively fast ranged attack, 3 sardonyx shards. 5 mana
+
+    May want to build in a "memory" of magic users, increasing damage against them.
     */
     
     class SardonyxElemental: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_elemental_1").build()){
