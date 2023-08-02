@@ -24,47 +24,47 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate")
 object RegisterBlock {
 
-    internal val regBlock: MutableMap<String, Block> = mutableMapOf()
+    internal val regBlockItem: MutableList<Item> = mutableListOf()
 
-    val IMBUING_TABLE = ImbuingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)).also { regBlock["imbuing_table"] = it }
-    val DISENCHANTING_TABLE = DisenchantingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)).also { regBlock["disenchanting_table"] = it }
-    val ALTAR_OF_EXPERIENCE = AltarOfExperienceBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)).also { regBlock["altar_of_experience"] = it }
-    val CRYSTAL_ALTAR = CrystalAltarBlock(FzzyBlockSettings.burn().mapColor(MapColor.OFF_WHITE).strength(2.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["crystal_altar"] = it }
-    val EXPERIENCE_BUSH = ExperienceBushBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LICHEN_GREEN).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)).also { regBlock["experience_bush"] = it }
-    val CRYSTALLINE_CORE_BLOCK = AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["crystalline_core"] = it }
-    val WARDING_CANDLE = WardingCandleBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.OFF_WHITE).strength(0.1f).sounds(BlockSoundGroup.CANDLE).luminance(WardingCandleBlock.STATE_TO_LUMINANCE)).also { regBlock["warding_candle"] = it }
-    val WARDING_CANDLE_ITEM = SpellcastersReagentBlockItem(
+    val IMBUING_TABLE = register(ImbuingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)),"imbuing_table")
+    val DISENCHANTING_TABLE = register(DisenchantingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)),"disenchanting_table")
+    val ALTAR_OF_EXPERIENCE = register(AltarOfExperienceBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)),"altar_of_experience")
+    val CRYSTAL_ALTAR = register(CrystalAltarBlock(FzzyBlockSettings.burn().mapColor(MapColor.OFF_WHITE).strength(2.5f).sounds(BlockSoundGroup.WOOD)),"crystal_altar")
+    val EXPERIENCE_BUSH = registerBlockOnly(ExperienceBushBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LICHEN_GREEN).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)),"experience_bush")
+    val CRYSTALLINE_CORE_BLOCK = register(AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"crystalline_core")
+    val WARDING_CANDLE = registerBlockOnly(WardingCandleBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.OFF_WHITE).strength(0.1f).sounds(BlockSoundGroup.CANDLE).luminance(WardingCandleBlock.STATE_TO_LUMINANCE)),"warding_candle")
+    val WARDING_CANDLE_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
         EntityAttributeModifier(UUID.fromString("279ce6aa-d1c6-11ed-afa1-0242ac120002"),"warding_modifier",0.5,EntityAttributeModifier.Operation.ADDITION),
         WARDING_CANDLE,
         FabricItemSettings()
     )
-    val STEEL_BLOCK = Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["steel_block"] = it }
-    val STEEL_BLOCK_ITEM = SpellcastersReagentBlockItem(
+    val STEEL_BLOCK = registerBlockOnly(Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)),"steel_block")
+    val STEEL_BLOCK_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
         EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.8,EntityAttributeModifier.Operation.ADDITION),
         STEEL_BLOCK,
         FabricItemSettings()
     )
-    val BERYL_COPPER_BLOCK = Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)).also { regBlock["beryl_copper_block"] = it }
-    val BERYL_COPPER_BLOCK_ITEM = SpellcastersReagentBlockItem(
+    val BERYL_COPPER_BLOCK = registerBlockOnly(Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"beryl_copper_block")
+    val BERYL_COPPER_BLOCK_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ATTACK_SPEED,
         EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"beryl_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         BERYL_COPPER_BLOCK,
         FabricItemSettings()
     )
-    val CUT_BERYL_COPPER_BLOCK = Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)).also { regBlock["cut_beryl_copper_block"] = it }
-    val CUT_BERYL_COPPER_SLAB = SlabBlock(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)).also { regBlock["cut_beryl_copper_slab"] = it }
-    val CUT_BERYL_COPPER_STAIRS = StairsBlock(CUT_BERYL_COPPER_BLOCK.defaultState,FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)).also { regBlock["cut_beryl_copper_stairs"] = it }
-    val POLISHED_AMETHYST_BLOCK = AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_block"] = it }
-    val POLISHED_AMETHYST_SLAB = PolishedAmethystSlabBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_slab"] = it }
-    val POLISHED_AMETHYST_STAIRS = PolishedAmethystStairsBlock(POLISHED_AMETHYST_BLOCK.defaultState,FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_stairs"] = it }
-    val POLISHED_AMETHYST_PILLAR = PolishedAmethystPillarBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_pillar"] = it }
-    val POLISHED_AMETHYST_BRICKS = AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["polished_amethyst_bricks"] = it }
-    val CHISELED_POLISHED_AMETHYST_BLOCK = AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()).also { regBlock["chiseled_polished_amethyst_block"] = it }
-    val FORCEFIELD_BLOCK = ForcefieldBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["forcefield_block"] = it }
-    val GLISTENING_ICE = TransparentBlock(FzzyBlockSettings.basic().mapColor(MapColor.PALE_PURPLE).strength(3.0f).slipperiness(0.992f).sounds(BlockSoundGroup.GLASS)).also { regBlock["glistening_ice"] = it }
-    val GLISTENING_ICE_ITEM = SpellcastersReagentBlockItem(
+    val CUT_BERYL_COPPER_BLOCK = register(Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_block")
+    val CUT_BERYL_COPPER_SLAB = register(SlabBlock(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_slab")
+    val CUT_BERYL_COPPER_STAIRS = register(StairsBlock(CUT_BERYL_COPPER_BLOCK.defaultState,FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_stairs")
+    val POLISHED_AMETHYST_BLOCK = register(AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"polished_amethyst_block")
+    val POLISHED_AMETHYST_SLAB = register(PolishedAmethystSlabBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"polished_amethyst_slab")
+    val POLISHED_AMETHYST_STAIRS = register(PolishedAmethystStairsBlock(POLISHED_AMETHYST_BLOCK.defaultState,FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"polished_amethyst_stairs")
+    val POLISHED_AMETHYST_PILLAR = register(PolishedAmethystPillarBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"polished_amethyst_pillar")
+    val POLISHED_AMETHYST_BRICKS = register(AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"polished_amethyst_bricks")
+    val CHISELED_POLISHED_AMETHYST_BLOCK = register(AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()),"chiseled_polished_amethyst_block")
+    val FORCEFIELD_BLOCK = register(ForcefieldBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_BLUE_GRAY).nonOpaque().strength(5.0f, 1200.0f).sounds(BlockSoundGroup.WOOL).blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }.suffocates { _: BlockState, _: BlockView, _: BlockPos -> never() }),"forcefield_block")
+    val GLISTENING_ICE = registerBlockOnly(TransparentBlock(FzzyBlockSettings.basic().mapColor(MapColor.PALE_PURPLE).strength(3.0f).slipperiness(0.992f).sounds(BlockSoundGroup.GLASS)),"glistening_ice")
+    val GLISTENING_ICE_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         RegisterAttribute.SPELL_COOLDOWN,
         EntityAttributeModifier(
             UUID.fromString("102d4ad8-c5e5-11ed-afa1-0242ac120002"),"glistening_modifier",-0.03,
@@ -73,44 +73,44 @@ object RegisterBlock {
         FabricItemSettings()
     )
 
-    val TIGERS_EYE_BLACKSTONE_ORE = ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_blackstone_ore"] = it }
-    val TIGERS_EYE_BASALT_ORE = PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_basalt_ore"] = it }
+    val TIGERS_EYE_BLACKSTONE_ORE = register(ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)),"tigers_eye_blackstone_ore")
+    val TIGERS_EYE_BASALT_ORE = register(PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)),"tigers_eye_basalt_ore")
 
-    val HARD_LIGHT_BLOCK = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["hard_light_block"] = it }
-    val CRYSTALLIZED_LIGHT_WHITE = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.WHITE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_white"] = it }
-    val CRYSTALLIZED_LIGHT_LIGHT_GRAY = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_light_gray"] = it }
-    val CRYSTALLIZED_LIGHT_GRAY = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_gray"] = it }
-    val CRYSTALLIZED_LIGHT_BLACK = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BLACK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_black"] = it }
-    val CRYSTALLIZED_LIGHT_BROWN = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BROWN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_brown"] = it }
-    val CRYSTALLIZED_LIGHT_RED = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.RED).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_red"] = it }
-    val CRYSTALLIZED_LIGHT_ORANGE = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.ORANGE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_orange"] = it }
-    val CRYSTALLIZED_LIGHT_YELLOW = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.YELLOW).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_yellow"] = it }
-    val CRYSTALLIZED_LIGHT_LIME = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIME).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_lime"] = it }
-    val CRYSTALLIZED_LIGHT_GREEN = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.GREEN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_green"] = it }
-    val CRYSTALLIZED_LIGHT_CYAN = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.CYAN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_cyan"] = it }
-    val CRYSTALLIZED_LIGHT_LIGHT_BLUE = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_light_blue"] = it }
-    val CRYSTALLIZED_LIGHT_BLUE = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_blue"] = it }
-    val CRYSTALLIZED_LIGHT_PURPLE = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PURPLE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_purple"] = it }
-    val CRYSTALLIZED_LIGHT_MAGENTA = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.MAGENTA).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_magenta"] = it }
-    val CRYSTALLIZED_LIGHT_PINK = HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)).also { regBlock["crystallized_light_pink"] = it }
+    val HARD_LIGHT_BLOCK = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"hard_light_block")
+    val CRYSTALLIZED_LIGHT_WHITE = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.WHITE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_white")
+    val CRYSTALLIZED_LIGHT_LIGHT_GRAY = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_light_gray")
+    val CRYSTALLIZED_LIGHT_GRAY = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.GRAY).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_gray")
+    val CRYSTALLIZED_LIGHT_BLACK = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BLACK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_black")
+    val CRYSTALLIZED_LIGHT_BROWN = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BROWN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_brown")
+    val CRYSTALLIZED_LIGHT_RED = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.RED).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_red")
+    val CRYSTALLIZED_LIGHT_ORANGE = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.ORANGE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_orange")
+    val CRYSTALLIZED_LIGHT_YELLOW = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.YELLOW).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_yellow")
+    val CRYSTALLIZED_LIGHT_LIME = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIME).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_lime")
+    val CRYSTALLIZED_LIGHT_GREEN = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.GREEN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_green")
+    val CRYSTALLIZED_LIGHT_CYAN = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.CYAN).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_cyan")
+    val CRYSTALLIZED_LIGHT_LIGHT_BLUE = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.LIGHT_BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_light_blue")
+    val CRYSTALLIZED_LIGHT_BLUE = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.BLUE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_blue")
+    val CRYSTALLIZED_LIGHT_PURPLE = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PURPLE).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_purple")
+    val CRYSTALLIZED_LIGHT_MAGENTA = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.MAGENTA).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_magenta")
+    val CRYSTALLIZED_LIGHT_PINK = register(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)),"crystallized_light_pink")
 
-    val SHINE_LIGHT = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }).also { regBlock["shine_light"] = it }
-    val SHINE_LIGHT_LIGHT_GRAY = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIGHT_GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_GRAY)).also { regBlock["shine_light_light_gray"] = it }
-    val SHINE_LIGHT_GRAY = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GRAY)).also { regBlock["shine_light_gray"] = it }
-    val SHINE_LIGHT_BLACK = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BLACK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLACK)).also { regBlock["shine_light_black"] = it }
-    val SHINE_LIGHT_BROWN = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BROWN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BROWN)).also { regBlock["shine_light_brown"] = it }
-    val SHINE_LIGHT_RED = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.RED).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.RED)).also { regBlock["shine_light_red"] = it }
-    val SHINE_LIGHT_ORANGE = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.ORANGE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.ORANGE)).also { regBlock["shine_light_orange"] = it }
-    val SHINE_LIGHT_YELLOW = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.YELLOW).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.YELLOW)).also { regBlock["shine_light_yellow"] = it }
-    val SHINE_LIGHT_LIME = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIME).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIME)).also { regBlock["shine_light_lime"] = it }
-    val SHINE_LIGHT_GREEN = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.GREEN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GREEN)).also { regBlock["shine_light_green"] = it }
-    val SHINE_LIGHT_CYAN = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.CYAN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.CYAN)).also { regBlock["shine_light_cyan"] = it }
-    val SHINE_LIGHT_LIGHT_BLUE = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIGHT_BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_BLUE)).also { regBlock["shine_light_light_blue"] = it }
-    val SHINE_LIGHT_BLUE = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLUE)).also { regBlock["shine_light_blue"] = it }
-    val SHINE_LIGHT_PURPLE = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.PURPLE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PURPLE)).also { regBlock["shine_light_purple"] = it }
-    val SHINE_LIGHT_MAGENTA = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.MAGENTA).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.MAGENTA)).also { regBlock["shine_light_magenta"] = it }
-    val SHINE_LIGHT_PINK = ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.PINK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PINK)).also { regBlock["shine_light_pink"] = it }
-    val SHINE_LIGHT_RAINBOW = ShineLightRainbowBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _, _, _ -> never() }.suffocates { _, _, _ -> never() }).also { regBlock["shine_light_rainbow"] = it }
+    val SHINE_LIGHT = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }),"shine_light")
+    val SHINE_LIGHT_LIGHT_GRAY = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIGHT_GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_GRAY)),"shine_light_light_gray")
+    val SHINE_LIGHT_GRAY = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.GRAY).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GRAY)),"shine_light_gray")
+    val SHINE_LIGHT_BLACK = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BLACK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLACK)),"shine_light_black")
+    val SHINE_LIGHT_BROWN = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BROWN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BROWN)),"shine_light_brown")
+    val SHINE_LIGHT_RED = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.RED).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.RED)),"shine_light_red")
+    val SHINE_LIGHT_ORANGE = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.ORANGE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.ORANGE)),"shine_light_orange")
+    val SHINE_LIGHT_YELLOW = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.YELLOW).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.YELLOW)),"shine_light_yellow")
+    val SHINE_LIGHT_LIME = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIME).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIME)),"shine_light_lime")
+    val SHINE_LIGHT_GREEN = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.GREEN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.GREEN)),"shine_light_green")
+    val SHINE_LIGHT_CYAN = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.CYAN).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.CYAN)),"shine_light_cyan")
+    val SHINE_LIGHT_LIGHT_BLUE = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LIGHT_BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.LIGHT_BLUE)),"shine_light_light_blue")
+    val SHINE_LIGHT_BLUE = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.BLUE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.BLUE)),"shine_light_blue")
+    val SHINE_LIGHT_PURPLE = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.PURPLE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PURPLE)),"shine_light_purple")
+    val SHINE_LIGHT_MAGENTA = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.MAGENTA).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.MAGENTA)),"shine_light_magenta")
+    val SHINE_LIGHT_PINK = register(ShineLightBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.PINK).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _,_,_ -> never() }.suffocates { _,_,_ -> never() }, ColoredEndParticleEffect(DyeColor.PINK)),"shine_light_pink")
+    val SHINE_LIGHT_RAINBOW = register(ShineLightRainbowBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _, _, _ -> never() }.suffocates { _, _, _ -> never() }),"shine_light_rainbow")
 
     fun registerAll() {
         for (k in regBlock.keys) {
@@ -129,17 +129,19 @@ object RegisterBlock {
         Registry.register(Registries.ITEM, AI.identity("glistening_ice"), GLISTENING_ICE_ITEM)
     }
 
-    private fun registerBlock(path: String, block:Block): Block{
+    private fun register(block:Block, path: String): Block{
         val item = BlockItem(block,FabricItemSettings())
+        regBlockItem.add(item)
         Registry.register(Registries.ITEM, AI.identity(path), item)
-        return Registry.register(Registries.BLOCK, AI.identity( path), block)
+        return Registry.register(Registries.BLOCK, AI.identity(path), block)
     }
 
-    private fun registerBlockOnly(path: String, block:Block): Block{
-        return Registry.register(Registries.BLOCK, AI.identity( path), block)
+    private fun registerBlockOnly(block:Block, path: String): Block{
+        return Registry.register(Registries.BLOCK, AI.identity(path), block)
     }
 
-    private fun registerItemOnly(path: String, item: Item): Item{
+    private fun registerItemOnly(item: Item, path: String): Item{
+        regBlockItem.add(item)
         return Registry.register(Registries.ITEM, AI.identity(path), item)
     }
 
