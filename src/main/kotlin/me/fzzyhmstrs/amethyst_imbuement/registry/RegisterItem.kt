@@ -32,12 +32,13 @@ import java.util.*
 // don't know if this is better as a class or object. as an object it allows me to call it without needing to initialize an instance of it.
 object RegisterItem {
 
-    private val regItem: MutableMap<String, Item> = mutableMapOf()
+    private val regItem: MutableList<Item> = mutableListOf()
 
     private fun register(item: Item, name: String): Item{
-         if (item is IgnitedGemItem){
+        if (item is IgnitedGemItem){
             GemOfPromiseItem.register(item)
         }
+        regItem.add(item)
         return Registry.register(Registries.ITEM,AI.identity(name), item)
     }
 
@@ -290,7 +291,7 @@ object RegisterItem {
             .displayName(Text.translatable("itemGroup.amethyst_imbuement.ai_group"))
             .icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }
             .entries { _, entries ->
-                entries.addAll(regItem.values.stream()
+                entries.addAll(regItem.stream()
                     .filter { item -> item !== SPELL_SCROLL }
                     .map { item -> ItemStack(item) }.toList())
                 entries.addAll(Registries.ENCHANTMENT.stream()
@@ -299,7 +300,7 @@ object RegisterItem {
                     .toList()
                 )
                 entries.addAll(RegisterArmor.regArmor.stream().map { item -> ItemStack(item) }.toList())
-                RegisterBlock.regBlock.values.stream()
+                RegisterBlock.regBlockItem.stream()
                     .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
                     .map { block -> ItemStack(block.asItem()) }
                     .forEach {
