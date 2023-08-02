@@ -154,6 +154,22 @@ object AiConfig
             return items
         }
     }
+
+    private val materialsHeader = buildSectionHeader("materials")
+    
+    class Materials: ConfigClass(materialsHeader), OldClass<Materials> {
+        var armor: Armor()
+        class Armor: ConfigSection(Header.Builder().space().add("readme.materials.armor_1").build()) {
+            var ametrine = AiArmorMaterialsConfig.AMETRINE
+            var steel = AiArmorMaterialsConfig.STEEL
+        }
+        var tools: Tools()
+        class Tools: ConfigSection(Header.Builder().space().add("readme.materials.tools_1").build()) {
+        }
+        var scepters: Scepters()
+        class Scepters: ConfigSection(Header.Builder().space().add("readme.materials.scepters_1").build()) {
+        }
+    }
     
     private val blocksHeader = buildSectionHeader("altars")
     
