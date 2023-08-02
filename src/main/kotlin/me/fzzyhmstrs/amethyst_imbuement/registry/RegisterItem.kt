@@ -90,6 +90,9 @@ object RegisterItem {
     val MALACHITE_FIGURINE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DURATION,
         EntityAttributeModifier(UUID.fromString("402ebf88-c404-11ed-afa1-0242ac120002"),"malachite_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"malachite_figurine")
+    val SARDONYX_FIGURINE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
+        EntityAttributeModifier(UUID.fromString("ea73a9c8-3159-11ee-be56-0242ac120002"),"sardonyx_modifier",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)),"sardonyx_figurine")
     val RESONANT_ROD = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
         EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM)),"resonant_rod")
