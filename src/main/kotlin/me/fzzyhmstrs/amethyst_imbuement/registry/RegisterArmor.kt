@@ -14,25 +14,19 @@ object RegisterArmor {
 
     internal val regArmor: MutableList<Item> = mutableListOf()
 
-    val STEEL_ARMOR_MATERIAL = SteelArmorMaterial()
-    val STEEL_HELMET = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.HELMET,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_CHESTPLATE = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_LEGGINGS = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,Item.Settings()).also { regArmor.add(it) }
-    val STEEL_BOOTS = ArmorItem(STEEL_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_ARMOR_MATERIAL = AmetrineArmorMaterial()
-    val AMETRINE_HELMET = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.HELMET,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_CHESTPLATE = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_LEGGINGS = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,Item.Settings()).also { regArmor.add(it) }
-    val AMETRINE_BOOTS = ArmorItem(AMETRINE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,Item.Settings()).also { regArmor.add(it) }
-
-    fun registerAll() {
-        Registry.register(Registries.ITEM, AI.identity("steel_helmet"), STEEL_HELMET)
-        Registry.register(Registries.ITEM, AI.identity("steel_chestplate"), STEEL_CHESTPLATE)
-        Registry.register(Registries.ITEM, AI.identity("steel_leggings"), STEEL_LEGGINGS)
-        Registry.register(Registries.ITEM, AI.identity("steel_boots"), STEEL_BOOTS)
-        Registry.register(Registries.ITEM, AI.identity("ametrine_helmet"), AMETRINE_HELMET)
-        Registry.register(Registries.ITEM, AI.identity("ametrine_chestplate"), AMETRINE_CHESTPLATE)
-        Registry.register(Registries.ITEM, AI.identity("ametrine_leggings"), AMETRINE_LEGGINGS)
-        Registry.register(Registries.ITEM, AI.identity("ametrine_boots"), AMETRINE_BOOTS)
+    private fun register(item: Item, name: String): Item{
+        regArmor.add(item)
+        return Registry.register(Registries.ITEM,AI.identity(name), item)
     }
+    
+    val STEEL_HELMET = register(ArmorItem(AiArmorMaterials.STEEL, ArmorItem.Type.HELMET,Item.Settings()), "steel_helmet")
+    val STEEL_CHESTPLATE = register(ArmorItem(AiArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE,Item.Settings()), "steel_chestplate")
+    val STEEL_LEGGINGS = register(ArmorItem(AiArmorMaterials.STEEL, ArmorItem.Type.LEGGINGS,Item.Settings()), "steel_leggings")
+    val STEEL_BOOTS = register(ArmorItem(AiArmorMaterials.STEEL, ArmorItem.Type.BOOTS,Item.Settings()), "steel_boots")
+    val AMETRINE_HELMET = register(ArmorItem(AiArmorMaterials.AMETRINE, ArmorItem.Type.HELMET,Item.Settings()), "ametrine_helmet")
+    val AMETRINE_CHESTPLATE = register(ArmorItem(AiArmorMaterials.AMETRINE, ArmorItem.Type.CHESTPLATE,Item.Settings()), "ametrine_chestplate")
+    val AMETRINE_LEGGINGS = register(ArmorItem(AiArmorMaterials.AMETRINE, ArmorItem.Type.LEGGINGS,Item.Settings()), "ametrine_leggings")
+    val AMETRINE_BOOTS = register(ArmorItem(AiArmorMaterials.AMETRINE, ArmorItem.Type.BOOTS,Item.Settings()),"ametrine_boots")
+
+    fun registerAll() {}
 }
