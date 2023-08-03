@@ -1,11 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
-import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
+import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
@@ -24,35 +20,41 @@ abstract public class ServerPlayerEntityMixin {
 
     @Inject(method = "copyFrom", at= @At(value = "HEAD"))
     private void amethyst_imbuement_copyInventoryIfSoulBound(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci){
-        if (oldPlayer.hasStatusEffect(RegisterStatus.INSTANCE.getSOULBINDING())){
+
             boolean canClone = false;
-            for (ItemStack stack : ((PlayerEntity)(Object)this).getInventory().main){
+            for (ItemStack stack : oldPlayer.getInventory().main){
                 if (stack.getItem() instanceof TotemItem){
-                    if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                        if (RegisterEnchantment.INSTANCE.getSOULBINDING().canActivate((PlayerEntity)(Object)this,1,stack)){
+                    NbtCompound nbt = stack.getNbt();
+                    if (nbt != null){
+                        if (nbt.contains("cloneInventory")){
                             canClone = true;
+                            nbt.remove("cloneInventory");
                             break;
                         }
                     }
                 }
             }
             if (!canClone)
-                for (ItemStack stack : ((PlayerEntity)(Object)this).getInventory().offHand){
+                for (ItemStack stack : oldPlayer.getInventory().offHand){
                     if (stack.getItem() instanceof TotemItem){
-                        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                            if (RegisterEnchantment.INSTANCE.getSOULBINDING().canActivate((PlayerEntity)(Object)this,1,stack)){
+                        NbtCompound nbt = stack.getNbt();
+                        if (nbt != null){
+                            if (nbt.contains("cloneInventory")){
                                 canClone = true;
+                                nbt.remove("cloneInventory");
                                 break;
                             }
                         }
                     }
                 }
             if (!canClone)
-                for (ItemStack stack : ((PlayerEntity)(Object)this).getInventory().armor){
+                for (ItemStack stack : oldPlayer.getInventory().armor){
                     if (stack.getItem() instanceof TotemItem){
-                        if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getSOULBINDING(), stack) > 0){
-                            if (RegisterEnchantment.INSTANCE.getSOULBINDING().canActivate((PlayerEntity)(Object)this,1,stack)){
+                        NbtCompound nbt = stack.getNbt();
+                        if (nbt != null){
+                            if (nbt.contains("cloneInventory")){
                                 canClone = true;
+                                nbt.remove("cloneInventory");
                                 break;
                             }
                         }
@@ -62,7 +64,6 @@ abstract public class ServerPlayerEntityMixin {
                 ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
                 player.getInventory().clone(oldPlayer.getInventory());
             }
-        }
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
