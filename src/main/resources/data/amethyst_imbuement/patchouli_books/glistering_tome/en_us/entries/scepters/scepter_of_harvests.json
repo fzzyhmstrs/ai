@@ -1,6 +1,6 @@
 {
-  "name": "Scepter of the Vanguard",
-  "icon": "amethyst_imbuement:scepter_of_the_vanguard",
+  "name": "Scepter of Harvests",
+  "icon": "amethyst_imbuement:scepter_of_harvests",
   "category": "amethyst_imbuement:scepters",
   "sortnum": 22,
   "pages": [
@@ -17,7 +17,7 @@
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Scepter..Vanguard",
+      "title": "Scepter..Harvests",
       "imbue_a_item": "minecraft:gold_ingot",
       "imbue_b_item": "amethyst_imbuement:glowing_hoe",
       "imbue_c_item": "minecraft:gold_ingot",
