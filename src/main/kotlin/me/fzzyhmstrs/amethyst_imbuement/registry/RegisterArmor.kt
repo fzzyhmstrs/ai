@@ -3,8 +3,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.armor.AmetrineArmorMaterial
-import me.fzzyhmstrs.amethyst_imbuement.armor.SteelArmorMaterial
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries

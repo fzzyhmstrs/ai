@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    " D "
+  ],
+  "key": {
+    "S": {
+      "tag": "c:steel_ingots"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "imbued_ascendancy:steel_amulet",
+    "count": 1
+  }
+}

@@ -1,6 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
+import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
+import me.fzzyhmstrs.fzzy_config.config_util.ConfigSection
+import me.fzzyhmstrs.fzzy_config.config_util.ReadMeText
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedEntityAttributes
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedInt
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.Monster
 import net.minecraft.world.World
 
