@@ -32,7 +32,7 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
         get() = super.baseEffect.withDamage(3.0F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("enchantment.amethyst_imbuement.magic_missile.desc.manaCost")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -46,8 +46,19 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.MANA_COST_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.STAT_TRIGGER)
     }
 
+    override fun modifyManaCost(
+        manaCost: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        return manaCost.plus(0,0,-10f)
+    }
+    
     override fun modifyDamage(
         damage: PerLvlF,
         other: ScepterAugment,
