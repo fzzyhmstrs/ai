@@ -48,13 +48,34 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
         }
     }
 
-    override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val me = MissileEntity(world, user, false)
-        me.setVelocity(user,user.pitch,user.yaw,0.0f,
-            2.0f,
-            0.1f)
-        me.passEffects(effects, level)
-        return me
+    override fun modifyDamage(
+        damage: PerLvlF,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlF {
+        if (spells.spellsAreEqual()){
+            return damage.plus(1f)
+        return damage
+    }
+
+    open fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int = 1, effects: AugmentEffect, spells: PairedAugments, count: Int)
+    : 
+    List<ProjectileEntity>
+    where 
+    T: LivingEntity,
+    T: SpellCastingEntity
+    {
+        val list: MutableList<ProjectileEntity> = mutableListOf()
+        for (i in 1..count){
+            val me = MissileEntity(world, user)
+            val direction = user.rotationVec3d
+            me.setVelocity(direction.x,direction.y,direction.z, 2.0f, 0.1f)
+            me.passEffects(spells,effects,level)
+            me.passContext(context)
+            list.add(me)
+        }
+        return list
     }
 
     override fun soundEvent(): SoundEvent {
