@@ -780,7 +780,7 @@
 
 	"enchantment.amethyst_imbuement.zap": "Zap",
 	"enchantment.amethyst_imbuement.zap.double": "Electrocute",
-	
+
 	"enchantment.amethyst_imbuement.heroic.desc": "Increases damage against illagers.",
 	"enchantment.amethyst_imbuement.wasting.desc": "Damaged enemies are afflicted with slowness.",
 	"enchantment.amethyst_imbuement.deadly_shot.desc": "Increases crossbow and sniper bow range and damage.",
@@ -888,7 +888,7 @@
 	"enchantment.amethyst_imbuement.weightlessness.desc": "Grants levitation and slow falling to the caster or target.",
 	"enchantment.amethyst_imbuement.withering_bolt.desc": "Summons a wither skull and casts it at the enemy.",
 	"enchantment.amethyst_imbuement.zap.desc": "Zaps targets in a line with an electric shock.",
-	
+
 	"container.imbuing_table": "Imbue",
 	"container.imbuing_table.level_low": "Scepter level too low for this augment",
 	"container.imbuing_table.scepter_low": "Scepter tier not high enough for this augment",
@@ -1295,14 +1295,7 @@
 	"readme.items.manaItems.fullManaColor": "The color of the item mana bar at full durability. Will mix with emptyManaColor as the durability decreases.",
 	"readme.items.manaItems.emptyManaColor": "The color of the item mana bar when depleted. Will mix with fullManaColor as the durability decreases.",
 	"readme.items.scepters_1": "Scepters",
-	"readme.items.scepters_2": "Similar sets of options for different tiers of scepters.",
-	"readme.items.scepters_3": "Durability: how much mana a scepter tier has, Cooldown: how long in ticks between each scepter regen, Damage: If the scepter can be used as a melee weapon, how much damage it does.",
-	"readme.items.scepters.bladesDamage": "Float between 20.0 and 0.0. Defines the damage the Scepter of Blades deals as a melee weapon.",
-	"readme.items.scepters.lethalityDamage": "Float between 30.0 and 0.0. Defines the damage Lethality deals as a melee weapon.",
-	"readme.items.scepters.vanguardDamage": "Float between 20.0 and 0.0. Defines the damage the Scepter of the Vanguard deals as a melee weapon.",
-	"readme.items.scepters.buildersDamage": "Float between 10.0 and 0.0. Defines the damage the Builders Scepter deals as a melee weapon.",
-	"readme.items.scepters.buildersMiningSpeed": "Float between 12.0 and 1.0 (the range of mining speeds provided by vanilla tools). Defines the mining speed of the Builders Scepter.",
-	"readme.items.scepters.harvestMiningSpeed": "Float between 12.0 and 1.0 (the range of mining speeds provided by vanilla tools). Defines the mining speed of the Scepter of Harvests.",
+	"readme.items.scepters_2": "Misc options related to Scepters. For direct scepter settings, see the Materials config.",
 	"readme.items.scepters.uniqueWitherChance": "Float between 1 and 0. Defines the chance that a unique AI item will drop from the wither upon death. In heavily modded environments this value should probably be *very* low, as many late-game players can kill dozens of Withers easily.",
 	"readme.items.gem_1": "Gems",
 	"readme.items.gems_2": "Configures the targets for the ignited gems of promise.",

@@ -40,6 +40,7 @@ object AiConfig
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
             .add("1.20-01/1.19.4-01/1.19.3-13/1.19-36: Added hamster and bonestorm configs in entities_v2. Updated to items_v5 with fzzyhammer and harvest scepter info and new loot chances for unique items.")
+            .add("2.0.0+1.20.2: Overhaul of many of the configs with the Spell Rebirth Update. Please review the README carefully and go over the available config options to see what has changed.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -76,44 +77,8 @@ object AiConfig
 
         var scepters = ScepterSection()
         class ScepterSection: ConfigSection(Header.Builder().space().add("readme.items.scepters_1").add("readme.items.scepters_2").add("readme.items.scepters_3").build()){
-            var opalineDurability = ValidatedInt(ScepterLvl1ToolMaterial.defaultDurability(),1250,32)
-            var opalineCooldown = ValidatedLong(ScepterLvl1ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl1ToolMaterial.minCooldown())
-            var iridescentDurability = ValidatedInt(ScepterLvl2ToolMaterial.defaultDurability(),1650,64)
-            var iridescentCooldown = ValidatedLong(ScepterLvl2ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl2ToolMaterial.minCooldown())
-            var lustrousDurability = ValidatedInt(ScepterLvl3ToolMaterial.defaultDurability(),3550,128)
-            var lustrousCooldown = ValidatedLong(ScepterLvl3ToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterLvl3ToolMaterial.minCooldown())
-            var bladesDurability = ValidatedInt(ScepterOfBladesToolMaterial.defaultDurability(),1250,32)
-            var bladesCooldown = ValidatedLong(ScepterOfBladesToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterOfBladesToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.bladesDamage")
-            var bladesDamage = ValidatedFloat(ScepterOfBladesToolMaterial.defaultAttackDamage(),20f,0f)
-            var lethalityDurability = ValidatedInt(LethalityToolMaterial.defaultDurability(),3250,128)
-            var lethalityCooldown = ValidatedLong(LethalityToolMaterial.baseCooldown(), Long.MAX_VALUE,LethalityToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.lethalityDamage")
-            var lethalityDamage = ValidatedFloat(LethalityToolMaterial.defaultAttackDamage(),30f,0f)
-            var vanguardDurability = ValidatedInt(ScepterOfTheVanguardToolMaterial.defaultDurability(),1650,128)
-            var vanguardCooldown = ValidatedLong(ScepterOfTheVanguardToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterOfTheVanguardToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.vanguardDamage")
-            var vanguardDamage = ValidatedFloat(ScepterOfTheVanguardToolMaterial.defaultAttackDamage(),20f,0f)
-            var buildersDurability = ValidatedInt(BuildersScepterToolMaterial.defaultDurability(),1650,128)
-            var buildersCooldown = ValidatedLong(BuildersScepterToolMaterial.baseCooldown(), Long.MAX_VALUE,BuildersScepterToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.buildersDamage")
-            var buildersDamage = ValidatedFloat(BuildersScepterToolMaterial.defaultAttackDamage(),20f,0f)
-            @ReadMeText("readme.items.scepters.buildersMiningSpeed")
-            var buildersMiningSpeed = ValidatedFloat(BuildersScepterToolMaterial.defaultMiningSpeed(),12f,1f)
-            var fowlDurability = ValidatedInt(ScepterSoFoulToolMaterial.defaultDurability(),1650,32)
-            var fowlCooldown = ValidatedLong(ScepterSoFoulToolMaterial.baseCooldown(), Long.MAX_VALUE,ScepterSoFoulToolMaterial.minCooldown())
             var fowlChestChance = ValidatedFloat(0.02f,1f,0f)
-            var fzzyDurability = ValidatedInt(FzzyhammerToolMaterial.defaultDurability(),1650,128)
-            var fzzyCooldown = ValidatedLong(FzzyhammerToolMaterial.baseCooldown(), Long.MAX_VALUE,FzzyhammerToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.fzzyDamage")
-            var fzzyDamage = ValidatedFloat(FzzyhammerToolMaterial.defaultAttackDamage(),30f,0f)
-            @ReadMeText("readme.items.scepters.fzzyMiningSpeed")
-            var fzzyMiningSpeed = ValidatedFloat(FzzyhammerToolMaterial.defaultMiningSpeed(),12f,1f)
             var fzzyChestChance = ValidatedFloat(0.002f,1f,0f)
-            var harvestDurability = ValidatedInt(ScepterOfHarvestsToolMaterial.defaultDurability(),1650,128)
-            var harvestCooldown = ValidatedLong(ScepterOfHarvestsToolMaterial.baseCooldown(), Long.MAX_VALUE,BuildersScepterToolMaterial.minCooldown())
-            @ReadMeText("readme.items.scepters.harvestMiningSpeed")
-            var harvestMiningSpeed = ValidatedFloat(ScepterOfHarvestsToolMaterial.defaultMiningSpeed(),12f,1f)
             @ReadMeText("readme.items.scepters.uniqueWitherChance")
             var uniqueWitherChance = ValidatedFloat(0.01f,1f,0f)
         }
@@ -149,25 +114,42 @@ object AiConfig
         }
         
         override fun generateNewClass(): Items {
-            val items = this
-            items.scepters.buildersMiningSpeed.validateAndSet(BuildersScepterToolMaterial.defaultMiningSpeed())
-            return items
+            return this
         }
     }
 
     private val materialsHeader = buildSectionHeader("materials")
     
     class Materials: ConfigClass(materialsHeader), OldClass<Materials> {
-        var armor: Armor()
+        var armor = Armor()
         class Armor: ConfigSection(Header.Builder().space().add("readme.materials.armor_1").build()) {
             var ametrine = AiArmorMaterialsConfig.AMETRINE
             var steel = AiArmorMaterialsConfig.STEEL
         }
-        var tools: Tools()
+        var tools = Tools()
         class Tools: ConfigSection(Header.Builder().space().add("readme.materials.tools_1").build()) {
+            var garnet = AiToolMaterialsConfig.GARNET
+            var glowing = AiToolMaterialsConfig.GLOWING
+            var steel = AiToolMaterialsConfig.STEEL
         }
-        var scepters: Scepters()
+        var scepters = Scepters()
         class Scepters: ConfigSection(Header.Builder().space().add("readme.materials.scepters_1").build()) {
+            var tier1Scepter = AiScepterMaterialsConfig.SCEPTER_TIER_1
+            var tier2Scepter = AiScepterMaterialsConfig.SCEPTER_TIER_2
+            var tier3Scepter = AiScepterMaterialsConfig.SCEPTER_TIER_3
+
+            var blades = AiScepterMaterialsConfig.SCEPTER_OF_BLADES
+            var builder = AiScepterMaterialsConfig.BUILDERS_SCEPTER
+            var fowl = AiScepterMaterialsConfig.SCEPTER_SO_FOWL
+            var fzzyhammer = AiScepterMaterialsConfig.FZZYHAMMER
+            var harvests = AiScepterMaterialsConfig.SCEPTER_OF_HARVESTS
+            var lethality = AiScepterMaterialsConfig.LETHALITY
+            var vanguard = AiScepterMaterialsConfig.SCEPTER_OF_THE_VANGUARD
+
+        }
+
+        override fun generateNewClass(): Materials {
+            return this
         }
     }
     
@@ -419,12 +401,14 @@ object AiConfig
         }
     }
 
-    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v5.json","items_v4.json", base = AI.MOD_ID, configClass = { Items() }, previousClass = {Items()})
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,
+        configClass = { Items() }, previousClass = {Items()})
+    var materials: Materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v2.json","entities_v1.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
 
     private fun buildSectionHeader(name:String): Header{

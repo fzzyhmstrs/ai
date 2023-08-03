@@ -13,8 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem.Companion.createSpe
 import me.fzzyhmstrs.amethyst_imbuement.item.custom.*
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.*
-import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
-import me.fzzyhmstrs.amethyst_imbuement.tool.*
+import me.fzzyhmstrs.amethyst_imbuement.spells.DebugAugment
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -87,9 +86,9 @@ object RegisterItem {
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).also{ regItem["malachite_figurine"] = it}
     val RESONANT_ROD = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
         EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
-        AiItemSettings().aiGroup(AiItemGroup.GEM)).also{ regItem["resonant_rod"] = it}
-    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()).also{ regItem["survey_map"] = it}
-    val HEARTSTONE = SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
+        AiItemSettings().aiGroup(AiItemGroup.GEM)),"resonant_rod")
+    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()),"survey_map")
+    val HEARTSTONE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
         EntityAttributeModifier(UUID.fromString("402ec528-c404-11ed-afa1-0242ac120002"),"heartstone_modifier",1.0,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).withGlint() .also{ regItem["heartstone"] = it}
     val IRIDESCENT_ORB = CustomFlavorItem(FabricItemSettings().rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_orb"] = it}
@@ -107,22 +106,27 @@ object RegisterItem {
 
 
     //tool and weapon items
-    val FZZYHAMMER = FzzyhammerItem(FabricItemSettings().rarity(Rarity.EPIC)).also{ regItem["fzzyhammer"] = it}
-    val GLISTERING_TRIDENT = GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(550).rarity(Rarity.RARE)).also{ regItem["glistering_trident"] = it}
-    val SNIPER_BOW = SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).rarity(Rarity.RARE)).also{ regItem["sniper_bow"] = it}
-    val GARNET_SWORD = SwordItem(GarnetToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_sword"] = it}
-    val GARNET_SHOVEL = ShovelItem(GarnetToolMaterial,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_shovel"] = it}
-    val GARNET_PICKAXE = PickaxeItem(GarnetToolMaterial,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_pickaxe"] = it}
-    val GARNET_AXE = AxeItem(GarnetToolMaterial,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_axe"] = it}
-    val GARNET_HOE = HoeItem(GarnetToolMaterial,-3,0.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_hoe"] = it}
-    val GARNET_HORSE_ARMOR = HorseArmorItem(12,"garnet",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["garnet_horse_armor"] = it}
-    val GLOWING_BLADE = CustomSwordItem(GlowingToolMaterial,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_blade"] = it}
-    val GLOWING_SPADE = CustomShovelItem(GlowingToolMaterial,1.5f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_spade"] = it}
-    val GLOWING_PICK = CustomPickaxeItem(GlowingToolMaterial,1 ,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_pick"] = it}
-    val GLOWING_AXE = CustomAxeItem(GlowingToolMaterial,5.0f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_axe"] = it}
-    val GLOWING_HOE = CustomHoeItem(GlowingToolMaterial,-3 ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)) .also{ regItem["glowing_hoe"] = it}
-    val GLOWING_HORSE_ARMOR = FlavorHorseArmorItem(14,"glowing",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)).also{ regItem["glowing_horse_armor"] = it}
-
+    val FZZYHAMMER = register(FzzyhammerItem(FabricItemSettings().rarity(Rarity.EPIC)),"fzzyhammer")
+    val GLISTERING_TRIDENT = register(GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(550).rarity(Rarity.RARE)),"glistering_trident")
+    val SNIPER_BOW = register(SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(500).rarity(Rarity.RARE)),"sniper_bow")
+    val GARNET_SWORD = register(SwordItem(AiConfig.materials.tools.garnet,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_sword")
+    val GARNET_SHOVEL = register(ShovelItem(AiConfig.materials.tools.garnet,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_shovel")
+    val GARNET_PICKAXE = register(PickaxeItem(AiConfig.materials.tools.garnet,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_pickaxe")
+    val GARNET_AXE = register(AxeItem(AiConfig.materials.tools.garnet,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_axe")
+    val GARNET_HOE = register(HoeItem(AiConfig.materials.tools.garnet,-3,0.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_hoe")
+    val GARNET_HORSE_ARMOR = register(HorseArmorItem(12,"garnet",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_horse_armor")
+    val GLOWING_BLADE = register(CustomSwordItem(AiConfig.materials.tools.glowing,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_blade")
+    val GLOWING_SPADE = register(CustomShovelItem(AiConfig.materials.tools.glowing,1.5f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_spade")
+    val GLOWING_PICK = register(CustomPickaxeItem(AiConfig.materials.tools.glowing,1 ,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_pick")
+    val GLOWING_AXE = register(CustomAxeItem(AiConfig.materials.tools.glowing,5.0f ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_axe")
+    val GLOWING_HOE = register(CustomHoeItem(AiConfig.materials.tools.glowing,-3 ,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_hoe")
+    val GLOWING_HORSE_ARMOR = register(FlavorHorseArmorItem(14,"glowing",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"glowing_horse_armor")
+    val STEEL_AXE = register(AxeItem(AiConfig.materials.tools.steel,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_axe")
+    val STEEL_HOE = register(CustomHoeItem(AiConfig.materials.tools.steel,-3,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_hoe")
+    val STEEL_PICKAXE = register(PickaxeItem(AiConfig.materials.tools.steel,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_pickaxe")
+    val STEEL_SHOVEL = register(ShovelItem(AiConfig.materials.tools.steel,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_shovel")
+    val STEEL_SWORD = register(SwordItem(AiConfig.materials.tools.steel,3,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_sword")
+    val STEEL_HORSE_ARMOR = register(HorseArmorItem(9,"steel",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_horse_armor")
 
     //trinket and books
     val COPPER_RING = CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)) .also{ regItem["copper_ring"] = it}
@@ -131,143 +135,149 @@ object RegisterItem {
     val COPPER_WARD = CopperWardItem(
         RegisterAttribute.SHIELDING,
         EntityAttributeModifier(UUID.fromString("c66fd31a-ce6e-11ed-afa1-0242ac120002"),"ward_modifier",0.025,EntityAttributeModifier.Operation.ADDITION),
-        AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(336)).also{ regItem["copper_ward"] = it}
-    val IMBUED_RING = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())) .also{ regItem["imbued_ring"] = it}
-    val IMBUED_HEADBAND = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_headband"] = it}
-    val IMBUED_AMULET = ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())).also{ regItem["imbued_amulet"] = it}
-    val IMBUED_WARD = ImbuedWardItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get())).also{ regItem["imbued_ward"] = it}
-    val TOTEM_OF_AMETHYST = TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)).also{ regItem["totem_of_amethyst"] = it}
-    val SPELLCASTERS_FOCUS = SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).rarity(Rarity.UNCOMMON)).also{ regItem["spellcasters_focus"] = it}
-    val WITCHES_ORB = WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1).rarity(Rarity.RARE)).withGlint().also{ regItem["witches_orb"] = it}
-    val BOOK_OF_LORE = BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_lore")) .also{ regItem["book_of_lore"] = it}
-    val BOOK_OF_MYTHOS = BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(Identifier(AI.MOD_ID,"book_of_mythos")).withGlint() .also{ regItem["book_of_mythos"] = it}
-    val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()).also{ regItem["glistering_tome"] = it}
-    val MANA_POTION = ManaPotionItem(FabricItemSettings().maxCount(16)).also{ regItem["mana_potion"] = it}
-    val DAZZLING_MELON_SLICE = Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
-        StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())).also{ regItem["dazzling_melon_slice"] = it}
+        AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(336)),"copper_ward")
+    val STEEL_AMULET = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_amulet")
+    val STEEL_HEADBAND = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_headband")
+    val STEEL_RING = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_ring")
+    val STEEL_WARD = register(SteelWardItem(EntityAttributes.GENERIC_ARMOR,
+        EntityAttributeModifier(UUID.fromString("1f6875e4-d167-11ed-afa1-0242ac120002"),"steel_ward_modifier",1.2, EntityAttributeModifier.Operation.ADDITION),
+        AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(424)),"steel_ward")
+    val IMBUED_RING = register(ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())),"imbued_ring")
+    val IMBUED_HEADBAND = register(ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())),"imbued_headband")
+    val IMBUED_AMULET = register(ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())),"imbued_amulet")
+    val IMBUED_WARD = register(ImbuedWardItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get())),"imbued_ward")
+    val TOTEM_OF_AMETHYST = register(TotemItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.totemOfAmethystDurability.get()).rarity(Rarity.UNCOMMON)),"totem_of_amethyst")
+    val SPELLCASTERS_FOCUS = register(SpellcastersFocusItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).rarity(Rarity.UNCOMMON)),"spellcasters_focus")
+    val WITCHES_ORB = register(WitchesOrbItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1).rarity(Rarity.RARE)).withGlint(),"witches_orb")
+    val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(AI.identity("book_of_lore")),"book_of_lore")
+    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(AI.identity("book_of_mythos")).withGlint(),"book_of_mythos")
+    //val GLISTERING_TOME = GlisteringTomeItem(FabricItemSettings()),"glistering_tome")
+    val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
+    val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
+        StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
 
 
     //Basic scepters
-    val OPALINE_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.COMMON)).also{ regItem["opaline_scepter"] = it}
-    val IRIDESCENT_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON)).also{ regItem["iridescent_scepter"] = it}
-    val LUSTROUS_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE)).also{ regItem["lustrous_scepter"] = it}
-    val DEBUG_SCEPTER = ScepterItem(ScepterLvl3ToolMaterial, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+    val OPALINE_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.COMMON)),"opaline_scepter")
+    val IRIDESCENT_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON)),"iridescent_scepter")
+    val LUSTROUS_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier3Scepter, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE)),"lustrous_scepter")
+    val DEBUG_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier3Scepter, AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.DEBUG))
         .withModifiers(listOf(ModifierRegistry.MODIFIER_DEBUG,ModifierRegistry.MODIFIER_DEBUG_2,ModifierRegistry.MODIFIER_DEBUG_3))
         .also{ regItem["debug_scepter"] = it}
         
     // scepter upgrade scepters
-    val FURIOUS_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+    val FURIOUS_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.FURIOUS))
-        .also{ regItem["furious_scepter"] = it}
-    val WITTY_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+        ,"furious_scepter")
+    val WITTY_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.WITTY))
-        .also{ regItem["witty_scepter"] = it}
-    val GRACEFUL_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+        ,"witty_scepter")
+    val GRACEFUL_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.GRACEFUL))
-        .also{ regItem["graceful_scepter"] = it}
-    val DANGEROUS_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+        ,"graceful_scepter")
+    val DANGEROUS_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.DANGEROUS, RegisterModifier.DANGEROUS_PACT))
-        .also{ regItem["dangerous_scepter"] = it}
-    val SKILLFUL_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+        ,"dangerous_scepter")
+    val SKILLFUL_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(RegisterModifier.SKILLFUL))
-        .also{ regItem["skillful_scepter"] = it}
-    val ENDURING_SCEPTER = ScepterItem(ScepterLvl1ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
+        ,"skillful_scepter")
+    val ENDURING_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier1Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.UNCOMMON))
         .withModifiers(listOf(ModifierRegistry.LESSER_ENDURING))
-        .also{ regItem["enduring_scepter"] = it}
-    val BLAZING_SCEPTER = ParticleScepterItem(ParticleTypes.SMOKE,10,ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"enduring_scepter")
+    val BLAZING_SCEPTER = register(ParticleScepterItem(ParticleTypes.SMOKE,10,AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FIREBALL))
         .withModifiers(listOf(RegisterModifier.FIRE_ASPECT))
-        .also{ regItem["blazing_scepter"] = it}
-    val SPARKING_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"blazing_scepter")
+    val SPARKING_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.LIGHTNING_BOLT))
         .withModifiers(listOf(RegisterModifier.LIGHTNING_ASPECT))
-        .also{ regItem["sparking_scepter"] = it}
-    val FROSTED_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"sparking_scepter")
+    val FROSTED_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.ICE_SPIKES))
         .withModifiers(listOf(RegisterModifier.ICE_ASPECT))
-        .also{ regItem["frosted_scepter"] = it}
-    val SCEPTER_OF_BLADES = SpellbladeItem(ScepterOfBladesToolMaterial,3,-2.7f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"frosted_scepter")
+    val SCEPTER_OF_BLADES = register(SpellbladeItem(AiConfig.materials.scepters.blades,3,-2.7f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withModifiers(listOf(RegisterModifier.BLADE_ASPECT))
-        .also{ regItem["scepter_of_blades"] = it}
-    val CORRUPTED_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_blades")
+    val CORRUPTED_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SOUL_MISSILE))
         .withModifiers(listOf(RegisterModifier.NECROTIC))
-        .also{ regItem["corrupted_scepter"] = it}
-    val SCEPTER_OF_AGONIES = SpellbladeItem(ScepterLvl2ToolMaterial,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"corrupted_scepter")
+    val SCEPTER_OF_AGONIES = register(SpellbladeItem(AiConfig.materials.scepters.tier2Scepter,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.CRIPPLE))
         .withModifiers(listOf(ModifierRegistry.ENDURING, ModifierRegistry.LESSER_REACH))
-        .also{ regItem["scepter_of_agonies"] = it}    
-    val SCEPTER_OF_INSIGHT = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_agonies")  
+    val SCEPTER_OF_INSIGHT = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MENTAL_CLARITY))
         .withModifiers(listOf(RegisterModifier.INSIGHTFUL, ModifierRegistry.LESSER_REACH))
-        .also{ regItem["scepter_of_insight"] = it}
-    val SCEPTER_OF_SUMMONING = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_insight")
+    val SCEPTER_OF_SUMMONING = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.SUMMON_ZOMBIE))
         .withModifiers(listOf(RegisterModifier.SUMMONERS_ASPECT))
-        .also{ regItem["scepter_of_summoning"] = it}
-    val PERSUASIVE_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_summoning")
+    val PERSUASIVE_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.PERSUADE))
         .withModifiers(listOf(RegisterModifier.WITTY, ModifierRegistry.LESSER_ATTUNED))
-        .also{ regItem["persuasive_scepter"] = it}
-    val TRAVELERS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
-        .withAugments(listOf(RegisterEnchantment.SUMMON_BOAT, RegisterEnchantment.SUMMON_STRIDER))
+        ,"persuasive_scepter")
+    val TRAVELERS_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        .withAugments(listOf(RegisterEnchantment.SUMMON_SEAHORSE))
         .withModifiers(listOf(RegisterModifier.TRAVELER))
-        .also{ regItem["travelers_scepter"] = it}
-    val SCEPTER_OF_RECALL = ParticleScepterItem(ParticleTypes.PORTAL,10,ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"travelers_scepter")
+    val SCEPTER_OF_RECALL = register(ParticleScepterItem(ParticleTypes.PORTAL,10,AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.RECALL))
         .withModifiers(listOf(ModifierRegistry.GREATER_REACH))
-        .also{ regItem["scepter_of_recall"] = it}
-    val BUILDERS_SCEPTER = BuilderScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_recall")
+    val BUILDERS_SCEPTER = register(BuilderScepterItem(AiConfig.materials.scepters.builder,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.HARD_LIGHT_BRIDGE))
         .withModifiers(listOf(RegisterModifier.BUILDERS_ASPECT, ModifierRegistry.LESSER_REACH))
-        .also{ regItem["builders_scepter"] = it}
-    val SCEPTER_OF_THE_VANGUARD = SpellbladeItem(ScepterLvl2ToolMaterial,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"builders_scepter")
+    val SCEPTER_OF_THE_VANGUARD = register(SpellbladeItem(AiConfig.materials.scepters.vanguard,3,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BARRIER))
         .withModifiers(listOf(RegisterModifier.SMITING, RegisterModifier.GRACEFUL))
-        .also{ regItem["scepter_of_the_vanguard"] = it}
-    val SCEPTER_OF_THE_PALADIN = ScepterItem(ScepterOfTheVanguardToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_the_vanguard")
+    val SCEPTER_OF_THE_PALADIN = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.FORTIFY))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, ModifierRegistry.LESSER_ENDURING))
-        .also{ regItem["scepter_of_the_paladin"] = it}
-    val SCEPTER_OF_HARVESTS = ScepterOfHarvestsItem(ScepterOfHarvestsToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_the_paladin")
+    val SCEPTER_OF_HARVESTS = register(ScepterOfHarvestsItem(AiConfig.materials.scepters.harvests,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.ANIMAL_HUSBANDRY))
         .withModifiers(listOf(ModifierRegistry.REACH, ModifierRegistry.LESSER_THRIFTY))
-        .also{ regItem["scepter_of_harvests"] = it}
-    val SCEPTER_OF_THE_PACIFIST = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_harvests")
+    val SCEPTER_OF_THE_PACIFIST = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.BEDAZZLE))
         .withModifiers(listOf(RegisterModifier.HEALERS_GRACE, RegisterModifier.HEALERS_PACT))
-        .also{ regItem["scepter_of_the_pacifist"] = it}
-    val CLERICS_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"scepter_of_the_pacifist")
+    val CLERICS_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MINOR_HEAL))
         .withModifiers(listOf(RegisterModifier.HEALING))
-        .also{ regItem["clerics_scepter"] = it}
-    val BARDIC_SCEPTER = ScepterItem(ScepterLvl2ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
+        ,"clerics_scepter")
+    val BARDIC_SCEPTER = register(ScepterItem(AiConfig.materials.scepters.tier2Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.INSPIRING_SONG))
         .withModifiers(listOf(ModifierRegistry.LESSER_ENDURING, ModifierRegistry.ATTUNED))
-        .also{ regItem["bardic_scepter"] = it}
-    val EQUINOX = EquinoxScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"bardic_scepter")
+    val EQUINOX = register(EquinoxScepterItem(AiConfig.materials.scepters.tier3Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.ELEMENTAL, RegisterModifier.FURIOUS))
-        .also{ regItem["equinox"] = it}
-    val LETHALITY = LethalityScepterItem(LethalityToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"equinox")
+    val LETHALITY = register(LethalityScepterItem(AiConfig.materials.scepters.lethality,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.DANGEROUS,RegisterModifier.DANGEROUS_PACT))
-        .also{ regItem["lethality"] = it}
-    val RESONANCE = ScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"lethality")
+    val RESONANCE = register(ScepterItem(AiConfig.materials.scepters.tier3Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.RESONATE))
         .withModifiers(listOf(RegisterModifier.ECHOING,RegisterModifier.SKILLFUL))
-        .also{ regItem["resonance"] = it}
-    val SOJOURN = SojournScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"resonance")
+    val SOJOURN = register(SojournScepterItem(AiConfig.materials.scepters.tier3Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.SURVEY))
         .withModifiers(listOf(RegisterModifier.WITTY,RegisterModifier.TRAVELER))
-        .also{ regItem["sojourn"] = it}
-    val AEGIS = SpellbladeItem(ScepterLvl3ToolMaterial,5,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"sojourn")
+    val AEGIS = register(SpellbladeItem(AiConfig.materials.scepters.tier3Scepter,5,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.PROTECTIVE, RegisterModifier.SMITING))
-        .also{ regItem["aegis"] = it}
-    val REDEMPTION = ScepterItem(ScepterLvl3ToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        ,"aegis")
+    val REDEMPTION = register(ScepterItem(AiConfig.materials.scepters.tier3Scepter,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.HEALERS_PACT,RegisterModifier.HEALERS_GRACE, ModifierRegistry.LESSER_ENDURING))
         .also{ regItem["redemption"] = it}
 
-    val A_SCEPTER_SO_FOWL = ScepterItem(ScepterSoFoulToolMaterial,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+    val A_SCEPTER_SO_FOWL = register(ScepterItem(AiConfig.materials.scepters.fowl,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.TORRENT_OF_BEAKS,RegisterEnchantment.CHICKENFORM,RegisterEnchantment.POULTRYMORPH))
         .withModifiers(listOf(RegisterModifier.FOWL))
         .also{ regItem["a_scepter_so_fowl"] = it}
