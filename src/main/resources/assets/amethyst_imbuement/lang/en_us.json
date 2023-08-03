@@ -492,7 +492,7 @@
 	"enchantment.amethyst_imbuement.soul_missile": "Soul Missile",
 	"enchantment.amethyst_imbuement.soul_missile.double": "Soul Blast",
 	"enchantment.amethyst_imbuement.soul_missile.double.desc": "Damage increased and deals a small AoE burst of damage around the target.",
-	"enchantment.amethyst_imbuement.soul_missile.combination": "Ensouled%1$s Missile",
+	"enchantment.amethyst_imbuement.soul_missile.combination": "Soul-%1$s Missile",
 	"enchantment.amethyst_imbuement.soul_missile.noun": "Soul",
 	"enchantment.amethyst_imbuement.soul_missile.verb": "Ensoul",
 	"enchantment.amethyst_imbuement.soul_missile.adjective": "Ensouled",
