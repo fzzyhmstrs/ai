@@ -20,12 +20,12 @@ class SoulbindingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
             EffectQueue.addStatusToQueue(user, RegisterStatus.SOULBINDING, 260, 0)
     }
 
-    fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean{
-        return RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,90)
-    }
-
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
-        if (!RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,90)) return false
+        if (!RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,90)) {
+            user.removeStatusEffect(RegisterStatus.SOULBINDING)
+            return false
+        }
+        stack.orCreateNbt.putBoolean("cloneInventory",true)
         if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 90)) {
             if (AiConfig.trinkets.enableBurnout.get()) {
                 RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
