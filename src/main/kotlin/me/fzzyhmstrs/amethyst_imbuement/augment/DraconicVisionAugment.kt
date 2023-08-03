@@ -4,8 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.block.Blocks
 import net.minecraft.block.ExperienceDroppingBlock
@@ -29,12 +29,12 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.isOf(RegisterItem.IMBUED_HEADBAND))
+        return (stack.isOf(RegisterTool.IMBUED_HEADBAND))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterItem.IMBUED_HEADBAND,1))
+        list.add(ItemStack(RegisterTool.IMBUED_HEADBAND,1))
         return list
     }
 

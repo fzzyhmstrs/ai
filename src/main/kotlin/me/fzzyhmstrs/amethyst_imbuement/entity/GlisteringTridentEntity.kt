@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment.CONTAMINATED
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment.DECAYED
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity.GLISTERING_TRIDENT_ENTITY
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -28,7 +28,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class GlisteringTridentEntity : PersistentProjectileEntity {
-    private var tridentStack = ItemStack(RegisterItem.GLISTERING_TRIDENT)
+    private var tridentStack = ItemStack(RegisterTool.GLISTERING_TRIDENT)
     private var dealtDamage = false
     private var returnTimer = 0
 

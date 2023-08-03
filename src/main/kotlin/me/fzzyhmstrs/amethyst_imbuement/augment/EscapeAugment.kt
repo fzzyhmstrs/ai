@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.UsedActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -20,10 +20,10 @@ class EscapeAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot):
         val rndX = user.blockPos.x + world.random.nextInt(17) - 8
         val rndZ = user.blockPos.z + world.random.nextInt(17) - 8
         val rndY = world.getTopY(Heightmap.Type.MOTION_BLOCKING,rndX,rndZ)
-        if(RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack, world, user as PlayerEntity, 120, AcText.translatable("augment_damage.escape.check_can_use"))) {
-            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, world, user, 120)) {
+        if(RegisterTool.TOTEM_OF_AMETHYST.checkCanUse(stack, world, user as PlayerEntity, 120, AcText.translatable("augment_damage.escape.check_can_use"))) {
+            if (RegisterTool.TOTEM_OF_AMETHYST.manaDamage(stack, world, user, 120)) {
                 if (AiConfig.trinkets.enableBurnout.get()) {
-                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
+                    RegisterTool.TOTEM_OF_AMETHYST.burnOutHandler(
                         stack,
                         RegisterEnchantment.ESCAPE,
                         user,

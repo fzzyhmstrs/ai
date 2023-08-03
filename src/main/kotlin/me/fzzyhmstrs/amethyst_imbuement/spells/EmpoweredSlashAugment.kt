@@ -12,7 +12,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.minecraft.entity.Entity
@@ -32,7 +32,7 @@ import net.minecraft.world.World
 class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("empowered_slash"),SpellType.FURY,20,20,
-            16,5,1,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
+            16,5,1,1,LoreTier.LOW_TIER, RegisterTool.GARNET_SWORD)
 
     //ml 5
     override val baseEffect: AugmentEffect

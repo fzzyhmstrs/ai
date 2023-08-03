@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "imbued_ascendancy:item/steel_ward"
+        "layer0": "amethyst_imbuement:item/steel_ward"
     },
     "display": {
         "thirdperson_righthand": {
@@ -30,7 +30,7 @@
             "predicate": {
                 "blocking": 1
             },
-            "model": "imbued_ascendancy:item/steel_ward_blocking"
+            "model": "amethyst_imbuement:item/steel_ward_blocking"
         }
     ]
 }

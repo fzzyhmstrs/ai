@@ -14,11 +14,11 @@ object RegisterItemModel {
     fun registerAll(){
         val blazingScepterModels = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID,  "blazing_scepter","inventory"))
             .withHeld(ModelIdentifier(AI.MOD_ID,"blazing_scepter_in_hand","inventory"), true)
-        ItemModelRegistry.registerItemModelId(RegisterItem.BLAZING_SCEPTER, blazingScepterModels)
+        ItemModelRegistry.registerItemModelId(RegisterTool.BLAZING_SCEPTER, blazingScepterModels)
         val modelsPerMode = ItemModelRegistry.ModelIdentifierPerModes(ModelIdentifier(AI.MOD_ID,  "glistering_trident","inventory"))
             .withHeld(ModelIdentifier(AI.MOD_ID,"glistering_trident_in_hand","inventory"), true)
-        ItemModelRegistry.registerItemModelId(RegisterItem.GLISTERING_TRIDENT, modelsPerMode)
-        ItemModelRegistry.registerItemEntityModel(RegisterItem.GLISTERING_TRIDENT,
+        ItemModelRegistry.registerItemModelId(RegisterTool.GLISTERING_TRIDENT, modelsPerMode)
+        ItemModelRegistry.registerItemEntityModel(RegisterTool.GLISTERING_TRIDENT,
             GlisteringTridentItemEntityRenderer,
             RegisterRenderer.GLISTERING_TRIDENT,
             GlisteringTridentEntityModel::class.java)

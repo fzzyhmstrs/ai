@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.amethyst_core.modifier.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
@@ -53,10 +53,10 @@ class SpellcastersFocusScreenHandler(
                         )
                 }
                 val nbt = stack.orCreateNbt
-                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                nbt.putBoolean(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP)
                 if (!lvlUpNbt.isEmpty){
-                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8))
+                    nbt.put(RegisterTool.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_1,8))
                 }
                 failed = true
                 return true
@@ -74,10 +74,10 @@ class SpellcastersFocusScreenHandler(
                         )
                 }
                 val nbt = stack.orCreateNbt
-                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                nbt.putBoolean(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP)
                 if (!lvlUpNbt.isEmpty){
-                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8))
+                    nbt.put(RegisterTool.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_2,8))
                 }
                 failed = true
                 return true
@@ -95,10 +95,10 @@ class SpellcastersFocusScreenHandler(
                         )
                 }
                 val nbt = stack.orCreateNbt
-                nbt.putBoolean(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
-                val lvlUpNbt = nbt.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+                nbt.putBoolean(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP_READY,false)
+                val lvlUpNbt = nbt.getCompound(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP)
                 if (!lvlUpNbt.isEmpty){
-                    nbt.put(RegisterItem.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8))
+                    nbt.put(RegisterTool.SPELLCASTERS_FOCUS.CHOSEN_OPTION,lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_3,8))
                 }
                 failed = true
                 return true
@@ -117,13 +117,13 @@ class SpellcastersFocusScreenHandler(
         if (nbt == null){
             failed = true
         }
-        val lvlUpNbt = nbt?.getCompound(RegisterItem.SPELLCASTERS_FOCUS.LEVEL_UP)
+        val lvlUpNbt = nbt?.getCompound(RegisterTool.SPELLCASTERS_FOCUS.LEVEL_UP)
         if (lvlUpNbt == null){
             failed = true
         } else {
-            val list1 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_1,8)
-            val list2 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_2,8)
-            val list3 = lvlUpNbt.getList(RegisterItem.SPELLCASTERS_FOCUS.OPTION_3,8)
+            val list1 = lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_1,8)
+            val list2 = lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_2,8)
+            val list3 = lvlUpNbt.getList(RegisterTool.SPELLCASTERS_FOCUS.OPTION_3,8)
             options[0] = list1.stream().map { Identifier(it.asString()) }.toList()
             options[1] = list2.stream().map { Identifier(it.asString()) }.toList()
             options[2] = list3.stream().map { Identifier(it.asString()) }.toList()

@@ -71,6 +71,9 @@ object AiConfig
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
 
+        var glisteringTridentDurability = ValidatedInt(550,5500,0)
+        var sniperBowDurability = ValidatedInt(500,5000,0)
+
         var manaItems = ManaItems()
         class ManaItems: ConfigSection(Header.Builder().space().add("readme.items.manaItems_1").add("readme.items.manaItems_2").build()) {
             var totemOfAmethystDurability = ValidatedInt(360, 1000, 32)

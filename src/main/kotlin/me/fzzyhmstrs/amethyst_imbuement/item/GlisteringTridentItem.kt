@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.client.item.TooltipContext
@@ -104,7 +105,7 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {
-        return ingredient.isOf(RegisterItem.GARNET) && stack.isOf(RegisterItem.GLISTERING_TRIDENT)
+        return ingredient.isOf(RegisterItem.GARNET) && stack.isOf(RegisterTool.GLISTERING_TRIDENT)
     }
 
 

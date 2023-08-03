@@ -192,7 +192,7 @@ class DisenchantingTableScreenHandler(
             }
             1 -> {
                 if (enchantmentId[id] == -1) return false
-                if ((itemStack2.isOf(Items.BOOK) && Registries.ENCHANTMENT.get(enchantmentId[id]) is ScepterAugment) || (itemStack2.isOf(RegisterItem.EMPTY_SPELL_SCROLL) && Registries.ENCHANTMENT.get(enchantmentId[id]) !is ScepterAugment) || (player.experienceLevel < disenchantCost[0] && !player.abilities.creativeMode)) return false
+                if ((itemStack2.isOf(Items.BOOK) && Registries.ENCHANTMENT.get(enchantmentId[id]) is ScepterAugment) || (itemStack2.isOf(RegisterTool.EMPTY_SPELL_SCROLL) && Registries.ENCHANTMENT.get(enchantmentId[id]) !is ScepterAugment) || (player.experienceLevel < disenchantCost[0] && !player.abilities.creativeMode)) return false
                 context.run { world: World, pos: BlockPos ->
                     removing = true
                     val enchantList3 = EnchantmentHelper.get(itemStack)
@@ -338,13 +338,13 @@ class DisenchantingTableScreenHandler(
                     return ItemStack.EMPTY
                 }
             } else if (index in 2..28) {
-                if (itemStack2.isOf(Items.BOOK) || itemStack2.isOf(RegisterItem.EMPTY_SPELL_SCROLL)) {
+                if (itemStack2.isOf(Items.BOOK) || itemStack2.isOf(RegisterTool.EMPTY_SPELL_SCROLL)) {
                     slotChecker(itemStack2,1,29,38)
                 } else {
                     slotChecker(itemStack2,0,29,38)
                 }
             } else if (index in 29..37) {
-                if (itemStack2.isOf(Items.BOOK) || itemStack2.isOf(RegisterItem.EMPTY_SPELL_SCROLL)) {
+                if (itemStack2.isOf(Items.BOOK) || itemStack2.isOf(RegisterTool.EMPTY_SPELL_SCROLL)) {
                     slotChecker(itemStack2,1,2,29)
                 } else {
                     slotChecker(itemStack2,0,2,29)
@@ -503,7 +503,7 @@ class DisenchantingTableScreenHandler(
             }
         })
         addSlot(object : Slot(inventory, 1, 35, 47) {
-            override fun canInsert(stack: ItemStack): Boolean { return stack.isOf(Items.BOOK) || stack.isOf(RegisterItem.EMPTY_SPELL_SCROLL) }
+            override fun canInsert(stack: ItemStack): Boolean { return stack.isOf(Items.BOOK) || stack.isOf(RegisterTool.EMPTY_SPELL_SCROLL) }
             override fun getMaxItemCount(): Int {
                 return 1
             }

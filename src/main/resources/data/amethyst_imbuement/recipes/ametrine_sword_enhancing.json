@@ -1,0 +1,15 @@
+{
+  "type": "amethyst_imbuement:enhancing",
+  "dust": {
+    "item": "amethyst_imbuement:knowledge_powder"
+  },
+  "base": {
+    "item": "minecraft:netherite_sword"
+  },
+  "addition": {
+    "item": "amethyst_imbuement:ametrine"
+  },
+  "result": {
+    "item": "amethyst_imbuement:ametrine_sword"
+  }
+}

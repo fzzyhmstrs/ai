@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -18,12 +18,12 @@ class HealthyAugment(weight: Rarity, mxLvl: Int, vararg slot: EquipmentSlot): Pa
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.isOf(RegisterItem.IMBUED_AMULET))
+        return (stack.isOf(RegisterTool.IMBUED_AMULET))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterItem.IMBUED_AMULET,1))
+        list.add(ItemStack(RegisterTool.IMBUED_AMULET,1))
         return list
     }
 }

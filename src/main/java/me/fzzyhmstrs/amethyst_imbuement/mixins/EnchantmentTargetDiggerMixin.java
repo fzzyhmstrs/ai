@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,7 @@ public abstract class EnchantmentTargetDiggerMixin {
 
     @Inject(method = "isAcceptableItem(Lnet/minecraft/item/Item;)Z", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_buildersScepterEnchant(Item item, CallbackInfoReturnable<Boolean> cir){
-        if (item == RegisterItem.INSTANCE.getBUILDERS_SCEPTER()){
+        if (item == RegisterTool.INSTANCE.getBUILDERS_SCEPTER()){
             cir.setReturnValue(true);
         }
     }

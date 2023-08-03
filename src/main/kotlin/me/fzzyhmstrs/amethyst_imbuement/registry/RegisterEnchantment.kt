@@ -18,12 +18,13 @@ object RegisterEnchantment {
 
     private fun <T: Enchantment> register(e: T, name: String): T{
         val id = AI.identity(name)
-        if (e is AbstractConfigDisableEnchantment){
-            if (!e.isEnabled()){
+        val e1 = Registry.register(Registries.ENCHANTMENT,id, e)
+        if (e1 is AbstractConfigDisableEnchantment){
+            if (!e1.isEnabled()){
                 LOGGER.info("Augment $id is set as disabled in the configs!")
             }
         }
-        return Registry.register(Registries.ENCHANTMENT,id, e)
+        return e1
     }
     
     //vanilla style enchantments

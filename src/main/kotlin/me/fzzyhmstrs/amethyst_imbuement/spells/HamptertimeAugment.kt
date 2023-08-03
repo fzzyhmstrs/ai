@@ -20,8 +20,8 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
@@ -98,7 +98,7 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
                 val rnd2 = world.random.nextFloat()
                 if (rnd2 < (0.15f + 0.003f * level)){
                     if (rnd2 < 0.05){
-                        hamsterEntity.setMainHand(ItemStack(RegisterItem.GARNET_SWORD))
+                        hamsterEntity.setMainHand(ItemStack(RegisterTool.GARNET_SWORD))
                     } else {
                         hamsterEntity.setMainHand(ItemStack(Items.STONE_SWORD))
                     }

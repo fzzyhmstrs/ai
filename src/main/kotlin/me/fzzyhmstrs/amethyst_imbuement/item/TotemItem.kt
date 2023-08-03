@@ -4,8 +4,8 @@ import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
@@ -71,7 +71,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {
-        return ingredient.isOf(Items.AMETHYST_SHARD) && stack.isOf(RegisterItem.TOTEM_OF_AMETHYST)
+        return ingredient.isOf(Items.AMETHYST_SHARD) && stack.isOf(RegisterTool.TOTEM_OF_AMETHYST)
     }
 
     override fun isFireproof(): Boolean {

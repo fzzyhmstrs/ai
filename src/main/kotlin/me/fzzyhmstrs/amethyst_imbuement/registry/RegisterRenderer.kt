@@ -255,11 +255,11 @@ object RegisterRenderer {
         //////////////////////////////////
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.GLISTERING_TRIDENT, Identifier("throwing")
+            RegisterTool.GLISTERING_TRIDENT, Identifier("throwing")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int -> if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f }
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
+            RegisterTool.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
                 CompassItem.createLodestonePos(stack.orCreateNbt)
             } else {
                 CompassItem.createSpawnPos(world)
@@ -267,7 +267,7 @@ object RegisterRenderer {
         )
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("pulling")
+            RegisterTool.SNIPER_BOW, Identifier("pulling")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack && !CrossbowItem.isCharged(
                     stack
@@ -275,7 +275,7 @@ object RegisterRenderer {
             ) 1.0f else 0.0f
         }
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("charged")
+            RegisterTool.SNIPER_BOW, Identifier("charged")
         ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && CrossbowItem.isCharged(
                     stack
@@ -283,7 +283,7 @@ object RegisterRenderer {
             ) 1.0f else 0.0f
         }
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("firework")
+            RegisterTool.SNIPER_BOW, Identifier("firework")
         ) { stack: ItemStack?, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && CrossbowItem.isCharged(
                     stack
@@ -291,7 +291,7 @@ object RegisterRenderer {
             ) 1.0f else 0.0f
         }
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SNIPER_BOW, Identifier("pull")
+            RegisterTool.SNIPER_BOW, Identifier("pull")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity == null) {
                 return@register 0.0f
@@ -335,31 +335,31 @@ object RegisterRenderer {
         }
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.SPELL_SCROLL, Identifier("model_key")
+            RegisterTool.SPELL_SCROLL, Identifier("model_key")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.nbt
             if (nbt == null){
                 0.0f
             } else {
-                val decimal = when (nbt.getString(RegisterItem.SPELL_SCROLL.SPELL_TYPE)){
+                val decimal = when (nbt.getString(RegisterTool.SPELL_SCROLL.SPELL_TYPE)){
                     SpellType.FURY.str() ->{ 0.0f }
                     SpellType.GRACE.str() -> { 0.2f }
                     SpellType.WIT.str() -> { 0.4f }
                     else -> { return@register 0.0f }
                 }
-                val value = nbt.getFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY).takeIf { f -> f > 0f }?:33f
+                val value = nbt.getFloat(RegisterTool.SPELL_SCROLL.MODEL_KEY).takeIf { f -> f > 0f }?:33f
                 (value + decimal)/1000f
             }
         }
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.IMBUED_WARD, Identifier("blocking")
+            RegisterTool.IMBUED_WARD, Identifier("blocking")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
         }
 
         ModelPredicateProviderRegistry.register(
-            RegisterItem.COPPER_WARD, Identifier("blocking")
+            RegisterTool.COPPER_WARD, Identifier("blocking")
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
         }
