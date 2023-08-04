@@ -135,6 +135,12 @@ object RegisterItem {
     val STEEL_SHOVEL = register(ShovelItem(AiConfig.materials.tools.steel,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_shovel")
     val STEEL_SWORD = register(SwordItem(AiConfig.materials.tools.steel,3,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_sword")
     val STEEL_HORSE_ARMOR = register(HorseArmorItem(9,"steel",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"steel_horse_armor")
+    val AMETRINE_AXE = register(AxeItem(AiConfig.materials.tools.ametrine,5.0f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_axe")
+    val AMETRINE_HOE = register(CustomHoeItem(AiConfig.materials.tools.ametrine,-3,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_hoe")
+    val AMETRINE_PICKAXE = register(PickaxeItem(AiConfig.materials.tools.ametrine,1,-2.8f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_pickaxe")
+    val AMETRINE_SHOVEL = register(ShovelItem(AiConfig.materials.tools.ametrine,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_shovel")
+    val AMETRINE_SWORD = register(SwordItem(AiConfig.materials.tools.ametrine,3,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_sword")
+    val AMETRINE_HORSE_ARMOR = register(HorseArmorItem(15,"ametrine",AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"ametrine_horse_armor")
 
     //trinket and books
     val COPPER_RING = register(CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"copper_ring")
