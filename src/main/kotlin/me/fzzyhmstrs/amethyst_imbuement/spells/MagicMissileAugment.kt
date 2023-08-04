@@ -15,6 +15,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.LivingEntity
@@ -26,9 +27,15 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+
+/*
+    Checklist
+     */
 
 class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
     override val augmentData: AugmentDatapoint =
@@ -39,6 +46,17 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
     //ml 1
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(3.0F)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("enchantment.amethyst_imbuement.magic_missile.desc.manaCost")

@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.ExplosionBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
@@ -23,6 +24,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addEffect
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.ResonanceExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
@@ -46,26 +48,6 @@ import kotlin.math.max
 
 /*
     Checklist
-    - spells are equal check
-    - special names for uniques
-    - onPaired to grant relevant adv.
-    - implement all special combinations
-    - fill up interaction methods
-        - onEntityHit?
-        - onEntityKill?
-        - onBlockHit?
-        - Remember to call and check results of the super for the "default" behavior
-    - modify stats. don't forget mana cost and cooldown!
-        - modifyDealtDamage for unique interactions
-    - modifyDamageSource?
-        - remember DamageSourceBuilder for a default damage source
-    - modify other things
-        - summon?
-        - projectile?
-        - explosion?
-        - drops?
-        - count? (affects some things like summon count and projectile count)
-    - sound and particles
      */
 class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
     override val augmentData: AugmentDatapoint =
@@ -96,6 +78,8 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
             description.addLang("enchantment.amethyst_imbuement.resonate.desc.amplifier", SpellAdvancementChecks.STAT)
         if (othersType.has(AugmentType.SUMMONS))
             description.addLang("enchantment.amethyst_imbuement.resonate.desc.summons", SpellAdvancementChecks.STAT.or(SpellAdvancementChecks.SUMMONS))
+        if (othersType.has(AugmentType.EXPLODES))
+            description.addLang("enchantment.amethyst_imbuement.resonate.desc.explodes", SpellAdvancementChecks.EXPLODES)
 
     }
 
@@ -119,6 +103,17 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.AMPLIFIER_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.STAT_TRIGGER)
+    }
+
+    override fun modifyCooldown(
+        cooldown: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (spells.spellsAreEqual())
+            return cooldown.plus(-4)
+        return cooldown
     }
 
     override fun modifyAmplifier(
@@ -157,7 +152,7 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
         if (resonance == null){
             entity.addStatusEffect(StatusEffectInstance(RegisterStatus.RESONATING,80,0))
         } else {
-            val resonanceLevel = if(othersType.empty) resonance.amplifier + 1 else resonance.amplifier + world.random.nextInt(2)
+            val resonanceLevel = if(othersType.empty) resonance.amplifier + 1 else if (spells.spellsAreEqual())  resonance.amplifier + 2 else resonance.amplifier + world.random.nextInt(2)
             entity.removeStatusEffect(RegisterStatus.RESONATING)
             entity.addStatusEffect(StatusEffectInstance(RegisterStatus.RESONATING, 80, resonanceLevel))
         }
@@ -207,6 +202,20 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
             summon.addEffect(ModifiableEffectEntity.DAMAGE,ModifiableEffects.ECHO_EFFECT)
         }
         return summons
+    }
+
+    override fun modifyExplosion(
+        builder: ExplosionBuilder,
+        context: ProcessContext,
+        user: LivingEntity?,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): ExplosionBuilder {
+        return builder.withCustomBehavior(ResonanceExplosionBehavior())
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

@@ -5,10 +5,7 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
-import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.augments.paired.*
 import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -17,9 +14,13 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -31,6 +32,7 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -42,6 +44,10 @@ import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
 
+/*
+    Checklist
+     */
+
 class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("soul_missile"),SpellType.FURY,16,3,
@@ -51,13 +57,30 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(3.9F,0.1F,0.0F).withRange(2.0)
 
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
+        if (other == RegisterEnchantment.WITHERING_BOLT){
+            description.addLang("enchantment.amethyst_imbuement.soul_missile.withering_bolt", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.EXPLODES))
+            return
+        }
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.soul_missile.desc.damageSource", SpellAdvancementChecks.DAMAGE_SOURCE)
         if (othersType.positiveEffect)
             description.addLang("enchantment.amethyst_imbuement.soul_missile.desc.positiveEffect", SpellAdvancementChecks.ENTITY_EFFECT)
         if (othersType.negativeEffect)
             description.addLang("enchantment.amethyst_imbuement.soul_missile.desc.negativeEffect", SpellAdvancementChecks.ENTITY_EFFECT)
+        if (othersType.has(AugmentType.EXPLODES))
+            description.addLang("enchantment.amethyst_imbuement.soul_missile.desc.explodes", SpellAdvancementChecks.EXPLODES)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -66,8 +89,17 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
-        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.SOUL_TRIGGER)
+    }
+
+    override fun specialName(otherSpell: ScepterAugment): MutableText {
+        return when(otherSpell) {
+            RegisterEnchantment.WITHERING_BOLT ->
+                AcText.translatable("enchantment.amethyst_imbuement.soul_missile.withering_bolt.desc")
+            else ->
+                super.specialName(otherSpell)
+        }
     }
 
     override fun modifyDamage(
@@ -205,6 +237,22 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         } else {
             SUCCESSFUL_PASS
         }
+    }
+
+    override fun modifyExplosion(
+        builder: ExplosionBuilder,
+        context: ProcessContext,
+        user: LivingEntity?,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): ExplosionBuilder {
+        if (spells.primary() == RegisterEnchantment.WITHERING_BOLT)
+            return builder.modifyPower{power -> power * 1.25f}.modifyDamageSource{source -> source.add(DamageTypes.SONIC_BOOM)}
+        return builder.modifyDamageSource {source -> source.add(DamageTypes.MAGIC)}
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {
