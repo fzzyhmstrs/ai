@@ -125,12 +125,16 @@ object AiConfig
         class Armor: ConfigSection(Header.Builder().space().add("readme.materials.armor_1").build()) {
             var ametrine = AiArmorMaterialsConfig.AMETRINE
             var steel = AiArmorMaterialsConfig.STEEL
+            var garnet = AiArmorMaterialsConfig.GARNET
+            var glowing = AiArmorMaterialsConfig.GLOWING
+            var shimmering = AiArmorMaterialsConfig.SHIMMERING
         }
         var tools = Tools()
         class Tools: ConfigSection(Header.Builder().space().add("readme.materials.tools_1").build()) {
             var garnet = AiToolMaterialsConfig.GARNET
             var glowing = AiToolMaterialsConfig.GLOWING
             var steel = AiToolMaterialsConfig.STEEL
+            var ametrine = AiToolMaterialsConfig.AMETRINE
         }
         var scepters = Scepters()
         class Scepters: ConfigSection(Header.Builder().space().add("readme.materials.scepters_1").build()) {
