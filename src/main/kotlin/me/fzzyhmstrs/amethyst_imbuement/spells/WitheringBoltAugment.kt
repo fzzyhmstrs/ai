@@ -57,8 +57,10 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
         count: Int
     ): List<ProjectileEntity> where T : SpellCastingEntity,T : LivingEntity {
         val list: MutableList<ProjectileEntity> = mutableListOf()
+        val direction = user.rotationVec3d
         for (i in 1..count){
-            val wse = PlayerWitherSkullEntity()
+            val wse = PlayerWitherSkullEntity(world,user,direction.x,direction.y,direction.z)
+            wse.setVelocity()
         }
         return list
     }
