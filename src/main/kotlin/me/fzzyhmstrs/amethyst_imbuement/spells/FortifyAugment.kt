@@ -54,11 +54,10 @@ class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         if (pair.spellsAreUnique()){
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
         }
-        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_TRIGGER)
-        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.BOOSTED_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.PROTECTED_TRIGGER)
     }
+
     override fun supportEffect(
         world: World,
         target: Entity?,

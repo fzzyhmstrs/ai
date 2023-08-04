@@ -22,6 +22,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.PlaceBlockAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.boosts.DyeBoost
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
@@ -31,7 +32,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
 import net.minecraft.particle.ParticleEffect
@@ -254,11 +254,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     T : LivingEntity
     {
         if (spells.primary() == RegisterEnchantment.ICE_SHARD){
-            val entity = entityHitResult.entity
-            if (entity is LivingEntity && world.random.nextFloat() < 0.15){
-                entity.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING,120))
+            if (world.random.nextFloat() < 0.15 && entityHitResult.addStatus(StatusEffects.GLOWING,120))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
-            }
         }
         return SUCCESSFUL_PASS
     }

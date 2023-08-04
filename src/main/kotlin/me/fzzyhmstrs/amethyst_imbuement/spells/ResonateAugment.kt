@@ -27,14 +27,17 @@ import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.DefaultParticleType
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
 
@@ -203,11 +206,15 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
         return StatusEffectInstance(RegisterStatus.RESONATING,effect.duration(level), level)
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_BELL_RESONATE
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_BELL_RESONATE,SoundCategory.PLAYERS,1f,1f)
     }
 
-    override fun particleType(): DefaultParticleType {
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_BELL_RESONATE,SoundCategory.PLAYERS,1f,1f)
+    }
+
+    override fun castParticleType(): ParticleEffect? {
         return ParticleTypes.ELECTRIC_SPARK
     }
 

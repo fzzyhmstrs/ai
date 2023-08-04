@@ -25,6 +25,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
@@ -230,12 +231,10 @@ class ChickenformAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             }
         }
         if (othersType.positiveEffect){
-            val target = entityHitResult.entity
-            if (target is LivingEntity){
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), min(2,effects.amplifier(level))))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))
-                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
+            val bl = entityHitResult.addStatus(StatusEffects.JUMP_BOOST, effects.duration(level), min(2,effects.amplifier(level)))
+                    && entityHitResult.addStatus(StatusEffects.SLOW_FALLING, effects.duration(level))
+            if (bl) return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+
         }
 
         return SUCCESSFUL_PASS

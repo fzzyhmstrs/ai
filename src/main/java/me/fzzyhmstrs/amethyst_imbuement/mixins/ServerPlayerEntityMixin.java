@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
-import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil;
+import me.fzzyhmstrs.amethyst_imbuement.recipe.RecipeUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;

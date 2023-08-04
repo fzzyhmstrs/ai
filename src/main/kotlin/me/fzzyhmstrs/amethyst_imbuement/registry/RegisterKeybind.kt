@@ -23,7 +23,6 @@ import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
 import java.util.*
 
-@Suppress("PrivatePropertyName")
 object RegisterKeybind {
 
     private val VEIN_MINER_PACKET = AI.identity( "vein_miner_packet")

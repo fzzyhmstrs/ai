@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects.getRndEntityList
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -234,7 +235,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
         val list1 = list.stream().filter { it is VillagerEntity }.map { EntityHitResult(it) } .toList()
-        val list2 = hostileFilter(list, user)
+        val list2 = SpellHelper.hostileFilter(list, user,this)
         list2.addAll(list1)
         return list2
     }

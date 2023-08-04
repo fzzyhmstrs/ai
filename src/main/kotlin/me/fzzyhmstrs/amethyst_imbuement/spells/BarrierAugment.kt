@@ -25,6 +25,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.PROTECTED_EFFECT
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -174,9 +175,7 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
             val target = RaycasterUtil.raycastHit(distance = effects.range(level),user)
             if (target is EntityHitResult){
                 if (canTarget(target,context, world, user, hand, spells)){
-                    val entity = target.entity
-                    if (entity is LivingEntity){
-                        entity.addStatusEffect(StatusEffectInstance(StatusEffects.FIRE_RESISTANCE,effects.duration(level)))
+                    if (target.addStatus(StatusEffects.FIRE_RESISTANCE,effects.duration(level))){
                         world.playSound(null,user.blockPos,SoundEvents.ENTITY_WANDERING_TRADER_DRINK_POTION,SoundCategory.PLAYERS,0.8f,0.8f)
                         return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
                     }
@@ -212,20 +211,14 @@ class BarrierAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         if (result.acted() || !result.success())
             return result
         if (spells.primary() == RegisterEnchantment.CLEANSE){
-            val entity = entityHitResult.entity
-            if (entity is LivingEntity){
-                entity.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,effects.duration(level)))
-            } else {
+            if (!entityHitResult.addStatus(RegisterStatus.IMMUNITY,effects.duration(level))){
                 user.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY,effects.duration(level)))
             }
             return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
         }
         if (othersType.has(AugmentType.BENEFICIAL) && othersType.has(AugmentType.ENTITY)){
-            val target = entityHitResult.entity
-            if (target is LivingEntity){
-                EffectQueue.addStatusToQueue(target, StatusEffects.ABSORPTION, 400, 0)
+            if (entityHitResult.addStatus(StatusEffects.ABSORPTION, 400, 0))
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
         }
         if (othersType.has(AugmentType.PROJECTILE) || othersType.negativeEffect){
             if (!canTarget(entityHitResult, context, world, user, hand, spells)) return SUCCESSFUL_PASS

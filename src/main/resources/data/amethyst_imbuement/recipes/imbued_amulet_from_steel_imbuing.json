@@ -1,0 +1,35 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+	"item": "imbued_ascendancy:steel_amulet"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftH": {
+    "tag": "amethyst_imbuement:focus_reagents"
+  },
+  "title": "Imbued Amulet",
+  "cost": 13,
+  "resultA": "amethyst_imbuement:imbued_amulet",
+  "countA": 1
+}
+

@@ -33,7 +33,7 @@ object RegisterItem {
 
     private val regItem: MutableList<Item> = mutableListOf()
 
-    private fun register(item: Item, name: String): Item{
+    private fun <T: Item> register(item: T, name: String): T{
         if (item is IgnitedGemItem){
             GemOfPromiseItem.register(item)
         }

@@ -38,21 +38,21 @@ object RegisterBlock {
         EntityAttributeModifier(UUID.fromString("279ce6aa-d1c6-11ed-afa1-0242ac120002"),"warding_modifier",0.5,EntityAttributeModifier.Operation.ADDITION),
         WARDING_CANDLE,
         FabricItemSettings()
-    )
+    ),"warding_candle")
     val STEEL_BLOCK = registerBlockOnly(Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)),"steel_block")
     val STEEL_BLOCK_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
         EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.8,EntityAttributeModifier.Operation.ADDITION),
         STEEL_BLOCK,
         FabricItemSettings()
-    )
+    ),"steel_block")
     val BERYL_COPPER_BLOCK = registerBlockOnly(Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"beryl_copper_block")
     val BERYL_COPPER_BLOCK_ITEM = registerItemOnly(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ATTACK_SPEED,
         EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"beryl_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         BERYL_COPPER_BLOCK,
         FabricItemSettings()
-    )
+    ),"beryl_copper_block")
     val CUT_BERYL_COPPER_BLOCK = register(Block(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_block")
     val CUT_BERYL_COPPER_SLAB = register(SlabBlock(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_slab")
     val CUT_BERYL_COPPER_STAIRS = register(StairsBlock(CUT_BERYL_COPPER_BLOCK.defaultState,FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)),"cut_beryl_copper_stairs")
@@ -71,7 +71,7 @@ object RegisterBlock {
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         GLISTENING_ICE,
         FabricItemSettings()
-    )
+    ),"glistening_ice")
 
     val TIGERS_EYE_BLACKSTONE_ORE = register(ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)),"tigers_eye_blackstone_ore")
     val TIGERS_EYE_BASALT_ORE = register(PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)),"tigers_eye_basalt_ore")
@@ -113,34 +113,20 @@ object RegisterBlock {
     val SHINE_LIGHT_RAINBOW = register(ShineLightRainbowBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _, _, _ -> never() }.suffocates { _, _, _ -> never() }),"shine_light_rainbow")
 
     fun registerAll() {
-        for (k in regBlock.keys) {
-            if (k == "experience_bush" || k =="warding_candle" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice") continue
-            registerBlock(k,regBlock[k]?:continue)
-        }
-
-        Registry.register(Registries.BLOCK, AI.identity( "experience_bush"), EXPERIENCE_BUSH)
-        Registry.register(Registries.BLOCK, AI.identity( "warding_candle"), WARDING_CANDLE)
-        Registry.register(Registries.ITEM, AI.identity("warding_candle"), WARDING_CANDLE_ITEM)
-        Registry.register(Registries.BLOCK, AI.identity( "steel_block"), STEEL_BLOCK)
-        Registry.register(Registries.ITEM, AI.identity("steel_block"), STEEL_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, AI.identity( "beryl_copper_block"), BERYL_COPPER_BLOCK)
-        Registry.register(Registries.ITEM, AI.identity("beryl_copper_block"), BERYL_COPPER_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, AI.identity( "glistening_ice"), GLISTENING_ICE)
-        Registry.register(Registries.ITEM, AI.identity("glistening_ice"), GLISTENING_ICE_ITEM)
     }
 
-    private fun register(block:Block, path: String): Block{
+    private fun<T: Block> register(block: T, path: String): T{
         val item = BlockItem(block,FabricItemSettings())
         regBlockItem.add(item)
         Registry.register(Registries.ITEM, AI.identity(path), item)
         return Registry.register(Registries.BLOCK, AI.identity(path), block)
     }
 
-    private fun registerBlockOnly(block:Block, path: String): Block{
+    private fun<T: Block> registerBlockOnly(block: T, path: String): T{
         return Registry.register(Registries.BLOCK, AI.identity(path), block)
     }
 
-    private fun registerItemOnly(item: Item, path: String): Item{
+    private fun<T: Item> registerItemOnly(item: T, path: String): T{
         regBlockItem.add(item)
         return Registry.register(Registries.ITEM, AI.identity(path), item)
     }

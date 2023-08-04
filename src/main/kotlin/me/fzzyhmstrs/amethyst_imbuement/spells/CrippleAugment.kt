@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.removeStatuses
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -163,20 +164,13 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
             }
         }
         if (othersType.positiveEffect){
-            val target = entityHitResult.entity
-            if (target is LivingEntity) {
-                target.removeStatusEffect(StatusEffects.SLOWNESS)
-                target.removeStatusEffect(StatusEffects.WEAKNESS)
+            if (entityHitResult.removeStatuses(StatusEffects.SLOWNESS,StatusEffects.WEAKNESS))
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
         }
         if (spells.primary() == RegisterEnchantment.FORTIFY){
-            val target = entityHitResult.entity
-            if (target is LivingEntity){
-                target.removeStatusEffect(StatusEffects.WEAKNESS)
-                target.removeStatusEffect(StatusEffects.SLOWNESS)
-            }
-
+            if (entityHitResult.removeStatuses(StatusEffects.SLOWNESS,StatusEffects.WEAKNESS))
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            TODO()
         }
 
 

@@ -6,6 +6,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffect
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
@@ -50,6 +52,25 @@ object SpellHelper {
             }
         }
         return friendlyEntityList
+    }
+
+    fun EntityHitResult.addStatus(effect: StatusEffect, duration: Int, amplifier: Int = 0): Boolean{
+        val chk = this.entity
+        if (chk is LivingEntity){
+            return chk.addStatusEffect(StatusEffectInstance(effect,duration, amplifier))
+        }
+        return false
+    }
+
+    fun EntityHitResult.removeStatuses(vararg statuses: StatusEffect): Boolean{
+        val chk = this.entity
+        if (chk is LivingEntity){
+            for (status in statuses){
+                chk.removeStatusEffect(status)
+            }
+            return true
+        }
+        return false
     }
     
 }

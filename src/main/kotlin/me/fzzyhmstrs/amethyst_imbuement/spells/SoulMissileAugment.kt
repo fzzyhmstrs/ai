@@ -1,24 +1,46 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlF
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
 import net.minecraft.world.World
+import kotlin.math.max
+import kotlin.math.min
 
 class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     override val augmentData: AugmentDatapoint =
@@ -59,7 +81,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         othersType: AugmentType,
         spells: PairedAugments
     ): PerLvlF {
-        if (spells.spellsAreEqual()){
+        if (spells.spellsAreEqual())
             return damage.plus(0f,0f,20f)
         return damage
     }
@@ -79,7 +101,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.MAGIC)
     }
     
-    open fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int = 1, effects: AugmentEffect, spells: PairedAugments, count: Int)
+    override fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments, count: Int)
     : 
     List<ProjectileEntity>
     where 
@@ -109,8 +131,8 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         effects: AugmentEffect,
         othersType: AugmentType,
         spells: PairedAugments
-    ): 
-    SpellActionResult
+    ):
+            SpellActionResult
     where 
     T: LivingEntity,
     T: SpellCastingEntity
@@ -121,54 +143,60 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         if (spells.spellsAreEqual()){
             return burst(world, entityHitResult, context, source, user, level, effects, spells)
         }
+        if (othersType.positiveEffect)
+            entityHitResult.addStatus(RegisterStatus.SOUL_SHIELD,effects.duration(level), min(effects.amplifier(level),4))
+        if (othersType.negativeEffect)
+            entityHitResult.addStatus(RegisterStatus.SOUL_SHIELD,effects.duration(level), max((effects.amplifier(level) + 1) * -1,-5))
+        return SUCCESSFUL_PASS
     }
 
      override fun <T> onBlockHit(
-        blockHitResult: BlockHitResult,
-        context: ProcessContext,
-        world: World,
-        source: Entity?,
-        user: T,
-        hand: Hand,
-        level: Int,
-        effects: AugmentEffect,
-        othersType: AugmentType,
-        spells: PairedAugments
+         blockHitResult: BlockHitResult,
+         context: ProcessContext,
+         world: World,
+         source: Entity?,
+         user: T,
+         hand: Hand,
+         level: Int,
+         effects: AugmentEffect,
+         othersType: AugmentType,
+         spells: PairedAugments
     )
-    : 
-    SpellActionResult 
+    :
+             SpellActionResult
     where 
     T: LivingEntity,
     T: SpellCastingEntity
     {
-        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
         if (spells.spellsAreEqual()){
             return burst(world, blockHitResult, context, source, user, level, effects, spells)
         }
+        return SUCCESSFUL_PASS
     }
 
-    private fun <T> burst(world: World, hitResult: HitResult: Vec3d, context: ProcessContext, source: Entity?, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments): SpellActionResult
+    private fun <T> burst(world: World, hitResult: HitResult, context: ProcessContext, source: Entity?, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments): SpellActionResult
     where 
     T: LivingEntity,
     T: SpellCastingEntity
     {
         val range = effects.range(level)
         val pos = hitResult.pos
-        val box = Box(pos.x + range, posy + range, pos.z + range, pos.x - range, pos.y - range, pos.z - range)
+        val box = Box(pos.x + range, pos.y + range, pos.z + range, pos.x - range, pos.y - range, pos.z - range)
         val entities = (if (hitResult is EntityHitResult) world.getOtherEntities(hitResult.entity, box) else world.getOtherEntities(null, box)).stream().filter{ it !== user && it is LivingEntity }.map {it -> it as LivingEntity}
         var successes = 0
         var killed = false
         entities.forEach { entity ->
             val hit = EntityHitResult(entity)
             val damageSource = spells.provideDamageSource(context, hit, source, user, world, Hand.MAIN_HAND, level, effects)
-            val amount = 0.4f * spells.provideDealtDamage(effects.damage(level), context, hit, user, world, hand, level, effects)
+            val amount = 0.4f * spells.provideDealtDamage(effects.damage(level), context, hit, user, world, Hand.MAIN_HAND, level, effects)
             val bl = entity.damage(damageSource, amount)
             if (bl){
-                if (!entity.isAlive()) killed = true
-                val pos = source?.pos?:entity.pos
-                splashParticles(hit,world,entity.pos.x,entity.pos.y + entity.height/2.0,entity.pos.z,spells)
+                if (!entity.isAlive) killed = true
+                val pos2 = source?.pos?:entity.pos.add(0.0,entity.height/2.0,0.0)
+                splashParticles(hit,world,pos2.x,pos2.y,pos2.z,spells)
                 user.applyDamageEffects(user,entity)
                 successes++
             }
@@ -184,11 +212,19 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         }
     }
 
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SOUL
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SOUL
+    }
+
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos, SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, SoundCategory.PLAYERS, 0.5f, 1f)
+    }
+
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
         world.playSound(null,blockPos, SoundEvents.ENTITY_ENDER_DRAGON_SHOOT, SoundCategory.PLAYERS, 1f, 1f)
-    }
-    
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_ENDER_DRAGON_SHOOT
     }
 }
