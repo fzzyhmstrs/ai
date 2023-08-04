@@ -15,7 +15,6 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
@@ -181,14 +180,8 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
         if (result.acted() || !result.success())
             return result
         if (spells.primary() == RegisterEnchantment.INSPIRING_SONG){
-            val entity = entityHitResult.entity
-            if (entity is ModifiableEffectMobOrPlayer){
-                entity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.DAMAGE, ModifiableEffects.ECHO_EFFECT, effects.duration(level))
+            if(entityHitResult.addEffect(ModifiableEffectEntity.DAMAGE, ModifiableEffects.ECHO_EFFECT, effects.duration(level)))
                 return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            } else if (entity is ModifiableEffectEntity){
-                entity.addTemporaryEffect(ModifiableEffectEntity.DAMAGE, ModifiableEffects.ECHO_EFFECT, effects.duration(level))
-                return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
         }
         if (spells.primary() == RegisterEnchantment.FORTIFY){
             val bl = entityHitResult.addEffect(ModifiableEffectEntity.DAMAGE, ModifiableEffects.ECHO_EFFECT, effects.duration(level))
