@@ -89,12 +89,7 @@ class AbundanceAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_AREA) 
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.BLOCK_TRIGGER)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.AMPLIFIER_TRIGGER)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.ON_KILL_TRIGGER)

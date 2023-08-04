@@ -22,6 +22,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addEffect
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.StunningExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -141,12 +142,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player,SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.STAT_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.LIGHTNING_TRIGGER)
@@ -270,12 +266,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
                 return FAIL
             }
         } else if (spells.primary() == RegisterEnchantment.INSPIRING_SONG){
-            if (livingEntity is ModifiableEffectEntity) {
-                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.CHAIN_LIGHTNING_EFFECT, effects.duration(level))
+            if (entityHitResult.addEffect(ModifiableEffectEntity.TICK, ModifiableEffects.CHAIN_LIGHTNING_EFFECT, effects.duration(level))){
                 (livingEntity as? LivingEntity)?.addStatusEffect(StatusEffectInstance(StatusEffects.HASTE,effects.duration(level)))
-                return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            } else if (livingEntity is ModifiableEffectMobOrPlayer) {
-                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.CHAIN_LIGHTNING_EFFECT, effects.duration(level))
                 return SpellActionResult.overwrite(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             }
         }
@@ -286,13 +278,8 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             }
         }
         if (othersType.positiveEffect){
-            if (livingEntity is ModifiableEffectEntity) {
-                livingEntity.addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400)
+            if (entityHitResult.addEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400))
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            } else if (livingEntity is ModifiableEffectMobOrPlayer) {
-                livingEntity.amethyst_imbuement_addTemporaryEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT, 400)
-                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            }
         }
 
         return SUCCESSFUL_PASS

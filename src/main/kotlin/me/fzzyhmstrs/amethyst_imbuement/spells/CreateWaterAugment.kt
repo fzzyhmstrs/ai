@@ -32,12 +32,7 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {

@@ -1,9 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.pieces
 
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffect
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.interfaces.ModifiableEffectMobOrPlayer
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect
@@ -12,6 +15,7 @@ import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
 
 object SpellHelper {
@@ -68,6 +72,18 @@ object SpellHelper {
             for (status in statuses){
                 chk.removeStatusEffect(status)
             }
+            return true
+        }
+        return false
+    }
+
+    fun EntityHitResult.addEffect(type: Identifier,effect: ModifiableEffect, duration: Int = -1): Boolean{
+        val chk = this.entity
+        if (chk is ModifiableEffectMobOrPlayer){
+            chk.amethyst_imbuement_addTemporaryEffect(type, effect, duration)
+            return true
+        } else if (chk is ModifiableEffectEntity){
+            chk.addTemporaryEffect(type, effect, duration)
             return true
         }
         return false

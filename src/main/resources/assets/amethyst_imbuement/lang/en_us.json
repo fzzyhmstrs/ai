@@ -1094,9 +1094,9 @@
 	"enchantment.amethyst_imbuement.resonate.inspiring_song": "Song of Echoes",
 	"enchantment.amethyst_imbuement.resonate.inspiring_song.desc": "Stacks Resonating on all nearby enemies, and all friendly targets stack Resonating and deal increased damage.",
 	"enchantment.amethyst_imbuement.resonate.desc.damage": "Damage is increased by 1 with each stack of Resonating.",
-	"enchantment.amethyst_imbuement.resonate.desc.damage2": "Dealing damage adds 1 stack of Resonating to a target per hit.",
+	"enchantment.amethyst_imbuement.resonate.desc.damage2": "Dealing damage has a 50% chance to add 1 stack of Resonating to a target.",
 	"enchantment.amethyst_imbuement.resonate.desc.amplifier": "Spell effect amplification is increased 2 levels.",
-	"enchantment.amethyst_imbuement.resonate.desc.summons": "Summoned mobs stack Resonating on their targets when they deal damage.",
+	"enchantment.amethyst_imbuement.resonate.desc.summons": "Summoned mobs have a chance to apply Resonating stacks when they deal damage.",
 
 	"enchantment.amethyst_imbuement.shine": "Shine",
 	"enchantment.amethyst_imbuement.shine.double": "Enhanced Shine",

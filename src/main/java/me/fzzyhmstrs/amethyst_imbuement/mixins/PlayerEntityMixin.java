@@ -69,8 +69,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Modifiab
     public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
             ci.cancel();
-        } else {
-            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, target, processContext);
         }
     }
 

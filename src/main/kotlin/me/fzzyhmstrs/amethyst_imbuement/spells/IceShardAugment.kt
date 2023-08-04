@@ -16,11 +16,13 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -50,6 +52,10 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         return arrayOf(pairedSpell.provideNoun(this))
     }
 
+    override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DURATION_TRIGGER)
+    }
 
     override fun <T> createProjectileEntities(
         world: World,

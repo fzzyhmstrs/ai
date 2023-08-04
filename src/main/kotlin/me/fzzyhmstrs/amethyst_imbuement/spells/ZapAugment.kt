@@ -88,12 +88,7 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.LIGHTNING_TRIGGER)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.RANGE_TRIGGER)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.STUNNED_TRIGGER)

@@ -98,15 +98,16 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
     }
 
     @Inject(method = "onAttacking", at = @At("HEAD"))
-    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
-        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, null, processContext);
+    public void amethyst_imbuement_onMobAttack(Entity target, CallbackInfo ci) {
+        if (((LivingEntity)(Object)this) instanceof MobEntity || ((LivingEntity)(Object)this) instanceof PlayerEntity) {
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getDAMAGE(), this, target, processContext);
+        }
     }
 
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"), cancellable = true)
-    public void onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci) {
+    public void amethyst_imbuement_onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-
         if (livingEntity.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())) {
             ci.cancel();
         }
@@ -153,6 +154,16 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
                 RegisterItem.INSTANCE.getINQUISITIVE_GEM().inquisitiveGemCheck(stack2,inventory,effect.getEffectType());
             }
         }
+    }
+
+    @WrapOperation(method = "applyDamage", at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.applyArmorToDamage (Lnet/minecraft/entity/damage/DamageSource;F)F"))
+    private float amethyst_core_applyMultiplicationAttributeToDamage(LivingEntity instance, DamageSource source, float amount, Operation<Float> operation){
+        float newAmount = instance.hasStatusEffect(RegisterStatus.INSTANCE.getRESONATING())
+                ?
+                amount + 1f + instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier()
+                :
+                amount;
+        return operation.call(instance,source,newAmount);
     }
 
     @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)

@@ -40,12 +40,7 @@ class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

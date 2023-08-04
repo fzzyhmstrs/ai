@@ -64,12 +64,7 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
-        if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
     private val hailDelay = PerLvlF(20f,-0.5f,0f)

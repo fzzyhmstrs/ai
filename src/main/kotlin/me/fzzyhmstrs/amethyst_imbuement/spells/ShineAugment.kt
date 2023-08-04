@@ -123,11 +123,8 @@ class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
-        if (pair.spellsAreEqual()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DOUBLE_TRIGGER)
-        }
+        SpellAdvancementChecks.uniqueOrDouble(player, pair)
         if (pair.spellsAreUnique()){
-            SpellAdvancementChecks.grant(player, SpellAdvancementChecks.UNIQUE_TRIGGER)
             SpellAdvancementChecks.grant(player, SpellAdvancementChecks.MANA_COST_TRIGGER)
         }
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)

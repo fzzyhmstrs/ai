@@ -17,6 +17,7 @@ object ModifiableEffects {
     val CALL_HOSTILES_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("call_hostiles_effect")) {entity,owner,context-> BodySwapEffect.callHostiles(entity,owner,context)}
     val CALL_SUMMONS_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("call_summons_effect")) {entity,owner,context-> BodySwapEffect.callSummons(entity,owner,context)}
     val SHINE_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shine_effect")) {entity,owner,context-> ShineEffect.shine(entity,owner,context)}
+    val ECHO_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("echo_effect")) {entity,owner,context-> EchoingEffect.resonate(entity,owner,context)}
     fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): MutableList<LivingEntity>{
         if (list.isNotEmpty()){
             val listTmp: MutableList<LivingEntity> = mutableListOf()
