@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
@@ -43,6 +45,22 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
+    }
+
+    override fun <T> createProjectileEntities(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments,
+        count: Int
+    ): List<ProjectileEntity> where T : SpellCastingEntity,T : LivingEntity {
+        val list: MutableList<ProjectileEntity> = mutableListOf()
+        for (i in 1..count){
+            val wse = PlayerWitherSkullEntity()
+        }
+        return list
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
