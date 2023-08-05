@@ -12,20 +12,23 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.WitherSkullEntity
 import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import kotlin.math.sqrt
+import net.minecraft.world.event.GameEvent
 
 open class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerWitherSkullEntity?>, world: World): super(entityType, world)
-    constructor(world: World, owner: LivingEntity, directionX: Double, directionY: Double, directionZ: Double): super(RegisterEntity.PLAYER_WITHER_SKULL, world){
+    constructor(world: World, owner: LivingEntity, direction: Vec3d): super(RegisterEntity.PLAYER_WITHER_SKULL, world){
         this.owner = owner
-        this.refreshPositionAndAngles(owner.x, owner.y, owner.z, owner.yaw, owner.pitch)
-        val d = sqrt(directionX * directionX + directionY * directionY + directionZ * directionZ)
+        this.refreshPositionAndAngles(owner.x, owner.eyeY - 0.2, owner.z, owner.yaw, owner.pitch)
+        val d = direction.length()
         if (d != 0.0){
-            powerX = directionX / d * 0.1
-            powerY = directionY / d * 0.1
-            powerZ = directionZ / d * 0.1
+            powerX = direction.x / d * 0.1
+            powerY = direction.y / d * 0.1
+            powerZ = direction.z / d * 0.1
         }
     }
 
@@ -38,6 +41,25 @@ open class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     override fun tick() {
         super.tick()
         tickTickEffects(this, owner, processContext)
+    }
+
+    override fun onCollision(hitResult: HitResult) {
+        processContext.beforeRemoval()
+        val type = hitResult.type
+        if (type == HitResult.Type.ENTITY) {
+            onEntityHit((hitResult as EntityHitResult?)!!)
+            world.emitGameEvent(GameEvent.PROJECTILE_LAND, hitResult.pos, GameEvent.Emitter.of(this, null))
+        } else if (type == HitResult.Type.BLOCK) {
+            val blockHitResult = hitResult as BlockHitResult
+            onBlockHit(blockHitResult)
+            val blockPos = blockHitResult.blockPos
+            world.emitGameEvent(GameEvent.PROJECTILE_LAND, blockPos, GameEvent.Emitter.of(this, world.getBlockState(blockPos)))
+        }
+        val entity = this.owner
+        if (!world.isClient && entity is LivingEntity?) {
+            spells.causeExplosion(processContext,this,entity,world,Hand.MAIN_HAND,level,entityEffects)
+            discard()
+        }
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {

@@ -30,10 +30,10 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     private void amethyst_imbuement_transferDisenchantNbt(Map<Enchantment, Integer> enchantments, ItemStack stack, Operation<Void> operation){
         ItemStack stack2 = this.input.getStack(1);
         NbtCompound nbt2 = stack2.getNbt();
-        if (nbt2 != null && nbt2.contains(NbtKeys.DISENCHANT_COUNT.str())){
+        if (nbt2 != null && nbt2.contains(NbtKeys.INSTANCE.getDISENCHANT_COUNT())){
             NbtCompound nbt = stack.getOrCreateNbt();
-            int lvl = nbt2.getInt(NbtKeys.DISENCHANT_COUNT.str());
-            nbt.putInt(NbtKeys.DISENCHANT_COUNT.str(), lvl);
+            int lvl = nbt2.getInt(NbtKeys.INSTANCE.getDISENCHANT_COUNT());
+            nbt.putInt(NbtKeys.INSTANCE.getDISENCHANT_COUNT(), lvl);
         }
         operation.call(enchantments, stack);
     }

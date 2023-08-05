@@ -1,9 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.block.Block
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.BlockItem
+import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.text.MutableText
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
+import net.minecraft.world.World
 
 class SpellcastersReagentBlockItem(
     private val attribute: EntityAttribute,
@@ -30,7 +39,7 @@ class SpellcastersReagentBlockItem(
         makeFlavorTextDesc()
     }
     
-    private fun makeFlavorText(): MutableText{
+    private fun makeFlavorText(): MutableText {
         val id = Registries.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor"
         val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
@@ -38,7 +47,7 @@ class SpellcastersReagentBlockItem(
         return text
     }
     
-    private fun makeFlavorTextDesc(): MutableText{
+    private fun makeFlavorTextDesc(): MutableText {
         val id = Registries.ITEM.getId(this)
         val key = "item.${id.namespace}.${id.path}.flavor.desc"
         val text = AcText.translatable(key).formatted(Formatting.WHITE)
@@ -59,14 +68,14 @@ class SpellcastersReagentBlockItem(
         }
     }
     
-    override fun flavorText(): MutableText{
+    override fun flavorText(): MutableText {
         return flavorText
     }
-    override fun flavorDescText(): MutableText{
+    override fun flavorDescText(): MutableText {
         return flavorTextDesc
     }
 
-    override fun getFlavorItem(): CustomFlavorItem {
+    override fun getFlavorItem(): SpellcastersReagentBlockItem {
         return this
     }
 
