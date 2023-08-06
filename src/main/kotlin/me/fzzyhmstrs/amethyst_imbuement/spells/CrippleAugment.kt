@@ -54,9 +54,6 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
 
-
-
-
         when(other) {
             RegisterEnchantment.FORTIFY ->
                 description.addLang("enchantment.amethyst_imbuement.cripple.fortify.desc",SpellAdvancementChecks.UNIQUE)

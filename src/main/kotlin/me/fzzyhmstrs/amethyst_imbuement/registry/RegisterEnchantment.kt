@@ -17,12 +17,13 @@ import net.minecraft.registry.Registry
 object RegisterEnchantment {
 
     private fun <T: Enchantment> register(e: T, name: String): T{
+        val id = AI.identity(name)
         if (e is AbstractConfigDisableEnchantment){
             if (!e.isEnabled()){
                 LOGGER.info("Augment $id is set as disabled in the configs!")
             }
         }
-        return Registry.register(Registries.ENCHANTMENT,AI.identity(name), e)
+        return Registry.register(Registries.ENCHANTMENT,id, e)
     }
     
     //vanilla style enchantments
@@ -151,10 +152,7 @@ object RegisterEnchantment {
     val WITHERING_BOLT = register(WitheringBoltAugment(),"withering_bolt")
     val ZAP = register(ZapAugment(),"zap")
 
-    val DEBUG = DebugAugment(),"debug")
+    val DEBUG = register(DebugAugment(),"debug")
 
-    private fun checkConfig(check: String, enchant: Enchantment){
-        regEnchant[check] = enchant
-    }
     fun registerAll(){}
 }

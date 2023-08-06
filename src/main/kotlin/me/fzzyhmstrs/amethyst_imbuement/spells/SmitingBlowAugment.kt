@@ -1,6 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
@@ -16,13 +19,16 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.LivingEntity
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
@@ -31,6 +37,8 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
@@ -45,6 +53,17 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
             .withDamage(4.5F,0.5F)
             .withRange(7.5,0.5)
             .withAmplifier(2)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         TODO("Not yet implemented")
@@ -71,9 +90,43 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
         spells: PairedAugments
     ): Float where T : SpellCastingEntity, T : LivingEntity {
         val entity = entityHitResult.entity
-        if (entity is LivingEntity && entity.group == EntityGroup.UNDEAD)
+        if (entity is LivingEntity && entity.group == EntityGroup.UNDEAD && !context.get(ContextData.CRIT))
             return amount * 1.5f
         return amount
+    }
+
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if (othersType.empty){
+            if (!canTarget(entityHitResult, context, world, user, hand, spells)) return FAIL
+            val damage = spells.provideDealtDamage(effects.damage(level),context, entityHitResult, user, world, hand, level, effects)
+            val damageSource = spells.provideDamageSource(context, entityHitResult, source, user, world, hand, level, effects)
+            val bl = entityHitResult.entity.damage(damageSource,damage)
+            if (bl){
+                val pos = entityHitResult.entity.eyePos
+                splashParticles(entityHitResult,world,pos.x,pos.y + 0.2,pos.z,spells)
+                splashParticles(entityHitResult,world,pos.x,pos.y,pos.z,spells)
+                splashParticles(entityHitResult,world,pos.x,pos.y - 0.2,pos.z,spells)
+                user.applyDamageEffects(user,entityHitResult.entity)
+                if (entityHitResult.entity.isAlive) {
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB)
+                } else {
+                    spells.processOnKill(entityHitResult, context, world, source, user, hand, level, effects)
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB, AugmentHelper.KILLED_MOB)
+                }
+            }
+        }
+        return SUCCESSFUL_PASS
     }
 
     override fun supportEffect(
@@ -109,51 +162,15 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
         }
     }
 
-    private fun sendParticles(pos: Vec3d, user: ServerPlayerEntity){
-        val buf = PacketByteBufs.create()
-        buf.writeDouble(pos.x)
-        buf.writeDouble(pos.y)
-        buf.writeDouble(pos.z)
-        ServerPlayNetworking.send(user, SMITE_PARTICLES, buf)
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SPIT
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_ELDER_GUARDIAN_HURT
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SPIT
     }
 
-    companion object{
-        private val SMITE_PARTICLES = AI.identity("smite_particles")
-        fun registerClient(){
-            ClientPlayNetworking.registerGlobalReceiver(SMITE_PARTICLES){client,_,buf,_ ->
-                val world = client.world ?: return@registerGlobalReceiver
-                val posX = buf.readDouble()
-                val posY = buf.readDouble()
-                val posZ = buf.readDouble()
-                client.execute {
-                    generateParticles(world, Vec3d(posX, posY, posZ))
-                }
-            }
-        }
-        private fun generateParticles(world: World, pos: Vec3d){
-            val random = AIClient.aiRandom()
-            for (i in 1..16){
-                val rnd1 =  random.nextDouble() - 0.5
-                val rnd2 = random.nextDouble() - 0.5
-                val rnd3 = -1.5 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.3,pos.z + rnd2,0.0,rnd3,0.0)
-            }
-            for (i in 1..16){
-                val rnd1 = random.nextDouble() - 0.5
-                val rnd2 = random.nextDouble() - 0.5
-                val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.0,pos.z + rnd2,0.0,rnd3,0.0)
-            }
-            for (i in 1..16){
-                val rnd1 = random.nextDouble() - 0.5
-                val rnd2 = random.nextDouble() - 0.5
-                val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
-                world.addParticle(ParticleTypes.SPIT,true,pos.x +rnd1,pos.y + 2.6,pos.z + rnd2,0.0,rnd3,0.0)
-            }
-        }
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_ELDER_GUARDIAN_HURT,SoundCategory.PLAYERS,1f,1f)
     }
 }
