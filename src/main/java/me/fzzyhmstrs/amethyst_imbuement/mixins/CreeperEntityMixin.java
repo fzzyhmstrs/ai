@@ -20,8 +20,6 @@ import java.util.function.Predicate;
 @Mixin(CreeperEntity.class)
 public class CreeperEntityMixin extends MobEntity {
 
-
-
     @SuppressWarnings("unused")
     protected CreeperEntityMixin(EntityType<? extends MobEntity> entityType, World world, GoalSelector goalSelector) {
         super(entityType, world);

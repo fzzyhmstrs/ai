@@ -333,6 +333,9 @@ object AiConfig
         
         @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
         var disableIncreaseMaxLevels = ValidatedBoolean(false)
+
+        @ReadMeText("readme.enchants.enableSpellProgression")
+        var disableSpellProgression = ValidatedBoolean(false)
         
         @ReadMeText("readme.enchants.enabledEnchants")
         var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Identifier.tryParse(id) != null}, invalidEntryMessage = "Needs a valid registered enchantment identifier.")
