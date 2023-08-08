@@ -44,7 +44,7 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
             .withRange(7.0,1.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        description.addLang("")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
