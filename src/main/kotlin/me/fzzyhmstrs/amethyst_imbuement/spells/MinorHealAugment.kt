@@ -35,6 +35,11 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(2.5F,0.5F,0.0F)
 
+    override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
+            : Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return SpellHelper.friendlyTarget(entityHitResult.entity,user,this)
+    }
+        
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
     }
