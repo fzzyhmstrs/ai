@@ -70,8 +70,11 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         if ((othersType.empty || spells.spellsAreEqual())) {
             val bl = entityHitResult.addStatus(StatusEffects.RESISTANCE, effect.duration(level), max(effect.amplifier((level-1)/4+3),3))
-            if (bl && entityHitResult.addStatus(StatusEffects.STRENGTH, effect.duration(level), max(effect.amplifier((level-1)/4+3),3))
-            return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            if (bl && entityHitResult.addStatus(StatusEffects.STRENGTH, effect.duration(level), max(effect.amplifier((level-1)/4+3),3)){
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else {
+                return FAIL
+            }
         }
         return SUCCESSFUL_PASS
     }
