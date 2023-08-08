@@ -69,7 +69,7 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
                 entity.heal(effects.damage(level))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             } else {
-                FAIL
+                return FAIL
             }
         }
         return SUCCESSFUL_PASS
