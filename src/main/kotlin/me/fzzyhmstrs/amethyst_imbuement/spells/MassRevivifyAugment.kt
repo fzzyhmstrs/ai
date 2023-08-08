@@ -40,11 +40,11 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
             .withDuration(80,180,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        TODO("Not yet implemented")
+        return SpellHelper.friendlyFilter(list, user, this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -55,41 +55,67 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun effect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        user: LivingEntity,
-        entityList: MutableList<Entity>,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effect: AugmentEffect
-    ): Boolean {
-        var successes = 0
-        if (entityList.isEmpty()){
-            successes++
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
-            EffectQueue.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
-            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        }
-        entityList.add(user)
-        for (entity3 in entityList) {
-            if(entity3 !is Monster && entity3 is LivingEntity){
-                if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+            var successes = 0
+            var bl = entityHitResult.addStatus(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
+            if(bl && entityHitResult.addStatus(StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level)))
                 successes++
-                EffectQueue.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
-                EffectQueue.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))
-                effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
+            if (entity.health < entity.maxHealth){
+                entity.heal(effects.damage(level))
+                successes++
+            }
+            val statuses: MutableList<StatusEffectInstance> = mutableListOf()
+            if (statuses.isNotEmpty()){
+                for (effect in entity.statusEffects) {
+                    if (effect.effectType.isBeneficial) {
+                        if ((effect.effectType == RegisterStatus.CURSED && !spells.spellsAreEqual()) || effect.effectType != RegisterStatus.CURSED)
+                            continue
+                    }
+                    statuses.add(effect)
+                }
+                for (effect in statuses) {
+                    entity.removeStatusEffect(effect.effectType)
+                }
+                entity.fireTicks = 0
+                EffectQueue.addStatusToQueue(
+                    entity,
+                    RegisterStatus.IMMUNITY,
+                    effects.duration(level),
+                    effects.amplifier(level)
+                )
+                successes++
+            }
+            return if (successes > 0){
+                SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else {
+                FAIL
             }
         }
-        //removing consumers from the main effect so that I don't get triplicate beneficial consumer effects
-        val passedEffect = AugmentEffect()
-        passedEffect.plus(effect)
-        passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.BENEFICIAL)
-        passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.HARMFUL)
-        RegisterEnchantment.MASS_CLEANSE.effect(world, user, entityList, level, passedEffect)
-        RegisterEnchantment.MASS_HEAL.effect(world, user, entityList, level, passedEffect)
-        return successes > 0
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_ILLUSIONER_PREPARE_BLINDNESS
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.COMPOSTER
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.COMPOSTER
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_ILLUSIONER_PREPARE_BLINDNESS,SoundCategory.PLAYERS,1f,1f)
     }
 }
