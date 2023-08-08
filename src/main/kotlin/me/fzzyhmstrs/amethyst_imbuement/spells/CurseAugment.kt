@@ -118,29 +118,34 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         return SUCCESSFUL_PASS
     }
 
-    override fun supportEffect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        return if(target != null) {
-            if (target is Monster || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                EffectQueue.addStatusToQueue(
-                    target as LivingEntity,
-                    RegisterStatus.CURSED,
-                    effects.duration(level),
-                    (effects.amplifier(level + 1)/4) + 1)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.HARMFUL)
-                true
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            if (entityHitResult.addStatus(RegisterStatus.CURSED,effects.duration(level),(effects.amplifier(level + 1)/4) + 1))) {
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             } else {
-                false
+                return FAIL
             }
-        } else {
-            false
         }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SMOKE
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SMOKE
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
