@@ -36,7 +36,7 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
         get() = super.baseEffect.withDamage(2.5F,0.5F,0.0F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -46,30 +46,40 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
-
-    override fun supportEffect(
+    
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                val healthCheck = (target as LivingEntity).health
-                target.heal(effects.damage(level))
-                if (target.health == healthCheck) return false
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                return true
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+            if (entity.health < entity.maxHealth){
+                entity.heal(effects.damage(level))
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            } else {
+                FAIL
             }
         }
+        return SUCCESSFUL_PASS
+    }
 
-        val healthCheck = user.health
-        user.heal(effects.damage(level))
-        if (user.health == healthCheck) return false
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-        effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-        return true
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.RED_DUST
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.RED_DUST
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_BEACON_ACTIVATE,SoundCategory.PLAYERS,1f,1f)
     }
 }
