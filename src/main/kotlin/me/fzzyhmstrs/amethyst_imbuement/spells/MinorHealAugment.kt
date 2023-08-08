@@ -68,7 +68,7 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
         if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
             if (entity.health < entity.maxHealth){
                 entity.heal(effects.damage(level))
-                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
             } else {
                 return FAIL
             }
