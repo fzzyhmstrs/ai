@@ -65,7 +65,7 @@ class MinorHealAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
                 entity.heal(effects.damage(level))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             } else {
-                FAIL
+                return FAIL
             }
         }
         return SUCCESSFUL_PASS
