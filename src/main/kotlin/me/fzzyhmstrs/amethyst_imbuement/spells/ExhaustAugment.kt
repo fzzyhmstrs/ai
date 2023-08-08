@@ -38,7 +38,7 @@ class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
             .withAmplifier(0,1,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -49,33 +49,36 @@ class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun supportEffect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        return if(target != null) {
-            if (target is Monster || target is HostileEntity || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                EffectQueue.addStatusToQueue(
-                    target as LivingEntity,
-                    StatusEffects.SLOWNESS,
-                    effects.duration(level),
-                    effects.amplifier(level+ 1)/2)
-                EffectQueue.addStatusToQueue(
-                    target,
-                    StatusEffects.WEAKNESS,
-                    effects.duration(level),
-                    effects.amplifier(level)/2)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.HARMFUL)
-                true
-            } else {
-                false
-            }
-        } else {
-            false
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            var bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+1)/2)
+            if(bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level)/2))
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
         }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.WITCH
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.WITCH
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_PREPARE_ATTACK,SoundCategory.PLAYERS,1f,1f)
     }
 }

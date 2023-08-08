@@ -36,11 +36,11 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
             .withDamage(2.5F,2.5F,0.0F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        return friendlyFilter(list, user)
+        return friendlyFilter(list, user, this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -51,36 +51,39 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun effect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        user: LivingEntity,
-        entityList: MutableList<Entity>,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effect: AugmentEffect
-    ): Boolean {
-        var successes = 0
-        if (entityList.isEmpty()){
-            if (user.health < user.maxHealth){
-                successes++
-                user.heal(effect.damage(level))
-                effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-            }
-        } else {
-            entityList.add(user)
-            for (entity3 in entityList) {
-                if (entity3 !is Monster && entity3 is LivingEntity) {
-                    if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
-                    if (entity3.health == entity3.maxHealth) continue
-                    successes++
-                    entity3.heal(effect.damage(level)/1.25F)
-                    effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
-                }
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+            if (entity.health < entity.maxHealth){
+                entity.heal(effects.damage(level))
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else {
+                return FAIL
             }
         }
-        return successes > 0
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_BEACON_ACTIVATE
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.WAX_ON
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.WAX_ON
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_BEACON_ACTIVATE,SoundCategory.PLAYERS,1f,1f)
     }
 }

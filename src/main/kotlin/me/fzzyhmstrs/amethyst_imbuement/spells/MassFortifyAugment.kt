@@ -41,11 +41,11 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
             .withRange(9.0,1.0,0.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        TODO("Not yet implemented")
+        return SpellHelper.friendlyFilter(list, user, this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -56,6 +56,29 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            val bl = entityHitResult.addStatus(StatusEffects.RESISTANCE, effect.duration(level), max(effect.amplifier((level-1)/4+3),3))
+            if (bl && entityHitResult.addStatus(StatusEffects.STRENGTH, effect.duration(level), max(effect.amplifier((level-1)/4+3),3)){
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else {
+                return FAIL
+            }
+        }
+        return SUCCESSFUL_PASS
+    }
+    
     override fun effect(
         world: World,
         user: LivingEntity,
@@ -85,7 +108,15 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         return successes > 0
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_BEACON_ACTIVATE
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.ENCHANTED_HIT
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.ENCHANTED_HIT
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_BEACON_ACTIVATE,SoundCategory.PLAYERS,1f,1f)
     }
 }

@@ -36,8 +36,13 @@ class WeightlessnessAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(120,40)
 
+    override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
+            : Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return true
+    }
+        
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -48,30 +53,40 @@ class WeightlessnessAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun supportEffect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        if(target != null) {
-            if (target is HostileEntity || !AiConfig.entities.isEntityPvpTeammate(user,target,this) && target is LivingEntity) {
-                (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.LEVITATION, effects.duration(level), 0))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level+2), 0))
-                effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.0F)
-                return true
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            val bl = entityHitResult.addStatus(StatusEffects.LEVITATION, effects.duration(level), 0)
+            if (bl && entityHitResult.addStatus(StatusEffects.SLOW_FALLING, effects.duration(level+2), 0)){
+                entity.heal(effects.damage(level))
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            } else {
+                return FAIL
             }
         }
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.LEVITATION, effects.duration(level), 0))
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level+2), 0))
-        effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.0F)
-        return true
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_SHULKER_BULLET_HIT
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.END_ROD
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.END_ROD
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_SHULKER_BULLET_HIT,SoundCategory.PLAYERS,0.6F, 1.0F)
     }
 }

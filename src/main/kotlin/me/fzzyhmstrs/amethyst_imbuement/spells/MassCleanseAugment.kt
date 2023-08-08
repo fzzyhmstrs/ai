@@ -44,7 +44,7 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
             .withRange(7.0,1.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        description.addLang("")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
@@ -74,6 +74,7 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
         val entity = entityHitResult.entity
         if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
             val statuses: MutableList<StatusEffectInstance> = mutableListOf()
+            if (statuses.isEmpty()) return FAIL
             for (effect in entity.statusEffects) {
                 if (effect.effectType.isBeneficial) {
                     if ((effect.effectType == RegisterStatus.CURSED && !spells.spellsAreEqual()) || effect.effectType != RegisterStatus.CURSED)

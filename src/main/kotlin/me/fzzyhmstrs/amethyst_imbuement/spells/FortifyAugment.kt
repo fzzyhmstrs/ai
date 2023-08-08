@@ -40,7 +40,7 @@ class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         get() = super.baseEffect.withDuration(210,90).withAmplifier(-1,1)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -52,27 +52,27 @@ class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.PROTECTED_TRIGGER)
     }
 
-    override fun supportEffect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3)))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                return true
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if (othersType.empty || spells.spellsAreEqual()) {
+            val bl = entityHitResult.addStatus(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3))
+            if (bl && entityHitResult.addStatus(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))){
+                return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
+            } else {
+                return FAIL
             }
         }
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max((effects.amplifier(level)/4)-1,3)))
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
-        effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-        return true
+        return SUCCESSFUL_PASS
     }
 
     override fun soundEvent(): SoundEvent {

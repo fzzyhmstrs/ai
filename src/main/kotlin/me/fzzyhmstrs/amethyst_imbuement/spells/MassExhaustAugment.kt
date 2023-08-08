@@ -40,11 +40,11 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
             .withAmplifier(0,1,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        TODO("Not yet implemented")
+        return SpellHelper.hostileFilter(list, user, this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -55,33 +55,39 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun effect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        user: LivingEntity,
-        entityList: MutableList<Entity>,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effect: AugmentEffect
-    ): Boolean {
-        if (entityList.isEmpty()) return false
-        var successes = 0
-        for (entity3 in entityList) {
-            if(entity3 is Monster || entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
-                if (entity3 is LivingEntity){
-                    successes++
-                    EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
-                    EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
-                    effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
-                }
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            var bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
+            if(bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))) {
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            } else {
+                return fail
             }
         }
-        val bl = successes > 0
-        if (bl){
-            effect.accept(user,AugmentConsumer.Type.BENEFICIAL)
-        }
-        return bl
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EVOKER_PREPARE_ATTACK
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.WITCH
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.WITCH
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_PREPARE_ATTACK,SoundCategory.PLAYERS,1f,1f)
     }
 }
