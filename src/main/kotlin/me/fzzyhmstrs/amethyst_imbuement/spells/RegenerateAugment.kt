@@ -40,6 +40,11 @@ class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
             .withAmplifier(0)
             .withDamage(-1.0f,0.2f)
 
+    override fun <T> canTarget(entityHitResult: EntityHitResult, context: ProcessContext, world: World, user: T, hand: Hand, spells: PairedAugments)
+            : Boolean where T : SpellCastingEntity, T : LivingEntity {
+        return SpellHelper.friendlyTarget(entityHitResult.entity,user,this)
+    }
+            
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
     }
