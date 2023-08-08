@@ -173,7 +173,7 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
             cir.setReturnValue(false);
         }
         if (((LivingEntity)(Object)this) instanceof MobEntity){
-            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this, null, processContext);
+            modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this, source.getAttacker(), processContext);
         }
         damageSource = source;
     }
@@ -282,7 +282,7 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
     @Inject(method = "onKilledBy", at = @At("HEAD"))
     private void amethyst_imbuement_fireKillEffectsOnKiller(LivingEntity adversary, CallbackInfo ci){
         if (adversary instanceof ModifiableEffectMobOrPlayer && !(adversary instanceof PlayerEntity)){
-            ((ModifiableEffectMobOrPlayer) adversary).amethyst_imbuement_run(ModifiableEffectEntity.Companion.getKILL(), adversary,null, processContext);
+            ((ModifiableEffectMobOrPlayer) adversary).amethyst_imbuement_run(ModifiableEffectEntity.Companion.getKILL(),this ,adversary, processContext);
         }
     }
 }

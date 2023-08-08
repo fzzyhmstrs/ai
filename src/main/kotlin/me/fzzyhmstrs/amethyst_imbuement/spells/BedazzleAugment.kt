@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.ExplosionBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
@@ -20,9 +21,11 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addEffect
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
-import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects.getRndEntityList
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors.BedazzlingExplosionBehavior
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -108,7 +111,7 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
                 hostileEntities.add(entity2)
             }
         }
-        hostileEntities = getRndEntityList(world,hostileEntities.toMutableList(),level)
+        hostileEntities = SpellHelper.getRndEntityList(world,hostileEntities.toMutableList(),level)
         val merchantEntities: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
             if (entity2 is VillagerEntity){
@@ -137,6 +140,8 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
             val tier = other.getTier()
             description.addLang("enchantment.amethyst_imbuement.bedazzle.desc.damage", arrayOf(tier), SpellAdvancementChecks.STUNS)
         }
+        if (othersType.has(AugmentType.EXPLODES))
+            description.addLang("enchantment.amethyst_imbuement.bedazzle.desc.explodes", SpellAdvancementChecks.STUNS.or(SpellAdvancementChecks.EXPLODES))
         if (othersType.positiveEffect) {
             description.addLang("enchantment.amethyst_imbuement.bedazzle.desc.beneficial", SpellAdvancementChecks.STUNS)
         } else if (othersType.has(AugmentType.SUMMONS)) {
@@ -214,7 +219,11 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
                 }
             }
         }
-        if (othersType.empty || spells.spellsAreEqual()) {
+        if (spells.primary() == RegisterEnchantment.PERSUADE){
+            entityHitResult.addEffect(ModifiableEffectEntity.TICK,ModifiableEffects.DRAW_AGGRO_EFFECT,effects.duration(level))
+            return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+        }
+        if (othersType.empty || spells.spellsAreEqual()){
             val entity = entityHitResult.entity
             if (entity is Monster && entity !is WitherEntity && entity is MobEntity) {
                 if (spells.spellsAreEqual()) {
@@ -256,10 +265,23 @@ class BedazzleAugment: EntityAoeAugment(ScepterTier.TWO, false) {
     U : LivingEntity
     {
         for (summon in summons){
-            summon.addEffect(ModifiableEffectEntity.TICK, ModifiableEffects.SHOCKING_EFFECT)
-            summon.addEffect(ModifiableEffectEntity.ON_REMOVED, ModifiableEffects.SHOCKING_EFFECT)
+            summon.addEffect(ModifiableEffectEntity.TICK, ModifiableEffects.DRAW_AGGRO_EFFECT)
         }
         return summons
+    }
+
+    override fun modifyExplosion(
+        builder: ExplosionBuilder,
+        context: ProcessContext,
+        user: LivingEntity?,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): ExplosionBuilder {
+        return builder.withCustomBehavior(BedazzlingExplosionBehavior())
     }
 
     override fun castParticleType(): ParticleEffect? {

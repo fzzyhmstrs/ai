@@ -23,12 +23,15 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -138,6 +141,10 @@ class CleanseAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
             return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
         }
         return SUCCESSFUL_PASS
+    }
+
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.HAPPY_VILLAGER
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

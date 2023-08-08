@@ -114,7 +114,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Modifiab
 
     @Inject(method = "damage", at = @At(value = "HEAD"))
     private void amethyst_imbuement_damageMixin(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this,null, processContext);
+        modifiableEffectContainer.run(ModifiableEffectEntity.Companion.getON_DAMAGED(), this,source.getAttacker(), processContext);
         damageSource = source;
         Entity attacker = damageSource.getSource();
         if (attacker != null) {

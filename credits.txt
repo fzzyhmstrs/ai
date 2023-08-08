@@ -1,3 +1,10 @@
 Credits for assets:
 
+mob_effects:
 stunned.png: Sattes (https://github.com/SattesKrokodil)
+
+MCDE Icons:
+deadly_shot.png: BackupCup (https://github.com/EndLone, https://legacy.curseforge.com/members/backupcup/projects)
+insight.png: BackupCup (https://github.com/EndLone, https://legacy.curseforge.com/members/backupcup/projects)
+resilience.png: BackupCup (https://github.com/EndLone, https://legacy.curseforge.com/members/backupcup/projects)
+heroic.png: BackupCup (https://github.com/EndLone, https://legacy.curseforge.com/members/backupcup/projects)

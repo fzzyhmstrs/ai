@@ -1,30 +1,35 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
-import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
@@ -39,11 +44,11 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
             .withRange(7.0,1.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        return friendlyFilter(list, user)
+        return SpellHelper.friendlyFilter(list, user, this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -54,40 +59,44 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun effect(
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        user: LivingEntity,
-        entityList: MutableList<Entity>,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        effect: AugmentEffect
-    ): Boolean {
-        var successes = 0
-        for (target in entityList) {
-            if(target !is Monster){
-                if (target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) continue
-                entityTask(world,target,user,level.toDouble(),null, effect)
-                successes++
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+            val statuses: MutableList<StatusEffectInstance> = mutableListOf()
+            for (effect in entity.statusEffects) {
+                if (effect.effectType.isBeneficial) {
+                    if ((effect.effectType == RegisterStatus.CURSED && !spells.spellsAreEqual()) || effect.effectType != RegisterStatus.CURSED)
+                        continue
+                }
+                statuses.add(effect)
             }
+            for (effect in statuses) {
+                entity.removeStatusEffect(effect.effectType)
+            }
+            entity.fireTicks = 0
+            EffectQueue.addStatusToQueue(
+                entity,
+                RegisterStatus.IMMUNITY,
+                effects.duration(level),
+                effects.amplifier(level)
+            )
+            return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
         }
-        if (!user.hasStatusEffect(RegisterStatus.IMMUNITY)){
-            RegisterEnchantment.CLEANSE.supportEffect(world,null,user,level, effect)
-            successes++
-        }
-        return successes > 0
+        return SUCCESSFUL_PASS
     }
 
-    override fun entityTask(
-        world: World,
-        target: Entity,
-        user: LivingEntity,
-        level: Double,
-        hit: HitResult?,
-        effects: AugmentEffect
-    ) {
-        RegisterEnchantment.CLEANSE.supportEffect(world,target,user,level.toInt(),effects)
-    }
-
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EVOKER_PREPARE_SUMMON
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_PREPARE_SUMMON,SoundCategory.PLAYERS,1f,1f)
     }
 }

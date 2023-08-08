@@ -17,6 +17,8 @@ import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.world.World
+import kotlin.math.min
 
 object SpellHelper {
 
@@ -56,6 +58,24 @@ object SpellHelper {
             }
         }
         return friendlyEntityList
+    }
+
+    fun getRndEntityList(world: World, list: MutableList<LivingEntity>, level: Int): MutableList<LivingEntity>{
+        if (list.isNotEmpty()){
+            val listTmp: MutableList<LivingEntity> = mutableListOf()
+            val startSize = min(level, list.size)
+            var remaining = min(level, list.size)
+            for (i in 1..startSize) {
+                val rnd = world.random.nextInt(remaining)
+                val ent = list[rnd]
+                listTmp.add(ent)
+                list.remove(ent)
+                remaining--
+            }
+            return listTmp
+        } else {
+            return list
+        }
     }
 
     fun EntityHitResult.addStatus(effect: StatusEffect, duration: Int, amplifier: Int = 0): Boolean{
