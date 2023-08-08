@@ -70,7 +70,7 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
         val entity = entityHitResult.entity
         if ((othersType.empty || spells.spellsAreEqual())) {
             var bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
-            if(bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level+)))
+            if(bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level)))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
         }
         return SUCCESSFUL_PASS
