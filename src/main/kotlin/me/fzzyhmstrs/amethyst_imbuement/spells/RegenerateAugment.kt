@@ -41,7 +41,7 @@ class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
             .withDamage(-1.0f,0.2f)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -52,22 +52,37 @@ class RegenerateAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun supportEffect(world: World, target: Entity?, user: LivingEntity, level: Int, effects: AugmentEffect): Boolean {
-        if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                EffectQueue.addStatusToQueue(target as LivingEntity,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level) + effects.damage(level).toInt())
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                return true
+    override fun <T> entityEffects(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if ((othersType.empty || spells.spellsAreEqual())) {
+            if (entityHitResult.addStatus(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level) + effects.damage(level).toInt())){
+                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            } else {
+                return FAIL
             }
         }
-        EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(level) + effects.damage(level).toInt())
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-        effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
-        return true
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_CONDUIT_AMBIENT
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.RED_DUST
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.RED_DUST
+    }
+    
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_CONDUIT_AMBIENT,SoundCategory.PLAYERS, 0.6F, 1.2F)
     }
 }
