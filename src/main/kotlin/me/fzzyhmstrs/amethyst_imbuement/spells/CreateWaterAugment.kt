@@ -44,13 +44,15 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
     }
 
     private fun itemAfterWaterTransform(item: Item): Item {
-        return CreateHardLightAugment.items[item]?:item
+        return items[item]?:item
     }
 
     companion object{
         val items: Map<Item, Item> = mapOf(
             Items.SPONGE to Items.MUD,
-            Items.LAVA_BUCKET to Items.STONE
+            Items.LAVA_BUCKET to Items.STONE,
+            RegisterBlock.HARD_LIGHT_BLOCK.asItem() to Items.GLASS,
+            RegisterBlock.SHINE_LIGHT.asItem() to Items.SEA_LANTERN
         )
     }
 }
