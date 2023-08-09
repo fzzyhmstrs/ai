@@ -32,7 +32,7 @@ class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().
         get() = super.baseEffect.withRange(1.4,0.1)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -43,10 +43,78 @@ class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val enderPearlEntity = EnderPearlEntity(world, user)
-        enderPearlEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, effects.range(level).toFloat(), 1.0f)
-        return enderPearlEntity
+    override fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments, count: Int)
+            :
+            List<ProjectileEntity>
+            where
+            T: LivingEntity,
+            T: SpellCastingEntity
+    {
+        val list: MutableList<ProjectileEntity> = mutableListOf()
+        for (i in 1..count){
+            val me = PlayerItemEntity(RegisterEntity.PLAYER_ENDER_PEARL,world,user,Items.ENDER_PEARL)
+            val direction = user.rotationVec3d
+            val speed = effects.range(level).toFloat()
+            val div = 1.0F
+            me.place(user,direction,-0.2, speed, div, 0.6)
+            me.passEffects(spells,effects,level)
+            me.passContext(context)
+            list.add(me)
+        }
+        return list
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                teleport(world,world.random,source,effects,level,spells)
+            }
+            return result
+        }
+        
+    }
+
+    override fun <T> onBlockHit(
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
+        val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                teleport(world,world.random,source,effects,level,spells)
+            }
+            return result
+        }
+    }
+
+    private fun teleport(world: World, random: Random, source: Entity?, entityEffects: AugmentEffects, level: Int, spells: PairedAugments){
+        TODO()
     }
 
     override fun soundEvent(): SoundEvent {
