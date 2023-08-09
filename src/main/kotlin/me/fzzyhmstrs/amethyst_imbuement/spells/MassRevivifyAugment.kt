@@ -1,31 +1,40 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.EntityAoeAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.Monster
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
@@ -70,15 +79,15 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         val entity = entityHitResult.entity
         if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
             var successes = 0
-            var bl = entityHitResult.addStatus(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
-            if(bl && entityHitResult.addStatus(StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level)))
+            val bl = entityHitResult.addStatus(StatusEffects.REGENERATION,effects.duration(level), effects.amplifier(1))
+            if(bl && entityHitResult.addStatus(StatusEffects.ABSORPTION, effects.duration(level + 3), effects.amplifier(level)))
                 successes++
             if (entity.health < entity.maxHealth){
                 entity.heal(effects.damage(level))
                 successes++
             }
             val statuses: MutableList<StatusEffectInstance> = mutableListOf()
-            if (statuses.isNotEmpty()){
+            if (entity.statusEffects.isNotEmpty()){
                 for (effect in entity.statusEffects) {
                     if (effect.effectType.isBeneficial) {
                         if ((effect.effectType == RegisterStatus.CURSED && !spells.spellsAreEqual()) || effect.effectType != RegisterStatus.CURSED)
@@ -116,6 +125,6 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
     }
     
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
-        world.playSound(null,blockPos,SoundEvents.ENTITY_ILLUSIONER_PREPARE_BLINDNESS,SoundCategory.PLAYERS,1f,1f)
+        world.playSound(null,blockPos,SoundEvents.ENTITY_ILLUSIONER_PREPARE_BLINDNESS, SoundCategory.PLAYERS,1f,1f)
     }
 }

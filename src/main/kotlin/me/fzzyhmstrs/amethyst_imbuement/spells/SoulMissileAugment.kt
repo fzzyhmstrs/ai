@@ -127,13 +127,13 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.MAGIC)
     }
-    
+
     override fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments, count: Int)
-    : 
-    List<ProjectileEntity>
-    where 
-    T: LivingEntity,
-    T: SpellCastingEntity
+            :
+            List<ProjectileEntity>
+            where
+            T: LivingEntity,
+            T: SpellCastingEntity
     {
         val list: MutableList<ProjectileEntity> = mutableListOf()
         for (i in 1..count){
@@ -146,7 +146,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         }
         return list
     }
-    
+
     override fun <T> onEntityHit(
         entityHitResult: EntityHitResult,
         context: ProcessContext,
