@@ -78,6 +78,29 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
         return list
     }
 
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                entityHitResult.entity.setOnFireFor(effects.duration(level)/20)
+                return result.withResults(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            }
+            return result
+        }
+        
+    }
+
     override fun hitParticleType(hit: HitResult): ParticleEffect? {
         return ParticleTypes.FLAME
     }
