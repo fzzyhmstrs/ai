@@ -86,6 +86,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         }
         if (other is PlaceItemAugment)
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.item(),itemAfterHardLightTransform(other.item())), SpellAdvancementChecks.BLOCK)
+        if (other is PlaceBlockAugment)
+            description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.getItem(),itemAfterHardLightTransform(other.getItem())), SpellAdvancementChecks.BLOCK)
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.damage", SpellAdvancementChecks.DAMAGE)
     }
@@ -208,7 +210,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         if (result.acted() || !result.success())
             return result
         val other = spells.primary()
-        if (!othersType.empty && other is PlaceItemAugment) {
+        if (!othersType.empty && (other is PlaceItemAugment || other is PlaceBlockAugment)) {
+            val beforeItem = 
             val item = itemAfterHardLightTransform(other.item())
             if (user !is ServerPlayerEntity) return FAIL
             when (item) {
@@ -259,7 +262,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     override fun hitParticleType(hit: HitResult): ParticleEffect? {
         return ParticleTypes.END_ROD
     }
-
+    
     private fun itemAfterHardLightTransform(item: Item): Item {
         return items[item]?:item
     }
@@ -288,7 +291,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         val items: Map<Item,Item> = mapOf(
             Items.WATER_BUCKET to Items.PRISMARINE_BRICKS,
             Items.LAVA_BUCKET to Items.OCHRE_FROGLIGHT,
-            Items.SPONGE to Items.HAY_BLOCK
+            Items.SPONGE to Items.HAY_BLOCK,
+            RegisterBlock.SHINE_LIGHT.asItem() to Items.LANTERN
         )
 
     }
