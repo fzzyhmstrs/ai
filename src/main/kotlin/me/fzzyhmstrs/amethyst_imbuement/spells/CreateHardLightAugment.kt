@@ -210,8 +210,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         if (result.acted() || !result.success())
             return result
         val other = spells.primary()
-        if (!othersType.empty && (other is PlaceItemAugment || other is PlaceBlockAugment)) {
-            val beforeItem = 
+        if (!othersType.empty && other is PlaceItemAugment) {
             val item = itemAfterHardLightTransform(other.item())
             if (user !is ServerPlayerEntity) return FAIL
             when (item) {
