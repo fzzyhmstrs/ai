@@ -119,6 +119,29 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
         }
         return amount * criticalAmount
     }
+    
+    override fun <T> onCast(
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
+        if (world.random.nextFloat() < 0.15) {
+            context.set(ContextData.CRIT, true)
+        }
+        return SUCCESSFUL_PASS
+    }
 
     override fun <T> onEntityHit(
         entityHitResult: EntityHitResult,
@@ -169,78 +192,6 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
 
         return SUCCESSFUL_PASS
     }
-
-    override fun <T> onCast(
-        context: ProcessContext,
-        world: World,
-        source: Entity?,
-        user: T,
-        hand: Hand,
-        level: Int,
-        effects: AugmentEffect,
-        othersType: AugmentType,
-        spells: PairedAugments
-    )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
-    {
-        if (world.random.nextFloat() < 0.15) {
-            context.set(ContextData.CRIT, true)
-        }
-        return SUCCESSFUL_PASS
-    }
-
-    /*override fun effect(world: World, user: LivingEntity, entityList: MutableList<Entity>, level: Int, effect: AugmentEffect): Boolean {
-        val entityDistance: SortedMap<Double, Entity> = mutableMapOf<Double, Entity>().toSortedMap()
-        for (entity in entityList){
-            if (entity is MobEntity){
-                val dist = entity.squaredDistanceTo(user)
-                entityDistance[dist] = entity
-            }
-        }
-        var bl = false
-        if (entityDistance.isNotEmpty()) {
-            val entityDistance2 = entityDistance.toList()
-            val entity1 = entityDistance2[0].second
-            bl = critTarget(world,user,entity1,level, effect)
-            var nextTarget = 1
-            while (entityDistance.size > nextTarget && effect.amplifier(level) > nextTarget){
-                val entity2 = entityDistance2[nextTarget].second
-                bl = bl || critTarget(world, user, entity2, level, effect, true)
-                nextTarget++
-            }
-            if (bl){
-                effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-            }
-        }
-        return bl
-    }*/
-
-    /*private fun critTarget(world: World,user: LivingEntity,target: Entity,level: Int,effect: AugmentEffect, splash: Boolean = false): Boolean{
-        val crit = if (world.random.nextFloat() < 0.15) 2f else 1f
-        val damage = if(!splash) {
-            effect.damage(level) * crit
-        } else {
-            effect.damage(level)/2 * crit
-        }
-        val bl = target.damage(if (user is PlayerEntity) user.damageSources.playerAttack(user) else user.damageSources.mobAttack(user), damage)
-        if (bl) {
-            if (user is ServerPlayerEntity) {
-                ServerPlayNetworking.send(user, NOTE_BLAST, ResonateAugment.writeBuf(user, target))
-            }
-            if (target is LivingEntity) {
-                effect.accept(target, AugmentConsumer.Type.HARMFUL)
-                val amp = if (crit > 1f) 4 else 1
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, effect.duration(level), amp))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, effect.duration(level), amp))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effect.duration(level), (amp + 1) * -1))
-            }
-        }
-        return bl
-    }*/
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
         world.playSound(null,blockPos, SoundEvents.EVENT_RAID_HORN.value(), SoundCategory.PLAYERS,1.0f,1.0f)
