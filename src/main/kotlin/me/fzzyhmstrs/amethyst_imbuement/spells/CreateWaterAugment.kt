@@ -39,8 +39,24 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
         return arrayOf(pairedSpell.provideAdjective(this))
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ITEM_BUCKET_EMPTY
+    override fun <T> customItemPlaceOnBlockHit(
+        startItem: Item,
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Item where T : SpellCastingEntity, T : LivingEntity {
+        return items[startItem] ?: startItem
+    }
+
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ITEM_BUCKET_EMPTY,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 
     private fun itemAfterWaterTransform(item: Item): Item {
