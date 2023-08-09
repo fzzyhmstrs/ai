@@ -34,7 +34,7 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
         get() = super.baseEffect.withDamage(7.5F,1.5F,0.0F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
