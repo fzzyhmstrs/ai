@@ -93,9 +93,6 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
             is PlaceItemAugment -> {
                 description.addLang("enchantment.amethyst_imbuement.create_lava.desc.block", arrayOf(other.item(),itemAfterLavaTransform(other.item())), SpellAdvancementChecks.BLOCK)
             }
-            is PlaceBlockAugment -> {
-                description.addLang("enchantment.amethyst_imbuement.create_lava.desc.block", arrayOf(other.getItem(),itemAfterLavaTransform(other.getItem())), SpellAdvancementChecks.BLOCK)
-            }
         }
         if (othersType.has(AugmentType.DAMAGE)) {
             description.addLang("enchantment.amethyst_imbuement.create_lava.desc.damage", SpellAdvancementChecks.DAMAGE)
@@ -251,7 +248,7 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
             Items.WATER_BUCKET to Items.COBBLESTONE,
             Items.SPONGE to Items.MAGMA_BLOCK,
             RegisterBlock.HARD_LIGHT_BLOCK.asItem() to Items.NETHERRACK,
-            RegisterBlock.SHINE_LIGHT.asItem() to Items.GLOWSTONE_BLOCK
+            RegisterBlock.SHINE_LIGHT.asItem() to Items.SHROOMLIGHT
         )
     }
 }
