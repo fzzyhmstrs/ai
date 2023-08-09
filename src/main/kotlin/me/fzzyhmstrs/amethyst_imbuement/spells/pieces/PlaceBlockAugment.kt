@@ -115,6 +115,8 @@ abstract class PlaceBlockAugment(tier: ScepterTier, type: AugmentType = AugmentT
         return SUCCESSFUL_PASS
     }
 
+    abstract fun getItem(): Item
+    
     abstract fun getBlockStateToPlace(context: ProcessContext,world: World,pos: BlockPos, spells: PairedAugments): BlockState
 
     override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
