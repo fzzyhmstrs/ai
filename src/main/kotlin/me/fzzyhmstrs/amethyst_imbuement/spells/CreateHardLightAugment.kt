@@ -259,7 +259,7 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
     override fun hitParticleType(hit: HitResult): ParticleEffect? {
         return ParticleTypes.END_ROD
     }
-
+    
     private fun itemAfterHardLightTransform(item: Item): Item {
         return items[item]?:item
     }
@@ -288,7 +288,8 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         val items: Map<Item,Item> = mapOf(
             Items.WATER_BUCKET to Items.PRISMARINE_BRICKS,
             Items.LAVA_BUCKET to Items.OCHRE_FROGLIGHT,
-            Items.SPONGE to Items.HAY_BLOCK
+            Items.SPONGE to Items.HAY_BLOCK,
+            RegisterBlock.SHINE_LIGHT.asItem() to Items.LANTERN
         )
 
     }

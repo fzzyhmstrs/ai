@@ -51,12 +51,20 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
             .withDamage(1.8f,0.1f)
             .withRange(11.75,0.25)
 
+    override applyTasks(world: World, context: ProcessContext, user: T, hand: Hand, level: Int, effects: AugmentEffect, spells: PairedAugments){
+        super.applyTasks(world,context,user,hand,level,effects,spells)
+        if (!context.get(ContextData.PERSISTENT)){
+            context.set(ContextData.PERSISTENT,true)
+            val data = 
+        }
+    }
+            
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
-        TODO("Not yet implemented")
+        return SpellHelper.hostileFilter(list,user,this)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -69,6 +77,9 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
 
     private val hailDelay = PerLvlF(20f,-0.5f,0f)
 
+    
+
+    
     override fun effect(
         world: World,
         target: Entity?,
@@ -143,8 +154,15 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
         }
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_HURT_FREEZE
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
     }
 
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos, SoundEvents.ENTITY_PLAYER_HURT_FREEZE, SoundCategory.PLAYERS, 1f, 1f)
+    }
 }

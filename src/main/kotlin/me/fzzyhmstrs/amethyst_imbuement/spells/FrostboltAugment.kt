@@ -102,12 +102,47 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
         for (i in 1..count){
             val me = MissileEntity(world, user).color(MissileEntity.ColorData(0.7f, 0.7f))
             val direction = user.rotationVec3d
-            me.setVelocity(direction.x,direction.y,direction.z, 2.0f, 0.1f)
+            me.place(user,direction,-0.2, 2f, 0.1f, 0.6)
             me.passEffects(spells,effects,level)
             me.passContext(context)
             list.add(me)
         }
         return list
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                val entity = entityHitResult.entity
+                if (entity is LivingEntity) entity.frozenTicks = effects.duration(level)
+                val entityList = RaycasterUtil.raycastEntityArea(distance = entityEffects.range(0), entityHitResult.entity)
+                for (entity2 in entityList){
+                    if (entity2 is LivingEntity) entity2.frozenTicks = effects.duration(level)
+                    val amount = spells.provideDealtDamage(effects.damage(level)*0.6f, context, entityHitResult, user, world, hand, level, effects)
+                    val damageSource = spells.provideDamageSource(context,entityHitResult, source, user, world, hand, level, effects)
+                    val bl  = entityHitResult.entity.damage(damageSource, amount)
+                    if (bl){
+                        splashParticles(entityHitResult,world,pos.x,pos.y,pos.z,spells)
+                        user.applyDamageEffects(user,entityHitResult.entity)
+                    }
+                }
+                return result.withResults(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            }
+            return result
+        }
+        
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {

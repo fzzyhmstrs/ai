@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-abstract class PlaceBlockAugment(tier: ScepterTier, type: AugmentType = AugmentType.BLOCK_TARGET): ScepterAugment(tier,type) {
+abstract class PlaceBlockAugment(tier: ScepterTier,item: Item, type: AugmentType = AugmentType.BLOCK_TARGET): PlaceItemAugment(tier,item,type) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(4.5)
@@ -114,7 +114,7 @@ abstract class PlaceBlockAugment(tier: ScepterTier, type: AugmentType = AugmentT
         }
         return SUCCESSFUL_PASS
     }
-
+    
     abstract fun getBlockStateToPlace(context: ProcessContext,world: World,pos: BlockPos, spells: PairedAugments): BlockState
 
     override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

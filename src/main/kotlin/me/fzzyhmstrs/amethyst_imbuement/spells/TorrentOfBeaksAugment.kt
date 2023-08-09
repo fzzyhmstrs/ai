@@ -34,7 +34,7 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
             .withRange(12.0,0.5)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -46,16 +46,100 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
     }
 
-    override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val speed = effects.amplifier(level+5)/10f
-        val div = 1.0F
-        val eggEntity = PlayerEggEntity(world, user)
-        eggEntity.setVelocity(user, user.pitch, user.yaw, 0.0f, speed, div)
-        eggEntity.passEffects(effects, level)
-        return eggEntity
+    override fun <T> createProjectileEntities(world: World, context: ProcessContext, user: T, level: Int, effects: AugmentEffect, spells: PairedAugments, count: Int)
+            :
+            List<ProjectileEntity>
+            where
+            T: LivingEntity,
+            T: SpellCastingEntity
+    {
+        val list: MutableList<ProjectileEntity> = mutableListOf()
+        for (i in 1..count){
+            val me = PlayerItemEntity(RegisterEntity.PLAYER_EGG,world,user,Items.EGG)
+            val direction = user.rotationVec3d
+            val speed = effects.amplifier(level+5)/10f
+            val div = 1.0F
+            me.place(user,direction,-0.2, speed, div, 0.6)
+            me.passEffects(spells,effects,level)
+            me.passContext(context)
+            list.add(me)
+        }
+        return list
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EGG_THROW
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                spawnChicken(world,world.random,source,effects,level,spells)
+            }
+            return result
+        }
+        
+    }
+
+    override fun <T> onBlockHit(
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+            :
+            SpellActionResult
+            where
+            T : SpellCastingEntity,
+            T : LivingEntity
+    {
+        val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                spawnChicken(world,world.random,source,effects,level,spells)
+            }
+            return result
+        }
+    }
+
+    private fun spawnChicken(world: World, random: Random, source: Entity?, entityEffects: AugmentEffects, level: Int, spells: PairedAugments){
+        if (source == null) return
+        if (!world.isClient) {
+            if (random.nextFloat() < (1f-10f/entityEffects.range(level))) {
+                var i = 1
+                if (random.nextFloat() < (1f-10f/entityEffects.range(level))/5f) {
+                    i = 4
+                }
+                for (j in 0 until i) {
+                    val chickenEntity = RegisterEntity.BOOM_CHICKEN_ENTITY.create(world) ?: return
+                    chickenEntity.refreshPositionAndAngles(source.x, source.y, source.z, yaw, 0.0f)
+                    chickenEntity.isBaby = false
+                    if (source.owner is LivingEntity) {
+                        chickenEntity.setChickenOwner(source.owner as LivingEntity)
+                    }
+                    chickenEntity.passEffects(spells,entityEffects,levels)
+                    world.spawnEntity(chickenEntity)
+                }
+            }
+            world.sendEntityStatus(source, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES)
+        }
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 1f, 1f)
     }
 }

@@ -34,7 +34,7 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
             .withRange(2.625,0.125,0.0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -51,5 +51,13 @@ open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE){
 
     override fun castParticleType(): ParticleEffect? {
         return ParticleTypes.ELECTRIC_SPARK
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect?{
+        return ParticleTypes.ELECTRIC_SPARK
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext){
+        world.playSound(null, blockPos, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 0.7F, 1.1F)
     }
 }

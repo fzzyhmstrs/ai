@@ -87,6 +87,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         PressableWidget(x,y,58,86,message)
     {
         private val texture = AI.identity("textures/gui/container/spellcasters_focus_gui.png")
+        private val fallbackTexId = AI.identity("textures/gui/patchouli/mod_spotlights/fallback_mod_icon.png")
         private var selected = false
         private var finalSelected = false
 
@@ -125,7 +126,8 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             }
             for (j in range){
                 val mod = mods[j]
-                RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"))
+                val texId = Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png")
+                RenderSystem.setShaderTexture(0, if (MinecraftClient.getInstance().resourceManager.getResource(texId).isPresent()) texId else fallbackTexId)
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
                 context.drawTexture(texture, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
             }

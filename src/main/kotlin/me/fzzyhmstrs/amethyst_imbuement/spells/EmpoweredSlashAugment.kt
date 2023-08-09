@@ -34,7 +34,7 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
         get() = super.baseEffect.withDamage(7.5F,1.5F,0.0F)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -58,11 +58,15 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
         return hostileEntityList
     }
 
-    override fun particleType(): DefaultParticleType{
+    override fun castParticleType(): ParticleEffect?{
+        return ParticleTypes.CRIT
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect?{
         return ParticleTypes.CRIT
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_ATTACK_CRIT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext){
+        world.playSound(null, blockPos, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 0.7F, 1.1F)
     }
 }

@@ -70,12 +70,35 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
         for (i in 1..count){
             val me = BasicMissileEntity(world, user).burning().color(MissileEntity.ColorData(1f, 0.7f, 0.3f, 0.6666f, 1.2f))
             val direction = user.rotationVec3d
-            me.setVelocity(direction.x,direction.y,direction.z, 2.0f, 0.1f)
+            me.place(user,direction,-0.2, 2f, 0.1f, 0.6)
             me.passEffects(spells,effects,level)
             me.passContext(context)
             list.add(me)
         }
         return list
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success()) {
+            if (result.acted()){
+                entityHitResult.entity.setOnFireFor(effects.duration(level)/20)
+                return result.withResults(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            }
+            return result
+        }
+        
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {
