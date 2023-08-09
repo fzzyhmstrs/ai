@@ -59,7 +59,7 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
             val direction = user.rotationVec3d
             val speed = effects.amplifier(level+5)/10f
             val div = 1.0F
-            me.setVelocity(direction.x,direction.y,direction.z, speed, div)
+            me.place(user,direction,-0.2, speed, div, 0.6)
             me.passEffects(spells,effects,level)
             me.passContext(context)
             list.add(me)
