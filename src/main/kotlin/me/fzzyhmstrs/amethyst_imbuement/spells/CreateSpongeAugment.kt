@@ -33,7 +33,12 @@ class CreateSpongeAugment: PlaceItemAugment(ScepterTier.ONE,Items.SPONGE){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        when (other){
+            is PlaceItemAugment -> {
+                description.addLang("enchantment.amethyst_imbuement.create_sponge.desc.block", arrayOf(other.item(),itemAfterSpongeTransform(other.item())), SpellAdvancementChecks.BLOCK)
+            }
+        }
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -43,19 +48,37 @@ class CreateSpongeAugment: PlaceItemAugment(ScepterTier.ONE,Items.SPONGE){
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
         return arrayOf(pairedSpell.provideAdjective(this))
     }
+    
+    override fun <T> customItemPlaceOnBlockHit(
+        startItem: Item,
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Item where T : SpellCastingEntity, T : LivingEntity {
+        return items[startItem] ?: startItem
+    }
 
-    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
-        world.playSound(null, blockPos, SoundEvents.BLOCK_CONDUIT_AMBIENT_SHORT, SoundCategory.NEUTRAL, 1.0f, 1.0f)
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ITEM_BUCKET_EMPTY_LAVA,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 
     private fun itemAfterSpongeTransform(item: Item): Item {
-        return CreateHardLightAugment.items[item]?:item
+        return items[item]?:item
     }
 
     companion object{
         val items: Map<Item, Item> = mapOf(
             Items.WATER_BUCKET to Items.WET_SPONGE,
-            Items.LAVA_BUCKET to Items.BLACKSTONE
+            Items.LAVA_BUCKET to Items.BLACKSTONE,
+            RegisterBlock.HARD_LIGHT_BLOCK.asItem() to Items.GLASS,
+            RegisterBlock.SHINE_LIGHT.asItem() to Items.LANTERN
         )
     }
 }
