@@ -86,8 +86,6 @@ class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
         }
         if (other is PlaceItemAugment)
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.item(),itemAfterHardLightTransform(other.item())), SpellAdvancementChecks.BLOCK)
-        if (other is PlaceBlockAugment)
-            description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.block", arrayOf(other.getItem(),itemAfterHardLightTransform(other.getItem())), SpellAdvancementChecks.BLOCK)
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.create_hard_light.desc.damage", SpellAdvancementChecks.DAMAGE)
     }
