@@ -544,6 +544,20 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
+    val PLAYER_ENDER_PEARL: EntityType<PlayerItemEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "player_ender_pearl_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlayerItemEntity>, world: World ->
+            PlayerItemEntity(
+                entityType,
+                world,
+                Items.ENDER_PEARL
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
     //////////////////////////////////////////
     
     val IMBUING_TABLE_BLOCK_ENTITY: BlockEntityType<ImbuingTableBlockEntity> = Registry.register(
