@@ -46,16 +46,7 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (list.isNotEmpty()) {
-            for (entity in list) {
-                if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
-                }
-            }
-        }
-        return hostileEntityList
+       return SpellHelper.hostileFilter(list,user,this)
     }
 
     override fun particleType(): DefaultParticleType{
