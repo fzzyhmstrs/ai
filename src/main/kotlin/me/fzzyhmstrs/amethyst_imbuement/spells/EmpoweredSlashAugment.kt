@@ -46,14 +46,27 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
-       return SpellHelper.hostileFilter(list,user,this)
+        val hostileEntityList: MutableList<Entity> = mutableListOf()
+        if (list.isNotEmpty()) {
+            for (entity in list) {
+                if (entity !== user) {
+                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
+                    hostileEntityList.add(entity)
+                }
+            }
+        }
+        return hostileEntityList
     }
 
-    override fun particleType(): DefaultParticleType{
+    override fun castParticleType(): ParticleEffect?{
+        return ParticleTypes.CRIT
+    }
+    
+    override fun hitParticleType(hit: HitResult): ParticleEffect?{
         return ParticleTypes.CRIT
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_ATTACK_CRIT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext){
+        world.playSound(null, blockPos, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 0.7F, 1.1F)
     }
 }
