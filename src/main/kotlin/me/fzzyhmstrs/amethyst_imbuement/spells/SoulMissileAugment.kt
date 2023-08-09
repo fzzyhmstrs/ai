@@ -139,7 +139,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
         for (i in 1..count){
             val me = MissileEntity(world, user)
             val direction = user.rotationVec3d
-            me.setVelocity(direction.x,direction.y,direction.z, 2.0f, 0.1f)
+            me.place(user,direction,-0.2, 2f, 0.1f, 0.6)
             me.passEffects(spells,effects,level)
             me.passContext(context)
             list.add(me)
