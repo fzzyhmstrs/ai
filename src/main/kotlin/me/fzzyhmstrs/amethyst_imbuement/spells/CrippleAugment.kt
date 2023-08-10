@@ -131,11 +131,11 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
         othersType: AugmentType,
         spells: PairedAugments
     )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
     {
         if (world.random.nextFloat() < 0.15) {
             context.set(ContextData.CRIT, true)
@@ -185,11 +185,7 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
         if (spells.primary() == RegisterEnchantment.FORTIFY){
             if (entityHitResult.removeStatuses(StatusEffects.SLOWNESS,StatusEffects.WEAKNESS))
                 return SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)
-            TODO()
         }
-
-
-
         return SUCCESSFUL_PASS
     }
 
