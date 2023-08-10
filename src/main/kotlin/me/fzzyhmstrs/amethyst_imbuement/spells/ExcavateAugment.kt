@@ -46,7 +46,7 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
         get() = super.baseEffect.withRange(4.5)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -71,38 +71,54 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
             T : SpellCastingEntity,
             T : LivingEntity
     {
-        TODO("Not yet implemented")
-    }
-
-    override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return
-    }
-
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
-        if (user !is ServerPlayerEntity) return false
+        if (user !is ServerPlayerEntity) return FAIL
         val hit = RaycasterUtil.raycastHit(effects.range(level),entity = user)
         if (hit is BlockHitResult  && CommonProtection.canBreakBlock(world,hit.blockPos,user.gameProfile,user)){
-            val state = world.getBlockState(hit.blockPos)
-            if (state.getHardness(world,hit.blockPos) == -1.0f) return false
-            if (canBreak(state, level)) {
-                world.breakBlock(hit.blockPos,true,user)
-                val group = state.soundGroup
-                val sound = group.breakSound
-                world.playSound(
-                    null,
-                    hit.blockPos,
-                    sound,
-                    SoundCategory.BLOCKS,
-                    (group.volume + 1.0f) / 2.0f,
-                    group.pitch * 0.8f
-                )
-                //sendItemPacket(user, stack, hand, hit)
-                effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
-            }
-            return true
+            spells.processSingleBlockHit()
         }
-        return false
+        return FAIL
     }
+
+    override fun <T> onBlockHit(
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val state = world.getBlockState(hit.blockPos)
+        if (state.getHardness(world,hit.blockPos) == -1.0f) return FAIL
+        if (canBreak(state, level)) {
+            breakBlock(world,hit.blockPos,true,user)
+            //world.breakBlock(hit.blockPos,true,user)
+            val group = state.soundGroup
+            val sound = group.breakSound
+            world.playSound(
+                null,
+                hit.blockPos,
+                sound,
+                SoundCategory.BLOCKS,
+                (group.volume + 1.0f) / 2.0f,
+                group.pitch * 0.8f
+            )
+            //sendItemPacket(user, stack, hand, hit)
+            return SpellActionResult.success(AugmentHelper.BLOCK_BROKEN)
+        }
+        return FAIL
+    }
+
+   
 
     private fun canBreak(state: BlockState, level: Int): Boolean{
         val miningLevel = if(level < 10){
