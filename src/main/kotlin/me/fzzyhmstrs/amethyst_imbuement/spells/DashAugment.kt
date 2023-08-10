@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -39,7 +40,7 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
         get() = super.baseEffect.withAmplifier(1,1).withDuration(20)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {

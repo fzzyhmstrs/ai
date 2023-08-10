@@ -1,11 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -14,17 +17,16 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
-import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
-import net.minecraft.util.math.Direction
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-@Suppress("SpellCheckingInspection")
 class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("summon_fury_totem"),SpellType.FURY,2400,240,
@@ -39,7 +41,7 @@ class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) 
             .withAmplifier(8,1)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -50,40 +52,31 @@ class SummonFuryTotemAugment: SummonAugment<TotemOfFuryEntity>(ScepterTier.TWO) 
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun placeEntity(
+    override fun entitiesToSpawn(
         world: World,
-        user: PlayerEntity,
+        user: LivingEntity,
+        hand: Hand,
         hit: HitResult,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        var successes = 0
-        val xrnd: Double = (hit as BlockHitResult).blockPos.x + 0.5
-        val zrnd: Double = hit.blockPos.z.toDouble() + 0.5
-        val yrnd = hit.blockPos.y + 1.0
-        val furyEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world,user,effects.duration(level),effects.amplifier(level)/2)
-        furyEntity.passEffects(effects,level)
-        furyEntity.refreshPositionAndAngles(xrnd, yrnd, zrnd,0.0f,0.0f)
-        if (world.spawnEntity(furyEntity)){
-            successes++
-        } else {
-            val direction = Direction.Type.HORIZONTAL.random(world.random)
-            val newPos = hit.blockPos.offset(direction,1)
-            val xrnd2: Double = newPos.x + 0.5
-            val zrnd2: Double = newPos.z + 0.5
-            val yrnd2 = newPos.y + 1.0
-            furyEntity.refreshPositionAndAngles(xrnd2, yrnd2, zrnd2,0.0f,0.0f)
-            if (world.spawnEntity(furyEntity)){
-                successes++
+        effects: AugmentEffect,
+        spells: PairedAugments,
+        count: Int
+    ): List<TotemOfFuryEntity> {
+        val startPos = BlockPos.ofFloored(hit.pos)
+        val list: MutableList<TotemOfFuryEntity> = mutableListOf()
+        for (i in 1..count){
+            val totemOfFuryEntity = TotemOfFuryEntity(RegisterEntity.TOTEM_OF_FURY_ENTITY, world, user, effects.duration(level),effects.amplifier(level)/2)
+            val success = AugmentHelper.findSpawnPos(world, startPos, totemOfFuryEntity, 3, 15, user.pitch, user.yaw)
+            if (success) {
+                totemOfFuryEntity.passEffects(spells, effects, level)
+                list.add(totemOfFuryEntity)
             }
         }
-        if (successes > 0) {
-            return super.placeEntity(world, user, hit, level, effects)
-        }
-        return false
+
+        return list
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE,SoundCategory.PLAYERS,1f,1f)
     }
 }

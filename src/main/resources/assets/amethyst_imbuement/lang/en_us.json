@@ -807,6 +807,7 @@
 
 	"enchantment.amethyst_imbuement.fang_barrage": "Fang Barrage",
 	"enchantment.amethyst_imbuement.fang_barrage.double": "Fang Assault",
+	"enchantment.amethyst_imbuement.fang_barrage.double.desc": "Increases the number of fang waves, the duration of the effect, and the mana cost",
 	"enchantment.amethyst_imbuement.fang_barrage.combination": "%1$s Fang Barrage",
 	"enchantment.amethyst_imbuement.fang_barrage.noun": "Barrage",
 	"enchantment.amethyst_imbuement.fang_barrage.verb": "Barrage",

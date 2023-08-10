@@ -189,6 +189,7 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
     override fun entitiesToSpawn(
         world: World,
         user: LivingEntity,
+        hand: Hand,
         hit: HitResult,
         level: Int,
         effects: AugmentEffect,
@@ -211,6 +212,7 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
     override fun <T> startCount(
         user: T,
         effects: AugmentEffect,
+        level: Int,
         othersType: AugmentType,
         spells: PairedAugments
     ): Int where T : SpellCastingEntity, T : LivingEntity {
@@ -342,17 +344,17 @@ class SummonBonestormAugment: SummonAugment<BonestormEntity>(ScepterTier.TWO){
         return summons
     }
 
-    override fun <T> modifyExplosion(
+    override fun modifyExplosion(
         builder: ExplosionBuilder,
         context: ProcessContext,
-        user: T,
+        user: LivingEntity?,
         world: World,
         hand: Hand,
         level: Int,
         effects: AugmentEffect,
         othersType: AugmentType,
         spells: PairedAugments
-    ): ExplosionBuilder where T : SpellCastingEntity,T : LivingEntity {
+    ): ExplosionBuilder {
         return builder.withCustomBehavior(BonestormExplosionBehavior())
     }
 

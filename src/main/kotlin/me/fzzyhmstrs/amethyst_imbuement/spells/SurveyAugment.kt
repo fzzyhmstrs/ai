@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -14,7 +15,6 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.FilledMapItem
@@ -26,11 +26,10 @@ import net.minecraft.registry.tag.StructureTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.gen.structure.Structure
@@ -65,27 +64,14 @@ class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(Augmen
         effects: AugmentEffect,
         spells: PairedAugments
     )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
+    :
+    SpellActionResult
+    where T : SpellCastingEntity, T : LivingEntity
     {
-        TODO("Not yet implemented")
-    }
-
-    override fun effect(
-        world: World,
-        target: Entity?,
-        user: LivingEntity,
-        level: Int,
-        hit: HitResult?,
-        effect: AugmentEffect
-    ): Boolean {
-        if (user !is PlayerEntity) return false
-        if (world !is ServerWorld) return false
+        if (user !is PlayerEntity) return FAIL
+        if (world !is ServerWorld) return FAIL
         val type = mapList[world.random.nextInt(mapList.size)]
-        val blockPos: BlockPos? = world.locateStructure(type.structure, user.getBlockPos(), effect.range(level).toInt(), true)
+        val blockPos: BlockPos? = world.locateStructure(type.structure, user.getBlockPos(), effects.range(level).toInt(), true)
         return if (blockPos != null) {
             val mapStack = FilledMapItem.createMap(world, blockPos.x, blockPos.z, 2.toByte(), true, true)
             FilledMapItem.fillExplorationMap(world,mapStack)
@@ -98,14 +84,14 @@ class SurveyAugment: ScepterAugment(ScepterTier.THREE, AugmentType().plus(Augmen
             if (!user.inventory.insertStack(mapStack)) {
                 user.dropItem(mapStack, false)
             }
-            true
+            SpellActionResult.success(AugmentHelper.DRY_FIRED)
         } else {
-            false
+            FAIL
         }
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ITEM_SPYGLASS_USE
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ITEM_SPYGLASS_USE,SoundCategory.PLAYERS,1f,1f)
     }
 
     companion object{

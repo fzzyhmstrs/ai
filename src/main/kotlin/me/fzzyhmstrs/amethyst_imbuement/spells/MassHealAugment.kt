@@ -71,7 +71,7 @@ class MassHealAugment: EntityAoeAugment(ScepterTier.TWO,true){
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         val entity = entityHitResult.entity
-        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+        if (othersType.empty && entity is LivingEntity) {
             return if (entity.health < entity.maxHealth){
                 entity.heal(effects.damage(level))
                 SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)

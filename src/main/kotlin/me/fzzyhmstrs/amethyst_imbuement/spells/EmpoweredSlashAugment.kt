@@ -5,23 +5,28 @@ import me.fzzyhmstrs.amethyst_core.augments.base.SlashAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.particle.DefaultParticleType
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
 @Suppress("SameParameterValue")
 class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
@@ -44,18 +49,9 @@ class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO) {
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
-    
-    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        if (list.isNotEmpty()) {
-            for (entity in list) {
-                if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
-                }
-            }
-        }
-        return hostileEntityList
+
+    override fun filter(list: List<Entity>, user: LivingEntity): MutableList<EntityHitResult> {
+        return SpellHelper.hostileFilter(list, user, this)
     }
 
     override fun castParticleType(): ParticleEffect?{

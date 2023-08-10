@@ -74,7 +74,7 @@ class MassFortifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         othersType: AugmentType,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
-        if ((othersType.empty || spells.spellsAreEqual())) {
+        if (othersType.empty) {
             val bl = entityHitResult.addStatus(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier((level-1)/4+3),3))
             return if (bl && entityHitResult.addStatus(StatusEffects.STRENGTH, effects.duration(level), max(effects.amplifier((level-1)/4+3),3))){
                 SpellActionResult.success(AugmentHelper.APPLIED_POSITIVE_EFFECTS)

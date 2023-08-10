@@ -1,12 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.SingleTargetAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -16,6 +20,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.passive.ChickenEntity
@@ -25,10 +30,11 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
@@ -44,7 +50,7 @@ class PoultrymorphAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffec
             .withRange(4.0,.5)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -55,34 +61,44 @@ class PoultrymorphAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffec
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         val stack = user.getStackInHand(hand)
-        if (stack.item != RegisterItem.A_SCEPTER_SO_FOWL) return false
+        if (stack.item != RegisterItem.A_SCEPTER_SO_FOWL) return FAIL
         val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
         return if(target != null && target !is SpellCastingEntity && target !is ChickenEntity) {
             val nbt = NbtCompound()
-            if (!target.saveSelfNbt(nbt)) return false
-            val chickenEntity = EntityType.CHICKEN.create(world)?:return false
+            if (!target.saveSelfNbt(nbt)) return FAIL
+            val chickenEntity = EntityType.CHICKEN.create(world)?:return FAIL
             val pos = target.pos
             chickenEntity.refreshPositionAndAngles(pos.x,pos.y,pos.z, target.yaw, target.pitch)
             chickenEntity.isInvulnerable = true
-            if (!world.spawnEntity(chickenEntity)) return false
+            if (!world.spawnEntity(chickenEntity)) return FAIL
             val data = PoultrymorphPersistentData(nbt,chickenEntity.id,Vec3d(target.pos.toVector3f()),world)
             target.discard()
             PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),data)
             if (world is ServerWorld){
                 world.spawnParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,chickenEntity.x,chickenEntity.y + chickenEntity.height/2.0,chickenEntity.z,15,0.4,0.6,0.4,0.0)
             }
-            world.playSound(null,user.blockPos,SoundEvents.ENTITY_FIREWORK_ROCKET_TWINKLE_FAR, SoundCategory.NEUTRAL,0.7f,1.0f)
-            world.playSound(null,user.blockPos,soundEvent(), SoundCategory.NEUTRAL,1.0f,1.0f)
-            true
+            SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
         } else {
-            false
+            FAIL
         }
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_HURT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_FIREWORK_ROCKET_TWINKLE_FAR, SoundCategory.NEUTRAL,0.7f,1.0f)
+        world.playSound(null,blockPos,SoundEvents.ENTITY_CHICKEN_HURT,SoundCategory.PLAYERS,1f,1f)
     }
 
     override val delay: PerLvlI

@@ -72,7 +72,7 @@ class MassCleanseAugment: EntityAoeAugment(ScepterTier.TWO,true){
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         val entity = entityHitResult.entity
-        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+        if (othersType.empty && entity is LivingEntity) {
             val statuses: MutableList<StatusEffectInstance> = mutableListOf()
             if (entity.statusEffects.isEmpty()) return FAIL
             for (effect in entity.statusEffects) {

@@ -11,7 +11,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -19,7 +18,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
-class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600):
+class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: World, summoner: LivingEntity? = null, maxAge: Int = 600):
     AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.HEALERS_GEM) {
 
     override fun initTicker(): EventRegistry.Ticker {

@@ -6,7 +6,9 @@ import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -16,13 +18,14 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.text.Text
-import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 @Suppress("SpellCheckingInspection")
@@ -39,7 +42,7 @@ class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
             .withDamage(AiConfig.entities.hamster.baseSummonDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -50,25 +53,31 @@ class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun placeEntity(
+    override fun entitiesToSpawn(
         world: World,
-        user: PlayerEntity,
+        user: LivingEntity,
+        hand: Hand,
         hit: HitResult,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        val startPos = (hit as BlockHitResult).blockPos
-        val spawnPos = findSpawnPos(world,startPos,1,1, tries = 12)
-        val hampter = BaseHamsterEntity(RegisterEntity.BASIC_HAMSTER_ENTITY, world, effects.duration(level), user, effects, level)
-        hampter.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
-        hampter.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.005, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
-        if (world.spawnEntity(hampter)) {
-            return super.placeEntity(world, user, hit, level, effects)
+        effects: AugmentEffect,
+        spells: PairedAugments,
+        count: Int
+    ): List<BaseHamsterEntity> {
+        val startPos = BlockPos.ofFloored(hit.pos)
+        val list: MutableList<BaseHamsterEntity> = mutableListOf()
+        for (i in 1..count){
+            val hamsterEntity = BaseHamsterEntity(RegisterEntity.BASIC_HAMSTER_ENTITY, world, effects.duration(level), user)
+            val success = findSpawnPos(world, startPos, hamsterEntity, 1, 20, user.pitch, user.yaw)
+            if (success) {
+                hamsterEntity.passEffects(spells, effects, level)
+                list.add(hamsterEntity)
+            }
         }
-        return false
+
+        return list
     }
 
-    override fun soundEvent(): SoundEvent {
-        return RegisterSound.HAMSTER_AMBIENT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,RegisterSound.HAMSTER_AMBIENT,SoundCategory.PLAYERS,1f,1f)
     }
 }

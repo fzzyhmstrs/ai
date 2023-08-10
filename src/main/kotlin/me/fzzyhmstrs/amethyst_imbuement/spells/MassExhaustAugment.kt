@@ -74,8 +74,7 @@ class MassExhaustAugment: EntityAoeAugment(ScepterTier.THREE,false) {
         othersType: AugmentType,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
-        val entity = entityHitResult.entity
-        if ((othersType.empty || spells.spellsAreEqual())) {
+        if (othersType.empty) {
             val bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effects.duration(level),effects.amplifier(level+ 1))
             return if (bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effects.duration(level),effects.amplifier(level))) {
                 SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)

@@ -29,7 +29,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
     }
 
     override fun tick() {
-        val range = entityEffects.range(0)
+        val range = entityEffects.range(level)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
         val entities = world.getOtherEntities(owner, box)
         val list: MutableList<LivingEntity> = mutableListOf()

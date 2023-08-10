@@ -1,31 +1,38 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.hit.HitResult
+import net.minecraft.util.Identifier
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
-import kotlin.math.min
 
 class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY){
     //ml 5
@@ -40,7 +47,7 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
             .withDuration(225,25)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -51,6 +58,10 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+        return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.FREEZE)
+    }
+
     override fun <T> applyTasks(
         world: World,
         context: ProcessContext,
@@ -59,65 +70,94 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
         level: Int,
         effects: AugmentEffect,
         spells: PairedAugments
-    )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
-    {
-        TODO("Not yet implemented")
-    }
-
-    override fun effect(
-        world: World,
-        target: Entity?,
-        user: LivingEntity,
-        level: Int,
-        hit: HitResult?,
-        effect: AugmentEffect
-    ): Boolean {
+    ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
         var successes = 0
-        var d: Double
-        var e: Double
-        if (target != null){
-            d = min(target.y, user.y)
-            e = d + 2.0
-        } else {
+
+        val angles = if (spells.spellsAreEqual()) arrayOf(-9,9) else arrayOf(0)
+        for (a in angles) {
+            var d: Double
+            var e: Double
+
             d = user.y
             e = d + 2.0
-        }
-        val f = (user.yaw + 90) * MathHelper.PI / 180
-        for (i in 0..effect.amplifier(level)) {
-            val g = 1.25 * (i + 1).toDouble()
-            val success = conjureIceSpikes(
-                world,
-                user,
-                user.x + MathHelper.cos(f).toDouble() * g,
-                user.z + MathHelper.sin(f).toDouble() * g,
-                d,
-                e,
-                f,
-                i,
-                effect,
-                level,
-                this
-            )
-            if (success != Double.NEGATIVE_INFINITY) {
-                successes++
-                d = success
-                e = d + 2.0
-            }
 
+            val f = (user.yaw + 90 + a) * MathHelper.PI / 180
+            for (i in 0..effects.range(level).toInt()) {
+                val g = 1.25 * (i + 1).toDouble()
+                val success = PlayerFangsEntity.conjureFang(
+                    world,
+                    user,
+                    user.x + MathHelper.cos(f).toDouble() * g,
+                    user.z + MathHelper.sin(f).toDouble() * g,
+                    d,
+                    e,
+                    f,
+                    i,
+                    effects,
+                    level,
+                    spells
+                )
+                if (success != Double.NEGATIVE_INFINITY) {
+                    successes++
+                    d = success
+                    e = d + 2.0
+                }
+            }
         }
         val bl = successes > 0
         if (bl){
-            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
+            spells.castSoundEvents(world,user.blockPos,context)
         }
-        return successes > 0
+        return if(successes > 0) SpellActionResult.success(AugmentHelper.SUMMONED_MOB) else FAIL
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if (othersType.empty){
+            if (!canTarget(entityHitResult, context, world, user, hand, spells)) return SUCCESSFUL_PASS
+            val amount = spells.provideDealtDamage(effects.damage(level), context, entityHitResult, user, world, hand, level, effects)
+            val damageSource = spells.provideDamageSource(context, entityHitResult, source, user, world, hand, level, effects)
+            val bl  = entityHitResult.entity.damage(damageSource, amount)
+            return if(bl) {
+                val pos = source?.pos?:entityHitResult.entity.pos
+                splashParticles(entityHitResult,world,pos.x,pos.y,pos.z,spells)
+                user.applyDamageEffects(user,entityHitResult.entity)
+                spells.hitSoundEvents(world, entityHitResult.entity.blockPos, context)
+                val entity = entityHitResult.entity
+                if (entity is LivingEntity){
+                    entity.frozenTicks = effects.duration(level)
+                }
+                val list: MutableList<Identifier> = mutableListOf()
+                if (entityHitResult.entity.isAlive) {
+                    list.add(AugmentHelper.DAMAGED_MOB)
+                    SpellActionResult.success(list)
+                } else {
+                    list.add(AugmentHelper.DAMAGED_MOB)
+                    list.add(AugmentHelper.KILLED_MOB)
+                    SpellActionResult.success(list)
+                }
+            } else {
+                FAIL
+            }
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
+    }
+
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_FANGS_ATTACK, SoundCategory.PLAYERS,1.0f,world.random.nextFloat()*0.8f + 0.4f)
     }
 }

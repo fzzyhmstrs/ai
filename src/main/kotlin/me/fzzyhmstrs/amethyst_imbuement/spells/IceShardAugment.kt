@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -22,6 +23,8 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -45,7 +48,7 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
             .withRange(4.3,0.2)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -99,6 +102,10 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         }
 
         return SUCCESSFUL_PASS
+    }
+
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

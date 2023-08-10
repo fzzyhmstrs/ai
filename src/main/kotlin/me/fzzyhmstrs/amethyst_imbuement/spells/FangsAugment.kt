@@ -31,6 +31,8 @@ import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -119,8 +121,10 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
         effects: AugmentEffect,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
+        val onCastResults = spells.processOnCast(context,world,null,user, hand, level, effects)
+        if (!onCastResults.success()) return  FAIL
+        if (onCastResults.overwrite()) return onCastResults
         var successes = 0
-
         val angles = if (spells.spellsAreEqual()) arrayOf(-9,9) else arrayOf(0)
         for (a in angles) {
             var d: Double
@@ -156,7 +160,7 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
         if (bl){
             spells.castSoundEvents(world,user.blockPos,context)
         }
-        return if(successes > 0) SpellActionResult.success(AugmentHelper.SUMMONED_MOB) else FAIL
+        return if(bl) SpellActionResult.success(AugmentHelper.SUMMONED_MOB).withResults(onCastResults.results()) else FAIL
     }
 
     override fun modifyRange(
@@ -275,6 +279,9 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
         return summons
     }
 
+    override fun castParticleType(): ParticleEffect? {
+        return ParticleTypes.CRIT
+    }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
         world.playSound(null,blockPos,SoundEvents.ENTITY_EVOKER_FANGS_ATTACK, SoundCategory.PLAYERS,1.0f,world.random.nextFloat()*0.8f + 0.4f)

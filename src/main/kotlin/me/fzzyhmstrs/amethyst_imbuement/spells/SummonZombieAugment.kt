@@ -8,7 +8,10 @@ import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -18,13 +21,13 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.zombie.UnhallowedEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
-import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -44,7 +47,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
             .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -55,30 +58,38 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun placeEntity(
+    override fun <T> startCount(
+        user: T,
+        effects: AugmentEffect,
+        level: Int,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Int where T : SpellCastingEntity,T : LivingEntity {
+        return max(min(effects.amplifier(level),level/2),1)
+    }
+
+    override fun entitiesToSpawn(
         world: World,
-        user: PlayerEntity,
+        user: LivingEntity,
+        hand: Hand,
         hit: HitResult,
         level: Int,
-        effects: AugmentEffect
-    ): Boolean {
-        val bonus = bonus(level)
-        var successes = 0
-        for(i in 1..max(min(effects.amplifier(level),level/2),1)) {
-            val startPos = (hit as BlockHitResult).blockPos
-            val spawnPos = findSpawnPos(world,startPos,3,2)
-            if (spawnPos == BlockPos.ORIGIN) continue
-
-            val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), user, effects, level, bonus)
-            zom.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y + 0.05, spawnPos.z + 0.5, user.yaw, user.pitch)
-            if (world.spawnEntity(zom)){
-                successes++
+        effects: AugmentEffect,
+        spells: PairedAugments,
+        count: Int
+    ): List<UnhallowedEntity> {
+        val startPos = BlockPos.ofFloored(hit.pos)
+        val list: MutableList<UnhallowedEntity> = mutableListOf()
+        for (i in 1..count){
+            val unhallowedEntity = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world, effects.duration(level), user, bonus(level))
+            val success = findSpawnPos(world, startPos, unhallowedEntity, 3, 15, user.pitch, user.yaw)
+            if (success) {
+                unhallowedEntity.passEffects(spells, effects, level)
+                list.add(unhallowedEntity)
             }
         }
-        if (successes > 0) {
-            return super.placeEntity(world, user, hit, level, effects)
-        }
-        return false
+
+        return list
     }
 
     private fun bonus(level: Int): Int{
@@ -95,7 +106,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
         }
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_ZOMBIE_AMBIENT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null, blockPos, SoundEvents.ENTITY_ZOMBIE_AMBIENT, SoundCategory.PLAYERS, 1f, 1f)
     }
 }

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -8,24 +9,23 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
-import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
@@ -40,7 +40,7 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
         get() = super.baseEffect.withDuration(10,5,0)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -66,18 +66,7 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
             T : SpellCastingEntity,
             T : LivingEntity
     {
-        TODO("Not yet implemented")
-    }
-
-    override fun effect(
-        world: World,
-        target: Entity?,
-        user: LivingEntity,
-        level: Int,
-        hit: HitResult?,
-        effect: AugmentEffect
-    ): Boolean {
-        if (user !is PlayerEntity) return false
+        if (user !is PlayerEntity) return FAIL
         val stacks: MutableList<ItemStack> = mutableListOf()
         for (stack2 in user.inventory.main){
             if (stack2.item !is ManaItem && stack2.isDamaged){
@@ -92,11 +81,16 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
         if (user.offHandStack.item !is ManaItem && user.offHandStack.isDamaged){
             stacks.add(user.offHandStack)
         }
-        if (stacks.isEmpty()) return false
-        val healLeft = effect.duration(level)
+        if (stacks.isEmpty()) return FAIL
+        val healLeft = effects.duration(level)
         val leftOverHeal = healItems(stacks,world,healLeft)
-        world.playSound(null,user.blockPos,soundEvent(),SoundCategory.NEUTRAL,0.5f,1.0f)
-        return (leftOverHeal < healLeft)
+
+        return if(leftOverHeal < healLeft) {
+            spells.castSoundEvents(world,user.blockPos,context)
+            SpellActionResult.success(AugmentHelper.DRY_FIRED)
+        } else {
+            FAIL
+        }
     }
 
     private fun healItems(list: MutableList<ItemStack>,world: World, healLeft: Int): Int{
@@ -113,8 +107,8 @@ class MendEquipmentAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SINGLE_T
         return healItems(list,world,hl)
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.BLOCK_ANVIL_USE
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.BLOCK_ANVIL_USE,SoundCategory.PLAYERS,1f,1f)
     }
 
     override fun getRepairTime(): Int {

@@ -1,24 +1,40 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper.place
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.PlayerItemEntity
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityStatuses
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.Tameable
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
 class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMMON_BOOM.plus(AugmentType.PROJECTILE)){
@@ -86,7 +102,7 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
             }
             return result
         }
-        
+        return SUCCESSFUL_PASS
     }
 
     override fun <T> onBlockHit(
@@ -101,11 +117,11 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
         othersType: AugmentType,
         spells: PairedAugments
     )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
     {
         val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success()) {
@@ -114,9 +130,10 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
             }
             return result
         }
+        return SUCCESSFUL_PASS
     }
 
-    private fun spawnChicken(world: World, random: Random, source: Entity?, entityEffects: AugmentEffects, level: Int, spells: PairedAugments){
+    private fun spawnChicken(world: World, random: Random, source: Entity?, entityEffects: AugmentEffect, level: Int, spells: PairedAugments){
         if (source == null) return
         if (!world.isClient) {
             if (random.nextFloat() < (1f-10f/entityEffects.range(level))) {
@@ -126,12 +143,23 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
                 }
                 for (j in 0 until i) {
                     val chickenEntity = RegisterEntity.BOOM_CHICKEN_ENTITY.create(world) ?: return
-                    chickenEntity.refreshPositionAndAngles(source.x, source.y, source.z, yaw, 0.0f)
+                    chickenEntity.refreshPositionAndAngles(source.x, source.y, source.z, source.yaw , 0.0f)
                     chickenEntity.isBaby = false
-                    if (source.owner is LivingEntity) {
-                        chickenEntity.setChickenOwner(source.owner as LivingEntity)
+                    if (source is ProjectileEntity) {
+                        if (source.owner is LivingEntity) {
+                            chickenEntity.setChickenOwner(source.owner as LivingEntity)
+                        }
+                    } else if (source is PlayerCreatable){
+                        if (source.entityOwner is LivingEntity) {
+                            chickenEntity.setChickenOwner(source.entityOwner as LivingEntity)
+                        }
+                    } else if (source is Tameable){
+                        val owner = source.owner
+                        if (owner is LivingEntity) {
+                            chickenEntity.setChickenOwner(owner)
+                        }
                     }
-                    chickenEntity.passEffects(spells,entityEffects,levels)
+                    chickenEntity.passEffects(spells,entityEffects,level)
                     world.spawnEntity(chickenEntity)
                 }
             }

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper.place
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment

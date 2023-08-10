@@ -77,7 +77,7 @@ class MassRevivifyAugment: EntityAoeAugment(ScepterTier.THREE,true){
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         val entity = entityHitResult.entity
-        if ((othersType.empty || spells.spellsAreEqual()) && entity is LivingEntity) {
+        if (othersType.empty && entity is LivingEntity) {
             var successes = 0
             val bl = entityHitResult.addStatus(StatusEffects.REGENERATION,effects.duration(level), effects.amplifier(1))
             if(bl && entityHitResult.addStatus(StatusEffects.ABSORPTION, effects.duration(level + 3), effects.amplifier(level)))
