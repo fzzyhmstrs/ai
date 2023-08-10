@@ -28,7 +28,7 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
@@ -52,7 +52,7 @@ class CreateWaterAugment: PlaceItemAugment(ScepterTier.ONE,Items.WATER_BUCKET){
         othersType: AugmentType,
         spells: PairedAugments
     ): Item where T : SpellCastingEntity, T : LivingEntity {
-        return items[startItem] ?: startItem
+        return itemAfterWaterTransform(startItem)
     }
 
     override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

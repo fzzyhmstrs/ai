@@ -51,33 +51,7 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun <T> applyTasks(
-        world: World,
-        context: ProcessContext,
-        user: T,
-        hand: Hand,
-        level: Int,
-        effects: AugmentEffect,
-        spells: PairedAugments
-    )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
-    {
-        TODO("Not yet implemented")
-    }
-
-    override fun effect(
-        world: World,
-        target: Entity?,
-        user: LivingEntity,
-        level: Int,
-        hit: HitResult?,
-        effect: AugmentEffect
-    ): Boolean {
-        if (user !is PlayerEntity) return false
+    override fun clientTask(context: ProcessContext, world: World, user: PlayerEntity, target: Entity?, hand: Hand, bufData: PacketByteBuf){
         val y: Float = user.getYaw()
         val p: Float = user.getPitch()
         var g =
@@ -97,21 +71,36 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
         if (user.isOnGround()) {
             user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))
         }
-        world.playSoundFromEntity(null,user,soundEvent(),SoundCategory.PLAYERS,1.0F,1.0F)
-        return true
-    }
-
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
-        effect(world, null, user, level, null, baseEffect)
-    }
-
-    override fun soundEvent(): SoundEvent {
-        return when(AI.aiRandom().nextInt(3)){
+        val sound = when(AI.aiRandom().nextInt(3)){
             0-> SoundEvents.ITEM_TRIDENT_RIPTIDE_1
             1-> SoundEvents.ITEM_TRIDENT_RIPTIDE_2
             2-> SoundEvents.ITEM_TRIDENT_RIPTIDE_3
             else-> SoundEvents.ITEM_TRIDENT_RIPTIDE_1
         }
+        world.playSoundFromEntity(null,user,sound,SoundCategory.PLAYERS,1.0F,1.0F)
+    }
 
+    override fun <T> applyTasks(
+        world: World,
+        context: ProcessContext,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val onCastResults = spells.processOnCast(context,world,null,user, hand, level, effects)
+        if (!onCastResults.success()) return  FAIL
+        if (onCastResults.overwrite()) return onCastResults
+        if (user !is ServerPlayerEntity) return FAIL
+        val buf = AugmentHelper.createClientEffectPacket(this, null, context, hand)
+        AugmentHelper.sendClientTask(user, buf)
+        return SpellActionResult.success(AugmentHelper.DRY_FIRED).withResults(onCastResults.results())
     }
 }
