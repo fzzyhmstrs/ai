@@ -39,7 +39,7 @@ class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(A
         get() = super.baseEffect.withAmplifier(1).withRange(4.5)
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -66,12 +66,8 @@ class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(A
             T : SpellCastingEntity,
             T : LivingEntity
     {
-        TODO("Not yet implemented")
-    }
-
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         val hit = RaycasterUtil.raycastHit(distance = effects.range(level),user, includeFluids = false)
-        if (hit !is BlockHitResult || user !is PlayerEntity) return false
+        if (hit !is BlockHitResult || user !is PlayerEntity) return FAIL
         val stack = ItemStack(Items.FIREWORK_ROCKET)
         val nbtList = NbtList()
         for (i in 1..world.random.nextInt(level/5+1)+1){
@@ -107,5 +103,9 @@ class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(A
         stack.getOrCreateSubNbt("Fireworks").put("Explosions",nbtList)
         val result = stack.useOnBlock(ItemUsageContext(world,user,hand,stack,hit))
         return result.isAccepted
+    }
+
+    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+        
     }
 }
