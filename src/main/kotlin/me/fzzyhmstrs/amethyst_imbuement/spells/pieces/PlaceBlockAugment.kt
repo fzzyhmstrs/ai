@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.pieces
 
 import eu.pb4.common.protection.api.CommonProtection
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
+import me.fzzyhmstrs.amethyst_core.augments.base.PlaceItemAugment
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
@@ -17,6 +17,7 @@ import net.minecraft.block.ShapeContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.Tameable
+import net.minecraft.item.Item
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.Hand
@@ -25,7 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-abstract class PlaceBlockAugment(tier: ScepterTier,item: Item, type: AugmentType = AugmentType.BLOCK_TARGET): PlaceItemAugment(tier,item,type) {
+abstract class PlaceBlockAugment(tier: ScepterTier, item: Item, type: AugmentType = AugmentType.BLOCK_TARGET): PlaceItemAugment(tier,item,type) {
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(4.5)

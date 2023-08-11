@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
+import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
@@ -145,7 +146,7 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
     private fun lightning(world: World,user: LivingEntity, hit: HitResult, entityEffects: AugmentEffect, level: Int, spells: PairedAugments, context: ProcessContext): Boolean{
         val le = PlayerLightningEntity(world, user)
         le.passEffects(spells,entityEffects,level)
-        le.passContext(context)
+        le.passContext(ProjectileAugment.projectileContext(context.copy()))
         le.refreshPositionAfterTeleport(hit.pos)
         return world.spawnEntity(le)
     }

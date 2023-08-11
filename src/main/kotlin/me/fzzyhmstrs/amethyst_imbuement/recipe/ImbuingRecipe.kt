@@ -123,12 +123,12 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
                             return false
                         } else {
                             val nbt = stackTest.orCreateNbt
-                            if (!nbt.contains(me.fzzyhmstrs.amethyst_core.nbt.NbtKeys.LORE_KEY.str())){
+                            if (!nbt.contains(me.fzzyhmstrs.amethyst_core.nbt.NbtKeys.LORE_KEY)){
                                 return false
                             } else {
                                 val idTest = Identifier(augment)
                                 val pathTest = idTest.toString()
-                                val loreString = nbt.getString(me.fzzyhmstrs.amethyst_core.nbt.NbtKeys.LORE_KEY.str())
+                                val loreString = nbt.getString(me.fzzyhmstrs.amethyst_core.nbt.NbtKeys.LORE_KEY)
                                 val nbtTest = if (Identifier(loreString).namespace == "minecraft"){
                                     AI.identity(Identifier(loreString).path).toString()
                                 } else {

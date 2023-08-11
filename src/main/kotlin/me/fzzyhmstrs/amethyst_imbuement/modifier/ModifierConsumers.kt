@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.modifier
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.item.ScepterLike
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
@@ -267,7 +268,7 @@ object ModifierConsumers {
             if (data is EchoingPersistentData){
                 val user = data.user
                 if (user is SpellCastingEntity)
-                    data.augment.applyModifiableTasks(user.world,user,data.hand,1, listOf(), AugmentModifier(), data.pairedAugments)
+                    data.augment.applyModifiableTasks(user.world,user,data.hand,1,data.pairedAugments, ProcessContext.EMPTY_CONTEXT, listOf(), AugmentModifier())
             }
         }
 

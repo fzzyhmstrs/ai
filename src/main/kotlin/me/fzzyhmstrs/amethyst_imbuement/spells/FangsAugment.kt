@@ -273,7 +273,6 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
             val tofe = TotemOfFangsEntity(RegisterEntity.TOTEM_OF_FANGS_ENTITY,world,user,effects.duration(level))
             tofe.refreshPositionAndAngles(x, y, z,0.0f,0.0f)
             tofe.passEffects(spells,effects,level)
-            tofe.passContext(context)
             return listOf(tofe)
         }
         return summons

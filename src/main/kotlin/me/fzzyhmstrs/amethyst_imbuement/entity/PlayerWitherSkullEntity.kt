@@ -36,7 +36,7 @@ open class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override var modifiableEffects = ModifiableEffectContainer()
-    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY_CONTEXT
 
     override fun tick() {
         super.tick()

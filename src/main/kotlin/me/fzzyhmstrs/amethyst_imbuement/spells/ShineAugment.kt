@@ -60,7 +60,7 @@ import kotlin.math.min
 Checklist
 */
 
-class ShineAugment: PlaceBlockAugment(ScepterTier.ONE) {
+class ShineAugment: PlaceBlockAugment(ScepterTier.ONE, RegisterBlock.SHINE_LIGHT.asItem()) {
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("shine"),SpellType.WIT,10,2,
             1,1,1,1,LoreTier.NO_TIER,RegisterBlock.SHINE_LIGHT.asItem())

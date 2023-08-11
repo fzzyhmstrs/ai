@@ -36,7 +36,7 @@ open class BasicShardEntity(entityType: EntityType<out BasicShardEntity?>, world
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override var modifiableEffects = ModifiableEffectContainer()
-    override var processContext = ProcessContext.EMPTY_CONTEXT
+    override var processContext = ProcessContext.FROM_ENTITY_CONTEXT
     private val struckEntities: MutableList<UUID> = mutableListOf()
     private val particle
         get() = spells.getCastParticleType()

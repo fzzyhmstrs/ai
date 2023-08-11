@@ -39,7 +39,7 @@ class HastingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
                     if (item is TotemItem){
                         val nbt = stack.orCreateNbt
                         item.inactiveEnchantmentTasks(stack,user.world,user)
-                        nbt.putBoolean(NbtKeys.TOTEM.str(), false)
+                        nbt.putBoolean(NbtKeys.TOTEM, false)
                     }
                 }
             }

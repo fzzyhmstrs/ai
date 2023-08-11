@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -19,13 +20,12 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.MovementType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
-import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -52,23 +52,25 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
     }
 
     override fun clientTask(context: ProcessContext, world: World, user: PlayerEntity, target: Entity?, hand: Hand, bufData: PacketByteBuf){
-        val y: Float = user.getYaw()
-        val p: Float = user.getPitch()
+        val amplifier = bufData.readInt()
+        val duration = bufData.readInt()
+        val y: Float = user.yaw
+        val p: Float = user.pitch
         var g =
             -MathHelper.sin(y * (Math.PI.toFloat() / 180)) * MathHelper.cos(p * (Math.PI.toFloat() / 180))
         var h = -MathHelper.sin(p * (Math.PI.toFloat() / 180))
         var k =
             MathHelper.cos(y * (Math.PI.toFloat() / 180)) * MathHelper.cos(p * (Math.PI.toFloat() / 180))
         val l = MathHelper.sqrt(g * g + h * h + k * k)
-        val m: Float = 3.0f * (effect.amplifier(level).toFloat() / 4.0f)
+        val m: Float = 3.0f * amplifier / 4.0f
 
         g *= m / l
         h *= m / l
         k *= m / l
         user.addVelocity(g.toDouble(),h.toDouble(),k.toDouble())
-        user.useRiptide(effect.duration(level))
+        user.useRiptide(duration)
 
-        if (user.isOnGround()) {
+        if (user.isOnGround) {
             user.move(MovementType.SELF, Vec3d(0.0, 1.1999999284744263, 0.0))
         }
         val sound = when(AI.aiRandom().nextInt(3)){
@@ -100,6 +102,8 @@ class DashAugment: ScepterAugment(ScepterTier.TWO, AugmentType.SINGLE_TARGET_OR_
         if (onCastResults.overwrite()) return onCastResults
         if (user !is ServerPlayerEntity) return FAIL
         val buf = AugmentHelper.createClientEffectPacket(this, null, context, hand)
+        buf.writeInt(effects.amplifier(level))
+        buf.writeInt(effects.duration(level))
         AugmentHelper.sendClientTask(user, buf)
         return SpellActionResult.success(AugmentHelper.DRY_FIRED).withResults(onCastResults.results())
     }

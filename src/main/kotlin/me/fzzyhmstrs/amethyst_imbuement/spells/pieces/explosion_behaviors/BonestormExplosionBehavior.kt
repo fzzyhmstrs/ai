@@ -3,11 +3,12 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.pieces.explosion_behaviors
 import me.fzzyhmstrs.amethyst_core.augments.CustomExplosion
 import me.fzzyhmstrs.amethyst_imbuement.entity.BasicShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import net.minecraft.entity.Entity
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class BonestormExplosionBehavior: CustomExplosion.CustomExplosionBehavior() {
-    override fun extraExplosionEffects(x: Double, y: Double, z: Double, world: World) {
+    override fun extraExplosionEffects(x: Double, y: Double, z: Double, world: World, source: Entity?) {
         for (i in 1..10){
             val rndX = world.random.nextDouble() * 2.0 -1.0
             val rndY = world.random.nextDouble() * 2.0 -1.0

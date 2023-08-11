@@ -1,55 +1,46 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.augments.AugmentPersistentEffectData
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerBulletEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
-import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
-import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
-import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil.raycastEntityArea
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
-import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
 
-class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentEffectHelper.PersistentEffect {
+class LevitatingBulletAugment: MultiTargetAugment(ScepterTier.THREE, AugmentType.BOLT) {
     override val augmentData: AugmentDatapoint =
-        AugmentDatapoint(AI.identity("levitating_bullet"),SpellType.FURY,80,20,
-            18,3,1,2,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
+        AugmentDatapoint(AI.identity("levitating_bullet"),SpellType.FURY,30,8,
+            18,3,1,1,LoreTier.HIGH_TIER, Items.SHULKER_SHELL)
     //ml 3
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(40,20,0)
-            .withRange(8.0,1.0,0.0)
+        get() = super.baseEffect.withRange(8.0,1.0,0.0)
             .withDamage(4.0f)
 
     override fun <T> canTarget(
@@ -75,95 +66,47 @@ class LevitatingBulletAugment: ProjectileAugment(ScepterTier.THREE), PersistentE
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override val delay = PerLvlI(16,-2,0)
-
-    override fun effect(
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
         world: World,
-        target: Entity?,
-        user: LivingEntity,
+        source: Entity?,
+        user: T,
+        hand: Hand,
         level: Int,
-        hit: HitResult?,
-        effect: AugmentEffect
-    ): Boolean {
-        val blockPos: BlockPos = user.blockPos
-        val (_,entityList) = raycastEntityArea(user,hit,effect.range(level))
-        if (entityList.isEmpty()) {
-            return false
-        }
-        val hostileEntityList: MutableList<Entity> = mutableListOf()
-        for (entity in entityList){
-            if (entity is Monster || entity is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity,this)){
-                hostileEntityList.add(entity)
-            }
-        }
-        if (hostileEntityList.isEmpty()) {
-            return false
-        }
-        if (!effect(world, user, hostileEntityList, level, effect)) return false
-        val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
-        PersistentEffectHelper.setPersistentTickerNeed(RegisterEnchantment.LEVITATING_BULLET, delay.value(level),effect.duration(level),data)
-        effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-        return true
-    }
-
-    override fun effect(
-        world: World,
-        user: LivingEntity,
-        entityList: MutableList<Entity>,
-        level: Int,
-        effect: AugmentEffect
-    ): Boolean {
-        val axis = getAxis(user)
-        var successes = 0
-        for (i in 0..min(level-1,entityList.size-1)){
-            val entity = entityList[i]
-            //consider custom shulker bullet entity for the modifiability
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
+        if (context.get(ProcessContext.FROM_ENTITY)){
+            val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+            if (result.acted() || !result.success())
+                if (result.acted()){
+                    if (entityHitResult.addStatus(StatusEffects.LEVITATION, 200))
+                        return result.withResults(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+                }
+                return result
+        } else if (othersType.empty){
+            val axis = getAxis(user)
+            val entity = entityHitResult.entity
             val sbe = PlayerBulletEntity(world,user,entity,axis)
-            sbe.passEffects(effect, level)
-            sbe.setAugment(this)
-            if (world.spawnEntity(sbe)){
-                successes++
+            sbe.passEffects(spells,effects,level)
+            sbe.passContext(ProjectileAugment.projectileContext(context.copy()))
+            return if (world.spawnEntity(sbe)){
+                SpellActionResult.success(AugmentHelper.PROJECTILE_FIRED)
+            } else {
+                FAIL
             }
         }
-
-        return true
-    }
-    override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
-        if (data !is AugmentPersistentEffectData) return
-        val rnd1 = data.entityList.size
-        val rnd2 = data.world.random.nextInt(rnd1)
-        val entity = data.entityList[rnd2]
-
-        val axis = getAxis(data.user)
-        val sbe = PlayerBulletEntity(data.world,data.user,entity,axis)
-        sbe.passEffects(data.effect, data.level)
-        sbe.setAugment(this)
-        data.world.spawnEntity(sbe)
+        return SUCCESSFUL_PASS
     }
 
-    override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_SHULKER_SHOOT
+    override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_SHULKER_SHOOT,SoundCategory.PLAYERS,1f,1f)
     }
 
     private fun getAxis(user: LivingEntity): Direction.Axis{
-        val xAmount = user.getRotationVec(1.0F).x
-        val zAmount = user.getRotationVec(1.0F).z
-        val maxAmount = max(abs(xAmount), abs(zAmount))
-        val axis: Direction.Axis = if (maxAmount == abs(xAmount)){
-            if (xAmount < 0){
-                Direction.EAST.axis
-            } else {
-                Direction.WEST.axis
-            }
-        }  else {
-            if (xAmount < 0){
-                Direction.SOUTH.axis
-            } else {
-                Direction.NORTH.axis
-            }
-        }
-        return axis
+        return user.horizontalFacing.axis
     }
 
 }

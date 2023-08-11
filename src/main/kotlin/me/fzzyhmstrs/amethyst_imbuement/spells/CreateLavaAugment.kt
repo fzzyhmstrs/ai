@@ -6,10 +6,7 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.PlaceItemAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
-import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.augments.paired.*
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -19,6 +16,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.LampsterEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
@@ -188,6 +186,7 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
         othersType: AugmentType,
         spells: PairedAugments
     ): DamageSourceBuilder where T : SpellCastingEntity,T : LivingEntity {
+        if (spells.primary() == RegisterEnchantment.SUMMON_HAMSTER) builder.add(DamageTypes.EXPLOSION)
         return builder.add(DamageTypes.LAVA)
     }
 
@@ -210,13 +209,28 @@ class CreateLavaAugment: PlaceItemAugment(ScepterTier.TWO, Items.LAVA_BUCKET){
                 return listOf()
             }
             le.passEffects(spells,effects,level)
-            le.passContext(context)
             return listOf(le)
         } else if (spells.primary() == RegisterEnchantment.SUMMON_GOLEM){
 
         }
 
         return summons
+    }
+
+    override fun modifyExplosion(
+        builder: ExplosionBuilder,
+        context: ProcessContext,
+        user: LivingEntity?,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): ExplosionBuilder {
+        if (spells.primary() == RegisterEnchantment.SUMMON_HAMSTER)
+            return builder.withPower(0.5f).withCreateFire(true).withType(World.ExplosionSourceType.TNT)
+        return builder
     }
 
     override fun <T> customItemPlaceOnBlockHit(

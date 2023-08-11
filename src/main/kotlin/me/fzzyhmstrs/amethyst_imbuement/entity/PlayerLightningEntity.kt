@@ -49,7 +49,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override var modifiableEffects = ModifiableEffectContainer()
-    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY_CONTEXT
 
     fun getOwner(): LivingEntity? {
         if (owner != null && !owner!!.isRemoved) {

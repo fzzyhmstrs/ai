@@ -329,7 +329,6 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
             }
             chorse.setPlayerHorseOwner(user)
             chorse.passEffects(spells,effects,level)
-            chorse.passContext(context)
             if (scepter.item is ScepterLike && scepter.item is SpellCasting){
                 scepter.orCreateNbt.putUuid("current_chorse",chorse.uuid)
             }

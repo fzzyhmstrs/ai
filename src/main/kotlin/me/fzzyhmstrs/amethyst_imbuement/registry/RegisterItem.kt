@@ -320,7 +320,6 @@ object RegisterItem {
                 )
                 entries.addAll(RegisterArmor.regArmor.stream().map { item -> ItemStack(item) }.toList())
                 RegisterBlock.regBlockItem.stream()
-                    .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
                     .map { block -> ItemStack(block.asItem()) }
                     .forEach {
                         entries.add(it)

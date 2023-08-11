@@ -41,22 +41,22 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
         }
         usageEnchantmentTasks(stack, world, user)
         val nbt = stack.orCreateNbt
-        return if (!nbt.contains(NbtKeys.TOTEM.str())){
+        return if (!nbt.contains(NbtKeys.TOTEM)){
             if (canActivateTasks(stack,world,user)) {
-                nbt.putBoolean(NbtKeys.TOTEM.str(), true)
+                nbt.putBoolean(NbtKeys.TOTEM, true)
                 activeEnchantmentTasks(stack, world, user)
                 TypedActionResult.success(stack)
             } else {
                 TypedActionResult.fail(stack)
             }
         } else {
-            val bl = !nbt.getBoolean(NbtKeys.TOTEM.str())
+            val bl = !nbt.getBoolean(NbtKeys.TOTEM)
             if (bl){
                 if (!canActivateTasks(stack,world,user)){
                     return TypedActionResult.fail(stack)
                 }
             }
-            nbt.putBoolean(NbtKeys.TOTEM.str(), bl)
+            nbt.putBoolean(NbtKeys.TOTEM, bl)
             if (bl) {
                 activeEnchantmentTasks(stack, world, user)
             } else {
@@ -83,7 +83,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
         if (EventRegistry.ticker_20.isReady()){
             val nbt = stack.orCreateNbt
             passiveEnchantmentTasks(stack,world,entity)
-            if (!nbt.getBoolean(NbtKeys.TOTEM.str())) return
+            if (!nbt.getBoolean(NbtKeys.TOTEM)) return
             activeEnchantmentTasks(stack,world,entity)
         }
         if (EnchantmentHelper.getLevel(RegisterEnchantment.GUARDIAN,stack) > 0){ //check for guardian every tick for max responsiveness
@@ -145,10 +145,10 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
 
         fun getActive(stack: ItemStack): Boolean{
             val nbt = stack.nbt ?: return false
-            return if (!nbt.contains(NbtKeys.TOTEM.str())){
+            return if (!nbt.contains(NbtKeys.TOTEM)){
                 false
             } else {
-                nbt.getBoolean(NbtKeys.TOTEM.str())
+                nbt.getBoolean(NbtKeys.TOTEM)
             }
         }
 

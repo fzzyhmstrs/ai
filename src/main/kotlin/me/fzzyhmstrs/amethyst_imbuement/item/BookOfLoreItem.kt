@@ -30,17 +30,17 @@ open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings
     ): TypedActionResult<ItemStack> {
         val nbt = stack.nbt
         if (nbt != null){
-            if (!nbt.contains(NbtKeys.LORE_KEY.str())) return super.useAfterWriting(stack, world, user, hand)
-            val bolaId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str()))
+            if (!nbt.contains(NbtKeys.LORE_KEY)) return super.useAfterWriting(stack, world, user, hand)
+            val bolaId = Identifier(nbt.getString(NbtKeys.LORE_KEY))
             if (Registries.ENCHANTMENT.get(bolaId) == null) return super.useAfterWriting(stack, world, user, hand)
             val bola = bolaId.toString()
             val type = AugmentHelper.getAugmentType(bola)
-            if (nbt.contains(NbtKeys.LORE_TYPE.str())){
-                if (nbt.getString(NbtKeys.LORE_TYPE.str()) != type.str()){
-                    nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+            if (nbt.contains(NbtKeys.LORE_TYPE)){
+                if (nbt.getString(NbtKeys.LORE_TYPE) != type.str()){
+                    nbt.putString(NbtKeys.LORE_TYPE,type.str())
                 }
             } else {
-                nbt.putString(NbtKeys.LORE_TYPE.str(),type.str())
+                nbt.putString(NbtKeys.LORE_TYPE,type.str())
             }
 
         }

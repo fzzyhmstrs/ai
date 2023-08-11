@@ -194,7 +194,6 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
         for (i in 1..count){
             val wse = PlayerWitherSkullEntity(world,user,direction.multiply(4.0))
             wse.passEffects(spells,effects,level)
-            wse.passContext(context)
             list.add(wse)
         }
         return list
@@ -215,7 +214,6 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
             val direction = projectile.rotationVector
             val wse = PlayerWitherSkullEntity(world,user,direction.multiply(4.0))
             wse.passEffects(spells,effects,level)
-            wse.passContext(context)
             return wse
         }
         return super.modifyProjectile(projectile, context, user, world, hand, level, effects, othersType, spells)

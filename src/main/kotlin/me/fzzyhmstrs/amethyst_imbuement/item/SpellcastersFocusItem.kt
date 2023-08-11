@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
 import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentModifier
@@ -65,11 +65,11 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
             modifiers
         }
 
-        AfterSpellEvent.EVENT.register{ world,user,_,spell ->
+        AfterSpellEvent.EVENT.register{ world,user,_,_,spell, pair ->
             val offhand = user.offHandStack
             val item = offhand.item
             if (item is SpellcastersFocusItem){
-                addXpAndLevelUp(offhand, spell, user, world)
+                addXpAndLevelUp(offhand, spell,pair, user, world)
             }
         }
     }
@@ -144,12 +144,12 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         return TypedActionResult.success(stack)
     }
 
-    private fun addXpAndLevelUp(stack: ItemStack, spell: ScepterAugment, user: LivingEntity, world: World){
+    private fun addXpAndLevelUp(stack: ItemStack, spell: ScepterAugment, pair: PairedAugments, user: LivingEntity, world: World){
         val nbt = stack.orCreateNbt
         val tier = getTier(nbt)
         if (tier.nextTier == -1) return
-        val id = spell.id?.toString()?:return
-        val newXp = AugmentHelper.getAugmentCastXp(id)
+        val id = spell.id.toString()
+        val newXp = pair.provideCastXp(spell.augmentData.type)
         val currentXp = nbt.getInt(FOCUS_XP)
         val newCurrentXp = currentXp + newXp
         nbt.putInt(FOCUS_XP,newCurrentXp)

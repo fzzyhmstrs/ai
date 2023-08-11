@@ -64,6 +64,7 @@ abstract class AbstractEffectTotemEntity(
         firstTick()
     }
 
+    @Deprecated("Use with caution. Most base spells pass context for you. If needed, remember to copy() the context first.")
     override fun passContext(context: ProcessContext) {
         super.passContext(context.set(TOTEM_BEAM, true))
     }

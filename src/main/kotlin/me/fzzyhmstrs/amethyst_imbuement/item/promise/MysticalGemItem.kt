@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
-import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
@@ -23,11 +23,11 @@ class MysticalGemItem(settings: Settings): IgnitedGemItem(settings){
     }
     
     init{
-        AfterSpellEvent.EVENT.register{ _, user, _, spell ->
+        AfterSpellEvent.EVENT.register{ _, user, _,_, spell, pair ->
             val offhand = user.offHandStack
             val item = offhand.item
             if (item is GemOfPromiseItem && user is PlayerEntity){
-                mysticalGemCheck(offhand, spell, user)
+                mysticalGemCheck(offhand,spell, pair, user)
             }
         }
     }
@@ -44,10 +44,9 @@ class MysticalGemItem(settings: Settings): IgnitedGemItem(settings){
         return RegisterModifier.SAVANT_ASPECT.modifierId
     }
 
-    fun mysticalGemCheck(stack: ItemStack, spell: ScepterAugment, user: PlayerEntity){
+    fun mysticalGemCheck(stack: ItemStack, spell: ScepterAugment, pair: PairedAugments, user: PlayerEntity){
             val nbt = stack.orCreateNbt
-            val id = spell.id?.toString()?:return
-            val newXp = AugmentHelper.getAugmentCastXp(id)
+            val newXp = pair.provideCastXp(spell.augmentData.type)
             var xp = 0
             if (nbt.contains("xp_cast")){
                 xp = nbt.getInt("xp_cast")

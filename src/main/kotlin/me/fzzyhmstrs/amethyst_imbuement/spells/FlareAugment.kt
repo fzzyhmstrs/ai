@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -8,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -102,10 +104,6 @@ class FlareAugment: ScepterAugment(ScepterTier.ONE, AugmentType.Builder().with(A
         FireworkRocketItem.setFlight(stack, (world.random.nextInt(3) + 1).toByte())
         stack.getOrCreateSubNbt("Fireworks").put("Explosions",nbtList)
         val result = stack.useOnBlock(ItemUsageContext(world,user,hand,stack,hit))
-        return result.isAccepted
-    }
-
-    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
-        
+        return if(result.isAccepted) SpellActionResult.success(AugmentHelper.PROJECTILE_FIRED) else FAIL
     }
 }

@@ -52,7 +52,7 @@ import java.util.*
     Checklist
      */
 
-class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE) {
+class CreateHardLightAugment: PlaceBlockAugment(ScepterTier.ONE,RegisterBlock.HARD_LIGHT_BLOCK.asItem()) {
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("create_hard_light"),SpellType.WIT, 7,4,
             5,1,1,1, LoreTier.LOW_TIER, RegisterBlock.HARD_LIGHT_BLOCK.asItem())

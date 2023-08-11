@@ -77,13 +77,17 @@ abstract class MultiTargetAugment(tier: ScepterTier, type: AugmentType = Augment
             targetsLeft--
             val temp = spells.processSingleEntityHit(entity,context,world,null,user,hand, level, effects)
             if (temp.isNotEmpty()){
-                val buf = writeBuf(user,entity.entity,spells,particleSpeed())
-                ScepterHelper.sendSpellParticlesFromServer(world,user.pos,buf)
+                particles(user, entity, world, spells)
             }
             list.addAll(temp)
         }
         return if (list.isEmpty()) FAIL else SpellActionResult.success(list)
 
+    }
+
+    open fun particles(user: LivingEntity,entity: EntityHitResult, world: World, spells: PairedAugments){
+        val buf = writeBuf(user,entity.entity,spells,particleSpeed())
+        ScepterHelper.sendSpellParticlesFromServer(world,user.pos,buf)
     }
 
     open fun particleSpeed(): Double{

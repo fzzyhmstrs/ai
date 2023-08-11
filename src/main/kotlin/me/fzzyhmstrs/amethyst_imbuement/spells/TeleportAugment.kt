@@ -70,7 +70,6 @@ class TeleportAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.Builder().
             val div = 1.0F
             me.place(user,direction,-0.2, speed, div, 0.6)
             me.passEffects(spells,effects,level)
-            me.passContext(context)
             list.add(me)
         }
         return list

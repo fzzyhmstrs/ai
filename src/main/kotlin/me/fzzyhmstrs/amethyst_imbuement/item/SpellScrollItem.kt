@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.item.SpellCasting
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterHelper
@@ -99,10 +100,10 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         if (spell !is ScepterAugment) return resetCooldown(stack,world,user,spellString)
         val level = min(spell.maxLevel,max(1,nbt.getInt(SCROLL_LEVEL)))
         if (world.isClient) {
-            spell.clientTask(world,user,hand,level)
+            //spell.clientTask(world,user,hand,level)
             return TypedActionResult.pass(stack)
         }
-        return ScepterHelper.castSpell(world,user,hand,stack,spell,spellString,level,this,
+        return ScepterHelper.castSpell(world, ProcessContext.EMPTY_CONTEXT,user,hand,stack,spellString,spell,level,this,
             incrementStats = false,
             checkEnchant = false
         )
@@ -151,8 +152,8 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         var fails = 0
         for (reagent in reagents){
             if (reagent.item is BookOfKnowledge){
-                val spell = reagent.nbt?.contains(NbtKeys.LORE_KEY.str())?:false
-                val loreType = reagent.nbt?.contains(NbtKeys.LORE_TYPE.str())?:false
+                val spell = reagent.nbt?.contains(NbtKeys.LORE_KEY)?:false
+                val loreType = reagent.nbt?.contains(NbtKeys.LORE_TYPE)?:false
                 if (!spell || !loreType){
                     fails++
                 }
@@ -166,8 +167,8 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         for (reagent in reagents){
             if (nbt.contains(SPELL)) break
             if (reagent.item is BookOfKnowledge){
-                val spellString = reagent.nbt?.getString(NbtKeys.LORE_KEY.str())?:return
-                val spellType = reagent.nbt?.getString(NbtKeys.LORE_TYPE.str())?:""
+                val spellString = reagent.nbt?.getString(NbtKeys.LORE_KEY)?:return
+                val spellType = reagent.nbt?.getString(NbtKeys.LORE_TYPE)?:""
                 nbt.putString(SPELL,spellString)
                 nbt.putString(SPELL_TYPE,spellType)
             }

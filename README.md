@@ -14,6 +14,8 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 
 ### Spell Update Progress 15/73
 
+### Alpha Spells Progress 70/73
+
 /*
 Checklist
 - canTarget if entity spell

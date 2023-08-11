@@ -27,7 +27,7 @@ open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity 
     override var level: Int = 1
     override var spells: PairedAugments = PairedAugments()
     override var modifiableEffects = ModifiableEffectContainer()
-    override var processContext: ProcessContext = ProcessContext.EMPTY_CONTEXT
+    override var processContext: ProcessContext = ProcessContext.FROM_ENTITY_CONTEXT
 
     override fun tick() {
         super.tick()
@@ -36,6 +36,9 @@ open class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity 
 
     override fun onCollision(hitResult: HitResult) {
         super.onCollision(hitResult)
+        val entity = owner
+        if (entity is LivingEntity)
+            spells.causeExplosion(processContext,this,entity,world,Hand.MAIN_HAND,level,entityEffects)
         if (!world.isClient) {
             discard()
         }

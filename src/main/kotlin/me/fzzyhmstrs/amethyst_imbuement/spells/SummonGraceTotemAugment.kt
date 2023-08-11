@@ -27,7 +27,6 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-@Suppress("SpellCheckingInspection")
 class SummonGraceTotemAugment: SummonAugment<TotemOfGraceEntity>(ScepterTier.TWO){
     override val augmentData: AugmentDatapoint =
         AugmentDatapoint(AI.identity("summon_grace_totem"),SpellType.GRACE,2400,240,

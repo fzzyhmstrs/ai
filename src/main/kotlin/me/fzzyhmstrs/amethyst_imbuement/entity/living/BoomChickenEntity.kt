@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import me.fzzyhmstrs.amethyst_core.augments.paired.ExplosionBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectContainer
@@ -158,9 +157,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
             val augment = spells.primary()
             val summoner = owner
             if (augment != null && summoner is SpellCastingEntity) {
-                val damageSourceBuilder = augment.damageSourceBuilder(world,this,summoner)
-                val builder = ExplosionBuilder(damageSourceBuilder,this,this.pos)
-                spells.causeExplosion(builder,processContext,summoner,world,Hand.MAIN_HAND,level,entityEffects)
+                spells.causeExplosion(processContext,this,summoner,world,Hand.MAIN_HAND,level,entityEffects)
             } else {
                 world.createExplosion(
                     this,

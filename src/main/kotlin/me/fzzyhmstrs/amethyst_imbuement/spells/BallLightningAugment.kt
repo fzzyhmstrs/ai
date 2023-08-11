@@ -348,10 +348,10 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         spells: PairedAugments
     )
     :
-    T
+            ProjectileEntity
     where
     T : ModifiableEffectEntity,
-    T : Entity,
+    T : ProjectileEntity,
     U : SpellCastingEntity,
     U : LivingEntity
     {
@@ -408,7 +408,6 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         for (i in 1..count) {
             val ble = BallLightningEntity(world, user, dir, 1.0f, 0.25f, pos)
             ble.passEffects(spells, effects, level)
-            ble.passContext(context)
             list.add(ble)
         }
         return list

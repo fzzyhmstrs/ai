@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import eu.pb4.common.protection.api.CommonProtection
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
@@ -8,8 +9,8 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.modifier.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -65,16 +66,22 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
         effects: AugmentEffect,
         spells: PairedAugments
     )
-            :
-            SpellActionResult
-            where
-            T : SpellCastingEntity,
-            T : LivingEntity
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
     {
+        val onCastResults = spells.processOnCast(context,world,null,user, hand, level, effects)
+        if (!onCastResults.success()) return  FAIL
+        if (onCastResults.overwrite()) return onCastResults
         if (user !is ServerPlayerEntity) return FAIL
         val hit = RaycasterUtil.raycastHit(effects.range(level),entity = user)
         if (hit is BlockHitResult  && CommonProtection.canBreakBlock(world,hit.blockPos,user.gameProfile,user)){
-            spells.processSingleBlockHit()
+            val result = spells.processSingleBlockHit(hit,context,world,null,user,hand, level, effects)
+            if (result.isNotEmpty()){
+                return SpellActionResult.success(result).withResults(onCastResults.results())
+            }
         }
         return FAIL
     }
@@ -97,23 +104,23 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE, AugmentType.BLOCK_TARGET)
     T : SpellCastingEntity,
     T : LivingEntity
     {
-        val state = world.getBlockState(hit.blockPos)
-        if (state.getHardness(world,hit.blockPos) == -1.0f) return FAIL
+        val state = world.getBlockState(blockHitResult.blockPos)
+        if (state.getHardness(world,blockHitResult.blockPos) == -1.0f) return FAIL
         if (canBreak(state, level)) {
-            breakBlock(world,hit.blockPos,true,user)
+            breakBlock(world,blockHitResult.blockPos,true,user)
             //world.breakBlock(hit.blockPos,true,user)
             val group = state.soundGroup
             val sound = group.breakSound
             world.playSound(
                 null,
-                hit.blockPos,
+                blockHitResult.blockPos,
                 sound,
                 SoundCategory.BLOCKS,
                 (group.volume + 1.0f) / 2.0f,
                 group.pitch * 0.8f
             )
             //sendItemPacket(user, stack, hand, hit)
-            return SpellActionResult.success(AugmentHelper.BLOCK_BROKEN)
+            return SpellActionResult.success(AugmentHelper.BLOCK_BROKE)
         }
         return FAIL
     }
