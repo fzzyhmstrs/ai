@@ -7,7 +7,6 @@ import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.*
-import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
@@ -15,6 +14,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.BasicMissileEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
@@ -138,7 +138,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     {
         val list: MutableList<ProjectileEntity> = mutableListOf()
         for (i in 1..count){
-            val me = MissileEntity(world, user)
+            val me = BasicMissileEntity(world, user)
             val direction = user.rotationVec3d
             me.place(user,direction,-0.2, 2f, 0.1f, 0.6)
             me.passEffects(spells,effects,level)

@@ -55,9 +55,9 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
             return
         }
         tooltipList = list
-        val augId = Identifier(nbt.getString(NbtKeys.LORE_KEY)).toString()
+        val augId = Identifier(nbt.getString(NbtKeys.LORE_KEY))
         bookmarkUV = AugmentHelper.getAugmentType(augId).uv()
-        val recipeId = augId + "_imbuing"
+        val recipeId =  augId.namespace + ":imbuing/" + augId.path + "_imbuing"
         val recipeCheck = client?.world?.recipeManager?.get(Identifier(recipeId))
         if (recipeCheck == null){
             this.close()

@@ -17,6 +17,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.BasicMissileEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -106,7 +107,7 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
     {
         val list: MutableList<ProjectileEntity> = mutableListOf()
         for (i in 1..count){
-            val me = MissileEntity(world, user).color(MissileEntity.ColorData(0.7f, 0.7f))
+            val me = BasicMissileEntity(world, user).color(MissileEntity.ColorData(0.7f, 0.7f))
             val direction = user.rotationVec3d
             me.place(user,direction,-0.2, 2f, 0.1f, 0.6)
             me.passEffects(spells,effects,level)

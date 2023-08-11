@@ -175,6 +175,10 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> BasicShardEntityRenderer(context, AI.identity("textures/entity/ice_shard.png")) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.BASIC_MISSILE_ENTITY
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
         ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context) }
 
