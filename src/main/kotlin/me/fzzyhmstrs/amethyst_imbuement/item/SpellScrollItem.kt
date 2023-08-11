@@ -2,10 +2,12 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.item.SpellCasting
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterHelper
+import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
@@ -24,7 +26,6 @@ import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -35,16 +36,18 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
     private val TOTAL_USES = "total_uses"
     private val SPENT_USES = "spent_uses"
     internal val SPELL = "written_spell"
+    internal val SPELL_PAIR = "wirtten_spell_pair"
     internal val SPELL_TYPE = "written_spell_type"
     internal val MODEL_KEY = "model_predicate_key"
     internal val DISENCHANTED = "disenchanted"
 
     companion object{
-        internal fun createSpellScroll(enchant: ScepterAugment, disenchanted: Boolean = false): ItemStack{
+        internal fun createSpellScroll(enchant: ScepterAugment, pair: PairedAugments? = null, disenchanted: Boolean = false): ItemStack{
             val stack = ItemStack(RegisterItem.SPELL_SCROLL)
             val nbt = stack.orCreateNbt
             val spellString = Registries.ENCHANTMENT.getId(enchant)?.toString()?: throw IllegalStateException("Enchantment couldn't be found!")
             nbt.putString(RegisterItem.SPELL_SCROLL.SPELL,spellString)
+            nbt.put(RegisterItem.SPELL_SCROLL.SPELL_PAIR,AugmentHelper.writePairedAugmentsToNbt(pair ?: PairedAugments(enchant)))
             val type = AugmentHelper.getAugmentType(spellString)
             nbt.putString(RegisterItem.SPELL_SCROLL.SPELL_TYPE,type.str())
             nbt.putFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY,33f)
@@ -64,22 +67,22 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
     ) {
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.nbt?:return
-        val spellString = nbt.getString(SPELL)
-        val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+        val pair = AugmentHelper.getOrCreatePairedAugmentsFromNbt(nbt.getCompound(SPELL_PAIR))
         val level = max(1,nbt.getInt(SCROLL_LEVEL))
-        tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.spell",spell.getName(level)).formatted(Formatting.GOLD))
-        val cooldown = AugmentHelper.getAugmentCooldown(spellString)
-        val cooldownBase = cooldown.base / 20f
-        val cooldownPerLvl = cooldown.perLevel / 20f
-        val cooldownKey = if(cooldownPerLvl < 0){
-            "lore_book.cooldown.minus"
-        } else if (cooldownPerLvl == 0f){
-            "lore_book.cooldown.basic"
-        } else {
-            "lore_book.cooldown.plus"
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.spell",pair.provideName(level).formatted(Formatting.GOLD)))
+        val pairedSpell = pair.paired()
+        if (pairedSpell != null){
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.paired_spell",pairedSpell.getName(level)))
         }
-        tooltip.add(AcText.translatable(cooldownKey,cooldownBase.toString(),abs(cooldownPerLvl).toString()).formatted(Formatting.WHITE))
-        val castXp = AugmentHelper.getAugmentCastXp(spellString)
+        val boost = pair.boost()
+        if (boost != null){
+            tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.paired_boost",boost.name()))
+        }
+        val cooldown = pair.provideCooldown(level)
+        tooltip.add(AcText.translatable("lore_book.cooldown.basic",cooldown).formatted(Formatting.WHITE))
+        val type = nbt.getString(SPELL_TYPE)
+
+        val castXp = pair.provideCastXp(SpellType.fromString(type))
         tooltip.add(AcText.translatable("lore_book.cast_xp",castXp.toString()).formatted(Formatting.WHITE))
         tooltip.add(AcText.empty())
         if (nbt.contains(DISENCHANTED)){
@@ -98,12 +101,20 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         val spellString = nbt.getString(SPELL)
         val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return resetCooldown(stack,world,user,spellString)
         if (spell !is ScepterAugment) return resetCooldown(stack,world,user,spellString)
+        val pair: PairedAugments =if (!nbt.contains(SPELL_PAIR)){
+            val pairedAugments = PairedAugments(spell)
+            nbt.put(SPELL_PAIR,AugmentHelper.writePairedAugmentsToNbt(pairedAugments))
+            pairedAugments
+        } else {
+            AugmentHelper.getOrCreatePairedAugmentsFromNbt(nbt.getCompound(SPELL_PAIR))
+        }
+
         val level = min(spell.maxLevel,max(1,nbt.getInt(SCROLL_LEVEL)))
         if (world.isClient) {
             //spell.clientTask(world,user,hand,level)
             return TypedActionResult.pass(stack)
         }
-        return ScepterHelper.castSpell(world, ProcessContext.EMPTY_CONTEXT,user,hand,stack,spellString,spell,level,this,
+        return ScepterHelper.castSpell(world, ProcessContext.EMPTY_CONTEXT,user,hand,stack,spellString,spell,pair,level,this,
             incrementStats = false,
             checkEnchant = false
         )

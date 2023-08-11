@@ -59,17 +59,6 @@ class CholemEntityModel(private val root: ModelPart): SinglePartEntityModel<Chol
         }
     }
 
-
-    override fun setAngles(
-        entity: CholemEntity?,
-        limbSwing: Float,
-        limbSwingAmount: Float,
-        ageInTicks: Float,
-        netHeadYaw: Float,
-        headPitch: Float
-    ) {
-    }
-
     override fun setAngles(cholemEntity: CholemEntity, f: Float, g: Float, h: Float, i: Float, j: Float) {
         head.yaw = i * (Math.PI.toFloat() / 180)
         head.pitch = j * (Math.PI.toFloat() / 180)

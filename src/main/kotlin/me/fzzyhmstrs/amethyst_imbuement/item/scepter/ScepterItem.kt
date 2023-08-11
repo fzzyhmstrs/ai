@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.item.DefaultScepterItem
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -62,6 +63,8 @@ open class ScepterItem(
                 val spellString = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL)
                 val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
+                val pair = AugmentHelper.getOrCreatePairedAugmentsFromNbt(nbt.getCompound(RegisterItem.SPELL_SCROLL.SPELL_PAIR))
+                AugmentHelper.writePairedAugments(stack,pair)
                 return
             }
         }

@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import me.fzzyhmstrs.amethyst_core.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.nbt.NbtKeys
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -213,7 +214,7 @@ class DisenchantingTableScreenHandler(
                         itemStackTemp
                     } else {
                         if (enchantCheck is ScepterAugment) {
-                            SpellScrollItem.createSpellScroll(enchantCheck,true)
+                            SpellScrollItem.createSpellScroll(enchantCheck,AugmentHelper.getPairedAugments(enchantCheck,itemStack),true)
                         } else {
                             val itemStackTemp = ItemStack(Items.ENCHANTED_BOOK)
                             val nbtCompound = itemStack2.nbt

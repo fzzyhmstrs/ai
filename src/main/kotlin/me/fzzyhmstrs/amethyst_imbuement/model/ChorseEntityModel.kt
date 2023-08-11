@@ -92,16 +92,6 @@ class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
         }
     }
 
-    override fun setAngles(
-        entity: ChorseEntity?,
-        limbSwing: Float,
-        limbSwingAmount: Float,
-        ageInTicks: Float,
-        netHeadYaw: Float,
-        headPitch: Float
-    ) {
-    }
-
     override fun render(
         matrices: MatrixStack?,
         vertexConsumer: VertexConsumer?,

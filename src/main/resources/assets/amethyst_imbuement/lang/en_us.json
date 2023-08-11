@@ -291,6 +291,8 @@
 	"item.amethyst_imbuement.empty_spell_scroll": "Empty Spell Scroll",
 	"item.amethyst_imbuement.spell_scroll": "Spell Scroll",
 	"item.amethyst_imbuement.spell_scroll.spell": "Spell Within: %1$s",
+	"item.amethyst_imbuement.spell_scroll.paired_spell": "    Paired with: %1$s",
+	"item.amethyst_imbuement.spell_scroll.paired_boost": "    Boosted by: %1$s",
 	"item.amethyst_imbuement.spell_scroll.uses": "Uses: %1$s/%2$s",
 	"item.amethyst_imbuement.spell_scroll.disenchanted": "Disenchanted",
 	"item.amethyst_imbuement.spellcasters_focus": "Unlit Spellcaster's Focus",
