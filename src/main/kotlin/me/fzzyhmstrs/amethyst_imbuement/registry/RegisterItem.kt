@@ -47,6 +47,7 @@ object RegisterItem {
     val OPAL = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"opal")
     val GARNET = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"garnet")
     val PYRITE = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"pyrite")
+    val SARDONYX = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"sardonyx")
     val TIGERS_EYE = register(SpellcastersReagentFlavorItem(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
         EntityAttributeModifier(UUID.fromString("64399f14-d25b-11ed-afa1-0242ac120002"),"tigers_eye_modifier",0.15,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"tigers_eye")
@@ -58,7 +59,7 @@ object RegisterItem {
     val CELESTINE = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)).withGlint(),"celestine") // item is custom for flavor text. need texture
     val STEEL_INGOT = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM)),"steel_ingot")
     val BERYL_COPPER_INGOT = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM)),"beryl_copper_ingot")
-
+    val SHIMMERING_FABRIC = register(Item(AiItemSettings()),"shimmering_fabric")
 
     //scepter update gem and found/crafted items
     val GEM_OF_PROMISE = register(GemOfPromiseItem(AiItemSettings().aiGroup(AiItemGroup.GEM).maxCount(1))

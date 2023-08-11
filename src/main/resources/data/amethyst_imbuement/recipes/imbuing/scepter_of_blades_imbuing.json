@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:glowing_blade"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"item": "minecraft:diamond_sword"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:iridescent_orb"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:fury_scepters"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftG": {
+	"item": "minecraft:diamond_sword"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftI": {
+	"item": "minecraft:diamond_sword"
+  },
+  "title": "Scepter of Blades",
+  "cost": 23,
+  "resultA": "amethyst_imbuement:scepter_of_blades",
+  "countA": 1,
+  "transferEnchant": true
+}

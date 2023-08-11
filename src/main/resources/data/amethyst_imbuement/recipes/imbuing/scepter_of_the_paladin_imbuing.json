@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:tigers_eye"
+  },
+  "imbueC": {
+	"item": "minecraft:gold_ingot"
+  },
+  "imbueD": {
+	"item": "minecraft:gold_ingot"
+  },
+  "craftA": {
+	"item": "minecraft:shield"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:iridescent_orb"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftE": {
+    "tag": "amethyst_imbuement:grace_scepters"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftG": {
+	"item": "minecraft:shield"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:imbued_quartz"
+  },
+  "craftI": {
+	"item": "minecraft:shield"
+  },
+  "title": "Scepter of the Paladin",
+  "cost": 19,
+  "resultA": "amethyst_imbuement:scepter_of_the_paladin",
+  "countA": 1,
+  "transferEnchant": true
+}
