@@ -34,6 +34,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     override val maxAge: Int = 600
     var ticker = EventRegistry.ticker_20
     var initialBeam = false
+    override var colorData: ColorData = ColorData(1f,1f,0f,-2f,1.25f)
 
     override fun passEffects(spells: PairedAugments, ae: AugmentEffect, level: Int) {
         super.passEffects(spells,ae, level)

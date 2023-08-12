@@ -26,9 +26,15 @@ import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.Tameable
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.resource.ResourceManager
+import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.ColorHelper
 import kotlin.math.max
@@ -63,6 +69,7 @@ object AiConfig
             .space()
             .space()
             .build())
+    , SimpleSynchronousResourceReloadListener
 {
     private val itemsHeader = buildSectionHeader("items")
 
@@ -372,7 +379,9 @@ object AiConfig
             if (user == null) return false
             if (user === entity) return true
             if (forcePvpOnAllSpells.get() || spell?.getPvpMode() == true){
-                return user.isTeammate(entity)
+                if ((entity is PlayerEntity || entity is Tameable))
+                    return user.isTeammate(entity)
+                return entity is LivingEntity
             }
             return true
         }
@@ -381,7 +390,9 @@ object AiConfig
             if (user == null) return false
             if (user === entity) return true
             if (forcePvpOnAllSpells.get()){
-                return user.isTeammate(entity)
+                if ((entity is PlayerEntity || entity is Tameable))
+                    return user.isTeammate(entity)
+                return entity is LivingEntity
             }
             return true
         }
@@ -418,9 +429,28 @@ object AiConfig
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
-
     private fun buildSectionHeader(name:String): Header{
         return Header.Builder().space().underoverscore("readme.header.$name").add("readme.header.$name.desc").space().build()
+    }
+
+    override fun initConfig() {
+        super.initConfig()
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(this)
+    }
+
+    override fun reload(manager: ResourceManager?) {
+        items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,
+            configClass = { Items() }, previousClass = {Items()})
+        materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
+        blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
+        villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
+        enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+        trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    }
+
+    override fun getFabricId(): Identifier {
+        return AI.identity("ai_configuration")
     }
 
 }

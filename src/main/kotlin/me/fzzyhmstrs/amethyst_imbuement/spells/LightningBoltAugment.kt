@@ -81,6 +81,8 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
         ) ?: return FAIL
         val list = if (hit is BlockHitResult) {
             spells.processSingleBlockHit(hit, context, world, null, user, hand, level, effects)
+        } else if (hit is EntityHitResult) {
+            spells.processSingleEntityHit(hit,context,world,null,user, hand, level, effects)
         } else {
             val entityHitResult = EntityHitResult(user)
             spells.processSingleEntityHit(entityHitResult,context,world,null,user, hand, level, effects)
@@ -105,9 +107,27 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
         othersType: AugmentType,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
-        if (othersType.empty) {
+        if (othersType.empty && !context.get(ProcessContext.FROM_ENTITY)) {
             return if (lightning(world,user,entityHitResult,effects,level,spells, context)){
                 SpellActionResult.success(AugmentHelper.BLOCK_HIT)
+            } else {
+                FAIL
+            }
+        } else if (othersType.empty){
+            if (!canTarget(entityHitResult, context, world, user, hand, spells)) return FAIL
+            val amount = spells.provideDealtDamage(effects.damage(level), context, entityHitResult, user, world, hand, level, effects)
+            val damageSource = spells.provideDamageSource(context,entityHitResult, source, user, world, hand, level, effects)
+            val bl  = entityHitResult.entity.damage(damageSource, amount)
+
+            return if(bl) {
+                user.applyDamageEffects(user,entityHitResult.entity)
+                spells.hitSoundEvents(world, entityHitResult.entity.blockPos,context)
+                if (entityHitResult.entity.isAlive) {
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB, AugmentHelper.PROJECTILE_HIT)
+                } else {
+                    spells.processOnKill(entityHitResult, context, world, source, user, hand, level, effects)
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB, AugmentHelper.PROJECTILE_HIT, AugmentHelper.KILLED_MOB)
+                }
             } else {
                 FAIL
             }
@@ -133,7 +153,7 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
     T : SpellCastingEntity,
     T : LivingEntity
     {
-        if (othersType.empty) {
+        if (othersType.empty && !context.get(ProcessContext.FROM_ENTITY)) {
             return if (lightning(world,user,blockHitResult,effects,level,spells, context)){
                 SpellActionResult.success(AugmentHelper.BLOCK_HIT)
             } else {

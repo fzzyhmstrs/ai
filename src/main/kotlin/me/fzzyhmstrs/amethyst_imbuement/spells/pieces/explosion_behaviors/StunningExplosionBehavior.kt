@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffectInstance
 
 class StunningExplosionBehavior: CustomExplosion.CustomExplosionBehavior() {
     override fun affectEntity(entity: Entity) {
-        if (AI.aiRandom().nextFloat() < 0.2f && entity is LivingEntity){
+        if (AI.aiRandom().nextFloat() < 0.333f && entity is LivingEntity){
             entity.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,80))
         }
     }

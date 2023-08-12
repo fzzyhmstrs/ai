@@ -119,7 +119,7 @@ class CometStormAugment: MultiTargetAugment(ScepterTier.THREE, AugmentType.AREA_
                 .normalize()
                 .multiply(4.0)
             val pfe = PlayerFireballEntity(world, user, vel.x, vel.y, vel.z)
-            val pos = user.pos.add(0.0,user.eyeY -0.4,0.0).add(vel.normalize().multiply(0.5))
+            val pos = user.pos.add(0.0,user.standingEyeHeight -0.4,0.0).add(vel.normalize().multiply(0.5))
             pfe.refreshPositionAfterTeleport(pos)
             pfe.passEffects(spells,effects,level)
             pfe.passContext(ProjectileAugment.projectileContext(context.copy()))

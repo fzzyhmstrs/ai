@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.*
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
@@ -155,5 +156,7 @@ object RegisterEnchantment {
 
     val DEBUG = register(DebugAugment(),"debug")
 
-    fun registerAll(){}
+    fun registerAll(){
+        ModifiableEffects.init()
+    }
 }

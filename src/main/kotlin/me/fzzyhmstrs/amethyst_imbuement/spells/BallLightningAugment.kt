@@ -406,7 +406,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         val pos = user.eyePos.subtract(0.0,0.5,0.0).add(dir.multiply(0.75))
         val list: MutableList<BallLightningEntity> = mutableListOf()
         for (i in 1..count) {
-            val ble = BallLightningEntity(world, user, dir, 1.0f, 0.25f, pos)
+            val ble = BallLightningEntity(world, user, dir, 0.15f, 0.25f, pos)
             ble.passEffects(spells, effects, level)
             list.add(ble)
         }

@@ -72,7 +72,7 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
             ).multiply(2.0)
 
             val pfe = PlayerFireballEntity(world, user, vec3d.x,vec3d.y,vec3d.z)
-            val pos = user.pos.add(0.0,user.eyeY -0.4,0.0).add(direction.multiply(0.5))
+            val pos = user.pos.add(0.0,user.standingEyeHeight -0.4,0.0).add(direction.multiply(0.5))
             pfe.refreshPositionAfterTeleport(pos)
             pfe.passEffects(spells,effects,level)
             list.add(pfe)

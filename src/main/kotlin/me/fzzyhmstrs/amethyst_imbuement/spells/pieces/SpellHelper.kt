@@ -25,11 +25,11 @@ object SpellHelper {
     val CHICKEN = AI.identity("chicken")
 
     fun friendlyTarget(target: Entity, user: LivingEntity, spell: ScepterAugment): Boolean{
-        return  target !is Monster && (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,spell))
+        return  target !is Monster && (target is PassiveEntity || target is GolemEntity || AiConfig.entities.isEntityPvpTeammate(user,target,spell))
     }
 
     fun hostileTarget(target: Entity, user: LivingEntity, spell: ScepterAugment): Boolean{
-        return (target is Monster || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,spell))
+        return (target is Monster || !AiConfig.entities.isEntityPvpTeammate(user,target,spell))
     }
 
     fun hostileFilter(list: List<Entity>, user: LivingEntity, spell: ScepterAugment): MutableList<EntityHitResult> {

@@ -91,7 +91,7 @@ class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.ARE
             if (!context.get(ContextData.PERSISTENT)) {
                 context.set(ContextData.PERSISTENT,true)
                 (world as ServerWorld).setWeather(0, 1200, true, true)
-                val data = ApplyTaskAugmentData(world, context, user, hand, level, effects, spells)
+                val data = ApplyTaskAugmentData(world, context.copy(), user, hand, level, effects, spells)
                 PersistentEffectHelper.setPersistentTickerNeed(this,delay.value(level),effects.duration(level),data)
                 castSoundEvent(world,user.blockPos,context)
             }
@@ -111,10 +111,24 @@ class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.ARE
         othersType: AugmentType,
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
-        if (context.get(ProcessContext.FROM_ENTITY)){
-            val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
-            if (!result.success() || result.acted())
-                return result
+        if (othersType.empty && context.get(ProcessContext.FROM_ENTITY)){
+            if (!canTarget(entityHitResult, context, world, user, hand, spells)) return FAIL
+            val amount = spells.provideDealtDamage(effects.damage(level), context, entityHitResult, user, world, hand, level, effects)
+            val damageSource = spells.provideDamageSource(context,entityHitResult, source, user, world, hand, level, effects)
+            val bl  = entityHitResult.entity.damage(damageSource, amount)
+
+            return if(bl) {
+                user.applyDamageEffects(user,entityHitResult.entity)
+                spells.hitSoundEvents(world, entityHitResult.entity.blockPos,context)
+                if (entityHitResult.entity.isAlive) {
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB, AugmentHelper.PROJECTILE_HIT)
+                } else {
+                    spells.processOnKill(entityHitResult, context, world, source, user, hand, level, effects)
+                    SpellActionResult.success(AugmentHelper.DAMAGED_MOB, AugmentHelper.PROJECTILE_HIT, AugmentHelper.KILLED_MOB)
+                }
+            } else {
+                FAIL
+            }
         } else if (othersType.empty){
             val ple = PlayerLightningEntity(world,user)
             ple.passEffects(spells,effects,level)

@@ -67,33 +67,12 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
 
     override fun tick() {
         var list: List<Entity>
-        super.tick()
+        baseTick()
         tickTickEffects(this,owner,processContext)
-        val livingEntity = getOwner()
-        if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
-        val augment = spells.primary() ?: return
         if (ambientTick == 2) {
             if (world.isClient) {
-                world.playSound(
-                    this.x,
-                    this.y,
-                    this.z,
-                    SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER,
-                    SoundCategory.WEATHER,
-                    10000.0f,
-                    0.8f + random.nextFloat() * 0.2f,
-                    false
-                )
-                world.playSound(
-                    this.x,
-                    this.y,
-                    this.z,
-                    SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT,
-                    SoundCategory.WEATHER,
-                    2.0f,
-                    0.5f + random.nextFloat() * 0.2f,
-                    false
-                )
+                world.playSound(this.x, this.y, this.z, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 10000.0f, 0.8f + random.nextFloat() * 0.2f, false)
+                world.playSound(this.x, this.y, this.z, SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.WEATHER, 2.0f, 0.5f + random.nextFloat() * 0.2f, false)
             } else {
                 //may move into the spells, not sure
                 val difficulty = world.difficulty
@@ -102,34 +81,23 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                 }
                 powerLightningRod()
                 cleanOxidation(world, getAffectedBlockPos())
-                spells.processSingleBlockHit(BlockHitResult(this.pos,Direction.UP,getAffectedBlockPos(),false),world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
+                val livingEntity = getOwner()
+                if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
+                spells.processSingleBlockHit(BlockHitResult(this.pos,Direction.UP,getAffectedBlockPos(),false),processContext,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 this.emitGameEvent(GameEvent.LIGHTNING_STRIKE)
             }
         }
         --ambientTick
+        val livingEntity = getOwner()
+        if (livingEntity !is LivingEntity || livingEntity !is SpellCastingEntity) return
+        val augment = spells.primary() ?: return
         if (ambientTick < 0) {
             if (remainingActions == 0) {
                 if (!world.isClient) {
-                    list = world.getOtherEntities(
-                        this,
-                        Box(
-                            this.x - 15.0,
-                            this.y - 15.0,
-                            this.z - 15.0,
-                            this.x + 15.0,
-                            this.y + 6.0 + 15.0,
-                            this.z + 15.0
-                        )
-                    ) { entity: Entity ->
-                        entity.isAlive && !struckEntities.contains(
-                            entity
-                        )
-                    }
-                    for (serverPlayerEntity2 in (world as ServerWorld).getPlayers { serverPlayerEntity: ServerPlayerEntity ->
-                        serverPlayerEntity.distanceTo(
-                            this
-                        ) < 256.0f
-                    }) {
+                    val box = Box(this.x - 15.0, this.y - 15.0, this.z - 15.0, this.x + 15.0, this.y + 6.0 + 15.0, this.z + 15.0)
+                    list = world.getOtherEntities(this, box) { entity: Entity ->
+                        entity.isAlive && !struckEntities.contains(entity) }
+                    for (serverPlayerEntity2 in (world as ServerWorld).getPlayers { serverPlayerEntity: ServerPlayerEntity -> serverPlayerEntity.distanceTo(this) < 256.0f }) {
                         Criteria.LIGHTNING_STRIKE.trigger(serverPlayerEntity2, this, list)
                     }
                 }
@@ -154,14 +122,14 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                 }
 
                 runEffect(ModifiableEffectEntity.DAMAGE,this,owner,processContext)
-                spells.processMultipleEntityHits(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
+                spells.processMultipleEntityHits(list2,processContext,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 for (hit in list2){
                     if (!hit.entity.isAlive){
                         runEffect(ModifiableEffectEntity.KILL,this,owner,processContext)
                         break
                     }
                 }
-                spells.processMultipleOnKill(list2,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
+                spells.processMultipleOnKill(list2,processContext,world,this,livingEntity,Hand.MAIN_HAND,level,entityEffects)
                 struckEntities.addAll(list)
                 if (channeler != null) {
                     Criteria.CHANNELED_LIGHTNING.trigger(channeler, list)

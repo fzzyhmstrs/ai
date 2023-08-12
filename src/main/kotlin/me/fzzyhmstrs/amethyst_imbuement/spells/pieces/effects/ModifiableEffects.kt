@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 
 object ModifiableEffects {
 
+    fun init(){}
+
     //used for the ticking of the entity
     val SHOCKING_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shocking_effect")) {entity,attackerOrOwner,context-> ShockingEffect.shock(entity,attackerOrOwner,context)}
     val STATIC_SHOCK_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("static_shock_effect")) {entity,attackerOrOwner,context-> ShockingEffect.staticShock(entity,attackerOrOwner,context)}

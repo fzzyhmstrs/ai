@@ -5,7 +5,6 @@ package me.fzzyhmstrs.amethyst_imbuement
 import com.llamalad7.mixinextras.MixinExtrasBootstrap
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HamsterVariant
-import me.fzzyhmstrs.amethyst_imbuement.item.Test
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
@@ -18,7 +17,6 @@ import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.random.Random
-import kotlin.reflect.full.memberProperties
 
 val LOGGER = LoggerUtil.getLogger()
 
@@ -30,8 +28,6 @@ object AI: ModInitializer {
     val slots: Array<EquipmentSlot> = arrayOf(EquipmentSlot.HEAD,EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     override fun onInitialize() {
-        val test = Test()
-        println(test.javaClass.kotlin.memberProperties)
         RegisterBlock.registerAll()
         RegisterEnchantment.registerAll()
         RegisterArmor.registerAll()
