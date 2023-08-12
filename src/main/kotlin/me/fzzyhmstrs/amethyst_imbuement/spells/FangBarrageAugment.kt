@@ -106,7 +106,7 @@ class FangBarrageAugment: ScepterAugment(ScepterTier.THREE, AugmentType.DIRECTED
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return DamageSourceBuilder(world, attacker, source).set(DamageTypes.MAGIC)
     }
 

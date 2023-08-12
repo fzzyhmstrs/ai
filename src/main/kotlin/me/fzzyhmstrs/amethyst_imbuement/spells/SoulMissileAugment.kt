@@ -125,7 +125,7 @@ class SoulMissileAugment: ProjectileAugment(ScepterTier.ONE,){
     }
 
     
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.MAGIC)
     }
 

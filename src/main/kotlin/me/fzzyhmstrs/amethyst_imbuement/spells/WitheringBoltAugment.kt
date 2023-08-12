@@ -160,7 +160,7 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
         return amount
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.MAGIC)
     }
 

@@ -106,7 +106,7 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.FREEZE)
     }
 

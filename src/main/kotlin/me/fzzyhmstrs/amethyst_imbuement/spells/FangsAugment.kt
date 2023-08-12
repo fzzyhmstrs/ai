@@ -192,7 +192,7 @@ class FangsAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENERGY)
         return builder.add(DamageTypes.MAGIC)
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return DamageSourceBuilder(world, attacker, source).set(DamageTypes.MAGIC)
     }
 

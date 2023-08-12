@@ -60,7 +60,7 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.FIREBALL)
     }
 
@@ -114,7 +114,7 @@ class FlameboltAugment: ProjectileAugment(ScepterTier.ONE){
     }
 
     override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
-        world.playSound(null,blockPos, SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST_FAR, SoundCategory.PLAYERS, 0.5f, 1f)
+        world.playSound(null,blockPos, SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST_FAR, SoundCategory.PLAYERS, 0.8f, 1f)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

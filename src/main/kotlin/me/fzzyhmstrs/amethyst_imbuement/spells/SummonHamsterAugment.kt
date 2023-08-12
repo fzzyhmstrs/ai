@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.SummonAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
@@ -18,7 +19,9 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
@@ -51,6 +54,12 @@ class SummonHamsterAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.ONE) {
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
+    }
+
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        if (source is LivingEntity)
+            return super.damageSourceBuilder(world, source, source).set(DamageTypes.MOB_ATTACK)
+        return super.damageSourceBuilder(world, source, attacker)
     }
 
     override fun entitiesToSpawn(

@@ -315,7 +315,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
     }
 
-    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity): DamageSourceBuilder {
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.LIGHTNING_BOLT)
     }
 
@@ -406,7 +406,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
         val pos = user.eyePos.subtract(0.0,0.5,0.0).add(dir.multiply(0.75))
         val list: MutableList<BallLightningEntity> = mutableListOf()
         for (i in 1..count) {
-            val ble = BallLightningEntity(world, user, dir, 0.15f, 0.25f, pos)
+            val ble = BallLightningEntity(world, user, dir, 0.18f, 0.25f, pos)
             ble.passEffects(spells, effects, level)
             list.add(ble)
         }
@@ -430,7 +430,7 @@ class BallLightningAugment: ProjectileAugment(ScepterTier.TWO){
             world.playSound(null, blockPos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
             return
         }
-        world.playSound(null,blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
+        world.playSound(null,blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.PLAYERS,0.3f,1.0f + world.random.nextFloat() * 0.4f - 0.2f)
 
     }
 }
