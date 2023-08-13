@@ -21,6 +21,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addEffect
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
@@ -60,6 +61,17 @@ class ResonateAugment: MultiTargetAugment(ScepterTier.THREE) {
             .withRange(10.25,0.75,0.0)
             .withDuration(72,8)
             .withAmplifier(0,1,0)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         when(other){

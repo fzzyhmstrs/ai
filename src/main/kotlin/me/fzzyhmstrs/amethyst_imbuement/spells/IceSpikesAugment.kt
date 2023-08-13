@@ -30,6 +30,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
@@ -151,6 +152,10 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
             }
         }
         return SUCCESSFUL_PASS
+    }
+
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
     }
 
     override fun castParticleType(): ParticleEffect? {

@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:altar_of_spellcasting",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:empty_spell_scroll"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.chicken_feature"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.chicken_feature.desc"
+	}
+},
+"criteria":{
+	"get_feature":{
+		"trigger": "amethyst_core:paired_feature",
+		"conditions":{
+			"feature": "amethyst_imbuement:chicken"
+		}
+	}
+}
+}

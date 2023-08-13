@@ -1,0 +1,31 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:hard_light_block"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.spellcasting"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.spellcasting.desc"
+	}
+},
+"criteria":{
+	"got_spellcasting":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:hard_light_block"
+					]
+				}
+			]
+		}
+	}
+},
+"rewards": {
+	"experience": 15
+}
+}

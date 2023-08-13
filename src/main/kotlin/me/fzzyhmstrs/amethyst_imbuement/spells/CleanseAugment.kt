@@ -17,6 +17,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
@@ -74,6 +75,17 @@ class CleanseAugment: SingleTargetOrSelfAugment(ScepterTier.ONE){
     //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(190,10)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.friendlyTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.positiveEffect)

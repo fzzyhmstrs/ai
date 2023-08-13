@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.MissileEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.modifier.addLang
 import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
@@ -95,7 +96,7 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        TODO("Not yet implemented")
+        description.addLang("amethyst_imbuement.todo")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -162,6 +163,22 @@ class FrostboltAugment: ProjectileAugment(ScepterTier.ONE){
             return result
         }
         return SUCCESSFUL_PASS
+    }
+
+    override fun <T> modifyDamageSource(
+        builder: DamageSourceBuilder,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        source: Entity?,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
+        return builder.add(DamageTypes.FREEZE)
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {

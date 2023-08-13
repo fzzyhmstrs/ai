@@ -62,6 +62,17 @@ class BodySwapAugment: ScepterAugment(ScepterTier.THREE,AugmentType.SINGLE_TARGE
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(15.75,0.75)
 
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return true
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         when(other) {
             RegisterEnchantment.EMPOWERED_SLASH ->

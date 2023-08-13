@@ -3,10 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
-import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
-import me.fzzyhmstrs.amethyst_core.augments.paired.ExplosionBuilder
-import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
-import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.augments.paired.*
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
@@ -16,14 +13,18 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -37,6 +38,17 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDamage(7.75F,0.25f)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
@@ -78,6 +90,22 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
             list.add(pfe)
         }
         return list
+    }
+
+    override fun <T> modifyDamageSource(
+        builder: DamageSourceBuilder,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        source: Entity?,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
+        return builder.add(DamageTypes.FIREBALL)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

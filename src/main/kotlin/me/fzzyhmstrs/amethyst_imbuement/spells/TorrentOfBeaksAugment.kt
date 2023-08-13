@@ -18,6 +18,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.Entity
@@ -48,6 +49,17 @@ class TorrentOfBeaksAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.SUMM
             .withDamage(2.8F,0.2f)
             .withAmplifier(9,1)
             .withRange(12.0,0.5)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")

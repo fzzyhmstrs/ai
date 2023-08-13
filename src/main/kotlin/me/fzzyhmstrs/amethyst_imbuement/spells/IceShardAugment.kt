@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
@@ -21,6 +22,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleEffect
@@ -31,6 +33,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.EntityHitResult
+import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -58,6 +61,7 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DURATION_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
     }
 
     override fun <T> createProjectileEntities(
@@ -104,8 +108,32 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         return SUCCESSFUL_PASS
     }
 
+    override fun <T> modifyDamageSource(
+        builder: DamageSourceBuilder,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        source: Entity?,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
+        return builder.add(DamageTypes.FREEZE)
+    }
+
+    override fun hitParticleType(hit: HitResult): ParticleEffect? {
+        return ParticleTypes.SNOWFLAKE
+    }
+
     override fun castParticleType(): ParticleEffect? {
         return ParticleTypes.SNOWFLAKE
+    }
+
+    override fun hitSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
+        world.playSound(null,blockPos,SoundEvents.ENTITY_PLAYER_HURT_FREEZE,SoundCategory.PLAYERS,1.0f,1.0f)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

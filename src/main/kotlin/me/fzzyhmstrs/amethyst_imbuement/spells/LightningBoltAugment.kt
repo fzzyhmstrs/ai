@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
@@ -21,6 +22,7 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
@@ -169,6 +171,22 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
         le.passContext(ProjectileAugment.projectileContext(context.copy()))
         le.refreshPositionAfterTeleport(hit.pos)
         return world.spawnEntity(le)
+    }
+
+    override fun <T> modifyDamageSource(
+        builder: DamageSourceBuilder,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        source: Entity?,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
+        return builder.add(DamageTypes.LIGHTNING_BOLT)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {

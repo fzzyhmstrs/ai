@@ -17,6 +17,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
@@ -51,6 +52,17 @@ class PersuadeAugment: SingleTargetAugment(ScepterTier.TWO) {
     //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(360,40)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")

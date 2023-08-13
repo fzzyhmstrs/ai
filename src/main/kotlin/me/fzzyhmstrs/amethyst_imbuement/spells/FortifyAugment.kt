@@ -16,6 +16,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
@@ -43,6 +44,17 @@ class FortifyAugment: SingleTargetOrSelfAugment(ScepterTier.TWO){
     //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withDuration(210,90).withAmplifier(-1,1)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.friendlyTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")

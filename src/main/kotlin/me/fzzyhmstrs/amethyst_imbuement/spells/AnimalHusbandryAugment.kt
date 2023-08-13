@@ -87,7 +87,7 @@ class AnimalHusbandryAugment: EntityAoeAugment(ScepterTier.TWO,true), Persistent
         if (othersType.has(AugmentType.DAMAGE))
             description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.damage", SpellAdvancementChecks.DAMAGE)
         if (othersType.has(SpellHelper.CHICKEN))
-            description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.chicken", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.CHICKEN).or(SpellAdvancementChecks.SHOOT_ITEM))
+            description.addLang("enchantment.amethyst_imbuement.animal_husbandry.desc.chicken", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.CHICKEN).or(SpellAdvancementChecks.PROJECTILE))
         when(other) {
             RegisterEnchantment.SUMMON_SEAHORSE -> {
                 description.addLang("enchantment.amethyst_imbuement.animal_husbandry.summon_seahorse.desc", SpellAdvancementChecks.UNIQUE.or(SpellAdvancementChecks.SUMMONS))

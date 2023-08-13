@@ -23,6 +23,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
@@ -43,6 +44,37 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
+/*
+    Checklist
+    - canTarget if entity spell
+    - Build description for
+        - Unique combinations
+        - stat modifications
+        - other type interactions
+        - add Lang
+    - provideArgs
+    - spells are equal check
+    - special names for uniques
+    - onPaired to grant relevant adv.
+    - implement all special combinations
+    - fill up interaction methods
+        - onEntityHit?
+        - onEntityKill?
+        - onBlockHit?
+        - Remember to call and check results of the super for the "default" behavior
+    - modify stats. don't forget mana cost and cooldown!
+        - modifyDealtDamage for unique interactions
+    - modifyDamageSource?
+        - remember DamageSourceBuilder for a default damage source
+    - modify other things
+        - summon?
+        - projectile?
+        - explosion?
+        - drops?
+        - count? (affects some things like summon count and projectile count)
+    - sound and particles
+     */
+
 class ZapAugment: BeamAugment(ScepterTier.ONE){
     override val augmentData: AugmentDatapoint =
          AugmentDatapoint(AI.identity("zap"),SpellType.FURY,18,6,
@@ -51,6 +83,17 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
     //ml 11
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withRange(6.8,0.2).withDamage(3.4f,0.1f)
+
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.has(AugmentType.DAMAGE))

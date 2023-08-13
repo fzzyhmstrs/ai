@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.ContextData
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.MultiTargetAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.removeStatuses
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
@@ -52,6 +53,17 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
             .withDuration(110,10)
             .withAmplifier(-1,1,0)
 
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
 
         when(other) {
@@ -62,8 +74,6 @@ class CrippleAugment: MultiTargetAugment(ScepterTier.TWO) {
             RegisterEnchantment.INSPIRING_SONG ->
                 description.addLang("enchantment.amethyst_imbuement.cripple.inspiring_song.desc",SpellAdvancementChecks.UNIQUE)
         }
-
-        TODO("Not yet implemented")
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {

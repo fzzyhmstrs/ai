@@ -51,6 +51,17 @@ class LightningStormAugment: EntityAoeAugment(ScepterTier.THREE, AugmentType.ARE
             .withDuration(0,120,0)
             .withDamage(5.0f,1.0f)
 
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
     }

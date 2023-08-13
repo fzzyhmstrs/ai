@@ -20,6 +20,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.BasicMissileEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
@@ -48,6 +49,17 @@ class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
             .withDamage(5.85F,0.15F,0.0F)
             .withDuration(76,4)
 
+    override fun <T> canTarget(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        user: T,
+        hand: Hand,
+        spells: PairedAugments
+    ): Boolean where T : SpellCastingEntity,T : LivingEntity {
+        return SpellHelper.hostileTarget(entityHitResult.entity,user,this)
+    }
+
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
     }
@@ -58,6 +70,7 @@ class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
     }
 
     override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
@@ -103,6 +116,22 @@ class FlamewaveAugment: ProjectileAugment(ScepterTier.THREE){
             return result
         }
         return SUCCESSFUL_PASS
+    }
+
+    override fun <T> modifyDamageSource(
+        builder: DamageSourceBuilder,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        source: Entity?,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
+        return builder.add(DamageTypes.FIREBALL)
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {

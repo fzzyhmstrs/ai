@@ -61,7 +61,7 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         if (othersType.positiveEffect)
-            description.addLang("enchantment.amethyst_imbuement.curse.desc.positive", SpellAdvancementChecks.BOOSTED_EFFECT)
+            description.addLang("enchantment.amethyst_imbuement.curse.desc.positive", SpellAdvancementChecks.PROTECTED_EFFECT)
         if (othersType.negativeEffect)
             description.addLang("enchantment.amethyst_imbuement.curse.desc.negative", SpellAdvancementChecks.BOOSTED_EFFECT)
         if (othersType == AugmentType.DIRECTED_ENERGY)

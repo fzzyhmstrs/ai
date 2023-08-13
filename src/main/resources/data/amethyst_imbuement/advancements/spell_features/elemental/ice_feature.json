@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:spell_features/elemental_feature",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:empty_spell_scroll"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.ice_feature"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.ice_feature.desc"
+	}
+},
+"criteria":{
+	"get_feature":{
+		"trigger": "amethyst_core:paired_feature",
+		"conditions":{
+			"feature": "amethyst_imbuement:ice"
+		}
+	}
+}
+}
