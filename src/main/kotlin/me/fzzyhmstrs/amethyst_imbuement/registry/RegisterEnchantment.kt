@@ -25,7 +25,8 @@ object RegisterEnchantment {
                 LOGGER.info("Augment $id is set as disabled in the configs!")
             }
         }
-        return e1
+        println(e1)
+        return e
     }
     
     //vanilla style enchantments

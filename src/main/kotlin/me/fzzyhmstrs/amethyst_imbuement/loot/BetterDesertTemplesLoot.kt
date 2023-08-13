@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.loot.LootPool
@@ -35,7 +36,7 @@ object BetterDesertTemplesLoot: AbstractModLoot() {
                 val poolBuilder = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0F))
                     .conditionally(RandomChanceLootCondition.builder(0.125f))
-                    .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(4))
+                    .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(4))
                     .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(15).apply(
                       SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F))))
                     .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(1))

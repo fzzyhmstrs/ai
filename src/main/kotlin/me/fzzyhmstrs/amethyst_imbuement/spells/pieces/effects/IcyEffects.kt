@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Box
 
-object FrostNovaEffect {
+object IcyEffects {
 
     fun nova(entity: Entity, attackerOrOwner: Entity?, processContext: ProcessContext){
         val world = entity.world
@@ -26,6 +26,19 @@ object FrostNovaEffect {
                 entity.frozenTicks = 180
             }
         }
+    }
+
+    //attacker in this case
+    fun jab(entity: Entity, attackerOrOwner: Entity?, processContext: ProcessContext){
+        attackerOrOwner?.damage(entity.damageSources.freeze(),2f)
+        attackerOrOwner?.frozenTicks = 180
+        entity.world.playSound(null,entity.x,entity.y,entity.z,SoundEvents.ENTITY_PLAYER_HURT_FREEZE,SoundCategory.PLAYERS,0.6f,1f)
+    }
+
+    fun stab(entity: Entity, attackerOrOwner: Entity?, processContext: ProcessContext){
+        attackerOrOwner?.damage(entity.damageSources.freeze(),3f)
+        attackerOrOwner?.frozenTicks = 240
+        entity.world.playSound(null,entity.x,entity.y,entity.z,SoundEvents.ENTITY_PLAYER_HURT_FREEZE,SoundCategory.PLAYERS,0.6f,1f)
     }
 
 }

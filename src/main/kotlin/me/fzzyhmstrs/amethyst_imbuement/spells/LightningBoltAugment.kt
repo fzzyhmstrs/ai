@@ -48,6 +48,8 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
+        if (othersType.has(AugmentType.DAMAGE))
+            description.addLang("enchantment.amethyst_imbuement.lightning_bolt.desc.damage", SpellAdvancementChecks.DAMAGE_SOURCE)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -56,6 +58,11 @@ class LightningBoltAugment: ScepterAugment(ScepterTier.TWO, AugmentType.TARGET_D
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
+    }
+
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.LIGHTNING_BOLT)
     }
 
     override fun <T> applyTasks(

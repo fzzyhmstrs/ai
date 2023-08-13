@@ -135,6 +135,9 @@ object RegisterItem {
                 entries.addAll(RegisterTool.regTool.stream()
                     .map { item -> ItemStack(item) }
                     .toList())
+                entries.addAll(RegisterScepter.regScepter.stream()
+                    .map { item -> ItemStack(item) }
+                    .toList())
                 entries.addAll(RegisterArmor.regArmor.stream()
                     .map { item -> ItemStack(item) }
                     .toList())

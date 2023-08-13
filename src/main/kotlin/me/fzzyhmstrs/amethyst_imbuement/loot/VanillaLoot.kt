@@ -1,9 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.block.Blocks
 import net.minecraft.enchantment.Enchantments
@@ -73,7 +70,7 @@ object VanillaLoot: AbstractModLoot() {
                 .conditionally(RandomChanceLootCondition.builder(0.5f))
                 .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(5))
                 .with(ItemEntry.builder(RegisterItem.GLOWING_FRAGMENT).weight(5))
-                .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(3))
+                .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(3))
             table.pool(poolBuilder)
             val poolBuilder2 = RegisterLoot.tierOneGemPool(3.0F, 0.25F)
             table.pool(poolBuilder2)
@@ -284,7 +281,7 @@ object VanillaLoot: AbstractModLoot() {
             .conditionally(RandomChanceLootCondition.builder(0.5f))
             .with(ItemEntry.builder(RegisterItem.GEM_OF_PROMISE).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(1).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f,4f))))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(1).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f,4f))))
         table.pool(poolBuilder2)
     }
 
@@ -294,7 +291,7 @@ object VanillaLoot: AbstractModLoot() {
             .conditionally(RandomChanceLootCondition.builder(0.66f))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(7))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(1))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .rolls(UniformLootNumberProvider.create(0.0F,2.0F))
@@ -318,7 +315,7 @@ object VanillaLoot: AbstractModLoot() {
             .conditionally(RandomChanceLootCondition.builder(0.6f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(7))
             .with(ItemEntry.builder(RegisterItem.IRIDESCENT_ORB).weight(3))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(1))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()
             .conditionally(RandomChanceLootCondition.builder(0.5f))
@@ -332,7 +329,7 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(UniformLootNumberProvider.create(0.0F,2.0f))
             .conditionally(RandomChanceLootCondition.builder(.75f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(3))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(1))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(1))
         table.pool(poolBuilder)
     }
 
@@ -396,7 +393,7 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(10))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(5))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(4))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(4))
         table.pool(poolBuilder2)
     }
 
@@ -495,7 +492,7 @@ object VanillaLoot: AbstractModLoot() {
             .rolls(UniformLootNumberProvider.create(1.0F,2.0F))
             .conditionally(RandomChanceLootCondition.builder(.50f))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_LORE).weight(1))
-            .with(ItemEntry.builder(RegisterTool.EMPTY_SPELL_SCROLL).weight(1))
+            .with(ItemEntry.builder(RegisterScepter.EMPTY_SPELL_SCROLL).weight(1))
             .with(ItemEntry.builder(RegisterItem.BOOK_OF_MYTHOS).weight(18))
         table.pool(poolBuilder)
         val poolBuilder2 = LootPool.builder()

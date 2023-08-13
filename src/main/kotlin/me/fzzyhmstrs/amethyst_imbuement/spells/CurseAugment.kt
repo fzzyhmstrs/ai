@@ -64,8 +64,16 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
             description.addLang("enchantment.amethyst_imbuement.curse.desc.positive", SpellAdvancementChecks.PROTECTED_EFFECT)
         if (othersType.negativeEffect)
             description.addLang("enchantment.amethyst_imbuement.curse.desc.negative", SpellAdvancementChecks.BOOSTED_EFFECT)
-        if (othersType == AugmentType.DIRECTED_ENERGY)
-            description.addLang("enchantment.amethyst_imbuement.curse.desc.directedEnergy", SpellAdvancementChecks.BOOSTED_EFFECT.or(SpellAdvancementChecks.HARMED_EFFECT))
+        if (othersType == AugmentType.DIRECTED_ENERGY) {
+            description.addLang(
+                "enchantment.amethyst_imbuement.curse.desc.directedEnergy",
+                SpellAdvancementChecks.BOOSTED_EFFECT.or(SpellAdvancementChecks.HARMED_EFFECT)
+            )
+        } else if (othersType.has(AugmentType.DAMAGE)) {
+            description.addLang("enchantment.amethyst_imbuement.curse.desc.damage", SpellAdvancementChecks.BOOSTED_EFFECT.or(SpellAdvancementChecks.HARMED_EFFECT))
+        }
+        if (othersType.has(AugmentType.DAMAGE))
+            description.addLang("enchantment.amethyst_imbuement.curse.desc.damage", SpellAdvancementChecks.DAMAGE)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -86,6 +94,26 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         if (othersType.negativeEffect)
             return amplifier.plus(2)
         return amplifier
+    }
+
+    override fun <T> modifyDealtDamage(
+        amount: Float,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Float where T : SpellCastingEntity, T : LivingEntity {
+        val entity = entityHitResult.entity
+        if (entity is LivingEntity){
+            val cursed = entity.getStatusEffect(RegisterStatus.CURSED)?.amplifier?:-1
+            return amount * (1f + (0.1f * (cursed + 1).toFloat()))
+        }
+        return amount
     }
 
     override fun <T> onEntityHit(
@@ -111,6 +139,9 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         }
         if (othersType == AugmentType.DIRECTED_ENERGY){
             entityHitResult.addStatus(RegisterStatus.CURSED,100,1)
+        } else if (othersType.has(AugmentType.DAMAGE)){
+            if (world.random.nextFloat() < 0.333333f)
+                entityHitResult.addStatus(RegisterStatus.CURSED,50,0)
         }
 
         return SUCCESSFUL_PASS
@@ -129,10 +160,10 @@ class CurseAugment: SingleTargetAugment(ScepterTier.THREE){
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         if ((othersType.empty || spells.spellsAreEqual())) {
-            if (entityHitResult.addStatus(RegisterStatus.CURSED,effects.duration(level),(effects.amplifier(level + 1)/4) + 1)) {
-                return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
+            return if (entityHitResult.addStatus(RegisterStatus.CURSED,effects.duration(level),(effects.amplifier(level + 1)/4) + 1)) {
+                SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
             } else {
-                return FAIL
+                FAIL
             }
         }
         return SUCCESSFUL_PASS

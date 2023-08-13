@@ -205,7 +205,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()
         }
-        runEffect(ModifiableEffectEntity.ON_DAMAGED,this,owner,processContext)
+        runEffect(ModifiableEffectEntity.ON_DAMAGED,this,source.attacker,processContext)
         return super.damage(source, amount)
     }
 

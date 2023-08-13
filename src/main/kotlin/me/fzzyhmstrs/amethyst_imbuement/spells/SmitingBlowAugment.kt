@@ -123,7 +123,6 @@ class SmitingBlowAugment: SingleTargetAugment(ScepterTier.TWO) {
             entityHitResult.addEffect(ModifiableEffectEntity.ON_DAMAGED,ModifiableEffects.SHIELD_OF_FAITH_EFFECT,effects.duration(level))
         }
         if (othersType.negativeEffect){
-
             entityHitResult.addStatus(RegisterStatus.CURSED,effects.duration(level),1)
         }
         return SUCCESSFUL_PASS

@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
 import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
+import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.modifier.addLang
@@ -17,6 +18,9 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addEffect
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.effects.ModifiableEffects
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
@@ -49,6 +53,15 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
+        if (othersType.has(AugmentType.DAMAGE)) {
+            if (othersType.has(AugmentType.PROJECTILE))
+                description.addLang("enchantment.amethyst_imbuement.ice_spikes.desc.damage", SpellAdvancementChecks.DAMAGE.or(SpellAdvancementChecks.PROJECTILE))
+            description.addLang("enchantment.amethyst_imbuement.ice_spikes.desc.damage2", SpellAdvancementChecks.DAMAGE)
+        }
+        if (othersType.positiveEffect)
+            description.addLang("enchantment.amethyst_imbuement.ice_spikes.desc.thorns", SpellAdvancementChecks.HARMED_EFFECT)
+        if (othersType.has(AugmentType.SUMMONS))
+            description.addLang("enchantment.amethyst_imbuement.ice_spikes.desc.thorns2", SpellAdvancementChecks.SUMMONS)
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -57,10 +70,30 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
 
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_TRIGGER)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.ICE_TRIGGER)
+        SpellAdvancementChecks.grant(player,SpellAdvancementChecks.ENTITY_EFFECT_TRIGGER)
     }
 
     override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
         return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.FREEZE)
+    }
+
+    override fun <T> modifyDealtDamage(
+        amount: Float,
+        context: ProcessContext,
+        entityHitResult: EntityHitResult,
+        user: T,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): Float where T : SpellCastingEntity, T : LivingEntity {
+        if (entityHitResult.entity.isFireImmune && othersType.has(AugmentType.PROJECTILE))
+            return amount * 1.75f
+        return amount
     }
 
     override fun <T> applyTasks(
@@ -151,7 +184,38 @@ class IceSpikesAugment: ScepterAugment(ScepterTier.TWO, AugmentType.DIRECTED_ENE
                 FAIL
             }
         }
+        if (othersType.has(AugmentType.DAMAGE)){
+            val entity = entityHitResult.entity
+            if (entity is LivingEntity){
+                if (entity.isFireImmune) {
+                    entity.frozenTicks = 540
+                } else {
+                    entity.frozenTicks = 180
+                }
+            }
+        }
+        if (othersType.positiveEffect){
+            entityHitResult.addEffect(ModifiableEffectEntity.ON_DAMAGED,ModifiableEffects.ICE_SPIKES_BOOST_EFFECT,effects.duration(level))
+        }
         return SUCCESSFUL_PASS
+    }
+
+    override fun <T, U> modifySummons(
+        summons: List<T>,
+        hit: HitResult,
+        context: ProcessContext,
+        user: U,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): List<Entity> where T : ModifiableEffectEntity, U : SpellCastingEntity, T : Entity, U : LivingEntity {
+        for (summon in summons){
+            summon.addEffect(ModifiableEffectEntity.ON_DAMAGED, ModifiableEffects.ICE_SPIKES_SUMMON_EFFECT)
+        }
+        return summons
     }
 
     override fun hitParticleType(hit: HitResult): ParticleEffect? {

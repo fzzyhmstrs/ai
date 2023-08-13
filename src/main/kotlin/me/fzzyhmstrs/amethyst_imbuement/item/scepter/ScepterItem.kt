@@ -10,7 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.RecipeType
@@ -36,8 +36,8 @@ open class ScepterItem(
         if (type != AltarRecipe.Type) return true
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
-                if (reagent.nbt?.contains(RegisterTool.SPELL_SCROLL.SPELL) != true) return false
-                if ((reagent.nbt?.contains(RegisterTool.SPELL_SCROLL.DISENCHANTED) != true)) return false
+                if (reagent.nbt?.contains(RegisterScepter.SPELL_SCROLL.SPELL) != true) return false
+                if ((reagent.nbt?.contains(RegisterScepter.SPELL_SCROLL.DISENCHANTED) != true)) return false
                 var count = 0
                 for (reagent1 in reagents){
                     if (reagent1.isOf(RegisterItem.KNOWLEDGE_POWDER)){
@@ -61,10 +61,10 @@ open class ScepterItem(
                 }
                 if (count == 0) return
                 val nbt = reagent.nbt?:return
-                val spellString = nbt.getString(RegisterTool.SPELL_SCROLL.SPELL)
+                val spellString = nbt.getString(RegisterScepter.SPELL_SCROLL.SPELL)
                 val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
-                val pair = AugmentHelper.getOrCreatePairedAugmentsFromNbt(nbt.getCompound(RegisterTool.SPELL_SCROLL.SPELL_PAIR))
+                val pair = AugmentHelper.getOrCreatePairedAugmentsFromNbt(nbt.getCompound(RegisterScepter.SPELL_SCROLL.SPELL_PAIR))
                 AugmentHelper.writePairedAugments(stack,pair)
                 return
             }

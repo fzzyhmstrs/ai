@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.BeamAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.AugmentType
+import me.fzzyhmstrs.amethyst_core.augments.paired.DamageSourceBuilder
 import me.fzzyhmstrs.amethyst_core.augments.paired.PairedAugments
 import me.fzzyhmstrs.amethyst_core.augments.paired.ProcessContext
 import me.fzzyhmstrs.amethyst_core.entity.ModifiableEffectEntity
@@ -30,6 +31,7 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlD
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
@@ -159,6 +161,10 @@ class ZapAugment: BeamAugment(ScepterTier.ONE){
         if (othersType == AugmentType.DIRECTED_ENERGY || othersType == AugmentType.AOE_POSITIVE)
             return range.plus(0.0,0.0,35.0)
         return super.modifyRange(range, other, othersType, spells)
+    }
+
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        return super.damageSourceBuilder(world, source, attacker).set(DamageTypes.LIGHTNING_BOLT)
     }
 
     override fun <T> onCast(

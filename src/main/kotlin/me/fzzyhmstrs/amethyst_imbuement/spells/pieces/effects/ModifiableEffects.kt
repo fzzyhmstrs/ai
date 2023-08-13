@@ -19,6 +19,8 @@ object ModifiableEffects {
     val ECHO_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("echo_effect")) {entity,attackerOrOwner,context-> EchoingEffect.resonate(entity,attackerOrOwner,context)}
     val SHIELD_OF_FAITH_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("shield_of_faith_effect")) {entity,attackerOrOwner,context-> ShieldOfFaithEffect.shield(entity,attackerOrOwner,context)}
     val DRAW_AGGRO_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("draw_aggro_effect")) {entity,attackerOrOwner,context-> BedazzlingEffect.drawAggro(entity,attackerOrOwner,context)}
-    val FROST_NOVA_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("frost_nova_effect")) {entity,attackerOrOwner,context-> FrostNovaEffect.nova(entity,attackerOrOwner,context)}
+    val FROST_NOVA_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("frost_nova_effect")) {entity,attackerOrOwner,context-> IcyEffects.nova(entity,attackerOrOwner,context)}
+    val ICE_SPIKES_SUMMON_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("ice_spikes_summon_effect")) {entity,attackerOrOwner,context-> IcyEffects.jab(entity,attackerOrOwner,context)}
+    val ICE_SPIKES_BOOST_EFFECT = ModifiableEffect.createAndRegisterConsumer(AI.identity("ice_spikes_boost_effect")) {entity,attackerOrOwner,context-> IcyEffects.stab(entity,attackerOrOwner,context)}
 
 }

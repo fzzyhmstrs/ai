@@ -70,7 +70,6 @@ class MagicMissileAugment: ProjectileAugment(ScepterTier.ONE) {
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.MANA_COST_TRIGGER)
-        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.STAT_TRIGGER)
     }
 
     override fun modifyManaCost(

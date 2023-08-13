@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.entity.EntityType
@@ -22,7 +23,7 @@ object UniqueLoot: AbstractModLoot() {
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .conditionally(RandomChanceLootCondition.builder(AiConfig.items.scepters.uniqueWitherChance.get()))
                 .with(ItemEntry.builder(RegisterTool.FZZYHAMMER).weight(1))
-                .with(ItemEntry.builder(RegisterTool.A_SCEPTER_SO_FOWL).weight(1))
+                .with(ItemEntry.builder(RegisterScepter.A_SCEPTER_SO_FOWL).weight(1))
                 .with(ItemEntry.builder(RegisterItem.ACCURSED_FIGURINE).weight(1))
             table.pool(poolBuilder)
             return true
@@ -31,7 +32,7 @@ object UniqueLoot: AbstractModLoot() {
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .bonusRolls(ConstantLootNumberProvider.create(1.0F))
                 .conditionally(RandomChanceLootCondition.builder(AiConfig.items.scepters.fowlChestChance.get()))
-                .with(ItemEntry.builder(RegisterTool.A_SCEPTER_SO_FOWL).weight(1))
+                .with(ItemEntry.builder(RegisterScepter.A_SCEPTER_SO_FOWL).weight(1))
             table.pool(poolBuilder)
             return true
         } else if (id.path.contains("chests") || id.path.contains("chest")) {

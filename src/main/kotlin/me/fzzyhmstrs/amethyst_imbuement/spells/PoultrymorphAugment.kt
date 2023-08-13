@@ -15,7 +15,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -86,7 +86,7 @@ class PoultrymorphAugment: SingleTargetAugment(ScepterTier.TWO), PersistentEffec
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         val stack = user.getStackInHand(hand)
-        if (stack.item != RegisterTool.A_SCEPTER_SO_FOWL) return FAIL
+        if (stack.item != RegisterScepter.A_SCEPTER_SO_FOWL) return FAIL
         val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
         return if(target != null && target !is SpellCastingEntity && target !is ChickenEntity) {
             val nbt = NbtCompound()

@@ -9,7 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.recipe.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.recipe.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 
 
 object EmiClientPlugin: EmiPlugin{
@@ -33,7 +33,7 @@ object EmiClientPlugin: EmiPlugin{
 
         registry.addRecipeHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, IMBUING_HANDLER)
 
-        registry.setDefaultComparison(RegisterTool.SPELL_SCROLL, Comparison.compareNbt())
+        registry.setDefaultComparison(RegisterScepter.SPELL_SCROLL, Comparison.compareNbt())
 
         registry.addCategory(ALTAR_CATEGORY)
         registry.addWorkstation(ALTAR_CATEGORY, ALTAR_WORKSTATION)

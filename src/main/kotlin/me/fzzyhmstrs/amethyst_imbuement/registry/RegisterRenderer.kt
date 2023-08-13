@@ -263,7 +263,7 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int -> if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f }
 
         ModelPredicateProviderRegistry.register(
-            RegisterTool.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
+            RegisterScepter.SOJOURN, Identifier("angle"), CompassAnglePredicateProvider {world,stack,_ -> if(CompassItem.hasLodestone(stack)) {
                 CompassItem.createLodestonePos(stack.orCreateNbt)
             } else {
                 CompassItem.createSpawnPos(world)
@@ -339,19 +339,19 @@ object RegisterRenderer {
         }
 
         ModelPredicateProviderRegistry.register(
-            RegisterTool.SPELL_SCROLL, Identifier("model_key")
+            RegisterScepter.SPELL_SCROLL, Identifier("model_key")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
             val nbt = stack.nbt
             if (nbt == null){
                 0.0f
             } else {
-                val decimal = when (nbt.getString(RegisterTool.SPELL_SCROLL.SPELL_TYPE)){
+                val decimal = when (nbt.getString(RegisterScepter.SPELL_SCROLL.SPELL_TYPE)){
                     SpellType.FURY.str() ->{ 0.0f }
                     SpellType.GRACE.str() -> { 0.2f }
                     SpellType.WIT.str() -> { 0.4f }
                     else -> { return@register 0.0f }
                 }
-                val value = nbt.getFloat(RegisterTool.SPELL_SCROLL.MODEL_KEY).takeIf { f -> f > 0f }?:33f
+                val value = nbt.getFloat(RegisterScepter.SPELL_SCROLL.MODEL_KEY).takeIf { f -> f > 0f }?:33f
                 (value + decimal)/1000f
             }
         }
