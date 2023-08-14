@@ -64,6 +64,10 @@ class IceShardAugment: ProjectileAugment(ScepterTier.TWO){
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
     }
 
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        return DamageSourceBuilder(world, attacker, source).set(DamageTypes.FREEZE)
+    }
+
     override fun <T> createProjectileEntities(
         world: World,
         context: ProcessContext,

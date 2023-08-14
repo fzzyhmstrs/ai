@@ -836,6 +836,10 @@
 	"enchantment.amethyst_imbuement.curse.desc.directedEnergy": "Applies 2 levels of Cursed on hit.",
 	"enchantment.amethyst_imbuement.curse.desc.damage": "Has a chance of applying Cursed on hit.",
 	"enchantment.amethyst_imbuement.curse.desc.damage2": "Deals additional damage to Cursed targets, based on the level of Cursed they have.",
+	"enchantment.amethyst_imbuement.curse.exhaust": "Decrepitude",
+	"enchantment.amethyst_imbuement.curse.exhaust.desc": "No longer applies slowness, but doubles the amplification of weakness.",
+	"enchantment.amethyst_imbuement.curse.minor_heal": "False Life",
+	"enchantment.amethyst_imbuement.curse.minor_heal.desc": "Instead of healing, provides persistent absorption hearts. Status is lost on death or interdimensional travel.",
 
 	"enchantment.amethyst_imbuement.dash": "Dash",
 	"enchantment.amethyst_imbuement.dash.double": "Sprint",

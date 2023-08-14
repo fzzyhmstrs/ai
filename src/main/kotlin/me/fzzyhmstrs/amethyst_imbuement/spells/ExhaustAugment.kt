@@ -81,7 +81,7 @@ class ExhaustAugment: SingleTargetAugment(ScepterTier.TWO){
         spells: PairedAugments
     ): SpellActionResult where T : SpellCastingEntity, T : LivingEntity {
         if ((othersType.empty || spells.spellsAreEqual())) {
-            var bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effects.duration(level),effects.amplifier(level+1)/2)
+            val bl = entityHitResult.addStatus(StatusEffects.SLOWNESS,effects.duration(level),effects.amplifier(level+1)/2)
             if(bl && entityHitResult.addStatus(StatusEffects.WEAKNESS,effects.duration(level),effects.amplifier(level)/2))
                 return SpellActionResult.success(AugmentHelper.APPLIED_NEGATIVE_EFFECTS)
         }

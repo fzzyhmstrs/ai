@@ -288,7 +288,7 @@ class WitheringBoltAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL)
         val pos = entityHitResult.entity.pos.add(0.0,entityHitResult.entity.height/2.0,0.0)
         if (world.isClient) return SUCCESSFUL_PASS
         val areaEffectCloudEntity = AreaEffectCloudEntity(world, pos.x, pos.y, pos.z)
-        areaEffectCloudEntity.particleType = ParticleTypes.SOUL
+        areaEffectCloudEntity.particleType = ParticleTypes.LARGE_SMOKE
         areaEffectCloudEntity.duration = 200
         areaEffectCloudEntity.radius = 2.0f
         if (source is ProjectileEntity){

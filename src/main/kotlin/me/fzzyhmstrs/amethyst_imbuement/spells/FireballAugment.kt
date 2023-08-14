@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -51,7 +52,8 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        description.addLang("amethyst_imbuement.todo")
+        if (othersType.has(AugmentType.SUMMONS))
+            description.addLang("enchantment.amethyst_imbuement.fireball.desc.projectile", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.PROTECTED_EFFECT))
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -90,6 +92,10 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
             list.add(pfe)
         }
         return list
+    }
+
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        return DamageSourceBuilder(world, attacker, source).set(DamageTypes.FIREBALL)
     }
 
     override fun <T> modifyDamageSource(

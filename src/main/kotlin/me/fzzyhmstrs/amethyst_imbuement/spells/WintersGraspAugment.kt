@@ -93,6 +93,8 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
             description.addLang("enchantment.amethyst_imbuement.winters_grasp.desc.damage", SpellAdvancementChecks.DAMAGE)
             description.addLang("enchantment.amethyst_imbuement.winters_grasp.desc.fireDamage", SpellAdvancementChecks.ICE)
         }
+        if (othersType.has(AugmentType.AOE))
+            description.addLang("enchantment.amethyst_imbuement.winters_grasp.desc.aoe", SpellAdvancementChecks.EXPLODES)
         if (othersType.has(AugmentType.BLOCK))
             description.addLang("enchantment.amethyst_imbuement.winters_grasp.desc.block", SpellAdvancementChecks.DAMAGE)
         if (othersType.has(AugmentType.EXPLODES))
@@ -117,6 +119,21 @@ class WintersGraspAugment: EntityAoeAugment(ScepterTier.THREE,false), Persistent
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.DAMAGE_SOURCE_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.SUMMONS_TRIGGER)
         SpellAdvancementChecks.grant(player,SpellAdvancementChecks.HARMED_TRIGGER)
+    }
+
+    override fun damageSourceBuilder(world: World, source: Entity?, attacker: LivingEntity?): DamageSourceBuilder {
+        return DamageSourceBuilder(world, attacker, source).set(DamageTypes.FREEZE)
+    }
+
+    override fun modifyDuration(
+        duration: PerLvlI,
+        other: ScepterAugment,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): PerLvlI {
+        if (othersType.has(AugmentType.AOE))
+            return duration.plus(0,10)
+        return super.modifyDuration(duration, other, othersType, spells)
     }
 
     override fun <T> onEntityHit(

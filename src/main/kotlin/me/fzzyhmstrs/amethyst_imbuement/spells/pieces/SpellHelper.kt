@@ -78,6 +78,14 @@ object SpellHelper {
         }
     }
 
+    fun EntityHitResult.getStatus(effect: StatusEffect): StatusEffectInstance?{
+        val chk = this.entity
+        if (chk is LivingEntity){
+            return chk.getStatusEffect(effect)
+        }
+        return null
+    }
+
     fun EntityHitResult.addStatus(effect: StatusEffect, duration: Int, amplifier: Int = 0): Boolean{
         val chk = this.entity
         if (chk is LivingEntity){
