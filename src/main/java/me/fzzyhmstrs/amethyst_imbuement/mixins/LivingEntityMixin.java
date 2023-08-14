@@ -164,7 +164,12 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
                 amount + 1f + instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier()
                 :
                 amount;
-        return operation.call(instance,source,newAmount);
+        float newAmount2 = instance.hasStatusEffect(RegisterStatus.INSTANCE.getBLAST_RESISTANT()) && source.isIn(DamageTypeTags.IS_EXPLOSION)
+                ?
+                newAMount * Math.max(0f,(9f - instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier().toFloat()) / 10f)
+                :
+                newAmount;
+        return operation.call(instance,source,newAmount2);
     }
 
     @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
