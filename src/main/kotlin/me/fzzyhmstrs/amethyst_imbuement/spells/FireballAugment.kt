@@ -52,8 +52,28 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     }
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
-        if (othersType.has(AugmentType.SUMMONS))
-            description.addLang("enchantment.amethyst_imbuement.fireball.desc.projectile", SpellAdvancementChecks.SUMMONS.or(SpellAdvancementChecks.PROTECTED_EFFECT))
+        when (other){
+            RegisterEnchantment.ZAP -> {
+                description.addLang("enchantment.amethyst_imbuement.fireball.zap.desc1", SpellAdvancementChecks.UNIQUE.and(SpellAdvancementChecks.EXPLODES))
+                description.addLang("enchantment.amethyst_imbuement.fireball.zap.desc2", SpellAdvancementChecks.UNIQUE.and(SpellAdvancementChecks.MANA_COST))
+                return
+            }
+            RegisterEnchantment.SHINE -> {
+                description.addLang("enchantment.amethyst_imbuement.fireball.shine.desc", SpellAdvancementChecks.UNIQUE.and(SpellAdvancementChecks.EXPLODES))
+                return
+            }
+        }
+        if (othersType.positiveEffect){
+            if (othersType.has(AugmentType.AOE) {
+                description.addLang("enchantment.amethyst_imbuement.fireball.desc.positive_aoe", SpellAdvancementChecks.PROTECTED_EFFECT)
+            } else {
+                description.addLang("enchantment.amethyst_imbuement.fireball.desc.positive_nonAoe", SpellAdvancementChecks.PROTECTED_EFFECT)
+            }m9
+        }
+        if (othersType.has(AugmentType.PROJECTILE))
+            description.addLang("enchantment.amethyst_imbuement.fireball.desc.projectile", SpellAdvancementChecks.PROJECTILE)
+        if (othersType.has(AugmentType.EXPLODES))
+            description.addLang("enchantment.amethyst_imbuement.fireball.desc.explodes", SpellAdvancementChecks.EXPLODES.and(SpellAdvancementChecks.FIRE))
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -63,6 +83,18 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
     override fun onPaired(player: ServerPlayerEntity, pair: PairedAugments) {
         SpellAdvancementChecks.uniqueOrDouble(player, pair)
         SpellAdvancementChecks.grant(player, SpellAdvancementChecks.EXPLODES_TRIGGER)
+        SpellAdvancementChecks.grant(player, SpellAdvancementChecks.PROJECTILE_TRIGGER)
+    }
+
+    override fun specialName(otherSpell: ScepterAugment): MutableText {
+        return when(otherSpell) {
+            RegisterEnchantment.ZAP ->
+                AcText.translatable("enchantment.amethyst_imbuement.fireball.zap")
+            RegisterEnchantment.SHINE ->
+                AcText.translatable("enchantment.amethyst_imbuement.fireball.shine")
+            else ->
+                return super.specialName(otherSpell)
+        }
     }
 
     override fun explosionBuilder(world: World, source: Entity?, attacker: LivingEntity?): ExplosionBuilder {
@@ -112,6 +144,86 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         spells: PairedAugments
     ): DamageSourceBuilder where T : SpellCastingEntity, T : LivingEntity {
         return builder.add(DamageTypes.FIREBALL)
+    }
+
+    override fun <T> onEntityHit(
+        entityHitResult: EntityHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success())
+            return result
+        if (othersType.has(AugmentType.PROJECTILE){
+            TODO()
+        }
+        if (othersType.positiveEffect){
+            if (othersType.has(AugmentType.AOE) {
+                entityHitResult.addStatus(RegisterStatus.BLAST_RESISTANT, effects.duration(level), 7)
+            } else {
+                entityHitResult.addStatus(RegisterStatus.BLAST_RESISTANT, effects.duration(level), 3)
+            }
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun <T> onBlockHit(
+        blockHitResult: BlockHitResult,
+        context: ProcessContext,
+        world: World,
+        source: Entity?,
+        user: T,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    )
+    :
+    SpellActionResult
+    where
+    T : SpellCastingEntity,
+    T : LivingEntity
+    {
+        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        if (result.acted() || !result.success())
+            return result
+        if (othersType.has(AugmentType.PROJECTILE){
+            
+        }
+        if (spells.primary() == RegisterEnchantment.SHINE){
+            TODO()
+        }
+        return SUCCESSFUL_PASS
+    }
+
+    override fun modifyExplosion(
+        builder: ExplosionBuilder,
+        context: ProcessContext,
+        user: LivingEntity?,
+        world: World,
+        hand: Hand,
+        level: Int,
+        effects: AugmentEffect,
+        othersType: AugmentType,
+        spells: PairedAugments
+    ): ExplosionBuilder {
+        if (spells.spellsAreEqual())
+            return builder.modifyPower{power -> power * 2.5f}
+        return builder.modifyPower{power -> power * 1.75f}.withCreateFire(true)
     }
 
     override fun castSoundEvent(world: World, blockPos: BlockPos, context: ProcessContext) {
