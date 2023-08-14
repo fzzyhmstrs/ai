@@ -32,6 +32,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -166,7 +167,7 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableEffe
                 amount;
         float newAmount2 = instance.hasStatusEffect(RegisterStatus.INSTANCE.getBLAST_RESISTANT()) && source.isIn(DamageTypeTags.IS_EXPLOSION)
                 ?
-                newAMount * Math.max(0f,(9f - instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier().toFloat()) / 10f)
+                newAmount * Math.max(0f,(9f - (float)( instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier())) / 10f)
                 :
                 newAmount;
         return operation.call(instance,source,newAmount2);

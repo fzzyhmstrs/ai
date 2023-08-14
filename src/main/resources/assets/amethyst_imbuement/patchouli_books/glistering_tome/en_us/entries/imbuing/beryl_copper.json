@@ -1,7 +1,7 @@
 {    
 "name": "Beryllium Copper",    
 "icon": "amethyst_imbuement:beryl_copper_ingot",    
-"category": "amethyst_imbuement:imbuing",    
+"category": "amethyst_imbuement:imbuing",
 "pages": [        
 {            
 "type": "patchouli:text",            

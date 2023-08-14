@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_core.augments.SpellActionResult
 import me.fzzyhmstrs.amethyst_core.augments.base.ProjectileAugment
 import me.fzzyhmstrs.amethyst_core.augments.data.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.augments.paired.*
@@ -12,9 +13,13 @@ import me.fzzyhmstrs.amethyst_core.scepter.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter.SpellType
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFireballEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks
-import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.or
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellAdvancementChecks.and
 import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper
+import me.fzzyhmstrs.amethyst_imbuement.spells.pieces.SpellHelper.addStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageTypes
@@ -23,8 +28,10 @@ import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -64,16 +71,16 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
             }
         }
         if (othersType.positiveEffect){
-            if (othersType.has(AugmentType.AOE) {
+            if (othersType.has(AugmentType.AOE)) {
                 description.addLang("enchantment.amethyst_imbuement.fireball.desc.positive_aoe", SpellAdvancementChecks.PROTECTED_EFFECT)
             } else {
                 description.addLang("enchantment.amethyst_imbuement.fireball.desc.positive_nonAoe", SpellAdvancementChecks.PROTECTED_EFFECT)
-            }m9
+            }
         }
         if (othersType.has(AugmentType.PROJECTILE))
             description.addLang("enchantment.amethyst_imbuement.fireball.desc.projectile", SpellAdvancementChecks.PROJECTILE)
         if (othersType.has(AugmentType.EXPLODES))
-            description.addLang("enchantment.amethyst_imbuement.fireball.desc.explodes", SpellAdvancementChecks.EXPLODES.and(SpellAdvancementChecks.FIRE))
+            description.addLang("enchantment.amethyst_imbuement.fireball.desc.explodes", SpellAdvancementChecks.EXPLODES.and(SpellAdvancementChecks.FLAME))
     }
 
     override fun provideArgs(pairedSpell: ScepterAugment): Array<Text> {
@@ -159,7 +166,7 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         spells: PairedAugments
     )
     :
-    SpellActionResult
+            SpellActionResult
     where
     T : SpellCastingEntity,
     T : LivingEntity
@@ -167,11 +174,11 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
-        if (othersType.has(AugmentType.PROJECTILE){
+        if (othersType.has(AugmentType.PROJECTILE)){
             TODO()
         }
         if (othersType.positiveEffect){
-            if (othersType.has(AugmentType.AOE) {
+            if (othersType.has(AugmentType.AOE)) {
                 entityHitResult.addStatus(RegisterStatus.BLAST_RESISTANT, effects.duration(level), 7)
             } else {
                 entityHitResult.addStatus(RegisterStatus.BLAST_RESISTANT, effects.duration(level), 3)
@@ -193,16 +200,16 @@ class FireballAugment: ProjectileAugment(ScepterTier.TWO, AugmentType.BALL){
         spells: PairedAugments
     )
     :
-    SpellActionResult
+            SpellActionResult
     where
     T : SpellCastingEntity,
     T : LivingEntity
     {
-        val result = super.onEntityHit(entityHitResult, context, world, source, user, hand, level, effects, othersType, spells)
+        val result = super.onBlockHit(blockHitResult, context, world, source, user, hand, level, effects, othersType, spells)
         if (result.acted() || !result.success())
             return result
-        if (othersType.has(AugmentType.PROJECTILE){
-            
+        if (othersType.has(AugmentType.PROJECTILE)){
+            TODO()
         }
         if (spells.primary() == RegisterEnchantment.SHINE){
             TODO()
