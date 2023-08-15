@@ -367,6 +367,12 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
         }
+
+        ModelPredicateProviderRegistry.register(
+            RegisterTool.STEEL_WARD, Identifier("blocking")
+        ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
+            if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
+        }
     }
 
 }
