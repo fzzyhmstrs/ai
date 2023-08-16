@@ -16,7 +16,7 @@ object RegisterModifier {
     val FULGUROUS = AugmentModifier(AI.identity("fulgurous"), levelModifier = 3, cooldownModifier = -40.0, rollToll = 7).withRange(0.0,0.0,50.0).withAmplifier(2).withSpellToAffect(ModifierPredicates.LIGHTNING_PREDICATE) .also { regMod[it] = 1 }
     val DISARMING = AugmentModifier(AI.identity("disarming")).withConsumer(ModifierConsumers.DISARMING_CONSUMER).also { regMod[it] = 4 }
     val TESTAMENT_TO_POWER = AugmentModifier(AI.identity("testament_to_power"), levelModifier = 1, cooldownModifier = 35.0, rollToll = 8).withDuration(0,0,-10).withAmplifier(6).withConsumer(ModifierConsumers.HEALING_CONSUMER).also { regMod[it] = 1 }
-    val SPELL_FRENZIED = AugmentModifier(AI.identity("spell_frenzied"), cooldownModifier = -50.0,manaCostModifier = 25.0).withDamage(0f,0f,-15f).also { regMod[it] = 5 }
+    val SPELL_FRENsZIED = AugmentModifier(AI.identity("spell_frenzied"), cooldownModifier = -50.0,manaCostModifier = 25.0).withDamage(0f,0f,-15f).also { regMod[it] = 5 }
     val BOLT_SPECIALIST = AugmentModifier(AI.identity("bolt_specialist"), cooldownModifier = -10.0, rollToll = 6).withDamage(1f).withConsumer(ModifierConsumers.BOLT_CONSUMER).withSpellToAffect(ModifierPredicates.BOLT_PREDICATE).also { regMod[it] = 1 }
     val BOLSTERING = AugmentModifier(AI.identity("bolstering"), manaCostModifier = 15.0).withDuration(0,0,35).withConsumer(ModifierConsumers.BOLSTERING_CONSUMER).also { regMod[it] = 3 }
     val BOUNDLESS = AugmentModifier(AI.identity("boundless"), cooldownModifier = 10.0, rollToll = 6).withRange(1.0,0.0,100.0).also { regMod[it] = 2 }

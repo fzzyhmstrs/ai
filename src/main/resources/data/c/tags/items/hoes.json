@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "amethyst_imbuement:garnet_hoe",
-    "amethyst_imbuement:glowing_hoe"
+    "amethyst_imbuement:glowing_hoe",
+    "amethyst_imbuement:steel_hoe",
+    "amethyst_imbuement:ametrine_hoe"
   ]
 }

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "amethyst_imbuement:garnet_pickaxe",
-    "amethyst_imbuement:glowing_pick"
+    "amethyst_imbuement:glowing_pick",
+    "amethyst_imbuement:steel_pickaxe",
+    "amethyst_imbuement:ametrine_pickaxe"
   ]
 }

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "amethyst_imbuement:garnet_shovel",
-    "amethyst_imbuement:glowing_spade"
+    "amethyst_imbuement:glowing_spade",
+    "amethyst_imbuement:steel_shovel",
+    "amethyst_imbuement:ametrine_shovel"
   ]
 }
