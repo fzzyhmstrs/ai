@@ -42,7 +42,8 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
     //ml 13
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withAmplifier(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0,0)
+            .withAmplifier(0,1,0)
+            .withRange(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0.0,0.0)
             .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
             .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
 
@@ -65,7 +66,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
         othersType: AugmentType,
         spells: PairedAugments
     ): Int where T : SpellCastingEntity,T : LivingEntity {
-        return max(min(effects.amplifier(level),level/2),1)
+        return max(min(effects.amplifier(level + 1)/2),1)
     }
 
     override fun entitiesToSpawn(
