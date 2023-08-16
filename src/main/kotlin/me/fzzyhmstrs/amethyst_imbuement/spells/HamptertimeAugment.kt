@@ -45,9 +45,9 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(AiConfig.entities.hamster.baseLifespan.get())
-            .withAmplifier(AiConfig.entities.hamster.baseHealth.get().toInt())
+            .withRange(AiConfig.entities.hamster.baseHealth.get())
             .withDamage(AiConfig.entities.hamster.baseHamptertimeDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
-            .withRange(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
+            .withAmplifier(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
