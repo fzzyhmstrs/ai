@@ -64,6 +64,7 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
+            .withAmplifier(0,1,0)
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         when(other) {
             RegisterEnchantment.SUMMON_SEAHORSE -> {
@@ -272,7 +273,7 @@ class SummonChickenAugment: ScepterAugment(ScepterTier.ONE, AugmentType.SUMMON_G
     ): SpellActionResult where T : SpellCastingEntity,T : LivingEntity {
         if (othersType.empty || othersType.has(AugmentType.PROJECTILE)){
             summonContext(context)
-            var count = if (othersType.has(AugmentType.PROJECTILE)) 1 else spells.provideCount(level,context,user,world, hand, level, effects, othersType, spells)
+            var count = if (othersType.has(AugmentType.PROJECTILE)) 1 else spells.provideCount(effects.amplifier(level),context,user,world, hand, level, effects, othersType, spells)
             count *= if (spells.spellsAreEqual()) 3 else 1
             var successes = 0
             for(i in 1..count) {

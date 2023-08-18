@@ -47,7 +47,7 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
             .withDuration(AiConfig.entities.hamster.baseLifespan.get())
             .withRange(AiConfig.entities.hamster.baseHealth.get())
             .withDamage(AiConfig.entities.hamster.baseHamptertimeDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
-            .withAmplifier(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
+            .withAmplifier(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get().toInt(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get().toInt())
 
     override fun appendDescription(description: MutableList<Text>, other: ScepterAugment, othersType: AugmentType) {
         description.addLang("amethyst_imbuement.todo")
@@ -68,7 +68,7 @@ class HamptertimeAugment: SummonAugment<BaseHamsterEntity>(ScepterTier.THREE) {
         othersType: AugmentType,
         spells: PairedAugments
     ): Int where T : SpellCastingEntity, T : LivingEntity {
-        return max(effects.range(level/2).toInt(),1)
+        return max(effects.amplifier(level/2),1)
     }
 
     override fun entitiesToSpawn(
