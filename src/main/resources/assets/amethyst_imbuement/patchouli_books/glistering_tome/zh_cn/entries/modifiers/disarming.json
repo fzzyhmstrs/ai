@@ -1,0 +1,21 @@
+{    
+"name": "Disarming",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/disarming.png",
+"sortnum": 102,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Affects struck or affected enemies. 33% chance to apply Weakness II on cast. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Disarming",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/disarming.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Weakening Enemies$()",
+"mod_text": "You can feel your focus impart your scepters with a crippling energy. Appears on a Spellcasters Focus on tier ignition."
+}
+]
+}

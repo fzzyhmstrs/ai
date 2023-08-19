@@ -1,0 +1,21 @@
+{    
+"name": "Blessed",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/blessed.png",
+"sortnum": 121,
+"category": "amethyst_imbuement:modifiers",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Increases spell range and AOE by 10% and blesses the caster and all affected teammates with the Blessed status effect, adding armor and reducing incoming damage. This modifier is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
+},
+{            
+"type": "amethyst_imbuement:modifier_spotlight",            
+"mod_head": "Blessed",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/blessed.png",
+  "ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Damage Reduction$()",
+"mod_text": "Your orb focuses the blessed energy of the gem within, shielding you from harm as you channel magic through it. Appears on a Witches Orb if crafted with the proper gem."
+}
+]
+}

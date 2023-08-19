@@ -18,13 +18,13 @@
 "craft_b_item": "amethyst_imbuement:imbued_quartz",
 "craft_c_item": "minecraft:air",
 "craft_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_e_item": "amethyst_imbuement:copper_ring,amethyst_imbuement:copper_headband,amethyst_imbuement:copper_amulet",
+"craft_e_item": "amethyst_imbuement:copper_ring,amethyst_imbuement:copper_headband,amethyst_imbuement:copper_amulet,amethyst_imbuement:copper_ward",
 "craft_f_item": "amethyst_imbuement:imbued_lapis",
 "craft_g_item": "minecraft:air",
-"craft_h_item": "amethyst_imbuement:imbued_quartz",
+"craft_h_item": "tag:amethyst_imbuement:focus_reagents",
 "craft_i_item": "minecraft:air",
 "result_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet",
-"cost_text": "$(l)消耗等级：$(2)9$()"
+"cost_text": "$(l)消耗等级：$(2)13-17$()"
 }
 ]
 }

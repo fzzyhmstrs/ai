@@ -33,25 +33,6 @@
   "craft_i_item": "minecraft:lightning_rod",
   "result_item": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
   "cost_text": "$(l)消耗等级：$(2)19$()"
-},
-  {
-    "type": "amethyst_imbuement:imbuing_recipe",
-    "title": "由虹彩至电光",
-    "imbue_a_item": "minecraft:lightning_rod",
-    "imbue_b_item": "amethyst_imbuement:sparking_gem",
-    "imbue_c_item": "minecraft:lightning_rod",
-    "imbue_d_item": "minecraft:lightning_rod",
-    "craft_a_item": "minecraft:air",
-    "craft_b_item": "amethyst_imbuement:gem_dust",
-    "craft_c_item": "minecraft:air",
-    "craft_d_item": "amethyst_imbuement:gem_dust",
-    "craft_e_item": "amethyst_imbuement:iridescent_scepter",
-    "craft_f_item": "amethyst_imbuement:gem_dust",
-    "craft_g_item": "minecraft:air",
-    "craft_h_item": "amethyst_imbuement:gem_dust",
-    "craft_i_item": "minecraft:air",
-    "result_item": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
-    "cost_text": "$(l)消耗等级：$(2)10$()"
   }
 ]
 }
