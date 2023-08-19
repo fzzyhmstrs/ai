@@ -25,6 +25,14 @@
 "craft_i_item": "minecraft:quartz",
 "result_item": "amethyst_imbuement:citrine#4",
 "cost_text": "$(l)消耗等级：$(2)1$()"
-}     
+},
+{
+"type": "amethyst_imbuement:altar_recipe",
+"anchor": "enhancing_citrine",
+"input_item": "minecraft:gunpowder",
+"addition_item": "minecraft:amethyst_shard",
+"flower_item": "minecraft:sunflower",
+"output_item": "amethyst_imbuement:citrine"
+}
 ]
 }

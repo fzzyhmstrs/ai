@@ -33,25 +33,6 @@
       "craft_i_item": "minecraft:blaze_powder",
       "result_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
       "cost_text": "$(l)消耗等级：$(2)19$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "由虹彩至烈焰",
-      "imbue_a_item": "minecraft:blaze_powder",
-      "imbue_b_item": "amethyst_imbuement:blazing_gem",
-      "imbue_c_item": "minecraft:blaze_powder",
-      "imbue_d_item": "minecraft:blaze_powder",
-      "craft_a_item": "minecraft:air",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "minecraft:air",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "minecraft:air",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
-      "cost_text": "$(l)消耗等级：$(2)10$()"
     }
   ]
 }

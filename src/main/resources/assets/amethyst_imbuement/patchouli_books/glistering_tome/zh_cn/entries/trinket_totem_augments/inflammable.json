@@ -1,0 +1,31 @@
+{    
+"name": "Inflammable Augment",
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:trinket_totem_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)Effect:$() Grants the totem-holder Fire Resistance while the totem is active.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1 $(br)$(l)Active/Passive:$() Active, drains durability while using and on fire or in lava$(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other active totem augments."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Inflammable Imbuing",
+"anchor": "inflammable",
+"imbue_a_item": "amethyst_imbuement:moonstone",
+"imbue_b_item": "amethyst_imbuement:moonstone",
+"imbue_c_item": "amethyst_imbuement:moonstone",
+"imbue_d_item": "amethyst_imbuement:moonstone",
+"craft_a_item": "minecraft:magma_cream",
+"craft_b_item": "amethyst_imbuement:glistening_ice",
+"craft_c_item": "minecraft:magma_cream",
+"craft_d_item": "amethyst_imbuement:glistening_ice",
+"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_f_item": "amethyst_imbuement:glistening_ice",
+"craft_g_item": "minecraft:magma_cream",
+"craft_h_item": "amethyst_imbuement:glistening_ice",
+"craft_i_item": "minecraft:magma_cream",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:inflammable\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)19$()"
+}
+]
+}
