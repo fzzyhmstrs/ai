@@ -68,7 +68,7 @@ object RegisterBlock {
     val GLISTENING_ICE_ITEM = SpellcastersReagentBlockItem(
         RegisterAttribute.SPELL_COOLDOWN,
         EntityAttributeModifier(
-            UUID.fromString("102d4ad8-c5e5-11ed-afa1-0242ac120002"),"glistening_modifier",-0.03,
+            UUID.fromString("102d4ad8-c5e5-11ed-afa1-0242ac120002"),"glistening_modifier",0.03,
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         GLISTENING_ICE,
         FabricItemSettings()
