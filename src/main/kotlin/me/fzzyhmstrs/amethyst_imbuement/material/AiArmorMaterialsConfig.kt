@@ -19,7 +19,6 @@ object AiArmorMaterialsConfig{
         .enchantability(10)
         .protectionAmounts(2,7,6,2)
         .durabilityMultiplier(20)
-        .knockbackResistance(0.1f)
         .toughness(1.0f)
         .build()
     val GARNET = ValidatedArmorMaterial.Builder("ai_garnet",SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND)
