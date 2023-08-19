@@ -141,7 +141,6 @@ class CrystalAltarScreenHandler(
         val item = itemStack.item.recipeRemainder
         itemStack.decrement(1)
         if (item != null) {
-            println("bleh")
             val itemStack2 = ItemStack(item)
             if (itemStack.isEmpty) {
                 itemStack = itemStack2
