@@ -24,7 +24,7 @@
 "craft_h_item": "amethyst_imbuement:beryl_copper_ingot",
 "craft_i_item": "minecraft:air",
 "result_item": "amethyst_imbuement:sniper_bow",
-"cost_text": "$(l)消耗等级：$(2)19$()"
+"cost_text": "$(l)消耗等级：$(2)13$()"
 },
 {
 "type": "patchouli:image",
@@ -40,7 +40,7 @@
 "amethyst_imbuement:textures/gui/patchouli/sniper_bow_scope/sniper_bow_scope_6.png"
 ],
 "border": true,
-"text": "按下'='键来切换瞄准镜纹理(默认设置，可在设置菜单中更改)."
+"text": "按下‘=’键来切换瞄准镜纹理（默认设置，可在设置菜单中更改）。"
 },
 {            
 "type": "patchouli:text",

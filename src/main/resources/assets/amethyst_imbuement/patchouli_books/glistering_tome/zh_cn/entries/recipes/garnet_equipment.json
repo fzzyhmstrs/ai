@@ -8,24 +8,39 @@
       "text": "石榴石装备是钻石工具的另一种锻造升级。它们的伤害和工具等级相同，但耐久值大大提高。它们也是注魔$(l:amethyst_imbuement:imbuing/glowing_tools)荧光工具$()所需的原料。"
     },
     {
-      "type": "amethyst_imbuement:three_smithing_recipe",
-      "smithing_a": "minecraft:diamond_pickaxe",
-      "smithing_b": "minecraft:diamond_sword",
-      "smithing_c": "minecraft:diamond_axe",
-      "addition_item": "amethyst_imbuement:garnet",
-      "result_a": "amethyst_imbuement:garnet_pickaxe",
-      "result_b": "amethyst_imbuement:garnet_sword",
-      "result_c": "amethyst_imbuement:garnet_axe"
+      "type": "amethyst_imbuement:altar_recipe",
+      "input_item": "amethyst_imbuement:gem_dust",
+      "addition_item": "minecraft:diamond_axe",
+      "flower_item": "amethyst_imbuement:garnet",
+      "output_item": "amethyst_imbuement:garnet_axe"
     },
     {
-      "type": "amethyst_imbuement:three_smithing_recipe",
-      "smithing_a": "minecraft:diamond_shovel",
-      "smithing_b": "minecraft:diamond_hoe",
-      "smithing_c": "minecraft:diamond_horse_armor",
-      "addition_item": "amethyst_imbuement:garnet",
-      "result_a": "amethyst_imbuement:garnet_shovel",
-      "result_b": "amethyst_imbuement:garnet_hoe",
-      "result_c": "amethyst_imbuement:garnet_horse_armor"
+      "type": "amethyst_imbuement:altar_recipe",
+      "input_item": "amethyst_imbuement:gem_dust",
+      "addition_item": "minecraft:diamond_hoe",
+      "flower_item": "amethyst_imbuement:garnet",
+      "output_item": "amethyst_imbuement:garnet_hoe"
+    },
+    {
+      "type": "amethyst_imbuement:altar_recipe",
+      "input_item": "amethyst_imbuement:gem_dust",
+      "addition_item": "minecraft:diamond_pickaxe",
+      "flower_item": "amethyst_imbuement:garnet",
+      "output_item": "amethyst_imbuement:garnet_pickaxe"
+    },
+    {
+      "type": "amethyst_imbuement:altar_recipe",
+      "input_item": "amethyst_imbuement:gem_dust",
+      "addition_item": "minecraft:diamond_shovel",
+      "flower_item": "amethyst_imbuement:garnet",
+      "output_item": "amethyst_imbuement:garnet_shovel"
+    },
+    {
+      "type": "amethyst_imbuement:altar_recipe",
+      "input_item": "amethyst_imbuement:gem_dust",
+      "addition_item": "minecraft:diamond_sword",
+      "flower_item": "amethyst_imbuement:garnet",
+      "output_item": "amethyst_imbuement:garnet_sword"
     }
   ]
 }

@@ -5,17 +5,12 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(#490)注魔台$()是你魔法之旅的核心。其内里燃烧的灵魂火为其提供了源源不断的魔法能量。$(o)如果$()你愿意提供必要的原料和一部分灵魂的话。$(br2)围绕注魔台摆放书架可以提升其能力。$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)附魔相关$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)注魔相关$()"
+"text": "$(#490)注魔台$()是你魔法之旅的核心。其内里燃烧的灵魂火为其提供了源源不断的魔法能量……$(o)如果$()你愿意提供必要的原料和一部分灵魂的话。$(br2)围绕注魔台摆放书架可以提升其能力。"
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:imbuing_table"
-},
-{            
-"type": "patchouli:text",
-"title": "附魔",
-"anchor": "enchant_info",
-"text": "注魔台可以作为更高级的$(#490)附魔台$()使用。将待附魔物品放入中间的槽位，青金石放入标记的青金石槽。$(br)注魔台可以提供最大等级为$(l)60$()级的附魔，是附魔台上限的两倍。为达到这样的等级，注魔台周围需要摆放$(l)30$()个书架而不是15个。书架的摆放方式和附魔台一致。"
+"recipe": "amethyst_imbuement:imbuing_table",
+"text": "更多详细信息：$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)附魔相关$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)注魔相关$()"
 },
 {
 "type": "patchouli:multiblock",
@@ -36,6 +31,17 @@
 {
 "type": "patchouli:text",
 "title": "注魔",
+"anchor": "enchant_info",
+"text": "注魔台可以作为更高级的$(#490)附魔台$()使用。将待附魔物品放入中间的槽位，青金石放入标记的青金石槽。$(br)注魔台可以提供最大等级为$(l)60$()级的附魔，是附魔台上限的两倍。为达到这样的等级，注魔台周围需要摆放$(l)30$()个书架而不是15个。书架的摆放方式和附魔台一致。"
+},
+{
+"type": "patchouli:text",
+"title": "Rerolling",
+"text": "If enabled in the mod configurations (it is enabled by default), you can reroll the enchantments in the imbuing table by clicking the refresh button that shows up between the right two imbuing slots.$(br2)This reroll requires lapis and experience levels, and the button will grey out if you don't have enough of one or both."
+},
+{
+"type": "patchouli:text",
+"title": "Imbuing",
 "anchor": "imbue_info",
 "text": "注魔是你魔法之旅中需要完成的首要任务。注魔结合了合成与附魔；他是将物品和其他物品的源质，以及你的灵魂相融合的过程。在游戏中，你的$(#490)经验值$()就代表你的灵魂。"
 },

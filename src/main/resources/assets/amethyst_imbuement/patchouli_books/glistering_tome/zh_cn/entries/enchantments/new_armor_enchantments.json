@@ -9,12 +9,6 @@
 },
 {
 "type": "patchouli:spotlight",
-"title": "壁垒",
-"item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:bulwark\",lvl:1}]}",
-"text": "$(l)效果：$()使用附魔盾牌抵挡伤害时治疗使用者。$(br)$(l)适用于：$() $(#490)盾牌$()$(br)$(l)最高等级：$() 1 $(br)$(l)稀有度：$()常见$(br)$(l)不兼容：$()无"
-},
-{
-"type": "patchouli:spotlight",
 "title": "多段跳",
 "item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:multi_jump\",lvl:1}]}",
 "text": "$(l)效果：$()使用者可以在空中二段跳，落地后重置。$(br)$(l)适用于：$() $(#490)靴子$()$(br)$(l)最高等级：$() 1 $(br)$(l)稀有度：$()常见$(br)$(l)不兼容：$()无"

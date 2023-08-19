@@ -1,6 +1,6 @@
 {    
 "name": "法术模板",
-"parent": "amethyst_imbuement:scepter_augments",
+"parent": "amethyst_imbuement:spells",
 "description": "隐藏在世界各地的更罕见、更强大的法术的模板。阅读学识之书和神话之书以揭示其中的强化和完成注魔所需的$(#b0b)关键物品$()。",
 "icon": "amethyst_imbuement:book_of_mythos"
 }

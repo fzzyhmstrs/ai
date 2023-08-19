@@ -19,7 +19,7 @@
       "type": "amethyst_imbuement:imbuing_recipe",
       "title": "寒霜法杖",
       "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "minecraft:blue_ice",
+      "imbue_b_item": "amethyst_imbuement:glistening_ice",
       "imbue_c_item": "minecraft:gold_ingot",
       "imbue_d_item": "minecraft:gold_ingot",
       "craft_a_item": "minecraft:snow_block",
@@ -33,25 +33,6 @@
       "craft_i_item": "minecraft:snow_block",
       "result_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
       "cost_text": "$(l)消耗等级：$(2)19$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "由虹彩至寒霜",
-      "imbue_a_item": "minecraft:snow_block",
-      "imbue_b_item": "minecraft:blue_ice",
-      "imbue_c_item": "minecraft:snow_block",
-      "imbue_d_item": "minecraft:snow_block",
-      "craft_a_item": "minecraft:air",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "minecraft:air",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "minecraft:air",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
-      "cost_text": "$(l)消耗等级：$(2)10$()"
     }
   ]
 }

@@ -38,6 +38,11 @@
       "type": "patchouli:crafting",
       "recipe": "amethyst_imbuement:gem_dust_from_healers_gem",
       "recipe2": "amethyst_imbuement:gem_dust_from_inquisitive_gem"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "amethyst_imbuement:gem_dust_from_mystical_gem",
+      "recipe2": "amethyst_imbuement:gem_dust_from_spell_scroll"
     }
   ]
 }

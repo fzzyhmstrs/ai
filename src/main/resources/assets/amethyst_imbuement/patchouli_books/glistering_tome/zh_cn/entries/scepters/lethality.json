@@ -2,7 +2,7 @@
 "name": "死之触",    
 "icon": "amethyst_imbuement:lethality",
 "category": "amethyst_imbuement:scepters", 
-"sortnum": 25,
+"sortnum": 28,
 "pages": [        
 {            
 "type": "patchouli:text",            
@@ -10,8 +10,9 @@
 },
 {            
 "type": "amethyst_imbuement:scepter_lineage_tier_3_2",
-"anc_b": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
-"anc_c": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
+"anc_a": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+"anc_b": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
+"anc_c": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
 "input_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
 },
 {
@@ -32,25 +33,6 @@
   "craft_i_item": "amethyst_imbuement:garnet_sword",
   "result_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
   "cost_text": "$(l)消耗等级：$(2)45$()"
-},
-  {
-    "type": "amethyst_imbuement:imbuing_recipe",
-    "title": "由光辉至死之触",
-    "imbue_a_item": "amethyst_imbuement:garnet_sword",
-    "imbue_b_item": "amethyst_imbuement:glowing_blade",
-    "imbue_c_item": "amethyst_imbuement:lethal_gem",
-    "imbue_d_item": "amethyst_imbuement:garnet_sword",
-    "craft_a_item": "amethyst_imbuement:gem_dust",
-    "craft_b_item": "amethyst_imbuement:gem_dust",
-    "craft_c_item": "amethyst_imbuement:gem_dust",
-    "craft_d_item": "amethyst_imbuement:gem_dust",
-    "craft_e_item": "amethyst_imbuement:lustrous_scepter",
-    "craft_f_item": "amethyst_imbuement:gem_dust",
-    "craft_g_item": "amethyst_imbuement:gem_dust",
-    "craft_h_item": "amethyst_imbuement:gem_dust",
-    "craft_i_item": "amethyst_imbuement:gem_dust",
-    "result_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-    "cost_text": "$(l)消耗等级：$(2)29$()"
   }
 ]
 }

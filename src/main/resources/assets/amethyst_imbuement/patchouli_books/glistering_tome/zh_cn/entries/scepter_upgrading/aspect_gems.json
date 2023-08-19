@@ -42,6 +42,12 @@
 "item": "amethyst_imbuement:healers_gem",
 "link_recipe": true,
 "text": "医师宝石闪耀着生命的光辉。$(br2)创造它需要副手拿着机遇宝石并（大量）治疗自己。吃饭很重要。"
+},
+{            
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:mystical_gem",
+"link_recipe": true,
+"text": "A mystical gem flickers with raw magic.$(br2)Create one by holding a Gem of Promise in your off-hand and casting spells with a scepter or scroll.$(br2)Orb Modifier: $(l:amethyst_imbuement:modifiers/savant_aspect)Savant Aspect$()"
 }
 ]
 }

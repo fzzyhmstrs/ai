@@ -2,7 +2,7 @@
   "name": "旅人法杖",
   "icon": "amethyst_imbuement:travelers_scepter",
   "category": "amethyst_imbuement:scepters",
-  "sortnum": 16,
+  "sortnum": 18,
   "pages": [
     {
       "type": "patchouli:text",
@@ -33,25 +33,6 @@
       "craft_i_item": "minecraft:cactus",
       "result_item": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
       "cost_text": "$(l)消耗等级：$(2)23$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "由虹彩至旅人",
-      "imbue_a_item": "minecraft:fern",
-      "imbue_b_item": "amethyst_imbuement:malachite_figurine",
-      "imbue_c_item": "minecraft:prismarine_shard",
-      "imbue_d_item": "minecraft:cactus",
-      "craft_a_item": "minecraft:air",
-      "craft_b_item": "amethyst_imbuement:gem_dust",
-      "craft_c_item": "minecraft:air",
-      "craft_d_item": "amethyst_imbuement:gem_dust",
-      "craft_e_item": "amethyst_imbuement:iridescent_scepter",
-      "craft_f_item": "amethyst_imbuement:gem_dust",
-      "craft_g_item": "minecraft:air",
-      "craft_h_item": "amethyst_imbuement:gem_dust",
-      "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
-      "cost_text": "$(l)消耗等级：$(2)10$()"
     }
   ]
 }

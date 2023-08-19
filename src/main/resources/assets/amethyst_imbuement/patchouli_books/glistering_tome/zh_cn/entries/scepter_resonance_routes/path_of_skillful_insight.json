@@ -10,8 +10,8 @@
 {
   "type": "amethyst_imbuement:scepter_route",
   "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+  "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
   "spec": "经验获取",
   "spells": "灵魂飞弹，共鸣（独有）",
   "mods": "回响，洞悉，精通，弱效范围"

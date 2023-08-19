@@ -15,7 +15,8 @@
 "desc_b": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
 "desc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
 "desc_d": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
-"desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}"
+"desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
+"desc_f": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}"
 },
 {
   "type": "amethyst_imbuement:imbuing_recipe",

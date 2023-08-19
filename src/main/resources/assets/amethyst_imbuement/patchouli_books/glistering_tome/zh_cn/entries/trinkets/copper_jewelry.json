@@ -14,7 +14,9 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:copper_ring"
+"anchor": "copper_ward_recipe",
+"recipe": "amethyst_imbuement:copper_ring",
+"recipe2": "amethyst_imbuement:copper_ward"
 }
 ]
 }
