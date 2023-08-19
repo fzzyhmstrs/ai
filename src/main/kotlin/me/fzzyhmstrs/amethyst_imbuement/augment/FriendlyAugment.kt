@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment.FRIENDLY
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EquipmentSlot
@@ -31,9 +31,9 @@ class FriendlyAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterItem.IMBUED_HEADBAND,1))
-        list.add(ItemStack(RegisterItem.IMBUED_AMULET,1))
-        list.add(ItemStack(RegisterItem.IMBUED_RING,1))
+        list.add(ItemStack(RegisterTool.IMBUED_HEADBAND,1))
+        list.add(ItemStack(RegisterTool.IMBUED_AMULET,1))
+        list.add(ItemStack(RegisterTool.IMBUED_RING,1))
         return list
     }
 

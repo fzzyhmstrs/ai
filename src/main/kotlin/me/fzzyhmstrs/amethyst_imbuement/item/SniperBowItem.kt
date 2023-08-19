@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.LivingEntity
@@ -71,7 +72,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
     }
 
     override fun canRepair(stack: ItemStack, ingredient: ItemStack): Boolean {
-        return ingredient.isOf(RegisterItem.BERYL_COPPER_INGOT) && stack.isOf(RegisterItem.SNIPER_BOW)
+        return ingredient.isOf(RegisterItem.BERYL_COPPER_INGOT) && stack.isOf(RegisterTool.SNIPER_BOW)
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult1<ItemStack> {

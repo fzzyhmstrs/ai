@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool;
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry;
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment;
 import net.minecraft.enchantment.Enchantment;
@@ -227,7 +228,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
     private boolean amethyst_imbuement_tryUseTotemCheck(ItemStack instance, Item item, Operation<Boolean> operation){
-        if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) return operation.call(instance, item);
+        if (!instance.isOf(RegisterTool.INSTANCE.getTOTEM_OF_AMETHYST())) return operation.call(instance, item);
         if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getUNDYING(),instance) == 0) return operation.call(instance, item);
         if (!RegisterEnchantment.INSTANCE.getUNDYING().specialEffect((LivingEntity)(Object)this,1,instance)) return operation.call(instance, item);
         return true;
@@ -235,7 +236,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @WrapOperation(method = "tryUseTotem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.decrement (I)V"))
     private void amethyst_imbuement_tryUseTotemNoDecrement(ItemStack instance, int i, Operation<Void> operation){
-        if (!instance.isOf(RegisterItem.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
+        if (!instance.isOf(RegisterTool.INSTANCE.getTOTEM_OF_AMETHYST())) operation.call(instance, i);
     }
 
     /*@WrapOperation(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getAttributeModifiers (Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))

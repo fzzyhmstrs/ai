@@ -3,17 +3,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterArmor {
 
     internal val regArmor: MutableList<Item> = mutableListOf()
 
-    private fun register(item: Item, name: String): Item{
+    private fun <T: ArmorItem> register(item: T, name: String): T{
         regArmor.add(item)
         return Registry.register(Registries.ITEM,AI.identity(name), item)
     }

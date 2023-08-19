@@ -2,7 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.tool.*
+import me.fzzyhmstrs.amethyst_imbuement.material.AiArmorMaterialsConfig
+import me.fzzyhmstrs.amethyst_imbuement.material.AiScepterMaterialsConfig
+import me.fzzyhmstrs.amethyst_imbuement.material.AiToolMaterialsConfig
 import me.fzzyhmstrs.fzzy_config.config_util.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
@@ -40,7 +42,7 @@ object AiConfig
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
             .add("1.20-01/1.19.4-01/1.19.3-13/1.19-36: Added hamster and bonestorm configs in entities_v2. Updated to items_v5 with fzzyhammer and harvest scepter info and new loot chances for unique items.")
-            .add("2.0.0+1.20.2: Overhaul of many of the configs with the Spell Rebirth Update. Please review the README carefully and go over the available config options to see what has changed.")
+            .add("1.20-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -54,6 +56,9 @@ object AiConfig
 
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
+
+        var glisteringTridentDurability = ValidatedInt(550,5500,0)
+        var sniperBowDurability = ValidatedInt(500,5000,0)
 
         var manaItems = ManaItems()
         class ManaItems: ConfigSection(Header.Builder().space().add("readme.items.manaItems_1").add("readme.items.manaItems_2").build()) {

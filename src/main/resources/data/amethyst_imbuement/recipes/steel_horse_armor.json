@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:steel_ingots"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:steel_horse_armor",
+    "count": 1
+  }
+}

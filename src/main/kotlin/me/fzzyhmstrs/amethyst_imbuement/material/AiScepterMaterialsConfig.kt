@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.material
 
-import me.fzzyhmstrs.amethyst_core.scepter.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.fabricmc.yarn.constants.MiningLevels
 import net.minecraft.item.Items

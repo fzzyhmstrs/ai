@@ -74,7 +74,7 @@ open class SteelJewelryItem(settings: Settings) : TrinketItem(settings), Flavorf
         val modifiers = super.getModifiers(stack, slot, entity, uuid)
         modifiers.put(
             EntityAttributes.GENERIC_ARMOR,
-            EntityAttributeModifier(uuid, "imbued_ascendancy:armor", 0.5, EntityAttributeModifier.Operation.ADDITION)
+            EntityAttributeModifier(uuid, "amethyst_imbuement:armor", 0.5, EntityAttributeModifier.Operation.ADDITION)
         )
         return modifiers
     }

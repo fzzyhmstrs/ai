@@ -19,7 +19,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 class FzzyhammerItem(settings: Settings):
-    CustomSpellToolItem(AiConfig.materials.scepters.builder, 1.5f,AiConfig.materials.scepters.builder.getAttackSpeed().toFloat(), BlockTags.PICKAXE_MINEABLE, settings)
+    CustomSpellToolItem(AiConfig.materials.scepters.fzzyhammer, 1.5f,AiConfig.materials.scepters.fzzyhammer.getAttackSpeed().toFloat(), BlockTags.PICKAXE_MINEABLE, settings)
 
 {
 

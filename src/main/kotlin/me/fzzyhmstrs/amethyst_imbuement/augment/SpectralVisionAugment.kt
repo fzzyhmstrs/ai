@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -15,12 +15,12 @@ class SpectralVisionAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: Equipmen
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.isOf(RegisterItem.IMBUED_HEADBAND))
+        return (stack.isOf(RegisterTool.IMBUED_HEADBAND))
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterItem.IMBUED_HEADBAND,1))
+        list.add(ItemStack(RegisterTool.IMBUED_HEADBAND,1))
         return list
     }
 }

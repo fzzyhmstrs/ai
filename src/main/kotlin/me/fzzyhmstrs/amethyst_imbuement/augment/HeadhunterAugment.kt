@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
@@ -20,7 +20,7 @@ class HeadhunterAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterItem.SNIPER_BOW,1))
+        list.add(ItemStack(RegisterTool.SNIPER_BOW,1))
         return list
     }
 

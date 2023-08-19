@@ -7,10 +7,9 @@ import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiStack
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
-import java.util.function.Function
 
 
 object EmiClientPlugin: EmiPlugin{
@@ -34,7 +33,7 @@ object EmiClientPlugin: EmiPlugin{
 
         registry.addRecipeHandler(RegisterHandler.IMBUING_SCREEN_HANDLER, IMBUING_HANDLER)
 
-        registry.setDefaultComparison(RegisterItem.SPELL_SCROLL, Comparison.compareNbt())
+        registry.setDefaultComparison(RegisterScepter.SPELL_SCROLL, Comparison.compareNbt())
 
         registry.addCategory(ALTAR_CATEGORY)
         registry.addWorkstation(ALTAR_CATEGORY, ALTAR_WORKSTATION)

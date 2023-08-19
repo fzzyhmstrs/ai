@@ -4,10 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus;
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag;
+import me.fzzyhmstrs.amethyst_imbuement.registry.*;
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -49,7 +46,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
-        if(super.getActiveItem().isOf(RegisterItem.INSTANCE.getSNIPER_BOW())){
+        if(super.getActiveItem().isOf(RegisterTool.INSTANCE.getSNIPER_BOW())){
             if (CrossbowItem.isCharged(super.getActiveItem())) {
                 if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getILLUMINATING(),super.getActiveItem()) > 0){
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,260));
@@ -126,7 +123,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @WrapOperation(method = "damageShield", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
     private boolean amethyst_imbuement_damageWards(ItemStack instance, Item item, Operation<Boolean> operation){
-        return operation.call(instance,item) || instance.isIn(RegisterTag.INSTANCE.getBASIC_WARDS_TAG()) || instance.isOf(RegisterItem.INSTANCE.getIMBUED_WARD());
+        return operation.call(instance,item) || instance.isIn(RegisterTag.INSTANCE.getBASIC_WARDS_TAG()) || instance.isOf(RegisterTool.INSTANCE.getIMBUED_WARD());
     }
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))

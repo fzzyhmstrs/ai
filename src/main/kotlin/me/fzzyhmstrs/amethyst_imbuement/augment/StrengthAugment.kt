@@ -4,7 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.enchantment.EnchantmentHelper
@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack
 class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): ActiveAugment(weight,mxLvl,*slot) {
 
     override fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
-        return RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,10)
+        return RegisterTool.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,10)
     }
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
@@ -25,9 +25,9 @@ class StrengthAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot
         EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH,100,lvl-1)
         val rnd = user.world.random.nextFloat()
         if (rnd <= 0.5) {
-            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)) {
+            if (RegisterTool.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user as PlayerEntity, 1)) {
                 if (AiConfig.trinkets.enableBurnout.get()) {
-                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
+                    RegisterTool.TOTEM_OF_AMETHYST.burnOutHandler(
                         stack,
                         RegisterEnchantment.STRENGTH,
                         user,

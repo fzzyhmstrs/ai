@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "amethyst_imbuement:garnet_axe",
-    "amethyst_imbuement:glowing_axe"
+    "amethyst_imbuement:glowing_axe",
+    "amethyst_imbuement:steel_axe",
+    "amethyst_imbuement:ametrine_axe"
   ]
 }

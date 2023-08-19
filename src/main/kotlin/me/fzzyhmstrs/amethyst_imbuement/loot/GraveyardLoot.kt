@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.loot
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
@@ -49,7 +50,7 @@ object GraveyardLoot: AbstractModLoot() {
             Identifier("graveyard","totem_loot") -> {
                 val poolBuilder = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0F))
-                    .with(ItemEntry.builder(RegisterItem.TOTEM_OF_AMETHYST).weight(1))
+                    .with(ItemEntry.builder(RegisterTool.TOTEM_OF_AMETHYST).weight(1))
                     .with(ItemEntry.builder(Items.AIR).weight(99))
                 table.pool(poolBuilder)
                 return true

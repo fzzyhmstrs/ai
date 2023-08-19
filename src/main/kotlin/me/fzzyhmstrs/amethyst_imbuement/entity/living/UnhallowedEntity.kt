@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterArmor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.EquipmentSlot
@@ -88,7 +88,7 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
                 this.equipStack(EquipmentSlot.CHEST, ItemStack(RegisterArmor.STEEL_CHESTPLATE))
                 this.equipStack(EquipmentSlot.LEGS, ItemStack(RegisterArmor.STEEL_LEGGINGS))
                 this.equipStack(EquipmentSlot.FEET, ItemStack(RegisterArmor.STEEL_BOOTS))
-                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterItem.GLOWING_BLADE))
+                this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterTool.GLOWING_BLADE))
             }
         }
     }

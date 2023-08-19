@@ -2,8 +2,8 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterLoot
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.item_util.AbstractModLoot
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
@@ -29,9 +29,9 @@ object BetterDungeonsLoot: AbstractModLoot() {
             Identifier("betterdungeons", "zombie_dungeon/chests/tombstone") -> {
                 val poolBuilder = LootPool.builder()
                     .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
-                    .with(ItemEntry.builder(RegisterItem.COPPER_RING).weight(1))
-                    .with(ItemEntry.builder(RegisterItem.COPPER_HEADBAND).weight(1))
-                    .with(ItemEntry.builder(RegisterItem.COPPER_AMULET).weight(1))
+                    .with(ItemEntry.builder(RegisterTool.COPPER_RING).weight(1))
+                    .with(ItemEntry.builder(RegisterTool.COPPER_HEADBAND).weight(1))
+                    .with(ItemEntry.builder(RegisterTool.COPPER_AMULET).weight(1))
                     .with(ItemEntry.builder(Items.AIR).weight(25))
                 table.pool(poolBuilder)
                 return true

@@ -10,7 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -29,7 +29,7 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
     }
 
     override fun canActivate(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
-        return user is PlayerEntity && !user.abilities.creativeMode && RegisterItem.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,20)
+        return user is PlayerEntity && !user.abilities.creativeMode && RegisterTool.TOTEM_OF_AMETHYST.checkCanUse(stack,user.world,user,20)
     }
 
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
@@ -39,9 +39,9 @@ class AngelicAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
             abilitySource.grantTo(user,ability)
         }
         if(user.abilities.flying) {
-            if (RegisterItem.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 2)) {
+            if (RegisterTool.TOTEM_OF_AMETHYST.manaDamage(stack, user.world, user, 2)) {
                 if (AiConfig.trinkets.enableBurnout.get()) {
-                    RegisterItem.TOTEM_OF_AMETHYST.burnOutHandler(
+                    RegisterTool.TOTEM_OF_AMETHYST.burnOutHandler(
                         stack,
                         RegisterEnchantment.ANGELIC,
                         user,

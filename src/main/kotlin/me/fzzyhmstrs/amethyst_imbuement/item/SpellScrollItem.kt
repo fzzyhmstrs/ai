@@ -6,7 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
@@ -40,17 +40,17 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
 
     companion object{
         internal fun createSpellScroll(enchant: ScepterAugment, disenchanted: Boolean = false): ItemStack{
-            val stack = ItemStack(RegisterItem.SPELL_SCROLL)
+            val stack = ItemStack(RegisterScepter.SPELL_SCROLL)
             val nbt = stack.orCreateNbt
             val spellString = Registries.ENCHANTMENT.getId(enchant)?.toString()?: throw IllegalStateException("Enchantment couldn't be found!")
-            nbt.putString(RegisterItem.SPELL_SCROLL.SPELL,spellString)
+            nbt.putString(RegisterScepter.SPELL_SCROLL.SPELL,spellString)
             val type = AugmentHelper.getAugmentType(spellString)
-            nbt.putString(RegisterItem.SPELL_SCROLL.SPELL_TYPE,type.str())
-            nbt.putFloat(RegisterItem.SPELL_SCROLL.MODEL_KEY,33f)
-            nbt.putInt(RegisterItem.SPELL_SCROLL.SPENT_USES,0)
-            nbt.putInt(RegisterItem.SPELL_SCROLL.TOTAL_USES,AiConfig.items.scroll.uses.get()[0])
-            nbt.putInt(RegisterItem.SPELL_SCROLL.SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[0])
-            if (disenchanted) nbt.putBoolean(RegisterItem.SPELL_SCROLL.DISENCHANTED, true)
+            nbt.putString(RegisterScepter.SPELL_SCROLL.SPELL_TYPE,type.str())
+            nbt.putFloat(RegisterScepter.SPELL_SCROLL.MODEL_KEY,33f)
+            nbt.putInt(RegisterScepter.SPELL_SCROLL.SPENT_USES,0)
+            nbt.putInt(RegisterScepter.SPELL_SCROLL.TOTAL_USES,AiConfig.items.scroll.uses.get()[0])
+            nbt.putInt(RegisterScepter.SPELL_SCROLL.SCROLL_LEVEL, AiConfig.items.scroll.levels.get()[0])
+            if (disenchanted) nbt.putBoolean(RegisterScepter.SPELL_SCROLL.DISENCHANTED, true)
             return stack
         }
     }

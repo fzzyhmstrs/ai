@@ -15,6 +15,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.entity.EquipmentSlot
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.random.Random
 
 val LOGGER = LoggerUtil.getLogger()
@@ -31,6 +32,8 @@ object AI: ModInitializer {
         RegisterEnchantment.registerAll()
         RegisterArmor.registerAll()
         RegisterItem.registerAll()
+        RegisterTool.registerAll()
+        RegisterScepter.registerAll()
         RegisterPotion.registerAll()
         RegisterLoot.registerAll()
         RegisterEntity.registerAll()
@@ -55,6 +58,10 @@ object AI: ModInitializer {
     }
     fun aiKotlinRandom(): kotlin.random.Random{
         return kotlinRandom
+    }
+
+    fun identity(name: String): Identifier {
+        return Identifier(MOD_ID,name)
     }
 }
 

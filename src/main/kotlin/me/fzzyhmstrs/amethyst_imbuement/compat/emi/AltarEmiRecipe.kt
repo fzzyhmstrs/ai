@@ -9,6 +9,7 @@ import dev.emi.emi.api.widget.WidgetHolder
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.item.ItemStack
@@ -32,7 +33,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
         base = EmiIngredient.of(recipe.base)
 		addition = EmiIngredient.of(recipe.addition)
 	    result = if(!recipe.react) {
-            if (!recipe.result.isOf(RegisterItem.SPELL_SCROLL)) {
+            if (!recipe.result.isOf(RegisterScepter.SPELL_SCROLL)) {
                 listOf(EmiStack.of(recipe.result))
             } else {
                 generateScrollOutputs(recipe.addition)
@@ -43,7 +44,7 @@ class AltarEmiRecipe(recipe: AltarRecipe): EmiRecipe{
     }
 
     private fun generateScrollOutputs(addition: Ingredient): List<EmiStack>{
-        val list = mutableListOf(EmiStack.of(ItemStack(RegisterItem.SPELL_SCROLL)))
+        val list = mutableListOf(EmiStack.of(ItemStack(RegisterScepter.SPELL_SCROLL)))
         if (addition.test(RegisterItem.BOOK_OF_MYTHOS.defaultStack)){
             Registries.ENCHANTMENT.stream()
                 .filter { enchant -> enchant is ScepterAugment && enchant.getTier() == 3 }

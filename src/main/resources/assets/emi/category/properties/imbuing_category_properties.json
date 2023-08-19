@@ -1,10 +1,10 @@
 {
   "amethyst_imbuement:imbuing_table": {
-    "order": -200,
+    "order": -10000,
     "sort": "none"
   },
   "amethyst_imbuement:crystal_altar": {
-    "order": -190,
+    "order": -9000,
     "sort": "none"
   }
 }

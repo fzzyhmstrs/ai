@@ -1,12 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.item_util.DefaultAugmentSwordItem
-import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
+import me.fzzyhmstrs.amethyst_imbuement.material.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import net.minecraft.block.BlockState
 import net.minecraft.entity.EquipmentSlot
@@ -25,7 +26,7 @@ open class SpellbladeItem(
     attackSpeed: Float,
     settings: Settings)
     :
-    DefaultAugmentSwordItem(material, damage, attackSpeed, settings),
+    DefaultAugmentSwordItem(material.compatMaterial(), damage, attackSpeed, settings),
     Reactant,
     Reagent
 {
@@ -64,8 +65,8 @@ open class SpellbladeItem(
         if (type != AltarRecipe.Type) return true
         for (reagent in reagents){
             if (reagent.item is SpellScrollItem){
-                if (reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.SPELL) != true) return false
-                if ((reagent.nbt?.contains(RegisterItem.SPELL_SCROLL.DISENCHANTED) != true)) return false
+                if (reagent.nbt?.contains(RegisterScepter.SPELL_SCROLL.SPELL) != true) return false
+                if ((reagent.nbt?.contains(RegisterScepter.SPELL_SCROLL.DISENCHANTED) != true)) return false
                 var count = 0
                 for (reagent1 in reagents){
                     if (reagent1.isOf(RegisterItem.KNOWLEDGE_POWDER)){
@@ -89,7 +90,7 @@ open class SpellbladeItem(
                 }
                 if (count == 0) return
                 val nbt = reagent.nbt?:return
-                val spellString = nbt.getString(RegisterItem.SPELL_SCROLL.SPELL)
+                val spellString = nbt.getString(RegisterScepter.SPELL_SCROLL.SPELL)
                 val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
                 return

@@ -8,7 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.DefaultParticleType
@@ -24,7 +24,7 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,20,20,
-            16,imbueLevel,1,LoreTier.LOW_TIER, RegisterItem.GARNET_SWORD)
+            16,imbueLevel,1,LoreTier.LOW_TIER, RegisterTool.GARNET_SWORD)
     }
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
