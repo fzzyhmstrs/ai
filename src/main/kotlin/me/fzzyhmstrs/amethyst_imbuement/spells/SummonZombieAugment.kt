@@ -32,7 +32,6 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.math.max
-import kotlin.math.min
 
 class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
     override val augmentData: AugmentDatapoint =
@@ -43,7 +42,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withAmplifier(0,1,0)
-            .withRange(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0.0,0.0)
+            .withRange(AiConfig.entities.unhallowed.baseHealth.get(),0.0,0.0)
             .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
             .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
 
@@ -66,7 +65,7 @@ class SummonZombieAugment: SummonAugment<UnhallowedEntity>(ScepterTier.TWO) {
         othersType: AugmentType,
         spells: PairedAugments
     ): Int where T : SpellCastingEntity,T : LivingEntity {
-        return max(min(effects.amplifier(level + 1)/2),1)
+        return max(effects.amplifier(level + 1)/2,1)
     }
 
     override fun entitiesToSpawn(
