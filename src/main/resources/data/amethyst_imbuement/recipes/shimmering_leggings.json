@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "amethyst_imbuement:shimmering_fabric"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:shimmering_leggings",
+    "count": 1
+  }
+}

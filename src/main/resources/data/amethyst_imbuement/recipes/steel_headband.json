@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:steel_ingots"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "amethyst_imbuement:steel_headband",
+    "count": 1
+  }
+}

@@ -25,6 +25,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -100,6 +101,21 @@ public abstract class LivingEntityMixin extends Entity {
                 RegisterItem.INSTANCE.getHEALERS_GEM().healersGemCheck(stack2, inventory, healed);
             }
         }
+    }
+
+    @WrapOperation(method = "applyDamage", at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.applyArmorToDamage (Lnet/minecraft/entity/damage/DamageSource;F)F"))
+    private float amethyst_core_applyMultiplicationAttributeToDamage(LivingEntity instance, DamageSource source, float amount, Operation<Float> operation){
+        float newAmount = instance.hasStatusEffect(RegisterStatus.INSTANCE.getRESONATING())
+                ?
+                amount + 1f + instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier()
+                :
+                amount;
+        float newAmount2 = instance.hasStatusEffect(RegisterStatus.INSTANCE.getBLAST_RESISTANT()) && source.isIn(DamageTypeTags.IS_EXPLOSION)
+                ?
+                newAmount * Math.max(0f,(9f - (float)( instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier())) / 10f)
+                :
+                newAmount;
+        return operation.call(instance,source,newAmount2);
     }
 
     @Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At(value = "HEAD"))
