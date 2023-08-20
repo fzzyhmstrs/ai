@@ -13,19 +13,19 @@
 	"item": "minecraft:sunflower"
   },
   "craftB": {
-	"item": "minecraft:paper"
+	"item": "amethyst_imbuement:shimmering_fabric"
   },
   "craftD": {
-	"item": "minecraft:paper"
+	"item": "amethyst_imbuement:shimmering_fabric"
   },
   "craftE": {
     "item": "amethyst_imbuement:gem_dust"
   },
   "craftF": {
-	"item": "minecraft:paper"
+	"item": "amethyst_imbuement:shimmering_fabric"
   },
   "craftH": {
-	"item": "minecraft:paper"
+	"item": "amethyst_imbuement:shimmering_fabric"
   },
   "title": "Empty Spell Scroll",
   "cost": 9,
