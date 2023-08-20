@@ -1,5 +1,5 @@
 {
-  "name": "荧光装备",
+  "name": "Glowing Equipment",
   "icon": "amethyst_imbuement:glowing_blade",
   "category": "amethyst_imbuement:imbuing",
   "extra_recipe_mappings": {
@@ -7,16 +7,17 @@
     "amethyst_imbuement:glowing_pick": 2,
     "amethyst_imbuement:glowing_spade": 3,
     "amethyst_imbuement:glowing_axe": 4,
-    "amethyst_imbuement:glowing_hoe": 5
+    "amethyst_imbuement:glowing_hoe": 5,
+    "amethyst_imbuement:glowing_horse_armor": 6
   },
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "类似黄金的一套高级装备，它们的破坏力略高于钻石，但牺牲了大量的耐久度以获得快速的采矿速度和极高的附魔能力。但荧光马铠是石榴石马铠的升级版"
+      "text": "A high tier set of gold-like equipment. They are slightly more damaging than diamond, but sacrifice a large chunk of durability for fast mining speed and extreme enchantability."
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光剑",
+      "title": "Glowing Blade Imbuing",
       "imbue_a_item": "minecraft:amethyst_shard",
       "imbue_b_item": "amethyst_imbuement:citrine",
       "imbue_c_item": "amethyst_imbuement:citrine",
@@ -31,11 +32,11 @@
       "craft_h_item": "amethyst_imbuement:glowing_fragment",
       "craft_i_item": "minecraft:air",
       "result_item": "amethyst_imbuement:glowing_blade",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
+      "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光斧",
+      "title": "Glowing Axe Imbuing",
       "imbue_a_item": "minecraft:amethyst_shard",
       "imbue_b_item": "amethyst_imbuement:citrine",
       "imbue_c_item": "amethyst_imbuement:citrine",
@@ -50,11 +51,11 @@
       "craft_h_item": "amethyst_imbuement:glowing_fragment",
       "craft_i_item": "minecraft:air",
       "result_item": "amethyst_imbuement:glowing_axe",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
+      "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光镐",
+      "title": "Glowing Pick Imbuing",
       "imbue_a_item": "amethyst_imbuement:imbued_lapis",
       "imbue_b_item": "amethyst_imbuement:danburite",
       "imbue_c_item": "amethyst_imbuement:danburite",
@@ -69,11 +70,11 @@
       "craft_h_item": "amethyst_imbuement:glowing_fragment",
       "craft_i_item": "minecraft:air",
       "result_item": "amethyst_imbuement:glowing_pick",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
+      "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光锹",
+      "title": "Glowing Spade Imbuing",
       "imbue_a_item": "amethyst_imbuement:imbued_lapis",
       "imbue_b_item": "amethyst_imbuement:danburite",
       "imbue_c_item": "amethyst_imbuement:danburite",
@@ -88,11 +89,11 @@
       "craft_h_item": "amethyst_imbuement:glowing_fragment",
       "craft_i_item": "minecraft:air",
       "result_item": "amethyst_imbuement:glowing_spade",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
+      "cost_text": "$(l)Level Cost: $(2)13$()"
     },
     {
       "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光锄",
+      "title": "Glowing Hoe Imbuing",
       "imbue_a_item": "amethyst_imbuement:imbued_lapis",
       "imbue_b_item": "amethyst_imbuement:danburite",
       "imbue_c_item": "amethyst_imbuement:danburite",
@@ -107,26 +108,7 @@
       "craft_h_item": "amethyst_imbuement:glowing_fragment",
       "craft_i_item": "minecraft:air",
       "result_item": "amethyst_imbuement:glowing_hoe",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "注魔：荧光马铠",
-      "imbue_a_item": "amethyst_imbuement:imbued_lapis",
-      "imbue_b_item": "amethyst_imbuement:danburite",
-      "imbue_c_item": "amethyst_imbuement:danburite",
-      "imbue_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_a_item": "minecraft:air",
-      "craft_b_item": "amethyst_imbuement:glowing_fragment",
-      "craft_c_item": "minecraft:air",
-      "craft_d_item": "amethyst_imbuement:glowing_fragment",
-      "craft_e_item": "amethyst_imbuement:garnet_horse_armor",
-      "craft_f_item": "amethyst_imbuement:glowing_fragment",
-      "craft_g_item": "minecraft:air",
-      "craft_h_item": "amethyst_imbuement:glowing_fragment",
-      "craft_i_item": "minecraft:air",
-      "result_item": "amethyst_imbuement:glowing_horse_armor",
-      "cost_text": "$(l)消耗等级：$(2)13$()"
+      "cost_text": "$(l)Level Cost: $(2)13$()"
     }
   ]
 }

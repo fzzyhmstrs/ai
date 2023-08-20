@@ -38,7 +38,7 @@ object AiArmorMaterialsConfig{
         .toughness(3f)
         .build()
     val SHIMMERING = ValidatedArmorMaterial.Builder("ai_shimmering",SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)
-        .repairIngredient(Ingredient.ofItems(RegisterItem.GLOWING_FRAGMENT))
+        .repairIngredient(Ingredient.ofItems(RegisterItem.SHIMMERING_FABRIC))
         .enchantability(25)
         .protectionAmounts(2,6,5,2)
         .durabilityMultiplier(12)
