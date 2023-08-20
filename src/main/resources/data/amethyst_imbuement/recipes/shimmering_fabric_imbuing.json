@@ -1,0 +1,46 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+    "item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueB": {
+    "item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueC": {
+    "item": "amethyst_imbuement:imbued_quartz"
+  },
+  "imbueD": {
+    "item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftA": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftB": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftC": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftD": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftE": {
+    "item": "amethyst_imbuement:gem_dust"
+  },
+  "craftF": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftG": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftH": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "craftI": {
+    "tag": "minecraft:wool_carpets"
+  },
+  "title": "Shimmering Fabric",
+  "cost": 7,
+  "resultA": "amethyst_imbuement:shimmering_fabric",
+  "countA": 8
+}

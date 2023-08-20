@@ -4,7 +4,7 @@
     "item": "amethyst_imbuement:gem_dust"
   },
   "base": {
-    "item": "minecraft:paper"
+    "item": "amethyst_imbuement:shimmering_fabric"
   },
   "addition": {
     "item": "minecraft:sunflower"
