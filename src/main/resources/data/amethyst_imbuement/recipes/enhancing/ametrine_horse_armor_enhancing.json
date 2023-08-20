@@ -4,7 +4,7 @@
     "item": "amethyst_imbuement:knowledge_powder"
   },
   "base": {
-    "item": "minecraft:diamond_horse_armor"
+    "item": "amethyst_imbuement:garnet_horse_armor"
   },
   "addition": {
     "item": "amethyst_imbuement:ametrine"
