@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.ShimmeringArmorItem
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
@@ -34,10 +35,10 @@ object RegisterArmor {
     val GLOWING_CHESTPLATE = register(ArmorItem(AiConfig.materials.armor.glowing, ArmorItem.Type.CHESTPLATE,Item.Settings()), "glowing_chestplate")
     val GLOWING_LEGGINGS = register(ArmorItem(AiConfig.materials.armor.glowing, ArmorItem.Type.LEGGINGS,Item.Settings()), "glowing_leggings")
     val GLOWING_BOOTS = register(ArmorItem(AiConfig.materials.armor.glowing, ArmorItem.Type.BOOTS,Item.Settings()),"glowing_boots")
-    val SHIMMERING_HELMET = register(ArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.HELMET,Item.Settings()), "shimmering_helmet")
-    val SHIMMERING_CHESTPLATE = register(ArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.CHESTPLATE,Item.Settings()), "shimmering_chestplate")
-    val SHIMMERING_LEGGINGS = register(ArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.LEGGINGS,Item.Settings()), "shimmering_leggings")
-    val SHIMMERING_BOOTS = register(ArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.BOOTS,Item.Settings()),"shimmering_boots")
+    val SHIMMERING_HELMET = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.HELMET,Item.Settings()), "shimmering_helmet")
+    val SHIMMERING_CHESTPLATE = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.CHESTPLATE,Item.Settings()), "shimmering_chestplate")
+    val SHIMMERING_LEGGINGS = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.LEGGINGS,Item.Settings()), "shimmering_leggings")
+    val SHIMMERING_BOOTS = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.BOOTS,Item.Settings()),"shimmering_boots")
 
     fun registerAll() {}
 }
