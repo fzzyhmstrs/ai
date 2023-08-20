@@ -1,46 +1,46 @@
 {    
-"name": "Ametrine Armor",    
-"icon": "amethyst_imbuement:ametrine_chestplate",    
+"name": "Ametrine Equipment",
+"icon": "amethyst_imbuement:ametrine_sword",
 "category": "amethyst_imbuement:recipes",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Ametrine Armor is a further upgrade to Netherite Armor. It offers improved protection, knockback resistance, armor toughness, and durability."
+"text": "Ametrine Equipment is a further upgrade to Netherite Equipment. It offers improved damage and durability."
 },
   {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
-    "addition_item": "minecraft:netherite_helmet",
+    "addition_item": "minecraft:netherite_axe",
     "flower_item": "amethyst_imbuement:ametrine",
-    "output_item": "amethyst_imbuement:ametrine_helmet"
+    "output_item": "amethyst_imbuement:ametrine_axe"
   },
   {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
-    "addition_item": "minecraft:netherite_chestplate",
+    "addition_item": "minecraft:netherite_hoe",
     "flower_item": "amethyst_imbuement:ametrine",
-    "output_item": "amethyst_imbuement:ametrine_chestplate"
+    "output_item": "amethyst_imbuement:ametrine_hoe"
   },
   {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
-    "addition_item": "minecraft:netherite_leggings",
+    "addition_item": "minecraft:netherite_pickaxe",
     "flower_item": "amethyst_imbuement:ametrine",
-    "output_item": "amethyst_imbuement:ametrine_leggings"
+    "output_item": "amethyst_imbuement:ametrine_pickaxe"
   },
   {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
-    "addition_item": "minecraft:netherite_boots",
+    "addition_item": "minecraft:netherite_shovel",
     "flower_item": "amethyst_imbuement:ametrine",
-    "output_item": "amethyst_imbuement:ametrine_boots"
+    "output_item": "amethyst_imbuement:ametrine_shovel"
   },
   {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
-    "addition_item": "amethyst_imbuement:garnet_horse_armor",
+    "addition_item": "minecraft:netherite_sword",
     "flower_item": "amethyst_imbuement:ametrine",
-    "output_item": "amethyst_imbuement:ametrine_horse_armor"
+    "output_item": "amethyst_imbuement:ametrine_sword"
   }
 ]
 }

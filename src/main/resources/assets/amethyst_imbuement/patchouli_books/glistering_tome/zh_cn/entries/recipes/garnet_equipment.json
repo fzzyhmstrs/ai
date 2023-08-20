@@ -1,11 +1,11 @@
 {
-  "name": "石榴石装备",
+  "name": "Garnet Equipment",
   "icon": "amethyst_imbuement:garnet_pickaxe",
   "category": "amethyst_imbuement:recipes",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "石榴石装备是钻石工具的另一种锻造升级。它们的伤害和工具等级相同，但耐久值大大提高。它们也是注魔$(l:amethyst_imbuement:imbuing/glowing_tools)荧光工具$()所需的原料。"
+      "text": "Garnet Equipment is an alternate enhancing upgrade for diamond tools. They have the same damage and usage levels, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_tools)Glowing Tools$()"
     },
     {
       "type": "amethyst_imbuement:altar_recipe",

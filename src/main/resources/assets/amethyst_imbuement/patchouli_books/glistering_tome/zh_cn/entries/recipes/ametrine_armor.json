@@ -1,13 +1,13 @@
 {    
-"name": "紫黄晶盔甲",    
+"name": "Ametrine Armor",    
 "icon": "amethyst_imbuement:ametrine_chestplate",    
 "category": "amethyst_imbuement:recipes",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "紫黄晶盔甲是下界合金盔甲的升级。它提供了更好的保护、击退抗性、盔甲韧性和耐久值。"
+"text": "Ametrine Armor is a further upgrade to Netherite Armor. It offers improved protection, knockback resistance, armor toughness, and durability."
 },
-{
+  {
     "type": "amethyst_imbuement:altar_recipe",
     "input_item": "amethyst_imbuement:knowledge_powder",
     "addition_item": "minecraft:netherite_helmet",
@@ -34,6 +34,13 @@
     "addition_item": "minecraft:netherite_boots",
     "flower_item": "amethyst_imbuement:ametrine",
     "output_item": "amethyst_imbuement:ametrine_boots"
-}
+  },
+  {
+    "type": "amethyst_imbuement:altar_recipe",
+    "input_item": "amethyst_imbuement:knowledge_powder",
+    "addition_item": "amethyst_imbuement:garnet_horse_armor",
+    "flower_item": "amethyst_imbuement:ametrine",
+    "output_item": "amethyst_imbuement:ametrine_horse_armor"
+  }
 ]
 }

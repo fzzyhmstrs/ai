@@ -15,17 +15,6 @@
 },
 {
 "type": "patchouli:crafting",
-"anchor": "steel_helmet",
-"recipe": "amethyst_imbuement:steel_helmet",
-"recipe2": "amethyst_imbuement:steel_chestplate"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:steel_leggings",
-"recipe2": "amethyst_imbuement:steel_boots"
-},
-{
-"type": "patchouli:crafting",
 "anchor": "beryl_copper_block",
 "recipe": "amethyst_imbuement:beryl_copper_block",
 "recipe2": "amethyst_imbuement:cut_beryl_copper_block"

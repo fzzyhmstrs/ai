@@ -1,28 +1,17 @@
 {    
-"name": "合成配方",    
+"name": "Crafting Recipes",    
 "icon": "minecraft:crafting_table",    
 "category": "amethyst_imbuement:recipes",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "以下是重要物品、饰品和其他必需品的配方。"
+"text": "Following are recipes for important items, trinkets, and other necessities."
 },
 {
 "type": "patchouli:crafting",
 "anchor": "golden_heart",
 "recipe": "amethyst_imbuement:golden_heart",
 "recipe2": "amethyst_imbuement:steel_block"
-},
-{
-"type": "patchouli:crafting",
-"anchor": "steel_helmet",
-"recipe": "amethyst_imbuement:steel_helmet",
-"recipe2": "amethyst_imbuement:steel_chestplate"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:steel_leggings",
-"recipe2": "amethyst_imbuement:steel_boots"
 },
 {
 "type": "patchouli:crafting",
