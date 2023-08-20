@@ -7,7 +7,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
-import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem.Companion.createSpellScroll
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
@@ -73,10 +72,10 @@ object RegisterItem {
     val BRUTAL_GEM = register(BrutalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"brutal_gem")
     val MYSTICAL_GEM = register(MysticalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"mystical_gem")
     val GLOWING_FRAGMENT = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_MANA_COST,
-        EntityAttributeModifier(UUID.fromString("38ea2c82-ce89-11ed-afa1-0242ac120002"),"glowing_modifier",-0.02,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("38ea2c82-ce89-11ed-afa1-0242ac120002"),"glowing_modifier",0.02,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"glowing_fragment")
     val BRILLIANT_DIAMOND = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_MANA_COST,
-        EntityAttributeModifier(UUID.fromString("402ea570-c404-11ed-afa1-0242ac120002"),"brilliant_modifier",-0.06,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ea570-c404-11ed-afa1-0242ac120002"),"brilliant_modifier",0.06,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)).withGlint(),"brilliant_diamond")
     val ACCURSED_FIGURINE = register(SpellcastersReagentFlavorItem(RegisterAttribute.DAMAGE_MULTIPLICATION,
         EntityAttributeModifier(UUID.fromString("57ac057e-c505-11ed-afa1-0242ac120002"),"accursed_modifier",0.1,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
@@ -123,11 +122,6 @@ object RegisterItem {
             .entries { _, entries ->
                 entries.addAll(regItem.stream()
                     .map { item -> ItemStack(item) }.toList())
-                entries.addAll(Registries.ENCHANTMENT.stream()
-                    .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
-                    .map { enchant ->  createSpellScroll(enchant as ScepterAugment)}
-                    .toList()
-                )
                 entries.addAll(RegisterTool.regTool.stream()
                     .map { item -> ItemStack(item) }
                     .toList())
@@ -141,7 +135,11 @@ object RegisterItem {
                     .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
                     .map { block -> ItemStack(block.asItem()) }
                     .toList())
-
+                entries.addAll(Registries.ENCHANTMENT.stream()
+                    .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
+                    .map { enchant -> SpellScrollItem.createSpellScroll(enchant as ScepterAugment) }
+                    .toList()
+                )
             }.build())
     }
 
