@@ -25,23 +25,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_blazing_gem",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_sparking_gem"
-
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_brutal_gem",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_lethal_gem"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_healers_gem",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_inquisitive_gem"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_mystical_gem",
+      "recipe": "amethyst_imbuement:crafting/gem_dust_from_aspect_gem",
       "recipe2": "amethyst_imbuement:crafting/gem_dust_from_spell_scroll"
     }
   ]
