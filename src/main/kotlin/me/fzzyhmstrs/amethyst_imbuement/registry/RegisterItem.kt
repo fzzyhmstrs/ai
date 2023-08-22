@@ -8,7 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
-import me.fzzyhmstrs.amethyst_imbuement.scepter.DebugAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.DebugAugment
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
