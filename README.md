@@ -14,7 +14,7 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 
 ### Spell Update Progress 15/73
 
-### Alpha Spells Progress 70/73
+### Alpha Spells Progress 73/73
 
 /*
 Checklist
@@ -46,6 +46,9 @@ Checklist
   - count? (affects some things like summon count and projectile count)
 - sound and particles
 */
+
+### Major task List
+1.Complete AugmentEffect modification layer
 
 ### TODO List
 | Task                                                                         | Status      |
