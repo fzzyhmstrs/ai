@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:imbuing_table",
+"recipe": "amethyst_imbuement:crafting/imbuing_table",
 "text": "更多详细信息：$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)附魔相关$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)注魔相关$()"
 },
 {

@@ -9,7 +9,7 @@
 	},
 	{            
 		"type": "patchouli:crafting",
-		"recipe": "amethyst_imbuement:glowing_fragment",
+		"recipe": "amethyst_imbuement:crafting/glowing_fragment",
 		"text": "$(o)A shard of an exceptionally brilliant diamond. This fragment glows with inner potential.$()"
 	}
 ]

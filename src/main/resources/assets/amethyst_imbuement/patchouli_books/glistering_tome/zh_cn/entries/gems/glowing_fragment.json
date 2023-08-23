@@ -9,7 +9,7 @@
 	},
 	{            
 		"type": "patchouli:crafting",
-		"recipe": "amethyst_imbuement:glowing_fragment",
+		"recipe": "amethyst_imbuement:crafting/glowing_fragment",
 		"text": "$(o)一块特别的璀璨钻石碎片。这个碎片内里散发着潜能。$()"
 	}
 ]

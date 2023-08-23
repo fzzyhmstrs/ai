@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:crystal_altar"
+"recipe": "amethyst_imbuement:crafting/crystal_altar"
 }
 ]
 }

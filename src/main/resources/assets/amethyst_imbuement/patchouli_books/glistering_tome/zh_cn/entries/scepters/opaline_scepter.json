@@ -10,7 +10,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:opaline_scepter"
+"recipe": "amethyst_imbuement:crafting/opaline_scepter"
 }
 ]
 }

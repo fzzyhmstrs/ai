@@ -9,13 +9,13 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:shimmering_helmet",
-"recipe2": "amethyst_imbuement:shimmering_chestplate"
+"recipe": "amethyst_imbuement:crafting/shimmering_helmet",
+"recipe2": "amethyst_imbuement:crafting/shimmering_chestplate"
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:shimmering_leggings",
-"recipe2": "amethyst_imbuement:shimmering_boots"
+"recipe": "amethyst_imbuement:crafting/shimmering_leggings",
+"recipe2": "amethyst_imbuement:crafting/shimmering_boots"
 }
 ]
 }

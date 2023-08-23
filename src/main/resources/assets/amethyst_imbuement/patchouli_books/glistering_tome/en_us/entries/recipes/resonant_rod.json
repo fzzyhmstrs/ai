@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:resonant_rod"
+      "recipe": "amethyst_imbuement:crafting/resonant_rod"
     }
   ]
 }

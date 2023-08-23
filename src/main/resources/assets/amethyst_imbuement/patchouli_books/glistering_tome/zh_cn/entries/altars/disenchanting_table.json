@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:disenchanting_table"
+"recipe": "amethyst_imbuement:crafting/disenchanting_table"
 },
 {
 "type": "patchouli:multiblock",

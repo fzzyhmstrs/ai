@@ -9,14 +9,14 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:copper_headband",
-"recipe2": "amethyst_imbuement:copper_amulet"
+"recipe": "amethyst_imbuement:crafting/copper_headband",
+"recipe2": "amethyst_imbuement:crafting/copper_amulet"
 },
 {
 "type": "patchouli:crafting",
 "anchor": "copper_ward_recipe",
-"recipe": "amethyst_imbuement:copper_ring",
-"recipe2": "amethyst_imbuement:copper_ward"
+"recipe": "amethyst_imbuement:crafting/copper_ring",
+"recipe2": "amethyst_imbuement:crafting/copper_ward"
 }
 ]
 }

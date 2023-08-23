@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:imbuing_table",
+"recipe": "amethyst_imbuement:crafting/imbuing_table",
 "text": "More detailed information:$(br2)$(l:amethyst_imbuement:altars/imbuing_table#enchant_info)Enchanting Info$()$(br)$(l:amethyst_imbuement:altars/imbuing_table#imbue_info)Imbuing Info$()"
 },
 {

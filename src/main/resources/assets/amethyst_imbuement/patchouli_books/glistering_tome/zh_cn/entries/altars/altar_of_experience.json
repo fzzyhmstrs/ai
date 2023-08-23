@@ -9,7 +9,7 @@
 },
 {
 "type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:altar_of_experience"
+"recipe": "amethyst_imbuement:crafting/altar_of_experience"
 },
 {
 "type": "patchouli:multiblock",
