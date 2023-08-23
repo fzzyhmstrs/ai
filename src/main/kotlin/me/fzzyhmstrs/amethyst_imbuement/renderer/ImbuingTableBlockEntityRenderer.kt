@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.RenderLayer

@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.ImbuingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import net.minecraft.block.BlockState

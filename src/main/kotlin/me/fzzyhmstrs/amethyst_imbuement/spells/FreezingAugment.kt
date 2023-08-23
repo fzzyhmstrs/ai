@@ -7,7 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.FreezingEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.spell.FreezingEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -18,12 +18,12 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,6){
+class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,11){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
             .withDuration(230,50,0)
-            .withDamage(2.9F,0.1f)
+            .withDamage(3.9F,0.1f)
             .withRange(3.8,0.2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

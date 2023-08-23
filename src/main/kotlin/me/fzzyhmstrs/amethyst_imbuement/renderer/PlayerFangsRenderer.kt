@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.PlayerFangsEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlayerFangsEntity
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
