@@ -58,11 +58,8 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        val hamsters = HamsterVariant.HAMSTERS.indexedEntries
-        if (hamsters.size() > 0){
-            val hamster = hamsters[AI.aiRandom().nextInt(hamsters.size())]?.value()?:return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
-            setVariant(hamster)
-        }
+        val hamster = HamsterVariant.randomVariant(world.random) ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        setVariant(hamster)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
