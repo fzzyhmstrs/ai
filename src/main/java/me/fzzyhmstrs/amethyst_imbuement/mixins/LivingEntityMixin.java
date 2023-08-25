@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import me.fzzyhmstrs.amethyst_imbuement.augment.ShieldingAugment;
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem;
@@ -27,14 +26,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -51,7 +49,9 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
+    @Unique
     private long lastTime = 0;
+    @Unique
     private DamageSource damageSource;
 
     @Shadow public abstract int getArmor();
@@ -131,12 +131,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "damage", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "damage", at = @At(value = "HEAD"))
     private void amethyst_imbuement_getDamageSourceForShield(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.getWorld().random, (LivingEntity) (Object) this, source)){
+        /*if (ShieldingAugment.ShieldingObject.damageIsBlocked(this.getWorld().random, (LivingEntity) (Object) this, source)){
             this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.getWorld().random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
-        }
+        }*/
         damageSource = source;
     }
 

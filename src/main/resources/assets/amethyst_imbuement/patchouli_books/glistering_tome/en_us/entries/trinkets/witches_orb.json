@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The mesmerizing witches orb is many witches first steps into crafting a magical offhand bauble. Simple to craft, they offer a single powerful modifier that augments your scepter spells the same as any modifiers directly affixed to the scepter itself. Great for early-mid game augmentation of your spellcasting, it is recommended to upgrade to the much more involved $(l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus$() once you have more resources."
+      "text": "The mesmerizing witches orb is many witches first steps into crafting a magical offhand bauble. Simple to craft, they offer a spell damage boost and a single powerful modifier that augments your spells the same as any modifiers on the scepter itself. Great for early-mid game augmentation of your spellcasting, it is recommended to upgrade to the much more involved $(l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus$() once you have more resources.$(br2)Innate Attribute: +7.5% Spell Damage"
     },
     {
     "type": "patchouli:spotlight",

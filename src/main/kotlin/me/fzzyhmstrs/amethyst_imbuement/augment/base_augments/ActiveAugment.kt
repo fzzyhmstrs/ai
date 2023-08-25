@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractActiveAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
@@ -30,13 +30,11 @@ open class ActiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSl
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.isOf(RegisterTool.TOTEM_OF_AMETHYST))
+        return stack.isIn(RegisterTag.TOTEMS_TAG)
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        val list = mutableListOf<ItemStack>()
-        list.add(ItemStack(RegisterTool.TOTEM_OF_AMETHYST,1))
-        return list
+        return Registries.ITEM.iterateEntries(RegisterTag.TOTEMS_TAG).map { it.value().defaultStack }.toMutableList()
     }
 
 }

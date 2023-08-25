@@ -2,7 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractPassiveAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
@@ -25,19 +25,13 @@ open class PassiveAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentS
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is AbstractAugmentJewelryItem) || (stack.isOf(RegisterTool.TOTEM_OF_AMETHYST)) || (stack.isOf(RegisterTool.IMBUED_WARD))
+        return stack.item is AbstractAugmentJewelryItem || stack.isIn(RegisterTag.TOTEMS_TAG) || stack.isIn(RegisterTag.WARDS_TAG)
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        val list = mutableListOf<ItemStack>()
-        val entries = Registries.ITEM.indexedEntries
-        list.add(ItemStack(RegisterTool.TOTEM_OF_AMETHYST,1))
-        for (entry in entries){
-            val item = entry.value()
-            if (item is AbstractAugmentJewelryItem){
-                list.add(ItemStack(item,1))
-            }
-        }
+        val list = Registries.ITEM.iterateEntries(RegisterTag.TOTEMS_TAG).map { it.value().defaultStack }.toMutableList()
+        list.addAll(Registries.ITEM.iterateEntries(RegisterTag.WARDS_TAG).map { it.value().defaultStack })
+        list.addAll(Registries.ITEM.stream().filter { it is AbstractAugmentJewelryItem }.map { it.defaultStack }.toList())
         return list
     }
 }

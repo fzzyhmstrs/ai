@@ -1,0 +1,22 @@
+{    
+"name": "Copper Jewelry",    
+"icon": "amethyst_imbuement:copper_ring",    
+"category": "amethyst_imbuement:trinkets",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Steel jewelry is a base set of jewelry for the more powerful $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(). Steel Jewelry offers a modest armor bonus, stacking with each piece worn. There are four pieces of base jewelry:$(li)$(#b0b)Steel Headband$()$(li)$(#b0b)Steel Amulet$()$(li)$(#b0b)Steel Ring$()$(li)$(#b0b)Steel Ward$() (Usable as a shield)"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/steel_headband",
+"recipe2": "amethyst_imbuement:crafting/steel_amulet"
+},
+{
+"type": "patchouli:crafting",
+"anchor": "copper_ward_recipe",
+"recipe": "amethyst_imbuement:crafting/steel_ring",
+"recipe2": "amethyst_imbuement:crafting/steel_ward"
+}
+]
+}

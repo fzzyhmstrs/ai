@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:steel_ingot"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.steely_dan"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.steely_dan.desc"
+	},
+	"frame": "goal"
+},
+"criteria":{
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:steel_ingot"
+					]
+				}
+			]
+		}
+	}
+}
+}

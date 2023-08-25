@@ -125,7 +125,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @WrapOperation(method = "damageShield", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z"))
     private boolean amethyst_imbuement_damageWards(ItemStack instance, Item item, Operation<Boolean> operation){
-        return operation.call(instance,item) || instance.isIn(RegisterTag.INSTANCE.getBASIC_WARDS_TAG()) || instance.isOf(RegisterTool.INSTANCE.getIMBUED_WARD());
+        return operation.call(instance,item) || instance.isIn(RegisterTag.INSTANCE.getALL_WARDS_TAG());
     }
 
     @Inject(method = "onKilledOther", at = @At(value = "HEAD"))

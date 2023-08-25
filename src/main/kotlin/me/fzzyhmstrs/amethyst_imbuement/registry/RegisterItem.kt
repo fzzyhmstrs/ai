@@ -72,19 +72,19 @@ object RegisterItem {
     val BRUTAL_GEM = register(BrutalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"brutal_gem")
     val MYSTICAL_GEM = register(MysticalGemItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"mystical_gem")
     val GLOWING_FRAGMENT = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_MANA_COST,
-        EntityAttributeModifier(UUID.fromString("38ea2c82-ce89-11ed-afa1-0242ac120002"),"glowing_modifier",0.02,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("38ea2c82-ce89-11ed-afa1-0242ac120002"),"glowing_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"glowing_fragment")
     val BRILLIANT_DIAMOND = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_MANA_COST,
-        EntityAttributeModifier(UUID.fromString("402ea570-c404-11ed-afa1-0242ac120002"),"brilliant_modifier",0.06,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ea570-c404-11ed-afa1-0242ac120002"),"brilliant_modifier",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)).withGlint(),"brilliant_diamond")
     val ACCURSED_FIGURINE = register(SpellcastersReagentFlavorItem(RegisterAttribute.DAMAGE_MULTIPLICATION,
         EntityAttributeModifier(UUID.fromString("57ac057e-c505-11ed-afa1-0242ac120002"),"accursed_modifier",0.1,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"accursed_figurine")
     val MALACHITE_FIGURINE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DURATION,
-        EntityAttributeModifier(UUID.fromString("402ebf88-c404-11ed-afa1-0242ac120002"),"malachite_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ebf88-c404-11ed-afa1-0242ac120002"),"malachite_modifier",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"malachite_figurine")
     val RESONANT_ROD = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
-        EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM)),"resonant_rod")
     //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()),"survey_map")
     val HEARTSTONE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
@@ -92,14 +92,14 @@ object RegisterItem {
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).withGlint(),"heartstone")
     val IRIDESCENT_ORB = register(CustomFlavorItem(FabricItemSettings().rarity(Rarity.UNCOMMON)),"iridescent_orb")
     val LUSTROUS_SPHERE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
-        EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         FabricItemSettings().rarity(Rarity.RARE)).withGlint(),"lustrous_sphere")
     val KNOWLEDGE_POWDER = register(SpellcastersReagentFlavorItem(RegisterAttribute.PLAYER_EXPERIENCE,
         EntityAttributeModifier(UUID.fromString("72321934-ccc0-11ed-afa1-0242ac120002"),"knowledge_modifier",0.05,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM)),"knowledge_powder")
     val XP_BUSH_SEED = register(AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings()),"xp_bush_seed")
     val GOLDEN_HEART = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
-        EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",0.1,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
+        EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",0.125,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"golden_heart")
     val CRYSTALLINE_HEART = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withGlint(),"crystalline_heart") //item is custom for flavor text
     val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(AI.identity("book_of_lore")),"book_of_lore")

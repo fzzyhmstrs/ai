@@ -15,10 +15,12 @@ open class EquipmentAugment(weight: Rarity, mxLvl: Int = 1, target: EnchantmentT
     }
 
     override fun canAccept(other: Enchantment?): Boolean {
-        return super.canAccept(other) || ((Registries.ENCHANTMENT.getId(other) == Registries.ENCHANTMENT.getId(this) && this.maxLevel > 1))
+        return super.canAccept(other) || ((Registries.ENCHANTMENT.getId(other) == id && this.maxLevel > 1))
     }
 
     override fun checkEnabled(): Boolean{
         return AiConfig.trinkets.enabledAugments.getOrDefault(id.toString(),true)
     }
+
+
 }

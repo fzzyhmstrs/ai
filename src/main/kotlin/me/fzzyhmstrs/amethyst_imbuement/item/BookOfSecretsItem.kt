@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
@@ -18,7 +19,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-class BookOfMythosItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge {
+class BookOfSecretsItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge {
     override val loreTier: LoreTier = SECRET_TIER
     override val bindingUV: Pair<Int, Int> = Pair(81,184)
 

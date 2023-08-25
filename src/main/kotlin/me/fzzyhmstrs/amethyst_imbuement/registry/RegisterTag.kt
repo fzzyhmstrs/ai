@@ -23,7 +23,6 @@ object RegisterTag {
     val STEEL_BLOCKS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier("c","steel_blocks"))
     val FOCUS_REAGENTS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"focus_reagents"))
     val ASPECT_GEMS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"aspect_gems"))
-    val BASIC_WARDS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"basic_wards"))
     val PILLARS_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
     val PILLARS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
     val SHINE_LIGHTS_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"shine_lights"))
@@ -44,6 +43,14 @@ object RegisterTag {
     val ALL_FURY_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"all_fury_scepters"))
     val ALL_WIT_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"all_wit_scepters"))
     val ALL_GRACE_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"all_grace_scepters"))
-    
+
+    val HEADBANDS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"headbands"))
+    val AMULETS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"amulets"))
+    val RINGS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"rings"))
+    val TOTEMS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"totems"))
+    val WARDS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"wards"))
+    val ALL_WARDS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"all_wards"))
+
+    fun registerAll(){}
 
 }

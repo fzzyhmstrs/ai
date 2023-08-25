@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:copper_ward",
+    "amethyst_imbuement:steel_ward",
+    "#amethyst_imbuement:wards"
+  ]
+}

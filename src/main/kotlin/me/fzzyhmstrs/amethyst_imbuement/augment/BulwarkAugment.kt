@@ -2,11 +2,11 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.item.ShieldItem
 import net.minecraft.registry.Registries
 
 class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
@@ -15,20 +15,12 @@ class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
         return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
     }
 
-    override fun acceptableItemStacks(): MutableList<ItemStack> {
-        val list = mutableListOf<ItemStack>()
-        val entries = Registries.ITEM.indexedEntries
-        for (entry in entries){
-            val item = entry.value()
-            if (item is ShieldItem){
-                list.add(ItemStack(item,1))
-            }
-        }
-        return list
+    override fun isAcceptableItem(stack: ItemStack): Boolean {
+        return stack.isIn(ConventionalItemTags.SHIELDS)
     }
 
-    override fun isAcceptableItem(stack: ItemStack): Boolean {
-        return (stack.item is ShieldItem)
+    override fun acceptableItemStacks(): MutableList<ItemStack> {
+        return Registries.ITEM.iterateEntries(ConventionalItemTags.SHIELDS).map { it.value().defaultStack }.toMutableList()
     }
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {

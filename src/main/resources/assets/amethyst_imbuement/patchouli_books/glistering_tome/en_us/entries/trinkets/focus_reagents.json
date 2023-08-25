@@ -9,15 +9,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(l:amethyst_imbuement:gems/tigers_eye)Tigers Eye$(): +15% Knockback Resistance$(li)$(l:amethyst_imbuement:gems/energetic_opal)Energetic Opal$(): +3% Movement Speed$(li)$(l:amethyst_imbuement:gems/glowing_fragment)Glowing Fragment$(): -2% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$(): -6% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/accursed_figurine)Accursed Figurine$(): +10% Damage Taken (This is a negative attribute, the holder takes the additional damage)$(li)$(l:amethyst_imbuement:gems/malachite_figurine)Malachite Figurine$(): +5% Spell Effect Duration"
+      "text": "$(li)$(l:amethyst_imbuement:gems/tigers_eye)Tigers Eye$(): +15% Knockback Resistance$(li)$(l:amethyst_imbuement:gems/energetic_opal)Energetic Opal$(): +3% Movement Speed$(li)$(l:amethyst_imbuement:gems/glowing_fragment)Glowing Fragment$(): -3% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$(): -7.5% Spell Mana Cost$(li)$(l:amethyst_imbuement:gems/accursed_figurine)Accursed Figurine$(): +10% Damage Taken (This is a negative attribute, the holder takes the additional damage)$(li)$(l:amethyst_imbuement:gems/malachite_figurine)Malachite Figurine$(): +7.5% Spell Effect Duration"
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(l:amethyst_imbuement:recipes/resonant_rod)Resonant Rod$(): +3% Spell Damage$(li)$(l:amethyst_imbuement:gems/heartstone)Heartstone$(): +1 Spell Effect Amplifier$(li)$(l:amethyst_imbuement:gems/lustrous_sphere)Lustrous Sphere$(): +5% Spell Level$(li)$(l:amethyst_imbuement:imbuing/knowledge_powder)Knowledge Powder$(): +5% Player Experience Gain$(li)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Golden Heart$(): +10% Spell Range and AOE$(li)$(l:amethyst_imbuement:trinkets/copper_jewelry#copper_ward_recipe)Copper Ward$(): +2.5% Shielding Chance$(li)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Ward$(): +5% Shielding Chance"
+      "text": "$(li)$(l:amethyst_imbuement:recipes/resonant_rod)Resonant Rod$(): +5% Spell Damage$(li)$(l:amethyst_imbuement:gems/heartstone)Heartstone$(): +1 Spell Effect Amplifier$(li)$(l:amethyst_imbuement:gems/lustrous_sphere)Lustrous Sphere$(): +7.5% Spell Level$(li)$(l:amethyst_imbuement:imbuing/knowledge_powder)Knowledge Powder$(): +5% Player Experience Gain$(li)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Golden Heart$(): +12.5% Spell Range and AOE$(li)$(l:amethyst_imbuement:trinkets/copper_jewelry#copper_ward_recipe)Copper Ward$(): +2.5% Shielding Chance$(li)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Steel Ward$(): +1.25 Armor"
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(l:amethyst_imbuement:imbuing/warding_candle)Warding Candle$(): +0.5 Armor Toughness$(li)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Block of Steel$(): +1 Armor$(li)$(l:amethyst_imbuement:recipes/recipes#beryl_copper_block)Block of Beryllium Copper$(): +5% Attack Speed$(li)$(l:amethyst_imbuement:recipes/enhancing#enhancing_glistening_ice)Glistening Ice$(): -3% Spell Cooldown"
+      "text": "$(li)$(l:amethyst_imbuement:imbuing/warding_candle)Warding Candle$(): +0.5 Armor Toughness$(li)$(l:amethyst_imbuement:recipes/recipes#golden_heart)Block of Steel$(): +0.75 Armor$(li)$(l:amethyst_imbuement:recipes/recipes#beryl_copper_block)Block of Beryllium Copper$(): +5% Attack Speed$(li)$(l:amethyst_imbuement:recipes/enhancing#enhancing_glistening_ice)Glistening Ice$(): -3.5% Spell Cooldown"
     }
   ]
 }

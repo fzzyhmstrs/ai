@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:beryl_copper_ingot"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.berylilliant"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.berylilliant.desc"
+	},
+	"frame": "goal"
+},
+"criteria":{
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:beryl_copper_ingot"
+					]
+				}
+			]
+		}
+	}
+}
+}

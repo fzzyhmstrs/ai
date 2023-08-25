@@ -15,7 +15,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ExperienceOrbEntity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable

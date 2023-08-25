@@ -4,7 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.item.*
+import net.minecraft.item.AxeItem
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 
 class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl, EnchantmentTarget.WEAPON, *slot) {
@@ -24,11 +25,13 @@ class CrystallineAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
         val list = mutableListOf<ItemStack>()
-        val entries = Registries.ITEM.indexedEntries
         list.addAll(super.acceptableItemStacks().asIterable())
-        for (entry in entries){
-            val item = entry.value()
-            if (item is AxeItem || item is CrossbowItem || item is TridentItem || item is BowItem){
+        for (item in Registries.ITEM){
+            if ((EnchantmentTarget.CROSSBOW.isAcceptableItem(item) ||
+                        EnchantmentTarget.TRIDENT.isAcceptableItem(item) ||
+                        EnchantmentTarget.BOW.isAcceptableItem(item) ||
+                        (item is AxeItem) ||
+                        EnchantmentTarget.WEAPON.isAcceptableItem(item))){
                 list.add(ItemStack(item,1))
             }
         }

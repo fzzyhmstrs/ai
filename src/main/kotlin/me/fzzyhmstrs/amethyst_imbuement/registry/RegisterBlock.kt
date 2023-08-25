@@ -43,7 +43,7 @@ object RegisterBlock {
     val STEEL_BLOCK = Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["steel_block"] = it }
     val STEEL_BLOCK_ITEM = SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
-        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.8,EntityAttributeModifier.Operation.ADDITION),
+        EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.75,EntityAttributeModifier.Operation.ADDITION),
         STEEL_BLOCK,
         FabricItemSettings()
     )
@@ -68,7 +68,7 @@ object RegisterBlock {
     val GLISTENING_ICE_ITEM = SpellcastersReagentBlockItem(
         RegisterAttribute.SPELL_COOLDOWN,
         EntityAttributeModifier(
-            UUID.fromString("102d4ad8-c5e5-11ed-afa1-0242ac120002"),"glistening_modifier",0.03,
+            UUID.fromString("102d4ad8-c5e5-11ed-afa1-0242ac120002"),"glistening_modifier",0.035,
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         GLISTENING_ICE,
         FabricItemSettings()
