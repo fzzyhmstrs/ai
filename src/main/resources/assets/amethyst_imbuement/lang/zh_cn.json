@@ -97,7 +97,7 @@
 	"amethyst_imbuement.advancement.path_lethality": "致命之道",
 	"amethyst_imbuement.advancement.path_lethality.desc": "将二级愤怒之杖升级为死之触",
 	"amethyst_imbuement.advancement.path_lustre": "光辉之道",
-	"amethyst_imbuement.advancement.path_lustre.desc": "注魔一根光辉法杖，几乎完全越过特化升级之道", 
+	"amethyst_imbuement.advancement.path_lustre.desc": "注魔一根光辉法杖，几乎完全越过特化升级之道",
 	"amethyst_imbuement.advancement.path_missed": "失遇之道",
 	"amethyst_imbuement.advancement.path_missed.desc": "注魔一根虹彩法杖，不开启特化升级之道",
 	"amethyst_imbuement.advancement.path_redemption": "救赎之道",
@@ -116,7 +116,7 @@
 	"amethyst_imbuement.advancement.scepter_opaline.desc": "用欧泊法杖施放法术",
 	"amethyst_imbuement.advancement.slice_disease": "斩击还是染疾",
 	"amethyst_imbuement.advancement.slice_disease.desc": "循致命之道，注魔一根二级法杖",
-	"amethyst_imbuement.advancement.totem":"图腾？真不熟！",
+	"amethyst_imbuement.advancement.totem": "图腾？真不熟！",
 	"amethyst_imbuement.advancement.totem.desc": "制作紫水晶图腾",
 	"amethyst_imbuement.advancement.trinketeer": "这都能附魔？？",
 	"amethyst_imbuement.advancement.trinketeer.desc": "为一件注魔珠宝添加强化",
@@ -227,7 +227,7 @@
 	"item.amethyst_imbuement.book_of_mythos.flavor": "里面藏着何等古老的知识……？",
 	"item.amethyst_imbuement.book_of_mythos.flavor.desc": "副手拿着法杖以提升开出法杖相关法术的几率",
 	"item.amethyst_imbuement.glistering_tome": "闪耀魔典",
-	"item.amethyst_imbuement.glistering_tome.landing_text":"欢迎来到$(o)紫晶魔艺$()，一个关于水晶和其他物件内在魔力的mod！为物品注入强大的能力，制作高级的武器。使用法杖来施展一众或进攻或防御的法术$(br2)如果您是新手，请参阅$(l)$(#490)$(l:amethyst_imbuement:starter_guide)入门指南$()章节",
+	"item.amethyst_imbuement.glistering_tome.landing_text": "欢迎来到$(o)紫晶魔艺$()，一个关于水晶和其他物件内在魔力的mod！为物品注入强大的能力，制作高级的武器。使用法杖来施展一众或进攻或防御的法术$(br2)如果您是新手，请参阅$(l)$(#490)$(l:amethyst_imbuement:starter_guide)入门指南$()章节",
 	"item.amethyst_imbuement.mana_potion": "魔力药水",
 	"item.amethyst_imbuement.mana_potion.effect.empty": "魔力药水",
 	"item.amethyst_imbuement.mana_potion.tooltip1": "恢复法杖及其他魔法物品",
@@ -564,7 +564,7 @@
 	"emi.category.amethyst_imbuement.imbuing_table": "注魔",
 	"emi.category.amethyst_imbuement.crystal_altar": "强化",
 	"augment_damage.check_can_use": "耐久不足无法使用强化！",
-	"augment_damage.escape.check_can_use":"耐久不足无法逃脱！",
+	"augment_damage.escape.check_can_use": "耐久不足无法逃脱！",
 	"augment_damage.guardian.check_can_use": "耐久不足无法召唤傀儡！",
 	"augment_damage.burnout": "强化已耗尽！： ",
 	"augment_damage.angelic.burnout": "天使祝福强化已耗尽！",
@@ -577,7 +577,7 @@
 	"augment_damage.damage": "物品魔力不足！",
 	"scepter.modifier.amethyst_imbuement:furious": "愤怒",
 	"scepter.modifier.amethyst_imbuement:enraged": "暴怒",
-		"scepter.modifier.amethyst_imbuement:witty": "智慧",
+	"scepter.modifier.amethyst_imbuement:witty": "智慧",
 	"scepter.modifier.amethyst_imbuement:genius": "天才",
 	"scepter.modifier.amethyst_imbuement:graceful": "典雅",
 	"scepter.modifier.amethyst_imbuement:elegant": "优雅",
@@ -758,7 +758,4 @@
 	"enchantment_lore.amethyst_imbuement:teleport.description": "传送\n\n最大等级：I\n\n法术派系：智慧\n\n投掷一颗末影珍珠",
 	"enchantment_lore.amethyst_imbuement:withering_bolt.description": "凋灵击\n\n最大等级：V\n\n法术派系：愤怒\n\n向敌人发射一颗凋灵头颅",
 	"enchantment_lore.amethyst_imbuement:zap.description": "闪电冲击\n\n最大等级：XI\n\n法术派系：愤怒\n\n用闪电劈击一条线上的敌人"
-	
-	
-	
 }
