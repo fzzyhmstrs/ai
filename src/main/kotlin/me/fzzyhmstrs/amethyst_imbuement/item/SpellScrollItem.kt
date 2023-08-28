@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.item.TooltipContext

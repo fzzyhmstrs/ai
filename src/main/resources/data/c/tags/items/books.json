@@ -3,6 +3,7 @@
   "values": [
     "amethyst_imbuement:book_of_lore",
 	"amethyst_imbuement:book_of_mythos",
+    "amethyst_imbuement:book_of_tales",
     {
       "required": false,
       "id": "amethyst_imbuement:glistering_tome"

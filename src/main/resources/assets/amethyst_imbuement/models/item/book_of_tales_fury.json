@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "amethyst_imbuement:item/book_of_tales_fury"
+  }
+}

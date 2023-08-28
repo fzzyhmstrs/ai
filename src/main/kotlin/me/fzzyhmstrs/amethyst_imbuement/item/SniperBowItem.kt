@@ -22,7 +22,7 @@ import net.minecraft.world.World
 import net.minecraft.util.TypedActionResult as TypedActionResult1
 
 @Suppress("ObjectPropertyName", "PrivatePropertyName")
-class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
+open class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
     private val CHARGED_PROJECTILES_KEY = "ChargedProjectiles"
     private var charged = false
     private var loaded = false
@@ -64,7 +64,7 @@ class SniperBowItem(settings: Settings) :  CrossbowItem(settings) {
         }
     }
 
-    private fun getSpeed(stack: ItemStack): Float {
+    protected open fun getSpeed(stack: ItemStack): Float {
         val i = EnchantmentHelper.getLevel(RegisterEnchantment.DEADLY_SHOT, stack)
         return if (hasProjectile(stack, Items.FIREWORK_ROCKET)) {
             RegisterEnchantment.DEADLY_SHOT.getSpeed(i,firework = true,sniper = true)

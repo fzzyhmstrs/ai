@@ -5,7 +5,7 @@ import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.BookOfKnowledge
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
@@ -55,9 +55,9 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
             return
         }
         tooltipList = list
-        val augId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str())).toString()
-        bookmarkUV = AugmentHelper.getAugmentType(augId).uv()
-        val recipeId = augId + "_imbuing"
+        val augId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str()))
+        bookmarkUV = AugmentHelper.getAugmentType(augId.toString()).uv()
+        val recipeId = augId.namespace + ":imbuing/" + augId.path + "_imbuing"
         val recipeCheck = client?.world?.recipeManager?.get(Identifier(recipeId))
         if (recipeCheck == null){
             this.close()

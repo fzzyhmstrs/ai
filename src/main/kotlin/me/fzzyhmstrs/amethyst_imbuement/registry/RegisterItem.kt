@@ -7,6 +7,10 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfLoreItem
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.item.book.GlisteringTomeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.DebugAugment
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
@@ -102,9 +106,14 @@ object RegisterItem {
         EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",0.125,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"golden_heart")
     val CRYSTALLINE_HEART = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withGlint(),"crystalline_heart") //item is custom for flavor text
-    val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8)).withFlavorDefaultPath(AI.identity("book_of_lore")),"book_of_lore")
-    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withFlavorDefaultPath(AI.identity("book_of_mythos")).withGlint(),"book_of_mythos")
+
+    // book and other used items
+    val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)),"book_of_lore") as CustomFlavorItem
+    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_mythos") as CustomFlavorItem
+    val BOOK_OF_TALES = register(BookOfTalesItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales") as CustomFlavorItem
     val GLISTERING_TOME = register(GlisteringTomeItem(FabricItemSettings()),"glistering_tome")
+    val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
+    val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
     val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
     val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")

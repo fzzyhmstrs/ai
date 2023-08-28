@@ -2,7 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig;
 import net.minecraft.enchantment.DamageEnchantment;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.LivingEntity;
@@ -44,7 +46,7 @@ public abstract class EnchantDamageMixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToSeven(int original){
-        return 7;
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,7);
     }
 
     @Inject(method = "getAttackDamage", at = @At(value = "HEAD"), cancellable = true)

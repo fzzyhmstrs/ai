@@ -319,6 +319,13 @@
 	"item.amethyst_imbuement.book_of_mythos": "Book of Mythos",
 	"item.amethyst_imbuement.book_of_mythos.flavor": "What ancient knowledge lies within...?",
 	"item.amethyst_imbuement.book_of_mythos.flavor.desc": "Hold a scepter in your offhand to increase chances of opening a spell relevant to that scepter",
+	"item.amethyst_imbuement.book_of_tales": "Book of Tales",
+	"item.amethyst_imbuement.book_of_tales.flavor": "What tales of bygone eras are locked within...?",
+	"item.amethyst_imbuement.book_of_tales.flavor.desc": "This needs to be unlocked by something... Hold a scepter in your offhand when opening to help get related spells.",
+	"item.amethyst_imbuement.book_of_tales.locked": "This book is locked shut. What would open it...?",
+	"item.amethyst_imbuement.glistering_key": "Glistering Key",
+	"item.amethyst_imbuement.glistering_key.flavor": "It sparkles beautifully in the light. Wonder what it unlocks...?",
+	"item.amethyst_imbuement.glistering_key.flavor.desc": "Use on unlockable blocks, or use on unlockable items by holding them in your other hand.",
 	"item.amethyst_imbuement.glistering_tome": "Glistering Tome",
 	"item.amethyst_imbuement.glistering_tome.landing_text":"Welcome to $(o)Amethyst Imbuement$(), a mod all about the innate magic within crystals and other objects! Imbue your gear with powerful abilities. Create advanced weapons. Wield magical scepters to cast an array of offensive and defensive spells.$(br2)If you are new here, check out the $(l)$(#490)$(l:amethyst_imbuement:starter_guide)Starter Guide$() section",
 	"item.amethyst_imbuement.mana_potion": "Mana Potion",
@@ -437,6 +444,21 @@
 	"enchantment.amethyst_imbuement.rain_of_thorns": "Rain of Thorns",
 	"enchantment.amethyst_imbuement.vein_miner": "Vein Miner",
 
+	"enchantment.amethyst_imbuement.heroic.desc": "Increases damage against illagers.",
+	"enchantment.amethyst_imbuement.wasting.desc": "Damaged enemies are afflicted with slowness.",
+	"enchantment.amethyst_imbuement.deadly_shot.desc": "Increases crossbow and sniper bow range and damage.",
+	"enchantment.amethyst_imbuement.puncturing.desc": "Arrows deal additional armor-piercing damage.",
+	"enchantment.amethyst_imbuement.resilience.desc": "Adds one armor point per piece per level.",
+	"enchantment.amethyst_imbuement.insight.desc": "Mobs drop additional experience when killed.",
+	"enchantment.amethyst_imbuement.lifesteal.desc": "Heals the user when attacking an enemy.",
+	"enchantment.amethyst_imbuement.decayed.desc": "Withers the target temporarily on hit.",
+	"enchantment.amethyst_imbuement.contaminated.desc": "Poisons the target temporarily on hit.",
+	"enchantment.amethyst_imbuement.cleaving.desc": "Axes deal additional damage and disable shields on hit.",
+	"enchantment.amethyst_imbuement.bulwark.desc": "Heals the user when blocking an attack.",
+	"enchantment.amethyst_imbuement.night_vision.desc": "Grants the wearer Night Vision.",
+	"enchantment.amethyst_imbuement.rain_of_thorns.desc": "On hit, arrow spawns additional arrows that radiate from the target.",
+	"enchantment.amethyst_imbuement.vein_miner.desc": "Mines multiple blocks in an area when a keybind is held.",
+
 	"enchantment.amethyst_imbuement.beast_master": "Beast Master",
 	"enchantment.amethyst_imbuement.accursed": "Accursed",
 	"enchantment.amethyst_imbuement.consecrated": "Consecrated",
@@ -471,330 +493,6 @@
 	"enchantment.amethyst_imbuement.suntouched": "Suntouched",
 	"enchantment.amethyst_imbuement.swiftness": "Swiftness",
 	"enchantment.amethyst_imbuement.undying": "Undying",
-	
-	"enchantment.amethyst_imbuement.magic_missile": "Magic Missile",
-	"enchantment.amethyst_imbuement.magic_missile.double": "Arcane Missile",
-	"enchantment.amethyst_imbuement.magic_missile.combination": "%1$s Missile",
-	"enchantment.amethyst_imbuement.magic_missile.noun": "Magic",
-	"enchantment.amethyst_imbuement.magic_missile.verb": "Imbue",
-	"enchantment.amethyst_imbuement.magic_missile.adjective": "Magical",
-	"enchantment.amethyst_imbuement.magic_missile.desc": "A simple bolt of damaging energy.",
-
-	"enchantment.amethyst_imbuement.soul_missile": "Soul Missile",
-	"enchantment.amethyst_imbuement.soul_missile.double": "Soul Blast",
-	"enchantment.amethyst_imbuement.soul_missile.combination": "%1$s Missile",
-	"enchantment.amethyst_imbuement.soul_missile.noun": "Soul",
-	"enchantment.amethyst_imbuement.soul_missile.verb": "Ensoul",
-	"enchantment.amethyst_imbuement.soul_missile.adjective": "Ensouled",
-	"enchantment.amethyst_imbuement.soul_missile.desc": "A bolt of energy that pierces armor.",
-
-	"enchantment.amethyst_imbuement.abundance": "Abundance",
-	"enchantment.amethyst_imbuement.abundance.double": "Cornucopia",
-	"enchantment.amethyst_imbuement.abundance.combination": "Bounty of %1$s",
-	"enchantment.amethyst_imbuement.abundance.noun": "Bounty",
-	"enchantment.amethyst_imbuement.abundance.verb": "Enrich",
-	"enchantment.amethyst_imbuement.abundance.adjective": "Abundance",
-	"enchantment.amethyst_imbuement.abundance.desc": "Bonemeals nearby crops and harvests when mature.",
-
-	"enchantment.amethyst_imbuement.animal_husbandry": "Animal Husbandry",
-	"enchantment.amethyst_imbuement.animal_husbandry.double": "Animal Agriculture",
-	"enchantment.amethyst_imbuement.animal_husbandry.combination": "Husbandry of %1$s",
-	"enchantment.amethyst_imbuement.animal_husbandry.noun": "Husbandry",
-	"enchantment.amethyst_imbuement.animal_husbandry.verb": "Breed",
-	"enchantment.amethyst_imbuement.animal_husbandry.adjective": "Breeding",
-	"enchantment.amethyst_imbuement.animal_husbandry.desc": "Breeds, heals, and grows nearby livestock.",
-
-	"enchantment.amethyst_imbuement.ball_lightning": "Ball Lightning",
-	"enchantment.amethyst_imbuement.ball_lightning.double": "Saint Elmos Fire",
-	"enchantment.amethyst_imbuement.ball_lightning.combination": "Ball %1$s",
-	"enchantment.amethyst_imbuement.ball_lightning.noun": "Ball Lightning",
-	"enchantment.amethyst_imbuement.ball_lightning.verb": "Electrify",
-	"enchantment.amethyst_imbuement.ball_lightning.adjective": "Lightning",
-	"enchantment.amethyst_imbuement.ball_lightning.desc": "Launches a slow-moving ball of lightning that zaps nearby enemies as it passes them.",
-
-	"enchantment.amethyst_imbuement.barrier": "Barrier",
-	"enchantment.amethyst_imbuement.barrier.double": "Fortification",
-	"enchantment.amethyst_imbuement.barrier.combination": "%1$s Barrier",
-	"enchantment.amethyst_imbuement.barrier.noun": "Barrier",
-	"enchantment.amethyst_imbuement.barrier.verb": "Fortify",
-	"enchantment.amethyst_imbuement.barrier.adjective": "Fortifying",
-	"enchantment.amethyst_imbuement.barrier.desc": "Applies absorption to the caster.",
-
-	"enchantment.amethyst_imbuement.bedazzle": "Bedazzle",
-	"enchantment.amethyst_imbuement.bedazzle.double": "Mass Charm",
-	"enchantment.amethyst_imbuement.bedazzle.combination": "En%1$s",
-	"enchantment.amethyst_imbuement.bedazzle.noun": "En%1$s",
-	"enchantment.amethyst_imbuement.bedazzle.verb": "En%1$s",
-	"enchantment.amethyst_imbuement.bedazzle.adjective": "En%1$s",
-	"enchantment.amethyst_imbuement.bedazzle.desc": "Nearby enemies stop attacking and grants Hero of the Village.",
-
-	"enchantment.amethyst_imbuement.body_swap": "Body Swap",
-	"enchantment.amethyst_imbuement.body_swap.double": "Trade Realities",
-	"enchantment.amethyst_imbuement.body_swap.combination": "%1$s Swap",
-	"enchantment.amethyst_imbuement.body_swap.noun": "Swap",
-	"enchantment.amethyst_imbuement.body_swap.verb": "Swap",
-	"enchantment.amethyst_imbuement.body_swap.adjective": "Transient",
-	"enchantment.amethyst_imbuement.body_swap.desc": "The caster swaps places with the furthest targeted mob or player.",
-
-	"enchantment.amethyst_imbuement.chickenform": "Chickenform",
-	"enchantment.amethyst_imbuement.chickenform.double": "Giga-Chickenform",
-	"enchantment.amethyst_imbuement.chickenform.combination": "%1$s Chickenform",
-	"enchantment.amethyst_imbuement.chickenform.noun": "Chicken",
-	"enchantment.amethyst_imbuement.chickenform.verb": "Feather",
-	"enchantment.amethyst_imbuement.chickenform.adjective": "Feathery",
-	"enchantment.amethyst_imbuement.chickenform.desc": "Take on the aspect of a chicken, jump high, run fast, fall slow",
-
-	"enchantment.amethyst_imbuement.cleanse": "Cleanse",
-	"enchantment.amethyst_imbuement.cleanse.double": "Purify",
-	"enchantment.amethyst_imbuement.cleanse.combination": "Purify",
-	"enchantment.amethyst_imbuement.cleanse.noun": "Purify",
-	"enchantment.amethyst_imbuement.cleanse.verb": "Purify",
-	"enchantment.amethyst_imbuement.cleanse.adjective": "Purify",
-	"enchantment.amethyst_imbuement.cleanse.desc": "Removes negative statuses and grants temporary immunity.",
-
-	"enchantment.amethyst_imbuement.comet_storm": "Comet Storm",
-	"enchantment.amethyst_imbuement.comet_storm.double": "Rain of Hellfire",
-	"enchantment.amethyst_imbuement.comet_storm.combination": "%1$s Storm",
-	"enchantment.amethyst_imbuement.comet_storm.noun": "Comet",
-	"enchantment.amethyst_imbuement.comet_storm.verb": "Enmeteor",
-	"enchantment.amethyst_imbuement.comet_storm.adjective": "Meteoric",
-	"enchantment.amethyst_imbuement.comet_storm.desc": "Summons a storm of comets to rain destruction on an area.",
-
-	"enchantment.amethyst_imbuement.create_hard_light": "Create Hard Light",
-	"enchantment.amethyst_imbuement.create_hard_light.double": "Enhanced Create Hard Light",
-	"enchantment.amethyst_imbuement.create_hard_light.combination": "Create %1$s",
-	"enchantment.amethyst_imbuement.create_hard_light.noun": "Hard Light",
-	"enchantment.amethyst_imbuement.create_hard_light.verb": "Harden",
-	"enchantment.amethyst_imbuement.create_hard_light.adjective": "Hardened",
-	"enchantment.amethyst_imbuement.create_hard_light.desc": "Materializes a block of hard light a few meters out in the direction cast. Can place blocks in midair.",
-
-	"enchantment.amethyst_imbuement.create_lava": "Create Lava",
-	"enchantment.amethyst_imbuement.create_lava.double": "Enhanced Create Lava",
-	"enchantment.amethyst_imbuement.create_lava.combination": "Create %1$s",
-	"enchantment.amethyst_imbuement.create_lava.noun": "Lava",
-	"enchantment.amethyst_imbuement.create_lava.verb": "Melt",
-	"enchantment.amethyst_imbuement.create_lava.adjective": "Magmatic",
-	"enchantment.amethyst_imbuement.create_lava.desc": "Places a lava source block.",
-
-	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
-	"enchantment.amethyst_imbuement.create_sponge.double": "Enhanced Create Sponge",
-	"enchantment.amethyst_imbuement.create_sponge.combination": "Create %1$s",
-	"enchantment.amethyst_imbuement.create_sponge.noun": "Sponge",
-	"enchantment.amethyst_imbuement.create_sponge.verb": "Sponge",
-	"enchantment.amethyst_imbuement.create_sponge.adjective": "Spongy",
-	"enchantment.amethyst_imbuement.create_sponge.desc": "Places a sponge.",
-
-	"enchantment.amethyst_imbuement.create_water": "Create Water",
-	"enchantment.amethyst_imbuement.create_water.double": "Enhanced Create Water",
-	"enchantment.amethyst_imbuement.create_water.combination": "Create %1$s",
-	"enchantment.amethyst_imbuement.create_water.noun": "Water",
-	"enchantment.amethyst_imbuement.create_water.verb": "Water",
-	"enchantment.amethyst_imbuement.create_water.adjective": "Watering",
-	"enchantment.amethyst_imbuement.create_water.desc": "Places a water source block.",
-
-	"enchantment.amethyst_imbuement.cripple": "Cripple",
-	"enchantment.amethyst_imbuement.cripple.double": "Maim",
-	"enchantment.amethyst_imbuement.cripple.combination": "Cripple and %1$s",
-	"enchantment.amethyst_imbuement.cripple.noun": "Cripple",
-	"enchantment.amethyst_imbuement.cripple.verb": "Cripple",
-	"enchantment.amethyst_imbuement.cripple.adjective": "Crippling",
-	"enchantment.amethyst_imbuement.cripple.desc": "Damages, weakens, and slows nearby targets. Has a chance to critical strike, which stuns the target.",
-
-	"enchantment.amethyst_imbuement.curse": "Curse",
-	"enchantment.amethyst_imbuement.curse.double": "Afflict",
-	"enchantment.amethyst_imbuement.curse.combination": "Curse of %1$s",
-	"enchantment.amethyst_imbuement.curse.noun": "Curse",
-	"enchantment.amethyst_imbuement.curse.verb": "Curse",
-	"enchantment.amethyst_imbuement.curse.adjective": "Cursed",
-	"enchantment.amethyst_imbuement.curse.desc": "Curses the target, increasing damage taken and reducing armor.",
-
-	"enchantment.amethyst_imbuement.dash": "Dash",
-	"enchantment.amethyst_imbuement.dash.double": "Sprint",
-	"enchantment.amethyst_imbuement.dash.combination": "%1$s Dash",
-	"enchantment.amethyst_imbuement.dash.noun": "Sprint",
-	"enchantment.amethyst_imbuement.dash.verb": "Sprint",
-	"enchantment.amethyst_imbuement.dash.adjective": "Sprint",
-	"enchantment.amethyst_imbuement.dash.desc": "Dashes the user similarly to Riptide.",
-
-	"enchantment.amethyst_imbuement.empowered_slash": "Empowered Slash",
-	"enchantment.amethyst_imbuement.empowered_slash.double": "Godly Slash",
-
-	"enchantment.amethyst_imbuement.excavate": "Excavate",
-	"enchantment.amethyst_imbuement.excavate.double": "Enhanced Excavate",
-
-	"enchantment.amethyst_imbuement.exhaust": "Exhaust",
-	"enchantment.amethyst_imbuement.exhaust.double": "Enfeeble",
-
-	"enchantment.amethyst_imbuement.fang_barrage": "Fang Barrage",
-	"enchantment.amethyst_imbuement.fang_barrage.double": "Fang Assault",
-
-	"enchantment.amethyst_imbuement.fangs": "Fangs",
-	"enchantment.amethyst_imbuement.fangs.double": "Enhanced Fangs",
-
-	"enchantment.amethyst_imbuement.fireball": "Fireball",
-	"enchantment.amethyst_imbuement.fireball.double": "Blazeball",
-
-	"enchantment.amethyst_imbuement.flamebolt": "Flamebolt",
-	"enchantment.amethyst_imbuement.flamebolt.double": "Blazebolt",
-
-	"enchantment.amethyst_imbuement.flamewave": "Flamewave",
-	"enchantment.amethyst_imbuement.flamewave.double": "Blazewave",
-
-	"enchantment.amethyst_imbuement.flare": "Flare",
-	"enchantment.amethyst_imbuement.flare.double": "Enhanced Flare",
-
-	"enchantment.amethyst_imbuement.forcefield": "Forcefield",
-	"enchantment.amethyst_imbuement.forcefield.double": "Arcane Barrier",
-
-	"enchantment.amethyst_imbuement.fortify": "Fortify",
-	"enchantment.amethyst_imbuement.fortify.double": "Reinforce",
-
-	"enchantment.amethyst_imbuement.freezing": "Frostbolt",
-	"enchantment.amethyst_imbuement.freezing.double": "Winterbolt",
-
-	"enchantment.amethyst_imbuement.gusting": "Gusting",
-	"enchantment.amethyst_imbuement.gusting.double": "Gale",
-
-	"enchantment.amethyst_imbuement.hail_storm": "Winters Grasp",
-	"enchantment.amethyst_imbuement.hail_storm.double": "Deep Freeze",
-
-	"enchantment.amethyst_imbuement.hamptertime": "Hamptertime",
-	"enchantment.amethyst_imbuement.hamptertime.double": "Hampterpocalypse",
-
-	"enchantment.amethyst_imbuement.hard_light_bridge": "Hard Light Bridge",
-	"enchantment.amethyst_imbuement.hard_light_bridge.double": "Enhanced Hard Light Bridge",
-
-	"enchantment.amethyst_imbuement.healing_wind": "Healing Wind",
-	"enchantment.amethyst_imbuement.healing_wind.double": "Vitalizing Wind",
-
-	"enchantment.amethyst_imbuement.ice_shard": "Ice Shard",
-	"enchantment.amethyst_imbuement.ice_shard.double": "Rime Shard",
-
-	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
-	"enchantment.amethyst_imbuement.ice_spikes.double": "Rime Spikes",
-
-	"enchantment.amethyst_imbuement.inspiring_song": "Inspiring Song",
-	"enchantment.amethyst_imbuement.inspiring_song.double": "Inspiring Ballad",
-
-	"enchantment.amethyst_imbuement.levitating_bullet": "Levitating Bullet",
-	"enchantment.amethyst_imbuement.levitating_bullet.double": "Levitating Bullet Storm",
-
-	"enchantment.amethyst_imbuement.lightning_bolt": "Lightning Bolt",
-	"enchantment.amethyst_imbuement.lightning_bolt.double": "Fulgurous Bolt",
-
-	"enchantment.amethyst_imbuement.lightning_storm": "Lightning Storm",
-	"enchantment.amethyst_imbuement.lightning_storm.double": "Fulgurous Storm",
-
-	"enchantment.amethyst_imbuement.magnetic_aura": "Magnetic Aura",
-	"enchantment.amethyst_imbuement.magnetic_aura.double": "Gravitational Aura",
-
-	"enchantment.amethyst_imbuement.mass_cleanse": "Mass Cleanse",
-	"enchantment.amethyst_imbuement.mass_cleanse.double": "Mass Purify",
-
-	"enchantment.amethyst_imbuement.mass_exhaust": "Mass Exhaust",
-	"enchantment.amethyst_imbuement.mass_exhaust.double": "Mass Enfeeble",
-
-	"enchantment.amethyst_imbuement.mass_fortify": "Mass Fortify",
-	"enchantment.amethyst_imbuement.mass_fortify.double": "Mass Reinforce",
-
-	"enchantment.amethyst_imbuement.mass_heal": "Mass Heal",
-	"enchantment.amethyst_imbuement.mass_heal.double": "Mass Vitalize",
-
-	"enchantment.amethyst_imbuement.mass_revivify": "Mass Revivify",
-	"enchantment.amethyst_imbuement.mass_revivify.double": "Saints Blessing",
-
-	"enchantment.amethyst_imbuement.mend_equipment": "Mend Equipment",
-	"enchantment.amethyst_imbuement.mend_equipment.double": "Repair Equipment",
-
-	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
-	"enchantment.amethyst_imbuement.mental_clarity.double": "Mental Breakthrough",
-
-	"enchantment.amethyst_imbuement.minor_heal": "Minor Heal",
-	"enchantment.amethyst_imbuement.minor_heal.double": "Vitalize",
-
-	"enchantment.amethyst_imbuement.persuade": "Persuade",
-	"enchantment.amethyst_imbuement.persuade.double": "Dominate Mind",
-
-	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
-	"enchantment.amethyst_imbuement.poultrymorph.double": "Chicken Upon Ye",
-
-	"enchantment.amethyst_imbuement.recall": "Recall",
-	"enchantment.amethyst_imbuement.recall.double": "Total Recall",
-
-	"enchantment.amethyst_imbuement.regenerate": "Regenerate",
-	"enchantment.amethyst_imbuement.regenerate.double": "Rejuvenate",
-
-	"enchantment.amethyst_imbuement.resonate": "Resonate",
-	"enchantment.amethyst_imbuement.resonate.double": "Harmonize",
-
-	"enchantment.amethyst_imbuement.shine": "Shine",
-	"enchantment.amethyst_imbuement.shine.double": "Enhanced Shine",
-
-	"enchantment.amethyst_imbuement.smiting_blow": "Smiting Blow",
-	"enchantment.amethyst_imbuement.smiting_blow.double": "Daybreak Hammer",
-
-	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
-	"enchantment.amethyst_imbuement.spectral_slash.double": "Ghostly Slash",
-
-	"enchantment.amethyst_imbuement.summon_boat": "Summon Boat",
-	"enchantment.amethyst_imbuement.summon_boat.double": "Enhanced Summon Boat",
-
-	"enchantment.amethyst_imbuement.summon_bonestorm": "Summon Bonestorm",
-	"enchantment.amethyst_imbuement.summon_bonestorm.double": "Enhanced Summon Bonestorm",
-
-	"enchantment.amethyst_imbuement.summon_chicken": "Summon Chicken",
-	"enchantment.amethyst_imbuement.summon_chicken.double": "Summon Flock",
-
-	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
-	"enchantment.amethyst_imbuement.summon_fury_totem.double": "Summon Totem of Rage",
-
-	"enchantment.amethyst_imbuement.summon_golem": "Summon Crystalline Golem",
-	"enchantment.amethyst_imbuement.summon_golem.double": "Enhanced Summon Crystalline Golem",
-
-	"enchantment.amethyst_imbuement.summon_grace_totem": "Summon Totem of Grace",
-	"enchantment.amethyst_imbuement.summon_grace_totem.double": "Summon Totem of the Saint",
-
-	"enchantment.amethyst_imbuement.summon_hamster": "Summon Hamster",
-	"enchantment.amethyst_imbuement.summon_hamster.double": "Enhanced Summon Hamster",
-
-	"enchantment.amethyst_imbuement.summon_strider": "Summon Strider",
-	"enchantment.amethyst_imbuement.summon_strider.double": "Enhanced Summon Strider",
-
-	"enchantment.amethyst_imbuement.summon_zombie": "Summon Zombie",
-	"enchantment.amethyst_imbuement.summon_zombie.double": "Call from the Grave",
-
-	"enchantment.amethyst_imbuement.survey": "Survey",
-	"enchantment.amethyst_imbuement.survey.double": "Deep Scan",
-
-	"enchantment.amethyst_imbuement.teleport": "Teleport",
-	"enchantment.amethyst_imbuement.teleport.double": "Enhanced Teleport",
-
-	"enchantment.amethyst_imbuement.torrent_of_beaks": "Torrent of Beaks",
-	"enchantment.amethyst_imbuement.torrent_of_beaks.double": "Deluge of Beaks",
-
-	"enchantment.amethyst_imbuement.weightlessness": "Weightlessness",
-	"enchantment.amethyst_imbuement.weightlessness.double": "Anti-Gravity",
-
-	"enchantment.amethyst_imbuement.withering_bolt": "Withering Bolt",
-	"enchantment.amethyst_imbuement.withering_bolt.double": "Skull of Evil",
-
-	"enchantment.amethyst_imbuement.zap": "Zap",
-	"enchantment.amethyst_imbuement.zap.double": "Electrocute",
-
-	"enchantment.amethyst_imbuement.heroic.desc": "Increases damage against illagers.",
-	"enchantment.amethyst_imbuement.wasting.desc": "Damaged enemies are afflicted with slowness.",
-	"enchantment.amethyst_imbuement.deadly_shot.desc": "Increases crossbow and sniper bow range and damage.",
-	"enchantment.amethyst_imbuement.puncturing.desc": "Arrows deal additional armor-piercing damage.",
-	"enchantment.amethyst_imbuement.resilience.desc": "Adds one armor point per piece per level.",
-	"enchantment.amethyst_imbuement.insight.desc": "Mobs drop additional experience when killed.",
-	"enchantment.amethyst_imbuement.lifesteal.desc": "Heals the user when attacking an enemy.",
-	"enchantment.amethyst_imbuement.decayed.desc": "Withers the target temporarily on hit.",
-	"enchantment.amethyst_imbuement.contaminated.desc": "Poisons the target temporarily on hit.",
-	"enchantment.amethyst_imbuement.cleaving.desc": "Axes deal additional damage and disable shields on hit.",
-	"enchantment.amethyst_imbuement.bulwark.desc": "Heals the user when blocking an attack.",
-	"enchantment.amethyst_imbuement.night_vision.desc": "Grants the wearer Night Vision.",
-	"enchantment.amethyst_imbuement.rain_of_thorns.desc": "On hit, arrow spawns additional arrows that radiate from the target.",
-	"enchantment.amethyst_imbuement.vein_miner.desc": "Mines multiple blocks in an area when a keybind is held.",
 
 	"enchantment.amethyst_imbuement.horde_master.desc": "Buffs summons and pets while the totem is active.",
 	"enchantment.amethyst_imbuement.accursed.desc": "Attackers have a chance of being cursed.",
@@ -830,63 +528,227 @@
 	"enchantment.amethyst_imbuement.suntouched.desc": "The user gains Strength and Speed during the day.",
 	"enchantment.amethyst_imbuement.swiftness.desc": "Grants the wearer Speed.",
 	"enchantment.amethyst_imbuement.undying.desc": "Totem acts like a Totem of Undying.",
+	
+	"enchantment.amethyst_imbuement.magic_missile": "Magic Missile",
+	"enchantment.amethyst_imbuement.magic_missile.desc": "A simple bolt of damaging energy.",
 
+	"enchantment.amethyst_imbuement.soul_missile": "Soul Missile",
+	"enchantment.amethyst_imbuement.soul_missile.desc": "A bolt of energy that pierces armor.",
+
+	"enchantment.amethyst_imbuement.abundance": "Abundance",
+	"enchantment.amethyst_imbuement.abundance.desc": "Bonemeals nearby crops and harvests when mature.",
+
+	"enchantment.amethyst_imbuement.animal_husbandry": "Animal Husbandry",
+	"enchantment.amethyst_imbuement.animal_husbandry.desc": "Breeds, heals, and grows nearby livestock.",
+
+	"enchantment.amethyst_imbuement.ball_lightning": "Ball Lightning",
+	"enchantment.amethyst_imbuement.ball_lightning.desc": "Launches a slow-moving ball of lightning that zaps nearby enemies as it passes them.",
+
+	"enchantment.amethyst_imbuement.barrier": "Barrier",
+	"enchantment.amethyst_imbuement.barrier.desc": "Applies absorption to the caster.",
+
+	"enchantment.amethyst_imbuement.bedazzle": "Bedazzle",
+	"enchantment.amethyst_imbuement.bedazzle.desc": "Nearby enemies stop attacking and grants Hero of the Village.",
+
+	"enchantment.amethyst_imbuement.body_swap": "Body Swap",
+	"enchantment.amethyst_imbuement.body_swap.desc": "The caster swaps places with the furthest targeted mob or player.",
+
+	"enchantment.amethyst_imbuement.chaos_bolt": "Chaos Bolt",
+	"enchantment.amethyst_imbuement.chaos_bolt.desc": "A chaotic bolt of energy that deals damage relative to the status effects the caster has.",
+
+	"enchantment.amethyst_imbuement.chickenform": "Chickenform",
+	"enchantment.amethyst_imbuement.chickenform.desc": "Take on the aspect of a chicken, jump high, run fast, fall slow",
+
+	"enchantment.amethyst_imbuement.cleanse": "Cleanse",
+	"enchantment.amethyst_imbuement.cleanse.desc": "Removes negative statuses and grants temporary immunity.",
+
+	"enchantment.amethyst_imbuement.comet_storm": "Comet Storm",
+	"enchantment.amethyst_imbuement.comet_storm.desc": "Summons a storm of comets to rain destruction on an area.",
+
+	"enchantment.amethyst_imbuement.create_hard_light": "Create Hard Light",
+	"enchantment.amethyst_imbuement.create_hard_light.desc": "Materializes a block of hard light a few meters out in the direction cast. Can place blocks in midair.",
+
+	"enchantment.amethyst_imbuement.create_lava": "Create Lava",
+	"enchantment.amethyst_imbuement.create_lava.desc": "Places a lava source block.",
+
+	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
+	"enchantment.amethyst_imbuement.create_sponge.desc": "Places a sponge.",
+
+	"enchantment.amethyst_imbuement.create_water": "Create Water",
+	"enchantment.amethyst_imbuement.create_water.desc": "Places a water source block.",
+
+	"enchantment.amethyst_imbuement.cripple": "Cripple",
+	"enchantment.amethyst_imbuement.cripple.desc": "Damages, weakens, and slows nearby targets. Has a chance to critical strike, which stuns the target.",
+
+	"enchantment.amethyst_imbuement.curse": "Curse",
+	"enchantment.amethyst_imbuement.curse.desc": "Curses the target, increasing damage taken and reducing armor.",
+
+	"enchantment.amethyst_imbuement.dash": "Dash",
+	"enchantment.amethyst_imbuement.dash.desc": "Dashes the user similarly to Riptide.",
+
+	"enchantment.amethyst_imbuement.empowered_slash": "Empowered Slash",
 	"enchantment.amethyst_imbuement.empowered_slash.desc": "A powerful energy slash attack.",
+
+	"enchantment.amethyst_imbuement.excavate": "Excavate",
 	"enchantment.amethyst_imbuement.excavate.desc": "Mines the targeted block, successfully mining higher and higher tier blocks as as the spell levels up.",
+
+	"enchantment.amethyst_imbuement.exhaust": "Exhaust",
 	"enchantment.amethyst_imbuement.exhaust.desc": "Weakens and slows the target.",
+
+	"enchantment.amethyst_imbuement.fang_barrage": "Fang Barrage",
 	"enchantment.amethyst_imbuement.fang_barrage.desc": "Summons several waves of evoker fangs.",
+
+	"enchantment.amethyst_imbuement.fangs": "Fangs",
 	"enchantment.amethyst_imbuement.fangs.desc": "Summons a row of evoker fangs.",
+
+	"enchantment.amethyst_imbuement.fireball": "Fireball",
 	"enchantment.amethyst_imbuement.fireball.desc": "Launches a fireball in the direction cast.",
+
+	"enchantment.amethyst_imbuement.flamebolt": "Flamebolt",
 	"enchantment.amethyst_imbuement.flamebolt.desc": "A fiery bolt of energy. Lights target on fire.",
+
+	"enchantment.amethyst_imbuement.flamewave": "Flamewave",
 	"enchantment.amethyst_imbuement.flamewave.desc": "A rapid-fire assault of flaming bolts. Lights targets on fire.",
+
+	"enchantment.amethyst_imbuement.flare": "Flare",
 	"enchantment.amethyst_imbuement.flare.desc": "Launches off a random firework.",
+
+	"enchantment.amethyst_imbuement.forcefield": "Forcefield",
 	"enchantment.amethyst_imbuement.forcefield.desc": "Places a forcefield the user can pass through but harmful entities can't.",
+
+	"enchantment.amethyst_imbuement.fortify": "Fortify",
 	"enchantment.amethyst_imbuement.fortify.desc": "Grants Strength and Resistance to the caster or target.",
+
+	"enchantment.amethyst_imbuement.freezing": "Frostbolt",
 	"enchantment.amethyst_imbuement.freezing.desc": "A frosty bolt of energy that chills the target and nearby enemies.",
+
+	"enchantment.amethyst_imbuement.gusting": "Gusting",
 	"enchantment.amethyst_imbuement.gusting.desc": "Knocks back all enemies in a swath in front of the user.",
+
+	"enchantment.amethyst_imbuement.hail_storm": "Winters Grasp",
 	"enchantment.amethyst_imbuement.hail_storm.desc": "Damages and slows nearby enemies over time, and randomly spawns snow",
+
+	"enchantment.amethyst_imbuement.hamptertime": "Hamptertime",
 	"enchantment.amethyst_imbuement.hamptertime.desc": "Summons a horde of hamsters to aid the caster in battle.",
+
+	"enchantment.amethyst_imbuement.hard_light_bridge": "Hard Light Bridge",
 	"enchantment.amethyst_imbuement.hard_light_bridge.desc": "Summons a row of glassy blocks in front of the user.",
+
+	"enchantment.amethyst_imbuement.healing_wind": "Healing Wind",
 	"enchantment.amethyst_imbuement.healing_wind.desc": "Bathes the caster and nearby allies in a soothing wind that heals over time.",
+
+	"enchantment.amethyst_imbuement.ice_shard": "Ice Shard",
 	"enchantment.amethyst_imbuement.ice_shard.desc": "Launches an icicle in the direction cast.",
+
+	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.desc": "Summons a row of icy fangs that damage and freeze on hit.",
+
+	"enchantment.amethyst_imbuement.inspiring_song": "Inspiring Song",
 	"enchantment.amethyst_imbuement.inspiring_song.desc": "Increases speed and jump height of the caster and nearby allies, regenerates slightly. At high levels applies a temporary death-resist.",
+
+	"enchantment.amethyst_imbuement.levitating_bullet": "Levitating Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.desc": "Bombards nearby enemies with shulker bullets.",
+
+	"enchantment.amethyst_imbuement.lightning_bolt": "Lightning Bolt",
 	"enchantment.amethyst_imbuement.lightning_bolt.desc": "Strikes a nearby target with a lightning bolt.",
+
+	"enchantment.amethyst_imbuement.lightning_storm": "Lightning Storm",
 	"enchantment.amethyst_imbuement.lightning_storm.desc": "Strikes all nearby enemies with a persistent storm of lightning.",
+
+	"enchantment.amethyst_imbuement.magnetic_aura": "Magnetic Aura",
 	"enchantment.amethyst_imbuement.magnetic_aura.desc": "Automatically picks up all nearby items continuously for a short period.",
+
+	"enchantment.amethyst_imbuement.mass_cleanse": "Mass Cleanse",
 	"enchantment.amethyst_imbuement.mass_cleanse.desc": "Removes negative status effects from nearby players and grants temporary immunity.",
+
+	"enchantment.amethyst_imbuement.mass_exhaust": "Mass Exhaust",
 	"enchantment.amethyst_imbuement.mass_exhaust.desc": "Weakens and slows all nearby enemies.",
+
+	"enchantment.amethyst_imbuement.mass_fortify": "Mass Fortify",
 	"enchantment.amethyst_imbuement.mass_fortify.desc": "Grants Strength and Resistance to nearby players.",
+
+	"enchantment.amethyst_imbuement.mass_heal": "Mass Heal",
 	"enchantment.amethyst_imbuement.mass_heal.desc": "Heals nearby players. More heal than minor heal.",
+
+	"enchantment.amethyst_imbuement.mass_revivify": "Mass Revivify",
 	"enchantment.amethyst_imbuement.mass_revivify.desc": "Regenerates, Heals, Cleanses, and grants Absorption to nearby players.",
+
+	"enchantment.amethyst_imbuement.mend_equipment": "Mend Equipment",
 	"enchantment.amethyst_imbuement.mend_equipment.desc": "Repairs damaged equipment in the users inventory.",
+
+	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.desc": "Grants the target or caster increased experience gain.",
+
+	"enchantment.amethyst_imbuement.minor_heal": "Minor Heal",
 	"enchantment.amethyst_imbuement.minor_heal.desc": "Heals caster or target. Amount healed increases with level.",
+
+	"enchantment.amethyst_imbuement.persuade": "Persuade",
 	"enchantment.amethyst_imbuement.persuade.desc": "Persuades a nearby enemy to fight for you temporarily.",
+
+	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
 	"enchantment.amethyst_imbuement.poultrymorph.desc": "Temporarily transmute the target into a harmless chicken.",
+
+	"enchantment.amethyst_imbuement.recall": "Recall",
 	"enchantment.amethyst_imbuement.recall.desc": "Teleports the player to their respawn point.",
+
+	"enchantment.amethyst_imbuement.regenerate": "Regenerate",
 	"enchantment.amethyst_imbuement.regenerate.desc": "Grants Regeneration. Duration increases with level.",
+
+	"enchantment.amethyst_imbuement.resonate": "Resonate",
 	"enchantment.amethyst_imbuement.resonate.desc": "Fires sonic pulses at nearby enemies, dealing increasing damage with each hit.",
+
+	"enchantment.amethyst_imbuement.shine": "Shine",
 	"enchantment.amethyst_imbuement.shine.desc": "Places a torch.",
+
+	"enchantment.amethyst_imbuement.smiting_blow": "Smiting Blow",
 	"enchantment.amethyst_imbuement.smiting_blow.desc": "Smites a nearby enemy with a holy blast. Deals extra damage to undead.",
+
+	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.desc": "An energy slash that damages all enemies in front of the caster.",
-	"enchantment.amethyst_imbuement.summon_blaze.desc": "Summons blazes to assist the caster in battle.",
+
+	"enchantment.amethyst_imbuement.summon_boat": "Summon Boat",
 	"enchantment.amethyst_imbuement.summon_boat.desc": "Summons a boat.",
+
+	"enchantment.amethyst_imbuement.summon_bonestorm": "Summon Bonestorm",
 	"enchantment.amethyst_imbuement.summon_bonestorm.desc": "Summons a Bonestorm to aid the caster in battle.",
+
+	"enchantment.amethyst_imbuement.summon_chicken": "Summon Chicken",
 	"enchantment.amethyst_imbuement.summon_chicken.desc": "Summons chickens to aid the caster in battle ;).",
-	"enchantment.amethyst_imbuement.summon_familiar.desc": "Summons a powerful cat ally to aid you in battle, transport you, and carry your items.",
+
+	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
 	"enchantment.amethyst_imbuement.summon_fury_totem.desc": "Summons a totem that periodically damages nearby enemies.",
+
+	"enchantment.amethyst_imbuement.summon_golem": "Summon Crystalline Golem",
 	"enchantment.amethyst_imbuement.summon_golem.desc": "Summons a Crystalline Golem to aid the caster in battle.",
+
+	"enchantment.amethyst_imbuement.summon_grace_totem": "Summon Totem of Grace",
 	"enchantment.amethyst_imbuement.summon_grace_totem.desc": "Summons a totem that periodically heals the summoner if in range.",
+
+	"enchantment.amethyst_imbuement.summon_hamster": "Summon Hamster",
 	"enchantment.amethyst_imbuement.summon_hamster.desc": "Summons a hamster to aide you in battle :3.",
+
+	"enchantment.amethyst_imbuement.summon_strider": "Summon Strider",
 	"enchantment.amethyst_imbuement.summon_strider.desc": "Summons a strider to aid the caster in transit.",
+
+	"enchantment.amethyst_imbuement.summon_zombie": "Summon Zombie",
 	"enchantment.amethyst_imbuement.summon_zombie.desc": "Summons zombies to aid the caster in battle.",
+
+	"enchantment.amethyst_imbuement.survey": "Survey",
 	"enchantment.amethyst_imbuement.survey.desc": "Creates a random explorer map of a nearby structure.",
+
+	"enchantment.amethyst_imbuement.teleport": "Teleport",
 	"enchantment.amethyst_imbuement.teleport.desc": "Throws an ender pearl.",
+
+	"enchantment.amethyst_imbuement.torrent_of_beaks": "Torrent of Beaks",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.desc": "Launch a barrage of Boom Chicken eggs in the direction cast.",
+
+	"enchantment.amethyst_imbuement.weightlessness": "Weightlessness",
 	"enchantment.amethyst_imbuement.weightlessness.desc": "Grants levitation and slow falling to the caster or target.",
+
+	"enchantment.amethyst_imbuement.withering_bolt": "Withering Bolt",
 	"enchantment.amethyst_imbuement.withering_bolt.desc": "Summons a wither skull and casts it at the enemy.",
+
+	"enchantment.amethyst_imbuement.zap": "Zap",
 	"enchantment.amethyst_imbuement.zap.desc": "Zaps targets in a line with an electric shock.",
 
 	"container.imbuing_table": "Imbue",
@@ -1007,6 +869,8 @@
 	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
 	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",
 	"subtitles.amethyst_imbuement.hamster_ambient": "Hamster squeaks",
+	"subtitles.amethyst_imbuement.unlock": "Key unlocks something",
+	"subtitles.amethyst_imbuement.locked_book": "Book lock rattles",
 	
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",

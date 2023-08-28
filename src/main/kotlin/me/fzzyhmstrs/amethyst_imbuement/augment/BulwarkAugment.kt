@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -10,10 +9,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 
 class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
-
-    override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
-    }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return stack.isIn(ConventionalItemTags.SHIELDS)

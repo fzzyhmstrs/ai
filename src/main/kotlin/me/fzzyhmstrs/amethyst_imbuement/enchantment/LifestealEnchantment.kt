@@ -26,7 +26,7 @@ class LifestealEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDi
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),3)
+        return AiConfig.enchants.getAiMaxLevel(this,3)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

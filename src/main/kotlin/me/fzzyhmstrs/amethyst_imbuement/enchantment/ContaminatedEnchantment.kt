@@ -26,7 +26,7 @@ class ContaminatedEnchantment(weight: Rarity, vararg slot: EquipmentSlot): Confi
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
+        return AiConfig.enchants.getAiMaxLevel(this,1)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

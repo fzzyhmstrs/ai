@@ -5,6 +5,10 @@
 	{
       "id": "astromine:steel_chestplate",
       "required": false
+    },
+    {
+      "id": "mythicmetals:steel_chestplate",
+      "required": false
     }
   ]
 }

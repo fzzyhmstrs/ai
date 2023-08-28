@@ -7,7 +7,6 @@ import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.item.CrossbowItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.TridentItem
@@ -23,7 +22,7 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),6)
+        return AiConfig.enchants.getAiMaxLevel(this,6)
     }
 
     override fun canAccept(other: Enchantment): Boolean {

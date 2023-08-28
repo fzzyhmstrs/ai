@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.config
 object AiConfigDefaults {
 
     internal val enabledEnchantments: Map<String,Boolean> = mapOf(
-        "amethyst_imbuement:bulwark" to true,
         "amethyst_imbuement:cleaving" to true,
         "amethyst_imbuement:heroic" to true,
         "amethyst_imbuement:wasting" to true,
@@ -21,7 +20,6 @@ object AiConfigDefaults {
     )
     
     internal val aiEnchantmentMaxLevels: Map<String,Int> = mapOf(
-        "amethyst_imbuement:bulwark" to 1,
         "amethyst_imbuement:cleaving" to 3,
         "amethyst_imbuement:contaminated" to 1,
         "amethyst_imbuement:deadly_shot" to 3,
@@ -64,6 +62,7 @@ object AiConfigDefaults {
 
     internal val enabledAugments: Map<String,Boolean> = mapOf(
         "amethyst_imbuement:angelic" to true,
+        "amethyst_imbuement:bulwark" to true,
         "amethyst_imbuement:crystalline" to true,
         "amethyst_imbuement:draconic_vision" to true,
         "amethyst_imbuement:escape" to true,

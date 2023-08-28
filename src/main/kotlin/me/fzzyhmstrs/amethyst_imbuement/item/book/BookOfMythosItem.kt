@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.book
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys

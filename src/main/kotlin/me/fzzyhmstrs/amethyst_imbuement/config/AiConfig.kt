@@ -12,9 +12,11 @@ import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.ColorHelper
 import kotlin.math.max
@@ -42,7 +44,8 @@ object AiConfig
             .add("1.19.4-01/1.19.3-09/1.19-32: Updated the values of some scepters and added two new material configs. Added a new trinket config for turning off burnout on totem augments.")
             .add("1.19.4-01/1.19.3-12/1.19-35: Tweaked the default values for the healers gem and brutal gem in items_v4. Adds configs for the Hard Light block in the renamed Blocks_v0")
             .add("1.20-01/1.19.4-01/1.19.3-13/1.19-36: Added hamster and bonestorm configs in entities_v2. Updated to items_v5 with fzzyhammer and harvest scepter info and new loot chances for unique items.")
-            .add("1.20-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
+            .add("1.20.1-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
+            .add("1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -308,16 +311,22 @@ object AiConfig
     
     private val enchantsHeader = buildSectionHeader("enchants")
     
-    class Enchants: ConfigClass(enchantsHeader){
+    class Enchants: ConfigClass(enchantsHeader), OldClass<Enchants>{
 
-        fun getAiMaxLevel(id: String, fallback: Int): Int{
+        fun isEnchantEnabled(enchantment: Enchantment): Boolean{
+            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return true).toString()
+            return enabledEnchants[id] ?: true
+        }
+        fun getAiMaxLevel(enchantment: Enchantment, fallback: Int): Int{
             if (disableIncreaseMaxLevels.get()) return fallback
-            return aiEnchantMaxLevels[id]?:fallback
+            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
+            return aiEnchantMaxLevels[id] ?: fallback
         }
         
-        fun getVanillaMaxLevel(id: String, fallback: Int): Int{
+        fun getVanillaMaxLevel(enchantment: Enchantment, fallback: Int): Int{
             if (disableIncreaseMaxLevels.get()) return fallback
-            return vanillaEnchantMaxLevels[id]?:fallback
+            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
+            return vanillaEnchantMaxLevels[id] ?: fallback
         }
         
         @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
@@ -331,6 +340,16 @@ object AiConfig
 
         @ReadMeText("readme.enchants.vanillaEnchantMaxLevels")
         var vanillaEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.vanillaEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
+        override fun generateNewClass(): Enchants {
+            val enchants = this
+            val map1 = enchants.enabledEnchants.toMutableMap()
+            map1.remove("amethyst_imbuement:bulwark")
+            enchants.enabledEnchants.validateAndSet(map1)
+            val map2 = enchants.aiEnchantMaxLevels.toMutableMap()
+            map2.remove("amethyst_imbuement:bulwark")
+            enchants.aiEnchantMaxLevels.validateAndSet(map2)
+            return enchants
+        }
     }
 
     private val trinketsHeader = buildSectionHeader("trinkets")
@@ -344,7 +363,11 @@ object AiConfig
         var enabledAugments = ValidatedStringBoolMap(AiConfigDefaults.enabledAugments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
 
         override fun generateNewClass(): Trinkets {
-            return this
+            val trinkets = this
+            val map = trinkets.enabledAugments.toMutableMap()
+            map["amethyst_imbuement:bulwark"] = true
+            trinkets.enabledAugments.validateAndSet(map)
+            return trinkets
         }
     }
 
@@ -415,8 +438,8 @@ object AiConfig
     var materials: Materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
-    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v1.json","enchantments_v0.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
-    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("trinkets_v2.json","trinkets_v1.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
+    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
 

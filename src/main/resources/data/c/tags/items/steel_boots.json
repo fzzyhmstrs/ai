@@ -5,6 +5,10 @@
 	{
       "id": "astromine:steel_boots",
       "required": false
+    },
+    {
+      "id": "mythicmetals:steel_boots",
+      "required": false
     }
   ]
 }

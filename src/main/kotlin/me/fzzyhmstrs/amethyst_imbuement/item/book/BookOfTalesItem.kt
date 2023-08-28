@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.book
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
@@ -6,8 +6,11 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_imbuement.item.GlisteringKeyItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -17,14 +20,15 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class BookOfSecretsItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge {
-    override val loreTier: LoreTier = SECRET_TIER
+class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge, GlisteringKeyItem.GlisteringKeyUnlockable {
+    override val loreTier: LoreTier = TALES_TIER
     override val bindingUV: Pair<Int, Int> = Pair(81,184)
 
     companion object{
-      val SECRET_TIER = object: LoreTier() {
+      val TALES_TIER = object: LoreTier() {
             private val secretList: MutableList<String> =  mutableListOf()
 
             override fun addToList(string: String) {
@@ -34,6 +38,18 @@ class BookOfSecretsItem(settings: Settings) : AbstractAugmentBookItem(settings),
                 return secretList
             }
         }
+    }
+
+    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+        val stack = user.getStackInHand(hand)
+        val nbt = stack.nbt ?: return TypedActionResult.fail(stack)
+        if (!nbt.getBoolean("unlocked")) {
+            user.sendMessage(AcText.translatable(this.translationKey + ".locked"), true)
+            if (world.isClient)
+                user.playSound(RegisterSound.LOCKED_BOOK, SoundCategory.PLAYERS, 1.0f, 1.2f)
+            return TypedActionResult.fail(stack)
+        }
+        return super.use(world, user, hand)
     }
 
     override fun useAfterWriting(
@@ -95,5 +111,13 @@ class BookOfSecretsItem(settings: Settings) : AbstractAugmentBookItem(settings),
         }
 
         return super.getRandomBookAugment(list, user, hand)
+    }
+
+    override fun unlock(world: World, blockPos: BlockPos, stack: ItemStack?) {
+        stack?.orCreateNbt?.putBoolean("unlocked",true)
+    }
+
+    override fun consumeItem(): Boolean {
+        return false
     }
 }

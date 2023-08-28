@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.MixinExtrasBootstrap
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HamsterVariant
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
+import me.fzzyhmstrs.amethyst_imbuement.renderer.BaseHamsterArmorFeatureRenderer
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.LoggerUtil
@@ -77,6 +78,7 @@ object AIClient: ClientModInitializer{
         RegisterParticle.registerParticleFactories()
         ImbuingTableScreenHandler.registerClient()
         AltarOfExperienceScreenHandler.registerClient()
+        BaseHamsterArmorFeatureRenderer.HamsterArmorTextureIdsHolder.registerClient()
         RegisterNetworking.registerClient()
     }
 

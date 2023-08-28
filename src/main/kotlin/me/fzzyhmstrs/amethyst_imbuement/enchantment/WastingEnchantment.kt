@@ -22,7 +22,7 @@ class WastingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDisa
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),4)
+        return AiConfig.enchants.getAiMaxLevel(this,4)
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {

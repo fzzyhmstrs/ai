@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:flamebolt",
+		"amethyst_imbuement:flamewave",
+		"amethyst_imbuement:soul_missile",
+		"amethyst_imbuement:magic_missile",
+		"amethyst_imbuement:withering_bolt",
+		"amethyst_imbuement:freezing"
+	]
+}

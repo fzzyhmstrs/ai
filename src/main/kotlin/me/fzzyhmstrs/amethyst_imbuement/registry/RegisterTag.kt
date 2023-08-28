@@ -24,12 +24,16 @@ object RegisterTag {
     val FOCUS_REAGENTS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"focus_reagents"))
     val ASPECT_GEMS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"aspect_gems"))
     val PILLARS_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
-    val PILLARS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
     val SHINE_LIGHTS_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"shine_lights"))
-    val SHINE_LIGHTS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"shine_lights"))
     val CRYSTALLIZED_LIGHTS_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"crystallized_lights"))
+    val UNLOCKABLES_ITEM_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"unlockables"))
+
+    val PILLARS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"disenchant_pillar_blocks"))
+    val SHINE_LIGHTS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"shine_lights"))
     val CRYSTALLIZED_LIGHTS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"crystallized_lights"))
-    
+    val DRACONIC_VISION_BLOCKS: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"draconic_vision_blocks"))
+    val UNLOCKABLES_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK,Identifier(AI.MOD_ID,"unlockables"))
+
     val EQUINOX_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"equinox_scepters"))
     val LETHALITY_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"lethality_scepters"))
     val RESONANCE_SCEPTERS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier(AI.MOD_ID,"resonance_scepters"))

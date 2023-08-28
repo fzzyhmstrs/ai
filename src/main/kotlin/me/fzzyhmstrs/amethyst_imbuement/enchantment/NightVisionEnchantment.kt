@@ -37,7 +37,7 @@ class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipm
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),1)
+        return AiConfig.enchants.getAiMaxLevel(this,1)
     }
 
     override fun isTreasure(): Boolean {

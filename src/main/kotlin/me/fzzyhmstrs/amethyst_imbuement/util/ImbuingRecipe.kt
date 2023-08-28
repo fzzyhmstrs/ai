@@ -7,7 +7,11 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.*
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfLoreItem
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment
 import net.minecraft.enchantment.EnchantmentLevelEntry

@@ -8,7 +8,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.item.EnchantedBookItem;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtList;
@@ -25,7 +26,8 @@ public abstract class ItemStackMixin {
 
     @ModifyReturnValue(method = "getAttributeModifiers", at = @At("RETURN"))
     private Multimap<EntityAttribute, EntityAttributeModifier> amethyst_imbuement_addResilientAttributesToModifiers(Multimap<EntityAttribute, EntityAttributeModifier> original, EquipmentSlot slot){
-        if (getItem() instanceof ArmorItem armorItem && armorItem.getSlotType() != slot) return original;
+        if (getItem() instanceof EnchantedBookItem) return original;
+        if (getItem() instanceof Equipment equipment && equipment.getSlotType() != slot) return original;
         Multimap<EntityAttribute, EntityAttributeModifier> newMap = null;
         boolean modified = false;
         for (var entry: EnchantmentHelper.get((ItemStack) (Object) this).entrySet()){

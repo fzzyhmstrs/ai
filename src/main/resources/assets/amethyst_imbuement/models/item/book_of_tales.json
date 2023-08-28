@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "amethyst_imbuement:item/book_of_tales"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "type": 0.1
+      },
+      "model": "amethyst_imbuement:item/book_of_tales_locked"
+    },
+    {
+      "predicate": {
+        "type": 0.3
+      },
+      "model": "amethyst_imbuement:item/book_of_tales_fury"
+    },
+    {
+      "predicate": {
+        "type": 0.7
+      },
+      "model": "amethyst_imbuement:item/book_of_tales_grace"
+    },
+    {
+      "predicate": {
+        "type": 1.0
+      },
+      "model": "amethyst_imbuement:item/book_of_tales_wit"
+    }
+  ]
+}

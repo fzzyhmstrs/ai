@@ -234,7 +234,7 @@ object RegisterRenderer {
         ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_LORE, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
-            val nbt = stack.orCreateNbt
+            val nbt = stack.nbt ?:  return@register 0f
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
                 when(nbt.getString(NbtKeys.LORE_TYPE.str())){
                     SpellType.FURY.str() ->{ 0.3f }
@@ -250,8 +250,26 @@ object RegisterRenderer {
         ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_MYTHOS, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
-            val nbt = stack.orCreateNbt
+            val nbt = stack.nbt ?:  return@register 0f
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){
+                when(nbt.getString(NbtKeys.LORE_TYPE.str())){
+                    SpellType.FURY.str() ->{ 0.3f }
+                    SpellType.GRACE.str() -> { 0.7f }
+                    SpellType.WIT.str() -> { 1.0f }
+                    else -> { 0.0f }
+                }
+            } else {
+                0.0f
+            }
+        }
+
+        ModelPredicateProviderRegistry.register(
+            RegisterItem.BOOK_OF_TALES, Identifier("type")
+        ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
+            val nbt = stack.nbt ?:  return@register 0f
+            if (!nbt.getBoolean("unlocked")){
+                0.1f
+            } else if (nbt.contains(NbtKeys.LORE_TYPE.str())){
                 when(nbt.getString(NbtKeys.LORE_TYPE.str())){
                     SpellType.FURY.str() ->{ 0.3f }
                     SpellType.GRACE.str() -> { 0.7f }

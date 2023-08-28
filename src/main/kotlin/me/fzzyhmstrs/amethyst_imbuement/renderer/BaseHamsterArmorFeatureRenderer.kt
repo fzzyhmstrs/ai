@@ -40,7 +40,7 @@ FeatureRenderer<T, M>(context)
         
         private fun loadHamsterArmorIds(manager: ResourceManager){
             val map: MutableMap<String, Identifier> = mutableMapOf()
-            manager.findResources("amethyst_imbuement/hamster") { path -> path.path.endsWith("hamster_armor_textures.json") }
+            manager.findResources("hamster") { path -> path.path.endsWith(".json") }
             .forEach { (id,resource) ->
                 try{
                     val reader = resource.reader
@@ -61,6 +61,8 @@ FeatureRenderer<T, M>(context)
                                     println("Hamster texture ID $jsonHamsterStr isn't a valid Identifier in hamster texture file $id")
                                     continue
                                 }
+                                println(jsonArmorStr)
+                                println(hamsterStrId)
                                 map[jsonArmorStr] = hamsterStrId
                             }
                         
@@ -86,7 +88,7 @@ FeatureRenderer<T, M>(context)
             return Identifier(AI.MOD_ID,"hamster_armor_loader")
         }
         
-        fun registerAll(){
+        fun registerClient(){
             ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(this)
         }
     }

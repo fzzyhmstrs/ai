@@ -15,167 +15,157 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterEnchantment {
-    private var regEnchant: MutableMap<String,Enchantment> = mutableMapOf()
+
+    private fun <T: Enchantment> T.register(name: String): T{
+        val id = AI.identity(name)
+        val e1 = Registry.register(Registries.ENCHANTMENT,id, this)
+        if (e1 is AbstractConfigDisableEnchantment){
+            if (!e1.isEnabled()){
+                LOGGER.info("Augment $id is set as disabled in the configs!")
+            }
+        }
+        if (e1 is ScepterAugment){
+            if (!AugmentHelper.getAugmentEnabled(e1)) {
+                LOGGER.info("Augment $id is set as disabled in the configs!")
+            }
+        }
+        return e1
+    }
 
     //vanilla style enchantments
-    val HEROIC = DamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, EquipmentSlot.MAINHAND).also{ checkConfig("heroic",it)}
-    val WASTING = WastingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("wasting", it)}
-    val DEADLY_SHOT = DeadlyShotEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("deadly_shot", it)}
-    val PUNCTURING = PuncturingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("puncturing", it)}
-    val INSIGHT = InsightEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("insight", it)}
-    val LIFESTEAL = LifestealEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("lifesteal", it)}
-    val DECAYED = DecayedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{ checkConfig("decayed", it)}
-    val CONTAMINATED = ContaminatedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).also{ checkConfig("contaminated", it)}
-    val CLEAVING = CleavingEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).also{ checkConfig("cleaving", it)}
-    val MULTI_JUMP = MultiJumpEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.FEET).also{ checkConfig("multi_jump", it)}
-    val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).also{ checkConfig("night_vision", it)}
-    val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, *AI.slots).also{ checkConfig("steadfast", it)}
-    val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).also{ checkConfig("rain_of_thorns", it)}
-    val VEIN_MINER = VeinMinerEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).also{ checkConfig("vein_miner", it)}
+    val HEROIC = DamageEnchantment(Enchantment.Rarity.UNCOMMON, 3, EquipmentSlot.MAINHAND).register("heroic")
+    val WASTING = WastingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).register("wasting")
+    val DEADLY_SHOT = DeadlyShotEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).register("deadly_shot")
+    val PUNCTURING = PuncturingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).register("puncturing")
+    val INSIGHT = InsightEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).register("insight")
+    val LIFESTEAL = LifestealEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).register("lifesteal")
+    val DECAYED = DecayedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).register("decayed")
+    val CONTAMINATED = ContaminatedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND).register("contaminated")
+    val CLEAVING = CleavingEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND).register("cleaving")
+    val MULTI_JUMP = MultiJumpEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.FEET).register("multi_jump")
+    val NIGHT_VISION = NightVisionEnchantment(Enchantment.Rarity.RARE,1, EquipmentSlot.HEAD).register("night_vision")
+    val STEADFAST = SteadfastEnchantment(Enchantment.Rarity.UNCOMMON, *AI.slots).register("steadfast")
+    val RAIN_OF_THORNS = RainOfThornsEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND).register("rain_of_thorns")
+    val VEIN_MINER = VeinMinerEnchantment(Enchantment.Rarity.RARE,EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND).register("vein_miner")
 
     //augments for imbuing
-    val ACCURSED = AccursedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).also{regEnchant["accursed"] = it}
-    val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).also{regEnchant["angelic"] = it}
-    val BEAST_MASTER = BeastMasterAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).also{regEnchant["beast_master"] = it}
-    val BULWARK = BulwarkAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).also{ checkConfig("bulwark", it)}
-    val CONSECRATED = ConsecratedAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).also{regEnchant["consecrated"] = it}
-    val CRYSTALLINE = CrystallineAugment(Enchantment.Rarity.VERY_RARE,6, EquipmentSlot.OFFHAND).also{regEnchant["crystalline"] = it}
-    val DRACONIC_VISION = DraconicVisionAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["draconic_vision"] = it}
-    val ESCAPE = EscapeAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["escape"] = it}
-    val FELINE = FelineAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["feline"] = it}
-    val FRIENDLY = FriendlyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["friendly"] = it}
-    val GUARDIAN = GuardianAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["guardian"] = it}
-    val HASTING = HastingAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.MAINHAND).also{regEnchant["hasting"] = it}
-    val HEADHUNTER = HeadhunterAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).also{regEnchant["headhunter"] = it}
-    val HEALTHY = HealthyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["healthy"] = it}
-    val ILLUMINATING = IlluminatingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["illuminating"] = it}
-    val IMMUNITY = ImmunityAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["immunity"] = it}
-    val INFLAMMABLE = InflammableAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["inflammable"] = it}
-    val INVISIBILITY = InvisibilityAugment(Enchantment.Rarity.VERY_RARE,1, *AI.slots).also{regEnchant["invisibility"] = it}
-    val LEAPING = LeapingAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.LEGS).also{regEnchant["leaping"] = it}
-    val LIGHTFOOTED = LightfootedAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["lightfooted"] = it}
-    val LUCKY = LuckyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["lucky"] = it}
-    val MOONLIT = MoonlitAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).also{regEnchant["moonlit"] = it}
-    val RESILIENCE = ResilienceAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).also{regEnchant["resilience"] = it}
-    val SHIELDING = ShieldingAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).also{regEnchant["shielding"] = it}
-    val SLIMY = SlimyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["slimy"] = it}
-    val SOULBINDING = SoulbindingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["soulbinding"] = it}
-    val SOUL_OF_THE_CONDUIT = SoulOfTheConduitAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.OFFHAND).also{regEnchant["soul_of_the_conduit"] = it}
-    val SPECTRAL_VISION = SpectralVisionAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.HEAD).also{regEnchant["spectral_vision"] = it}
-    val SPIKED = SpikedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).also{regEnchant["spiked"] = it}
-    val STRENGTH = StrengthAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.MAINHAND).also{regEnchant["strength"] = it}
-    val STRIDING = StridingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).also{regEnchant["striding"] = it}
-    val SUNTOUCHED = SuntouchedAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).also{regEnchant["suntouched"] = it}
-    val SWIFTNESS = SwiftnessAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.LEGS).also{regEnchant["swiftness"] = it}
-    val UNDYING = UndyingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).also{regEnchant["undying"] = it}
+    val ACCURSED = AccursedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("accursed")
+    val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("angelic")
+    val BEAST_MASTER = BeastMasterAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("beast_master")
+    val BULWARK = BulwarkAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("bulwark")
+    val CONSECRATED = ConsecratedAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).register("consecrated")
+    val CRYSTALLINE = CrystallineAugment(Enchantment.Rarity.VERY_RARE,6, EquipmentSlot.OFFHAND).register("crystalline")
+    val DRACONIC_VISION = DraconicVisionAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("draconic_vision")
+    val ESCAPE = EscapeAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("escape")
+    val FELINE = FelineAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("feline")
+    val FRIENDLY = FriendlyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("friendly")
+    val GUARDIAN = GuardianAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("guardian")
+    val HASTING = HastingAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.MAINHAND).register("hasting")
+    val HEADHUNTER = HeadhunterAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("headhunter")
+    val HEALTHY = HealthyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("healthy")
+    val ILLUMINATING = IlluminatingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("illuminating")
+    val IMMUNITY = ImmunityAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("immunity")
+    val INFLAMMABLE = InflammableAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("inflammable")
+    val INVISIBILITY = InvisibilityAugment(Enchantment.Rarity.VERY_RARE,1, *AI.slots).register("invisibility")
+    val LEAPING = LeapingAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.LEGS).register("leaping")
+    val LIGHTFOOTED = LightfootedAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).register("lightfooted")
+    val LUCKY = LuckyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("lucky")
+    val MOONLIT = MoonlitAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).register("moonlit")
+    val RESILIENCE = ResilienceAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).register("resilience")
+    val SHIELDING = ShieldingAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("shielding")
+    val SLIMY = SlimyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).register("slimy")
+    val SOULBINDING = SoulbindingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("soulbinding")
+    val SOUL_OF_THE_CONDUIT = SoulOfTheConduitAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.OFFHAND).register("soul_of_the_conduit")
+    val SPECTRAL_VISION = SpectralVisionAugment(Enchantment.Rarity.VERY_RARE,1 , EquipmentSlot.HEAD).register("spectral_vision")
+    val SPIKED = SpikedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("spiked")
+    val STRENGTH = StrengthAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.MAINHAND).register("strength")
+    val STRIDING = StridingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).register("striding")
+    val SUNTOUCHED = SuntouchedAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).register("suntouched")
+    val SWIFTNESS = SwiftnessAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.LEGS).register("swiftness")
+    val UNDYING = UndyingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("undying")
 
     //Scepter Spells
-    val MAGIC_MISSILE = MagicMissileAugment().also{regEnchant["magic_missile"] = it}
-    val ABUNDANCE = AbundanceAugment().also{regEnchant["abundance"] = it}
-    val ANIMAL_HUSBANDRY = AnimalHusbandryAugment().also{regEnchant["animal_husbandry"] = it}
-    val BALL_LIGHTNING = BallLightningAugment().also{regEnchant["ball_lightning"] = it}
-    val BARRIER = BarrierAugment().also{regEnchant["barrier"] = it}
-    val BEDAZZLE = BedazzleAugment().also{regEnchant["bedazzle"] = it}
-    val BODY_SWAP = BodySwapAugment().also{regEnchant["body_swap"] = it}
-    val CHICKENFORM = ChickenformAugment().also{regEnchant["chickenform"] = it}
-    val CLEANSE = CleanseAugment().also{regEnchant["cleanse"] = it}
-    val COMET_STORM = CometStormAugment().also{regEnchant["comet_storm"] = it}
-    val CREATE_HARD_LIGHT = CreateHardLightAugment().also{regEnchant["create_hard_light"] = it}
-    val CREATE_LAVA = CreateLavaAugment().also{regEnchant["create_lava"] = it}
-    val CREATE_SPONGE = CreateSpongeAugment().also{regEnchant["create_sponge"] = it}
-    val CREATE_WATER = CreateWaterAugment().also{regEnchant["create_water"] = it}
-    val CRIPPLE = CrippleAugment().also{regEnchant["cripple"] = it}
-    val CURSE = CurseAugment().also{regEnchant["curse"] = it}
-    val DASH = DashAugment().also{regEnchant["dash"] = it}
-    val EMPOWERED_SLASH = EmpoweredSlashAugment().also{regEnchant["empowered_slash"] = it}
-    val EXCAVATE = ExcavateAugment().also{regEnchant["excavate"] = it}
-    val EXHAUST = ExhaustAugment().also{regEnchant["exhaust"] = it}
-    val FANG_BARRAGE = FangBarrageAugment().also{regEnchant["fang_barrage"] = it}
-    val FANGS = FangsAugment().also{regEnchant["fangs"] = it}
-    val FIREBALL = FireballAugment().also{regEnchant["fireball"] = it}
-    val FLAMEBOLT = FlameboltAugment().also{regEnchant["flamebolt"] = it}
-    val FLAMEWAVE = FlamewaveAugment().also{regEnchant["flamewave"] = it}
-    val FLARE = FlareAugment().also{regEnchant["flare"] = it}
-    val FORCE_FIELD = ForcefieldAugment().also{regEnchant["forcefield"] = it}
-    val FORTIFY = FortifyAugment().also{regEnchant["fortify"] = it}
-    val FREEZING = FreezingAugment().also{regEnchant["freezing"] = it}
-    val GUSTING = GustingAugment().also{regEnchant["gusting"] = it}
-    val HAMPTERTIME = HamptertimeAugment().also{regEnchant["hamptertime"] = it}
-    val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().also{regEnchant["hard_light_bridge"] = it}
-    val HEALING_WIND = HealingWindAugment().also{regEnchant["healing_wind"] = it}
-    val ICE_SHARD = IceShardAugment().also{regEnchant["ice_shard"] = it}
-    val ICE_SPIKES = IceSpikesAugment().also{regEnchant["ice_spikes"] = it}
-    val INSPIRING_SONG = InspiringSongAugment().also{regEnchant["inspiring_song"] = it}
-    val LEVITATING_BULLET = LevitatingBulletAugment().also{regEnchant["levitating_bullet"] = it}
-    val LIGHTNING_BOLT = LightningBoltAugment().also{regEnchant["lightning_bolt"] = it}
-    val LIGHTNING_STORM = LightningStormAugment().also{regEnchant["lightning_storm"] = it}
-    val MAGNETIC_AURA = MagneticAuraAugment().also{regEnchant["magnetic_aura"] = it}
-    val MASS_CLEANSE = MassCleanseAugment().also{regEnchant["mass_cleanse"] = it}
-    val MASS_EXHAUST = MassExhaustAugment().also{regEnchant["mass_exhaust"] = it}
-    val MASS_FORTIFY = MassFortifyAugment().also{regEnchant["mass_fortify"] = it}
-    val MASS_HEAL = MassHealAugment().also{regEnchant["mass_heal"] = it}
-    val MASS_REVIVIFY = MassRevivifyAugment().also{regEnchant["mass_revivify"] = it}
-    val MEND_EQUIPMENT = MendEquipmentAugment().also{regEnchant["mend_equipment"] = it}
-    val MENTAL_CLARITY = MentalClarityAugment().also{regEnchant["mental_clarity"] = it}
-    val MINOR_HEAL = MinorHealAugment().also{regEnchant["minor_heal"] = it}
-    val PERSUADE = PersuadeAugment().also{regEnchant["persuade"] = it}
-    val POULTRYMORPH = PoultrymorphAugment().also{regEnchant["poultrymorph"] = it}
-    val RECALL = RecallAugment().also{regEnchant["recall"] = it}
-    val REGENERATE = RegenerateAugment().also{regEnchant["regenerate"] = it}
-    val RESONATE = ResonateAugment().also{regEnchant["resonate"] = it}
-    val SHINE = ShineAugment().also{regEnchant["shine"] = it}
-    val SMITING_BLOW = SmitingBlowAugment().also{regEnchant["smiting_blow"] = it}
-    val SOUL_MISSILE = SoulMissileAugment().also{regEnchant["soul_missile"] = it}
-    val SPECTRAL_SLASH = SpectralSlashAugment().also{regEnchant["spectral_slash"] = it}
-    val SUMMON_BOAT = SummonBoatAugment().also{regEnchant["summon_boat"] = it}
-    val SUMMON_BONESTORM = SummonBonestormAugment().also{regEnchant["summon_bonestorm"] = it}
-    val SUMMON_CHICKEN = SummonChickenAugment().also{regEnchant["summon_chicken"] = it}
-    val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().also{regEnchant["summon_fury_totem"] = it}
-    val SUMMON_GOLEM = SummonGolemAugment().also{regEnchant["summon_golem"] = it}
-    val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().also{regEnchant["summon_grace_totem"] = it}
-    val SUMMON_HAMSTER = SummonHamsterAugment().also{regEnchant["summon_hamster"] = it}
-    val SUMMON_STRIDER = SummonStriderAugment().also{regEnchant["summon_strider"] = it}
-    val SUMMON_ZOMBIE = SummonZombieAugment().also{regEnchant["summon_zombie"] = it}
-    val SURVEY = SurveyAugment().also{regEnchant["survey"] = it}
-    val TELEPORT = TeleportAugment().also{regEnchant["teleport"] = it}
-    val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().also{regEnchant["torrent_of_beaks"] = it}
-    val WEIGHTLESSNESS = WeightlessnessAugment().also{regEnchant["weightlessness"] = it}
-    val WINTERS_GRASP = WintersGraspAugment().also{regEnchant["hail_storm"] = it} //id kept as hail storm to maintain compat
-    val WITHERING_BOLT = WitheringBoltAugment().also{regEnchant["withering_bolt"] = it}
-    val ZAP = ZapAugment().also{regEnchant["zap"] = it}
+    val MAGIC_MISSILE = MagicMissileAugment().register("magic_missile")
+    val ABUNDANCE = AbundanceAugment().register("abundance")
+    val ANIMAL_HUSBANDRY = AnimalHusbandryAugment().register("animal_husbandry")
+    val BALL_LIGHTNING = BallLightningAugment().register("ball_lightning")
+    val BARRIER = BarrierAugment().register("barrier")
+    val BEDAZZLE = BedazzleAugment().register("bedazzle")
+    val BODY_SWAP = BodySwapAugment().register("body_swap")
+    val CHICKENFORM = ChickenformAugment().register("chickenform")
+    val CLEANSE = CleanseAugment().register("cleanse")
+    val COMET_STORM = CometStormAugment().register("comet_storm")
+    val CREATE_HARD_LIGHT = CreateHardLightAugment().register("create_hard_light")
+    val CREATE_LAVA = CreateLavaAugment().register("create_lava")
+    val CREATE_SPONGE = CreateSpongeAugment().register("create_sponge")
+    val CREATE_WATER = CreateWaterAugment().register("create_water")
+    val CRIPPLE = CrippleAugment().register("cripple")
+    val CURSE = CurseAugment().register("curse")
+    val DASH = DashAugment().register("dash")
+    val EMPOWERED_SLASH = EmpoweredSlashAugment().register("empowered_slash")
+    val EXCAVATE = ExcavateAugment().register("excavate")
+    val EXHAUST = ExhaustAugment().register("exhaust")
+    val FANG_BARRAGE = FangBarrageAugment().register("fang_barrage")
+    val FANGS = FangsAugment().register("fangs")
+    val FIREBALL = FireballAugment().register("fireball")
+    val FLAMEBOLT = FlameboltAugment().register("flamebolt")
+    val FLAMEWAVE = FlamewaveAugment().register("flamewave")
+    val FLARE = FlareAugment().register("flare")
+    val FORCE_FIELD = ForcefieldAugment().register("forcefield")
+    val FORTIFY = FortifyAugment().register("fortify")
+    val FREEZING = FreezingAugment().register("freezing")
+    val GUSTING = GustingAugment().register("gusting")
+    val HAMPTERTIME = HamptertimeAugment().register("hamptertime")
+    val HARD_LIGHT_BRIDGE = HardLightBridgeAugment().register("hard_light_bridge")
+    val HEALING_WIND = HealingWindAugment().register("healing_wind")
+    val ICE_SHARD = IceShardAugment().register("ice_shard")
+    val ICE_SPIKES = IceSpikesAugment().register("ice_spikes")
+    val INSPIRING_SONG = InspiringSongAugment().register("inspiring_song")
+    val LEVITATING_BULLET = LevitatingBulletAugment().register("levitating_bullet")
+    val LIGHTNING_BOLT = LightningBoltAugment().register("lightning_bolt")
+    val LIGHTNING_STORM = LightningStormAugment().register("lightning_storm")
+    val MAGNETIC_AURA = MagneticAuraAugment().register("magnetic_aura")
+    val MASS_CLEANSE = MassCleanseAugment().register("mass_cleanse")
+    val MASS_EXHAUST = MassExhaustAugment().register("mass_exhaust")
+    val MASS_FORTIFY = MassFortifyAugment().register("mass_fortify")
+    val MASS_HEAL = MassHealAugment().register("mass_heal")
+    val MASS_REVIVIFY = MassRevivifyAugment().register("mass_revivify")
+    val MEND_EQUIPMENT = MendEquipmentAugment().register("mend_equipment")
+    val MENTAL_CLARITY = MentalClarityAugment().register("mental_clarity")
+    val MINOR_HEAL = MinorHealAugment().register("minor_heal")
+    val PERSUADE = PersuadeAugment().register("persuade")
+    val POULTRYMORPH = PoultrymorphAugment().register("poultrymorph")
+    val RECALL = RecallAugment().register("recall")
+    val REGENERATE = RegenerateAugment().register("regenerate")
+    val RESONATE = ResonateAugment().register("resonate")
+    val SHINE = ShineAugment().register("shine")
+    val SMITING_BLOW = SmitingBlowAugment().register("smiting_blow")
+    val SOUL_MISSILE = SoulMissileAugment().register("soul_missile")
+    val SPECTRAL_SLASH = SpectralSlashAugment().register("spectral_slash")
+    val SUMMON_BOAT = SummonBoatAugment().register("summon_boat")
+    val SUMMON_BONESTORM = SummonBonestormAugment().register("summon_bonestorm")
+    val SUMMON_CHICKEN = SummonChickenAugment().register("summon_chicken")
+    val SUMMON_FURY_TOTEM = SummonFuryTotemAugment().register("summon_fury_totem")
+    val SUMMON_GOLEM = SummonGolemAugment().register("summon_golem")
+    val SUMMON_GRACE_TOTEM = SummonGraceTotemAugment().register("summon_grace_totem")
+    val SUMMON_HAMSTER = SummonHamsterAugment().register("summon_hamster")
+    val SUMMON_STRIDER = SummonStriderAugment().register("summon_strider")
+    val SUMMON_ZOMBIE = SummonZombieAugment().register("summon_zombie")
+    val SURVEY = SurveyAugment().register("survey")
+    val TELEPORT = TeleportAugment().register("teleport")
+    val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().register("torrent_of_beaks")
+    val WEIGHTLESSNESS = WeightlessnessAugment().register("weightlessness")
+    val WINTERS_GRASP = WintersGraspAugment().register("hail_storm") //id kept as hail storm to maintain compat
+    val WITHERING_BOLT = WitheringBoltAugment().register("withering_bolt")
+    val ZAP = ZapAugment().register("zap")
 
-    val DEBUG = DebugAugment().also{regEnchant["debug"] = it}
+    val DEBUG = DebugAugment().register("debug")
 
-    private fun checkConfig(check: String, enchant: Enchantment){
-        regEnchant[check] = enchant
-    }
-    fun registerAll(){
+    val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
 
-        for (k in regEnchant.keys){
-            val enchant = regEnchant[k]
-            val id = Identifier(AI.MOD_ID, k)
-            Registry.register(Registries.ENCHANTMENT, id, enchant)
-        }
-        for (enchant in regEnchant){
-            val e = enchant.value
-            val id = Identifier(AI.MOD_ID, enchant.key)
-            if (e is AbstractConfigDisableEnchantment){
-                if (!e.isEnabled()){
-                    LOGGER.info("Augment $id is set as disabled in the configs!")
-                }
-            }
-            if (e is ScepterAugment){
-                AugmentHelper.registerAugmentStat(e)
-                if (!AugmentHelper.getAugmentEnabled(id.toString())) {
-                    LOGGER.info("Augment $id is set as disabled in the configs!")
-                }
-            }
-        }
-        regEnchant.clear()
-    }
+    fun registerAll(){}
 
 
 }

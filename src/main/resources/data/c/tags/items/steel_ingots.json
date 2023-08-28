@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:steel_ingot"
+    "amethyst_imbuement:steel_ingot",
+    {
+      "id": "mythicmetals:steel_ingot",
+      "required": false
+    }
   ]
 }

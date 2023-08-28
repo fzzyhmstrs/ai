@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig;
 import net.minecraft.enchantment.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +19,7 @@ public abstract class EnchantMaxLvl5Mixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToFive(int original){
-        return 5;
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,5);
     }
 
 }

@@ -25,7 +25,7 @@ class CleavingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigDis
     }
 
     override fun getMaxLevel(): Int {
-        return AiConfig.enchants.getAiMaxLevel(id.toString(),3)
+        return AiConfig.enchants.getAiMaxLevel(this,3)
     }
 
     override fun getAttackDamage(level: Int, group: EntityGroup): Float {

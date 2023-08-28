@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.book
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings),BookOfKnowledge {
+open class BookOfLoreItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge {
     override val loreTier: LoreTier = LoreTier.LOW_TIER
     override val bindingUV: Pair<Int, Int> = Pair(45,184)
 

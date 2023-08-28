@@ -19,6 +19,19 @@
       "amethyst_imbuement:ambient_squeak_2",
       "amethyst_imbuement:ambient_squeak_3"
     ]
+  },
+  "unlock": {
+    "subtitle": "subtitles.amethyst_imbuement.unlock",
+    "sounds": [
+      "amethyst_imbuement:unlock_1"
+    ]
+  },
+  "locked_book": {
+    "subtitle": "subtitles.amethyst_imbuement.locked_book",
+    "sounds": [
+      "amethyst_imbuement:locked_book_1",
+      "amethyst_imbuement:locked_book_2"
+    ]
   }
 }
 
