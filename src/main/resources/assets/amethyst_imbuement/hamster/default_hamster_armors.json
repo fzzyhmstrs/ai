@@ -8,6 +8,9 @@
     "diamond": "amethyst_imbuement:textures/entity/hamster/armor/diamond.png",
     "netherite": "amethyst_imbuement:textures/entity/hamster/armor/netherite.png",
     "ai_steel": "amethyst_imbuement:textures/entity/hamster/armor/ai_steel.png",
-    "ai_ametrine": "amethyst_imbuement:textures/entity/hamster/armor/ai_ametrine.png"
+    "ai_ametrine": "amethyst_imbuement:textures/entity/hamster/armor/ai_ametrine.png",
+    "ai_garnet": "amethyst_imbuement:textures/entity/hamster/armor/ai_garnet.png",
+    "ai_glowing": "amethyst_imbuement:textures/entity/hamster/armor/ai_glowing.png",
+    "ai_shimmering": "amethyst_imbuement:textures/entity/hamster/armor/ai_shimmering.png"
   }
 }

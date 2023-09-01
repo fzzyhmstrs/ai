@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags
 import net.minecraft.block.ExperienceDroppingBlock
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -35,7 +36,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
                     val bp = pos.add(i,j,k)
                     if (world.isAir(bp)) continue
                     val bs = world.getBlockState(bp)
-                    if (bs.block is ExperienceDroppingBlock || bs.isIn(RegisterTag.DRACONIC_VISION_BLOCKS)){
+                    if ((bs.block is ExperienceDroppingBlock || bs.isIn(ConventionalBlockTags.ORES)) && !bs.isIn(RegisterTag.DRACONIC_VISION_BLACKLIST)){
                         if (!extendBoxLife(bp, world)) {
                             val dbe = DraconicBoxEntity(RegisterEntity.DRACONIC_BOX_ENTITY, world, bs.block, 40, bp)
                             dbe.setPosition(ii + 0.5, jj + 0.1, kk + 0.5)

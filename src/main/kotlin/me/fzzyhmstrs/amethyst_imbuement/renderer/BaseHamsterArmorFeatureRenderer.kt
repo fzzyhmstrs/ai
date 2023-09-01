@@ -61,8 +61,6 @@ FeatureRenderer<T, M>(context)
                                     println("Hamster texture ID $jsonHamsterStr isn't a valid Identifier in hamster texture file $id")
                                     continue
                                 }
-                                println(jsonArmorStr)
-                                println(hamsterStrId)
                                 map[jsonArmorStr] = hamsterStrId
                             }
                         

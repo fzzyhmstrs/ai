@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:redstone_ore",
-    "minecraft:deepslate_redstone_ore",
-    "minecraft:ancient_debris",
     {
       "id": "darkblades:dark_ore",
       "required": false

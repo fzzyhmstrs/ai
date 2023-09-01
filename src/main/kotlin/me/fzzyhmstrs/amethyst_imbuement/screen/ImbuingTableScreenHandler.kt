@@ -17,6 +17,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
+import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -1065,7 +1066,9 @@ class ImbuingTableScreenHandler(
                 }
 
                 val itemStack5 = if (recipe.getTransferEnchant()){
-                    Nbt.createItemStackWithNbt(itemStack4.item,itemStack4.count,itemStack3.orCreateNbt)
+                    val nbtTemp = itemStack3.orCreateNbt.copy()
+                    nbtTemp.remove(NbtKeys.ITEM_STACK_ID.str())
+                    Nbt.createItemStackWithNbt(itemStack4.item,itemStack4.count,nbtTemp)
                 } else {
                     itemStack4.copy()
                 }
