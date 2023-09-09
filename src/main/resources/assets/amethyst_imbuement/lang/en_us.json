@@ -789,7 +789,7 @@
 	"container.spellcasters_focus.option2": "Option B",
 	"container.spellcasters_focus.option3": "Option C",
 
-	"effect.amethyst_imbuement.custom_absorption": "Shielding",
+	"effect.amethyst_imbuement.shielding": "Shielding",
 	"effect.amethyst_imbuement.draconic_vision": "Draconic Vision",
 	"effect.amethyst_imbuement.spectral_vision": "Spectral Vision",
 	"effect.amethyst_imbuement.leapt": "Leapt",
