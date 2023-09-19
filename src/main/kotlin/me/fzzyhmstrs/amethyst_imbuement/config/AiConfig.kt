@@ -51,7 +51,7 @@ object AiConfig
             .add("readme.main_header.note")
             .space()
             .space()
-            .build())
+            .build()), SimpleSynchronousResourceReloadListener
 {
     private val itemsHeader = buildSectionHeader("items")
 
@@ -433,8 +433,7 @@ object AiConfig
         }
     }
 
-    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,
-        configClass = { Items() }, previousClass = {Items()})
+    var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
     var materials: Materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
@@ -442,6 +441,25 @@ object AiConfig
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
+
+    override fun initConfig() {
+        super.initConfig()
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(this)
+    }
+
+    override fun reload(manager: ResourceManager) {
+        items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
+        materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
+        blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
+        villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
+        enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+        trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    }
+
+    override fun getFabricId(): Identifier {
+        return Identifier(AI.MOD_ID,"ai_config_reloader")
+    }
 
     private fun buildSectionHeader(name:String): Header{
         return Header.Builder().space().underoverscore("readme.header.$name").add("readme.header.$name.desc").space().build()
