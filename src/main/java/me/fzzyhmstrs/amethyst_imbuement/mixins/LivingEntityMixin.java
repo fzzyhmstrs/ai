@@ -113,7 +113,7 @@ public abstract class LivingEntityMixin extends Entity {
                 amount;
         float newAmount2 = instance.hasStatusEffect(RegisterStatus.INSTANCE.getBLAST_RESISTANT()) && source.isIn(DamageTypeTags.IS_EXPLOSION)
                 ?
-                newAmount * Math.max(0f,(9f - (float)( instance.getStatusEffect(RegisterStatus.INSTANCE.getRESONATING()).getAmplifier())) / 10f)
+                newAmount * Math.max(0f,(9f - (float)( instance.getStatusEffect(RegisterStatus.INSTANCE.getBLAST_RESISTANT()).getAmplifier())) / 10f)
                 :
                 newAmount;
         return operation.call(instance,source,newAmount2);

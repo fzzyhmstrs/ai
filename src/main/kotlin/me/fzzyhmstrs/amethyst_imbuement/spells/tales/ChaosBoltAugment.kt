@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
@@ -14,10 +14,13 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class ChaosBoltAugment: SummonProjectileAugment(ScepterTier.THREE,15) {
+class ChaosBoltAugment: SummonProjectileAugment(ScepterTier.THREE,21) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(3.0F)
+        get() = super.baseEffect
+            .withDamage(1.95f,0.05f)
+            .withDuration(80)
+            .withAmplifier(0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,3,

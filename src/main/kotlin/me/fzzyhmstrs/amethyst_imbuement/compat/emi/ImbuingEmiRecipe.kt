@@ -52,6 +52,7 @@ class ImbuingEmiRecipe(recipe: ImbuingRecipe): EmiRecipe{
             val input = inputs[i]
             if (recipe.getAugment() != "" && i == 6){
                 val ingredient = recipe.getCenterIngredient()
+                EmiIngredient.of(ingredient).emiStacks
                 list.add(EmiIngredient.of(ingredient))
                 continue
             }

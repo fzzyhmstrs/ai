@@ -143,6 +143,10 @@ object RegisterRenderer {
         ){context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context, 3f, true) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.PLAYER_METEOR
+        ){context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context, 5f, true) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.PLAYER_LIGHTNING
         ){ context: EntityRendererFactory.Context -> LightningEntityRenderer(context) }
 

@@ -58,6 +58,7 @@ object RegisterItem {
         EntityAttributeModifier(UUID.fromString("1ac772d4-d25b-11ed-afa1-0242ac120002"),"energetic_modifier",0.03,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withGlint(),"energetic_opal")
     val AMETRINE = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)),"ametrine") // item is custom for flavor text
+    val SARDONYX = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM)),"sardonyx")
     val CELESTINE = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.EPIC)).withGlint(),"celestine") // item is custom for flavor text. need texture
     val STEEL_INGOT = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM)),"steel_ingot")
     val BERYL_COPPER_INGOT = register(Item(AiItemSettings().aiGroup(AiItemGroup.GEM)),"beryl_copper_ingot")

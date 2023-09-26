@@ -2,10 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.effects.CharmedStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.effects.CustomStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.effects.ShieldingStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.effects.SpectralVisionStatusEffect
+import me.fzzyhmstrs.amethyst_imbuement.status.CharmedStatusEffect
+import me.fzzyhmstrs.amethyst_imbuement.status.CustomStatusEffect
+import me.fzzyhmstrs.amethyst_imbuement.status.ShieldingStatusEffect
+import me.fzzyhmstrs.amethyst_imbuement.status.SpectralVisionStatusEffect
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
@@ -31,6 +31,7 @@ object RegisterStatus {
     val BLAST_RESISTANT = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF0000),"blast_resistant")
     val SOULBINDING = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000),"soulbinding")
     val RESONATING = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
+    val STUNNED = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
     val SOUL_SHIELD: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x60F5FA)
         .addAttributeModifier(RegisterAttribute.MAGIC_RESISTANCE,"c6914e3a-3266-11ee-be56-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
         ,"soul_shield")

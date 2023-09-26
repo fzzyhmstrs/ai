@@ -20,8 +20,8 @@ import net.minecraft.world.World
 
 class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
     constructor(entityType: EntityType<out PlayerFireballEntity?>, world: World): super(entityType, world)
-    constructor(world: World, owner: LivingEntity, velocityX: Double, velocityY: Double, velocityZ: Double):
-            super(RegisterEntity.PLAYER_FIREBALL,owner,velocityX,velocityY,velocityZ, world)
+    constructor(type: EntityType<out PlayerFireballEntity>,world: World, owner: LivingEntity, velocityX: Double, velocityY: Double, velocityZ: Double):
+            super(type,owner,velocityX,velocityY,velocityZ, world)
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(1)
 
@@ -86,7 +86,15 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
 
     companion object{
         fun createFireball(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int, augment:ScepterAugment): PlayerFireballEntity {
-            val fbe = PlayerFireballEntity(world, user, vel.x, vel.y, vel.z)
+            val fbe = PlayerFireballEntity(RegisterEntity.PLAYER_FIREBALL,world, user, vel.x, vel.y, vel.z)
+            fbe.passEffects(effects, level)
+            fbe.setPos(pos.x,pos.y,pos.z)
+            fbe.setAugment(augment)
+            return fbe
+        }
+
+        fun createMeteor(world: World, user: LivingEntity, vel: Vec3d, pos: Vec3d, effects: AugmentEffect, level: Int, augment:ScepterAugment): PlayerFireballEntity {
+            val fbe = PlayerFireballEntity(RegisterEntity.PLAYER_METEOR,world, user, vel.x, vel.y, vel.z)
             fbe.passEffects(effects, level)
             fbe.setPos(pos.x,pos.y,pos.z)
             fbe.setAugment(augment)

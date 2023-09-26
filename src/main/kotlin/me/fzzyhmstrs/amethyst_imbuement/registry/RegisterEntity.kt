@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.ManaPotionEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
@@ -159,6 +161,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
+    val CHAOS_BOLT_ENTITY: EntityType<ChaosBoltEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "chaos_bolt_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<ChaosBoltEntity>, world: World ->
+            ChaosBoltEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
     val BALL_LIGHTNING_ENTITY: EntityType<BallLightningEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "ball_lightning_entity"),
@@ -266,6 +281,19 @@ object RegisterEntity {
     val PLAYER_FIREBALL: EntityType<PlayerFireballEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "player_fireball_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlayerFireballEntity>, world: World ->
+            PlayerFireballEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.0f, 1.0f)).trackRangeChunks(12).trackedUpdateRate(10).build()
+    )
+
+    val PLAYER_METEOR: EntityType<PlayerFireballEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "player_meteor_entity"),
         FabricEntityTypeBuilder.create(
             SpawnGroup.MISC
         ) { entityType: EntityType<PlayerFireballEntity>, world: World ->
