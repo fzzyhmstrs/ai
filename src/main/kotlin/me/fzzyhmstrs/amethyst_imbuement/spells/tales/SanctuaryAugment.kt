@@ -32,7 +32,7 @@ class SanctuaryAugment: MinorSupportAugment(ScepterTier.THREE,13){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 12000,600,
-            23,imbueLevel,85, BookOfTales.TALES_TIER, Items.SHIELD)
+            23,imbueLevel,85, BookOfTalesItem.TALES_TIER, Items.SHIELD)
     }
 
     override fun supportEffect(
