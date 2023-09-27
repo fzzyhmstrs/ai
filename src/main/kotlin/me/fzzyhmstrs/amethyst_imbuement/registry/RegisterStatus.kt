@@ -60,6 +60,10 @@ object RegisterStatus {
         .addAttributeModifier(RegisterAttribute.SPELL_AMPLIFIER,"26613746-5d35-11ee-8c99-0242ac120002", 1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.SPELL_DAMAGE,"2661398a-5d35-11ee-8c99-0242ac120002", 0.15, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         ,"arcane_aura")
+    val MENDING_AURA = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"26613ab6-5d35-11ee-8c99-0242ac120002",2.0,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"26613bd8-5d35-11ee-8c99-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+        ,"mending_aura")
 
     fun registerAll(){}
 }
