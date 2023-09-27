@@ -24,8 +24,8 @@ class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
         get() = super.baseEffect.withAmplifier(-1,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT, 12000,750,
-            22,imbueLevel,100, BookOfTalesItem.TALES_TIER, Items.COPPER_BLOCK)
+        return AugmentDatapoint(SpellType.FURY, 12000, 750,
+            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, Items.COPPER_BLOCK)
     }
 
     override fun supportEffect(
@@ -35,7 +35,7 @@ class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, -1, max((effects.amplifier(level)/4)-1,3)))
+        user.addStatusEffect(StatusEffectInstance(RegisterStatus.LIGHTNING_AURA, -1, (effects.amplifier(level)/3)))
         effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
         return true
