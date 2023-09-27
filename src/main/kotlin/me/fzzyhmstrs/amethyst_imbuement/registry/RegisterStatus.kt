@@ -50,6 +50,10 @@ object RegisterStatus {
     val INSIGHTFUL: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xC8FF8F)
         .addAttributeModifier(RegisterAttribute.PLAYER_EXPERIENCE,"063b1430-d641-11ed-afa1-0242ac120002",0.25,EntityAttributeModifier.Operation.ADDITION)
         ,"insightful")
+    val SANCTUARY: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFEFBEA)
+        .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"26613cdc-5d35-11ee-8c99-0242ac120002",-1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE,"266141a0-5d35-11ee-8c99-0242ac120002",1.0, EntityAttributeModifier.Operation.ADDITION)
+        ,"sanctuary")
 
     //auras
     val LIGHTNING_AURA = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)
@@ -60,6 +64,10 @@ object RegisterStatus {
         .addAttributeModifier(RegisterAttribute.SPELL_AMPLIFIER,"26613746-5d35-11ee-8c99-0242ac120002", 1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.SPELL_DAMAGE,"2661398a-5d35-11ee-8c99-0242ac120002", 0.15, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         ,"arcane_aura")
+    val MENDING_AURA = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"26613ab6-5d35-11ee-8c99-0242ac120002",2.0,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"26613bd8-5d35-11ee-8c99-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+        ,"mending_aura")
 
     fun registerAll(){}
 }

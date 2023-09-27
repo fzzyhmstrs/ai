@@ -1,16 +1,21 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.passive.GolemEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -18,14 +23,14 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
+class CarapaceAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(-1,1)
+        get() = super.baseEffect.withDuration(2200,200).withAmplifier(7,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, 12000, 750,
-            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, Items.COPPER_BLOCK)
+        return AugmentDatapoint(SpellType.GRACE, 6000, 450,
+            30,imbueLevel,75, BookOfTalesItem.TALES_TIER, Items.GOLDEN_APPLE)
     }
 
     override fun supportEffect(
@@ -35,7 +40,15 @@ class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        user.addStatusEffect(StatusEffectInstance(RegisterStatus.LIGHTNING_AURA, -1, (effects.amplifier(level)/3)))
+        if(target != null) {
+            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+                target.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
+                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+                return true
+            }
+        }
+        user.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
         effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
         return true

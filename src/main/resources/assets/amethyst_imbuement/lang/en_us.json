@@ -191,6 +191,7 @@
 	"item.amethyst_imbuement.smoky_quartz": "Smoky Quartz",
 	"item.amethyst_imbuement.garnet": "Garnet",
 	"item.amethyst_imbuement.danburite": "Danburite",
+	"item.amethyst_imbuement.sardonyx": "Sardonyx",
 	"item.amethyst_imbuement.crystalline_heart": "Crystalline Heart",
 	"item.amethyst_imbuement.crystalline_heart.flavor": "Its faint heartbeat sounds like windchimes",
 	"item.amethyst_imbuement.celestine": "Celestine",
@@ -541,6 +542,9 @@
 	"enchantment.amethyst_imbuement.animal_husbandry": "Animal Husbandry",
 	"enchantment.amethyst_imbuement.animal_husbandry.desc": "Breeds, heals, and grows nearby livestock.",
 
+	"enchantment.amethyst_imbuement.arcane_aura": "Arcane Aura",
+	"enchantment.amethyst_imbuement.arcane_aura.desc": "Bathes the caster in an aura of arcane energy. Spell damage and amplification increased. Items slowly regenerate mana. Replaces any existing auras.",
+
 	"enchantment.amethyst_imbuement.ball_lightning": "Ball Lightning",
 	"enchantment.amethyst_imbuement.ball_lightning.desc": "Launches a slow-moving ball of lightning that zaps nearby enemies as it passes them.",
 
@@ -553,8 +557,17 @@
 	"enchantment.amethyst_imbuement.body_swap": "Body Swap",
 	"enchantment.amethyst_imbuement.body_swap.desc": "The caster swaps places with the furthest targeted mob or player.",
 
+	"enchantment.amethyst_imbuement.bone_fan": "Bone Fan",
+	"enchantment.amethyst_imbuement.bone_fan.desc": "Launches a fan of piercing bone shards in the direction cast.",
+
+	"enchantment.amethyst_imbuement.carapace": "Carapace",
+	"enchantment.amethyst_imbuement.carapace.desc": "Grants the caster or target Bone Armor.",
+	
+	"enchantment.amethyst_imbuement.chain_lightning": "Chain Lightning",
+	"enchantment.amethyst_imbuement.chain_lightning.desc": "A branching lightning blast that strikes the target and other nearby enemies it can branch to. Chance to stun on hit.",
+	
 	"enchantment.amethyst_imbuement.chaos_bolt": "Chaos Bolt",
-	"enchantment.amethyst_imbuement.chaos_bolt.desc": "A chaotic bolt of energy that deals damage relative to the status effects the caster has.",
+	"enchantment.amethyst_imbuement.chaos_bolt.desc": "A chaotic bolt of energy that deals damage relative to the status effects the caster has. Applies a random negative status on hit.",
 
 	"enchantment.amethyst_imbuement.chickenform": "Chickenform",
 	"enchantment.amethyst_imbuement.chickenform.desc": "Take on the aspect of a chicken, jump high, run fast, fall slow",
@@ -574,6 +587,9 @@
 	"enchantment.amethyst_imbuement.create_sponge": "Create Sponge",
 	"enchantment.amethyst_imbuement.create_sponge.desc": "Places a sponge.",
 
+	"enchantment.amethyst_imbuement.create_tnt": "Create TNT",
+	"enchantment.amethyst_imbuement.create_tnt.desc": "Places a TNT block and lights it.",
+	
 	"enchantment.amethyst_imbuement.create_water": "Create Water",
 	"enchantment.amethyst_imbuement.create_water.desc": "Places a water source block.",
 
@@ -588,6 +604,9 @@
 
 	"enchantment.amethyst_imbuement.empowered_slash": "Empowered Slash",
 	"enchantment.amethyst_imbuement.empowered_slash.desc": "A powerful energy slash attack.",
+
+	"enchantment.amethyst_imbuement.energy_blade": "Energy Blade",
+	"enchantment.amethyst_imbuement.energy_blade.desc": "Conjurs a persistent arc of energy that damages anyhting it touches and richochets off walls.",
 
 	"enchantment.amethyst_imbuement.excavate": "Excavate",
 	"enchantment.amethyst_imbuement.excavate.desc": "Mines the targeted block, successfully mining higher and higher tier blocks as as the spell levels up.",
@@ -622,6 +641,9 @@
 	"enchantment.amethyst_imbuement.freezing": "Frostbolt",
 	"enchantment.amethyst_imbuement.freezing.desc": "A frosty bolt of energy that chills the target and nearby enemies.",
 
+	"enchantment.amethyst_imbuement.full_heal": "Full Heal",
+	"enchantment.amethyst_imbuement.full_heal.desc": "Fully heals the caster or target.",
+	
 	"enchantment.amethyst_imbuement.gusting": "Gusting",
 	"enchantment.amethyst_imbuement.gusting.desc": "Knocks back all enemies in a swath in front of the user.",
 
@@ -640,6 +662,9 @@
 	"enchantment.amethyst_imbuement.ice_shard": "Ice Shard",
 	"enchantment.amethyst_imbuement.ice_shard.desc": "Launches an icicle in the direction cast.",
 
+	"enchantment.amethyst_imbuement.ice_spikes": "Ice Burst",
+	"enchantment.amethyst_imbuement.ice_burst.desc": "Calls forth a devestating field of Ice Spikes around the caster.",
+	
 	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.desc": "Summons a row of icy fangs that damage and freeze on hit.",
 
@@ -649,6 +674,9 @@
 	"enchantment.amethyst_imbuement.levitating_bullet": "Levitating Bullet",
 	"enchantment.amethyst_imbuement.levitating_bullet.desc": "Bombards nearby enemies with shulker bullets.",
 
+	"enchantment.amethyst_imbuement.lightning_aura": "Lightning Aura",
+	"enchantment.amethyst_imbuement.lightning_aura.desc": "Bathes the caster in an aura of crackling energy. Attack and cast speed increased. Shocks nearby enemies. Replaces any existing auras.",
+	
 	"enchantment.amethyst_imbuement.lightning_bolt": "Lightning Bolt",
 	"enchantment.amethyst_imbuement.lightning_bolt.desc": "Strikes a nearby target with a lightning bolt.",
 
@@ -676,6 +704,9 @@
 	"enchantment.amethyst_imbuement.mend_equipment": "Mend Equipment",
 	"enchantment.amethyst_imbuement.mend_equipment.desc": "Repairs damaged equipment in the users inventory.",
 
+	"enchantment.amethyst_imbuement.mending_aura": "Mending Aura",
+	"enchantment.amethyst_imbuement.mending_aura.desc": "Bathes the caster in an aura of rejuvenating energy. Armor and Armor Toughness increased. Items slowly repaired, or caster slowly healed. Replaces any existing auras.",
+
 	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.desc": "Grants the target or caster increased experience gain.",
 
@@ -685,6 +716,9 @@
 	"enchantment.amethyst_imbuement.persuade": "Persuade",
 	"enchantment.amethyst_imbuement.persuade.desc": "Persuades a nearby enemy to fight for you temporarily.",
 
+	"enchantment.amethyst_imbuement.planar_door": "Planar Door",
+	"enchantment.amethyst_imbuement.planar_door.desc": "Creates a portal. Casting again creates and links a second portal. A third cast will replace the first portal and link portal 2 and 3.",
+	
 	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
 	"enchantment.amethyst_imbuement.poultrymorph.desc": "Temporarily transmute the target into a harmless chicken.",
 
@@ -697,6 +731,9 @@
 	"enchantment.amethyst_imbuement.resonate": "Resonate",
 	"enchantment.amethyst_imbuement.resonate.desc": "Fires sonic pulses at nearby enemies, dealing increasing damage with each hit.",
 
+	"enchantment.amethyst_imbuement.sanctuary": "Sanctuary",
+	"enchantment.amethyst_imbuement.sanctuary.desc": "Target or caster can't be damaged or affected by negative statuses. Dispels on attack or fury spell cast.",
+	
 	"enchantment.amethyst_imbuement.shine": "Shine",
 	"enchantment.amethyst_imbuement.shine.desc": "Places a torch.",
 
@@ -715,6 +752,12 @@
 	"enchantment.amethyst_imbuement.summon_chicken": "Summon Chicken",
 	"enchantment.amethyst_imbuement.summon_chicken.desc": "Summons chickens to aid the caster in battle ;).",
 
+	"enchantment.amethyst_imbuement.summon_cholem": "Summon Cholem",
+	"enchantment.amethyst_imbuement.summon_cholem.desc": "Summons a small flock of cholems to aid the caster in battle.",
+
+	"enchantment.amethyst_imbuement.summon_chorse": "Summon Chorse",
+	"enchantment.amethyst_imbuement.summon_chorse.desc": "Summons a Chorse to carry the caster far and wide. If a summoned chorse exists, it will dismiss the existing Chorse.",
+	
 	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
 	"enchantment.amethyst_imbuement.summon_fury_totem.desc": "Summons a totem that periodically damages nearby enemies.",
 
@@ -806,6 +849,11 @@
 	"effect.amethyst_imbuement.cursed": "Cursed",
 	"effect.amethyst_imbuement.blessed": "Blessed",
 	"effect.amethyst_imbuement.insightful": "Insightful",
+	"effect.amethyst_imbuement.stunned": "Stunned",
+	"effect.amethyst_imbuement.sanctuary": "Sanctuary",
+	"effect.amethyst_imbuement.lightning_aura": "Lightning Aura",
+	"effect.amethyst_imbuement.arcane_aura": "Arcane Aura",
+	"effect.amethyst_imbuement.mending_aura": "Mending Aura",
 	
 	"lore_book.screen": "Imbuing Recipe",
 	"lore_book.screen.cost": "%1$s Levels",
