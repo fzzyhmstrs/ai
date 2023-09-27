@@ -163,10 +163,19 @@ object RegisterEnchantment {
     val WITHERING_BOLT = WitheringBoltAugment().register("withering_bolt")
     val ZAP = ZapAugment().register("zap")
 
+    //debug
     val DEBUG = DebugAugment().register("debug")
 
+    //Tales Spells
+    val ARCANE_AURA = ArcaneAuraAugment().register("arcane_aura")
+    val CARAPACE = CarapaceAugment().register("carapace")
+    val CHAIN_LIGHTNING = ChainLightningAugment().register("chain_lightning")
     val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
+    val CREATE_TNT = CreateTntAugment().register("create_tnt")
+    val FULL_HEAL = FUllHealAugment().register("full_heal")
     val LIGHTNING_AURA = LightningAuraAugment().register("lightning_aura")
+    val MENDING_AURA = MendingAuraAugment().register("mending_aura")
+    val METEOR = MeteorAugment().register("meteor")
 
     fun registerAll(){}
 
