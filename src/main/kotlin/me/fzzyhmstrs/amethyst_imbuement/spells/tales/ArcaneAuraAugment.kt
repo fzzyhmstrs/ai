@@ -18,7 +18,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import kotlin.math.max
 
-class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
+class ArcaneAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect.withAmplifier(-1,1)
