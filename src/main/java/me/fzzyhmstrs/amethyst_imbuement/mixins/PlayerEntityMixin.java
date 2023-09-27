@@ -46,6 +46,29 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
+    //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.getAttributeValue (Lnet/minecraft/entity/attribute/EntityAttribute;)D"), cancellable = true)
+    public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
+    }
+
+    //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
+    @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
+    public void amethyst_imbuement_onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    public void amethyst_imbuement_runTickingModifiableEffects(CallbackInfo ci) {
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+            ci.cancel();
+        }
+    }
+
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
         if(super.getActiveItem().isOf(RegisterTool.INSTANCE.getSNIPER_BOW())){

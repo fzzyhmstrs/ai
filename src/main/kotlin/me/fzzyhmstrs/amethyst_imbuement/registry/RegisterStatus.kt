@@ -2,10 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.status.CharmedStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.status.CustomStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.status.ShieldingStatusEffect
-import me.fzzyhmstrs.amethyst_imbuement.status.SpectralVisionStatusEffect
+import me.fzzyhmstrs.amethyst_imbuement.status.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
@@ -20,6 +17,7 @@ object RegisterStatus {
         return Registry.register(Registries.STATUS_EFFECT, Identifier(AI.MOD_ID,name), status)
     }
 
+    //basic effects
     val SHIELDING = register(ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL,0x2552A5),"shielding")
     val DRACONIC_VISION = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xA606E5),"draconic_vision")
     val SPECTRAL_VISION = register(SpectralVisionStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF),"spectral_vision")
@@ -31,7 +29,9 @@ object RegisterStatus {
     val BLAST_RESISTANT = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF0000),"blast_resistant")
     val SOULBINDING = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000),"soulbinding")
     val RESONATING = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
-    val STUNNED = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
+    val STUNNED = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
+
+    //attribute effects
     val SOUL_SHIELD: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x60F5FA)
         .addAttributeModifier(RegisterAttribute.MAGIC_RESISTANCE,"c6914e3a-3266-11ee-be56-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
         ,"soul_shield")
@@ -50,6 +50,12 @@ object RegisterStatus {
     val INSIGHTFUL: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xC8FF8F)
         .addAttributeModifier(RegisterAttribute.PLAYER_EXPERIENCE,"063b1430-d641-11ed-afa1-0242ac120002",0.25,EntityAttributeModifier.Operation.ADDITION)
         ,"insightful")
+
+    //auras
+    val LIGHTNING_AURA = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)
+        .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"0a3a25d6-5ccd-11ee-8c99-0242ac120002", 0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(RegisterAttribute.SPELL_COOLDOWN,"0a3a2842-5ccd-11ee-8c99-0242ac120002", 0.1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        ,"lightning_aura")
 
     fun registerAll(){}
 }
