@@ -1,20 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.status
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import net.minecraft.entity.Entity
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.AttributeContainer
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.Box
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
+import net.minecraft.world.World
+import kotlin.math.max
 
 class MendingAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int): StatusEffect(statusEffectCategory, i), Aura {
 
@@ -55,16 +50,16 @@ class MendingAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int
                 stacks.add(it)
             }
         }
-        val leftOverMana = manaHealItems(stacks,world,healLeft)
+        val leftOverMana = mendItems(stacks,entity.world,amplifier + 1)
         if (leftOverMana > 0) {
-            user.heal(leftOverMana * 0.025)
+            entity.heal(leftOverMana * 0.025f)
         }
     }
 
     private fun mendItems(list: MutableList<ItemStack>, world: World, amount: Int): Int{
         if (list.isEmpty()) return amount
         val stack = list.random()
-        leftover = if(stack.damage < amount) amount - stack.damage else 0
+        val leftover = if(stack.damage < amount) amount - stack.damage else 0
         stack.damage = max(0,stack.damage - amount)
         return leftover
     }

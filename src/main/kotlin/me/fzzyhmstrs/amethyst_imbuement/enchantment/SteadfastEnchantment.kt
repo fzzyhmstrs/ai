@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import com.google.common.collect.Multimap
-import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.AttributeProviding
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.enchantment_util.AttributeProviding
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute

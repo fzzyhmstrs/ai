@@ -1,20 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.status
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import net.minecraft.entity.Entity
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.AttributeContainer
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.Box
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
+import net.minecraft.world.World
 
 class ArcaneAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int): StatusEffect(statusEffectCategory, i), Aura {
 
@@ -55,9 +49,9 @@ class ArcaneAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int)
                 stacks.add(it)
             }
         }
-        val leftOverMana = manaHealItems(stacks,world,healLeft)
+        val leftOverMana = manaHealItems(stacks,entity.world)
         if (leftOverMana > 0) {
-            user.addExperience(leftOverMana)
+            entity.addExperience(leftOverMana)
         }
     }
 
@@ -65,6 +59,6 @@ class ArcaneAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int)
         if (list.isEmpty()) return 1
         val stack = list.random()
         val healedAmount = (stack.item as ManaItem).healDamage(1,stack)
-        if (healedAmount > 0) return 0 else 1
+        return if (healedAmount > 0) 0 else 1
     }
 }

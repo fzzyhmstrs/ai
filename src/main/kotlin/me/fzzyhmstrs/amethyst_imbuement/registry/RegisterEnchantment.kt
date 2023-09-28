@@ -9,8 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.*
-import me.fzzyhmstrs.amethyst_imbuement.spells.tales.ChaosBoltAugment
-import me.fzzyhmstrs.amethyst_imbuement.spells.tales.LightningAuraAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.tales.*
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
@@ -172,7 +171,7 @@ object RegisterEnchantment {
     val CHAIN_LIGHTNING = ChainLightningAugment().register("chain_lightning")
     val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
     val CREATE_TNT = CreateTntAugment().register("create_tnt")
-    val FULL_HEAL = FUllHealAugment().register("full_heal")
+    val FULL_HEAL = FullHealAugment().register("full_heal")
     val LIGHTNING_AURA = LightningAuraAugment().register("lightning_aura")
     val MENDING_AURA = MendingAuraAugment().register("mending_aura")
     val METEOR = MeteorAugment().register("meteor")

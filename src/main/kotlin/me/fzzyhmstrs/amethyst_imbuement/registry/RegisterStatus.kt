@@ -52,7 +52,7 @@ object RegisterStatus {
         ,"insightful")
     val SANCTUARY: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFEFBEA)
         .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"26613cdc-5d35-11ee-8c99-0242ac120002",-1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-        .addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE,"266141a0-5d35-11ee-8c99-0242ac120002",1.0, EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,"266141a0-5d35-11ee-8c99-0242ac120002",1.0, EntityAttributeModifier.Operation.ADDITION)
         ,"sanctuary")
 
     //auras

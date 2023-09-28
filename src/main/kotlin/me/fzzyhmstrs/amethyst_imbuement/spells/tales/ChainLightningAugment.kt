@@ -1,30 +1,32 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
+import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
-import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.TargetPredicate
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.boss.WitherEntity
-import net.minecraft.entity.boss.dragon.EnderDragonEntity
-import net.minecraft.entity.mob.*
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.math.Box
 import net.minecraft.world.World
+import java.util.*
 
 class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
@@ -47,10 +49,10 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
               val bl = target.damage(CustomDamageSources.lightningBolt(world,null,user), effects.damage(level))
               if (bl){
                   if (world.random.nextFloat() < 0.25f)
-                      target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, effects.duration(level))
+                      target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, effects.duration(level)))
                   val data = ChainLightningPersistentEffectData(target, user, listOf(target.uuid), effects.amplifier(level) - 1, effects.damage(level) - 1f, effects, level)
                   PersistentEffectHelper.setPersistentTickerNeed(this, 4, 4, data)
-                  effects.accept(target,AugmentConsumer.Type.HARMFUL)
+                  effects.accept(target, AugmentConsumer.Type.HARMFUL)
                   effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
                   if (world is ServerWorld){
                       beam(world,user,target)
@@ -58,6 +60,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
                 
                   world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
               }
+              bl
           } else {
               false
           }
@@ -75,7 +78,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.LIGHTNING_BOLT
+        return SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER
     }
 
     override val delay: PerLvlI
@@ -85,17 +88,17 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         if (data !is ChainLightningPersistentEffectData) return
         val range = data.effects.range(data.level)
         val box = Box(data.entity.pos.add(range,range/2.0,range),data.entity.pos.subtract(range,range/2.0,range))
-        val newEntities = world.getOtherEntities(data.entity, box) {(!data.struckEntities.contains(it.uuid)) && (it is LivingEntity && (it is Monster || it is HostileEntity || it is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, it, this))) && data.entity.canSee(it)}
+        val newEntities = data.user.world.getOtherEntities(data.entity, box) {(!data.struckEntities.contains(it.uuid)) && (it is LivingEntity && (it is Monster || it is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(data.user, it, this))) && data.entity.canSee(it)}
         if (newEntities.isEmpty()) return
         val nextTarget = newEntities.random()
-        if (nextTarget.damage(CustomDamageSources.lightningBolt(data.user.world,null,data.user), data.damage){
+        if (nextTarget is LivingEntity && nextTarget.damage(CustomDamageSources.lightningBolt(data.user.world,null,data.user), data.damage)){
             if (data.user.world.random.nextFloat() < 0.25f)
-                nextTarget.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, data.effects.duration(data.level))
-            effects.accept(nextTarget,AugmentConsumer.Type.HARMFUL)
+                nextTarget.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, data.effects.duration(data.level)))
+            data.effects.accept(nextTarget,AugmentConsumer.Type.HARMFUL)
             data.user.world.playSound(null, nextTarget.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.75F, 1.0F)
             val serverWorld = data.user.world
             if (serverWorld is ServerWorld){
-                beam(world,data.entity,nextTarget)
+                beam(serverWorld,data.entity,nextTarget)
             }
             if (data.chainsLeft <= 0) return
             val newList = data.struckEntities.toMutableList()
@@ -105,5 +108,5 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         }
     }
 
-    class ChainLightningPersistentEffectData(val entity: LivingEntity, val user: LivingEntity, val struckEntities: List<UUID>, val chainsLeft: Int, val damage: Float, val effects: AugmentEffects, val level: Int): PersistentEffectHelper.PersistentEffectData
+    class ChainLightningPersistentEffectData(val entity: LivingEntity, val user: LivingEntity, val struckEntities: List<UUID>, val chainsLeft: Int, val damage: Float, val effects: AugmentEffect, val level: Int): PersistentEffectHelper.PersistentEffectData
 }
