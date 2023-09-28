@@ -29,7 +29,7 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,300,150,
-            29,imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
+            29, imbueLevel,12,LoreTier.HIGH_TIER, RegisterItem.GOLDEN_HEART)
     }
 
     override fun effect(
@@ -46,7 +46,6 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
             EffectQueue.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
             effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
         }
-        entityList.add(user)
         for (entity3 in entityList) {
             if(entity3 !is Monster && entity3 is LivingEntity){
                 if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
@@ -56,6 +55,7 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
                 effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
             }
         }
+        entityList.add(user)
         //removing consumers from the main effect so that I don't get triplicate beneficial consumer effects
         val passedEffect = AugmentEffect()
         passedEffect.plus(effect)
