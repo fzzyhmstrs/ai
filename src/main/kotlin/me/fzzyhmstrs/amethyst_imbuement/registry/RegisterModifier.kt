@@ -28,6 +28,17 @@ object RegisterModifier {
     val BLESSED = AugmentModifier(Identifier(AI.MOD_ID,"blessed")).withRange(0.0,0.0,10.0).withConsumer(ModifierConsumers.BLESSED_CONSUMER).also { regMod[it] = 0 }
     val DYNAMO = AugmentModifier(Identifier(AI.MOD_ID,"dynamo"), cooldownModifier = -15.0, manaCostModifier = -15.0).also { regMod[it] = 0 }
 
+    //Soulwoven set
+    val ENSOULED_XP = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_xp")).withConsumer(ModifierConsumers.SOUL_XP_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_REGEN = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_regen")).withConsumer(ModifierConsumers.SOUL_REGEN_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_SPEED = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_speed")).withConsumer(ModifierConsumers.SOUL_SPEED_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_ABSORPTION = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_absorption")).withConsumer(ModifierConsumers.SOUL_ABSORPTION_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_ARMOR = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_armor")).withConsumer(ModifierConsumers.SOUL_ARMOR_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_COOLDOWN = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_cooldown"), cooldownModifier = -20.0).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_LEVEL = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_level"), levelModifier = 2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_AMPLIFIER = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_amplifier")).withAmplifier(2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_SPELL_XP = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_spell_xp")).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE) .also { regMod[it] = 0 }
+    
     val ENRAGED = AugmentModifier(Identifier(AI.MOD_ID,"enraged"), levelModifier = 1).withDamage(0.4F).withXpMod(SpellType.FURY,2).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 2 }
     val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious")).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 4 }
     val GENIUS = AugmentModifier(Identifier(AI.MOD_ID,"genius"), cooldownModifier = -10.0).withXpMod(SpellType.WIT,2).withRange(0.6,0.0,10.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).also { regMod[it] = 2 }
