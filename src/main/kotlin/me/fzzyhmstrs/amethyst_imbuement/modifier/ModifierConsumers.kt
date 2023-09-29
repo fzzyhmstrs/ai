@@ -34,6 +34,48 @@ import net.minecraft.world.explosion.ExplosionBehavior
 
 object ModifierConsumers {
 
+    val SOUL_XP_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> soulXpConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun soulXpConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.world.random.nextInt(4) == 0 && it is PlayerEntity)
+                it.addExperience(1)
+        }
+    }
+
+    val SOUL_REGEN_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> soulRegenConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun soulRegenConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.world.random.nextInt(4) == 0)
+                it.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION,101,0))
+        }
+    }
+
+    val SOUL_SPEED_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> soulSpeedConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun soulSpeedConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.world.random.nextInt(4) == 0)
+                it.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,100,1))
+        }
+    }
+
+    val SOUL_ABSORPTION_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> soulAbsorptionConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun soulAbsorptionConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.world.random.nextInt(4) == 0)
+                it.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION,100,1))
+        }
+    }
+
+    val SOUL_ARMOR_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> soulArmorConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
+    private fun soulArmorConsumer(list: List<LivingEntity>){
+        list.forEach {
+            if (it.world.random.nextInt(4) == 0)
+                it.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR,100,1))
+        }
+    }
+
+    /////////////
+
     val DISARMING_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> disarmingConsumer(list) }, AugmentConsumer.Type.HARMFUL)
     private fun disarmingConsumer(list: List<LivingEntity>){
         list.forEach {

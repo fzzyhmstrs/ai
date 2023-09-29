@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.weapon
 
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap

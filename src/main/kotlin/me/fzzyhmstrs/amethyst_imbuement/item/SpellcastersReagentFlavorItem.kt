@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.attribute.EntityAttribute

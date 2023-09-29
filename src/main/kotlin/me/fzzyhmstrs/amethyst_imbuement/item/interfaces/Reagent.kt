@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.interfaces
 
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack

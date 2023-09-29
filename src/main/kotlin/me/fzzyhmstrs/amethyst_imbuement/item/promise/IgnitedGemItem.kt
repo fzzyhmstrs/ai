@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.promise
 
-import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reagent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound

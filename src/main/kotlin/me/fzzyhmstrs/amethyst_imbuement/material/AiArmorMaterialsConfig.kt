@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.material
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_config.validated_field.ValidatedArmorMaterial
+import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvents
 
@@ -42,5 +43,13 @@ object AiArmorMaterialsConfig{
         .enchantability(25)
         .protectionAmounts(2,6,5,2)
         .durabilityMultiplier(12)
+        .build()
+    val SOULWOVEN = ValidatedArmorMaterial.Builder("ai_soulwoven",SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE)
+        .repairIngredient(Ingredient.ofItems(Items.CRYING_OBSIDIAN))
+        .enchantability(25)
+        .protectionAmounts(3,8,6,3)
+        .durabilityMultiplier(25)
+        .knockbackResistance(0.1f)
+        .toughness(3f)
         .build()
 }

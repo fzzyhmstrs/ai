@@ -4,7 +4,8 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.item.ShimmeringArmorItem
+import me.fzzyhmstrs.amethyst_imbuement.item.armor.ShimmeringArmorItem
+import me.fzzyhmstrs.amethyst_imbuement.item.armor.SoulwovenArmorItem
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
@@ -39,6 +40,10 @@ object RegisterArmor {
     val SHIMMERING_CHESTPLATE = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.CHESTPLATE,Item.Settings()), "shimmering_chestplate")
     val SHIMMERING_LEGGINGS = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.LEGGINGS,Item.Settings()), "shimmering_leggings")
     val SHIMMERING_BOOTS = register(ShimmeringArmorItem(AiConfig.materials.armor.shimmering, ArmorItem.Type.BOOTS,Item.Settings()),"shimmering_boots")
+    val SOULWOVEN_HELMET = register(SoulwovenArmorItem(AiConfig.materials.armor.soulwoven, ArmorItem.Type.HELMET,Item.Settings()), "soulwoven_helmet")
+    val SOULWOVEN_CHESTPLATE = register(SoulwovenArmorItem(AiConfig.materials.armor.soulwoven, ArmorItem.Type.CHESTPLATE,Item.Settings()), "soulwoven_chestplate")
+    val SOULWOVEN_LEGGINGS = register(SoulwovenArmorItem(AiConfig.materials.armor.soulwoven, ArmorItem.Type.LEGGINGS,Item.Settings()), "soulwoven_leggings")
+    val SOULWOVEN_BOOTS = register(SoulwovenArmorItem(AiConfig.materials.armor.soulwoven, ArmorItem.Type.BOOTS,Item.Settings()),"soulwoven_boots")
 
     fun registerAll() {}
 }

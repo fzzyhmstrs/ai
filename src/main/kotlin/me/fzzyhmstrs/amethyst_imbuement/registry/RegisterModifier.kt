@@ -12,6 +12,7 @@ object RegisterModifier {
 
     private val regMod: MutableMap<AugmentModifier,Int> = mutableMapOf()
 
+
     //Modifiers unique to the spellcasters focus and other non-scepter things that might use rolling
     val SAVANT_ASPECT = AugmentModifier(Identifier(AI.MOD_ID,"savant_aspect"), rollToll = 7).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1) .also { regMod[it] = 1 }
     val FULGUROUS = AugmentModifier(Identifier(AI.MOD_ID,"fulgurous"), levelModifier = 3, cooldownModifier = -40.0, rollToll = 7).withRange(0.0,0.0,50.0).withAmplifier(2).withSpellToAffect(ModifierPredicates.LIGHTNING_PREDICATE) .also { regMod[it] = 1 }
@@ -38,7 +39,8 @@ object RegisterModifier {
     val ENSOULED_LEVEL = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_level"), levelModifier = 2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_AMPLIFIER = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_amplifier")).withAmplifier(2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_SPELL_XP = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_spell_xp")).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE) .also { regMod[it] = 0 }
-    
+    internal val ensouledModifiers: List<AugmentModifier> = listOf(ENSOULED_XP, ENSOULED_REGEN, ENSOULED_SPEED, ENSOULED_ABSORPTION, ENSOULED_ARMOR, ENSOULED_COOLDOWN, ENSOULED_LEVEL, ENSOULED_AMPLIFIER, ENSOULED_SPELL_XP)
+
     val ENRAGED = AugmentModifier(Identifier(AI.MOD_ID,"enraged"), levelModifier = 1).withDamage(0.4F).withXpMod(SpellType.FURY,2).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 2 }
     val FURIOUS = AugmentModifier(Identifier(AI.MOD_ID,"furious")).withDamage(0.2F).withXpMod(SpellType.FURY,1).withSpellToAffect(ModifierPredicates.FURIOUS_PREDICATE).also { regMod[it] = 4 }
     val GENIUS = AugmentModifier(Identifier(AI.MOD_ID,"genius"), cooldownModifier = -10.0).withXpMod(SpellType.WIT,2).withRange(0.6,0.0,10.0).withSpellToAffect(ModifierPredicates.WITTY_PREDICATE).also { regMod[it] = 2 }

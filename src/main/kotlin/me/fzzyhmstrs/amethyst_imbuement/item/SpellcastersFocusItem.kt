@@ -7,6 +7,8 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.MysticalGemItem
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellcastersFocusScreenHandlerFactory
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe

@@ -9,8 +9,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
-import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler

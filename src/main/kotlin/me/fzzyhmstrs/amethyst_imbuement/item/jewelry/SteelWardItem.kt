@@ -1,5 +1,6 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful

@@ -116,6 +116,7 @@ object RegisterItem {
     val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
     val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
     val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
+    val ELIXIR_OF_REBINDING = register(ElixirOfRebindingItem(FabricItemSettings().maxCount(16)),"elixir_of_rebinding")
     val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
 

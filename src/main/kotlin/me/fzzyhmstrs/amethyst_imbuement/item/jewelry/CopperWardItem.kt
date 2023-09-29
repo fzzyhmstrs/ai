@@ -1,24 +1,27 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
-import com.google.common.collect.Multimap
-import dev.emi.trinkets.api.SlotReference
-import dev.emi.trinkets.api.TrinketItem
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
-import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
+import net.minecraft.item.ShieldItem
 import net.minecraft.registry.Registries
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
-import java.util.*
 
-open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavorful<CopperJewelryItem> {
+class CopperWardItem(
+    private val attribute: EntityAttribute,
+    private val modifier: EntityAttributeModifier,
+    settings: Settings)
+    : 
+    ShieldItem(settings), SpellcastersReagent, Modifiable, Flavorful<CopperWardItem>
+{
 
     override var flavor: String = ""
     override var glint: Boolean = false
@@ -48,10 +51,10 @@ open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavor
         return text
     }
 
-    override fun flavorText(): MutableText {
+    override fun flavorText(): MutableText{
         return flavorText
     }
-    override fun flavorDescText(): MutableText {
+    override fun flavorDescText(): MutableText{
         return flavorTextDesc
     }
 
@@ -65,21 +68,12 @@ open class CopperJewelryItem(settings: Settings) : TrinketItem(settings), Flavor
         addFlavorText(tooltip, context)
     }
 
-    override fun getModifiers(
-        stack: ItemStack,
-        slot: SlotReference,
-        entity: LivingEntity,
-        uuid: UUID
-    ): Multimap<EntityAttribute, EntityAttributeModifier>? {
-        val modifiers = super.getModifiers(stack, slot, entity, uuid)
-        modifiers.put(
-            EntityAttributes.GENERIC_MOVEMENT_SPEED,
-            EntityAttributeModifier(uuid, "amethyst_imbuement:movement_speed", 0.03, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-        )
-        return modifiers
+    override fun getAttributeModifier(): Pair<EntityAttribute,EntityAttributeModifier>{
+        return Pair(attribute,modifier)
     }
 
-    override fun getFlavorItem(): CopperJewelryItem {
+    override fun getFlavorItem(): CopperWardItem {
         return this
     }
+
 }

@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
 import com.google.common.collect.Multimap
 import dev.emi.trinkets.api.SlotReference

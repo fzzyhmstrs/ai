@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reagent
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack

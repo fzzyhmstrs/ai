@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.armor
 
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap

@@ -1,15 +1,22 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.status.*
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import net.minecraft.world.World
 
 object RegisterStatus {
 
@@ -56,18 +63,25 @@ object RegisterStatus {
         ,"sanctuary")
 
     //auras
-    val LIGHTNING_AURA = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)
+    val LIGHTNING_AURA: StatusEffect = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)
         .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"0a3a25d6-5ccd-11ee-8c99-0242ac120002", 0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         .addAttributeModifier(RegisterAttribute.SPELL_COOLDOWN,"0a3a2842-5ccd-11ee-8c99-0242ac120002", 0.1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         ,"lightning_aura")
-    val ARCANE_AURA = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xDDA0DD)
+    val ARCANE_AURA: StatusEffect = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xDDA0DD)
         .addAttributeModifier(RegisterAttribute.SPELL_AMPLIFIER,"26613746-5d35-11ee-8c99-0242ac120002", 1.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(RegisterAttribute.SPELL_DAMAGE,"2661398a-5d35-11ee-8c99-0242ac120002", 0.15, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         ,"arcane_aura")
-    val MENDING_AURA = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
+    val MENDING_AURA: StatusEffect = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xFFFFFF)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"26613ab6-5d35-11ee-8c99-0242ac120002",2.0,EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"26613bd8-5d35-11ee-8c99-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
         ,"mending_aura")
 
-    fun registerAll(){}
+    fun registerAll(){
+        AfterSpellEvent.EVENT.register{ _: World, user: LivingEntity, _: ItemStack, spell: ScepterAugment ->
+            if (user.hasStatusEffect(SANCTUARY) && AugmentHelper.getAugmentType(spell) == SpellType.FURY){
+                user.removeStatusEffect(SANCTUARY)
+                user.removeStatusEffect(IMMUNITY)
+            }
+        }
+    }
 }

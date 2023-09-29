@@ -5,12 +5,19 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.item.*
+import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersFocusItem
+import me.fzzyhmstrs.amethyst_imbuement.item.TotemItem
+import me.fzzyhmstrs.amethyst_imbuement.item.WitchesOrbItem
+import me.fzzyhmstrs.amethyst_imbuement.item.armor.FlavorHorseArmorItem
 import me.fzzyhmstrs.amethyst_imbuement.item.custom.*
+import me.fzzyhmstrs.amethyst_imbuement.item.jewelry.*
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.IgnitedGemItem
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.FzzyhammerItem
+import me.fzzyhmstrs.amethyst_imbuement.item.weapon.GlisteringTridentItem
+import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
@@ -66,13 +73,15 @@ object RegisterTool {
     val COPPER_RING = register(CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"copper_ring")
     val COPPER_HEADBAND = register(CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"copper_headband")
     val COPPER_AMULET = register(CopperJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"copper_amulet")
-    val COPPER_WARD = register(CopperWardItem(RegisterAttribute.SHIELDING,
+    val COPPER_WARD = register(
+        CopperWardItem(RegisterAttribute.SHIELDING,
         EntityAttributeModifier(UUID.fromString("c66fd31a-ce6e-11ed-afa1-0242ac120002"),"ward_modifier",0.025,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(336)),"copper_ward")
     val STEEL_AMULET = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_amulet")
     val STEEL_HEADBAND = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_headband")
     val STEEL_RING = register(SteelJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxCount(1)),"steel_ring")
-    val STEEL_WARD = register(SteelWardItem(EntityAttributes.GENERIC_ARMOR,
+    val STEEL_WARD = register(
+        SteelWardItem(EntityAttributes.GENERIC_ARMOR,
         EntityAttributeModifier(UUID.fromString("1f6875e4-d167-11ed-afa1-0242ac120002"),"steel_ward_modifier",1.25, EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(424)),"steel_ward")
     val IMBUED_RING = register(ImbuedJewelryItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.manaItems.imbuedJewelryDurability.get())),"imbued_ring")

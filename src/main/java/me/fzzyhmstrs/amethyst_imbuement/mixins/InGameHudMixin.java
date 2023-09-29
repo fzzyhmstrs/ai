@@ -3,7 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem;
+import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

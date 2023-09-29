@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.SniperBowItem
+import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.Entity

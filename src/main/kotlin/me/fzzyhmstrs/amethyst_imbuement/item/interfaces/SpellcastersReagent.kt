@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item
+package me.fzzyhmstrs.amethyst_imbuement.item.interfaces
 
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -6,7 +6,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
 import java.util.*
 
-interface SpellcastersReagent: Reagent{
+interface SpellcastersReagent: Reagent {
     fun getAttributeModifier(): Pair<EntityAttribute,EntityAttributeModifier>
 
     companion object{

@@ -52,6 +52,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
             ci.cancel();
         }
+        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSANCTUARY())){
+            this.removeStatusEffect(RegisterStatus.INSTANCE.getSANCTUARY());
+            this.removeStatusEffect(RegisterStatus.INSTANCE.getIMMUNITY());
+        }
     }
 
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
