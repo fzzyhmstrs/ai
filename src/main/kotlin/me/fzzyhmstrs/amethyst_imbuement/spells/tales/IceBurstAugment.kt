@@ -1,34 +1,37 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.spell.IceSpikeEntity.Companion.conjureIceSpikes
+import me.fzzyhmstrs.amethyst_imbuement.entity.spell.IceSpikeEntity
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
+import org.joml.Vector2d
 import kotlin.math.min
 
-class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
+class IceBurstAugment: MiscAugment(ScepterTier.THREE,9){
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withAmplifier(11,1,0)
-            .withDamage(5.25F,0.25F)
-            .withDuration(225,25)
+            .withDamage(12.75F,0.25F)
+            .withDuration(175,25)
+            .withRange(7.0,1.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,14,
-            8, imbueLevel,2, LoreTier.NO_TIER, Items.BLUE_ICE)
+        return AugmentDatapoint(
+            SpellType.FURY, 80, 40,
+            22, imbueLevel, 2, BookOfTalesItem.TALES_TIER, Items.BLUE_ICE
+        )
     }
 
     override fun effect(
@@ -49,28 +52,35 @@ class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
             d = user.y
             e = d + 2.0
         }
+        val horPos = Vector2d(user.x,user.z)
         val f = (user.yaw + 90) * MathHelper.PI / 180
-        for (i in 0..effect.amplifier(level)) {
-            val g = 1.25 * (i + 1).toDouble()
-            val success = conjureIceSpikes(
-                world,
-                user,
-                user.x + MathHelper.cos(f).toDouble() * g,
-                user.z + MathHelper.sin(f).toDouble() * g,
-                d,
-                e,
-                f,
-                i,
-                effect,
-                level,
-                this
-            )
-            if (success != Double.NEGATIVE_INFINITY) {
-                successes++
-                d = success
-                e = d + 2.0
+        val range = effect.range(level)
+        var i = -range
+        while (i < range){
+            var j = -range
+            while(j < range){
+                if (horPos.distance(i,j) > range || horPos.distance(i,j) < 0.8) continue
+                val success = IceSpikeEntity.conjureIceSpikes(
+                    world,
+                    user,
+                    i,
+                    j,
+                    d,
+                    e,
+                    f,
+                    horPos.distance(i,j).toInt() + 1,
+                    effect,
+                    level,
+                    this
+                )
+                if (success != Double.NEGATIVE_INFINITY) {
+                    successes++
+                    d = success
+                    e = d + 2.0
+                }
+                j += 0.75
             }
-
+            i += 0.75
         }
         val bl = successes > 0
         if (bl){
@@ -80,6 +90,6 @@ class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_EVOKER_FANGS_ATTACK
+        return RegisterSound.ICE_SPIKES
     }
 }

@@ -1,18 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
 import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
-import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
-import me.fzzyhmstrs.fzzy_core.item_util.interfaces.Flavorful
+import me.fzzyhmstrs.fzzy_core.item_util.FlavorHelper
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ShieldItem
-import net.minecraft.registry.Registries
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
-import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 class SteelWardItem(
@@ -20,42 +17,15 @@ class SteelWardItem(
     private val modifier: EntityAttributeModifier,
     settings: Settings)
     : 
-    ShieldItem(settings), SpellcastersReagent, Modifiable, Flavorful<SteelWardItem>
+    ShieldItem(settings), SpellcastersReagent, Modifiable
 {
 
-    override var flavor: String = ""
-    override var glint: Boolean = false
-    override var flavorDesc: String = ""
-
     private val flavorText: MutableText by lazy{
-        makeFlavorText()
+        FlavorHelper.makeFlavorText(this)
     }
 
     private val flavorTextDesc: MutableText by lazy{
-        makeFlavorTextDesc()
-    }
-
-    private fun makeFlavorText(): MutableText {
-        val id = Registries.ITEM.getId(this)
-        val key = "item.${id.namespace}.${id.path}.flavor"
-        val text = AcText.translatable(key).formatted(Formatting.WHITE, Formatting.ITALIC)
-        if (text.string == key) return AcText.empty()
-        return text
-    }
-
-    private fun makeFlavorTextDesc(): MutableText {
-        val id = Registries.ITEM.getId(this)
-        val key = "item.${id.namespace}.${id.path}.flavor.desc"
-        val text = AcText.translatable(key).formatted(Formatting.WHITE)
-        if (text.string == key) return AcText.empty()
-        return text
-    }
-
-    override fun flavorText(): MutableText{
-        return flavorText
-    }
-    override fun flavorDescText(): MutableText{
-        return flavorTextDesc
+        FlavorHelper.makeFlavorTextDesc(this)
     }
 
     override fun appendTooltip(
@@ -65,15 +35,10 @@ class SteelWardItem(
         context: TooltipContext
     ) {
         super.appendTooltip(stack, world, tooltip, context)
-        addFlavorText(tooltip, context)
+        FlavorHelper.addFlavorText(tooltip, context, flavorText, flavorTextDesc)
     }
 
     override fun getAttributeModifier(): Pair<EntityAttribute,EntityAttributeModifier>{
         return Pair(attribute,modifier)
     }
-
-    override fun getFlavorItem(): SteelWardItem {
-        return this
-    }
-
 }

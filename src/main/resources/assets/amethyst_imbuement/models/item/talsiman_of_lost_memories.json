@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "amethyst_imbuement:item/talisman_of_lost_memories"
+  }
+}

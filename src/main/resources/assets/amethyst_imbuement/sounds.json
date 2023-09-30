@@ -32,6 +32,19 @@
       "amethyst_imbuement:locked_book_1",
       "amethyst_imbuement:locked_book_2"
     ]
+  },
+  "execute": {
+    "subtitle": "subtitles.amethyst_imbuement.execute",
+    "sounds": [
+      "amethyst_imbuement:execute"
+    ]
+  },
+  "ice_spikes": {
+    "subtitle": "subtitles.amethyst_imbuement.ice_spikes",
+    "sounds": [
+      "amethyst_imbuement:ice_spikes_1",
+      "amethyst_imbuement:ice_spikes_2"
+    ]
   }
 }
 

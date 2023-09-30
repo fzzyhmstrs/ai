@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier

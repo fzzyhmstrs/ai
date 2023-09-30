@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect

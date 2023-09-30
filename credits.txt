@@ -1,7 +1,22 @@
 Credits for assets:
 
 Unlocking Sound Event:
-angelkunev: https://freesound.org/people/angelkunev/
+"Door Unlock" by angelkunev: https://freesound.org/people/angelkunev/
 
 Locked Book Sound Event:
-mitchanary: https://freesound.org/people/mitchanary/
+"door locked.wav" by mitchanary: https://freesound.org/people/mitchanary/
+
+Ice Spikes Sound Event (component sounds used):
+"Gathering, Ice, A.wav" by InspectorJ (www.jshaw.co.uk) of https://freesound.org/people/InspectorJ/
+"SFX_Destruction_Ice_x04.wav" by Euphrosyyn of https://freesound.org/people/Euphrosyyn/
+
+Energy Blade Sound Event:
+"Anime_drama_shing_sword_2.wav" by Euphrosyyn of https://freesound.org/people/Euphrosyyn/
+
+Execute Sound Events (component sounds used):
+"Scythe Sharpen.wav" by CapsLok of https://freesound.org/people/CapsLok/
+"Fleshy Impale Bone Break with Gut Dropping.wav" by UOregonCinemaStudies of https://freesound.org/people/UOregonCinemaStudies/
+"Zombie Flesh Bites" by MrPokephile of https://freesound.org/people/MrPokephile/
+
+MCDE Icons:
+BackupCup of https://legacy.curseforge.com/members/backupcup/projects and https://github.com/EndLone

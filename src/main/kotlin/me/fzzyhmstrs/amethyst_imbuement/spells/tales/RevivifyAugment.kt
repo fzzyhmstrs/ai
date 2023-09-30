@@ -9,13 +9,13 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.item.Items
+import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.mob.Monster
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -41,8 +41,8 @@ class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
         if(target != null) {
             if (target !is Monster && target is LivingEntity) {
                 if (!(target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this))) {
-                  target.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level) * 0.7, effects.amplifier(1))
-                  target.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, effects.duration(level + 3) * 0.7, effects.amplifier(level - 1))
+                  target.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, (effects.duration(level) * 0.7).toInt(), effects.amplifier(1)))
+                  target.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, (effects.duration(level + 3) * 0.7).toInt(), effects.amplifier(level - 1)))
                   effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                   val passedEffect = AugmentEffect()
                   passedEffect.plus(effects)
@@ -55,8 +55,8 @@ class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
                 }
             }
         }
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(1))
-        user.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, effects.duration(level + 3), effects.amplifier(level))
+        user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(1)))
+        user.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, effects.duration(level + 3), effects.amplifier(level)))
         effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
         val passedEffect = AugmentEffect()
         passedEffect.plus(effects)
@@ -64,7 +64,7 @@ class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
         passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.HARMFUL)
         RegisterEnchantment.MASS_CLEANSE.effect(world, user, mutableListOf(user), level, passedEffect)
         RegisterEnchantment.MASS_HEAL.effect(world, user, mutableListOf(user), level, passedEffect)
-        world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+        world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
         return true
     }
 

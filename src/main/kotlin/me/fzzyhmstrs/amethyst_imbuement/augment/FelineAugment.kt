@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
-import me.fzzyhmstrs.amethyst_imbuement.item.ImbuedJewelryItem
+import me.fzzyhmstrs.amethyst_imbuement.item.jewelry.ImbuedJewelryItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment.FELINE
 import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.enchantment.EnchantmentHelper

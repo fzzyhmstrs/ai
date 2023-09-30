@@ -155,6 +155,11 @@ object RegisterScepter {
         .withModifiers(listOf(RegisterModifier.FOWL))
         ,"a_scepter_so_fowl")
 
+    val JUDGMENT = register(SpellbladeItem(AiConfig.materials.scepters.tier3Scepter,7,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
+        .withAugments(listOf(RegisterEnchantment.TORRENT_OF_BEAKS,RegisterEnchantment.CHICKENFORM,RegisterEnchantment.POULTRYMORPH), true)
+        .withModifiers(listOf(RegisterModifier.FOWL))
+        ,"a_scepter_so_fowl")
+
 
     // Spell scrolls
     val EMPTY_SPELL_SCROLL = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"empty_spell_scroll")

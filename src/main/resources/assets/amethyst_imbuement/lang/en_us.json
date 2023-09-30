@@ -384,6 +384,8 @@
 	"item.amethyst_imbuement.moss_covered_seeds": "Moss-Covered Seeds",
 	"item.amethyst_imbuement.elixir_of_rebinding": "Elixir of Rebinding",
 	"item.amethyst_imbuement.elixir_of_rebinding.tooltip1": "Grant a temporary Arcane Aura to regenerate mana and increase spell power",
+	"item.amethyst_imbuement.talisman_of_lost_memories": "Talisman of Lost Memories",
+	"item.amethyst_imbuement.talisman_of_lost_memories.flavor": "If you listen close you could swear it's humming a sad tune...",
 	
 	"block.amethyst_imbuement.polished_amethyst_block": "Polished Amethyst Block",
 	"block.amethyst_imbuement.polished_amethyst_slab": "Polished Amethyst Slab",
@@ -622,6 +624,9 @@
 	"enchantment.amethyst_imbuement.excavate": "Excavate",
 	"enchantment.amethyst_imbuement.excavate.desc": "Mines the targeted block, successfully mining higher and higher tier blocks as as the spell levels up.",
 
+	"enchantment.amethyst_imbuement.execute": "Execute",
+	"enchantment.amethyst_imbuement.execute.desc": "Instantly kills a target if its health is low enough, otherwise deals damage.",
+
 	"enchantment.amethyst_imbuement.exhaust": "Exhaust",
 	"enchantment.amethyst_imbuement.exhaust.desc": "Weakens and slows the target.",
 
@@ -673,8 +678,8 @@
 	"enchantment.amethyst_imbuement.ice_shard": "Ice Shard",
 	"enchantment.amethyst_imbuement.ice_shard.desc": "Launches an icicle in the direction cast.",
 
-	"enchantment.amethyst_imbuement.ice_spikes": "Ice Burst",
-	"enchantment.amethyst_imbuement.ice_burst.desc": "Calls forth a devestating field of Ice Spikes around the caster.",
+	"enchantment.amethyst_imbuement.ice_burst": "Ice Burst",
+	"enchantment.amethyst_imbuement.ice_burst.desc": "Calls forth a devastating field of Ice Spikes around the caster.",
 	
 	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.desc": "Summons a row of icy fangs that damage and freeze on hit.",
@@ -1023,6 +1028,16 @@
 	"scepter.modifier.amethyst_imbuement:inner_fire": "Inner Fire",
 	"scepter.modifier.amethyst_imbuement:blessed": "Blessed",
 	"scepter.modifier.amethyst_imbuement:dynamo": "Dynamo",
+
+	"scepter.modifier.amethyst_imbuement:ensouled_xp": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_regen": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_speed": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_absorption": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_armor": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_cooldown": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_level": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_amplifier": "Ensouled",
+	"scepter.modifier.amethyst_imbuement:ensouled_spell_xp": "Ensouled",
 	
 	"scepter.modifier.amethyst_imbuement:furious.desc": "+1 §c□ Fury§r XP and minor §c□ Fury§r bonuses",
 	"scepter.modifier.amethyst_imbuement:enraged.desc": "+2 §c□ Fury§r XP and minor §c□ Fury§r bonuses",
@@ -1077,6 +1092,16 @@
 	"scepter.modifier.amethyst_imbuement:inner_fire.desc": "Increased spell effect amplification and duration",
 	"scepter.modifier.amethyst_imbuement:blessed.desc": "Applies the Blessed status on successful cast",
 	"scepter.modifier.amethyst_imbuement:dynamo.desc": "Reduces spell cooldown and mana cost",
+
+	"scepter.modifier.amethyst_imbuement:ensouled_xp.desc": "Casting a Soul spell grants player experience.",
+	"scepter.modifier.amethyst_imbuement:ensouled_regen.desc": "Casting a Soul spell has a chance to grant Regeneration.",
+	"scepter.modifier.amethyst_imbuement:ensouled_speed.desc": "Casting a Soul spell has a chance to grant Speed.",
+	"scepter.modifier.amethyst_imbuement:ensouled_absorption.desc": "Casting a Soul spell has a chance to grant Absorption.",
+	"scepter.modifier.amethyst_imbuement:ensouled_armor.desc": "Casting a Soul spell has a chance to grant Bone Armor",
+	"scepter.modifier.amethyst_imbuement:ensouled_cooldown.desc": "Soul spell cooldowns reduced 20%.",
+	"scepter.modifier.amethyst_imbuement:ensouled_level.desc": "Soul spell effective level increased by 1.",
+	"scepter.modifier.amethyst_imbuement:ensouled_amplifier.desc": "Soul spell effect amplification increased by 2.",
+	"scepter.modifier.amethyst_imbuement:ensouled_spell_xp.desc": "Soul spells gain an additional spell XP on cast.",
 	
 	"amethyst_imbuement.tip.scepters": "There are 30 scepters in Amethyst Imbuement. Don't just craft a plain scepter; check out the upgrade tree!",
 	"amethyst_imbuement.tip.figurine": "Malachite Figurines can only be obtained by trading with a Crystal Witch villager.",

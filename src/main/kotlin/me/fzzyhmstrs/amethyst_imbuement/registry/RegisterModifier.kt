@@ -36,7 +36,7 @@ object RegisterModifier {
     val ENSOULED_ABSORPTION = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_absorption")).withConsumer(ModifierConsumers.SOUL_ABSORPTION_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_ARMOR = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_armor")).withConsumer(ModifierConsumers.SOUL_ARMOR_CONSUMER).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_COOLDOWN = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_cooldown"), cooldownModifier = -20.0).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
-    val ENSOULED_LEVEL = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_level"), levelModifier = 2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
+    val ENSOULED_LEVEL = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_level"), levelModifier = 1).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_AMPLIFIER = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_amplifier")).withAmplifier(2).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE).also { regMod[it] = 0 }
     val ENSOULED_SPELL_XP = AugmentModifier(Identifier(AI.MOD_ID,"ensouled_spell_xp")).withXpMod(SpellType.FURY,1).withXpMod(SpellType.GRACE,1).withXpMod(SpellType.WIT,1).withSpellToAffect(ModifierPredicates.SOUL_PREDICATE) .also { regMod[it] = 0 }
     internal val ensouledModifiers: List<AugmentModifier> = listOf(ENSOULED_XP, ENSOULED_REGEN, ENSOULED_SPEED, ENSOULED_ABSORPTION, ENSOULED_ARMOR, ENSOULED_COOLDOWN, ENSOULED_LEVEL, ENSOULED_AMPLIFIER, ENSOULED_SPELL_XP)

@@ -12,7 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.GlisteringTomeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
-import me.fzzyhmstrs.amethyst_imbuement.spells.DebugAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.special.DebugAugment
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -114,7 +114,7 @@ object RegisterItem {
     val BOOK_OF_TALES = register(BookOfTalesItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales") as CustomFlavorItem
     val GLISTERING_TOME = register(GlisteringTomeItem(FabricItemSettings()),"glistering_tome")
     val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
-    val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
+    //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
     val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
     val ELIXIR_OF_REBINDING = register(ElixirOfRebindingItem(FabricItemSettings().maxCount(16)),"elixir_of_rebinding")
     val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(

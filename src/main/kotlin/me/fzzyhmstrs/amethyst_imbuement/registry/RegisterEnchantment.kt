@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.augment.*
 import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.*
+import me.fzzyhmstrs.amethyst_imbuement.spells.special.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.*
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
 import net.minecraft.enchantment.DamageEnchantment
@@ -107,6 +108,7 @@ object RegisterEnchantment {
     val DASH = DashAugment().register("dash")
     val EMPOWERED_SLASH = EmpoweredSlashAugment().register("empowered_slash")
     val EXCAVATE = ExcavateAugment().register("excavate")
+    val EXECUTE = ExecuteAugment().register("execute")
     val EXHAUST = ExhaustAugment().register("exhaust")
     val FANG_BARRAGE = FangBarrageAugment().register("fang_barrage")
     val FANGS = FangsAugment().register("fangs")
@@ -172,9 +174,11 @@ object RegisterEnchantment {
     val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
     val CREATE_TNT = CreateTntAugment().register("create_tnt")
     val FULL_HEAL = FullHealAugment().register("full_heal")
+    val ICE_BURST = FullHealAugment().register("ice_burst")
     val LIGHTNING_AURA = LightningAuraAugment().register("lightning_aura")
     val MENDING_AURA = MendingAuraAugment().register("mending_aura")
     val METEOR = MeteorAugment().register("meteor")
+    val SANCTUARY = SanctuaryAugment().register("sanctuary")
 
     fun registerAll(){}
 

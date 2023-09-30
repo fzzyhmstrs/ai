@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -15,7 +15,10 @@ import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.PrioritizedGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.boss.WitherEntity
 import net.minecraft.entity.boss.dragon.EnderDragonEntity
 import net.minecraft.entity.mob.*
@@ -62,7 +65,9 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
                     }
 
 
-                    PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),PersuadePersistentEffectData(target,targets))
+                    PersistentEffectHelper.setPersistentTickerNeed(this,effects.duration(level),effects.duration(level),
+                        PersuadePersistentEffectData(target,targets)
+                    )
                     world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
                     true
                 } else {

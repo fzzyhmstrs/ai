@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.spells
+package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment.Companion.NOTE_BLAST
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity

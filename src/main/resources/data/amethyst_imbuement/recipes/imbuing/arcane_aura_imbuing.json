@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:crying_obsidian"
+  },
+  "craftF": {
+	"item": "minecraft:crying_obsidian"
+  },
+  "craftH": {
+	"item": "minecraft:crying_obsidian"
+  },
+  "title": "Arcane Aura",
+  "cost": 33,
+  "augment": "amethyst_imbuement:arcane_aura"
+}
+

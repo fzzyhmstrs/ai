@@ -23,6 +23,12 @@ object RegisterSound {
     private val LOCKED_BOOK_ID = Identifier(AI.MOD_ID,"locked_book")
     val LOCKED_BOOK = soundEvent(LOCKED_BOOK_ID)
 
+    private val EXECUTE_ID = Identifier(AI.MOD_ID,"execute")
+    val EXECUTE = soundEvent(EXECUTE_ID)
+
+    private val ICE_SPIKES_ID = Identifier(AI.MOD_ID,"ice_spikes")
+    val ICE_SPIKES = soundEvent(ICE_SPIKES_ID)
+
     private fun soundEvent(identifier: Identifier): SoundEvent{
         return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))
     }
