@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagent
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.FlavorHelper
 import net.minecraft.client.item.TooltipContext

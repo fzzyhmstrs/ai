@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.item.interfaces
+package me.fzzyhmstrs.amethyst_imbuement.item
 
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier

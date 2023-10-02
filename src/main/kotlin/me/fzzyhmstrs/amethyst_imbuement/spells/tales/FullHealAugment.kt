@@ -38,15 +38,18 @@ class FullHealAugment: MinorSupportAugment(ScepterTier.THREE,7){
         if(target != null) {
             if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 val toHeal = (target as LivingEntity).maxHealth - target.health
-                target.heal(toHeal)
-                if (target.health != target.maxHealth) return false
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                return true
+                if (toHeal > 0f) {
+                    target.heal(toHeal)
+                    if (target.health != target.maxHealth) return false
+                    world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+                    effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+                    return true
+                }
             }
         }
 
-        val toHeal = (target as LivingEntity).maxHealth - target.health
+        val toHeal = user.maxHealth - user.health
+        if (toHeal <= 0f) return false
         user.heal(toHeal)
         if (user.health != user.maxHealth) return false
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)

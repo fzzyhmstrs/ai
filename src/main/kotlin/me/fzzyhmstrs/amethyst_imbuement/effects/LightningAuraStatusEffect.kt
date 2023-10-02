@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.status
+package me.fzzyhmstrs.amethyst_imbuement.effects
 
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources

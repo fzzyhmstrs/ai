@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -19,7 +20,6 @@ import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
@@ -143,7 +143,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
                     this.x,
                     this.y,
                     this.z,
-                    SoundEvents.ENTITY_EVOKER_FANGS_ATTACK,
+                    RegisterSound.ICE_SPIKES,
                     this.soundCategory,
                     1.0f,
                     random.nextFloat() * 0.2f + 0.85f,

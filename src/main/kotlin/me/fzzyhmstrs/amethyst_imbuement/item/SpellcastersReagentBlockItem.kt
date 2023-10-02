@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
 import net.minecraft.block.Block
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier

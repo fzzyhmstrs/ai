@@ -174,7 +174,7 @@ object RegisterEnchantment {
     val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
     val CREATE_TNT = CreateTntAugment().register("create_tnt")
     val FULL_HEAL = FullHealAugment().register("full_heal")
-    val ICE_BURST = FullHealAugment().register("ice_burst")
+    val ICE_BURST = IceBurstAugment().register("ice_burst")
     val LIGHTNING_AURA = LightningAuraAugment().register("lightning_aura")
     val MENDING_AURA = MendingAuraAugment().register("mending_aura")
     val METEOR = MeteorAugment().register("meteor")

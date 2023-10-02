@@ -7,8 +7,8 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem

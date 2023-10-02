@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
-import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
+import me.fzzyhmstrs.amethyst_imbuement.entity.spell.ChaosBoltEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -28,12 +28,9 @@ class ChaosBoltAugment: SummonProjectileAugment(ScepterTier.THREE,21) {
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val me = MissileEntity(world, user, false)
-        me.setVelocity(user,user.pitch,user.yaw,0.0f,
-            2.0f,
-            0.1f)
-        me.passEffects(effects, level)
-        return me
+        val speed = 2.0F
+        val div = 0.75F
+        return ChaosBoltEntity.createChaosBolt(world, user, speed, div, effects, level,this)
     }
 
     override fun soundEvent(): SoundEvent {

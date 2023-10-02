@@ -3,8 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 import me.fzzyhmstrs.amethyst_core.item_util.DefaultScepterItem
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reagent
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.material.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem

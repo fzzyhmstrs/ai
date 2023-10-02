@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -18,7 +19,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.Monster
-import net.minecraft.item.Items
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -35,7 +35,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, 200, 100,
-            22, imbueLevel, 12, BookOfTalesItem.TALES_TIER, Items.COAL)
+            22, imbueLevel, 12, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
     }
 
     override fun supportEffect(

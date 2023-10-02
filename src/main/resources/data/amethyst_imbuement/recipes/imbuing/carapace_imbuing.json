@@ -1,0 +1,31 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftF": {
+	"item": "minecraft:shulker_shell"
+  },
+  "craftH": {
+	"item": "minecraft:shulker_shell"
+  },
+  "title": "Carapace",
+  "cost": 27,
+  "augment": "amethyst_imbuement:carapace"
+}
+

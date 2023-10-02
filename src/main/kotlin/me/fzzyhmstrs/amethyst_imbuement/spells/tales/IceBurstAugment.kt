@@ -45,21 +45,24 @@ class IceBurstAugment: MiscAugment(ScepterTier.THREE,9){
         var successes = 0
         var d: Double
         var e: Double
-        if (target != null){
-            d = min(target.y, user.y)
-            e = d + 2.0
-        } else {
-            d = user.y
-            e = d + 2.0
-        }
         val horPos = Vector2d(user.x,user.z)
         val f = (user.yaw + 90) * MathHelper.PI / 180
         val range = effect.range(level)
-        var i = -range
-        while (i < range){
-            var j = -range
-            while(j < range){
-                if (horPos.distance(i,j) > range || horPos.distance(i,j) < 0.8) continue
+        var i = user.x - range
+        while (i < user.x + range){
+            if (target != null){
+                d = min(target.y, user.y)
+                e = d + 2.0
+            } else {
+                d = user.y
+                e = d + 2.0
+            }
+            var j = user.z - range
+            while(j < user.z + range){
+                if (horPos.distance(i,j) > range || horPos.distance(i,j) < 0.8) {
+                    j += 0.75
+                    continue
+                }
                 val success = IceSpikeEntity.conjureIceSpikes(
                     world,
                     user,
@@ -68,7 +71,7 @@ class IceBurstAugment: MiscAugment(ScepterTier.THREE,9){
                     d,
                     e,
                     f,
-                    horPos.distance(i,j).toInt() + 1,
+                    (horPos.distance(i,j).toInt() * 2) + 1,
                     effect,
                     level,
                     this

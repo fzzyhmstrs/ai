@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.status
+package me.fzzyhmstrs.amethyst_imbuement.effects
 
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue

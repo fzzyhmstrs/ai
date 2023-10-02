@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
-import eu.pb4.common.protection.api.CommonProtection
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
@@ -9,18 +8,17 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import net.minecraft.block.AbstractFireBlock
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.particle.DustParticleEffect
 import net.minecraft.particle.ParticleEffect
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries
+import net.minecraft.util.DyeColor
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.math.MathHelper
-import net.minecraft.world.GameRules
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): MissileEntity(entityType, world) {
@@ -82,26 +80,25 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
 
     override fun onMissileBlockHit(blockHitResult: BlockHitResult) {
         super.onMissileBlockHit(blockHitResult)
-        val owner = this.owner
+        /*val owner = this.owner
         if (owner !is PlayerEntity) return
         val blockPos1 = blockHitResult.blockPos.offset(blockHitResult.side)
         if ((world.gameRules.getBoolean(GameRules.DO_MOB_GRIEFING))
             && world.isAir(blockPos1)
             && CommonProtection.canPlaceBlock(world,blockPos1,owner.gameProfile,owner)) {
             world.setBlockState(blockPos1, AbstractFireBlock.getState(world, blockPos1))
-        }
-    }
-
-    override fun isBurning(): Boolean {
-        return this.age > 1
+        }*/
     }
 
     override fun getParticleType(): ParticleEffect {
-        return ParticleTypes.FLAME
+        val rnd3 = world.random.nextInt(DyeColor.values().size)
+        val colorInt = DyeColor.values()[rnd3].signColor
+        val color = Vec3d.unpackRgb(colorInt).toVector3f()
+        return DustParticleEffect(color,0.8f)
     }
 
     companion object{
-        fun createFlamebolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int, augment:ScepterAugment): ChaosBoltEntity {
+        fun createChaosBolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int, augment:ScepterAugment): ChaosBoltEntity {
             val fbe = ChaosBoltEntity(
                 world, user, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(

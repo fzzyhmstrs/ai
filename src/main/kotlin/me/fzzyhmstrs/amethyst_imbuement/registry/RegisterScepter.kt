@@ -158,7 +158,7 @@ object RegisterScepter {
     val JUDGMENT = register(SpellbladeItem(AiConfig.materials.scepters.tier3Scepter,7,-3f,AiItemSettings().aiGroup(AiItemGroup.SCEPTER).rarity(Rarity.EPIC))
         .withAugments(listOf(RegisterEnchantment.TORRENT_OF_BEAKS,RegisterEnchantment.CHICKENFORM,RegisterEnchantment.POULTRYMORPH), true)
         .withModifiers(listOf(RegisterModifier.FOWL))
-        ,"a_scepter_so_fowl")
+        ,"judgment")
 
 
     // Spell scrolls

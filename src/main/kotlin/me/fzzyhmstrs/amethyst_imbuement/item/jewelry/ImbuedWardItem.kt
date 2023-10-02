@@ -2,8 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.item.jewelry
 
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.Reactant
-import me.fzzyhmstrs.amethyst_imbuement.item.interfaces.SpellcastersReagent
+import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
+import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagent
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable

@@ -28,7 +28,7 @@ class CarapaceAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 6000, 450,
-            30,imbueLevel,75, BookOfTalesItem.TALES_TIER, Items.GOLDEN_APPLE)
+            30,imbueLevel,75, BookOfTalesItem.TALES_TIER, Items.SHULKER_SHELL)
     }
 
     override fun supportEffect(
