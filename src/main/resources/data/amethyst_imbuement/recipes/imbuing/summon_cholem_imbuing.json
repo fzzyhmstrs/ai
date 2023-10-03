@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:cooked_chicken"
+  },
+  "craftF": {
+	"item": "minecraft:cooked_chicken"
+  },
+  "craftH": {
+	"item": "minecraft:cooked_chicken"
+  },
+  "title": "Summon Cholem",
+  "cost": 37,
+  "augment": "amethyst_imbuement:summon_cholem"
+}
