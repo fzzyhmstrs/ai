@@ -68,6 +68,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(6).build()
     )
 
+    val CHOLEM_ENTITY: EntityType<CholemEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "cholem"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<CholemEntity>, world: World ->
+            CholemEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.1f)).trackRangeChunks(10).build()
+    )
+
     val CRYSTAL_GOLEM_ENTITY: EntityType<CrystallineGolemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "crystal_golem"),

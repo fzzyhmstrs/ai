@@ -433,6 +433,15 @@ object AiConfig
             var perLvlDamage = ValidatedFloat(0.25f,1.0f,0.0f)
         }
 
+        var cholem = Cholem()
+        class Cholem: ConfigSection(Header.Builder().space().add("readme.entities.cholem_1").build()){
+            var baseLifespan = ValidatedInt(3600,Int.MAX_VALUE-1000000,20)
+            var baseHealth = ValidatedDouble(80.0,800.0,1.0)
+            var baseArmor = ValidatedDouble(4.0,20.0,1.0)
+            var baseDamage = ValidatedFloat(10f,100f,0.0f)
+            var enragedDamage = ValidatedFloat(4f,40f,0.0f)
+        }
+
         override fun generateNewClass(): Entities {
             return this
         }
@@ -444,7 +453,7 @@ object AiConfig
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
 
 
     override fun initConfig() {
@@ -454,12 +463,12 @@ object AiConfig
 
     override fun reload(manager: ResourceManager) {
         items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
-        materials = SyncedConfigHelperV1.readOrCreateAndValidate("materials_v0.json", base = AI.MOD_ID, configClass = {Materials()})
+        materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
         blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v2.json","villages_v1.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
         trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v3.json","entities_v2.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
     }
 
     override fun getFabricId(): Identifier {

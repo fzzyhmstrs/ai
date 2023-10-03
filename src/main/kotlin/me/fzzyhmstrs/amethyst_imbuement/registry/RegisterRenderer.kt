@@ -41,6 +41,7 @@ object RegisterRenderer {
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
+    val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
     
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
     val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_armor")
@@ -77,6 +78,10 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.BOOM_CHICKEN_ENTITY
         ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.CHOLEM_ENTITY
+        ){ context: EntityRendererFactory.Context -> CholemEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.CRYSTAL_GOLEM_ENTITY
@@ -178,6 +183,7 @@ object RegisterRenderer {
 
         /////////////////////////////////
 
+        EntityModelLayerRegistry.registerModelLayer(CHOLEM_ENTITY,CholemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(CRYSTAL_GOLEM_ENTITY,CrystallineGolemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(DRACONIC_BOX_ENTITY,DraconicBoxModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(BONESTORM_ENTITY) { BlazeEntityModel.getTexturedModelData() }
