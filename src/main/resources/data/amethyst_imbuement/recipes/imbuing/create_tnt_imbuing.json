@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:tnt"
+  },
+  "craftF": {
+	"item": "minecraft:tnt"
+  },
+  "craftH": {
+	"item": "minecraft:tnt"
+  },
+  "title": "Create TNT",
+  "cost": 27,
+  "augment": "amethyst_imbuement:create_tnt"
+}
