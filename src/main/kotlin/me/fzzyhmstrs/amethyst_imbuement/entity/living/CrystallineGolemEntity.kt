@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -88,17 +89,21 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         world.sendEntityStatus(this, 4.toByte())
         val f = getAttackDamage()
         val g = if (f.toInt() > 0) f / 2.0f + random.nextInt(f.toInt()).toFloat() else f
-        val entity = owner
-        val bl = if(entity == null) {
+        val bl = target.damage(this.damageSources.mobAttack(this), g) /*if(entity == null) {
             target.damage(this.damageSources.mobAttack(this), g)
         } else if (entity is PlayerEntity) {
             target.damage(this.damageSources.playerAttack(entity), g)
         } else {
             target.damage(this.damageSources.mobAttack(entity), g)
-        }
+        }*/
         if (bl) {
+            val summoner = getOwner()
+            if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
+                (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
+            }
             target.velocity = target.velocity.add(0.0, 0.5, 0.0)
             applyDamageEffects(this, target)
+            onAttacking(target)
         }
         playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0f, 1.0f)
         return bl

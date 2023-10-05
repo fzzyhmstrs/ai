@@ -20,15 +20,15 @@ class CholemEntityModel(private val root: ModelPart): SinglePartEntityModel<Chol
             val modelPartData = modelData.root
             val leftLeg = modelPartData.addChild(
                 "leftLeg",
-                ModelPartBuilder.create().uv(26, 0).cuboid(1.0f, -5.0f, -0.5f, 1.0f, 5.0f, 1.0f, Dilation(0.0f))
-                    .uv(5, 16).cuboid(0.0f, 0.0f, -2.0f, 3.0f, 0.0f, 3.0f, Dilation(0.0f)),
-                ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                ModelPartBuilder.create().uv(26, 0).cuboid(1.0f, 0.0f, -0.5f, 1.0f, 5.0f, 1.0f, Dilation(0.0f))
+                    .uv(5, 16).cuboid(0.0f, 4.95f, -2.0f, 3.0f, 0.0f, 3.0f, Dilation(0.0f)),
+                ModelTransform.pivot(0.0f, 19.0f, 0.0f)
             )
             val rightLeg = modelPartData.addChild(
                 "rightLeg",
-                ModelPartBuilder.create().uv(26, 0).cuboid(-2.0f, -5.0f, -0.5f, 1.0f, 5.0f, 1.0f, Dilation(0.0f))
-                    .uv(5, 16).cuboid(-3.0f, 0.0f, -2.0f, 3.0f, 0.0f, 3.0f, Dilation(0.0f)),
-                ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                ModelPartBuilder.create().uv(26, 0).cuboid(-2.0f, 0.0f, -0.5f, 1.0f, 5.0f, 1.0f, Dilation(0.0f))
+                    .uv(5, 16).cuboid(-3.0f, 4.95f, -2.0f, 3.0f, 0.0f, 3.0f, Dilation(0.0f)),
+                ModelTransform.pivot(0.0f, 19.0f, 0.0f)
             )
             val body = modelPartData.addChild(
                 "body",
@@ -47,13 +47,13 @@ class CholemEntityModel(private val root: ModelPart): SinglePartEntityModel<Chol
             )
             val leftArm = modelPartData.addChild(
                 "leftArm",
-                ModelPartBuilder.create().uv(0, 10).cuboid(4.5f, -13.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
-                ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                ModelPartBuilder.create().uv(0, 10).cuboid(4.5f, -1.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
+                ModelTransform.pivot(0.0f, 12.0f, 0.0f)
             )
             val rightArm = modelPartData.addChild(
                 "rightArm",
-                ModelPartBuilder.create().uv(0, 10).cuboid(-6.5f, -13.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
-                ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                ModelPartBuilder.create().uv(0, 10).cuboid(-6.5f, -1.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
+                ModelTransform.pivot(0.0f, 12.0f, 0.0f)
             )
             return TexturedModelData.of(modelData, 64, 32)
         }

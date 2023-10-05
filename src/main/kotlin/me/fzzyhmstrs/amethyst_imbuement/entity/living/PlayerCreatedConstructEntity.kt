@@ -289,12 +289,12 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     override fun tryAttack(target: Entity): Boolean {
-        val summoner = getOwner()
-        if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
-            (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
-        }
         val bl = super.tryAttack(target)
         if (bl) {
+            val summoner = getOwner()
+            if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
+                (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
+            }
             val f = world.getLocalDifficulty(blockPos).localDifficulty
             if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f) {
                 target.setOnFireFor(2 * f.toInt())

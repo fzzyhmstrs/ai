@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -41,7 +42,7 @@ open class CholemEntity: PlayerCreatedConstructEntity {
         protected val ENRAGED: TrackedData<Boolean> = DataTracker.registerData(CholemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         protected val DAMAGE_UUID = UUID.fromString("71c5ccf4-2d8a-11ee-be56-0242ac120002")
         protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
-        fun createGolemAttributes(): DefaultAttributeContainer.Builder {
+        fun createCholemAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.cholem.baseHealth.get())
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.75)
@@ -73,7 +74,7 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        setEnraged(nbt.getBoolean("enraged"))
+        setEnraged(nbt.getBoolean("enraged"), true)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -98,7 +99,7 @@ open class CholemEntity: PlayerCreatedConstructEntity {
         world.sendEntityStatus(this, 4.toByte())
         val f = getAttackDamage()
         val g = if (f.toInt() > 0) f / 2.0f + random.nextInt(f.toInt()).toFloat() else f
-        val bl = when (val entity = owner) {
+        val bl = target.damage(this.damageSources.mobAttack(this), g) /*when (val entity = owner) {
             null -> {
                 target.damage(this.damageSources.mobAttack(this), g)
             }
@@ -109,10 +110,15 @@ open class CholemEntity: PlayerCreatedConstructEntity {
             else -> {
                 target.damage(this.damageSources.mobAttack(entity), g)
             }
-        }
+        }*/
         if (bl) {
+            val summoner = getOwner()
+            if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
+                (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
+            }
             target.velocity = target.velocity.add(0.0, 0.3, 0.0)
             applyDamageEffects(this, target)
+            onAttacking(target)
         }
         playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0f, 1.0f)
         return bl
@@ -137,27 +143,29 @@ open class CholemEntity: PlayerCreatedConstructEntity {
         return dataTracker.get(ENRAGED)
     }
 
-    fun setEnraged(bl: Boolean){
-        if (bl && !getEnraged()) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(damageModifier)
-            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.addPersistentModifier(speedModifier)
-            val entityWorld = world
-            if (entityWorld is ServerWorld){
-                entityWorld.spawnParticles(ParticleTypes.ANGRY_VILLAGER,this.x,this.eyeY,this.z,15,.25,.25,.25,0.2)
+    fun setEnraged(bl: Boolean, loading: Boolean){
+        if (!loading) {
+            if (bl && !getEnraged()) {
+                this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(damageModifier)
+                this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.addPersistentModifier(speedModifier)
+                val entityWorld = world
+                if (entityWorld is ServerWorld){
+                    entityWorld.spawnParticles(ParticleTypes.ANGRY_VILLAGER,this.x,this.eyeY,this.z,15,.25,.25,.25,0.2)
+                }
+                world.playSound(null,blockPos,SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, SoundCategory.PLAYERS,0.4f,1.0f)
+            } else if (!bl && getEnraged()) {
+                this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.removeModifier(damageModifier)
+                this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.removeModifier(speedModifier)
             }
-            world.playSound(null,blockPos,SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, SoundCategory.PLAYERS,0.4f,1.0f)
-        } else if (!bl && getEnraged()) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.removeModifier(damageModifier)
-            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.removeModifier(speedModifier)
         }
         dataTracker.set(ENRAGED, bl)
     }
 
     override fun remove(reason: RemovalReason) {
-        if (reason.shouldDestroy()) {
+        if (reason == RemovalReason.KILLED) {
             val box = Box(pos.x + 16.0, pos.y + 16.0, pos.z + 16.0, pos.x - 16.0, pos.y - 16.0, pos.z - 16.0)
             for (cholem in world.getOtherEntities(this, box) { it is CholemEntity }.stream().map { it as CholemEntity }) {
-                cholem.setEnraged(true)
+                cholem.setEnraged(true, false)
             }
         }
         super.remove(reason)
@@ -182,9 +190,9 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     fun texture(): Identifier {
         return if(getEnraged()){
-            AI.identity("textures/entity/crystal_golem/cholem.png")
-        } else {
             AI.identity("textures/entity/crystal_golem/cholem_enraged.png")
+        } else {
+            AI.identity("textures/entity/crystal_golem/cholem.png")
         }
     }
 }

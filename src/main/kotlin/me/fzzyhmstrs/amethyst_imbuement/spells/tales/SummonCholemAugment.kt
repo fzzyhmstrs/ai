@@ -3,15 +3,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.UnhallowedEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
@@ -20,8 +19,6 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import kotlin.math.max
-import kotlin.math.min
 
 class SummonCholemAugment: SummonEntityAugment(ScepterTier.THREE,9) {
 
@@ -34,7 +31,7 @@ class SummonCholemAugment: SummonEntityAugment(ScepterTier.THREE,9) {
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 3000, 350,
-            25,imbueLevel,55,BookOfTalesItem.TALES_TIER, Items.COOKED_CHICKEN)
+            25,imbueLevel,55, BookOfTalesItem.TALES_TIER, Items.COOKED_CHICKEN)
     }
 
     override fun placeEntity(

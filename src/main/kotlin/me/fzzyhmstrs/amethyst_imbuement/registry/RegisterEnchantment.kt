@@ -179,6 +179,7 @@ object RegisterEnchantment {
     val MENDING_AURA = MendingAuraAugment().register("mending_aura")
     val METEOR = MeteorAugment().register("meteor")
     val SANCTUARY = SanctuaryAugment().register("sanctuary")
+    val SUMMON_CHOLEM = SummonCholemAugment().register("summon_cholem")
 
     fun registerAll(){}
 
