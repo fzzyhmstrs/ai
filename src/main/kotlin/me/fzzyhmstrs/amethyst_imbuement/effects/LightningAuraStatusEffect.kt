@@ -35,11 +35,12 @@ class LightningAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: I
         val world = entity.world as? ServerWorld ?: return
         val box = Box(entity.pos.add(6.0,6.0,6.0),entity.pos.subtract(6.0,6.0,6.0))
         val entities = world.getOtherEntities(entity, box) { !((it is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, it, RegisterEnchantment.LIGHTNING_AURA)) || it is PassiveEntity) }
+        if (entities.isNotEmpty())
+            world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.2f,1.0f)
         for (e in entities){
             e.damage(CustomDamageSources.lightningBolt(world,null,entity),3f)
             beam(world,entity,e)
         }
-        world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.2f,1.0f)
     }
 
     private fun beam(serverWorld: ServerWorld, entity: Entity, target: Entity){

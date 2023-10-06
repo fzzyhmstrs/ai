@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.FlavorHelper
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
+import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
@@ -44,14 +45,17 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
 
     companion object{
         init{
-            ModifyModifiersEvent.EVENT.register{ _, user, _, modifiers ->
+            ModifyModifiersEvent.EVENT.register{ _, user, scepterStack, modifiers ->
+                val activeEnchant = Identifier(scepterStack.nbt?.getString(NbtKeys.ACTIVE_ENCHANT.str()) ?: "blank_spell")
+                var mods = modifiers
                 for (stack in user.armorItems) {
                     if (stack.item is SoulwovenArmorItem) {
+                        ModifierHelper.gatherActiveModifiers(stack, activeEnchant)
                         val focusMods = ModifierHelper.getActiveModifiers(stack)
-                        return@register modifiers.combineWith(focusMods, AugmentModifier())
+                        mods = mods.combineWith(focusMods, AugmentModifier())
                     }
                 }
-                modifiers
+                mods
             }
         }
     }

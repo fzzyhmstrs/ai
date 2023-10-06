@@ -5,7 +5,7 @@ import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.util.math.Box
 
-class CallForConstructHelpGoal(private val construct: PlayerCreatedConstructEntity): Goal() {
+class CallForConstructHelpGoal(private val construct: MobEntity): Goal(){
     
     private var hurt: Boolean = false
     

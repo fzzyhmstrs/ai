@@ -342,6 +342,7 @@
 	"item.amethyst_imbuement.mana_potion": "Mana Potion",
 	"item.amethyst_imbuement.mana_potion.effect.empty": "Mana Potion",
 	"item.amethyst_imbuement.mana_potion.tooltip1": "Restore your scepter and other magical items",
+
 	"item.amethyst_imbuement.dazzling_melon_slice": "Dazzling Melon Slice",
 	"item.amethyst_imbuement.gem_of_promise": "Gem of Promise",
 	"item.amethyst_imbuement.gem_of_promise.flavor": "It sparkles with the promise of change",
@@ -385,6 +386,7 @@
 	"item.amethyst_imbuement.energetic_opal.flavor": "It crackles softly",
 	"item.amethyst_imbuement.moss_covered_seeds": "Moss-Covered Seeds",
 	"item.amethyst_imbuement.elixir_of_rebinding": "Elixir of Rebinding",
+	"item.amethyst_imbuement.elixir_of_rebinding.effect.empty": "Elixir of Rebinding",
 	"item.amethyst_imbuement.elixir_of_rebinding.tooltip1": "Grant a temporary Arcane Aura to regenerate mana and increase spell power",
 	"item.amethyst_imbuement.talisman_of_lost_memories": "Talisman of Lost Memories",
 	"item.amethyst_imbuement.talisman_of_lost_memories.flavor": "If you listen close you could swear it's humming a sad tune...",

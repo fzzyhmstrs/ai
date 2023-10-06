@@ -201,7 +201,6 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         world.playSound(null,user.blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,0.6F,0.8F)
         val level = stack.nbt?.getInt(SCROLL_LEVEL)?:1
         ScepterHelper.resetCooldown(world, stack, user, activeEnchant,level)
-        Exception().printStackTrace()
         return TypedActionResult.fail(stack)
     }
 }

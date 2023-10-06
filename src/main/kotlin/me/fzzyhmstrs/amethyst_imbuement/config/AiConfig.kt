@@ -442,6 +442,13 @@ object AiConfig
             var enragedDamage = ValidatedFloat(4f,40f,0.0f)
         }
 
+        var chorse = Chorse()
+        class Chorse: ConfigSection(Header.Builder().space().add("readme.entities.chorse_1").build()){
+            var baseHealth = ValidatedDouble(80.0,800.0,1.0)
+            var baseJumpStrength = ValidatedDouble(0.93,2.0,0.0)
+            var baseMoveSpeed = ValidatedDouble(0.275,1.0,0.01)
+        }
+
         override fun generateNewClass(): Entities {
             return this
         }

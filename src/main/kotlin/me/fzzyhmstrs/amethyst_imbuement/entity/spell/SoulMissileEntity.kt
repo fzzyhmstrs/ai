@@ -48,6 +48,7 @@ class SoulMissileEntity: MissileEntity {
                 )
 
                 if (bl) {
+                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
                     applyDamageEffects(entity, entity2)
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
