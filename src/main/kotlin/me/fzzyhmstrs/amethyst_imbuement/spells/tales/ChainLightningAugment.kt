@@ -34,8 +34,8 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         get() = super.baseEffect.withDuration(75,5).withDamage(15.5f,0.5f).withRange(12.0).withAmplifier(6)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, 200, 100,
-            22, imbueLevel, 12, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
+        return AugmentDatapoint(SpellType.FURY, 160, 90,
+            22, imbueLevel, 11, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
     }
 
     override fun supportEffect(
@@ -51,7 +51,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
                   if (world.random.nextFloat() < 0.25f)
                       target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, effects.duration(level)))
                   val data = ChainLightningPersistentEffectData(target, user, listOf(target.uuid), effects.amplifier(level) - 1, effects.damage(level) - 1f, effects, level)
-                  PersistentEffectHelper.setPersistentTickerNeed(this, 4, 4, data)
+                  PersistentEffectHelper.setPersistentTickerNeed(this, 3, 3, data)
                   effects.accept(target, AugmentConsumer.Type.HARMFUL)
                   effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
                   if (world is ServerWorld){
@@ -104,7 +104,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
             val newList = data.struckEntities.toMutableList()
             newList.add(nextTarget.uuid)
             val newData = ChainLightningPersistentEffectData(nextTarget, data.user, newList, data.chainsLeft - 1, data.damage - 1f,data.effects, data.level)
-            PersistentEffectHelper.setPersistentTickerNeed(this, 4, 4, newData)
+            PersistentEffectHelper.setPersistentTickerNeed(this, 3, 3, newData)
         }
     }
 

@@ -1,0 +1,23 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:barrier",
+		"amethyst_imbuement:chickenform",
+		"amethyst_imbuement:cripple",
+		"amethyst_imbuement:curse",
+		"amethyst_imbuement:exhaust",
+		"amethyst_imbuement:fortify",
+		"amethyst_imbuement:inspiring_song",
+		"amethyst_imbuement:levitating_bullet",
+		"amethyst_imbuement:mass_exhaust",
+		"amethyst_imbuement:mass_fortify",
+		"amethyst_imbuement:mental_clarity",
+		"amethyst_imbuement:persuade",
+		"amethyst_imbuement:smiting_blow",
+		"amethyst_imbuement:weightlessness",
+		"amethyst_imbuement:arcane_aura",
+		"amethyst_imbuement:chaos_bolt",
+		"amethyst_imbuement:lightning_aura",
+		"amethyst_imbuement:sanctuary"
+	]
+}

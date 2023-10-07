@@ -1,14 +1,15 @@
 {
 	"replace": false,
 	"values": [
+		"amethyst_imbuement:body_swap",
+		"amethyst_imbuement:chickenform",
 		"amethyst_imbuement:dash",
 		"amethyst_imbuement:hard_light_bridge",
-		"amethyst_imbuement:recall",
 		"amethyst_imbuement:summon_boat",
 		"amethyst_imbuement:summon_strider",
 		"amethyst_imbuement:survey",
 		"amethyst_imbuement:teleport",
-		"amethyst_imbuement:chickenform",
-		"amethyst_imbuement:body_swap"
+		"amethyst_imbuement:planar_door",
+		"amethyst_imbuement:summon_chorse"
 	]
 }

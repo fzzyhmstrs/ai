@@ -1,3 +1,4 @@
 {
-  "parent": "bettercombat:scythe"
+  "parent": "bettercombat:scythe",
+  "two_handed": false
 }

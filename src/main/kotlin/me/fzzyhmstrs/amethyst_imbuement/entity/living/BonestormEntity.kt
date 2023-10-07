@@ -199,8 +199,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
                         }
                         val rot = Vec3d(livingEntity.x - bonestorm.x,livingEntity.getBodyY(0.5) - bonestorm.getBodyY(0.5),livingEntity.z - bonestorm.z)
                         val pos  = Vec3d(bonestorm.x,bonestorm.getBodyY(0.5) + 0.5,bonestorm.z)
-                        val bonestormOwner = bonestorm.getOwner()
-                        val owner = if(bonestormOwner == null || bonestormOwner !is LivingEntity) bonestorm else bonestormOwner
+                        val owner = bonestorm.getOwner() ?: bonestorm
                         val bse = BoneShardEntity(bonestorm.world,owner,4.0f,1.75f*h,pos,rot)
                         bonestorm.world.spawnEntity(bse)
 

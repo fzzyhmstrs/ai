@@ -6,6 +6,10 @@
 		"amethyst_imbuement:soul_missile",
 		"amethyst_imbuement:magic_missile",
 		"amethyst_imbuement:withering_bolt",
-		"amethyst_imbuement:freezing"
+		"amethyst_imbuement:freezing",
+		"amethyst_imbuement:fireball",
+		"amethyst_imbuement:levitating_bullet",
+		"amethyst_imbuement:torrent_of_beaks",
+		"amethyst_imbuement:chaos_bolt"
 	]
 }

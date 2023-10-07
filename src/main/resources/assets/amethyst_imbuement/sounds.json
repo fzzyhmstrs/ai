@@ -45,6 +45,18 @@
       "amethyst_imbuement:ice_spikes_1",
       "amethyst_imbuement:ice_spikes_2"
     ]
+  },
+  "solar_flare_charge": {
+    "subtitle": "subtitles.amethyst_imbuement.solar_flare_charge",
+    "sounds": [
+      "amethyst_imbuement:charge"
+    ]
+  },
+  "solar_flare_fire": {
+    "subtitle": "subtitles.amethyst_imbuement.solar_flare_fire",
+    "sounds": [
+      "amethyst_imbuement:fire"
+    ]
   }
 }
 

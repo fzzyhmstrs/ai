@@ -20,3 +20,8 @@ Execute Sound Events (component sounds used):
 
 MCDE Icons:
 BackupCup of https://legacy.curseforge.com/members/backupcup/projects and https://github.com/EndLone
+
+Solar Flare Sound Events
+"Spell shoot" by Bertsz of https://freesound.org/people/Bertsz/
+"Charging Laser" by LegoLunatic of https://freesound.org/people/LegoLunatic/
+"Fire Magic Impact" by EminYILDIRIM of https://freesound.org/people/EminYILDIRIM/

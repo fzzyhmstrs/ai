@@ -763,6 +763,12 @@
 	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.desc": "An energy slash that damages all enemies in front of the caster.",
 
+	"enchantment.amethyst_imbuement.solar_flare": "Solar Flare",
+	"enchantment.amethyst_imbuement.solar_flare.desc": "A devastating blast of solar energy that fires after a short delay. Damage scales with 'Sunfire' spell powers from RPG Series - Arcane and Fire.",
+
+	"enchantment.amethyst_imbuement.soulfreeze": "Soulfreeze",
+	"enchantment.amethyst_imbuement.soulfreeze.desc": "Freezes nearby enemies solid and inflicts long-term wither. Effect duration and power scales with 'Soulfrost' spell powers from RPG Series - Soul and Frost.",
+
 	"enchantment.amethyst_imbuement.summon_boat": "Summon Boat",
 	"enchantment.amethyst_imbuement.summon_boat.desc": "Summons a boat.",
 
@@ -940,6 +946,8 @@
 	"subtitles.amethyst_imbuement.locked_book": "Book lock rattles",
 	"subtitles.amethyst_imbuement.execute": "Mob executed",
 	"subtitles.amethyst_imbuement.ice_spikes": "Ice Spikes chomp",
+	"subtitles.amethyst_imbuement.solar_flare_charge": "Solar flare charging",
+	"subtitles.amethyst_imbuement.solar_flare_fire": "Solar flare flares",
 	
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",

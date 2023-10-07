@@ -1,13 +1,31 @@
 {
 	"replace": false,
 	"values": [
+		"amethyst_imbuement:abundance",
+		"amethyst_imbuement:animal_husbandry",
 		"amethyst_imbuement:bedazzle",
-		"amethyst_imbuement:soul_missile",
-		"amethyst_imbuement:withering_bolt",
+		"amethyst_imbuement:cripple",
 		"amethyst_imbuement:curse",
+		"amethyst_imbuement:exhaust",
+		"amethyst_imbuement:fang_barrage",
+		"amethyst_imbuement:fangs",
+		"amethyst_imbuement:fortify",
+		"amethyst_imbuement:hamptertime",
+		"amethyst_imbuement:levitating_bullet",
+		"amethyst_imbuement:mass_exhaust",
+		"amethyst_imbuement:mass_fortify",
+		"amethyst_imbuement:persuade",
 		"amethyst_imbuement:poultrymorph",
+		"amethyst_imbuement:smiting_blow",
+		"amethyst_imbuement:soul_missile",
+		"amethyst_imbuement:spectral_slash",
 		"amethyst_imbuement:summon_bonestorm",
-		"amethyst_imbuement:mental_clarity",
-		"amethyst_imbuement:persuade"
+		"amethyst_imbuement:summon_chicken",
+		"amethyst_imbuement:summon_hamster",
+		"amethyst_imbuement:withering_bolt",
+		"amethyst_imbuement:chaos_bolt",
+		"amethyst_imbuement:summon_cholem",
+		"amethyst_imbuement:summon_chorse",
+		"amethyst_imbuement:soulfreeze"
 	]
 }

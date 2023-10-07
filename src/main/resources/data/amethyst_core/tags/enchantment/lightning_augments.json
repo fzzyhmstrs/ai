@@ -1,9 +1,15 @@
 {
 	"replace": false,
 	"values": [
+		"amethyst_imbuement:ball_lightning",
 		"amethyst_imbuement:lightning_bolt",
 		"amethyst_imbuement:lightning_storm",
+		"amethyst_imbuement:resonate",
+		"amethyst_imbuement:summon_fury_totem",
 		"amethyst_imbuement:zap",
-		"amethyst_imbuement:ball_lightning"
+		"amethyst_imbuement:chain_lightning",
+		"amethyst_imbuement:chaos_bolt",
+		"amethyst_imbuement:lightning_aura",
+		"amethyst_imbuement:crackling_infusion"
 	]
 }

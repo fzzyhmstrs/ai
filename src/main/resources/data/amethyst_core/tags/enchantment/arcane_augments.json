@@ -1,11 +1,31 @@
 {
 	"replace": false,
 	"values": [
-		"amethyst_imbuement:flamebolt",
-		"amethyst_imbuement:flamewave",
-		"amethyst_imbuement:soul_missile",
-		"amethyst_imbuement:magic_missile",
-		"amethyst_imbuement:withering_bolt",
-		"amethyst_imbuement:freezing"
+		"amethyst_imbuement:barrier",
+		"amethyst_imbuement:bedazzle",
+		"amethyst_imbuement:body_swap",
+		"amethyst_imbuement:create_hard_light",
+		"amethyst_imbuement:dash",
+		"amethyst_imbuement:empowered_slash",
+		"amethyst_imbuement:excavate",
+		"amethyst_imbuement:fang_barrage",
+		"amethyst_imbuement:fangs",
+		"amethyst_imbuement:forcefield",
+		"amethyst_imbuement:gusting",
+		"amethyst_imbuement:hard_light_bridge",
+		"amethyst_imbuement:magnetic_aura",
+		"amethyst_imbuement:mental_clarity",
+		"amethyst_imbuement:recall",
+		"amethyst_imbuement:summon_boat",
+		"amethyst_imbuement:summon_strider",
+		"amethyst_imbuement:survey",
+		"amethyst_imbuement:teleport",
+		"amethyst_imbuement:weightlessness",
+		"amethyst_imbuement:arcane_aura",
+		"amethyst_imbuement:chaos_bolt",
+		"amethyst_imbuement:energy_blade",
+		"amethyst_imbuement:planar_door",
+		"amethyst_imbuement:solar_flare",
+		"amethyst_imbuement:bone_fan"
 	]
 }

@@ -36,7 +36,7 @@ object RegisterStatus {
     val BLAST_RESISTANT = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF0000),"blast_resistant")
     val SOULBINDING = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000),"soulbinding")
     val RESONATING = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
-    val STUNNED = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
+    val STUNNED = register(StunnedStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
 
     //attribute effects
     val SOUL_SHIELD: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x60F5FA)
@@ -58,7 +58,7 @@ object RegisterStatus {
         .addAttributeModifier(RegisterAttribute.PLAYER_EXPERIENCE,"063b1430-d641-11ed-afa1-0242ac120002",0.25,EntityAttributeModifier.Operation.ADDITION)
         ,"insightful")
     val SANCTUARY: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFEFBEA)
-        .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"26613cdc-5d35-11ee-8c99-0242ac120002",-1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"26613cdc-5d35-11ee-8c99-0242ac120002",-100.0, EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,"266141a0-5d35-11ee-8c99-0242ac120002",1.0, EntityAttributeModifier.Operation.ADDITION)
         ,"sanctuary")
 

@@ -7,10 +7,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
-import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -19,7 +17,6 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -60,11 +57,24 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
         entityList.forEach {
             it.damage(CustomDamageSources.lightningBolt(world,null,user), effect.damage(level))
         }
+        beam(world,user,rotation,effect.range(level))
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.7F, 1.1F)
         return true
     }
 
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+    private fun beam(serverWorld: ServerWorld, entity: Entity, rotation: Vec3d, range: Double){
+        val startPos = entity.pos.add(0.0,entity.height/2.0,0.0)
+        val endPos = startPos.add(rotation.multiply(range))
+        val vec = endPos.subtract(startPos).multiply(0.05)
+        var pos = startPos
+        for (i in 1..20){
+            serverWorld.spawnParticles(ParticleTypes.ELECTRIC_SPARK,pos.x,pos.y,pos.z,10,vec.x,vec.y,vec.z,0.0)
+            pos = pos.add(vec)
+        }
+
+    }
+
+    /*override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
         val random = AIClient.aiRandom()
         val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
         val perpendicularToPosX = 1.0
@@ -82,7 +92,7 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
                 world.addParticle(ParticleTypes.ELECTRIC_SPARK,true, particlePos.x, particlePos.y + rnd2, particlePos.z, 0.0, 0.0, 0.0)
             }
         }
-    }
+    }*/
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_RESPAWN_ANCHOR_DEPLETE.value()

@@ -29,6 +29,12 @@ object RegisterSound {
     private val ICE_SPIKES_ID = Identifier(AI.MOD_ID,"ice_spikes")
     val ICE_SPIKES = soundEvent(ICE_SPIKES_ID)
 
+    private val SOLAR_FLARE_CHARGE_ID = Identifier(AI.MOD_ID,"solar_flare_charge")
+    val SOLAR_FLARE_CHARGE = soundEvent(SOLAR_FLARE_CHARGE_ID)
+
+    private val SOLAR_FLARE_FIRE_ID = Identifier(AI.MOD_ID,"solar_flare_fire")
+    val SOLAR_FLARE_FIRE = soundEvent(SOLAR_FLARE_FIRE_ID)
+
     private fun soundEvent(identifier: Identifier): SoundEvent{
         return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))
     }

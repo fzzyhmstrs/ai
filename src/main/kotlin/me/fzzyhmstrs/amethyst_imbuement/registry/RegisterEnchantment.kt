@@ -11,7 +11,11 @@ import me.fzzyhmstrs.amethyst_imbuement.enchantment.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.special.*
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.*
+import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.CracklingInfusionAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SolarFlareAugment
+import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SoulfreezeAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
@@ -180,8 +184,17 @@ object RegisterEnchantment {
     val METEOR = MeteorAugment().register("meteor")
     val SANCTUARY = SanctuaryAugment().register("sanctuary")
     val SUMMON_CHOLEM = SummonCholemAugment().register("summon_cholem")
-
-    fun registerAll(){}
+    //RPG Series
+    private fun rpgSeries(){
+        if (FabricLoader.getInstance().isModLoaded("spell_power")){
+            SolarFlareAugment().register("solar_flare")
+            SoulfreezeAugment().register("soulfreeze")
+            CracklingInfusionAugment().register("crackling_infusion")
+        }
+    }
+    fun registerAll(){
+        rpgSeries()
+    }
 
 
 }
