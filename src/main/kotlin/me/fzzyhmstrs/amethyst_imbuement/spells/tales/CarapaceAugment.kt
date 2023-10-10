@@ -23,8 +23,9 @@ import net.minecraft.world.World
 
 class CarapaceAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(2200,200).withAmplifier(7,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(7,1)
+                                                .withDuration(2200,200)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 6000, 450,
