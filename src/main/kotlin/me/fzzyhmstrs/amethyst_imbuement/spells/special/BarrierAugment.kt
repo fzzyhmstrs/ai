@@ -23,10 +23,9 @@ import net.minecraft.world.World
 
 class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withAmplifier(0,1)
-            .withDuration(540,80)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(0,1)
+                                                .withDuration(540,80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,600,50,
