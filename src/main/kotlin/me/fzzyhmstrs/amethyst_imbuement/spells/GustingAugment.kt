@@ -22,8 +22,9 @@ import kotlin.math.min
 
 class GustingAugment: MiscAugment(ScepterTier.ONE,3){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(8.0,0.0).withAmplifier(2,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(2,1)
+                                                .withRange(8.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,60,15,
