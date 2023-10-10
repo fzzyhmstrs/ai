@@ -22,10 +22,10 @@ import net.minecraft.world.World
 
 class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(9.0,1.0,0.0)
-            .withAmplifier(0,1,0)
-            .withDuration(80,180,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(0,1,0)
+                                                .withDuration(80,180,0)
+                                                .withRange(9.0,1.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,300,150,
