@@ -25,10 +25,10 @@ import net.minecraft.world.World
 
 class CracklingInfusionAugment: MiscAugment(ScepterTier.THREE,12){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(4000)
-            .withAmplifier(-1,1)
-            .withRange(10.0,0.5,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(-1,1)
+                                                .withDuration(4000)
+                                                .withRange(10.0,0.5,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,12000,500,
