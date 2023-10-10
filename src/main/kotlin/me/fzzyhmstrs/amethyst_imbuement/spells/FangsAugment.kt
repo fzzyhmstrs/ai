@@ -20,10 +20,9 @@ import kotlin.math.min
 
 class FangsAugment: MiscAugment(ScepterTier.TWO,6) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withRange(11.0,1.0,0.0)
-            .withDamage(5.8F,0.2F)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(5.8F,0.2F)
+                                                .withRange(11.0,1.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,34,12,
