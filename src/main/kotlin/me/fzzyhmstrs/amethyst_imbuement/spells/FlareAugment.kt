@@ -22,8 +22,9 @@ import net.minecraft.world.World
 
 class FlareAugment: MiscAugment(ScepterTier.ONE,15) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(1).withRange(4.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(1)
+                                                .withRange(4.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,15,3,
