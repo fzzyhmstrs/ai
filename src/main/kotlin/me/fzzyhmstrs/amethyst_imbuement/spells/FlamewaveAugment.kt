@@ -16,10 +16,9 @@ import net.minecraft.world.World
 
 class FlamewaveAugment: SummonProjectileAugment(ScepterTier.THREE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(5.85F,0.15F,0.0F)
-            .withDuration(76,4)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(5.85F,0.15F,0.0F)
+                                                .withDuration(76,4)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,2,2,
