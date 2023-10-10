@@ -27,10 +27,9 @@ import net.minecraft.world.World
 
 class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEffectHelper.PersistentEffect {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(250,50)
-            .withRange(4.0,.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(250,50)
+                                                .withRange(4.0,.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1200,200,
