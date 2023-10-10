@@ -19,8 +19,7 @@ import net.minecraft.world.World
 
 class ArcaneAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(-1,1)
+    override val baseEffect: AugmentEffect = super.baseEffect.withAmplifier(-1,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 12000, 750,
