@@ -31,12 +31,11 @@ import net.minecraft.world.World
 
 class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withAmplifier(1)
-            .withDuration(1150,50)
-            .withDamage(4.5f,0.5f)
-            .withRange(11.25,0.25)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(4.5f,0.5f)
+                                                .withAmplifier(1)
+                                                .withDuration(1150,50)
+                                                .withRange(11.25,0.25)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,600,120,
