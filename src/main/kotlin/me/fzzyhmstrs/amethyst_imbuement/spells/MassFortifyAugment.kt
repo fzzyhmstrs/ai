@@ -23,10 +23,10 @@ import kotlin.math.max
 
 class MassFortifyAugment: MiscAugment(ScepterTier.THREE,9){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(700,100,0)
-            .withAmplifier(-1,1,0)
-            .withRange(9.0,1.0,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(-1,1,0)
+                                                .withDuration(700,100,0)
+                                                .withRange(9.0,1.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1200,275,
