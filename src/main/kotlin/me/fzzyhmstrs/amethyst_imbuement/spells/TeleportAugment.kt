@@ -17,8 +17,7 @@ import net.minecraft.world.World
 
 class TeleportAugment: SummonProjectileAugment(ScepterTier.TWO,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(1.4,0.1)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(1.4,0.1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(210,-10),30,
