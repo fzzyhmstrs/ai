@@ -22,11 +22,10 @@ import net.minecraft.world.World
 
 class SummonCholemAugment: SummonEntityAugment(ScepterTier.THREE,9) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
+    override val baseEffect: AugmentEffect = super.baseEffect
+            .withDamage(AiConfig.entities.cholem.baseDamage.get())
             .withAmplifier(AiConfig.entities.cholem.baseHealth.get().toInt(),0,0)
             .withDuration(AiConfig.entities.cholem.baseLifespan.get(),0,0)
-            .withDamage(AiConfig.entities.cholem.baseDamage.get())
             .withRange(1.75,0.25)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
