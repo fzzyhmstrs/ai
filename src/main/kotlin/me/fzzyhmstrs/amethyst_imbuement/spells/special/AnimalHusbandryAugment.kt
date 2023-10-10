@@ -20,9 +20,8 @@ import net.minecraft.world.World
 
 class AnimalHusbandryAugment: MiscAugment(ScepterTier.TWO,4) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(6.0,0.5)
-            .withAmplifier(2,1)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(6.0,0.5)
+        .withAmplifier(2,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 80,16,

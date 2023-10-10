@@ -342,6 +342,21 @@ object RegisterEntity {
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).trackRangeChunks(4).trackedUpdateRate(10).build()
     )
+
+    val ENERGY_BLADE: EntityType<EnergyBladeEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "energy_blade_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<EnergyBladeEntity>, world: World ->
+            EnergyBladeEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.0f, 0.5f)).build()
+    )
+
+
     val MANA_POTION: EntityType<ManaPotionEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "mana_potion_entity"),

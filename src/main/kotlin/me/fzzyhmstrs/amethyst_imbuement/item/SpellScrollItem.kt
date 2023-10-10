@@ -69,8 +69,8 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         val level = max(1,nbt.getInt(SCROLL_LEVEL))
         tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.spell",spell.getName(level)).formatted(Formatting.GOLD))
         val cooldown = AugmentHelper.getAugmentCooldown(spellString)
-        val cooldownBase = cooldown.base / 20f
-        val cooldownPerLvl = cooldown.perLevel / 20f
+        val cooldownBase = cooldown.base() / 20f
+        val cooldownPerLvl = cooldown.perLevel() / 20f
         val cooldownKey = if(cooldownPerLvl < 0){
             "lore_book.cooldown.minus"
         } else if (cooldownPerLvl == 0f){
