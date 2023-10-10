@@ -25,10 +25,10 @@ import net.minecraft.world.World
 
 class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withRange(13.8,0.2,0.0)
-            .withDamage(4.8F,0.2f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(4.8F,0.2f)
+                                                .withRange(13.8,0.2,0.0)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(51,-1),20,
