@@ -23,8 +23,7 @@ import net.minecraft.world.World
 class ForcefieldAugment: MiscAugment(ScepterTier.TWO,6){
 
     private val offset = intArrayOf(-2,2)
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(1800,200)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDuration(1800,200)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(620,-20),135,
