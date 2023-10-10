@@ -19,8 +19,7 @@ import net.minecraft.sound.SoundEvents
 @Suppress("SameParameterValue")
 open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(7.5F,1.5F,0.0F)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(7.5F,1.5F,0.0F)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,20,20,
