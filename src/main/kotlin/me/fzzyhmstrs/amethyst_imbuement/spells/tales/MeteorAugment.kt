@@ -18,10 +18,9 @@ import net.minecraft.world.World
 
 class MeteorAugment: SummonProjectileAugment(ScepterTier.THREE,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(12.25F,0.75f)
-            .withAmplifier(2)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(12.25F,0.75f)
+                                                .withAmplifier(2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,32,10,
