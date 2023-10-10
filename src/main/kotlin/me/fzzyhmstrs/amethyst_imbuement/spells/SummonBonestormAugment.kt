@@ -20,11 +20,11 @@ import net.minecraft.world.World
 
 class SummonBonestormAugment: SummonEntityAugment(ScepterTier.TWO,12){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withAmplifier(AiConfig.entities.bonestorm.baseHealth.get().toInt(),0,0)
-            .withDuration(AiConfig.entities.bonestorm.baseLifespan.get(),AiConfig.entities.bonestorm.perLvlLifespan.get(),0)
-            .withDamage(AiConfig.entities.bonestorm.baseDamage.get(),AiConfig.entities.bonestorm.perLvlDamage.get())
+    override val baseEffect: AugmentEffect = super.baseEffect
+        .withDamage(AiConfig.entities.bonestorm.baseDamage.get(),AiConfig.entities.bonestorm.perLvlDamage.get())
+        .withAmplifier(AiConfig.entities.bonestorm.baseHealth.get().toInt(),0,0)
+        .withDuration(AiConfig.entities.bonestorm.baseLifespan.get(),AiConfig.entities.bonestorm.perLvlLifespan.get(),0)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,2400,320,
