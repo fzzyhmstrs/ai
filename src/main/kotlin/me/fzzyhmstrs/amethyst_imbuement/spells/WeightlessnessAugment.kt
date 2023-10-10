@@ -22,8 +22,7 @@ import net.minecraft.world.World
 
 class WeightlessnessAugment: MinorSupportAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(120,40)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDuration(120,40)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(725,-25),125,
