@@ -25,10 +25,10 @@ import kotlin.math.min
 
 class FangBarrageAugment: MiscAugment(ScepterTier.THREE,6), PersistentEffectHelper.PersistentEffect {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(28,0,0)
-            .withAmplifier(9,1,0)
-            .withDamage(5.8F,0.2F)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(5.8F,0.2F)
+                                                .withAmplifier(9,1,0)
+                                                .withDuration(28,0,0)
 
     override val delay = PerLvlI(15,-1,0)
 
