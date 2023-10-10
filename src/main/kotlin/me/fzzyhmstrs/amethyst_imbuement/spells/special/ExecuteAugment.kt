@@ -22,11 +22,10 @@ import net.minecraft.world.World
 
 class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(9.4F,0.6F)
-            .withRange(7.5,0.5)
-            .withAmplifier(9,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(9.4F,0.6F)
+                                                .withRange(7.5,0.5)
+                                                .withAmplifier(9,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,300,250,
