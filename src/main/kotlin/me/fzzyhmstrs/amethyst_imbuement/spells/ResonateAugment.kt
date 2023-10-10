@@ -36,11 +36,13 @@ import java.util.*
 
 class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(4.25F,0.75F,0.0F)
-            .withRange(10.25,0.75,0.0)
-            .withDuration(72,8)
-            .withAmplifier(0,1,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(4.25F,0.75F,0.0F)
+                                                .withAmplifier(0,1,0)
+                                                .withDuration(72,8)
+                                                .withRange(10.25,0.75,0.0)
+            
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,18,
