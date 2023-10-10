@@ -16,10 +16,9 @@ import net.minecraft.world.World
 
 class FlameboltAugment: SummonProjectileAugment(ScepterTier.ONE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(5.8F,0.2F,0.0F)
-            .withDuration(76,4)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(5.8F,0.2F,0.0F)
+                                                .withDuration(76,4)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,19,4,
