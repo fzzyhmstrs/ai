@@ -20,8 +20,7 @@ import net.minecraft.world.World
 
 class FullHealAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(5.5,0.5, 0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(5.5,0.5, 0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(210,-10),150,
