@@ -24,10 +24,11 @@ import net.minecraft.world.World
 
 class RegenerateAugment: MinorSupportAugment(ScepterTier.ONE,17){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(384,12)
-            .withAmplifier(0)
-            .withDamage(-1.0f,0.2f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(-1.0f,0.2f)
+                                                .withAmplifier(0)
+                                                .withDuration(384,12)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(835,-5),60,
