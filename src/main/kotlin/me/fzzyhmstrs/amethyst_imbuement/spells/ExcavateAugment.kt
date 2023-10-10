@@ -30,8 +30,7 @@ import net.minecraft.world.event.GameEvent
 
 class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(4.5)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(4.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 8,6,
