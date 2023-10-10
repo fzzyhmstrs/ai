@@ -31,8 +31,9 @@ import org.joml.Vector3f
 
 class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(14.0,2.0).withDamage(15f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(15f)
+                                                .withRange(14.0,2.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,600,300,
