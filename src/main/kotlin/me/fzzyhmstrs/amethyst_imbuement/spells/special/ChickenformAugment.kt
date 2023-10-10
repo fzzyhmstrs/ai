@@ -24,8 +24,9 @@ import net.minecraft.world.World
 
 class ChickenformAugment: MinorSupportAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(215,35).withAmplifier(1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(215,35)
+                                                .withAmplifier(1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(720,-20),65,
