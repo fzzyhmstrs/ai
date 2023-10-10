@@ -21,10 +21,9 @@ import net.minecraft.world.World
 
 class MassCleanseAugment: MiscAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(200,100)
-            .withRange(7.0,1.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(200,100)
+                                                .withRange(7.0,1.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1200,120,
