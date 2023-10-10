@@ -24,8 +24,9 @@ import net.minecraft.world.World
 
 class CurseAugment: MinorSupportAugment(ScepterTier.THREE,16){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(360,40).withAmplifier(0,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(0,1)
+                                                .withDuration(360,40)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),400,
