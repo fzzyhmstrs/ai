@@ -19,9 +19,9 @@ import net.minecraft.world.World
 
 class MassHealAugment: MiscAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(7.0,1.0,0.0)
-            .withDamage(2.5F,2.5F,0.0F)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(2.5F,2.5F,0.0F)
+                                                .withRange(7.0,1.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,200,50,
