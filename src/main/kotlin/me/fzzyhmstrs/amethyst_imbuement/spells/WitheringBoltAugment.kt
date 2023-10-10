@@ -18,8 +18,7 @@ import net.minecraft.world.World
 
 class WitheringBoltAugment: SummonProjectileAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(7.5f,0.5f)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(7.5f,0.5f)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(30,-2),13,
