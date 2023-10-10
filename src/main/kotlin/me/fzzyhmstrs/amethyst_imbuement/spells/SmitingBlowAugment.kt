@@ -28,11 +28,11 @@ import net.minecraft.world.World
 
 class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(4.5F,0.5F)
-            .withRange(7.5,0.5)
-            .withAmplifier(2)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(4.5F,0.5F)
+                                                .withAmplifier(2)
+                                                .withRange(7.5,0.5)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,20,8,
