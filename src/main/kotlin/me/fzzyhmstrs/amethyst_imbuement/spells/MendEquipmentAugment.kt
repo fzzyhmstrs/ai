@@ -23,8 +23,7 @@ import kotlin.math.min
 @Suppress("SpellCheckingInspection")
 class MendEquipmentAugment: MiscAugment(ScepterTier.ONE,13), ManaItem {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(10,5,0)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDuration(10,5,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,16,8,
