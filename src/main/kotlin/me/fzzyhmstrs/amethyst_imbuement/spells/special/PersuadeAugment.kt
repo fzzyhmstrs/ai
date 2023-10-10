@@ -31,8 +31,7 @@ import net.minecraft.world.World
 
 class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(360,40)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDuration(360,40)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(2240,-40),300,
