@@ -16,8 +16,7 @@ import net.minecraft.world.World
 
 class SoulMissileAugment: SummonProjectileAugment(ScepterTier.ONE,21){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(3.9F,0.1F,0.0F)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(3.9F,0.1F,0.0F)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,16,3,
