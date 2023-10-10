@@ -24,10 +24,10 @@ import kotlin.math.max
 
 class InspiringSongAugment: MiscAugment(ScepterTier.TWO,13){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(175,125,0)
-            .withAmplifier(0,0,0)
-            .withRange(3.5,0.5,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(175,125,0)
+                                                .withAmplifier(0,0,0)
+                                                .withRange(3.5,0.5,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,750,125,
