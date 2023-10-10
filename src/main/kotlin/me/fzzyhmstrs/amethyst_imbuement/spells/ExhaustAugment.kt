@@ -22,9 +22,9 @@ import net.minecraft.world.World
 
 class ExhaustAugment: MinorSupportAugment(ScepterTier.TWO,6){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(250,50,0)
-            .withAmplifier(0,1,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(0,1,0)
+                                                .withDuration(250,50,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(360,-10),40,
