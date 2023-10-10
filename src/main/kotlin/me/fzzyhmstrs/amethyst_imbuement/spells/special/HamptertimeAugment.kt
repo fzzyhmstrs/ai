@@ -26,12 +26,11 @@ import kotlin.math.max
 
 class HamptertimeAugment: SummonEntityAugment(ScepterTier.THREE,25) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(AiConfig.entities.hamster.baseLifespan.get())
-            .withAmplifier(AiConfig.entities.hamster.baseHealth.get().toInt())
-            .withDamage(AiConfig.entities.hamster.baseHamptertimeDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
-            .withRange(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
+    override val baseEffect: AugmentEffect = super.baseEffect
+                    .withDuration(AiConfig.entities.hamster.baseLifespan.get())
+                    .withAmplifier(AiConfig.entities.hamster.baseHealth.get().toInt())
+                    .withDamage(AiConfig.entities.hamster.baseHamptertimeDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
+                    .withRange(AiConfig.entities.hamster.hamptertimeBaseSpawnCount.get(),AiConfig.entities.hamster.hamptertimePerLvlSpawnCount.get())
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 6000,750,
