@@ -22,8 +22,7 @@ import java.util.*
 
 class BodySwapAugment: MiscAugment(ScepterTier.THREE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(15.75,0.75)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(15.75,0.75)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,600,125,
