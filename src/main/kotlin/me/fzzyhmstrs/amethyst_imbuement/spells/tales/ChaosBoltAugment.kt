@@ -16,11 +16,10 @@ import net.minecraft.world.World
 
 class ChaosBoltAugment: SummonProjectileAugment(ScepterTier.THREE,21) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(1.95f,0.05f)
-            .withDuration(80)
-            .withAmplifier(0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(1.95f,0.05f)
+                                                .withAmplifier(0)
+                                                .withDuration(80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,3,

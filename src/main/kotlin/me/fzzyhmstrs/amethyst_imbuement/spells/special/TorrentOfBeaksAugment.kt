@@ -17,11 +17,10 @@ import net.minecraft.world.World
 
 class TorrentOfBeaksAugment: SummonProjectileAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(2.8F,0.2f)
-            .withAmplifier(9,1)
-            .withRange(12.0,0.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(2.8F,0.2f)
+                                                .withAmplifier(9,1)
+                                                .withRange(12.0,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),2,

@@ -20,11 +20,10 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonGraceTotemAugment: SummonEntityAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(650,50)
-            .withDamage(1.8f,0.2f)
-            .withRange(6.8,0.2)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(1.8f,0.2f)
+                                                .withDuration(650,50)
+                                                .withRange(6.8,0.2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,2400,240,

@@ -16,8 +16,7 @@ import net.minecraft.world.World
 
 class MagicMissileAugment: SummonProjectileAugment(ScepterTier.ONE,1) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(3.0F)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(3.0F)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.NULL,15,1,

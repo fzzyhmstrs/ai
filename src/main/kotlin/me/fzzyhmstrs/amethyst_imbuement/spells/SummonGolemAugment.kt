@@ -21,11 +21,11 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(AiConfig.entities.crystalGolem.spellBaseLifespan.get(),AiConfig.entities.crystalGolem.spellPerLvlLifespan.get())
-            .withAmplifier(AiConfig.entities.crystalGolem.baseHealth.get().toInt())
+    override val baseEffect: AugmentEffect = super.baseEffect
             .withDamage(AiConfig.entities.crystalGolem.baseDamage.get())
+            .withAmplifier(AiConfig.entities.crystalGolem.baseHealth.get().toInt())
+            .withDuration(AiConfig.entities.crystalGolem.spellBaseLifespan.get(),AiConfig.entities.crystalGolem.spellPerLvlLifespan.get())
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,6000,600,

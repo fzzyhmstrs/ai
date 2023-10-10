@@ -23,9 +23,10 @@ import net.minecraft.world.World
 
 class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(2200,200).withAmplifier(7,1)
-
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(7,1)
+                                                .withDuration(2200,200)
+        
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 280, 175,
             30, imbueLevel,13, BookOfTalesItem.TALES_TIER, RegisterItem.GOLDEN_HEART)

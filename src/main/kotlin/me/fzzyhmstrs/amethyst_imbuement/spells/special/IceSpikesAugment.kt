@@ -20,11 +20,10 @@ import kotlin.math.min
 
 class IceSpikesAugment: MiscAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withAmplifier(11,1,0)
-            .withDamage(5.25F,0.25F)
-            .withDuration(225,25)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(11,1,0)
+                                                .withDamage(5.25F,0.25F)
+                                                .withDuration(225,25)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,32,14,

@@ -30,8 +30,11 @@ import java.util.*
 
 class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(75,5).withDamage(15.5f,0.5f).withRange(12.0).withAmplifier(6)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(15.5f,0.5f)
+                                                .withAmplifier(6)
+                                                .withDuration(75,5)
+                                                .withRange(12.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, 160, 90,

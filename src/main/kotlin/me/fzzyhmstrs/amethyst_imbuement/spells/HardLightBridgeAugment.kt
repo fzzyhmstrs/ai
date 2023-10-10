@@ -23,8 +23,7 @@ import net.minecraft.world.World
 
 class HardLightBridgeAugment: MiscAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(7.8,0.2,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(7.8,0.2,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,8,2,

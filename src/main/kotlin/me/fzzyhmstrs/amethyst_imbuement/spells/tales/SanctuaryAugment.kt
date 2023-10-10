@@ -23,10 +23,9 @@ import net.minecraft.world.World
 
 class SanctuaryAugment: MinorSupportAugment(ScepterTier.THREE,13){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(1100,100)
-            .withRange(9.5,0.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(1100,100)
+                                                .withRange(9.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, 12000,600,

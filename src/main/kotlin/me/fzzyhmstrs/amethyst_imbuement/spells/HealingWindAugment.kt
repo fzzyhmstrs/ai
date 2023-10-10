@@ -31,12 +31,11 @@ import net.minecraft.world.World
 
 class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withAmplifier(1)
-            .withDuration(360,40)
-            .withDamage(1.9f,0.1f)
-            .withRange(11.5,0.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(1.9f,0.1f)
+                                                .withAmplifier(1)
+                                                .withDuration(360,40)
+                                                .withRange(11.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,1200,240,

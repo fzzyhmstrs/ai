@@ -17,8 +17,9 @@ import net.minecraft.world.World
 
 class AbundanceAugment: MiscAugment(ScepterTier.ONE,6) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(1.5,0.5).withDamage(0.18F,0.02F)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(0.18F,0.02F)
+                                                .withRange(1.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(15,-1),3,

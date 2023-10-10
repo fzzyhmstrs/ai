@@ -27,9 +27,10 @@ import kotlin.math.min
 
 class BedazzleAugment: MiscAugment(ScepterTier.TWO,1) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(13.0,1.0)
-            .withDuration(1200,0,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(1200,0,0)
+                                                .withRange(13.0,1.0)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1500,85,

@@ -23,8 +23,9 @@ import net.minecraft.world.World
 
 class ZapAugment: MiscAugment(ScepterTier.ONE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(6.8,0.2).withDamage(3.4f,0.1f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(3.4f,0.1f)
+                                                .withRange(6.8,0.2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,6,

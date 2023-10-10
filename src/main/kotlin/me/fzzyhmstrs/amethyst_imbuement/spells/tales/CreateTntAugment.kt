@@ -16,6 +16,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.world.World
 
 class CreateTntAugment: PlaceItemAugment(ScepterTier.THREE, 1, Items.TNT){
+    
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,100,50,
             20,imbueLevel,6, BookOfTalesItem.TALES_TIER, Items.TNT)

@@ -23,8 +23,9 @@ import net.minecraft.world.World
 
 class DashAugment: MiscAugment(ScepterTier.TWO,3){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(1,1).withDuration(20)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(1,1)
+                                                .withDuration(20)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,32,12,

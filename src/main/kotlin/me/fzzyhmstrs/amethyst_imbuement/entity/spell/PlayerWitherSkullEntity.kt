@@ -65,6 +65,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
                     applyDamageEffects(entity2, entity)
                 } else {
                     entity2.heal(5.0f)
+                    entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
                 }
             }
         } else {

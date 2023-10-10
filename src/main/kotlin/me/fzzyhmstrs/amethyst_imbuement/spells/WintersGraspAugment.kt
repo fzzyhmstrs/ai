@@ -34,11 +34,10 @@ import net.minecraft.world.World
 
 class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
+    override val baseEffect: AugmentEffect = super.baseEffect
+            .withDamage(1.8f,0.1f)
             .withAmplifier(1)
             .withDuration(115,5)
-            .withDamage(1.8f,0.1f)
             .withRange(11.75,0.25)
 
     private val hailDelay = PerLvlF(20f,-0.5f,0f)

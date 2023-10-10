@@ -25,8 +25,9 @@ import kotlin.math.max
 
 class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(210,90).withAmplifier(-1,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(-1,1)
+                                                .withDuration(210,90)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(1320,-20),135,

@@ -32,10 +32,12 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(8.0,1.0,0.0)
-            .withDuration(0,120,0)
-            .withDamage(5.0f,1.0f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(5.0f,1.0f)
+                                                .withDuration(0,120,0)
+                                                .withRange(8.0,1.0,0.0)
+            
+            
 
     override val delay = PerLvlI(21,-3,0)
 

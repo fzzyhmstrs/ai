@@ -25,11 +25,11 @@ import kotlin.math.min
 
 class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
+    override val baseEffect: AugmentEffect = super.baseEffect
+            .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
             .withAmplifier(AiConfig.entities.unhallowed.baseHealth.get().toInt(),0,0)
             .withDuration(AiConfig.entities.unhallowed.baseLifespan.get(),0,0)
-            .withDamage(AiConfig.entities.unhallowed.baseDamage.get())
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1295,-15),150,

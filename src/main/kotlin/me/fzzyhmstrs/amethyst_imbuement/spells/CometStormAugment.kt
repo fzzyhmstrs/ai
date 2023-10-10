@@ -29,11 +29,12 @@ import net.minecraft.world.World
 
 class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(70,4)
-            .withAmplifier(1)
-            .withRange(8.25,0.25)
-            .withDamage(7.75f,0.25f)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(7.75f,0.25f)
+                                                .withAmplifier(1)
+                                                .withDuration(70,4)
+                                                .withRange(8.25,0.25)
+            
 
     override val delay = PerLvlI(19,-1,0)
 

@@ -20,8 +20,10 @@ import net.minecraft.world.World
 
 class MentalClarityAugment: MinorSupportAugment(ScepterTier.TWO,16){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(840,60).withAmplifier(-1,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(-1,1)
+                                                .withDuration(840,60)
+        
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, PerLvlI(1920,-20),300,

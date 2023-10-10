@@ -25,8 +25,7 @@ import net.minecraft.world.World
 
 class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDuration(190,10)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDuration(190,10)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(670,-20),45,

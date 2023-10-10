@@ -22,10 +22,11 @@ import net.minecraft.world.World
 
 class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(12.0,0.0,0.0)
-            .withDuration(240,100,0)
-            .withAmplifier(0,1,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withAmplifier(0,1,0)
+                                                .withDuration(240,100,0)
+                                                .withRange(12.0,0.0,0.0)
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE, PerLvlI(450,-50),80,

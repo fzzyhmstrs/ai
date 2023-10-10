@@ -24,8 +24,7 @@ import net.minecraft.world.World
 
 class CreateHardLightAugment: ScepterAugment(ScepterTier.ONE,1) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(4.5)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(4.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT, 7,4,

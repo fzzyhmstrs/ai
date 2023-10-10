@@ -30,11 +30,11 @@ import java.util.*
 
 class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withDamage(3.4F,0.2F,0.0F)
-            .withRange(7.75,0.25,0.0)
-            .withDuration(110,10)
-            .withAmplifier(-1,1,0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(3.4F,0.2F,0.0F)
+                                                .withRange(7.75,0.25,0.0)
+                                                .withDuration(110,10)
+                                                .withAmplifier(-1,1,0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,20,5,

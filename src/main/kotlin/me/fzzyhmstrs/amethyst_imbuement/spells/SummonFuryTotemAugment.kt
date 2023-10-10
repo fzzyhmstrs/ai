@@ -20,12 +20,11 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonFuryTotemAugment: SummonEntityAugment(ScepterTier.TWO,5) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(750,50)
-            .withDamage(2.75f,0.25f)
-            .withRange(4.5,0.5)
-            .withAmplifier(8,1)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(2.75f,0.25f)
+                                                .withDuration(750,50)
+                                                .withAmplifier(8,1)
+                                                .withRange(4.5,0.5)   
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,2400,240,

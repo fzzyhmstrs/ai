@@ -20,11 +20,10 @@ import net.minecraft.world.World
 
 class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,11){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(230,50,0)
-            .withDamage(3.9F,0.1f)
-            .withRange(3.8,0.2)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(3.9F,0.1f)
+                                                .withDuration(230,50,0)
+                                                .withRange(3.8,0.2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,

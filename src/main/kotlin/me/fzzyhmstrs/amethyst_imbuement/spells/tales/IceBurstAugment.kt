@@ -21,11 +21,10 @@ import kotlin.math.min
 
 class IceBurstAugment: MiscAugment(ScepterTier.THREE,9){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(12.75F,0.25F)
-            .withDuration(175,25)
-            .withRange(7.0,1.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(12.75F,0.25F)
+                                                .withDuration(175,25)
+                                                .withRange(7.0,1.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(

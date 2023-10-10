@@ -27,10 +27,9 @@ import net.minecraft.world.World
 
 class MagneticAuraAugment: MiscAugment(ScepterTier.TWO,7), PersistentEffectHelper.PersistentEffect{
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDuration(120,40)
-            .withRange(4.5,0.5)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDuration(120,40)
+                                                .withRange(4.5,0.5)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.GRACE,400,60,

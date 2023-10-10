@@ -27,8 +27,7 @@ import net.minecraft.world.gen.structure.Structure
 
 class SurveyAugment: MiscAugment(ScepterTier.THREE,1){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withRange(100.0,0.0,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect.withRange(100.0,0.0,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,1200,120,
