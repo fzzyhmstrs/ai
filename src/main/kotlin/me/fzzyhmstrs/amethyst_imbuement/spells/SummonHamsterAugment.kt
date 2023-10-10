@@ -20,11 +20,11 @@ import net.minecraft.world.World
 @Suppress("SpellCheckingInspection")
 class SummonHamsterAugment: SummonEntityAugment(ScepterTier.ONE,10) {
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
+    override val baseEffect: AugmentEffect = super.baseEffect
+            .withDamage(AiConfig.entities.hamster.baseSummonDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
             .withDuration(AiConfig.entities.hamster.baseLifespan.get())
             .withAmplifier(AiConfig.entities.hamster.baseHealth.get().toInt())
-            .withDamage(AiConfig.entities.hamster.baseSummonDamage.get(),AiConfig.entities.hamster.perLvlDamage.get())
+            
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,600,50,
