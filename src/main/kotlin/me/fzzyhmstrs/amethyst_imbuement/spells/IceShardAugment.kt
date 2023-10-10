@@ -17,12 +17,11 @@ import net.minecraft.world.World
 
 class IceShardAugment: SummonProjectileAugment(ScepterTier.TWO,6){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(3.6F,0.4F,0.0F)
-            .withDuration(180,20)
-            .withAmplifier(1)
-            .withRange(4.3,0.2)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(3.6F,0.4F,0.0F)
+                                                .withAmplifier(1)
+                                                .withDuration(180,20)
+                                                .withRange(4.3,0.2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, PerLvlI(15,-1),
