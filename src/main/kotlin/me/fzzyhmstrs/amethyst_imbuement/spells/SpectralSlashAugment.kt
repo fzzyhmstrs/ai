@@ -17,10 +17,9 @@ import net.minecraft.particle.ParticleTypes
 @Suppress("SameParameterValue")
 open class SpectralSlashAugment: SlashAugment(ScepterTier.ONE,9){
 
-    override val baseEffect: AugmentEffect
-        get() = super.baseEffect
-            .withDamage(4.5F,0.5F,0.0F)
-            .withRange(2.625,0.125,0.0)
+    override val baseEffect: AugmentEffect = super.baseEffect
+                                                .withDamage(4.5F,0.5F,0.0F)
+                                                .withRange(2.625,0.125,0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,18,4,
