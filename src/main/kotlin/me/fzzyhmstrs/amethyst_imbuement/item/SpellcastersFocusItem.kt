@@ -1,8 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.event.AfterSpellEvent
-import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -54,7 +52,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
     )
 
     init{
-        ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
+        /*ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
             for (stack in user.handItems) {
                 if (stack.item is SpellcastersFocusItem) {
                     val focusMods = ModifierHelper.getActiveModifiers(stack)
@@ -63,7 +61,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 }
             }
             modifiers
-        }
+        }*/
 
         AfterSpellEvent.EVENT.register{ world,user,_,spell ->
             val offhand = user.offHandStack

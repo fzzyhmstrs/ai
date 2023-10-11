@@ -1,13 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.armor
 
-import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.FlavorHelper
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
-import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
@@ -37,7 +34,7 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
         FlavorHelper.addFlavorText(tooltip, context, flavorText, flavorTextDesc)
     }
 
-    override fun defaultModifiers(type: ModifierHelperType?): MutableList<Identifier> {
+    override fun defaultModifiers(type: ModifierHelperType<*>?): MutableList<Identifier> {
         if (type == ModifierHelper.getType())
             return mutableListOf(RegisterModifier.ensouledModifiers.random().modifierId)
         return super.defaultModifiers(type)
@@ -45,7 +42,7 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
 
     companion object{
         init{
-            ModifyModifiersEvent.EVENT.register{ _, user, scepterStack, modifiers ->
+            /*ModifyModifiersEvent.EVENT.register{ _, user, scepterStack, modifiers ->
                 val activeEnchant = Identifier(scepterStack.nbt?.getString(NbtKeys.ACTIVE_ENCHANT.str()) ?: "blank_spell")
                 var mods = modifiers
                 for (stack in user.armorItems) {
@@ -56,7 +53,7 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
                     }
                 }
                 mods
-            }
+            }*/
         }
     }
 }

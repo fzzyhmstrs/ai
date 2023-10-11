@@ -2,8 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
-import me.fzzyhmstrs.amethyst_core.event.ModifyModifiersEvent
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.IgnitedGemItem
@@ -26,7 +24,7 @@ class WitchesOrbItem(settings: Settings)
     private val attributes: Multimap<EntityAttribute, EntityAttributeModifier>
 
     init{
-        ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
+        /*ModifyModifiersEvent.EVENT.register{ _,user,_,modifiers ->
             for (stack in user.handItems) {
                 if (stack.item is WitchesOrbItem) {
                     val focusMods = ModifierHelper.getActiveModifiers(stack)
@@ -34,7 +32,7 @@ class WitchesOrbItem(settings: Settings)
                 }
             }
             modifiers
-        }
+        }*/
         val map: Multimap<EntityAttribute, EntityAttributeModifier> = ArrayListMultimap.create()
         map.put(
             RegisterAttribute.SPELL_DAMAGE,

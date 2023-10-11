@@ -18,12 +18,12 @@ import org.spongepowered.asm.mixin.Mixin;
 public class ModifiableItemMixin implements HitTracking, MineTracking, AttributeTracking, DamageTracking, KillTracking, ModifierTracking {
 
     @Override
-    public boolean correctSlot(EquipmentSlot slot){
+    public boolean fzzy_core_correctSlot(EquipmentSlot slot){
         return slot == EquipmentSlot.OFFHAND;
     }
 
     @Override
-    public EquipmentSlot getCorrectSlot(){
+    public EquipmentSlot fzzy_core_getCorrectSlot(){
         return EquipmentSlot.OFFHAND;
     }
 

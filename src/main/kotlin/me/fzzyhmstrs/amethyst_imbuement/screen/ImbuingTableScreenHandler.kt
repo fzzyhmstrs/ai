@@ -236,14 +236,16 @@ class ImbuingTableScreenHandler(
                                     }
                                 } else if (ModifierRegistry.isModifier(id)) {
                                     val modifier = ModifierRegistry.getByType<AugmentModifier>(id)
-                                    val blA = modifier?.isAcceptableItem(itemStack) ?: false
-                                    val blB = ModifierHelper.checkModifierLineage(id, itemStack)
-                                    if (blA && blB) {
-                                        val nextInLine = ModifierHelper.getNextInLineage(id, itemStack)
-                                        tempResults.add(ModifierResult(imbuingRecipe,nextInLine.toString(),false, power))
-                                    } else if (blA && !blB) {
-                                        val maxModifier = ModifierHelper.getMaxInLineage(id)
-                                        tempResults.add(ModifierResult(imbuingRecipe,maxModifier.toString(),true, power))
+                                    if (modifier != null) {
+                                        val blA = modifier.isAcceptableItem(itemStack)
+                                        val blB = modifier.getDescendant()?.modifierId
+                                        if (blA && blB != null) {
+                                            tempResults.add(ModifierResult(imbuingRecipe,blB.toString(),false, power))
+                                        } else if (blA && blB == null) {
+                                            tempResults.add(ModifierResult(imbuingRecipe,modifier.modifierId.toString(),true, power))
+                                        } else {
+                                            tempResults.add(EmptyResult())
+                                        }
                                     } else {
                                         tempResults.add(EmptyResult())
                                     }
