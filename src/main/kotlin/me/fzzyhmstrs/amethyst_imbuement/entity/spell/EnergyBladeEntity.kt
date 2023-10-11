@@ -56,10 +56,8 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         this.setRotation(owner.yaw, owner.pitch)
     }
 
-    private var pierce: Boolean = false
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F)
     open var maxAge = 100
-    private val struckEntities: MutableList<UUID> = mutableListOf()
     protected var scepterAugment: ScepterAugment = RegisterEnchantment.ICE_SHARD
 
     fun setAugment(aug: ScepterAugment){
@@ -149,11 +147,9 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (struckEntities.contains(entity2.uuid)) return
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
                 val bl = entity2.damage(entity.damageSources.indirectMagic(this,entity),entityEffects.damage(0))
                 )
-                struckEntities.add(entity2.uuid)
                 if (bl) {
                     world.playSound(null,blockPos,SoundEvents.ENCHANTED_HIT,SoundCategory.PLAYERS,0.5f,1.0f)
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
