@@ -58,7 +58,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
 
     private var pierce: Boolean = false
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F)
-    open val maxAge = 100
+    open var maxAge = 100
     private val struckEntities: MutableList<UUID> = mutableListOf()
     protected var scepterAugment: ScepterAugment = RegisterEnchantment.ICE_SHARD
 
@@ -68,6 +68,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
+        maxAge = ae.amplifier(level)
     }
 
     override fun initDataTracker() {}
@@ -80,8 +81,15 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
             discard()
         }
         val vec3d = velocity
-        val hitResult = getMissileCollision()
-        onCollision(hitResult)
+        val hitResult = getMissileBlockCollision()
+        if (hitResult is BlockHitResult){
+            onBlockHit(hitResult)
+        }
+        val entityHits = getMissileEntityCollision()
+        for (hit in entityHits){
+            onEntityHit(hit)
+        }
+        //onCollision(hitResult)
         val x2 = vec3d.x
         val y2 = vec3d.y
         val z2 = vec3d.z
@@ -89,12 +97,11 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val e = this.y + y2
         val f = this.z + z2
         this.updateRotation()
-        val g = drag.toDouble()
         addParticles(x2, y2, z2)
         val gg: Double = if (this.isTouchingWater) {
-            0.95
+            0.995
         } else {
-            g
+            drag.toDouble()
         }
         velocity = vec3d.multiply(gg)
         if (!hasNoGravity()) {
@@ -103,32 +110,32 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         this.setPosition(d, e, f)
     }
 
-    private fun getMissileCollision(): HitResult{
-        var vec3d = pos.add(velocity)
-        var hitResult: HitResult = world.raycast(
+    private fun getMissileBlockCollision(): HitResult{
+        return world.raycast(
             RaycastContext(
                 pos,
-                vec3d,
+                pos.add(velocity),
                 RaycastContext.ShapeType.COLLIDER,
                 fluidHandling(),
                 this
             )
         )
-        if (hitResult.type != HitResult.Type.MISS) {
-            vec3d = hitResult.pos
-        }
-        val hitResult2 = ProjectileUtil.getEntityCollision(
-            world,
-            this,
-            pos,
-            vec3d,
-            this.boundingBox.stretch(velocity).expand(1.0)
-        ) { target -> canHit(target) }
-        if (hitResult2 != null) {
-            hitResult = hitResult2
-        }
-        return hitResult
+    }
 
+    private fun getMissileEntityCollision(): List<EntityHitResult>{
+        if (world.isClient) return listOf()
+        val rotation = getRotationVector()
+        val flatRotation = rotation.multiply(1.0,0.0,1.0)
+        val flatPerpendicular = RaycasterUtil.perpendicularVector(flatRotation,RaycasterUtil.InPlane.XZ)
+        return RaycasterUtil.raycastEntityRotatedArea(
+            (world as ServerWorld).iterateEntities(),
+            this,
+            pos.add(velocity),
+            rotation,
+            flatPerpendicular,
+            1.2,
+            2.25,
+            1.0).map{EntityHitResult(it)}
     }
 
     open fun fluidHandling(): FluidHandling{
@@ -142,14 +149,13 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
+            if (struckEntities.contains(entity2.uuid)) return
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
-                val bl = entity2.damage(entity.damageSources.mobProjectile(this,entity),
-                    max(1f,entityEffects.damage(0) - struckEntities.size)
+                val bl = entity2.damage(entity.damageSources.indirectMagic(this,entity),entityEffects.damage(0))
                 )
-                if (!struckEntities.contains(entity2.uuid)){
-                    struckEntities.add(entity2.uuid)
-                }
+                struckEntities.add(entity2.uuid)
                 if (bl) {
+                    world.playSound(null,blockPos,SoundEvents.ENCHANTED_HIT,SoundCategory.PLAYERS,0.5f,1.0f)
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
                     applyDamageEffects(entity as LivingEntity?, entity2)
                     if (entity2 is LivingEntity) {
@@ -161,14 +167,14 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
     }
 
     override fun onBlockHit(blockHitResult: BlockHitResult) {
-        super.onBlockHit(blockHitResult)
-        onMissileBlockHit(blockHitResult)
-        discard()
-    }
-
-    open fun onMissileBlockHit(blockHitResult: BlockHitResult){
         splashParticles(pos,world)
         playHitSound(world,blockPos)
+        when(blockHitResult.getSide().getAxis()){
+            Direction.Axis.X -> velocity = Vec3d(velocity.x * -1.0, velocity.y, velocity.z)
+            Direction.Axis.Y -> velocity = Vec3d(velocity.x, velocity.y * -1.0, velocity.z)
+            Direction.Axis.Z -> velocity = Vec3d(velocity.x, velocity.y, velocity.z * -1.0)
+        }
+        super.onBlockHit(blockHitResult)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
