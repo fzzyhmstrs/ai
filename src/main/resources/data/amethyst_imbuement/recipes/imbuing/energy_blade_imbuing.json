@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:golden_sword"
+  },
+  "craftF": {
+	"item": "minecraft:golden_sword"
+  },
+  "craftH": {
+	"item": "minecraft:golden_sword"
+  },
+  "title": "Energy Blade",
+  "cost": 33,
+  "augment": "amethyst_imbuement:energy_blade"
+}
