@@ -39,7 +39,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,600,120,
-            23,imbueLevel,25, LoreTier.HIGH_TIER, RegisterBlock.GLISTENING_ICE.asItem())
+            23,imbueLevel,25, LoreTier.HIGH_TIER, Items.SOUL_SOIL)
     }
 
     override fun effect(
