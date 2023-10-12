@@ -185,6 +185,7 @@ object RegisterEnchantment {
     val METEOR = MeteorAugment().register("meteor")
     val SANCTUARY = SanctuaryAugment().register("sanctuary")
     val SUMMON_CHOLEM = SummonCholemAugment().register("summon_cholem")
+    val SUMMON_CHORSE = SummonCholemAugment().register("summon_chorse")
     //RPG Series
     private fun rpgSeries(){
         if (FabricLoader.getInstance().isModLoaded("spell_power")){

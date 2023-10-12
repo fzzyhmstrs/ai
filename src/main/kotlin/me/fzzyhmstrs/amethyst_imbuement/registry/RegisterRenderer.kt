@@ -119,6 +119,10 @@ object RegisterRenderer {
         }
 
         EntityRendererRegistry.register(
+            RegisterEntity.CHAOS_BOLT_ENTITY
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 0.5f, 0.0f, 1.0f) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.FREEZING_ENTITY
         ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 0.7f, 0.7f) }
 

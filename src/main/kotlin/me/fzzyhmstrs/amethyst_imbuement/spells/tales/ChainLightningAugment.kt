@@ -31,7 +31,7 @@ import java.util.*
 class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(15.5f,0.5f)
+                                                .withDamage(15.75f,0.25f)
                                                 .withAmplifier(6)
                                                 .withDuration(75,5)
                                                 .withRange(12.0)

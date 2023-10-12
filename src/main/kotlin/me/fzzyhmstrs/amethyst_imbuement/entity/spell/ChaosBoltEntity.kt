@@ -56,7 +56,7 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
-                val ownerEffects = entity.statusEffects.filter { !it.isInfinite }
+                val ownerEffects = entity.statusEffects//.filter { !it.isInfinite }
                 val beneficialEffects = ownerEffects.filter { it.effectType.isBeneficial }
                 val negativeEffects = ownerEffects.filter { !it.effectType.isBeneficial }
                 val multiplier = 1f + beneficialEffects.size * 0.75f + negativeEffects.size * 1.5f

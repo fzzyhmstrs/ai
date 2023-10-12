@@ -22,8 +22,8 @@ class ChaosBoltAugment: SummonProjectileAugment(ScepterTier.THREE,21) {
                                                 .withDuration(80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,18,3,
-            21,imbueLevel,1,BookOfTalesItem.TALES_TIER,Items.SUSPICIOUS_STEW)
+        return AugmentDatapoint(SpellType.FURY,24,8,
+            21,imbueLevel,2,BookOfTalesItem.TALES_TIER,Items.SUSPICIOUS_STEW)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
-import me.fzzyhmstrs.amethyst_core.AC
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
@@ -8,7 +7,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import java.util.function.Predicate
@@ -43,10 +41,8 @@ object ModifierPredicates {
 
     private fun isInTag(id: Identifier,tag: TagKey<Enchantment>): Boolean{
         val augment = Registries.ENCHANTMENT.get(id)?:return false
-        val opt = Registries.ENCHANTMENT.getEntry(Registries.ENCHANTMENT.getRawId(augment))
-        var bl = false
-        opt.ifPresent { entry -> bl = entry.isIn(tag) }
-        return bl
+        val registryEntry = Registries.ENCHANTMENT.getEntry(augment)
+        return registryEntry.isIn(tag)
     }
 
 }

@@ -11,6 +11,7 @@
         "amethyst_imbuement:resonate",
         "amethyst_imbuement:withering_bolt",
         "amethyst_imbuement:fireball",
-        "amethyst_imbuement:ice_shard"
-	]
+        "amethyst_imbuement:ice_shard",
+        "amethyst_imbuement:execute"
+    ]
 }

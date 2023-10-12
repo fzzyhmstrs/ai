@@ -8,11 +8,11 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity
-import net.minecraft.entity.projectile.ProjectileUtil
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.particle.ParticleEffect
@@ -24,12 +24,11 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.RaycastContext.FluidHandling
 import net.minecraft.world.World
-import java.util.*
-import kotlin.math.max
 
 /**
  * basic missile projectile for use with spells or any other projectile-lobbing object.
@@ -149,9 +148,8 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
             val entity2 = entityHitResult.entity
             if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
                 val bl = entity2.damage(entity.damageSources.indirectMagic(this,entity),entityEffects.damage(0))
-                )
                 if (bl) {
-                    world.playSound(null,blockPos,SoundEvents.ENCHANTED_HIT,SoundCategory.PLAYERS,0.5f,1.0f)
+                    world.playSound(null,blockPos,SoundEvents.ENTITY_PLAYER_ATTACK_CRIT,SoundCategory.PLAYERS,0.5f,1.0f)
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
                     applyDamageEffects(entity as LivingEntity?, entity2)
                     if (entity2 is LivingEntity) {
@@ -165,10 +163,11 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
     override fun onBlockHit(blockHitResult: BlockHitResult) {
         splashParticles(pos,world)
         playHitSound(world,blockPos)
-        when(blockHitResult.getSide().getAxis()){
-            Direction.Axis.X -> velocity = Vec3d(velocity.x * -1.0, velocity.y, velocity.z)
-            Direction.Axis.Y -> velocity = Vec3d(velocity.x, velocity.y * -1.0, velocity.z)
-            Direction.Axis.Z -> velocity = Vec3d(velocity.x, velocity.y, velocity.z * -1.0)
+        velocity = when(blockHitResult.side.axis){
+            Direction.Axis.X -> Vec3d(velocity.x * -1.0, velocity.y, velocity.z)
+            Direction.Axis.Y -> Vec3d(velocity.x, velocity.y * -1.0, velocity.z)
+            Direction.Axis.Z -> Vec3d(velocity.x, velocity.y, velocity.z * -1.0)
+            else -> velocity
         }
         super.onBlockHit(blockHitResult)
     }
