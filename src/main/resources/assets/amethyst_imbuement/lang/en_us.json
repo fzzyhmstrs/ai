@@ -10,13 +10,32 @@
 	"entity.amethyst_imbuement.zombie_hamster": "Hambie",
 	"entity.amethyst_imbuement.boom_chicken": "Boom Chicken",
 	"entity.amethyst_imbuement.cholem": "Cholem",
+	"entity.amethyst_imbuement.chorse": "Chorse",
 	"entity.amethyst_imbuement.crystal_golem": "Crystalline Golem",
-	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
 	"entity.amethyst_imbuement.unhallowed": "Unhallowed",
 	"entity.amethyst_imbuement.totem_of_fury": "Totem of Fury",
-	"entity.amethyst_imbuement.totem_of_wit": "Totem of Wit",
 	"entity.amethyst_imbuement.totem_of_grace": "Totem of Grace",
 	"entity.minecraft.villager.crystal_witch": "Crystal Witch",
+
+	"entity.amethyst_imbuement.glistering_trident": "Glistering Trident",
+	"entity.amethyst_imbuement.flamebolt_entity": "Flamebolt",
+	"entity.amethyst_imbuement.chaos_bolt_entity": "Chaos Bolt",
+	"entity.amethyst_imbuement.ball_lightning_entity": "Ball Lightning",
+	"entity.amethyst_imbuement.bone_shard_entity": "Bone Shard",
+	"entity.amethyst_imbuement.ice_shard_entity": "Ice Shard",
+	"entity.amethyst_imbuement.freezing_entity": "Frostbolt",
+	"entity.amethyst_imbuement.soul_missile_entity": "Soul Missile",
+	"entity.amethyst_imbuement.player_bullet_entity": "Shulker Bullet",
+	"entity.amethyst_imbuement.player_fangs_entity": "Evoker Fange",
+	"entity.amethyst_imbuement.ice_spike_entity": "Ice Spike",
+	"entity.amethyst_imbuement.player_fireball_entity": "Fireball",
+	"entity.amethyst_imbuement.player_meteor_entity": "Meteor",
+	"entity.amethyst_imbuement.player_lightning_entity": "Lightning Bolt",
+	"entity.amethyst_imbuement.player_wither_skull_entity": "Wither Skull",
+	"entity.amethyst_imbuement.energy_blade_entity": "Energy Blade",
+	"entity.amethyst_imbuement.mana_potion_entity": "Mana Potion",
+	"entity.amethyst_imbuement.player_egg_entity": "Egg",
+	"entity.amethyst_imbuement.planar_door_entity": "Planar Door",
 	
 	"enchantment.level.11": "XI",
 	"enchantment.level.12": "XII",
@@ -477,8 +496,9 @@
 	"enchantment.amethyst_imbuement.rain_of_thorns.desc": "On hit, arrow spawns additional arrows that radiate from the target.",
 	"enchantment.amethyst_imbuement.vein_miner.desc": "Mines multiple blocks in an area when a keybind is held.",
 
-	"enchantment.amethyst_imbuement.beast_master": "Beast Master",
 	"enchantment.amethyst_imbuement.accursed": "Accursed",
+	"enchantment.amethyst_imbuement.beast_master": "Beast Master",
+	"enchantment.amethyst_imbuement.blast_resistance": "Blast Resistance",
 	"enchantment.amethyst_imbuement.consecrated": "Consecrated",
 	"enchantment.amethyst_imbuement.lightfooted": "Lightfooted",
 	"enchantment.amethyst_imbuement.shielding": "Shielding",
@@ -512,8 +532,9 @@
 	"enchantment.amethyst_imbuement.swiftness": "Swiftness",
 	"enchantment.amethyst_imbuement.undying": "Undying",
 
-	"enchantment.amethyst_imbuement.horde_master.desc": "Buffs summons and pets while the totem is active.",
 	"enchantment.amethyst_imbuement.accursed.desc": "Attackers have a chance of being cursed.",
+	"enchantment.amethyst_imbuement.beast_master.desc": "Buffs summons and pets while the totem is active.",
+	"enchantment.amethyst_imbuement.blast_resistance.desc": "Reduces damage from explosions. Stacks with Blast Protection.",
 	"enchantment.amethyst_imbuement.consecrated.desc": "Blesses the totem holder.",
 	"enchantment.amethyst_imbuement.lightfooted.desc": "No longer sink in powdered snow or trample crops.",
 	"enchantment.amethyst_imbuement.shielding.desc": "Adds 2% chance of blocking an attack per level. Stacks with jewelery.",
@@ -595,6 +616,9 @@
 	"enchantment.amethyst_imbuement.comet_storm": "Comet Storm",
 	"enchantment.amethyst_imbuement.comet_storm.desc": "Summons a storm of comets to rain destruction on an area.",
 
+	"enchantment.amethyst_imbuement.crackling_infusion": "Crackling Infusion",
+	"enchantment.amethyst_imbuement.crackling_infusion.desc": "Grants the caster and all nearby allies Lightning Aura, Speed, and Regeneration.",
+	
 	"enchantment.amethyst_imbuement.create_hard_light": "Create Hard Light",
 	"enchantment.amethyst_imbuement.create_hard_light.desc": "Materializes a block of hard light a few meters out in the direction cast. Can place blocks in midair.",
 
@@ -629,7 +653,7 @@
 	"enchantment.amethyst_imbuement.excavate.desc": "Mines the targeted block, successfully mining higher and higher tier blocks as as the spell levels up.",
 
 	"enchantment.amethyst_imbuement.execute": "Execute",
-	"enchantment.amethyst_imbuement.execute.desc": "Instantly kills a target if its health is low enough, otherwise deals damage.",
+	"enchantment.amethyst_imbuement.execute.desc": "Instantly kills a target if its health is low enough, otherwise deals high damage.",
 
 	"enchantment.amethyst_imbuement.exhaust": "Exhaust",
 	"enchantment.amethyst_imbuement.exhaust.desc": "Weakens and slows the target.",
@@ -938,6 +962,7 @@
 	
 	"filled_map.village": "Village Map",
 	"filled_map.mineshaft": "Abandoned Mineshaft Map",
+	"filled_map.crystal_witch_house": "Crystal Witch House Map",
 
 	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
 	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",
