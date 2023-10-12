@@ -1,0 +1,42 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:smoky_quartz"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:moonstone"
+  },
+  "craftA": {
+	"tag": "minecraft:wool"
+  },
+  "craftB": {
+	"tag": "c:steel_ingots"
+  },
+  "craftC": {
+	"tag": "minecraft:wool"
+  },
+  "craftD": {
+	"tag": "c:steel_ingots"
+  },
+  "craftF": {
+	"tag": "c:steel_ingots"
+  },
+  "craftG": {
+	"tag": "minecraft:wool"
+  },
+  "craftH": {
+	"tag": "c:steel_ingots"
+  },
+  "craftI": {
+	"tag": "minecraft:wool"
+  },
+  "title": "Blast Resistance",
+  "cost": 13,
+  "augment": "amethyst_imbuement:blast_resistance"
+}
