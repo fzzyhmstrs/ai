@@ -27,10 +27,8 @@ class IceBurstAugment: MiscAugment(ScepterTier.THREE,9){
                                                 .withRange(7.0,1.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(
-            SpellType.FURY, 80, 40,
-            22, imbueLevel, 2, BookOfTalesItem.TALES_TIER, Items.BLUE_ICE
-        )
+        return AugmentDatapoint(SpellType.FURY, 80, 40,
+            22, imbueLevel, 2, BookOfTalesItem.TALES_TIER, RegisterBlock.GLISTENING_ICE_ITEM)
     }
 
     override fun effect(
