@@ -24,7 +24,7 @@ class MeteorAugment: SummonProjectileAugment(ScepterTier.THREE,5){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,32,10,
-            10,imbueLevel,2, LoreTier.LOW_TIER, Items.TNT)
+            10,imbueLevel,2, LoreTier.LOW_TIER, Items.LAVA_BUCKET)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
