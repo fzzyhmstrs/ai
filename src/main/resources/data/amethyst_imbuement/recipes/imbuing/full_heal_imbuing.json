@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:dazzling_melon_slice"
+  },
+  "title": "Full Heal",
+  "cost": 37,
+  "augment": "amethyst_imbuement:full_heal"
+}
