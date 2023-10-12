@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:beryl_copper_block"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:beryl_copper_block"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:beryl_copper_block"
+  },
+  "title": "Lightning Aura",
+  "cost": 27,
+  "augment": "amethyst_imbuement:lightning_aura"
+}
