@@ -1,0 +1,38 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "spell_power"
+      ]
+    }
+  ],
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:soul_soil"
+  },
+  "craftF": {
+	"item": "minecraft:soul_soil"
+  },
+  "craftH": {
+	"item": "minecraft:soul_soil"
+  },
+  "title": "Soulfreeze",
+  "cost": 30,
+  "augment": "amethyst_imbuement:soulfreeze"
+}
