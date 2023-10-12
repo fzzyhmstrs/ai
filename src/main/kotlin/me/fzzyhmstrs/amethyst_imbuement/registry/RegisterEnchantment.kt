@@ -60,6 +60,7 @@ object RegisterEnchantment {
     val ACCURSED = AccursedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("accursed")
     val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("angelic")
     val BEAST_MASTER = BeastMasterAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("beast_master")
+    val BLAST_RESISTANCE = BlastResistanceAugment(Enchantment.Rarity.VERY_RARE, 3, EquipmentSlot.OFFHAND).register("blast_resistance")
     val BULWARK = BulwarkAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("bulwark")
     val CONSECRATED = ConsecratedAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).register("consecrated")
     val CRYSTALLINE = CrystallineAugment(Enchantment.Rarity.VERY_RARE,6, EquipmentSlot.OFFHAND).register("crystalline")
