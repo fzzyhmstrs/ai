@@ -23,7 +23,7 @@ class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, 12000, 750,
-            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, Items.COPPER_BLOCK)
+            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
     }
 
     override fun supportEffect(
