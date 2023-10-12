@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:sardonyx"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:book_of_tales"
+  },
+  "craftD": {
+	"item": "minecraft:gold_block"
+  },
+  "craftF": {
+	"item": "minecraft:gold_block"
+  },
+  "craftH": {
+	"item": "minecraft:gold_block"
+  },
+  "title": "Mending Aura",
+  "cost": 27,
+  "augment": "amethyst_imbuement:mending_aura"
+}
