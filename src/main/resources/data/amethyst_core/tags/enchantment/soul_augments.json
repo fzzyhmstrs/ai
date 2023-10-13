@@ -26,7 +26,9 @@
 		"amethyst_imbuement:withering_bolt",
 		"amethyst_imbuement:chaos_bolt",
 		"amethyst_imbuement:summon_cholem",
-		"amethyst_imbuement:summon_chorse",
-		"amethyst_imbuement:soulfreeze"
+		{
+			"id":  "amethyst_imbuement:soulfreeze",
+			"required":  false
+		}
 	]
 }

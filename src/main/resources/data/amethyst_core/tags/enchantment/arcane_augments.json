@@ -25,7 +25,10 @@
 		"amethyst_imbuement:chaos_bolt",
 		"amethyst_imbuement:energy_blade",
 		"amethyst_imbuement:planar_door",
-		"amethyst_imbuement:solar_flare",
-		"amethyst_imbuement:bone_fan"
+		"amethyst_imbuement:bone_fan",
+		{
+			"id":  "amethyst_imbuement:solar_flare",
+			"required":  false
+		}
 	]
 }

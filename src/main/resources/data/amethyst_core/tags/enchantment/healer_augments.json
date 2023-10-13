@@ -16,6 +16,9 @@
 		"amethyst_imbuement:mending_aura",
 		"amethyst_imbuement:sanctuary",
 		"amethyst_imbuement:revivify",
-		"amethyst_imbuement:crackling_infusion"
+		{
+			"id":  "amethyst_imbuement:crackling_infusion",
+			"required":  false
+		}
 	]
 }

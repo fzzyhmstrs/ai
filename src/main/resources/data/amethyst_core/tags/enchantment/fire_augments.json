@@ -11,7 +11,10 @@
 		"amethyst_imbuement:torrent_of_beaks",
 		"amethyst_imbuement:chaos_bolt",
 		"amethyst_imbuement:create_tnt",
-		"amethyst_imbuement:solar_flare"
+		{
+			"id":  "amethyst_imbuement:solar_flare",
+			"required":  false
+		}
 
 	]
 }

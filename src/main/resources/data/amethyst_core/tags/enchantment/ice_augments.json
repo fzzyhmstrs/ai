@@ -7,6 +7,9 @@
 		"amethyst_imbuement:hail_storm",
 		"amethyst_imbuement:chaos_bolt",
 		"amethyst_imbuement:ice_burst",
-		"amethyst_imbuement:soulfreeze"
+		{
+			"id":  "amethyst_imbuement:soulfreeze",
+			"required":  false
+		}
 	]
 }

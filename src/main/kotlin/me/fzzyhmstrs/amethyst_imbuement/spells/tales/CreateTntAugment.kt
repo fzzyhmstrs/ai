@@ -23,11 +23,10 @@ class CreateTntAugment: PlaceItemAugment(ScepterTier.THREE, 1, Items.TNT){
     }
 
     override fun blockPlacing(hit: BlockHitResult, world: World, user: ServerPlayerEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean{
-        val bl = super.blockPlacing(hit,world,user,hand,level,effects)
-        if (bl){
-            TntBlock.primeTnt(world,hit.blockPos)
-        }
-        return bl
+        val placePos = if (world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockPos.offset(hit.side)
+        //val bl = super.blockPlacing(hit,world,user,hand,level,effects)
+        TntBlock.primeTnt(world,placePos)
+        return true
     }
 
     override fun soundEvent(): SoundEvent {

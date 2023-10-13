@@ -20,6 +20,18 @@ class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World
         this.setPosition(pos)
     }
 
+    constructor(world: World,owner: LivingEntity, speed: Float, divergence: Float, yaw: Float, x: Double, y: Double, z: Double): this(RegisterEntity.BONE_SHARD_ENTITY,world){
+        this.owner = owner
+        this.setVelocity(owner,
+            owner.pitch,
+            yaw,
+            0.0f,
+            speed,
+            divergence)
+        this.setPosition(x,y,z)
+        this.setRotation(yaw, owner.pitch)
+    }
+
     override var entityEffects: AugmentEffect = super.entityEffects.withDuration(180)
 
 

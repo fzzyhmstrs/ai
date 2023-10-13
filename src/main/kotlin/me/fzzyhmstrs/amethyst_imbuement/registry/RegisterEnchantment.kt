@@ -174,6 +174,7 @@ object RegisterEnchantment {
 
     //Tales Spells
     val ARCANE_AURA = ArcaneAuraAugment().register("arcane_aura")
+    val BONE_FAN = BoneFanAugment().register("bone_fan")
     val CARAPACE = CarapaceAugment().register("carapace")
     val CHAIN_LIGHTNING = ChainLightningAugment().register("chain_lightning")
     val CHAOS_BOLT = ChaosBoltAugment().register("chaos_bolt")
@@ -186,7 +187,6 @@ object RegisterEnchantment {
     val METEOR = MeteorAugment().register("meteor")
     val SANCTUARY = SanctuaryAugment().register("sanctuary")
     val SUMMON_CHOLEM = SummonCholemAugment().register("summon_cholem")
-    val SUMMON_CHORSE = SummonCholemAugment().register("summon_chorse")
     //RPG Series
     private fun rpgSeries(){
         if (FabricLoader.getInstance().isModLoaded("spell_power")){
