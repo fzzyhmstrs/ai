@@ -32,10 +32,12 @@ class GlisteringKeyItem(settings: Settings)
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
+        if (context.world.isClient) return ActionResult.FAIL
         val block = context.world.getBlockState(context.blockPos).block
         if (block !is GlisteringKeyUnlockable) return ActionResult.FAIL
         block.unlock(context.world,context.blockPos, null)
         if (block.consumeItem()){
+            println("decrementing the stack ${context.stack}")
             context.stack.decrement(1)
         }
         context.world.playSound(null,context.blockPos,RegisterSound.UNLOCK,SoundCategory.PLAYERS,1.0f,1.0f)

@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.ManaPotionEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.GildedLockboxBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.ImbuingTableBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.*
@@ -414,6 +415,16 @@ object RegisterEntity {
                 state
             )
         },RegisterBlock.DISENCHANTING_TABLE).build(null))
+
+    val GILDED_LOCKBOX_BLOCK_ENTITY: BlockEntityType<GildedLockboxBlockEntity> = Registry.register(
+        Registries.BLOCK_ENTITY_TYPE,
+        AI.MOD_ID + ":gilded_lockbox_entity",
+        FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
+            GildedLockboxBlockEntity(
+                pos,
+                state
+            )
+        },RegisterBlock.GILDED_LOCKBOX).build(null))
 
 
     fun registerAll(){

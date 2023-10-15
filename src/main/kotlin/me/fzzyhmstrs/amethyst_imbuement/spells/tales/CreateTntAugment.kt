@@ -18,7 +18,7 @@ import net.minecraft.world.World
 class CreateTntAugment: PlaceItemAugment(ScepterTier.THREE, 1, Items.TNT){
     
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.WIT,100,50,
+        return AugmentDatapoint(SpellType.WIT,120,50,
             20,imbueLevel,6, BookOfTalesItem.TALES_TIER, Items.TNT)
     }
 

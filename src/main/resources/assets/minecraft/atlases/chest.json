@@ -1,0 +1,8 @@
+{
+	"sources": [
+		{
+			"type": "single",
+			"resource": "amethyst_imbuement:entity/gilded_lockbox"
+		}
+	]
+}

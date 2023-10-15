@@ -22,6 +22,7 @@ import net.minecraft.client.model.Dilation
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer
 import net.minecraft.client.render.entity.*
 import net.minecraft.client.render.entity.model.BlazeEntityModel
 import net.minecraft.client.render.entity.model.EntityModelLayer
@@ -184,6 +185,9 @@ object RegisterRenderer {
 
         BlockEntityRendererFactories.register(RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
         ){ context: BlockEntityRendererFactory.Context -> AltarOfExperienceBlockEntityRenderer(context) }
+
+        BlockEntityRendererFactories.register(RegisterEntity.GILDED_LOCKBOX_BLOCK_ENTITY
+        ){ context: BlockEntityRendererFactory.Context -> ChestBlockEntityRenderer(context) }
 
         /////////////////////////////////
 

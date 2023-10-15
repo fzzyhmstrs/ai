@@ -156,6 +156,9 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
     include("eu.pb4:common-protection-api:$cpaVersion")
+
+    val lithiumVersion: String by project
+    modImplementation("maven.modrinth:lithium:$lithiumVersion")
 }
 
 tasks {

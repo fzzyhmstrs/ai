@@ -185,6 +185,7 @@ object RegisterEnchantment {
     val LIGHTNING_AURA = LightningAuraAugment().register("lightning_aura")
     val MENDING_AURA = MendingAuraAugment().register("mending_aura")
     val METEOR = MeteorAugment().register("meteor")
+    val REVIVIFY = RevivifyAugment().register("revivify")
     val SANCTUARY = SanctuaryAugment().register("sanctuary")
     val SUMMON_CHOLEM = SummonCholemAugment().register("summon_cholem")
     //RPG Series

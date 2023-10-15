@@ -30,6 +30,7 @@
     "EntityMixin",
     "FarmlandBlockMixin",
     "FishEntityMixin",
+    "GildedLockboxBlockMixin",
     "ItemGroupsMixin",
     "ItemMixin",
     "ItemStackMixin",
@@ -49,6 +50,7 @@
     "TridentEntityMixin"
   ],
   "client": [
+    "TexturedRenderLayersMixin",
     "ClientPlayNetworkHandlerMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin"

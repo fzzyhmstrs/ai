@@ -29,7 +29,7 @@ class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World
             speed,
             divergence)
         this.setPosition(x,y,z)
-        this.setRotation(yaw, owner.pitch)
+        //this.setRotation(yaw, owner.pitch)
     }
 
     override var entityEffects: AugmentEffect = super.entityEffects.withDuration(180)

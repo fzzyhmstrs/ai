@@ -430,6 +430,9 @@
 	"block.amethyst_imbuement.crystal_altar": "Crystal Altar",
 	"block.amethyst_imbuement.forcefield_block": "Forcefield Block",
 	"block.amethyst_imbuement.tigers_eye_blackstone_ore": "Tigers Eye Blackstone Ore",
+	"block.amethyst_imbuement.glistening_ice": "Glistening Ice",
+	"block.amethyst_imbuement.gilded_lockbox": "Gilded Lockbox",
+	"block.amethyst_imbuement.gilded_lockbox.locked": "Locked. Is there some key that opens it..?",
 	"block.amethyst_imbuement.hard_light_block": "Hard Light Block",
 	"block.amethyst_imbuement.crystallized_light_white": "White Crystallized Light",
 	"block.amethyst_imbuement.crystallized_light_light_gray": "Light Gray Crystallized Light",
@@ -447,7 +450,6 @@
 	"block.amethyst_imbuement.crystallized_light_purple": "Purple Crystallized Light",
 	"block.amethyst_imbuement.crystallized_light_magenta": "Magenta Crystallized Light",
 	"block.amethyst_imbuement.crystallized_light_pink": "Pink Crystallized Light",
-	"block.amethyst_imbuement.glistening_ice": "Glistening Ice",
 	"block.amethyst_imbuement.shine_light": "Shine Light",
 	"block.amethyst_imbuement.shine_light_light_gray": "Light Gray Shine Light",
 	"block.amethyst_imbuement.shine_light_gray": "Gray Shine Light",
@@ -753,6 +755,9 @@
 
 	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.desc": "Grants the target or caster increased experience gain.",
+
+	"enchantment.amethyst_imbuement.meteor": "Meteor",
+	"enchantment.amethyst_imbuement.meteor.desc": "Launches a powerful explosive meteor in the direction cast.",
 
 	"enchantment.amethyst_imbuement.minor_heal": "Minor Heal",
 	"enchantment.amethyst_imbuement.minor_heal.desc": "Heals caster or target. Amount healed increases with level.",

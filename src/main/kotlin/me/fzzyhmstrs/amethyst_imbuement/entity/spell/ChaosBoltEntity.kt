@@ -101,11 +101,11 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
         fun createChaosBolt(world: World, user: LivingEntity, speed: Float, div: Float, effects: AugmentEffect, level: Int, augment:ScepterAugment): ChaosBoltEntity {
             val fbe = ChaosBoltEntity(
                 world, user, speed, div,
-                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
                 user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
-                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
             )

@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
+import net.minecraft.block.enums.Instrument
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.BlockItem
@@ -73,6 +74,7 @@ object RegisterBlock {
         GLISTENING_ICE,
         FabricItemSettings()
     )
+    val GILDED_LOCKBOX = GildedLockboxBlock(FzzyBlockSettings.burn().mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASS).strength(2.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["gilded_lockbox"] = it }
 
     val TIGERS_EYE_BLACKSTONE_ORE = ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_blackstone_ore"] = it }
     val TIGERS_EYE_BASALT_ORE = PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_basalt_ore"] = it }

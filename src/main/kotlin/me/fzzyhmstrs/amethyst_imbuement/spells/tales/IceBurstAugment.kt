@@ -8,10 +8,10 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.IceSpikeEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper

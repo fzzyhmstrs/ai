@@ -24,22 +24,23 @@ class BoneFanAugment: SummonProjectileAugment(ScepterTier.THREE,17) {
                                                 .withDuration(80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,24,8,
+        return AugmentDatapoint(SpellType.FURY,32,20,
             21,imbueLevel,2,BookOfTalesItem.TALES_TIER,Items.SUSPICIOUS_STEW)
     }
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+        var successes = 0
         val speed = 2.0F
         val div = 0.75F
         val increment = 12.5f * 2 / effects.amplifier(level)
         for (i in -effects.amplifier(level) ..effects.amplifier(level)){
             val fbe = BoneShardEntity(
-                world, user, speed, div, (user.bodyYaw + 12.5f * i),
-                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin((user.bodyYaw + increment * i) * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                world, user, speed, div, (user.yaw + 12.5f * i),
+                user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin((user.yaw + increment * i) * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
                 user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
-                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos((user.bodyYaw + increment * i) * (Math.PI.toFloat() / 180)) * MathHelper.cos(
+                user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos((user.yaw + increment * i) * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
             )
@@ -47,6 +48,7 @@ class BoneFanAugment: SummonProjectileAugment(ScepterTier.THREE,17) {
             fbe.setAugment(this)
             val bl = world.spawnEntity(fbe)
             if(bl) {
+                successes++
                 world.playSound(
                     null,
                     user.blockPos,
@@ -57,7 +59,7 @@ class BoneFanAugment: SummonProjectileAugment(ScepterTier.THREE,17) {
                 )
             }
         }
-        return super.applyTasks(world, user, hand, level, effects)
+        return successes > 0
     }
 
 

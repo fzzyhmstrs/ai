@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.GildedLockboxBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.screen.AltarOfExperienceScreenHandler
 import net.minecraft.block.BlockState
@@ -34,9 +35,9 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
         return if (world.isClient) checkType(
-            type, RegisterEntity.ALTAR_OF_EXPERIENCE_BLOCK_ENTITY
-        ) { wrld: World, pos: BlockPos, state2: BlockState, blockEntity: AltarOfExperienceBlockEntity ->
-            AltarOfExperienceBlockEntity.tick(
+            type, RegisterEntity.GILDED_LOCKBOX_BLOCK_ENTITY
+        ) { wrld: World, pos: BlockPos, state2: BlockState, blockEntity: GildedLockboxBlockEntity ->
+            GildedLockboxBlockEntity.tick(
                 wrld,
                 pos,
                 state2,
