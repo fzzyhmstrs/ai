@@ -1,0 +1,102 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "minecraft:chests/stronghold_library"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:string"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:bone"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"It\\'s done. A simple sleep charm was all it took, and my familiar did the heavy lifting.\\\\n\\\\nI\\'ve fashioned crudes cells to keep them in.\"]]','[[\"What am I doing.\\\\n\\\\nWhat have I become.\\\\n\\\\nThe experiment begins tomorrow.\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"Their blood isn\\'t enough. It\\'s so close. Not enough.\\\\n\\\\nI\\'ve come this far. I think I know what must be done.\\\\n\\\\n\\\\n\\\\nWill it be worth it?\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"I can\\'t believe it worked. It really worked.\\\\n\\\\nReal, tangible Sardonyx, distilled down from the life essence of... them.\\\\n\\\\nI have begun my experimentation on the new crystal.\"]]','[[\"It\\'s quite unstable, exhibiting a high degree of magic flux.\\\\n\\\\nIt seems to interact with every kind of magical energy, but the results are often very unexpected. Powerful, but... chaotic. Like it\\'s reaching into the very fabric of reality itself.\"]]','[[\"I should test with this on my familiar....\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"Mistake.\\\\n\\\\nThe crystals reacted extremely powerfully to the familiar.\\\\n\\\\nIt\\'s completely uncontrollable, chaotic, HOSTILE.\\\\n\\\\nI believe I\\'ve sealed it away in the lower sanctum.\"]]','[[\"If anyone is reading this, stay away.\\\\n\\\\nSTAY AWAY.\\\\n\\\\nI\\'ll have to abandon this facility and seal it off. Even while sealed, the monstrosity has warped my conjuring experiments... I can no longer remain.\\\\n\\\\nSTAY AWAY.\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        }
+      ]
+    }
+  ]
+}

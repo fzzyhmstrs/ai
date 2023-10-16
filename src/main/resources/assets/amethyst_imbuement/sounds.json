@@ -23,7 +23,7 @@
   "unlock": {
     "subtitle": "subtitles.amethyst_imbuement.unlock",
     "sounds": [
-      "amethyst_imbuement:unlock_1"
+      "amethyst_imbuement:unlock_3"
     ]
   },
   "locked_book": {

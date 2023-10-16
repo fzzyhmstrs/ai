@@ -28,7 +28,7 @@ class GlisteringKeyItem(settings: Settings)
             stack.decrement(1)
         }
         world.playSound(null,user.blockPos,RegisterSound.UNLOCK,SoundCategory.PLAYERS,0.8f,1.3f)
-        return TypedActionResult.success(stack)
+        return TypedActionResult.fail(stack)
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
@@ -37,7 +37,7 @@ class GlisteringKeyItem(settings: Settings)
         if (block !is GlisteringKeyUnlockable) return ActionResult.FAIL
         block.unlock(context.world,context.blockPos, null)
         if (block.consumeItem()){
-            println("decrementing the stack ${context.stack}")
+            println("item decrementing the stack ${context.stack} in a server world: ${!context.world.isClient}")
             context.stack.decrement(1)
         }
         context.world.playSound(null,context.blockPos,RegisterSound.UNLOCK,SoundCategory.PLAYERS,1.0f,1.0f)

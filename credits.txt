@@ -1,6 +1,8 @@
 Credits for assets:
 
 Unlocking Sound Event:
+"Mortice Door Lock being locked and unlocked" by Woodstokk of
+"locking and unlocking the door.wav" by Tomlija of https://freesound.org/people/Tomlija/ and http://www.facebook.com/TsheSound
 "Door Unlock" by angelkunev: https://freesound.org/people/angelkunev/
 
 Locked Book Sound Event:

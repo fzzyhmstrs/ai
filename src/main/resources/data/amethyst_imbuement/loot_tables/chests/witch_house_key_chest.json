@@ -1,0 +1,165 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:bread"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:baked_potato"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3.0,
+                "max": 6.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:wheat"
+        },
+		{
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:apple"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:string"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:bone"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"Year 20, Fall 13\\\\n\\\\nBreakthrough! I believe I\\'ve finally unlocked the missing piece I\\'ve been searching for, of course it would be life itself! How could I have missed such a simple avenue of experiemntation...\"]]','[[\"The imbuing process is responding strongly to some chicken wings I happened to have nearby.\\\\n\\\\nNow comes the matter of finding more of this lifeforce to test. Surely the local herder won\\'t miss a sheep or two..?\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"Year 20, Winter 3\\\\n\\\\nMy experimentation has hit a dead end. Livestock blood isn\\'t catalyzing the reaction strongly enough...\\\\n\\\\nI\\'m at a loss. Where do I go from here? Animal blood is obiviously the catalyst, why isn\\'t it working?\"]]','[[\"Unless....\\\\n\\\\nNo, that can\\'t be it can it....?\\\\n\\\\nThere is a village nearby....\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{pages:['[[\"Year 21, Spring 12\\\\n\\\\nIt CAN\\'T be the only way. There has to be another.\\\\n\\\\nThere has to be another way.\\\\n\\\\nNothing is working!\"]]','[[\"Why won\\'t it work?\\\\n\\\\nWhy won\\'t it work??\\\\n\\\\nWhy won\\'t it work.\\\\n\\\\nwhywontitwork\\\\n\\\\nWHYWONTITWORKWHYWONTITWORKWHYWONTITWORKWHYWO\"]]'],title:\"Dusty Journal\",author:fzzyhmstrs,generation:3}"
+            }
+          ],
+          "name": "minecraft:written_book"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "amethyst_imbuement:glistering_key"
+        }
+      ]
+    }
+  ]
+}

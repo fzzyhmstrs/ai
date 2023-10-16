@@ -287,7 +287,7 @@ object RegisterRenderer {
         ModelPredicateProviderRegistry.register(
             RegisterItem.BOOK_OF_TALES, Identifier("type")
         ) { stack: ItemStack, _: ClientWorld?, _: LivingEntity?, _: Int ->
-            val nbt = stack.nbt ?:  return@register 0f
+            val nbt = stack.nbt ?:  return@register 0.1f
             if (!nbt.getBoolean("unlocked")){
                 0.1f
             } else if (nbt.contains(NbtKeys.LORE_TYPE.str())){

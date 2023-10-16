@@ -75,9 +75,21 @@ class GildedLockboxBlock(
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is GildedLockboxBlockEntity){
             if (!blockEntity.unlocked) {
-                player.sendMessage(AcText.translatable(this.translationKey + ".locked"), true)
-                world.playSound(null,pos,RegisterSound.LOCKED_BOOK,SoundCategory.BLOCKS,1f,1f)
-                return ActionResult.PASS
+                val stack = player.getStackInHand(hand)
+                val item = stack.item
+                return if (item is GlisteringKeyItem){
+                    /*println("block decrementing the stack $stack in a server world: ${!world.isClient}")
+                    blockEntity.unlocked = true
+                    stack.decrement(1)
+                    world.playSound(null,player.blockPos,
+                        RegisterSound.UNLOCK,SoundCategory.PLAYERS,1f,1f)
+                    ActionResult.FAIL*/
+                    ActionResult.FAIL
+                } else {
+                    player.sendMessage(AcText.translatable(this.translationKey + ".locked"), true)
+                    world.playSound(null, pos, RegisterSound.LOCKED_BOOK, SoundCategory.BLOCKS, 1f, 1f)
+                    ActionResult.PASS
+                }
             }
         } else {
             return ActionResult.FAIL
