@@ -57,9 +57,8 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
 
     override fun blockPlacing(hit: BlockHitResult, world: World, user: ServerPlayerEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean{
         if (world !is ServerWorld) return false
-        val bl = super.blockPlacing(hit,world,user,hand,level,effects)
-        if (!bl) return false
         val hitPos = if(world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockpos.offSet(hit.side)
+        if(!world.setBlockState(hitPos,RegisterBlock.PLANAR_DOOR.defaultState.with(PlanarDoorBlock.WATERLOGGED,world.getFluidState(pos).isIn(FluidTags.WATER)))) return false
         val blockEntity = world.getBlockEntity(hitPos)
         if (blockEntity is PlanarDoorBlockEntity){
             val stack = user.getStackInHand(hand)
