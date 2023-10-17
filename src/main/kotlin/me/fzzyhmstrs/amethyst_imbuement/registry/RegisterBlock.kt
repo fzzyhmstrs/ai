@@ -75,7 +75,9 @@ object RegisterBlock {
         FabricItemSettings()
     )
     val GILDED_LOCKBOX = GildedLockboxBlock(FzzyBlockSettings.burn().mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASS).strength(2.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["gilded_lockbox"] = it }
+    val PLANAR_DOOR = PlanarDoorBlock(FzzyBlockSettings.nonSolidLightDestroyMoveReplace().mapColor(MapColor.PURPLE).sounds(BlockSoundGroup.GLASS)).also { regBlock["planar_door"] = it }
 
+    
     val TIGERS_EYE_BLACKSTONE_ORE = ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_blackstone_ore"] = it }
     val TIGERS_EYE_BASALT_ORE = PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)).also { regBlock["tigers_eye_basalt_ore"] = it }
 
