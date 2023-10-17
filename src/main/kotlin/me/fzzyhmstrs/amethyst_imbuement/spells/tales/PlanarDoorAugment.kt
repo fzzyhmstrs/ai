@@ -23,10 +23,31 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.world.World
 import java.util.*
 
-class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, Items.ENDER_EYE){
+class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.PLANAR_DOOR.asItem()){
 
     companion object{
         private val colorMap: MutableMap<UUID,Int> = mutableMapOf()
+        private val teleportedEntitiesMap: MutableMap<BlockPos,MutableMap<Int,Long>> = mutableMapOf()
+
+        fun getAndUpdateDoorStatus(entity: Entity, pos: Blockpos): Boolean{
+            val time = entity.world.time
+            val lastTime = teleportedEntitiesMap[pos]?.get(entity.id) ?: return false
+            val bl = time - lastTime <= 5L
+            if (bl){
+                teleportedEntitiesMap[pos]?.put(entity.id,time)
+            } else {
+                teleportedEntitiesMap[pos]?.remove(entity.id)
+            }
+            if (teleportedEntitiesMap[pos]?.isEmpty()){
+                teleportedEntitiesMap.remove(pos)
+            }
+            return bl
+        }
+
+        fun addEntityTeleported(entity: Entity, pos: BlockPos){
+            teleportedEntitiesMap.computeIfAbsent(pos) {mutableMapOf()}.put(entity.id,entity.world.time)
+        }
+        
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
@@ -35,7 +56,72 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, Items.ENDER_EYE
     }
 
     override fun blockPlacing(hit: BlockHitResult, world: World, user: ServerPlayerEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean{
-        val placePos = if (world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockPos.offset(hit.side)
+        if (world !is ServerWorld) return false
+        val bl = super.blockPlacing(hit,world,user,hand,level,effects)
+        if (!bl) return false
+        val hitPos = if(world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockpos.offSet(hit.side)
+        val blockEntity = world.getBlockEntity(hitPos)
+        if (blockEntity is PlanarDoorBlockEntity){
+            val stack = user.getStackInHand(hand)
+            val nbt = stack.orCreateNbt
+            val colorInt = if (!nbt.contains("planar_door_color")){
+                val oldCi = colorMap.computeIfAbsent(user.uuid) {0}
+                var ci = DyeColor.values().random().signColor
+                while (oldCi == ci){
+                    ci = DyeColor.values().random().signColor
+                }
+                nbt.putInt("planar_door_color",ci)
+                colorMap[user.uuid] = ci
+                ci
+            } else {
+                nbt.getInt("planar_door_color")
+            }
+            blockEntity.color = colorInt
+            blockEntity.setOwner(user)
+            if (nbt.contains("partnerPos")) {
+                val pos = Nbt.readBlockPos("partnerPos",nbt)
+                val worldOptional = World.CODEC.parse(NbtOps.INSTANCE, nbt[CompassItem.LODESTONE_DIMENSION_KEY]).result()
+                if (worldOptional.isPresent) {
+                    val newWorld = world.server.getWorld(worldOptional.get()) ?: return false
+                    val partnerEntity = newWorld.getBlockEntity(pos))
+                    if (partnerEntity is PlanarDoorBlockEntity){
+                        partnerEntity.breakPartner(world)
+                        partnerEntity.partnerPos = hitPos
+                        partnerEntity.setPartnerWorld(world.registryKey)
+                        blockEntity.partnerPos = pos
+                        blockEntity.setPartnerWorld(newWorld.registryKey)
+                        Nbt.writeBlockPos("partnerPosPrevious", pos, nbt)
+                        World.CODEC.encodeStart(NbtOps.INSTANCE, world.registryKey).resultOrPartial { s: String? ->
+                                println(s)
+                            }.ifPresent { nbtElement: NbtElement? ->
+                                nbt.put(CompassItem.LODESTONE_DIMENSION_KEY + "Previous", nbtElement)
+                            }
+                    } else if (nbt.contains("partnerPosPrevious")){
+                        val pos2 = Nbt.readBlockPos("partnerPosPrevious")
+                        val worldOptional2 = World.CODEC.parse(NbtOps.INSTANCE, nbt[CompassItem.LODESTONE_DIMENSION_KEY + "Previous"]).result()
+                        if (worldOptional2.isPresent){
+                            val newWorld2 = world.server.getWorld(worldOptional2.get()) ?: return false
+                            val partnerEntity2 = newWorld2.getBlockEntity(pos2))
+                            if (partnerEntity2 is PlanarDoorBlockEntity){
+                                partnerEntity2.breakPartner(world)
+                                partnerEntity2.partnerPos = hitPos
+                                partnerEntity2.setPartnerWorld(world.registryKey)
+                                blockEntity.partnerPos = pos2
+                                blockEntity.setPartnerWorld(newWorld2.registryKey)
+                            }
+                        }
+                    }
+                }       
+            }
+            Nbt.writeBlockPos("partnerPos",hitPos,nbt)
+            World.CODEC.encodeStart(NbtOps.INSTANCE, world.registryKey).resultOrPartial { s: String? ->
+                    println(s)
+                }.ifPresent { nbtElement: NbtElement? ->
+                    nbt.put(CompassItem.LODESTONE_DIMENSION_KEY, nbtElement)
+                }
+        }
+        return true
+        /*val placePos = if (world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockPos.offset(hit.side)
         val stack = user.getStackInHand(hand)
         val nbt = stack.orCreateNbt
         val colorInt = if (!nbt.contains("planar_door_color")){
@@ -142,7 +228,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, Items.ENDER_EYE
                 Nbt.writeBlockPos("partner_pos",pde.blockPos,nbt)
                 return true
             }
-        }
+        }*/
         //TntBlock.primeTnt(world,placePos)
         return false
     }
