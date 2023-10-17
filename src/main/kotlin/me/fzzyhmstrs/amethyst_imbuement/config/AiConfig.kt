@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.Tameable
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.resource.ResourceManager
@@ -381,6 +382,8 @@ object AiConfig
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
             if (user == null) return false
+            if (entity === user) return true
+            if ((entity as? Tameable)?.owner == user) return true
             if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
                 return user.isTeammate(entity)
             }

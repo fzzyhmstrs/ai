@@ -6,9 +6,11 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.mixins.ProjectileEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
@@ -25,10 +27,12 @@ import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.RaycastContext.FluidHandling
 import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
 
 /**
  * basic missile projectile for use with spells or any other projectile-lobbing object.
@@ -47,17 +51,13 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
 
     constructor(world: World,owner: LivingEntity) : this(RegisterEntity.ENERGY_BLADE,world){
         this.owner = owner
-        this.setPosition(
-            owner.x,
-            owner.eyeY - 0.4,
-            owner.z
-        )
-        this.setRotation(owner.yaw, owner.pitch)
+        this.updatePositionAndAngles(owner.x, owner.eyeY - 0.4, owner.z, owner.yaw, owner.pitch)
     }
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F)
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F).withRange(5.0)
     open var maxAge = 100
     protected var scepterAugment: ScepterAugment = RegisterEnchantment.ICE_SHARD
+    private var blockHits = 0
 
     fun setAugment(aug: ScepterAugment){
         this.scepterAugment = aug
@@ -66,25 +66,53 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
         maxAge = ae.amplifier(level)
+        entityEffects.setRange(ae.range(level))
     }
 
     override fun initDataTracker() {}
 
     override fun tick() {
-        super.tick()
+        //println("Top of Tick:  ${this.yaw}")
+        //println("Top of Tick prev:  ${this.prevYaw}")
+        val entity = owner
+        if (!world.isClient && (entity != null && entity.isRemoved || !world.isChunkLoaded(blockPos))) {
+            discard()
+            return
+        }
         if (isRemoved)
             return
         if (age > maxAge){
             discard()
         }
-        val vec3d = velocity
+
+        //println("After refresh:  ${this.yaw}")
+        //println("After refresh prev:  ${this.prevYaw}")
+        if (!(this as ProjectileEntityAccessor).isShot) {
+            this.emitGameEvent(GameEvent.PROJECTILE_SHOOT, owner)
+            (this as ProjectileEntityAccessor).isShot = true
+        }
+        if (!(this as ProjectileEntityAccessor).isLeftOwner) {
+            (this as ProjectileEntityAccessor).isLeftOwner = shouldLeaveOwner()
+        }
+        baseTick()
+        if (this.isBurning) {
+            setOnFireFor(1)
+        }
+
         val hitResult = getMissileBlockCollision()
-        if (hitResult is BlockHitResult){
+        if (hitResult.type == HitResult.Type.BLOCK && hitResult is BlockHitResult){
             onBlockHit(hitResult)
         }
         val entityHits = getMissileEntityCollision()
         for (hit in entityHits){
             onEntityHit(hit)
+        }
+        val vec3d = velocity
+        if (prevPitch == 0.0f && prevYaw == 0.0f) {
+            yaw = -(MathHelper.atan2(vec3d.x, vec3d.z) * 57.2957763671875).toFloat()
+            pitch = -(MathHelper.atan2(vec3d.y, vec3d.horizontalLength()) * 57.2957763671875).toFloat()
+            prevYaw = yaw
+            prevPitch = pitch
         }
         //onCollision(hitResult)
         val x2 = vec3d.x
@@ -93,22 +121,58 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val d = this.x + x2
         val e = this.y + y2
         val f = this.z + z2
-        this.updateRotation()
+
         addParticles(x2, y2, z2)
         val gg: Double = if (this.isTouchingWater) {
-            0.995
+            0.95
         } else {
             drag.toDouble()
         }
         velocity = vec3d.multiply(gg)
-        if (!hasNoGravity()) {
-            velocity = velocity.add(0.0, -0.0, 0.0)
+        if (velocity.lengthSquared() == 0.0) {
+            return
         }
+        this.yaw = -(MathHelper.atan2(velocity.x, velocity.z) * 57.2957763671875).toFloat()
+        this.pitch = -(MathHelper.atan2(velocity.y,velocity.horizontalLength()) * 57.2957763671875).toFloat()
+
+
+        //ProjectileUtil.setRotationFromVelocity(this,0.5f)
+        //println("Bottom Tick:  ${this.yaw}")
+        //println("Bottom Tick prev:  ${this.prevYaw}")
+/*        if (!hasNoGravity()) {
+            velocity = velocity.add(0.0, -0.0, 0.0)
+        }*/
+        //world.addParticle(this.particleType, d, e + 0.5, f, 0.0, 0.0, 0.0)
         this.setPosition(d, e, f)
     }
 
+    override fun setVelocityClient(x: Double, y: Double, z: Double) {
+        this.setVelocity(x, y, z)
+        if (prevPitch == 0.0f && prevYaw == 0.0f) {
+            val d = Math.sqrt(x * x + z * z)
+            pitch = -(MathHelper.atan2(y, d) * 57.2957763671875).toFloat()
+            yaw = -(MathHelper.atan2(x, z) * 57.2957763671875).toFloat()
+            prevPitch = pitch
+            prevYaw = yaw
+            this.refreshPositionAndAngles(x, y, z, yaw, pitch)
+        }
+    }
+
+    private fun shouldLeaveOwner(): Boolean {
+        val entity2 = owner
+        if (entity2 != null) {
+            for (entity22 in world.getOtherEntities(
+                this, boundingBox.stretch(velocity).expand(1.0)
+            ) { entity: Entity -> !entity.isSpectator && entity.canHit() }) {
+                if (entity22.rootVehicle !== entity2.rootVehicle) continue
+                return false
+            }
+        }
+        return true
+    }
+
     private fun getMissileBlockCollision(): HitResult{
-        return world.raycast(
+        val hit = world.raycast(
             RaycastContext(
                 pos,
                 pos.add(velocity),
@@ -117,11 +181,22 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
                 this
             )
         )
+        if (hit.type == HitResult.Type.BLOCK)
+            blockHits++
+        if (blockHits >= entityEffects.range(0)) {
+            discard()
+        }
+        /*if (hit is BlockHitResult && hit.type != HitResult.Type.MISS){
+            if (age - lastBlockHit <= 1)
+                discard()
+            lastBlockHit = age
+        }*/
+        return hit
     }
 
     private fun getMissileEntityCollision(): List<EntityHitResult>{
         if (world.isClient) return listOf()
-        val rotation = getRotationVector()
+        val rotation = rotationVector
         val flatRotation = rotation.multiply(1.0,0.0,1.0)
         val flatPerpendicular = RaycasterUtil.perpendicularVector(flatRotation,RaycasterUtil.InPlane.XZ)
         return RaycasterUtil.raycastEntityRotatedArea(
@@ -130,9 +205,9 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
             pos.add(velocity),
             rotation,
             flatPerpendicular,
-            1.2,
-            2.25,
-            1.0).map{EntityHitResult(it)}
+            1.5,
+            2.75,
+            1.5).map{EntityHitResult(it)}
     }
 
     open fun fluidHandling(): FluidHandling{
@@ -198,10 +273,11 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val e = packet.velocityY
         val f = packet.velocityZ
         this.setVelocity(d, e, f)
+        //ProjectileUtil.setRotationFromVelocity(this,1f)
     }
 
     override fun getParticleType(): ParticleEffect? {
-        return ParticleTypes.CRIT
+        return ParticleTypes.ENCHANTED_HIT
     }
 
     open fun hitParticleType(): ParticleEffect?{
@@ -209,7 +285,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
     }
 
     open fun playHitSound(world: World,pos: BlockPos){
-        world.playSound(null,pos,SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE,SoundCategory.PLAYERS,0.3f,1.0f)
+        world.playSound(null,pos,SoundEvents.ENTITY_PLAYER_ATTACK_CRIT,SoundCategory.PLAYERS,0.3f,1.0f)
     }
 
     open fun splashParticles(pos: Vec3d, world: World){

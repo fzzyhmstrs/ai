@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
-import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -8,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.EnergyBladeEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -26,6 +26,7 @@ open class EnergyBladeAugment: SlashAugment(ScepterTier.THREE,16){
     override val baseEffect: AugmentEffect = super.baseEffect
                                                 .withDamage(7.8F,0.2F,0.0F)
                                                 .withAmplifier(100)
+                                                .withRange(5.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,80,20,
@@ -45,8 +46,9 @@ open class EnergyBladeAugment: SlashAugment(ScepterTier.THREE,16){
     private fun entityClass(world: World, user: LivingEntity, level: Int = 1, effects: AugmentEffect): ProjectileEntity {
         val ebe = EnergyBladeEntity(world,user)
         ebe.passEffects(effects,level)
-        ebe.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.2f, 0.1f)
-        return MissileEntity(world, user, false)
+
+        ebe.setVelocity(user.rotationVector.x,user.rotationVector.y,user.rotationVector.z, 1.2f, 0.1f)
+        return ebe
     }
 
     private fun spawnProjectileEntity(world: World, entity: LivingEntity, projectile: ProjectileEntity, soundEvent: SoundEvent): Boolean{
@@ -72,6 +74,10 @@ open class EnergyBladeAugment: SlashAugment(ScepterTier.THREE,16){
     
     override fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
         return list.toMutableList()
+    }
+
+    override fun soundEvent(): SoundEvent {
+        return RegisterSound.ENERGY_BLADE
     }
 
     override fun particleType(): DefaultParticleType{

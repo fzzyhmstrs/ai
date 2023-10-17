@@ -42,6 +42,7 @@ object RegisterRenderer {
     val TOTEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"totem"),"totem_model")
     val CRYSTAL_GOLEM_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"crystal_golem"),"crystal_golem_model")
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
+    val ENERGY_BLADE_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"energy_blade_entity"),"energy_blade_entity_model")
     val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
     
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
@@ -168,6 +169,14 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> WitherSkullEntityRenderer(context) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.ENERGY_BLADE
+        ){ context: EntityRendererFactory.Context -> EnergyBladeEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.PLANAR_DOOR
+        ){ context: EntityRendererFactory.Context -> PlanarDoorEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.MANA_POTION
         ){ context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context) }
 
@@ -198,7 +207,8 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(TOTEM_ENTITY,TotemEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
-        
+        EntityModelLayerRegistry.registerModelLayer(ENERGY_BLADE_ENTITY) { EnergyBladeEntityModel.texturedModelData }
+
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN) { BaseHamsterEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.15f)) }
 

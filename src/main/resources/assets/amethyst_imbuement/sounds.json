@@ -57,6 +57,12 @@
     "sounds": [
       "amethyst_imbuement:fire"
     ]
+  },
+  "energy_blade": {
+    "subtitle": "subtitles.amethyst_imbuement.energy_blade",
+    "sounds": [
+      "amethyst_imbuement:energy_blade"
+    ]
   }
 }
 

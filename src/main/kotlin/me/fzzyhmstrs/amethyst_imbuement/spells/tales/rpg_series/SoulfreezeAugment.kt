@@ -56,8 +56,8 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
             if (world is ServerWorld){
-                world.spawnParticles(ParticleTypes.SNOWFLAKE,user.x,user.getBodyY(0.5),user.z,250,effect.range(level),0.8,effect.range(level),0.0)
-                world.spawnParticles(ParticleTypes.SMOKE,user.x,user.getBodyY(0.5),user.z,250,effect.range(level),0.8,effect.range(level),0.0)
+                world.spawnParticles(ParticleTypes.SNOWFLAKE,user.x,user.getBodyY(0.5),user.z,1000,effect.range(level),0.8,effect.range(level),0.0)
+                world.spawnParticles(ParticleTypes.SMOKE,user.x,user.getBodyY(0.5),user.z,1000,effect.range(level),0.8,effect.range(level),0.0)
 
             }
             world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)

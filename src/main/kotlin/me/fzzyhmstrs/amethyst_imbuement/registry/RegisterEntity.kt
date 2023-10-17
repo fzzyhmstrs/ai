@@ -354,7 +354,19 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.0f, 0.5f)).build()
+        }.dimensions(EntityDimensions.fixed(0.85f, 0.85f)).build()
+    )
+    val PLANAR_DOOR: EntityType<PlanarDoorEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "planar_door_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<PlanarDoorEntity>, world: World ->
+            PlanarDoorEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1f, 1f)).build()
     )
 
 

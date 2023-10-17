@@ -1,30 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import net.minecraft.client.model.*
+import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumer
-import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.entity.Entity
+import net.minecraft.util.Identifier
+import java.util.function.Function
 
 // Made with Blockbench 4.8.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-class EnergyBladeEntityModel(root: ModelPart) : EntityModel<Entity?>() {
-    private val bb_main: ModelPart
-
-    init {
-        bb_main = root.getChild("bb_main")
-    }
-
-    override fun setAngles(
-        entity: Entity?,
-        limbSwing: Float,
-        limbSwingAmount: Float,
-        ageInTicks: Float,
-        netHeadYaw: Float,
-        headPitch: Float
-    ) {
-    }
+class EnergyBladeEntityModel(root: ModelPart) : Model(Function { texture: Identifier ->
+    RenderLayer.getEntitySolid(texture) }) {
+    private val bb_main: ModelPart = root.getChild("bb_main")
 
     override fun render(
         matrices: MatrixStack,

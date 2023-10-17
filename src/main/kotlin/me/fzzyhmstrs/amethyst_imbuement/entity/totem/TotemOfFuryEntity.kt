@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.EntityType
@@ -39,7 +41,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
     override fun tick() {
         val range = entityEffects.range(0)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
-        val entities = world.getOtherEntities(summoner, box)
+        val entities = world.getOtherEntities(summoner, box) {e -> e is LivingEntity && !AiConfig.entities.isEntityPvpTeammate(summoner,e,RegisterEnchantment.SUMMON_FURY_TOTEM)}
         val list: MutableList<LivingEntity> = mutableListOf()
         for (entity in entities) {
             if (entity is LivingEntity && entity != this){

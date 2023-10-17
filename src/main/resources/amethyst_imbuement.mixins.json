@@ -45,15 +45,16 @@
     "PlayerHitTimerAccessor",
     "PowderSnowBlockMixin",
     "PowderSnowBucketItemMixin",
+    "ProjectileEntityAccessor",
     "ServerPlayerEntityMixin",
     "StructureMixin",
     "TridentEntityMixin"
   ],
   "client": [
-    "TexturedRenderLayersMixin",
     "ClientPlayNetworkHandlerMixin",
     "HeldItemRendererMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "TexturedRenderLayersMixin"
   ],
   "server": [
   ],

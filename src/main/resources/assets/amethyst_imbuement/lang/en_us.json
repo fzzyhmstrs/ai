@@ -766,7 +766,7 @@
 	"enchantment.amethyst_imbuement.persuade.desc": "Persuades a nearby enemy to fight for you temporarily.",
 
 	"enchantment.amethyst_imbuement.planar_door": "Planar Door",
-	"enchantment.amethyst_imbuement.planar_door.desc": "Creates a portal. Casting again creates and links a second portal. A third cast will replace the first portal and link portal 2 and 3.",
+	"enchantment.amethyst_imbuement.planar_door.desc": "Creates a portal and links to the previous portal if any. Older portals are destroyed. Each scepter has its own pair.",
 	
 	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
 	"enchantment.amethyst_imbuement.poultrymorph.desc": "Temporarily transmute the target into a harmless chicken.",
@@ -978,6 +978,7 @@
 	"subtitles.amethyst_imbuement.ice_spikes": "Ice Spikes chomp",
 	"subtitles.amethyst_imbuement.solar_flare_charge": "Solar flare charging",
 	"subtitles.amethyst_imbuement.solar_flare_fire": "Solar flare flares",
+	"subtitles.amethyst_imbuement.energy_blade": "Energy blade launched",
 	
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",

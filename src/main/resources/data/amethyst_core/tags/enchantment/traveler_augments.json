@@ -9,7 +9,6 @@
 		"amethyst_imbuement:summon_strider",
 		"amethyst_imbuement:survey",
 		"amethyst_imbuement:teleport",
-		"amethyst_imbuement:planar_door",
-		"amethyst_imbuement:summon_chorse"
+		"amethyst_imbuement:planar_door"
 	]
 }
