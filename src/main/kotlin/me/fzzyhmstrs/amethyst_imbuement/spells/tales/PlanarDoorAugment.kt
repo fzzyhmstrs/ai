@@ -83,12 +83,13 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
                 val worldOptional = World.CODEC.parse(NbtOps.INSTANCE, nbt[CompassItem.LODESTONE_DIMENSION_KEY]).result()
                 if (worldOptional.isPresent) {
                     val newWorld = world.server.getWorld(worldOptional.get()) ?: return false
+                    newWorld.getBlockState(pos)
                     val partnerEntity = newWorld.getBlockEntity(pos))
                     if (partnerEntity is PlanarDoorBlockEntity){
                         partnerEntity.breakPartner(world)
-                        partnerEntity.partnerPos = hitPos
+                        partnerEntity.partnerBlockPos = hitPos
                         partnerEntity.setPartnerWorld(world.registryKey)
-                        blockEntity.partnerPos = pos
+                        blockEntity.partnerBlockPos = pos
                         blockEntity.setPartnerWorld(newWorld.registryKey)
                         Nbt.writeBlockPos("partnerPosPrevious", pos, nbt)
                         World.CODEC.encodeStart(NbtOps.INSTANCE, world.registryKey).resultOrPartial { s: String? ->
@@ -101,6 +102,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
                         val worldOptional2 = World.CODEC.parse(NbtOps.INSTANCE, nbt[CompassItem.LODESTONE_DIMENSION_KEY + "Previous"]).result()
                         if (worldOptional2.isPresent){
                             val newWorld2 = world.server.getWorld(worldOptional2.get()) ?: return false
+                            newWorld2.getBlockState(pos)
                             val partnerEntity2 = newWorld2.getBlockEntity(pos2))
                             if (partnerEntity2 is PlanarDoorBlockEntity){
                                 partnerEntity2.breakPartner(world)
@@ -230,7 +232,6 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
             }
         }*/
         //TntBlock.primeTnt(world,placePos)
-        return false
     }
 
     override fun soundEvent(): SoundEvent {
