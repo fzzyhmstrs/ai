@@ -438,6 +438,16 @@ object RegisterEntity {
             )
         },RegisterBlock.GILDED_LOCKBOX).build(null))
 
+    val PLANAR_DOOR_BLOCK_ENTITY: BlockEntityType<PlanarDoorBlockEntity> = Registry.register(
+        Registries.BLOCK_ENTITY_TYPE,
+        AI.MOD_ID + ":planar_door_entity",
+        FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->
+            PlanarDoorBlockEntity(
+                pos,
+                state
+            )
+        },RegisterBlock.PLANAR_DOOR).build(null))
+
 
     fun registerAll(){
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
