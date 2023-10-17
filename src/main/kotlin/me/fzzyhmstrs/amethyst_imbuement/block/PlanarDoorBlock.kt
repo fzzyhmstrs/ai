@@ -28,6 +28,10 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
         public val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
+    override fun getPickStack(world: BlockView?, pos: BlockPos?, state: BlockState?): ItemStack {
+        return ItemStack.EMPTY.copy()
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
         if (world !is ServerWorld) return
