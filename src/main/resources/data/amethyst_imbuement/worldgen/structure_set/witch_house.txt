@@ -1,0 +1,14 @@
+{
+	"structures": [
+		{
+			"structure": "amethyst_imbuement:witch_house",
+			"weight": 1
+		}
+	],
+	"placement": {
+		"type": "minecraft:random_spread",
+		"salt": 266855274,
+		"spacing": 100,
+		"separation": 75
+	}
+}
