@@ -25,7 +25,7 @@ import net.minecraft.world.WorldAccess
 class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggable {
 
     companion object{
-        private val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
+        public val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
     }
 
     @Deprecated("Deprecated in Java")
