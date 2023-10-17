@@ -119,7 +119,7 @@ object RegisterBlock {
 
     fun registerAll() {
         for (k in regBlock.keys) {
-            if (k == "experience_bush" || k =="warding_candle" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice") continue
+            if (k == "experience_bush" || k =="warding_candle" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice" || k =="planar_door") continue
             registerBlock(k,regBlock[k]?:continue)
         }
 
@@ -132,6 +132,7 @@ object RegisterBlock {
         Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"beryl_copper_block"), BERYL_COPPER_BLOCK_ITEM)
         Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "glistening_ice"), GLISTENING_ICE)
         Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"glistening_ice"), GLISTENING_ICE_ITEM)
+        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "planar_door"), PLANAR_DOOR)
     }
 
     private fun registerBlock(path: String, block:Block): Block{
