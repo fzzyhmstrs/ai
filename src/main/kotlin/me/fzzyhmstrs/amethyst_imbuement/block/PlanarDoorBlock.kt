@@ -40,14 +40,14 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
               || entity is ItemEntity)) {
             return
         }
-        val newPos = blockEntity.partnerPos
+        val newPos = blockEntity.partnerBlockPos
         //put the check for just-teleported here
-        val newDim = blockEntity.getPartnerWorld(world)
-        addEntityTeleported(entity,newPos)
+        val newDim = blockEntity.getPartnerWorld(world) ?: return
+        PlanarDoorAugment.addEntityTeleported(entity,newPos)
         val p = pewPos.centerPos.add(0.0,-0.5,0.0)
         //Add the just-teleported bit
-        entity.teleport(pw, p.x, p.y, p.z, setOf(), entity.yaw, entity.pitch)
-        pw.playSound(null,newPos,SoundEvents.BLOCK_PORTAL_TRAVEL,SoundCategory.BLOCKS,0.2f,1.0f)
+        entity.teleport(newDim, p.x, p.y, p.z, setOf(), entity.yaw, entity.pitch)
+        newDim.playSound(null,newPos,SoundEvents.BLOCK_PORTAL_TRAVEL,SoundCategory.BLOCKS,0.2f,1.0f)
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -102,6 +102,22 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos?,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (state.isOf(newState.block)) {
+            return
+        }
+        (world.getBlockEntity(pos) as? PlanarDoorBlockEntity).clearPartner(world)
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }
+
 
     @Deprecated("Deprecated in Java", ReplaceWith("(context.stack.isEmpty || !context.stack.isOf(this.asItem()))"))
     override fun canReplace(state: BlockState?, context: ItemPlacementContext): Boolean {
