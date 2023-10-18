@@ -146,9 +146,8 @@ object RegisterItem {
                 entries.addAll(RegisterArmor.regArmor.stream()
                     .map { item -> ItemStack(item) }
                     .toList())
-                entries.addAll(RegisterBlock.regBlock.values.stream()
-                    .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH && block !== RegisterBlock.PLANAR_DOOR}
-                    .map { block -> ItemStack(block.asItem()) }
+                entries.addAll(RegisterBlock.regBlockItem.stream()
+                    .map { block -> ItemStack(block) }
                     .toList())
                 entries.addAll(Registries.ENCHANTMENT.stream()
                     .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
