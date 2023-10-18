@@ -26,7 +26,7 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate")
 object RegisterBlock {
 
-    internal val regBlockItem: MutableSet<Item> = mutableSetOf()
+    internal val regBlockItem: MutableList<Item> = mutableListOf()
 
     val IMBUING_TABLE = registerBoth(ImbuingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "imbuing_table")
     val DISENCHANTING_TABLE = registerBoth(DisenchantingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "disenchanting_table")
