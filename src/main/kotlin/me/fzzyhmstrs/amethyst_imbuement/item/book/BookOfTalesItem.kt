@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.book
 
+import com.google.common.collect.HashMultimap
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -22,21 +23,35 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.*
 
 class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge, GlisteringKeyItem.GlisteringKeyUnlockable {
     override val loreTier: LoreTier = TALES_TIER
     override val bindingUV: Pair<Int, Int> = Pair(81,184)
 
-    companion object{
-      val TALES_TIER = object: LoreTier() {
-            private val secretList: MutableList<String> =  mutableListOf()
+    object TALES_TIER: LoreTier() {
+        private val secretList: MutableList<String> =  mutableListOf()
 
-            override fun addToList(string: String) {
-                secretList.addIfDistinct(string)
-            }
-            override fun list(): List<String> {
-                return secretList
-            }
+        override fun addToList(string: String) {
+            secretList.addIfDistinct(string)
+        }
+        override fun list(): List<String> {
+            return secretList
+        }
+        fun talesSize(): Int{
+            return secretList.size
+        }
+    }
+
+    companion object{
+        private val playerOpenedTales: HashMultimap<UUID,String> = HashMultimap.create()
+        private fun hasOpenedTale(player: UUID, tale: String): Boolean{
+            if(playerOpenedTales.containsEntry(player,tale)) return true
+            playerOpenedTales.put(player,tale)
+            return false
+        }
+        private fun hasOpenedAllTales(player: UUID): Boolean{
+            return (playerOpenedTales.get(player).size >= TALES_TIER.talesSize())
         }
     }
 
@@ -83,34 +98,41 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
     }
 
     override fun getRandomBookAugment(list: List<String>, user: PlayerEntity, hand: Hand): String {
-        val stack = if (hand == Hand.MAIN_HAND) user.offHandStack else user.mainHandStack
-        if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)){
-            for (i in 1..2){
-                val aug = super.getRandomBookAugment(list, user, hand)
-                val type = AugmentHelper.getAugmentType(aug)
-                if (type == SpellType.FURY){
-                    return aug
+        if (hasOpenedAllTales(user.uuid)) {
+            val stack = if (hand == Hand.MAIN_HAND) user.offHandStack else user.mainHandStack
+            if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)) {
+                for (i in 1..2) {
+                    val aug = super.getRandomBookAugment(list, user, hand)
+                    val type = AugmentHelper.getAugmentType(aug)
+                    if (type == SpellType.FURY) {
+                        return aug
+                    }
+                }
+            } else if (stack.isIn(RegisterTag.ALL_WIT_SCEPTERS_TAG)) {
+                for (i in 1..2) {
+                    val aug = super.getRandomBookAugment(list, user, hand)
+                    val type = AugmentHelper.getAugmentType(aug)
+                    if (type == SpellType.WIT) {
+                        return aug
+                    }
+                }
+            } else if (stack.isIn(RegisterTag.ALL_GRACE_SCEPTERS_TAG)) {
+                for (i in 1..2) {
+                    val aug = super.getRandomBookAugment(list, user, hand)
+                    val type = AugmentHelper.getAugmentType(aug)
+                    if (type == SpellType.GRACE) {
+                        return aug
+                    }
                 }
             }
-        } else if (stack.isIn(RegisterTag.ALL_WIT_SCEPTERS_TAG)){
-            for (i in 1..2){
-                val aug = super.getRandomBookAugment(list, user, hand)
-                val type = AugmentHelper.getAugmentType(aug)
-                if (type == SpellType.WIT){
-                    return aug
-                }
+            return super.getRandomBookAugment(list, user, hand)
+        } else {
+            var attempt = super.getRandomBookAugment(list, user, hand)
+            while(hasOpenedTale(user.uuid,attempt)){
+                attempt = super.getRandomBookAugment(list, user, hand)
             }
-        } else if (stack.isIn(RegisterTag.ALL_GRACE_SCEPTERS_TAG)){
-            for (i in 1..2){
-                val aug = super.getRandomBookAugment(list, user, hand)
-                val type = AugmentHelper.getAugmentType(aug)
-                if (type == SpellType.GRACE){
-                    return aug
-                }
-            }
+            return attempt
         }
-
-        return super.getRandomBookAugment(list, user, hand)
     }
 
     override fun unlock(world: World, blockPos: BlockPos, stack: ItemStack?) {
