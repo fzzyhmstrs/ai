@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "amethyst_imbuement:block/sardonyx_crystal_up",
+    "north": "amethyst_imbuement:block/sardonyx_crystal_north",
+    "south": "amethyst_imbuement:block/sardonyx_crystal_south",
+    "east": "amethyst_imbuement:block/sardonyx_crystal_east",
+    "west": "amethyst_imbuement:block/sardonyx_crystal_west",
+    "up": "amethyst_imbuement:block/sardonyx_crystal_up",
+    "down": "amethyst_imbuement:block/sardonyx_crystal_down"
+  }
+}
