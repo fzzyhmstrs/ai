@@ -38,21 +38,51 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
         override fun list(): List<String> {
             return secretList
         }
-        fun talesSize(): Int{
-            return secretList.size
-        }
     }
 
     companion object{
-        private val playerOpenedTales: HashMultimap<UUID,String> = HashMultimap.create()
-        private fun hasOpenedTale(player: UUID, tale: String): Boolean{
-            if(playerOpenedTales.containsEntry(player,tale)) return true
-            playerOpenedTales.put(player,tale)
-            return false
+        clientLastReadMap: MutableMap<UUID,String> = mutableMapOf()
+        serverLastReadMap: MutableMap<UUID,String> = mutableMapOf()
+
+        private val TALES_SYNC = Identifier(AI.MOD_ID, "tales_sync")
+        
+        fun hasReadLast(player: PlayerEntity,tale: String): Boolean{
+            if (player.world.isClient()){
+                if(clientLastReadMap[player.uuid] == tale) return true
+                clientLastReadMap[player.uuid] = tale
+                return false
+            } else {
+                if(serverLastReadMap[player.uuid] == tale) return true
+                serverLastReadMap[player.uuid] = tale
+                return false
+            }
         }
-        private fun hasOpenedAllTales(player: UUID): Boolean{
-            return (playerOpenedTales.get(player).size >= TALES_TIER.talesSize())
+
+        fun saveToPlayer(player: ServerPlayerEntity, nbt: NbtCompound){
+            val tale = serverLastReadMap[player.uuid]
+            if (tale != null){
+                nbt.putString("BookOfTalesLastRead", tale)
+            }
         }
+
+        fun loadFromPlayer(player: ServerPlayerEntity, nbt: NbtCompound){
+            if (nbt.contains("BookOfTalesLastRead")){
+                val tale = nbt.getString("BookOfTalesLastRead")
+                serverLastReadMap[player.uuid] = tale
+                val buf = PacketByteBufs.create()
+                buf.writeString(tale)
+                ServerPlayNetworking.send(TALES_SYNC, player, buf)
+            }
+        }
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(TALES_SYNC){client,_,buf,_ ->
+                val player = client.player ?: return@registerGlobalReceiver
+                val tale = buf.readString()
+                clientLastReadMap[player.uuid] = tale
+            }
+        }
+        
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
@@ -98,41 +128,41 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
     }
 
     override fun getRandomBookAugment(list: List<String>, user: PlayerEntity, hand: Hand): String {
-        if (hasOpenedAllTales(user.uuid)) {
-            val stack = if (hand == Hand.MAIN_HAND) user.offHandStack else user.mainHandStack
-            if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)) {
-                for (i in 1..2) {
-                    val aug = super.getRandomBookAugment(list, user, hand)
-                    val type = AugmentHelper.getAugmentType(aug)
-                    if (type == SpellType.FURY) {
-                        return aug
-                    }
-                }
-            } else if (stack.isIn(RegisterTag.ALL_WIT_SCEPTERS_TAG)) {
-                for (i in 1..2) {
-                    val aug = super.getRandomBookAugment(list, user, hand)
-                    val type = AugmentHelper.getAugmentType(aug)
-                    if (type == SpellType.WIT) {
-                        return aug
-                    }
-                }
-            } else if (stack.isIn(RegisterTag.ALL_GRACE_SCEPTERS_TAG)) {
-                for (i in 1..2) {
-                    val aug = super.getRandomBookAugment(list, user, hand)
-                    val type = AugmentHelper.getAugmentType(aug)
-                    if (type == SpellType.GRACE) {
-                        return aug
-                    }
+        val stack = if (hand == Hand.MAIN_HAND) user.offHandStack else user.mainHandStack
+        if (stack.isIn(RegisterTag.ALL_FURY_SCEPTERS_TAG)) {
+            for (i in 1..3) {
+                val aug = getUniqueTale(user) { super.getRandomBookAugment(list, user, hand) }
+                val type = AugmentHelper.getAugmentType(aug)
+                if (type == SpellType.FURY) {
+                    return aug
                 }
             }
-            return super.getRandomBookAugment(list, user, hand)
-        } else {
-            var attempt = super.getRandomBookAugment(list, user, hand)
-            while(hasOpenedTale(user.uuid,attempt)){
-                attempt = super.getRandomBookAugment(list, user, hand)
+        } else if (stack.isIn(RegisterTag.ALL_WIT_SCEPTERS_TAG)) {
+            for (i in 1..3) {
+                val aug = getUniqueTale(user) { super.getRandomBookAugment(list, user, hand) }
+                val type = AugmentHelper.getAugmentType(aug)
+                if (type == SpellType.WIT) {
+                    return aug
+                }
             }
-            return attempt
+        } else if (stack.isIn(RegisterTag.ALL_GRACE_SCEPTERS_TAG)) {
+            for (i in 1..3) {
+                val aug = getUniqueTale(user) { super.getRandomBookAugment(list, user, hand) }
+                val type = AugmentHelper.getAugmentType(aug)
+                if (type == SpellType.GRACE) {
+                    return aug
+                }
+            }
         }
+        return getUniqueTale(user) { super.getRandomBookAugment(list, user, hand) }
+    }
+
+    private fun getUniqueTale(player: PlayerEntity, supplierOfTales: Supplier<String>): String{
+        var tale = supplierOfTales.get()
+        while (hasReadLast(player,tale)){
+            tale = supplierOfTales.get()
+        }
+        return tale
     }
 
     override fun unlock(world: World, blockPos: BlockPos, stack: ItemStack?) {
