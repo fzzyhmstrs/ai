@@ -9,13 +9,16 @@ object RegisterNetworking {
 
     fun registerServer(){
         RegisterKeybindServer.registerServer()
+        AltarOfExperienceScreenHandler.registerServer()
         ImbuingTableScreenHandler.registerServer()
         RecipeUtil.registerServer()
     }
     fun registerClient(){
         ImbuingTableScreenHandler.registerClient()
+        AltarOfExperienceScreenHandler.registerClient()
         ResonateAugment.registerClient()
         SmitingBlowAugment.registerClient()
+        BookOfTalesItem.registerClient()
         //ImbuingRecipeBookScreen.registerClientReceiver()
     }
 }
