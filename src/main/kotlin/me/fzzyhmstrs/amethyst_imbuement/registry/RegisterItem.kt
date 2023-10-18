@@ -116,9 +116,13 @@ object RegisterItem {
     val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
     //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
     val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
-    val ELIXIR_OF_REBINDING = register(ElixirOfRebindingItem(FabricItemSettings().maxCount(16)),"elixir_of_rebinding")
+    val ELIXIR_OF_REBINDING = register(ElixirItem(RegisterStatus.ARCANE_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_rebinding")
+    val ELIXIR_OF_MENDING = register(ElixirItem(RegisterStatus.MENDING_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_mending")
+    val ELIXIR_OF_SHIELDING = register(ElixirItem(RegisterStatus.SOUL_SHIELD, 6000, 4, FabricItemSettings().maxCount(16)),"elixir_of_shielding")
+    val ELIXIR_OF_INSIGHT = register(ElixirItem(RegisterStatus.INSIGHTFUL, 6000, 3, FabricItemSettings().maxCount(16)),"elixir_of_insight")
     val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
+    val SARDONYX_FRAGMENT_SPAWN_EGG = register(SpawnEggItem(RegisterEntity.SARDONYX_FRAGMENT, 0x961900,0x806060, FabricItemSettings()),"glistering_key")
 
     ///////////////////////////
 
