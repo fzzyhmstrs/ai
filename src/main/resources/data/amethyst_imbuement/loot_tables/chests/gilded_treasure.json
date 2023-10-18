@@ -65,7 +65,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -78,6 +78,54 @@
             }
           ],
           "name": "amethyst_imbuement:elixir_of_rebinding"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:elixir_of_mending"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:elixir_of_shielding"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:elixir_of_insight"
         },
         {
           "type": "minecraft:item",
