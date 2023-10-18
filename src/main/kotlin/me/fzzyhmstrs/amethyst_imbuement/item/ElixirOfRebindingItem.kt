@@ -29,7 +29,7 @@ class ElixirOfRebindingItem(settings: Settings) : PotionItem(settings) {
         if (user is ServerPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(user, stack)
         }
-        user.addStatusEffect(StatusEffectInstance(RegisterStatus.ARCANE_AURA,6000,1))
+        user.addStatusEffect(StatusEffectInstance(RegisterStatus.ARCANE_AURA,24000,1))
         user.incrementStat(Stats.USED.getOrCreateStat(this))
         if (!user.abilities.creativeMode) {
             stack.decrement(1)
