@@ -1,0 +1,42 @@
+{
+	"name": "amethyst_imbuement:witch_house/basement_entry",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/basement_entry/entry_1",
+				"processors": [
+          "amethyst_imbuement:cracked_bricks",
+          "amethyst_imbuement:mossy_bricks"
+        ]
+			}
+		},
+    {
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/basement_entry/entry_2",
+				"processors": [
+          "amethyst_imbuement:cracked_bricks",
+          "amethyst_imbuement:mossy_bricks"
+        ]
+			}
+		},
+    {
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/basement_entry/entry_3",
+				"processors": [
+          "amethyst_imbuement:cracked_bricks",
+          "amethyst_imbuement:mossy_bricks"
+        ]
+			}
+		}
+	]
+}
