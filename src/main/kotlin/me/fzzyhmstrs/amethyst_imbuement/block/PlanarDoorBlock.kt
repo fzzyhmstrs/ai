@@ -1,21 +1,33 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.PlanarDoorBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.spells.tales.PlanarDoorAugment
 import net.minecraft.block.*
-import net.minecraft.block.piston.PistonBehavior
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.BlockEntityTicker
+import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.Entity
+import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.passive.AnimalEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.vehicle.MinecartEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.particle.ParticleEffect
-import net.minecraft.particle.ParticleTypes
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
@@ -34,24 +46,34 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
 
     @Deprecated("Deprecated in Java")
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
+        println("Door Collide")
+        println("Player: ${entity.id}")
         if (world !is ServerWorld) return
+        println("A")
         if (PlanarDoorAugment.getAndUpdateDoorStatus(entity, pos)) return
+        println("B")
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity !is PlanarDoorBlockEntity) return
-        if (!((entity is PlayerEntity && AiConfig.entities.isEntityPvpTeammate(blockEntity.owner,entity,RegisterEnchantment.PLANAR_DOOR)) 
-              || entity is AnimalEntity 
-              || entity is MinecartEntity 
+        println("C")
+        if (!((entity is PlayerEntity && AiConfig.entities.isEntityPvpTeammate(blockEntity.getOwner() as? LivingEntity,entity,
+                RegisterEnchantment.PLANAR_DOOR))
+              || entity is AnimalEntity
+              || entity is MinecartEntity
               || entity is ItemEntity)) {
             return
         }
-        val newPos = blockEntity.partnerBlockPos
+        println("D")
+        val newPos = blockEntity.getPartnerPos()
         //put the check for just-teleported here
-        val newDim = blockEntity.getPartnerWorld(world) ?: return
+        val newDim = blockEntity.getPartnerWorld(world) as? ServerWorld ?: return
+        println("E")
+        if (newPos == blockEntity.pos && world === newDim) return
+        println("F")
         PlanarDoorAugment.addEntityTeleported(entity,newPos)
-        val p = pewPos.centerPos.add(0.0,-0.5,0.0)
+        val p = newPos.toCenterPos().add(0.0,-0.5,0.0)
         //Add the just-teleported bit
         entity.teleport(newDim, p.x, p.y, p.z, setOf(), entity.yaw, entity.pitch)
-        newDim.playSound(null,newPos,SoundEvents.BLOCK_PORTAL_TRAVEL,SoundCategory.BLOCKS,0.2f,1.0f)
+        newDim.playSound(null,newPos, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS,0.2f,1.0f)
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -118,7 +140,7 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
         if (state.isOf(newState.block)) {
             return
         }
-        (world.getBlockEntity(pos) as? PlanarDoorBlockEntity).clearPartner(world)
+        (world.getBlockEntity(pos) as? PlanarDoorBlockEntity)?.clearPartner(world)
         super.onStateReplaced(state, world, pos, newState, moved)
     }
 

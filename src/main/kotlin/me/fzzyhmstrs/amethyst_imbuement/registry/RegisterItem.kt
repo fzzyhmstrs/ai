@@ -110,8 +110,8 @@ object RegisterItem {
 
     // book and other used items
     val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)),"book_of_lore") as CustomFlavorItem
-    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_mythos") as CustomFlavorItem
-    val BOOK_OF_TALES = register(BookOfTalesItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales") as CustomFlavorItem
+    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_mythos")
+    val BOOK_OF_TALES = register(BookOfTalesItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales")
     val GLISTERING_TOME = register(GlisteringTomeItem(FabricItemSettings()),"glistering_tome")
     val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
     //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
@@ -143,7 +143,7 @@ object RegisterItem {
                     .map { item -> ItemStack(item) }
                     .toList())
                 entries.addAll(RegisterBlock.regBlock.values.stream()
-                    .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH }
+                    .filter { block -> block !== RegisterBlock.EXPERIENCE_BUSH && block !== RegisterBlock.PLANAR_DOOR}
                     .map { block -> ItemStack(block.asItem()) }
                     .toList())
                 entries.addAll(Registries.ENCHANTMENT.stream()

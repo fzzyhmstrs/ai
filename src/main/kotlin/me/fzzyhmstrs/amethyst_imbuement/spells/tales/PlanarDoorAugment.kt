@@ -5,14 +5,18 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.PlaceItemAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlanarDoorEntity
+import me.fzzyhmstrs.amethyst_imbuement.block.PlanarDoorBlock
+import me.fzzyhmstrs.amethyst_imbuement.entity.block.PlanarDoorBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
+import net.minecraft.entity.Entity
 import net.minecraft.item.CompassItem
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtOps
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
@@ -20,6 +24,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
 
@@ -29,7 +34,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
         private val colorMap: MutableMap<UUID,Int> = mutableMapOf()
         private val teleportedEntitiesMap: MutableMap<BlockPos,MutableMap<Int,Long>> = mutableMapOf()
 
-        fun getAndUpdateDoorStatus(entity: Entity, pos: Blockpos): Boolean{
+        fun getAndUpdateDoorStatus(entity: Entity, pos: BlockPos): Boolean{
             val time = entity.world.time
             val lastTime = teleportedEntitiesMap[pos]?.get(entity.id) ?: return false
             val bl = time - lastTime <= 5L
@@ -38,7 +43,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
             } else {
                 teleportedEntitiesMap[pos]?.remove(entity.id)
             }
-            if (teleportedEntitiesMap[pos]?.isEmpty()){
+            if (teleportedEntitiesMap[pos]?.isEmpty() == true){
                 teleportedEntitiesMap.remove(pos)
             }
             return bl
@@ -57,8 +62,10 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
 
     override fun blockPlacing(hit: BlockHitResult, world: World, user: ServerPlayerEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean{
         if (world !is ServerWorld) return false
-        val hitPos = if(world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockpos.offSet(hit.side)
-        if(!world.setBlockState(hitPos,RegisterBlock.PLANAR_DOOR.defaultState.with(PlanarDoorBlock.WATERLOGGED,world.getFluidState(pos).isIn(FluidTags.WATER)))) return false
+        val hitPos = if(world.getBlockState(hit.blockPos).isReplaceable) hit.blockPos else hit.blockPos.offset(hit.side)
+        if(!world.setBlockState(hitPos,
+                RegisterBlock.PLANAR_DOOR.defaultState.with(PlanarDoorBlock.WATERLOGGED,world.getFluidState(hitPos).isIn(
+                    FluidTags.WATER)))) return false
         val blockEntity = world.getBlockEntity(hitPos)
         if (blockEntity is PlanarDoorBlockEntity){
             val stack = user.getStackInHand(hand)
@@ -75,7 +82,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
             } else {
                 nbt.getInt("planar_door_color")
             }
-            blockEntity.color = colorInt
+            blockEntity.setColor(colorInt)
             blockEntity.setOwner(user)
             if (nbt.contains("partnerPos")) {
                 val pos = Nbt.readBlockPos("partnerPos",nbt)
@@ -83,13 +90,18 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
                 if (worldOptional.isPresent) {
                     val newWorld = world.server.getWorld(worldOptional.get()) ?: return false
                     newWorld.getBlockState(pos)
-                    val partnerEntity = newWorld.getBlockEntity(pos))
+                    val partnerEntity = newWorld.getBlockEntity(pos)
                     if (partnerEntity is PlanarDoorBlockEntity){
                         partnerEntity.breakPartner(world)
-                        partnerEntity.partnerBlockPos = hitPos
+                        partnerEntity.setColor(colorInt)
+                        partnerEntity.setPartnerPos(hitPos)
                         partnerEntity.setPartnerWorld(world.registryKey)
-                        blockEntity.partnerBlockPos = pos
+                        println(partnerEntity.getPartnerPos())
+                        println(partnerEntity.getPartnerWorld(world))
+                        blockEntity.setPartnerPos(pos)
                         blockEntity.setPartnerWorld(newWorld.registryKey)
+                        println(blockEntity.getPartnerPos())
+                        println(blockEntity.getPartnerWorld(world))
                         Nbt.writeBlockPos("partnerPosPrevious", pos, nbt)
                         World.CODEC.encodeStart(NbtOps.INSTANCE, world.registryKey).resultOrPartial { s: String? ->
                                 println(s)
@@ -97,17 +109,17 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
                                 nbt.put(CompassItem.LODESTONE_DIMENSION_KEY + "Previous", nbtElement)
                             }
                     } else if (nbt.contains("partnerPosPrevious")){
-                        val pos2 = Nbt.readBlockPos("partnerPosPrevious")
+                        val pos2 = Nbt.readBlockPos("partnerPosPrevious",nbt)
                         val worldOptional2 = World.CODEC.parse(NbtOps.INSTANCE, nbt[CompassItem.LODESTONE_DIMENSION_KEY + "Previous"]).result()
                         if (worldOptional2.isPresent){
                             val newWorld2 = world.server.getWorld(worldOptional2.get()) ?: return false
                             newWorld2.getBlockState(pos)
-                            val partnerEntity2 = newWorld2.getBlockEntity(pos2))
+                            val partnerEntity2 = newWorld2.getBlockEntity(pos2)
                             if (partnerEntity2 is PlanarDoorBlockEntity){
                                 partnerEntity2.breakPartner(world)
-                                partnerEntity2.partnerPos = hitPos
+                                partnerEntity2.setPartnerPos(hitPos)
                                 partnerEntity2.setPartnerWorld(world.registryKey)
-                                blockEntity.partnerPos = pos2
+                                blockEntity.setPartnerPos(pos2)
                                 blockEntity.setPartnerWorld(newWorld2.registryKey)
                             }
                         }

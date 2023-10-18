@@ -30,7 +30,7 @@
     "EntityMixin",
     "FarmlandBlockMixin",
     "FishEntityMixin",
-    "GildedLockboxBlockMixin",
+    "GildedLockboxBlockEntityMixin",
     "ItemGroupsMixin",
     "ItemMixin",
     "ItemStackMixin",
