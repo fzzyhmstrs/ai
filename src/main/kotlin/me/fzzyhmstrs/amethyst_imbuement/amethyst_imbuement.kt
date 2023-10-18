@@ -48,8 +48,6 @@ object AI: ModInitializer {
         RegisterSound.registerAll()
         RegisterWorldgen.registerAll()
         AiConfig.initConfig()
-        RegisterKeybindServer.registerServer()
-        AltarOfExperienceScreenHandler.registerServer()
         RegisterModifier.registerAll()
         RegisterNetworking.registerServer()
         HamsterVariant.registerAll()
@@ -76,8 +74,6 @@ object AIClient: ClientModInitializer{
         RegisterKeybind.registerAll()
         RegisterItemModel.registerAll()
         RegisterParticle.registerParticleFactories()
-        ImbuingTableScreenHandler.registerClient()
-        AltarOfExperienceScreenHandler.registerClient()
         BaseHamsterArmorFeatureRenderer.HamsterArmorTextureIdsHolder.registerClient()
         RegisterNetworking.registerClient()
     }
