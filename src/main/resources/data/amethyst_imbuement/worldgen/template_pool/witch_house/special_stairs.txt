@@ -7,7 +7,7 @@
 			"element": {
 				"element_type": "minecraft:single_pool_element",
 				"projection": "rigid",
-				"location": "amethyst_imbuement:witch_house/special_stairs/stairs_special",
+				"location": "amethyst_imbuement:witch_house/special_stairs/stairs_special_1",
 				"processors": [
           "amethyst_imbuement:cracked_bricks",
           "amethyst_imbuement:mossy_bricks"
