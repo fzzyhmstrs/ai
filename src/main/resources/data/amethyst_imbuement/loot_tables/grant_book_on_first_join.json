@@ -2,7 +2,7 @@
   "fabric:load_conditions": [
     {
       "condition": "amethyst_imbuement:enabled",
-      "id": "chests/grant_book_on_first_join"
+      "id": "grant_book_on_first_join"
     }
   ],
 "type": "advancement_reward",  
