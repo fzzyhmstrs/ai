@@ -145,6 +145,11 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 3,
+          "name": "amethyst_imbuement:strange_egg"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 1,
           "name": "amethyst_imbuement:talisman_of_lost_memories"
         },
