@@ -371,6 +371,7 @@
 	"item.amethyst_imbuement.glistering_tome": "Glistering Tome",
 	"item.amethyst_imbuement.glistering_tome.landing_text":"Welcome to $(o)Amethyst Imbuement$(), a mod all about the innate magic within crystals and other objects! Imbue your gear with powerful abilities. Create advanced weapons. Wield magical scepters to cast an array of offensive and defensive spells.$(br2)If you are new here, check out the $(l)$(#490)$(l:amethyst_imbuement:starter_guide)Starter Guide$() section",
 	"item.amethyst_imbuement.sardonyx_fragment_spawn_egg": "Sardonyx Fragment Spawn Egg",
+	"item.amethyst_imbuement.strange_egg": "Strange Egg",
 
 	"item.amethyst_imbuement.gem_of_promise": "Gem of Promise",
 	"item.amethyst_imbuement.gem_of_promise.flavor": "It sparkles with the promise of change",
