@@ -1,4 +1,10 @@
 {  
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "devout_cleric"
+    }
+  ],
 "type": "advancement_reward",  
 "pools": 
 [    
