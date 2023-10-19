@@ -1,6 +1,6 @@
 @file:Suppress("PrivatePropertyName")
 
-package me.fzzyhmstrs.amethyst_imbuement.renderer
+package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import com.google.gson.JsonParser
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -33,7 +33,7 @@ FeatureRenderer<T, M>(context)
             val item = stack.item
             if (item is ArmorItem){
                 val armorStr = item.material.name
-                return hamsterTextures.getOrDefault(armorStr,fallback)
+                return hamsterTextures.getOrDefault(armorStr, fallback)
             }
             return fallback
         }

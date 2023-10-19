@@ -5,8 +5,10 @@ import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions
 import net.minecraft.enchantment.EnchantmentLevelEntry
 import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
@@ -55,7 +57,7 @@ object RecipeUtil {
             }
 
         }
-        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_SAVE){server,_,_,buf,_ ->
+        ServerPlayNetworking.registerGlobalReceiver(FAVORITES_SAVE){_,_,_,buf,_ ->
             val uuid = buf.readUuid()
             val list: MutableList<ItemStack> = mutableListOf()
             val size = buf.readShort()
@@ -63,6 +65,14 @@ object RecipeUtil {
                 list.add(buf.readItemStack())
             }
             playerFavoritesMap[uuid] = list
+        }
+
+        ResourceConditions.register(Identifier(AI.MOD_ID,"enabled")) {json ->
+            try{
+                AiConfig.resources.isEnabled(json.getAsJsonPrimitive("id").asString)
+            } catch (e: Exception){
+                false
+            }
         }
     }
 

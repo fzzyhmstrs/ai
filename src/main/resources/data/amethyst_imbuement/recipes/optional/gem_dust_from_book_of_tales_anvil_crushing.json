@@ -1,0 +1,27 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "spectrum"
+      ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/gem_dust_from_book_of_tales_anvil_crushing"
+    }
+  ],
+
+  "type": "spectrum:anvil_crushing",
+  "ingredient": {
+    "item": "amethyst_imbuement:book_of_tales"
+  },
+  "crushedItemsPerPointOfDamage": 2,
+  "experience": 10.0,
+  "result": {
+    "item": "amethyst_imbuement:gem_dust",
+    "count": 12
+  },
+  "particleEffectIdentifier": "cloud",
+  "soundEventIdentifier": "block.amethyst_block.break"
+}

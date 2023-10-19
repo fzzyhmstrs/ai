@@ -1,0 +1,18 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "crafting/gem_dust_from_book_of_tales"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "amethyst_imbuement:book_of_tales"
+    }
+  ],
+  "result": {
+    "item": "amethyst_imbuement:gem_dust",
+    "count": 9
+  }
+}

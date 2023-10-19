@@ -66,6 +66,19 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.7f)).trackRangeChunks(6).build()
     )
 
+    val CHORSE_ENTITY: EntityType<ChorseEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        AI.identity( "chorse"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.CREATURE
+        ) { entityType: EntityType<ChorseEntity>, world: World ->
+            ChorseEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build()
+    )
+
     val CHOLEM_ENTITY: EntityType<CholemEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "cholem"),
@@ -142,6 +155,19 @@ object RegisterEntity {
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
+    )
+
+    val SARDONYX_FRAGMENT: EntityType<SardonyxFragmentEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "sardonyx_fragment"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MONSTER
+        ) { entityType: EntityType<SardonyxFragmentEntity>, world: World ->
+            SardonyxFragmentEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.1f)).trackRangeChunks(10).build()
     )
 
     ////////////////////////////////////////
@@ -353,19 +379,6 @@ object RegisterEntity {
             )
         }.dimensions(EntityDimensions.fixed(0.85f, 0.85f)).build()
     )
-    val PLANAR_DOOR: EntityType<PlanarDoorEntity> = Registry.register(
-        Registries.ENTITY_TYPE,
-        Identifier(AI.MOD_ID, "planar_door_entity"),
-        FabricEntityTypeBuilder.create(
-            SpawnGroup.MISC
-        ) { entityType: EntityType<PlanarDoorEntity>, world: World ->
-            PlanarDoorEntity(
-                entityType,
-                world
-            )
-        }.dimensions(EntityDimensions.fixed(1f, 1f)).build()
-    )
-
 
     val MANA_POTION: EntityType<ManaPotionEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -451,11 +464,13 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
         FabricDefaultAttributeRegistry.register(BOOM_CHICKEN_ENTITY, BoomChickenEntity.createBoomChickenAttributes())
+        FabricDefaultAttributeRegistry.register(CHORSE_ENTITY, ChorseEntity.createChorseBaseAttributes())
         FabricDefaultAttributeRegistry.register(CHOLEM_ENTITY, CholemEntity.createCholemAttributes())
         FabricDefaultAttributeRegistry.register(CRYSTAL_GOLEM_ENTITY, CrystallineGolemEntity.createGolemAttributes())
         FabricDefaultAttributeRegistry.register(UNHALLOWED_ENTITY, UnhallowedEntity.createUnhallowedAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_GRACE_ENTITY,TotemOfGraceEntity.createTotemAttributes())
+        FabricDefaultAttributeRegistry.register(SARDONYX_FRAGMENT, SardonyxFragmentEntity.createFragmentAttributes())
     }
 
 

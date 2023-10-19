@@ -5,6 +5,10 @@
       "values": [
         "patchouli"
       ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/glistering_tome"
     }
   ],
   

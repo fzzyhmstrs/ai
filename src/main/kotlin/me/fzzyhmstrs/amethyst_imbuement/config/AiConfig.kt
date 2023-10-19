@@ -10,6 +10,7 @@ import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedIntList
 import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedSeries
+import me.fzzyhmstrs.fzzy_config.validated_field.list.ValidatedStringList
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringBoolMap
 import me.fzzyhmstrs.fzzy_config.validated_field.map.ValidatedStringIntMap
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
@@ -452,7 +453,37 @@ object AiConfig
             var baseMoveSpeed = ValidatedDouble(0.275,1.0,0.01)
         }
 
+        var sardonyxFragment = SardonyxFragment()
+        class SardonyxFragment: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_fragment_1").build()){
+            var baseHealth = ValidatedDouble(60.0,600.0,1.0)
+            var baseArmor = ValidatedDouble(6.0,20.0,1.0)
+            var baseDamage = ValidatedDouble(9.0,90.0,0.0)
+            var enragedDamage = ValidatedDouble(6.0,60.0,0.0)
+        }
+
+        var sardonyxElemental = SardonyxFragment()
+        class SardonyxElemental: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_elemental_1").build()){
+            var baseHealth = ValidatedDouble(512.0,1024.0,1.0)
+            var baseArmor = ValidatedDouble(16.0,30.0,1.0)
+            var baseDamage = ValidatedDouble(18.0,180.0,0.0)
+        }
+
         override fun generateNewClass(): Entities {
+            return this
+        }
+    }
+
+    private val resourcesHeader = buildSectionHeader("resources")
+
+    class Resources: ConfigClass(resourcesHeader), OldClass<Resources>{
+
+        fun isEnabled(id: String): Boolean{
+            return !disabledResources.contains(id)
+        }
+
+        var disabledResources: ValidatedStringList = ValidatedStringList(listOf("optional/iridescent_scepter_imbuing","optional/lustrous_scepter_imbuing"))
+
+        override fun generateNewClass(): Resources {
             return this
         }
     }
@@ -464,7 +495,7 @@ object AiConfig
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
-
+    var resources: Resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
 
     override fun initConfig() {
         super.initConfig()
@@ -479,6 +510,7 @@ object AiConfig
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
         trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
         entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+        resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
     }
 
     override fun getFabricId(): Identifier {

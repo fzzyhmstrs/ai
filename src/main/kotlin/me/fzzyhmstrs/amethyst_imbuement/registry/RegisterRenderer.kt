@@ -44,6 +44,9 @@ object RegisterRenderer {
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
     val ENERGY_BLADE_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"energy_blade_entity"),"energy_blade_entity_model")
     val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
+
+    val CHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model")
+    val CHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model_armor")
     
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
     val HAMSTER_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_armor")
@@ -80,6 +83,10 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.BOOM_CHICKEN_ENTITY
         ){ context: EntityRendererFactory.Context -> ChickenEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.CHORSE_ENTITY
+        ){ context: EntityRendererFactory.Context -> ChorseEntityRenderer(context) }
 
         EntityRendererRegistry.register(
             RegisterEntity.CHOLEM_ENTITY
@@ -173,10 +180,6 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> EnergyBladeEntityRenderer(context) }
 
         EntityRendererRegistry.register(
-            RegisterEntity.PLANAR_DOOR
-        ){ context: EntityRendererFactory.Context -> PlanarDoorEntityRenderer(context) }
-
-        EntityRendererRegistry.register(
             RegisterEntity.MANA_POTION
         ){ context: EntityRendererFactory.Context -> FlyingItemEntityRenderer(context) }
 
@@ -208,6 +211,9 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(ENERGY_BLADE_ENTITY) { EnergyBladeEntityModel.texturedModelData }
+
+        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY) { ChorseEntityModel.getTexturedModelData() }
+        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_ARMOR) { ChorseEntityModel.getTexturedModelData(Dilation(0.15f)) }
 
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN) { BaseHamsterEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.15f)) }

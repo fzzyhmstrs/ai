@@ -5,6 +5,10 @@
       "values": [
         "spectrum"
       ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/gem_dust_from_glowing_fragment_anvil_crushing"
     }
   ],
 

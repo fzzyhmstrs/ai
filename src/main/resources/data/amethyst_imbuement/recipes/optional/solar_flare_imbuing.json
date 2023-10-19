@@ -5,6 +5,10 @@
       "values": [
         "spell_power"
       ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/solar_flare_imbuing"
     }
   ],
   "type": "amethyst_imbuement:imbuing",
@@ -24,15 +28,15 @@
 	"item": "amethyst_imbuement:book_of_tales"
   },
   "craftD": {
-	"item": "minecraft:soul_soil"
+	"item": "minecraft:glowstone"
   },
   "craftF": {
-	"item": "minecraft:soul_soil"
+	"item": "minecraft:glowstone"
   },
   "craftH": {
-	"item": "minecraft:soul_soil"
+	"item": "minecraft:glowstone"
   },
-  "title": "Soulfreeze",
-  "cost": 30,
-  "augment": "amethyst_imbuement:soulfreeze"
+  "title": "Solar Flare",
+  "cost": 27,
+  "augment": "amethyst_imbuement:solar_flare"
 }

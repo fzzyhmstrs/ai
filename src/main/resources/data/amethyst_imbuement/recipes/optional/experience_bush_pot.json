@@ -5,6 +5,10 @@
       "values": [
         "botanypots"
       ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/experience_bush_pot"
     }
   ],
 

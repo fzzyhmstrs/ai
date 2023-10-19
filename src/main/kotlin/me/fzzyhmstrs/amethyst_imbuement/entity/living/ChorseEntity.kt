@@ -4,9 +4,9 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
-import net.minecraft.block.BlockState
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -17,15 +17,20 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.passive.AbstractHorseEntity
+import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.inventory.Inventory
+import net.minecraft.item.HorseArmorItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtElement
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3d
 import net.minecraft.world.EntityView
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -75,6 +80,33 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     internal var entityScale = 1f
     protected var trackingOwner = false
 
+    var flapProgress = 0f
+    var maxWingDeviation = 0f
+    var prevMaxWingDeviation = 0f
+    var prevFlapProgress = 0f
+    private var flapSpeed = 1.0f
+
+    override fun tickMovement() {
+        super.tickMovement()
+        prevFlapProgress = flapProgress
+        prevMaxWingDeviation = maxWingDeviation
+        maxWingDeviation += (if (this.isOnGround) -1.0f else 4.0f) * 0.3f
+        maxWingDeviation = MathHelper.clamp(maxWingDeviation, 0.0f, 1.0f)
+        if (!this.isOnGround && flapSpeed < 1.0f) {
+            flapSpeed = 1.0f
+        }
+        flapSpeed *= 0.9f
+        val vec3d = velocity
+        if (!this.isOnGround && vec3d.y < 0.0) {
+            velocity = if (hasPassengers()) {
+                vec3d.multiply(1.0, 0.8, 1.0)
+            } else {
+                vec3d.multiply(1.0, 0.6, 1.0)
+            }
+        }
+        flapProgress += flapSpeed * 2.0f
+    }
+
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
         this.level = level
@@ -99,48 +131,9 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         goalSelector.add(3,callForConstructHelpGoal)
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
-        this.initEquipment(world.random, difficulty)
-        modifyHealth(entityEffects.amplifier(level).toDouble())
-        modifyDamage(entityEffects.damage(level).toDouble())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(SCALE,1f)
-    }
-
-    open fun modifyHealth(modHealth: Double){
-        val baseHealth = this.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH)
-        if (modHealth != baseHealth && modHealth != 0.0){
-            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
-                EntityAttributeModifier(
-                    "Modified health bonus",
-                    modHealth - baseHealth,
-                    EntityAttributeModifier.Operation.ADDITION
-                )
-            )
-        }
-    }
-
-    open fun modifyDamage(modDamage: Double){
-        val baseDamage = this.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE)
-        if (modDamage != baseDamage && modDamage != 0.0){
-            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
-                EntityAttributeModifier(
-                    "Modified damage bonus",
-                    modDamage - baseDamage,
-                    EntityAttributeModifier.Operation.ADDITION
-                )
-            )
-        }
     }
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
@@ -164,58 +157,118 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         writePlayerCreatedNbt(nbt)
-        nbt.putInt("effect_level", level)
         nbt.putFloat("scale_factor",getScale())
+        if (!items.getStack(1).isEmpty) {
+            nbt.put("ArmorItem", items.getStack(1).writeNbt(NbtCompound()))
+        }
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         readPlayerCreatedNbt(world, nbt)
-        if (owner != null) {
-            try {
-                startTrackingOwner(owner!!)
-            } catch (e: Exception){
-                //
-            }
-        }
-        this.level = nbt.getInt("effect_level").takeIf { it > 0 } ?: 1
         setScale(nbt.getFloat("scale_factor").takeIf { it > 0f } ?: 1f)
-    }
-
-    override fun canTarget(target: LivingEntity): Boolean {
-        if (!isPlayerCreated()) return super.canTarget(target)
-        val uuid = target.uuid
-        if (getOwner() != null) {
-            if (target.isTeammate(getOwner())) return false
+        if (nbt.contains("ArmorItem", NbtElement.COMPOUND_TYPE.toInt())){
+            val itemStack = ItemStack.fromNbt(nbt.getCompound("ArmorItem"))
+            if (isHorseArmor(itemStack))
+                items.setStack(1, itemStack)
         }
-        return uuid != createdBy
     }
 
-    open fun getStepSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_STEP
+    override fun canBreedWith(other: AnimalEntity): Boolean {
+        return false
     }
 
-    override fun playStepSound(pos: BlockPos, state: BlockState) {
-        playSound(getStepSound(), 0.15f, 1.0f)
+    override fun hasArmorSlot(): Boolean {
+        return true
     }
 
-    override fun tryAttack(target: Entity): Boolean {
-        val bl = super.tryAttack(target)
-        if (bl) {
-            val summoner = getOwner()
-            if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
-                (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
-            }
-            val f = world.getLocalDifficulty(blockPos).localDifficulty
-            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f) {
-                target.setOnFireFor(2 * f.toInt())
-            }
+    fun getArmorType(): ItemStack? {
+        return getEquippedStack(EquipmentSlot.CHEST)
+    }
+
+    private fun equipArmor(stack: ItemStack) {
+        equipStack(EquipmentSlot.CHEST, stack)
+        setEquipmentDropChance(EquipmentSlot.CHEST, 0.0f)
+    }
+
+    override fun updateSaddle() {
+        if (world.isClient) {
+            return
         }
-        return bl
+        super.updateSaddle()
+        setArmorTypeFromStack(items.getStack(1))
+        setEquipmentDropChance(EquipmentSlot.CHEST, 0.0f)
     }
 
-    override fun getLeashOffset(): Vec3d {
-        return Vec3d(0.0, (0.875f * standingEyeHeight).toDouble(), (this.width * 0.4f).toDouble())
+    private fun setArmorTypeFromStack(stack: ItemStack) {
+        this.equipArmor(stack)
+        if (!world.isClient) {
+            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.removeModifier(HORSE_ARMOR_BONUS_ID)
+            if (!isHorseArmor(stack)) return
+            val i: Int = (stack.item as HorseArmorItem).bonus
+            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.addTemporaryModifier(
+                EntityAttributeModifier(
+                    HORSE_ARMOR_BONUS_ID,
+                    "Horse armor bonus",
+                    i.toDouble(),
+                    EntityAttributeModifier.Operation.ADDITION
+                )
+            )
+
+        }
+    }
+
+    override fun onInventoryChanged(sender: Inventory?) {
+        val itemStack = getArmorType()
+        super.onInventoryChanged(sender)
+        val itemStack2 = getArmorType()
+        if (age > 20 && isHorseArmor(itemStack2!!) && itemStack != itemStack2) {
+            playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5f, 1.0f)
+        }
+    }
+
+    override fun playWalkSound(group: BlockSoundGroup) {
+        super.playWalkSound(group)
+        if (random.nextInt(10) == 0) {
+            playSound(SoundEvents.ENTITY_CHICKEN_AMBIENT, group.getVolume() * 0.6f, group.getPitch())
+        }
+    }
+
+    override fun getAmbientSound(): SoundEvent? {
+        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    }
+
+    override fun getDeathSound(): SoundEvent? {
+        return SoundEvents.ENTITY_CHICKEN_DEATH
+    }
+
+    override fun getEatSound(): SoundEvent? {
+        return SoundEvents.ENTITY_HORSE_EAT
+    }
+
+    override fun getHurtSound(source: DamageSource?): SoundEvent? {
+        return SoundEvents.ENTITY_CHICKEN_HURT
+    }
+
+    override fun getAngrySound(): SoundEvent? {
+        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess?,
+        difficulty: LocalDifficulty?,
+        spawnReason: SpawnReason?,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        this.items.setStack(0, ItemStack(Items.SADDLE))
+        this.updateSaddle()
+        this.isTame = true
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun isHorseArmor(item: ItemStack): Boolean {
+        return item.item is HorseArmorItem
     }
 
     fun setConstructOwner(owner: LivingEntity?){

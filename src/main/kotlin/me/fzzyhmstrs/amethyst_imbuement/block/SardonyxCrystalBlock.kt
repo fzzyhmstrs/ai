@@ -1,63 +1,29 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
-import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.block.PlanarDoorBlockEntity
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
-import me.fzzyhmstrs.amethyst_imbuement.spells.tales.PlanarDoorAugment
-import net.minecraft.block.*
-import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
-import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.entity.Entity
-import net.minecraft.entity.ItemEntity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.passive.AnimalEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.vehicle.MinecartEntity
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
-import net.minecraft.item.ItemStack
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.BooleanProperty
-import net.minecraft.state.property.Properties
+import net.minecraft.particle.DustParticleEffect
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
 
-class SardonyxCrystlBlock(settings:Settings):Block(settings) {
+class SardonyxCrystalBlock(settings:Settings):Block(settings) {
 
-    /*override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return PlanarDoorBlockEntity(RegisterEntity.PLANAR_DOOR_BLOCK_ENTITY, pos, state)
-    }*/
+    companion object{
+        private val SMALL_DUST = DustParticleEffect(DustParticleEffect.RED,0.8f)
+        private val MESSAGES = Array<Text>(5) { i -> AcText.translatable("block.amethyst_imbuement.sardonyx_crystal.message$i").formatted(Formatting.RED)}
+    }
 
-    /*override fun <T : BlockEntity> getTicker(
-        world: World,
-        state: BlockState,
-        type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return if (!world.isClient) checkType(
-            type, RegisterEntity.PLANAR_DOOR_BLOCK_ENTITY
-        ) { wrld: World, pos: BlockPos, state2: BlockState, blockEntity: PlanarDoorBlockEntity ->
-            PlanarDoorBlockEntity.tick(
-                wrld,
-                pos,
-                state2,
-                blockEntity
-            )
-        } else null
-    }*/
+    override fun onBreak(world: World?, pos: BlockPos?, state: BlockState?, player: PlayerEntity?) {
+        super.onBreak(world, pos, state, player)
+    }
 
-    @Deprecated("Deprecated in Java")
+    /*@Deprecated("Deprecated in Java")
     override fun onStateReplaced(
         state: BlockState,
         world: World,
@@ -70,12 +36,17 @@ class SardonyxCrystlBlock(settings:Settings):Block(settings) {
         }
         //summon SardonyxElemental here
         super.onStateReplaced(state, world, pos, newState, moved)
-    }
+    }*/
 
     override fun randomDisplayTick(state: BlockState?, world: World, pos: BlockPos, random: Random) {
-        if (world.random.nextFloat() < 0.9f) return
+        val d = pos.x.toDouble() + world.random.nextDouble()
+        val e = pos.y.toDouble() + world.random.nextDouble()
+        val f = pos.z.toDouble() + world.random.nextDouble()
+        world.addParticle(SMALL_DUST, d, e, f, 0.0, 0.0, 0.0)
+        if (world.random.nextFloat() < 0.975f) return
         val player = MinecraftClient.getInstance().player ?: return
-        val message = AcText.translatable("block.amethyst_imbuement.sardonyx_crystal.message${world.random.nextInt(5)}")
+        if (pos.getManhattanDistance(player.blockPos) > 12) return
+        val message = MESSAGES[world.random.nextInt(5)]
         player.sendMessage(message, true)
         //sned random messages to player
     }

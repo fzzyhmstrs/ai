@@ -46,6 +46,7 @@
     "PowderSnowBlockMixin",
     "PowderSnowBucketItemMixin",
     "ProjectileEntityAccessor",
+    "ServerPlayerEntityAccessor",
     "ServerPlayerEntityMixin",
     "StructureMixin",
     "TridentEntityMixin"

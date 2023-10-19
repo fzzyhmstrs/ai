@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.PlanarDoorBlockEntity
+import me.fzzyhmstrs.amethyst_imbuement.mixins.ServerPlayerEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.PlanarDoorAugment
@@ -20,6 +21,7 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -46,15 +48,10 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
 
     @Deprecated("Deprecated in Java")
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
-        println("Door Collide")
-        println("Player: ${entity.id}")
         if (world !is ServerWorld) return
-        println("A")
         if (PlanarDoorAugment.getAndUpdateDoorStatus(entity, pos)) return
-        println("B")
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity !is PlanarDoorBlockEntity) return
-        println("C")
         if (!((entity is PlayerEntity && AiConfig.entities.isEntityPvpTeammate(blockEntity.getOwner() as? LivingEntity,entity,
                 RegisterEnchantment.PLANAR_DOOR))
               || entity is AnimalEntity
@@ -62,17 +59,21 @@ class PlanarDoorBlock(settings:Settings):BlockWithEntity(settings), Waterloggabl
               || entity is ItemEntity)) {
             return
         }
-        println("D")
         val newPos = blockEntity.getPartnerPos()
         //put the check for just-teleported here
         val newDim = blockEntity.getPartnerWorld(world) as? ServerWorld ?: return
-        println("E")
         if (newPos == blockEntity.pos && world === newDim) return
-        println("F")
         PlanarDoorAugment.addEntityTeleported(entity,newPos)
         val p = newPos.toCenterPos().add(0.0,-0.5,0.0)
         //Add the just-teleported bit
-        entity.teleport(newDim, p.x, p.y, p.z, setOf(), entity.yaw, entity.pitch)
+        if (entity is ServerPlayerEntity) {
+            (entity as ServerPlayerEntityAccessor).isInTeleportationState= true
+            entity.teleport(newDim, p.x, p.y, p.z, entity.yaw, entity.pitch)
+        } else {
+            if (entity.hasPassengers())
+                entity.removeAllPassengers()
+            entity.teleport(newDim, p.x, p.y, p.z, setOf(), entity.yaw, entity.pitch)
+        }
         newDim.playSound(null,newPos, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS,0.2f,1.0f)
     }
 

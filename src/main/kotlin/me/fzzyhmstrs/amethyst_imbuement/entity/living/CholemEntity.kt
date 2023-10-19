@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -173,7 +174,7 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
 
     override fun playStepSound(pos: BlockPos, state: BlockState) {
-        playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0f, 1.0f)
+        playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 0.5f, 1.0f)
     }
 
     fun getAttackTicks(): Int {

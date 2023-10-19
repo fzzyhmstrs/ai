@@ -1,21 +1,26 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.book
 
-import com.google.common.collect.HashMultimap
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentBookItem
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.addIfDistinct
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.GlisteringKeyItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Hand
@@ -24,6 +29,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
+import java.util.function.Supplier
 
 class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), BookOfKnowledge, GlisteringKeyItem.GlisteringKeyUnlockable {
     override val loreTier: LoreTier = TALES_TIER
@@ -41,8 +47,8 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
     }
 
     companion object{
-        clientLastReadMap: MutableMap<UUID,String> = mutableMapOf()
-        serverLastReadMap: MutableMap<UUID,String> = mutableMapOf()
+        private val clientLastReadMap: MutableMap<UUID,String> = mutableMapOf()
+        private val serverLastReadMap: MutableMap<UUID,String> = mutableMapOf()
 
         private val TALES_SYNC = Identifier(AI.MOD_ID, "tales_sync")
         
@@ -71,12 +77,12 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
                 serverLastReadMap[player.uuid] = tale
                 val buf = PacketByteBufs.create()
                 buf.writeString(tale)
-                ServerPlayNetworking.send(TALES_SYNC, player, buf)
+                ServerPlayNetworking.send(player, TALES_SYNC, buf)
             }
         }
 
         fun registerClient(){
-            ClientPlayNetworking.registerGlobalReceiver(TALES_SYNC){client,_,buf,_ ->
+            ClientPlayNetworking.registerGlobalReceiver(TALES_SYNC){ client, _, buf, _ ->
                 val player = client.player ?: return@registerGlobalReceiver
                 val tale = buf.readString()
                 clientLastReadMap[player.uuid] = tale

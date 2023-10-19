@@ -1,11 +1,11 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -18,7 +18,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
-class ElixirItem(effect: StatusEffect,duration: Int, amplifier: Int,settings: Settings) : PotionItem(settings) {
+class ElixirItem(private val effect: StatusEffect, private val duration: Int, private val amplifier: Int, settings: Settings) : PotionItem(settings) {
 
     override fun getDefaultStack(): ItemStack {
         return ItemStack(this)

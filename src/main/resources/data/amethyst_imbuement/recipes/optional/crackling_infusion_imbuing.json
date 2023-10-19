@@ -5,6 +5,10 @@
       "values": [
         "spell_power"
       ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/crackling_infusion_imbuing"
     }
   ],
   "type": "amethyst_imbuement:imbuing",

@@ -1,4 +1,10 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "crafting/beryl_copper_ingot"
+    }
+  ],
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {

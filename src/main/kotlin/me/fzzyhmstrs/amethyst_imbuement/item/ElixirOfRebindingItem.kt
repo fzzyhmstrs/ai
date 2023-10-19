@@ -47,7 +47,7 @@ class ElixirOfRebindingItem(settings: Settings) : PotionItem(settings) {
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        tooltip.add(AcText.translatable("item.amethyst_imbuement.elixir_of_rebinding.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
+        tooltip.add(AcText.translatable("item.amethyst_imbuement.elixir_of_arcana.tooltip1").formatted(Formatting.AQUA, Formatting.ITALIC))
     }
 
     override fun hasGlint(stack: ItemStack?): Boolean {

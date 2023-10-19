@@ -32,16 +32,16 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
 
     companion object{
         private val colorMap: MutableMap<UUID,Int> = mutableMapOf()
-        private val teleportedEntitiesMap: MutableMap<BlockPos,MutableMap<Int,Long>> = mutableMapOf()
+        private val teleportedEntitiesMap: MutableMap<BlockPos,MutableMap<UUID,Long>> = mutableMapOf()
 
         fun getAndUpdateDoorStatus(entity: Entity, pos: BlockPos): Boolean{
             val time = entity.world.time
-            val lastTime = teleportedEntitiesMap[pos]?.get(entity.id) ?: return false
+            val lastTime = teleportedEntitiesMap[pos]?.get(entity.uuid) ?: return false
             val bl = time - lastTime <= 5L
             if (bl){
-                teleportedEntitiesMap[pos]?.put(entity.id,time)
+                teleportedEntitiesMap[pos]?.put(entity.uuid,time)
             } else {
-                teleportedEntitiesMap[pos]?.remove(entity.id)
+                teleportedEntitiesMap[pos]?.remove(entity.uuid)
             }
             if (teleportedEntitiesMap[pos]?.isEmpty() == true){
                 teleportedEntitiesMap.remove(pos)
@@ -50,7 +50,7 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
         }
 
         fun addEntityTeleported(entity: Entity, pos: BlockPos){
-            teleportedEntitiesMap.computeIfAbsent(pos) {mutableMapOf()}.put(entity.id,entity.world.time)
+            teleportedEntitiesMap.computeIfAbsent(pos) {mutableMapOf()}.put(entity.uuid,entity.world.time)
         }
         
     }

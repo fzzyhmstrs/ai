@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:mana_potion"
+    "amethyst_imbuement:mana_potion",
+    "amethyst_imbuement:elixir_of_arcana",
+    "amethyst_imbuement:elixir_of_mending",
+    "amethyst_imbuement:elixir_of_shielding",
+    "amethyst_imbuement:elixir_of_insight"
   ]
 }
