@@ -1,4 +1,10 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "entities/sardonyx_elemental"
+    }
+  ],
   "type": "minecraft:entity",
   "pools": [
     {
