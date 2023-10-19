@@ -1,4 +1,10 @@
-{  
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "master_researcher"
+    }
+  ],
 "type": "advancement_reward",  
 "pools": 
 [    
