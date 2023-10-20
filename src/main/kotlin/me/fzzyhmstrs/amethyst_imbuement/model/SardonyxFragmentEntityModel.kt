@@ -1,15 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxFragmentEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.entity.Entity
+import net.minecraft.util.math.MathHelper
 
 // Made with Blockbench 4.8.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<Entity?>() {
+class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<SardonyxFragmentEntity>() {
     private val leftLeg: ModelPart
     private val rightLeg: ModelPart
     private val body: ModelPart
@@ -26,14 +27,24 @@ class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<Entity?>() {
         rightArm = root.getChild("rightArm")
     }
 
-    override fun setAngles(
-        entity: Entity?,
-        limbSwing: Float,
-        limbSwingAmount: Float,
-        ageInTicks: Float,
-        netHeadYaw: Float,
-        headPitch: Float
-    ) {
+    override fun setAngles(cholemEntity: SardonyxFragmentEntity, f: Float, g: Float, h: Float, i: Float, j: Float) {
+        head.yaw = i * (Math.PI.toFloat() / 180)
+        head.pitch = j * (Math.PI.toFloat() / 180)
+        rightLeg.pitch = -1.5f * MathHelper.wrap(f, 13.0f) * g
+        leftLeg.pitch = 1.5f * MathHelper.wrap(f, 13.0f) * g
+        rightLeg.yaw = 0.0f
+        leftLeg.yaw = 0.0f
+    }
+
+    override fun animateModel(cholemEntity: SardonyxFragmentEntity, f: Float, g: Float, h: Float) {
+        val i = cholemEntity.getAttackTicks()
+        if (i > 0) {
+            rightArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)
+            leftArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)
+        } else {
+            rightArm.pitch = (-0.2f + 1.5f * MathHelper.wrap(f, 13.0f)) * g
+            leftArm.pitch = (-0.2f - 1.5f * MathHelper.wrap(f, 13.0f)) * g
+        }
     }
 
     override fun render(

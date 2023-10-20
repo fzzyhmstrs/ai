@@ -123,7 +123,7 @@ object RegisterItem {
     val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
     val SARDONYX_FRAGMENT_SPAWN_EGG = register(SpawnEggItem(RegisterEntity.SARDONYX_FRAGMENT, 0x961900,0x806060, FabricItemSettings()),"sardonyx_fragment_spawn_egg")
-    val STRANGE_EGG = register(SpawnEggItem(RegisterEntity.CHORSE, 0xE1C800 ,0xF0F0F0, FabricItemSettings()),"strange_egg")
+    val STRANGE_EGG = register(SpawnEggItem(RegisterEntity.CHORSE_ENTITY, 0xE1C800 ,0xF0F0F0, FabricItemSettings()),"strange_egg")
 
 
     ///////////////////////////

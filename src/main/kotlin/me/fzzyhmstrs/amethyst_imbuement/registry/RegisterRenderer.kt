@@ -112,6 +112,10 @@ object RegisterRenderer {
             RegisterEntity.TOTEM_OF_GRACE_ENTITY
         ){ context: EntityRendererFactory.Context -> TotemEntityRenderer(context) }
 
+        EntityRendererRegistry.register(
+            RegisterEntity.SARDONYX_FRAGMENT
+        ){ context: EntityRendererFactory.Context -> SardonyxFragmentEntityRenderer(context) }
+
         //////////////////////////////////////////////////////////
 
         EntityRendererRegistry.register(

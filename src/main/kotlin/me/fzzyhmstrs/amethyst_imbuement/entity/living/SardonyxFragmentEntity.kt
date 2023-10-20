@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.block.BlockState
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -17,6 +18,7 @@ import net.minecraft.entity.mob.ZombifiedPiglinEntity
 import net.minecraft.entity.passive.IronGolemEntity
 import net.minecraft.entity.passive.MerchantEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -39,8 +41,9 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.sardonyxFragment.baseHealth.get())
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.75)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.5)
                 .add(EntityAttributes.GENERIC_ARMOR, AiConfig.entities.sardonyxFragment.baseArmor.get())
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.sardonyxFragment.baseDamage.get().toDouble())
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, AiConfig.entities.sardonyxFragment.baseDamage.get())
         }
     }
 
@@ -75,6 +78,15 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(ENRAGED,false)
+    }
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        setEnraged(nbt.getBoolean("enraged"), true)
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        nbt.putBoolean("enraged", getEnraged())
     }
 
     override fun getAmbientSound(): SoundEvent? {
@@ -114,6 +126,19 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
 
     fun getEnraged(): Boolean{
         return dataTracker.get(ENRAGED)
+    }
+
+    override fun tryAttack(target: Entity): Boolean {
+        attackTicksLeft = 10
+        world.sendEntityStatus(this, 4.toByte())
+        val bl = super.tryAttack(target)
+        if (bl) {
+            val f = world.getLocalDifficulty(blockPos).localDifficulty
+            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f) {
+                target.setOnFireFor(2 * f.toInt())
+            }
+        }
+        return bl
     }
 
     fun setEnraged(bl: Boolean, loading: Boolean){
