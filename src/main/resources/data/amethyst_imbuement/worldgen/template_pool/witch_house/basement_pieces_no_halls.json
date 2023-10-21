@@ -3,61 +3,6 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 2,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/hallway_straight_short",
-        "processors": "amethyst_imbuement:cracked_bricks"
-      }
-    },
-    {
-      "weight": 2,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/staircase",
-        "processors": "amethyst_imbuement:cracked_bricks"
-
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/hallway_straight_long",
-        "processors": "amethyst_imbuement:cracked_bricks"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/hallway_bend_right",
-        "processors": "amethyst_imbuement:cracked_bricks"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/hallway_bend_left",
-        "processors": "amethyst_imbuement:cracked_bricks"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "amethyst_imbuement:witch_house/basement_pieces/hallway_tee",
-        "processors": "amethyst_imbuement:cracked_bricks"
-      }
-    },
-    {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",

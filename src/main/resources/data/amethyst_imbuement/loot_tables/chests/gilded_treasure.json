@@ -39,7 +39,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -55,7 +55,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -156,7 +156,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "amethyst_imbuement:talisman_of_lost_memories"
         },
         {
@@ -171,7 +171,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
@@ -187,7 +187,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
@@ -203,7 +203,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
@@ -219,7 +219,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
