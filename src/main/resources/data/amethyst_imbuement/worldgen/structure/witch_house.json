@@ -10,19 +10,19 @@
 			"type": "amethyst_imbuement:sardonyx_fragment",
 			"weight": 3,
 			"minCount": 1,
-			"maxCount": 4
+			"maxCount": 3
 		  },
 		  {
 			"type": "minecraft:zombie",
-			"weight": 1,
+			"weight": 2,
 			"minCount": 1,
 			"maxCount": 3
 		  },
 		  {
 			"type": "minecraft:skeleton",
-			"weight": 1,
+			"weight": 2,
 			"minCount": 1,
-			"maxCount": 2
+			"maxCount": 5
 		  }
 		]
 	  }
