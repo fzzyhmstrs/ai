@@ -1,0 +1,24 @@
+{
+	"name": "amethyst_imbuement:witch_house/basement_fallbacks",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/basement_pieces/wall_1",
+				"processors": "minecraft:empty"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/basement_pieces/closet_1",
+				"processors": "minecraft:empty"
+			}
+		}
+	]
+}

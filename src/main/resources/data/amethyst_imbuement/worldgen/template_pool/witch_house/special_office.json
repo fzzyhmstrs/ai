@@ -1,6 +1,6 @@
 {
 	"name": "amethyst_imbuement:witch_house/special_office",
-	"fallback": "minecraft:empty",
+	"fallback": "amethyst_imbuement:witch_house/basement_fallbacks",
 	"elements": [
 		{
 			"weight": 1,
