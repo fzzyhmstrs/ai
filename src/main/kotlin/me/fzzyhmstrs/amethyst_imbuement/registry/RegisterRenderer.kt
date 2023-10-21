@@ -44,6 +44,10 @@ object RegisterRenderer {
     val PLAYER_WITHER_SKULL_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"player_wither_skull_entity"),"player_wither_skull_model")
     val ENERGY_BLADE_ENTITY: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"energy_blade_entity"),"energy_blade_entity_model")
     val CHOLEM_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("cholem"),"cholem_model")
+    val SARDONYX_FRAGMENT: EntityModelLayer = EntityModelLayer(AI.identity("sardonyx_fragment"),"sardonyx_fragment_model")
+
+    val SARDONYX_ELEMENTAL: EntityModelLayer = EntityModelLayer(AI.identity("sardonyx_elemental"),"sardonyx_elemental_model")
+    val SARDONYX_ELEMENTAL_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("sardonyx_elemental"),"sardonyx_elemental_model_armor")
 
     val CHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model")
     val CHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model_armor")
@@ -115,6 +119,10 @@ object RegisterRenderer {
         EntityRendererRegistry.register(
             RegisterEntity.SARDONYX_FRAGMENT
         ){ context: EntityRendererFactory.Context -> SardonyxFragmentEntityRenderer(context) }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.SARDONYX_ELEMENTAL
+        ){ context: EntityRendererFactory.Context -> SardonyxElementalEntityRenderer(context) }
 
         //////////////////////////////////////////////////////////
 
@@ -215,6 +223,10 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(GLISTERING_TRIDENT,GlisteringTridentEntityModel::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(PLAYER_WITHER_SKULL_ENTITY,WitherSkullEntityRenderer::getTexturedModelData)
         EntityModelLayerRegistry.registerModelLayer(ENERGY_BLADE_ENTITY) { EnergyBladeEntityModel.texturedModelData }
+        EntityModelLayerRegistry.registerModelLayer(SARDONYX_FRAGMENT) { SardonyxFragmentEntityModel.texturedModelData }
+
+        EntityModelLayerRegistry.registerModelLayer(SARDONYX_ELEMENTAL) { SardonyxElementalEntityModel.getTexturedModelData() }
+        EntityModelLayerRegistry.registerModelLayer(SARDONYX_ELEMENTAL_ARMOR) { SardonyxElementalEntityModel.getTexturedModelData(Dilation(0.15f)) }
 
         EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY) { ChorseEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_ARMOR) { ChorseEntityModel.getTexturedModelData(Dilation(0.15f)) }

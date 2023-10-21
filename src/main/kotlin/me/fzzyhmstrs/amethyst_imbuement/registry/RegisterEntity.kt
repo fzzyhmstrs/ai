@@ -24,7 +24,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object RegisterEntity {
-    
+
+    /// Hammy ///////////////////////////////////
+
     val BASIC_HAMSTER_ENTITY: EntityType<BaseHamsterEntity> = Registry.register(
         Registries.ENTITY_TYPE,
         Identifier(AI.MOD_ID, "basic_hamster"),
@@ -38,7 +40,7 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.4f, 0.3f)).trackRangeChunks(8).build()
     )
     
-    /////////
+    /// Living Entities //////////////////////////
 
     val BONESTORM_ENTITY: EntityType<BonestormEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -170,7 +172,20 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.7f, 1.1f)).trackRangeChunks(10).build()
     )
 
-    ////////////////////////////////////////
+    val SARDONYX_ELEMENTAL: EntityType<SardonyxElementalEntity> = Registry.register(
+        Registries.ENTITY_TYPE,
+        Identifier(AI.MOD_ID, "sardonyx_elemental"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MONSTER
+        ) { entityType: EntityType<SardonyxElementalEntity>, world: World ->
+            SardonyxElementalEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(1.95f, 2.95f)).trackRangeChunks(10).build()
+    )
+
+    /// Projectiles /////////////////////////////////////
 
     val GLISTERING_TRIDENT_ENTITY: EntityType<GlisteringTridentEntity> = Registry.register(
         Registries.ENTITY_TYPE,
@@ -406,7 +421,7 @@ object RegisterEntity {
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
     )
 
-    //////////////////////////////////////////
+    /// Block Entities ///////////////////////////////////////
     
     val IMBUING_TABLE_BLOCK_ENTITY: BlockEntityType<ImbuingTableBlockEntity> = Registry.register(
         Registries.BLOCK_ENTITY_TYPE,
@@ -471,6 +486,7 @@ object RegisterEntity {
         FabricDefaultAttributeRegistry.register(TOTEM_OF_FURY_ENTITY,TotemOfFuryEntity.createTotemAttributes())
         FabricDefaultAttributeRegistry.register(TOTEM_OF_GRACE_ENTITY,TotemOfGraceEntity.createTotemAttributes())
         FabricDefaultAttributeRegistry.register(SARDONYX_FRAGMENT, SardonyxFragmentEntity.createFragmentAttributes())
+        FabricDefaultAttributeRegistry.register(SARDONYX_ELEMENTAL, SardonyxElementalEntity.createElementalAttributes())
     }
 
 

@@ -14,7 +14,6 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.mob.ZombifiedPiglinEntity
 import net.minecraft.entity.passive.IronGolemEntity
 import net.minecraft.entity.passive.MerchantEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -38,7 +37,9 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
         protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
 
         fun createFragmentAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.sardonyxFragment.baseHealth.get())
+            return createHostileAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, AiConfig.entities.sardonyxFragment.baseHealth.get())
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.75)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.5)
@@ -69,7 +70,7 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
     protected fun initCustomGoals() {
         goalSelector.add(2, MeleeAttackGoal(this, 1.0, false))
         goalSelector.add(7, WanderAroundFarGoal(this, 1.0))
-        targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(ZombifiedPiglinEntity::class.java))
+        targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
         targetSelector.add(2, ActiveTargetGoal(this as MobEntity, PlayerEntity::class.java, true))
         targetSelector.add(3, ActiveTargetGoal(this as MobEntity, MerchantEntity::class.java, false))
         targetSelector.add(3, ActiveTargetGoal(this as MobEntity, IronGolemEntity::class.java, true))

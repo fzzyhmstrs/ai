@@ -8,10 +8,12 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import java.util.function.Consumer
 
-class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World): BaseShardEntity(entityType, world), ModifiableEffectEntity {
+open class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World): BaseShardEntity(entityType, world), ModifiableEffectEntity {
 
     constructor(world: World, owner: LivingEntity, speed: Float, divergence: Float, pos: Vec3d, rot: Vec3d): this(
         RegisterEntity.BONE_SHARD_ENTITY,world){
@@ -33,7 +35,16 @@ class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World
     }
 
     override var entityEffects: AugmentEffect = super.entityEffects.withDuration(180)
+    private var onEntityHit: Consumer<LivingEntity> = Consumer { }
+    private var onBlockHit: Consumer<BlockHitResult> = Consumer {  }
 
+    fun setOnEntityHit(consumer: Consumer<LivingEntity>){
+        this.onEntityHit = consumer
+    }
+
+    fun setOnBlockHit(consumer: Consumer<BlockHitResult>){
+        this.onBlockHit = consumer
+    }
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super<BaseShardEntity>.passEffects(ae, level)
@@ -41,9 +52,11 @@ class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: World
     }
 
     override fun onEntityHitSideEffects(entity: LivingEntity) {
-        if (entity.world.random.nextFloat() < 0.1){
-            entity.frozenTicks = entityEffects.duration(0)
-        }
+        onEntityHit.accept(entity)
+    }
+
+    override fun onBlockHitSideEffects(blockHitResult: BlockHitResult) {
+        onBlockHit.accept(blockHitResult)
     }
 
     override fun particle(): ParticleEffect {

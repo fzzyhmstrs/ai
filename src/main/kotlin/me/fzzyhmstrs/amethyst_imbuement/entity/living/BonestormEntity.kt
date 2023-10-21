@@ -50,7 +50,7 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
     override var entityGroup: EntityGroup = EntityGroup.UNDEAD
 
     override fun initGoals() {
-        goalSelector.add(4,ShootProjectileGoal(this))
+        goalSelector.add(4,me.fzzyhmstrs.amethyst_imbuement.entity.goal.ShootProjectileGoal(this,{this.owner ?: this}, { bl -> this.setFireActive(bl)}))
         goalSelector.add(5, GoToWalkTargetGoal(this, 1.0))
         goalSelector.add(7, WanderAroundFarGoal(this as PathAwareEntity, 1.0, 0.0f))
         goalSelector.add(8, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))

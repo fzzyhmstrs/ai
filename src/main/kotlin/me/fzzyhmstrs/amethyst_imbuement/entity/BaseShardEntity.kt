@@ -9,12 +9,12 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.world.World
 import java.util.*
@@ -66,6 +66,15 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
     }
 
     open fun onEntityHitSideEffects(entity: LivingEntity){
+
+    }
+
+    override fun onBlockHit(blockHitResult: BlockHitResult) {
+        super.onBlockHit(blockHitResult)
+        onBlockHitSideEffects(blockHitResult)
+    }
+
+    open fun onBlockHitSideEffects(blockHitResult: BlockHitResult){
 
     }
 

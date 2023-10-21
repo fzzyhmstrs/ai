@@ -72,13 +72,13 @@ class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<SardonyxFragmen
                 val modelPartData = modelData.root
                 val leftLeg = modelPartData.addChild(
                     "leftLeg",
-                    ModelPartBuilder.create().uv(8, 24).cuboid(0.5f, -5.0f, -1.0f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                    ModelPartBuilder.create().uv(8, 24).cuboid(0.5f, 0.0f, -1.0f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
+                    ModelTransform.pivot(0.0f, 19.0f, 0.0f)
                 )
                 val rightLeg = modelPartData.addChild(
                     "rightLeg",
-                    ModelPartBuilder.create().uv(0, 24).cuboid(-2.5f, -5.0f, -1.0f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                    ModelPartBuilder.create().uv(0, 24).cuboid(-2.5f, 0.0f, -1.0f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
+                    ModelTransform.pivot(0.0f, 19.0f, 0.0f)
                 )
                 val body = modelPartData.addChild(
                     "body",
@@ -94,14 +94,14 @@ class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<SardonyxFragmen
                 )
                 val leftArm = modelPartData.addChild(
                     "leftArm",
-                    ModelPartBuilder.create().uv(0, 10).cuboid(4.5f, -13.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                    ModelPartBuilder.create().uv(0, 10).cuboid(4.5f, 0.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
+                    ModelTransform.pivot(0.0f, 11.0f, 0.0f)
                 )
                 val rightArm = modelPartData.addChild(
                     "rightArm",
                     ModelPartBuilder.create().uv(24, 10)
-                        .cuboid(-6.5f, -13.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.pivot(0.0f, 24.0f, 0.0f)
+                        .cuboid(-6.5f, 0.0f, -1.0f, 2.0f, 12.0f, 2.0f, Dilation(0.0f)),
+                    ModelTransform.pivot(0.0f, 11.0f, 0.0f)
                 )
                 return TexturedModelData.of(modelData, 64, 32)
             }

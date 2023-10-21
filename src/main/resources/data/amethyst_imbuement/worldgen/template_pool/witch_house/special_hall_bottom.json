@@ -7,11 +7,8 @@
 			"element": {
 				"element_type": "minecraft:single_pool_element",
 				"projection": "rigid",
-				"location": "amethyst_imbuement:witch_house/special_hall_top/hall_bottom_1",
-				"processors": [
-          "amethyst_imbuement:cracked_bricks",
-          "amethyst_imbuement:mossy_bricks"
-        ]
+				"location": "amethyst_imbuement:witch_house/special_hall_bottom/hall_bottom_1",
+				"processors": "amethyst_imbuement:cracked_bricks"
 			}
 		}
 	]

@@ -8,10 +8,7 @@
 				"element_type": "minecraft:single_pool_element",
 				"projection": "rigid",
 				"location": "amethyst_imbuement:witch_house/special_office/office_1",
-				"processors": [
-          "amethyst_imbuement:cracked_bricks",
-          "amethyst_imbuement:mossy_bricks"
-        ]
+				"processors": "amethyst_imbuement:cracked_bricks"
 			}
 		}
 	]

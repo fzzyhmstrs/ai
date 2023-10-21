@@ -45,61 +45,60 @@ class SardonyxElementalEntityModel(private val root: ModelPart) : SinglePartEnti
     }
 
     companion object {
-        val texturedModelData: TexturedModelData
-            get() {
+        fun getTexturedModelData(dilation: Dilation = Dilation.NONE): TexturedModelData {
                 val modelData = ModelData()
                 val modelPartData = modelData.root
                 val body = modelPartData.addChild(
                     "body",
                     ModelPartBuilder.create().uv(0, 38)
-                        .cuboid(-11.0f, -6.0f, -7.0f, 22.0f, 16.0f, 14.0f, Dilation(0.0f))
-                        .uv(0, 68).cuboid(-7.5f, 9.0f, -4.0f, 15.0f, 6.0f, 8.0f, Dilation(0.5f))
-                        .uv(84, 84).cuboid(8.0f, -9.0f, -6.0f, 10.0f, 10.0f, 12.0f, Dilation(0.0f))
-                        .uv(84, 106).cuboid(-18.0f, -9.0f, -6.0f, 10.0f, 10.0f, 12.0f, Dilation(0.0f))
-                        .uv(104, 6).cuboid(0.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, Dilation(0.0f)),
+                        .cuboid(-11.0f, -6.0f, -7.0f, 22.0f, 16.0f, 14.0f, dilation)
+                        .uv(0, 68).cuboid(-7.5f, 9.0f, -4.0f, 15.0f, 6.0f, 8.0f, dilation)
+                        .uv(84, 84).cuboid(8.0f, -9.0f, -6.0f, 10.0f, 10.0f, 12.0f, dilation)
+                        .uv(84, 106).cuboid(-18.0f, -9.0f, -6.0f, 10.0f, 10.0f, 12.0f, dilation)
+                        .uv(104, 6).cuboid(0.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, dilation),
                     ModelTransform.pivot(0.0f, -7.0f, 0.0f)
                 )
                     body.addChild(
                         "shardsR",
                         ModelPartBuilder.create().uv(104, 24)
-                            .cuboid(-4.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, Dilation(0.0f)),
+                            .cuboid(-4.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, dilation),
                         ModelTransform.of(0.0f, 0.0f, 0.0f, 0.0f, -0.1745f, -0.1309f)
                     )
                     body.addChild(
                         "shardsL",
                         ModelPartBuilder.create().uv(104, -12)
-                            .cuboid(4.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, Dilation(0.0f)),
+                            .cuboid(4.0f, -11.0f, 1.0f, 0.0f, 18.0f, 12.0f, dilation),
                         ModelTransform.of(0.0f, 0.0f, 0.0f, 0.0f, 0.1745f, 0.1309f)
                     )
                 val head = modelPartData.addChild(
                     "head",
-                    ModelPartBuilder.create().uv(0, 11).cuboid(-4.0f, -9.0f, -5.5f, 8.0f, 7.0f, 8.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(0, 11).cuboid(-4.0f, -9.0f, -5.5f, 8.0f, 7.0f, 8.0f, dilation),
                     ModelTransform.pivot(0.0f, -4.0f, -4.0f)
                 )
                     head.addChild(
                         "jaw",
-                        ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -2.0f, -5.5f, 8.0f, 3.0f, 8.0f, Dilation(0.0f)),
+                        ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -2.0f, -5.5f, 8.0f, 3.0f, 8.0f, dilation),
                     ModelTransform.pivot(0.0f, 0.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "rightArm",
-                    ModelPartBuilder.create().uv(20, 99).cuboid(-16.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(20, 99).cuboid(-16.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, dilation),
                     ModelTransform.pivot(0.0f, -3.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "leftArm",
-                    ModelPartBuilder.create().uv(0, 99).cuboid(12.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(0, 99).cuboid(12.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, dilation),
                     ModelTransform.pivot(0.0f, -3.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "rightLeg",
-                    ModelPartBuilder.create().uv(32, -1).cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, Dilation(0.0f)),
+                    ModelPartBuilder.create().uv(32, -1).cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, dilation),
                     ModelTransform.pivot(-4.0f, 18.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "leftLeg",
                     ModelPartBuilder.create().uv(56, -1).mirrored()
-                        .cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, Dilation(0.0f)).mirrored(false),
+                        .cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, dilation).mirrored(false),
                     ModelTransform.pivot(5.0f, 18.0f, 0.0f)
                 )
                 return TexturedModelData.of(modelData, 128, 128)

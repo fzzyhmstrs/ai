@@ -45,15 +45,15 @@
         "type": "minecraft:uniform",
         "min": 1.0,
         "max": 2.0
-      },
+      }
     },
     {
       "bonus_rolls": 0.0,
       "conditions":[
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.025,
-          "looting_multiplier": 0.01
+          "chance": 0.01,
+          "looting_multiplier": 0.005
         }
       ],
       "entries": [

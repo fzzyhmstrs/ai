@@ -13,11 +13,11 @@ import kotlin.math.abs
 
 class SardonyxFragmentEntityRenderer(context: EntityRendererFactory.Context) :
     MobEntityRenderer<SardonyxFragmentEntity, SardonyxFragmentEntityModel>(context,
-        SardonyxFragmentEntityModel(context.getPart(RegisterRenderer.CHOLEM_ENTITY)),
+        SardonyxFragmentEntityModel(context.getPart(RegisterRenderer.SARDONYX_FRAGMENT)),
         0.4f
     ) {
 
-    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/crystal_golem/sardonyx_fragment.png")
+    private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/sardonyx/sardonyx_fragment.png")
 
     override fun getTexture(entity: SardonyxFragmentEntity): Identifier {
         return TEXTURE

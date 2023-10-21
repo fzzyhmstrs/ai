@@ -456,12 +456,12 @@ object AiConfig
         var sardonyxFragment = SardonyxFragment()
         class SardonyxFragment: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_fragment_1").build()){
             var baseHealth = ValidatedDouble(60.0,600.0,1.0)
-            var baseArmor = ValidatedDouble(6.0,20.0,1.0)
+            var baseArmor = ValidatedDouble(8.0,20.0,1.0)
             var baseDamage = ValidatedDouble(9.0,90.0,0.0)
             var enragedDamage = ValidatedDouble(6.0,60.0,0.0)
         }
 
-        var sardonyxElemental = SardonyxFragment()
+        var sardonyxElemental = SardonyxElemental()
         class SardonyxElemental: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_elemental_1").build()){
             var baseHealth = ValidatedDouble(512.0,1024.0,1.0)
             var baseArmor = ValidatedDouble(16.0,30.0,1.0)
