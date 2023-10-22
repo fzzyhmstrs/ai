@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxElementalEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.SardonyxElementalArmorFeatureRenderer
@@ -30,18 +30,18 @@ class SardonyxElementalEntityRenderer(context: EntityRendererFactory.Context) :
     }
 
     override fun setupTransforms(
-        sardonyxElementalEntity: SardonyxElementalEntity,
-        matrixStack: MatrixStack,
-        f: Float,
-        g: Float,
-        h: Float
-    ) {
-        super.setupTransforms(sardonyxElementalEntity, matrixStack, f, g, h)
-        if (sardonyxElementalEntity.limbAnimator.speed < 0.01) {
-            return
-        }
-        val j = sardonyxElementalEntity.limbAnimator.getPos(h) + 6.0f
-        val k = (abs(j % 13.0f - 6.5f) - 3.25f) / 3.25f
-        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(6.5f * k))
+            sardonyxElementalEntity: SardonyxElementalEntity,
+            matrixStack: MatrixStack,
+            f: Float,
+            g: Float,
+            h: Float
+        ) {
+            super.setupTransforms(sardonyxElementalEntity, matrixStack, f, g, h)
+            if (sardonyxElementalEntity.limbAnimator.speed < 0.01) {
+                return
+            }
+            val j = sardonyxElementalEntity.limbAnimator.getPos(h) + 6.0f
+            val k = (abs(j % 13.0f - 6.5f) - 3.25f) / 3.25f
+            matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(6.5f * k))
     }
 }

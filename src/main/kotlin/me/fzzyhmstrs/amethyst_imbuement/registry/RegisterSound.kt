@@ -8,35 +8,35 @@ import net.minecraft.util.Identifier
 
 object RegisterSound {
 
-    private val HAMSTER_HIT_ID = Identifier(AI.MOD_ID,"hamster_hit")
-    val HAMSTER_HIT = soundEvent(HAMSTER_HIT_ID)
+    val HAMSTER_HIT = soundEvent(Identifier(AI.MOD_ID,"hamster_hit"))
 
-    private val HAMSTER_DIE_ID = Identifier(AI.MOD_ID,"hamster_die")
-    val HAMSTER_DIE = soundEvent(HAMSTER_DIE_ID)
+    val HAMSTER_DIE = soundEvent(Identifier(AI.MOD_ID,"hamster_die"))
 
-    private val HAMSTER_AMBIENT_ID = Identifier(AI.MOD_ID,"hamster_ambient")
-    val HAMSTER_AMBIENT = soundEvent(HAMSTER_AMBIENT_ID)
+    val HAMSTER_AMBIENT = soundEvent(Identifier(AI.MOD_ID,"hamster_ambient"))
 
-    private val UNLOCK_ID = Identifier(AI.MOD_ID,"unlock")
-    val UNLOCK = soundEvent(UNLOCK_ID)
+    val UNLOCK = soundEvent(Identifier(AI.MOD_ID,"unlock"))
 
-    private val LOCKED_BOOK_ID = Identifier(AI.MOD_ID,"locked_book")
-    val LOCKED_BOOK = soundEvent(LOCKED_BOOK_ID)
+    val LOCKED_BOOK = soundEvent(Identifier(AI.MOD_ID,"locked_book"))
 
-    private val EXECUTE_ID = Identifier(AI.MOD_ID,"execute")
-    val EXECUTE = soundEvent(EXECUTE_ID)
+    val EXECUTE = soundEvent(Identifier(AI.MOD_ID,"execute"))
 
-    private val ICE_SPIKES_ID = Identifier(AI.MOD_ID,"ice_spikes")
-    val ICE_SPIKES = soundEvent(ICE_SPIKES_ID)
+    val ICE_SPIKES = soundEvent(Identifier(AI.MOD_ID,"ice_spikes"))
 
-    private val SOLAR_FLARE_CHARGE_ID = Identifier(AI.MOD_ID,"solar_flare_charge")
-    val SOLAR_FLARE_CHARGE = soundEvent(SOLAR_FLARE_CHARGE_ID)
+    val SOLAR_FLARE_CHARGE = soundEvent(Identifier(AI.MOD_ID,"solar_flare_charge"))
 
-    private val SOLAR_FLARE_FIRE_ID = Identifier(AI.MOD_ID,"solar_flare_fire")
-    val SOLAR_FLARE_FIRE = soundEvent(SOLAR_FLARE_FIRE_ID)
+    val SOLAR_FLARE_FIRE = soundEvent(Identifier(AI.MOD_ID,"solar_flare_fire"))
 
-    private val ENERGY_BLADE_ID = Identifier(AI.MOD_ID,"energy_blade")
-    val ENERGY_BLADE = soundEvent(ENERGY_BLADE_ID)
+    val ENERGY_BLADE = soundEvent(Identifier(AI.MOD_ID,"energy_blade"))
+
+    val STOMP = soundEvent(Identifier(AI.MOD_ID,"stomp"))
+
+    val ELEMENTAL_RUMBLE = soundEvent(Identifier(AI.MOD_ID,"elemental_rumble"))
+
+    val ELEMENTAL_DEATH = soundEvent(Identifier(AI.MOD_ID,"elemental_death"))
+
+    val ELEMENTAL_HURT = soundEvent(Identifier(AI.MOD_ID,"elemental_hurt"))
+
+    val FRAGMENT_CRUMBLES = soundEvent(Identifier(AI.MOD_ID,"fragment_crumbles"))
 
     private fun soundEvent(identifier: Identifier): SoundEvent{
         return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))

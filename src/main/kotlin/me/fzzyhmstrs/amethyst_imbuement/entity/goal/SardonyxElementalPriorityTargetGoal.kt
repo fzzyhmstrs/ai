@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import net.minecraft.entity.ai.goal.TrackTargetGoal
 
 class SardonyxElementalPriorityTargetGoal(private val sardonyxElemental: SardonyxElementalEntity) :
@@ -13,7 +13,7 @@ class SardonyxElementalPriorityTargetGoal(private val sardonyxElemental: Sardony
     }
 
     override fun start() {
-        sardonyxElemental.target = sardonyxElemental.lastDamageTracker.getPriority()
+        sardonyxElemental.target = sardonyxElemental.lastDamageTracker.getPriority(sardonyxElemental.world)
         super.start()
     }
 

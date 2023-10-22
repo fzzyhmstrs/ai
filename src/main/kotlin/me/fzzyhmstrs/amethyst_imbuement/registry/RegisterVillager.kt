@@ -186,6 +186,13 @@ object RegisterVillager {
 
         }
 
+        if(FabricLoader.getInstance().isModLoaded("skyvillages")){
+            if (AiConfig.villages.sky.enableSkyWorkshops.get()) {
+                val skyId = Identifier(AI.MOD_ID + ":village/sky_crystal_workshop_1")
+                FabricStructurePoolRegistry.registerSimple(Identifier("skyvillages:skyvillage_houses"), skyId, AiConfig.villages.sky.skyWorkshopWeight.get())
+            }
+        }
+
     }
 
 

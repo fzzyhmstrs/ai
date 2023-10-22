@@ -1,6 +1,7 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.living
+package me.fzzyhmstrs.amethyst_imbuement.entity.monster
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -90,16 +91,16 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
         nbt.putBoolean("enraged", getEnraged())
     }
 
-    override fun getAmbientSound(): SoundEvent? {
-        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT
+    override fun getAmbientSound(): SoundEvent {
+        return RegisterSound.FRAGMENT_CRUMBLES
     }
 
-    override fun getHurtSound(source: DamageSource?): SoundEvent? {
-        return SoundEvents.ENTITY_WITHER_SKELETON_HURT
+    override fun getHurtSound(source: DamageSource?): SoundEvent {
+        return RegisterSound.ELEMENTAL_HURT
     }
 
-    override fun getDeathSound(): SoundEvent? {
-        return SoundEvents.ENTITY_WITHER_SKELETON_DEATH
+    override fun getDeathSound(): SoundEvent {
+        return RegisterSound.ELEMENTAL_DEATH
     }
 
     override fun playStepSound(pos: BlockPos?, state: BlockState?) {

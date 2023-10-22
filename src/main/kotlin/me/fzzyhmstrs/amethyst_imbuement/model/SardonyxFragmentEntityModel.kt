@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxFragmentEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel

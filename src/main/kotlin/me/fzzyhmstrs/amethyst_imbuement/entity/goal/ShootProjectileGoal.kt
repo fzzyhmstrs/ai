@@ -17,7 +17,8 @@ open class ShootProjectileGoal (
     protected val ownerGetter: Supplier<LivingEntity>,
     protected val activeConsumer: Consumer<Boolean>,
     protected val meleeCooldown: Int = 20,
-    protected val fireballCharge: Int = 60) : Goal() {
+    protected val fireballCharge: Int = 60,
+    protected val meleeRange: Double = 4.0) : Goal() {
     private var fireballsFired = 0
     private var fireballCooldown = 0
     private var targetNotVisibleTicks = 0
@@ -47,7 +48,7 @@ open class ShootProjectileGoal (
         val bl = mobEntity.visibilityCache.canSee(livingEntity)
         targetNotVisibleTicks = if (bl) 0 else ++targetNotVisibleTicks
         val d = mobEntity.squaredDistanceTo(livingEntity)
-        if (d < 4.0) {
+        if (d < meleeRange) {
             if (!bl) {
                 return
             }

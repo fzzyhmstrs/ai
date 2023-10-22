@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxElementalEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.entity.feature.EnergySwirlOverlayFeatureRenderer

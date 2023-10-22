@@ -6,6 +6,8 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.ManaPotionEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.*
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
@@ -182,7 +184,7 @@ object RegisterEntity {
                 entityType,
                 world
             )
-        }.dimensions(EntityDimensions.fixed(1.95f, 2.95f)).trackRangeChunks(10).build()
+        }.dimensions(EntityDimensions.fixed(1.95f, 2.65f)).trackRangeChunks(10).build()
     )
 
     /// Projectiles /////////////////////////////////////

@@ -1005,6 +1005,11 @@
 	"subtitles.amethyst_imbuement.solar_flare_charge": "Solar flare charging",
 	"subtitles.amethyst_imbuement.solar_flare_fire": "Solar flare flares",
 	"subtitles.amethyst_imbuement.energy_blade": "Energy blade launched",
+	"subtitles.amethyst_imbuement.stomp": "Elemental stomps",
+	"subtitles.amethyst_imbuement.elemental_rumble": "Elemental rumbles",
+	"subtitles.amethyst_imbuement.elemental_death": "Elemental dies",
+	"subtitles.amethyst_imbuement.elemental_hurt": "Elemental hurts",
+	"subtitles.amethyst_imbuement.fragment_crumbles": "Fragment crumbles",
 	
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",

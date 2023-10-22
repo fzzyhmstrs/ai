@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.util.math.MathHelper
@@ -73,7 +73,7 @@ class SardonyxElementalEntityModel(private val root: ModelPart) : SinglePartEnti
                 val head = modelPartData.addChild(
                     "head",
                     ModelPartBuilder.create().uv(0, 11).cuboid(-4.0f, -9.0f, -5.5f, 8.0f, 7.0f, 8.0f, dilation),
-                    ModelTransform.pivot(0.0f, -4.0f, -4.0f)
+                    ModelTransform.pivot(0.0f, -11.0f, -4.0f)
                 )
                     head.addChild(
                         "jaw",
@@ -83,23 +83,23 @@ class SardonyxElementalEntityModel(private val root: ModelPart) : SinglePartEnti
                 modelPartData.addChild(
                     "rightArm",
                     ModelPartBuilder.create().uv(20, 99).cuboid(-16.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, dilation),
-                    ModelTransform.pivot(0.0f, -3.0f, 0.0f)
+                    ModelTransform.pivot(0.0f, -10.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "leftArm",
                     ModelPartBuilder.create().uv(0, 99).cuboid(12.0f, 2.5f, -3.0f, 4.0f, 23.0f, 6.0f, dilation),
-                    ModelTransform.pivot(0.0f, -3.0f, 0.0f)
+                    ModelTransform.pivot(0.0f, -10.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "rightLeg",
                     ModelPartBuilder.create().uv(32, -1).cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, dilation),
-                    ModelTransform.pivot(-4.0f, 18.0f, 0.0f)
+                    ModelTransform.pivot(-4.0f, 11.0f, 0.0f)
                 )
                 modelPartData.addChild(
                     "leftLeg",
                     ModelPartBuilder.create().uv(56, -1).mirrored()
                         .cuboid(-3.5f, -3.0f, -3.0f, 6.0f, 16.0f, 6.0f, dilation).mirrored(false),
-                    ModelTransform.pivot(5.0f, 18.0f, 0.0f)
+                    ModelTransform.pivot(5.0f, 11.0f, 0.0f)
                 )
                 return TexturedModelData.of(modelData, 128, 128)
             }

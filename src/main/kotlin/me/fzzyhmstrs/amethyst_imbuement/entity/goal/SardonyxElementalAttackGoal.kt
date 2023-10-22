@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxElementalEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.BoneShardEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.util.math.Vec3d
@@ -14,7 +14,7 @@ class SardonyxElementalAttackGoal(
     sardonyxElementalEntity: SardonyxElementalEntity,
     ownerGetter: Supplier<LivingEntity>,
     activeConsumer: Consumer<Boolean>
-) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20) {
+) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 5.0) {
 
     override fun canStart(): Boolean {
         val livingEntity = mobEntity.target

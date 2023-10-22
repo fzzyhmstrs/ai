@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.entity.living.SardonyxFragmentEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxFragmentEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory

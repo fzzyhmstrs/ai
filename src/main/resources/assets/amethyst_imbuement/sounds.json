@@ -63,6 +63,40 @@
     "sounds": [
       "amethyst_imbuement:energy_blade"
     ]
+  },
+  "stomp": {
+    "subtitle": "subtitles.amethyst_imbuement.stomp",
+    "sounds": [
+      "amethyst_imbuement:stomp_1",
+      "amethyst_imbuement:stomp_2"
+    ]
+  },
+  "elemental_rumble": {
+    "subtitle": "subtitles.amethyst_imbuement.elemental_rumble",
+    "sounds": [
+      "amethyst_imbuement:elemental_rumble",
+      "amethyst_imbuement:fragment_crumbles"
+    ]
+  },
+  "elemental_death": {
+    "subtitle": "subtitles.amethyst_imbuement.elemental_death",
+    "sounds": [
+      "amethyst_imbuement:elemental_death"
+    ]
+  },
+  "elemental_hurt": {
+    "subtitle": "subtitles.amethyst_imbuement.elemental_hurt",
+    "sounds": [
+      "amethyst_imbuement:elemental_hurt_1",
+      "amethyst_imbuement:elemental_hurt_2",
+      "amethyst_imbuement:elemental_hurt_3"
+    ]
+  },
+  "fragment_crumbles": {
+    "subtitle": "subtitles.amethyst_imbuement.fragment_crumbles",
+    "sounds": [
+      "amethyst_imbuement:fragment_crumbles"
+    ]
   }
 }
 
