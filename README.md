@@ -16,25 +16,9 @@ Channel mana through scepters to unleash devastation upon your enemies, bolster 
 
 | Task                                                                         | Status      |
 |------------------------------------------------------------------------------|-------------|
-| NOT STARTED                                                                  | 13          |
-| Check on Spellcasters Focus not giving the Special Modifier                  | Not started |
-| Add sounds for Ice Shard and HailStorm                                       | Not started |
-| check on bulwark and maybe make it an augment                                | Not started |
-| Update AC with fzzy-config                                                   | Not started |
-| Impl combination modification into augment configs                           | Not started |
-| Implement new missile entity                                                 | Not started |
-| implement new base spells                                                    | Not started |
-| Add spell splicing system                                                    | Not started |
-| re-impl all spells with new system                                           | Not started |
-| overhaul lang with new combining system                                      | Not started |
-| Update Enchantment system in MC to account for paired enchants, where needed | Not started |
-| Add attribite modifier modification for summons                              | Not started |
-| Add on killed event? On completed?                                           | Not started |
-| Add reroll functionality into the imbuing table                              | Not started |
-| IN PROGRESS                                                                  | 3           |
+| NOT STARTED                                                                  | 0           |
+| IN PROGRESS                                                                  | 1           |
 | Test devout cleric                                                           | In progress |
-| Update AC systems to account for paired enchants                             | In progress |
-| Overhaul augment datapoint system to simplify and fzzy-config-ify            | In progress |
 | DOCUMENTATION TODO                                                           | 4           |
 | Polish up wiki                                                               | Doc Todo    |
 | Correct updated scepter durabilities in Wiki                                 | Doc Todo    |
