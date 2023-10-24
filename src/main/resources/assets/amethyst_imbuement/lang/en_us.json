@@ -805,6 +805,9 @@
 
 	"enchantment.amethyst_imbuement.resonate": "Resonate",
 	"enchantment.amethyst_imbuement.resonate.desc": "Fires sonic pulses at nearby enemies, dealing increasing damage with each hit.",
+	
+	"enchantment.amethyst_imbuement.revivify": "Revivify",
+	"enchantment.amethyst_imbuement.revivify.desc": "Regenerates, Heals, Cleanses, and grants Absorption to the target or caster.",
 
 	"enchantment.amethyst_imbuement.sanctuary": "Sanctuary",
 	"enchantment.amethyst_imbuement.sanctuary.desc": "Target or caster can't be damaged or affected by negative statuses. Dispels on attack or fury spell cast.",
