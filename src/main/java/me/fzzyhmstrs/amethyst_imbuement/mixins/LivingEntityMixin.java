@@ -146,6 +146,13 @@ public abstract class LivingEntityMixin extends Entity {
             this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 0.4f, 0.9f + this.getWorld().random.nextFloat() * 0.4f);
             cir.setReturnValue(false);
         }*/
+        Entity attacker = source.getAttacker();
+        if (attacker instanceof LivingEntity livingEntity){
+            if (livingEntity.hasStatusEffect(RegisterStatus.INSTANCE.getSANCTUARY())){
+                livingEntity.removeStatusEffect(RegisterStatus.INSTANCE.getSANCTUARY());
+                livingEntity.removeStatusEffect(RegisterStatus.INSTANCE.getIMMUNITY());
+            }
+        }
         damageSource = source;
     }
 

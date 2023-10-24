@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.monster
 
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
@@ -29,7 +30,7 @@ class FragmentAid {
     }
 
     private fun findSpawnPos(world: World, startPos: BlockPos, radius: Int, heightNeeded: Int, blockNeeded: Block = Blocks.AIR, tries: Int = 8): BlockPos{
-        for (i in 1..tries){
+        for (i in 1..AiConfig.entities.sardonyxElemental.fragmentsSpawned.get()){
             val xPos = startPos.x + world.random.nextBetween(-radius,radius)
             val yPos = startPos.up().y
             val zPos = startPos.z + world.random.nextBetween(-radius,radius)

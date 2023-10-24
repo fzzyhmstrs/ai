@@ -78,7 +78,7 @@ object RegisterStatus {
 
     fun registerAll(){
         AfterSpellEvent.EVENT.register{ _: World, user: LivingEntity, _: ItemStack, spell: ScepterAugment ->
-            if (user.hasStatusEffect(SANCTUARY) && AugmentHelper.getAugmentType(spell) == SpellType.FURY){
+            if (user.hasStatusEffect(SANCTUARY) && (AugmentHelper.getAugmentType(spell) == SpellType.FURY || AugmentHelper.getAugmentType(spell) == SpellType.NULL)){
                 user.removeStatusEffect(SANCTUARY)
                 user.removeStatusEffect(IMMUNITY)
             }

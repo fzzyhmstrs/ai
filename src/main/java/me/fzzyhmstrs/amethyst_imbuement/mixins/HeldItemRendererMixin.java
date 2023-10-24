@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.mixins;
 
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool;
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;
@@ -19,17 +19,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HeldItemRendererMixin {
 
     @Unique
-    private boolean isSniper = false;
+    private Item sniper = null;
 
     @Inject(method = "renderFirstPersonItem", at = @At(value = "HEAD"), require = 0)
     private void amethyst_imbuement_checkStackForSniper(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
-        isSniper = item.isOf(RegisterTool.INSTANCE.getSNIPER_BOW());
+        sniper = item.isIn(RegisterTag.INSTANCE.getCROSSBOWS_TAG()) ? item.getItem() : null;
     }
 
     @ModifyArg(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.isOf (Lnet/minecraft/item/Item;)Z",ordinal = 1), require = 0)
     private Item amethyst_imbuement_updateIfCheckSniper(Item chkItem){
-        if (isSniper){
-            return RegisterTool.INSTANCE.getSNIPER_BOW();
+        if (sniper != null){
+            return sniper;
         } else {
             return chkItem;
         }

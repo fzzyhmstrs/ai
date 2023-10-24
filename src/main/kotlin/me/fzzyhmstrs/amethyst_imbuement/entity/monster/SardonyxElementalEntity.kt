@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.SardonyxElementalPriorityTar
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterNetworking
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.block.BlockState
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner
 import net.minecraft.entity.Entity
@@ -15,6 +16,8 @@ import net.minecraft.entity.Tameable
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.boss.BossBar
+import net.minecraft.entity.boss.ServerBossBar
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -28,8 +31,10 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.registry.tag.DamageTypeTags
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
+import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -77,24 +82,38 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         dataTracker.startTracking(FIRING_PROJECTILES,false)
     }
 
+    override fun getNextAirUnderwater(air: Int): Int {
+        return air
+    }
+
     protected var attackTicksLeft = 0
     protected var quartersReached = 0
     internal var lastDamageTracker = LastDamageTracker()
     internal var spellCooldown = 60
     private var lastSpellWasBuff = false
+    private val bossBar = ServerBossBar(displayName,BossBar.Color.RED,BossBar.Style.NOTCHED_12)
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        setCharging(nbt.getBoolean("charging"))
+        quartersReached = nbt.getInt("quartersReached")
         setFiringProjectiles(nbt.getBoolean("firingProjectiles"))
         nbt.put("lastDamageTracker", lastDamageTracker.toNbt())
+        if (hasCustomName()) {
+            bossBar.name = this.displayName
+        }
+
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putBoolean("charging", getCharging())
         nbt.putBoolean("firingProjectiles", getFiringProjectiles())
+        nbt.putInt("quartersReached", quartersReached)
         lastDamageTracker = LastDamageTracker.fromNbt(nbt.getCompound("lastDamageTracker"))
+    }
+
+    override fun setCustomName(name: Text?) {
+        super.setCustomName(name)
+        bossBar.name = this.displayName
     }
 
     override fun tickMovement() {
@@ -116,6 +135,24 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         if (attackTicksLeft > 0) {
             --attackTicksLeft
         }
+    }
+
+    override fun mobTick() {
+        super.mobTick()
+        if (EventRegistry.ticker_20.isReady()){
+            this.heal(AiConfig.entities.sardonyxElemental.amountHealedPerSecond.get())
+        }
+        bossBar.percent = this.health / this.maxHealth
+    }
+
+    override fun onStartedTrackingBy(player: ServerPlayerEntity?) {
+        super.onStartedTrackingBy(player)
+        bossBar.addPlayer(player)
+    }
+
+    override fun onStoppedTrackingBy(player: ServerPlayerEntity?) {
+        super.onStoppedTrackingBy(player)
+        bossBar.removePlayer(player)
     }
 
     override fun handleStatus(status: Byte) {
@@ -172,7 +209,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                     if (quartersReached <= 2) {
                         val target = this.target
                         if (target != null) {
-                            val rot = Vec3d(target.x - this.x,target.getBodyY(0.5) - target.getBodyY(0.5),target.z - target.z).normalize()
+                            val rot = Vec3d(target.x - this.x,target.getBodyY(0.5) - this.getBodyY(0.5),target.z - this.z).normalize()
                             DevastationBeam.INSTANCE.fire(world as ServerWorld,this,this.pos.add(0.0,this.height/2.0,0.0),rot)
                         }
                     } else {
@@ -192,21 +229,26 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     }
 
     override fun tryAttack(target: Entity?): Boolean {
-        if (spellCooldown <= 0 && !world.isClient && lastSpellWasBuff){
-            val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(3.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable}) .map { it as LivingEntity }
-            spellCooldown = if (lastDamageTracker.getNumberOfAttackers() < 3 && nearbyPossibleAttackers.size < 4){
-                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
-            } else {
-                for (entity in nearbyPossibleAttackers){
-                    RegisterNetworking.sendPlayerKnockback(this.pos.subtract(entity.pos).normalize(),2.5)
+            attackTicksLeft = 10
+            world.sendEntityStatus(this, 4.toByte())
+            if (spellCooldown <= 0 && !world.isClient && lastSpellWasBuff){
+                val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(3.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable}) .map { it as LivingEntity }
+                spellCooldown = if (lastDamageTracker.getNumberOfAttackers() < 3 && nearbyPossibleAttackers.size < 4){
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                    AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
+                } else {
+                    for (entity in nearbyPossibleAttackers){
+                        if (entity is ServerPlayerEntity)
+                            RegisterNetworking.sendPlayerKnockback(entity,this.pos.subtract(entity.pos).normalize(),2.5)
+                        else
+                            entity.takeKnockback(2.5,this.x - entity.x, this.z - entity.z)
+                    }
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                    AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
                 }
-                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
+                lastSpellWasBuff = false
             }
-            lastSpellWasBuff = false
-        }
         return super.tryAttack(target)
     }
 

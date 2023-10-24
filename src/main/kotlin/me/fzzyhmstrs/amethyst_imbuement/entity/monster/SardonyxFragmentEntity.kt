@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.monster
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
@@ -36,6 +37,8 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
         protected val ENRAGED: TrackedData<Boolean> = DataTracker.registerData(SardonyxFragmentEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         protected val DAMAGE_UUID = UUID.fromString("71c5ccf4-2d8a-11ee-be56-0242ac120002")
         protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
+        protected val ARMOR_UUID = UUID.fromString("f6a24268-70dd-11ee-b962-0242ac120002")
+
 
         fun createFragmentAttributes(): DefaultAttributeContainer.Builder {
             return createHostileAttributes()
@@ -51,14 +54,19 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
 
     private val damageModifier = EntityAttributeModifier(
         DAMAGE_UUID,
-        "Cholem Damage Bonus",
-        AiConfig.entities.sardonyxFragment.enragedDamage.get().toDouble(),
+        "Sardonyx Damage Bonus",
+        AiConfig.entities.sardonyxFragment.enragedDamage.get(),
         EntityAttributeModifier.Operation.ADDITION)
     private val speedModifier = EntityAttributeModifier(
         SPEED_UUID,
-        "Cholem Speed Bonus",
+        "Sardonyx Speed Bonus",
         0.25,
         EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+    private val armorModifier = EntityAttributeModifier(
+        ARMOR_UUID,
+        "Sardonyx Armor Bonus",
+        6.0,
+        EntityAttributeModifier.Operation.ADDITION)
 
     protected var attackTicksLeft = 0
 
@@ -71,15 +79,20 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
     protected fun initCustomGoals() {
         goalSelector.add(2, MeleeAttackGoal(this, 1.0, false))
         goalSelector.add(7, WanderAroundFarGoal(this, 1.0))
-        targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)))
+        targetSelector.add(1, RevengeGoal(this, SardonyxElementalEntity::class.java))
         targetSelector.add(2, ActiveTargetGoal(this as MobEntity, PlayerEntity::class.java, true))
         targetSelector.add(3, ActiveTargetGoal(this as MobEntity, MerchantEntity::class.java, false))
-        targetSelector.add(3, ActiveTargetGoal(this as MobEntity, IronGolemEntity::class.java, true))
+        targetSelector.add(4, ActiveTargetGoal(this as MobEntity, PlayerCreatedConstructEntity::class.java, true))
+        targetSelector.add(5, ActiveTargetGoal(this as MobEntity, IronGolemEntity::class.java, true))
     }
 
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(ENRAGED,false)
+    }
+
+    override fun getNextAirUnderwater(air: Int): Int {
+        return air
     }
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
@@ -148,6 +161,7 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
             if (bl && !getEnraged()) {
                 this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(damageModifier)
                 this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.addPersistentModifier(speedModifier)
+                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.addPersistentModifier(armorModifier)
                 val entityWorld = world
                 if (entityWorld is ServerWorld){
                     entityWorld.spawnParticles(ParticleTypes.ANGRY_VILLAGER,this.x,this.eyeY,this.z,15,.25,.25,.25,0.2)
@@ -156,6 +170,7 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
             } else if (!bl && getEnraged()) {
                 this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.removeModifier(damageModifier)
                 this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.removeModifier(speedModifier)
+                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.removeModifier(armorModifier)
             }
         }
         dataTracker.set(ENRAGED, bl)
@@ -164,8 +179,8 @@ class SardonyxFragmentEntity(entityType: EntityType<out HostileEntity>?, world: 
     override fun remove(reason: RemovalReason) {
         if (reason == RemovalReason.KILLED) {
             val box = Box(pos.x + 16.0, pos.y + 16.0, pos.z + 16.0, pos.x - 16.0, pos.y - 16.0, pos.z - 16.0)
-            for (cholem in world.getOtherEntities(this, box) { it is SardonyxFragmentEntity }.stream().map { it as SardonyxFragmentEntity }) {
-                cholem.setEnraged(true, false)
+            for (sardonyxFragmentEntity in world.getOtherEntities(this, box) { it is SardonyxFragmentEntity }.stream().map { it as SardonyxFragmentEntity }) {
+                sardonyxFragmentEntity.setEnraged(true, false)
             }
         }
         super.remove(reason)

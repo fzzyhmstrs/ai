@@ -24,11 +24,12 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         if (player.isCreative) return super.onBreak(world, pos, state, player)
-        val placePos = findSpawnPos(world,pos,8,3, tries = 100)
+        val placePos = findSpawnPos(world,pos,6,3, tries = 100)
         if (placePos == BlockPos.ORIGIN) {
             val explosionPos = pos.toCenterPos()
             world.createExplosion(null,explosionPos.x,explosionPos.y,explosionPos.z,15f,World.ExplosionSourceType.TNT)
         } else {
+
             val sge = RegisterEntity.SARDONYX_ELEMENTAL.create(world)
             if (sge == null){
                 val explosionPos = pos.toCenterPos()
@@ -36,6 +37,7 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
                 return
             }
             sge.refreshPositionAndAngles(placePos,0f,0f)
+            world.spawnEntity(sge)
         }
         super.onBreak(world, pos, state, player)
     }

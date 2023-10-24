@@ -32,7 +32,7 @@ import org.joml.Vector3f
 class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(15f)
+                                                .withDamage(14.75f,0.25f)
                                                 .withRange(14.0,2.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
@@ -120,7 +120,7 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
                     val mod = SpChecker.getModFromTags(data.user,RegisterTag.ARCANE_AUGMENTS, RegisterTag.FIRE_AUGMENTS)
                     val dmg = data.effect.damage(data.level) * (1f + mod.toFloat()/100f)
                     entityList.forEach {
-                        it.damage(CustomDamageSources.lightningBolt(data.world, null, data.user), dmg)
+                        it.damage(CustomDamageSources.lightningBolt(data.world, null, data.user), if (it is LivingEntity && (it.maxHealth > 50f || it.isUndead)) dmg*2f else dmg)
                         if (it is MobEntity && it.isUndead)
                             it.setOnFireFor(10)
                         if (it is LivingEntity)

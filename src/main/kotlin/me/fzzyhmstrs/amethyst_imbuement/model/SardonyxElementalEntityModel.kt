@@ -41,6 +41,9 @@ class SardonyxElementalEntityModel(private val root: ModelPart) : SinglePartEnti
         if (i > 0) {
             rightArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)
             leftArm.pitch = -2.0f + 1.5f * MathHelper.wrap(i.toFloat() - h, 10.0f)
+        } else {
+            rightArm.pitch = (-0.2f + 1.5f * MathHelper.wrap(f, 13.0f)) * g
+            leftArm.pitch = (-0.2f - 1.5f * MathHelper.wrap(f, 13.0f)) * g
         }
     }
 

@@ -53,20 +53,23 @@ open class ShootProjectileGoal (
                 return
             }
             if (fireballCooldown <= 0) {
+                println("melee attack at: $d")
                 fireballCooldown = meleeCooldown
                 mobEntity.tryAttack(livingEntity)
             }
             moveTo(livingEntity)
         } else if (d < followRange * followRange && bl) {
-
             if (fireballCooldown <= 0) {
                 ++fireballsFired
                 if (fireballsFired == 1) {
+                    println("range charge at: $d")
                     fireballCooldown = fireballCharge
                     activeConsumer.accept(true)
                 } else if (fireballsFired <= 4) {
+                    println("range fire at: $d")
                     fireballCooldown = 6
                 } else {
+                    println("range cooldown at: $d")
                     fireballCooldown = 100
                     fireballsFired = 0
                     activeConsumer.accept(false)
@@ -91,7 +94,7 @@ open class ShootProjectileGoal (
         mobEntity.moveControl.moveTo(livingEntity.x, livingEntity.y, livingEntity.z, 1.0)
     }
 
-    protected open fun shootProjectile(d: Double, livingEntity: LivingEntity){
+    protected open fun shootProjectile(d: Double, livingEntity: LivingEntity) {
         val h = (sqrt(sqrt(d)) * 0.5f).toFloat()
         if (!mobEntity.isSilent) {
             mobEntity.world.syncWorldEvent(null, WorldEvents.BLAZE_SHOOTS, mobEntity.blockPos, 0)

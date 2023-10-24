@@ -19,6 +19,7 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.Tameable
+import net.minecraft.entity.mob.Monster
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.resource.ResourceManager
@@ -388,6 +389,8 @@ object AiConfig
 
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
+            if (user is Monster)
+                return entity is Monster
             if (user == null) return false
             if (entity === user) return true
             if ((entity as? Tameable)?.owner == user) return true
@@ -470,10 +473,13 @@ object AiConfig
         var sardonyxElemental = SardonyxElemental()
         class SardonyxElemental: ConfigSection(Header.Builder().space().add("readme.entities.sardonyx_elemental_1").build()){
             var baseHealth = ValidatedDouble(512.0,1024.0,1.0)
-            var baseArmor = ValidatedDouble(12.0,30.0,1.0)
-            var baseDamage = ValidatedDouble(18.0,180.0,0.0)
-            var devastationBeamDmg = ValidatedFloat(250f,Float.MAX_VALUE,0f)
+            var baseArmor = ValidatedDouble(14.0,50.0,1.0)
+            var baseDamage = ValidatedDouble(28.0,280.0,0.0)
+            var projectileDamage = ValidatedFloat(20f,200f,0f)
+            var fragmentsSpawned = ValidatedInt(3,25,1)
+            var devastationBeamDmg = ValidatedFloat(350f,Float.MAX_VALUE,0f)
             var spellActivationCooldown = ValidatedInt(600,6000,100)
+            var amountHealedPerSecond = ValidatedFloat(0.2f,5f, 0f)
         }
 
         override fun generateNewClass(): Entities {
@@ -486,7 +492,7 @@ object AiConfig
     class Resources: ConfigClass(resourcesHeader), OldClass<Resources>{
 
         fun isEnabled(id: String): Boolean{
-            return !disabledResources.contains(id)
+            return !disabledResources.contains(id).also { println("Resource $id is enabled: $it") }
         }
 
         var disabledResources: ValidatedStringList = ValidatedStringList(listOf("optional/iridescent_scepter_imbuing","optional/lustrous_scepter_imbuing"))

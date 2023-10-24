@@ -75,7 +75,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
-        if(super.getActiveItem().isOf(RegisterTool.INSTANCE.getSNIPER_BOW())){
+        if(super.getActiveItem().isIn(RegisterTag.INSTANCE.getCROSSBOWS_TAG())){
             if (CrossbowItem.isCharged(super.getActiveItem())) {
                 if (EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getILLUMINATING(),super.getActiveItem()) > 0){
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,260));

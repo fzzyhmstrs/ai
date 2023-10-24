@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.monster
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -56,13 +55,13 @@ class DevastationBeam: PersistentEffectHelper.PersistentEffect {
                     rotation,
                     perpendicularVector,
                     16.0,
-                    2.0,
-                    2.0)
+                    3.0,
+                    3.0)
             if (entityList.isNotEmpty()) {
                 val dmg = AiConfig.entities.sardonyxElemental.devastationBeamDmg.get()
                 for (it in entityList) {
                     if (it is SardonyxElementalEntity || it is SardonyxFragmentEntity) continue
-                    it.damage(CustomDamageSources.lightningBolt(data.world, null, data.caster), dmg)
+                    it.damage(data.caster.damageSources.indirectMagic( data.caster, data.caster), dmg)
                     if (it is LivingEntity)
                         it.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 600,3))
                 }

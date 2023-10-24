@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.entity.BaseShardEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityType
@@ -34,7 +33,6 @@ open class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: 
         //this.setRotation(yaw, owner.pitch)
     }
 
-    override var entityEffects: AugmentEffect = super.entityEffects.withDuration(180)
     private var onEntityHit: Consumer<LivingEntity> = Consumer { }
     private var onBlockHit: Consumer<BlockHitResult> = Consumer {  }
 
@@ -44,11 +42,6 @@ open class BoneShardEntity(entityType: EntityType<out BoneShardEntity?>, world: 
 
     fun setOnBlockHit(consumer: Consumer<BlockHitResult>){
         this.onBlockHit = consumer
-    }
-
-    override fun passEffects(ae: AugmentEffect, level: Int) {
-        super<BaseShardEntity>.passEffects(ae, level)
-        entityEffects.setDuration(ae.duration(level))
     }
 
     override fun onEntityHitSideEffects(entity: LivingEntity) {

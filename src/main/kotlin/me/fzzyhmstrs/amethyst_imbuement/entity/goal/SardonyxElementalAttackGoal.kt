@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
+import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.BoneShardEntity
 import net.minecraft.entity.LivingEntity
@@ -14,7 +16,9 @@ class SardonyxElementalAttackGoal(
     sardonyxElementalEntity: SardonyxElementalEntity,
     ownerGetter: Supplier<LivingEntity>,
     activeConsumer: Consumer<Boolean>
-) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 5.0) {
+) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 6.0) {
+
+    private val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get())
 
     override fun canStart(): Boolean {
         val livingEntity = mobEntity.target
@@ -55,6 +59,7 @@ class SardonyxElementalAttackGoal(
                 World.ExplosionSourceType.NONE
             )
         }
+        bse.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse)
         val bse2 = BoneShardEntity(mobEntity.world,owner,4.0f,2.25f*h,pos,rot)
         bse2.setOnBlockHit { bhr ->
@@ -77,6 +82,7 @@ class SardonyxElementalAttackGoal(
                 World.ExplosionSourceType.NONE
             )
         }
+        bse.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse2)
         val bse3 = BoneShardEntity(mobEntity.world,owner,4.0f,2.25f*h,pos,rot)
         bse3.setOnBlockHit { bhr ->
@@ -99,6 +105,7 @@ class SardonyxElementalAttackGoal(
                 World.ExplosionSourceType.NONE
             )
         }
+        bse.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse3)
     }
 
