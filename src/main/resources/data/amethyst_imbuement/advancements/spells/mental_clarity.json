@@ -1,0 +1,11 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"criteria":{
+	"cast_mental_clarity":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_imbuement:mental_clarity"
+		}
+	}
+}
+}
