@@ -12,7 +12,6 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Monster
@@ -38,6 +37,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
 
     companion object{
 
+        private val MEADOW_COMPAT_GOD_DAMN_EFFING_DAMN_GOD_DAMNIT = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         private val FUSE_SPEED = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         private val IGNITED = DataTracker.registerData(BoomChickenEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 

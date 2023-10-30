@@ -492,7 +492,7 @@ object AiConfig
     class Resources: ConfigClass(resourcesHeader), OldClass<Resources>{
 
         fun isEnabled(id: String): Boolean{
-            return !disabledResources.contains(id).also { println("Resource $id is enabled: $it") }
+            return !disabledResources.contains(id)
         }
 
         var disabledResources: ValidatedStringList = ValidatedStringList(listOf("optional/iridescent_scepter_imbuing","optional/lustrous_scepter_imbuing"))
