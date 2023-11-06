@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.loot
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.mixins.BuilderAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
@@ -10,6 +11,7 @@ import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.condition.RandomChanceLootCondition
+import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
@@ -35,14 +37,21 @@ object UniqueLoot: AbstractModLoot() {
                 .with(ItemEntry.builder(RegisterScepter.A_SCEPTER_SO_FOWL).weight(1))
             table.pool(poolBuilder)
             return true
-        } else if (id.path.contains("chests") || id.path.contains("chest")) {
+        } else if ((table as BuilderAccessor).type == LootContextTypes.CHEST) {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .conditionally(RandomChanceLootCondition.builder(AiConfig.items.scepters.fzzyChestChance.get()))
                 .with(ItemEntry.builder(RegisterTool.FZZYHAMMER).weight(1))
             table.pool(poolBuilder)
             return true
-        }
+        }/*else if (id.path.startsWith("chests") || id.path.startsWith("chest")) {
+            val poolBuilder = LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1.0F))
+                .conditionally(RandomChanceLootCondition.builder(AiConfig.items.scepters.fzzyChestChance.get()))
+                .with(ItemEntry.builder(RegisterTool.FZZYHAMMER).weight(1))
+            table.pool(poolBuilder)
+            return true
+        }*/
 
         return false
     }

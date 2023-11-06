@@ -8,6 +8,7 @@
     "AxolotlEntityMixin",
     "BlockMixin",
     "BucketItemMixin",
+    "BuilderAccessor",
     "CarvedPumpkinBlockMixin",
     "CowEntityMixin",
     "CreeperEntityMixin",
