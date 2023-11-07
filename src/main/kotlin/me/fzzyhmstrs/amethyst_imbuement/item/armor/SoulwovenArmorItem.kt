@@ -19,17 +19,11 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
     private val attributeModifiers: Multimap<EntityAttribute, EntityAttributeModifier> by lazy {
         val map: ArrayListMultimap<EntityAttribute, EntityAttributeModifier> = ArrayListMultimap.create()
         map.putAll(super.getAttributeModifiers(type.equipmentSlot))
-        if (SpChecker.spellPowerLoaded) {
-            val attribute = Registries.ATTRIBUTE.get(Identifier("spell_power","soul"))
-            if (attribute != null) {
-                val uUID = when(type) {
-                    Type.BOOTS -> UUID.fromString("6959f0e8-7d8c-11ee-b962-0242ac120002")
-                    Type.LEGGINGS -> UUID.fromString("6959f3ea-7d8c-11ee-b962-0242ac120002")
-                    Type.CHESTPLATE -> UUID.fromString("6959f53e-7d8c-11ee-b962-0242ac120002")
-                    Type.HELMET -> UUID.fromString("6959fab6-7d8c-11ee-b962-0242ac120002")
-                }
-                map.put(attribute, EntityAttributeModifier(uUID,"soul_power", 2.0, EntityAttributeModifier.Operation.ADDITION))
-            }
+        when(type) {
+            Type.BOOTS -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f0e8-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.LEGGINGS -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f3ea-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.CHESTPLATE -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f53e-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.HELMET -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959fab6-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
         }
         map
     }
