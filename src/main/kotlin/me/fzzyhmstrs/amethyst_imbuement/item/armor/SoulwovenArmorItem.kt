@@ -39,21 +39,4 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
             return mutableListOf(RegisterModifier.ensouledModifiers.random().modifierId)
         return super.defaultModifiers(type)
     }
-
-    companion object{
-        init{
-            /*ModifyModifiersEvent.EVENT.register{ _, user, scepterStack, modifiers ->
-                val activeEnchant = Identifier(scepterStack.nbt?.getString(NbtKeys.ACTIVE_ENCHANT.str()) ?: "blank_spell")
-                var mods = modifiers
-                for (stack in user.armorItems) {
-                    if (stack.item is SoulwovenArmorItem) {
-                        ModifierHelper.gatherActiveModifiers(stack, activeEnchant)
-                        val focusMods = ModifierHelper.getActiveModifiers(stack)
-                        mods = mods.combineWith(focusMods, AugmentModifier())
-                    }
-                }
-                mods
-            }*/
-        }
-    }
 }
