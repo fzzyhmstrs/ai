@@ -11,7 +11,7 @@ import net.minecraft.item.ArmorMaterial
 import net.minecraft.util.Util
 import java.util.*
 
-class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings) {
+class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), ManaItem {
 
     private val attributeModifiers: Multimap<EntityAttribute, EntityAttributeModifier> by lazy {
         val map: ArrayListMultimap<EntityAttribute, EntityAttributeModifier> = ArrayListMultimap.create()
@@ -38,6 +38,18 @@ class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Setting
                 return this.attributeModifiers
         }
         return super.getAttributeModifiers(slot)
+    }
+
+    override fun getRepairTime(): Int {
+        return 600
+    }
+
+    override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
+        if (world.isClient) return
+        //slowly heal damage over time
+        if (world.time % getRepairTime().toLong() == 0L){
+            healDamage(1,stack)
+        }
     }
 
 }
