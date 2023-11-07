@@ -34,8 +34,6 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
         }
         map
     }
-
-    private 
     
     private val flavorText: MutableText by lazy{
         FlavorHelper.makeFlavorText(this)
