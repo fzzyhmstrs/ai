@@ -20,10 +20,10 @@ class SoulwovenArmorItem(material: ArmorMaterial, type: Type, settings: Settings
         val map: ArrayListMultimap<EntityAttribute, EntityAttributeModifier> = ArrayListMultimap.create()
         map.putAll(super.getAttributeModifiers(type.equipmentSlot))
         when(type) {
-            Type.BOOTS -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f0e8-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
-            Type.LEGGINGS -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f3ea-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
-            Type.CHESTPLATE -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959f53e-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
-            Type.HELMET -> SpChecker.addSpellPowerAttribute("spell_power:soul","6959fab6-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.BOOTS -> SpChecker.addSpellPowerAttribute(SpChecker.Power.SOUL,"6959f0e8-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.LEGGINGS -> SpChecker.addSpellPowerAttribute(SpChecker.Power.SOUL,"6959f3ea-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.CHESTPLATE -> SpChecker.addSpellPowerAttribute(SpChecker.Power.SOUL,"6959f53e-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
+            Type.HELMET -> SpChecker.addSpellPowerAttribute(SpChecker.Power.SOUL,"6959fab6-7d8c-11ee-b962-0242ac120002",2.0, EntityAttributeModifier.Operation.ADDITION, map)
         }
         map
     }
