@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "amethyst_imbuement:block/witches_bookshelf_front",
+    "north": "amethyst_imbuement:block/witches_bookshelf_front",
+    "south": "amethyst_imbuement:block/witches_bookshelf_front",
+    "east": "amethyst_imbuement:block/witches_bookshelf_side",
+    "west": "amethyst_imbuement:block/witches_bookshelf_side",
+    "up": "minecraft:block/dark_oak_planks",
+    "down": "minecraft:block/dark_oak_planks"
+  }
+}

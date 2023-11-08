@@ -32,6 +32,7 @@ object RegisterBlock {
     val DISENCHANTING_TABLE = registerBoth(DisenchantingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "disenchanting_table")
     val ALTAR_OF_EXPERIENCE = registerBoth(AltarOfExperienceBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "altar_of_experience")
     val CRYSTAL_ALTAR = registerBoth(CrystalAltarBlock(FzzyBlockSettings.burn().mapColor(MapColor.OFF_WHITE).strength(2.5f).sounds(BlockSoundGroup.WOOD)), "crystal_altar")
+    val WITCHES_BOOKSHELF = registerBoth(WitchesBookshelfBlock(FzzyBlockSettings.burn().mapColor(MapColor.BROWN).strength(1.5f).sounds(BlockSoundGroup.WOOD)), "witches_bookshelf")
     val EXPERIENCE_BUSH = registerBlock(ExperienceBushBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.LICHEN_GREEN).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)), "experience_bush")
     val CRYSTALLINE_CORE_BLOCK = registerBoth(AmethystBlock(FzzyBlockSettings.basic().mapColor(MapColor.PURPLE).strength(4.0f).requiresTool()), "crystalline_core")
     val WARDING_CANDLE = registerBlock(WardingCandleBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.OFF_WHITE).strength(0.1f).sounds(BlockSoundGroup.CANDLE).luminance(WardingCandleBlock.STATE_TO_LUMINANCE)), "warding_candle")

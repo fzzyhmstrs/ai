@@ -3,15 +3,20 @@ package me.fzzyhmstrs.amethyst_imbuement.item.armor
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
+import net.minecraft.item.ItemStack
 import net.minecraft.util.Util
+import net.minecraft.world.World
 import java.util.*
 
-class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), ManaItem {
+class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings),
+    ManaItem {
 
     private val attributeModifiers: Multimap<EntityAttribute, EntityAttributeModifier> by lazy {
         val map: ArrayListMultimap<EntityAttribute, EntityAttributeModifier> = ArrayListMultimap.create()
@@ -47,7 +52,7 @@ class ShimmeringArmorItem(material: ArmorMaterial, type: Type, settings: Setting
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         if (world.isClient) return
         //slowly heal damage over time
-        if (world.time % getRepairTime().toLong() == 0L){
+        if (world.time % getRepairTime() == 0L){
             healDamage(1,stack)
         }
     }

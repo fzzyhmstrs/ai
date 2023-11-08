@@ -10,14 +10,26 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.block.pattern.BlockPatternBuilder
 import net.minecraft.block.pattern.CachedBlockPosition
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.predicate.block.BlockStatePredicate
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 import java.util.function.Predicate
 
 class CrystallineCoreBlock(settings: Settings): AmethystBlock( settings) {
+
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
+    }
 
     companion object{
         private var crystallineGolemPattern: BlockPattern? = null

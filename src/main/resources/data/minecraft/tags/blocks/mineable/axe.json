@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "amethyst_imbuement:gilded_lockbox"
+    "amethyst_imbuement:gilded_lockbox",
+    "amethyst_imbuement:crystal_altar",
+    "amethyst_imbuement:witches_bookshelf"
   ]
 }

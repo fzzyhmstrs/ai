@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.block
 
-import me.fzzyhmstrs.amethyst_imbuement.LOGGER
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
@@ -34,13 +33,12 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
     val inventory = ImbuingInventory(13, this)
     var inUse: Boolean = false
     var inUseUuid: UUID = UUID(0L,0L)
-    private val logger = LOGGER
 
     fun setInUse(uuid: UUID){
         if (!inUse){
             inUseUuid = uuid
             inUse = true
-            logger.info("block set as in-use by $uuid")
+            //logger.info("block set as in-use by $uuid")
         }
     }
 
@@ -48,7 +46,7 @@ class ImbuingTableBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(Reg
         if (uuid == inUseUuid){
             inUse = false
             inUseUuid = UUID(0L,0L)
-            logger.info("block cleared for future use by $uuid")
+            //logger.info("block cleared for future use by $uuid")
         }
     }
 

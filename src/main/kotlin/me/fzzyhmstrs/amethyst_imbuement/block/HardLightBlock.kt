@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.block
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
@@ -10,6 +11,7 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
+import net.minecraft.world.BlockView
 
 class HardLightBlock(settings: Settings): Block(settings) {
 
@@ -38,6 +40,16 @@ class HardLightBlock(settings: Settings): Block(settings) {
         if (state.isIn(RegisterTag.CRYSTALLIZED_LIGHTS_TAG) && !state.get(PERSISTENT)) {
             world.removeBlock(pos, false)
         }
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
     }
 
 

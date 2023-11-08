@@ -4,11 +4,14 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ExperienceDroppingBlock
 import net.minecraft.block.PillarBlock
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
 import net.minecraft.util.BlockRotation
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.intprovider.IntProvider
+import net.minecraft.world.BlockView
 
 class PillarExperienceDroppingBlock(settings: Settings, experience: IntProvider) : ExperienceDroppingBlock(settings, experience) {
 
@@ -31,4 +34,13 @@ class PillarExperienceDroppingBlock(settings: Settings, experience: IntProvider)
         return defaultState.with(PillarBlock.AXIS, ctx.side.axis) as BlockState
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
+    }
 }

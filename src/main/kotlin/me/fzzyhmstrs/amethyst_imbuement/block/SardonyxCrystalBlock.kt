@@ -6,12 +6,14 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.client.MinecraftClient
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.DustParticleEffect
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 class SardonyxCrystalBlock(settings:Settings):Block(settings) {
@@ -94,5 +96,15 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
         val message = MESSAGES[world.random.nextInt(5)]
         player.sendMessage(message, true)
         //sned random messages to player
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
     }
 }

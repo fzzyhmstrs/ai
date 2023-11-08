@@ -35,3 +35,6 @@ Sardonyx Entities Sound Events
 "FX_023_rotatingStone.wav" by d00121058 of https://freesound.org/people/d00121058/
 "https://www.cybergnose.cafe/" by anational of https://freesound.org/people/anational/ and http://billrobinson.me
 "08191 heavy stones falling.wav" by Robinhood76 of https://freesound.org/people/Robinhood76/
+
+Book Closing Sound Event
+"Closing a Book" by Kodack of https://freesound.org/people/Kodack

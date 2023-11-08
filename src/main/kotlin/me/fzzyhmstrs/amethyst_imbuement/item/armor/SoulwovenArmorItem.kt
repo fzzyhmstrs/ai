@@ -1,11 +1,17 @@
 package me.fzzyhmstrs.amethyst_imbuement.item.armor
 
+import com.google.common.collect.ArrayListMultimap
+import com.google.common.collect.Multimap
+import me.fzzyhmstrs.amethyst_core.compat.spell_power.SpChecker
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.item_util.FlavorHelper
 import me.fzzyhmstrs.fzzy_core.modifier_util.ModifierHelperType
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.ItemStack

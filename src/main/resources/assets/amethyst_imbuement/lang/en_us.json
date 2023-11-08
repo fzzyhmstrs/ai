@@ -451,6 +451,7 @@
 	"block.amethyst_imbuement.cut_beryl_copper_slab": "Cut Beryllium Copper Slab",
 	"block.amethyst_imbuement.experience_bush": "Experience Bush",
 	"block.amethyst_imbuement.crystal_altar": "Crystal Altar",
+	"block.amethyst_imbuement.witches_bookshelf": "Witches Bookshelf",
 	"block.amethyst_imbuement.forcefield_block": "Forcefield Block",
 	"block.amethyst_imbuement.tigers_eye_blackstone_ore": "Tigers Eye Blackstone Ore",
 	"block.amethyst_imbuement.glistening_ice": "Glistening Ice",
@@ -919,6 +920,7 @@
 	"container.spellcasters_focus.option1": "Option A",
 	"container.spellcasters_focus.option2": "Option B",
 	"container.spellcasters_focus.option3": "Option C",
+	"container.witches_bookshelf": "Witches Bookshelf",
 
 	"effect.amethyst_imbuement.shielding": "Shielding",
 	"effect.amethyst_imbuement.draconic_vision": "Draconic Vision",

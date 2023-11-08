@@ -2,10 +2,13 @@ package me.fzzyhmstrs.amethyst_imbuement.block
 
 import net.minecraft.block.BlockState
 import net.minecraft.block.PillarBlock
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 class PolishedAmethystPillarBlock(settings: Settings): PillarBlock( settings){
@@ -30,5 +33,15 @@ class PolishedAmethystPillarBlock(settings: Settings): PillarBlock( settings){
                 0.5f + world.random.nextFloat() * 1.2f
             )
         }
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
     }
 }
