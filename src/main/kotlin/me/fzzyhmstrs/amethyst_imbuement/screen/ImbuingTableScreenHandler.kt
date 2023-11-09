@@ -364,7 +364,7 @@ class ImbuingTableScreenHandler(
             return true
         }
         if (id == 5){
-            return if (AiConfig.blocks.imbuing.getRerollEnabled()) {
+            return if (AiConfig.blocks.imbuing.getRerollEnabled() && !inventory.getStack(6).hasEnchantments()) {
                 val result = inventory.getStack(7).count >= AiConfig.blocks.imbuing.getLapisCost() && player.experienceLevel >= AiConfig.blocks.imbuing.getLevelCost()
                 if (result || player.isCreative){
                     player.applyEnchantmentCosts(ItemStack.EMPTY,AiConfig.blocks.imbuing.getLevelCost())
@@ -375,6 +375,7 @@ class ImbuingTableScreenHandler(
                     if (inventory.getStack(7).isEmpty){
                         inventory.setStack(7, ItemStack.EMPTY)
                     }
+                    onContentChanged(inventory)
                     true
                 } else {
                     false
