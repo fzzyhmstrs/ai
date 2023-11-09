@@ -1,0 +1,31 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "amethyst_imbuement:enabled",
+			"id": "crafting/witches_bookshelf"
+		}
+	],
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"DDD",
+		"ABC",
+		"DDD"
+	],
+	"key": {
+		"D": {
+			"item": "minecraft:dark_oak_planks"
+		},
+		"A": {
+			"tag": "c:gems"
+		},
+		"B": {
+			"item": "minecraft:book"
+		},
+		"C": {
+			"tag": "c:chests"
+		}
+	},
+	"result": {
+		"item": "amethyst_imbuement:witches_bookshelf"
+	}
+}
