@@ -37,6 +37,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
+import net.minecraft.world.Difficulty
 import net.minecraft.world.World
 import java.util.*
 
@@ -143,6 +144,14 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             this.heal(AiConfig.entities.sardonyxElemental.amountHealedPerSecond.get())
         }
         bossBar.percent = this.health / this.maxHealth
+    }
+
+    override fun checkDespawn() {
+        if (world.difficulty == Difficulty.PEACEFUL && this.isDisallowedInPeaceful) {
+            discard()
+            return
+        }
+        despawnCounter = 0
     }
 
     override fun onStartedTrackingBy(player: ServerPlayerEntity?) {
