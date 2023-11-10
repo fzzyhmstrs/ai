@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "amethyst_imbuement:block/witches_bookshelf_turned"
+    },
+    "facing=north": {
+      "model": "amethyst_imbuement:block/witches_bookshelf"
+    },
+    "facing=south": {
+      "model": "amethyst_imbuement:block/witches_bookshelf"
+    },
+    "facing=west": {
+      "model": "amethyst_imbuement:block/witches_bookshelf_turned"
+    }
+  }
+}

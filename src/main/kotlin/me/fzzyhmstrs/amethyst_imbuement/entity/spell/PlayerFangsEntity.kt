@@ -119,7 +119,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
+        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (  AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
             return
         }
         if (livingEntity == null) {

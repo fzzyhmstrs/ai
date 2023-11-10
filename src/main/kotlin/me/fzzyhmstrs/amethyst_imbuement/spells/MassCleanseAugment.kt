@@ -40,7 +40,7 @@ class MassCleanseAugment: MiscAugment(ScepterTier.TWO,5){
         var successes = 0
         for (target in entityList) {
             if(target !is Monster){
-                if (target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) continue
+                if (  !AiConfig.entities.isEntityPvpTeammate(user,target,this)) continue
                 entityTask(world,target,user,level.toDouble(),null, effect)
                 successes++
             }

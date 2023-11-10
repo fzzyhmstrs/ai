@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
@@ -59,7 +58,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
+            if (!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl = if (!entity2.isFireImmune) {
                     if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
                     entity2.damage(CustomDamageSources.freeze(world,this, entity), entityEffects.damage(0))

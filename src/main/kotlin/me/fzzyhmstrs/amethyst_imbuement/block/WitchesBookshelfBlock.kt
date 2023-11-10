@@ -1,10 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.WitchesBookshelfBlockEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.ChestBlock
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.ChestBlockEntity
 import net.minecraft.entity.LivingEntity
@@ -27,6 +24,11 @@ import net.minecraft.world.World
 class WitchesBookshelfBlock(settings: Settings?) : BlockWithEntity(settings) {
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return WitchesBookshelfBlockEntity(pos, state)
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("BlockRenderType.MODEL", "net.minecraft.block.BlockRenderType"))
+    override fun getRenderType(state: BlockState?): BlockRenderType {
+        return BlockRenderType.MODEL
     }
 
     override fun onPlaced(

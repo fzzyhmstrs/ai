@@ -46,7 +46,7 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
         val entities = world.getOtherEntities(this, box)
         for (entity in entities){
             if (entity !is LivingEntity) continue
-            if (entity is PassiveEntity || entity is GolemEntity || entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(summoner,entity,
+            if (entity is PassiveEntity || entity is GolemEntity ||    AiConfig.entities.isEntityPvpTeammate(summoner,entity,
                     RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
                 entity.heal(entityEffects.damage(0))
                 val serverWorld: ServerWorld = this.world as ServerWorld

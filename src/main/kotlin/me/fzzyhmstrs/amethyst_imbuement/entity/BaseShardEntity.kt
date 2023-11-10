@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -43,7 +42,7 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
+            if (!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
                 val bl = entity2.damage(entity.damageSources.mobProjectile(this,entity),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
                 )

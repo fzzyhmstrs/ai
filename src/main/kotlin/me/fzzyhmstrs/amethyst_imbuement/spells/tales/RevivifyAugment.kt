@@ -41,7 +41,7 @@ class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
     ): Boolean {
         if(target != null) {
             if (target !is Monster && target is LivingEntity) {
-                if (!(target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this))) {
+                if (!(  !AiConfig.entities.isEntityPvpTeammate(user,target,this))) {
                   target.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, (effects.duration(level) * 0.7).toInt(), effects.amplifier(1)))
                   target.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, (effects.duration(level + 3) * 0.7).toInt(), effects.amplifier(level - 1)))
                   effects.accept(target, AugmentConsumer.Type.BENEFICIAL)

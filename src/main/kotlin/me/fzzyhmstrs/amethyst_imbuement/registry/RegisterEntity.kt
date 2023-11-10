@@ -475,7 +475,7 @@ object RegisterEntity {
             )
         },RegisterBlock.PLANAR_DOOR).build(null))
 
-    val PWITCHES_BOOKSHELF_BLOCK_ENTITY: BlockEntityType<WitchesBookshelfBlockEntity> = Registry.register(
+    val WITCHES_BOOKSHELF_BLOCK_ENTITY: BlockEntityType<WitchesBookshelfBlockEntity> = Registry.register(
         Registries.BLOCK_ENTITY_TYPE,
         AI.MOD_ID + ":witches_bookshelf_entity",
         FabricBlockEntityTypeBuilder.create({ pos: BlockPos, state: BlockState ->

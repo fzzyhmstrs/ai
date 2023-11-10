@@ -14,7 +14,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
@@ -38,7 +37,7 @@ class MentalClarityAugment: MinorSupportAugment(ScepterTier.TWO,16){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PlayerEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (target is LivingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 EffectQueue.addStatusToQueue(
                     target,
                     RegisterStatus.INSIGHTFUL,

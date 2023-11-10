@@ -48,7 +48,7 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
     ): Boolean {
         return if(target != null) {
             if (target is LivingEntity) {
-                if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
+                if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
                 val bl = if(target.isUndead) {
                     target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level) * effects.amplifier(level))
                 } else {

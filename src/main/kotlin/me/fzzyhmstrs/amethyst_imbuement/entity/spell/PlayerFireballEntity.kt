@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -61,7 +60,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
+        if (entity2 is LivingEntity && !(AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
             entity.damage(this.damageSources.fireball(this, entity2), entityEffects.damage(0))
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)

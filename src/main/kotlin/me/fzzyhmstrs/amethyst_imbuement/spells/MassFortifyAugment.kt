@@ -51,7 +51,7 @@ class MassFortifyAugment: MiscAugment(ScepterTier.THREE,9){
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
-                    if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
+                    if (  !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
                     successes++
                     EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level),  max(effect.amplifier((level-1)/4+2),2))
                     EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier((level-1)/4))

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -31,7 +30,7 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
+                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
                     hostileEntityList.add(entity)
                 }
             }

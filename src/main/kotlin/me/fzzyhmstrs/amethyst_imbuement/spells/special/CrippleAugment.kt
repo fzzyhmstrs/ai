@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -46,7 +45,7 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
+                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
                     hostileEntityList.add(entity)
                 }
             }

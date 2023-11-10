@@ -48,7 +48,7 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
         }
         for (entity3 in entityList) {
             if(entity3 !is Monster && entity3 is LivingEntity){
-                if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
+                if (  !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
                 successes++
                 EffectQueue.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
                 EffectQueue.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))

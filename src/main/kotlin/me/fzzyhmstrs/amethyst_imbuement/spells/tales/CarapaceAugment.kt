@@ -40,7 +40,7 @@ class CarapaceAugment: MinorSupportAugment(ScepterTier.THREE,7){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)

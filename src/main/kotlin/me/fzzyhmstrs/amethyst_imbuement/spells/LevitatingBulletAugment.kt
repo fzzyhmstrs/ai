@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -60,7 +59,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
         }
         val hostileEntityList: MutableList<Entity> = mutableListOf()
         for (entity in entityList){
-            if (entity is Monster || entity is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity,this)){
+            if (entity is Monster ||  !AiConfig.entities.isEntityPvpTeammate(user,entity,this)){
                 hostileEntityList.add(entity)
             }
         }

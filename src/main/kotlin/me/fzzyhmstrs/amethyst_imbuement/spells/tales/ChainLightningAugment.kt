@@ -48,7 +48,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-          return if (target is LivingEntity && (target is Monster || target is HostileEntity || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user, target,this))) {
+          return if (target is LivingEntity && (target is Monster || target is HostileEntity ||   !AiConfig.entities.isEntityPvpTeammate(user, target,this))) {
               val bl = target.damage(CustomDamageSources.lightningBolt(world,null,user), effects.damage(level))
               if (bl){
                   if (world.random.nextFloat() < 0.25f)

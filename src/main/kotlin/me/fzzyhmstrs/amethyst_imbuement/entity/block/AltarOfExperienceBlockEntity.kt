@@ -5,7 +5,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.text.Text
@@ -13,8 +12,6 @@ import net.minecraft.util.Nameable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
-import kotlin.math.atan2
-import kotlin.math.roundToInt
 
 
 @Suppress("UNUSED_PARAMETER")
@@ -81,67 +78,47 @@ class AltarOfExperienceBlockEntity(pos: BlockPos, state: BlockState): BlockEntit
         }
     }
 
+        var field_11964 = 0f
+        var field_11963 = 0f
+        var field_11962 = 0f
 
-        //private val RANDOM = Random()
-        var lookingRotR = 0f
-        private var turningSpeedR = 2f
-
-        private fun rotClamp(clampTo: Int, value: Float): Float {
-            return if (value >= clampTo) {
-                value - clampTo
-            } else if (value < 0) {
-                value + clampTo
-            } else {
-                value
-            }
-        }
-
-        private fun checkBound(amount: Int, rotBase: Float): Boolean {
-            val rot = rotBase.roundToInt().toFloat()
-            val rot2 = rotClamp(360, rot + 180)
-            return rot - amount <= lookingRotR && lookingRotR <= rot + amount || rot2 - amount <= lookingRotR && lookingRotR <= rot2 + amount
-        }
-
-        private fun moveOnTickR(rot: Float) {
-            if (!checkBound(2, rot)) {
-                val check = ((rotClamp(180, rot) - rotClamp(180, lookingRotR) + 180) % 180).toDouble()
-                if (check < 90) {
-                    lookingRotR += turningSpeedR
-                } else {
-                    lookingRotR -= turningSpeedR
-                }
-                lookingRotR = rotClamp(360, lookingRotR)
-                if (checkBound(10, rot)) {
-                    turningSpeedR = 2f
-                } else {
-                    turningSpeedR += 1f
-                    turningSpeedR = MathHelper.clamp(turningSpeedR, 2f, 20f)
-                }
-            }
-        }
         companion object {
             fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: AltarOfExperienceBlockEntity) {
                 //println("ticking")
-                val closestPlayer: PlayerEntity? = world.getClosestPlayer(
-                    pos.x.toDouble() + 0.5,
-                    pos.y.toDouble() + 0.5,
-                    pos.z.toDouble() + 0.5,
-                    3.0,
-                    false
-                )
-                if (closestPlayer != null) {
-                    val x: Double = closestPlayer.x - pos.x.toDouble() - 0.5
-                    val z: Double = closestPlayer.z - pos.z.toDouble() - 0.5
-                    val rotY = (atan2(z, x).toFloat() / Math.PI * 180 + 180).toFloat()
-                    blockEntity.moveOnTickR(rotY)
+                blockEntity.field_11963 = blockEntity.field_11964
+                val playerEntity =
+                    world.getClosestPlayer(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, 3.0, false)
+                if (playerEntity != null) {
+                    val d2 = playerEntity.x - (pos.x.toDouble() + 0.5)
+                    val e = playerEntity.z - (pos.z.toDouble() + 0.5)
+                    blockEntity.field_11962 = MathHelper.atan2(e, d2).toFloat()
                 } else {
-                    blockEntity.lookingRotR += 2
+                    blockEntity.field_11962 += 0.02f
                 }
+                while (blockEntity.field_11964 >= Math.PI.toFloat()) {
+                    blockEntity.field_11964 -= Math.PI.toFloat() * 2
+                }
+                while (blockEntity.field_11964 < (-Math.PI).toFloat()) {
+                    blockEntity.field_11964 += Math.PI.toFloat() * 2
+                }
+                while (blockEntity.field_11962 >= Math.PI.toFloat()) {
+                    blockEntity.field_11962 -= Math.PI.toFloat() * 2
+                }
+                while (blockEntity.field_11962 < (-Math.PI).toFloat()) {
+                    blockEntity.field_11962 += Math.PI.toFloat() * 2
+                }
+                var d: Float = blockEntity.field_11962 - blockEntity.field_11964
+                while (d >= Math.PI.toFloat()) {
+                    d -= Math.PI.toFloat() * 2
+                }
+                while (d < (-Math.PI).toFloat()) {
+                    d += Math.PI.toFloat() * 2
+                }
+                blockEntity.field_11964 += d * 0.4f
                 blockEntity.ticks++
                 if (blockEntity.ticks >= 360){
                     blockEntity.ticks = 0
                 }
-                blockEntity.lookingRotR = blockEntity.rotClamp(360, blockEntity.lookingRotR)
             }
         }
 

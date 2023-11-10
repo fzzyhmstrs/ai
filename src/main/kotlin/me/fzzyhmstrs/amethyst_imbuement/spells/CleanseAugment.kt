@@ -40,7 +40,7 @@ class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
                 for (effect in target.statusEffects){
                     if (effect.effectType.isBeneficial) continue

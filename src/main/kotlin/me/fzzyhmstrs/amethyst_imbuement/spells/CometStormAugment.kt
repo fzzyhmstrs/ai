@@ -77,7 +77,7 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
     ): Boolean {
         var successes = 0
         for (entity3 in entityList) {
-            if(entity3 is Monster || entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
+            if(entity3 is Monster ||   !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
                 val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
                 val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level, this)
                 if (world.spawnEntity(ce)){

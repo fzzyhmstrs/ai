@@ -39,7 +39,7 @@ class ExhaustAugment: MinorSupportAugment(ScepterTier.TWO,6){
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is Monster || target is HostileEntity || target is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (target is Monster || target is HostileEntity ||   !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 EffectQueue.addStatusToQueue(
                     target as LivingEntity,
                     StatusEffects.SLOWNESS,

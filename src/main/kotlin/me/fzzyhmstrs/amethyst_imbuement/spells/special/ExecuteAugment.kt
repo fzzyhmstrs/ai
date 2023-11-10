@@ -41,7 +41,7 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
     ): Boolean {
         return if(target != null) {
             if (target is LivingEntity) {
-                if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
+                if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
                 val bl = if (target.health <= effects.amplifier(level)){
                     target.kill()
                     true

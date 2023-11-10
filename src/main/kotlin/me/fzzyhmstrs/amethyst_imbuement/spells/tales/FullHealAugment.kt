@@ -35,7 +35,7 @@ class FullHealAugment: MinorSupportAugment(ScepterTier.THREE,7){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 val toHeal = (target as LivingEntity).maxHealth - target.health
                 if (toHeal > 0f) {
                     target.heal(toHeal)

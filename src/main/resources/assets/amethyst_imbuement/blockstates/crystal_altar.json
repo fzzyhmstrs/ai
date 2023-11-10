@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "amethyst_imbuement:block/witches_bookshelf",
-      "y": 270
-    },
-    "facing=north": {
-      "model": "amethyst_imbuement:block/witches_bookshelf",
-      "y": 180
-    },
-    "facing=south": {
-      "model": "amethyst_imbuement:block/witches_bookshelf"
-    },
-    "facing=west": {
-      "model": "amethyst_imbuement:block/witches_bookshelf",
-      "y": 90
+    "": {
+      "model": "amethyst_imbuement:block/crystal_altar"
     }
   }
 }

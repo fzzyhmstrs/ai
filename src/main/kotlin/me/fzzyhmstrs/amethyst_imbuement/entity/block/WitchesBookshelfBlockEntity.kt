@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.screen.GenericContainerScreenHandler
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -18,7 +19,7 @@ import net.minecraft.util.Nameable
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 
-class WitchesBookshelfBlockEntity(pos: BlockPos, state: BlockState): LootableContainerBlockEntity(RegisterEntity.IMBUING_TABLE_BLOCK_ENTITY,pos, state),Nameable {
+class WitchesBookshelfBlockEntity(pos: BlockPos, state: BlockState): LootableContainerBlockEntity(RegisterEntity.WITCHES_BOOKSHELF_BLOCK_ENTITY,pos, state),Nameable {
 
     private var customName: Text? = null
     var inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
@@ -61,7 +62,13 @@ class WitchesBookshelfBlockEntity(pos: BlockPos, state: BlockState): LootableCon
     }
 
     override fun createScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler {
-        return GenericContainerScreenHandler.createGeneric9x1(syncId, playerInventory)
+        return GenericContainerScreenHandler(
+            ScreenHandlerType.GENERIC_9X1,
+            syncId,
+            playerInventory,
+            this,
+            1
+        )
     }
 
     override fun getInvStackList(): DefaultedList<ItemStack> {

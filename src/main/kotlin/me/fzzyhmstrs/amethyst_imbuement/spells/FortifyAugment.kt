@@ -42,7 +42,7 @@ class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)

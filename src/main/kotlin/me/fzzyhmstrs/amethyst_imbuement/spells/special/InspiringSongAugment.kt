@@ -51,7 +51,7 @@ class InspiringSongAugment: MiscAugment(ScepterTier.TWO,13){
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
-                    if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
+                    if (  !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
                     successes++
                     inspire(entity3,max(1,level-1),effect)
                     effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)

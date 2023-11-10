@@ -58,7 +58,7 @@ class CracklingInfusionAugment: MiscAugment(ScepterTier.THREE,12){
             entityList.add(user)
             for (entity3 in entityList) {
                 if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
-                    if (entity3 is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
+                    if (  !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
                     successes++
                     entity3.addStatusEffect(StatusEffectInstance(RegisterStatus.LIGHTNING_AURA,duration, amplifier))
                     entity3.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,duration, 0))

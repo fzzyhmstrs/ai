@@ -76,7 +76,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
 
         var successes = 0
         for (target in entityList) {
-            if (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
+            if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
             val bl = target.damage(CustomDamageSources.freeze(world,null,user),effect.damage(level))
             if (bl && target is LivingEntity) {
                 val mod = SpChecker.getModFromTags(user, RegisterTag.SOUL_AUGMENTS, RegisterTag.ICE_AUGMENTS)

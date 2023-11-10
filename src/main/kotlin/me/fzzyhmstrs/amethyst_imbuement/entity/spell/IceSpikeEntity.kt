@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
@@ -117,7 +116,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
+        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (  AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
             return
         }
         if (livingEntity == null) {

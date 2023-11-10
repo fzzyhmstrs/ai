@@ -40,7 +40,7 @@ class SanctuaryAugment: MinorSupportAugment(ScepterTier.THREE,13){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(RegisterStatus.IMMUNITY, effects.duration(level), 0))
                 target.addStatusEffect(StatusEffectInstance(RegisterStatus.SANCTUARY, effects.duration(level), 0))
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)

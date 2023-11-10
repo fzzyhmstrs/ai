@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -35,7 +34,7 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity || target is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
                 val healthCheck = (target as LivingEntity).health
                 target.heal(effects.damage(level))
                 if (target.health == healthCheck) return false

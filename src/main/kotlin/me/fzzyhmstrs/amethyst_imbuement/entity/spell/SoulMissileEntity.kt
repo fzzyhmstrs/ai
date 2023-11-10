@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -41,7 +40,7 @@ class SoulMissileEntity: MissileEntity {
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if(!(entity2 is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
+            if(!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
                 val bl: Boolean = entity2.damage(
                     this.damageSources.indirectMagic(this, entity),
                     entityEffects.damage(0)

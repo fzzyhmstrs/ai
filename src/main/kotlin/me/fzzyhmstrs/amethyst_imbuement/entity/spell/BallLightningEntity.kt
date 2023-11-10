@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -67,7 +66,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
         for (entity in entities){
-            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
+            if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
             entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
@@ -97,7 +96,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
         for (entity in entities){
-            if (entity is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
+            if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
             entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
             beam(world as ServerWorld,entity)

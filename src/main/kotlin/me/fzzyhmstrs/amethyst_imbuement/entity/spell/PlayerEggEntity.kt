@@ -2,6 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import net.minecraft.entity.EntityStatuses
 import net.minecraft.entity.EntityType
@@ -53,7 +55,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = this.owner
-        if (entity is LivingEntity) {
+        if (entity is LivingEntity && !(AiConfig.entities.isEntityPvpTeammate(entity,entityHitResult.entity,RegisterEnchantment.TORRENT_OF_BEAKS))) {
             entityHitResult.entity.damage(this.damageSources.mobProjectile(this, entity), entityEffects.damage(0))
         } else {
             entityHitResult.entity.damage(this.damageSources.generic(), entityEffects.damage(0))
