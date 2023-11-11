@@ -6,6 +6,30 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "altar_used",
+                  "target": "altar_used"
+                },
+                {
+                  "op": "replace",
+                  "source": "altar_used_1",
+                  "target": "altar_used_1"
+                }
+              ,
+                {
+                  "op": "replace",
+                  "source": "CustomName",
+                  "target": "CustomName"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "amethyst_imbuement:altar_of_experience"
         }
       ],

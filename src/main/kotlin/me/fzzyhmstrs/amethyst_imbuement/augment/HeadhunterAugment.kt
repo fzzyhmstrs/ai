@@ -26,7 +26,7 @@ class HeadhunterAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
 
     @Suppress("SpellCheckingInspection")
     companion object {
-        fun checkHeadhunterHit(target: Entity, arrow: PersistentProjectileEntity, amount: Float): Float {
+        fun checkHeadhunterHit(target: Entity, arrow: PersistentProjectileEntity, amount: Double): Double {
             val y1: Double = arrow.y
             val y2: Double = target.eyeY
 
@@ -41,16 +41,16 @@ class HeadhunterAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
                 return amount
             } else if (arrow.pitch.toDouble() == -90.0) {
                 val rndMultiplier: Float = target.world.random.nextFloat() * 0.7f + 0.6f
-                return amount * (1.0f + rndMultiplier)
+                return amount * (1.0 + rndMultiplier)
             } else {
                 y1
             }
 
             if (abs(y1Fix - y2) < 0.03) {
-                return amount * 4.2f
+                return amount * 4.2
             } else if (abs(y1Fix - y2) < 0.14) {
                 val rndMultiplier: Float = target.world.random.nextFloat() * 0.7f + 0.6f
-                return amount * (1.0f + rndMultiplier)
+                return amount * (1.0 + rndMultiplier)
             }
             return amount
         }

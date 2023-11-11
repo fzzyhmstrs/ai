@@ -68,20 +68,25 @@ public abstract class PersistentProjectileEntityMixin extends Entity {
 
     @Redirect(method = "onEntityHit", at = @At(value = "INVOKE", target = "net/minecraft/util/math/MathHelper.ceil (D)I"))
     private int amethyst_imbuement_checkHeadhunter(double value){
-        int amount = MathHelper.ceil(value);
+        double newValue = value;
         PersistentProjectileEntity chk = (PersistentProjectileEntity) (Object) this;
         Entity owner = chk.getOwner();
         if (owner != null) {
             if (owner instanceof LivingEntity) {
                 ItemStack chk2 = ((LivingEntity) owner).getStackInHand(Hand.MAIN_HAND);
+                int lvl2 = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getCRYSTALLINE(), chk2);
+                if (lvl2 > 0 && headhunterEntity != null && RegisterEnchantment.INSTANCE.getCRYSTALLINE().isEnabled()){
+                    newValue += (lvl2 * 0.25);
+                }
                 int lvl = EnchantmentHelper.getLevel(RegisterEnchantment.INSTANCE.getHEADHUNTER(), chk2);
                 if (lvl > 0 && headhunterEntity != null && RegisterEnchantment.INSTANCE.getHEADHUNTER().isEnabled()){
-                    amount = round(HeadhunterAugment.Companion.checkHeadhunterHit(headhunterEntity,(PersistentProjectileEntity)(Object) this,amount));
+                    newValue = HeadhunterAugment.Companion.checkHeadhunterHit(headhunterEntity,(PersistentProjectileEntity)(Object) this,newValue);
                     headhunterEntity = null;
                 }
+
             }
         }
-        return amount;
+        return MathHelper.ceil(newValue);
     }
 
     private int round(float value){

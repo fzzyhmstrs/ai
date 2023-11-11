@@ -3,11 +3,20 @@
 	"fallback": "amethyst_imbuement:witch_house/basement_fallbacks",
 	"elements": [
 		{
-			"weight": 1,
+			"weight": 10,
 			"element": {
 				"element_type": "minecraft:single_pool_element",
 				"projection": "rigid",
 				"location": "amethyst_imbuement:witch_house/special_stairs/stairs_special_1",
+				"processors": "amethyst_imbuement:cracked_bricks"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/special_stairs/stairs_special_2",
 				"processors": "amethyst_imbuement:cracked_bricks"
 			}
 		}

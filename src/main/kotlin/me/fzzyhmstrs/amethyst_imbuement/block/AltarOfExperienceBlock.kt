@@ -56,8 +56,8 @@ class AltarOfExperienceBlock(settings: Settings): EnchantingTableBlock(settings)
         itemStack: ItemStack
     ) {
         val blockEntity: BlockEntity? = world.getBlockEntity(pos)
-        if (itemStack.hasCustomName() && blockEntity is AltarOfExperienceBlockEntity) {
-            (blockEntity).customName = itemStack.name
+        if (itemStack.nbt != null && blockEntity is AltarOfExperienceBlockEntity) {
+            (blockEntity).readNbt(itemStack.nbt)
         }
     }
 

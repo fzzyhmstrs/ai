@@ -155,6 +155,15 @@
         "location": "amethyst_imbuement:witch_house/basement_pieces/hidden_right",
         "processors": "amethyst_imbuement:cracked_bricks"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "amethyst_imbuement:witch_house/basement_pieces/treasure_room",
+        "processors": "amethyst_imbuement:cracked_bricks"
+      }
     }
   ]
 }

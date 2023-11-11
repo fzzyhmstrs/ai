@@ -1,13 +1,22 @@
 {
 	"name": "amethyst_imbuement:witch_house/special_hall_top",
-	"fallback": "amethyst_imbuement:witch_house/basement_fallbacks",
+	"fallback": "amethyst_imbuement:witch_house/basement_hall_top_fallbacks",
 	"elements": [
+		{
+			"weight": 50,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"projection": "rigid",
+				"location": "amethyst_imbuement:witch_house/special_hall_top/hall_top_1",
+				"processors": "amethyst_imbuement:cracked_bricks"
+			}
+		},
 		{
 			"weight": 1,
 			"element": {
 				"element_type": "minecraft:single_pool_element",
 				"projection": "rigid",
-				"location": "amethyst_imbuement:witch_house/special_hall_top/hall_top_1",
+				"location": "amethyst_imbuement:witch_house/special_hall_top/hall_top_2",
 				"processors": "amethyst_imbuement:cracked_bricks"
 			}
 		}

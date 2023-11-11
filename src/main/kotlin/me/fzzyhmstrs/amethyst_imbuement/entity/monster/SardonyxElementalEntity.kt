@@ -209,10 +209,10 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     }
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (getCharging())
+        if (getCharging() && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return false
         val bl = super.damage(source, amount)
-        if (bl){
+        if (bl && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)){
             if (atOrBelowQuarter()){
                 if (world is ServerWorld){
                     if (quartersReached <= 2) {
