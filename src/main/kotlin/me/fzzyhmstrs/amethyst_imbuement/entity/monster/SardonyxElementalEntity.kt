@@ -118,6 +118,10 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     }
 
     override fun tickMovement() {
+        val charge = dataTracker.get(CHARGING)
+        if (charge > 0) {
+            setCharging(charge - 1)
+        }
         if (!getCharging())
             super.tickMovement()
         if (spellCooldown > 0) {
@@ -140,9 +144,6 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     override fun mobTick() {
         super.mobTick()
-        val charge = dataTracker.get(CHARGING)
-        if (charge > 0)
-            setCharging(charge - 1)
         if (EventRegistry.ticker_20.isReady()){
             this.heal(AiConfig.entities.sardonyxElemental.amountHealedPerSecond.get())
         }

@@ -154,7 +154,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
 
     override fun craft(inventory: SimpleInventory, registryManager: DynamicRegistryManager): ItemStack {
-        return ItemStack.EMPTY
+        return getOutput()
     }
     override fun fits(var1: Int, var2: Int): Boolean {
         return false
