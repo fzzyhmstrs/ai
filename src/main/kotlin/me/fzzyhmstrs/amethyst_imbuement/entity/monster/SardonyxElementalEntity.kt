@@ -45,7 +45,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     companion object{
 
-        protected val CHARGING: TrackedData<Boolean> = DataTracker.registerData(SardonyxElementalEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        protected val CHARGING: TrackedData<Int> = DataTracker.registerData(SardonyxElementalEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         protected val FIRING_PROJECTILES: TrackedData<Boolean> = DataTracker.registerData(SardonyxElementalEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         fun createElementalAttributes(): DefaultAttributeContainer.Builder {
@@ -79,7 +79,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(CHARGING,false)
+        dataTracker.startTracking(CHARGING,0)
         dataTracker.startTracking(FIRING_PROJECTILES,false)
     }
 
@@ -140,6 +140,9 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     override fun mobTick() {
         super.mobTick()
+        val charge = dataTracker.get(CHARGING)
+        if (charge > 0)
+            setCharging(charge - 1)
         if (EventRegistry.ticker_20.isReady()){
             this.heal(AiConfig.entities.sardonyxElemental.amountHealedPerSecond.get())
         }
@@ -193,11 +196,15 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     }
 
     fun getCharging(): Boolean{
-        return dataTracker.get(CHARGING)
+        return dataTracker.get(CHARGING) > 0
     }
 
-    fun setCharging(bl: Boolean){
-        dataTracker.set(CHARGING,bl)
+    fun setCharging(bl: Boolean) {
+        dataTracker.set(CHARGING,if (bl) 100 else 0)
+    }
+
+    fun setCharging(amount: Int) {
+        dataTracker.set(CHARGING,amount)
     }
 
     fun getFiringProjectiles(): Boolean{
@@ -229,7 +236,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                         }
                     }
                 }
-                setCharging(true)
+                setCharging(100)
             }
             source.attacker?.damage(this.damageSources.thorns(this),4f)
             lastDamageTracker.addDamage(source, amount)

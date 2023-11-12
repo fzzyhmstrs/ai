@@ -66,7 +66,7 @@ class DevastationBeam: PersistentEffectHelper.PersistentEffect {
                         it.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 600,3))
                 }
             }
-            beam(data.world,data.pos,data.rot,16.0,150)
+            beam(data.world,data.pos,data.rot,16.0,300)
             data.world.playSound(null, data.pos.x,data.pos.y,data.pos.z, RegisterSound.SOLAR_FLARE_FIRE, SoundCategory.HOSTILE, 1.0F, 1.0F)
         }
     }
