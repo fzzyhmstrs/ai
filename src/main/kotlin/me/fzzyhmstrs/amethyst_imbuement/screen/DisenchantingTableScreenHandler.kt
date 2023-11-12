@@ -75,13 +75,13 @@ class DisenchantingTableScreenHandler(
     }
 
     override fun onClosed(player: PlayerEntity) {
-        super.onClosed(player)
         context.run { _: World, _: BlockPos ->
             dropInventory(
                 player,
                 inventory
             )
         }
+        super.onClosed(player)
     }
 
     override fun onContentChanged(inventory: Inventory) {
@@ -130,8 +130,8 @@ class DisenchantingTableScreenHandler(
                         }
                     }
                 }
-                sendContentUpdates()
             }
+            sendContentUpdates()
         }
     }
 

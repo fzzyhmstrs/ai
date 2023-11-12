@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
@@ -55,7 +56,7 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
                 effect.range(level),
                 0.8,
                 0.8)
-        entityList.forEach {
+        filter(entityList,user).forEach {
             it.damage(CustomDamageSources.lightningBolt(world,null,user), effect.damage(level))
         }
         beam(world,user,rotation,effect.range(level))
@@ -73,6 +74,19 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
             pos = pos.add(vec)
         }
 
+    }
+
+    private fun filter(list: List<Entity>, user: LivingEntity): MutableList<Entity>{
+        val hostileEntityList: MutableList<Entity> = mutableListOf()
+        if (list.isNotEmpty()) {
+            for (entity in list) {
+                if (entity !== user) {
+                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
+                    hostileEntityList.add(entity)
+                }
+            }
+        }
+        return hostileEntityList
     }
 
     /*override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.minecraft.block.Block
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.damage.DamageType
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
@@ -12,6 +13,8 @@ import net.minecraft.util.Identifier
 object RegisterTag {
 
     val GUARDIAN_IGNORES_DAMAGE_TAG: TagKey<DamageType> = TagKey.of(RegistryKeys.DAMAGE_TYPE,Identifier(AI.MOD_ID,"guardian_ignores_damage"))
+
+    val POULTRYMORPH_IGNORES: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE,Identifier(AI.MOD_ID,"poultrymorph_ignores"))
 
     val GEMS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier("c","gems"))
     val SKULLS_TAG: TagKey<Item> = TagKey.of(RegistryKeys.ITEM,Identifier("c","skulls"))

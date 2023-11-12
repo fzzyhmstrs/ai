@@ -532,6 +532,7 @@
 	"enchantment.amethyst_imbuement.vein_miner.desc": "Mines multiple blocks in an area when a keybind is held.",
 
 	"enchantment.amethyst_imbuement.accursed": "Accursed",
+	"enchantment.amethyst_imbuement.beast_magnet": "Beast Magnet",
 	"enchantment.amethyst_imbuement.beast_master": "Beast Master",
 	"enchantment.amethyst_imbuement.blast_resistance": "Blast Resistance",
 	"enchantment.amethyst_imbuement.consecrated": "Consecrated",
@@ -567,6 +568,7 @@
 	"enchantment.amethyst_imbuement.undying": "Undying",
 
 	"enchantment.amethyst_imbuement.accursed.desc": "Attackers have a chance of being cursed.",
+	"enchantment.amethyst_imbuement.beast_magnet.desc": "Summons and pets pick up items and xp for you, auto-depositing in your inventory.",
 	"enchantment.amethyst_imbuement.beast_master.desc": "Buffs summons and pets while the totem is active.",
 	"enchantment.amethyst_imbuement.blast_resistance.desc": "Reduces damage from explosions. Stacks with Blast Protection.",
 	"enchantment.amethyst_imbuement.consecrated.desc": "Blesses the totem holder.",

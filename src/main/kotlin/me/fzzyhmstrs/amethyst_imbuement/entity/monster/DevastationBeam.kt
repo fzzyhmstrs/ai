@@ -61,7 +61,7 @@ class DevastationBeam: PersistentEffectHelper.PersistentEffect {
                 val dmg = AiConfig.entities.sardonyxElemental.devastationBeamDmg.get()
                 for (it in entityList) {
                     if (it is SardonyxElementalEntity || it is SardonyxFragmentEntity) continue
-                    it.damage(data.caster.damageSources.indirectMagic( data.caster, data.caster), dmg)
+                    it.damage(data.caster.damageSources.sonicBoom( data.caster), dmg)
                     if (it is LivingEntity)
                         it.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 600,3))
                 }

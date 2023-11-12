@@ -7,8 +7,11 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.block.BlockState
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.EntityAttributeModifier
@@ -64,7 +67,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         internal val SCALE = DataTracker.registerData(PlayerCreatedConstructEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
     }
 
-    private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 10.0f, 2.0f, false)
+    private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 20.0f, 2.0f, false)
     private val callForConstructHelpGoal = CallForConstructHelpGoal(this)
     private val trackSummonerAttackerGoal = TrackSummonerAttackerGoal(this,null)
 
@@ -78,7 +81,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override var entityOwner: LivingEntity? = null
     private var angryAt: UUID? = null
     override var entityEffects: AugmentEffect = AugmentEffect()
-    private var level = 1
+    protected var level = 1
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
     protected var trackingOwner = false
@@ -166,12 +169,29 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
                 kill()
             }
         }
-        if (owner != null){
-            val attacker = owner?.recentDamageSource?.attacker
+        val constructOwner = owner
+        if (constructOwner != null){
+            val attacker = constructOwner.recentDamageSource?.attacker
             if (attacker != null && attacker is LivingEntity){
                 this.target = attacker
                 setAngryAt(attacker.uuid)
                 chooseRandomAngerTime()
+            }
+            if (this.age % 5 == 0 && constructOwner is PlayerEntity) {
+                val trinkets = TrinketUtil.getTrinketStacks(constructOwner)
+                for (stack in trinkets) {
+                    if (EnchantmentHelper.getLevel(RegisterEnchantment.BEAST_MAGNET, stack) > 0){
+                        val box = this.boundingBox.expand(1.0)
+                        for (entity in world.getOtherEntities(this,box)){
+                            if (entity is ItemEntity){
+                                entity.onPlayerCollision(constructOwner)
+                            } else if (entity is ExperienceOrbEntity){
+                                entity.onPlayerCollision(constructOwner)
+                            }
+                        }
+                        break
+                    }
+                }
             }
         }
     }

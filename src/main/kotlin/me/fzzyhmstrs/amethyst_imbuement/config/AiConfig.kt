@@ -20,6 +20,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.Tameable
 import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.resource.ResourceManager
@@ -53,6 +54,7 @@ object AiConfig
             .add("1.20-01/1.19.4-01/1.19.3-13/1.19-36: Added hamster and bonestorm configs in entities_v2. Updated to items_v5 with fzzyhammer and harvest scepter info and new loot chances for unique items.")
             .add("1.20.1-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
             .add("1.20.2-01/1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs. Added Soulwoven armor material to materials_v1. Added new entities in entities_v4. Added sky village integration configs in villages_v3")
+            .add("1.20.2-01/1.20.1-16: Updated how PvpTeammates are considered. new Entities v5. Beast augments added into augments v4 config.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -379,7 +381,8 @@ object AiConfig
         override fun generateNewClass(): Trinkets {
             val trinkets = this
             val map = trinkets.enabledAugments.toMutableMap()
-            map["amethyst_imbuement:bulwark"] = true
+            map["amethyst_imbuement:beast_master"] = true
+            map["amethyst_imbuement:beast_magnet"] = true
             trinkets.enabledAugments.validateAndSet(map)
             return trinkets
         }
@@ -389,15 +392,15 @@ object AiConfig
 
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
-            if (user is Monster)
-                return entity is Monster
+            if (entity is Monster)
+                return user is Monster
             if (user == null) return false
             if (entity === user) return true
             if ((entity as? Tameable)?.owner == user) return true
             if (forcePvpOnAllSpells.get() || spell.getPvpMode()){
                 return user.isTeammate(entity)
             }
-            return true
+            return entity is PlayerEntity
         }
 
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
@@ -477,12 +480,13 @@ object AiConfig
             var baseDamage = ValidatedDouble(28.0,280.0,0.0)
             var projectileDamage = ValidatedFloat(20f,200f,0f)
             var fragmentsSpawned = ValidatedInt(3,25,1)
-            var devastationBeamDmg = ValidatedFloat(350f,Float.MAX_VALUE,0f)
+            var devastationBeamDmg = ValidatedFloat(50f,Float.MAX_VALUE,0f)
             var spellActivationCooldown = ValidatedInt(600,6000,100)
             var amountHealedPerSecond = ValidatedFloat(0.2f,5f, 0f)
         }
 
         override fun generateNewClass(): Entities {
+            sardonyxElemental.devastationBeamDmg.validateAndSet(50f)
             return this
         }
     }
@@ -507,8 +511,8 @@ object AiConfig
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
-    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v5.json","entities_v4.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
     var resources: Resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
 
     override fun initConfig() {
@@ -522,8 +526,8 @@ object AiConfig
         blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
-        trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v3.json","trinkets_v2.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v4.json","entities_v3.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+        trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v5.json","entities_v4.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
         resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
     }
 

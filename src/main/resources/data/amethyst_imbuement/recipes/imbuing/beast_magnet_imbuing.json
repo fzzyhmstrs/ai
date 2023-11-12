@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:emerald_block"
+  },
+  "imbueB": {
+	"item": "minecraft:emerald_block"
+  },
+  "imbueC": {
+	"item": "minecraft:emerald_block"
+  },
+  "imbueD": {
+	"item": "minecraft:emerald_block"
+  },
+  "craftA": {
+	"item": "minecraft:iron_ingot"
+  },
+  "craftB": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftC": {
+	"item": "minecraft:iron_ingot"
+  },
+  "craftD": {
+	"item": "minecraft:lead"
+  },
+  "craftF": {
+	"item": "minecraft:lead"
+  },
+  "craftG": {
+	"item": "minecraft:iron_ingot"
+  },
+  "craftH": {
+	"item": "minecraft:experience_bottle"
+  },
+  "craftI": {
+	"item": "minecraft:iron_ingot"
+  },
+  "title": "beast magnet",
+  "cost": 13,
+  "augment": "amethyst_imbuement:beast_magnet"
+}
+

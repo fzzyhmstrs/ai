@@ -59,6 +59,7 @@ object RegisterEnchantment {
     //augments for imbuing
     val ACCURSED = AccursedAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("accursed")
     val ANGELIC = AngelicAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("angelic")
+    val BEAST_MAGNET = BeastMagnetAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("beast_magnet")
     val BEAST_MASTER = BeastMasterAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("beast_master")
     val BLAST_RESISTANCE = BlastResistanceAugment(Enchantment.Rarity.VERY_RARE, 3, EquipmentSlot.OFFHAND).register("blast_resistance")
     val BULWARK = BulwarkAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.MAINHAND).register("bulwark")

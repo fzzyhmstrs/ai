@@ -62,6 +62,8 @@ object AiConfigDefaults {
 
     internal val enabledAugments: Map<String,Boolean> = mapOf(
         "amethyst_imbuement:angelic" to true,
+        "amethyst_imbuement:beast_magnet" to true,
+        "amethyst_imbuement:beast_master" to true,
         "amethyst_imbuement:bulwark" to true,
         "amethyst_imbuement:crystalline" to true,
         "amethyst_imbuement:draconic_vision" to true,

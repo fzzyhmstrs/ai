@@ -68,6 +68,7 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
     }
 
     override fun initEquipment(random: Random ,difficulty: LocalDifficulty) {
+        bonusEquipment = bonus(this.level)
         when (bonusEquipment) {
             1 -> {
                 this.equipStack(EquipmentSlot.HEAD, ItemStack(Items.LEATHER_HELMET))
@@ -91,6 +92,21 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
                 this.equipStack(EquipmentSlot.FEET, ItemStack(RegisterArmor.STEEL_BOOTS))
                 this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterTool.GLOWING_BLADE))
             }
+        }
+        println(this.itemsEquipped)
+    }
+
+    private fun bonus(level: Int): Int{
+        return if (level <= 5){
+            0
+        } else if (level <= 8){
+            1
+        } else if (level <= 10){
+            2
+        } else if (level <= 12){
+            3
+        } else {
+            4
         }
     }
 

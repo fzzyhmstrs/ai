@@ -20,7 +20,7 @@ open class FollowSummonerGoal(
     private val leavesAllowed: Boolean):
     Goal() {
 
-    private val teleportDistance = 12.0
+    private val teleportDistance = minDistance + 2.0
     private val world: WorldView
     private val navigation: EntityNavigation
     private var oldWaterPathfindingPenalty = 0f

@@ -68,7 +68,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         }
     }
 
-    private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 10.0f, 2.0f, false)
+    private val followSummonerGoal = FollowSummonerGoal(this, null, 1.0, 12.0f, 2.0f, false)
     private val callForConstructHelpGoal = CallForConstructHelpGoal(this)
 
     override var maxAge = -1

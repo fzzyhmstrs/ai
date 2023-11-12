@@ -8,12 +8,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
@@ -40,7 +40,7 @@ class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEff
         val stack = user.getStackInHand(hand)
         if (stack.item != RegisterScepter.A_SCEPTER_SO_FOWL) return false
         val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
-        return if(target != null && target !is SpellCastingEntity && target !is ChickenEntity) {
+        return if(target != null && target !is SpellCastingEntity && !target.type.isIn(RegisterTag.POULTRYMORPH_IGNORES)) {
             val nbt = NbtCompound()
             if (!target.saveSelfNbt(nbt)) return false
             val chickenEntity = EntityType.CHICKEN.create(world)?:return false

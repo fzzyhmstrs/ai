@@ -94,6 +94,7 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
         val nbt = stack.nbt ?: return TypedActionResult.fail(stack)
+        if (hand == Hand.OFF_HAND) return TypedActionResult.fail(stack)
         if (!nbt.getBoolean("unlocked")) {
             user.sendMessage(AcText.translatable(this.translationKey + ".locked"), true)
             if (world.isClient)
