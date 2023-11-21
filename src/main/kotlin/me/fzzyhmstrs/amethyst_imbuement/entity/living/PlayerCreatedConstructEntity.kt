@@ -213,6 +213,11 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         if (isInvulnerableTo(source)) {
             return false
         }
+        val attacker = source.attacker
+        if (attacker != null){
+            val spell = if (source is SpellDamageSource) source.getSpell() else null
+            if(!AiConfig.entities.shouldItHit(attacker, this, spell)) return false
+        }
         if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()
         }
