@@ -391,6 +391,26 @@ object AiConfig
     private val entitiesHeader = buildSectionHeader("entities")
 
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
+
+        private val IS_PVP_NOT_FRIEND: MobChecker = PredicatedPassChecker(
+            {a,v,args -> forcePvpOnAllSpells.get() || args.size > 0 && (args[0] as? ScepterAugment)?.getPvpMode() == true},
+            MobCheckers.NOT_FRIEND
+            )
+        
+        private val BASE_CHECKER = MobCheckerBuilder.sequence(
+            MobCheckers.NON_NULL_HIT,
+            MobCheckers.NOT_MONSTER_FRIEND,
+            MobCheckers.NOT_SELF,
+            MobCheckers.NOT_PET,
+            IS_PVP_NOT_FRIEND,
+            MobCheckers.NOT_PLAYER
+        )
+
+        private val NON_BOSS_CHECKER = MobCheckerBuilder.sequence(
+            ExcludeTagChecker(RegisterTag.POULTRYMORPH_IGNORES),
+            BASE_CHECKER
+        )
+        
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
             if (entity is Monster)
                 return user is Monster
@@ -401,6 +421,14 @@ object AiConfig
                 return user.isTeammate(entity)
             }
             return entity is PlayerEntity
+        }
+
+        fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
+            return BASE_CHECKER.shouldItHit(attacker, victim, args)
+        }
+
+        fun nonBossShouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
+            return NON_BOSS_CHECKER.shouldItHit(attacker, victim, args)
         }
 
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
