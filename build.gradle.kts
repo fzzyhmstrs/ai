@@ -66,6 +66,9 @@ repositories {
     flatDir {
         dirs("E:\\Documents\\Mod Libraries\\structurized-reborn-1.0\\build\\libs")
     }
+    flatDir {
+        dirs("E:\\Documents\\Mod Libraries\\siht\\build\\libs")
+    }
     mavenCentral()
 }
 dependencies {
@@ -159,6 +162,12 @@ dependencies {
 
     val lithiumVersion: String by project
     modImplementation("maven.modrinth:lithium:$lithiumVersion")
+
+    val sihtVersion: String by project
+    modImplementation(":should_i_hit_that-$sihtVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include(":should_i_hit_that-$sihtVersion")
 }
 
 tasks {
