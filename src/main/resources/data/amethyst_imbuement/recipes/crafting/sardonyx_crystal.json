@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SAS",
+		"ANA",
+		"SAS"
+	],
+	"key": {
+		"S": {
+			"item": "amethyst_imbuement:sardonyx"
+		},
+		"A": {
+			"item": "amethyst_imbuement:accursed_figurine"
+		},
+		"N": {
+			"item": "minecraft:nether_star"
+		}
+	},
+	"result": {
+		"item": "amethyst_imbuement:sardonyx_crystal"
+	}
+}
