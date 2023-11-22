@@ -3,7 +3,10 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FleeCreeperGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
@@ -20,10 +23,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.Angerable
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.mob.PathAwareEntity
+import net.minecraft.entity.mob.*
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
@@ -98,6 +98,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     override fun initGoals() {
+        goalSelector.add(0, FleeCreeperGoal(this))
         goalSelector.add(1, MeleeAttackGoal(this, 1.0, true))
         goalSelector.add(4, WanderNearTargetGoal(this, 0.9, 16.0f))
         goalSelector.add(4, WanderAroundPointOfInterestGoal(this as PathAwareEntity, 0.6, false))
@@ -107,7 +108,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
 
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
         targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
-        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster && ((entity as? CreeperEntity)?.isIgnited != true) })
         targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 
@@ -214,9 +215,9 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
             return false
         }
         val attacker = source.attacker
-        if (attacker != null){
+        if (attacker is LivingEntity){
             val spell = if (source is SpellDamageSource) source.getSpell() else null
-            if(!AiConfig.entities.shouldItHit(attacker, this, spell)) return false
+            if(!AiConfig.entities.shouldItHitBase(attacker, this,AiConfig.Entities.Options.NONE, spell)) return false
         }
         if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()

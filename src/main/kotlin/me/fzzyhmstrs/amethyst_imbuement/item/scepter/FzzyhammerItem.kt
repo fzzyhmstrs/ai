@@ -25,6 +25,14 @@ class FzzyhammerItem(settings: Settings):
 
     override val fallbackId: Identifier = Identifier(AI.MOD_ID,"hamptertime")
 
+    override fun getMiningSpeedMultiplier(stack: ItemStack, state: BlockState): Float {
+        val damage = stack.damage
+        val maxDamage = stack.maxDamage
+        val damageLeft = maxDamage - damage
+        if (damageLeft <= 1) return 1.0f
+        return super.getMiningSpeedMultiplier(stack, state)
+    }
+
     override fun canAcceptAugment(augment: ScepterAugment): Boolean {
         return augment == RegisterEnchantment.HAMPTERTIME
     }

@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlayerFireballEntity.Companion.createMeteor
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.item.Items
@@ -23,8 +23,8 @@ class MeteorAugment: SummonProjectileAugment(ScepterTier.THREE,5){
                                                 .withAmplifier(3)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,32,10,
-            10,imbueLevel,2, LoreTier.LOW_TIER, Items.LAVA_BUCKET)
+        return AugmentDatapoint(SpellType.FURY,40,50,
+            25,imbueLevel,10, BookOfTalesItem.TALES_TIER, Items.LAVA_BUCKET)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {

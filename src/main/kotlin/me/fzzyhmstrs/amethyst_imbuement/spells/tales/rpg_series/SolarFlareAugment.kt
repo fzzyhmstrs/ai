@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
@@ -68,26 +69,6 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
 
     }
 
-    /*override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
-        val random = AIClient.aiRandom()
-        val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
-        val perpendicularToPosX = 1.0
-        val perpendicularToPosZ = (rotation.x/rotation.z) * -1
-        val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
-        val userPos = user.eyePos.add(0.0,-0.3,0.0)
-        val increment = rotation.multiply(baseEffect.range(level) / 60)
-        var particleBasePos = userPos
-        for (i in 0..60){
-            particleBasePos = particleBasePos.add(increment)
-            for (j in 0..3){
-                val rnd1 = random.nextDouble() * 0.4 - 0.2
-                val rnd2 = random.nextDouble() * 0.4 - 0.2
-                val particlePos = particleBasePos.add(perpendicularVector.multiply(rnd1))
-                world.addParticle(ParticleTypes.ELECTRIC_SPARK,true, particlePos.x, particlePos.y + rnd2, particlePos.z, 0.0, 0.0, 0.0)
-            }
-        }
-    }*/
-
     override fun soundEvent(): SoundEvent {
         return RegisterSound.SOLAR_FLARE_FIRE
     }
@@ -106,7 +87,7 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
                 val rotation = data.user.getRotationVec(1.0F)
                 val perpendicularVector = RaycasterUtil.perpendicularVector(rotation, RaycasterUtil.InPlane.XZ)
                 val raycasterPos = data.user.pos.add(rotation.multiply(data.effect.range(data.level)/2)).add(Vec3d(0.0,data.user.height/2.0,0.0))
-                val entityList: MutableList<Entity> =
+                val entityList: List<Entity> =
                     RaycasterUtil.raycastEntityRotatedArea(
                         data.world.iterateEntities(),
                         data.user,
@@ -115,7 +96,7 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
                         perpendicularVector,
                         data.effect.range(data.level),
                         1.5,
-                        1.5)
+                        1.5).filter { AiConfig.entities.shouldItHitBase(data.user, it,this) }
                 if (entityList.isNotEmpty()) {
                     val mod = SpChecker.getModFromTags(data.user,RegisterTag.ARCANE_AUGMENTS, RegisterTag.FIRE_AUGMENTS)
                     val dmg = data.effect.damage(data.level) * (1f + mod.toFloat()/100f)

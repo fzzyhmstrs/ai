@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series
 
 import me.fzzyhmstrs.amethyst_core.compat.spell_power.SpChecker
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
@@ -16,8 +15,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -57,8 +54,8 @@ class CracklingInfusionAugment: MiscAugment(ScepterTier.THREE,12){
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
-                if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
-                    if (  !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
+                if (entity3 is LivingEntity) {
+                    if (!AiConfig.entities.shouldItHitFriend(user,entity3,this)) continue
                     successes++
                     entity3.addStatusEffect(StatusEffectInstance(RegisterStatus.LIGHTNING_AURA,duration, amplifier))
                     entity3.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,duration, 0))

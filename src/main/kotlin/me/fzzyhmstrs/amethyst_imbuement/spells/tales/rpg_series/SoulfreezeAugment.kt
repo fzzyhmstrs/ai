@@ -1,17 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series
 
 import me.fzzyhmstrs.amethyst_core.compat.spell_power.SpChecker
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
-import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
@@ -39,7 +38,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,600,120,
-            23,imbueLevel,25, LoreTier.HIGH_TIER, Items.SOUL_SOIL)
+            23,imbueLevel,25, BookOfTalesItem.TALES_TIER, Items.SOUL_SOIL)
     }
 
     override fun effect(
@@ -52,8 +51,9 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
     ): Boolean {
         val hitResult = EntityHitResult(user, Vec3d(user.x,user.getBodyY(0.5),user.z))
         val (_, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
-        if (entityList.isEmpty()) return false
-        val bl = effect(world, user, entityList, level, effect)
+        val filteredList = entityList.filter { AiConfig.entities.shouldItHitBase(user, it,this) }.toMutableList()
+        if (filteredList.isEmpty()) return false
+        val bl = effect(world, user, filteredList, level, effect)
         if (bl) {
             if (world is ServerWorld){
                 world.spawnParticles(ParticleTypes.SNOWFLAKE,user.x,user.getBodyY(0.5),user.z,1000,effect.range(level),0.8,effect.range(level),0.0)
@@ -76,7 +76,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
 
         var successes = 0
         for (target in entityList) {
-            if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
+            //if (!AiConfig.entities.shouldItHit(user, target,this)) continue
             val bl = target.damage(CustomDamageSources.freeze(world,null,user),effect.damage(level))
             if (bl && target is LivingEntity) {
                 val mod = SpChecker.getModFromTags(user, RegisterTag.SOUL_AUGMENTS, RegisterTag.ICE_AUGMENTS)

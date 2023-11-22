@@ -93,7 +93,6 @@ open class UnhallowedEntity: PlayerCreatedConstructEntity {
                 this.equipStack(EquipmentSlot.MAINHAND, ItemStack(RegisterTool.GLOWING_BLADE))
             }
         }
-        println(this.itemsEquipped)
     }
 
     private fun bonus(level: Int): Int{

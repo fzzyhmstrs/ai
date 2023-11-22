@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
@@ -45,8 +46,8 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
+                    if (AiConfig.entities.shouldItHitBase(user, entity,this))
+                        hostileEntityList.add(entity)
                 }
             }
         }
@@ -86,7 +87,8 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         } else {
             effect.damage(level)/2 * crit
         }
-        val bl = target.damage(if (user is PlayerEntity) user.damageSources.playerAttack(user) else user.damageSources.mobAttack(user), damage)
+        val source = SpellDamageSource(if (user is PlayerEntity) user.damageSources.playerAttack(user) else user.damageSources.mobAttack(user),this)
+        val bl = target.damage(source, damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, ResonateAugment.writeBuf(user, target))

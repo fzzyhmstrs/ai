@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -14,8 +13,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -41,7 +38,7 @@ class ChickenformAugment: MinorSupportAugment(ScepterTier.TWO,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if (AiConfig.entities.shouldItHitFriend(user,target,this) && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))

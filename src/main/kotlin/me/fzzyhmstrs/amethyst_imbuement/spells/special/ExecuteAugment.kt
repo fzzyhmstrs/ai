@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -41,7 +40,7 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
     ): Boolean {
         return if(target != null) {
             if (target is LivingEntity) {
-                if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
+                if (!AiConfig.entities.shouldItHitBase(user, target,this)) return false
                 val bl = if (target.health <= effects.amplifier(level)){
                     target.kill()
                     true

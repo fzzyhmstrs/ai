@@ -8,10 +8,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.MobEntityAccessor
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
-import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
@@ -19,9 +17,10 @@ import net.minecraft.entity.ai.goal.ActiveTargetGoal
 import net.minecraft.entity.ai.goal.PrioritizedGoal
 import net.minecraft.entity.ai.goal.RevengeGoal
 import net.minecraft.entity.ai.goal.UniversalAngerGoal
-import net.minecraft.entity.boss.WitherEntity
-import net.minecraft.entity.boss.dragon.EnderDragonEntity
-import net.minecraft.entity.mob.*
+import net.minecraft.entity.mob.Angerable
+import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
@@ -46,8 +45,8 @@ class PersuadeAugment: MinorSupportAugment(ScepterTier.TWO,11), PersistentEffect
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is Monster || target is HostileEntity || target is PlayerCreatable && target.entityOwner != user && AiConfig.entities.isEntityPvpTeammate(target.entityOwner, user,RegisterEnchantment.PERSUADE)) {
-                if (target is MobEntity && target !is WitherEntity && target !is EnderDragonEntity ) {
+            if (AiConfig.entities.shouldItHit(user,target,AiConfig.Entities.Options.NON_BOSS,this)) {
+                if (target is MobEntity) {
                     val targetSelector = (target as MobEntityAccessor).targetSelector
                     val targets = targetSelector.goals.toMutableSet()
                     targetSelector.clear {true}

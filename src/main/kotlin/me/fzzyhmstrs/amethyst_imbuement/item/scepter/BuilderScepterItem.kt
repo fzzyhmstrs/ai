@@ -7,7 +7,6 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Oxidizable
 import net.minecraft.block.PillarBlock
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.HoneycombItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
@@ -24,6 +23,10 @@ class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings
 ): CustomSpellToolItem(material, 1.5f,-3.0f, BlockTags.SHOVEL_MINEABLE, settings) {
 
     override fun getMiningSpeedMultiplier(stack: ItemStack, state: BlockState): Float {
+        val damage = stack.damage
+        val maxDamage = stack.maxDamage
+        val damageLeft = maxDamage - damage
+        if (damageLeft <= 1) return 1.0f
         return if (state.isIn(BlockTags.AXE_MINEABLE) || state.isIn(BlockTags.SHOVEL_MINEABLE)) material.miningSpeedMultiplier else 1.0f
     }
 
@@ -69,11 +72,7 @@ class BuilderScepterItem(material: ScepterToolMaterial, settings: Settings
                 GameEvent.Emitter.of(playerEntity, optional4.get())
             )
             if (playerEntity != null) {
-                itemStack.damage(1, playerEntity) { p: PlayerEntity ->
-                    p.sendToolBreakStatus(
-                        context.hand
-                    )
-                }
+                manaDamage(context.stack,context.world,playerEntity,1, unbreakingFlag = true)
             }
             return ActionResult.success(world.isClient)
         }

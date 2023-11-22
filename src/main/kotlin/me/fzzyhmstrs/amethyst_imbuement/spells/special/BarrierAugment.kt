@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.special
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -13,8 +12,6 @@ import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -40,7 +37,7 @@ class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if (AiConfig.entities.shouldItHitFriend(user,target,this) && target is LivingEntity) {
                 EffectQueue.addStatusToQueue(target, StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level)/5)
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)

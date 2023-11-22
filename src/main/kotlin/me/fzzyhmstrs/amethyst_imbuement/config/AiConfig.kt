@@ -1,10 +1,18 @@
 package me.fzzyhmstrs.amethyst_imbuement.config
 
+import fzzyhmstrs.should_i_hit_that.api.MobCheckerBuilder
+import fzzyhmstrs.should_i_hit_that.api.MobCheckers
+import fzzyhmstrs.should_i_hit_that.api.ShouldHitResult
+import fzzyhmstrs.should_i_hit_that.api.ShouldItHitPredicate
+import fzzyhmstrs.should_i_hit_that.checkers.ExcludeTagChecker
+import fzzyhmstrs.should_i_hit_that.checkers.MobChecker
+import fzzyhmstrs.should_i_hit_that.checkers.PredicatedPassChecker
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.material.AiArmorMaterialsConfig
 import me.fzzyhmstrs.amethyst_imbuement.material.AiScepterMaterialsConfig
 import me.fzzyhmstrs.amethyst_imbuement.material.AiToolMaterialsConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_config.config_util.*
 import me.fzzyhmstrs.fzzy_config.interfaces.OldClass
 import me.fzzyhmstrs.fzzy_config.validated_field.*
@@ -393,11 +401,20 @@ object AiConfig
     class Entities: ConfigClass(entitiesHeader), OldClass<Entities>{
 
         private val IS_PVP_NOT_FRIEND: MobChecker = PredicatedPassChecker(
-            {a,v,args -> forcePvpOnAllSpells.get() || args.size > 0 && (args[0] as? ScepterAugment)?.getPvpMode() == true},
+            {_,_,args -> forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true},
             MobCheckers.NOT_FRIEND
             )
+
+        private val IS_PVP_FRIEND: MobChecker = PredicatedPassChecker(
+            {_,_,args -> forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true},
+            MobCheckers.FRIEND
+        )
+        private val NULL_NOT_MONSTER: MobChecker = PredicatedPassChecker(
+            {attacker,_,_ -> attacker == null},
+            {_,victim,_ -> if (victim is Monster) ShouldHitResult.FAIL else ShouldHitResult.PASS}
+        )
         
-        private val BASE_CHECKER = MobCheckerBuilder.sequence(
+        private val HIT_CHECKER = MobCheckerBuilder.sequence(
             MobCheckers.NON_NULL_HIT,
             MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_SELF,
@@ -406,9 +423,12 @@ object AiConfig
             MobCheckers.NOT_PLAYER
         )
 
-        private val NON_BOSS_CHECKER = MobCheckerBuilder.sequence(
-            ExcludeTagChecker(RegisterTag.POULTRYMORPH_IGNORES),
-            BASE_CHECKER
+        private val FRIEND_CHECKER = MobCheckerBuilder.sequence(
+            NULL_NOT_MONSTER,
+            MobCheckers.MONSTER_FRIEND,
+            MobCheckers.PET,
+            IS_PVP_FRIEND,
+            MobCheckers.HIT
         )
         
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
@@ -423,13 +443,61 @@ object AiConfig
             return entity is PlayerEntity
         }
 
-        fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
-            return BASE_CHECKER.shouldItHit(attacker, victim, args)
+        enum class Options{
+            NONE{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return true
+                }
+            },
+            NON_BOSS{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_BOSS_HIT_CHECKER.shouldItHit(attacker, victim, args)
+                }
+            },
+            NON_ANIMAL{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_ANIMAL_HIT_CHECKER.shouldItHit(attacker, victim, args)
+                }
+            },
+            NON_VILLAGER{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_VILLAGER_HIT_CHECKER.shouldItHit(attacker, victim, args)
+                }
+            },
+            NON_FRIENDLY{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_ANIMAL_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_VILLAGER.shouldItHit(attacker, victim, args)
+                }
+            },
+            NON_BOSS_FRIENDLY{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_BOSS_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_FRIENDLY.shouldItHit(attacker, victim, args)
+                }
+            };
+            abstract fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean
+
+            protected val NON_ANIMAL_HIT_CHECKER: ShouldItHitPredicate = MobCheckerBuilder.single(MobCheckers.NOT_FARM_ANIMAL)
+
+            protected val NON_VILLAGER_HIT_CHECKER: ShouldItHitPredicate = MobCheckerBuilder.single(MobCheckers.NOT_VILLAGER)
+
+            protected val NON_BOSS_HIT_CHECKER: ShouldItHitPredicate = MobCheckerBuilder.single(ExcludeTagChecker(RegisterTag.POULTRYMORPH_IGNORES))
         }
 
-        fun nonBossShouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
-            return NON_BOSS_CHECKER.shouldItHit(attacker, victim, args)
+        fun shouldItHitBase(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
+            return shouldItHit(attacker,victim, Options.NON_FRIENDLY, args)
         }
+
+        fun shouldItHit(attacker: LivingEntity?, victim: Entity, options: Options, vararg args: Any?): Boolean{
+            return options.shouldItHit(attacker, victim, args) && HIT_CHECKER.shouldItHit(attacker, victim, args)
+        }
+
+        fun shouldItHitFriend(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
+            return FRIEND_CHECKER.shouldItHit(attacker, victim, args)
+        }
+
+        //MonsterShouldHit:
+        //NOT_MONSTER_FRIEND &&
+        //
 
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
         var forcePvpOnAllSpells = ValidatedBoolean(false)
