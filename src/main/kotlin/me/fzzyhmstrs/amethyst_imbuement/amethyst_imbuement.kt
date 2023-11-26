@@ -74,6 +74,7 @@ object AIClient: ClientModInitializer{
         RegisterParticle.registerParticleFactories()
         BaseHamsterArmorFeatureRenderer.HamsterArmorTextureIdsHolder.registerClient()
         RegisterNetworking.registerClient()
+        RegisterCommand.registerClient()
     }
 
     fun aiRandom(): Random{

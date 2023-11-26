@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -54,13 +55,13 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
+            if (AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
                 val ownerEffects = entity.statusEffects//.filter { !it.isInfinite }
                 val beneficialEffects = ownerEffects.filter { it.effectType.isBeneficial }
                 val negativeEffects = ownerEffects.filter { !it.effectType.isBeneficial }
                 val multiplier = 1f + beneficialEffects.size * 0.75f + negativeEffects.size * 1.5f
                 val bl = entity2.damage(
-                    entity.damageSources.indirectMagic(this,owner),
+                    SpellDamageSource(entity.damageSources.indirectMagic(this,owner),augment),
                     entityEffects.damage(0) * multiplier
                 )
                 if (bl) {

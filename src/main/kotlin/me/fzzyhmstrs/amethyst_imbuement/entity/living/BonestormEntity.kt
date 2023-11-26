@@ -2,7 +2,6 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.spell.BoneShardEntity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -19,11 +18,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import net.minecraft.world.WorldEvents
-import java.util.*
-import kotlin.math.sqrt
 
 @Suppress("PrivatePropertyName")
 open class BonestormEntity: PlayerCreatedConstructEntity {
@@ -139,84 +134,6 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
 
     fun setFireActive(fireActive: Boolean){
         dataTracker.set(BONESTORM_FLAGS,fireActive)
-    }
-
-    internal class ShootProjectileGoal(private val bonestorm: BonestormEntity) : Goal() {
-        private var fireballsFired = 0
-        private var fireballCooldown = 0
-        private var targetNotVisibleTicks = 0
-        override fun canStart(): Boolean {
-            val livingEntity = bonestorm.target
-            return livingEntity != null && livingEntity.isAlive && bonestorm.canTarget(livingEntity)
-        }
-
-        override fun start() {
-            fireballsFired = 0
-        }
-
-        override fun stop() {
-            bonestorm.setFireActive(false)
-            targetNotVisibleTicks = 0
-        }
-
-        override fun shouldRunEveryTick(): Boolean {
-            return true
-        }
-
-        override fun tick() {
-            --fireballCooldown
-            val livingEntity = bonestorm.target ?: return
-            val bl = bonestorm.visibilityCache.canSee(livingEntity)
-            targetNotVisibleTicks = if (bl) 0 else ++targetNotVisibleTicks
-            val d = bonestorm.squaredDistanceTo(livingEntity)
-            if (d < 4.0) {
-                if (!bl) {
-                    return
-                }
-                if (fireballCooldown <= 0) {
-                    fireballCooldown = 20
-                    bonestorm.tryAttack(livingEntity)
-                }
-                bonestorm.moveControl.moveTo(livingEntity.x, livingEntity.y, livingEntity.z, 1.0)
-            } else if (d < followRange * followRange && bl) {
-
-                if (fireballCooldown <= 0) {
-                    ++fireballsFired
-                    if (fireballsFired == 1) {
-                        fireballCooldown = 60
-                        bonestorm.setFireActive(true)
-                    } else if (fireballsFired <= 4) {
-                        fireballCooldown = 6
-                    } else {
-                        fireballCooldown = 100
-                        fireballsFired = 0
-                        bonestorm.setFireActive(false)
-                    }
-                    if (fireballsFired > 1) {
-                        val h = (sqrt(sqrt(d)) * 0.5f).toFloat()
-                        if (!bonestorm.isSilent) {
-                            bonestorm.world.syncWorldEvent(null, WorldEvents.BLAZE_SHOOTS, bonestorm.blockPos, 0)
-                        }
-                        val rot = Vec3d(livingEntity.x - bonestorm.x,livingEntity.getBodyY(0.5) - bonestorm.getBodyY(0.5),livingEntity.z - bonestorm.z)
-                        val pos  = Vec3d(bonestorm.x,bonestorm.getBodyY(0.5) + 0.5,bonestorm.z)
-                        val owner = bonestorm.getOwner() ?: bonestorm
-                        val bse = BoneShardEntity(bonestorm.world,owner,4.0f,1.75f*h,pos,rot)
-                        bonestorm.world.spawnEntity(bse)
-
-                    }
-                }
-                bonestorm.lookControl.lookAt(livingEntity, 10.0f, 10.0f)
-            } else if (targetNotVisibleTicks < 5) {
-                bonestorm.moveControl.moveTo(livingEntity.x, livingEntity.y, livingEntity.z, 1.0)
-            }
-            super.tick()
-        }
-
-        private val followRange: Double = bonestorm.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE)
-
-        init {
-            controls = EnumSet.of(Control.MOVE, Control.LOOK)
-        }
     }
 
 }

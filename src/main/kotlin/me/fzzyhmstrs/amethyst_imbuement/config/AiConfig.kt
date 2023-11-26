@@ -602,6 +602,89 @@ object AiConfig
         }
     }
 
+    private val hudHeader = buildSectionHeader("hud")
+
+    class Hud: ConfigClass(hudHeader), OldClass<Hud>{
+
+        fun getX(width: Int): Int{
+            return hudCorner.get().getX(width, hudX.get())
+        }
+
+        fun getY(height: Int): Int{
+            return hudCorner.get().getY(height, hudY.get())
+        }
+
+        var showHud = ValidatedBoolean(true)
+        var hudCorner = ValidatedEnum(Corner.TOP_LEFT,Corner::class.java)
+        var hudX = ValidatedInt(0,Int.MAX_VALUE, 0)
+        var hudY = ValidatedInt(0,Int.MAX_VALUE, 0)
+        override fun generateNewClass(): Hud {
+            return this
+        }
+
+        enum class Corner{
+            TOP_LEFT{
+                override fun getX(width: Int, x: Int): Int {
+                    return x + 6
+                }
+                override fun getY(height: Int, y: Int): Int {
+                    return y + 4
+                }
+            },
+            BOTTOM_LEFT{
+                override fun getX(width: Int, x: Int): Int {
+                    return x + 6
+                }
+                override fun getY(height: Int, y: Int): Int {
+                    return height - y - 35
+                }
+            },
+            TOP_RIGHT{
+                override fun getX(width: Int, x: Int): Int {
+                    return width - x - 93
+                }
+                override fun getY(height: Int, y: Int): Int {
+                    return y + 4
+                }
+            },
+            BOTTOM_RIGHT{
+                override fun getX(width: Int, x: Int): Int {
+                    return width - x - 93
+                }
+                override fun getY(height: Int, y: Int): Int {
+                    return height - y - 35
+                }
+            },
+            BOTTOM_MIDDLE{
+                override fun getX(width: Int, x: Int): Int {
+                    return width/2 - x
+                }
+                override fun getY(height: Int, y: Int): Int {
+                    return height - y - 35
+                }
+
+                override fun validate(x: Int, y: Int, width: Int, height: Int): Boolean {
+                    if (x < 0 || y < 0) return false
+                    if (x > width/2) return false
+                    return y <= height - 35
+                }
+            };
+
+            abstract fun getX(width: Int, x: Int): Int
+            abstract fun getY(height: Int, y: Int): Int
+
+            open fun validate(x: Int, y: Int, width: Int, height: Int): Boolean {
+                if (x < 0 || y < 0) return false
+                if (x > width - 93) return false
+                return y <= height - 35
+            }
+        }
+    }
+
+    fun saveHud(){
+        SyncedConfigHelperV1.save("hud_v0.json", base = AI.MOD_ID, configClass = hud)
+    }
+
     var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
     var materials: Materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
@@ -610,6 +693,9 @@ object AiConfig
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v5.json","entities_v4.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
     var resources: Resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
+    @NonSync
+    var hud: Hud = SyncedConfigHelperV1.readOrCreateAndValidate("hud_v0.json", base = AI.MOD_ID, configClass = {Hud()})
+
 
     override fun initConfig() {
         super.initConfig()

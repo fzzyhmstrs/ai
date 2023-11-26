@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.ProjectileEntityAccessor
@@ -55,7 +56,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F).withRange(5.0)
     open var maxAge = 100
-    protected var scepterAugment: ScepterAugment = RegisterEnchantment.ICE_SHARD
+    protected var scepterAugment: ScepterAugment = RegisterEnchantment.ENERGY_BLADE
     private var blockHits = 0
 
     fun setAugment(aug: ScepterAugment){
@@ -220,8 +221,8 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!( AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
-                val bl = entity2.damage(entity.damageSources.indirectMagic(this,entity),entityEffects.damage(0))
+            if (AiConfig.entities.shouldItHitBase(entity, entity2, scepterAugment)){
+                val bl = entity2.damage(SpellDamageSource(entity.damageSources.indirectMagic(this,entity),scepterAugment),entityEffects.damage(0))
                 if (bl) {
                     world.playSound(null,blockPos,SoundEvents.ENTITY_PLAYER_ATTACK_CRIT,SoundCategory.PLAYERS,0.5f,1.0f)
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)

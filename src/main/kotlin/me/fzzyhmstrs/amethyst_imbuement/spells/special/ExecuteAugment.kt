@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
@@ -45,7 +46,7 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
                     target.kill()
                     true
                 } else {
-                    target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level))
+                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level))
                 }
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)

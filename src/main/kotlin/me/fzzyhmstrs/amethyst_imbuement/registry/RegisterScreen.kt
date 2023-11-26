@@ -7,7 +7,11 @@ import net.minecraft.text.Text
 
 object RegisterScreen {
 
+
+
     fun registerAll(){
+
+        ScepterHud.registerClient()
 
         HandledScreens.register(RegisterHandler.IMBUING_SCREEN_HANDLER) {
                 handler: ImbuingTableScreenHandler, playerInventory: PlayerInventory, title: Text ->

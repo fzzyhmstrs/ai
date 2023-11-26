@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FleeCreeperGoal
@@ -26,11 +27,16 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.*
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.AxeItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.Registries
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.util.Identifier
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
@@ -85,10 +91,19 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     open var entityGroup: EntityGroup = EntityGroup.DEFAULT
     internal var entityScale = 1f
     protected var trackingOwner = false
+    protected var spell: Identifier? = null
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
         this.level = level
+    }
+
+    open fun setSpell(spell: ScepterAugment){
+        this.spell = Registries.ENCHANTMENT.getId(spell)
+    }
+
+    open fun getSpell(): ScepterAugment? {
+        return Registries.ENCHANTMENT.get(spell) as? ScepterAugment
     }
 
     init{
@@ -291,10 +306,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     override fun canTarget(target: LivingEntity): Boolean {
         if (!isPlayerCreated()) return super.canTarget(target)
         val uuid = target.uuid
-        if (getOwner() != null) {
-            if (target.isTeammate(getOwner())) return false
-        }
-        return uuid != createdBy
+        val owner = owner
+        return AiConfig.entities.shouldItHitBase(owner,target,getSpell())
     }
 
     override fun handleStatus(status: Byte) {
@@ -318,18 +331,62 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     override fun tryAttack(target: Entity): Boolean {
-        val bl = super.tryAttack(target)
+        val summoner = getOwner()
+        if (summoner != null){
+            if (!AiConfig.entities.shouldItHitBase(summoner,target,getSpell())) return false
+        } else {
+            if (!AiConfig.entities.shouldItHitBase(this,target,getSpell())) return false
+        }
+        var f = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+        var g = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK).toFloat()
+        if (target is LivingEntity) {
+            f += EnchantmentHelper.getAttackDamage(this.mainHandStack, target.group)
+            g += EnchantmentHelper.getKnockback(this).toFloat()
+        }
+        val fireAspect: Int = EnchantmentHelper.getFireAspect(this)
+        if (fireAspect > 0) {
+            target.setOnFireFor(fireAspect * 4)
+        }
+        val spell = getSpell()
+        val source = if (spell == null) this.damageSources.mobAttack(this) else SpellDamageSource(this.damageSources.mobAttack(this), spell)
+        val bl = target.damage(source, f)
         if (bl) {
-            val summoner = getOwner()
+            if (g > 0.0f && target is LivingEntity) {
+                target.takeKnockback(
+                    (g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(
+                        yaw * (Math.PI.toFloat() / 180)
+                    ).toDouble()
+                )
+                velocity = velocity.multiply(0.6, 1.0, 0.6)
+            }
+            if (target is PlayerEntity) {
+                disablePlayerShield(
+                    target,
+                    this.mainHandStack,
+                    if (target.isUsingItem) target.activeItem else ItemStack.EMPTY
+                )
+            }
+            applyDamageEffects(this, target)
+            onAttacking(target)
             if (summoner != null && summoner is PlayerEntity && target is LivingEntity){
                 (target as PlayerHitTimerAccessor).setPlayerHitTimer(100)
             }
-            val f = world.getLocalDifficulty(blockPos).localDifficulty
-            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < f * 0.3f) {
-                target.setOnFireFor(2 * f.toInt())
+            val h = world.getLocalDifficulty(blockPos).localDifficulty
+            if (this.mainHandStack.isEmpty && this.isOnFire && random.nextFloat() < h * 0.3f) {
+                target.setOnFireFor(2 * h.toInt())
             }
         }
         return bl
+    }
+
+    private fun disablePlayerShield(player: PlayerEntity, mobStack: ItemStack, playerStack: ItemStack) {
+        if (!mobStack.isEmpty && !playerStack.isEmpty && mobStack.item is AxeItem && playerStack.isOf(Items.SHIELD)) {
+            val f = 0.25f + EnchantmentHelper.getEfficiency(this).toFloat() * 0.05f
+            if (random.nextFloat() < f) {
+                player.itemCooldownManager[Items.SHIELD] = 100
+                world.sendEntityStatus(player, EntityStatuses.BREAK_SHIELD)
+            }
+        }
     }
 
     override fun getLeashOffset(): Vec3d {

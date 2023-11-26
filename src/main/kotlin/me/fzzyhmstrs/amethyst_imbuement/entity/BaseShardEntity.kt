@@ -42,7 +42,7 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, scepterAugment))){
+            if (AiConfig.entities.shouldItHitBase(entity, entity2, scepterAugment)){
                 val bl = entity2.damage(entity.damageSources.mobProjectile(this,entity),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
                 )

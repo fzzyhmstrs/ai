@@ -4,6 +4,7 @@ import eu.pb4.common.protection.api.CommonProtection
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -54,13 +55,13 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if (!entity2.isFireImmune && !(AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
+            if (!entity2.isFireImmune && AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
                 val i = entity2.fireTicks
                 val j = if (entity2 is LivingEntity) ProtectionEnchantment.transformFireDuration(entity2, entityEffects.duration(0)) else entityEffects.duration(0)
                 if (i < j)
                     entity2.fireTicks = j
                 val bl = entity2.damage(
-                    entity.damageSources.fireball(null,owner),
+                    SpellDamageSource(entity.damageSources.fireball(null,owner),augment),
                     entityEffects.damage(0)
                 )
                 if (!bl) {

@@ -19,15 +19,11 @@ class FleeCreeperGoal(private val construct: PlayerCreatedConstructEntity): Goal
             println(target.squaredDistanceTo(construct))
         }*/
         if (target is CreeperEntity && target.fuseSpeed > 0 && target.squaredDistanceTo(construct) < 49.0){
-            println("First trying to flee!")
             val vec3d = NoPenaltyTargeting.findFrom(construct, 16, 7, target.pos) ?: return false
-            println("Second trying to flee!")
             if (target.squaredDistanceTo(vec3d.x, vec3d.y, vec3d.z) < target.squaredDistanceTo(construct)) {
                 return false
             }
-            println("Third trying to flee!")
             fleePath = construct.navigation.findPathTo(vec3d.x,vec3d.y,vec3d.z,0)
-            println("I'm trying to flee!!")
             return fleePath != null
         }
         return false

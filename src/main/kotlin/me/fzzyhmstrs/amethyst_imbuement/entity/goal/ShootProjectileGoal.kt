@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.goal
 
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.BonestormEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.BoneShardEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.EntityAttributes
@@ -103,6 +105,8 @@ open class ShootProjectileGoal (
         val pos  = Vec3d(mobEntity.x,mobEntity.getBodyY(0.5) + 0.5,mobEntity.z)
         val owner = ownerGetter.get()
         val bse = BoneShardEntity(mobEntity.world,owner,4.0f,1.75f*h,pos,rot)
+        if (mobEntity is BonestormEntity)
+            bse.setAugment(RegisterEnchantment.SUMMON_BONESTORM)
         mobEntity.world.spawnEntity(bse)
     }
 

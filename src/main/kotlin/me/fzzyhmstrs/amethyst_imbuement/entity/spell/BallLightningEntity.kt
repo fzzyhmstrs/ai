@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -66,9 +67,9 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
         for (entity in entities){
-            if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
+            if (!AiConfig.entities.shouldItHitBase(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
+            entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
@@ -98,7 +99,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(CustomDamageSources.lightningBolt(world,this,owner),entityEffects.damage(0))
+            entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         }
@@ -121,7 +122,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
-                user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
+                user.eyeY - (user.height * 0.3333333) - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
                 user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),

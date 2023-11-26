@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
@@ -139,6 +140,11 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     override fun damage(source: DamageSource, amount: Float): Boolean {
         if (isInvulnerableTo(source)) {
             return false
+        }
+        val attacker = source.attacker
+        if (attacker is LivingEntity){
+            val spell = if (source is SpellDamageSource) source.getSpell() else null
+            if(!AiConfig.entities.shouldItHitBase(attacker, this,AiConfig.Entities.Options.NONE, spell)) return false
         }
         if (source.isIn(DamageTypeTags.ALWAYS_TRIGGERS_SILVERFISH)) {
             this.callForConstructHelpGoal.onHurt()

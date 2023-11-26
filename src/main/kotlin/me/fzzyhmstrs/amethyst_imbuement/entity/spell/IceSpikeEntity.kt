@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -116,9 +117,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (  AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
-            return
-        }
+        if (!AiConfig.entities.shouldItHitBase(livingEntity, target, augment)) return
         if (livingEntity == null) {
             target.damage(this.damageSources.freeze(), entityEffects.damage(0))
             target.frozenTicks = entityEffects.duration(0)
@@ -127,7 +126,7 @@ open class IceSpikeEntity(entityType: EntityType<IceSpikeEntity>, world: World):
             if (livingEntity.isTeammate(target)) {
                 return
             }
-            target.damage(CustomDamageSources.freeze(world,this,livingEntity), entityEffects.damage(0))
+            target.damage(SpellDamageSource(CustomDamageSources.freeze(world,this,livingEntity),augment), entityEffects.damage(0))
             target.frozenTicks = entityEffects.duration(0)
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }

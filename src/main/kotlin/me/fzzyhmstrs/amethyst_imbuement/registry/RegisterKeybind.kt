@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem
+import me.fzzyhmstrs.amethyst_imbuement.screen.SpellRadialHud
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.fabricmc.api.EnvType
@@ -31,6 +32,7 @@ object RegisterKeybind {
     private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
+    private var scepterRadialMenuPressed: Boolean = false
     private val CATEGORY = "key.categories.amethyst_imbuement"
 
     private val SCEPTER_ACTIVE_AUGMENT: KeyBinding = KeyBindingHelper.registerKeyBinding(
@@ -74,6 +76,15 @@ object RegisterKeybind {
             "key.amethyst_imbuement.scepter_down_key",  // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
             GLFW.GLFW_KEY_UNKNOWN,  // The keycode of the key
+            CATEGORY // The translation key of the keybinding's category.
+        )
+    )
+
+    private val SCEPTER_RADIAL_MENU: KeyBinding = KeyBindingHelper.registerKeyBinding(
+        KeyBinding(
+            "key.amethyst_imbuement.scepter_radial_menu_key",  // The translation key of the keybinding's name
+            InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+            GLFW.GLFW_KEY_LEFT_ALT,  // The keycode of the key
             CATEGORY // The translation key of the keybinding's category.
         )
     )
@@ -124,6 +135,19 @@ object RegisterKeybind {
                     if (uuid != null) {
                         ClientPlayNetworking.send(VEIN_MINER_PACKET, writeBuf(uuid, veinMinerKeyPressed))
                     }
+                }
+            }
+            if (SCEPTER_RADIAL_MENU.isPressed){
+                if (!scepterRadialMenuPressed){
+                    scepterRadialMenuPressed = true
+                    if (MinecraftClient.getInstance().currentScreen == null)
+                        MinecraftClient.getInstance().setScreen(SpellRadialHud)
+                }
+            } else {
+                if (scepterRadialMenuPressed){
+                    scepterRadialMenuPressed = false
+                    if (MinecraftClient.getInstance().currentScreen is SpellRadialHud)
+                        MinecraftClient.getInstance().setScreen(null)
                 }
             }
         })

@@ -994,6 +994,7 @@
 	"key.amethyst_imbuement.spell_key": "Current Scepter Spell",
 	"key.amethyst_imbuement.scepter_up_key": "Next Scepter Spell",
 	"key.amethyst_imbuement.scepter_down_key": "Previous Scepter Spell",
+	"key.amethyst_imbuement.scepter_radial_menu_key": "Scepter Radial Menu",
 	"key.amethyst_imbuement.sniper_bow_key": "Change Sniper Bow Scope",
 	
 	"chat.amethyst_imbuement.active_spell": "Active spell is: ",
@@ -1026,7 +1027,14 @@
 	"recipe.enhancing": "Enhancing",
 	"recipe.enhancing.spell_addition": "Disenchanted scrolls",
 	"recipe.enhancing.focus_reset": "Tier >1",
-	
+
+	"scepter.hud.fallback_name": "Unknown Spell",
+
+	"commands.amethyst_imbuement.failed.failed_validation": "Requested position is outside the bounds of the screen:[%1$s, %2$s]",
+	"commands.amethyst_imbuement.success": "HUD position updated to %1$s corner offset by [%2$s, %3$s]",
+	"commands.amethyst_imbuement.success.enable": "Spell HUD enabled!",
+	"commands.amethyst_imbuement.success.disable": "Spell HUD disabled!",
+
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
 	
 	"tag.amethyst_imbuement.disenchant_pillar_blocks": "Disenchanting Table Pillar Blocks",
