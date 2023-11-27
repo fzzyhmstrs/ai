@@ -43,7 +43,7 @@ object RegisterNetworking {
                 val spellId = Identifier.tryParse(spell) ?: return@execute
                 val spellEnchant = Registries.ENCHANTMENT.get(spellId) as? ScepterAugment ?: return@execute
                 val nbt = stack.nbt ?: return@execute
-                ScepterHelper.updateActiveAugment(stack, nbt, player, spell, spellEnchant)
+                ScepterHelper.updateActiveAugment(stack, nbt, player, spell, spellEnchant,false)
             }
 
         }

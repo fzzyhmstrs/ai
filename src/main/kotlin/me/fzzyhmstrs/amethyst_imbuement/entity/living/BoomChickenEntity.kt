@@ -3,6 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
@@ -12,6 +13,7 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Monster
@@ -172,6 +174,18 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
 
     override fun tryAttack(target: Entity?): Boolean {
         return true
+    }
+
+    override fun damage(source: DamageSource, amount: Float): Boolean {
+        if (isInvulnerableTo(source)) {
+            return false
+        }
+        val attacker = source.attacker
+        if (attacker is LivingEntity){
+            val spell = if (source is SpellDamageSource) source.getSpell() else null
+            if(!AiConfig.entities.shouldItHitBase(attacker, this,AiConfig.Entities.Options.NONE, spell)) return false
+        }
+        return super.damage(source, amount)
     }
 
     fun getFuseSpeed(): Int {

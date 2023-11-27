@@ -7,11 +7,11 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -23,7 +23,7 @@ class LightningAuraAugment: MinorSupportAugment(ScepterTier.THREE,7){
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY, 12000, 750,
-            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
+            22, imbueLevel, 100, BookOfTalesItem.TALES_TIER, Items.RAW_COPPER_BLOCK)
     }
 
     override fun supportEffect(

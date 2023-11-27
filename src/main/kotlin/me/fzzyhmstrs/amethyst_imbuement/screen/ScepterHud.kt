@@ -28,6 +28,7 @@ object ScepterHud {
     private val fallbackSpellName = AcText.translatable("scepter.hud.fallback_name")
 
     private var tick: Long = 0L
+    private var onTick = false
 
     private var activeStack: ItemStack = ItemStack.EMPTY
     private var activeSpellTextureId: Identifier = fallbackSpellTextureId
@@ -77,6 +78,7 @@ object ScepterHud {
             this.activeSpell = null
             RegisterTag.TagStyle.EMPTY
         }
+        if (!AiConfig.hud.showHud.get()) return
         val activeSpellTextureIdTemp = Identifier(activeSpellIdTemp.namespace,"textures/spell/${activeSpellIdTemp.path}.png")
         activeSpellTextureId = if (MinecraftClient.getInstance().resourceManager.getResource(activeSpellTextureIdTemp).isPresent) activeSpellTextureIdTemp else fallbackSpellTextureId
         val manaFractionTemp = (((activeStack.maxDamage - activeStack.damage).toFloat() / activeStack.maxDamage) * 54).toInt()
@@ -129,11 +131,10 @@ object ScepterHud {
                 witLevelDirty = false
             }
         }
-
     }
 
     private fun updateSpellRadialHudMap(stack: ItemStack, activeSpellIdentifier: Identifier, activeAugmentString: String){
-        val enchants = stack.enchantments.mapNotNull { EnchantmentHelper.getIdFromNbt(it as NbtCompound) }
+        val enchants = stack.enchantments.mapNotNull { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it as NbtCompound)) as? ScepterAugment }
         SpellRadialHud.update(enchants, activeSpellIdentifier, activeAugmentString)
     }
 
@@ -284,11 +285,23 @@ object ScepterHud {
             val item = stack.item
             if (item !is ScepterLike) return@register
             val activeSpell = item.getActiveEnchant(stack)
-            if (tick % 20L == 0L || !ItemStack.areEqual(stack, activeStack)){
+            if (SpellRadialHud.isDirty()){
                 if (!stack.hasEnchantments()) return@register
                 refreshHudCache(stack, activeSpell)
             }
-            draw(drawContext, tickDelta)
+            if (tick % 20L == 0L && !onTick){
+                if (!stack.hasEnchantments()) return@register
+                onTick = true
+                refreshHudCache(stack, activeSpell)
+            } else {
+                onTick = false
+            }
+            if (!ItemStack.areEqual(stack, activeStack)){
+                if (!stack.hasEnchantments()) return@register
+                refreshHudCache(stack, activeSpell)
+            }
+            if (AiConfig.hud.showHud.get())
+                draw(drawContext, tickDelta)
         }
     }
 }

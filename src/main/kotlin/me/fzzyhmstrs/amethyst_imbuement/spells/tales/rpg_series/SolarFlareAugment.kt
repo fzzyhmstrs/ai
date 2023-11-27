@@ -37,8 +37,8 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
                                                 .withRange(14.0,2.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,600,300,
-            25,imbueLevel,30, BookOfTalesItem.TALES_TIER, Items.GLOWSTONE)
+        return AugmentDatapoint(SpellType.FURY,400,200,
+            25,imbueLevel,20, BookOfTalesItem.TALES_TIER, Items.GLOWSTONE)
     }
 
     override fun effect(

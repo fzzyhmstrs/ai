@@ -1,33 +1,35 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.EquipmentSlot
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Arm
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.MathHelper
+import net.minecraft.world.EntityView
 import net.minecraft.world.World
+import java.util.*
 import kotlin.math.atan2
 import kotlin.math.roundToInt
 
 abstract class AbstractEffectTotemEntity(
     entityType: EntityType<out AbstractEffectTotemEntity>,
     world: World,
-    protected val summoner: PlayerEntity? = null,
+    protected var summoner: LivingEntity? = null,
     private val maxAge: Int = 600,
     item: Item = Items.AIR)
-    : LivingEntity(entityType, world) {
+    : LivingEntity(entityType, world), Tameable {
 
     var ticks = 0
     var lookingRotR = 0f
@@ -35,12 +37,64 @@ abstract class AbstractEffectTotemEntity(
     protected val ticker: EventRegistry.Ticker
     internal val stack = ItemStack(item)
     internal val seed = this.blockPos.asLong().toInt()
+    private var ownerUuid: UUID? = summoner?.uuid
     private val init: Int by lazy{
         firstTick()
     }
 
     init{
         ticker = initTickerInternal()
+    }
+
+    override fun getOwnerUuid(): UUID?{
+        return ownerUuid
+    }
+
+    override fun method_48926(): EntityView{
+        return this.world
+    }
+
+    override fun getOwner(): LivingEntity? {
+        return if (summoner != null) {
+            summoner
+        } else if (world is ServerWorld && ownerUuid != null) {
+            val o = (world as ServerWorld).getEntity(ownerUuid)
+            if (o != null && o is LivingEntity) {
+                this.summoner = o
+                o
+            } else {
+                null
+            }
+
+        }else {
+            null
+        }
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        if (ownerUuid != null) {
+            nbt.putUuid("owner",ownerUuid)
+        }
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        if (nbt.containsUuid("owner")){
+            ownerUuid = nbt.getUuid("owner")
+        }
+    }
+
+    override fun damage(source: DamageSource, amount: Float): Boolean {
+        if (isInvulnerableTo(source)) {
+            return false
+        }
+        val attacker = source.attacker
+        if (attacker is LivingEntity){
+            val spell = if (source is SpellDamageSource) source.getSpell() else null
+            if(!AiConfig.entities.shouldItHitBase(attacker, this, AiConfig.Entities.Options.NONE, spell)) return false
+        }
+        return super.damage(source, amount)
     }
 
     private fun initTickerInternal(): EventRegistry.Ticker {

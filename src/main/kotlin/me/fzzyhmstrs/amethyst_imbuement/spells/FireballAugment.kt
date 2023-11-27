@@ -18,7 +18,7 @@ import net.minecraft.world.World
 
 class FireballAugment: SummonProjectileAugment(ScepterTier.TWO,5){
 
-    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(7.75F,0.25f)
+    override val baseEffect: AugmentEffect = super.baseEffect.withDamage(7.75F,0.25f).withAmplifier(1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,32,10,

@@ -1034,6 +1034,9 @@
 	"commands.amethyst_imbuement.success": "HUD position updated to %1$s corner offset by [%2$s, %3$s]",
 	"commands.amethyst_imbuement.success.enable": "Spell HUD enabled!",
 	"commands.amethyst_imbuement.success.disable": "Spell HUD disabled!",
+	"commands.amethyst_imbuement.success.spacing": "Spell radial menu spacing updated to [%s] pixels",
+	"commands.amethyst_imbuement.success.spacing_warning": "Spell radial menu out of bounds. Requested [%1$s] pixels updated to [%2$s]",
+	"commands.amethyst_imbuement.success.spacing_reset": "Spell radial menu spacing reset",
 
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
 	

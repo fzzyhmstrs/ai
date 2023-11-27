@@ -55,7 +55,6 @@ open class ShootProjectileGoal (
                 return
             }
             if (fireballCooldown <= 0) {
-                println("melee attack at: $d")
                 fireballCooldown = meleeCooldown
                 mobEntity.tryAttack(livingEntity)
             }
@@ -64,14 +63,11 @@ open class ShootProjectileGoal (
             if (fireballCooldown <= 0) {
                 ++fireballsFired
                 if (fireballsFired == 1) {
-                    println("range charge at: $d")
                     fireballCooldown = fireballCharge
                     activeConsumer.accept(true)
                 } else if (fireballsFired <= 4) {
-                    println("range fire at: $d")
                     fireballCooldown = 6
                 } else {
-                    println("range cooldown at: $d")
                     fireballCooldown = 100
                     fireballsFired = 0
                     activeConsumer.accept(false)

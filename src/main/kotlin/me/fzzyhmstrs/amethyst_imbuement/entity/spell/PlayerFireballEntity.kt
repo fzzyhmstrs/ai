@@ -27,7 +27,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDamage(ae.damage(level))
-        entityEffects.addAmplifier(ae.amplifier(level))
+        entityEffects.setAmplifier(ae.amplifier(level))
     }
     
     private var augment: ScepterAugment = RegisterEnchantment.FIREBALL

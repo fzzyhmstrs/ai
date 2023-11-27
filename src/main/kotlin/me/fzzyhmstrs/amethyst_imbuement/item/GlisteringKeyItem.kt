@@ -37,7 +37,7 @@ class GlisteringKeyItem(settings: Settings)
         if (block !is GlisteringKeyUnlockable) return ActionResult.FAIL
         block.unlock(context.world,context.blockPos, null)
         if (block.consumeItem()){
-            println("item decrementing the stack ${context.stack} in a server world: ${!context.world.isClient}")
+            //println("item decrementing the stack ${context.stack} in a server world: ${!context.world.isClient}")
             context.stack.decrement(1)
         }
         context.world.playSound(null,context.blockPos,RegisterSound.UNLOCK,SoundCategory.PLAYERS,1.0f,1.0f)

@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
@@ -12,9 +11,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -22,7 +18,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
-class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600):
+class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: World, summoner: LivingEntity? = null, maxAge: Int = 600):
     AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.HEALERS_GEM), ModifiableEffectEntity {
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(2.0F).withRange(5.0)
@@ -40,14 +36,13 @@ class TotemOfGraceEntity(entityType: EntityType<out TotemOfGraceEntity>, world: 
     }
 
     override fun totemEffect() {
-        if (summoner == null) return
+        if (getOwner() == null) return
         val range = entityEffects.range(0)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
         val entities = world.getOtherEntities(this, box)
         for (entity in entities){
             if (entity !is LivingEntity) continue
-            if (entity is PassiveEntity || entity is GolemEntity ||    AiConfig.entities.isEntityPvpTeammate(summoner,entity,
-                    RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
+            if (AiConfig.entities.shouldItHitFriend(getOwner(),entity, RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
                 entity.heal(entityEffects.damage(0))
                 val serverWorld: ServerWorld = this.world as ServerWorld
                 beam(entity,serverWorld)

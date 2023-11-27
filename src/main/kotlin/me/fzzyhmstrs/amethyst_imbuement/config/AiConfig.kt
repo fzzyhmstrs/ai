@@ -618,6 +618,7 @@ object AiConfig
         var hudCorner = ValidatedEnum(Corner.TOP_LEFT,Corner::class.java)
         var hudX = ValidatedInt(0,Int.MAX_VALUE, 0)
         var hudY = ValidatedInt(0,Int.MAX_VALUE, 0)
+        var spellHudSpacing = ValidatedInt(80,145,30)
         override fun generateNewClass(): Hud {
             return this
         }

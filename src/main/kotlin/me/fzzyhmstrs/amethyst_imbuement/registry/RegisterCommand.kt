@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.context.CommandContext
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.screen.SpellRadialHud
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
@@ -106,26 +107,54 @@ object RegisterCommand {
                             1
                         }
                 )
+                .then(
+                    ClientCommandManager.literal("spellHudSpacing")
+                        .then(ClientCommandManager.argument("spacing", IntegerArgumentType.integer())
+                            .executes{ context ->
+                                val spacing = IntegerArgumentType.getInteger(context, "spacing")
+                                AiConfig.hud.spellHudSpacing.validateAndSet(spacing)
+                                val chk = AiConfig.hud.spellHudSpacing.get()
+                                AiConfig.saveHud()
+                                SpellRadialHud.markDirty()
+                                if (spacing == chk)
+                                    context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.spacing",spacing))
+                                else
+                                    context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.spacing_warning",spacing,chk))
+                                1
+                            }
+                        )
+                        .then(ClientCommandManager.literal("reset")
+                            .executes{ context ->
+                                AiConfig.hud.spellHudSpacing.reset()
+                                AiConfig.saveHud()
+                                SpellRadialHud.markDirty()
+                                context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.spacing_reset"))
+                                1
+                            }
+                        )
+                )
         )
     }
 
-    private fun hudUpdate(corner: AiConfig.Hud.Corner,context: CommandContext<FabricClientCommandSource>): Int{
-        val x = IntegerArgumentType.getInteger(context, "x")
-        val y = IntegerArgumentType.getInteger(context, "y")
-        return hudUpdate(corner, x, y, context)
-    }
-
-    private fun hudUpdate(corner: AiConfig.Hud.Corner,x: Int, y: Int, context: CommandContext<FabricClientCommandSource>): Int{
-
-        if (!corner.validate(x,y,context.source.client.window.scaledWidth,context.source.client.window.scaledHeight)){
-            context.source.sendError(AcText.translatable("commands.amethyst_imbuement.failed.failed_validation",x,y))
-            return 0
+    private fun hudUpdate(corner: AiConfig.Hud.Corner, context: CommandContext<FabricClientCommandSource>): Int{
+            val x = IntegerArgumentType.getInteger(context, "x")
+            val y = IntegerArgumentType.getInteger(context, "y")
+            return hudUpdate(corner, x, y, context)
         }
-        AiConfig.hud.hudCorner.validateAndSet(corner)
-        AiConfig.hud.hudX.validateAndSet(x)
-        AiConfig.hud.hudY.validateAndSet(y)
-        AiConfig.saveHud()
-        context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success", corner.name,x,y))
+
+        private fun hudUpdate(corner: AiConfig.Hud.Corner,x: Int, y: Int, context: CommandContext<FabricClientCommandSource>): Int{
+
+            if (!corner.validate(x,y,context.source.client.window.scaledWidth,context.source.client.window.scaledHeight)){
+                context.source.sendError(AcText.translatable("commands.amethyst_imbuement.failed.failed_validation",x,y))
+                return 0
+            }
+            AiConfig.hud.hudCorner.validateAndSet(corner)
+            AiConfig.hud.hudX.validateAndSet(x)
+            AiConfig.hud.hudY.validateAndSet(y)
+            AiConfig.saveHud()
+            context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success", corner.name,x,y))
         return 1
     }
+
+
 }

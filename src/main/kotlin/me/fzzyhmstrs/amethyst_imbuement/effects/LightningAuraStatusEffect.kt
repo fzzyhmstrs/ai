@@ -8,8 +8,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.AttributeContainer
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
-import net.minecraft.entity.mob.HostileEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -34,7 +32,7 @@ class LightningAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: I
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
         val world = entity.world as? ServerWorld ?: return
         val box = Box(entity.pos.add(6.0,6.0,6.0),entity.pos.subtract(6.0,6.0,6.0))
-        val entities = world.getOtherEntities(entity, box) { (!AiConfig.entities.isEntityPvpTeammate(entity, it, RegisterEnchantment.LIGHTNING_AURA) && it is LivingEntity && it !is PassiveEntity) || it is HostileEntity }
+        val entities = world.getOtherEntities(entity, box) { (AiConfig.entities.shouldItHitBase(entity, it, RegisterEnchantment.LIGHTNING_AURA) && it is LivingEntity) }
         if (entities.isNotEmpty())
             world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.2f,1.0f)
         for (e in entities){

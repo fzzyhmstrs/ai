@@ -92,7 +92,6 @@ class PlanarDoorBlockEntity(blockEntityType: BlockEntityType<*>, blockPos: Block
         }
         if (partnerWorldKey != null) {
             World.CODEC.encodeStart(NbtOps.INSTANCE, partnerWorldKey).resultOrPartial { s: String? ->
-                println(s)
             }.ifPresent { nbtElement: NbtElement? ->
                 nbt.put(CompassItem.LODESTONE_DIMENSION_KEY, nbtElement)
             }

@@ -20,7 +20,7 @@ class MeteorAugment: SummonProjectileAugment(ScepterTier.THREE,5){
 
     override val baseEffect: AugmentEffect = super.baseEffect
                                                 .withDamage(14.25F,0.75f)
-                                                .withAmplifier(3)
+                                                .withAmplifier(4)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,40,50,

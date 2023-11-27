@@ -21,7 +21,7 @@ import net.minecraft.world.World
 class SummonFuryTotemAugment: SummonEntityAugment(ScepterTier.TWO,5) {
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(2.75f,0.25f)
+                                                .withDamage(4.5f,0.5f)
                                                 .withDuration(750,50)
                                                 .withAmplifier(8,1)
                                                 .withRange(4.5,0.5)   

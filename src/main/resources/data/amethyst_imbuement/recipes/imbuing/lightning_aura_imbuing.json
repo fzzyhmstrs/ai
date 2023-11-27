@@ -16,13 +16,13 @@
 	"item": "amethyst_imbuement:book_of_tales"
   },
   "craftD": {
-	"item": "amethyst_imbuement:beryl_copper_block"
+	"item": "minecraft:raw_copper_block"
   },
   "craftF": {
-	"item": "amethyst_imbuement:beryl_copper_block"
+	"item": "minecraft:raw_copper_block"
   },
   "craftH": {
-	"item": "amethyst_imbuement:beryl_copper_block"
+	"item": "minecraft:raw_copper_block"
   },
   "title": "Lightning Aura",
   "cost": 27,

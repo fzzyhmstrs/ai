@@ -169,7 +169,7 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
         while (hasReadLast(player,tale)){
             tale = supplierOfTales.get()
         }
-        return tale.also { println(it) }
+        return tale
     }
 
     override fun unlock(world: World, blockPos: BlockPos, stack: ItemStack?) {

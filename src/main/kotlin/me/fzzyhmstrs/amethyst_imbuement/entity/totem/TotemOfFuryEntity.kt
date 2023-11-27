@@ -12,7 +12,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -20,7 +19,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
-class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: World, summoner: PlayerEntity? = null, maxAge: Int = 600, private val attackModifier: Int = 4):
+class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: World, summoner: LivingEntity? = null, maxAge: Int = 600, private val attackModifier: Int = 4):
     AbstractEffectTotemEntity(entityType, world, summoner, maxAge, RegisterItem.LETHAL_GEM), ModifiableEffectEntity {
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(3.0F).withRange(5.0)
@@ -38,31 +37,28 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
         return ticker
     }
 
-    override fun tick() {
+    override fun lookAt(): LivingEntity? {
+        return target
+    }
+
+    override fun totemEffect() {
         val range = entityEffects.range(0)
         val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
-        val entities = world.getOtherEntities(summoner, box) {e -> e is LivingEntity && !AiConfig.entities.isEntityPvpTeammate(summoner,e,RegisterEnchantment.SUMMON_FURY_TOTEM)}
+        val entities = world.getOtherEntities(getOwner(), box) {e -> e is LivingEntity && AiConfig.entities.shouldItHitBase(getOwner(),e,
+            RegisterEnchantment.SUMMON_FURY_TOTEM)}
         val list: MutableList<LivingEntity> = mutableListOf()
         for (entity in entities) {
             if (entity is LivingEntity && entity != this){
                 list.add(entity)
             }
         }
-        target = world.getClosestEntity(list, TargetPredicate.DEFAULT,summoner,pos.x,pos.y,pos.z)
-        super.tick()
-    }
-
-    override fun lookAt(): LivingEntity? {
-        return target
-    }
-
-    override fun totemEffect() {
+        target = world.getClosestEntity(list, TargetPredicate.DEFAULT,getOwner(),pos.x,pos.y,pos.z)
         if (target == null) return
         if (target == this){
             target = null
             return
         }
-        target?.damage(CustomDamageSources.lightningBolt(world,this,summoner),entityEffects.damage(0))
+        target?.damage(CustomDamageSources.lightningBolt(world,this,getOwner()),entityEffects.damage(0))
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)
         world.playSound(null,this.blockPos,SoundEvents.ITEM_TRIDENT_THUNDER,SoundCategory.NEUTRAL,0.5f,1.0f)

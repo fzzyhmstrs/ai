@@ -24,7 +24,6 @@ import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
 import java.util.*
 
-@Suppress("PrivatePropertyName")
 object RegisterKeybind {
 
     private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
@@ -32,7 +31,7 @@ object RegisterKeybind {
     private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
-    private var scepterRadialMenuPressed: Boolean = false
+    //private var scepterRadialMenuPressed: Int = 0
     private val CATEGORY = "key.categories.amethyst_imbuement"
 
     private val SCEPTER_ACTIVE_AUGMENT: KeyBinding = KeyBindingHelper.registerKeyBinding(
@@ -137,19 +136,31 @@ object RegisterKeybind {
                     }
                 }
             }
-            if (SCEPTER_RADIAL_MENU.isPressed){
-                if (!scepterRadialMenuPressed){
-                    scepterRadialMenuPressed = true
+            //println("ALT pressed" + SCEPTER_RADIAL_MENU.isPressed)
+            var scepterWasPressed = 0
+            while (SCEPTER_RADIAL_MENU.wasPressed()){
+                scepterWasPressed++
+            }
+            if (scepterWasPressed > 0){
+                if (client.currentScreen == null) {
+                    if (client.player?.mainHandStack?.item is ScepterLike)
+                        MinecraftClient.getInstance().setScreen(SpellRadialHud)
+                }
+            }
+            /*if (SCEPTER_RADIAL_MENU.isPressed){
+                if (scepterRadialMenuPressed < 5){
+                    scepterRadialMenuPressed = 5
                     if (MinecraftClient.getInstance().currentScreen == null)
                         MinecraftClient.getInstance().setScreen(SpellRadialHud)
                 }
             } else {
-                if (scepterRadialMenuPressed){
-                    scepterRadialMenuPressed = false
-                    if (MinecraftClient.getInstance().currentScreen is SpellRadialHud)
-                        MinecraftClient.getInstance().setScreen(null)
+                if (scepterRadialMenuPressed > 0){
+                    scepterRadialMenuPressed--
+                    if (scepterRadialMenuPressed <= 0)
+                        if (MinecraftClient.getInstance().currentScreen is SpellRadialHud)
+                            MinecraftClient.getInstance().setScreen(null)
                 }
-            }
+            }*/
         })
     }
 

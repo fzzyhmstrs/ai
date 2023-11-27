@@ -96,12 +96,8 @@ class PlanarDoorAugment: PlaceItemAugment(ScepterTier.THREE, 10, RegisterBlock.P
                         partnerEntity.setColor(colorInt)
                         partnerEntity.setPartnerPos(hitPos)
                         partnerEntity.setPartnerWorld(world.registryKey)
-                        println(partnerEntity.getPartnerPos())
-                        println(partnerEntity.getPartnerWorld(world))
                         blockEntity.setPartnerPos(pos)
                         blockEntity.setPartnerWorld(newWorld.registryKey)
-                        println(blockEntity.getPartnerPos())
-                        println(blockEntity.getPartnerWorld(world))
                         Nbt.writeBlockPos("partnerPosPrevious", pos, nbt)
                         World.CODEC.encodeStart(NbtOps.INSTANCE, world.registryKey).resultOrPartial { s: String? ->
                                 println(s)
