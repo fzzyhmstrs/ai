@@ -78,7 +78,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     protected fun initCustomGoals() {
         //goalSelector.add(1, WanderAroundFarGoal(this, 1.0))
-        goalSelector.add(2, SardonyxElementalAttackGoal(this, { damageMultiplier }, { this }, {bl -> setFiringProjectiles(bl) }))
+        goalSelector.add(2, SardonyxElementalAttackGoal(this, { damageMultiplier }, {t -> spellOnAttack(t)}, { this }, {bl -> setFiringProjectiles(bl) }))
         goalSelector.add(7, WanderAroundGoal(this, 1.0))
         targetSelector.add(1, SardonyxElementalPriorityTargetGoal(this))
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
@@ -111,20 +111,19 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         super.readCustomDataFromNbt(nbt)
         quartersReached = nbt.getInt("quartersReached")
         setFiringProjectiles(nbt.getBoolean("firingProjectiles"))
-        nbt.put("lastDamageTracker", lastDamageTracker.toNbt())
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
-        nbt.putFloat("damageMultiplier",damageMultiplier)
-
+        lastDamageTracker = LastDamageTracker.fromNbt(nbt.getCompound("lastDamageTracker"))
+        damageMultiplier = nbt.getFloat("damageMultiplier").takeIf { it > 0f } ?: 1f
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putBoolean("firingProjectiles", getFiringProjectiles())
         nbt.putInt("quartersReached", quartersReached)
-        lastDamageTracker = LastDamageTracker.fromNbt(nbt.getCompound("lastDamageTracker"))
-        damageMultiplier = nbt.getFloat("damageMultiplier")
+        nbt.put("lastDamageTracker", lastDamageTracker.toNbt())
+        nbt.putFloat("damageMultiplier",damageMultiplier)
     }
 
     override fun setCustomName(name: Text?) {
@@ -243,7 +242,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         var realAmount = amount
         if (getCharging() && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return false
-        if (realAmount >= 50f){
+        if (realAmount >= 50f && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)){
             if (highDamageCalcify <= 0) {
                 Calcify.INSTANCE.emergencyCalcify(this)
                 highDamageCalcify = 600
@@ -287,9 +286,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         return bl
     }
 
-    override fun tryAttack(target: Entity): Boolean {
-        attackTicksLeft = 10
-        world.sendEntityStatus(this, 4.toByte())
+    private fun spellOnAttack(target: Entity){
         if (spellCooldown <= 0 && !world.isClient && lastSpellWasBuff){
             val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(7.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable}) .map { it as LivingEntity }
             if (lastDamageTracker.getNumberOfAttackers() < 3 && nearbyPossibleAttackers.size < 4){
@@ -308,6 +305,12 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             lastSpellWasBuff = false
             spellCooldown = AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
         }
+    }
+
+    override fun tryAttack(target: Entity): Boolean {
+        attackTicksLeft = 10
+        world.sendEntityStatus(this, 4.toByte())
+        spellOnAttack(target)
         if (!AiConfig.entities.shouldItHit(this,target,AiConfig.Entities.Options.NONE)) return false
         val i: Int = EnchantmentHelper.getFireAspect(this)
         var f = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
@@ -448,7 +451,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
         val knockbackMultiplier = max(0.0,(((friendCount + 1)/10.0) - 1.0))
 
-        this.damageMultiplier = (damageMultiplier/2f).toFloat()
+        this.damageMultiplier = max((damageMultiplier/2f).toFloat() + 1f,1f)
 
         if (tankMultiplier > 0.0) {
             getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
@@ -486,7 +489,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL
                 )
             )
-        println(this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE))
+        this.health = this.maxHealth
     }
 
 

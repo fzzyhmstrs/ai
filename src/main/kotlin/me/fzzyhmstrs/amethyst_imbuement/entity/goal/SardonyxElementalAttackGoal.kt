@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.BoneShardEntity
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -15,6 +16,7 @@ import kotlin.math.sqrt
 class SardonyxElementalAttackGoal(
     sardonyxElementalEntity: SardonyxElementalEntity,
     private val damageMultiplierGetter: Supplier<Float>,
+    private val onProjectileShoot: Consumer<Entity>,
     ownerGetter: Supplier<LivingEntity>,
     activeConsumer: Consumer<Boolean>
 ) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 6.0) {
@@ -38,6 +40,7 @@ class SardonyxElementalAttackGoal(
         val pos  = Vec3d(mobEntity.x,mobEntity.getBodyY(0.5) + 0.5,mobEntity.z)
         val owner = ownerGetter.get()
         val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get() * damageMultiplierGetter.get())
+        println("Projectile damage: ${effects.damage(1)}")
         val bse = BoneShardEntity(mobEntity.world,owner,4.0f,0.5f*h,pos,rot)
         bse.setOnBlockHit { bhr ->
             livingEntity.world.createExplosion(
