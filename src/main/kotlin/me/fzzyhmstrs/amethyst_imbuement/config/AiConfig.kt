@@ -421,6 +421,7 @@ object AiConfig
             MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_SELF,
             MobCheckers.NOT_PET,
+            TogglePvpMobChecker,
             IS_PVP_NOT_FRIEND,
             MobCheckers.NOT_PLAYER
         )
