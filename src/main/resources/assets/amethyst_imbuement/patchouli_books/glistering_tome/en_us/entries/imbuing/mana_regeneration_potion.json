@@ -1,0 +1,30 @@
+{    
+"name": "Mana Regen Potion",    
+"icon": "amethyst_imbuement:mana_regeneration_potion",    
+"category": "amethyst_imbuement:imbuing",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "Recovers mana in Scepters and other mana items over time, by granting the Mana Regeneration status effect."
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Mana Potion Imbuing",
+"imbue_a_item": "amethyst_imbuement:glowing_fragment",
+"imbue_b_item": "amethyst_imbuement:glowing_fragment",
+"imbue_c_item": "amethyst_imbuement:glowing_fragment",
+"imbue_d_item": "amethyst_imbuement:glowing_fragment",
+"craft_a_item": "amethyst_imbuement:mana_potion",
+"craft_b_item": "amethyst_imbuement:mana_potion",
+"craft_c_item": "amethyst_imbuement:mana_potion",
+"craft_d_item": "amethyst_imbuement:mana_potion",
+"craft_e_item": "amethyst_imbuement:imbued_lapis",
+"craft_f_item": "amethyst_imbuement:mana_potion",
+"craft_g_item": "amethyst_imbuement:mana_potion",
+"craft_h_item": "amethyst_imbuement:mana_potion",
+"craft_i_item": "amethyst_imbuement:mana_potion",
+"result_item": "amethyst_imbuement:mana_regeneration_potion#4",
+"cost_text": "$(l)Level Cost: $(2)15$()"
+}
+]
+}
