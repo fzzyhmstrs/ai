@@ -144,7 +144,7 @@ dependencies {
     modImplementation("io.github.ladysnake:PlayerAbilityLib:$palVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("io.github.ladysnake:PlayerAbilityLib:$palVersion")
+    //include("io.github.ladysnake:PlayerAbilityLib:$palVersion")
 
     val meVersion: String by project
     implementation("com.github.llamalad7.mixinextras:mixinextras-fabric:$meVersion")
@@ -158,7 +158,7 @@ dependencies {
     modImplementation("eu.pb4:common-protection-api:$cpaVersion"){
         exclude("net.fabricmc.fabric-api")
     }
-    include("eu.pb4:common-protection-api:$cpaVersion")
+    //include("eu.pb4:common-protection-api:$cpaVersion")
 
     val lithiumVersion: String by project
     modImplementation("maven.modrinth:lithium:$lithiumVersion")
