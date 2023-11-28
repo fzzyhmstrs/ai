@@ -420,6 +420,7 @@ object AiConfig
             MobCheckers.NON_NULL_HIT,
             MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_SELF,
+            MobCheckers.NOT_CLAIMED,
             MobCheckers.NOT_PET,
             TogglePvpMobChecker,
             IS_PVP_NOT_FRIEND,
@@ -429,6 +430,7 @@ object AiConfig
         private val FRIEND_CHECKER = MobCheckerBuilder.sequence(
             NULL_NOT_MONSTER,
             MobCheckers.MONSTER_FRIEND,
+            MobCheckers.CLAIMED,
             MobCheckers.PET,
             IS_PVP_FRIEND,
             MobCheckers.HIT
