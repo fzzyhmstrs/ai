@@ -10,8 +10,8 @@ import net.minecraft.entity.effect.StatusEffects
 
 class TranceStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int): StatusEffect(statusEffectCategory, i) {
 
-    override fun onApplied(entity: LivingEntity, attributes: AttributeContainer, amplifier: Int) {
-        super.onApplied(entity, attributes, amplifier)
+    override fun onRemoved(entity: LivingEntity, attributes: AttributeContainer, amplifier: Int) {
+        super.onRemoved(entity, attributes, amplifier)
         entity.addStatusEffect(StatusEffectInstance(RegisterStatus.ARCANE_AURA,200,2))
         entity.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED,200,2))
     }

@@ -78,7 +78,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     protected fun initCustomGoals() {
         //goalSelector.add(1, WanderAroundFarGoal(this, 1.0))
-        goalSelector.add(2, SardonyxElementalAttackGoal(this,damageMultiplier, { this }, {bl -> setFiringProjectiles(bl) }))
+        goalSelector.add(2, SardonyxElementalAttackGoal(this, { damageMultiplier }, { this }, {bl -> setFiringProjectiles(bl) }))
         goalSelector.add(7, WanderAroundGoal(this, 1.0))
         targetSelector.add(1, SardonyxElementalPriorityTargetGoal(this))
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
@@ -417,9 +417,9 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             val f = container.value.toFloat()
             val g = EnchantmentHelper.getAttackDamage(stack, this.group) * player.getAttackCooldownProgress(0.5f)
             damage = max(f + g, damage)
-            println("Damage from stack [$stack]: $damage")
+
         }
-        println("Final damage: $damage")
+
 
         val othersNearby = player.world.getNonSpectatingEntities(MobEntity::class.java,player.boundingBox.expand(7.0)).filter { it !is Monster && if (it !is Tameable) it !is PassiveEntity else true }
         var friendHealth = 0f
@@ -431,9 +431,9 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                 friendTotalDamage += friend.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
             friendCount++
         }
-        println("Friend health $friendHealth")
+
         val averageFriendDamage = if (friendCount > 0) friendTotalDamage/friendCount else 0f
-        println("Friend avg dmg $averageFriendDamage")
+
         damage += averageFriendDamage
         val tankMultiplier = ((damage/40f) * (damage/40f)).toDouble()
 
@@ -442,15 +442,11 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         val armor = player.armor
         val toughness = player.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
         val test = DamageUtil.getInflictedDamage(DamageUtil.getDamageLeft(20f,armor.toFloat(),toughness.toFloat()),EnchantmentHelper.getProtectionAmount(player.armorItems,this.damageSources.mobAttack(this)).toFloat())
-        println("test outgoing damage: $test")
+
         damageMultiplier += log(20f/test,40f)/2.0
         damageMultiplier += max(log((friendHealth + player.maxHealth) / 80f,30f).toDouble(),0.0)/2.0
 
         val knockbackMultiplier = max(0.0,(((friendCount + 1)/10.0) - 1.0))
-
-        println("tank multiplier: $tankMultiplier")
-        println("damage multiplier: $damageMultiplier")
-        println("knockback multiplier: $knockbackMultiplier")
 
         this.damageMultiplier = (damageMultiplier/2f).toFloat()
 
@@ -490,6 +486,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL
                 )
             )
+        println(this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE))
     }
 
 

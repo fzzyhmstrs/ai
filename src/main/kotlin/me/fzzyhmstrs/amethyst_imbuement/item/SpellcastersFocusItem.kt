@@ -195,8 +195,6 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 nbt.putBoolean(LEVEL_UP_READY,true)
                 nbt.remove(CHOSEN_OPTION)
                 nbt.put(LEVEL_UP,lvlUpNbt)
-                println("Leveled up!")
-                println(nbt)
             }
         }
     }

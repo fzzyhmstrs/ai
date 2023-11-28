@@ -14,12 +14,10 @@ import kotlin.math.sqrt
 
 class SardonyxElementalAttackGoal(
     sardonyxElementalEntity: SardonyxElementalEntity,
-    damageMultiplier: Float,
+    private val damageMultiplierGetter: Supplier<Float>,
     ownerGetter: Supplier<LivingEntity>,
     activeConsumer: Consumer<Boolean>
 ) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 6.0) {
-
-    private val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get())
 
     override fun canStart(): Boolean {
         val livingEntity = mobEntity.target
@@ -39,6 +37,7 @@ class SardonyxElementalAttackGoal(
         val rot = Vec3d(livingEntity.x - mobEntity.x,livingEntity.getBodyY(0.5) - mobEntity.getBodyY(0.5),livingEntity.z - mobEntity.z)
         val pos  = Vec3d(mobEntity.x,mobEntity.getBodyY(0.5) + 0.5,mobEntity.z)
         val owner = ownerGetter.get()
+        val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get() * damageMultiplierGetter.get())
         val bse = BoneShardEntity(mobEntity.world,owner,4.0f,0.5f*h,pos,rot)
         bse.setOnBlockHit { bhr ->
             livingEntity.world.createExplosion(
@@ -83,7 +82,7 @@ class SardonyxElementalAttackGoal(
                 World.ExplosionSourceType.NONE
             )
         }
-        bse.passEffects(effects,1)
+        bse2.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse2)
         val bse3 = BoneShardEntity(mobEntity.world,owner,4.0f,2.25f*h,pos,rot)
         bse3.setOnBlockHit { bhr ->
@@ -106,7 +105,7 @@ class SardonyxElementalAttackGoal(
                 World.ExplosionSourceType.NONE
             )
         }
-        bse.passEffects(effects,1)
+        bse3.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse3)
     }
 

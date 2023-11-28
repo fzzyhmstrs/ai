@@ -159,7 +159,6 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
     }
 
     override fun tryPickup(player: PlayerEntity): Boolean {
-        println("pickup offhand: $isOffhand")
         return when (this.pickupType){
             PickupPermission.ALLOWED -> {
                 if(isOffhand)
