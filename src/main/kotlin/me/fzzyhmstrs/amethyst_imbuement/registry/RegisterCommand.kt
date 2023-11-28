@@ -93,7 +93,7 @@ object RegisterCommand {
                     ClientCommandManager.literal("enable")
                         .executes{ context ->
                             AiConfig.hud.showHud.validateAndSet(true)
-                            AiConfig.saveHud()
+                            AiConfig.hud.save()
                             context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.enable"))
                             1
                         }
@@ -102,7 +102,7 @@ object RegisterCommand {
                     ClientCommandManager.literal("disable")
                         .executes{ context ->
                             AiConfig.hud.showHud.validateAndSet(false)
-                            AiConfig.saveHud()
+                            AiConfig.hud.save()
                             context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.disable"))
                             1
                         }
@@ -114,7 +114,7 @@ object RegisterCommand {
                                 val spacing = IntegerArgumentType.getInteger(context, "spacing")
                                 AiConfig.hud.spellHudSpacing.validateAndSet(spacing)
                                 val chk = AiConfig.hud.spellHudSpacing.get()
-                                AiConfig.saveHud()
+                                AiConfig.hud.save()
                                 SpellRadialHud.markDirty()
                                 if (spacing == chk)
                                     context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.spacing",spacing))
@@ -126,11 +126,32 @@ object RegisterCommand {
                         .then(ClientCommandManager.literal("reset")
                             .executes{ context ->
                                 AiConfig.hud.spellHudSpacing.reset()
-                                AiConfig.saveHud()
+                                AiConfig.hud.save()
                                 SpellRadialHud.markDirty()
                                 context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.spacing_reset"))
                                 1
                             }
+                        )
+                )
+                .then(
+                    ClientCommandManager.literal("scrollChangesSpells")
+                        .then(
+                            ClientCommandManager.literal("enable")
+                                .executes{ context ->
+                                    AiConfig.hud.scrollChangesSpells.validateAndSet(true)
+                                    AiConfig.hud.save()
+                                    context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.scrollChangesSpells.enable"))
+                                    1
+                                }
+                        )
+                        .then(
+                            ClientCommandManager.literal("disable")
+                                .executes{ context ->
+                                    AiConfig.hud.scrollChangesSpells.validateAndSet(false)
+                                    AiConfig.hud.save()
+                                    context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success.scrollChangesSpells.disable"))
+                                    1
+                                }
                         )
                 )
         )
@@ -151,7 +172,7 @@ object RegisterCommand {
             AiConfig.hud.hudCorner.validateAndSet(corner)
             AiConfig.hud.hudX.validateAndSet(x)
             AiConfig.hud.hudY.validateAndSet(y)
-            AiConfig.saveHud()
+            AiConfig.hud.save()
             context.source.sendFeedback(AcText.translatable("commands.amethyst_imbuement.success", corner.name,x,y))
         return 1
     }

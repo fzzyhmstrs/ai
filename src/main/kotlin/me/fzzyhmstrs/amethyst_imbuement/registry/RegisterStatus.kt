@@ -61,6 +61,16 @@ object RegisterStatus {
         .addAttributeModifier(RegisterAttribute.DAMAGE_MULTIPLICATION,"26613cdc-5d35-11ee-8c99-0242ac120002",-100.0, EntityAttributeModifier.Operation.ADDITION)
         .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,"266141a0-5d35-11ee-8c99-0242ac120002",1.0, EntityAttributeModifier.Operation.ADDITION)
         ,"sanctuary")
+    val MANA_REGENERATION: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x5A63E4)
+        .addAttributeModifier(RegisterAttribute.MANA_REGENERATION,"eabd0bfe-8d43-11ee-b9d1-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+        ,"mana_regeneration")
+    val TRANCE: StatusEffect = register(TranceStatusEffect(StatusEffectCategory.BENEFICIAL,0x5A63E4)
+        .addAttributeModifier(RegisterAttribute.MANA_REGENERATION,"eabd0bfe-8d43-11ee-b9d1-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,"9c5b5044-8d46-11ee-b9d1-0242ac120002",-0.01,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(RegisterAttribute.SPELL_COOLDOWN,"ffa71e76-8d46-11ee-b9d1-0242ac120002",-0.025,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"e27e7a10-8d46-11ee-b9d1-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(RegisterAttribute.MAGIC_RESISTANCE,"e27e7e0c-8d46-11ee-b9d1-0242ac120002",0.01,EntityAttributeModifier.Operation.ADDITION)
+        ,"trance")
 
     //auras
     val LIGHTNING_AURA: StatusEffect = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)

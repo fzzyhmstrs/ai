@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterKeybind
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterNetworking
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -60,6 +61,12 @@ object SpellRadialHud: Screen(AcText.empty()) {
         return dirty
     }
 
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (RegisterKeybind.SCEPTER_RADIAL_MENU.matchesKey(keyCode, scanCode))
+            this.close()
+        return super.keyPressed(keyCode, scanCode, modifiers)
+    }
+
     override fun resize(client: MinecraftClient?, width: Int, height: Int) {
         super.resize(client, width, height)
         dirty = true
@@ -79,7 +86,8 @@ object SpellRadialHud: Screen(AcText.empty()) {
                     context.drawTexture(hudTexture,position.position.x - 32,position.position.y - 6, 128,84 ,15,12)
                 }
             }
-            context.drawTexture(position.texture,position.position.x - 15,position.position.y - 15, 32,32,0f,0f,32,32,32,32)
+            ScepterHud.drawIcon(context,position.texture,position.position.x - 15,position.position.y - 15)
+            //context.drawTexture(position.texture,position.position.x - 15,position.position.y - 15, 32,32,0f,0f,32,32,32,32)
             if (position.left){
                 context.drawText(textRenderer,position.name,position.position.x - textRenderer.getWidth(position.name) - 18,position.position.y - 4 + position.offset,0xFFFFFF,true)
             } else {

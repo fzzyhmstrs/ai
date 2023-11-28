@@ -24,8 +24,8 @@ class BoneFanAugment: SummonProjectileAugment(ScepterTier.THREE,17) {
                                                 .withDuration(80)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,40,24,
-            21,imbueLevel,2,BookOfTalesItem.TALES_TIER,Items.BONE_BLOCK)
+        return AugmentDatapoint(SpellType.FURY,40,36,
+            21,imbueLevel,3,BookOfTalesItem.TALES_TIER,Items.BONE_BLOCK)
     }
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {

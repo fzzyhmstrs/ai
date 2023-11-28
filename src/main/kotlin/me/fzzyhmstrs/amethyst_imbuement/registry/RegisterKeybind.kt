@@ -79,7 +79,7 @@ object RegisterKeybind {
         )
     )
 
-    private val SCEPTER_RADIAL_MENU: KeyBinding = KeyBindingHelper.registerKeyBinding(
+    val SCEPTER_RADIAL_MENU: KeyBinding = KeyBindingHelper.registerKeyBinding(
         KeyBinding(
             "key.amethyst_imbuement.scepter_radial_menu_key",  // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM,  // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
@@ -144,8 +144,9 @@ object RegisterKeybind {
             if (scepterWasPressed > 0){
                 if (client.currentScreen == null) {
                     if (client.player?.mainHandStack?.item is ScepterLike)
-                        MinecraftClient.getInstance().setScreen(SpellRadialHud)
-                }
+                        client.setScreen(SpellRadialHud)
+                } else if (client.currentScreen is SpellRadialHud)
+                    client.setScreen(null)
             }
             /*if (SCEPTER_RADIAL_MENU.isPressed){
                 if (scepterRadialMenuPressed < 5){

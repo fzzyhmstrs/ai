@@ -11,8 +11,6 @@ import net.minecraft.util.Identifier
 
 object RegisterModifier {
 
-    private val regMod: MutableMap<AugmentModifier,Int> = mutableMapOf()
-    
     private fun <T: AugmentModifier> register(modifier: T, weight: Int = 0): T{
         if (modifier is ComplexAugmentModifier && weight > 0)
             me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry.registerWithRolling(modifier, weight)

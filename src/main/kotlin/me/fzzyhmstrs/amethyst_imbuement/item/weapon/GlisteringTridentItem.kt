@@ -158,6 +158,10 @@ class GlisteringTridentItem(settings: Settings) : TridentItem(settings), Flavorf
                 if (user.abilities.creativeMode) {
                     glisteringTridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
                 }
+                if(ItemStack.areEqual(user.offHandStack, stack)) {
+                    println("offhand trident")
+                    glisteringTridentEntity.setOffhand()
+                }
                 world.spawnEntity(glisteringTridentEntity)
                 world.playSoundFromEntity(
                     null,

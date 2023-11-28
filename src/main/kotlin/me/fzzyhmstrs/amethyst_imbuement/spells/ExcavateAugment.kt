@@ -44,19 +44,25 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
             val state = world.getBlockState(hit.blockPos)
             if (state.getHardness(world,hit.blockPos) == -1.0f) return false
             if (canBreak(state, level)) {
-                world.breakBlock(hit.blockPos,true,user)
-                val group = state.soundGroup
-                val sound = group.breakSound
-                world.playSound(
-                    null,
-                    hit.blockPos,
-                    sound,
-                    SoundCategory.BLOCKS,
-                    (group.volume + 1.0f) / 2.0f,
-                    group.pitch * 0.8f
-                )
-                //sendItemPacket(user, stack, hand, hit)
-                effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
+                state.block.onBreak(world,hit.blockPos,state,user)
+                if (world.breakBlock(hit.blockPos,true,user)) {
+                    state.block.onBroken(world,hit.blockPos,state)
+                    val group = state.soundGroup
+                    val sound = group.breakSound
+                    world.playSound(
+                        null,
+                        hit.blockPos,
+                        sound,
+                        SoundCategory.BLOCKS,
+                        (group.volume + 1.0f) / 2.0f,
+                        group.pitch * 0.8f
+                    )
+                    //sendItemPacket(user, stack, hand, hit)
+                    effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
+                } else {
+                    return false
+                }
+
             }
             return true
         }
@@ -89,7 +95,7 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
         }
         if (drop) {
             val blockEntity: BlockEntity? = if (blockState.hasBlockEntity()) world.getBlockEntity(pos) else null
-            Block.dropStacks(blockState, world, pos, blockEntity, breakingEntity, ItemStack.EMPTY)
+            Block.dropStacks(blockState, world, pos, blockEntity, breakingEntity, (breakingEntity as? LivingEntity)?.mainHandStack ?: ItemStack.EMPTY)
         }
         if (world.setBlockState(pos, fluidState.blockState, Block.NOTIFY_ALL, 512).also {
                 bl = it

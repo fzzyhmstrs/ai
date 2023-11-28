@@ -7,6 +7,7 @@ import fzzyhmstrs.should_i_hit_that.api.ShouldItHitPredicate
 import fzzyhmstrs.should_i_hit_that.checkers.ExcludeTagChecker
 import fzzyhmstrs.should_i_hit_that.checkers.MobChecker
 import fzzyhmstrs.should_i_hit_that.checkers.PredicatedPassChecker
+import me.fzzyhmstrs.amethyst_core.event.ShouldScrollEvent
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.material.AiArmorMaterialsConfig
@@ -63,6 +64,7 @@ object AiConfig
             .add("1.20.1-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
             .add("1.20.2-01/1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs. Added Soulwoven armor material to materials_v1. Added new entities in entities_v4. Added sky village integration configs in villages_v3")
             .add("1.20.2-01/1.20.1-16: Updated how PvpTeammates are considered. new Entities v5. Beast augments added into augments v4 config.")
+            .add("1.20.2-01/1.20.1-17: Added Hud_v0 config for controlling client side gui-related items. Added a series of commands for controlling this in-game.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -604,7 +606,7 @@ object AiConfig
 
     private val hudHeader = buildSectionHeader("hud")
 
-    class Hud: ConfigClass(hudHeader), OldClass<Hud>{
+    class Hud: SavableConfigClass("hud_v0.json", AI.MOD_ID, hudHeader), OldClass<Hud>{
 
         fun getX(width: Int): Int{
             return hudCorner.get().getX(width, hudX.get())
@@ -619,6 +621,7 @@ object AiConfig
         var hudX = ValidatedInt(0,Int.MAX_VALUE, 0)
         var hudY = ValidatedInt(0,Int.MAX_VALUE, 0)
         var spellHudSpacing = ValidatedInt(80,145,30)
+        var scrollChangesSpells = ValidatedBoolean(true)
         override fun generateNewClass(): Hud {
             return this
         }
@@ -682,9 +685,9 @@ object AiConfig
         }
     }
 
-    fun saveHud(){
+    /*fun saveHud(){
         SyncedConfigHelperV1.save("hud_v0.json", base = AI.MOD_ID, configClass = hud)
-    }
+    }*/
 
     var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
     var materials: Materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
@@ -697,6 +700,11 @@ object AiConfig
     @NonSync
     var hud: Hud = SyncedConfigHelperV1.readOrCreateAndValidate("hud_v0.json", base = AI.MOD_ID, configClass = {Hud()})
 
+    fun registerClient(){
+        ShouldScrollEvent.EVENT.register{_, _ ->
+            hud.scrollChangesSpells.get()
+        }
+    }
 
     override fun initConfig() {
         super.initConfig()

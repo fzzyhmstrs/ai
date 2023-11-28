@@ -24,7 +24,7 @@
   "craftH": {
 	"item": "minecraft:bone_block"
   },
-  "title": "Carapace",
+  "title": "Bone Fan",
   "cost": 27,
   "augment": "amethyst_imbuement:bone_fan"
 }

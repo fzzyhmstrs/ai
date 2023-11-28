@@ -3,8 +3,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item
 import me.fzzyhmstrs.amethyst_imbuement.entity.ManaPotionEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
-import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaHelper
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -24,7 +23,6 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 import kotlin.math.max
-import kotlin.math.min
 
 class ManaPotionItem(settings: Settings) : PotionItem(settings) {
 
@@ -37,30 +35,9 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
         if (user is ServerPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(user, stack)
         }
-        val stacks: MutableList<ItemStack> = mutableListOf()
-        for (stack2 in user.inventory.main){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        } // iterate over the inventory and look for items that are interfaced with "ManaItem"
-        for (stack2 in user.inventory.offHand){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        }
-        for (stack2 in user.inventory.armor){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        }
-        val stacks2 = TrinketUtil.getTrinketStacks(user)
-        stacks2.forEach {
-            if (it.item is ManaItem && it.isDamaged){
-                stacks.add(it)
-            }
-        }
+        val stacks = ManaHelper.getManaItems(user)
         val healLeft = 100
-        val leftOverMana = manaHealItems(stacks,world,healLeft)
+        val leftOverMana = ManaHelper.manaHealItems(stacks,world,healLeft)
         if (leftOverMana > 0) {
             val baseXp: Int = (3 + world.random.nextInt(5) + world.random.nextInt(5)) * 2
             val manaFraction = leftOverMana.toFloat()/healLeft.toFloat()
@@ -81,28 +58,7 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        val stacks: MutableList<ItemStack> = mutableListOf()
-        for (stack2 in user.inventory.main){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        } // iterate over the inventory and look for items that are interfaced with "ManaItem"
-        for (stack2 in user.inventory.offHand){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        }
-        for (stack2 in user.inventory.armor){
-            if (stack2.item is ManaItem && stack2.isDamaged){
-                stacks.add(stack2)
-            }
-        }
-        val stacks2 = TrinketUtil.getTrinketStacks(user)
-        stacks2.forEach {
-            if (it.item is ManaItem && it.isDamaged){
-                stacks.add(it)
-            }
-        }
+        val stacks = ManaHelper.getManaItems(user)
         if (stacks.isEmpty()){
             val stack = user.getStackInHand(hand)
             world.playSound(
@@ -127,20 +83,6 @@ class ManaPotionItem(settings: Settings) : PotionItem(settings) {
             return TypedActionResult.success(stack, world.isClient())
         }
         return super.use(world, user, hand)
-    }
-
-    private fun manaHealItems(list: MutableList<ItemStack>,world: World, healLeft: Int): Int{
-        var hl = healLeft
-        if (hl <= 0 || list.isEmpty()) return max(0,hl)
-        val rnd = world.random.nextInt(list.size)
-        val stack = list[rnd]
-        val healAmount = min(5,hl)
-        val healedAmount = (stack.item as ManaItem).healDamage(healAmount,stack)
-        hl -= min(healAmount,healedAmount)
-        if (!stack.isDamaged){
-            list.remove(stack)
-        }
-        return manaHealItems(list,world,hl)
     }
 
     override fun getTranslationKey(stack: ItemStack): String {

@@ -116,6 +116,7 @@ object RegisterItem {
     val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
     //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
     val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
+    val MANA_REGENERATION_POTION = register(ElixirItem(RegisterStatus.MANA_REGENERATION, 1200, 4, FabricItemSettings().maxCount(16)),"mana_regeneration_potion")
     val ELIXIR_OF_ARCANA = register(ElixirItem(RegisterStatus.ARCANE_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_arcana")
     val ELIXIR_OF_MENDING = register(ElixirItem(RegisterStatus.MENDING_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_mending")
     val ELIXIR_OF_SHIELDING = register(ElixirItem(RegisterStatus.SOUL_SHIELD, 6000, 4, FabricItemSettings().maxCount(16)),"elixir_of_shielding")

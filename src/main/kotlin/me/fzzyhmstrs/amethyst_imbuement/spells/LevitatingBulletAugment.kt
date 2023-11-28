@@ -32,7 +32,7 @@ import kotlin.math.min
 class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectHelper.PersistentEffect {
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(4.0f)
+                                                .withDamage(6.0f)
                                                 .withDuration(40,20,0)
                                                 .withRange(8.0,1.0,0.0)
             

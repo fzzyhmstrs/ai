@@ -431,6 +431,9 @@
 	"item.amethyst_imbuement.mana_potion": "Mana Potion",
 	"item.amethyst_imbuement.mana_potion.effect.empty": "Mana Potion",
 	"item.amethyst_imbuement.mana_potion.tooltip1": "Restore your scepter and other magical items",
+	"item.amethyst_imbuement.mana_regeneration_potion": "Mana Regeneration Potion",
+	"item.amethyst_imbuement.mana_regeneration_potion.effect.empty": "Mana Regeneration Potion",
+	"item.amethyst_imbuement.mana_regeneration_potion.effect.empty.tooltip1": "Restore mana in your scepters and other magical items over time.",
 	"item.amethyst_imbuement.dazzling_melon_slice": "Dazzling Melon Slice",
 	
 	"block.amethyst_imbuement.polished_amethyst_block": "Polished Amethyst Block",
@@ -873,6 +876,9 @@
 	"enchantment.amethyst_imbuement.teleport": "Teleport",
 	"enchantment.amethyst_imbuement.teleport.desc": "Throws an ender pearl.",
 
+	"enchantment.amethyst_imbuement.trance": "Trance",
+	"enchantment.amethyst_imbuement.trance.desc": "Caster is slowed greatly, but mana regenerates quickly and armor is increased. Speed and Arcane Aura are applied when the trance ends.",
+
 	"enchantment.amethyst_imbuement.torrent_of_beaks": "Torrent of Beaks",
 	"enchantment.amethyst_imbuement.torrent_of_beaks.desc": "Launch a barrage of Boom Chicken eggs in the direction cast.",
 
@@ -945,6 +951,8 @@
 	"effect.amethyst_imbuement.lightning_aura": "Lightning Aura",
 	"effect.amethyst_imbuement.arcane_aura": "Arcane Aura",
 	"effect.amethyst_imbuement.mending_aura": "Mending Aura",
+	"effect.amethyst_imbuement.mana_regeneration": "Mana Regeneration",
+	"effect.amethyst_imbuement.trance": "Trance",
 	
 	"lore_book.screen": "Imbuing Recipe",
 	"lore_book.screen.cost": "%1$s Levels",
@@ -1037,6 +1045,8 @@
 	"commands.amethyst_imbuement.success.spacing": "Spell radial menu spacing updated to [%s] pixels",
 	"commands.amethyst_imbuement.success.spacing_warning": "Spell radial menu out of bounds. Requested [%1$s] pixels updated to [%2$s]",
 	"commands.amethyst_imbuement.success.spacing_reset": "Spell radial menu spacing reset",
+	"commands.amethyst_imbuement.success.scrollChangesSpells.enable": "Spell switching via shift-scroll: Enabled",
+	"commands.amethyst_imbuement.success.scrollChangesSpells.disable": "Spell switching via shift-scroll: Disabled",
 
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
 	

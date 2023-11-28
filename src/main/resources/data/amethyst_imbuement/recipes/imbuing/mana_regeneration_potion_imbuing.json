@@ -1,0 +1,47 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:glowing_fragment"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftE": {
+	"item": "minecraft:ghast_tear"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "title": "Mana Regeneration Potion",
+  "cost": 15,
+  "resultA": "amethyst_imbuement:mana_regeneration_potion",
+  "countA": 4
+}
+

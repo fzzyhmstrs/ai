@@ -9,10 +9,8 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.screen.narration.NarrationPart
-import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -102,8 +100,6 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
         override fun renderButton(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             val minecraftClient = MinecraftClient.getInstance()
             val textRenderer = minecraftClient.textRenderer
-            RenderSystem.setShaderTexture(0, texture)
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.enableBlend()
             RenderSystem.defaultBlendFunc()
             RenderSystem.enableDepthTest()
@@ -118,7 +114,6 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
                 drawDots = true
                 0..1
             }
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             for (j in range){
                 context.drawTexture(texture, x + 9, y + 18 + 21 * j, 116, 128, 40 , 18)
             }
@@ -127,9 +122,7 @@ class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInv
             }
             for (j in range){
                 val mod = mods[j]
-                RenderSystem.setShaderTexture(0, Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"))
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-                context.drawTexture(texture, x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
+                context.drawTexture(Identifier(mod.namespace,"textures/gui/patchouli/mod_spotlights/${mod.path}.png"), x + 13, y + 19 + 21 * j,0, 0f, 0f, 32 , 16,32,16)
             }
 
         }

@@ -43,6 +43,12 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
         dataTracker.set(ENCHANTED, stack.hasGlint())
     }
 
+    private var isOffhand = false
+
+    fun setOffhand(){
+        isOffhand = true
+    }
+
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(LOYALTY, 0.toByte())
@@ -153,9 +159,51 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
     }
 
     override fun tryPickup(player: PlayerEntity): Boolean {
-        return super.tryPickup(player) || this.isNoClip && isOwner(player) && player.inventory.insertStack(
-            asItemStack()
-        )
+        println("pickup offhand: $isOffhand")
+        return when (this.pickupType){
+            PickupPermission.ALLOWED -> {
+                if(isOffhand)
+                    if (insertOffhand(asItemStack(),player))
+                        true
+                    else
+                        player.inventory.insertStack(asItemStack())
+                else
+                    player.inventory.insertStack(asItemStack())
+            }
+            PickupPermission.CREATIVE_ONLY -> player.abilities.creativeMode
+            else -> {
+                this.isNoClip && isOwner(player) &&
+                        if(isOffhand)
+                            if (insertOffhand(asItemStack(),player))
+                                true
+                            else
+                                player.inventory.insertStack(asItemStack())
+                        else
+                            player.inventory.insertStack(asItemStack())
+            }
+        }
+
+
+        /*return super.tryPickup(player) ||
+                this.isNoClip && isOwner(player) &&
+                if(isOffhand)
+                    if (player.inventory.insertStack(PlayerInventory.OFF_HAND_SLOT,asItemStack()))
+                        true
+                    else
+                        player.inventory.insertStack(asItemStack())
+                else
+                    player.inventory.insertStack(asItemStack())*/
+    }
+
+    private fun insertOffhand(stack: ItemStack, player: PlayerEntity): Boolean{
+        if (stack.isEmpty) {
+            return false
+        }
+        if (!player.inventory.offHand[0].isEmpty)
+            return false
+        player.inventory.offHand[0] = stack.copyAndEmpty()
+        player.inventory.offHand[0].bobbingAnimationTime = 5
+        return true
     }
 
     override fun getHitSound(): SoundEvent {
@@ -200,7 +248,6 @@ class GlisteringTridentEntity : PersistentProjectileEntity {
 
     companion object {
         private val LOYALTY = DataTracker.registerData(TridentEntity::class.java, TrackedDataHandlerRegistry.BYTE)
-        private val ENCHANTED =
-            DataTracker.registerData(TridentEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        private val ENCHANTED = DataTracker.registerData(TridentEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
     }
 }

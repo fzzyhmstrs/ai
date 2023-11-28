@@ -31,7 +31,6 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
             val explosionPos = pos.toCenterPos()
             world.createExplosion(null,explosionPos.x,explosionPos.y,explosionPos.z,15f,World.ExplosionSourceType.TNT)
         } else {
-
             val sge = RegisterEntity.SARDONYX_ELEMENTAL.create(world)
             if (sge == null){
                 val explosionPos = pos.toCenterPos()
@@ -39,6 +38,7 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
                 return
             }
             sge.refreshPositionAndAngles(placePos,0f,0f)
+            sge.analyzeBreakingPlayer(player)
             world.spawnEntity(sge)
         }
         super.onBreak(world, pos, state, player)

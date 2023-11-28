@@ -26,7 +26,7 @@ import net.minecraft.world.World
 class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(4.8F,0.2f)
+                                                .withDamage(4.6F,0.4f)
                                                 .withRange(13.8,0.2,0.0)
             
 

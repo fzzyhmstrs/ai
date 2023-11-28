@@ -26,6 +26,7 @@
 		"amethyst_imbuement:energy_blade",
 		"amethyst_imbuement:planar_door",
 		"amethyst_imbuement:bone_fan",
+		"amethyst_imbuement:trance",
 		{
 			"id":  "amethyst_imbuement:solar_flare",
 			"required":  false

@@ -164,6 +164,7 @@ object RegisterEnchantment {
     val SUMMON_ZOMBIE = SummonZombieAugment().register("summon_zombie")
     val SURVEY = SurveyAugment().register("survey")
     val TELEPORT = TeleportAugment().register("teleport")
+    val TRANCE = TranceAugment().register("trance")
     val TORRENT_OF_BEAKS = TorrentOfBeaksAugment().register("torrent_of_beaks")
     val WEIGHTLESSNESS = WeightlessnessAugment().register("weightlessness")
     val WINTERS_GRASP = WintersGraspAugment().register("hail_storm") //id kept as hail storm to maintain compat

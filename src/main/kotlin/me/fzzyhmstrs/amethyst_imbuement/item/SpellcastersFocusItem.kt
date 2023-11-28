@@ -146,7 +146,7 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
         val nbt = stack.orCreateNbt
         val tier = getTier(nbt)
         if (tier.nextTier == -1) return
-        val id = spell.id?.toString()?:return
+        val id = spell.id.toString()
         val newXp = AugmentHelper.getAugmentCastXp(id)
         val currentXp = nbt.getInt(FOCUS_XP)
         val newCurrentXp = currentXp + newXp
@@ -195,6 +195,8 @@ class SpellcastersFocusItem(settings: Settings): CustomFlavorItem(settings), Mod
                 nbt.putBoolean(LEVEL_UP_READY,true)
                 nbt.remove(CHOSEN_OPTION)
                 nbt.put(LEVEL_UP,lvlUpNbt)
+                println("Leveled up!")
+                println(nbt)
             }
         }
     }

@@ -9,12 +9,12 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.block.BlockState
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.Tameable
+import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributeInstance
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.boss.BossBar
 import net.minecraft.entity.boss.ServerBossBar
@@ -22,11 +22,18 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.IronGolemEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.AxeItem
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.item.ToolItem
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
@@ -36,10 +43,13 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
 import java.util.*
+import kotlin.math.log
+import kotlin.math.max
 
 class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world: World?) : HostileEntity(entityType, world), SkinOverlayOwner {
 
@@ -68,13 +78,14 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
 
     protected fun initCustomGoals() {
         //goalSelector.add(1, WanderAroundFarGoal(this, 1.0))
-        goalSelector.add(2, SardonyxElementalAttackGoal(this, { this }, {bl -> setFiringProjectiles(bl) }))
+        goalSelector.add(2, SardonyxElementalAttackGoal(this,damageMultiplier, { this }, {bl -> setFiringProjectiles(bl) }))
         goalSelector.add(7, WanderAroundGoal(this, 1.0))
         targetSelector.add(1, SardonyxElementalPriorityTargetGoal(this))
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
+        targetSelector.add(2, ActiveTargetGoal(this as MobEntity, PlayerCreatedConstructEntity::class.java, true))
         targetSelector.add(3, ActiveTargetGoal(this as MobEntity, PlayerEntity::class.java, true))
         targetSelector.add(5, ActiveTargetGoal(this as MobEntity, IronGolemEntity::class.java, true))
-        targetSelector.add(5, ActiveTargetGoal(this as MobEntity, PlayerCreatedConstructEntity::class.java, true))
+
     }
 
     override fun initDataTracker() {
@@ -91,7 +102,9 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     protected var quartersReached = 0
     internal var lastDamageTracker = LastDamageTracker()
     internal var spellCooldown = 60
-    private var lastSpellWasBuff = false
+    private var lastSpellWasBuff = true
+    private var highDamageCalcify = -1
+    private var damageMultiplier = 1f
     private val bossBar = ServerBossBar(displayName,BossBar.Color.RED,BossBar.Style.NOTCHED_12)
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -102,6 +115,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
+        nbt.putFloat("damageMultiplier",damageMultiplier)
 
     }
 
@@ -110,6 +124,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         nbt.putBoolean("firingProjectiles", getFiringProjectiles())
         nbt.putInt("quartersReached", quartersReached)
         lastDamageTracker = LastDamageTracker.fromNbt(nbt.getCompound("lastDamageTracker"))
+        damageMultiplier = nbt.getFloat("damageMultiplier")
     }
 
     override fun setCustomName(name: Text?) {
@@ -124,6 +139,8 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         }
         if (!getCharging())
             super.tickMovement()
+        if (highDamageCalcify > 0)
+            highDamageCalcify--
         if (spellCooldown > 0) {
             spellCooldown--
         } else if (!lastSpellWasBuff) {
@@ -133,9 +150,11 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                 } else {
                     Calcify.INSTANCE.physicalCalcify(this)
                 }
-                lastSpellWasBuff = true
-                spellCooldown = AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
+            } else {
+                DeathCloud.INSTANCE.cloud(this)
             }
+            lastSpellWasBuff = true
+            spellCooldown = AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
         }
         if (attackTicksLeft > 0) {
             --attackTicksLeft
@@ -156,6 +175,10 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             return
         }
         despawnCounter = 0
+    }
+
+    override fun isAffectedBySplashPotions(): Boolean {
+        return false
     }
 
     override fun onStartedTrackingBy(player: ServerPlayerEntity?) {
@@ -217,9 +240,21 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
     }
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
+        var realAmount = amount
         if (getCharging() && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return false
-        val bl = super.damage(source, amount)
+        if (realAmount >= 50f){
+            if (highDamageCalcify <= 0) {
+                Calcify.INSTANCE.emergencyCalcify(this)
+                highDamageCalcify = 600
+            }
+            realAmount = 50f
+        }else if (realAmount >= 8f){
+            highDamageCalcify -= 5
+            spellCooldown -= 5
+        }
+        val lastHealth = this.health
+        val bl = super.damage(source, realAmount)
         if (bl && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)){
             if (atOrBelowQuarter()){
                 if (world is ServerWorld){
@@ -237,36 +272,96 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                         }
                     }
                 }
+                val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(7.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable})
+                if (nearbyPossibleAttackers.size > 8) {
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth <= 0.75f)
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                } else if (nearbyPossibleAttackers.size > 4){
+                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                }
                 setCharging(100)
             }
-            source.attacker?.damage(this.damageSources.thorns(this),4f)
-            lastDamageTracker.addDamage(source, amount)
+            source.attacker?.damage(this.damageSources.thorns(this),5f)
+            lastDamageTracker.addDamage(source, lastHealth - this.health)
         }
         return bl
     }
 
-    override fun tryAttack(target: Entity?): Boolean {
-            attackTicksLeft = 10
-            world.sendEntityStatus(this, 4.toByte())
-            if (spellCooldown <= 0 && !world.isClient && lastSpellWasBuff){
-                val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(3.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable}) .map { it as LivingEntity }
-                spellCooldown = if (lastDamageTracker.getNumberOfAttackers() < 3 && nearbyPossibleAttackers.size < 4){
-                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                    AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
-                } else {
-                    for (entity in nearbyPossibleAttackers){
-                        if (entity is ServerPlayerEntity)
-                            RegisterNetworking.sendPlayerKnockback(entity,this.pos.subtract(entity.pos).normalize(),2.5)
-                        else
-                            entity.takeKnockback(2.5,this.x - entity.x, this.z - entity.z)
-                    }
-                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                    FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
-                    AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
+    override fun tryAttack(target: Entity): Boolean {
+        attackTicksLeft = 10
+        world.sendEntityStatus(this, 4.toByte())
+        if (spellCooldown <= 0 && !world.isClient && lastSpellWasBuff){
+            val nearbyPossibleAttackers = (world.getOtherEntities(this,this.boundingBox.expand(7.0)) {it is PlayerEntity || it is GolemEntity || it is LivingEntity && it is Tameable}) .map { it as LivingEntity }
+            if (lastDamageTracker.getNumberOfAttackers() < 3 && nearbyPossibleAttackers.size < 4){
+                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+            } else {
+                for (entity in nearbyPossibleAttackers){
+                    if (entity is ServerPlayerEntity)
+                        RegisterNetworking.sendPlayerKnockback(entity,this.pos.subtract(entity.pos).normalize(),2.5)
+                    else
+                        entity.takeKnockback(2.5,this.x - entity.x, this.z - entity.z)
                 }
-                lastSpellWasBuff = false
+                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+                FragmentAid.INSTANCE.summon(world,this.blockPos,this.health/this.maxHealth < 0.5f)
+
             }
-        return super.tryAttack(target)
+            lastSpellWasBuff = false
+            spellCooldown = AiConfig.entities.sardonyxElemental.spellActivationCooldown.get()
+        }
+        if (!AiConfig.entities.shouldItHit(this,target,AiConfig.Entities.Options.NONE)) return false
+        val i: Int = EnchantmentHelper.getFireAspect(this)
+        var f = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+        var g = this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_KNOCKBACK).toFloat()
+        if (target is LivingEntity) {
+            f += EnchantmentHelper.getAttackDamage(this.mainHandStack, target.group)
+            g += EnchantmentHelper.getKnockback(this).toFloat()
+        }
+        if (i > 0) {
+            target.setOnFireFor(i * 4)
+        }
+        if (target.damage(this.damageSources.mobAttack(this), f)) {
+            if (g > 0.0f && target is LivingEntity) {
+                target.takeKnockback(
+                    (g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(
+                        yaw * (Math.PI.toFloat() / 180)
+                    ).toDouble()
+                )
+                velocity = velocity.multiply(0.6, 1.0, 0.6)
+            }
+            if (target is PlayerEntity) {
+                disablePlayerShield(target, this.mainHandStack, if (target.isUsingItem) target.activeItem else ItemStack.EMPTY)
+            }
+            val list = world.getNonSpectatingEntities(LivingEntity::class.java, target.boundingBox.expand(1.5, 0.25, 1.5))
+            for (splashTarget in list){
+                if (AiConfig.entities.shouldItHit(this,splashTarget,AiConfig.Entities.Options.NONE)){
+                    if (splashTarget.damage(this.damageSources.mobAttack(this), f/2f)){
+                        if (g > 0.0f && splashTarget is LivingEntity) {
+                            splashTarget.takeKnockback(
+                                (g * 0.25f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(
+                                    yaw * (Math.PI.toFloat() / 180)
+                                ).toDouble()
+                            )
+                            //velocity = velocity.multiply(0.6, 1.0, 0.6)
+                        }
+                        applyDamageEffects(this, splashTarget)
+                    }
+                }
+            }
+            applyDamageEffects(this, target)
+            onAttacking(target)
+            return true
+        }
+        return false
+    }
+
+    private fun disablePlayerShield(player: PlayerEntity, mobStack: ItemStack, playerStack: ItemStack) {
+        if (!mobStack.isEmpty && !playerStack.isEmpty && mobStack.item is AxeItem && playerStack.isOf(Items.SHIELD)) {
+            val f = 0.25f + EnchantmentHelper.getEfficiency(this).toFloat() * 0.05f
+            if (random.nextFloat() < f) {
+                player.itemCooldownManager[Items.SHIELD] = 100
+                world.sendEntityStatus(player, EntityStatuses.BREAK_SHIELD)
+            }
+        }
     }
 
     private fun atOrBelowQuarter(): Boolean{
@@ -300,6 +395,101 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             }
             else -> false
         }
+    }
+
+    private val healthUUID = UUID.fromString("6b75d6f8-8d86-11ee-b9d1-0242ac120002")
+    private val armorUUID = UUID.fromString("6b75da4a-8d86-11ee-b9d1-0242ac120002")
+    private val damageUUID = UUID.fromString("6b75db94-8d86-11ee-b9d1-0242ac120002")
+    private val knockbackUUID = UUID.fromString("95c16616-8d86-11ee-b9d1-0242ac120002")
+
+    fun analyzeBreakingPlayer(player: PlayerEntity){
+        var damage = player.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat() + EnchantmentHelper.getAttackDamage(player.mainHandStack, this.group) * player.getAttackCooldownProgress(0.5f)
+        for (i in 0 until 9) {
+            val stack = player.inventory.getStack(i)
+            if (stack.isEmpty) continue
+            if (stack.item !is ToolItem) continue
+            val attributes = stack.getAttributeModifiers(EquipmentSlot.MAINHAND)
+            val container = EntityAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE){}
+            container.baseValue = player.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE)
+            for (attribute in attributes.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)){
+                container.addTemporaryModifier(attribute)
+            }
+            val f = container.value.toFloat()
+            val g = EnchantmentHelper.getAttackDamage(stack, this.group) * player.getAttackCooldownProgress(0.5f)
+            damage = max(f + g, damage)
+            println("Damage from stack [$stack]: $damage")
+        }
+        println("Final damage: $damage")
+
+        val othersNearby = player.world.getNonSpectatingEntities(MobEntity::class.java,player.boundingBox.expand(7.0)).filter { it !is Monster && if (it !is Tameable) it !is PassiveEntity else true }
+        var friendHealth = 0f
+        var friendTotalDamage = 0f
+        var friendCount = 0
+        for (friend in othersNearby){
+            friendHealth += friend.maxHealth
+            if (friend.attributes.hasAttribute(EntityAttributes.GENERIC_ATTACK_DAMAGE))
+                friendTotalDamage += friend.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+            friendCount++
+        }
+        println("Friend health $friendHealth")
+        val averageFriendDamage = if (friendCount > 0) friendTotalDamage/friendCount else 0f
+        println("Friend avg dmg $averageFriendDamage")
+        damage += averageFriendDamage
+        val tankMultiplier = ((damage/40f) * (damage/40f)).toDouble()
+
+        var damageMultiplier = 0.0
+        damageMultiplier += player.getStatusEffect(StatusEffects.RESISTANCE)?.amplifier?.plus(1)?.times(0.15) ?: 0.0
+        val armor = player.armor
+        val toughness = player.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
+        val test = DamageUtil.getInflictedDamage(DamageUtil.getDamageLeft(20f,armor.toFloat(),toughness.toFloat()),EnchantmentHelper.getProtectionAmount(player.armorItems,this.damageSources.mobAttack(this)).toFloat())
+        println("test outgoing damage: $test")
+        damageMultiplier += log(20f/test,40f)/2.0
+        damageMultiplier += max(log((friendHealth + player.maxHealth) / 80f,30f).toDouble(),0.0)/2.0
+
+        val knockbackMultiplier = max(0.0,(((friendCount + 1)/10.0) - 1.0))
+
+        println("tank multiplier: $tankMultiplier")
+        println("damage multiplier: $damageMultiplier")
+        println("knockback multiplier: $knockbackMultiplier")
+
+        this.damageMultiplier = (damageMultiplier/2f).toFloat()
+
+        if (tankMultiplier > 0.0) {
+            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    healthUUID,
+                    "Modified health bonus",
+                    tankMultiplier * 2.0,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                )
+            )
+            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    armorUUID,
+                    "Modified armor bonus",
+                    tankMultiplier,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                )
+            )
+        }
+        if (damageMultiplier > 0.0)
+            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    damageUUID,
+                    "Modified damage bonus",
+                    damageMultiplier,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                )
+            )
+        if (knockbackMultiplier > 0.0)
+            getAttributeInstance(EntityAttributes.GENERIC_ARMOR)?.addPersistentModifier(
+                EntityAttributeModifier(
+                    knockbackUUID,
+                    "Modified knockback bonus",
+                    knockbackMultiplier,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                )
+            )
     }
 
 

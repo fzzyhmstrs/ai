@@ -14,6 +14,7 @@ import kotlin.math.sqrt
 
 class SardonyxElementalAttackGoal(
     sardonyxElementalEntity: SardonyxElementalEntity,
+    damageMultiplier: Float,
     ownerGetter: Supplier<LivingEntity>,
     activeConsumer: Consumer<Boolean>
 ) : ShootProjectileGoal(sardonyxElementalEntity, ownerGetter, activeConsumer, 30, 20, 6.0) {

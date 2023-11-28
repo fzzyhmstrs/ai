@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
+import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterHelper
@@ -11,12 +12,15 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.render.*
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
+import org.joml.Matrix4f
 import org.joml.Vector2i
 import kotlin.math.abs
 import kotlin.math.min
@@ -31,6 +35,7 @@ object ScepterHud {
     private var onTick = false
 
     private var activeStack: ItemStack = ItemStack.EMPTY
+    private var activeStackSlot: Int = -1000
     private var activeSpellTextureId: Identifier = fallbackSpellTextureId
     private var activeSpellStyle = RegisterTag.TagStyle.EMPTY
     private var activeSpell: ScepterAugment? = null
@@ -61,8 +66,15 @@ object ScepterHud {
     private var witLevelDirty = false
     private val witChangeAnimator = ElementAnimator(mapOf(0 to Vector2i(55,23),1 to Vector2i(55,23), 2 to Vector2i(55,24), 3 to Vector2i(55,25), 4 to Vector2i(55,26)),4)
 
-    private fun refreshHudCache(stack: ItemStack, activeSpell: String){
+    private fun refreshHudCache(stack: ItemStack, activeSpell: String, playerEntity: PlayerEntity) {
         activeStack = stack
+        val slotTest = playerEntity.inventory.selectedSlot
+        val bl = if (slotTest != activeStackSlot){
+            activeStackSlot = slotTest
+            false
+        } else {
+            true
+        }
         val activeSpellIdTemp = Identifier(activeSpell)
         val activeAugment = Registries.ENCHANTMENT.get(activeSpellIdTemp)
         activeSpellStyle = if(activeAugment is ScepterAugment) {
@@ -85,7 +97,7 @@ object ScepterHud {
         if (manaFractionTemp != manaFraction){
             manaFractionDirty = manaFraction
             manaFraction = manaFractionTemp
-            manaChangeAnimator.reset()
+            if (bl) manaChangeAnimator.reset()
         }
         val stats = ScepterHelper.getScepterStats(stack)
         //xpToNext - prevXpToNext = total bar
@@ -95,7 +107,7 @@ object ScepterHud {
         if (furyFractionTemp != furyFraction){
             furyFractionDirty = furyFraction
             furyFraction = furyFractionTemp
-            furyChangeAnimator.reset()
+            if (bl) furyChangeAnimator.reset()
             if (stats[0] != furyLevel) {
                 furyLevelDirty = true
                 furyLevel = stats[0]
@@ -109,7 +121,7 @@ object ScepterHud {
         if (gracePrevToNext != graceFraction){
             graceFractionDirty = graceFraction
             graceFraction = graceFractionTemp
-            graceChangeAnimator.reset()
+            if (bl) graceChangeAnimator.reset()
             if (stats[1] != graceLevel) {
                 graceLevelDirty = true
                 graceLevel = stats[1]
@@ -123,7 +135,7 @@ object ScepterHud {
         if (witPrevToNext != witFraction){
             witFractionDirty = witFraction
             witFraction = witFractionTemp
-            witChangeAnimator.reset()
+            if (bl) witChangeAnimator.reset()
             if (stats[2] != witLevel) {
                 witLevelDirty = true
                 witLevel = stats[2]
@@ -143,6 +155,8 @@ object ScepterHud {
         manaChangeAnimator.tick()
         cooldownReadyAnimator.tick()
         furyChangeAnimator.tick()
+        graceChangeAnimator.tick()
+        witChangeAnimator.tick()
         if (MinecraftClient.getInstance().player?.itemCooldownManager?.isCoolingDown(activeStack.item) == true){
             val f = MinecraftClient.getInstance().player?.itemCooldownManager?.getCooldownProgress(activeStack.item,1f) ?: 0f
             coolingDownPips = MathHelper.ceil(f * 9f)
@@ -229,7 +243,8 @@ object ScepterHud {
         //the hud style
         drawContext.drawTexture(hudTexture,x-7,y, activeSpellStyle.x, activeSpellStyle.y,38,38)
         //spell icon
-        drawContext.drawTexture(activeSpellTextureId,x,y,32,32,32f,32f,32,32,32,32)
+        //drawContext.drawTexture(activeSpellTextureId,x,y,32,32,32f,32f,32,32,32,32)
+        drawIcon(drawContext, activeSpellTextureId,x,y)
     }
 
     private open class ElementAnimator(val elementMap: Map<Int, Vector2i>, val length: Int){
@@ -253,6 +268,32 @@ object ScepterHud {
         fun kill(){
             tick = length + 1
         }
+    }
+
+    fun drawIcon(
+        context: DrawContext,
+        texture: Identifier,
+        x1: Int,
+        y1: Int
+    ) {
+        val x2 = x1 + 32
+        val y2 = y1 + 32
+        RenderSystem.setShaderTexture(0, texture)
+        RenderSystem.setShader { GameRenderer.getPositionColorTexProgram() }
+        RenderSystem.enableBlend()
+        val matrix4f: Matrix4f = context.matrices.peek().positionMatrix
+        val bufferBuilder = Tessellator.getInstance().buffer
+        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE)
+        bufferBuilder.vertex(matrix4f, x1.toFloat(), y1.toFloat(), 0f).color(1f, 1f, 1f, 1f)
+            .texture(0f, 0f).next()
+        bufferBuilder.vertex(matrix4f, x1.toFloat(), y2.toFloat(), 0f).color(1f, 1f, 1f, 1f)
+            .texture(0f, 1f).next()
+        bufferBuilder.vertex(matrix4f, x2.toFloat(), y2.toFloat(), 0f).color(1f, 1f, 1f, 1f)
+            .texture(1f, 1f).next()
+        bufferBuilder.vertex(matrix4f, x2.toFloat(), y1.toFloat(), 0f).color(1f, 1f, 1f, 1f)
+            .texture(1f, 0f).next()
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end())
+        RenderSystem.disableBlend()
     }
 
     fun registerClient(){
@@ -287,18 +328,18 @@ object ScepterHud {
             val activeSpell = item.getActiveEnchant(stack)
             if (SpellRadialHud.isDirty()){
                 if (!stack.hasEnchantments()) return@register
-                refreshHudCache(stack, activeSpell)
+                refreshHudCache(stack, activeSpell, player)
             }
             if (tick % 20L == 0L && !onTick){
                 if (!stack.hasEnchantments()) return@register
                 onTick = true
-                refreshHudCache(stack, activeSpell)
+                refreshHudCache(stack, activeSpell, player)
             } else {
                 onTick = false
             }
             if (!ItemStack.areEqual(stack, activeStack)){
                 if (!stack.hasEnchantments()) return@register
-                refreshHudCache(stack, activeSpell)
+                refreshHudCache(stack, activeSpell, player)
             }
             if (AiConfig.hud.showHud.get())
                 draw(drawContext, tickDelta)

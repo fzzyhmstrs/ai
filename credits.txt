@@ -38,3 +38,6 @@ Sardonyx Entities Sound Events
 
 Book Closing Sound Event
 "Closing a Book" by Kodack of https://freesound.org/people/Kodack
+
+Mana Regen Potion Base Texture:
+"pl.png" by xalixilax of https://www.curseforge.com/minecraft/texture-packs/xalis-potions

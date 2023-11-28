@@ -184,6 +184,7 @@ tasks {
         targetCompatibility = javaVersion.toString()
     }
     jar { from("LICENSE") { rename { "${it}_${base.archivesName}" } } }
+    jar { from("credits.txt") { rename { "${it}_${base.archivesName}" } } }
     processResources {
         inputs.property("version", project.version)
         filesMatching("fabric.mod.json") { expand(mutableMapOf("version" to project.version)) }
