@@ -51,7 +51,9 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         effect: AugmentEffect
     ): Boolean {
         val hitResult = EntityHitResult(user, Vec3d(user.x,user.getBodyY(0.5),user.z))
-        val (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
+        var (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
+        entityList.add(user)
+        entityList = entityList.filter{ AiConfig.entities.shouldItHitFriend(user,it,this) }.toMutableList()
         if (entityList.isEmpty()) return false
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
@@ -79,8 +81,7 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-        for (target in entityList) {
-            if (!(target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this))) continue
+        for (target in entityList) {  
             if (target !is LivingEntity) continue
             if (target.health == target.maxHealth) continue
             target.heal(effect.damage(level))
