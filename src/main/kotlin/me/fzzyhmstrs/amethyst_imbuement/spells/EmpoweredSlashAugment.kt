@@ -32,8 +32,8 @@ open class EmpoweredSlashAugment: SlashAugment(ScepterTier.TWO,5) {
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
+                    if (AiConfig.entities.shouldItHitBase(user, entity,this))
+                        hostileEntityList.add(entity)
                 }
             }
         }

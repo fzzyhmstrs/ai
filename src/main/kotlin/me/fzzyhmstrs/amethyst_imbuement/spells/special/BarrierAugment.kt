@@ -37,7 +37,7 @@ class BarrierAugment: MinorSupportAugment(ScepterTier.TWO,10){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (AiConfig.entities.shouldItHitFriend(user,target,this) && target is LivingEntity) {
+            if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
                 EffectQueue.addStatusToQueue(target, StatusEffects.ABSORPTION, effects.duration(level), effects.amplifier(level)/5)
                 effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
                 world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)

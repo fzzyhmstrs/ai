@@ -7,12 +7,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.boss.WitherEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.HostileEntity
@@ -57,7 +57,7 @@ class BedazzleAugment: MiscAugment(ScepterTier.TWO,1) {
     ): Boolean {
         val hostileEntity: MutableList<LivingEntity> = mutableListOf()
         for (entity2 in entityList){
-            if (entity2 is HostileEntity && entity2 !is WitherEntity){
+            if (entity2 is HostileEntity && AiConfig.Entities.Options.NON_BOSS.shouldItHit(user,entity2,this)){
                 hostileEntity.add(entity2)
             }
         }

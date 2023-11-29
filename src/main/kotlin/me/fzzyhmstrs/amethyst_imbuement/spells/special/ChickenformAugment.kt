@@ -38,7 +38,7 @@ class ChickenformAugment: MinorSupportAugment(ScepterTier.TWO,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (AiConfig.entities.shouldItHitFriend(user,target,this) && target is LivingEntity) {
+            if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.JUMP_BOOST, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SPEED, effects.duration(level), effects.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level)))

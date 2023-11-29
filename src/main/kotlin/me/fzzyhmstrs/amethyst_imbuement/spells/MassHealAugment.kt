@@ -10,7 +10,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.Monster
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -44,8 +43,7 @@ class MassHealAugment: MiscAugment(ScepterTier.TWO,5){
         } else {
             entityList.add(user)
             for (entity3 in entityList) {
-                if (entity3 !is Monster && entity3 is LivingEntity) {
-                    if (  !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
+                if (entity3 is LivingEntity && AiConfig.entities.shouldItHitFriend(user, entity3,this)) {
                     if (entity3.health == entity3.maxHealth) continue
                     successes++
                     entity3.heal(effect.damage(level)/1.25F)

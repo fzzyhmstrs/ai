@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -15,8 +14,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.HostileEntity
-import net.minecraft.entity.mob.Monster
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -41,7 +38,7 @@ class CurseAugment: MinorSupportAugment(ScepterTier.THREE,16){
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is Monster || target is HostileEntity ||   !AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
+            if (AiConfig.entities.shouldItHitBase(user,target,this)) {
                 EffectQueue.addStatusToQueue(
                     target as LivingEntity,
                     RegisterStatus.CURSED,

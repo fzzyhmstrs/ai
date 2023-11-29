@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -17,7 +16,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.mob.Monster
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -51,7 +49,8 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
+        var (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
+        entityList = entityList.filter { AiConfig.entities.shouldItHitBase(user,it,this) }.toMutableList()
         if (entityList.isEmpty() || blockPos == user.blockPos) return false
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
@@ -77,12 +76,10 @@ class CometStormAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelpe
     ): Boolean {
         var successes = 0
         for (entity3 in entityList) {
-            if(entity3 is Monster ||   !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
-                val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
-                val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level, this)
-                if (world.spawnEntity(ce)){
-                    successes++
-                }
+            val vel = entity3.pos.subtract(user.pos.add(0.0,user.standingEyeHeight.toDouble(),0.0)).normalize().multiply(4.0)
+            val ce = createFireball(world, user, vel, user.eyePos.subtract(0.0,0.2,0.0), effect, level, this)
+            if (world.spawnEntity(ce)){
+                successes++
             }
         }
         effect.accept(toLivingEntityList(entityList),AugmentConsumer.Type.HARMFUL)

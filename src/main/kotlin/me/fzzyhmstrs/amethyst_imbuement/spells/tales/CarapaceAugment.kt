@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -13,8 +12,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -39,13 +36,11 @@ class CarapaceAugment: MinorSupportAugment(ScepterTier.THREE,7){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
-                target.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                return true
-            }
+        if ((target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this))) {
+            target.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
+            effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+            return true
         }
         user.addStatusEffect(StatusEffectInstance(RegisterStatus.BONE_ARMOR, effects.duration(level), effects.amplifier(level)/2))
         effects.accept(user, AugmentConsumer.Type.BENEFICIAL)

@@ -64,7 +64,7 @@ object AiConfig
             .add("1.20.1-10: Add materials_v0 to capture configurable gear materials. Add some durability configs to items and remove the previous items_v5 durability/damage configs.")
             .add("1.20.2-01/1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs. Added Soulwoven armor material to materials_v1. Added new entities in entities_v4. Added sky village integration configs in villages_v3")
             .add("1.20.2-01/1.20.1-16: Updated how PvpTeammates are considered. new Entities v5. Beast augments added into augments v4 config.")
-            .add("1.20.2-01/1.20.1-17: Added Hud_v0 config for controlling client side gui-related items. Added a series of commands for controlling this in-game.")
+            .add("1.20.2-01/1.20.1-17: Added Hud_v0 config for controlling client side gui-related items. Added a series of commands for controlling this in-game. Entities_v6 includes a massively overhauled Pvp checker based on the Should I Hit That API. Config option added for the default secondary checker options.")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -418,8 +418,8 @@ object AiConfig
         
         private val HIT_CHECKER = MobCheckerBuilder.sequence(
             MobCheckers.NON_NULL_HIT,
-            MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_SELF,
+            MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_CLAIMED,
             MobCheckers.NOT_PET,
             TogglePvpMobChecker,
@@ -489,7 +489,7 @@ object AiConfig
         }
 
         fun shouldItHitBase(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
-            return shouldItHit(attacker,victim, Options.NON_FRIENDLY, args)
+            return shouldItHit(attacker,victim, defaultSecondaryHitCheckerOption.get(), args)
         }
 
         fun shouldItHit(attacker: LivingEntity?, victim: Entity, options: Options, vararg args: Any?): Boolean{
@@ -506,6 +506,7 @@ object AiConfig
 
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
         var forcePvpOnAllSpells = ValidatedBoolean(false)
+        var defaultSecondaryHitCheckerOption = ValidatedEnum(Options.NONE,Options::class.java)
 
         var unhallowed = Unhallowed()
         class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").build()){
@@ -698,7 +699,7 @@ object AiConfig
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v5.json","entities_v4.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+    var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v6.json","entities_v5.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
     var resources: Resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
     @NonSync
     var hud: Hud = SyncedConfigHelperV1.readOrCreateAndValidate("hud_v0.json", base = AI.MOD_ID, configClass = {Hud()})
@@ -721,7 +722,7 @@ object AiConfig
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
         trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v5.json","entities_v4.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v6.json","entities_v5.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
         resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
     }
 

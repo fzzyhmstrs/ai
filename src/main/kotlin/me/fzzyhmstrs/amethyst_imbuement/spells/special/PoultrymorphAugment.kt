@@ -7,7 +7,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
@@ -38,7 +37,7 @@ class PoultrymorphAugment: MinorSupportAugment(ScepterTier.TWO,5), PersistentEff
 
     override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
         val stack = user.getStackInHand(hand)
-        if (stack.item != RegisterScepter.A_SCEPTER_SO_FOWL) return false
+        //if (stack.item != RegisterScepter.A_SCEPTER_SO_FOWL) return false
         val target = RaycasterUtil.raycastEntity(distance = effects.range(level),user)
         return if(target != null && target !is SpellCastingEntity && !target.type.isIn(RegisterTag.POULTRYMORPH_IGNORES)) {
             val nbt = NbtCompound()

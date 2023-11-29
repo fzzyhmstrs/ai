@@ -7,11 +7,16 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.MovementType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -30,6 +35,17 @@ class DashAugment: MiscAugment(ScepterTier.TWO,3){
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.WIT,32,12,
             8,imbueLevel,1, LoreTier.LOW_TIER, Items.SUGAR)
+    }
+
+    override fun applyTasks(world: World, user: LivingEntity, hand: Hand, level: Int, effects: AugmentEffect): Boolean {
+        return if (user is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            buf.writeInt(level)
+            ServerPlayNetworking.send(user,DASH_CLIENT,buf)
+            true
+        } else{
+            effect(world,null, user,level,null,effects)
+        }
     }
 
     override fun effect(
@@ -64,9 +80,9 @@ class DashAugment: MiscAugment(ScepterTier.TWO,3){
         return true
     }
 
-    override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
+    /*override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
         effect(world, null, user, level, null, baseEffect)
-    }
+    }*/
 
     override fun soundEvent(): SoundEvent {
         return when(AI.aiRandom().nextInt(3)){
@@ -75,6 +91,18 @@ class DashAugment: MiscAugment(ScepterTier.TWO,3){
             2-> SoundEvents.ITEM_TRIDENT_RIPTIDE_3
             else-> SoundEvents.ITEM_TRIDENT_RIPTIDE_1
         }
+    }
 
+    companion object{
+
+        private val DASH_CLIENT = AI.identity("dash_client")
+
+        fun registerClient(){
+            ClientPlayNetworking.registerGlobalReceiver(DASH_CLIENT){client,_,buf,_->
+                val player = client.player ?: return@registerGlobalReceiver
+                val lvl = buf.readInt()
+                RegisterEnchantment.DASH.effect(player.world,null,player,lvl,null,RegisterEnchantment.DASH.baseEffect)
+            }
+        }
     }
 }

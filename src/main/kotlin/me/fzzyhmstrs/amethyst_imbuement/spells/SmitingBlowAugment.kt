@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -47,8 +46,7 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is LivingEntity) {
-                if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) return false
+            if (target is LivingEntity &&  AiConfig.entities.shouldItHitBase(user, target,this)) {
                 val bl = if(target.isUndead) {
                     target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level) * effects.amplifier(level))
                 } else {
@@ -99,19 +97,19 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
         }
         private fun generateParticles(world: World, pos: Vec3d){
             val random = AIClient.aiRandom()
-            for (i in 1..16){
+            for (i in 1..40){
                 val rnd1 =  random.nextDouble() - 0.5
                 val rnd2 = random.nextDouble() - 0.5
                 val rnd3 = -1.5 + (random.nextDouble() - 0.5) * 0.1
                 world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.3,pos.z + rnd2,0.0,rnd3,0.0)
             }
-            for (i in 1..16){
-                val rnd1 = random.nextDouble() - 0.5
-                val rnd2 = random.nextDouble() - 0.5
+            for (i in 1..40){
+                val rnd1 = (random.nextDouble()* 2.0) - 1.0
+                val rnd2 = (random.nextDouble()* 2.0) - 1.0
                 val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1
                 world.addParticle(ParticleTypes.SPIT,true,pos.x + rnd1,pos.y + 2.0,pos.z + rnd2,0.0,rnd3,0.0)
             }
-            for (i in 1..16){
+            for (i in 1..40){
                 val rnd1 = random.nextDouble() - 0.5
                 val rnd2 = random.nextDouble() - 0.5
                 val rnd3 = -1.0 + (random.nextDouble() - 0.5) * 0.1

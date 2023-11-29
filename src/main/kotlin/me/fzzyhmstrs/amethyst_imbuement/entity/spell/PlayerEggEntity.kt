@@ -55,10 +55,8 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = this.owner
-        if (entity is LivingEntity && !(AiConfig.entities.isEntityPvpTeammate(entity,entityHitResult.entity,RegisterEnchantment.TORRENT_OF_BEAKS))) {
+        if (entity is LivingEntity && AiConfig.entities.shouldItHitBase(entity,entityHitResult.entity,RegisterEnchantment.TORRENT_OF_BEAKS)) {
             entityHitResult.entity.damage(this.damageSources.mobProjectile(this, entity), entityEffects.damage(0))
-        } else {
-            entityHitResult.entity.damage(this.damageSources.generic(), entityEffects.damage(0))
         }
     }
 

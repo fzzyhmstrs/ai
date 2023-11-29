@@ -17,7 +17,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.Monster
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
@@ -48,7 +47,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-          return if (target is LivingEntity && (target is Monster || target is HostileEntity ||   !AiConfig.entities.isEntityPvpTeammate(user, target,this))) {
+          return if (target is LivingEntity && AiConfig.entities.shouldItHitBase(user, target,this)) {
               val bl = target.damage(CustomDamageSources.lightningBolt(world,null,user), effects.damage(level))
               if (bl){
                   if (world.random.nextFloat() < 0.25f)

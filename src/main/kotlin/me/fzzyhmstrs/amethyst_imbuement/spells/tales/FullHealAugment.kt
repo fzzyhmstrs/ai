@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -13,8 +12,6 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
@@ -34,16 +31,14 @@ class FullHealAugment: MinorSupportAugment(ScepterTier.THREE,7){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                val toHeal = (target as LivingEntity).maxHealth - target.health
-                if (toHeal > 0f) {
-                    target.heal(toHeal)
-                    if (target.health != target.maxHealth) return false
-                    world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                    effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                    return true
-                }
+        if (target is LivingEntity &&   AiConfig.entities.shouldItHitFriend(user,target,this)) {
+            val toHeal = (target as LivingEntity).maxHealth - target.health
+            if (toHeal > 0f) {
+                target.heal(toHeal)
+                if (target.health != target.maxHealth) return false
+                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+                return true
             }
         }
 

@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
@@ -15,7 +14,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.Monster
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -39,22 +37,18 @@ class RevivifyAugment: MinorSupportAugment(ScepterTier.THREE,7){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if (target !is Monster && target is LivingEntity) {
-                if (!(  !AiConfig.entities.isEntityPvpTeammate(user,target,this))) {
-                  target.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, (effects.duration(level) * 0.7).toInt(), effects.amplifier(1)))
-                  target.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, (effects.duration(level + 3) * 0.7).toInt(), effects.amplifier(level - 1)))
-                  effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                  val passedEffect = AugmentEffect()
-                  passedEffect.plus(effects)
-                  passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.BENEFICIAL)
-                  passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.HARMFUL)
-                  RegisterEnchantment.MASS_CLEANSE.effect(world, user, mutableListOf(target), level, passedEffect)
-                  RegisterEnchantment.MASS_HEAL.effect(world, user, mutableListOf(target), level, passedEffect)
-                  world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                  return true
-                }
-            }
+        if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
+          target.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, (effects.duration(level) * 0.7).toInt(), effects.amplifier(1)))
+          target.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, (effects.duration(level + 3) * 0.7).toInt(), effects.amplifier(level - 1)))
+          effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+          val passedEffect = AugmentEffect()
+          passedEffect.plus(effects)
+          passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.BENEFICIAL)
+          passedEffect.setConsumers(mutableListOf(),AugmentConsumer.Type.HARMFUL)
+          RegisterEnchantment.MASS_CLEANSE.effect(world, user, mutableListOf(target), level, passedEffect)
+          RegisterEnchantment.MASS_HEAL.effect(world, user, mutableListOf(target), level, passedEffect)
+          world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+          return true
         }
         user.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, effects.duration(level), effects.amplifier(1)))
         user.addStatusEffect(StatusEffectInstance(StatusEffects.ABSORPTION, effects.duration(level + 3), effects.amplifier(level)))

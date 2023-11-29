@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -15,7 +14,6 @@ import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.Monster
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
@@ -39,16 +37,13 @@ class MassRevivifyAugment: MiscAugment(ScepterTier.THREE,5){
         level: Int,
         effect: AugmentEffect
     ): Boolean {
-        var successes = 0
-        if (entityList.isEmpty()){
-            successes++
-            EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
-            EffectQueue.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
-            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        }
+        var successes = 1
+        EffectQueue.addStatusToQueue(user,StatusEffects.REGENERATION,effect.duration(level), effect.amplifier(1))
+        EffectQueue.addStatusToQueue(user,StatusEffects.ABSORPTION, effect.duration(level + 3), effect.amplifier(level))
+        effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
+
         for (entity3 in entityList) {
-            if(entity3 !is Monster && entity3 is LivingEntity){
-                if (  !AiConfig.entities.isEntityPvpTeammate(user, entity3,this)) continue
+            if(entity3 is LivingEntity && AiConfig.entities.shouldItHitFriend(user, entity3,this)){
                 successes++
                 EffectQueue.addStatusToQueue(entity3,StatusEffects.REGENERATION,(effect.duration(level) * 0.7).toInt(), effect.amplifier(1))
                 EffectQueue.addStatusToQueue(entity3,StatusEffects.ABSORPTION, (effect.duration(level + 3) * 0.7).toInt(), effect.amplifier(level - 1))

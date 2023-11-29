@@ -11,8 +11,6 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
@@ -33,17 +31,14 @@ class MinorHealAugment: MinorSupportAugment(ScepterTier.ONE,6){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if (target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                val healthCheck = (target as LivingEntity).health
-                target.heal(effects.damage(level))
-                if (target.health == healthCheck) return false
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                return true
-            }
+        if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
+            val healthCheck = target.health
+            target.heal(effects.damage(level))
+            if (target.health == healthCheck) return false
+            world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+            effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+            return true
         }
-
         val healthCheck = user.health
         user.heal(effects.damage(level))
         if (user.health == healthCheck) return false

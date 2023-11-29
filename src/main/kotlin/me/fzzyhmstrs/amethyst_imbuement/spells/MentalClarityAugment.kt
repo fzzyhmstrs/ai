@@ -36,19 +36,16 @@ class MentalClarityAugment: MinorSupportAugment(ScepterTier.TWO,16){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if (target is LivingEntity && AiConfig.entities.isEntityPvpTeammate(user,target,this)) {
-                EffectQueue.addStatusToQueue(
-                    target,
-                    RegisterStatus.INSIGHTFUL,
-                    effects.duration(level),
-                    (effects.amplifier(level)/3) + 1)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                return true
-            }
+        if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
+            EffectQueue.addStatusToQueue(
+                target,
+                RegisterStatus.INSIGHTFUL,
+                effects.duration(level),
+                (effects.amplifier(level)/3) + 1)
+            world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
+            effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+            return true
         }
-
         EffectQueue.addStatusToQueue(
             user,
             RegisterStatus.INSIGHTFUL,

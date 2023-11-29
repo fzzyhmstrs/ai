@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -15,8 +14,6 @@ import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -40,7 +37,7 @@ class CleanseAugment: MinorSupportAugment(ScepterTier.ONE,11){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if ((target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this)) && target is LivingEntity) {
+            if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
                 val statuses: MutableList<StatusEffectInstance> = mutableListOf()
                 for (effect in target.statusEffects){
                     if (effect.effectType.isBeneficial) continue
