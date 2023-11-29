@@ -105,7 +105,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
-                user.eyeY - 0.6 - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
+                user.eyeY - (user.height * 0.3333333) - 0.8 * MathHelper.sin(user.pitch * (Math.PI.toFloat() / 180)),
                 user.z + (user.width + 0.5f) * 0.5 * MathHelper.cos(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
                     user.pitch * (Math.PI.toFloat() / 180)
                 ),
