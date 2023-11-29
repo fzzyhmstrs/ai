@@ -38,14 +38,12 @@ class FortifyAugment: MinorSupportAugment(ScepterTier.TWO,11){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        if(target != null) {
-            if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3)))
-                target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
-                effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
-                world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
-                return true
-            }
+        if (target is LivingEntity && AiConfig.entities.shouldItHitFriend(user,target,this)) {
+            target.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max(effects.amplifier(level)/4,3)))
+            target.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
+            effects.accept(target, AugmentConsumer.Type.BENEFICIAL)
+            world.playSound(null, target.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.6F, 1.2F)
+            return true
         }
         user.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, effects.duration(level), max((effects.amplifier(level)/4)-1,3)))
         user.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, effects.duration(level), effects.amplifier(level)/4))
