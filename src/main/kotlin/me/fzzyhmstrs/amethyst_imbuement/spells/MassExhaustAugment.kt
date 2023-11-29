@@ -43,13 +43,11 @@ class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
         if (entityList.isEmpty()) return false
         var successes = 0
         for (entity3 in entityList) {
-            if(entity3 is Monster ||   !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)){
-                if (entity3 is LivingEntity){
-                    successes++
-                    EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
-                    EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
-                    effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
-                }
+            if(entity3 is LivingEntity && AiConfig.entities.shouldItHitBase(user,entity3,this)){
+                successes++
+                EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
+                EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
+                effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
             }
         }
         val bl = successes > 0
