@@ -39,7 +39,7 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
-            val bl = entity.damage(this.damageSources.mobProjectile(this, entity2), entityEffects.damage(0))
+            val bl = entity.damage(SpellDamageSource(this.damageSources.mobProjectile(this, entity2),augment), entityEffects.damage(0))
             if (bl) {
                 applyDamageEffects(entity2, entity)
                 if (entity is LivingEntity) {
