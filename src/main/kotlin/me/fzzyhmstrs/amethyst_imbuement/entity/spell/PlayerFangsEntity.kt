@@ -121,7 +121,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         val livingEntity = getOwner()
         if (!AiConfig.entities.shouldItHitBase(livingEntity, target, augment)) return
         if (livingEntity == null) {
-            target.damage(this.damageSources.magic(), entityEffects.damage(0))
+            target.damage(SpellDamageSource(this.damageSources.magic(),augment), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
             if (livingEntity.isTeammate(target)) {
