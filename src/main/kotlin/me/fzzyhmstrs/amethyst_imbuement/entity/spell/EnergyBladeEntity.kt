@@ -51,7 +51,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
 
     constructor(world: World,owner: LivingEntity) : this(RegisterEntity.ENERGY_BLADE,world){
         this.owner = owner
-        this.updatePositionAndAngles(owner.x, owner.eyeY - 0.4, owner.z, owner.yaw, owner.pitch)
+        this.updatePositionAndAngles(owner.x, owner.eyeY - (user.height * 0.25), owner.z, owner.yaw, owner.pitch)
     }
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(8.0F).withRange(5.0)
