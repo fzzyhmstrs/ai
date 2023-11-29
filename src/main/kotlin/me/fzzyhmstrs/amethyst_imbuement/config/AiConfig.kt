@@ -344,15 +344,17 @@ object AiConfig
             return enabledEnchants[id] ?: true
         }
         fun getAiMaxLevel(enchantment: Enchantment, fallback: Int): Int{
-            if (disableIncreaseMaxLevels.get()) return fallback
             val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
-            return aiEnchantMaxLevels[id] ?: fallback
+            val amount = aiEnchantMaxLevels[id] ?: fallback
+            if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
+            return amount
         }
         
         fun getVanillaMaxLevel(enchantment: Enchantment, fallback: Int): Int{
-            if (disableIncreaseMaxLevels.get()) return fallback
             val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
-            return vanillaEnchantMaxLevels[id] ?: fallback
+            val amount = vanillaEnchantMaxLevels[id] ?: fallback
+            if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
+            return amount
         }
         
         @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
