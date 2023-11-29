@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -86,8 +87,8 @@ class WintersGraspAugment: MiscAugment(ScepterTier.THREE,17), PersistentEffectHe
 
         var successes = 0
         for (target in entityList) {
-            if (  AiConfig.entities.isEntityPvpTeammate(user, target,this)) continue
-            val bl = target.damage(CustomDamageSources.freeze(world,null,user),effect.damage(level))
+            if (!AiConfig.entities.shouldItHitBase(user, target,this)) continue
+            val bl = target.damage(SpellDamageSource(CustomDamageSources.freeze(world,null,user),this),effect.damage(level))
             if (bl && target is LivingEntity) {
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS,effect.duration(level), effect.amplifier(level)))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS,effect.duration(level), effect.amplifier(level)))
