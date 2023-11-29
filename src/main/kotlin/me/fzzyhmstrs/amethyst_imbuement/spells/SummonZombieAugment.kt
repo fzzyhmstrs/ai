@@ -51,6 +51,7 @@ class SummonZombieAugment: SummonEntityAugment(ScepterTier.TWO,13) {
             if (spawnPos == BlockPos.ORIGIN) continue
             val zom = UnhallowedEntity(RegisterEntity.UNHALLOWED_ENTITY, world,effects.duration(level), user, effects, level, bonus)
             zom.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y + 0.05, spawnPos.z + 0.5, user.yaw, user.pitch)
+            zom.setSpell(this)
             if (world.spawnEntity(zom)){
                 successes++
             }
