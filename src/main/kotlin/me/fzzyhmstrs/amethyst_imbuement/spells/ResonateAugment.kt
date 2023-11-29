@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -100,7 +101,7 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
         } else {
             effect.damage(level + amp - 1)
         }
-        val bl = if(user is PlayerEntity) target.damage(user.damageSources.playerAttack(user),damage) else target.damage(user.damageSources.mobAttack(user),damage)
+        val bl = if(user is PlayerEntity) target.damage(SpellDamageSource(user.damageSources.playerAttack(user),this),damage) else target.damage(SpellDamageSource(user.damageSources.mobAttack(user),this),damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))
