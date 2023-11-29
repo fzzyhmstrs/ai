@@ -22,7 +22,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
     constructor(world: World, owner: LivingEntity, directionX: Double, directionY: Double, directionZ: Double): super(RegisterEntity.PLAYER_WITHER_SKULL, world){
         this.owner = owner
         this.setRotation(owner.yaw, owner.pitch)
-        this.refreshPositionAndAngles(owner.x, owner.y, owner.z, yaw, pitch)
+        this.refreshPositionAndAngles(owner.x, owner.eyeY - (user.height * 0.25), owner.z, yaw, pitch)
         this.refreshPosition()
         val d = sqrt(directionX * directionX + directionY * directionY + directionZ * directionZ)
         if (d != 0.0){
@@ -53,7 +53,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
+        if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
             bl = entity.damage(this.damageSources.witherSkull(this, entity2), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
