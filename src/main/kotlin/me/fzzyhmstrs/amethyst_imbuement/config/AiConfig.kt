@@ -375,7 +375,9 @@ object AiConfig
             enchants.enabledEnchants.validateAndSet(map1)
             val map2 = enchants.aiEnchantMaxLevels.toMutableMap()
             map2.remove("amethyst_imbuement:bulwark")
-            enchants.aiEnchantMaxLevels.validateAndSet(map2)
+            val map3 = enchants.vanillaEnchantMaxLevels.toMutableMap()
+            map2["minecraft:projectile_protection"] = 5
+            enchants.vanillaEnchantMaxLevels.validateAndSet(map2)
             return enchants
         }
     }
@@ -699,7 +701,7 @@ object AiConfig
     var materials: Materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
-    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+    var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v3.json","enchantments_v2.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
     var trinkets: Trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
     var entities: Entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v6.json","entities_v5.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
     var resources: Resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
@@ -722,7 +724,7 @@ object AiConfig
         materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
         blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
-        enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v2.json","enchantments_v1.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
+        enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v3.json","enchantments_v2.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
         trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
         entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v6.json","entities_v5.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
         resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
