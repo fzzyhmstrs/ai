@@ -46,6 +46,7 @@ class SummonGolemAugment: SummonEntityAugment(ScepterTier.THREE,5) {
         golem.setConstructOwner(user)
         golem.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
         golem.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
+        golem.setSpell(this)
         if (world.spawnEntity(golem)) {
             return super.placeEntity(world, user, hit, level, effects)
         }
