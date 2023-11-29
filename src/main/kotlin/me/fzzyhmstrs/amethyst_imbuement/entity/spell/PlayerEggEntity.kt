@@ -56,7 +56,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
         super.onEntityHit(entityHitResult)
         val entity = this.owner
         if (entity is LivingEntity && AiConfig.entities.shouldItHitBase(entity,entityHitResult.entity,RegisterEnchantment.TORRENT_OF_BEAKS)) {
-            entityHitResult.entity.damage(this.damageSources.mobProjectile(this, entity), entityEffects.damage(0))
+            entityHitResult.entity.damage(SpellDamageSource(this.damageSources.mobProjectile(this, entity),RegisterEnchantment.TORRENT_OF_BEAKS), entityEffects.damage(0))
         }
     }
 
