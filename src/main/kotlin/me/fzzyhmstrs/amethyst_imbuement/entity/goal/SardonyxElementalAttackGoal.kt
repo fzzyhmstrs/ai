@@ -42,6 +42,7 @@ class SardonyxElementalAttackGoal(
         val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get() * damageMultiplierGetter.get())
         println("Projectile damage: ${effects.damage(1)}")
         val bse = BoneShardEntity(mobEntity.world,owner,4.0f,0.5f*h,pos,rot)
+        bse.setAugment(null)
         bse.setOnBlockHit { bhr ->
             livingEntity.world.createExplosion(
                 bse,
@@ -65,6 +66,7 @@ class SardonyxElementalAttackGoal(
         bse.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse)
         val bse2 = BoneShardEntity(mobEntity.world,owner,4.0f,2.25f*h,pos,rot)
+        bse2.setAugment(null)
         bse2.setOnBlockHit { bhr ->
             livingEntity.world.createExplosion(
                 bse2,
@@ -88,6 +90,7 @@ class SardonyxElementalAttackGoal(
         bse2.passEffects(effects,1)
         mobEntity.world.spawnEntity(bse2)
         val bse3 = BoneShardEntity(mobEntity.world,owner,4.0f,2.25f*h,pos,rot)
+        bse3.setAugment(null)
         bse3.setOnBlockHit { bhr ->
             livingEntity.world.createExplosion(
                 bse3,

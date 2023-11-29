@@ -45,6 +45,7 @@ class SummonBonestormAugment: SummonEntityAugment(ScepterTier.TWO,12){
 
         val zom = BonestormEntity(RegisterEntity.BONESTORM_ENTITY, world,effects.duration(level), user, effects, level)
         zom.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y + 0.05, spawnPos.z + 0.5, user.yaw, user.pitch)
+        zom.setSpell(this)
         if (world.spawnEntity(zom)){
             successes++
         }

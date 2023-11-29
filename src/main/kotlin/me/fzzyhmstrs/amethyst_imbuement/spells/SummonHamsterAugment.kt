@@ -43,6 +43,7 @@ class SummonHamsterAugment: SummonEntityAugment(ScepterTier.ONE,10) {
         val hampter = BaseHamsterEntity(RegisterEntity.BASIC_HAMSTER_ENTITY, world, effects.duration(level), user, effects, level)
         hampter.setPos(spawnPos.x +0.5, spawnPos.y +0.05, spawnPos.z + 0.5)
         hampter.refreshPositionAndAngles(spawnPos.x +0.5, spawnPos.y +0.005, spawnPos.z + 0.5,(world.random.nextFloat() * 360f) - 180f,user.pitch)
+        hampter.setSpell(this)
         if (world.spawnEntity(hampter)) {
             return super.placeEntity(world, user, hit, level, effects)
         }

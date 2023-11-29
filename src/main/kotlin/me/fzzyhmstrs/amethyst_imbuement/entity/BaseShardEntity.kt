@@ -23,9 +23,9 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
 
     override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6F).withAmplifier(0)
     private val struckEntities: MutableList<UUID> = mutableListOf()
-    protected var scepterAugment: ScepterAugment = RegisterEnchantment.ICE_SHARD
+    protected var scepterAugment: ScepterAugment? = RegisterEnchantment.ICE_SHARD
     
-    fun setAugment(aug: ScepterAugment){
+    fun setAugment(aug: ScepterAugment?){
         this.scepterAugment = aug
     }
 
@@ -43,7 +43,7 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             if (AiConfig.entities.shouldItHitBase(entity, entity2, scepterAugment)){
-                val bl = entity2.damage(entity.damageSources.mobProjectile(this,entity),
+                val bl = entity2.damage(SpellDamageSource(entity.damageSources.mobProjectile(this,entity),augment),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
                 )
                 if (!struckEntities.contains(entity2.uuid)){

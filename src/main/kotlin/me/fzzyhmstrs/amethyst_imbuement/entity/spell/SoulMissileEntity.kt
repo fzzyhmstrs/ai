@@ -21,7 +21,7 @@ class SoulMissileEntity: MissileEntity {
         this.owner = owner
         this.setPosition(
             owner.x,
-            owner.eyeY - 0.4,
+            owner.eyeY - (owner.height * 0.25),
             owner.z
         )
         this.setRotation(owner.yaw, owner.pitch)
@@ -40,9 +40,9 @@ class SoulMissileEntity: MissileEntity {
         val entity = owner
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
-            if(!(AiConfig.entities.isEntityPvpTeammate(entity, entity2, augment))) {
+            if(AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
                 val bl: Boolean = entity2.damage(
-                    this.damageSources.indirectMagic(this, entity),
+                    SpellDamageSource(this.damageSources.indirectMagic(this, entity),augment),
                     entityEffects.damage(0)
                 )
 

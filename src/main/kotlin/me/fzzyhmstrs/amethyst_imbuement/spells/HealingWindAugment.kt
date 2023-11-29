@@ -51,8 +51,9 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         effect: AugmentEffect
     ): Boolean {
         val hitResult = EntityHitResult(user, Vec3d(user.x,user.getBodyY(0.5),user.z))
-        val (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
-        if (entityList.isEmpty()) return false
+        var (blockPos, entityList) = RaycasterUtil.raycastEntityArea(user,hitResult,effect.range(level))
+        entityList = entityList.filter{ AiConfig.entities.shouldItHitFriend(user,it,this) }.toMutableList()
+        entityList.add(user)
         val bl = effect(world, user, entityList, level, effect)
         if (bl) {
             val data = AugmentPersistentEffectData(world, user, blockPos, entityList, level, effect)
@@ -79,8 +80,7 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-        for (target in entityList) {
-            if (!(target is PassiveEntity || target is GolemEntity ||   AiConfig.entities.isEntityPvpTeammate(user,target,this))) continue
+        for (target in entityList) {  
             if (target !is LivingEntity) continue
             if (target.health == target.maxHealth) continue
             target.heal(effect.damage(level))
@@ -97,6 +97,8 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
         if (data !is AugmentPersistentEffectData) return
         val hitResult = EntityHitResult(data.user, Vec3d(data.user.x,data.user.getBodyY(0.5),data.user.z))
         val (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
+        entityList = entityList.filter{ AiConfig.entities.shouldItHitFriend(data.user,it,this) }.toMutableList()
+        entityList.add(data.user)
         effect(data.world,data.user,entityList,data.level,data.effect)
         data.world.playSound(null,data.user.blockPos,soundEvent(),SoundCategory.PLAYERS,1.0f,0.8f + data.world.random.nextFloat()*0.4f)
         val world = data.world

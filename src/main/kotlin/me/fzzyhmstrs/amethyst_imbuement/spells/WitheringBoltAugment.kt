@@ -38,7 +38,7 @@ class WitheringBoltAugment: SummonProjectileAugment(ScepterTier.TWO,5){
         val h = (MathHelper.cos(yaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(pitch * (Math.PI.toFloat() / 180)) * speed) + user.velocity.z
         val wse = PlayerWitherSkullEntity(world,user,f,g,h)
         wse.passEffects(effects, level)
-        wse.setPos(user.x,user.eyeY-0.2,user.z)
+        wse.setPos(user.x,user.eyeY- (user.height * 0.125),user.z)
         wse.isCharged = false
         wse.setAugment(this)
         return wse

@@ -60,14 +60,13 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && !(AiConfig.entities.isEntityPvpTeammate(entity2, entity, augment))) {
-            entity.damage(this.damageSources.fireball(this, entity2), entityEffects.damage(0))
+        if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
+            entity.damage(SpellDamageSource(this.damageSources.fireball(this, entity2),augment), entityEffects.damage(0))
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
             }
             entityEffects.accept(entity2, AugmentConsumer.Type.BENEFICIAL)
             applyDamageEffects(entity2 as LivingEntity?, entity)
-
         }
     }
 

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
@@ -57,7 +58,7 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
                 0.8,
                 0.8)
         filter(entityList,user).forEach {
-            it.damage(CustomDamageSources.lightningBolt(world,null,user), effect.damage(level))
+            it.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,null,user),this), effect.damage(level))
         }
         beam(world,user,rotation,effect.range(level))
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.7F, 1.1F)
@@ -81,33 +82,13 @@ class ZapAugment: MiscAugment(ScepterTier.ONE,11){
         if (list.isNotEmpty()) {
             for (entity in list) {
                 if (entity !== user) {
-                    if (AiConfig.entities.isEntityPvpTeammate(user, entity,this)) continue
-                    hostileEntityList.add(entity)
+                    if (AiConfig.entities.shouldItHitBase(user, entity,this))
+                        hostileEntityList.add(entity)
                 }
             }
         }
         return hostileEntityList
     }
-
-    /*override fun clientTask(world: World, user: LivingEntity, hand: Hand, level: Int) {
-        val random = AIClient.aiRandom()
-        val rotation = user.getRotationVec(MinecraftClient.getInstance().tickDelta).normalize()
-        val perpendicularToPosX = 1.0
-        val perpendicularToPosZ = (rotation.x/rotation.z) * -1
-        val perpendicularVector = Vec3d(perpendicularToPosX,0.0,perpendicularToPosZ).normalize()
-        val userPos = user.eyePos.add(0.0,-0.3,0.0)
-        val increment = rotation.multiply(baseEffect.range(level) / 60)
-        var particleBasePos = userPos
-        for (i in 0..60){
-            particleBasePos = particleBasePos.add(increment)
-            for (j in 0..3){
-                val rnd1 = random.nextDouble() * 0.4 - 0.2
-                val rnd2 = random.nextDouble() * 0.4 - 0.2
-                val particlePos = particleBasePos.add(perpendicularVector.multiply(rnd1))
-                world.addParticle(ParticleTypes.ELECTRIC_SPARK,true, particlePos.x, particlePos.y + rnd2, particlePos.z, 0.0, 0.0, 0.0)
-            }
-        }
-    }*/
 
     override fun soundEvent(): SoundEvent {
         return SoundEvents.BLOCK_RESPAWN_ANCHOR_DEPLETE.value()
