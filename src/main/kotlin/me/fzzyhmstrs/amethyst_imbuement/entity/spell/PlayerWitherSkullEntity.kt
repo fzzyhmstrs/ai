@@ -47,14 +47,14 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         val bl: Boolean
-        super.onEntityHit(entityHitResult)
+        //super.onEntityHit(entityHitResult) <- Check on this
         if (world.isClient) {
             return
         }
         val entity = entityHitResult.entity
         val entity2 = owner
-        if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
-            bl = entity.damage(this.damageSources.witherSkull(this, entity2), entityEffects.damage(0))
+        if (entity is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
+            bl = entity.damage(SpellDamageSource(this.damageSources.witherSkull(this, entity2),augment), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
                     if (entity is LivingEntity) {
@@ -68,17 +68,11 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
                 }
             }
         } else {
-            bl = entity.damage(this.damageSources.wither(), 5.0f)
+            return
         }
         if (bl && entity is LivingEntity) {
-            var i = -1
-            if (world.difficulty == Difficulty.NORMAL) {
-                i = 0
-            } else if (world.difficulty == Difficulty.HARD) {
-                i = 1
-            }
             if (i > -1) {
-                entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, entityEffects.duration(i), entityEffects.amplifier(0)), this.effectCause)
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, entityEffects.duration(0), entityEffects.amplifier(0)), this.effectCause)
             }
         }
     }
