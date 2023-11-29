@@ -21,7 +21,7 @@ class SoulMissileEntity: MissileEntity {
         this.owner = owner
         this.setPosition(
             owner.x,
-            owner.eyeY - (owner.height * 0.3333333),
+            owner.eyeY - (owner.height * 0.25),
             owner.z
         )
         this.setRotation(owner.yaw, owner.pitch)
