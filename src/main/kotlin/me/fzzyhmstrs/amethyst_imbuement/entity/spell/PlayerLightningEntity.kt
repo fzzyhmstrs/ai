@@ -131,16 +131,16 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
             } else {
                 list = world.getOtherEntities(
                     this, Box(this.x - 3.0, this.y - 3.0, this.z - 3.0, this.x + 3.0, this.y + 6.0 + 3.0, this.z + 3.0)
-                ) { obj: Entity -> obj.isAlive && obj is LivingEntity && !(obj is SpellCastingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment)) }
+                ) { obj: Entity -> obj.isAlive && obj is LivingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment) }
                 for (entity2 in list) {
                     entity2.fireTicks++
                     if (entity2.fireTicks == 0){
                         entity2.setOnFireFor(entityEffects.amplifier(0))
                     }
                     if (owner != null) {
-                        entity2.damage(CustomDamageSources.lightningBolt(world,this,owner), entityEffects.damage(0))
+                        entity2.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment), entityEffects.damage(0))
                     } else {
-                        entity2.damage(this.damageSources.lightningBolt(), entityEffects.damage(0))
+                        entity2.damage(SpellDamageSource(this.damageSources.lightningBolt(),augment), entityEffects.damage(0))
                     }
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
