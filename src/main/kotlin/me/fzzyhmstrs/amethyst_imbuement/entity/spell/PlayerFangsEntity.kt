@@ -119,9 +119,7 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
 
     private fun damage(target: LivingEntity) {
         val livingEntity = getOwner()
-        if (!target.isAlive || target.isInvulnerable || target === livingEntity || (  AiConfig.entities.isEntityPvpTeammate(livingEntity, target, augment))) {
-            return
-        }
+        if (!AiConfig.entities.shouldItHitBase(livingEntity, target, augment)) return
         if (livingEntity == null) {
             target.damage(this.damageSources.magic(), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
