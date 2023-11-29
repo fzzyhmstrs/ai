@@ -41,22 +41,13 @@ class MassFortifyAugment: MiscAugment(ScepterTier.THREE,9){
         effect: AugmentEffect
     ): Boolean {
         var successes = 0
-
-        if (entityList.isEmpty()){
-            successes++
-            EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE, effect.duration(level), max(effect.amplifier((level-1)/4+3),3))
-            EffectQueue.addStatusToQueue(user,StatusEffects.STRENGTH, (effect.duration(level) * 1.25).toInt(), effect.amplifier((level-1)/4))
-            effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
-        } else {
-            entityList.add(user)
-            for (entity3 in entityList) {
-                if (entity3 !is Monster && entity3 !is PassiveEntity && entity3 is LivingEntity) {
-                    if (  !AiConfig.entities.isEntityPvpTeammate(user,entity3,this)) continue
-                    successes++
-                    EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level),  max(effect.amplifier((level-1)/4+2),2))
-                    EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier((level-1)/4))
-                    effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
-                }
+        entityList.add(user)
+        for (entity3 in entityList) {
+            if (entity3 is LivingEntity && AiConfig.entities.shouldItHitFriend(user,entity3,this)) {
+                successes++
+                EffectQueue.addStatusToQueue(entity3, StatusEffects.RESISTANCE, effect.duration(level),  max(effect.amplifier((level-1)/4+2),2))
+                EffectQueue.addStatusToQueue(entity3, StatusEffects.STRENGTH,  effect.duration(level), effect.amplifier((level-1)/4))
+                effect.accept(entity3,AugmentConsumer.Type.BENEFICIAL)
             }
         }
         return successes > 0
