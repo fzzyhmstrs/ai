@@ -43,7 +43,7 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val entity = RaycasterUtil.raycastEntity(effect.range(level),user)
+        val entity = RaycasterUtil.raycastEntity(effect.range(level),user) ?: (hit as? EntityHitResult)?.entity
 
         val blockPos: BlockPos = if (entity == null){
             if (hit == null) {
@@ -56,8 +56,6 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
                     hit.blockPos.add(0,1,0)
                 }
 
-            } else if (hit.type == HitResult.Type.ENTITY){
-                (hit as EntityHitResult).entity.blockPos
             } else if (hit.type == HitResult.Type.MISS){
                 return false
             } else {
@@ -67,9 +65,10 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
             entity.blockPos
         }
 
-        if (world.isSkyVisible(blockPos)) {
+        if (entity != null && AiConfig.entities.shouldItHitBase(user,hit.entity,this) || hit is BlockHitResult) {
             //replace with a player version that can pass consumers?
             val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),user,effect, level,this)
+            le.passEffects(effect,level)
             val bl = world.spawnEntity(le)
             if (bl) {
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
