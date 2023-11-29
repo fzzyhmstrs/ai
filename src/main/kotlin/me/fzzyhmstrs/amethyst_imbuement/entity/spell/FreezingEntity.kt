@@ -34,7 +34,7 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
         this.owner = owner
         this.setPosition(
             owner.x,
-            owner.eyeY - 0.4,
+            owner.eyeY - (user.height * 0.25),
             owner.z
         )
         this.setRotation(owner.yaw, owner.pitch)
