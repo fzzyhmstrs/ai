@@ -59,7 +59,7 @@ class LevitatingBulletAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffec
         }
         val hostileEntityList: MutableList<Entity> = mutableListOf()
         for (entity in entityList){
-            if (entity is Monster ||  !AiConfig.entities.isEntityPvpTeammate(user,entity,this)){
+            if (AiConfig.entities.shouldItHitBase(user,entity,this)){
                 hostileEntityList.add(entity)
             }
         }
