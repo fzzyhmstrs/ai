@@ -1,0 +1,36 @@
+{
+"name": "Spell Commands",
+"icon": "minecraft:command_block",
+"category": "amethyst_imbuement:spells",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "The spell HUD and spell Radial Menu can be configured with a variety of client-side commands.$(br2)The root of all of these commands is $(l)/spellHud$()"
+},
+{            
+"type": "patchouli:text",
+"title":"Basic HUD Positioning",
+"text": "$(li)topLeft: Moves the HUD to the top left of the screen with no padding.$(li)bottomLeft: Moves the HUD to the bottom left of the screen with no padding.$(li)topRight: Moves the HUD to the top right of the screen with no padding.$(li)bottomRight: Moves the HUD to the bottom right of the screen with no padding.$(li)bottomMiddle: Moves the HUD to the bottom middle of the screen with no padding.$(li)reset: Resets the HUD (top left, no padding)."
+},
+{
+"type": "patchouli:text",
+  "title":"HUD Padding",
+"text": "$(li)x: pads the chosen 'anchor' position left-right. The direction the padding moves the HUD depends on the anchor: Left > moves left, Middle/Right > moves right$(li)y: pads the chosen 'anchor' position up-down. The direction the padding moves the HUD depends on the anchor: Top > down, Bottom > up.$(li)Example: [$(l)/spellHud topLeft 20 20$()]. This command will anchor the HUD to the top left, with 20 additional pixels of padding left and down."
+},
+{
+"type": "patchouli:text",
+"title":"HUD Enable",
+"text": "$(li)enable: enables the spell HUD.$(li)disable: Disables the spell HUD."
+},
+{
+"type": "patchouli:text",
+"title": "Spell Radial Menu",
+"text": "The spell radial menu config is controlled with the subcommand $(l)spellHudSpacing$()$(li)spacing: defines the distance from the player crosshairs that spell icons appear.$(li)reset: resets to the default spacing (80 px)."
+},
+{
+"type": "patchouli:text",
+"title": "Scrool Wheel Behavior",
+"text": "The subcommand $(l)scrollChangesSpells$() configures whether or not crouching and scrolling changes spells on a scepter.$(li)enable: enables crouch-scroll spell changing.$(li)disable: disables crouch-scroll spell changing."
+}
+]
+}
