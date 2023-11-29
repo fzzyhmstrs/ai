@@ -50,6 +50,7 @@ object AiConfigDefaults {
         "minecraft:lure" to 4,
         "minecraft:piercing" to 6,
         "minecraft:power" to 5,
+        "minecraft:projectile_protection" to 5,
         "minecraft:protection" to 5,
         "minecraft:quick_charge" to 4,
         "minecraft:respiration" to 5,
