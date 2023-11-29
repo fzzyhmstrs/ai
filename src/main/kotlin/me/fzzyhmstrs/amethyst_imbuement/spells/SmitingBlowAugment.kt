@@ -46,11 +46,11 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
         effects: AugmentEffect
     ): Boolean {
         return if(target != null) {
-            if (target is LivingEntity &&  AiConfig.entities.shouldItHitBase(user, target,this)) {
+            if (target is LivingEntity && AiConfig.entities.shouldItHitBase(user, target,this)) {
                 val bl = if(target.isUndead) {
-                    target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level) * effects.amplifier(level))
+                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level) * effects.amplifier(level))
                 } else {
-                    target.damage(user.damageSources.indirectMagic(user,user),effects.damage(level))
+                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level))
                 }
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)
