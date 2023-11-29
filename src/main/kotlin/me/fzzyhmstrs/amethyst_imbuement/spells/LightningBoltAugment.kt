@@ -68,7 +68,6 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
         if (entity != null && AiConfig.entities.shouldItHitBase(user,hit.entity,this) || hit is BlockHitResult) {
             //replace with a player version that can pass consumers?
             val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),user,effect, level,this)
-            le.passEffects(effect,level)
             val bl = world.spawnEntity(le)
             if (bl) {
                 effect.accept(user, AugmentConsumer.Type.BENEFICIAL)
