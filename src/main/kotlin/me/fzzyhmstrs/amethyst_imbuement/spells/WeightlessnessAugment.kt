@@ -37,7 +37,7 @@ class WeightlessnessAugment: MinorSupportAugment(ScepterTier.TWO,5){
         effects: AugmentEffect
     ): Boolean {
         if(target != null) {
-            if (target is HostileEntity || !AiConfig.entities.isEntityPvpTeammate(user,target,this) && target is LivingEntity) {
+            if (target is LivingEntity) {
                 (target as LivingEntity).addStatusEffect(StatusEffectInstance(StatusEffects.LEVITATION, effects.duration(level), 0))
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.SLOW_FALLING, effects.duration(level+2), 0))
                 effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
