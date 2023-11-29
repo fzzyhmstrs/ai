@@ -71,7 +71,8 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
+        var (_,entityList) = RaycasterUtil.raycastEntityArea(user,hit,effect.range(level))
+        entityList = entitylist.filter{ AiConfig.entities.shouldItHitBase(user, it, this) }.toMutableList()
         if (entityList.isEmpty()) {
             return false
         }
@@ -106,12 +107,10 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
         user.isInvulnerable = true
         var successes = 0
         for (entity3 in entityList) {
-            if(entity3 is Monster && world.isSkyVisible(entity3.blockPos)){
-                //repalce with a player version that can pass consumers?
-                val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), user, effect, level,this)
-                if (world.spawnEntity(le)){
-                    successes++
-                }
+            //repalce with a player version that can pass consumers?
+            val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(entity3.blockPos), user, effect, level,this)
+            if (world.spawnEntity(le)){
+                successes++
             }
         }
         user.isInvulnerable = false
@@ -122,19 +121,11 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
         if (data !is AugmentPersistentEffectData) return
         var tries = 2
         while (tries >= 0) {
-            val rnd1 = data.entityList.size
-            val rnd2 = data.world.random.nextInt(rnd1)
-            val entity = data.entityList[rnd2]
-            val rnd3 = if(!entity.isAlive) {
-                data.world.random.nextDouble()
-            } else {
-                0.0
-            }
-
+            val entity = data.entityList[data.world.random.nextInt(data.entityList.size)]
             val bP: BlockPos
             val bpXrnd: Int
             val bpZrnd: Int
-            if (rnd3 > 0.3) {
+            if (entity.isAlive) {
                 bP = entity.blockPos
                 bpXrnd = data.world.random.nextInt(5) - 2
                 bpZrnd = data.world.random.nextInt(5) - 2
@@ -145,10 +136,6 @@ class LightningStormAugment: MiscAugment(ScepterTier.THREE,3), PersistentEffectH
                 bpZrnd = data.world.random.nextInt((range*2 + 1).toInt()) - range.toInt()
             }
             val rndBlockPos = BlockPos(bP.x + bpXrnd,data.world.getTopY(Heightmap.Type.MOTION_BLOCKING,bP.x + bpXrnd,bP.z + bpZrnd), bP.z + bpZrnd)
-            if (entity !is Monster || !data.world.isSkyVisible(rndBlockPos)){
-                tries--
-                continue
-            }
             val le = PlayerLightningEntity.createLightning(data.world, Vec3d.ofBottomCenter(data.blockPos),data.user, data.effect, data.level,this)
             data.world.spawnEntity(le)
             break
