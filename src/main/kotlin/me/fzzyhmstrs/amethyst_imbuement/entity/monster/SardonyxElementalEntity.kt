@@ -280,7 +280,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                 }
                 setCharging(100)
             }
-            source.attacker?.damage(this.damageSources.thorns(this),5f)
+            source.attacker?.damage(this.damageSources.thorns(this),max(5f,5f*damageMultiplier))
             lastDamageTracker.addDamage(source, lastHealth - this.health)
         }
         return bl
