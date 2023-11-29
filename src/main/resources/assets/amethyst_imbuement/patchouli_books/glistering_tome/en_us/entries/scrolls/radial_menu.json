@@ -1,0 +1,21 @@
+{    
+"name": "Spell Radial Menu",    
+"icon": "amethyst_imbuement:witches_orb",    
+"category": "amethyst_imbuement:spells",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "As of Amethyst Imbuement 1.20.1-17, there is a radial menu for changing spells! Press the [Left Alt] key (by default) to open the menu, and click to select the spell current highlighted by the indicator arrow."
+},
+{
+"type": "patchouli:image",
+"anchor": "scope",
+"title": "Sniper Bow Scope",
+"images": [
+"amethyst_imbuement:textures/gui/patchouli/radial_menu.png"
+],
+"border": true,
+"text": "If you want to configure the radial menu, see the $(l:amethyst_imbuement:spells/spell_commands)Spell Commands$() entry for more details."
+}
+]
+}
