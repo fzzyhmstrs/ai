@@ -103,6 +103,8 @@
 	"amethyst_imbuement.advancement.golem.desc": "Summon a crystalline golem.",
 	"amethyst_imbuement.advancement.grindstone_hero": "Grindstone Hero",
 	"amethyst_imbuement.advancement.grindstone_hero.desc": "Remove the maximum number of enchantments from one item with the disenchanting table.",
+	"amethyst_imbuement.advancement.heads_up":"Head Up!",
+	"amethyst_imbuement.advancement.heads_up.desc":"Scepters have a radial menu now! Press [Left Alt] (by default) to open it.",
 	"amethyst_imbuement.advancement.heal_inspire": "Heal or Inspire",
 	"amethyst_imbuement.advancement.heal_inspire.desc": "Imbue a tier two scepter as you progress on the Path of Redemption.",
 	"amethyst_imbuement.advancement.heart": "If Only I Could Cover This In Gold...",
