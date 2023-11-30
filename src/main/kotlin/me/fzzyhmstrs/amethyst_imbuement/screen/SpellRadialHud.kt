@@ -62,8 +62,10 @@ object SpellRadialHud: Screen(AcText.empty()) {
     }
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
-        if (RegisterKeybind.SCEPTER_RADIAL_MENU.matchesKey(keyCode, scanCode))
+        if (RegisterKeybind.SCEPTER_RADIAL_MENU.matchesKey(keyCode, scanCode)) {
+            RegisterKeybind.radialMenuJustClosed = true
             this.close()
+        }
         return super.keyPressed(keyCode, scanCode, modifiers)
     }
 

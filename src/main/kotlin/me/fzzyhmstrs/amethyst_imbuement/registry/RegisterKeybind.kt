@@ -31,6 +31,7 @@ object RegisterKeybind {
     private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
+    internal var radialMenuJustClosed = false
     //private var scepterRadialMenuPressed: Int = 0
     private val CATEGORY = "key.categories.amethyst_imbuement"
 
@@ -143,10 +144,11 @@ object RegisterKeybind {
             }
             if (scepterWasPressed > 0){
                 if (client.currentScreen == null) {
-                    if (client.player?.mainHandStack?.item is ScepterLike)
+                    if (client.player?.mainHandStack?.item is ScepterLike && !radialMenuJustClosed)
                         client.setScreen(SpellRadialHud)
                 } else if (client.currentScreen is SpellRadialHud)
                     client.setScreen(null)
+                radialMenuJustClosed = false
             }
             /*if (SCEPTER_RADIAL_MENU.isPressed){
                 if (scepterRadialMenuPressed < 5){

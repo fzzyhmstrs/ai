@@ -15,7 +15,7 @@ public abstract class EnchantQuickChargeMixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToFour(int original){
-        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,4);
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,original);
     }
 
     @Inject(method = "getMaxPower", at = @At(value = "HEAD"), cancellable = true)

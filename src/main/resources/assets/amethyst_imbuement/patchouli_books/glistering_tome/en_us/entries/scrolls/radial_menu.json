@@ -15,7 +15,7 @@
 "amethyst_imbuement:textures/gui/patchouli/radial_menu.png"
 ],
 "border": true,
-"text": "If you want to configure the radial menu, see the $(l:amethyst_imbuement:spells/spell_commands)Spell Commands$() entry for more details."
+"text": "If you want to configure the radial menu, see the $(l:amethyst_imbuement:scrolls/spell_commands#radial_menu)Spell Commands$() entry for more details."
 }
 ]
 }

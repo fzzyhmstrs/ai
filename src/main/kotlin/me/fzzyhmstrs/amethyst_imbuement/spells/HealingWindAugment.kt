@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -17,8 +16,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.passive.GolemEntity
-import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -92,11 +89,11 @@ class HealingWindAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHel
     override val delay: PerLvlI
         get() = PerLvlI(36,-1)
 
-    @Suppress("SpellCheckingInspection")
+
     override fun persistentEffect(data: PersistentEffectHelper.PersistentEffectData) {
         if (data !is AugmentPersistentEffectData) return
         val hitResult = EntityHitResult(data.user, Vec3d(data.user.x,data.user.getBodyY(0.5),data.user.z))
-        val (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
+        var (_, entityList) = RaycasterUtil.raycastEntityArea(data.user,hitResult,data.effect.range(data.level))
         entityList = entityList.filter{ AiConfig.entities.shouldItHitFriend(data.user,it,this) }.toMutableList()
         entityList.add(data.user)
         effect(data.world,data.user,entityList,data.level,data.effect)

@@ -46,7 +46,7 @@ public abstract class EnchantDamageMixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToSeven(int original){
-        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,7);
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,original);
     }
 
     @Inject(method = "getAttackDamage", at = @At(value = "HEAD"), cancellable = true)

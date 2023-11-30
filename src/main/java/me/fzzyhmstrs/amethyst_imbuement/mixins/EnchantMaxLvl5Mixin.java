@@ -19,7 +19,7 @@ public abstract class EnchantMaxLvl5Mixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToFive(int original){
-        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,5);
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,original);
     }
 
 }

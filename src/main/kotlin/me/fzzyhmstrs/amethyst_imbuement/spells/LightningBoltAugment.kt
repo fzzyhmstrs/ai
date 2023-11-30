@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlayerLightningEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
@@ -65,7 +66,7 @@ class LightningBoltAugment: MiscAugment(ScepterTier.TWO,11){
             entity.blockPos
         }
 
-        if (entity != null && AiConfig.entities.shouldItHitBase(user,hit.entity,this) || hit is BlockHitResult) {
+        if (entity != null && AiConfig.entities.shouldItHitBase(user,entity,this) || hit is BlockHitResult) {
             //replace with a player version that can pass consumers?
             val le = PlayerLightningEntity.createLightning(world, Vec3d.ofBottomCenter(blockPos),user,effect, level,this)
             val bl = world.spawnEntity(le)

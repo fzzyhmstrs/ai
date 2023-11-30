@@ -10,7 +10,7 @@
 {            
 "type": "patchouli:text",
 "title":"Basic HUD Positioning",
-"text": "$(li)topLeft: Moves the HUD to the top left of the screen with no padding.$(li)bottomLeft: Moves the HUD to the bottom left of the screen with no padding.$(li)topRight: Moves the HUD to the top right of the screen with no padding.$(li)bottomRight: Moves the HUD to the bottom right of the screen with no padding.$(li)bottomMiddle: Moves the HUD to the bottom middle of the screen with no padding.$(li)reset: Resets the HUD (top left, no padding)."
+"text": "$(li)topLeft: Moves the HUD to the top left of the screen.$(li)bottomLeft: Moves the HUD to the bottom left of the screen.$(li)topRight: Moves the HUD to the top right of the screen.$(li)bottomRight: Moves the HUD to the bottom right of the screen.$(li)bottomMiddle: Moves the HUD to the bottom middle of the screen.$(li)reset: Resets the HUD (top left, no padding)."
 },
 {
 "type": "patchouli:text",
@@ -24,6 +24,7 @@
 },
 {
 "type": "patchouli:text",
+"anchor": "radial_menu",
 "title": "Spell Radial Menu",
 "text": "The spell radial menu config is controlled with the subcommand $(l)spellHudSpacing$()$(li)spacing: defines the distance from the player crosshairs that spell icons appear.$(li)reset: resets to the default spacing (80 px)."
 },

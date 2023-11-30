@@ -13,7 +13,7 @@ public abstract class EnchantPiercingMixin {
 
     @ModifyReturnValue(method = "getMaxLevel", at = @At("RETURN"))
     private int amethyst_imbuement_updateMaxLevelToSix(int original){
-        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,6);
+        return AiConfig.INSTANCE.getEnchants().getVanillaMaxLevel((Enchantment)(Object)this,original);
     }
 
     @ModifyReturnValue(method = "getMaxPower", at = @At("RETURN"))

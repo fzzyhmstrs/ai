@@ -29,12 +29,12 @@ import net.minecraft.world.World
 
 class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): MissileEntity(entityType,world) {
 
-    constructor(world: World,owner: LivingEntity,_level: Int) : this(RegisterEntity.FREEZING_ENTITY,world){
-        this.level = _level
+    constructor(world: World, owner: LivingEntity, level: Int) : this(RegisterEntity.FREEZING_ENTITY,world){
+        this.level = level
         this.owner = owner
         this.setPosition(
             owner.x,
-            owner.eyeY - (user.height * 0.25),
+            owner.eyeY - (owner.height * 0.25),
             owner.z
         )
         this.setRotation(owner.yaw, owner.pitch)
