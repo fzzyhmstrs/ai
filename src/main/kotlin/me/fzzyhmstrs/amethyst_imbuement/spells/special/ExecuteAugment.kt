@@ -23,13 +23,13 @@ import net.minecraft.world.World
 class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(9.4F,0.6F)
-                                                .withRange(7.5,0.5)
+                                                .withDamage(9F,1F)
+                                                .withRange(9.5,0.5)
                                                 .withAmplifier(9,1)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,300,250,
-            30, imbueLevel,25, LoreTier.NO_TIER, Items.NETHERITE_AXE)
+            25, imbueLevel,40, LoreTier.NO_TIER, Items.NETHERITE_AXE)
     }
 
     override fun supportEffect(
