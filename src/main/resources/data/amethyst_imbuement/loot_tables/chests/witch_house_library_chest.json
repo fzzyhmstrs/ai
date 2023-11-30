@@ -45,6 +45,11 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 3,
+          "name": "amethyst_imbuement:mana_regeneration_potion"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {
