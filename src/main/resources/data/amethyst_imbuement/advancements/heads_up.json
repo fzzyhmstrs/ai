@@ -1,0 +1,22 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "minecraft:command_block"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.heads_up"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.heads_up.desc"
+	}
+},
+"criteria":{
+	"cast_magic_missile":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_core:any"
+		}
+	}
+}
+}
