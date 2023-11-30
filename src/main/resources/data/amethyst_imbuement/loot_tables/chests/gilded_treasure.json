@@ -166,7 +166,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "amethyst_imbuement:judgment"
         },
         {
