@@ -12,7 +12,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
@@ -51,8 +50,8 @@ open class BonestormEntity: PlayerCreatedConstructEntity {
         goalSelector.add(8, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(8, LookAroundGoal(this))
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
-        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster })
+        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity -> shouldAngerAt(entity) || AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) })
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity -> AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) })
         targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 

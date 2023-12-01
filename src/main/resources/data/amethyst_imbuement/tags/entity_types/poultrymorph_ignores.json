@@ -5,6 +5,7 @@
     "amethyst_imbuement:sardonyx_elemental",
     "minecraft:ender_dragon",
     "minecraft:wither",
+    "minecraft:warden",
     {
       "required": false,
       "id": "bosses_of_mass_destruction:gauntlet"

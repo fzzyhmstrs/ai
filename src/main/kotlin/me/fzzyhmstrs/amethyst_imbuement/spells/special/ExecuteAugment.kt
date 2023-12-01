@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
@@ -25,7 +26,7 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
     override val baseEffect: AugmentEffect = super.baseEffect
                                                 .withDamage(9F,1F)
                                                 .withRange(9.5,0.5)
-                                                .withAmplifier(9,1)
+                                                .withAmplifier(38,2)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,300,250,
@@ -42,7 +43,8 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
         return if(target != null) {
             if (target is LivingEntity) {
                 if (!AiConfig.entities.shouldItHitBase(user, target,this)) return false
-                val bl = if (target.health <= effects.amplifier(level)){
+                val fract = effects.amplifier(level).toFloat()/100f
+                val bl = if ((target.health/target.maxHealth <= fract) && !target.type.isIn(RegisterTag.POULTRYMORPH_IGNORES)){
                     target.kill()
                     true
                 } else {

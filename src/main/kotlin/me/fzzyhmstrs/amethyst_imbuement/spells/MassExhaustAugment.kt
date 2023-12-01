@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
@@ -14,11 +13,11 @@ import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.Monster
 import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
+import kotlin.math.max
 
 class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
 
@@ -45,7 +44,7 @@ class MassExhaustAugment: MiscAugment(ScepterTier.THREE,3) {
         for (entity3 in entityList) {
             if(entity3 is LivingEntity && AiConfig.entities.shouldItHitBase(user,entity3,this)){
                 successes++
-                EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),effect.amplifier(level+ 1))
+                EffectQueue.addStatusToQueue(entity3,StatusEffects.SLOWNESS,effect.duration(level),max(3,effect.amplifier(level+ 1)))
                 EffectQueue.addStatusToQueue(entity3,StatusEffects.WEAKNESS,effect.duration(level),effect.amplifier(level))
                 effect.accept(entity3, AugmentConsumer.Type.HARMFUL)
             }

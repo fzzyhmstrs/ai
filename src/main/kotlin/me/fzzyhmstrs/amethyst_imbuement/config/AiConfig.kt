@@ -4,9 +4,7 @@ import fzzyhmstrs.should_i_hit_that.api.MobCheckerBuilder
 import fzzyhmstrs.should_i_hit_that.api.MobCheckers
 import fzzyhmstrs.should_i_hit_that.api.ShouldHitResult
 import fzzyhmstrs.should_i_hit_that.api.ShouldItHitPredicate
-import fzzyhmstrs.should_i_hit_that.checkers.ExcludeTagChecker
-import fzzyhmstrs.should_i_hit_that.checkers.MobChecker
-import fzzyhmstrs.should_i_hit_that.checkers.PredicatedPassChecker
+import fzzyhmstrs.should_i_hit_that.checkers.*
 import me.fzzyhmstrs.amethyst_core.event.ShouldScrollEvent
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
@@ -411,37 +409,45 @@ object AiConfig
             MobCheckers.NOT_FRIEND
         )
         private val IS_PVP_FRIEND: MobChecker = PredicatedPassChecker(
-            {attacker,victim,args -> if (TogglePvpMobChecker.togglePvpInstalledButNotPvp(attacker, victim)) false else forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true},
+            {attacker,victim,args -> if (TogglePvpMobChecker.togglePvpInstalledButNotPvp(attacker, victim) || victim !is PlayerEntity) false else forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true},
             MobCheckers.FRIEND
         )
         private val TOGGLE_PVP_FRIEND: MobChecker = PredicatedPassChecker(
             {attacker,victim,_ -> TogglePvpMobChecker.areBothPvp(attacker, victim)},
             MobCheckers.FRIEND
         )
+        private val TOGGLE_PVP_PET: MobChecker = IfElseMobChecker(
+            {attacker,victim,_ -> TogglePvpMobChecker.togglePvpInstalledButNotPvp(attacker, victim)},
+            MobCheckers.FAIL,
+            MobCheckers.NOT_PET
+        )
         private val NULL_NOT_MONSTER: MobChecker = PredicatedPassChecker(
             {attacker,_,_ -> attacker == null},
             {_,victim,_ -> if (victim is Monster) ShouldHitResult.FAIL else ShouldHitResult.PASS}
         )
+        private val NULL_MONSTER: MobChecker = PredicatedPassChecker(
+            {attacker,_,_ -> attacker == null},
+            {_,victim,_ -> if (victim is Monster) ShouldHitResult.PASS else ShouldHitResult.FAIL}
+        )
         
         private val HIT_CHECKER = MobCheckerBuilder.sequence(
-            MobCheckers.NON_NULL_HIT,
+            NULL_MONSTER,
             MobCheckers.NOT_SELF,
             MobCheckers.NOT_MONSTER_FRIEND,
             MobCheckers.NOT_CLAIMED,
-            MobCheckers.NOT_PET,
+            TOGGLE_PVP_PET,
             TogglePvpMobChecker,
             IS_PVP_NOT_FRIEND,
             MobCheckers.NOT_PLAYER
         )
 
-        private val FRIEND_CHECKER = MobCheckerBuilder.sequence(
+        private val FRIEND_CHECKER = MobCheckerBuilder.and(
             NULL_NOT_MONSTER,
             MobCheckers.MONSTER_FRIEND,
-            MobCheckers.CLAIMED,
+            //MobCheckers.CLAIMED,
             MobCheckers.PET,
             TOGGLE_PVP_FRIEND,
-            IS_PVP_FRIEND,
-            MobCheckers.HIT
+            OrMobChecker(IS_PVP_FRIEND, MobCheckers.SELF)
         )
         
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
@@ -501,11 +507,11 @@ object AiConfig
         }
 
         fun shouldItHit(attacker: LivingEntity?, victim: Entity, options: Options, vararg args: Any?): Boolean{
-            return options.shouldItHit(attacker, victim, args) && HIT_CHECKER.shouldItHit(attacker, victim, args)
+            return options.shouldItHit(attacker, victim, args,*ignoredGuilds.get().toTypedArray()) && HIT_CHECKER.shouldItHit(attacker, victim, *ignoredGuilds.get().toTypedArray())
         }
 
         fun shouldItHitFriend(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean{
-            return FRIEND_CHECKER.shouldItHit(attacker, victim, args)
+            return FRIEND_CHECKER.shouldItHit(attacker, victim, args,*ignoredGuilds.get().toTypedArray())
         }
 
         //MonsterShouldHit:
@@ -515,6 +521,8 @@ object AiConfig
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
         var forcePvpOnAllSpells = ValidatedBoolean(false)
         var defaultSecondaryHitCheckerOption = ValidatedEnum(Options.NONE,Options::class.java)
+
+        var ignoredGuilds = ValidatedStringList(listOf("Streamers"))
 
         var unhallowed = Unhallowed()
         class Unhallowed: ConfigSection(Header.Builder().space().add("readme.entities.unhallowed_1").build()){

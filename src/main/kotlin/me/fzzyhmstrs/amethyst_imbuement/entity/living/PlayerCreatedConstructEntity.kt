@@ -24,7 +24,10 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.*
+import net.minecraft.entity.mob.Angerable
+import net.minecraft.entity.mob.CreeperEntity
+import net.minecraft.entity.mob.MobEntity
+import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.AxeItem
@@ -122,8 +125,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         goalSelector.add(8, LookAroundGoal(this))
 
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity? -> shouldAngerAt(entity) })
-        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity? -> entity is Monster && ((entity as? CreeperEntity)?.isIgnited != true) })
+        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity -> shouldAngerAt(entity) || AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) })
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity -> AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) && ((entity as? CreeperEntity)?.isIgnited != true) })
         targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 
@@ -185,6 +188,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
                 kill()
             }
         }
+        if (this.target?.isAlive == false)
+            this.target = null
         val constructOwner = owner
         if (constructOwner != null){
             val attacker = constructOwner.recentDamageSource?.attacker

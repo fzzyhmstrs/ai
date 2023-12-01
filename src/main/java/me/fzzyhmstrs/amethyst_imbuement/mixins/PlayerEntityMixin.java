@@ -66,13 +66,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
     }
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    public void amethyst_imbuement_runTickingModifiableEffects(CallbackInfo ci) {
-        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
-            ci.cancel();
-        }
-    }
-
     @Inject(method="isUsingSpyglass", at = @At(value = "HEAD"), cancellable = true)
     private void amethyst_imbuement_isUsingSpyglass(CallbackInfoReturnable<Boolean> cir){
         if(super.getActiveItem().isIn(RegisterTag.INSTANCE.getCROSSBOWS_TAG())){

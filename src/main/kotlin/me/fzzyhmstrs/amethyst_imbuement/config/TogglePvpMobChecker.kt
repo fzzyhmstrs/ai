@@ -13,6 +13,7 @@ object TogglePvpMobChecker: MobChecker{
     private val pvpId = Identifier("togglepvp", "pvp_state")
     
     override fun shouldItHit(attacker: Entity?, victim: Entity, vararg args: Any?): ShouldHitResult{
+        if (attacker == victim) return ShouldHitResult.PASS
         if (!FabricLoader.getInstance().isModLoaded("togglepvp")) return ShouldHitResult.PASS
         if (attacker !is ServerPlayerEntity || victim !is ServerPlayerEntity) return ShouldHitResult.PASS
         if (!Pal.isAbilityRegistered(pvpId)) return ShouldHitResult.PASS
