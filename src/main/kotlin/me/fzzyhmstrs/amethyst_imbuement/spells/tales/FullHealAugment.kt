@@ -20,7 +20,7 @@ class FullHealAugment: MinorSupportAugment(ScepterTier.THREE,7){
     override val baseEffect: AugmentEffect = super.baseEffect.withRange(5.5,0.5, 0.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.GRACE, PerLvlI(210,-10),150,
+        return AugmentDatapoint(SpellType.GRACE, PerLvlI(330,-10),150,
             24,imbueLevel,25,BookOfTalesItem.TALES_TIER, RegisterItem.DAZZLING_MELON_SLICE)
     }
 

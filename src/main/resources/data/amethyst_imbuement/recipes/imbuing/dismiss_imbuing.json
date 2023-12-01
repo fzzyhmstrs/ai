@@ -1,0 +1,30 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "minecraft:emerald"
+  },
+  "imbueB": {
+	"item": "minecraft:emerald"
+  },
+  "imbueC": {
+	"item": "minecraft:emerald"
+  },
+  "imbueD": {
+	"item": "minecraft:emerald"
+  },
+  "craftB": {
+	"item": "minecraft:stick"
+  },
+  "craftD": {
+	"item": "minecraft:stick"
+  },
+  "craftF": {
+	"item": "minecraft:stick"
+  },
+  "craftH": {
+	"item": "minecraft:stick"
+  },
+  "title": "Dismiss",
+  "cost": 5,
+  "augment": "amethyst_imbuement:dismiss"
+}

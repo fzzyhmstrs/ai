@@ -37,6 +37,6 @@
 	"item": "minecraft:soul_soil"
   },
   "title": "Soulfreeze",
-  "cost": 30,
+  "cost": 41,
   "augment": "amethyst_imbuement:soulfreeze"
 }

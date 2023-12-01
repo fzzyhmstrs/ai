@@ -103,7 +103,7 @@
 	"amethyst_imbuement.advancement.golem.desc": "Summon a crystalline golem.",
 	"amethyst_imbuement.advancement.grindstone_hero": "Grindstone Hero",
 	"amethyst_imbuement.advancement.grindstone_hero.desc": "Remove the maximum number of enchantments from one item with the disenchanting table.",
-	"amethyst_imbuement.advancement.heads_up":"Head Up!",
+	"amethyst_imbuement.advancement.heads_up":"Heads Up!",
 	"amethyst_imbuement.advancement.heads_up.desc":"Scepters have a radial menu now! Press [Left Alt] (by default) to open it.",
 	"amethyst_imbuement.advancement.heal_inspire": "Heal or Inspire",
 	"amethyst_imbuement.advancement.heal_inspire.desc": "Imbue a tier two scepter as you progress on the Path of Redemption.",
@@ -684,6 +684,9 @@
 
 	"enchantment.amethyst_imbuement.dash": "Dash",
 	"enchantment.amethyst_imbuement.dash.desc": "Dashes the user similarly to Riptide.",
+
+	"enchantment.amethyst_imbuement.dismiss": "Dismiss",
+	"enchantment.amethyst_imbuement.dismiss.desc": "Dismisses (kills) all of your nearby owned summons.",
 
 	"enchantment.amethyst_imbuement.empowered_slash": "Empowered Slash",
 	"enchantment.amethyst_imbuement.empowered_slash.desc": "A powerful energy slash attack.",

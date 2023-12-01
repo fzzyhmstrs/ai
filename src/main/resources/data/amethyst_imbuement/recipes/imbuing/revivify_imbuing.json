@@ -16,15 +16,15 @@
 	"item": "amethyst_imbuement:book_of_tales"
   },
   "craftD": {
-  "item": "minecraft:golden_apple"
+    "item": "amethyst_imbuement:golden_heart"
   },
   "craftF": {
-	"item": "minecraft:golden_apple"
+	"item": "amethyst_imbuement:golden_heart"
   },
   "craftH": {
-	"item": "minecraft:golden_apple"
+	"item": "amethyst_imbuement:golden_heart"
   },
   "title": "Revivify",
-  "cost": 41,
+  "cost": 45,
   "augment": "amethyst_imbuement:revivify"
 }

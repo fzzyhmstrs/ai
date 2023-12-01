@@ -95,6 +95,7 @@ object RegisterEnchantment {
     val UNDYING = UndyingAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("undying")
 
     //Scepter Spells
+    val DISMISS = DismissAugment().register("dismiss")
     val MAGIC_MISSILE = MagicMissileAugment().register("magic_missile")
     val ABUNDANCE = AbundanceAugment().register("abundance")
     val ANIMAL_HUSBANDRY = AnimalHusbandryAugment().register("animal_husbandry")

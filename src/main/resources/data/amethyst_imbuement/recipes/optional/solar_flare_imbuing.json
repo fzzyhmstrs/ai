@@ -37,6 +37,6 @@
 	"item": "minecraft:glowstone"
   },
   "title": "Solar Flare",
-  "cost": 27,
+  "cost": 31,
   "augment": "amethyst_imbuement:solar_flare"
 }
