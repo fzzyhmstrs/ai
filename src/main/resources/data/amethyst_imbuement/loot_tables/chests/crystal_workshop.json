@@ -1,216 +1,216 @@
 {
-"fabric:load_conditions": [
-{
-"condition": "amethyst_imbuement:enabled",
-"id": "chests/crystal_workshop"
-}
-],
-"type": "minecraft:chest",
-"pools": [
-{
-"rolls": {
-"type": "minecraft:uniform",
-"min": 2.0,
-"max": 6.0
-},
-"bonus_rolls": 0.2,
-"entries": [
-{
-"type": "minecraft:item",
-"weight": 20,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:quartz"
-},
-{
-"type": "minecraft:item",
-"weight": 20,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:lapis_lazuli"
-},
-{
-"type": "minecraft:item",
-"weight": 30,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:lilac"
-},
-{
-"type": "minecraft:item",
-"weight": 30,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:peony"
-},
-{
-"type": "minecraft:item",
-"weight": 30,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:sunflower"
-},
-{
-"type": "minecraft:item",
-"weight": 30,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 4.0
-},
-"add": false
-}
-],
-"name": "minecraft:rose_bush"
-},
-{
-"type": "minecraft:item",
-"weight": 10,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 2.0
-},
-"add": false
-}
-],
-"name": "amethyst_imbuement:brilliant_diamond"
-},
-{
-"type": "minecraft:item",
-"weight": 5,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 3.0
-},
-"add": false
-}
-],
-"name": "amethyst_imbuement:glowing_fragment"
-},
-{
-"type": "minecraft:item",
-"weight": 5,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 3.0
-},
-"add": false
-}
-],
-"name": "amethyst_imbuement:xp_bush_seed"
-},
-{
-"type": "minecraft:item",
-"weight": 5,
-"name": "amethyst_imbuement:copper_ring"
-},
-{
-"type": "minecraft:item",
-"weight": 5,
-"name": "amethyst_imbuement:copper_headband"
-},
-{
-"type": "minecraft:item",
-"weight": 5,
-"name": "amethyst_imbuement:copper_amulet"
-},
-{
-"type": "minecraft:item",
-"weight": 8,
-"name": "amethyst_imbuement:heartstone"
-},
-{
-"type": "minecraft:item",
-"weight": 35,
-"name": "amethyst_imbuement:book_of_lore"
-},
-{
-"type": "minecraft:item",
-"weight": 15,
-"name": "amethyst_imbuement:book_of_mythos"
-},
-{
-"type": "minecraft:item",
-"weight": 20,
-"functions": [
-{
-"function": "minecraft:set_count",
-"count": {
-"type": "minecraft:uniform",
-"min": 1.0,
-"max": 3.0
-},
-"add": false
-}
-],
-"name": "amethyst_imbuement:mana_potion"
-},
-{
-"type": "minecraft:item",
-"weight": 10,
-"name": "amethyst_imbuement:mana_regeneration_potion"
-},
-]
-}
-]
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "chests/crystal_workshop"
+    }
+  ],
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": 0.2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:quartz"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:lapis_lazuli"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:lilac"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:peony"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:sunflower"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              },
+              "add": false
+            }
+          ],
+          "name": "minecraft:rose_bush"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:brilliant_diamond"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:glowing_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:xp_bush_seed"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "amethyst_imbuement:copper_ring"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "amethyst_imbuement:copper_headband"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "amethyst_imbuement:copper_amulet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "amethyst_imbuement:heartstone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 35,
+          "name": "amethyst_imbuement:book_of_lore"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "amethyst_imbuement:book_of_mythos"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ],
+          "name": "amethyst_imbuement:mana_potion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "amethyst_imbuement:mana_regeneration_potion"
+        }
+      ]
+    }
+  ]
 }

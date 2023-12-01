@@ -40,7 +40,7 @@ class SardonyxElementalAttackGoal(
         val pos  = Vec3d(mobEntity.x,mobEntity.getBodyY(0.5) + 0.5,mobEntity.z)
         val owner = ownerGetter.get()
         val effects = AugmentEffect().withDamage(AiConfig.entities.sardonyxElemental.projectileDamage.get() * damageMultiplierGetter.get())
-        println("Projectile damage: ${effects.damage(1)}")
+        //println("Projectile damage: ${effects.damage(1)}")
         val bse = BoneShardEntity(mobEntity.world,owner,4.0f,0.5f*h,pos,rot)
         bse.setAugment(null)
         bse.setOnBlockHit { bhr ->

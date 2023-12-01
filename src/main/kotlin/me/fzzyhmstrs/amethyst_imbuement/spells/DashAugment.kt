@@ -41,6 +41,7 @@ class DashAugment: MiscAugment(ScepterTier.TWO,3){
         return if (user is ServerPlayerEntity) {
             val buf = PacketByteBufs.create()
             buf.writeInt(level)
+            world.playSoundFromEntity(null,user,soundEvent(),SoundCategory.PLAYERS,1.0F,1.0F)
             ServerPlayNetworking.send(user,DASH_CLIENT,buf)
             true
         } else{

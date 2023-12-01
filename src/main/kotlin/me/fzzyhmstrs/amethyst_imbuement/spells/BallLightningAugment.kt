@@ -22,7 +22,7 @@ class BallLightningAugment: SummonProjectileAugment(ScepterTier.TWO,8){
                                                 .withRange(3.0,.25)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,80,25,
+        return AugmentDatapoint(SpellType.FURY,90,30,
             14, imbueLevel,3, LoreTier.LOW_TIER, Items.COPPER_BLOCK)
     }
 

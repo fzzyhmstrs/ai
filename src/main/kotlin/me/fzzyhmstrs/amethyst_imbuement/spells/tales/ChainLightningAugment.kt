@@ -36,8 +36,8 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
                                                 .withRange(12.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, 160, 90,
-            22, imbueLevel, 11, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
+        return AugmentDatapoint(SpellType.FURY, 120, 75,
+            22, imbueLevel, 9, BookOfTalesItem.TALES_TIER, RegisterBlock.BERYL_COPPER_BLOCK_ITEM)
     }
 
     override fun supportEffect(

@@ -7,15 +7,19 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterNetworking
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.math.max
 import kotlin.math.min
@@ -39,7 +43,7 @@ class GustingAugment: MiscAugment(ScepterTier.ONE,3){
         hit: HitResult?,
         effect: AugmentEffect
     ): Boolean {
-        val entityList = RaycasterUtil.raycastEntityArea(effect.range(level), user)
+        val entityList = RaycasterUtil.raycastEntityArea(effect.range(level), user).filter { AiConfig.entities.shouldItHit(user,it,AiConfig.Entities.Options.NON_BOSS,this) }
         if (entityList.isEmpty()) return false
         var minDist = 10000000.0
         var maxDist = 0.0
@@ -52,7 +56,11 @@ class GustingAugment: MiscAugment(ScepterTier.ONE,3){
         val minDistNorm = minDist/maxDist
         val maxDistNorm = 1.0
         for (entity in entityList){
-            if (entity is LivingEntity){
+            if (entity is ServerPlayerEntity){
+                val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
+                val strength = effect.amplifier(level) * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
+                RegisterNetworking.sendPlayerKnockback(entity, Vec3d(user.x - entity.x,0.0,user.z - entity.z), strength)
+            } else if (entity is LivingEntity){
                 val distNorm = 1.0 - (entity.squaredDistanceTo(user) - minDist)/maxDist
                 val strength = effect.amplifier(level) * MathHelper.lerp(distNorm,minDistNorm,maxDistNorm)
                 entityTask(world,entity,user,strength,null, effect)

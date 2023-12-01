@@ -108,6 +108,10 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         flapProgress += flapSpeed * 2.0f
     }
 
+    override fun handleFallDamage(fallDistance: Float, damageMultiplier: Float, damageSource: DamageSource?): Boolean {
+        return false
+    }
+
     override fun passEffects(ae: AugmentEffect, level: Int) {
         this.entityEffects = ae.copy()
         this.level = level

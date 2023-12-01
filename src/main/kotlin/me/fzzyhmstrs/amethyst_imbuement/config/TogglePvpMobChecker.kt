@@ -27,4 +27,24 @@ object TogglePvpMobChecker: MobChecker{
             ShouldHitResult.PASS
         }
     }
+
+    fun togglePvpInstalledButNotPvp(attacker: Entity?, victim: Entity): Boolean{
+        val bl = FabricLoader.getInstance().isModLoaded("togglepvp") && attacker is ServerPlayerEntity && victim is ServerPlayerEntity && Pal.isAbilityRegistered(pvpId)
+        if (!bl) return false
+        val pvpAbility = Pal.provideRegisteredAbility(pvpId).get()
+        return !pvpAbility.isEnabledFor(attacker as ServerPlayerEntity) || !pvpAbility.isEnabledFor(victim as ServerPlayerEntity)
+    }
+
+    fun areBothPvp(attacker: Entity?, victim: Entity): Boolean{
+        if (!FabricLoader.getInstance().isModLoaded("togglepvp")) return false
+        if (attacker !is ServerPlayerEntity || victim !is ServerPlayerEntity) return false
+        if (!Pal.isAbilityRegistered(pvpId)) return false
+        return try{
+            val pvpAbility = Pal.provideRegisteredAbility(pvpId).get()
+            pvpAbility.isEnabledFor(attacker) && pvpAbility.isEnabledFor(victim)
+        } catch (e: Exception){
+            false
+        }
+
+    }
 }
