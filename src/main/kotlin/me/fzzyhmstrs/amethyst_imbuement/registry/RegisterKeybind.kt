@@ -27,8 +27,6 @@ import java.util.*
 object RegisterKeybind {
 
     private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
-    @Environment(value = EnvType.SERVER)
-    private val veinMiners: MutableMap<UUID,Boolean> = mutableMapOf()
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
     internal var radialMenuJustClosed = false
