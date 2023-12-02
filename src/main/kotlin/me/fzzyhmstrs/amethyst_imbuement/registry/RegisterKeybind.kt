@@ -24,13 +24,16 @@ import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
 import java.util.*
 
+@Environment(value = EnvType.CLIENT)
 object RegisterKeybind {
 
     private val VEIN_MINER_PACKET = Identifier(AI.MOD_ID, "vein_miner_packet")
     @Environment(value = EnvType.CLIENT)
     private var veinMinerKeyPressed: Boolean = false
+    @Environment(value = EnvType.CLIENT)
     internal var radialMenuJustClosed = false
     //private var scepterRadialMenuPressed: Int = 0
+    @Environment(value = EnvType.CLIENT)
     private val CATEGORY = "key.categories.amethyst_imbuement"
 
     private val SCEPTER_ACTIVE_AUGMENT: KeyBinding = KeyBindingHelper.registerKeyBinding(
