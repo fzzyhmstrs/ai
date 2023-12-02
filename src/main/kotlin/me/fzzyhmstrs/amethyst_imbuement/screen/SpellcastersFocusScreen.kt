@@ -4,6 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_core.modifier_util.ModifierHelper
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -18,7 +20,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.Util
 
 
-@Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "SpellCheckingInspection")
+@Environment(value = EnvType.CLIENT)
 class SpellcastersFocusScreen(handler: SpellcastersFocusScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<SpellcastersFocusScreenHandler>(handler, playerInventory, title) {
 

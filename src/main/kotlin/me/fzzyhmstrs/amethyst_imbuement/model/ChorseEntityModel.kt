@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
@@ -10,6 +12,7 @@ import net.minecraft.entity.passive.AbstractHorseEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 class ChorseEntityModel(root: ModelPart): EntityModel<ChorseEntity>() {
 
     private val leftFrontLeg: ModelPart

@@ -17,8 +17,6 @@ import net.minecraft.item.Items
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
-
-@Suppress("DEPRECATION")
 @Environment(value = EnvType.CLIENT)
 class AltarOfExperienceBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
     BlockEntityRenderer<AltarOfExperienceBlockEntity> {

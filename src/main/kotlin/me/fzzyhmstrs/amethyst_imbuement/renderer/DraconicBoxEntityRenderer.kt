@@ -4,11 +4,14 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.DraconicBoxModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.LivingEntityRenderer
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class DraconicBoxEntityRenderer(ctx: EntityRendererFactory.Context,
                                 model: DraconicBoxModel, shadowRadius: Float
 ) : LivingEntityRenderer<DraconicBoxEntity, DraconicBoxModel>(ctx, model, shadowRadius) {

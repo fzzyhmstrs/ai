@@ -1,11 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.item.TooltipData
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
@@ -13,6 +14,7 @@ import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
 import java.util.*
 
+@Environment(value = EnvType.CLIENT)
 open class ImbuingRecipeBaseScreen(title: Text): Screen(title) {
 
     protected val context: TooltipContext by lazy{

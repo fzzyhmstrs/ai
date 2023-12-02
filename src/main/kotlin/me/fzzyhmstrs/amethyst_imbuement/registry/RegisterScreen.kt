@@ -1,13 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.screen.*
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 
+@Environment(value = EnvType.CLIENT)
 object RegisterScreen {
-
-
 
     fun registerAll(){
 

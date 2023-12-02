@@ -2,6 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.IceSpikeEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
@@ -12,7 +14,8 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
-@Suppress("PrivatePropertyName", "SpellCheckingInspection")
+@Suppress("PrivatePropertyName")
+@Environment(value = EnvType.CLIENT)
 class IceSpikeRenderer(context: EntityRendererFactory.Context): EntityRenderer<IceSpikeEntity>(context) {
     private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/ice_spike.png")
     private val model: EvokerFangsEntityModel<IceSpikeEntity> = EvokerFangsEntityModel(context.getPart(

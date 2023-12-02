@@ -7,6 +7,8 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterKeybind
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterNetworking
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.minecraft.client.MinecraftClient
@@ -20,6 +22,7 @@ import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.MathHelper
 import org.joml.Vector2i
 
+@Environment(value = EnvType.CLIENT)
 object SpellRadialHud: Screen(AcText.empty()) {
 
     private var spellPositions: List<Entry> = listOf()

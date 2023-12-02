@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentEntityModel.Companion.TEXTURE
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.registry.ItemModelRegistry
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.item.ItemRenderer
@@ -10,6 +12,7 @@ import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 
+@Environment(value = EnvType.CLIENT)
 object GlisteringTridentItemEntityRenderer: BuiltinItemRendererRegistry.DynamicItemRenderer {
 
     private val modelLoader by lazy {

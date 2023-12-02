@@ -74,7 +74,7 @@ object AIClient: ClientModInitializer{
         RegisterParticle.registerParticleFactories()
         BaseHamsterArmorFeatureRenderer.HamsterArmorTextureIdsHolder.registerClient()
         RegisterNetworking.registerClient()
-        RegisterCommand.registerClient()
+        RegisterCommandClient.registerClient()
         AiConfig.registerClient()
     }
 

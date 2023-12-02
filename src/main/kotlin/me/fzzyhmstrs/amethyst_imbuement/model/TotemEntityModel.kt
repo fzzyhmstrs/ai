@@ -1,12 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
 
 
+@Environment(value = EnvType.CLIENT)
 class TotemEntityModel(_modelPart: ModelPart) : EntityModel<AbstractEffectTotemEntity>() {
 
     private val modelPart: ModelPart = _modelPart

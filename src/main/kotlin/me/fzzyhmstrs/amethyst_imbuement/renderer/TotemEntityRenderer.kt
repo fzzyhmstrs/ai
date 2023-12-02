@@ -4,19 +4,21 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.TotemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.LivingEntityRenderer
-import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
+@Environment(value = EnvType.CLIENT)
 class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
                           model: TotemEntityModel, shadowRadius: Float
 ) : LivingEntityRenderer<AbstractEffectTotemEntity, TotemEntityModel>(ctx, model, shadowRadius) {

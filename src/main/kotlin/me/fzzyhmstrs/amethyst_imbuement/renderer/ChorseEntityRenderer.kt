@@ -5,11 +5,14 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.ChorseEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.ChorseArmorFeatureRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 class ChorseEntityRenderer(context: EntityRendererFactory.Context): MobEntityRenderer<ChorseEntity, ChorseEntityModel>(context,ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY)),0.75f) {
     private val TEXTURE = AI.identity("textures/entity/chorse.png")
 

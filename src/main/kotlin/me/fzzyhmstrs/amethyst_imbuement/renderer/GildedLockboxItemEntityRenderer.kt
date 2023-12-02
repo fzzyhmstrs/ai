@@ -2,6 +2,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.GildedLockboxBlockEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
@@ -10,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
+@Environment(value = EnvType.CLIENT)
 object GildedLockboxItemEntityRenderer: BuiltinItemRendererRegistry.DynamicItemRenderer {
 
     private val blockEntity by lazy {

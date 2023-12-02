@@ -10,6 +10,8 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.item.TooltipContext
@@ -18,6 +20,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(AcText.translatable("lore_book.screen")) {
 
     private var recipe: ImbuingRecipe? = null

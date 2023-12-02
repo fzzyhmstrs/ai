@@ -5,6 +5,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.ChorseEntityModel
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
@@ -15,6 +17,7 @@ import net.minecraft.item.DyeableHorseArmorItem
 import net.minecraft.item.HorseArmorItem
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class ChorseArmorFeatureRenderer(context: FeatureRendererContext<ChorseEntity, ChorseEntityModel>, private val model: ChorseEntityModel)
 : 
 FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)

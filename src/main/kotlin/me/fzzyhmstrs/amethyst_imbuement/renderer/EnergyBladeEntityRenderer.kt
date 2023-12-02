@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.EnergyBladeEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.EnergyBladeEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
@@ -14,6 +16,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName")
+@Environment(value = EnvType.CLIENT)
 class EnergyBladeEntityRenderer(context: EntityRendererFactory.Context): EntityRenderer<EnergyBladeEntity>(context) {
     private val TEXTURE = Identifier(AI.MOD_ID,"textures/entity/energy_blade.png")
     private val model: EnergyBladeEntityModel = EnergyBladeEntityModel(context.getPart(RegisterRenderer.ENERGY_BLADE_ENTITY))

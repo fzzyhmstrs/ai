@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlayerFangsEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
@@ -12,6 +14,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName", "SpellCheckingInspection")
+@Environment(value = EnvType.CLIENT)
 class PlayerFangsRenderer(context: EntityRendererFactory.Context): EntityRenderer<PlayerFangsEntity>(context) {
     private val TEXTURE = Identifier("textures/entity/illager/evoker_fangs.png")
     private val model: EvokerFangsEntityModel<PlayerFangsEntity> = EvokerFangsEntityModel(context.getPart(

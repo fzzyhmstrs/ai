@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
@@ -15,6 +17,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName")
+@Environment(value = EnvType.CLIENT)
 class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : EntityRenderer<GlisteringTridentEntity>(context) {
     private var TEXTURE = Identifier(AI.MOD_ID,"textures/entity/glistering_trident.png")
     var model = GlisteringTridentEntityModel(context.getPart(RegisterRenderer.GLISTERING_TRIDENT))

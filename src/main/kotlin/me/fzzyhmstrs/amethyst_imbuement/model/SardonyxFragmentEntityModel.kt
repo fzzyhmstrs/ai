@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
@@ -10,6 +12,7 @@ import net.minecraft.util.math.MathHelper
 // Made with Blockbench 4.8.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
+@Environment(value = EnvType.CLIENT)
 class SardonyxFragmentEntityModel(root: ModelPart) : EntityModel<SardonyxFragmentEntity>() {
     private val leftLeg: ModelPart
     private val rightLeg: ModelPart

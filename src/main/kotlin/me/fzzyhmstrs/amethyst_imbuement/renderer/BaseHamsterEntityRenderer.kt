@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterArmorFeatureRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterItemFeatureRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.LivingEntityRenderer
@@ -12,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
 @Suppress("LeakingThis")
+@Environment(value = EnvType.CLIENT)
 open class BaseHamsterEntityRenderer<T:BaseHamsterEntity>(ctx: EntityRendererFactory.Context,
                                                           model: BaseHamsterEntityModel<T>, shadowRadius: Float
 ) : LivingEntityRenderer<T, BaseHamsterEntityModel<T>>(ctx, model, shadowRadius) {

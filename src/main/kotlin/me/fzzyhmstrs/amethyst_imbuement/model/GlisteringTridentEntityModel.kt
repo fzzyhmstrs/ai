@@ -1,14 +1,16 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.TridentEntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class GlisteringTridentEntityModel(private val root: ModelPart) : TridentEntityModel(root) {
-
 
     companion object {
         var TEXTURE: Identifier = Identifier(AI.MOD_ID,"textures/entity/glistering_trident.png")

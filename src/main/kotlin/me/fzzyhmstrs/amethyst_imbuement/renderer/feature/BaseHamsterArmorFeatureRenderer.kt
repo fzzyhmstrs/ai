@@ -6,6 +6,8 @@ import com.google.gson.JsonParser
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.client.render.VertexConsumerProvider
@@ -19,11 +21,13 @@ import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class BaseHamsterArmorFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>, private val model: BaseHamsterEntityModel<T>)
 : 
 FeatureRenderer<T, M>(context)
 {
 
+    @Environment(value = EnvType.CLIENT)
     object HamsterArmorTextureIdsHolder: SimpleSynchronousResourceReloadListener {
         
         private var hamsterTextures: Map<String,Identifier> = mapOf()

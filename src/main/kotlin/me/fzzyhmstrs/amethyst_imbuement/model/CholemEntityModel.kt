@@ -1,10 +1,13 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 class CholemEntityModel(private val root: ModelPart): SinglePartEntityModel<CholemEntity>() {
 
     private var leftLeg = root.getChild("leftLeg")

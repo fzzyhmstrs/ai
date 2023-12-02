@@ -6,12 +6,15 @@ import com.google.common.collect.ImmutableMap
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.feature.FeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
+@Environment(value = EnvType.CLIENT)
 class CrystallineGolemCrackFeatureRenderer(context: FeatureRendererContext<CrystallineGolemEntity, CrystallineGolemEntityModel>) : FeatureRenderer<CrystallineGolemEntity, CrystallineGolemEntityModel>(
     context
 ) {

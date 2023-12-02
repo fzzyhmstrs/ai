@@ -1,11 +1,14 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 class CrystallineGolemEntityModel(_root: ModelPart): SinglePartEntityModel<CrystallineGolemEntity>() {
 
     private val root = _root

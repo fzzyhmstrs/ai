@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CrystallineGolemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.CrystallineGolemCrackFeatureRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -13,6 +15,7 @@ import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
 @Suppress("PrivatePropertyName")
+@Environment(value = EnvType.CLIENT)
 class CrystallineGolemEntityRenderer(context: EntityRendererFactory.Context) :
     MobEntityRenderer<CrystallineGolemEntity, CrystallineGolemEntityModel>(context,
         CrystallineGolemEntityModel(context.getPart(RegisterRenderer.CRYSTAL_GOLEM_ENTITY)),

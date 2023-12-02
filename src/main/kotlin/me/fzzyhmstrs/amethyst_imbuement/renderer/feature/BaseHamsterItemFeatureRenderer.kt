@@ -4,6 +4,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
@@ -14,6 +16,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.util.math.RotationAxis
 
+@Environment(value = EnvType.CLIENT)
 class BaseHamsterItemFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>)
 : 
 FeatureRenderer<T, M>(context)

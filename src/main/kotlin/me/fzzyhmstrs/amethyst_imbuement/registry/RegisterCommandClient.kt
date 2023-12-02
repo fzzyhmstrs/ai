@@ -6,11 +6,14 @@ import com.mojang.brigadier.context.CommandContext
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellRadialHud
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 
-object RegisterCommand {
+@Environment(value = EnvType.CLIENT)
+object RegisterCommandClient {
 
     fun registerClient(){
         ClientCommandRegistrationCallback.EVENT.register{dispatcher, _ ->

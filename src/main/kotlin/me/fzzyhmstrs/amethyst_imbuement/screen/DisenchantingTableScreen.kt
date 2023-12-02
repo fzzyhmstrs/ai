@@ -5,6 +5,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.enchantment.Enchantment
@@ -17,7 +19,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 
-@Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "SpellCheckingInspection")
+@Environment(value = EnvType.CLIENT)
 class DisenchantingTableScreen(handler: DisenchantingTableScreenHandler, playerInventory: PlayerInventory, title: Text):
     HandledScreen<DisenchantingTableScreenHandler>(handler, playerInventory, title) {
 

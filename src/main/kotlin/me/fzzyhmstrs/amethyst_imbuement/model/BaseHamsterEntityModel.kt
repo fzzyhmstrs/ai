@@ -1,12 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 open class BaseHamsterEntityModel<T:BaseHamsterEntity>(root: ModelPart): EntityModel<T>() {
     private var body: ModelPart
     private var left_front_leg: ModelPart

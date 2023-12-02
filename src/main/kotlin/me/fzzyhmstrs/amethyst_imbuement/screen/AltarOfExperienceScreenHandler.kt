@@ -25,7 +25,7 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
-@Suppress("SENSELESS_COMPARISON", "unused")
+@Suppress("unused")
 class AltarOfExperienceScreenHandler(
     syncID: Int,
     playerInventory: PlayerInventory,

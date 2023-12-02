@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxFragmentEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -11,6 +13,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
+@Environment(value = EnvType.CLIENT)
 class SardonyxFragmentEntityRenderer(context: EntityRendererFactory.Context) :
     MobEntityRenderer<SardonyxFragmentEntity, SardonyxFragmentEntityModel>(context,
         SardonyxFragmentEntityModel(context.getPart(RegisterRenderer.SARDONYX_FRAGMENT)),

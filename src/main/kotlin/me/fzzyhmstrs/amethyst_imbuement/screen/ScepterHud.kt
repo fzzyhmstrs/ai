@@ -8,6 +8,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
@@ -25,6 +27,7 @@ import org.joml.Vector2i
 import kotlin.math.abs
 import kotlin.math.min
 
+@Environment(value = EnvType.CLIENT)
 object ScepterHud {
     private val fallbackV2i = Vector2i(110,180)
     private val hudTexture = Identifier(AI.MOD_ID,"textures/gui/scepter_hud.png")

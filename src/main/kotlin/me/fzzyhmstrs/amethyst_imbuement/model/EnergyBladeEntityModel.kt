@@ -1,5 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.model
 
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumer
@@ -10,6 +12,7 @@ import java.util.function.Function
 // Made with Blockbench 4.8.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
+@Environment(value = EnvType.CLIENT)
 class EnergyBladeEntityModel(root: ModelPart) : Model(Function { texture: Identifier ->
     RenderLayer.getEntitySolid(texture) }) {
     private val bb_main: ModelPart = root.getChild("bb_main")

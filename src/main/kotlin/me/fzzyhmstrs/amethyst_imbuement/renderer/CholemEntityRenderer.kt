@@ -3,6 +3,8 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.CholemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -10,6 +12,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
+@Environment(value = EnvType.CLIENT)
 class CholemEntityRenderer(context: EntityRendererFactory.Context) :
     MobEntityRenderer<CholemEntity, CholemEntityModel>(context,
         CholemEntityModel(context.getPart(RegisterRenderer.CHOLEM_ENTITY)),

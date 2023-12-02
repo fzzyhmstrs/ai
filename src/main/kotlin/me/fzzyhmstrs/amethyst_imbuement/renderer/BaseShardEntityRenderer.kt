@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.BaseShardEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
@@ -10,6 +12,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 
+@Environment(value = EnvType.CLIENT)
 class BaseShardEntityRenderer<T: BaseShardEntity>(context: EntityRendererFactory.Context, private val TEXTURE: Identifier): ProjectileEntityRenderer<T>(context) {
 
     override fun getTexture(entity: T): Identifier {

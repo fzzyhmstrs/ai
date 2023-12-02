@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxElementalEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.feature.EnergySwirlOverlayFeatureRenderer
 import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.render.entity.model.EntityModel
@@ -11,6 +13,7 @@ import net.minecraft.client.render.entity.model.EntityModelLoader
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 
+@Environment(value = EnvType.CLIENT)
 class SardonyxElementalArmorFeatureRenderer(featureRendererContext: FeatureRendererContext<SardonyxElementalEntity, SardonyxElementalEntityModel>, loader: EntityModelLoader) :
     EnergySwirlOverlayFeatureRenderer<SardonyxElementalEntity, SardonyxElementalEntityModel>(featureRendererContext) {
 
