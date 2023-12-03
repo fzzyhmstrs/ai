@@ -20,9 +20,9 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
         return Registries.ITEM.stream().filter { it is AbstractAugmentJewelryItem }.map { it.defaultStack }.toList()
     }
 
-    override fun attributeModifier(stack: ItemStack, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier> {
+    override fun attributeModifier(stack: ItemStack,level: Int, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier> {
         return Pair(RegisterAttribute.SHIELDING,
-            EntityAttributeModifier(uuid,"shielding_augment_mod",0.02,EntityAttributeModifier.Operation.ADDITION)
+            EntityAttributeModifier(uuid,"shielding_augment_mod",0.02 * level,EntityAttributeModifier.Operation.ADDITION)
         )
     }
 }
