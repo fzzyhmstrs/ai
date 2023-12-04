@@ -81,6 +81,7 @@ object RegisterEnchantment {
     val LIGHTFOOTED = LightfootedAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).register("lightfooted")
     val LUCKY = LuckyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.OFFHAND).register("lucky")
     val MOONLIT = MoonlitAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).register("moonlit")
+    val REBINDING = LuckyAugment(Enchantment.Rarity.VERY_RARE,2, EquipmentSlot.OFFHAND).register("lucky")
     val RESILIENCE = ResilienceAugment(Enchantment.Rarity.VERY_RARE,2, *AI.slots).register("resilience")
     val SHIELDING = ShieldingAugment(Enchantment.Rarity.VERY_RARE,3, EquipmentSlot.OFFHAND).register("shielding")
     val SLIMY = SlimyAugment(Enchantment.Rarity.VERY_RARE,1, EquipmentSlot.FEET).register("slimy")
