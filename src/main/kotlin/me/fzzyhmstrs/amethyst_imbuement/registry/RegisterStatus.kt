@@ -36,8 +36,13 @@ object RegisterStatus {
     val BLAST_RESISTANT = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0xFF0000),"blast_resistant")
     val SOULBINDING = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x4000000),"soulbinding")
     val RESONATING = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
-    val STUNNED = register(StunnedStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
+    private val STUNNED = register(StunnedStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
 
+    fun stun(livingEntity: LivingEntity, duration: Int){
+        if (livingEntity.type.isIn(RegisterTag.POULTRYMORPH_IGNORES)) return
+        livingEntity.addStatusEffect(StatusEffectInstance(STUNNED,duration))
+    }
+    
     //attribute effects
     val SOUL_SHIELD: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x60F5FA)
         .addAttributeModifier(RegisterAttribute.MAGIC_RESISTANCE,"c6914e3a-3266-11ee-be56-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
