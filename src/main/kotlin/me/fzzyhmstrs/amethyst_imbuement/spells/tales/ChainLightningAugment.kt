@@ -51,7 +51,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
               val bl = target.damage(CustomDamageSources.lightningBolt(world,null,user), effects.damage(level))
               if (bl){
                   if (world.random.nextFloat() < 0.25f)
-                      target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, effects.duration(level)))
+                      RegisterStatus.stun(target,effects.duration(level))
                   val data = ChainLightningPersistentEffectData(target, user, listOf(target.uuid), effects.amplifier(level) - 1, effects.damage(level) - 1f, effects, level)
                   PersistentEffectHelper.setPersistentTickerNeed(this, 3, 3, data)
                   effects.accept(target, AugmentConsumer.Type.HARMFUL)
