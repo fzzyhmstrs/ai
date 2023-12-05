@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:chicken",
     "amethyst_imbuement:sardonyx_elemental",
     "minecraft:ender_dragon",
     "minecraft:wither",
