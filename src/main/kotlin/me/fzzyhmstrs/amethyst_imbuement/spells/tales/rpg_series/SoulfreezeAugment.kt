@@ -82,8 +82,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
                 val mod = SpChecker.getModFromTags(user, RegisterTag.SOUL_AUGMENTS, RegisterTag.ICE_AUGMENTS)
                 val duration = effect.duration(level) * (1 + mod.toInt() / 100)
                 val amplifier = effect.amplifier(level) * (1 + mod.toInt() / 60)
-                if (AiConfig.entities.shouldItHit(user, target, AiConfig.Entities.Options.NON_BOSS, this)
-                    target.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED,duration / 4))
+                RegisterStatus.stun(target,duration/4)
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER,effect.duration(level), amplifier))
                 target.frozenTicks = duration * 2
                 effect.accept(target, AugmentConsumer.Type.HARMFUL)
