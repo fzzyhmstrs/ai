@@ -125,8 +125,8 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
         goalSelector.add(8, LookAroundGoal(this))
 
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
-        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity -> shouldAngerAt(entity) || AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) })
-        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity -> AiConfig.entities.shouldItHitBase(owner,entity,getSpell()) && ((entity as? CreeperEntity)?.isIgnited != true) })
+        targetSelector.add(3, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { entity: LivingEntity -> shouldAngerAt(entity) || AiConfig.entities.shouldItHit(owner,entity,AiConfig.Entities.Options.NON_FRIENDLY,getSpell()) })
+        targetSelector.add(3, ActiveTargetGoal(this, MobEntity::class.java, 5, false, false) { entity: LivingEntity -> AiConfig.entities.shouldItHit(owner,entity,AiConfig.Entities.Options.NON_FRIENDLY,getSpell()) && ((entity as? CreeperEntity)?.isIgnited != true) })
         targetSelector.add(4, UniversalAngerGoal(this, true))
     }
 

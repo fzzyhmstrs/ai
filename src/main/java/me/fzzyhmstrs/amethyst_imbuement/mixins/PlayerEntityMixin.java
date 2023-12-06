@@ -49,7 +49,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerEntity.getAttributeValue (Lnet/minecraft/entity/attribute/EntityAttribute;)D"), cancellable = true)
     public void amethyst_imbuement_onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
-        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+        if (RegisterStatus.INSTANCE.isStunned(this)){
             ci.cancel();
         }
         if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSANCTUARY())){
@@ -61,7 +61,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
     public void amethyst_imbuement_onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
-        if (this.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+        if (RegisterStatus.INSTANCE.isStunned(this)){
             ci.cancel();
         }
     }

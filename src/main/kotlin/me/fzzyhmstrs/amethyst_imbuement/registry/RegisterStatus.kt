@@ -12,6 +12,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -38,8 +39,16 @@ object RegisterStatus {
     val RESONATING = register(CustomStatusEffect(StatusEffectCategory.HARMFUL,0x39D6E0),"resonating")
     private val STUNNED = register(StunnedStatusEffect(StatusEffectCategory.HARMFUL,0xFFFF00),"stunned")
 
+    fun isStunned(livingEntity: LivingEntity): Boolean{
+        return livingEntity.hasStatusEffect(STUNNED)
+    }
+
     fun stun(livingEntity: LivingEntity, duration: Int){
         if (livingEntity.type.isIn(RegisterTag.POULTRYMORPH_IGNORES)) return
+        livingEntity.addStatusEffect(StatusEffectInstance(STUNNED,duration))
+    }
+
+    fun stunUnsafe(livingEntity: LivingEntity, duration: Int){
         livingEntity.addStatusEffect(StatusEffectInstance(STUNNED,duration))
     }
     

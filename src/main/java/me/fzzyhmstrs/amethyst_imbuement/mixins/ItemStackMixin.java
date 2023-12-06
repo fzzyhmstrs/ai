@@ -24,7 +24,7 @@ public abstract class ItemStackMixin {
     //credit for this mixin (C) Timefall Development, Chronos Sacaria, Kluzzio
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void amethyst_imbuement_onUsingItemWhilstStunned(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir){
-        if (user.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())){
+        if (RegisterStatus.INSTANCE.isStunned(user)){
             cir.setReturnValue(TypedActionResult.fail((ItemStack) (Object) this));
         }
     }

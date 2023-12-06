@@ -77,7 +77,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"), cancellable = true)
     public void amethyst_imbuement_onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (livingEntity.hasStatusEffect(RegisterStatus.INSTANCE.getSTUNNED())) {
+        if (RegisterStatus.INSTANCE.isStunned(livingEntity)) {
             ci.cancel();
         }
     }

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.item.scepter
 
 import me.fzzyhmstrs.amethyst_core.item_util.DefaultAugmentSwordItem
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.Reactant
 import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
@@ -31,6 +32,10 @@ open class SpellbladeItem(
     Reagent
 {
     override val fallbackId: Identifier = Identifier(AI.MOD_ID, "magic_missile")
+
+    override fun getItemBarColor(stack: ItemStack): Int {
+        return AiConfig.items.manaItems.getItemBarColor(stack)
+    }
 
     override fun postHit(stack: ItemStack, target: LivingEntity?, attacker: LivingEntity): Boolean {
         if (stack.maxDamage - stack.damage > 1) {

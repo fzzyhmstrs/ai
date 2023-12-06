@@ -32,7 +32,7 @@ class LightningAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: I
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
         val world = entity.world as? ServerWorld ?: return
         val box = Box(entity.pos.add(6.0,6.0,6.0),entity.pos.subtract(6.0,6.0,6.0))
-        val entities = world.getOtherEntities(entity, box) { (AiConfig.entities.shouldItHitBase(entity, it, RegisterEnchantment.LIGHTNING_AURA) && it is LivingEntity) }
+        val entities = world.getOtherEntities(entity, box) { (AiConfig.entities.shouldItHit(entity, it,AiConfig.Entities.Options.NON_FRIENDLY, RegisterEnchantment.LIGHTNING_AURA) && it is LivingEntity) }
         if (entities.isNotEmpty())
             world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.2f,1.0f)
         for (e in entities){

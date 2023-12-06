@@ -16,7 +16,6 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.Monster
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
@@ -95,7 +94,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         val nextTarget = newEntities.random()
         if (nextTarget is LivingEntity && nextTarget.damage(CustomDamageSources.lightningBolt(data.user.world,null,data.user), data.damage)){
             if (data.user.world.random.nextFloat() < 0.25f)
-                nextTarget.addStatusEffect(StatusEffectInstance(RegisterStatus.STUNNED, data.effects.duration(data.level)))
+                RegisterStatus.stun(nextTarget,data.effects.duration(data.level))
             data.effects.accept(nextTarget,AugmentConsumer.Type.HARMFUL)
             data.user.world.playSound(null, nextTarget.blockPos, soundEvent(), SoundCategory.PLAYERS, 0.75F, 1.0F)
             val serverWorld = data.user.world

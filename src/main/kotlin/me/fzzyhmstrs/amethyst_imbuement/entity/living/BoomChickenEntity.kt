@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
@@ -16,7 +15,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.Monster
 import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -75,9 +73,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         goalSelector.add(4, WanderAroundFarGoal(this, 1.0))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(6, LookAroundGoal(this))
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) {
-            it is Monster || (it is SpellCastingEntity && it !== getOwner() && !AiConfig.entities.isEntityPvpTeammate(getOwner() as? LivingEntity, it, RegisterEnchantment.TORRENT_OF_BEAKS))
-        })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) { entity: LivingEntity -> AiConfig.entities.shouldItHit(owner,entity,AiConfig.Entities.Options.NON_FRIENDLY,RegisterEnchantment.TORRENT_OF_BEAKS) })
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
     }
 
