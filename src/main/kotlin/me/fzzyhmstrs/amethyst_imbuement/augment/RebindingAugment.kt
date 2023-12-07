@@ -17,6 +17,14 @@ class RebindingAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlo
         )
     }
 
+     override fun isAcceptableItem(stack: ItemStack): Boolean {
+        return stack.isIn(RegisterTag.AMULETS_TAG)
+    }
+
+    override fun acceptableItemStacks(): MutableList<ItemStack> {
+        return Registries.ITEM.iterateEntries(RegisterTag.AMULETS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
     /*override fun tickEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         EffectQueue.addStatusToQueue(user,StatusEffects.LUCK,260,0)
     }*/
