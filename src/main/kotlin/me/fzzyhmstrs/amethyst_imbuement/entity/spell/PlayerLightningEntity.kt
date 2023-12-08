@@ -57,7 +57,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
 
     override fun tick() {
         var list: List<Entity>
-        super.tick()
+        baseTick()
         if (ambientTick == 2) {
             if (world.isClient) {
                 world.playSound(
