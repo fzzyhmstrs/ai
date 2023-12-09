@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
+import fzzyhmstrs.should_i_hit_that.api.TemporarySummon
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.entity_util.Scalable
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
@@ -52,7 +53,7 @@ import java.util.*
 
 @Suppress("PrivatePropertyName", "LeakingThis")
 open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World): GolemEntity(entityType,world),
-    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable {
+    Angerable, PlayerCreatable, ModifiableEffectEntity, Tameable, Scalable, TemporarySummon {
 
     constructor(entityType: EntityType<out PlayerCreatedConstructEntity>, world: World, ageLimit: Int = -1, createdBy: LivingEntity? = null, augmentEffect: AugmentEffect? = null, level: Int = 1) : this(entityType, world){
         maxAge = ageLimit
@@ -392,6 +393,13 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
                 world.sendEntityStatus(player, EntityStatuses.BREAK_SHIELD)
             }
         }
+    }
+
+    override fun onKilledOther(world: ServerWorld?, other: LivingEntity?): Boolean {
+        val ownerChk = owner
+        if (ownerChk is PlayerEntity)
+            ownerChk.onKilledOther(world, other)
+        return super.onKilledOther(world, other)
     }
 
     override fun getLeashOffset(): Vec3d {

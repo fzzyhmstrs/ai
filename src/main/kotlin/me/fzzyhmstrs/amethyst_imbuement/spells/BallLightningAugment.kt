@@ -18,8 +18,10 @@ class BallLightningAugment: SummonProjectileAugment(ScepterTier.TWO,8){
 
     override val baseEffect: AugmentEffect = super.baseEffect
                                                 .withDamage(6.4F,0.2F,0.0F)
+                                                .withAmplifier(4)
                                                 .withDuration(19,-1)
                                                 .withRange(3.0,.25)
+
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
         return AugmentDatapoint(SpellType.FURY,90,30,

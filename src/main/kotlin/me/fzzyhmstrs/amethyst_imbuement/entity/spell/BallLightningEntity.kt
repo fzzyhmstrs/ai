@@ -38,6 +38,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
 
     override var entityEffects: AugmentEffect = AugmentEffect()
         .withDamage(5.4F,0.2F,0.0F)
+        .withAmplifier(4)
         .withDuration(19,-1)
         .withRange(3.0,.25)
     override val maxAge: Int
@@ -48,6 +49,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
         entityEffects.setDuration(ae.duration(level))
+        entityEffects.setAmplifier(ae.amplifier(level))
         entityEffects.setRange(ae.range(level))
         ticker = EventRegistry.Ticker(ae.duration(level))
         EventRegistry.registerTickUppable(ticker)
@@ -66,12 +68,16 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         if (owner == null || owner !is LivingEntity) return
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
+        var struck = 0
         for (entity in entities){
             if (!AiConfig.entities.shouldItHitBase(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
             entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
+            struck++
+            if (struck >= entityEffects.amplifier(0))
+                break
         }
         initialBeam = true
     }
@@ -96,12 +102,16 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         if (owner == null || owner !is LivingEntity) return
         val box = Box(this.pos.add(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)),this.pos.subtract(entityEffects.range(0),entityEffects.range(0),entityEffects.range(0)))
         val entities = world.getOtherEntities(owner, box)
+        var struck = 0
         for (entity in entities){
             if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
             entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
+            struck++
+            if (struck >= entityEffects.amplifier(0))
+                break
         }
         world.playSound(null,this.blockPos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
         super.onMissileBlockHit(blockHitResult)

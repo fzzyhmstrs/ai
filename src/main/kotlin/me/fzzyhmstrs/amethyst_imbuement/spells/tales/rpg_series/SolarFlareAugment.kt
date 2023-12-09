@@ -30,10 +30,10 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import org.joml.Vector3f
 
-class SolarFlareAugment: MiscAugment(ScepterTier.THREE,9), PersistentEffectHelper.PersistentEffect{
+class SolarFlareAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHelper.PersistentEffect{
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(14.75f,0.25f)
+                                                .withDamage(14.5f,0.5f)
                                                 .withRange(14.0,2.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {

@@ -45,8 +45,8 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
-        ae.setDamage(ae.damage(level))
-        ae.addAmplifier(ae.amplifier(level))
+        entityEffects.setDamage(ae.damage(level))
+        entityEffects.addAmplifier(ae.amplifier(level))
     }
     
     private var augment: ScepterAugment = RegisterEnchantment.LIGHTNING_BOLT
@@ -131,16 +131,18 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
             } else {
                 list = world.getOtherEntities(
                     this, Box(this.x - 3.0, this.y - 3.0, this.z - 3.0, this.x + 3.0, this.y + 6.0 + 3.0, this.z + 3.0)
-                ) { obj: Entity -> obj.isAlive && obj is LivingEntity && AiConfig.entities.isEntityPvpTeammate(owner, obj, augment) }
+                ) { obj: Entity -> obj.isAlive && obj is LivingEntity && AiConfig.entities.shouldItHitBase(owner, obj, augment) }
                 for (entity2 in list) {
                     entity2.fireTicks++
                     if (entity2.fireTicks == 0){
                         entity2.setOnFireFor(entityEffects.amplifier(0))
                     }
+                    val dmg = entityEffects.damage(0)
+                    //println(dmg)
                     if (owner != null) {
-                        entity2.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment), entityEffects.damage(0))
+                        entity2.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment), dmg)
                     } else {
-                        entity2.damage(SpellDamageSource(this.damageSources.lightningBolt(),augment), entityEffects.damage(0))
+                        entity2.damage(SpellDamageSource(this.damageSources.lightningBolt(),augment), dmg)
                     }
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
@@ -237,6 +239,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
         fun createLightning(world: World, pos: Vec3d, owner: LivingEntity, effect: AugmentEffect, level: Int, augment: ScepterAugment): PlayerLightningEntity {
             val le = PlayerLightningEntity(world, owner)
             le.passEffects(effect, level)
+            //println(effect)
             le.setAugment(augment)
             le.refreshPositionAfterTeleport(pos)
             return le
