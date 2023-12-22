@@ -14,6 +14,54 @@
           "condition": "minecraft:survives_explosion"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "amethyst_imbuement:experience_bush",
+          "properties":{
+            "age": "2"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle"
+        }
+      ],
+      "functions": [
+        {
+          "function":"minecraft:set_count",
+          "count": 2
+        }
+      ]
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "amethyst_imbuement:experience_bush",
+          "properties":{
+            "age": "3"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
     }
   ]
 }
