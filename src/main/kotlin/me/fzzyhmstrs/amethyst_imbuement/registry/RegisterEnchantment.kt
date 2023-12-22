@@ -33,6 +33,7 @@ object RegisterEnchantment {
             }
         }
         if (e1 is ScepterAugment){
+            ModifierRegistry.register(e1.augmentSpecificModifier)
             if (!AugmentHelper.getAugmentEnabled(e1)) {
                 LOGGER.info("Augment $id is set as disabled in the configs!")
             }
