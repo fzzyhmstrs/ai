@@ -15,6 +15,7 @@ class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlo
     private val uuid = UUID.fromString("99390d1c-a0d2-11ee-8c90-0242ac120002")
     
     override fun modifyAttributeMap(map: Multimap<EntityAttribute, EntityAttributeModifier>,slot: EquipmentSlot, level: Int) {
+        if(!isEnabled()) return
         map.put(
             EntityAttributes.GENERIC_MOVEMENT_SPEED,
             EntityAttributeModifier(uuid, "swiftness_modifier_legs", 0.1 * level, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
