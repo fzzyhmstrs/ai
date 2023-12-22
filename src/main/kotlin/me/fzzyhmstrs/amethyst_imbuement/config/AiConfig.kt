@@ -493,6 +493,11 @@ object AiConfig
                     return victim is Monster
                 }
             },
+            NON_PASSIVE{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return victim !is PassiveEntity
+                }
+            },
             NON_BOSS_FRIENDLY{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
                     return NON_BOSS_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_FRIENDLY.shouldItHit(attacker, victim, args)
