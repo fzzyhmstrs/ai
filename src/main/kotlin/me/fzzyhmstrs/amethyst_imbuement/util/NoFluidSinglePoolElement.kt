@@ -4,6 +4,7 @@ import com.mojang.datafixers.kinds.Applicative
 import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterWorldgen
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.structure.StructurePlacementData
 import net.minecraft.structure.StructureTemplate
@@ -33,6 +34,9 @@ class NoFluidSinglePoolElement(
 
         }
 
+    override fun getType(): StructurePoolElementType<*>{
+        return RegisterWorldgen.NO_FLUID_SINGLE_POOL_ELEMENT
+    }
 
     override fun createPlacementData(
         rotation: BlockRotation?,
