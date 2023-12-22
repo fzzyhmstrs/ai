@@ -4,8 +4,8 @@ plugins {
     kotlin("jvm").version(kotlinVersion)
     id("com.modrinth.minotaur") version "2.+"
 }
+val archivesBaseName: String by project
 base {
-    val archivesBaseName: String by project
     archivesName.set(archivesBaseName)
 }
 val log: File = file("changelog.md")
