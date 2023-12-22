@@ -39,7 +39,7 @@ class NoFluidSinglePoolElement(
         box: BlockBox?,
         keepJigsaws: Boolean
     ): StructurePlacementData {
-        return super.createPlacementData(rotation, box, keepJigsaws).setPlaceFluids(false)
+        return super.createPlacementData(rotation, box, keepJigsaws).setKeepLiquids(false)
     }
 
 
