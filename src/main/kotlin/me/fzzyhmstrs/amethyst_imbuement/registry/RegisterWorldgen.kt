@@ -15,8 +15,6 @@ object RegisterWorldgen {
     val TIGERS_EYE_BLACKSTONE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier(AI.MOD_ID,"ore_tigers_eye_blackstone"))
     val TIGERS_EYE_BASALT_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier(AI.MOD_ID,"ore_tigers_eye_basalt"))
 
-    //val WATERLOGGED_UNDO_PROCESSOR = StructureProcessorType.register("amethyst_imbuement:waterlogged_undo", WaterloggedUndoStructureProcessor.CODEC)
-
     val NO_FLUID_SINGLE_POOL_ELEMENT = StructurePoolElementType.register("amethyst_imbuement:no_fluid_element", NoFluidSinglePoolElement.CODEC)
 
     fun registerAll(){
