@@ -105,9 +105,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                             this.z + 15.0
                         )
                     ) { entity: Entity ->
-                        entity.isAlive && !struckEntities.contains(
-                            entity
-                        )
+                        entity !is ItemEntity && entity !is ExperienceOrbEntity && entity.isAlive && !struckEntities.contains(entity)
                     }
                     for (serverPlayerEntity2 in (world as ServerWorld).getPlayers { serverPlayerEntity: ServerPlayerEntity ->
                         serverPlayerEntity.distanceTo(
