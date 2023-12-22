@@ -73,7 +73,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
         goalSelector.add(4, WanderAroundFarGoal(this, 1.0))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(6, LookAroundGoal(this))
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) { entity: LivingEntity -> AiConfig.entities.shouldItHit(owner,entity,AiConfig.Entities.Options.NON_FRIENDLY,RegisterEnchantment.TORRENT_OF_BEAKS) })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, true) { entity: LivingEntity -> AiConfig.entities.shouldItHit(owner,entity,AiConfig.Entities.Options.NON_FRIENDLY_NON_GOLEM,RegisterEnchantment.TORRENT_OF_BEAKS) })
         targetSelector.add(2, RevengeGoal(this, *arrayOfNulls(0)))
     }
 
