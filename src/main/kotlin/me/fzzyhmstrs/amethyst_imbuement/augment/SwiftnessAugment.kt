@@ -8,11 +8,16 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
 
-class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_LEGS, *slot) {
+class SwiftnessAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
+: EquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_LEGS, *slot), AttributeProviding 
+{
 
-    override fun attributeModifier(stack: ItemStack,level: Int, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier> {
-        return Pair(EntityAttributes.GENERIC_MOVEMENT_SPEED,
-            EntityAttributeModifier(uuid,"swiftness_augment_mod",0.1 * level,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+    private val uuid = UUID.fromString("99390d1c-a0d2-11ee-8c90-0242ac120002")
+    
+    override fun modifyAttributeMap(map: Multimap<EntityAttribute, EntityAttributeModifier>,slot: EquipmentSlot, level: Int) {
+        map.put(
+            EntityAttributes.GENERIC_MOVEMENT_SPEED,
+            EntityAttributeModifier(uuid, "swiftness_modifier_legs", 0.1 * level, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         )
     }
 }
