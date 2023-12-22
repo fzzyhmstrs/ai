@@ -63,6 +63,7 @@ object AiConfig
             .add("1.20.2-01/1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs. Added Soulwoven armor material to materials_v1. Added new entities in entities_v4. Added sky village integration configs in villages_v3")
             .add("1.20.2-01/1.20.1-16: Updated how PvpTeammates are considered. new Entities v5. Beast augments added into augments v4 config.")
             .add("1.20.2-01/1.20.1-17: Added Hud_v0 config for controlling client side gui-related items. Added a series of commands for controlling this in-game. Entities_v6 includes a massively overhauled Pvp checker based on the Should I Hit That API. Config option added for the default secondary checker options.")
+            .add("1.20.1-19: Added some new options to the default secondary pvp checker.")
             .space()
             .translate()
             .add("readme.main_header.note")
