@@ -483,9 +483,21 @@ object AiConfig
                     return NON_VILLAGER_HIT_CHECKER.shouldItHit(attacker, victim, args)
                 }
             },
+            NON_GOLEM{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    if (victim is PlayerCreatedConstructEntity) return true // let other logic handle summons
+                    if (victim !is GolemEntity) return true // other logic will handle if it's not a golem
+                    return victim.isUniversallyAngry() || (attacker?.uuid != null && attacker?.uuid == victim.getAngryAt())hjuy
+                }
+            },
             NON_FRIENDLY{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
                     return NON_ANIMAL_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_VILLAGER.shouldItHit(attacker, victim, args)
+                }
+            },
+            NON_FRIENDLY_NON_GOLEM{
+                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
+                    return NON_FRIENDLY.shouldItHit(attacker, victim, args) && NON_GOLEM.shouldItHit(attacker, victim, args)
                 }
             },
             HOSTILE_ONLY{
