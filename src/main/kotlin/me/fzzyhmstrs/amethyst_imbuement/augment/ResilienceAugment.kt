@@ -30,6 +30,7 @@ class ResilienceAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
     }
 
     override fun modifyAttributeMap(map: Multimap<EntityAttribute, EntityAttributeModifier>,slot: EquipmentSlot, level: Int) {
+        if(!isEnabled()) return
         val uuid = uuids[slot] ?: return
         val name = "resilience_modifier_" + slot.getName()
         map.put(
