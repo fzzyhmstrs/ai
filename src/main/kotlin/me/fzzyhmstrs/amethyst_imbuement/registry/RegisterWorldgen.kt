@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import me.fzzyhmstrs.amethyst_imbuement.util.WaterloggedUndoStructureProcessor
+import me.fzzyhmstrs.amethyst_imbuement.util.NoFluidSinglePoolElement
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
-import net.minecraft.structure.processor.StructureProcessorType
+import net.minecraft.structure.pool.StructurePoolElementType
 import net.minecraft.util.Identifier
 import net.minecraft.world.gen.GenerationStep
 

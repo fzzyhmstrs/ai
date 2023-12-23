@@ -8,6 +8,7 @@ import fzzyhmstrs.should_i_hit_that.checkers.*
 import me.fzzyhmstrs.amethyst_core.event.ShouldScrollEvent
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.material.AiArmorMaterialsConfig
 import me.fzzyhmstrs.amethyst_imbuement.material.AiScepterMaterialsConfig
 import me.fzzyhmstrs.amethyst_imbuement.material.AiToolMaterialsConfig
@@ -26,7 +27,10 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.Tameable
+import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.passive.GolemEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
@@ -487,8 +491,8 @@ object AiConfig
             NON_GOLEM{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
                     if (victim is PlayerCreatedConstructEntity) return true // let other logic handle summons
-                    if (victim !is GolemEntity) return true // other logic will handle if it's not a golem
-                    return victim.isUniversallyAngry() || (attacker?.uuid != null && attacker?.uuid == victim.getAngryAt())hjuy
+                    if (victim !is GolemEntity || victim !is Angerable) return true // other logic will handle if it's not a golem
+                    return victim.isUniversallyAngry(victim.world) || (attacker?.uuid != null && attacker.uuid == victim.angryAt)
                 }
             },
             NON_FRIENDLY{

@@ -10,6 +10,7 @@ import net.minecraft.structure.StructurePlacementData
 import net.minecraft.structure.StructureTemplate
 import net.minecraft.structure.pool.SinglePoolElement
 import net.minecraft.structure.pool.StructurePool
+import net.minecraft.structure.pool.StructurePoolElementType
 import net.minecraft.structure.processor.StructureProcessorList
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
@@ -34,7 +35,7 @@ class NoFluidSinglePoolElement(
 
         }
 
-    override fun getType(): StructurePoolElementType<*>{
+    override fun getType(): StructurePoolElementType<*> {
         return RegisterWorldgen.NO_FLUID_SINGLE_POOL_ELEMENT
     }
 
@@ -43,8 +44,11 @@ class NoFluidSinglePoolElement(
         box: BlockBox?,
         keepJigsaws: Boolean
     ): StructurePlacementData {
-        return super.createPlacementData(rotation, box, keepJigsaws).setKeepLiquids(false)
+        return super.createPlacementData(rotation, box, keepJigsaws).setPlaceFluids(false)
     }
 
+    override fun toString(): String {
+        return "NoFluidSingle[" + this.location + "]"
+    }
 
 }

@@ -15,6 +15,7 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.CracklingInfusio
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SolarFlareAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SoulfreezeAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
+import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment

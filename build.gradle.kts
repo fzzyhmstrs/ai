@@ -4,8 +4,9 @@ plugins {
     kotlin("jvm").version(kotlinVersion)
     id("com.modrinth.minotaur") version "2.+"
 }
-val archivesBaseName: String by project
+
 base {
+    val archivesBaseName: String by project
     archivesName.set(archivesBaseName)
 }
 val log: File = file("changelog.md")
@@ -183,7 +184,12 @@ tasks {
         sourceCompatibility = javaVersion.toString()
         targetCompatibility = javaVersion.toString()
     }
-    jar { from("LICENSE", "credits.txt") { rename { "${base.archivesName.get()}_${it}" } } }
+    jar {
+        from("LICENSE") { rename { "${base.archivesName.get()}_${it}" } }
+    }
+    jar {
+        from( "credits.txt") { rename { "${base.archivesName.get()}_${it}" } }
+    }
     processResources {
         inputs.property("version", project.version)
         filesMatching("fabric.mod.json") { expand(mutableMapOf("version" to project.version)) }

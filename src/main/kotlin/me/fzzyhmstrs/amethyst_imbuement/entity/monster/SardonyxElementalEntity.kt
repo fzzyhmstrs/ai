@@ -334,7 +334,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             if (target is PlayerEntity) {
                 disablePlayerShield(target, this.mainHandStack, if (target.isUsingItem) target.activeItem else ItemStack.EMPTY)
             }
-            val list = world.getNonSpectatingEntities(LivingEntity::class.java, target.boundingBox.expand(1.5, 0.25, 1.5))
+            val list = world.getNonSpectatingEntities(LivingEntity::class.java, target.boundingBox.expand(2.0, 0.25, 2.0))
             for (splashTarget in list){
                 if (AiConfig.entities.shouldItHit(this,splashTarget,AiConfig.Entities.Options.NONE)){
                     if (splashTarget.damage(this.damageSources.mobAttack(this), f/2f)){
