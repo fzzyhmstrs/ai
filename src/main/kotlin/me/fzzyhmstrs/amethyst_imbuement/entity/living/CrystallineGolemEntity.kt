@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
-import com.google.common.collect.ImmutableList
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
@@ -212,7 +211,7 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         companion object {
             private var VALUES: List<Crack> = Stream.of(*values()).sorted(
                 Comparator.comparingDouble { crack: Crack -> crack.maxHealthFraction.toDouble() }
-            ).collect(ImmutableList.toImmutableList())
+            ).toList()
 
             fun from(healthFraction: Float): Crack {
                 for (crack in VALUES) {

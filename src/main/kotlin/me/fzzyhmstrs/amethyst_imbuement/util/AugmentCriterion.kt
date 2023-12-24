@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import com.google.common.base.Predicate
 import com.google.gson.JsonObject
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractPassiveAugment
@@ -8,11 +7,11 @@ import net.minecraft.advancement.criterion.AbstractCriterion
 import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
-import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
+import java.util.function.Predicate
 
 class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCriterion.AugmentConditions>() {
 
@@ -50,7 +49,7 @@ class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCri
     }
 
 
-    class AugmentConditions(id: Identifier, private val augmentPredicate: Predicate<Enchantment>,entityPredicate: LootContextPredicate): AbstractCriterionConditions(id,entityPredicate){
+    class AugmentConditions(id: Identifier, private val augmentPredicate: Predicate<Enchantment>, entityPredicate: LootContextPredicate): AbstractCriterionConditions(id,entityPredicate){
 
         fun test(augment: Enchantment): Boolean{
             return augmentPredicate.test(augment)
