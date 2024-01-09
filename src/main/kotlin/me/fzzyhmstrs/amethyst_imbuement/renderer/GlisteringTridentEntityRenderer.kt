@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.GlisteringTridentEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.GlisteringTridentEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
@@ -14,7 +15,6 @@ import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName")
 @Environment(value = EnvType.CLIENT)
@@ -32,7 +32,7 @@ class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : 
     ) {
         matrixStack.push()
         matrixStack.multiply(
-            RotationAxis.POSITIVE_Y.rotationDegrees(
+            FzzyRotation.POSITIVE_Y.degrees(
                 MathHelper.lerp(
                     g,
                     glisteringTridentEntity.prevYaw,
@@ -41,7 +41,7 @@ class GlisteringTridentEntityRenderer(context: EntityRendererFactory.Context) : 
             )
         )
         matrixStack.multiply(
-            RotationAxis.POSITIVE_Z.rotationDegrees(
+            FzzyRotation.POSITIVE_Z.degrees(
                 MathHelper.lerp(
                     g,
                     glisteringTridentEntity.prevPitch,
