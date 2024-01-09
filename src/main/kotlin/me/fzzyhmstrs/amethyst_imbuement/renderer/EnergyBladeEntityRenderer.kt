@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.EnergyBladeEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.EnergyBladeEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
@@ -33,7 +34,7 @@ class EnergyBladeEntityRenderer(context: EntityRendererFactory.Context): EntityR
             matrixStack.push()
             //matrixStack.translate(0f,-1.5f,0f)
             matrixStack.multiply(
-                RotationAxis.POSITIVE_Y.rotationDegrees(
+                FzzyRotation.POSITIVE_Y.degrees(
                     180f - MathHelper.lerp(
                         g,
                         energyBladeEntity.prevYaw,
@@ -42,7 +43,7 @@ class EnergyBladeEntityRenderer(context: EntityRendererFactory.Context): EntityR
                 )
             )
             matrixStack.multiply(
-                RotationAxis.NEGATIVE_X.rotationDegrees(
+                FzzyRotation.NEGATIVE_X.degrees(
                     MathHelper.lerp(
                         g,
                         energyBladeEntity.prevPitch,
