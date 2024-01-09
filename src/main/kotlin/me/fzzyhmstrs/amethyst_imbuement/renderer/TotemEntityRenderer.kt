@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.AbstractEffectTotemEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.TotemEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
