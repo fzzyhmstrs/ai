@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.IceSpikeEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
@@ -39,7 +40,7 @@ class IceSpikeRenderer(context: EntityRendererFactory.Context): EntityRenderer<I
             j *= (1.0f - h) / 0.1f
         }
         matrixStack.push()
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0f - iceSpikeEntity.yaw))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.degrees(90.0f - iceSpikeEntity.yaw))
         matrixStack.scale(-j, -j, j)
         matrixStack.translate(0.0, -0.626, 0.0)
         matrixStack.scale(0.5f, 0.5f, 0.5f)
