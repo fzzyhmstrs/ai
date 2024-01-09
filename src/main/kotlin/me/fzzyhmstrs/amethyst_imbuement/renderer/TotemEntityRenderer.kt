@@ -39,8 +39,8 @@ class TotemEntityRenderer(ctx: EntityRendererFactory.Context,
         matrixStack.translate(0.0, 2.25, 0.0)
         val t = livingEntity.ticks.toFloat() + f
         matrixStack.translate(0.0, (0.1f + MathHelper.sin(t * 0.1f) * 0.01f).toDouble(), 0.0)
-        matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(livingEntity.lookingRotR))
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90F))
+        matrixStack.multiply(FzzyRotation.NEGATIVE_Y.degrees(livingEntity.lookingRotR))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.degrees(90F))
         MinecraftClient.getInstance().itemRenderer.renderItem(
             livingEntity.stack,
             ModelTransformationMode.FIXED,
