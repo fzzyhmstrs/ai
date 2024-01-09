@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.block
 
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.XpDroppingBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.ExperienceDroppingBlock
 import net.minecraft.block.PillarBlock
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.item.ItemPlacementContext
@@ -13,7 +13,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.intprovider.IntProvider
 import net.minecraft.world.BlockView
 
-class PillarExperienceDroppingBlock(settings: Settings, experience: IntProvider) : ExperienceDroppingBlock(settings, experience) {
+class PillarExperienceDroppingBlock(settings: Settings, experience: IntProvider) : XpDroppingBlock(settings, experience) {
 
     init {
         defaultState = defaultState.with(PillarBlock.AXIS, Direction.Axis.Y)
