@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagentBlockItem
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyBlockSettings
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.XpDroppingBlock
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.block.enums.Instrument
@@ -78,7 +79,7 @@ object RegisterBlock {
     val PLANAR_DOOR = registerBlock(PlanarDoorBlock(FzzyBlockSettings.nonSolidLightDestroyMoveReplace().mapColor(MapColor.PURPLE).sounds(BlockSoundGroup.GLASS)), "planar_door")
     val SARDONYX_CRYSTAL = registerBoth(SardonyxCrystalBlock(FzzyBlockSettings.basic().mapColor(MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).luminance(10).sounds(BlockSoundGroup.AMETHYST_CLUSTER)), "sardonyx_crystal")
     
-    val TIGERS_EYE_BLACKSTONE_ORE = registerBoth(ExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)), "tigers_eye_blackstone_ore")
+    val TIGERS_EYE_BLACKSTONE_ORE = registerBoth(XpDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.5f, 6.0f),UniformIntProvider.create(3,7)), "tigers_eye_blackstone_ore")
     val TIGERS_EYE_BASALT_ORE = registerBoth(PillarExperienceDroppingBlock(FzzyBlockSettings.basic().mapColor(MapColor.BLACK).requiresTool().strength(1.25f, 4.2f).sounds(BlockSoundGroup.BASALT),UniformIntProvider.create(3,7)), "tigers_eye_basalt_ore")
 
     val HARD_LIGHT_BLOCK = registerBoth(HardLightBlock(FzzyBlockSettings.light().mapColor(MapColor.PINK).strength(0.3f).sounds(BlockSoundGroup.GLASS).nonOpaque().breakInstantly().luminance(10)), "hard_light_block")
