@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -54,7 +55,7 @@ class CrystalAltarScreenHandler(
 
     init{
         world = playerInventory.player.world
-        recipes = playerInventory.player.world.recipeManager.listAllOfType(AltarRecipe.Type)
+        recipes = FzzyPort.listAllOfType(AltarRecipe.Type,playerInventory.player.world.recipeManager)
         addSlot(Slot(input, 0, 33, 47))
         addSlot(Slot(input, 1, 51, 47))
         addSlot(Slot(input, 2, 69, 47))
@@ -84,10 +85,7 @@ class CrystalAltarScreenHandler(
     override fun onContentChanged(inventory: Inventory) {
         super.onContentChanged(inventory)
         if (inventory === this.input){
-            val match: Optional<AltarRecipe> = this.world.recipeManager.getFirstMatch(
-                AltarRecipe.Type,
-                input as SimpleInventory, this.world
-            )
+            val match: Optional<AltarRecipe> = FzzyPort.getFirstMatch(AltarRecipe.Type, input as SimpleInventory, this.world)
             if (match.isEmpty) {
                 output.setStack(0, ItemStack.EMPTY)
             } else {

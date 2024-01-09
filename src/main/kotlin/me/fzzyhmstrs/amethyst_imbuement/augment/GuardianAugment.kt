@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
+import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.TotemPassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.CrystallineGolemEntity
@@ -10,11 +11,18 @@ import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageType
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 
 class GuardianAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): TotemPassiveAugment(weight,mxLvl, *slot) {
+
+    companion object{
+        val GUARDIAN_IGNORES_DAMAGE_TAG: TagKey<DamageType> = TagKey.of(RegistryKeys.DAMAGE_TYPE, AI.identity("guardian_ignores_damage"))
+    }
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {
         if (!checkEnabled()) return false

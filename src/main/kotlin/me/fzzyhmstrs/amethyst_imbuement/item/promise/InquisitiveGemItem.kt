@@ -5,11 +5,11 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterModifier
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -50,7 +50,7 @@ class InquisitiveGemItem(settings: Settings): IgnitedGemItem(settings) {
             if (nbt.contains("statuses")){
                 compound = nbt.get("statuses") as NbtCompound
             }
-            val statusIdentifier = Registries.STATUS_EFFECT.getId(statusEffect)?:return
+            val statusIdentifier = FzzyPort.STATUS_EFFECT.getId(statusEffect)?:return
             val id = statusIdentifier.toString()
             if (compound.contains(id)) return
             compound.putInt(id, 1)

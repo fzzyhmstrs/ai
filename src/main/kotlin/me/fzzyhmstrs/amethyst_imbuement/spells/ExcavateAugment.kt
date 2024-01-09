@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.fabricmc.fabric.api.mininglevel.v1.MiningLevelManager
 import net.minecraft.block.AbstractFireBlock
@@ -42,6 +43,7 @@ class ExcavateAugment: ScepterAugment(ScepterTier.ONE,25) {
         val hit = RaycasterUtil.raycastHit(effects.range(level),entity = user)
         if (hit is BlockHitResult  && CommonProtection.canBreakBlock(world,hit.blockPos,user.gameProfile,user)){
             val state = world.getBlockState(hit.blockPos)
+            if (state.isIn(RegisterTag.EXCAVATE_BLACKLIST)) return false
             if (state.getHardness(world,hit.blockPos) == -1.0f) return false
             if (canBreak(state, level)) {
                 state.block.onBreak(world,hit.blockPos,state,user)

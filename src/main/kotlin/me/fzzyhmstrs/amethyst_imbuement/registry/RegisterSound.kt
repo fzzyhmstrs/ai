@@ -1,8 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.Identifier
 
@@ -39,7 +38,7 @@ object RegisterSound {
     val FRAGMENT_CRUMBLES = soundEvent(Identifier(AI.MOD_ID,"fragment_crumbles"))
 
     private fun soundEvent(identifier: Identifier): SoundEvent{
-        return Registry.register(Registries.SOUND_EVENT,identifier, SoundEvent.of(identifier))
+        return FzzyPort.SOUND_EVENT.register(identifier,SoundEvent.of(identifier))
     }
 
     fun registerAll(){

@@ -3,11 +3,11 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 import java.util.*
 
 class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight, mxLvl, *slot) {
@@ -17,7 +17,7 @@ class ShieldingAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlot
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        return Registries.ITEM.stream().filter { it is AbstractAugmentJewelryItem }.map { it.defaultStack }.toList()
+        return RegisterItem.jewelryStacks
     }
 
     override fun attributeModifier(stack: ItemStack,level: Int, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier> {

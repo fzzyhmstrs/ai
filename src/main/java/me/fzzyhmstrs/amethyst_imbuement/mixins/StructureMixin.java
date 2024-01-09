@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig;
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock;
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.structure.StructureTemplate;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,7 +37,7 @@ public class StructureMixin {
         BlockState state = NbtHelper.toBlockState(blockLookup,nbtCompound);
         if (state.isOf(Blocks.ENCHANTING_TABLE) && AiConfig.INSTANCE.getBlocks().getImbuing().getReplaceEnchantingTable().get()){
             Item table = RegisterBlock.INSTANCE.getIMBUING_TABLE().asItem();
-            nbtCompound.putString("Name", Registries.ITEM.getId(table).toString());
+            nbtCompound.putString("Name", FzzyPort.INSTANCE.getITEM().getId(table).toString());
         }
         return nbtCompound;
     }

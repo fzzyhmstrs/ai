@@ -8,12 +8,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.particle.DustParticleEffect
 import net.minecraft.particle.ParticleEffect
-import net.minecraft.registry.Registries
 import net.minecraft.util.DyeColor
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
@@ -68,7 +68,7 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
                     applyDamageEffects(entity as LivingEntity?, entity2)
                     if (entity2 is LivingEntity) {
-                        val effects = Registries.STATUS_EFFECT.filter { !it.isBeneficial }
+                        val effects = FzzyPort.STATUS_EFFECT.filter { !it.isBeneficial }
                         entity2.addStatusEffect(StatusEffectInstance(effects.random(),entityEffects.duration(0), entityEffects.amplifier(0)))
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                     }

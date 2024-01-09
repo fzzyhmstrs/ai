@@ -16,6 +16,6 @@ class ColoredEndParticleFactory(private val spriteProvider: SpriteProvider): Par
         velocityY: Double,
         velocityZ: Double
     ): Particle {
-        return ColoredEndParticle(world,x,y,z,velocityX,velocityY,velocityZ,parameters.color,parameters.scale, spriteProvider)
+        return ColoredEndParticle(world,x,y,z,velocityX,velocityY,velocityZ,parameters.r,parameters.g,parameters.b,parameters.scale, spriteProvider)
     }
 }

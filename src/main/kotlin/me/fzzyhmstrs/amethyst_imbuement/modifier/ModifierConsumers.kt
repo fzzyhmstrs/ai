@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.modifier
 
-import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.item_util.ScepterLike
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
@@ -8,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
@@ -21,7 +21,6 @@ import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.passive.GolemEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
@@ -287,7 +286,7 @@ object ModifierConsumers {
         val item = stack.item
         if (item is ScepterLike){
             val activeEnchant = item.getActiveEnchant(stack)
-            val augment = Registries.ENCHANTMENT.get(Identifier(activeEnchant))
+            val augment = FzzyPort.ENCHANTMENT.get(Identifier(activeEnchant))
             if (augment != null && augment is ScepterAugment){
                 val effect = EchoingPersistentEffect(user,Hand.MAIN_HAND,augment)
             }

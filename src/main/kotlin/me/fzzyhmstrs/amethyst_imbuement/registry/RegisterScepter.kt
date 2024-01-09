@@ -11,11 +11,10 @@ import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.GemOfPromiseItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.IgnitedGemItem
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.*
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import net.minecraft.item.Item
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Rarity
 
 // don't know if this is better as a class or object. as an object it allows me to call it without needing to initialize an instance of it.
@@ -28,7 +27,7 @@ object RegisterScepter {
             GemOfPromiseItem.register(item)
         }
         regScepter.add(item)
-        return Registry.register(Registries.ITEM,AI.identity(name), item)
+        return FzzyPort.ITEM.register(AI.identity(name), item)
     }
 
     //Basic scepters

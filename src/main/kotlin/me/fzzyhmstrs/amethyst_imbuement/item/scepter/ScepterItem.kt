@@ -10,10 +10,10 @@ import me.fzzyhmstrs.amethyst_imbuement.material.ScepterToolMaterial
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.RecipeType
-import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 
 
@@ -61,7 +61,7 @@ open class ScepterItem(
                 if (count == 0) return
                 val nbt = reagent.nbt?:return
                 val spellString = nbt.getString(RegisterScepter.SPELL_SCROLL.SPELL)
-                val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+                val spell = FzzyPort.ENCHANTMENT.get(Identifier(spellString))?:return
                 stack.addEnchantment(spell,1)
                 return
             }

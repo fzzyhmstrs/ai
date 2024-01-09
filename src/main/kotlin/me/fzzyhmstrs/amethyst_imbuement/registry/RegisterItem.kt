@@ -2,8 +2,8 @@
 
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
+import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.*
 import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings.AiItemGroup
@@ -12,31 +12,54 @@ import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.GlisteringTomeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.promise.*
-import me.fzzyhmstrs.amethyst_imbuement.spells.special.DebugAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.*
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.text.Text
 import net.minecraft.util.Rarity
 import java.util.*
 
 // don't know if this is better as a class or object. as an object it allows me to call it without needing to initialize an instance of it.
 object RegisterItem {
 
-    private val regItem: MutableList<Item> = mutableListOf()
+    internal val regItem: MutableList<Item> = mutableListOf()
 
-    private fun <T: Item> register(item: T, name: String): T{
+    private fun <T: Item> register(item: T, name: String): T {
         if (item is IgnitedGemItem){
             GemOfPromiseItem.register(item)
         }
         regItem.add(item)
-        return Registry.register(Registries.ITEM,AI.identity(name), item)
+        return FzzyPort.ITEM.register(AI.identity(name), item)
+    }
+
+    val jewelryStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.stream().filter { it is AbstractAugmentJewelryItem }.map { it.defaultStack }.toList()
+    }
+
+    val headbandStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.HEADBANDS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
+    val amuletStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.AMULETS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
+    val ringStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.RINGS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
+    val wardStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.WARDS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
+    val totemStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.TOTEMS_TAG).map { it.value().defaultStack }.toMutableList()
+    }
+
+    val sniperBowStacks: MutableList<ItemStack> by lazy{
+        FzzyPort.ITEM.iterateEntries(RegisterTag.SNIPER_BOWS_TAG).map { it.value().defaultStack }.toMutableList()
     }
 
 
@@ -91,73 +114,46 @@ object RegisterItem {
     val RESONANT_ROD = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_DAMAGE,
         EntityAttributeModifier(UUID.fromString("402ec2da-c404-11ed-afa1-0242ac120002"),"resonant_modifier",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM)),"resonant_rod")
-    //val SURVEY_MAP = SurveyMapItem(FabricItemSettings()),"survey_map")
+    //val SURVEY_MAP = SurveyMapItem(AiItemSettings()),"survey_map")
     val HEARTSTONE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_AMPLIFIER,
         EntityAttributeModifier(UUID.fromString("402ec528-c404-11ed-afa1-0242ac120002"),"heartstone_modifier",1.0,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)).withGlint(),"heartstone")
-    val IRIDESCENT_ORB = register(CustomFlavorItem(FabricItemSettings().rarity(Rarity.UNCOMMON)),"iridescent_orb")
+    val IRIDESCENT_ORB = register(CustomFlavorItem(AiItemSettings().rarity(Rarity.UNCOMMON)),"iridescent_orb")
     val LUSTROUS_SPHERE = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_LEVEL,
         EntityAttributeModifier(UUID.fromString("402ec79e-c404-11ed-afa1-0242ac120002"),"lustrous_modifier",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
-        FabricItemSettings().rarity(Rarity.RARE)).withGlint(),"lustrous_sphere")
+        AiItemSettings().rarity(Rarity.RARE)).withGlint(),"lustrous_sphere")
     val KNOWLEDGE_POWDER = register(SpellcastersReagentFlavorItem(RegisterAttribute.PLAYER_EXPERIENCE,
         EntityAttributeModifier(UUID.fromString("72321934-ccc0-11ed-afa1-0242ac120002"),"knowledge_modifier",0.05,EntityAttributeModifier.Operation.ADDITION),
         AiItemSettings().aiGroup(AiItemGroup.GEM)),"knowledge_powder")
-    val XP_BUSH_SEED = register(AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,FabricItemSettings()),"xp_bush_seed")
+    val XP_BUSH_SEED = register(AliasedBlockItem(RegisterBlock.EXPERIENCE_BUSH,AiItemSettings()),"xp_bush_seed")
     val GOLDEN_HEART = register(SpellcastersReagentFlavorItem(RegisterAttribute.SPELL_RANGE,
         EntityAttributeModifier(UUID.fromString("f62a18b6-c407-11ed-afa1-0242ac120002"),"golden_modifier",0.125,EntityAttributeModifier.Operation.MULTIPLY_TOTAL),
         AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.UNCOMMON)),"golden_heart")
     val CRYSTALLINE_HEART = register(CustomFlavorItem(AiItemSettings().aiGroup(AiItemGroup.GEM).rarity(Rarity.RARE)).withGlint(),"crystalline_heart") //item is custom for flavor text
 
     // book and other used items
-    val BOOK_OF_LORE = register(BookOfLoreItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)),"book_of_lore") as CustomFlavorItem
-    val BOOK_OF_MYTHOS = register(BookOfMythosItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_mythos")
-    val BOOK_OF_TALES = register(BookOfTalesItem(FabricItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales")
-    val GLISTERING_TOME = register(GlisteringTomeItem(FabricItemSettings()),"glistering_tome")
-    val GLISTERING_KEY = register(GlisteringKeyItem(FabricItemSettings()),"glistering_key")
-    //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(FabricItemSettings()),"mysterious_magnifying_glass")
-    val MANA_POTION = register(ManaPotionItem(FabricItemSettings().maxCount(16)),"mana_potion")
-    val MANA_REGENERATION_POTION = register(ElixirItem(RegisterStatus.MANA_REGENERATION, 1200, 4, FabricItemSettings().maxCount(16)),"mana_regeneration_potion")
-    val ELIXIR_OF_ARCANA = register(ElixirItem(RegisterStatus.ARCANE_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_arcana")
-    val ELIXIR_OF_MENDING = register(ElixirItem(RegisterStatus.MENDING_AURA, 24000, 1, FabricItemSettings().maxCount(16)),"elixir_of_mending")
-    val ELIXIR_OF_SHIELDING = register(ElixirItem(RegisterStatus.SOUL_SHIELD, 6000, 4, FabricItemSettings().maxCount(16)),"elixir_of_shielding")
-    val ELIXIR_OF_INSIGHT = register(ElixirItem(RegisterStatus.INSIGHTFUL, 6000, 3, FabricItemSettings().maxCount(16)),"elixir_of_insight")
-    val DAZZLING_MELON_SLICE = register(Item(FabricItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
+    val BOOK_OF_LORE = register(BookOfLoreItem(AiItemSettings().maxCount(8).rarity(Rarity.RARE)),"book_of_lore") as CustomFlavorItem
+    val BOOK_OF_MYTHOS = register(BookOfMythosItem(AiItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_mythos")
+    val BOOK_OF_TALES = register(BookOfTalesItem(AiItemSettings().maxCount(8).rarity(Rarity.RARE)).withGlint(),"book_of_tales")
+    val GLISTERING_TOME = register(GlisteringTomeItem(AiItemSettings()),"glistering_tome")
+    val GLISTERING_KEY = register(GlisteringKeyItem(AiItemSettings()),"glistering_key")
+    //val MYSTERIOUS_MAGNIFYING_GLASS = register(CustomFlavorItem(AiItemSettings()),"mysterious_magnifying_glass")
+    val MANA_POTION = register(ManaPotionItem(AiItemSettings().maxCount(16)),"mana_potion")
+    val MANA_REGENERATION_POTION = register(ElixirItem(RegisterStatus.MANA_REGENERATION, 1200, 4, AiItemSettings().maxCount(16)),"mana_regeneration_potion")
+    val ELIXIR_OF_ARCANA = register(ElixirItem(RegisterStatus.ARCANE_AURA, 24000, 1, AiItemSettings().maxCount(16)),"elixir_of_arcana")
+    val ELIXIR_OF_MENDING = register(ElixirItem(RegisterStatus.MENDING_AURA, 24000, 1, AiItemSettings().maxCount(16)),"elixir_of_mending")
+    val ELIXIR_OF_SHIELDING = register(ElixirItem(RegisterStatus.SOUL_SHIELD, 6000, 4, AiItemSettings().maxCount(16)),"elixir_of_shielding")
+    val ELIXIR_OF_INSIGHT = register(ElixirItem(RegisterStatus.INSIGHTFUL, 6000, 3, AiItemSettings().maxCount(16)),"elixir_of_insight")
+    val DAZZLING_MELON_SLICE = register(Item(AiItemSettings().rarity(Rarity.UNCOMMON).food(FoodComponent.Builder().hunger(4).saturationModifier(0.75f).statusEffect(
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
-    val SARDONYX_FRAGMENT_SPAWN_EGG = register(SpawnEggItem(RegisterEntity.SARDONYX_FRAGMENT, 0x961900,0x806060, FabricItemSettings()),"sardonyx_fragment_spawn_egg")
-    val STRANGE_EGG = register(SpawnEggItem(RegisterEntity.CHORSE_ENTITY, 0xE1C800 ,0xF0F0F0, FabricItemSettings()),"strange_egg")
+    val SARDONYX_FRAGMENT_SPAWN_EGG = register(SpawnEggItem(RegisterEntity.SARDONYX_FRAGMENT, 0x961900,0x806060, AiItemSettings()),"sardonyx_fragment_spawn_egg")
+    val STRANGE_EGG = register(SpawnEggItem(RegisterEntity.CHORSE_ENTITY, 0xE1C800 ,0xF0F0F0, AiItemSettings()),"strange_egg")
 
 
     ///////////////////////////
 
     val AI_GROUP: ItemGroup by lazy{
-        registerItemGroup()
-    }
-
-    fun registerItemGroup(): ItemGroup{
-        return Registry.register(Registries.ITEM_GROUP,AI.identity("ai_group"), FabricItemGroup.builder()
-            .displayName(Text.translatable("itemGroup.amethyst_imbuement.ai_group"))
-            .icon { ItemStack(RegisterBlock.IMBUING_TABLE.asItem()) }
-            .entries { _, entries ->
-                entries.addAll(regItem.stream()
-                    .map { item -> ItemStack(item) }.toList())
-                entries.addAll(RegisterTool.regTool.stream()
-                    .map { item -> ItemStack(item) }
-                    .toList())
-                entries.addAll(RegisterScepter.regScepter.stream()
-                    .map { item -> ItemStack(item) }
-                    .toList())
-                entries.addAll(RegisterArmor.regArmor.stream()
-                    .map { item -> ItemStack(item) }
-                    .toList())
-                entries.addAll(RegisterBlock.regBlockItem.stream()
-                    .map { block -> ItemStack(block) }
-                    .toList())
-                entries.addAll(Registries.ENCHANTMENT.stream()
-                    .filter { enchant -> enchant is ScepterAugment && enchant !is DebugAugment }
-                    .map { enchant -> SpellScrollItem.createSpellScroll(enchant as ScepterAugment) }
-                    .toList()
-                )
-            }.build())
+        RegisterItemGroup.registerItemGroup()
     }
 
     fun registerAll() {

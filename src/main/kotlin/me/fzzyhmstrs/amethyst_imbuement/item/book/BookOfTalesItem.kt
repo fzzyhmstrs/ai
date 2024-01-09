@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.screen.KnowledgeBookScreen
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -19,7 +20,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -114,7 +114,7 @@ class BookOfTalesItem(settings: Settings) : AbstractAugmentBookItem(settings), B
         if (nbt != null){
             if (!nbt.contains(NbtKeys.LORE_KEY.str())) return super.useAfterWriting(stack, world, user, hand)
             val bolaId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str()))
-            if (Registries.ENCHANTMENT.get(bolaId) == null) return super.useAfterWriting(stack, world, user, hand)
+            if (FzzyPort.ENCHANTMENT.get(bolaId) == null) return super.useAfterWriting(stack, world, user, hand)
             val bola = bolaId.toString()
             val type = AugmentHelper.getAugmentType(bola)
             if (nbt.contains(NbtKeys.LORE_TYPE.str())){

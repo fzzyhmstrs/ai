@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
 import com.google.gson.JsonObject
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractEquipmentAugment
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.AbstractPassiveAugment
 import net.minecraft.advancement.criterion.AbstractCriterion
@@ -8,7 +9,6 @@ import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
 import net.minecraft.predicate.entity.LootContextPredicate
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import java.util.function.Predicate
@@ -34,7 +34,7 @@ class AugmentCriterion(private val id: Identifier): AbstractCriterion<AugmentCri
                     return AugmentConditions.jewelryTypeCondition(id,playerPredicate)
                 } else {
                     val augment = Identifier.tryParse(str)?:throw IllegalStateException("Augment $str not found in enchantment registry.")
-                    return AugmentConditions(id,{aug -> aug == Registries.ENCHANTMENT.get(augment)},playerPredicate)
+                    return AugmentConditions(id,{aug -> aug == FzzyPort.ENCHANTMENT.get(augment)},playerPredicate)
                 }
             }else {
                 throw IllegalStateException("Augment Criterion not properly formatted in json object: ${obj.asString}")

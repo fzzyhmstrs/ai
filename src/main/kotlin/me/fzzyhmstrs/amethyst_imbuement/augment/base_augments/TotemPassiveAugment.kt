@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment.base_augments
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 
 open class TotemPassiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): PassiveAugment(weight,mxLvl,*slot) {
 
@@ -12,6 +12,6 @@ open class TotemPassiveAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equi
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        return Registries.ITEM.iterateEntries(RegisterTag.TOTEMS_TAG).map { it.value().defaultStack }.toMutableList()
+        return FzzyPort.ITEM.iterateEntries(RegisterTag.TOTEMS_TAG).map { it.value().defaultStack }.toMutableList()
     }
 }

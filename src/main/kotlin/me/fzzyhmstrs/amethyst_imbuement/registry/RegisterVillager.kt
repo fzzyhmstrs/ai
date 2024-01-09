@@ -3,17 +3,14 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import fzzyhmstrs.structurized_reborn.impl.FabricStructurePoolRegistry
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
-import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.sound.SoundEvents
 import net.minecraft.structure.processor.StructureProcessorLists
 import net.minecraft.util.Identifier
@@ -25,13 +22,9 @@ import net.minecraft.village.VillagerProfession
 object RegisterVillager {
 
     private val CRYSTAL_WITCH_IDENTIFIER = Identifier(AI.MOD_ID,"crystal_witch")
-    private val CRYSTAL_ALTAR_POINT_OF_INTEREST = PointOfInterestHelper.register(CRYSTAL_WITCH_IDENTIFIER,1,1,RegisterBlock.CRYSTAL_ALTAR)
-    private val CRYSTAL_WITCH: VillagerProfession = VillagerProfessionBuilder.create().workstation(
-        Registries.POINT_OF_INTEREST_TYPE.getKey(CRYSTAL_ALTAR_POINT_OF_INTEREST).get()).id(CRYSTAL_WITCH_IDENTIFIER).workSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE).build()
+    private val CRYSTAL_WITCH = FzzyPort.createAndRegisterVillagerProfession(CRYSTAL_WITCH_IDENTIFIER,SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, RegisterBlock.CRYSTAL_ALTAR)
 
     fun registerAll(){
-        Registry.register(Registries.VILLAGER_PROFESSION, CRYSTAL_WITCH_IDENTIFIER , CRYSTAL_WITCH)
-
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.QUARTZ,16,4,Items.EMERALD,1,16,2))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.LAPIS_LAZULI,22,6,Items.EMERALD,1,12,2))}
         TradeOfferHelper.registerVillagerOffers(CRYSTAL_WITCH,1) { factories -> factories.add(TradeFactory(Items.EMERALD,1,Items.LILAC,2,12,1))}

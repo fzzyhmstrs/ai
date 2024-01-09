@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.PassiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.DraconicBoxEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
@@ -12,7 +13,6 @@ import net.minecraft.block.ExperienceDroppingBlock
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -56,7 +56,7 @@ class DraconicVisionAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipme
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        return Registries.ITEM.iterateEntries(RegisterTag.HEADBANDS_TAG).map { it.value().defaultStack }.toMutableList()
+        return RegisterItem.headbandStacks
     }
 
     private fun rangeOfEffect(): Int{

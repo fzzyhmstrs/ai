@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 
 
 object EmiClientPlugin: EmiPlugin{
@@ -27,7 +28,7 @@ object EmiClientPlugin: EmiPlugin{
         registry.addCategory(IMBUING_CATEGORY)
         registry.addWorkstation(IMBUING_CATEGORY, IMBUING_WORKSTATION)
         
-        for (recipe in manager.listAllOfType(ImbuingRecipe.Type)) {
+        for (recipe in FzzyPort.listAllOfType(ImbuingRecipe.Type,manager)) {
             registry.addRecipe(ImbuingEmiRecipe(recipe))
         }
 
@@ -38,7 +39,7 @@ object EmiClientPlugin: EmiPlugin{
         registry.addCategory(ALTAR_CATEGORY)
         registry.addWorkstation(ALTAR_CATEGORY, ALTAR_WORKSTATION)
         
-        for (recipe in manager.listAllOfType(AltarRecipe.Type)) {
+        for (recipe in FzzyPort.listAllOfType(AltarRecipe.Type, manager)) {
             registry.addRecipe(AltarEmiRecipe(recipe))
         }
 

@@ -18,12 +18,10 @@ import me.fzzyhmstrs.amethyst_imbuement.item.promise.IgnitedGemItem
 import me.fzzyhmstrs.amethyst_imbuement.item.scepter.FzzyhammerItem
 import me.fzzyhmstrs.amethyst_imbuement.item.weapon.GlisteringTridentItem
 import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.*
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Rarity
 import java.util.*
 
@@ -37,12 +35,12 @@ object RegisterTool {
             GemOfPromiseItem.register(item)
         }
         regTool.add(item)
-        return Registry.register(Registries.ITEM,AI.identity(name), item)
+        return FzzyPort.ITEM.register(AI.identity(name), item)
     }
 
     //tool and weapon items
-    val FZZYHAMMER = register(FzzyhammerItem(FabricItemSettings().rarity(Rarity.EPIC)),"fzzyhammer")
-    val GLISTERING_TRIDENT = register(GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.glisteringTridentDurability.get()).rarity(Rarity.RARE)),"glistering_trident")
+    val FZZYHAMMER = register(FzzyhammerItem( AiItemSettings().rarity(Rarity.EPIC)),"fzzyhammer")
+    val GLISTERING_TRIDENT = register(GlisteringTridentItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).rarity(Rarity.RARE)),"glistering_trident")
     val SNIPER_BOW = register(SniperBowItem(AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT).maxDamage(AiConfig.items.sniperBowDurability.get()).rarity(Rarity.RARE)),"sniper_bow")
     val GARNET_SWORD = register(SwordItem(AiConfig.materials.tools.garnet,3 ,-2.4f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_sword")
     val GARNET_SHOVEL = register(ShovelItem(AiConfig.materials.tools.garnet,1.5f,-3.0f,AiItemSettings().aiGroup(AiItemGroup.EQUIPMENT)),"garnet_shovel")

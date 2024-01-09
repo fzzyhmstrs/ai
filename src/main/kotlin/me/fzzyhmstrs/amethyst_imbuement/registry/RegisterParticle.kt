@@ -4,12 +4,10 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffectFactory
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleFactory
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleType
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterParticle {
 
@@ -17,7 +15,7 @@ object RegisterParticle {
     val COLORED_END_ROD_TYPE = ColoredEndParticleType()
 
     fun registerParticleTypes(){
-        Registry.register(Registries.PARTICLE_TYPE, Identifier(AI.MOD_ID,"colored_end_rod"), COLORED_END_ROD_TYPE)
+        FzzyPort.PARTICLE_TYPE.register(AI.identity("colored_end_rod"), COLORED_END_ROD_TYPE)
     }
 
     @Environment(value = EnvType.CLIENT)

@@ -3,9 +3,11 @@ package me.fzzyhmstrs.amethyst_imbuement.registry
 import me.fzzyhmstrs.amethyst_core.registry.RegisterAttribute
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.block.*
+import me.fzzyhmstrs.amethyst_imbuement.item.AiItemSettings
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellcastersReagentBlockItem
 import me.fzzyhmstrs.amethyst_imbuement.particle.ColoredEndParticleEffect
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyBlockSettings
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.block.enums.Instrument
@@ -13,11 +15,8 @@ import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.DyeColor
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.world.BlockView
@@ -119,44 +118,24 @@ object RegisterBlock {
     val SHINE_LIGHT_RAINBOW = registerBoth(ShineLightRainbowBlock(FzzyBlockSettings.nonSolidLightDestroyMove().mapColor(MapColor.WHITE).nonOpaque().strength(0.01f).luminance(15).sounds(BlockSoundGroup.CANDLE).blockVision { _, _, _ -> never() }.suffocates { _, _, _ -> never() }), "shine_light_rainbow")
 
     fun registerAll() {
-        /*for (k in regBlock.keys) {
-            if (k == "experience_bush" || k =="warding_candle" || k =="steel_block" || k =="beryl_copper_block" || k =="glistening_ice" || k =="planar_door") continue
-            registerBlock(k,regBlock[k]?:continue)
-        }
-
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "experience_bush"), EXPERIENCE_BUSH)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "warding_candle"), WARDING_CANDLE)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"warding_candle"), WARDING_CANDLE_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "steel_block"), STEEL_BLOCK)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"steel_block"), STEEL_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "beryl_copper_block"), BERYL_COPPER_BLOCK)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"beryl_copper_block"), BERYL_COPPER_BLOCK_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "glistening_ice"), GLISTENING_ICE)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,"glistening_ice"), GLISTENING_ICE_ITEM)
-        Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, "planar_door"), PLANAR_DOOR)*/
     }
 
     private fun<T: Block> registerBoth(block:T, path: String): T{
-        val item = BlockItem(block,FabricItemSettings())
+        val item = BlockItem(block,AiItemSettings())
         regBlockItem.add(item)
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,path), item)
-        return Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, path), block)
+        FzzyPort.ITEM.register(AI.identity(path),item)
+        return FzzyPort.BLOCK.register(AI.identity(path),block)
     }
 
     private fun<T: Block> registerBlock(block:T, path: String): T{
-        return Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, path), block)
+        return FzzyPort.BLOCK.register(AI.identity(path),block)
     }
 
     private fun<T: Item> registerItem(item:T, path: String): T{
         regBlockItem.add(item)
-        return Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,path), item)
+        return FzzyPort.ITEM.register(AI.identity(path),item)
     }
-    
-    private fun registerBlock(path: String, block:Block): Block{
-        val item = BlockItem(block,FabricItemSettings())
-        Registry.register(Registries.ITEM, Identifier(AI.MOD_ID,path), item)
-        return Registry.register(Registries.BLOCK, Identifier(AI.MOD_ID, path), block)
-    }
+
 
     @Suppress("unused")
     private fun always(): Boolean {

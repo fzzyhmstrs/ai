@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier
 class NightVisionEnchantment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): AbstractEquipmentAugment(weight, mxLvl,EnchantmentTarget.ARMOR_HEAD, *slot) {
 
     private val id: Identifier by lazy {
-        Registries.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
+        FzzyPort.ENCHANTMENT.getId(this)?: throw IllegalStateException("Couldn't find this enchantment in the Registry!: $this")
     }
 
     override fun checkEnabled(): Boolean{

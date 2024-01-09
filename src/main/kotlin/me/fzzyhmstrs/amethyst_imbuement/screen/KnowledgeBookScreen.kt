@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil.buildOutputProvider
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -60,12 +61,13 @@ class KnowledgeBookScreen(private val book: ItemStack): ImbuingRecipeBaseScreen(
         tooltipList = list
         val augId = Identifier(nbt.getString(NbtKeys.LORE_KEY.str()))
         bookmarkUV = AugmentHelper.getAugmentType(augId.toString()).uv()
-        val recipeId = (augId.namespace + ":imbuing/" + augId.path + "_imbuing").takeIf { client?.world?.recipeManager?.get(Identifier(it))?.isPresent == true } ?: (augId.namespace + ":optional/" + augId.path + "_imbuing")
-        val recipeCheck = client?.world?.recipeManager?.get(Identifier(recipeId))
-        if (recipeCheck == null){
+        val manager = client?.world?.recipeManager
+        if (manager == null){
             this.close()
             return
         }
+        val recipeId = (augId.namespace + ":imbuing/" + augId.path + "_imbuing").takeIf { FzzyPort.getRecipe(Identifier(it), manager).isPresent } ?: (augId.namespace + ":optional/" + augId.path + "_imbuing")
+        val recipeCheck = FzzyPort.getRecipe(Identifier(recipeId), manager)
         if (recipeCheck.isPresent){
             val recipeCheck2 = recipeCheck.get()
             if (recipeCheck2 is ImbuingRecipe){

@@ -12,6 +12,8 @@ import me.fzzyhmstrs.amethyst_imbuement.item.Reagent
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfLoreItem
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfMythosItem
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.fzzyhmstrs.fzzy_core.trinket_util.base_augments.BaseAugment
 import net.minecraft.enchantment.EnchantmentLevelEntry
@@ -24,7 +26,6 @@ import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.DynamicRegistryManager
-import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -179,9 +180,9 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     fun setOutput(stack: ItemStack){}
     private fun outputGenerator(): ItemStack{
-        if (augment == "") return ItemStack(Registries.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
+        if (augment == "") return ItemStack(FzzyPort.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
         val identifier = Identifier(augment)
-        val enchant = Registries.ENCHANTMENT.get(identifier)
+        val enchant = FzzyPort.ENCHANTMENT.get(identifier)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
         return if (enchant != null){
             if (enchant is ScepterAugment){
@@ -206,32 +207,23 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     private fun centerSlotGenerator(): Ingredient{
         if (augId.path == "") return Ingredient.EMPTY
-        val enchant = Registries.ENCHANTMENT.get(augId)
+        val enchant = FzzyPort.ENCHANTMENT.get(augId)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(augId)
         if (enchant != null){
-            when (enchant) {
+            return when (enchant) {
                 is BaseAugment -> {
-                    val stacks = enchant.acceptableItemStacks().toTypedArray()
-                    return Ingredient.ofStacks(*stacks)
+                    val stacks = enchant.acceptableItemStacks().stream()
+                    Ingredient.ofStacks(stacks)
                 }
+
                 is ScepterAugment -> {
-                    val opt = Registries.ITEM.getEntryList(enchant.getTag())
-                    val stacks = if(opt.isPresent){
-                        opt.get().stream().map { entry -> ItemStack(entry.value()) }.toList()
-                    } else {
-                        listOf()
-                    }
-                    return Ingredient.ofStacks(*stacks.toTypedArray())
+                    val stacks = FzzyPort.ITEM.iterateEntries(RegisterTag.HEADBANDS_TAG).map { it.value().defaultStack }.stream()
+                    Ingredient.ofStacks(stacks)
                 }
+
                 else -> {
-                    val enchantItemList: MutableList<ItemStack> = mutableListOf()
-                    for (item in Registries.ITEM.iterator()){
-                        val stack = ItemStack(item)
-                        if (enchant.isAcceptableItem(stack)){
-                            enchantItemList.add(stack)
-                        }
-                    }
-                    return Ingredient.ofStacks(*enchantItemList.toTypedArray())
+                    val enchantStream = FzzyPort.ITEM.stream().map { ItemStack(it) }.filter { enchant.isAcceptableItem(it) }
+                    Ingredient.ofStacks(enchantStream)
                 }
             }
         } else if(modifier != null) {

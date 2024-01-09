@@ -67,7 +67,7 @@ object AiConfig
             .add("1.20.2-01/1.20.1-11: Vanilla enchantments are now configurable. Renamed 'trinkets_vX' to 'augments_vX'. Switched Bulwark to the augments config where it belongs. Added Soulwoven armor material to materials_v1. Added new entities in entities_v4. Added sky village integration configs in villages_v3")
             .add("1.20.2-01/1.20.1-16: Updated how PvpTeammates are considered. new Entities v5. Beast augments added into augments v4 config.")
             .add("1.20.2-01/1.20.1-17: Added Hud_v0 config for controlling client side gui-related items. Added a series of commands for controlling this in-game. Entities_v6 includes a massively overhauled Pvp checker based on the Should I Hit That API. Config option added for the default secondary checker options.")
-            .add("1.20.1-19: Added some new options to the default secondary pvp checker.")
+            .add("1.20.1-19: Added some new options to the default secondary pvp checker. Added glistering tool material, removing the now-obsolete line in items_Vx 'glisteringTridentDurability'")
             .space()
             .translate()
             .add("readme.main_header.note")
@@ -82,7 +82,6 @@ object AiConfig
         @ReadMeText("readme.items.giveGlisteringTome")
         var giveGlisteringTome = ValidatedBoolean(true)
 
-        var glisteringTridentDurability = ValidatedInt(550,5500,0)
         var sniperBowDurability = ValidatedInt(500,5000,0)
 
         var manaItems = ManaItems()
@@ -166,6 +165,7 @@ object AiConfig
             var glowing = AiToolMaterialsConfig.GLOWING
             var steel = AiToolMaterialsConfig.STEEL
             var ametrine = AiToolMaterialsConfig.AMETRINE
+            var glistering = AiToolMaterialsConfig.GLISTERING
         }
         var scepters = Scepters()
         class Scepters: ConfigSection(Header.Builder().space().add("readme.materials.scepters_1").build()) {
@@ -343,18 +343,18 @@ object AiConfig
     class Enchants: ConfigClass(enchantsHeader), OldClass<Enchants>{
 
         fun isEnchantEnabled(enchantment: Enchantment): Boolean{
-            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return true).toString()
+            val id = (FzzyPort.ENCHANTMENT.getId(enchantment) ?: return true).toString()
             return enabledEnchants[id] ?: true
         }
         fun getAiMaxLevel(enchantment: Enchantment, fallback: Int): Int{
-            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
+            val id = (FzzyPort.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
             val amount = aiEnchantMaxLevels[id] ?: fallback
             if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
             return amount
         }
         
         fun getVanillaMaxLevel(enchantment: Enchantment, fallback: Int): Int{
-            val id = (Registries.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
+            val id = (FzzyPort.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
             val amount = vanillaEnchantMaxLevels[id] ?: fallback
             if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
             return amount
@@ -737,7 +737,7 @@ object AiConfig
     }*/
 
     var items: Items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
-    var materials: Materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
+    var materials: Materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v2.json","materials_v1.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
     var blocks: Blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
     var villages: Villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
     var enchants: Enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v3.json","enchantments_v2.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
@@ -760,7 +760,7 @@ object AiConfig
 
     override fun reload(manager: ResourceManager) {
         items = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("items_v6.json","items_v5.json", base = AI.MOD_ID,configClass = { Items() }, previousClass = {Items()})
-        materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v1.json","materials_v0.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
+        materials = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("materials_v2.json","materials_v1.json", base = AI.MOD_ID, configClass = {Materials()}, previousClass = {Materials()})
         blocks = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("blocks_v0.json","altars_v4.json", base = AI.MOD_ID, configClass = {Blocks()}, previousClass = {Blocks()})
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v3.json","enchantments_v2.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})

@@ -16,47 +16,27 @@ object RegisterScreen {
 
         HandledScreens.register(RegisterHandler.IMBUING_SCREEN_HANDLER) {
                 handler: ImbuingTableScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            ImbuingTableScreen(
-                handler,
-                playerInventory,
-                title
-            )
+            ImbuingTableScreen(handler, playerInventory, title)
         }
 
         HandledScreens.register(RegisterHandler.ALTAR_OF_EXPERIENCE_SCREEN_HANDLER) {
                 handler: AltarOfExperienceScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            AltarOfExperienceScreen(
-                handler,
-                playerInventory,
-                title
-            )
+            AltarOfExperienceScreen(handler, playerInventory, title)
         }
 
         HandledScreens.register(RegisterHandler.DISENCHANTING_TABLE_SCREEN_HANDLER) {
                 handler: DisenchantingTableScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            DisenchantingTableScreen(
-                handler,
-                playerInventory,
-                title
-            )
+            DisenchantingTableScreen(handler, playerInventory, title)
         }
 
         HandledScreens.register(RegisterHandler.CRYSTAL_ALTAR_SCREEN_HANDLER) {
                 handler: CrystalAltarScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            CrystalAltarScreen(
-                handler,
-                playerInventory,
-                title
-            )
+            CrystalAltarScreen(handler, playerInventory, title)
         }
 
         HandledScreens.register(RegisterHandler.SPELLCASTERS_FOCUS_SCREEN_HANDLER) {
                 handler: SpellcastersFocusScreenHandler, playerInventory: PlayerInventory, title: Text ->
-            SpellcastersFocusScreen(
-                handler,
-                playerInventory,
-                title
-            )
+            SpellcastersFocusScreen(handler, playerInventory, title)
         }
     }
 }

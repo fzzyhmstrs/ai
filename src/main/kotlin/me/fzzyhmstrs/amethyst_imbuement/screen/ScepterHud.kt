@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -19,7 +20,6 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import org.joml.Matrix4f
@@ -79,7 +79,7 @@ object ScepterHud {
             true
         }
         val activeSpellIdTemp = Identifier(activeSpell)
-        val activeAugment = Registries.ENCHANTMENT.get(activeSpellIdTemp)
+        val activeAugment = FzzyPort.ENCHANTMENT.get(activeSpellIdTemp)
         activeSpellStyle = if(activeAugment is ScepterAugment) {
             if (activeAugment != this.activeSpell) {
                 cooldownInProgress = false
@@ -149,7 +149,7 @@ object ScepterHud {
     }
 
     private fun updateSpellRadialHudMap(stack: ItemStack, activeSpellIdentifier: Identifier, activeAugmentString: String){
-        val enchants = stack.enchantments.mapNotNull { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it as NbtCompound)) as? ScepterAugment }
+        val enchants = stack.enchantments.mapNotNull { FzzyPort.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it as NbtCompound)) as? ScepterAugment }
         SpellRadialHud.update(enchants, activeSpellIdentifier, activeAugmentString)
     }
 

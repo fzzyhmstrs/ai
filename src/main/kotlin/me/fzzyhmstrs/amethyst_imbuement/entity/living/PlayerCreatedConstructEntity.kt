@@ -13,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.block.BlockState
@@ -35,7 +36,6 @@ import net.minecraft.item.AxeItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.Registries
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
@@ -103,11 +103,11 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
     }
 
     open fun setSpell(spell: ScepterAugment){
-        this.spell = Registries.ENCHANTMENT.getId(spell)
+        this.spell = FzzyPort.ENCHANTMENT.getId(spell)
     }
 
     open fun getSpell(): ScepterAugment? {
-        return Registries.ENCHANTMENT.get(spell) as? ScepterAugment
+        return FzzyPort.ENCHANTMENT.get(spell) as? ScepterAugment
     }
 
     init{

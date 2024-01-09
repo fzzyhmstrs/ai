@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreenHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.gui.handlers.IGuiClickableArea
 import mezz.jei.api.gui.handlers.IGuiContainerHandler
@@ -29,12 +30,11 @@ object JeiPlugin: IModPlugin {
     }
 
     override fun registerRecipes(registration: IRecipeRegistration) {
-        val list = MinecraftClient.getInstance()?.world?.recipeManager?.listAllOfType(ImbuingRecipe.Type)
-        if (list != null) {
+        val manager = MinecraftClient.getInstance()?.world?.recipeManager
+        if (manager != null) {
+            val list = FzzyPort.listAllOfType(ImbuingRecipe.Type,manager)
             registration.addRecipes(JeiImbuingCategory.IMBUING_TYPE,list)
-        }
-        val list2 = MinecraftClient.getInstance()?.world?.recipeManager?.listAllOfType(AltarRecipe.Type)
-        if (list2 != null) {
+            val list2 = FzzyPort.listAllOfType(AltarRecipe.Type,manager)
             registration.addRecipes(JeiAltarCategory.ENHANCING_TYPE,list2)
         }
     }

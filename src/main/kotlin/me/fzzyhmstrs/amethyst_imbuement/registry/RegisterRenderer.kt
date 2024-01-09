@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_imbuement.renderer.*
 import me.fzzyhmstrs.amethyst_imbuement.renderer.block.AltarOfExperienceBlockEntityRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.block.DisenchantingTableBlockEntityRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.block.ImbuingTableBlockEntityRenderer
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -369,6 +370,11 @@ object RegisterRenderer {
         ) { stack: ItemStack, _: ClientWorld?, entity: LivingEntity?, _: Int ->
             if (entity != null && entity.isUsingItem && entity.activeItem == stack) 1.0f else 0.0f
         }
+
+        //////////////////////
+
+        FzzyPort.clientBlockSpriteRegister(ImbuingTableBlockEntityRenderer.IMBUING_TABLE_BOOK_SPRITE_ID)
+        FzzyPort.clientBlockSpriteRegister(DisenchantingTableBlockEntityRenderer.DISENCHANTING_TABLE_BOOK_SPRITE_ID)
     }
 
 }

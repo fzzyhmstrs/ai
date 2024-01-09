@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.Registries
 import java.util.*
 
 interface SpellcastersReagent: Reagent {
@@ -16,7 +16,7 @@ interface SpellcastersReagent: Reagent {
             nbtCompound.putDouble("Amount", attribute.second.value)
             nbtCompound.putInt("Operation", attribute.second.operation.id)
             nbtCompound.putUuid("UUID", UUID.randomUUID())
-            nbtCompound.putString("AttributeName", Registries.ATTRIBUTE.getId(attribute.first).toString())
+            nbtCompound.putString("AttributeName", FzzyPort.ATTRIBUTE.getId(attribute.first).toString())
             return nbtCompound
         }
 

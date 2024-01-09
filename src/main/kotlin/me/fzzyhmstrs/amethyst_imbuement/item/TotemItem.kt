@@ -1,10 +1,10 @@
 package me.fzzyhmstrs.amethyst_imbuement.item
 
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
+import me.fzzyhmstrs.amethyst_imbuement.augment.GuardianAugment
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.ActiveAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.interfaces.Modifiable
 import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
@@ -153,7 +153,7 @@ class TotemItem(settings: Settings): Item(settings), AugmentTasks, Modifiable, M
         }
 
         private fun checkDamageSource(ds: DamageSource): Boolean{
-            return !ds.isIn(RegisterTag.GUARDIAN_IGNORES_DAMAGE_TAG)
+            return !ds.isIn(GuardianAugment.GUARDIAN_IGNORES_DAMAGE_TAG)
         }
     }
 

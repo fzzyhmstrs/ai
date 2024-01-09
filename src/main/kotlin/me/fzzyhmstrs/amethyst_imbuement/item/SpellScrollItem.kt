@@ -9,13 +9,13 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfKnowledge
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterScepter
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.RecipeType
-import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -43,7 +43,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         internal fun createSpellScroll(enchant: ScepterAugment, disenchanted: Boolean = false): ItemStack{
             val stack = ItemStack(RegisterScepter.SPELL_SCROLL)
             val nbt = stack.orCreateNbt
-            val spellString = Registries.ENCHANTMENT.getId(enchant)?.toString()?: throw IllegalStateException("Enchantment couldn't be found!")
+            val spellString = FzzyPort.ENCHANTMENT.getId(enchant)?.toString()?: throw IllegalStateException("Enchantment couldn't be found!")
             nbt.putString(RegisterScepter.SPELL_SCROLL.SPELL,spellString)
             val type = AugmentHelper.getAugmentType(spellString)
             nbt.putString(RegisterScepter.SPELL_SCROLL.SPELL_TYPE,type.str())
@@ -65,7 +65,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         super.appendTooltip(stack, world, tooltip, context)
         val nbt = stack.nbt?:return
         val spellString = nbt.getString(SPELL)
-        val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return
+        val spell = FzzyPort.ENCHANTMENT.get(Identifier(spellString))?:return
         val level = max(1,nbt.getInt(SCROLL_LEVEL))
         tooltip.add(AcText.translatable("item.amethyst_imbuement.spell_scroll.spell",spell.getName(level)).formatted(Formatting.GOLD))
         val cooldown = AugmentHelper.getAugmentCooldown(spellString)
@@ -96,7 +96,7 @@ class SpellScrollItem(settings: Settings): Item(settings), SpellCasting, Reactan
         val stack = user.getStackInHand(hand)
         val nbt = stack.orCreateNbt
         val spellString = nbt.getString(SPELL)
-        val spell = Registries.ENCHANTMENT.get(Identifier(spellString))?:return resetCooldown(stack,world,user,spellString)
+        val spell = FzzyPort.ENCHANTMENT.get(Identifier(spellString))?:return resetCooldown(stack,world,user,spellString)
         if (spell !is ScepterAugment) return resetCooldown(stack,world,user,spellString)
         val level = min(spell.maxLevel,max(1,nbt.getInt(SCROLL_LEVEL)))
         if (world.isClient) {

@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
+import kotlin.math.max
 
 class ArcaneAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int): StatusEffect(statusEffectCategory, i), Aura {
 
@@ -22,7 +23,7 @@ class ArcaneAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: Int)
 
     override fun canApplyUpdateEffect(duration: Int, amplifier: Int): Boolean {
         if (amplifier < 0) return false
-        return duration % (200/(1 + amplifier)) == 0
+        return duration % (200/max(1 + amplifier,5)) == 0
     }
 
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {

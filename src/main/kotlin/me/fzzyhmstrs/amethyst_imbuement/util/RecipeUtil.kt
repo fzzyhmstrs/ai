@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions
@@ -14,7 +15,6 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.Registries
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
@@ -92,7 +92,7 @@ object RecipeUtil {
         val augment = recipe.getAugment()
         if (augment != ""){
             val stack = ItemStack(Items.ENCHANTED_BOOK)
-            val enchant = Registries.ENCHANTMENT.get(Identifier(augment))?:return EmptyStackProvider()
+            val enchant = FzzyPort.ENCHANTMENT.get(Identifier(augment))?:return EmptyStackProvider()
             EnchantedBookItem.addEnchantment(stack, EnchantmentLevelEntry(enchant,1))
             return SingleStackProvider(stack)
         }
@@ -172,7 +172,7 @@ object RecipeUtil {
             val stack = slot.stack
 
             if (stack.isEmpty) continue
-            val id = Registries.ITEM.getRawId(stack.item)
+            val id = FzzyPort.ITEM.getRawId(stack.item)
             map[i] = IdStack(id,stack.count)
             list.add(id)
         }

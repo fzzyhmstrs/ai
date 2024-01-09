@@ -38,4 +38,12 @@ object AiToolMaterialsConfig{
         .enchantability(18)
         .repairIngredient(Ingredient.ofItems(RegisterItem.AMETRINE))
         .build()
+    val GLISTERING = ValidatedToolMaterial.Builder()
+        .durability(550)
+        .miningSpeedMultiplier(9.5f)
+        .attackDamage(11f)
+        .miningLevel(MiningLevels.DIAMOND)
+        .enchantability(15)
+        .repairIngredient(Ingredient.ofItems(RegisterItem.GARNET))
+        .build()
 }

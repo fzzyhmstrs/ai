@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.item.weapon.SniperBowItem
 import me.fzzyhmstrs.amethyst_imbuement.screen.SpellRadialHud
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -18,7 +19,6 @@ import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.registry.Registries
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
@@ -98,7 +98,7 @@ object RegisterKeybind {
                     val nbt = stack.orCreateNbt
                     if (nbt.contains(NbtKeys.ACTIVE_ENCHANT.str())) {
                         val activeEnchant = nbt.getString(NbtKeys.ACTIVE_ENCHANT.str())
-                        val activeEnchantName = Registries.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
+                        val activeEnchantName = FzzyPort.ENCHANTMENT.get(Identifier(activeEnchant))?.getName(1)?: AcText.literal(activeEnchant)
                         client.player?.sendMessage(AcText.translatable("scepter.active_spell_key").append(activeEnchantName), true)
                     } else {
                         client.player?.sendMessage(AcText.translatable("scepter.spells_not_activated"), true)

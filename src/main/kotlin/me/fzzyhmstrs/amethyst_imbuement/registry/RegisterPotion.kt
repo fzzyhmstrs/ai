@@ -1,14 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.registry
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Items
 import net.minecraft.potion.Potion
 import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 object RegisterPotion {
 
@@ -23,14 +21,14 @@ object RegisterPotion {
 
 
     fun registerAll(){
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"curse"), CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"strong_curse"), STRONG_CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_curse"), LONG_CURSE_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"immunity"), IMMUNITY_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_immunity"), LONG_IMMUNITY_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"insight"), INSIGHT_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"strong_insight"), STRONG_INSIGHT_POTION)
-        Registry.register(Registries.POTION, Identifier(AI.MOD_ID,"long_insight"), LONG_INSIGHT_POTION)
+        FzzyPort.POTION.register(AI.identity("curse"), CURSE_POTION)
+        FzzyPort.POTION.register(AI.identity("strong_curse"), STRONG_CURSE_POTION)
+        FzzyPort.POTION.register(AI.identity("long_curse"), LONG_CURSE_POTION)
+        FzzyPort.POTION.register(AI.identity("immunity"), IMMUNITY_POTION)
+        FzzyPort.POTION.register(AI.identity("long_immunity"), LONG_IMMUNITY_POTION)
+        FzzyPort.POTION.register(AI.identity("insight"), INSIGHT_POTION)
+        FzzyPort.POTION.register(AI.identity("strong_insight"), STRONG_INSIGHT_POTION)
+        FzzyPort.POTION.register(AI.identity("long_insight"), LONG_INSIGHT_POTION)
 
         BrewingRecipeRegistry.registerPotionRecipe(Potions.POISON,RegisterItem.ACCURSED_FIGURINE, CURSE_POTION)
         BrewingRecipeRegistry.registerPotionRecipe(CURSE_POTION, Items.GLOWSTONE_DUST, STRONG_CURSE_POTION)

@@ -11,10 +11,10 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.DashAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.SmitingBlowAugment
 import me.fzzyhmstrs.amethyst_imbuement.util.RecipeUtil
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
@@ -42,7 +42,7 @@ object RegisterNetworking {
                 val stack = player.mainHandStack
                 if (stack.item !is ScepterLike) return@execute
                 val spellId = Identifier.tryParse(spell) ?: return@execute
-                val spellEnchant = Registries.ENCHANTMENT.get(spellId) as? ScepterAugment ?: return@execute
+                val spellEnchant = FzzyPort.ENCHANTMENT.get(spellId) as? ScepterAugment ?: return@execute
                 val nbt = stack.nbt ?: return@execute
                 ScepterHelper.updateActiveAugment(stack, nbt, player, spell, spellEnchant,false)
             }

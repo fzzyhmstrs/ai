@@ -16,6 +16,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
 import me.fzzyhmstrs.amethyst_imbuement.util.ImbuingRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.nbt_util.Nbt
 import me.fzzyhmstrs.fzzy_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
@@ -38,7 +39,6 @@ import net.minecraft.item.EnchantedBookItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.registry.Registries
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -187,11 +187,9 @@ class ImbuingTableScreenHandler(
             if (!itemStack.isEmpty) {
                 context.run { world: World, pos: BlockPos ->
                     val tempResults: MutableList<TableResult> = mutableListOf()
-                    var matches: MutableList<ImbuingRecipe> = mutableListOf()
+                    var matches: List<ImbuingRecipe> = mutableListOf()
                     if (!world.isClient) {
-                        matches = world.recipeManager.getAllMatches(ImbuingRecipe.Type,
-                            inventory,
-                            world)
+                        matches = FzzyPort.getAllMatches(ImbuingRecipe.Type, inventory, world)
                     }
                     val shelves = checkBookshelves(world, pos)
                     if (shelves == 30 && player is ServerPlayerEntity){
@@ -202,7 +200,7 @@ class ImbuingTableScreenHandler(
                             val power = MathHelper.ceil(imbuingRecipe.getCost() * AiConfig.blocks.imbuing.difficultyModifier.get())
                             if (imbuingRecipe.getAugment() != "") {
                                 val id = Identifier(imbuingRecipe.getAugment())
-                                val augment = Registries.ENCHANTMENT.get(id)
+                                val augment = FzzyPort.ENCHANTMENT.get(id)
                                 if (augment != null) {
                                     val augCheck = if (augment is ScepterAugment) {
                                         val blA = ScepterHelper.isAcceptableScepterItem(augment, itemStack, player)
@@ -291,7 +289,7 @@ class ImbuingTableScreenHandler(
                             }
                             val enchantmentLevelEntry = k[random.nextInt(k.size)]
                             enchantmentId[j] =
-                                Registries.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
+                                FzzyPort.ENCHANTMENT.getRawId(enchantmentLevelEntry.enchantment)
                             enchantmentLevel[j] = enchantmentLevelEntry.level
                             ++j
                         }
@@ -645,7 +643,7 @@ class ImbuingTableScreenHandler(
 
         private fun getPossibleEntries(power: Int, stack: ItemStack, treasureAllowed: Boolean): ArrayList<EnchantmentLevelEntry> {
             val list = Lists.newArrayList<EnchantmentLevelEntry>()
-            block0@ for (enchantment in Registries.ENCHANTMENT) {
+            block0@ for (enchantment in FzzyPort.ENCHANTMENT) {
                 if (enchantment.isTreasure && !treasureAllowed || !enchantment.isAvailableForRandomSelection || !enchantment.isAcceptableItem(
                         stack
                     ) && !stack.isOf(Items.BOOK)
@@ -931,7 +929,7 @@ class ImbuingTableScreenHandler(
         override fun bufClassReader(world: World, buf: PacketByteBuf): TableResult {
             val recipeId = buf.readIdentifier()
             val pow = buf.readShort().toInt()
-            val opt = world.recipeManager.get(recipeId)
+            val opt = FzzyPort.getRecipe(recipeId, world.recipeManager)
             val recipe = if(opt.isPresent){
                 opt.get()
             } else {
@@ -947,7 +945,7 @@ class ImbuingTableScreenHandler(
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             return if(recipe.getAugment() != "") {
                 val augId = Identifier(recipe.getAugment())
-                val str = Registries.ENCHANTMENT.get(augId)?.getName(1)?.string
+                val str = FzzyPort.ENCHANTMENT.get(augId)?.getName(1)?.string
                     ?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
                 AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))
             } else {
@@ -972,7 +970,7 @@ class ImbuingTableScreenHandler(
             if ((player.experienceLevel < i || player.experienceLevel < power) && !player.abilities.creativeMode) return false
             if(recipe.getAugment() != ""){
                 val augId = Identifier(recipe.getAugment())
-                val augmentChk = Registries.ENCHANTMENT.get(augId) ?: return false
+                val augmentChk = FzzyPort.ENCHANTMENT.get(augId) ?: return false
                 if (checkAcceptableAugment(augmentChk,itemStack3)){
                     val item = itemStack3.item
                     if (item is Reactant){
@@ -1087,7 +1085,7 @@ class ImbuingTableScreenHandler(
         override fun tooltipList(player: PlayerEntity, handler: ImbuingTableScreenHandler): List<Text> {
             val list: MutableList<Text> = mutableListOf()
             if (recipe.getAugment() != "") {
-                val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
+                val augment = FzzyPort.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     list.add(AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE)))
                     if (etdLoaded){
@@ -1118,7 +1116,7 @@ class ImbuingTableScreenHandler(
 
         override fun nextRecipeTooltipText(player: PlayerEntity, handler: ImbuingTableScreenHandler): Text {
             return if (recipe.getAugment() != "") {
-                val augment = Registries.ENCHANTMENT.get(Identifier(recipe.getAugment()))
+                val augment = FzzyPort.ENCHANTMENT.get(Identifier(recipe.getAugment()))
                 if (augment != null){
                     AcText.translatable("container.enchant.clue", (augment.getName(1) as MutableText).formatted(Formatting.WHITE))
                 } else {
@@ -1147,7 +1145,7 @@ class ImbuingTableScreenHandler(
             val nextInLine = buf.readString()
             val lineage = buf.readBoolean()
             val pow = buf.readShort().toInt()
-            val opt = world.recipeManager.get(recipeId)
+            val opt = FzzyPort.getRecipe(recipeId, world.recipeManager)
             val recipe = if(opt.isPresent){
                 opt.get()
             } else {

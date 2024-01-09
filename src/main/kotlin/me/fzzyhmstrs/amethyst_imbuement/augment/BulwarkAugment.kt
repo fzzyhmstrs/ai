@@ -1,12 +1,12 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.Registries
 
 class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot): EquipmentAugment(weight, mxLvl,EnchantmentTarget.CROSSBOW,*slot) {
 
@@ -15,7 +15,7 @@ class BulwarkAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentSlot)
     }
 
     override fun acceptableItemStacks(): MutableList<ItemStack> {
-        return Registries.ITEM.iterateEntries(ConventionalItemTags.SHIELDS).map { it.value().defaultStack }.toMutableList()
+        return FzzyPort.ITEM.registry().iterateEntries(ConventionalItemTags.SHIELDS).map { it.value().defaultStack }.toMutableList()
     }
 
     override fun specialEffect(user: LivingEntity, level: Int, stack: ItemStack): Boolean {

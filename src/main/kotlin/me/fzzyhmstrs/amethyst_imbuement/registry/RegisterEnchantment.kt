@@ -15,28 +15,26 @@ import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.CracklingInfusio
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SolarFlareAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series.SoulfreezeAugment
 import me.fzzyhmstrs.fzzy_core.coding_util.AbstractConfigDisableEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.enchantment.DamageEnchantment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 
 object RegisterEnchantment {
 
     private fun <T: Enchantment> T.register(name: String): T{
-        val id = AI.identity(name)
-        val e1 = Registry.register(Registries.ENCHANTMENT,id, this)
+        val e1 = FzzyPort.ENCHANTMENT.register(AI.identity(name), this)
         if (e1 is AbstractConfigDisableEnchantment){
             if (!e1.isEnabled()){
-                LOGGER.info("Augment $id is set as disabled in the configs!")
+                LOGGER.info("Augment $name is set as disabled in the configs!")
             }
         }
         if (e1 is ScepterAugment){
             ModifierRegistry.register(e1.augmentSpecificModifier)
             if (!AugmentHelper.getAugmentEnabled(e1)) {
-                LOGGER.info("Augment $id is set as disabled in the configs!")
+                LOGGER.info("Augment $name is set as disabled in the configs!")
             }
         }
         return e1
