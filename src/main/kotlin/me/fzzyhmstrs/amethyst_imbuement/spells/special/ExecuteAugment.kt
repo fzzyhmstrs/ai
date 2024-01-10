@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MinorSupportAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Items
@@ -48,7 +49,7 @@ class ExecuteAugment: MinorSupportAugment(ScepterTier.THREE,6) {
                     target.kill()
                     true
                 } else {
-                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level))
+                    target.damage(SpellDamageSource(FzzyDamage.indirectMagic(user),this),effects.damage(level))
                 }
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)

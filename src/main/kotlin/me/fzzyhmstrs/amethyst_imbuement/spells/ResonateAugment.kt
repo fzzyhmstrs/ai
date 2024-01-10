@@ -2,9 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -101,7 +102,7 @@ class ResonateAugment: SlashAugment(ScepterTier.THREE,5) {
         } else {
             effect.damage(level + amp - 1)
         }
-        val bl = if(user is PlayerEntity) target.damage(SpellDamageSource(user.damageSources.playerAttack(user),this),damage) else target.damage(SpellDamageSource(user.damageSources.mobAttack(user),this),damage)
+        val bl = if(user is PlayerEntity) target.damage(SpellDamageSource(FzzyDamage.playerAttack(user),this),damage) else target.damage(SpellDamageSource(FzzyDamage.mobAttack(user),this),damage)
         if (bl) {
             if (user is ServerPlayerEntity) {
                 ServerPlayNetworking.send(user, NOTE_BLAST, writeBuf(user, target))

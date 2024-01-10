@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.tales
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
@@ -14,6 +13,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.Monster
@@ -47,7 +47,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         effects: AugmentEffect
     ): Boolean {
           return if (target is LivingEntity && AiConfig.entities.shouldItHitBase(user, target,this)) {
-              val bl = target.damage(CustomDamageSources.lightningBolt(world,null,user), effects.damage(level))
+              val bl = target.damage(FzzyDamage.lightning(user), effects.damage(level))
               if (bl){
                   if (world.random.nextFloat() < 0.25f)
                       RegisterStatus.stun(target,effects.duration(level))
@@ -92,7 +92,7 @@ class ChainLightningAugment: MinorSupportAugment(ScepterTier.THREE,9), Persisten
         val newEntities = data.user.world.getOtherEntities(data.entity, box) {(!data.struckEntities.contains(it.uuid)) && (it is LivingEntity && (it is Monster || it is SpellCastingEntity && !AiConfig.entities.isEntityPvpTeammate(data.user, it, this))) && data.entity.canSee(it)}
         if (newEntities.isEmpty()) return
         val nextTarget = newEntities.random()
-        if (nextTarget is LivingEntity && nextTarget.damage(CustomDamageSources.lightningBolt(data.user.world,null,data.user), data.damage)){
+        if (nextTarget is LivingEntity && nextTarget.damage(FzzyDamage.lightning(data.user), data.damage)){
             if (data.user.world.random.nextFloat() < 0.25f)
                 RegisterStatus.stun(nextTarget,data.effects.duration(data.level))
             data.effects.accept(nextTarget,AugmentConsumer.Type.HARMFUL)

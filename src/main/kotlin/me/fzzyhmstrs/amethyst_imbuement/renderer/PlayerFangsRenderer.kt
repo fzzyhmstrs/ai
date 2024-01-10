@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.PlayerFangsEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.OverlayTexture
@@ -11,7 +12,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayers
 import net.minecraft.client.render.entity.model.EvokerFangsEntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.RotationAxis
 
 @Suppress("PrivatePropertyName", "SpellCheckingInspection")
 @Environment(value = EnvType.CLIENT)
@@ -38,7 +38,7 @@ class PlayerFangsRenderer(context: EntityRendererFactory.Context): EntityRendere
             j *= (1.0f - h) / 0.1f
         }
         matrixStack.push()
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0f - playerFangsEntity.yaw))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.degrees(90.0f - playerFangsEntity.yaw))
         matrixStack.scale(-j, -j, j)
         matrixStack.translate(0.0, -0.626, 0.0)
         matrixStack.scale(0.5f, 0.5f, 0.5f)

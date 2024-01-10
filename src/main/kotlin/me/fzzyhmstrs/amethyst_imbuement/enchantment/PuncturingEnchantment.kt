@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.enchantment
 
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.enchantment.Enchantments
@@ -39,7 +40,7 @@ class PuncturingEnchantment(weight: Rarity, vararg slot: EquipmentSlot): ConfigD
             if(!target.isDead){
                 target.setInvulnerable(false) //these two lines take away damage invulnerability
                 target.timeUntilRegen = 0
-                target.damage(user.damageSources.generic(), 0.5f * level) //GENERIC damage bypasses armor
+                target.damage(FzzyDamage.generic(user), 0.5f * level) //GENERIC damage bypasses armor
             }
         }
 

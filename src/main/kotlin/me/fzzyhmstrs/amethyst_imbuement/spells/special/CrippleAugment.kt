@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment
 import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment.Companion.NOTE_BLAST
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -87,7 +88,7 @@ class CrippleAugment: SlashAugment(ScepterTier.TWO,13) {
         } else {
             effect.damage(level)/2 * crit
         }
-        val source = SpellDamageSource(if (user is PlayerEntity) user.damageSources.playerAttack(user) else user.damageSources.mobAttack(user),this)
+        val source = SpellDamageSource(if (user is PlayerEntity) FzzyDamage.playerAttack(user) else FzzyDamage.mobAttack(user),this)
         val bl = target.damage(source, damage)
         if (bl) {
             if (user is ServerPlayerEntity) {

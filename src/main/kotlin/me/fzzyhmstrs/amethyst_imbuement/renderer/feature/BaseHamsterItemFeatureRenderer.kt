@@ -4,6 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer.feature
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.BaseHamsterEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.BaseHamsterEntityModel
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -14,7 +15,6 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext
 import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.EquipmentSlot
-import net.minecraft.util.math.RotationAxis
 
 @Environment(value = EnvType.CLIENT)
 class BaseHamsterItemFeatureRenderer<T:BaseHamsterEntity,M:BaseHamsterEntityModel<T>>(context: FeatureRendererContext<T, M>)
@@ -41,8 +41,8 @@ FeatureRenderer<T, M>(context)
         }
         matrixStack.push()
         matrixStack.translate(0f,1.27f,0f)
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-135f))
-        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90F))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.degrees(-135f))
+        matrixStack.multiply(FzzyRotation.POSITIVE_X.degrees(90F))
         matrixStack.scale(0.5f,0.5f,0.5f)
         MinecraftClient.getInstance().itemRenderer.renderItem(item, ModelTransformationMode.FIXED,i,OverlayTexture.DEFAULT_UV,matrixStack,vertexConsumerProvider,hamster.world,hamster.id)
         matrixStack.pop()

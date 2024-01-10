@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.block.AbstractFireBlock
 import net.minecraft.enchantment.ProtectionEnchantment
 import net.minecraft.entity.EntityType
@@ -61,7 +62,7 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
                 if (i < j)
                     entity2.fireTicks = j
                 val bl = entity2.damage(
-                    SpellDamageSource(entity.damageSources.fireball(null,owner),augment),
+                    SpellDamageSource(FzzyDamage.fireball(this,null,owner), augment),
                     entityEffects.damage(0)
                 )
                 if (!bl) {

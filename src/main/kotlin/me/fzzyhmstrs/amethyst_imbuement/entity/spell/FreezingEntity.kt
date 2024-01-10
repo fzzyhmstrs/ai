@@ -3,12 +3,12 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.block.Blocks
 import net.minecraft.block.FrostedIceBlock
@@ -61,10 +61,10 @@ class FreezingEntity(entityType: EntityType<FreezingEntity>, world: World): Miss
             if (AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
                 val bl = if (!entity2.isFireImmune) {
                     if (entity2 is LivingEntity) entity2.frozenTicks = entityEffects.duration(0)
-                    entity2.damage(SpellDamageSource(CustomDamageSources.freeze(world,this, entity),augment), entityEffects.damage(0))
+                    entity2.damage(SpellDamageSource(FzzyDamage.freeze(this), augment), entityEffects.damage(0))
                 } else {
                     if (entity2 is LivingEntity) entity2.frozenTicks = (entityEffects.duration() * 1.6).toInt()
-                    entity2.damage(SpellDamageSource(CustomDamageSources.freeze(world,this, entity),augment), entityEffects.damage(0) * 1.6F)
+                    entity2.damage(SpellDamageSource(FzzyDamage.freeze(this),augment), entityEffects.damage(0) * 1.6F)
                 }
                 if (bl) {
                     if (entity2 is LivingEntity) entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)

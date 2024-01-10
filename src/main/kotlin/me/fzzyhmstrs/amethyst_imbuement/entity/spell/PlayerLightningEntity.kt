@@ -4,12 +4,12 @@ import com.google.common.collect.Sets
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
 import net.minecraft.entity.*
@@ -134,11 +134,7 @@ class PlayerLightningEntity(entityType: EntityType<out PlayerLightningEntity?>, 
                     }
                     val dmg = entityEffects.damage(0)
                     //println(dmg)
-                    if (owner != null) {
-                        entity2.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment), dmg)
-                    } else {
-                        entity2.damage(SpellDamageSource(this.damageSources.lightningBolt(),augment), dmg)
-                    }
+                    entity2.damage(SpellDamageSource(FzzyDamage.lightning(this),augment), dmg)
                     if (entity2 is LivingEntity) {
                         entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                     }

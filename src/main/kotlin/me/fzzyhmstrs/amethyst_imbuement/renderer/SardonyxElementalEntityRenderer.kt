@@ -5,13 +5,13 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxElementalEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.SardonyxElementalEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.SardonyxElementalArmorFeatureRenderer
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.RotationAxis
 import kotlin.math.abs
 
 @Environment(value = EnvType.CLIENT)
@@ -45,6 +45,6 @@ class SardonyxElementalEntityRenderer(context: EntityRendererFactory.Context) :
             }
             val j = sardonyxElementalEntity.limbAnimator.getPos(h) + 6.0f
             val k = (abs(j % 13.0f - 6.5f) - 3.25f) / 3.25f
-            matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(6.5f * k))
+            matrixStack.multiply(FzzyRotation.POSITIVE_Z.degrees(6.5f * k))
     }
 }

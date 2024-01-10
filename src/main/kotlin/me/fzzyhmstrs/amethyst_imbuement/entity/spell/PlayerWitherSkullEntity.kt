@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -53,7 +54,7 @@ class PlayerWitherSkullEntity: WitherSkullEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity is LivingEntity && AiConfig.entities.shouldItHitBase(entity2 as? LivingEntity, entity, augment)) {
-            val bl = entity.damage(SpellDamageSource(this.damageSources.witherSkull(this, entity2),augment), entityEffects.damage(0))
+            val bl = entity.damage(SpellDamageSource(FzzyDamage.witherSkull(this, this, entity2),augment), entityEffects.damage(0))
             if (bl) {
                 if (entity.isAlive) {
                     entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, entityEffects.duration(0), entityEffects.amplifier(0)), this.effectCause)

@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityStatuses
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -57,7 +58,7 @@ class PlayerEggEntity: ThrownItemEntity, ModifiableEffectEntity {
         super.onEntityHit(entityHitResult)
         val entity = this.owner
         if (entity is LivingEntity && AiConfig.entities.shouldItHitBase(entity,entityHitResult.entity,RegisterEnchantment.TORRENT_OF_BEAKS)) {
-            entityHitResult.entity.damage(SpellDamageSource(this.damageSources.mobProjectile(this, entity),RegisterEnchantment.TORRENT_OF_BEAKS), entityEffects.damage(0))
+            entityHitResult.entity.damage(SpellDamageSource(FzzyDamage.mobProjectile(this,this,entity),RegisterEnchantment.TORRENT_OF_BEAKS), entityEffects.damage(0))
         }
     }
 

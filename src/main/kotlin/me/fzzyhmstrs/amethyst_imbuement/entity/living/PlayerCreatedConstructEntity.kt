@@ -14,6 +14,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.TrackSummonerAttackerGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
 import net.minecraft.block.BlockState
@@ -354,7 +355,7 @@ open class PlayerCreatedConstructEntity(entityType: EntityType<out PlayerCreated
             target.setOnFireFor(fireAspect * 4)
         }
         val spell = getSpell()
-        val source = if (spell == null) this.damageSources.mobAttack(this) else SpellDamageSource(this.damageSources.mobAttack(this), spell)
+        val source = if (spell == null) FzzyDamage.mobAttack(this) else SpellDamageSource(FzzyDamage.mobAttack(this), spell)
         val bl = target.damage(source, f)
         if (bl) {
             if (g > 0.0f && target is LivingEntity) {

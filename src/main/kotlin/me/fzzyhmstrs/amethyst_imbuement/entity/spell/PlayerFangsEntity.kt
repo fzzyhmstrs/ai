@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -121,13 +122,10 @@ open class PlayerFangsEntity(entityType: EntityType<PlayerFangsEntity>, world: W
         val livingEntity = getOwner()
         if (!AiConfig.entities.shouldItHitBase(livingEntity, target, augment)) return
         if (livingEntity == null) {
-            target.damage(SpellDamageSource(this.damageSources.magic(),augment), entityEffects.damage(0))
+            target.damage(SpellDamageSource(FzzyDamage.magic(this),augment), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         } else {
-            if (livingEntity.isTeammate(target)) {
-                return
-            }
-            target.damage(this.damageSources.indirectMagic(this, livingEntity), entityEffects.damage(0))
+            target.damage(FzzyDamage.indirectMagic(this,this,livingEntity), entityEffects.damage(0))
             entityEffects.accept(target, AugmentConsumer.Type.HARMFUL)
         }
     }

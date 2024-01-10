@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.mixins.ProjectileEntityAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -222,7 +223,7 @@ open class EnergyBladeEntity(entityType: EntityType<out EnergyBladeEntity?>, wor
         if (entity is LivingEntity) {
             val entity2 = entityHitResult.entity
             if (AiConfig.entities.shouldItHitBase(entity, entity2, scepterAugment)){
-                val bl = entity2.damage(SpellDamageSource(entity.damageSources.indirectMagic(this,entity),scepterAugment),entityEffects.damage(0))
+                val bl = entity2.damage(SpellDamageSource(FzzyDamage.indirectMagic(this, this, entity), scepterAugment),entityEffects.damage(0))
                 if (bl) {
                     world.playSound(null,blockPos,SoundEvents.ENTITY_PLAYER_ATTACK_CRIT,SoundCategory.PLAYERS,0.5f,1.0f)
                     entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)

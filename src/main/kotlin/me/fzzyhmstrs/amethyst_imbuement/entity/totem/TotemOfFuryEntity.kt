@@ -2,10 +2,10 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.totem
 
 import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -58,7 +58,7 @@ class TotemOfFuryEntity(entityType: EntityType<out TotemOfFuryEntity>, world: Wo
             target = null
             return
         }
-        target?.damage(CustomDamageSources.lightningBolt(world,this,getOwner()),entityEffects.damage(0))
+        target?.damage(FzzyDamage.lightning(this), entityEffects.damage(0))
         val serverWorld: ServerWorld = this.world as ServerWorld
         beam(serverWorld)
         world.playSound(null,this.blockPos,SoundEvents.ITEM_TRIDENT_THUNDER,SoundCategory.NEUTRAL,0.5f,1.0f)

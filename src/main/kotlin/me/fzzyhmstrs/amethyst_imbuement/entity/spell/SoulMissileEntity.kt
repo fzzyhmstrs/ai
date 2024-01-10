@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.particle.ParticleEffect
@@ -43,7 +44,7 @@ class SoulMissileEntity: MissileEntity {
             val entity2 = entityHitResult.entity
             if(AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
                 val bl: Boolean = entity2.damage(
-                    SpellDamageSource(this.damageSources.indirectMagic(this, entity),augment),
+                    SpellDamageSource(FzzyDamage.indirectMagic(this, this, entity),augment),
                     entityEffects.damage(0)
                 )
 

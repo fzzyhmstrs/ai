@@ -3,6 +3,7 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer.block
 
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.AltarOfExperienceBlockEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -15,7 +16,6 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.RotationAxis
 
 @Environment(value = EnvType.CLIENT)
 class AltarOfExperienceBlockEntityRenderer(ctx: BlockEntityRendererFactory.Context) :
@@ -42,8 +42,8 @@ class AltarOfExperienceBlockEntityRenderer(ctx: BlockEntityRendererFactory.Conte
             h += Math.PI.toFloat() * 2
         }
         val k = altarOfExperienceBlockEntity.field_11963 + h * f
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(-k))
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90F))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.rotation(-k))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.degrees(90F))
 
         val lightAbove = WorldRenderer.getLightmapCoordinates(altarOfExperienceBlockEntity.world, altarOfExperienceBlockEntity.pos.up())
         MinecraftClient.getInstance().itemRenderer.renderItem(

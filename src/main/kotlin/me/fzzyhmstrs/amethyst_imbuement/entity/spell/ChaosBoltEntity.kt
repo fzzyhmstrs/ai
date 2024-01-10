@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -61,7 +62,7 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
                 val negativeEffects = ownerEffects.filter { !it.effectType.isBeneficial }
                 val multiplier = 1f + beneficialEffects.size * 0.75f + negativeEffects.size * 1.5f
                 val bl = entity2.damage(
-                    SpellDamageSource(entity.damageSources.indirectMagic(this,owner),augment),
+                    SpellDamageSource(FzzyDamage.indirectMagic(this,this,owner), augment),
                     entityEffects.damage(0) * multiplier
                 )
                 if (bl) {

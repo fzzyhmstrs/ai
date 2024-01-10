@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -46,7 +47,7 @@ open class BaseShardEntity(entityType: EntityType<out BaseShardEntity?>, world: 
             if (AiConfig.entities.shouldItHitBase(entity, entity2, scepterAugment)){
                 val augment = scepterAugment
                 val bl = entity2.damage(
-                    if(augment != null) SpellDamageSource(entity.damageSources.mobProjectile(this,entity),augment) else entity.damageSources.mobProjectile(this,entity),
+                    if(augment != null) SpellDamageSource(FzzyDamage.mobProjectile(this,this,entity),augment) else FzzyDamage.mobProjectile(this,this,entity),
                     max(1f,entityEffects.damage(0) - struckEntities.size)
                 )
                 if (!struckEntities.contains(entity2.uuid)){

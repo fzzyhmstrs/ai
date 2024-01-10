@@ -10,6 +10,7 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityType
@@ -109,7 +110,7 @@ object ModifierConsumers {
         list.forEach {
             val rnd1 = it.world.random.nextInt(5)
             if (rnd1 == 0)
-                it.world.createExplosion(null, it.damageSources.magic(), BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
+                it.world.createExplosion(null, FzzyDamage.magic(it), BoltExplosionBehavior,it.pos,0.6f,false,World.ExplosionSourceType.NONE)
         }
     }
 
@@ -193,7 +194,7 @@ object ModifierConsumers {
                 if (!it.isDead) {
                     it.isInvulnerable = false //these two lines take away damage invulnerability
                     it.timeUntilRegen = 0
-                    it.damage(it.damageSources.generic(), 2.0F)
+                    it.damage(FzzyDamage.generic(it), 2.0F)
                 }
             }
         }
@@ -205,7 +206,7 @@ object ModifierConsumers {
                 if (!it.isDead) {
                     it.isInvulnerable = false //these two lines take away damage invulnerability
                     it.timeUntilRegen = 0
-                    it.damage(it.damageSources.generic(), 4.0F)
+                    it.damage(FzzyDamage.generic(it), 4.0F)
                     val rnd = AI.aiRandom().nextInt(5)
                     if (rnd == 0){
                         EffectQueue.addStatusToQueue(it,StatusEffects.WEAKNESS,60,0)

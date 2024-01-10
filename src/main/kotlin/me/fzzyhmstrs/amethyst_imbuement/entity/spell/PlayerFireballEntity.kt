@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.AbstractFireballEntity
@@ -62,7 +63,7 @@ class PlayerFireballEntity: AbstractFireballEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
-            entity.damage(SpellDamageSource(this.damageSources.fireball(this, entity2),augment), entityEffects.damage(0))
+            entity.damage(SpellDamageSource(FzzyDamage.fireball(this,this,entity2),augment), entityEffects.damage(0))
             if (entity is LivingEntity) {
                 entityEffects.accept(entity, AugmentConsumer.Type.HARMFUL)
             }

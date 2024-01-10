@@ -12,6 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.AIClient
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -49,9 +50,9 @@ class SmitingBlowAugment: MinorSupportAugment(ScepterTier.TWO,5) {
         return if(target != null) {
             if (target is LivingEntity && AiConfig.entities.shouldItHitBase(user, target,this)) {
                 val bl = if(target.isUndead) {
-                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level) * effects.amplifier(level))
+                    target.damage(SpellDamageSource(FzzyDamage.indirectMagic(user),this),effects.damage(level) * effects.amplifier(level))
                 } else {
-                    target.damage(SpellDamageSource(user.damageSources.indirectMagic(user,user),this),effects.damage(level))
+                    target.damage(SpellDamageSource(FzzyDamage.indirectMagic(user),this),effects.damage(level))
                 }
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)

@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.renderer.block
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.render.RenderLayer
@@ -15,7 +16,6 @@ import net.minecraft.client.util.SpriteIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.RotationAxis
 
 @Suppress("DEPRECATION")
 @Environment(value = EnvType.CLIENT)
@@ -43,8 +43,8 @@ class DisenchantingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Cont
             h += Math.PI.toFloat() * 2
         }
         val k = disenchantingTableBlockEntity.field_11963 + h * f
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(-k))
-        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(80.0f))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Y.rotation(-k))
+        matrixStack.multiply(FzzyRotation.POSITIVE_Z.degrees(80.0f))
         val l = MathHelper.lerp(f, disenchantingTableBlockEntity.pageAngle, disenchantingTableBlockEntity.nextPageAngle)
         val m = MathHelper.fractionalPart(l + 0.25f) * 1.6f - 0.3f
         val n = MathHelper.fractionalPart(l + 0.75f) * 1.6f - 0.3f

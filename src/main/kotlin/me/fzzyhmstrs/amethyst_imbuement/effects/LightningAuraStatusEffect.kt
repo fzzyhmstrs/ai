@@ -1,8 +1,8 @@
 package me.fzzyhmstrs.amethyst_imbuement.effects
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.AttributeContainer
@@ -36,7 +36,7 @@ class LightningAuraStatusEffect(statusEffectCategory: StatusEffectCategory, i: I
         if (entities.isNotEmpty())
             world.playSound(null,entity.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.2f,1.0f)
         for (e in entities){
-            e.damage(CustomDamageSources.lightningBolt(world,null,entity),3f)
+            e.damage(FzzyDamage.lightning(entity),3f)
             beam(world,entity,e)
         }
     }

@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.SardonyxElementalPriorityTar
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.PlayerCreatedConstructEntity
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterNetworking
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.block.BlockState
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner
@@ -280,7 +281,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
                 }
                 setCharging(100)
             }
-            source.attacker?.damage(this.damageSources.thorns(this),max(5f,5f*damageMultiplier))
+            source.attacker?.damage(FzzyDamage.thorns(this), max(5f,5f*damageMultiplier))
             lastDamageTracker.addDamage(source, lastHealth - this.health)
         }
         return bl
@@ -322,7 +323,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         if (i > 0) {
             target.setOnFireFor(i * 4)
         }
-        if (target.damage(this.damageSources.mobAttack(this), f)) {
+        if (target.damage(FzzyDamage.mobAttack(this), f)) {
             if (g > 0.0f && target is LivingEntity) {
                 target.takeKnockback(
                     (g * 0.5f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(
@@ -337,7 +338,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
             val list = world.getNonSpectatingEntities(LivingEntity::class.java, target.boundingBox.expand(2.0, 0.25, 2.0))
             for (splashTarget in list){
                 if (AiConfig.entities.shouldItHit(this,splashTarget,AiConfig.Entities.Options.NONE)){
-                    if (splashTarget.damage(this.damageSources.mobAttack(this), f/2f)){
+                    if (splashTarget.damage(FzzyDamage.mobAttack(this), f/2f)){
                         if (g > 0.0f && splashTarget is LivingEntity) {
                             splashTarget.takeKnockback(
                                 (g * 0.25f).toDouble(), MathHelper.sin(yaw * (Math.PI.toFloat() / 180)).toDouble(), -MathHelper.cos(
@@ -444,7 +445,7 @@ class SardonyxElementalEntity(entityType: EntityType<out HostileEntity>?, world:
         damageMultiplier += player.getStatusEffect(StatusEffects.RESISTANCE)?.amplifier?.plus(1)?.times(0.15) ?: 0.0
         val armor = player.armor
         val toughness = player.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)
-        val test = DamageUtil.getInflictedDamage(DamageUtil.getDamageLeft(20f,armor.toFloat(),toughness.toFloat()),EnchantmentHelper.getProtectionAmount(player.armorItems,this.damageSources.mobAttack(this)).toFloat())
+        val test = DamageUtil.getInflictedDamage(DamageUtil.getDamageLeft(20f,armor.toFloat(),toughness.toFloat()),EnchantmentHelper.getProtectionAmount(player.armorItems,FzzyDamage.mobAttack(this)).toFloat())
 
         damageMultiplier += log(20f/test,40f)/2.0
         damageMultiplier += max(log((friendHealth + player.maxHealth) / 80f,30f).toDouble(),0.0)/2.0

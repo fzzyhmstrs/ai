@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -89,13 +90,7 @@ open class CrystallineGolemEntity: PlayerCreatedConstructEntity {
         world.sendEntityStatus(this, 4.toByte())
         val f = getAttackDamage()
         val g = if (f.toInt() > 0) f / 2.0f + random.nextInt(f.toInt()).toFloat() else f
-        val bl = target.damage(this.damageSources.mobAttack(this), g) /*if(entity == null) {
-            target.damage(this.damageSources.mobAttack(this), g)
-        } else if (entity is PlayerEntity) {
-            target.damage(this.damageSources.playerAttack(entity), g)
-        } else {
-            target.damage(this.damageSources.mobAttack(entity), g)
-        }*/
+        val bl = target.damage(FzzyDamage.mobAttack(this), g)
         if (bl) {
             val summoner = getOwner()
             if (summoner != null && summoner is PlayerEntity && target is LivingEntity){

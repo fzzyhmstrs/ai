@@ -6,6 +6,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.block.BlockState
 import net.minecraft.entity.*
@@ -119,7 +120,7 @@ class BoomChickenEntity(entityType:EntityType<BoomChickenEntity>, world: World):
     private fun explode() {
         if (!world.isClient) {
             dead = true
-            world.createExplosion(this, this.damageSources.explosion(this,owner),
+            world.createExplosion(this, FzzyDamage.explosion(this,this,owner),
                 BoomChickenExplosionBehavior,this.pos,entityEffects.amplifier(0)/10f,false,World.ExplosionSourceType.NONE)
             discard()
         }

@@ -3,7 +3,6 @@ package me.fzzyhmstrs.amethyst_imbuement.spells.tales.rpg_series
 import me.fzzyhmstrs.amethyst_core.compat.spell_power.SpChecker
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
@@ -13,6 +12,7 @@ import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -101,7 +101,7 @@ class SolarFlareAugment: MiscAugment(ScepterTier.THREE,11), PersistentEffectHelp
                     val mod = SpChecker.getModFromTags(data.user,RegisterTag.ARCANE_AUGMENTS, RegisterTag.FIRE_AUGMENTS)
                     val dmg = data.effect.damage(data.level) * (1f + mod.toFloat()/100f)
                     entityList.forEach {
-                        it.damage(CustomDamageSources.lightningBolt(data.world, null, data.user), if (it is LivingEntity && (it.maxHealth > 50f || it.isUndead)) dmg*2f else dmg)
+                        it.damage(FzzyDamage.lightning(data.user), if (it is LivingEntity && (it.maxHealth > 50f || it.isUndead)) dmg*2f else dmg)
                         if (it is MobEntity && it.isUndead)
                             it.setOnFireFor(10)
                         if (it is LivingEntity)

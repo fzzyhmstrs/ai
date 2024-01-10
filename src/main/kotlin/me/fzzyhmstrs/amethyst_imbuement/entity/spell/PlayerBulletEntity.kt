@@ -8,6 +8,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -40,7 +41,7 @@ class PlayerBulletEntity: ShulkerBulletEntity, ModifiableEffectEntity {
         val entity = entityHitResult.entity
         val entity2 = owner
         if (entity2 is LivingEntity && AiConfig.entities.shouldItHitBase(entity2, entity, augment)) {
-            val bl = entity.damage(SpellDamageSource(this.damageSources.mobProjectile(this, entity2),augment), entityEffects.damage(0))
+            val bl = entity.damage(SpellDamageSource(FzzyDamage.mobProjectile(this,this,entity2), augment), entityEffects.damage(0))
             if (bl) {
                 applyDamageEffects(entity2, entity)
                 if (entity is LivingEntity) {

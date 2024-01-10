@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_core.compat.spell_power.SpChecker
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_core.registry.RegisterTag
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
@@ -12,6 +11,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -77,7 +77,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
         var successes = 0
         for (target in entityList) {
             //if (!AiConfig.entities.shouldItHit(user, target,this)) continue
-            val bl = target.damage(CustomDamageSources.freeze(world,null,user),effect.damage(level))
+            val bl = target.damage(FzzyDamage.freeze(user),effect.damage(level))
             if (bl && target is LivingEntity) {
                 val mod = SpChecker.getModFromTags(user, RegisterTag.SOUL_AUGMENTS, RegisterTag.ICE_AUGMENTS)
                 val duration = effect.duration(level) * (1 + mod.toInt() / 100)

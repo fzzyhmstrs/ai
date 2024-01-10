@@ -2,12 +2,12 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.spell
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.CustomDamageSources
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.registry.EventRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -72,7 +72,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (!AiConfig.entities.shouldItHitBase(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
+            entity.damage(SpellDamageSource(FzzyDamage.lightning(this),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
             struck++
@@ -106,7 +106,7 @@ class BallLightningEntity(entityType: EntityType<BallLightningEntity>, world: Wo
         for (entity in entities){
             if (   AiConfig.entities.isEntityPvpTeammate(owner as LivingEntity, entity,augment)) continue
             if (entity !is LivingEntity) continue
-            entity.damage(SpellDamageSource(CustomDamageSources.lightningBolt(world,this,owner),augment),entityEffects.damage(0))
+            entity.damage(SpellDamageSource(FzzyDamage.lightning(this),augment),entityEffects.damage(0))
             beam(world as ServerWorld,entity)
             world.playSound(null,this.blockPos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL,0.3f,2.0f + world.random.nextFloat() * 0.4f - 0.2f)
             struck++

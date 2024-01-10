@@ -4,6 +4,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.coding_util.PersistentEffectHelper
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -61,7 +62,7 @@ class DevastationBeam: PersistentEffectHelper.PersistentEffect {
                 val dmg = AiConfig.entities.sardonyxElemental.devastationBeamDmg.get()
                 for (it in entityList) {
                     if (it is SardonyxElementalEntity || it is SardonyxFragmentEntity) continue
-                    it.damage(data.caster.damageSources.sonicBoom( data.caster), dmg)
+                    it.damage(FzzyDamage.sonicBoom(data.caster), dmg)
                     if (it is LivingEntity)
                         it.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 600,3))
                 }

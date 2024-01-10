@@ -1,11 +1,15 @@
 package me.fzzyhmstrs.amethyst_imbuement.spells
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_core.scepter_util.*
+import me.fzzyhmstrs.amethyst_core.scepter_util.LoreTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
+import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.FreezingEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.ProjectileEntity
@@ -47,7 +51,7 @@ class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,11){
         effects: AugmentEffect
     ) {
         if (target is LivingEntity) target.frozenTicks = effects.duration(0)
-        target.damage(SpellDamageSource(CustomDamageSources.freeze(world,null,user),this),effects.damage(0)*2/3)
+        target.damage(SpellDamageSource(FzzyDamage.freeze(user),this),effects.damage(0)*2/3)
     }
 
     override fun soundEvent(): SoundEvent {
