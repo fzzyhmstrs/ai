@@ -1,0 +1,43 @@
+{
+  "type": "amethyst_imbuement:imbuing",
+  "imbueA": {
+	"item": "amethyst_imbuement:heartstone"
+  },
+  "imbueB": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueC": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "imbueD": {
+	"item": "amethyst_imbuement:imbued_lapis"
+  },
+  "craftA": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftB": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftC": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftD": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftF": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftG": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftH": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "craftI": {
+	"item": "amethyst_imbuement:mana_potion"
+  },
+  "title": "Rebinding",
+  "cost": 13,
+  "augment": "amethyst_imbuement:rebinding"
+}
+

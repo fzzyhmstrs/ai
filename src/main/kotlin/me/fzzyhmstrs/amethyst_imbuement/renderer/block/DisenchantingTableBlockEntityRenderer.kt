@@ -5,14 +5,11 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.block.DisenchantingTableBlockEnti
 import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyRotation
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.entity.model.BookModel
 import net.minecraft.client.render.entity.model.EntityModelLayers
-import net.minecraft.client.texture.SpriteAtlasTexture
-import net.minecraft.client.util.SpriteIdentifier
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -54,20 +51,17 @@ class DisenchantingTableBlockEntityRenderer(ctx: BlockEntityRendererFactory.Cont
             disenchantingTableBlockEntity.nextPageTurningSpeed
         )
         book.setPageAngles(g, MathHelper.clamp(m, 0.0f, 1.0f), MathHelper.clamp(n, 0.0f, 1.0f), o)
-        val vertexConsumer = BOOK_TEXTURE.getVertexConsumer(
+        /*val vertexConsumer = BOOK_TEXTURE.getVertexConsumer(
             vertexConsumerProvider
-        ) {texture: Identifier -> RenderLayer.getEntitySolid(texture)}
+        ) {texture: Identifier -> RenderLayer.getEntitySolid(texture)}*/
+        val vertexConsumer = vertexConsumerProvider.getBuffer(book.getLayer(DISENCHANTING_TABLE_BOOK_SPRITE_ID))
         book.renderBook(matrixStack, vertexConsumer, i, j, 1.0f, 1.0f, 1.0f, 1.0f)
         //println("rendered book")
         matrixStack.pop()
     }
 
     companion object {
-        val DISENCHANTING_TABLE_BOOK_SPRITE_ID = Identifier(AI.MOD_ID,"entity/disenchanting_table_book")
-        val BOOK_TEXTURE = SpriteIdentifier(
-            SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
-            DISENCHANTING_TABLE_BOOK_SPRITE_ID
-        )
+        val DISENCHANTING_TABLE_BOOK_SPRITE_ID = Identifier(AI.MOD_ID,"textures/entity/disenchanting_table_book.png")
     }
 
     init {

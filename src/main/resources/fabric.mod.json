@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "amethyst_imbuement",
+  "id": "${id}",
   "version": "${version}",
   "name": "Amethyst Imbuement",
   "description": "A mod all about the innate magic within crystals, gems, and you!",
@@ -69,15 +69,15 @@
     "amethyst_imbuement.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.21",
+    "fabricloader": ">=${loaderVersion}",
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
-    "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
-    "minecraft": ">=1.20",
-    "patchouli": ">=1.20.1-81-FABRIC",
-    "trinkets": ">=3.7.0",
+    "minecraft": ">=1.20 <=1.20.1",
     "java": ">=17",
-    "fzzy_core": ">=0.3.5+1.20.1",
-    "amethyst_core": ">=1.4.5+1.20.1"
+    "fabric-language-kotlin": ">=${fabricKotlinVersion}",
+    "trinkets": ">=${trinketsVersion}",
+    "patchouli": ">=${patchouliVersion}",
+    "fzzy_core": ">=${fcVersion}",
+    "amethyst_core": ">=${acVersion}"
   }
 }

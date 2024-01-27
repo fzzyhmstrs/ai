@@ -562,6 +562,7 @@
 	"enchantment.amethyst_imbuement.leaping": "Leaping",
 	"enchantment.amethyst_imbuement.lucky": "Lucky",
 	"enchantment.amethyst_imbuement.moonlit": "Moonlit",
+	"enchantment.amethyst_imbuement.rebinding": "Rebinding",
 	"enchantment.amethyst_imbuement.resilience": "Resilience",
 	"enchantment.amethyst_imbuement.slimy": "Slimy",
 	"enchantment.amethyst_imbuement.soulbinding": "Soulbinding",
@@ -598,6 +599,7 @@
 	"enchantment.amethyst_imbuement.leaping.desc": "Grants the wearer Jump Boost.",
 	"enchantment.amethyst_imbuement.lucky.desc": "Grants the user Luck.",
 	"enchantment.amethyst_imbuement.moonlit.desc": "The user gains Strength and Resistance during the night.",
+	"enchantment.amethyst_imbuement.rebinding.desc": "Repairs mana items in the players inventory over time.",
 	"enchantment.amethyst_imbuement.resilience.desc": "Adds one armor point per piece per level.",
 	"enchantment.amethyst_imbuement.slimy.desc": "Protects from fall damage and bounces the wearer like a slime block.",
 	"enchantment.amethyst_imbuement.soulbinding.desc": "Inventory is not lost upon death.",
@@ -1241,6 +1243,7 @@
 	"enchantment_lore.amethyst_imbuement:lightfooted.description": "Lightfooted\n\nMax Level: I\n\nNo longer sink in powdered snow or trample crops.",
 	"enchantment_lore.amethyst_imbuement:vein_miner.description": "Vein Miner\n\nMax Level: III\n\nMines multiple blocks in an area when a keybind is held.",
 
+	"enchantment_lore.amethyst_imbuement:rebinding.description": "Resilience\n\nMax Level: II\n\nRepairs mana items in the players inventory over time.",
 	"enchantment_lore.amethyst_imbuement:horde_master.description": "Horde Master\n\nMax Level: III\n\nBuffs summons and pets while the totem is active.",
 	"enchantment_lore.amethyst_imbuement:accursed.description": "Accursed\n\nMax Level: III\n\nAttackers have a chance of being cursed.",
 	"enchantment_lore.amethyst_imbuement:consecrated.description": "Consecrated\n\nMax Level: II\n\nBlesses the totem holder.",

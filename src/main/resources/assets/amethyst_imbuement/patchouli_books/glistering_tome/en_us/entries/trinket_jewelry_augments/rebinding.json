@@ -1,0 +1,31 @@
+{    
+"name": "Rebinding Augment",
+"icon": "amethyst_imbuement:book_of_mythos",    
+"category": "amethyst_imbuement:trinket_jewelry_augments",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "$(l)Effect:$() Repairs mana items in the players inventory over time.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Amulet$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
+},
+{
+"type": "amethyst_imbuement:imbuing_recipe",
+"title": "Healthy Imbuing",
+"anchor": "healthy",
+"imbue_a_item": "amethyst_imbuement:heartstone",
+"imbue_b_item": "amethyst_imbuement:imbued_lapis",
+"imbue_c_item": "amethyst_imbuement:imbued_lapis",
+"imbue_d_item": "amethyst_imbuement:imbued_lapis",
+"craft_a_item": "amethyst_imbuement:mana_potion",
+"craft_b_item": "amethyst_imbuement:mana_potion",
+"craft_c_item": "amethyst_imbuement:mana_potion",
+"craft_d_item": "amethyst_imbuement:mana_potion",
+"craft_e_item": "amethyst_imbuement:imbued_amulet",
+"craft_f_item": "amethyst_imbuement:mana_potion",
+"craft_g_item": "amethyst_imbuement:mana_potion",
+"craft_h_item": "amethyst_imbuement:mana_potion",
+"craft_i_item": "amethyst_imbuement:mana_potion",
+"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:rebinding\",lvl:1}]}",
+"cost_text": "$(l)Level Cost: $(2)13$()"
+}
+]
+}

@@ -10,7 +10,6 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.book.BookOfTalesItem
-import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import me.fzzyhmstrs.fzzy_core.raycaster_util.RaycasterUtil
 import net.minecraft.entity.Entity
@@ -82,7 +81,7 @@ class SoulfreezeAugment: MiscAugment(ScepterTier.THREE,13){
                 val mod = SpChecker.getModFromTags(user, RegisterTag.SOUL_AUGMENTS, RegisterTag.ICE_AUGMENTS)
                 val duration = effect.duration(level) * (1 + mod.toInt() / 100)
                 val amplifier = effect.amplifier(level) * (1 + mod.toInt() / 60)
-                RegisterStatus.stun(target,duration/4)
+                //RegisterStatus.stun(target,duration/4)
                 target.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER,effect.duration(level), amplifier))
                 target.frozenTicks = duration * 2
                 effect.accept(target, AugmentConsumer.Type.HARMFUL)
