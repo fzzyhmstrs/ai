@@ -97,6 +97,26 @@
     "sounds": [
       "amethyst_imbuement:fragment_crumbles"
     ]
+  },
+  "steel_steps": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "amethyst_imbuement:steel_01",
+      "amethyst_imbuement:steel_02",
+      "amethyst_imbuement:steel_03",
+      "amethyst_imbuement:steel_04",
+      "amethyst_imbuement:steel_05"
+    ]
+  },
+  "steel_falls": {
+    "subtitle": "subtitles.block.steel.falls",
+    "sounds": [
+      "amethyst_imbuement:steel_01",
+      "amethyst_imbuement:steel_02",
+      "amethyst_imbuement:steel_03",
+      "amethyst_imbuement:steel_04",
+      "amethyst_imbuement:steel_05"
+    ]
   }
 }
 

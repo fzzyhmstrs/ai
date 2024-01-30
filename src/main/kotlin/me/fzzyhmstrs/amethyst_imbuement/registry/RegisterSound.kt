@@ -37,6 +37,10 @@ object RegisterSound {
 
     val FRAGMENT_CRUMBLES = soundEvent(Identifier(AI.MOD_ID,"fragment_crumbles"))
 
+    val STEEL_STEPS = soundEvent(Identifier(AI.MOD_ID,"steel_steps"))
+
+    val STEEL_FALLS = soundEvent(Identifier(AI.MOD_ID,"steel_falls"))
+
     private fun soundEvent(identifier: Identifier): SoundEvent{
         return FzzyPort.SOUND_EVENT.register(identifier,SoundEvent.of(identifier))
     }

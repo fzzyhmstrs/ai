@@ -41,3 +41,66 @@ Book Closing Sound Event
 
 Mana Regen Potion Base Texture:
 "pl.png" by xalixilax of https://www.curseforge.com/minecraft/texture-packs/xalis-potions
+
+Steel Steps and Falls sound events
+"metal mesh stairs steps sound effect" by Garuda1982 of https://freesound.org/people/Garuda1982/ and https://www.youtube.com/channel/UC8P5eWUXgVaABjFfv9OI5hA
+
+Many item, block, and entity assets
+BackupCup of "https://www.curseforge.com/members/backupcup/projects" and "https://github.com/EndLone"
+assets/amethyst_imbuement/textures/entity/chorse/armor:
+- chorse_armor_steel.png
+assets/amethyst_imbuement/textures/entity/hamster/armor:
+- ai_steel.png
+assets/amethyst_imbuement/textures/item:
+- accursed_figurine.png
+- brilliant_diamond.png
+- copper_amulet.png
+- copper_headband.png
+- copper_ring.png
+- copper_ward.png
+- danburite.png
+- glowing_fragment.png
+- imbued_amulet.png
+- imbued_headband.png
+- imbued_lapis.png
+- imbued_quartz.png
+- imbued_ring.png
+- imbued_ward.png
+- knowledge_powder.png
+- malachite_figurine.png
+- moonstone.png
+- resonance.png
+- resonating_rod.png
+- steel_amulet.png
+- steel_axe.png
+- steel_boots.png
+- steel_chestplate.png
+- steel_headband.png
+- steel_helmet.png
+- steel_hoe.png
+- steel_horse_armor.png
+- steel_ingot.png
+- steel_leggings.png
+- steel_pickaxe.png
+- steel_ring.png
+- steel_shovel.png
+- steel_sword.png
+- steel_ward.png
+- talisman_of_lost_memories.png
+assets/minecraft/textures/entity/horse/armor:
+- horse_armor_steel.png
+assets/mythicmounts/textures/model/entity/armor:
+- acencia_armor_steel.png
+- archelon_armor_steel.png
+- bat_armor_steel.png
+- colelytra_armor_steel.png
+- courierbird_armor_steel.png
+- direwolf_armor_steel.png
+- dragon_armor_steel.png
+- firebird_armor_steel.png
+- griffon_armor_steel.png
+- groundlizard_armor_steel.png
+- moth_armor_steel.png
+- nightmare_armor_steel.png
+- nudibranch_armor_steel.png
+- ridinglizard_armor_steel.png

@@ -17,6 +17,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.sound.BlockSoundGroup
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.intprovider.UniformIntProvider
@@ -27,6 +28,8 @@ import java.util.*
 object RegisterBlock {
 
     internal val regBlockItem: ArrayList<Item> = ArrayList(65)
+
+    val steelSoundGroup = BlockSoundGroup(1.0f, 1.5f, SoundEvents.BLOCK_METAL_BREAK, RegisterSound.STEEL_STEPS, SoundEvents.BLOCK_METAL_PLACE, SoundEvents.BLOCK_METAL_HIT, RegisterSound.STEEL_FALLS)
 
     val IMBUING_TABLE = registerBoth(ImbuingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "imbuing_table")
     val DISENCHANTING_TABLE = registerBoth(DisenchantingTableBlock(FzzyBlockSettings.basic().mapColor(MapColor.YELLOW).requiresTool().strength(5.0f, 1200.0f).luminance(10)), "disenchanting_table")
@@ -42,7 +45,7 @@ object RegisterBlock {
         WARDING_CANDLE,
         FabricItemSettings()
     ), "warding_candle")
-    val STEEL_BLOCK = registerBlock(Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)), "steel_block")
+    val STEEL_BLOCK = registerBlock(Block(FzzyBlockSettings.basic().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(steelSoundGroup)), "steel_block")
     val STEEL_BLOCK_ITEM = registerItem(SpellcastersReagentBlockItem(
         EntityAttributes.GENERIC_ARMOR,
         EntityAttributeModifier(UUID.fromString("75c099f6-ce58-11ed-afa1-0242ac120002"),"steel_modifier",0.75,EntityAttributeModifier.Operation.ADDITION),

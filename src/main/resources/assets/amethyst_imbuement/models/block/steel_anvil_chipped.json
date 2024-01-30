@@ -1,6 +1,0 @@
-{
-  "parent": "amethyst_imbuement:block/template_steel_anvil",
-  "textures": {
-    "top": "amethyst_imbuement:block/steel_anvil_chipped_top"
-  }
-}

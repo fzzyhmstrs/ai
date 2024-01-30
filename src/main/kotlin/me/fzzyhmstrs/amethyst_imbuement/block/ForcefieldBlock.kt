@@ -99,6 +99,7 @@ class ForcefieldBlock(settings: Settings) : Block(settings) {
                 return VoxelShapes.empty()
             }
             if (entity is ProjectileEntity){
+                println(entity.owner)
                 if (entity.owner is PlayerEntity) {
                     return VoxelShapes.empty()
                 }

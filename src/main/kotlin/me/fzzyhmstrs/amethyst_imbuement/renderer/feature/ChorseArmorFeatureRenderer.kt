@@ -7,6 +7,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.ChorseEntityModel
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
@@ -23,7 +24,9 @@ class ChorseArmorFeatureRenderer(context: FeatureRendererContext<ChorseEntity, C
 FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
 {
 
-    private val ENTITY_TEXTURE_PREFIX_LENGTH = "textures/entity/horse/".length
+    private val ENTITY_TEXTURE_PREFIX_LENGTH = "textures/entity/horse/armor/horse_armor_".length
+
+    private val FALLBACK_TEXTURE = AI.identity("textures/entity/chorse/armor/chorse_armor_fallback.png")
 
     private val ENTITY_TEXTURE_CACHE: MutableMap<HorseArmorItem,Identifier> = mutableMapOf()
 
@@ -60,7 +63,11 @@ FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
             o = 1.0f
             p = 1.0f
         }
-        val id = ENTITY_TEXTURE_CACHE.computeIfAbsent(horseArmorItem) { AI.identity("textures/entity/chorse/" + it.entityTexture.path.substring(ENTITY_TEXTURE_PREFIX_LENGTH)) }
+        val id = ENTITY_TEXTURE_CACHE.computeIfAbsent(horseArmorItem) {
+            (AI.identity("textures/entity/chorse/armor/chorse_armor_" + it.entityTexture.path.substring(ENTITY_TEXTURE_PREFIX_LENGTH)))
+                .takeIf { it1 -> MinecraftClient.getInstance().resourceManager.getResource(it1).isPresent } ?: FALLBACK_TEXTURE
+        }
+
 
         val vertexConsumer =
             vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(id))

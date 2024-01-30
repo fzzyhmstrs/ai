@@ -9,9 +9,7 @@ import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
-import net.minecraft.loot.condition.KilledByPlayerLootCondition
-import net.minecraft.loot.condition.RandomChanceLootCondition
-import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition
+import net.minecraft.loot.condition.*
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.ApplyBonusLootFunction
 import net.minecraft.loot.function.EnchantWithLevelsLootFunction
@@ -19,6 +17,9 @@ import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.function.SetDamageLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
+import net.minecraft.predicate.NumberRange
+import net.minecraft.predicate.item.EnchantmentPredicate
+import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.util.Identifier
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -30,6 +31,14 @@ object VanillaLoot: AbstractModLoot() {
             val poolBuilder = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1.0F))
                 .conditionally(RandomChanceLootCondition.builder(0.0333333f))
+                .conditionally(
+                    InvertedLootCondition.builder(
+                        MatchToolLootCondition.builder(
+                            ItemPredicate.Builder.create()
+                                .enchantment(EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1)))
+                        )
+                    )
+                )
                 .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))
                 .with(ItemEntry.builder(Items.AMETHYST_SHARD).weight(2))
                 .with(ItemEntry.builder(RegisterItem.CITRINE).weight(1))
