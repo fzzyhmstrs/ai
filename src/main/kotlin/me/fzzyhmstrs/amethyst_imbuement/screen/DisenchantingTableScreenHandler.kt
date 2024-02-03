@@ -97,22 +97,20 @@ class DisenchantingTableScreenHandler(
                 disenchantCost[0] = -1
             }else {
                 context.run { world: World, pos: BlockPos ->
-                    val enchantList = getEnchantments(itemStack)
                     //first addition of the item to the table, initialize with a default selection
                     if (enchantmentId[1] == -1 || !checkForEnchantMatch(itemStack)){
+                        val enchantList = getEnchantments(itemStack)
                         enchantmentId[0] = -1
                         enchantmentLevel[0] = -1
-                        val identifier = EnchantmentHelper.getIdFromNbt(enchantList[0] as NbtCompound)
-                        val defaultEnchant = FzzyPort.ENCHANTMENT.get(identifier)
+                        val defaultEnchant = enchantList[0].key
                         val defaultEnchantId = FzzyPort.ENCHANTMENT.getRawId(defaultEnchant)
-                        val defaultEnchantLevel = EnchantmentHelper.getLevel(defaultEnchant,itemStack)
+                        val defaultEnchantLevel = enchantList[0].value
                         enchantmentId[1] = defaultEnchantId
                         enchantmentLevel[1] = defaultEnchantLevel
                         if (enchantList.size > 1){
-                            val identifier2 = EnchantmentHelper.getIdFromNbt(enchantList[1] as NbtCompound)
-                            val defaultEnchant2 = FzzyPort.ENCHANTMENT.get(identifier2)
+                            val defaultEnchant2 = enchantList[1].key
                             val defaultEnchantId2 = FzzyPort.ENCHANTMENT.getRawId(defaultEnchant2)
-                            val defaultEnchantLevel2 = EnchantmentHelper.getLevel(defaultEnchant2,itemStack)
+                            val defaultEnchantLevel2 = enchantList[1].value
                             enchantmentId[2] = defaultEnchantId2
                             enchantmentLevel[2] = defaultEnchantLevel2
                         }
@@ -135,11 +133,12 @@ class DisenchantingTableScreenHandler(
         }
     }
 
-    private fun getEnchantments(stack: ItemStack): NbtList {
-        val nbt = stack.nbt
-        return if (nbt != null) {
+    private fun getEnchantments(stack: ItemStack): List<Map.Entry<Enchantment, Int>> {
+        val nbt = stack.nbt ?: return listOf()
+        val list = if (nbt != null) {
             nbt.getList(ItemStack.ENCHANTMENTS_KEY, 10)
         } else NbtList()
+        return EnchantmentHelper.fromNbt(list).filterKeys { !FzzyPort.ENCHANTMENT.isInTag(it,RegisterTag.DISENCHANTING_BLACKLIST) }.map { it }
     }
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {
@@ -160,7 +159,6 @@ class DisenchantingTableScreenHandler(
             0 -> {
                 if (enchantmentId[id] == -1) return false
                 context.run { world: World, pos: BlockPos ->
-                    val enchantList = itemStack.enchantments
                     enchantmentId[2] = enchantmentId[1]
                     enchantmentLevel[2] = enchantmentLevel[1]
                     enchantmentId[1] = enchantmentId[0]
@@ -170,10 +168,10 @@ class DisenchantingTableScreenHandler(
                         enchantmentId[0] = -1
                         enchantmentLevel[0] = -1
                     } else {
-                        val identifier = EnchantmentHelper.getIdFromNbt(enchantList[refIndex-1] as NbtCompound)
-                        val enchant = FzzyPort.ENCHANTMENT.get(identifier)
+                        val enchantList = getEnchantments(itemStack)
+                        val enchant = enchantList[refIndex-1].key
                         val enchantId = FzzyPort.ENCHANTMENT.getRawId(enchant)
-                        val enchantLevel = EnchantmentHelper.getLevel(enchant,itemStack)
+                        val enchantLevel = enchantList[refIndex-1].value
                         enchantmentId[0] = enchantId
                         enchantmentLevel[0] = enchantLevel
                     }

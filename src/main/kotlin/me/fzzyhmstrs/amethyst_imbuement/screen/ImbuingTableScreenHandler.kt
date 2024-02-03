@@ -24,9 +24,9 @@ import me.shedaniel.rei.api.common.transfer.RecipeFinder
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.advancement.criterion.Criteria
+import net.minecraft.block.EnchantingTableBlock
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases
 import net.minecraft.enchantment.Enchantment
@@ -482,37 +482,9 @@ class ImbuingTableScreenHandler(
     }
     private fun checkBookshelves(world: World, pos: BlockPos): Int{
         var i = 0
-        var j: Int = -1
-        while (j <= 1) {
-            for (k in -1..1) {
-                if (j == 0 && k == 0 || !world.isAir(pos.add(k, 0, j)) || !world.isAir(
-                        pos.add(
-                            k,
-                            1,
-                            j
-                        )
-                    )
-                ) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
-                    ++i
-                }
-                if (world.getBlockState(pos.add(k * 2, 1, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
-                    ++i
-                }
-                if (k == 0 || j == 0) continue
-                if (world.getBlockState(pos.add(k * 2, 0, j)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
-                    ++i
-                }
-                if (world.getBlockState(pos.add(k * 2, 1, j)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
-                    ++i
-                }
-                if (world.getBlockState(pos.add(k, 0, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) {
-                    ++i
-                }
-                if (!world.getBlockState(pos.add(k, 1, j * 2)).isIn(ConventionalBlockTags.BOOKSHELVES)) continue
-                ++i
-            }
-            ++j
+        for (blockPos in EnchantingTableBlock.POWER_PROVIDER_OFFSETS) {
+            if (!EnchantingTableBlock.canAccessPowerProvider(world, pos, blockPos)) continue
+            ++i
         }
         return i
     }

@@ -4,7 +4,7 @@ package me.fzzyhmstrs.amethyst_imbuement
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HamsterVariant
+import me.fzzyhmstrs.amethyst_imbuement.entity.living.HamsterVariant
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterArmorFeatureRenderer
 import me.fzzyhmstrs.amethyst_imbuement.util.LoggerUtil

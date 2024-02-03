@@ -9,6 +9,8 @@ object RegisterTag {
 
     val POULTRYMORPH_IGNORES = FzzyPort.ENTITY_TYPE.tagOf(AI.identity("poultrymorph_ignores"))
 
+    val DISENCHANTING_BLACKLIST = FzzyPort.ENCHANTMENT.tagOf(AI.identity("disenchanting_blacklist"))
+
     val GEMS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","gems"))
     val SKULLS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","skulls"))
     val STEEL_BOOTS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","steel_boots"))
@@ -30,6 +32,7 @@ object RegisterTag {
     val DRACONIC_VISION_BLACKLIST = FzzyPort.BLOCK.tagOf(AI.identity("draconic_vision_blacklist"))
     val EXCAVATE_BLACKLIST = FzzyPort.BLOCK.tagOf(AI.identity("excavate_blacklist"))
     val UNLOCKABLES_TAG = FzzyPort.BLOCK.tagOf(AI.identity("unlockables"))
+    val WARDING_CANDLES_TAG = FzzyPort.BLOCK.tagOf(AI.identity("warding_candles"))
 
     val EQUINOX_SCEPTERS_TAG = FzzyPort.ITEM.tagOf(AI.identity("equinox_scepters"))
     val LETHALITY_SCEPTERS_TAG = FzzyPort.ITEM.tagOf(AI.identity("lethality_scepters"))

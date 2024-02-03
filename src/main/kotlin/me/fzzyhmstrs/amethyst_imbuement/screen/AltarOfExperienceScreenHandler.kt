@@ -5,6 +5,7 @@ import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterBlock
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterCriteria
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterHandler
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -104,7 +105,7 @@ class AltarOfExperienceScreenHandler(
         var candles = 0
         var wardingCandles = 0
         for (offset in blocks){
-            if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isOf(RegisterBlock.WARDING_CANDLE)) {
+            if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isIn(RegisterTag.WARDING_CANDLES_TAG)) {
                 wardingCandles++
             } else if (world.getBlockState(pos.add(offset.first, 0, offset.second)).isIn(BlockTags.CANDLES)) {
                 candles++

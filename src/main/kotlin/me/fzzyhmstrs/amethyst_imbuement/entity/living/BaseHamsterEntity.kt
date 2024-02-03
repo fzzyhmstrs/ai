@@ -4,7 +4,6 @@ import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
-import me.fzzyhmstrs.amethyst_imbuement.entity.hamster.HamsterVariant
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
@@ -36,7 +35,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
         private const val baseMoveSpeed = 0.25
         private  val baseAttackDamage = AiConfig.entities.hamster.baseSummonDamage.get()
-        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java,HamsterVariant.TRACKED_HAMSTER)
+        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java, HamsterVariant.TRACKED_HAMSTER)
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
@@ -66,10 +65,10 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(HAMSTER_VARIANT,HamsterVariant.DWARF)
+        dataTracker.startTracking(HAMSTER_VARIANT, HamsterVariant.DWARF)
     }
 
-    fun getVariant(): HamsterVariant{
+    fun getVariant(): HamsterVariant {
         return dataTracker.get(HAMSTER_VARIANT)
     }
 

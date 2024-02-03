@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.entity.hamster
+package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder

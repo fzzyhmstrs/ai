@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "$(l)Effect:$() Summons and pets pick up items and xp for you, auto-depositing in your inventory.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments."
+"text": "$(l)Effect:$() Summons and pets pick up items and xp for you, auto-depositing in your inventory. They won't actively seek out items, simply mop up items they happen to be nearby, much like a magnet.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments."
 },
 {
 "type": "amethyst_imbuement:imbuing_recipe",
@@ -19,7 +19,7 @@
 "craft_b_item": "minecraft:experience_bottle",
 "craft_c_item": "minecraft:iron_ingot",
 "craft_d_item": "minecraft:lead",
-"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
+"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet",
 "craft_f_item": "minecraft:lead",
 "craft_g_item": "minecraft:iron_ingot",
 "craft_h_item": "minecraft:experience_bottle",
