@@ -3,9 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
+import me.fzzyhmstrs.amethyst_imbuement.entity.Variants
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
-import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -23,7 +23,6 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 
-@Suppress("PrivatePropertyName")
 open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     constructor(entityType: EntityType<BaseHamsterEntity>, world: World): super(entityType, world)
@@ -35,7 +34,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
         private const val baseMoveSpeed = 0.25
         private  val baseAttackDamage = AiConfig.entities.hamster.baseSummonDamage.get()
-        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java, HamsterVariant.TRACKED_HAMSTER)
+        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java, Variants.HAMSTER.trackedDataHandler())
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
@@ -43,8 +42,6 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, baseAttackDamage.toDouble())
         }
     }
-
-    private var jamsterName: Text? = null
 
     override fun initGoals() {
         super.initGoals()
@@ -58,21 +55,21 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        val hamster = HamsterVariant.randomVariant(world.random) ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        val hamster = Variants.HAMSTER.randomVariant() ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
         setVariant(hamster)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(HAMSTER_VARIANT, HamsterVariant.DWARF)
+        dataTracker.startTracking(HAMSTER_VARIANT, Variants.DWARF)
     }
 
-    fun getVariant(): HamsterVariant {
+    fun getVariant(): Variants.HamsterVariant {
         return dataTracker.get(HAMSTER_VARIANT)
     }
 
-    fun setVariant(variant: HamsterVariant){
+    fun setVariant(variant: Variants.HamsterVariant){
         dataTracker.set(HAMSTER_VARIANT,variant)
     }
 
@@ -122,26 +119,23 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
     }
 
     override fun getName(): Text {
-        if (getVariant() == HamsterVariant.JAMSTER){
-            if (jamsterName == null){
-                jamsterName = AcText.translatable(this.type.translationKey + ".jeans")
-            }
-            return jamsterName as Text
-        }
-        return super.getName()
+        return getVariant().getName(this.type)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        val id = HamsterVariant.HAMSTERS.getId(getVariant())
-        nbt.putString("hamster_variant",id.toString())
+        Variants.HAMSTER.writeNbt(nbt, getVariant())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        val id = Identifier.tryParse(nbt.getString("hamster_variant"))
-        val variant = HamsterVariant.HAMSTERS.get(id)
-        setVariant(variant)
+        if (nbt.contains("hamster_variant")) {
+            val id = Identifier.tryParse(nbt.getString("hamster_variant"))
+            val variant = Variants.HAMSTER.get(id)
+            setVariant(variant)
+        } else {
+            setVariant(Variants.HAMSTER.readNbt(nbt))
+        }
     }
 
 }

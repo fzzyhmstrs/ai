@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "amethyst_imbuement:textures/entity/hamster/dwarf.png": "outlined_sprite:amethyst_imbuement/hamster/dwarf.png",
+    "amethyst_imbuement:textures/entity/hamster/black_bear.png": "outlined_sprite:amethyst_imbuement/hamster/black_bear.png",
+    "amethyst_imbuement:textures/entity/hamster/calico.png": "outlined_sprite:amethyst_imbuement/hamster/calico.png",
+    "amethyst_imbuement:textures/entity/hamster/jeans.png": "outlined_sprite:amethyst_imbuement/hamster/jeans.png",
+    "amethyst_imbuement:textures/entity/hamster/mink.png": "outlined_sprite:amethyst_imbuement/hamster/mink.png",
+    "amethyst_imbuement:textures/entity/hamster/siberian.png": "outlined_sprite:amethyst_imbuement/hamster/siberian.png",
+    "amethyst_imbuement:textures/entity/hamster/syrian.png": "outlined_sprite:amethyst_imbuement/hamster/syrian.png"
+  }
+}

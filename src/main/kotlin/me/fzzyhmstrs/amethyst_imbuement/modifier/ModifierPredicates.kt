@@ -41,7 +41,7 @@ object ModifierPredicates {
 
     private fun isInTag(id: Identifier,tag: TagKey<Enchantment>): Boolean{
         val augment = FzzyPort.ENCHANTMENT.get(id)?:return false
-        return FzzyPort.ENCHANTMENT.registry().getEntry(augment).isIn(tag)
+        return FzzyPort.ENCHANTMENT.getEntry(augment).isIn(tag)
     }
 
 }

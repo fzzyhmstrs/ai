@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
+import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.BlockSoundGroup
@@ -38,7 +39,7 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.*
 
-@Suppress("PrivatePropertyName", "LeakingThis")
+@Suppress("LeakingThis")
 open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World): AbstractHorseEntity(entityType,world),
     PlayerCreatable, ModifiableEffectEntity, Scalable {
 
@@ -60,6 +61,14 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
 
     companion object{
         protected val HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295")
+        protected val BREEDING_INGREDIENT = Ingredient.ofItems(
+            Items.WHEAT_SEEDS,
+            Items.MELON_SEEDS,
+            Items.PUMPKIN_SEEDS,
+            Items.BEETROOT_SEEDS,
+            Items.TORCHFLOWER_SEEDS,
+            Items.PITCHER_POD
+        )
         internal val SCALE = DataTracker.registerData(ChorseEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
         fun createChorseBaseAttributes(): DefaultAttributeContainer.Builder{
             return createMobAttributes()
@@ -162,6 +171,10 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
 
     open fun setGroup(entityGroup: EntityGroup){
         this.entityGroup = entityGroup
+    }
+
+    override fun isBreedingItem(stack: ItemStack?): Boolean {
+        return BREEDING_INGREDIENT.test(stack)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
