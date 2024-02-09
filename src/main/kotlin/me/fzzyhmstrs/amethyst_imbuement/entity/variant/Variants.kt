@@ -29,6 +29,7 @@ object Variants{
         val WHITE = CHOLEM.registerVariant(AI.identity("white_cholem"),AI.identity("textures/entity/cholem/cholem.png"))
         val JOLEM = CHOLEM.registerVariant(AI.identity("jeans_cholem"),AI.identity("textures/entity/cholem/jeans_cholem.png"))
         val CHUNK = CHOLEM.registerVariant(AI.identity("punk_cholem"),AI.identity("textures/entity/cholem/punk_cholem.png"))
+        
         fun init(){}
     }
 
