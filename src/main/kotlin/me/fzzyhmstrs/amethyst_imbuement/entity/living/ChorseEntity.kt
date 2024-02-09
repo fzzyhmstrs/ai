@@ -7,7 +7,12 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants.Type.CHORSE
+import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
+import me.fzzyhmstrs.fzzy_core.registry.variant.Variant
+import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -26,17 +31,20 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.EntityView
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
 import java.util.*
 
 @Suppress("LeakingThis")
@@ -70,6 +78,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
             Items.PITCHER_POD
         )
         internal val SCALE = DataTracker.registerData(ChorseEntity::class.java,TrackedDataHandlerRegistry.FLOAT)
+        internal val CHORSE_VARIANT = DataTracker.registerData(ChorseEntity::class.java, CHORSE.trackedDataHandler())
         fun createChorseBaseAttributes(): DefaultAttributeContainer.Builder{
             return createMobAttributes()
                 .add(EntityAttributes.HORSE_JUMP_STRENGTH, AiConfig.entities.chorse.baseJumpStrength.get())
@@ -148,6 +157,23 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(SCALE,1f)
+        dataTracker.startTracking(CHORSE_VARIANT, Variants.Chorse.MINECRAFT_CHICKEN)
+    }
+
+    fun getVariant(): Variant {
+        return dataTracker.get(CHORSE_VARIANT)
+    }
+
+    fun setVariant(variant: Variant){
+        dataTracker.set(CHORSE_VARIANT,variant)
+    }
+
+    override fun getName(): Text {
+        return if(isBaby) babyName() else super.getName()
+    }
+
+    private fun babyName(): Text{
+        return AcText.translatable(this.type.translationKey + ".baby")
     }
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
@@ -173,8 +199,70 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         this.entityGroup = entityGroup
     }
 
+    override fun isTame(): Boolean {
+        return true
+    }
+
     override fun isBreedingItem(stack: ItemStack?): Boolean {
         return BREEDING_INGREDIENT.test(stack)
+    }
+
+    //fix this pls
+    override fun receiveFood(player: PlayerEntity?, item: ItemStack): Boolean {
+        var bl = false
+        var f = 0.0f
+        var i = 0
+        var j = 0
+        if (item.isOf(Items.WHEAT)) {
+            f = 2.0f
+            i = 20
+            j = 3
+        } else if (item.isOf(Items.SUGAR)) {
+            f = 1.0f
+            i = 30
+            j = 3
+        } else if (item.isOf(Blocks.HAY_BLOCK.asItem())) {
+            f = 20.0f
+            i = 180
+        } else if (item.isOf(Items.APPLE)) {
+            f = 3.0f
+            i = 60
+            j = 3
+        } else if (item.isOf(Items.GOLDEN_CARROT)) {
+            f = 4.0f
+            i = 60
+            j = 5
+            if (!world.isClient && this.isTame && getBreedingAge() == 0 && !this.isInLove) {
+                bl = true
+                lovePlayer(player)
+            }
+        } else if (item.isOf(Items.GOLDEN_APPLE) || item.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
+            f = 10.0f
+            i = 240
+            j = 10
+            if (!world.isClient && this.isTame && getBreedingAge() == 0 && !this.isInLove) {
+                bl = true
+                lovePlayer(player)
+            }
+        }
+        if (this.health < this.maxHealth && f > 0.0f) {
+            heal(f)
+            bl = true
+        }
+        if (this.isBaby && i > 0) {
+            world.addParticle(
+                ParticleTypes.HAPPY_VILLAGER,
+                getParticleX(1.0), this.randomBodyY + 0.5, getParticleZ(1.0), 0.0, 0.0, 0.0
+            )
+            if (!world.isClient) {
+                this.growUp(i)
+            }
+            bl = true
+        }
+        if (bl) {
+            this.emitGameEvent(GameEvent.EAT)
+        }
+        return bl
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -184,6 +272,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         if (!items.getStack(1).isEmpty) {
             nbt.put("ArmorItem", items.getStack(1).writeNbt(NbtCompound()))
         }
+        CHORSE.writeNbt(nbt,getVariant())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -195,6 +284,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
             if (isHorseArmor(itemStack))
                 items.setStack(1, itemStack)
         }
+        setVariant(CHORSE.readNbt(nbt))
     }
 
     override fun canBreedWith(other: AnimalEntity): Boolean {
@@ -287,6 +377,8 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         this.items.setStack(0, ItemStack(Items.SADDLE))
         this.updateSaddle()
         this.isTame = true
+        val chorse = CHORSE.randomVariant() ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        setVariant(chorse)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -349,6 +441,10 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     //need to also do the bounding boxxxxxxx
     override fun setScale(scale: Float) {
         dataTracker.set(SCALE,MathHelper.clamp(scale,0.0f,20.0f))
+    }
+
+    override fun getScaleFactor(): Float {
+        return if (this.isBaby) 0.25f else 1.0f
     }
 
 }

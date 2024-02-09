@@ -1,6 +1,5 @@
 package me.fzzyhmstrs.amethyst_imbuement.renderer
 
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.entity.living.ChorseEntity
 import me.fzzyhmstrs.amethyst_imbuement.model.ChorseEntityModel
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterRenderer
@@ -14,14 +13,14 @@ import net.minecraft.util.math.MathHelper
 
 @Environment(value = EnvType.CLIENT)
 class ChorseEntityRenderer(context: EntityRendererFactory.Context): MobEntityRenderer<ChorseEntity, ChorseEntityModel>(context,ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY)),0.75f) {
-    private val TEXTURE = AI.identity("textures/entity/chorse/chorse.png")
+    //private val TEXTURE = AI.identity("textures/entity/chorse/chorse.png")
 
     init{
         this.addFeature(ChorseArmorFeatureRenderer(this, ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY_ARMOR))))
     }
 
     override fun getTexture(entity: ChorseEntity): Identifier {
-        return TEXTURE
+        return entity.getVariant().texture
     }
 
     override fun getAnimationProgress(chorseEntity: ChorseEntity, f: Float): Float {

@@ -3,8 +3,9 @@ package me.fzzyhmstrs.amethyst_imbuement.entity.living
 import me.fzzyhmstrs.amethyst_core.interfaces.SpellCastingEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.entity.Variants
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.NamedVariant
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterSound
 import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -34,7 +35,7 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         private  val baseMaxHealth = AiConfig.entities.hamster.baseHealth.get()
         private const val baseMoveSpeed = 0.25
         private  val baseAttackDamage = AiConfig.entities.hamster.baseSummonDamage.get()
-        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java, Variants.HAMSTER.trackedDataHandler())
+        internal val HAMSTER_VARIANT = DataTracker.registerData(BaseHamsterEntity::class.java, Variants.Type.HAMSTER.trackedDataHandler())
 
         fun createBaseHamsterAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, baseMaxHealth)
@@ -55,21 +56,21 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        val hamster = Variants.HAMSTER.randomVariant() ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        val hamster = Variants.Type.HAMSTER.randomVariant() ?: return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
         setVariant(hamster)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(HAMSTER_VARIANT, Variants.DWARF)
+        dataTracker.startTracking(HAMSTER_VARIANT, Variants.Hamster.DWARF)
     }
 
-    fun getVariant(): Variants.HamsterVariant {
+    fun getVariant(): NamedVariant {
         return dataTracker.get(HAMSTER_VARIANT)
     }
 
-    fun setVariant(variant: Variants.HamsterVariant){
+    fun setVariant(variant: NamedVariant){
         dataTracker.set(HAMSTER_VARIANT,variant)
     }
 
@@ -124,17 +125,17 @@ open class BaseHamsterEntity: PlayerCreatedConstructEntity, SpellCastingEntity {
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        Variants.HAMSTER.writeNbt(nbt, getVariant())
+        Variants.Type.HAMSTER.writeNbt(nbt, getVariant())
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         if (nbt.contains("hamster_variant")) {
             val id = Identifier.tryParse(nbt.getString("hamster_variant"))
-            val variant = Variants.HAMSTER.get(id)
+            val variant = Variants.Type.HAMSTER.get(id)
             setVariant(variant)
         } else {
-            setVariant(Variants.HAMSTER.readNbt(nbt))
+            setVariant(Variants.Type.HAMSTER.readNbt(nbt))
         }
     }
 

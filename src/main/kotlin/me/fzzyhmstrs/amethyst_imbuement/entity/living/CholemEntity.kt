@@ -4,6 +4,8 @@ import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.CholemNamedVariant
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants
 import me.fzzyhmstrs.amethyst_imbuement.mixins.PlayerHitTimerAccessor
 import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.block.BlockState
@@ -42,6 +44,7 @@ open class CholemEntity: PlayerCreatedConstructEntity {
     companion object {
 
         protected val ENRAGED: TrackedData<Boolean> = DataTracker.registerData(CholemEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        protected val CHOLEM_VARIANT = DataTracker.registerData(CholemEntity::class.java, Variants.Type.CHOLEM.trackedDataHandler())
         protected val DAMAGE_UUID = UUID.fromString("71c5ccf4-2d8a-11ee-be56-0242ac120002")
         protected val SPEED_UUID = UUID.fromString("78ee5708-2d8a-11ee-be56-0242ac120002")
         fun createCholemAttributes(): DefaultAttributeContainer.Builder {
@@ -72,16 +75,27 @@ open class CholemEntity: PlayerCreatedConstructEntity {
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(ENRAGED,false)
+        dataTracker.startTracking(CHOLEM_VARIANT,Variants.Cholem.WHITE)
+    }
+
+    fun getVariant(): CholemNamedVariant {
+        return dataTracker.get(CHOLEM_VARIANT)
+    }
+
+    fun setVariant(variant: CholemNamedVariant){
+        dataTracker.set(CHOLEM_VARIANT,variant)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         setEnraged(nbt.getBoolean("enraged"), true)
+        Variants.Type.CHOLEM.writeNbt(nbt,getVariant())
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putBoolean("enraged", getEnraged())
+        setVariant(Variants.Type.CHOLEM.readNbt(nbt))
     }
 
 

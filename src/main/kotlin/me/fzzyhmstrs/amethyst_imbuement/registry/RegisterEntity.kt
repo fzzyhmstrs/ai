@@ -11,6 +11,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.monster.SardonyxFragmentEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.spell.*
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfFuryEntity
 import me.fzzyhmstrs.amethyst_imbuement.entity.totem.TotemOfGraceEntity
+import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants
 import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import me.fzzyhmstrs.fzzy_core.entity_util.EntityBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -233,6 +234,7 @@ object RegisterEntity: EntityBuilder() {
     val WITCHES_BOOKSHELF_BLOCK_ENTITY = buildBlockEntity({ p, s -> WitchesBookshelfBlockEntity(p, s) }, RegisterBlock.WITCHES_BOOKSHELF).register("witches_bookshelf_entity")
 
     fun registerAll(){
+        Variants.registerAll()
         FabricDefaultAttributeRegistry.register(DRACONIC_BOX_ENTITY, DraconicBoxEntity.createMobAttributes())
         FabricDefaultAttributeRegistry.register(BASIC_HAMSTER_ENTITY, BaseHamsterEntity.createBaseHamsterAttributes())
         FabricDefaultAttributeRegistry.register(BONESTORM_ENTITY, BonestormEntity.createBonestormAttributes())
