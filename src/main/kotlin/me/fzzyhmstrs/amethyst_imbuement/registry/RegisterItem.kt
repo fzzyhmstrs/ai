@@ -148,7 +148,7 @@ object RegisterItem {
         StatusEffectInstance(RegisterStatus.BLESSED, 300),1f).build())),"dazzling_melon_slice")
     val SARDONYX_FRAGMENT_SPAWN_EGG = register(SpawnEggItem(RegisterEntity.SARDONYX_FRAGMENT, 0x961900,0x806060, AiItemSettings()),"sardonyx_fragment_spawn_egg")
     val STRANGE_EGG = register(SpawnEggItem(RegisterEntity.CHORSE_ENTITY, 0xE1C800 ,0xF0F0F0, AiItemSettings()),"strange_egg")
-
+    val CHORSE_CHIT = register(BoneMealItem(AiItemSettings()),"chorse_chit")
 
     ///////////////////////////
 

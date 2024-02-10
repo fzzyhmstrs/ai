@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.entity.living
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
-import me.fzzyhmstrs.amethyst_imbuement.AI
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.ConstructLookGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.variant.CholemNamedVariant
@@ -195,9 +194,9 @@ open class CholemEntity: PlayerCreatedConstructEntity {
 
     fun texture(): Identifier {
         return if(getEnraged()){
-            AI.identity("textures/entity/crystal_golem/cholem_enraged.png")
+            getVariant().getEnragedTexture()
         } else {
-            AI.identity("textures/entity/crystal_golem/cholem.png")
+            getVariant().texture
         }
     }
 }

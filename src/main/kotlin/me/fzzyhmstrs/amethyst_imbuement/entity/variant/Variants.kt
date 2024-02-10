@@ -38,6 +38,7 @@ object Variants{
         val DAPPER = CHORSE.registerVariant(AI.identity("dapper_chorse"),AI.identity("textures/entity/chorse/dapper_chorse.png"))
         val JORSE = CHORSE.registerVariant(AI.identity("jeans_chorse"),AI.identity("textures/entity/chorse/jeans_chorse.png"))
         val CHERRY = CHORSE.registerVariant(AI.identity("cherry_chorse"),AI.identity("textures/entity/chorse/cherry_chorse.png"))
+        val MARAN = CHORSE.registerVariant(AI.identity("maran_chorse"),AI.identity("textures/entity/chorse/maran_chorse.png"))
 
         fun init(){}
     }

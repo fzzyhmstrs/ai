@@ -9,6 +9,7 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.goal.CallForConstructHelpGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.goal.FollowSummonerGoal
 import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants
 import me.fzzyhmstrs.amethyst_imbuement.entity.variant.Variants.Type.CHORSE
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterItem
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import me.fzzyhmstrs.fzzy_core.registry.variant.Variant
@@ -104,6 +105,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
     var prevMaxWingDeviation = 0f
     var prevFlapProgress = 0f
     private var flapSpeed = 1.0f
+    var eggLayTime = random.nextInt(6000) + 6000
 
     override fun tickMovement() {
         super.tickMovement()
@@ -124,6 +126,12 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
             }
         }
         flapProgress += flapSpeed * 2.0f
+        if (!world.isClient && this.isAlive && !this.isBaby && --eggLayTime <= 0) {
+            playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f)
+            this.dropItem(RegisterItem.CHORSE_CHIT)
+            this.emitGameEvent(GameEvent.ENTITY_PLACE)
+            eggLayTime = random.nextInt(6000) + 6000
+        }
     }
 
     override fun handleFallDamage(fallDistance: Float, damageMultiplier: Float, damageSource: DamageSource?): Boolean {
