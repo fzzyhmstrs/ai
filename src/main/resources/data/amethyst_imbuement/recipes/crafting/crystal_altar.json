@@ -1,5 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
+	"category": "misc",
 	"pattern": [
 		"QQQ",
 		"WGW",
@@ -18,6 +19,7 @@
 	},
 	"result": {
 		"item": "amethyst_imbuement:crystal_altar"
-	}
+	},
+	"show_notification": true
 }
 

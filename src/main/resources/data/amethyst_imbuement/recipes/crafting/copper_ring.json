@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	" H ",
 	"G G",
@@ -15,6 +16,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:copper_ring"
-  }
+  },
+	"show_notification": true
 }
 

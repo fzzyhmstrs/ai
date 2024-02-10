@@ -6,6 +6,7 @@
 		}
 	],
 	"type": "minecraft:crafting_shaped",
+	"category": "building",
 	"pattern": [
 		"DDD",
 		"ABC",
@@ -27,5 +28,6 @@
 	},
 	"result": {
 		"item": "amethyst_imbuement:witches_bookshelf"
-	}
+	},
+	"show_notification": true
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "###"
   ],
@@ -13,5 +14,6 @@
   "result": {
     "item": "amethyst_imbuement:cut_beryl_copper_slab",
     "count": 6
-  }
+  },
+  "show_notification": true
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	" H ",
 	"GGG",
@@ -15,6 +16,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:copper_ward"
-  }
+  },
+	"show_notification": true
 }
 

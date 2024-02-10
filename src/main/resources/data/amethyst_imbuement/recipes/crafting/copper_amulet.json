@@ -1,11 +1,6 @@
 {
-	"fabric:load_conditions": [
-		{
-			"condition": "amethyst_imbuement:enabled",
-			"id": "crafting/copper_amulet"
-		}
-	],
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	"GGG",
 	"G G",
@@ -21,6 +16,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:copper_amulet"
-  }
+  },
+	"show_notification": true
 }
 

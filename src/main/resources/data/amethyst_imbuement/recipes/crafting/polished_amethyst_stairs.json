@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "#  ",
     "## ",
@@ -21,5 +22,6 @@
   "result": {
     "item": "amethyst_imbuement:polished_amethyst_stairs",
     "count": 4
-  }
+  },
+  "show_notification": true
 }

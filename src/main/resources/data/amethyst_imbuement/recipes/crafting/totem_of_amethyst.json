@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	"AGA",
 	"GHG",
@@ -18,6 +19,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:totem_of_amethyst"
-  }
+  },
+	"show_notification": true
 }
 

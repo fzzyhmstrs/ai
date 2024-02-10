@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	"GHG",
 	"G G"
@@ -14,6 +15,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:copper_headband"
-  }
+  },
+	"show_notification": true
 }
 

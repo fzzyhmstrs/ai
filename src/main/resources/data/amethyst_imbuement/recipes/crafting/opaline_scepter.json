@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
 	" GO",
 	" BG",
@@ -18,6 +19,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:opaline_scepter"
-  }
+  },
+	"show_notification": true
 }
 

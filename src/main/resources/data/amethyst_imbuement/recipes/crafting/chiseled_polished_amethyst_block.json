@@ -1,11 +1,6 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "amethyst_imbuement:enabled",
-      "id": "crafting/chiseled_polished_amethyst_block"
-    }
-  ],
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "#",
     "#"

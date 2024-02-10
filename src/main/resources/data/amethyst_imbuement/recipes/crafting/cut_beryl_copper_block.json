@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "CC",
     "CC"
@@ -12,5 +13,6 @@
   "result": {
     "item": "amethyst_imbuement:cut_beryl_copper_block",
     "count": 4
-  }
+  },
+  "show_notification": true
 }

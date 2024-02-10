@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
 	"ABA",
 	"OEO",
@@ -24,6 +25,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:imbuing_table"
-  }
+  },
+	"show_notification": true
 }
 

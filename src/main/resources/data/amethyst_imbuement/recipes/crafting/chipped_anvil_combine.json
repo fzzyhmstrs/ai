@@ -1,11 +1,6 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "amethyst_imbuement:enabled",
-      "id": "crafting/chipped_anvil_combine"
-    }
-  ],
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
       "item": "minecraft:chipped_anvil"
@@ -16,5 +11,6 @@
   ],
   "result": {
     "item": "minecraft:anvil"
-  }
+  },
+  "show_notification": true
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
     "SS",
     " K",
@@ -16,5 +17,6 @@
   "result": {
     "item": "amethyst_imbuement:steel_hoe",
     "count": 1
-  }
+  },
+  "show_notification": true
 }

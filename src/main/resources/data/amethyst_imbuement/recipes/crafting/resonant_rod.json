@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
 	"S S",
 	"CGC",
@@ -18,5 +19,6 @@
   },
   "result": {
 	"item": "amethyst_imbuement:resonant_rod"
-  }
+  },
+	"show_notification": true
 }

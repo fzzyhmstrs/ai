@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
 	"GGG",
 	"GHG",
@@ -15,6 +16,7 @@
   },
   "result": {
 	"item": "amethyst_imbuement:golden_heart"
-  }
+  },
+	"show_notification": true
 }
 

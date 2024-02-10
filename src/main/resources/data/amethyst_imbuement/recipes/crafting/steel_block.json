@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "SSS",
     "SSS",
@@ -13,5 +14,6 @@
   "result": {
     "item": "amethyst_imbuement:steel_block",
     "count": 1
-  }
+  },
+  "show_notification": true
 }

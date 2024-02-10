@@ -1,5 +1,12 @@
 {
+	"fabric:load_conditions": [
+		{
+			"condition": "amethyst_imbuement:enabled",
+			"id": "crafting/sardonyx_crystal"
+		}
+	],
 	"type": "minecraft:crafting_shaped",
+	"category": "misc",
 	"pattern": [
 		"SSS",
 		"ANA",
@@ -18,5 +25,6 @@
 	},
 	"result": {
 		"item": "amethyst_imbuement:sardonyx_crystal"
-	}
+	},
+	"show_notification": true
 }

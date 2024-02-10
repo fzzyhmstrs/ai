@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
     "S S",
     "SSS",
@@ -13,5 +14,6 @@
   "result": {
     "item": "amethyst_imbuement:steel_horse_armor",
     "count": 1
-  }
+  },
+  "show_notification": true
 }

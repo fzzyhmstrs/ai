@@ -1,0 +1,49 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "crafting/sardonyx_crystal"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "amethyst_imbuement:sardonyx"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_killed_elemental": {
+      "conditions": {
+        "entity": {
+          "type": "amethyst_imbuement:sardonyx_elemental"
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amethyst_imbuement:crafting/sardonyx_crystal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_items",
+      "has_killed_elemental",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amethyst_imbuement:crafting/sardonyx_crystal"
+    ]
+  }
+}

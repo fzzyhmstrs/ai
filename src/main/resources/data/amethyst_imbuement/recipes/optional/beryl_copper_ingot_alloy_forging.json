@@ -1,0 +1,45 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "alloy_forgery"
+      ]
+    },
+    {
+      "condition": "amethyst_imbuement:enabled",
+      "id": "optional/beryl_copper_ingot_alloy_forging"
+    }
+  ],
+  "type": "alloy_forgery:forging",
+  "inputs": [
+    {
+      "tag": "c:raw_copper_ores",
+      "count": 3
+    },
+    {
+      "item": "minecraft:emerald",
+      "count": 2
+    },
+    {
+      "item": "minecraft:magma_block",
+      "count": 1
+    }
+  ],
+  "output": {
+    "id": "amethyst_imbuement:beryl_copper_ingot",
+    "count": 2
+  },
+  "overrides": {
+    "2+": {
+      "id": "amethyst_imbuement:beryl_copper_ingot",
+      "count": 3
+    },
+    "3+": {
+      "id": "amethyst_imbuement:beryl_copper_ingot",
+      "count": 4
+    }
+  },
+  "min_forge_tier": 1,
+  "fuel_per_tick": 10
+}

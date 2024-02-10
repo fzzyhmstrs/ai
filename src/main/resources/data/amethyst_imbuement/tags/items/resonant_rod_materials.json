@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "amethyst_imbuement:beryl_copper_ingot",
+    "amethyst_imbuement:glowing_fragment",
+    "#c:steel_ingots"
+  ]
+}
