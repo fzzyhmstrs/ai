@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import com.google.gson.JsonObject
+import com.google.gson.JsonElement
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.ints.IntList
@@ -160,7 +160,7 @@ object RecipeUtil {
         }
     }
 
-    fun ingredientFromJson(json: JsonObject?): Ingredient{
+    fun ingredientFromJson(json: JsonElement?): Ingredient{
         return if (json == null) Ingredient.EMPTY else Ingredient.fromJson(json)
     }
 

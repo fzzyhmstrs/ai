@@ -1,23 +1,23 @@
 package me.fzzyhmstrs.amethyst_imbuement.util
 
-import com.google.gson.JsonObject
+import com.google.gson.JsonElement
 
 class ImbuingRecipeFormat {
 
     var type: String = "amethyst_imbuement:imbuing"
-    var imbueA: JsonObject? = null
-    var imbueB: JsonObject? = null
-    var imbueC: JsonObject? = null
-    var imbueD: JsonObject? = null
-    var craftA: JsonObject? = null
-    var craftB: JsonObject? = null
-    var craftC: JsonObject? = null
-    var craftD: JsonObject? = null
-    var craftE: JsonObject? = null
-    var craftF: JsonObject? = null
-    var craftG: JsonObject? = null
-    var craftH: JsonObject? = null
-    var craftI: JsonObject? = null
+    var imbueA: JsonElement? = null
+    var imbueB: JsonElement? = null
+    var imbueC: JsonElement? = null
+    var imbueD: JsonElement? = null
+    var craftA: JsonElement? = null
+    var craftB: JsonElement? = null
+    var craftC: JsonElement? = null
+    var craftD: JsonElement? = null
+    var craftE: JsonElement? = null
+    var craftF: JsonElement? = null
+    var craftG: JsonElement? = null
+    var craftH: JsonElement? = null
+    var craftI: JsonElement? = null
     var title: String = ""
     var cost: Int = 0
     var augment: String = ""
