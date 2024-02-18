@@ -10,7 +10,6 @@ base {
     archivesName.set(archivesBaseName)
 }
 val log: File = file("changelog.md")
-val mcVersions: String by project
 val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
@@ -226,7 +225,9 @@ tasks {
     }
 }
 
+
 modrinth {
+    val mcVersions: String by project
     token.set(System.getenv("MODRINTH_TOKEN"))
     projectId.set("amethyst-imbuement")
     versionNumber.set(modVersion)
@@ -240,11 +241,11 @@ modrinth {
     dependencies{
         required.project("fabric-api")
         required.project("fabric-language-kotlin")
-        required.project("amethyst-core")
-        required.project("fzzy-core")
-        optional.project("emi")
-        embedded.project("trinkets")
-        embedded.project("patchouli")
+        //required.project("amethyst-core")
+        //required.project("fzzy-core")
+        //optional.project("emi")
+        //embedded.project("trinkets")
+        //embedded.project("patchouli")
     }
-    debugMode.set(false)
+    debugMode.set(true)
 }

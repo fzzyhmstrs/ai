@@ -7,10 +7,8 @@ import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTool
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
-import me.fzzyhmstrs.fzzy_core.entity_util.PlayerCreatable
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.Tameable
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
@@ -26,7 +24,7 @@ class BeastMasterAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: EquipmentS
     override fun activateEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         //EffectQueue.addStatusToQueue(user,StatusEffects.FIRE_RESISTANCE,240,0)
         val box = user.boundingBox.expand(16.0)
-        val list = user.world.getOtherEntities(user,box).stream().filter { it is PlayerCreatable && it.entityOwner == user || it is Tameable && it.owner == user }.toList()
+        val list = user.world.getOtherEntities(user,box).stream().filter { AiConfig.entities.shouldItHitFriend(user,it)}.toList()
         if (list.isEmpty()) return
         val amplifier = if(list.size < 6) 1 else 0
         var helped = 0
