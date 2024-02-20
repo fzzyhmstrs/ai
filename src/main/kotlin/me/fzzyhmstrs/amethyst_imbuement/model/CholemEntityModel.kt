@@ -4,7 +4,9 @@ import me.fzzyhmstrs.amethyst_imbuement.entity.living.CholemEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.model.*
+import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.entity.model.SinglePartEntityModel
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 
 @Environment(value = EnvType.CLIENT)
@@ -90,6 +92,19 @@ class CholemEntityModel(private val root: ModelPart): SinglePartEntityModel<Chol
 
     override fun getPart(): ModelPart {
         return this.root
+    }
+
+    override fun render(
+        matrices: MatrixStack?,
+        vertices: VertexConsumer?,
+        light: Int,
+        overlay: Int,
+        red: Float,
+        green: Float,
+        blue: Float,
+        alpha: Float
+    ) {
+        this.part.render(matrices, vertices, light, overlay, red, green, blue, alpha)
     }
 
 }

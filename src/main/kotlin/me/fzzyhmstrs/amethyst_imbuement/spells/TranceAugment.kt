@@ -13,6 +13,7 @@ import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.sound.SoundCategory
 import net.minecraft.world.World
 
@@ -35,11 +36,8 @@ class TranceAugment: MinorSupportAugment(ScepterTier.TWO,13){
         level: Int,
         effects: AugmentEffect
     ): Boolean {
-        EffectQueue.addStatusToQueue(
-            user,
-            RegisterStatus.TRANCE,
-            effects.duration(level),
-            effects.amplifier(level))
+        EffectQueue.addStatusToQueue(user, RegisterStatus.TRANCE, effects.duration(level), effects.amplifier(level))
+        EffectQueue.addStatusToQueue(user, StatusEffects.BLINDNESS, effects.duration(level), effects.amplifier(level))
         world.playSound(null, user.blockPos, soundEvent(), SoundCategory.PLAYERS, 1.0F, 1.0F)
         effects.accept(user,AugmentConsumer.Type.BENEFICIAL)
         return true

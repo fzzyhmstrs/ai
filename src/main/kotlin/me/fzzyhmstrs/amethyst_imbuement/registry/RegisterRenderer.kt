@@ -51,6 +51,7 @@ object RegisterRenderer {
     val SARDONYX_ELEMENTAL_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("sardonyx_elemental"),"sardonyx_elemental_model_armor")
 
     val CHORSE_ENTITY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model")
+    val CHORSE_ENTITY_BABY: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model_baby")
     val CHORSE_ENTITY_ARMOR: EntityModelLayer = EntityModelLayer(AI.identity("chorse"),"chorse_model_armor")
     
     val HAMSTER_ENTITY_MAIN: EntityModelLayer = EntityModelLayer(Identifier(AI.MOD_ID,"base_hamster"),"hamster_main")
@@ -149,6 +150,10 @@ object RegisterRenderer {
         ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 0.7f, 0.7f) }
 
         EntityRendererRegistry.register(
+            RegisterEntity.SPARKBOLT_ENTITY
+        ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 1f) }
+
+        EntityRendererRegistry.register(
             RegisterEntity.FLAMEBOLT_ENTITY
         ){ context: EntityRendererFactory.Context -> MissileEntityRenderer(context, 1f, 0.7f, 0.3f, 0.6666F, 1.2F) }
 
@@ -229,8 +234,9 @@ object RegisterRenderer {
         EntityModelLayerRegistry.registerModelLayer(SARDONYX_ELEMENTAL) { SardonyxElementalEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(SARDONYX_ELEMENTAL_ARMOR) { SardonyxElementalEntityModel.getTexturedModelData(Dilation(0.15f)) }
 
-        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY) { ChorseEntityModel.getTexturedModelData() }
-        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_ARMOR) { ChorseEntityModel.getTexturedModelData(Dilation(0.15f)) }
+        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY) { ChorseEntityModel.getGrownTexturedModelData() }
+        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_BABY) { ChorseEntityModel.getBabyTexturedModelData() }
+        EntityModelLayerRegistry.registerModelLayer(CHORSE_ENTITY_ARMOR) { ChorseEntityModel.getGrownTexturedModelData(Dilation(0.15f)) }
 
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_MAIN) { BaseHamsterEntityModel.getTexturedModelData() }
         EntityModelLayerRegistry.registerModelLayer(HAMSTER_ENTITY_ARMOR) { BaseHamsterEntityModel.getTexturedModelData(Dilation(0.15f)) }

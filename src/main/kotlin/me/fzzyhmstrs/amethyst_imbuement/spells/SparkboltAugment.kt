@@ -7,8 +7,8 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellDamageSource
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonProjectileAugment
-import me.fzzyhmstrs.amethyst_imbuement.entity.spell.FreezingEntity
-import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.amethyst_imbuement.entity.spell.SparkboltEntity
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterStatus
 import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -19,26 +19,27 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
-class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,11){
+class SparkboltAugment: SummonProjectileAugment(ScepterTier.ONE,15){
 
     override val baseEffect: AugmentEffect = super.baseEffect
-                                                .withDamage(3.9F,0.1f)
-                                                .withDuration(230,50,0)
-                                                .withRange(3.8,0.2)
+                                                .withDamage(4.25F,0.15f)
+                                                .withAmplifier(45,2)
+                                                .withDuration(40)
+                                                .withRange(2.0)
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY, PerLvlI(36,-2),8,
-            5,imbueLevel,1, LoreTier.LOW_TIER, Items.PACKED_ICE)
+        return AugmentDatapoint(SpellType.FURY, 24,6,
+            5, imbueLevel,1, LoreTier.LOW_TIER, Items.CUT_COPPER)
     }
 
     override fun entityClass(world: World, user: LivingEntity, level: Int, effects: AugmentEffect): ProjectileEntity {
-        val fe = FreezingEntity(world,user,level)
-        fe.passEffects(effects, level)
-        fe.setAugment(this)
-        fe.setVelocity(user,user.pitch,user.yaw,0.0f,
-            1.3f,
+        val sbe = SparkboltEntity(world,user,level)
+        sbe.passEffects(effects, level)
+        sbe.setAugment(this)
+        sbe.setVelocity(user,user.pitch,user.yaw,0.0f,
+            0.9f,
             0.5f)
-        return fe
+        return sbe
     }
 
     override fun entityTask(
@@ -49,12 +50,13 @@ class FreezingAugment: SummonProjectileAugment(ScepterTier.ONE,11){
         hit: HitResult?,
         effects: AugmentEffect
     ) {
-        if (target is LivingEntity) target.frozenTicks = effects.duration(0)
-        target.damage(SpellDamageSource(FzzyDamage.freeze(user),this),effects.damage(0)*2/3)
+        if (world.random.nextDouble() < effects.amplifier(level.toInt())/2500.0 && target is LivingEntity)
+            RegisterStatus.stun(target,effects.duration(0))
+        target.damage(SpellDamageSource(FzzyDamage.lightning(user),this),effects.damage(0)/2.5f)
     }
 
     override fun soundEvent(): SoundEvent {
-        return SoundEvents.ENTITY_PLAYER_HURT_FREEZE
+        return SoundEvents.ENTITY_BLAZE_SHOOT
     }
 
 }

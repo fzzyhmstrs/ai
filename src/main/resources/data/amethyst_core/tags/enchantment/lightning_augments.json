@@ -10,6 +10,7 @@
 		"amethyst_imbuement:chain_lightning",
 		"amethyst_imbuement:chaos_bolt",
 		"amethyst_imbuement:lightning_aura",
+		"amethyst_imbuement:sparkbolt",
 		{
 			"id":  "amethyst_imbuement:crackling_infusion",
 			"required":  false

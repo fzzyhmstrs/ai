@@ -33,6 +33,7 @@
 	"entity.amethyst_imbuement.bone_shard_entity": "Bone Shard",
 	"entity.amethyst_imbuement.ice_shard_entity": "Ice Shard",
 	"entity.amethyst_imbuement.freezing_entity": "Frostbolt",
+	"entity.amethyst_imbuement.sparkbolt_entity": "Sparkbolt",
 	"entity.amethyst_imbuement.soul_missile_entity": "Soul Missile",
 	"entity.amethyst_imbuement.player_bullet_entity": "Shulker Bullet",
 	"entity.amethyst_imbuement.player_fangs_entity": "Evoker Fange",
@@ -845,6 +846,9 @@
 	"enchantment.amethyst_imbuement.smiting_blow": "Smiting Blow",
 	"enchantment.amethyst_imbuement.smiting_blow.desc": "Smites a nearby enemy with a holy blast. Deals extra damage to undead.",
 
+	"enchantment.amethyst_imbuement.sparkbolt": "Sparkbolt",
+	"enchantment.amethyst_imbuement.sparkbolt.desc": "A sparking bolt of energy that shocks nearby enemies on hit and has a small chance to stun.",
+
 	"enchantment.amethyst_imbuement.spectral_slash": "Spectral Slash",
 	"enchantment.amethyst_imbuement.spectral_slash.desc": "An energy slash that damages all enemies in front of the caster.",
 
@@ -1387,6 +1391,7 @@
 	"enchantment_lore.amethyst_imbuement:resonate.description": "Resonate\n\nMax Level: V\n\nMagic School: §c□ Fury§r\n\nFires sonic pulses at nearby enemies, dealing increasing damage with each hit.",
 	"enchantment_lore.amethyst_imbuement:shine.description": "Shine\n\nMax Level: I\n\nMagic School: §9◇ Wit§r\n\nPlaces a torch.",
 	"enchantment_lore.amethyst_imbuement:smiting_blow.description": "Smiting Blow\n\nMax Level: V\n\nMagic School: §c□ Fury§r\n\nSmites a nearby enemy with a holy blast. Deals extra damage to undead.",
+	"enchantment_lore.amethyst_imbuement:sparkbolt.description": "Sparkbolt\n\nMax Level: XV\n\nMagic School: §c□ Fury§r\n\nA sparking bolt of energy that shocks nearby enemies on hit and has a small chance to stun.",
 	"enchantment_lore.amethyst_imbuement:spectral_slash.description": "Spectral Slash\n\nMax Level: IX\n\nMagic School: §c□ Fury§r\n\nAn energy slash that damages all enemies in front of the caster.",
 	"enchantment_lore.amethyst_imbuement:summon_blaze.description": "Summon Blaze\n\nMax Level: III\n\nMagic School: §c□ Fury§r\n\nSummons blazes to assist the caster in battle.",
 	"enchantment_lore.amethyst_imbuement:summon_boat.description": "Summon Boat\n\nMax Level: I\n\nMagic School: §9◇ Wit§r\n\nSummons a boat.",

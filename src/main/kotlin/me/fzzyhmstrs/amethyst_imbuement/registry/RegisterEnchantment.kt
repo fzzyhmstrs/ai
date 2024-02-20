@@ -154,6 +154,7 @@ object RegisterEnchantment {
     val SHINE = ShineAugment().register("shine")
     val SMITING_BLOW = SmitingBlowAugment().register("smiting_blow")
     val SOUL_MISSILE = SoulMissileAugment().register("soul_missile")
+    val SPARKBOLT = SparkboltAugment().register("sparkbolt")
     val SPECTRAL_SLASH = SpectralSlashAugment().register("spectral_slash")
     val SUMMON_BOAT = SummonBoatAugment().register("summon_boat")
     val SUMMON_BONESTORM = SummonBonestormAugment().register("summon_bonestorm")

@@ -12,11 +12,11 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 
 @Environment(value = EnvType.CLIENT)
-class ChorseEntityRenderer(context: EntityRendererFactory.Context): MobEntityRenderer<ChorseEntity, ChorseEntityModel>(context,ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY)),0.75f) {
+class ChorseEntityRenderer(context: EntityRendererFactory.Context): MobEntityRenderer<ChorseEntity, ChorseEntityModel>(context,ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY),context.getPart(RegisterRenderer.CHORSE_ENTITY_BABY)),0.75f) {
     //private val TEXTURE = AI.identity("textures/entity/chorse/chorse.png")
 
     init{
-        this.addFeature(ChorseArmorFeatureRenderer(this, ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY_ARMOR))))
+        this.addFeature(ChorseArmorFeatureRenderer(this, ChorseEntityModel(context.getPart(RegisterRenderer.CHORSE_ENTITY_ARMOR),context.getPart(RegisterRenderer.CHORSE_ENTITY_BABY))))
     }
 
     override fun getTexture(entity: ChorseEntity): Identifier {

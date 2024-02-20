@@ -56,11 +56,13 @@ object RegisterEntity: EntityBuilder() {
         0.7f,
         6).register("boom_chicken")
 
-    val CHORSE_ENTITY = buildCreature(
-        { entityType: EntityType<ChorseEntity>, world -> ChorseEntity(entityType, world) },
-        1.3964844f,
-        1.6f,
-        10).register("chorse")
+    val CHORSE_ENTITY = FabricEntityTypeBuilder.create( SpawnGroup.CREATURE) { entityType: EntityType<ChorseEntity>, world ->
+        ChorseEntity(entityType, world) }
+            .dimensions(EntityDimensions.changing(1.3964844f,1.6f))
+            .trackRangeChunks(10)
+            .trackedUpdateRate(3)
+            .build()
+            .register("chorse")
 
     val CHOLEM_ENTITY = buildCreature(
         { entityType: EntityType<CholemEntity>, world -> CholemEntity(entityType, world) },
@@ -120,6 +122,11 @@ object RegisterEntity: EntityBuilder() {
         { entityType: EntityType<FlameboltEntity>, world -> FlameboltEntity(entityType, world) },
         0.3125f,
         0.3125f).register("flamebolt_entity")
+
+    val SPARKBOLT_ENTITY = buildMisc(
+        { entityType: EntityType<SparkboltEntity>, world -> SparkboltEntity(entityType, world) },
+        0.3125f,
+        0.3125f).register("sparkbolt_entity")
 
     val CHAOS_BOLT_ENTITY = buildMisc(
         { entityType: EntityType<ChaosBoltEntity>, world -> ChaosBoltEntity(entityType, world) },

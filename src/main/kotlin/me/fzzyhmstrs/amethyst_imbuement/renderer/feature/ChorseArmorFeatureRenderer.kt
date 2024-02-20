@@ -42,9 +42,7 @@ FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
         k: Float,
         l: Float
     ) {
-        val p: Float
-        val o: Float
-        val n: Float
+        if (chorse.isBaby) return
         val itemStack = chorse.getArmorType()
         if (itemStack?.item !is HorseArmorItem) {
             return
@@ -53,6 +51,9 @@ FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
         this.contextModel.copyStateTo(model)
         model.animateModel(chorse, f, g, h)
         model.setAngles(chorse, f, g, j, k, l)
+        val n: Float
+        val o: Float
+        val p: Float
         if (horseArmorItem is DyeableHorseArmorItem) {
             val m = horseArmorItem.getColor(itemStack)
             n = (m shr 16 and 0xFF).toFloat() / 255.0f
@@ -69,8 +70,7 @@ FeatureRenderer<ChorseEntity, ChorseEntityModel>(context)
         }
 
 
-        val vertexConsumer =
-            vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(id))
+        val vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(id))
         model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, n, o, p, 1.0f)
     }
 }
