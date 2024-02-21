@@ -7,7 +7,7 @@
     "item": "amethyst_imbuement:shimmering_fabric"
   },
   "addition": {
-    "item": "minecraft:sunflower"
+    "tag": "c:sunflowers"
   },
   "result": {
     "item": "amethyst_imbuement:empty_spell_scroll"

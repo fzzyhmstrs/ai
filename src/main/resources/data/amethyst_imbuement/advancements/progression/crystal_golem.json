@@ -1,0 +1,49 @@
+{
+"criteria":{
+	"got_spell_book":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:book_of_mythos"
+					],
+					"nbt": "{book_of_lore_augment:\"amethyst_imbuement:summon_golem\"}"
+				}
+			]
+		}
+	},
+	"got_crystalline_core":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:crystalline_core"
+					]
+				}
+			]
+		}
+	},
+	"cast_summon_golem":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_imbuement:summon_golem"
+		}
+	},
+	"augmented_golem":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:guardian"
+		}
+	}
+},
+"requirements": [
+	[
+		"got_spell_book",
+		"got_crystalline_core",
+		"cast_summon_golem",
+		"augmented_golem"
+	]
+]
+}

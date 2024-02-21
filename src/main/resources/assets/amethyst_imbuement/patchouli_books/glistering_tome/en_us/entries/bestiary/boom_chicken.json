@@ -1,0 +1,17 @@
+{
+	"name": "Boom Chicken",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/boom_chicken.png",
+	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:spells/torrent_of_beaks",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "BOOM! Boom chickens look eerily similar to their normal counterparts with one key difference; they will hunt down their enemies and explode! They explode with half the power of a creeper.$(br2)How to Obtain:$(li)Spell: Torrent of Beaks (spawned from shot eggs)"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:boom_chicken",
+			"text": "$(li)Default Health: 8$(li)Default Damage: BOOM!"
+		}
+	]
+}

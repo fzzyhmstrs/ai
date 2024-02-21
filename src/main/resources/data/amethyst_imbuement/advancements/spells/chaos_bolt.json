@@ -1,11 +1,29 @@
 {
-"parent": "amethyst_imbuement:crystalline_beginnings",
 "criteria":{
+	"got_spell_book":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:book_of_tales"
+					],
+					"nbt": "{book_of_lore_augment:\"amethyst_imbuement:chaos_bolt\"}"
+				}
+			]
+		}
+	},
 	"cast_chaos_bolt":{
 		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
 			"spell": "amethyst_imbuement:chaos_bolt"
 		}
 	}
-}
+},
+	"requirements": [
+		[
+			"got_spell_book",
+			"cast_chain_lightning"
+		]
+	]
 }

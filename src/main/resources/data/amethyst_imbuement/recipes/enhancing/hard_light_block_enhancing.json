@@ -7,7 +7,7 @@
     "tag": "c:glass_blocks"
   },
   "addition": {
-    "item": "minecraft:sunflower"
+    "tag": "c:sunflowers"
   },
   "result": {
     "item": "amethyst_imbuement:hard_light_block"

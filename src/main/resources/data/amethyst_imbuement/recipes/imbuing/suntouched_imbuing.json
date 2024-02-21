@@ -13,13 +13,13 @@
 	"item": "amethyst_imbuement:pyrite"
   },
   "craftA": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "craftB": {
 	"item": "minecraft:blaze_powder"
   },
   "craftC": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "craftD": {
 	"item": "minecraft:blaze_powder"
@@ -28,13 +28,13 @@
 	"item": "minecraft:blaze_powder"
   },
   "craftG": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "craftH": {
 	"item": "minecraft:blaze_powder"
   },
   "craftI": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "title": "Suntouched",
   "cost": 12,

@@ -31,7 +31,7 @@
 "anchor": "enhancing_citrine",
 "input_item": "minecraft:gunpowder",
 "addition_item": "minecraft:amethyst_shard",
-"flower_item": "minecraft:sunflower",
+"flower_item": "tag:c:sunflowers",
 "output_item": "amethyst_imbuement:citrine"
 }
 ]

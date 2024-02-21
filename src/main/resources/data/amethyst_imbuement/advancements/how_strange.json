@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:strange_egg"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.how_strange"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.how_strange.desc"
+	},
+	"hidden": true
+},
+"criteria":{
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:strange_egg"
+					]
+				}
+			]
+		}
+	}
+}
+}

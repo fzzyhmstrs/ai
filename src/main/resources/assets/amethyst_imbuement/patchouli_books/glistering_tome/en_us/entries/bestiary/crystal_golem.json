@@ -1,0 +1,35 @@
+{
+	"name": "Crystalline Golem",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/crystal_golem.png",
+	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:progression/crystal_golem",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "A powerful protector of the meek, the Crystalline Golem can dominate the battlefield. A fierce foe to even the hardiest of warriors, they leave plain Iron Golems far behind.$(br2)How to Obtain:$(li)Construct: Build Pattern (flip page)$(li)Augment: Guardian (when HP low)$(li)Spell: Summon Crystalline Golem"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:crystal_golem",
+			"text": "$(li)Default Health: 180$(li)Default Damage: 20"
+		},
+		{
+			"type": "patchouli:multiblock",
+			"name": "Golem Setup",
+			"multiblock": {
+				"pattern": [
+					[" P "],
+					["B0B"],
+					[" B "]
+				],
+				"mapping": {
+					"P": "minecraft:carved_pumpkin,minecraft:jack_o_lantern",
+					"B": "minecraft:amethyst_block",
+					"0": "amethyst_imbuement:crystalline_core"
+				}
+			},
+			"enable_visualize": false,
+			"text": "The block pattern needed to summon a Crystalline Golem. Place the pumpkin last as usual."
+		}
+	]
+}

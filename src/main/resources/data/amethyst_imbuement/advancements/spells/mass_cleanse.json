@@ -1,11 +1,29 @@
 {
-"parent": "amethyst_imbuement:crystalline_beginnings",
 "criteria":{
-	"cast_mass_exhaust":{
+	"got_spell_book":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:book_of_lore"
+					],
+					"nbt": "{book_of_lore_augment:\"amethyst_imbuement:mass_cleanse\"}"
+				}
+			]
+		}
+	},
+	"cast_mass_cleanse":{
 		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
-			"spell": "amethyst_imbuement:mass_exhaust"
+			"spell": "amethyst_imbuement:mass_cleanse"
 		}
 	}
-}
+},
+	"requirements": [
+		[
+			"got_spell_book",
+			"cast_mass_cleanse"
+		]
+	]
 }

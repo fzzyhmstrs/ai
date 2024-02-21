@@ -1,0 +1,16 @@
+{
+	"name": "Hamster",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/hamster.png",
+	"category": "amethyst_imbuement:bestiary",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "The humble hamster, beloved by their owners, feared by their enemies. These fearful combatants are often seen wielding swords and wearing various helmets.$(br2)How to Obtain:$(li)Spell: Summon Hamster$(li)Spell: Hamptertime"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:basic_hamster",
+			"text": "$(li)Default Health: 8$(li)Default Damage: 1 (2 from Hamptertime)"
+		}
+	]
+}

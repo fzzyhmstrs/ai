@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sunflower",
+    {
+      "required": false,
+      "id": "spawn:sunflower"
+    },
+    {
+      "required": false,
+      "id": "bloomingnature:wild_sunflower"
+    }
+  ]
+}

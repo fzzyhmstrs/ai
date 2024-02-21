@@ -14,10 +14,10 @@
     {
       "type": "amethyst_imbuement:imbuing_recipe",
       "title": "Spell Scroll Imbuing",
-      "imbue_a_item": "minecraft:sunflower",
-      "imbue_b_item": "minecraft:sunflower",
-      "imbue_c_item": "minecraft:sunflower",
-      "imbue_d_item": "minecraft:sunflower",
+      "imbue_a_item": "tag:c:sunflowers",
+      "imbue_b_item": "tag:c:sunflowers",
+      "imbue_c_item": "tag:c:sunflowers",
+      "imbue_d_item": "tag:c:sunflowers",
       "craft_a_item": "minecraft:air",
       "craft_b_item": "minecraft:paper",
       "craft_c_item": "minecraft:air",
@@ -35,7 +35,7 @@
       "anchor": "enhancing_spell_scroll",
       "input_item": "amethyst_imbuement:gem_dust",
       "addition_item": "minecraft:paper",
-      "flower_item": "minecraft:sunflower",
+      "flower_item": "tag:c:sunflowers",
       "output_item": "amethyst_imbuement:empty_spell_scroll"
     }   
   ]

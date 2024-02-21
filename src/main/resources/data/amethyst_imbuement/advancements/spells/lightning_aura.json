@@ -1,11 +1,29 @@
 {
-"parent": "amethyst_imbuement:crystalline_beginnings",
 "criteria":{
+	"got_spell_book":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:book_of_tales"
+					],
+					"nbt": "{book_of_lore_augment:\"amethyst_imbuement:lightning_aura\"}"
+				}
+			]
+		}
+	},
 	"cast_lightning_aura":{
 		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
 			"spell": "amethyst_imbuement:lightning_aura"
 		}
 	}
-}
+},
+	"requirements": [
+		[
+			"got_spell_book",
+			"cast_lightning_aura"
+		]
+	]
 }

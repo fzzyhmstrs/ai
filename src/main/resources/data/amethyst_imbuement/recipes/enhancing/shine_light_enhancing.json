@@ -7,7 +7,7 @@
     "item": "minecraft:torch"
   },
   "addition": {
-    "item": "minecraft:sunflower"
+    "tag": "c:sunflowers"
   },
   "result": {
     "item": "amethyst_imbuement:shine_light",

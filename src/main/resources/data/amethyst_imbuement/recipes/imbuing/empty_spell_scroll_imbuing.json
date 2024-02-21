@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "imbueB": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "imbueC": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "imbueD": {
-	"item": "minecraft:sunflower"
+	"tag": "c:sunflowers"
   },
   "craftB": {
 	"item": "amethyst_imbuement:shimmering_fabric"

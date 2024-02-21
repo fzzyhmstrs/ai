@@ -11,6 +11,7 @@ object RegisterTag {
 
     val DISENCHANTING_BLACKLIST = FzzyPort.ENCHANTMENT.tagOf(AI.identity("disenchanting_blacklist"))
 
+    val SUNFLOWERS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","sunflowers"))
     val GEMS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","gems"))
     val SKULLS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","skulls"))
     val STEEL_BOOTS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","steel_boots"))

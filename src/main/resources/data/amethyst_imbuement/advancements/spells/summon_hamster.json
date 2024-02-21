@@ -1,5 +1,4 @@
 {
-"parent": "amethyst_imbuement:crystalline_beginnings",
 "criteria":{
 	"cast_summon_hamster":{
 		"trigger": "amethyst_core:cast_spell",

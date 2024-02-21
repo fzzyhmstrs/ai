@@ -15,7 +15,7 @@ class HealthyAugment(weight: Rarity, mxLvl: Int, vararg slot: EquipmentSlot): Pa
     override fun attributeModifier(stack: ItemStack, level: Int, uuid: UUID): Pair<EntityAttribute, EntityAttributeModifier> {
         return Pair(
             EntityAttributes.GENERIC_MAX_HEALTH,
-            EntityAttributeModifier(uuid, "amethyst_imbuement:max_health", 4.0 * level, EntityAttributeModifier.Operation.ADDITION))
+            EntityAttributeModifier(uuid, "amethyst_imbuement:max_health", 0.1 * level, EntityAttributeModifier.Operation.MULTIPLY_BASE))
     }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
