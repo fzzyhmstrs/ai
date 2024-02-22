@@ -1,0 +1,16 @@
+{
+"name": "Ice Burst",
+"icon": "amethyst_imbuement:book_of_tales",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/ice_burst",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:ice_burst"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/ice_burst_imbuing"  
+}
+]
+}
