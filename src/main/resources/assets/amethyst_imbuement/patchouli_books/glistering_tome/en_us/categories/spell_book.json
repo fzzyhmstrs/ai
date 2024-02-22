@@ -1,0 +1,6 @@
+{
+"name": "Spell Book",
+"parent": "amethyst_imbuement:spells",
+"description": "A tome of all of the spell books you've found, with descriptions and recipes.",
+"icon": "amethyst_imbuement:book_of_tales"
+}
