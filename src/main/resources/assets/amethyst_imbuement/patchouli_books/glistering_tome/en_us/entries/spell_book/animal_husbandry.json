@@ -1,17 +1,17 @@
 {
-	"name": "Cholem",
-	"icon": "amethyst_imbuement:scepter_of_harvests",
-	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:how_strange",
-	"pages": [
-		{
-			"type": "amethyst_imbuement:spell_text",
-      "spell": "amethyst_imbuement:animal_husbandry"			
-		},
-		{            
-		"type": "patchouli:spotlight",
-		"item": "amethyst_imbuement:scepter_of_harvests",
-		"text": "The only way to obtain Animal Husbandry is to craft the Scepter of Harvests."       
-	}
-	]
+"name": "Cholem",
+"icon": "amethyst_imbuement:scepter_of_harvests",
+"category": "amethyst_imbuement:bestiary",
+"advancement": "amethyst_imbuement:how_strange",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:animal_husbandry"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:scepter_of_harvests",
+"text": "The only way to obtain Animal Husbandry is to craft the Scepter of Harvests."       
+}
+]
 }
