@@ -1,0 +1,17 @@
+{
+"name": "Survey",
+"icon": "amethyst_imbuement:sojourn",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/survey",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:survey"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:sojourn",
+"text": "The only way to obtain Survey is to craft a Sojourn."       
+}
+]
+}
