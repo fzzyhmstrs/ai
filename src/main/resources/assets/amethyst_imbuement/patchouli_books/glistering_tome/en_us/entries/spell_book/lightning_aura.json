@@ -1,0 +1,16 @@
+{
+"name": "Lightning Aura",
+"icon": "amethyst_imbuement:book_of_tales",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/lightning_aura",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:lightning_aura"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/lightning_aura_imbuing"  
+}
+]
+}
