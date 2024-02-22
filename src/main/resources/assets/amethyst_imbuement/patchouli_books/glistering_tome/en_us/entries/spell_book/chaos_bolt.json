@@ -1,0 +1,16 @@
+{
+"name": "Chaos Bolt",
+"icon": "amethyst_imbuement:book_of_tales",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/chaos_bolt",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:chaos_bolt"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/chaos_bolt_imbuing"  
+}
+]
+}
