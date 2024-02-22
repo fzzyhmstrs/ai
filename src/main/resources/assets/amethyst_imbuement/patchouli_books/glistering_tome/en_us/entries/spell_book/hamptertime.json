@@ -1,0 +1,17 @@
+{
+"name": "Hamptertime",
+"icon": "amethyst_imbuement:fzzyhammer",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/hamptertime",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:hamptertime"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:fzzyhammer",
+"text": "The only way to obtain Hamptertime is to find the Fzzyhammer."       
+}
+]
+}
