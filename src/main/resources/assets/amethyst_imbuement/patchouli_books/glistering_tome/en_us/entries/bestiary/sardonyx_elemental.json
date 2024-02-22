@@ -1,0 +1,33 @@
+{
+	"name": "Sardonyx Elemental",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/sardonyx_elemental.png",
+	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:progression/sardonyx_elemental_1",
+	"pages": [
+		{
+			"type": "amethyst_imbuement:text",
+			"text": "A demonic construct born of evil acts and an unfortunate crystalline golem. The Elemental is sealed away in a pure sardonyx crystal but even still manages to exert its influence on the nearby world.",
+      "text2": "A demonic construct born of evil acts and an unfortunate crystalline golem. The Elemental is sealed away in a pure sardonyx crystal but even still manages to exert its influence on the nearby world.$(br2)Defeated, finally. The smell of acrid smoke and sulfur still hangs in the air. Hopefully the knowledge gained from the fight will help prevent this struggle in the future. Details have been recorded on the next pages."
+      "advancement2": "amethyst_imbuement:progression/sardonyx_elemental_2"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:sardonyx_elemental",
+			"text": "$(li)Default Health/Armor 512 / 14$(li)Default Damage 28 (melee) / 20 (ranged)"
+		},
+    {
+			"type": "patchouli:text",
+      "title": "Elemental Details",
+			"text": "Attacks:$(li)Melee Attack - A powerful swing of its arms$(li)Bone Shards - Three bursts of explosive shards$(li)Withering Cloud - A puddle of damaging miasma$(li)Call For Aid - Summons sardonyx fragments$(li)$(l)Devastation Beam$() - A beam of pure hate, cuts through any defense. RUN! Fired 3 times, once per quarter HP lost.",
+      "advancement": "amethyst_imbuement:progression/sardonyx_elemental_2",
+      "secret": true
+		},
+    {
+			"type": "patchouli:text",
+      "title": "Elemental Details",
+			"text": "Defense:$(li)Regeneration - The elemental regenerates passively over time$(li)Magical Calcify - Periodically sheilds itself with Soul Shield if the last damage taken was magical.$(li)Physical Calcify - Periodically shields itself with Bone Armor if the last damage taken was physical.$(li)Emergency Calcify - if the elemental thinks it is in danger, it will shield itself with both Bone Armor and Soul Shield.",
+      "advancement": "amethyst_imbuement:progression/sardonyx_elemental_2",
+      "secret": true
+		}
+	]
+}
