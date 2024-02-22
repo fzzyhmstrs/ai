@@ -1,0 +1,21 @@
+{    
+"name": "Ensouled",
+"icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/ensouled.png",
+"sortnum": 1000,
+"category": "amethyst_imbuement:modifiers",
+"pages": [
+{
+"type": "patchouli:text",            
+"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/ensouled_gear)Ensouled Gear$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
+},
+{
+"type": "amethyst_imbuement:modifier_spotlight",
+"mod_head": "Ensouled",
+"mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/ensouled.png",
+"ancestor": "N/A",
+"descendant": "N/A",
+"mod_type": "$(2)Various Soul-Spell Effects$()",
+"mod_text": "The armor emanates a disturbing aura, almost like someone inside is trying to cry out. Your bond to spells of the soul is strengthened."
+}
+]
+}
