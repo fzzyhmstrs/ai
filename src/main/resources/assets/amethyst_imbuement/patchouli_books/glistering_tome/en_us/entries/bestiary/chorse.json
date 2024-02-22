@@ -18,7 +18,7 @@
 			"title": "Strange Egg",
 			"item": "amethyst_imbuement:strange_egg",
 			"link_recipe": true,
-			"text": "How strange.... This egg is simply a Chorse spawn egg. Can be used in all the normal ways spawn eggs can be used. Find this oddity in witch houses."
+			"text": "How strange.... This egg is simply a Chorse spawn egg. Can be used in all the ways spawn eggs can normally be used. Find this oddity in witch houses."
 		},
 		{
 			"type": "patchouli:text",
@@ -28,7 +28,12 @@
 		{
 			"type": "patchouli:text",
 			"title": "Stunting",
-			"text": "Baby chorses are cute lil' fellers ain't they? If you want to keep your chorse baby forever, feed it $(#490)Fermented Spider Eye$() to stunt it. A stunted baby will never grow up. If you decide you do want the adult chorse after all, feed the baby a $(#490)Golden Carrot$() to un-stunt it."
+			"text": "Baby chorses are cute lil' fellers ain't they? If you want to keep your chorse baby forever, feed it $(item)Fermented Spider Eye$() to stunt it. A stunted baby will never grow up. If you decide you do want the adult chorse after all, feed the baby a $(item)Golden Carrot$() to un-stunt it."
+		},
+		{
+			"type": "patchouli:text",
+			"title": "Drops",
+			"text": "Adult chorses eat a lot. A. Lot. That also means they poop a lot. Chorses will periodically leave behind some $(item)Chorse Chit$(). Gather up these fertile droppings and use them just like bone meal!$(br2)Adult chorses will also drop the following on death:$(li)Raw Chicken (cooked if on fire)$(li)Feather$(li)Chorse Chit"
 		}
 	]
 }
