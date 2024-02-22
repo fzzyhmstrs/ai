@@ -1,0 +1,16 @@
+{
+"name": "Revivify",
+"icon": "amethyst_imbuement:book_of_tales",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/revivify",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:revivify"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/revivify_imbuing"  
+}
+]
+}
