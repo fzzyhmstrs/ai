@@ -1,0 +1,17 @@
+{
+"name": "execute",
+"icon": "amethyst_imbuement:judgment",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/execute",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:execute"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:judgment",
+"text": "The only way to obtain Execute is to find Judgment."       
+}
+]
+}
