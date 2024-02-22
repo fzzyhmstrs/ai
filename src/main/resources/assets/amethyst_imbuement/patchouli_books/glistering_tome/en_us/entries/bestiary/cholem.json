@@ -6,7 +6,7 @@
 	"pages": [
 		{
 			"type": "patchouli:text",
-			"text": "$(br2)How to Obtain:$(li)Spell: Summon Cholem"
+			"text": "\"I got two words for ya... Cluck It\" These brolic $(m)dudes$() $(m)chickens$() creatures are born ready for combat, using their rippling pecs to smash your opponents to dust. If one of their brothers falls in the line of duty the survivors will become enraged, increasing their damage output.$(br2)How to Obtain:$(li)Spell: Summon Cholem"
 		},
 		{
 			"type": "patchouli:entity",
