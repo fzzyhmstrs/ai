@@ -1,0 +1,17 @@
+{
+"name": "Barrier",
+"icon": "amethyst_imbuement:frosted_scepter",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/ice_spikes",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:ice_spikes"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:frosted_scepter",
+"text": "The only way to obtain Ice Spikes is to craft the Frosted Scepter."       
+}
+]
+}
