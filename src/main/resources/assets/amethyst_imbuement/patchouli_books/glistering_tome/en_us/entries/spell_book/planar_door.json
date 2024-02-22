@@ -1,0 +1,16 @@
+{
+"name": "Planar Door",
+"icon": "amethyst_imbuement:book_of_tales",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/planar_door",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:planar_door"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/planar_door_imbuing"  
+}
+]
+}
