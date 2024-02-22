@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Grants the user Night Vision when scoped in.$(br)$(l)Enchants:$() $(#490)$(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$()$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Illuminating Imbuing",
-"anchor": "illuminating",
-"imbue_a_item": "minecraft:diamond",
-"imbue_b_item": "amethyst_imbuement:imbued_lapis",
-"imbue_c_item": "amethyst_imbuement:imbued_lapis",
-"imbue_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_a_item": "minecraft:glowstone",
-"craft_b_item": "minecraft:ender_eye",
-"craft_c_item": "minecraft:glowstone",
-"craft_d_item": "minecraft:glowstone",
-"craft_e_item": "amethyst_imbuement:sniper_bow",
-"craft_f_item": "minecraft:glowstone",
-"craft_g_item": "minecraft:glowstone",
-"craft_h_item": "minecraft:glowstone",
-"craft_i_item": "minecraft:glowstone",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:illuminating\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)8$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/illuminating_imbuing"
+  }
 ]
 }

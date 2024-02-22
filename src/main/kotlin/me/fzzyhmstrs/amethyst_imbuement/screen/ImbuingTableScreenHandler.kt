@@ -916,7 +916,7 @@ class ImbuingTableScreenHandler(
 
         override fun buttonStringVisitable(textRenderer: TextRenderer, width: Int): StringVisitable {
             return if(recipe.getAugment() != "") {
-                val augId = Identifier(recipe.getAugment())
+                val augId = recipe.getAugmentId()
                 val str = FzzyPort.ENCHANTMENT.get(augId)?.getName(1)?.string
                     ?: AcText.translatable("container.disenchanting_table.button.missing_enchantment").toString()
                 AcText.literal(str).fillStyle(Style.EMPTY.withFont(Identifier("minecraft", "default")))

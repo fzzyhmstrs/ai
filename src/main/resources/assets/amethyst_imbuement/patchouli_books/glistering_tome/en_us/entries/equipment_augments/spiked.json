@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Blocking with a shield augmented with spiked damages the attacker like Thorns.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Spiked Imbuing",
-"anchor": "spiked",
-"imbue_a_item": "minecraft:diamond",
-"imbue_b_item": "amethyst_imbuement:smoky_quartz",
-"imbue_c_item": "amethyst_imbuement:smoky_quartz",
-"imbue_d_item": "amethyst_imbuement:smoky_quartz",
-"craft_a_item": "minecraft:flint",
-"craft_b_item": "minecraft:flint",
-"craft_c_item": "minecraft:flint",
-"craft_d_item": "minecraft:flint",
-"craft_e_item": "minecraft:shield",
-"craft_f_item": "minecraft:flint",
-"craft_g_item": "minecraft:flint",
-"craft_h_item": "minecraft:flint",
-"craft_i_item": "minecraft:flint",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:spiked\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)5$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/spiked_imbuing"
+  }
 ]
 }

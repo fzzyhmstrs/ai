@@ -3,6 +3,7 @@
 package me.fzzyhmstrs.amethyst_imbuement
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
 import me.fzzyhmstrs.amethyst_imbuement.renderer.feature.BaseHamsterArmorFeatureRenderer
@@ -74,6 +75,7 @@ object AIClient: ClientModInitializer{
         RegisterNetworking.registerClient()
         RegisterCommandClient.registerClient()
         AiConfig.registerClient()
+        ModCompatHelper.registerPage()
     }
 
     fun aiRandom(): Random{

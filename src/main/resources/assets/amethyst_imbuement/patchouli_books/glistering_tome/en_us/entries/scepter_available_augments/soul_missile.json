@@ -1,5 +1,5 @@
 {    
-"name": "Soul Missile Augment",    
+"name": "Soul Missile",
 "icon": "amethyst_imbuement:book_of_lore",    
 "category": "amethyst_imbuement:scepter_available_augments",    
 "pages": [        
@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() An enhanced version of Magic Missile that deals more damage and pierces armor.$(br)$(l)Magical School:$() $(c)Fury$()$(br)$(l)Mana Cost:$() 3$(br)$(l)Cooldown:$() 0.8 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Soul Missile Imbuing",
-"anchor": "soul_missile",
-"imbue_a_item": "amethyst_imbuement:citrine",
-"imbue_b_item": "amethyst_imbuement:citrine",
-"imbue_c_item": "amethyst_imbuement:citrine",
-"imbue_d_item": "amethyst_imbuement:citrine",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "minecraft:soul_sand",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:soul_sand",
-"craft_e_item": "tag:amethyst_core:tier_one_spell_scepters",
-"craft_f_item": "minecraft:soul_sand",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:soul_sand",
-"craft_i_item": "minecraft:air",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soul_missile\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)5$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/soul_missile_imbuing"
+  }
 ]
 }

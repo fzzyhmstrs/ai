@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() The user is immune from negative status effects.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(),$(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() Other common or jewelry augments (jewelry), other common augments (totem)"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Immunity Imbuing",
-"anchor": "immunity",
-"imbue_a_item": "minecraft:diamond",
-"imbue_b_item": "amethyst_imbuement:smoky_quartz",
-"imbue_c_item": "amethyst_imbuement:smoky_quartz",
-"imbue_d_item": "amethyst_imbuement:smoky_quartz",
-"craft_a_item": "minecraft:milk_bucket",
-"craft_b_item": "minecraft:milk_bucket",
-"craft_c_item": "minecraft:milk_bucket",
-"craft_d_item": "minecraft:milk_bucket",
-"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "minecraft:milk_bucket",
-"craft_g_item": "minecraft:milk_bucket",
-"craft_h_item": "minecraft:milk_bucket",
-"craft_i_item": "minecraft:milk_bucket",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:immunity\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)21$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/immunity_imbuing"
+  }
 ]
 }

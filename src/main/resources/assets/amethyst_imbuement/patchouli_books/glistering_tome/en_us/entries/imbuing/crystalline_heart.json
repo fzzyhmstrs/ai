@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "A gently beating magical heart. It can provide certain objects with a soul."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Crystalline Heart Imbuing",
-"imbue_a_item": "minecraft:soul_sand",
-"imbue_b_item": "minecraft:soul_sand",
-"imbue_c_item": "minecraft:soul_sand",
-"imbue_d_item": "minecraft:soul_sand",
-"craft_a_item": "minecraft:amethyst_shard",
-"craft_b_item": "minecraft:diamond",
-"craft_c_item": "minecraft:amethyst_shard",
-"craft_d_item": "minecraft:emerald",
-"craft_e_item": "amethyst_imbuement:golden_heart",
-"craft_f_item": "minecraft:emerald",
-"craft_g_item": "minecraft:amethyst_shard",
-"craft_h_item": "minecraft:diamond",
-"craft_i_item": "minecraft:amethyst_shard",
-"result_item": "amethyst_imbuement:crystalline_heart",
-"cost_text": "$(l)Level Cost: $(2)15$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/crystalline_heart_imbuing"
+  }
 ]
 }

@@ -16,23 +16,8 @@
       "desc_a": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Travelers Scepter",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "amethyst_imbuement:malachite_figurine",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "minecraft:fern",
-      "craft_b_item": "amethyst_imbuement:imbued_quartz",
-      "craft_c_item": "amethyst_imbuement:iridescent_orb",
-      "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "tag:amethyst_imbuement:wit_scepters",
-      "craft_f_item": "amethyst_imbuement:imbued_lapis",
-      "craft_g_item": "minecraft:prismarine_shard",
-      "craft_h_item": "amethyst_imbuement:imbued_quartz",
-      "craft_i_item": "minecraft:cactus",
-      "result_item": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)23$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/travelers_scepter_imbuing"
     }
   ]
 }

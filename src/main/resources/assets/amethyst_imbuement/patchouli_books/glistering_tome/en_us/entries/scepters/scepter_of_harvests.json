@@ -16,23 +16,8 @@
       "desc_a": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Scepter..Harvests",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "amethyst_imbuement:glowing_hoe",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "minecraft:hay_block",
-      "craft_b_item": "amethyst_imbuement:imbued_quartz",
-      "craft_c_item": "amethyst_imbuement:iridescent_orb",
-      "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "tag:amethyst_imbuement:grace_scepters",
-      "craft_f_item": "amethyst_imbuement:imbued_lapis",
-      "craft_g_item": "minecraft:hay_block",
-      "craft_h_item": "amethyst_imbuement:imbued_quartz",
-      "craft_i_item": "minecraft:hay_block",
-      "result_item": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"}, {modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)19$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/scepter_of_harvests_imbuing"
     }
   ]
 }

@@ -18,24 +18,9 @@
 "desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
   "desc_f": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}"
 },
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Furious Scepter",
-  "imbue_a_item": "minecraft:amethyst_shard",
-  "imbue_b_item": "amethyst_imbuement:lethal_gem",
-  "imbue_c_item": "minecraft:amethyst_shard",
-  "imbue_d_item": "minecraft:amethyst_shard",
-  "craft_a_item": "minecraft:air",
-  "craft_b_item": "minecraft:bow",
-  "craft_c_item": "minecraft:air",
-  "craft_d_item": "minecraft:bow",
-  "craft_e_item": "amethyst_imbuement:opaline_scepter",
-  "craft_f_item": "minecraft:bow",
-  "craft_g_item": "minecraft:air",
-  "craft_h_item": "minecraft:bow",
-  "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "cost_text": "$(l)Level Cost: $(2)5$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/furious_scepter_imbuing"
+  }
 ]
 }

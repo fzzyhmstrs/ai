@@ -1,17 +1,17 @@
 {
-	"name": "Bonestorm",
-	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/bonestorm.png",
+	"name": "Cholem",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/cholem.png",
 	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:progression/cholem",
+	"advancement": "amethyst_imbuement:spells/summon_cholem",
 	"pages": [
 		{
 			"type": "patchouli:text",
-			"text": "For those who've visited the Nether, the Bonestorm might send a chill down the spine. Fear not, this bony construct is your ally! Firing powerful, piercing bone spikes at your enemies, Bonestorm are perfect for long range combat.$(br2)How to Obtain:$(li)Spell: Summon Bonestorm"
+			"text": "$(br2)How to Obtain:$(li)Spell: Summon Cholem"
 		},
 		{
 			"type": "patchouli:entity",
-			"entity": "amethyst_imbuement:bonestorm",
-			"text": "$(li)Default Health: 24$(li)Default Damage: 4.5 to 7.5"
+			"entity": "amethyst_imbuement:cholem",
+			"text": "$(li)Default Health: 80$(li)Default Damage: 10 / 14 (enraged)"
 		}
 	]
 }

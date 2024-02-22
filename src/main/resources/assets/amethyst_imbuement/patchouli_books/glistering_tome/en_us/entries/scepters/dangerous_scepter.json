@@ -18,24 +18,9 @@
 "desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
   "desc_f": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}"
 },
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Dangerous Scepter",
-  "imbue_a_item": "amethyst_imbuement:citrine",
-  "imbue_b_item": "amethyst_imbuement:lethal_gem",
-  "imbue_c_item": "amethyst_imbuement:citrine",
-  "imbue_d_item": "amethyst_imbuement:citrine",
-  "craft_a_item": "minecraft:air",
-  "craft_b_item": "minecraft:stone_sword",
-  "craft_c_item": "minecraft:air",
-  "craft_d_item": "minecraft:stone_sword",
-  "craft_e_item": "amethyst_imbuement:opaline_scepter",
-  "craft_f_item": "minecraft:stone_sword",
-  "craft_g_item": "minecraft:air",
-  "craft_h_item": "minecraft:stone_sword",
-  "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "cost_text": "$(l)Level Cost: $(2)7$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/dangerous_scepter_imbuing"
+  }
 ]
 }

@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "The Glistering Trident is an enhanced version of the common prismarine version. Enchant this trident with all the enchantments you'd expect (and more!), augment it even further. $(br2)Base damage is substantially increased over the Trident."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Glistering Trident",
-"imbue_a_item": "minecraft:gold_ingot",
-"imbue_b_item": "minecraft:gold_ingot",
-"imbue_c_item": "minecraft:gold_ingot",
-"imbue_d_item": "minecraft:gold_ingot",
-"craft_a_item": "minecraft:prismarine_crystals",
-"craft_b_item": "amethyst_imbuement:garnet",
-"craft_c_item": "minecraft:prismarine_crystals",
-"craft_d_item": "amethyst_imbuement:garnet",
-"craft_e_item": "minecraft:trident",
-"craft_f_item": "amethyst_imbuement:garnet",
-"craft_g_item": "minecraft:prismarine_crystals",
-"craft_h_item": "amethyst_imbuement:garnet",
-"craft_i_item": "minecraft:prismarine_crystals",
-"result_item": "amethyst_imbuement:glistering_trident",
-"cost_text": "$(l)Level Cost: $(2)15$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/glistering_trident_imbuing"
+  }
 ]
 }

@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "This fabric glitters strangely, even outside of direct light. Use it to craft some basic armor, as well as for crafting spell scrolls."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Shimmering Fabric Imbuing",
-"imbue_a_item": "amethyst_imbuement:imbued_lapis",
-"imbue_b_item": "amethyst_imbuement:imbued_quartz",
-"imbue_c_item": "amethyst_imbuement:imbued_quartz",
-"imbue_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_a_item": "tag:minecraft:wool_carpets",
-"craft_b_item": "tag:minecraft:wool_carpets",
-"craft_c_item": "tag:minecraft:wool_carpets",
-"craft_d_item": "tag:minecraft:wool_carpets",
-"craft_e_item": "amethyst_imbuement:gem_dust",
-"craft_f_item": "tag:minecraft:wool_carpets",
-"craft_g_item": "tag:minecraft:wool_carpets",
-"craft_h_item": "tag:minecraft:wool_carpets",
-"craft_i_item": "tag:minecraft:wool_carpets",
-"result_item": "amethyst_imbuement:shimmering_fabric#8",
-"cost_text": "$(l)Level Cost: $(2)7$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/shimmering_fabric_imbuing"
+  }
 ]
 }

@@ -1,5 +1,5 @@
 {    
 "name": "Imbuing",
 "description": "Listed here are imbuements you can perform on your $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() that may not be described elsewhere within this tome.",    
-"icon": "minecraft:experience_bottle"
+"icon": "amethyst_imbuement:imbuing_table"
 }

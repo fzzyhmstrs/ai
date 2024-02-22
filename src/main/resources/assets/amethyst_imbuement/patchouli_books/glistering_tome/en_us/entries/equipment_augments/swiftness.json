@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Grants the wearer Speed.$(br)$(l)Enchants:$() $(#490)Leggings$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Swiftness Imbuing",
-"anchor": "swiftness",
-"imbue_a_item": "amethyst_imbuement:opal",
-"imbue_b_item": "minecraft:amethyst_shard",
-"imbue_c_item": "minecraft:amethyst_shard",
-"imbue_d_item": "minecraft:amethyst_shard",
-"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_b_item": "minecraft:sugar",
-"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_d_item": "minecraft:sugar",
-"craft_e_item": "minecraft:chainmail_boots",
-"craft_f_item": "minecraft:sugar",
-"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_h_item": "minecraft:sugar",
-"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:swiftness\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)12$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/swiftness_imbuing"
+  }
 ]
 }

@@ -16,23 +16,8 @@
       "input_item": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Sojourn",
-      "imbue_a_item": "minecraft:netherite_ingot",
-      "imbue_b_item": "minecraft:elytra",
-      "imbue_c_item": "minecraft:netherite_ingot",
-      "imbue_d_item": "minecraft:netherite_ingot",
-      "craft_a_item": "minecraft:cartography_table",
-      "craft_b_item": "amethyst_imbuement:garnet",
-      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-      "craft_d_item": "amethyst_imbuement:pyrite",
-      "craft_e_item": "tag:amethyst_imbuement:sojourn_scepters",
-      "craft_f_item": "amethyst_imbuement:pyrite",
-      "craft_g_item": "amethyst_imbuement:inquisitive_gem",
-      "craft_h_item": "amethyst_imbuement:garnet",
-      "craft_i_item": "minecraft:cartography_table",
-      "result_item": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)37$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/sojourn_imbuing"
     }
   ]
 }

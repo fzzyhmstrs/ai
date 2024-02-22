@@ -25,7 +25,9 @@ import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.DynamicRegistryManager
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
 
 
@@ -171,6 +173,13 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     fun getInputs(): Array<Ingredient>{
         return inputs
     }
+
+    override fun isIgnoredInRecipeBook(): Boolean {
+        return true
+    }
+    override fun getIngredients(): DefaultedList<Ingredient> {
+        return DefaultedList.copyOf(Ingredient.EMPTY,*getInputs())
+    }
     override fun getOutput(registryManager: DynamicRegistryManager): ItemStack {
         return outputItem.copy()
     }
@@ -180,7 +189,7 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     fun setOutput(stack: ItemStack){}
     private fun outputGenerator(): ItemStack{
         if (augment == "") return ItemStack(FzzyPort.ITEM.getOrEmpty(resultId).orElse(Items.AIR),count)
-        val identifier = Identifier(augment)
+        val identifier = getAugmentId()
         val enchant = FzzyPort.ENCHANTMENT.get(identifier)
         val modifier = ModifierRegistry.getByType<AugmentModifier>(identifier)
         return if (enchant != null){
@@ -253,6 +262,16 @@ class ImbuingRecipe(private val inputs: Array<Ingredient>,
     }
     fun getCount(): Int {
         return count
+    }
+    fun getName(): Text {
+        return if (augment == ""){
+            outputItem.name
+        } else {
+            val identifier = getAugmentId()
+            FzzyPort.ENCHANTMENT.get(identifier)?.getName(1)
+                ?: ModifierRegistry.getByType<AugmentModifier>(identifier)?.getName()
+                ?: outputItem.name
+        }
     }
     override fun getId(): Identifier {
         return id

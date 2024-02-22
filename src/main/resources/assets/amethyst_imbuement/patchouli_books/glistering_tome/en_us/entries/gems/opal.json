@@ -7,24 +7,9 @@
 	"type": "patchouli:text",            
 	"text": "$(l)Meaning:$() Amplification and Invisibility $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce opal in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Opal Imbuing",
-"imbue_a_item": "minecraft:water_bucket",
-"imbue_b_item": "minecraft:water_bucket",
-"imbue_c_item": "minecraft:water_bucket",
-"imbue_d_item": "minecraft:water_bucket",
-"craft_a_item": "minecraft:emerald",
-"craft_b_item": "minecraft:prismarine_crystals",
-"craft_c_item": "amethyst_imbuement:citrine",
-"craft_d_item": "minecraft:redstone",
-"craft_e_item": "amethyst_imbuement:imbued_quartz",
-"craft_f_item": "minecraft:amethyst_shard",
-"craft_g_item": "amethyst_imbuement:danburite",
-"craft_h_item": "amethyst_imbuement:imbued_lapis",
-"craft_i_item": "amethyst_imbuement:smoky_quartz",
-"result_item": "amethyst_imbuement:opal",
-"cost_text": "$(l)Level Cost: $(2)6$()"
-}     
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/opal_imbuing"
+	}
 ]
 }

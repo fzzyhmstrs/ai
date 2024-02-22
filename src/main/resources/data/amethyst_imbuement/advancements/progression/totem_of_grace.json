@@ -1,0 +1,28 @@
+{
+"criteria":{
+	"completed_summon_grace_totem":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:spells/summon_grace_totem"
+		}
+	},
+	"got_healers_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:healers_gem"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"completed_summon_grace_totem",
+		"got_healers_gem"
+	]
+]
+}

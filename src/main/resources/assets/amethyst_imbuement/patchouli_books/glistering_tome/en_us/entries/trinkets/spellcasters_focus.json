@@ -15,23 +15,8 @@
       "text": "When crafting the unlit focus, it is $(l)very important$() that you pick the bottom middle ingredient carefully. Different ingredients imbue the focus with different innate attributes; pick one that suits your playstyle! Some provide negative effects so pick wisely! See the $(l:amethyst_imbuement:trinkets/focus_reagents)focus reagents$() entry for details."
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Focus Imbuing",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "minecraft:gold_ingot",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "amethyst_imbuement:blazing_gem",
-      "craft_b_item": "amethyst_imbuement:healers_gem",
-      "craft_c_item": "amethyst_imbuement:sparking_gem",
-      "craft_d_item": "amethyst_imbuement:mystical_gem",
-      "craft_e_item": "amethyst_imbuement:crystalline_heart",
-      "craft_f_item": "amethyst_imbuement:inquisitive_gem",
-      "craft_g_item": "amethyst_imbuement:lethal_gem",
-      "craft_h_item": "tag:amethyst_imbuement:focus_reagents",
-      "craft_i_item": "amethyst_imbuement:brutal_gem",
-      "result_item": "amethyst_imbuement:spellcasters_focus",
-      "cost_text": "$(l)Level Cost: $(2)39$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/spellcasters_focus_imbuing"
     },
     {
       "type": "patchouli:text",
@@ -42,12 +27,9 @@
       "text": "Once a focus reaches the next tier, it will ignite, offering you three different chances to affix it with new modifiers! Made a mistake, or don't like the options available? You can also respec a focus.$(br2)$(l)IMPORTANT: If you devote most of your spellcasting efforts to a specific spell, your focus will attune to that spell, and one of the ignited options will be a spell-specific modifier that provides that spell a large boost.$()"
     },
     {
-      "type": "amethyst_imbuement:altar_recipe",
-      "anchor": "enhancing_focus_respec",
-      "input_item": "amethyst_imbuement:gem_dust",
-      "addition_item": "amethyst_imbuement:spellcasters_focus",
-      "flower_item": "amethyst_imbuement:mystical_gem",
-      "output_item": "amethyst_imbuement:spellcasters_focus"
+      "type": "amethyst_imbuement:enhancing",
+      "recipe": "amethyst_imbuement:enhancing/spellcasters_focus_reset_enhancing",
+      "text": "Respecing will remove the last modifier picked and reset all progress towards the last tier."
     }
   ]
 }

@@ -2,12 +2,19 @@ package me.fzzyhmstrs.amethyst_imbuement.compat
 
 import dev.emi.emi.api.EmiApi
 import me.fzzyhmstrs.amethyst_imbuement.compat.emi.EmiClientPlugin
+import me.fzzyhmstrs.amethyst_imbuement.compat.patchouli.PatchouliCompat
 import me.fzzyhmstrs.amethyst_imbuement.screen.ImbuingTableScreen
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
+import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.Identifier
 
 object ModCompatHelper {
+
+    private val patchouliLoaded by lazy {
+        FabricLoader.getInstance().isModLoaded("patchouli")
+    }
 
     private val viewerHierarchy: Map<String, Int> = mapOf(
         "emi" to 1,
@@ -15,7 +22,17 @@ object ModCompatHelper {
         "jei" to 3
     )
 
-    fun isValidHandlerOffset(offset: Int): Boolean{
+    fun openBookGui(playerEntity: ServerPlayerEntity, identifier: Identifier){
+        if (patchouliLoaded)
+            PatchouliCompat.openBookGui(playerEntity, identifier)
+    }
+
+    fun registerPage(){
+        if (patchouliLoaded)
+            PatchouliCompat.registerPage()
+    }
+
+    fun isValidHandlerOffset(offset: Int): Boolean {
         return viewerHierarchy.values.contains(offset)
     }
 

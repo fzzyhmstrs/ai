@@ -6,7 +6,7 @@
 			"items":[
 				{
 					"items":[
-						"amethyst_imbuement:book_of_tnt"
+						"amethyst_imbuement:book_of_tales"
 					],
 					"nbt": "{book_of_lore_augment:\"amethyst_imbuement:create_tnt\"}"
 				}

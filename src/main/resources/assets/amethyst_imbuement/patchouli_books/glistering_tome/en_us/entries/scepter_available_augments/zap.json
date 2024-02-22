@@ -1,5 +1,5 @@
 {    
-"name": "Zap Augment",    
+"name": "Zap",
 "icon": "amethyst_imbuement:book_of_lore",    
 "category": "amethyst_imbuement:scepter_available_augments",    
 "pages": [        
@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Shocks targets in a line with a powerful static charge.$(br)$(l)Magical School:$() $(c)Fury$()$(br)$(l)Mana Cost:$() 6$(br)$(l)Cooldown:$() 0.9 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$(), $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 1"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Zap Imbuing",
-"anchor": "zap",
-"imbue_a_item": "minecraft:amethyst_shard",
-"imbue_b_item": "minecraft:amethyst_shard",
-"imbue_c_item": "minecraft:amethyst_shard",
-"imbue_d_item": "minecraft:amethyst_shard",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_e_item": "tag:amethyst_core:tier_one_spell_scepters",
-"craft_f_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_i_item": "minecraft:air",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:zap\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)7$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/zap_imbuing"
+  }
 ]
 }

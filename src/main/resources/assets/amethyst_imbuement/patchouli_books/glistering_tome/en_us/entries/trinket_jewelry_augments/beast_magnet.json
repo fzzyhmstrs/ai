@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Summons and pets pick up items and xp for you, auto-depositing in your inventory. They won't actively seek out items, simply mop up items they happen to be nearby, much like a magnet.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Beast Magnet Imbuing",
-"anchor": "beast_magnet",
-"imbue_a_item": "minecraft:emerald_block",
-"imbue_b_item": "minecraft:emerald_block",
-"imbue_c_item": "minecraft:emerald_block",
-"imbue_d_item": "minecraft:emerald_block",
-"craft_a_item": "minecraft:iron_ingot",
-"craft_b_item": "minecraft:experience_bottle",
-"craft_c_item": "minecraft:iron_ingot",
-"craft_d_item": "minecraft:lead",
-"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet",
-"craft_f_item": "minecraft:lead",
-"craft_g_item": "minecraft:iron_ingot",
-"craft_h_item": "minecraft:experience_bottle",
-"craft_i_item": "minecraft:iron_ingot",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:beast_magnet\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)13$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/beast_magnet_imbuing"
+  }
 ]
 }

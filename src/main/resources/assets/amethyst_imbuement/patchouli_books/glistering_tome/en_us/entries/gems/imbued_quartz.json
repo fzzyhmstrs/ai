@@ -7,32 +7,13 @@
 	"type": "patchouli:text",            
 	"text": "$(l)Meaning:$() Healing and Recovery $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce imbued quartz in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() or enhance $(#b0b)nether quartz$() in the $(#490)$(l:amethyst_imbuement:altars/crystal_altar)Crystal Altar$()."      
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Imbued Quartz Imbuing",
-"imbue_a_item": "minecraft:rose_bush",
-"imbue_b_item": "minecraft:rose_bush",
-"imbue_c_item": "minecraft:rose_bush",
-"imbue_d_item": "minecraft:rose_bush",
-"craft_a_item": "minecraft:quartz",
-"craft_b_item": "minecraft:quartz",
-"craft_c_item": "minecraft:quartz",
-"craft_d_item": "minecraft:quartz",
-"craft_e_item": "minecraft:glistering_melon_slice",
-"craft_f_item": "minecraft:quartz",
-"craft_g_item": "minecraft:quartz",
-"craft_h_item": "minecraft:quartz",
-"craft_i_item": "minecraft:quartz",
-"result_item": "amethyst_imbuement:imbued_quartz#4",
-"cost_text": "$(l)Level Cost: $(2)1$()"
-},
-{
-"type": "amethyst_imbuement:altar_recipe",
-"anchor": "enhancing_quartz",
-"input_item": "minecraft:redstone",
-"addition_item": "minecraft:quartz",
-"flower_item": "minecraft:rose_bush",
-"output_item": "amethyst_imbuement:imbued_quartz"
-}    
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/imbued_quartz_imbuing"
+	},
+	{
+		"type": "amethyst_imbuement:enhancing",
+		"recipe": "amethyst_imbuement:enhancing/imbued_quartz_enhancing"
+	}
 ]
 }

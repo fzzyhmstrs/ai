@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Provides step assist, allowing you to move up one block steps without jumping.$(br)$(l)Enchants:$() $(#490)Boots$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Striding Imbuing",
-"anchor": "striding",
-"imbue_a_item": "amethyst_imbuement:energetic_opal",
-"imbue_b_item": "amethyst_imbuement:opal",
-"imbue_c_item": "amethyst_imbuement:opal",
-"imbue_d_item": "amethyst_imbuement:opal",
-"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_b_item": "minecraft:redstone_block",
-"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_d_item": "minecraft:redstone_block",
-"craft_e_item": "minecraft:chainmail_boots",
-"craft_f_item": "minecraft:redstone_block",
-"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_h_item": "minecraft:redstone_block",
-"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:striding\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)18$()" 
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/striding_imbuing"
+  }
 ]
 }

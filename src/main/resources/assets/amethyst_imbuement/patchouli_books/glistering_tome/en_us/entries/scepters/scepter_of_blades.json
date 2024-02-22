@@ -16,23 +16,8 @@
       "desc_a": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Scepter of Blades Imbuing",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "amethyst_imbuement:glowing_blade",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "minecraft:diamond_sword",
-      "craft_b_item": "amethyst_imbuement:imbued_quartz",
-      "craft_c_item": "amethyst_imbuement:iridescent_orb",
-      "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "tag:amethyst_imbuement:fury_scepters",
-      "craft_f_item": "amethyst_imbuement:imbued_lapis",
-      "craft_g_item": "minecraft:diamond_sword",
-      "craft_h_item": "amethyst_imbuement:imbued_quartz",
-      "craft_i_item": "minecraft:diamond_sword",
-      "result_item": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)23$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/scepter_of_blades_imbuing"
     }
   ]
 }

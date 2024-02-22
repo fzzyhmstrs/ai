@@ -16,23 +16,8 @@
       "input_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Aegis",
-      "imbue_a_item": "minecraft:netherite_ingot",
-      "imbue_b_item": "amethyst_imbuement:crystalline_heart",
-      "imbue_c_item": "minecraft:netherite_ingot",
-      "imbue_d_item": "minecraft:netherite_ingot",
-      "craft_a_item": "minecraft:diamond_helmet",
-      "craft_b_item": "amethyst_imbuement:garnet",
-      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-      "craft_d_item": "amethyst_imbuement:pyrite",
-      "craft_e_item": "tag:amethyst_imbuement:aegis_scepters",
-      "craft_f_item": "amethyst_imbuement:pyrite",
-      "craft_g_item": "amethyst_imbuement:brilliant_diamond",
-      "craft_h_item": "amethyst_imbuement:garnet",
-      "craft_i_item": "minecraft:diamond_helmet",
-      "result_item": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)39$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/aegis_imbuing"
     }
   ]
 }

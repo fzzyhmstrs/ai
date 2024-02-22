@@ -7,24 +7,9 @@
 	"type": "patchouli:text",            
 	"text": "$(l)Meaning:$() Strength and Power $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce garnets in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()"      
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Garnet Imbuing",
-"imbue_a_item": "minecraft:flint",
-"imbue_b_item": "minecraft:flint",
-"imbue_c_item": "minecraft:flint",
-"imbue_d_item": "minecraft:flint",
-"craft_a_item": "amethyst_imbuement:citrine",
-"craft_b_item": "minecraft:redstone",
-"craft_c_item": "amethyst_imbuement:citrine",
-"craft_d_item": "minecraft:redstone",
-"craft_e_item": "minecraft:diamond",
-"craft_f_item": "minecraft:redstone",
-"craft_g_item": "amethyst_imbuement:citrine",
-"craft_h_item": "minecraft:redstone",
-"craft_i_item": "amethyst_imbuement:citrine",
-"result_item": "amethyst_imbuement:garnet",
-"cost_text": "$(l)Level Cost: $(2)15$()"
-}
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/garnet_imbuing"
+	}
 ]
 }

@@ -8,12 +8,9 @@
       "text": "A disenchanting table strips spells off of a scepter onto a spell scroll, rather than a book. This scroll can then be added to another scepter with the following recipe. This only works with scrolls that are disenchanted; a scroll that is made in the crystal altar directly will not work."
     },
     {
-      "type": "amethyst_imbuement:altar_recipe",
-      "anchor": "enhancing_adding_spell",
-      "input_item": "amethyst_imbuement:knowledge_powder",
-      "addition_item": "tag:amethyst_core:tier_one_spell_scepters",
-      "flower_item": "amethyst_imbuement:spell_scroll",
-      "output_item": "tag:amethyst_core:tier_one_spell_scepters"
+      "type": "amethyst_imbuement:enhancing",
+      "recipe": "amethyst_imbuement:enhancing/spell_addition_enhancing",
+      "text": "The scepter still needs to be able to accept the spell you are trying to add. Trying to combine spells that already exist on the scepter won't do anything."
     }
   ]
 }

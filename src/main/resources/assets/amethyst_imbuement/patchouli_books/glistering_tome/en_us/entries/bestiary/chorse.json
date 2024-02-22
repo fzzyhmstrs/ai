@@ -1,0 +1,34 @@
+{
+	"name": "Cholem",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/chorse.png",
+	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:how_strange",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "Majestic. Elegant. Cluck. The Chorse is the pinnacle of mounts; half chicken, half horse, perfect combo of both. Chorses come in a wide variety of colors and costumes. Find strange eggs or breed them with chicken breeding items to find your favorite color! See the following pages for care instructions. $(br2)How to Obtain:$(li)Item: Strange Egg$(li)Breeding"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:chorse",
+			"text": "$(li)Default Health: 80"
+		},
+		{
+			"type": "patchouli:spotlight",
+			"title": "Strange Egg",
+			"item": "amethyst_imbuement:strange_egg",
+			"link_recipe": true,
+			"text": "How strange.... This egg is simply a Chorse spawn egg. Can be used in all the normal ways spawn eggs can be used. Find this oddity in witch houses."
+		},
+		{
+			"type": "patchouli:text",
+			"title": "Breeding",
+			"text": "Chorses can be bred with standard Chicken Food. They follow all the standard breeding mechanics of vanilla mobs. Baby chorses (choals?) are born with a completely random variant, and Chorses always have the same stats."
+		},
+		{
+			"type": "patchouli:text",
+			"title": "Stunting",
+			"text": "Baby chorses are cute lil' fellers ain't they? If you want to keep your chorse baby forever, feed it $(#490)Fermented Spider Eye$() to stunt it. A stunted baby will never grow up. If you decide you do want the adult chorse after all, feed the baby a $(#490)Golden Carrot$() to un-stunt it."
+		}
+	]
+}

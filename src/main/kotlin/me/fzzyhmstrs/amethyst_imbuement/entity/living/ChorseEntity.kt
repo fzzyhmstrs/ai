@@ -255,11 +255,19 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         return stack?.isOf(Items.FERMENTED_SPIDER_EYE) == true
     }
 
+    private fun isUnStuntingItem(stack: ItemStack?): Boolean {
+        return stack?.isOf(Items.GOLDEN_CARROT) == true
+    }
+
     //fix this pls
     override fun receiveFood(player: PlayerEntity?, item: ItemStack): Boolean {
         var bl = false
         if (isStuntingItem(item) && isBaby){
             setStunted(true)
+            return true
+        }
+        if (isUnStuntingItem(item) && isBaby){
+            setStunted(false)
             return true
         }
         if (BREEDING_INGREDIENT.test(item)) {
@@ -294,7 +302,7 @@ open class ChorseEntity(entityType: EntityType<out ChorseEntity>, world: World):
         }
         val itemStack = player.getStackInHand(hand)
         if (!itemStack.isEmpty) {
-            if (isBreedingItem(itemStack) || isStuntingItem(itemStack)) {
+            if (isBreedingItem(itemStack) || isStuntingItem(itemStack)|| isUnStuntingItem(itemStack)) {
                 return interactHorse(player, itemStack)
             }
         }

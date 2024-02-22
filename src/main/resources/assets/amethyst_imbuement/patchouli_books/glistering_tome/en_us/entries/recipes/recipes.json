@@ -13,6 +13,11 @@
 "recipe": "amethyst_imbuement:crafting/golden_heart",
 "recipe2": "amethyst_imbuement:crafting/steel_block"
 },
+  {
+    "type": "patchouli:crafting",
+    "recipe": "amethyst_imbuement:crafting/witches_bookshelf",
+    "recipe2": "amethyst_imbuement:crafting/beryl_copper_ingot"
+  },
 {
 "type": "patchouli:crafting",
 "anchor": "beryl_copper_block",

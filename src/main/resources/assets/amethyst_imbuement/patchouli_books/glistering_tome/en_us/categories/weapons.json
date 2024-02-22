@@ -1,5 +1,5 @@
 {    
-"name": "Imbued Weapons",
-"description": "Channel your soul into the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() to produce deadly enhanced weaponry, with capabilities far beyond their vanilla counterparts.",    
+"name": "Equipment",
+"description": "Channel your soul into the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), the Crystal Altar, and even the simple Crafting Table to produce deadly enhanced weaponry and powerful sets of tools, with capabilities far beyond their vanilla counterparts.",
 "icon": "amethyst_imbuement:sniper_bow"
 }

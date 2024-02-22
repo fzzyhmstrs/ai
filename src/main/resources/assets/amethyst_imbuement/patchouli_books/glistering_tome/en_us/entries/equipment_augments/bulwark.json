@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Shield heals the holder by 1 health whenever hit.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Bulwark Imbuing",
-"anchor": "bulwark",
-"imbue_a_item": "amethyst_imbuement:tigers_eye",
-"imbue_b_item": "amethyst_imbuement:imbued_quartz",
-"imbue_c_item": "amethyst_imbuement:imbued_quartz",
-"imbue_d_item": "amethyst_imbuement:imbued_quartz",
-"craft_a_item": "minecraft:glistering_melon_slice",
-"craft_b_item": "amethyst_imbuement:heartstone",
-"craft_c_item": "minecraft:glistering_melon_slice",
-"craft_d_item": "minecraft:glistering_melon_slice",
-"craft_e_item": "minecraft:shield",
-"craft_f_item": "minecraft:glistering_melon_slice",
-"craft_g_item": "minecraft:glistering_melon_slice",
-"craft_h_item": "minecraft:glistering_melon_slice",
-"craft_i_item": "minecraft:glistering_melon_slice",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:bulwark\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)29$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/bulwark_imbuing"
+  }
 ]
 }

@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Adds 2% chance of blocking an attack per level. Stacks with jewelery.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Shielding Imbuing",
-"anchor": "shielding",
-"imbue_a_item": "amethyst_imbuement:smoky_quartz",
-"imbue_b_item": "amethyst_imbuement:imbued_quartz",
-"imbue_c_item": "amethyst_imbuement:imbued_quartz",
-"imbue_d_item": "amethyst_imbuement:smoky_quartz",
-"craft_a_item": "minecraft:shield",
-"craft_b_item": "minecraft:golden_apple",
-"craft_c_item": "minecraft:shield",
-"craft_d_item": "amethyst_imbuement:steel_ingot",
-"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "amethyst_imbuement:steel_ingot",
-"craft_g_item": "minecraft:shield",
-"craft_h_item": "amethyst_imbuement:steel_ingot",
-"craft_i_item": "minecraft:shield",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:shielding\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)4$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/shielding_imbuing"
+  }
 ]
 }

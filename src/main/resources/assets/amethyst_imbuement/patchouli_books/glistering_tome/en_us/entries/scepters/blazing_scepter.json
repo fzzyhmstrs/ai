@@ -16,23 +16,8 @@
       "desc_a": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Blazing Scepter",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "amethyst_imbuement:blazing_gem",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "minecraft:blaze_powder",
-      "craft_b_item": "amethyst_imbuement:imbued_quartz",
-      "craft_c_item": "amethyst_imbuement:iridescent_orb",
-      "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "tag:amethyst_imbuement:fury_scepters",
-      "craft_f_item": "amethyst_imbuement:imbued_lapis",
-      "craft_g_item": "minecraft:blaze_powder",
-      "craft_h_item": "amethyst_imbuement:imbued_quartz",
-      "craft_i_item": "minecraft:blaze_powder",
-      "result_item": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)19$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/blazing_scepter_imbuing"
     }
   ]
 }

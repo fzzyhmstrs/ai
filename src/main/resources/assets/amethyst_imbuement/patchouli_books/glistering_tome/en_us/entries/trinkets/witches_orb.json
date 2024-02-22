@@ -15,23 +15,8 @@
       "text": "When crafting the orb, pick the center aspect gem carefully! Each one imbues the orb with a different Scepter Modifier. In some cases, the modifier is unique to the orb and can't be obtained any other way. See the $(l:amethyst_imbuement:scepter_upgrading/aspect_gems)aspect gems$() entry for details."
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Witches Orb Imbuing",
-      "imbue_a_item": "amethyst_imbuement:opal",
-      "imbue_b_item": "amethyst_imbuement:opal",
-      "imbue_c_item": "amethyst_imbuement:opal",
-      "imbue_d_item": "amethyst_imbuement:opal",
-      "craft_a_item": "amethyst_imbuement:gem_dust",
-      "craft_b_item": "amethyst_imbuement:hard_light_block",
-      "craft_c_item": "amethyst_imbuement:gem_dust",
-      "craft_d_item": "amethyst_imbuement:hard_light_block",
-      "craft_e_item": "tag:amethyst_imbuement:aspect_gems",
-      "craft_f_item": "amethyst_imbuement:hard_light_block",
-      "craft_g_item": "amethyst_imbuement:gem_dust",
-      "craft_h_item": "amethyst_imbuement:hard_light_block",
-      "craft_i_item": "amethyst_imbuement:gem_dust",
-      "result_item": "amethyst_imbuement:witches_orb",
-      "cost_text": "$(l)Level Cost: $(2)19$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/witches_orb_imbuing"
     }
   ]
 }

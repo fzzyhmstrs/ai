@@ -16,23 +16,8 @@
       "input_item": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Redemption",
-      "imbue_a_item": "minecraft:netherite_ingot",
-      "imbue_b_item": "amethyst_imbuement:heartstone",
-      "imbue_c_item": "minecraft:netherite_ingot",
-      "imbue_d_item": "minecraft:netherite_ingot",
-      "craft_a_item": "minecraft:golden_apple",
-      "craft_b_item": "amethyst_imbuement:garnet",
-      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-      "craft_d_item": "amethyst_imbuement:pyrite",
-      "craft_e_item": "tag:amethyst_imbuement:redemption_scepters",
-      "craft_f_item": "amethyst_imbuement:pyrite",
-      "craft_g_item": "minecraft:enchanted_golden_apple",
-      "craft_h_item": "amethyst_imbuement:garnet",
-      "craft_i_item": "minecraft:golden_apple",
-      "result_item": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)37$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/redemption_imbuing"
     }
   ]
 }

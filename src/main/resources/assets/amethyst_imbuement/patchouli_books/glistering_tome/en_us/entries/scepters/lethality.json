@@ -15,24 +15,9 @@
   "anc_c": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
 "input_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}"
 },
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Lethality Imbuing",
-  "imbue_a_item": "minecraft:netherite_ingot",
-  "imbue_b_item": "amethyst_imbuement:glowing_blade",
-  "imbue_c_item": "minecraft:netherite_ingot",
-  "imbue_d_item": "minecraft:netherite_ingot",
-  "craft_a_item": "amethyst_imbuement:garnet_sword",
-  "craft_b_item": "amethyst_imbuement:garnet",
-  "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-  "craft_d_item": "amethyst_imbuement:pyrite",
-  "craft_e_item": "tag:amethyst_imbuement:lethality_scepters",
-  "craft_f_item": "amethyst_imbuement:pyrite",
-  "craft_g_item": "amethyst_imbuement:lethal_gem",
-  "craft_h_item": "amethyst_imbuement:garnet",
-  "craft_i_item": "amethyst_imbuement:garnet_sword",
-  "result_item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "cost_text": "$(l)Level Cost: $(2)45$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/lethality_imbuing"
+  }
 ]
 }

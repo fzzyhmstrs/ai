@@ -16,23 +16,8 @@
       "desc_a": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Scepter of Recall",
-      "imbue_a_item": "minecraft:gold_ingot",
-      "imbue_b_item": "minecraft:lodestone",
-      "imbue_c_item": "minecraft:gold_ingot",
-      "imbue_d_item": "minecraft:gold_ingot",
-      "craft_a_item": "minecraft:ender_eye",
-      "craft_b_item": "amethyst_imbuement:imbued_quartz",
-      "craft_c_item": "amethyst_imbuement:iridescent_orb",
-      "craft_d_item": "amethyst_imbuement:imbued_lapis",
-      "craft_e_item": "tag:amethyst_imbuement:wit_scepters",
-      "craft_f_item": "amethyst_imbuement:imbued_lapis",
-      "craft_g_item": "minecraft:ender_eye",
-      "craft_h_item": "amethyst_imbuement:imbued_quartz",
-      "craft_i_item": "minecraft:ender_eye",
-      "result_item": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)21$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/scepter_of_recall_imbuing"
     }
   ]
 }

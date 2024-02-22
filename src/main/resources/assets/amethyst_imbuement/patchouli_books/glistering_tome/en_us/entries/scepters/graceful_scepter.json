@@ -18,24 +18,9 @@
   "desc_e": "amethyst_imbuement:bardic_scepter{modifiers:[{modifier_id:\"amethyst_core:attuned\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
   "desc_f": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"}]}"
 },
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Graceful Scepter",
-  "imbue_a_item": "amethyst_imbuement:imbued_quartz",
-  "imbue_b_item": "amethyst_imbuement:healers_gem",
-  "imbue_c_item": "amethyst_imbuement:imbued_quartz",
-  "imbue_d_item": "amethyst_imbuement:imbued_quartz",
-  "craft_a_item": "minecraft:air",
-  "craft_b_item": "minecraft:glistering_melon_slice",
-  "craft_c_item": "minecraft:air",
-  "craft_d_item": "minecraft:glistering_melon_slice",
-  "craft_e_item": "amethyst_imbuement:opaline_scepter",
-  "craft_f_item": "minecraft:glistering_melon_slice",
-  "craft_g_item": "minecraft:air",
-  "craft_h_item": "minecraft:glistering_melon_slice",
-  "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
-  "cost_text": "$(l)Level Cost: $(2)5$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/graceful_scepter_imbuing"
+  }
 ]
 }

@@ -1,5 +1,6 @@
 {    
 "name": "Bestiary",
 "description": "Descriptions of the various mobs added by Amethyst Imbuement, both natural and summoned.",
-"icon": "amethyst_imbuement:strange_egg"
+"icon": "amethyst_imbuement:strange_egg",
+"secret": true
 }

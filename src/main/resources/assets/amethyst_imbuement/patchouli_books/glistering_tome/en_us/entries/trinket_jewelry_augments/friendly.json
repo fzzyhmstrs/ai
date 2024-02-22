@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Endermen and piglins will not bother the wearer.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Friendly Imbuing",
-"anchor": "friendly",
-"imbue_a_item": "amethyst_imbuement:pyrite",
-"imbue_b_item": "amethyst_imbuement:smoky_quartz",
-"imbue_c_item": "amethyst_imbuement:smoky_quartz",
-"imbue_d_item": "amethyst_imbuement:smoky_quartz",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "minecraft:carved_pumpkin",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:gold_ingot",
-"craft_e_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet",
-"craft_f_item": "minecraft:gold_ingot",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:gold_ingot",
-"craft_i_item": "minecraft:air",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:friendly\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)13$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/friendly_imbuing"
+  }
 ]
 }

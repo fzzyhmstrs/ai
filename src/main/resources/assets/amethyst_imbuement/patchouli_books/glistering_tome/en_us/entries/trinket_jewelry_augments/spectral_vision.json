@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Highlights nearby enemies with a spectral glow, even through obstacles.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Headband$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Spectral Vision Imbuing",
-"anchor": "spectral_vision",
-"imbue_a_item": "amethyst_imbuement:pyrite",
-"imbue_b_item": "amethyst_imbuement:danburite",
-"imbue_c_item": "amethyst_imbuement:danburite",
-"imbue_d_item": "amethyst_imbuement:danburite",
-"craft_a_item": "minecraft:ender_eye",
-"craft_b_item": "minecraft:spectral_arrow",
-"craft_c_item": "minecraft:ender_eye",
-"craft_d_item": "minecraft:spectral_arrow",
-"craft_e_item": "amethyst_imbuement:imbued_headband",
-"craft_f_item": "minecraft:spectral_arrow",
-"craft_g_item": "minecraft:ender_eye",
-"craft_h_item": "minecraft:spectral_arrow",
-"craft_i_item": "minecraft:ender_eye",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:spectral_vision\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)19$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/spectral_vision_imbuing"
+  }
 ]
 }

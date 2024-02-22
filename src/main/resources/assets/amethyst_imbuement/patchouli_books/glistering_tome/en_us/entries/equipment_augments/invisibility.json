@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Renders the wearer invisible, and the augmented armor piece does not reduce the invisibility effectiveness.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Invisibility Imbuing",
-"anchor": "invisibility",
-"imbue_a_item": "amethyst_imbuement:opal",
-"imbue_b_item": "amethyst_imbuement:opal",
-"imbue_c_item": "amethyst_imbuement:opal",
-"imbue_d_item": "amethyst_imbuement:opal",
-"craft_a_item": "minecraft:fermented_spider_eye",
-"craft_b_item": "minecraft:golden_carrot",
-"craft_c_item": "minecraft:fermented_spider_eye",
-"craft_d_item": "minecraft:golden_carrot",
-"craft_e_item": "minecraft:chainmail_helmet,minecraft:chainmail_chestplate,minecraft:chainmail_leggings,minecraft:chainmail_boots",
-"craft_f_item": "minecraft:golden_carrot",
-"craft_g_item": "minecraft:fermented_spider_eye",
-"craft_h_item": "minecraft:golden_carrot",
-"craft_i_item": "minecraft:fermented_spider_eye",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:invisibility\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)19$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/invisibility_imbuing"
+  }
 ]
 }

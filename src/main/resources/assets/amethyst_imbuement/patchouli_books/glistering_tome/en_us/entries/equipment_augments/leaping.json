@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Grants the wearer Jump Boost.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Leaping Imbuing",
-"anchor": "leaping",
-"imbue_a_item": "amethyst_imbuement:citrine",
-"imbue_b_item": "minecraft:amethyst_shard",
-"imbue_c_item": "minecraft:amethyst_shard",
-"imbue_d_item": "minecraft:amethyst_shard",
-"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_b_item": "minecraft:rabbit_foot",
-"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_d_item": "minecraft:rabbit_foot",
-"craft_e_item": "minecraft:chainmail_boots",
-"craft_f_item": "minecraft:rabbit_foot",
-"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_h_item": "minecraft:rabbit_foot",
-"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:leaping\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)15$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/leaping_imbuing"
+  }
 ]
 }

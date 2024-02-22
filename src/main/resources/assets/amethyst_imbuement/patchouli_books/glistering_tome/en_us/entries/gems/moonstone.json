@@ -7,24 +7,9 @@
 	"type": "patchouli:text",            
 	"text": "$(l)Meaning:$() Protection from the supernatural $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce moonstone in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Moonstone Imbuing",
-"imbue_a_item": "minecraft:rotten_flesh",
-"imbue_b_item": "minecraft:rotten_flesh",
-"imbue_c_item": "minecraft:rotten_flesh",
-"imbue_d_item": "minecraft:rotten_flesh",
-"craft_a_item": "minecraft:prismarine_crystals",
-"craft_b_item": "amethyst_imbuement:imbued_quartz",
-"craft_c_item": "minecraft:prismarine_crystals",
-"craft_d_item": "amethyst_imbuement:imbued_quartz",
-"craft_e_item": "minecraft:phantom_membrane",
-"craft_f_item": "amethyst_imbuement:imbued_quartz",
-"craft_g_item": "minecraft:prismarine_crystals",
-"craft_h_item": "amethyst_imbuement:imbued_quartz",
-"craft_i_item": "minecraft:prismarine_crystals",
-"result_item": "amethyst_imbuement:moonstone",
-"cost_text": "$(l)Level Cost: $(2)6$()"
-}      
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/moonstone_imbuing"
+	}
 ]
 }

@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "Break this potion on the ground to receive between 3 and 11 experience points."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Bottle o' Enchanting Imbuing",
-"imbue_a_item": "minecraft:lapis_lazuli",
-"imbue_b_item": "minecraft:lapis_lazuli",
-"imbue_c_item": "minecraft:lapis_lazuli",
-"imbue_d_item": "minecraft:lapis_lazuli",
-"craft_a_item": "minecraft:glass_bottle",
-"craft_b_item": "minecraft:glass_bottle",
-"craft_c_item": "minecraft:glass_bottle",
-"craft_d_item": "minecraft:glass_bottle",
-"craft_e_item": "minecraft:lapis_lazuli",
-"craft_f_item": "minecraft:glass_bottle",
-"craft_g_item": "minecraft:glass_bottle",
-"craft_h_item": "minecraft:glass_bottle",
-"craft_i_item": "minecraft:glass_bottle",
-"result_item": "minecraft:experience_bottle#8",
-"cost_text": "$(l)Level Cost: $(2)5$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/bottle-o-enchanting_imbuing"
+  }
 ]
 }

@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() When the holders health is low, summons a Crystalline Golem as aid.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Passive, single use until totem repaired$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Guardian Imbuing",
-"anchor": "guardian",
-"imbue_a_item": "amethyst_imbuement:crystalline_heart",
-"imbue_b_item": "minecraft:diamond",
-"imbue_c_item": "minecraft:diamond",
-"imbue_d_item": "minecraft:diamond",
-"craft_a_item": "minecraft:poppy",
-"craft_b_item": "minecraft:carved_pumpkin",
-"craft_c_item": "minecraft:poppy",
-"craft_d_item": "minecraft:amethyst_block",
-"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "minecraft:amethyst_block",
-"craft_g_item": "minecraft:poppy",
-"craft_h_item": "minecraft:amethyst_block",
-"craft_i_item": "minecraft:poppy",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:guardian\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)22$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/guardian_imbuing"
+  }
 ]
 }

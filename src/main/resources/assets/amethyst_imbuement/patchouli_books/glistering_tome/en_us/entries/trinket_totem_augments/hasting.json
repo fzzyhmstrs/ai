@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Grants the holder Haste while the totem is active.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 2 $(br)$(l)Active/Passive:$() Active, drains durability while using$(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() Other active totem augments."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Hasting Imbuing",
-"anchor": "hasting",
-"imbue_a_item": "amethyst_imbuement:energetic_opal",
-"imbue_b_item": "minecraft:amethyst_shard",
-"imbue_c_item": "minecraft:amethyst_shard",
-"imbue_d_item": "minecraft:amethyst_shard",
-"craft_a_item": "minecraft:iron_pickaxe",
-"craft_b_item": "minecraft:redstone",
-"craft_c_item": "minecraft:iron_pickaxe",
-"craft_d_item": "minecraft:redstone",
-"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "minecraft:redstone",
-"craft_g_item": "minecraft:iron_pickaxe",
-"craft_h_item": "minecraft:redstone",
-"craft_i_item": "minecraft:iron_pickaxe",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:hasting\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)8$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/hasting_imbuing"
+  }
 ]
 }

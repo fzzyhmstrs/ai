@@ -1,0 +1,12 @@
+{
+"criteria":{
+	"killed_elemental":{
+		"trigger": "minecraft:player_killed_entity",
+		"conditions":{
+			"entity": {
+				"type": "amethyst_imbuement:sardonyx_elemental"
+			}
+		}
+	}
+}
+}

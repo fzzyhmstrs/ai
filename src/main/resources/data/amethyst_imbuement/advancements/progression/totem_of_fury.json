@@ -1,0 +1,28 @@
+{
+"criteria":{
+	"completed_summon_fury_totem":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:spells/summon_fury_totem"
+		}
+	},
+	"got_lethal_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:lethal_gem"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"completed_summon_fury_totem",
+		"got_lethal_gem"
+	]
+]
+}

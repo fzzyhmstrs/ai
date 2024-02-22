@@ -13,7 +13,7 @@
 			]
 		}
 	},
-	"cast_create_hard_light":{
+	"cast_cleanse":{
 		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
 			"spell": "amethyst_imbuement:cleanse"

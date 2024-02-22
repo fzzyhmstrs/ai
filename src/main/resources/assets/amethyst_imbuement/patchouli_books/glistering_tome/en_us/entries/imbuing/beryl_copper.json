@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "This alloy of copper and beryl is prized for its flexibility and corrosion resistance. Excellent at enhancing weapons and other items."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Beryllium Copper Imbuing",
-"imbue_a_item": "minecraft:magma_block",
-"imbue_b_item": "minecraft:magma_block",
-"imbue_c_item": "minecraft:magma_block",
-"imbue_d_item": "minecraft:magma_block",
-"craft_a_item": "minecraft:emerald",
-"craft_b_item": "minecraft:raw_copper",
-"craft_c_item": "minecraft:emerald",
-"craft_d_item": "minecraft:raw_copper",
-"craft_e_item": "minecraft:raw_copper",
-"craft_f_item": "minecraft:raw_copper",
-"craft_g_item": "minecraft:emerald",
-"craft_h_item": "minecraft:raw_copper",
-"craft_i_item": "minecraft:emerald",
-"result_item": "amethyst_imbuement:beryl_copper_ingot#4",
-"cost_text": "$(l)Level Cost: $(2)1$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/beryl_copper_imbuing"
+  }
 ]
 }

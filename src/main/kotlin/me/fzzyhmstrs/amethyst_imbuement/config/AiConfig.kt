@@ -417,6 +417,10 @@ object AiConfig
             {attacker,victim,args -> if (TogglePvpMobChecker.togglePvpInstalledButNotPvp(attacker, victim) || victim !is PlayerEntity) false else forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true},
             MobCheckers.FRIEND
         )
+        private val NOT_PVP_NOT_PLAYER: MobChecker = PredicatedPassChecker(
+            {_,_,args -> !(forcePvpOnAllSpells.get() || args.isNotEmpty() && (args[0] as? ScepterAugment)?.getPvpMode() == true)},
+            MobCheckers.NOT_PLAYER
+        )
         private val TOGGLE_PVP_FRIEND: MobChecker = PredicatedPassChecker(
             {attacker,victim,_ -> TogglePvpMobChecker.areBothPvp(attacker, victim)},
             MobCheckers.FRIEND
@@ -443,7 +447,7 @@ object AiConfig
             TOGGLE_PVP_PET,
             TogglePvpMobChecker,
             IS_PVP_NOT_FRIEND,
-            MobCheckers.NOT_PLAYER
+            NOT_PVP_NOT_PLAYER
         )
 
         private val FRIEND_CHECKER = MobCheckerBuilder.and(

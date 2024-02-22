@@ -7,24 +7,21 @@
 "type": "patchouli:text",            
 "text": "Once imbued, your jewelry can contain magic. $(l)Imbued jewelry holds one augment. Choose wisely!$()$(br2)To choose another augment, you may remove the current ability in a $(#490)Grindstone$() or a $(#490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()$(br2)Imbued Jewelry adds a passive beneficial attribute based on the specific crafting ingredient used. Imbued wards can be used as shields."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Imbued Jewelry Imbuing",
-"imbue_a_item": "minecraft:gold_ingot",
-"imbue_b_item": "minecraft:gold_ingot",
-"imbue_c_item": "minecraft:gold_ingot",
-"imbue_d_item": "minecraft:gold_ingot",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "amethyst_imbuement:imbued_quartz",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_e_item": "amethyst_imbuement:copper_ring,amethyst_imbuement:copper_headband,amethyst_imbuement:copper_amulet,amethyst_imbuement:copper_ward",
-"craft_f_item": "amethyst_imbuement:imbued_lapis",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "tag:amethyst_imbuement:focus_reagents",
-"craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:imbued_ring,amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:imbued_ward",
-"cost_text": "$(l)Level Cost: $(2)13-17$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/imbued_amulet_imbuing"
+  },
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/imbued_headband_imbuing"
+  },
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/imbued_ring_imbuing"
+  },
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/imbued_ward_imbuing"
+  }
 ]
 }

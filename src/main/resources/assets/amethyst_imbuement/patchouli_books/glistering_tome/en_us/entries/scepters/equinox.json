@@ -16,23 +16,8 @@
       "input_item": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
     },
     {
-      "type": "amethyst_imbuement:imbuing_recipe",
-      "title": "Equinox",
-      "imbue_a_item": "minecraft:netherite_ingot",
-      "imbue_b_item": "amethyst_imbuement:energetic_opal",
-      "imbue_c_item": "minecraft:netherite_ingot",
-      "imbue_d_item": "minecraft:netherite_ingot",
-      "craft_a_item": "amethyst_imbuement:sparking_gem",
-      "craft_b_item": "amethyst_imbuement:garnet",
-      "craft_c_item": "amethyst_imbuement:lustrous_sphere",
-      "craft_d_item": "amethyst_imbuement:pyrite",
-      "craft_e_item": "tag:amethyst_imbuement:equinox_scepters",
-      "craft_f_item": "amethyst_imbuement:pyrite",
-      "craft_g_item": "amethyst_imbuement:brilliant_diamond",
-      "craft_h_item": "amethyst_imbuement:garnet",
-      "craft_i_item": "amethyst_imbuement:blazing_gem",
-      "result_item": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}",
-      "cost_text": "$(l)Level Cost: $(2)39$()"
+      "type": "amethyst_imbuement:imbuing",
+      "recipe": "amethyst_imbuement:imbuing/equinox_imbuing"
     }
   ]
 }

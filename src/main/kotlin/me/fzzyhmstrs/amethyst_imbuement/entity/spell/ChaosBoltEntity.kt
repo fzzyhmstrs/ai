@@ -50,29 +50,26 @@ class ChaosBoltEntity(entityType: EntityType<ChaosBoltEntity>, world: World): Mi
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
-        if (world.isClient) {
-            return
-        }
+        if (world.isClient) return
         val entity = owner
-        if (entity is LivingEntity) {
-            val entity2 = entityHitResult.entity
-            if (AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
-                val ownerEffects = entity.statusEffects//.filter { !it.isInfinite }
-                val beneficialEffects = ownerEffects.filter { it.effectType.isBeneficial }
-                val negativeEffects = ownerEffects.filter { !it.effectType.isBeneficial }
-                val multiplier = 1f + beneficialEffects.size * 0.75f + negativeEffects.size * 1.5f
-                val bl = entity2.damage(
-                    SpellDamageSource(FzzyDamage.indirectMagic(this,this,owner), augment),
-                    entityEffects.damage(0) * multiplier
-                )
-                if (bl) {
-                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
-                    applyDamageEffects(entity as LivingEntity?, entity2)
-                    if (entity2 is LivingEntity) {
-                        val effects = FzzyPort.STATUS_EFFECT.filter { !it.isBeneficial }
-                        entity2.addStatusEffect(StatusEffectInstance(effects.random(),entityEffects.duration(0), entityEffects.amplifier(0)))
-                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
-                    }
+        if (entity !is LivingEntity)  return
+        val entity2 = entityHitResult.entity
+        if (AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
+            val ownerEffects = entity.statusEffects//.filter { !it.isInfinite }
+            val beneficialEffects = ownerEffects.filter { it.effectType.isBeneficial }
+            val negativeEffects = ownerEffects.filter { !it.effectType.isBeneficial }
+            val multiplier = 1f + beneficialEffects.size * 0.75f + negativeEffects.size * 1.5f
+            val bl = entity2.damage(
+                SpellDamageSource(FzzyDamage.indirectMagic(this,this,owner), augment),
+                entityEffects.damage(0) * multiplier
+            )
+            if (bl) {
+                entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+                applyDamageEffects(entity as LivingEntity?, entity2)
+                if (entity2 is LivingEntity) {
+                    val effects = FzzyPort.STATUS_EFFECT.filter { !it.isBeneficial }
+                    entity2.addStatusEffect(StatusEffectInstance(effects.random(),entityEffects.duration(0), entityEffects.amplifier(0)))
+                    entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                 }
             }
         }

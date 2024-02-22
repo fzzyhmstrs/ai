@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Locate nearby ores with the vision of a dragon!$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Headband$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Draconic Vision Imbuing",
-"anchor": "draconic_vision",
-"imbue_a_item": "amethyst_imbuement:ametrine",
-"imbue_b_item": "amethyst_imbuement:glowing_fragment",
-"imbue_c_item": "amethyst_imbuement:glowing_fragment",
-"imbue_d_item": "amethyst_imbuement:glowing_fragment",
-"craft_a_item": "minecraft:ender_eye",
-"craft_b_item": "minecraft:dragon_head",
-"craft_c_item": "minecraft:ender_eye",
-"craft_d_item": "minecraft:dragon_breath",
-"craft_e_item": "amethyst_imbuement:imbued_headband",
-"craft_f_item": "minecraft:dragon_breath",
-"craft_g_item": "minecraft:ender_eye",
-"craft_h_item": "minecraft:dragon_breath",
-"craft_i_item": "minecraft:ender_eye",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:draconic_vision\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)27$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/draconic_vision_imbuing"
+  }
 ]
 }

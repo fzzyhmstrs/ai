@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Attackers have a chance of being cursed. Chance high with higher Accursed level. Curse amplifier stacks.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 3$(br)$(l)Active/Passive:$() Passive, drains durability on application$(br)$(l)Tier:$() High(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Accursed Imbuing",
-"anchor": "accursed",
-"imbue_a_item": "amethyst_imbuement:accursed_figurine",
-"imbue_b_item": "minecraft:coal_block",
-"imbue_c_item": "minecraft:coal_block",
-"imbue_d_item": "amethyst_imbuement:accursed_figurine",
-"craft_a_item": "minecraft:rotten_flesh",
-"craft_b_item": "minecraft:nether_wart",
-"craft_c_item": "minecraft:rotten_flesh",
-"craft_d_item": "minecraft:nether_wart",
-"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "minecraft:nether_wart",
-"craft_g_item": "minecraft:rotten_flesh",
-"craft_h_item": "minecraft:nether_wart",
-"craft_i_item": "minecraft:rotten_flesh",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:accursed\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)17$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/accursed_imbuing"
+  }
 ]
 }

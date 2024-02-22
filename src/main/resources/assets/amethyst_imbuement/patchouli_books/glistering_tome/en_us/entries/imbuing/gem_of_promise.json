@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "The base gem for creating aspect gems. Gems of promise will transmute into various aspect gems depending on what the user experiences in the environment.$(br2)$(l:amethyst_imbuement:scepter_upgrading/aspect_gems)Aspect Gems$()"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Gem of Promise Imbuing",
-"imbue_a_item": "amethyst_imbuement:gem_dust",
-"imbue_b_item": "amethyst_imbuement:gem_dust",
-"imbue_c_item": "amethyst_imbuement:gem_dust",
-"imbue_d_item": "amethyst_imbuement:gem_dust",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "amethyst_imbuement:imbued_quartz",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "amethyst_imbuement:imbued_quartz",
-"craft_e_item": "amethyst_imbuement:knowledge_powder",
-"craft_f_item": "amethyst_imbuement:imbued_quartz",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "amethyst_imbuement:imbued_quartz",
-"craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:gem_of_promise",
-"cost_text": "$(l)Level Cost: $(2)13$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/gem_of_promise_imbuing"
+  }
 ]
 }

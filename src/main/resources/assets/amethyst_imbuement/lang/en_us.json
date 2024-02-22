@@ -1086,6 +1086,9 @@
 	"filled_map.mineshaft": "Abandoned Mineshaft Map",
 	"filled_map.crystal_witch_house": "Crystal Witch House Map",
 
+	"patchouli.cost_text": "Level Cost: %s",
+	"patchouli.generic_title_text": "Imbuing Recipe",
+
 	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
 	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",
 	"subtitles.amethyst_imbuement.hamster_ambient": "Hamster squeaks",

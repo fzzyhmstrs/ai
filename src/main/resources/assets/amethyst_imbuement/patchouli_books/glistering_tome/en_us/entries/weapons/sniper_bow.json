@@ -7,25 +7,10 @@
 "type": "patchouli:text",            
 "text": "The sniper bow is designed with precision killing in mind. Besides having longer range and higher damage than the crossbow, right clicking and holding while the bow is loaded zooms into a scope view for precise aiming."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Sniper Bow",
-"imbue_a_item": "minecraft:ender_eye",
-"imbue_b_item": "minecraft:ender_eye",
-"imbue_c_item": "minecraft:ender_eye",
-"imbue_d_item": "minecraft:ender_eye",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "minecraft:spyglass",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_e_item": "minecraft:crossbow",
-"craft_f_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:sniper_bow",
-"cost_text": "$(l)Level Cost: $(2)13$()"
-},
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/sniper_bow_imbuing"
+  },
 {
 "type": "patchouli:image",
 "anchor": "scope",

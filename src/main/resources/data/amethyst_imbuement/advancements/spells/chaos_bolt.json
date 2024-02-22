@@ -23,7 +23,7 @@
 	"requirements": [
 		[
 			"got_spell_book",
-			"cast_chain_lightning"
+			"cast_chaos_bolt"
 		]
 	]
 }

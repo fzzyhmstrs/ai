@@ -17,24 +17,9 @@
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter is intimately attuned to the magic surrounding it. Imbue onto any scepter with the recipe on the next page."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Attuned Imbuing",
-"imbue_a_item": "amethyst_imbuement:imbued_lapis",
-"imbue_b_item": "amethyst_imbuement:imbued_lapis",
-"imbue_c_item": "amethyst_imbuement:imbued_lapis",
-"imbue_d_item": "amethyst_imbuement:imbued_lapis",
-"craft_a_item": "minecraft:air",
-"craft_b_item": "minecraft:clock",
-"craft_c_item": "minecraft:air",
-"craft_d_item": "minecraft:sugar",
-"craft_e_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"craft_f_item": "minecraft:sugar",
-"craft_g_item": "minecraft:air",
-"craft_h_item": "minecraft:sugar",
-"craft_i_item": "minecraft:air",
-"result_item": "amethyst_imbuement:opaline_scepter,amethyst_imbuement:iridescent_scepter,amethyst_imbuement:lustrous_scepter",
-"cost_text": "$(l)Level Cost: $(2)11$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_core:attuned_imbuing"
+  }
 ]
 }

@@ -1,7 +1,7 @@
 {    
 "name": "Shimmering Armor",
 "icon": "amethyst_imbuement:shimmering_helmet",
-"category": "amethyst_imbuement:recipes",    
+"category": "amethyst_imbuement:armor",
 "pages": [        
 {            
 "type": "patchouli:text",            

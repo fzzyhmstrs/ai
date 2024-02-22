@@ -2,6 +2,7 @@
 	"name": "Hamster",
 	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/hamster.png",
 	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:spells/magic_missile",
 	"pages": [
 		{
 			"type": "patchouli:text",

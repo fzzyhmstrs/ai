@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Inventory is not lost upon death.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Passive$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Soulbinding Imbuing",
-"anchor": "soulbinding",
-"imbue_a_item": "minecraft:emerald",
-"imbue_b_item": "minecraft:emerald",
-"imbue_c_item": "minecraft:emerald",
-"imbue_d_item": "minecraft:emerald",
-"craft_a_item": "minecraft:soul_sand",
-"craft_b_item": "minecraft:soul_sand",
-"craft_c_item": "minecraft:soul_sand",
-"craft_d_item": "minecraft:soul_sand",
-"craft_e_item": "amethyst_imbuement:totem_of_amethyst",
-"craft_f_item": "minecraft:soul_sand",
-"craft_g_item": "minecraft:soul_sand",
-"craft_h_item": "minecraft:soul_sand",
-"craft_i_item": "minecraft:soul_sand",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:soulbinding\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)8$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/soulbinding_imbuing"
+  }
 ]
 }

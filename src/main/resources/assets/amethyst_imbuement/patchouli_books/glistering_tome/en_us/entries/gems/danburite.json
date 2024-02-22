@@ -7,32 +7,17 @@
 	"type": "patchouli:text",            
 	"text": "$(l)Meaning:$() Knowledge and Creativity $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce danburite in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."     
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Danburite Imbuing",
-"imbue_a_item": "minecraft:oxeye_daisy",
-"imbue_b_item": "minecraft:oxeye_daisy",
-"imbue_c_item": "minecraft:oxeye_daisy",
-"imbue_d_item": "minecraft:oxeye_daisy",
-"craft_a_item": "minecraft:bone_meal",
-"craft_b_item": "minecraft:quartz",
-"craft_c_item": "minecraft:bone_meal",
-"craft_d_item": "minecraft:quartz",
-"craft_e_item": "minecraft:quartz",
-"craft_f_item": "minecraft:quartz",
-"craft_g_item": "minecraft:bone_meal",
-"craft_h_item": "minecraft:quartz",
-"craft_i_item": "minecraft:bone_meal",
-"result_item": "amethyst_imbuement:danburite#4",
-"cost_text": "$(l)Level Cost: $(2)1$()"
-},
-{
-"type": "amethyst_imbuement:altar_recipe",
-"anchor": "enhancing_danburite",
-"input_item": "minecraft:glowstone_dust",
-"addition_item": "minecraft:quartz",
-"flower_item": "tag:c:sunflowers",
-"output_item": "amethyst_imbuement:danburite"
-}
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/danburite_imbuing"
+	},
+	{
+		"type": "amethyst_imbuement:imbuing",
+		"recipe": "amethyst_imbuement:imbuing/danburite_imbuing_from_gem_dust"
+	},
+	{
+		"type": "amethyst_imbuement:enhancing",
+		"recipe": "amethyst_imbuement:enhancing/danburite_enhancing"
+	}
 ]
 }

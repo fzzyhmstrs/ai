@@ -50,29 +50,27 @@ class FlameboltEntity(entityType: EntityType<FlameboltEntity>, world: World): Mi
     }
 
     override fun onEntityHit(entityHitResult: EntityHitResult) {
-        if (world.isClient) {
-            return
-        }
+        if (world.isClient) return
+
         val entity = owner
-        if (entity is LivingEntity) {
-            val entity2 = entityHitResult.entity
-            if (!entity2.isFireImmune && AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
-                val i = entity2.fireTicks
-                val j = if (entity2 is LivingEntity) ProtectionEnchantment.transformFireDuration(entity2, entityEffects.duration(0)) else entityEffects.duration(0)
-                if (i < j)
-                    entity2.fireTicks = j
-                val bl = entity2.damage(
-                    SpellDamageSource(FzzyDamage.fireball(this,null,owner), augment),
-                    entityEffects.damage(0)
-                )
-                if (!bl) {
-                    entity2.fireTicks = i
-                } else {
-                    entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
-                    applyDamageEffects(entity as LivingEntity?, entity2)
-                    if (entity2 is LivingEntity) {
-                        entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
-                    }
+        if (entity !is LivingEntity) return
+        val entity2 = entityHitResult.entity
+        if (!entity2.isFireImmune && AiConfig.entities.shouldItHitBase(entity, entity2, augment)) {
+            val i = entity2.fireTicks
+            val j = if (entity2 is LivingEntity) ProtectionEnchantment.transformFireDuration(entity2, entityEffects.duration(0)) else entityEffects.duration(0)
+            if (i < j)
+                entity2.fireTicks = j
+            val bl = entity2.damage(
+                SpellDamageSource(FzzyDamage.fireball(this,null,owner), augment),
+                entityEffects.damage(0)
+            )
+            if (!bl) {
+                entity2.fireTicks = i
+            } else {
+                entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
+                applyDamageEffects(entity as LivingEntity?, entity2)
+                if (entity2 is LivingEntity) {
+                    entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                 }
             }
         }

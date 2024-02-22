@@ -7,25 +7,9 @@
 "type": "patchouli:text",            
 "text": "$(l)Effect:$() Coats the augmented boots in slime, protecting the wearer from fall damage and bouncing them like a slime block.$(br)$(l)Enchants:$() $(#490)Boots$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Slimy Imbuing",
-"anchor": "slimy",
-"imbue_a_item": "amethyst_imbuement:citrine",
-"imbue_b_item": "amethyst_imbuement:opal",
-"imbue_c_item": "amethyst_imbuement:opal",
-"imbue_d_item": "amethyst_imbuement:opal",
-"craft_a_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_b_item": "minecraft:slime_block",
-"craft_c_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_d_item": "minecraft:slime_block",
-"craft_e_item": "minecraft:chainmail_boots",
-"craft_f_item": "minecraft:slime_block",
-"craft_g_item": "amethyst_imbuement:beryl_copper_ingot",
-"craft_h_item": "minecraft:slime_block",
-"craft_i_item": "amethyst_imbuement:beryl_copper_ingot",
-"result_item": "minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:slimy\",lvl:1}]}",
-"cost_text": "$(l)Level Cost: $(2)21$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/slimy_imbuing"
+  }
 ]
 }

@@ -1,0 +1,17 @@
+{
+	"name": "Fury Totem",
+	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/fury_totem.png",
+	"category": "amethyst_imbuement:bestiary",
+	"advancement": "amethyst_imbuement:progression/totem_of_fury",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "This totem channels its power through its Lethal Gem to blast nearby enemies with powerful shocks. The totem will draw the aggression of enemies it hits, making it good as a diversion or delay tactic.$(br2)How to Obtain:$(li)Spell: Summon Totem of Fury"
+		},
+		{
+			"type": "patchouli:entity",
+			"entity": "amethyst_imbuement:totem_of_fury",
+			"text": "$(li)Default Health/Armor: 18 / 10$(li)Default Damage/Range: 5+ / 5+ Blocks"
+		}
+	]
+}

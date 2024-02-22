@@ -18,24 +18,9 @@
 "desc_e": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
 "desc_f": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}"
 },
-{
-  "type": "amethyst_imbuement:imbuing_recipe",
-  "title": "Skillful Scepter",
-  "imbue_a_item": "amethyst_imbuement:danburite",
-  "imbue_b_item": "amethyst_imbuement:inquisitive_gem",
-  "imbue_c_item": "amethyst_imbuement:danburite",
-  "imbue_d_item": "amethyst_imbuement:danburite",
-  "craft_a_item": "minecraft:air",
-  "craft_b_item": "minecraft:enchanted_book",
-  "craft_c_item": "minecraft:air",
-  "craft_d_item": "minecraft:enchanted_book",
-  "craft_e_item": "amethyst_imbuement:opaline_scepter",
-  "craft_f_item": "minecraft:enchanted_book",
-  "craft_g_item": "minecraft:air",
-  "craft_h_item": "minecraft:enchanted_book",
-  "craft_i_item": "minecraft:air",
-  "result_item": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "cost_text": "$(l)Level Cost: $(2)7$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/skillful_scepter_imbuing"
+  }
 ]
 }

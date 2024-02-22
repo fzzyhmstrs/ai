@@ -7,24 +7,9 @@
 "type": "patchouli:text",            
 "text": "Use this artifact as the heart of a $(l:amethyst_imbuement:bestiary/crystal_golem)Crystalline Golem$() to bring it to life. See the following pages for details on the Golem itself."
 },
-{
-"type": "amethyst_imbuement:imbuing_recipe",
-"title": "Crystalline Core Imbuing",
-"imbue_a_item": "minecraft:poppy",
-"imbue_b_item": "minecraft:poppy",
-"imbue_c_item": "minecraft:poppy",
-"imbue_d_item": "minecraft:poppy",
-"craft_a_item": "minecraft:amethyst_shard",
-"craft_b_item": "minecraft:amethyst_shard",
-"craft_c_item": "minecraft:amethyst_shard",
-"craft_d_item": "minecraft:amethyst_shard",
-"craft_e_item": "amethyst_imbuement:crystalline_heart",
-"craft_f_item": "minecraft:amethyst_shard",
-"craft_g_item": "minecraft:amethyst_shard",
-"craft_h_item": "minecraft:amethyst_shard",
-"craft_i_item": "minecraft:amethyst_shard",
-"result_item": "amethyst_imbuement:crystalline_core",
-"cost_text": "$(l)Level Cost: $(2)10$()"
-}
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/crystalline_core_imbuing"
+  }
 ]
 }
