@@ -2,7 +2,8 @@
 "name": "Greater Reach",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_reach.png",
 "sortnum": 25,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

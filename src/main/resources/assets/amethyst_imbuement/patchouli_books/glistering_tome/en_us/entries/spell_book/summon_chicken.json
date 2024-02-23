@@ -1,0 +1,16 @@
+{
+"name": "Summon Chicken",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/summon_chicken",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:summon_chicken"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/summon_chicken_imbuing"
+}
+]
+}

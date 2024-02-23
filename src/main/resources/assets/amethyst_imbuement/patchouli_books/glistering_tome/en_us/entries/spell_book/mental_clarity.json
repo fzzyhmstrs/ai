@@ -1,0 +1,16 @@
+{
+"name": "Mental Clarity",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/mental_clarity",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:mental_clarity"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/mental_clarity_imbuing"
+}
+]
+}

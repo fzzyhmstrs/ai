@@ -165,6 +165,8 @@
 	"amethyst_imbuement.advancement.pillars.desc": "Surround a disenchanting table with all eight crystal pillars.",
 	"amethyst_imbuement.advancement.protect_vanquish": "Protect or Vanquish",
 	"amethyst_imbuement.advancement.protect_vanquish.desc": "Imbue a tier two scepter as you progress on the Path of the Aegis.",
+	"amethyst_imbuement.advancement.sardonyx_elemental": "Oh FU- Big Mistake!!",
+	"amethyst_imbuement.advancement.sardonyx_elemental.desc": "Unleash a Sardonyx Elemental upon the world.",
 	"amethyst_imbuement.advancement.scepter_opaline": "I Cast Magic Missile!",
 	"amethyst_imbuement.advancement.scepter_opaline.desc": "Cast a spell with an opaline scepter",
 	"amethyst_imbuement.advancement.scroll": "Keep on Scrollin'",
@@ -183,6 +185,8 @@
 	"amethyst_imbuement.advancement.undying.desc": "Imbue a totem of amethyst with the undying augment",
 	"amethyst_imbuement.advancement.voyage_homecoming": "Voyage or Homecoming",
 	"amethyst_imbuement.advancement.voyage_homecoming.desc": "Imbue a tier two scepter as you progress on the Path of the Sojourn.",
+	"amethyst_imbuement.advancement.witchy": "Witchy",
+	"amethyst_imbuement.advancement.witchy.desc": "Find a Witch House. Looks innocent enough, right?",
 	"amethyst_imbuement.advancement.xp_bush": "Call That an Experience Farm",
 	"amethyst_imbuement.advancement.xp_bush.desc": "Imbue experience bush seeds to start growing experience bushes.",
 	"amethyst_imbuement.advancement.xp_bush_stack": "Experience Farmer",
@@ -807,7 +811,7 @@
 	"enchantment.amethyst_imbuement.mend_equipment.desc": "Repairs damaged equipment in the users inventory.",
 
 	"enchantment.amethyst_imbuement.mending_aura": "Mending Aura",
-	"enchantment.amethyst_imbuement.mending_aura.desc": "Bathes the caster in an aura of rejuvenating energy. Armor and Armor Toughness increased. Items slowly repaired, or caster slowly healed. Replaces any existing auras.",
+	"enchantment.amethyst_imbuement.mending_aura.desc": "Bathes you in an aura of rejuvenation. Defense increased. Items slowly repaired, or you slowly healed. Replaces any existing auras.",
 
 	"enchantment.amethyst_imbuement.mental_clarity": "Mental Clarity",
 	"enchantment.amethyst_imbuement.mental_clarity.desc": "Grants the target or caster increased experience gain.",
@@ -1088,6 +1092,8 @@
 
 	"patchouli.cost_text": "Level Cost: %s",
 	"patchouli.generic_title_text": "Imbuing Recipe",
+	"patchouli.min_level_text": "Min %1$s Level Required: %2$s",
+	"patchouli.style_text": "Spell Style: %s",
 
 	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
 	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",

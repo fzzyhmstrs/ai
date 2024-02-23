@@ -1,0 +1,16 @@
+{
+"name": "Hard Light Bridge",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/hard_light_bridge",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:hard_light_bridge"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/hard_light_bridge_imbuing"
+}
+]
+}

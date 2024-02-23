@@ -2,7 +2,8 @@
 "name": "Inner Fire",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/inner_fire.png",
 "sortnum": 120,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/witches_orb",
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -1,0 +1,15 @@
+{    
+"name": "Flamebolt",
+"icon": "amethyst_imbuement:book_of_lore",    
+"category": "amethyst_imbuement:spell_book",
+"pages": [
+  {
+    "type": "amethyst_imbuement:spell_text",
+    "spell": "amethyst_imbuement:flamebolt"
+  },
+  {
+    "type": "amethyst_imbuement:imbuing",
+    "recipe": "amethyst_imbuement:imbuing/flamebolt_imbuing"
+  }
+]
+}

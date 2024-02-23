@@ -1,0 +1,29 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_soulwoven":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:soulwoven_helmet",
+						"amethyst_imbuement:soulwoven_chestplate",
+						"amethyst_imbuement:soulwoven_leggings",
+						"amethyst_imbuement:soulwoven_boots",
+						"amethyst_imbuement:talisman_of_lost_memories"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_soulwoven"
+	]
+]
+}

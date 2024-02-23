@@ -1,0 +1,16 @@
+{
+"name": "Body Swap",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/body_swap",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:body_swap"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/body_swap_imbuing"
+}
+]
+}

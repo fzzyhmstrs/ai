@@ -1,0 +1,35 @@
+{
+"parent": "amethyst_imbuement:imbuing_table",
+"display": {
+	"icon":{
+		"item": "minecraft:cauldron"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.witchy"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.witchy.desc"
+	}
+},
+"criteria":{
+	"got_imbuing_table":{
+		"trigger": "minecraft:location",
+		"conditions":{
+			"player":{
+				"position": {
+					"horizontal": {
+						"min": -8,
+						"max": 8
+					}
+				},
+				"location": {
+					"structure": "amethyst_imbuement:witch_house"
+				}
+			}
+		}
+	}
+},
+"rewards": {
+	"experience": 10
+}
+}

@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier
 
 object RegisterCriteria {
 
+    val UNLOCK_BOOK = TickCriterion(Identifier(AI.MOD_ID,"unlock_book"))
     val GIVE_IF_CONFIG = TickCriterion(Identifier(AI.MOD_ID,"give_if_config"))
     val DISENCHANT_USE = TickCriterion(Identifier(AI.MOD_ID,"disenchant_use"))
     val DISENCHANTING_PILLARS = TickCriterion(Identifier(AI.MOD_ID,"disenchanting_pillars"))

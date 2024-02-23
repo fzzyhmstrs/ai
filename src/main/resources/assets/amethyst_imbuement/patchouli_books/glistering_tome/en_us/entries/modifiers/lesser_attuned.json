@@ -2,7 +2,8 @@
 "name": "Lesser Attuned",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lesser_attuned.png",
 "sortnum": 9,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

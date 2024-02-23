@@ -2,7 +2,8 @@
 "name": "Healers Pact",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healers_pact.png",
 "sortnum": 71,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

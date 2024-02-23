@@ -2,7 +2,8 @@
 "name": "Champion of the Meek",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/champion_of_the_meek.png",
 "sortnum": 83,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

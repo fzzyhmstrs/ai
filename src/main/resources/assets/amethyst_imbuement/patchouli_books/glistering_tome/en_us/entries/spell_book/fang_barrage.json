@@ -1,0 +1,16 @@
+{
+"name": "Fang Barrage",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/fang_barrage",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:fang_barrage"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/fang_barrage_imbuing"
+}
+]
+}

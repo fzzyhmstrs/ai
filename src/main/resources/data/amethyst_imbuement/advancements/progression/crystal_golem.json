@@ -6,6 +6,12 @@
 			"advancement": "amethyst_imbuement:spells/summon_golem"
 		}
 	},
+	"completed_golem_build":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:golem"
+		}
+	},
 	"got_crystalline_core":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
@@ -28,6 +34,7 @@
 "requirements": [
 	[
 		"completed_summon_golem",
+		"completed_golem_build",
 		"got_crystalline_core",
 		"augmented_golem"
 	]

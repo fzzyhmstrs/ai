@@ -1,0 +1,16 @@
+{
+"name": "Mass Exhaust",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/mass_exhaust",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:mass_exhaust"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/mass_exhaust_imbuing"
+}
+]
+}

@@ -1,0 +1,50 @@
+{
+	"parent": "amethyst_imbuement:crystalline_beginnings",
+	"display": {
+		"icon":{
+			"item": "amethyst_imbuement:sardonyx_crystal"
+		},
+		"title": {
+			"translate": "amethyst_imbuement.advancement.sardonyx_elemental"
+		},
+		"description": {
+			"translate": "amethyst_imbuement.advancement.sardonyx_elemental.desc"
+		},
+		"frame": "challenge",
+		"hidden": true
+	},
+	"criteria":{
+		"broke_block":{
+			"trigger": "minecraft:summoned_entity",
+			"conditions":{
+				"entity": {
+					"type": "amethyst_imbuement:sardonyx_elemental"
+				}
+			}
+		},
+		"hurt_by_elemental":{
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions":{
+				"source_entity": {
+					"type": "amethyst_imbuement:sardonyx_elemental"
+				}
+			}
+		},
+		"completed_progression": {
+			"trigger": "fzzy_core:advancement",
+			"conditions":{
+				"advancement": "amethyst_imbuement:progression/sardonyx_elemental"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"broke_block",
+			"hurt_by_elemental",
+			"completed_progression"
+		]
+	],
+	"rewards": {
+		"experience": 30
+	}
+}

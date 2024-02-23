@@ -10,23 +10,26 @@
 {
 "type": "patchouli:relations",
 "entries": [
-"amethyst_imbuement:scepter_available_augments/abundance",
+"amethyst_imbuement:spells/abundance",
 "amethyst_imbuement:trinket_totem_augments/angelic",
-"amethyst_imbuement:scepter_available_augments/create_water",
+"amethyst_imbuement:spells/create_water",
 "amethyst_imbuement:weapon_augments/crystalline",
+"amethyst_imbuement:spells/dismiss",
 "amethyst_imbuement:trinket_jewelry_augments/draconic_vision",
 "amethyst_imbuement:trinket_totem_augments/escape",
 "amethyst_imbuement:trinket_common_augments/feline",
-"amethyst_imbuement:scepter_available_augments/flare",
-"amethyst_imbuement:trinket_jewelry_augments/friendly",
-"amethyst_imbuement:trinket_totem_augments/guardian",
-"amethyst_imbuement:trinket_totem_augments/hasting"
+"amethyst_imbuement:spells/flamebolt",
+"amethyst_imbuement:spells/flare",
+"amethyst_imbuement:trinket_jewelry_augments/friendly"
 ],
-"title": "A-H"
+"title": "A-G"
 },
 {
 "type": "patchouli:relations",
 "entries": [
+
+"amethyst_imbuement:trinket_totem_augments/guardian",
+"amethyst_imbuement:trinket_totem_augments/hasting",
 "amethyst_imbuement:weapon_augments/headhunter",
 "amethyst_imbuement:trinket_jewelry_augments/healthy",
 "amethyst_imbuement:weapon_augments/illuminating",
@@ -35,32 +38,32 @@
 "amethyst_imbuement:equipment_augments/leaping",
 "amethyst_imbuement:equipment_augments/lightfooted",
 "amethyst_imbuement:trinket_common_augments/lucky",
-"amethyst_imbuement:trinket_common_augments/moonlit",
-"amethyst_imbuement:scepter_available_augments/regenerate"
+"amethyst_imbuement:trinket_common_augments/moonlit"
 ],
-"title": "H-R"
+"title": "G-M"
 },
 {
 "type": "patchouli:relations",
 "entries": [
+"amethyst_imbuement:spells/regenerate",
 "amethyst_imbuement:equipment_augments/resilience",
 "amethyst_imbuement:trinket_jewelry_augments/shielding",
-"amethyst_imbuement:scepter_available_augments/shine",
+"amethyst_imbuement:spells/shine",
 "amethyst_imbuement:equipment_augments/slimy",
-"amethyst_imbuement:scepter_available_augments/soul_missile",
+"amethyst_imbuement:spells/soul_missile",
 "amethyst_imbuement:trinket_totem_augments/soul_of_the_conduit",
 "amethyst_imbuement:trinket_totem_augments/soulbinding",
 "amethyst_imbuement:trinket_jewelry_augments/spectral_vision",
 "amethyst_imbuement:equipment_augments/spiked",
-"amethyst_imbuement:trinket_totem_augments/strength",
-"amethyst_imbuement:equipment_augments/striding"
+"amethyst_imbuement:trinket_totem_augments/strength"
 ],
 "title": "R-S"
 },
 {
 "type": "patchouli:relations",
 "entries": [
-"amethyst_imbuement:scepter_available_augments/summon_hamster",
+"amethyst_imbuement:equipment_augments/striding",
+"amethyst_imbuement:spells/summon_hamster",
 "amethyst_imbuement:trinket_common_augments/suntouched",
 "amethyst_imbuement:equipment_augments/swiftness",
 "amethyst_imbuement:equipment_augments/slimy",
@@ -69,18 +72,18 @@
 "amethyst_imbuement:scepter_template_augments/tier_1_wit",
 "amethyst_imbuement:scepter_template_augments/tier_2_fury",
 "amethyst_imbuement:scepter_template_augments/tier_2_grace",
-"amethyst_imbuement:scepter_template_augments/tier_2_wit",
-"amethyst_imbuement:scepter_template_augments/tier_3_fury"
+"amethyst_imbuement:scepter_template_augments/tier_2_wit"
 ],
 "title": "S-T"
 },
 {
 "type": "patchouli:relations",
 "entries": [
+"amethyst_imbuement:scepter_template_augments/tier_3_fury",
 "amethyst_imbuement:scepter_template_augments/tier_3_grace",
 "amethyst_imbuement:scepter_template_augments/tier_3_wit",
 "amethyst_imbuement:trinket_totem_augments/undying",
-"amethyst_imbuement:scepter_available_augments/zap"
+"amethyst_imbuement:spells/zap"
 ],
 "title": "T-Z"
 }

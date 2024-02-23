@@ -1,0 +1,16 @@
+{
+"name": "Cleanse",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/cleanse",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:cleanse"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/cleanse_imbuing"
+}
+]
+}

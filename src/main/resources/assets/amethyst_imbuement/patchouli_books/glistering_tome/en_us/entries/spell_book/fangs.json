@@ -1,0 +1,16 @@
+{
+"name": "Fangs",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/fangs",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:fangs"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/fangs_imbuing"
+}
+]
+}

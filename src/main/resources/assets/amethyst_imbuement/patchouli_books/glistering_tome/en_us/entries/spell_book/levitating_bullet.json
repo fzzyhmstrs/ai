@@ -1,0 +1,16 @@
+{
+"name": "Levitating Bullet",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/levitating_bullet",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:levitating_bullet"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/levitating_bullet"
+}
+]
+}

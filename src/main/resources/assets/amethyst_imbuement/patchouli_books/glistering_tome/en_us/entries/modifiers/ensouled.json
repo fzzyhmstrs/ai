@@ -3,10 +3,11 @@
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/ensouled.png",
 "sortnum": 1000,
 "category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/soulwoven_gear",
 "pages": [
 {
 "type": "patchouli:text",            
-"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/ensouled_gear)Ensouled Gear$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
+"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/soulwoven_armor)Soulwoven Armor$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",
@@ -15,7 +16,12 @@
 "ancestor": "N/A",
 "descendant": "N/A",
 "mod_type": "$(2)Various Soul-Spell Effects$()",
-"mod_text": "The armor emanates a disturbing aura, almost like someone inside is trying to cry out. Your bond to spells of the soul is strengthened."
-}
+"mod_text": "The dark steel emanates a disturbing aura, almost like someone inside is trying to cry out. Your bond to soul spells is strengthened."
+},
+  {
+    "type": "patchouli:text",
+    "title": "Bonuses",
+    "text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/soulwoven_armor)Soulwoven Armor$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
+  }
 ]
 }

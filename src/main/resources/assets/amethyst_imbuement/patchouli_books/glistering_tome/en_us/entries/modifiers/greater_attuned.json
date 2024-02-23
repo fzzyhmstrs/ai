@@ -2,7 +2,8 @@
 "name": "Greater Attuned",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_attuned.png",
 "sortnum": 13,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

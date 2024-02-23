@@ -1,0 +1,25 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/crystalline_heart",
+				"amethyst_imbuement:progression/witches_orb"
+			]
+		}
+	},
+	"got_gem_of_promise":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:gem_of_promise"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_gem_of_promise"
+	]
+]
+}

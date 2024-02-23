@@ -2,7 +2,8 @@
 "name": "Dynamo",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/dynamo.png",
 "sortnum": 122,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/witches_orb",
 "pages": [        
 {            
 "type": "patchouli:text",            

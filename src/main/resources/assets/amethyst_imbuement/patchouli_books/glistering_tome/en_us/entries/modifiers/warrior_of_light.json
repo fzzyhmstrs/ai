@@ -2,7 +2,8 @@
 "name": "Warrior of Light",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png",
 "sortnum": 79,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

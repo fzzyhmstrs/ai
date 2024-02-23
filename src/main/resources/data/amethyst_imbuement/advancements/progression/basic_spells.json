@@ -1,0 +1,24 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/tier_2_scepters"
+			]
+		}
+	},
+	"got_basic_spell":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:spells/magic_missile"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_basic_spell"
+	]
+]
+}

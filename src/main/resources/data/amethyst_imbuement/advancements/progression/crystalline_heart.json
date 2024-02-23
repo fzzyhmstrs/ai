@@ -1,0 +1,26 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:golem",
+				"amethyst_imbuement:totem",
+				"amethyst_imbuement:progression/spellcasters_focus"
+			]
+		}
+	},
+	"got_golden_heart":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:golden_heart"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_crystalline_heart"
+	]
+]
+}

@@ -2,7 +2,8 @@
 "name": "Greater Thrifty",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_thrifty.png",
 "sortnum": 19,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

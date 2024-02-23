@@ -2,7 +2,8 @@
 "name": "Blessed",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/blessed.png",
 "sortnum": 121,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/witches_orb",
 "pages": [        
 {            
 "type": "patchouli:text",            

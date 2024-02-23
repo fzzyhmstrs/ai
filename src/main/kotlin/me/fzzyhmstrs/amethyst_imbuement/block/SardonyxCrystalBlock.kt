@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.block
 
 import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEntity
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -9,6 +10,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.DustParticleEffect
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.BlockPos
@@ -40,6 +42,8 @@ class SardonyxCrystalBlock(settings:Settings):Block(settings) {
             sge.refreshPositionAndAngles(placePos,0f,0f)
             sge.analyzeBreakingPlayer(player)
             world.spawnEntity(sge)
+            if (player is ServerPlayerEntity)
+                Criteria.SUMMONED_ENTITY.trigger(player,sge)
         }
         super.onBreak(world, pos, state, player)
     }

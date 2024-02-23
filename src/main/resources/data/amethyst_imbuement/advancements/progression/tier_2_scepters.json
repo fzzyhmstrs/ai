@@ -1,0 +1,28 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/tier_3_scepters"
+			]
+		}
+	},
+	"got_scepter":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items": [
+				{
+					"tag": "amethyst_core:tier_two_spell_scepters"
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_scepter"
+	]
+]
+}

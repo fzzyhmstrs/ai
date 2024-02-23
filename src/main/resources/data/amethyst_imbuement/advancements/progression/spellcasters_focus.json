@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_spellcasters_focus":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:focus"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_spellcasters_focus"
+	]
+]
+}

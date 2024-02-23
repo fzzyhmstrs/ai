@@ -2,7 +2,8 @@
 "name": "Disarming",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/disarming.png",
 "sortnum": 102,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/spellcasters_focus",
 "pages": [        
 {            
 "type": "patchouli:text",            

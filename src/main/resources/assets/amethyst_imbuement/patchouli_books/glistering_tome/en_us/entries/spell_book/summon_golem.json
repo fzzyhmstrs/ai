@@ -1,0 +1,16 @@
+{
+"name": "Summon Crystalline Golem",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:spells/summon_golem",
+"pages": [
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:summon_golem"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"recipe": "amethyst_imbuement:imbuing/summon_golem_imbuing"
+}
+]
+}

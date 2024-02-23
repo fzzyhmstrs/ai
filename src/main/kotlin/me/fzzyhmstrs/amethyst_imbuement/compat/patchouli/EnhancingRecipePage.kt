@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import me.fzzyhmstrs.amethyst_imbuement.compat.patchouli.PatchouliCompat.ENHANCING_BACKGROUND
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -103,7 +104,7 @@ class EnhancingRecipePage: BookPage() {
 
         if (enhancingRecipe?.react == true){
             val text = AcText.translatable(enhancingRecipe?.reactMessage ?: "").formatted(Formatting.DARK_PURPLE)
-            parent.drawCenteredStringNoShadow(context, text.asOrderedText(), 0, 38,this.book.headerColor)
+            context.drawText(MinecraftClient.getInstance().textRenderer, text.asOrderedText(), 0, 38, this.book.headerColor, false);
         }
 
         super.render(context, mouseX, mouseY, delta)

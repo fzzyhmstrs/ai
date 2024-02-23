@@ -2,7 +2,8 @@
 "name": "Savant Aspect",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/savant_aspect.png",
 "sortnum": 100,
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/spellcasters_focus",
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -13,6 +13,18 @@
 			]
 		}
 	},
+	"got_lethal_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:lethal_gem"
+					]
+				}
+			]
+		}
+	},
 	"cast_summon_fury_totem":{
 		"trigger": "amethyst_core:cast_spell",
 		"conditions":{
@@ -23,6 +35,7 @@
 	"requirements": [
 		[
 			"got_spell_book",
+			"got_lethal_gem",
 			"cast_summon_fury_totem"
 		]
 	]

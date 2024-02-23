@@ -1,21 +1,21 @@
 {
-	"name": "Sardonyx Fragment",
-	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/sardonyx_fragment.png",
-	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:progression/sardonyx_fragment_1",
-	"pages": [
-		{
-			"type": "patchouli:text",
-			"text": "What was that noise...? Almost sounded like rocks scraping against each other?",
-      "text2": "$(m)What was that noise...? Almost sounded like rocks scraping against each other?$() Some sort of stony abomination with glowing rage in its eyes... What could cause such a fiercesome monster to spawn?$(br2)Drops: $(li)Basalt$(li)Redstone$(li)Sardonyx Fragment"
-      "advancement2": "amethyst_imbuement:progression/sardonyx_fragment_2"
-		},
-		{
-			"type": "patchouli:entity",
-			"entity": "amethyst_imbuement:sardonyx_fragment",
-			"text": "$(li)Default Health/Armor 60 / 8$(li)Default Damage 9 / 15 (enraged)",
-			"advancement": "amethyst_imbuement:progression/sardonyx_fragment_2",
-			"secret": true
-		}
-	]
+"name": "Sardonyx Fragment",
+"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/sardonyx_fragment.png",
+"category": "amethyst_imbuement:bestiary",
+"advancement": "amethyst_imbuement:witchy",
+"pages": [
+{
+"type": "amethyst_imbuement:hidden_text",
+"text": "What was that noise...? Almost sounded like rocks scraping against each other?",
+"text2": "$(m)What was that noise...? Almost sounded like rocks scraping against each other?$() Some sort of stony abomination with glowing rage in its eyes... What could cause such a fiercesome monster to spawn?$(br2)Drops: $(li)Basalt$(li)Redstone$(li)Sardonyx Fragment",
+"advancement2": "amethyst_imbuement:progression/sardonyx_fragment"
+},
+{
+"type": "patchouli:entity",
+"entity": "amethyst_imbuement:sardonyx_fragment",
+"text": "$(li)Default Health/Armor 60 / 8$(li)Default Damage 9 / 15 (enraged)",
+"advancement": "amethyst_imbuement:progression/sardonyx_fragment",
+"secret": true
+}
+]
 }

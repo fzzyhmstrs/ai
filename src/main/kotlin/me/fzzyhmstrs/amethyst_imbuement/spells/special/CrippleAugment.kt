@@ -9,8 +9,7 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SlashAugment
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
-import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment
-import me.fzzyhmstrs.amethyst_imbuement.spells.ResonateAugment.Companion.NOTE_BLAST
+import me.fzzyhmstrs.amethyst_imbuement.spells.special.ResonateAugment.Companion.NOTE_BLAST
 import me.fzzyhmstrs.fzzy_core.coding_util.compat.FzzyDamage
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity

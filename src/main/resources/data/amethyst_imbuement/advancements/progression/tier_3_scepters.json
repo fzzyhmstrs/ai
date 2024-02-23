@@ -1,0 +1,23 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_scepter":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items": [
+				{
+					"tag": "amethyst_core:tier_three_spell_scepters"
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_scepter"
+	]
+]
+}

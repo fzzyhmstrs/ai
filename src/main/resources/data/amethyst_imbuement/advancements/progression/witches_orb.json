@@ -1,0 +1,25 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_witches_orb":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:witches_orb"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_witches_orb"
+	]
+]
+}

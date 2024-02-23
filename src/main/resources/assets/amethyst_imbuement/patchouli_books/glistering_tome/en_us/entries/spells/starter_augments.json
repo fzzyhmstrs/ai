@@ -1,0 +1,26 @@
+{
+  "name": "Basic Scepter Spells",
+  "icon": "amethyst_imbuement:book_of_lore",
+  "category": "amethyst_imbuement:spells",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Recipes for basic spells available right away. They can be added to any scepter as long as you have the ingredients and experience levels, and the scepter is at the proper Level.$(br2)For more powerful spells find books scattered around the world and use them with the $(#490)Spell Templates$() to imbue your scepter."
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "amethyst_imbuement:spell_book/abundance",
+        "amethyst_imbuement:spell_book/create_water",
+        "amethyst_imbuement:spell_book/dismiss",
+        "amethyst_imbuement:spell_book/flamebolt",
+        "amethyst_imbuement:spell_book/flare",
+        "amethyst_imbuement:spell_book/regenerate",
+        "amethyst_imbuement:spell_book/shine",
+        "amethyst_imbuement:spell_book/soul_missile",
+        "amethyst_imbuement:spell_book/summon_hamster",
+        "amethyst_imbuement:spell_book/zap"
+      ]
+    }
+  ]
+}

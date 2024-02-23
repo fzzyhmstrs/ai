@@ -2,7 +2,8 @@
 "name": "Enraged",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/enraged.png",
 "sortnum": 2,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            

@@ -2,7 +2,8 @@
 "name": "Reach",    
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/reach.png",
 "sortnum": 23,  
-"category": "amethyst_imbuement:modifiers",    
+"category": "amethyst_imbuement:modifiers",
+  "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [        
 {            
 "type": "patchouli:text",            
