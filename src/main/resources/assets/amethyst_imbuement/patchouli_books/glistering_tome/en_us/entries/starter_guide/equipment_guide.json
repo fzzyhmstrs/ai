@@ -1,0 +1,29 @@
+{    
+"name": "Progression",    
+"icon": "minecraft:leather_boots",    
+"category": "amethyst_imbuement:starter_guide",    
+"pages": [        
+{            
+"type": "patchouli:text",            
+"text": "TODO"
+},
+{
+"type": "patchouli:relations",
+"entries": [
+"amethyst_imbuement:armor/ametrine_armor",
+"amethyst_imbuement:armor/garnet_armor",
+"amethyst_imbuement:armor/glowing_armor",
+"amethyst_imbuement:armor/shimmering_armor",
+"amethyst_imbuement:armor/soulwoven_armor",
+"amethyst_imbuement:armor/steel_armor",
+"amethyst_imbuement:weapons/ametrine_equipment",
+"amethyst_imbuement:weapons/garnet_equipment",
+"amethyst_imbuement:weapons/glistering_trident",
+"amethyst_imbuement:weapons/glowing_tools",
+"amethyst_imbuement:weapons/sniper_bow",
+"amethyst_imbuement:weapons/steel_equipment"
+],
+"title": "Armor and Weapons"
+}
+]
+}
