@@ -19,13 +19,13 @@
 },
 {
 "type": "patchouli:text", 
-"text": "Gem Dust",
+"text": "Powders",
 "x": 49,            
 "y": 17
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:gem_dust",
+"item": "amethyst_imbuement:gem_dust,amethyst_imbuement:knowledge_powder",
 "framed": false,
 "x": 7,            
 "y": 12
@@ -44,13 +44,13 @@
 },
 {
 "type": "patchouli:text", 
-"text": "Gem of Promise",
+"text": "Brilliant Diamond",
 "x": 49,            
 "y": 36
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:gem_of_promise",
+"item": "amethyst_imbuement:brilliant_diamond",
 "framed": false,
 "x": 7,            
 "y": 33
@@ -69,13 +69,13 @@
 },
 {
 "type": "patchouli:text", 
-"text": "Aspect Gems",
+"text": "Orbs",
 "x": 49,            
 "y": 57
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:blazing_gem,amethyst_imbuement:sparking_gem,amethyst_imbuement:brutal_gem,amethyst_imbuement:lethal_gem,amethyst_imbuement:inquisitive_gem,amethyst_imbuement:healers_gem",
+"item": "amethyst_imbuement:iridescent_orb,amethyst_imbuement:lustrous_spehere",
 "framed": false,
 "x": 7,            
 "y": 54
@@ -94,13 +94,13 @@
 },
 {
 "type": "patchouli:text", 
-"text": "Malachite Figurine",
+"text": "Figurines",
 "x": 49,            
 "y": 78
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:malachite_figurine",
+"item": "amethyst_imbuement:malachite_figurine,amethyst_imbuement:accursed_figurine",
 "framed": false,
 "x": 7,            
 "y": 75
@@ -119,13 +119,13 @@
 },
 {
 "type": "patchouli:text", 
-"text": "Charged Crystals",
+"text": "Glowing Tools",
 "x": 49,            
 "y": 99
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:tigers_eye,amethyst_imbuement:energetic_opal",
+"item": "amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick,amethyst_imbuement:glowing_hoe",
 "framed": false,
 "x": 7,            
 "y": 96
@@ -150,7 +150,7 @@
 },
 {
 "type": "patchouli:item",
-"item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick",
+"item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glistening_ice",
 "framed": false,
 "x": 7,            
 "y": 117
