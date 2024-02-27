@@ -5,7 +5,7 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Welcome to Amethyst Imbuement. Ready to start on a magical journey? Start with these simple steps to begin down your path!$(br2)The heart of AI is the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), lets start by gathering up ingredients to make and fuel one!"
+"text": "Welcome to Amethyst Imbuement! Ready to start on a magical journey? Take with these simple steps to begin down your path.$(br2)The heart of AI is the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), lets start by gathering up ingredients to make and fuel one!"
 },
 {
 "type": "amethyst_imbuement:progression",
@@ -19,11 +19,8 @@
 "amethyst_imbuement:progression/imbuing_table": {
 "text": "Craft your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), opening the door to most of the rest of the mod!"
 },
-"amethyst_imbuement:pillars": {
+"amethyst_imbuement:xp_bush": {
 "text": "The imbuing table is powered by experience. Imbue some $(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bushes$() to secure a steady flow of the stuff. Augment your supply by enchanting gear with $(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight$()."
-},
-"amethyst_imbuement:pillars": {
-"text": "Finish your upgrading journey! Craft a powerful tier 3 scepter."
 }
 }
 }
