@@ -1,0 +1,24 @@
+{
+"name": "Starting with Scepters",
+"priority": true,
+"icon": "amethyst_imbuement:iridescent_scepter",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Now that you have a functioning scepter, there is some more you should know...$(br2)$(l)Mana: $()Scepters have a limit to the spells they can cast at one time. More powerful scepters have higher limits. A blue bar in the hotbar shows the remaining scepter mana. If your scepter runs low, you can quaff a $(#b0b)$(l:amethyst_imbuement:imbuing/mana_potion)Mana Potion$() to restore its vigor."
+},
+{
+"type": "patchouli:text",
+"text": "$(l)Active Spell:$() Scepters have an active spell which is cast on using the scepter (right click). When created, the active spell defaults to Magic Missile. Once other augments are added, you can change the active spell by crouching and scrolling. The new active spell will be displayed on screen and in the tooltip."
+},
+{
+"type": "patchouli:text",
+"text": "$(l)Scepter Level:$() Casting spells with a scepter increases its magical potential, granting access to more spells the more you use it! See the $(#490)$(l:amethyst_imbuement:augment_index/all_augments)Augment Index$() for a full overview. There are three schools of magic to level up:$(br2)$(l)$(c)Fury:$() Magic related to warfare and offensive spells.$(br)$(l)$(2)Wit:$() Magic of cleverness and creation.$(br)$(l)$(9)Grace:$() Magic related to healing and bolstering you and your allies."
+},
+{
+"type": "amethyst_imbuement:tooltip_image",
+"tooltip_text": "Active spell is shown in $(6)gold$(), the three magical school levels in $(c)red$(), $(2)green$(), and $(9)blue$(). Fury, for example, is currently level 3 and needs 9 more spell casts to reach level 4."
+}
+]
+}
