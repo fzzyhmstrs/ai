@@ -1,46 +1,28 @@
 {    
-"name": "Next Steps",    
+"name": "Progression",    
 "icon": "minecraft:leather_boots",    
 "category": "amethyst_imbuement:starter_guide",    
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Now that you've got your feet under you, find out some of the advanced things that Amethyst Imbuement can provide.$(li)Craft a scepter and start spellcasting$(li)Create imbued jewelry and imbue them with powerful abilities$(li)Upgrade your equipment beyond anything you thought possible"
+"text": "Now that you've got your feet under you, find out more about the magical equipment and experiences that Amethyst Imbuement can provide.$(li)Craft a scepter and start spellcasting$(li)Create imbued jewelry and imbue them with powerful abilities$(li)Upgrade your equipment beyond anything you thought possible"
 },
 {
 "type": "amethyst_imbuement:progression",
 "progression": {
-"amethyst_imbuement:progression/basic_materials_1": {
-"text": "$(l:amethyst_imbuement:gems/amethyst)Amethyst Shards$() are the entrypoint to Amethyst Imbuement, find yourself a geode! $(item)Crying Obsidian$() is an important ingredient in AI altars."
+"amethyst_imbuement:progression/scepter_guide": {
+"text": "Start working on crafting a $(l:amethyst_imbuement:starter_guide/scepter_guide)magical scepter$(), and cast your first spell on your chosen spellcasting path."
 },
-"amethyst_imbuement:flower_power": {
-"text": "Many recipes use flowers, especially the 4 double-high flowers ($(item)Sunflower$(), $(item)Peony$(), $(item)Rose Bush$(), $(item)Lilac$()). Find in various fields and forests."
+"amethyst_imbuement:progression/jewelry_guide": {
+"text": "Find the materials to start crafting $(l:amethyst_imbuement:starter_guide/scepter_guide)powerful jewelry$() capable of hosting a wide array of specialized magical augments."
 },
-"amethyst_imbuement:progression/imbuing_table": {
-"text": "Craft your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), opening the door to most of the rest of the mod!"
+"amethyst_imbuement:progression/totem_guide": {
+"text": "An incredible font of inner power, a $(l:amethyst_imbuement:starter_guide/scepter_guide)totem of amethyst$() is an important tool in any crystal witches kit."
 },
-"amethyst_imbuement:xp_bush": {
-"text": "The imbuing table is powered by experience. Imbue some $(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bushes$() to secure a steady flow of the stuff. Augment your supply by enchanting gear with $(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight$()."
+"amethyst_imbuement:progression/equipment_guide": {
+"text": "Sturdy sets of armor and deadly weapons are all at a crystal witches disposal. Legends even talk about mystical $(l:https://www.curseforge.com/minecraft/mc-mods/imbued-gear)Imbued Gear$(), maybe an adventurous witch can learn those secrets."
 }
 }
-},
-{
-"type": "patchouli:spotlight",
-"title": "Scepter Spellcasting",
-"item": "amethyst_imbuement:opaline_scepter",
-"text": "Scepters are magical sources from which you can cast many offensive and defensive spells. Read $(l:amethyst_imbuement:scepters/scepter_guide)this guide$() to learn how to get started with these powerful and flexible tools.$(br2)You can follow an $(l:amethyst_imbuement:scepter_upgrading)upgrade path$() for your scepter to specialize it and increase its power!"
-},
-{
-"type": "patchouli:spotlight",
-"title": "Trinket Imbuing",
-"item": "amethyst_imbuement:imbued_headband,amethyst_imbuement:imbued_amulet,amethyst_imbuement:imbued_ring,amethyst_imbuement:totem_of_amethyst",
-"text": "You can adorn yourself with magical jewelry, and even craft a special totem, that provide you with status effect bonuses and other powerful abilities. Read about the trinkets you can create:$(br2)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()$(br)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()"
-},
-{
-"type": "patchouli:spotlight",
-"title": "Upgrade Equipment",
-"item": "amethyst_imbuement:ametrine_chestplate,amethyst_imbuement:garnet_sword,amethyst_imbuement:sniper_bow,minecraft:bucket",
-"text": "There is a wide variety of new gear to craft, as well as upgrades available for new and existing items to check out!$(br)$(l)"
 }
 ]
 }
