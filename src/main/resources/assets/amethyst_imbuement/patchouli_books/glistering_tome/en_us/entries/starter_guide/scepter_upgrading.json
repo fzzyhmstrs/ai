@@ -8,24 +8,24 @@
 
 {
 "type": "patchouli:text",
-"text": "Scepters can be upgraded with special materials to attune them to magical aspects and focuses. These upgraded scepters are more powerful and specialized, and some have unique spells you can't get otherwise!"
+"text": "Scepters can be upgraded with special materials to attune them to magical specializations. These upgraded scepters are more powerful, with unique modifiers that augment aspects of your spellcasting, some even have unique spells you can't get otherwise!"
 },
 {
 "type": "amethyst_imbuement:progression",
 "progression": {
-"amethyst_imbuement:golem": {
+"amethyst_imbuement:aspect_gem": {
 "text": "Create your first $(l:amethyst_imbuement:scepter_upgrading/aspect_gems)Aspect Gem$(), needed to progress on every tier."
 },
-"amethyst_imbuement:mana": {
+"amethyst_imbuement:progression/base_components": {
 "text": "Find and/or craft the $(l:amethyst_imbuement:scepter_upgrading/gem_materials)base components$() you will need to create specialized scepters."
 },
-"amethyst_imbuement:focus": {
+"amethyst_imbuement:progression/tier_1_scepters": {
 "text": "Pick a path on the $(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree)Scepter Tree$() and create your first upgraded scepter!"
 },
-"amethyst_imbuement:pillars": {
+"amethyst_imbuement:progression/tier_2_scepters": {
 "text": "Continue down your path by selecting a second tier to progress to."
 },
-"amethyst_imbuement:pillars": {
+"amethyst_imbuement:progression/tier_3_scepters": {
 "text": "Finish your upgrading journey! Craft a powerful tier 3 scepter."
 }
 }
