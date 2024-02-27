@@ -11,7 +11,7 @@
 "type": "amethyst_imbuement:progression",
 "progression": {
 "amethyst_imbuement:progression/basic_materials_1": {
-"text": "$(l:amethyst_imbuement:gems/amethyst)Amethyst Shards$() are the entrypoint to Amethyst Imbuement, find yourself a geode! $(item)Crying Obsidian$() is an important ingredient in the powerful AI altars."
+"text": "$(l:amethyst_imbuement:gems/amethyst)Amethyst Shards$() are the entrypoint to Amethyst Imbuement, find yourself a geode! $(item)Crying Obsidian$() is an important ingredient in AI altars."
 },
 "amethyst_imbuement:flower_power": {
 "text": "Most base crystals need flowers, especially the 4 double-high flowers ($(item)Sunflower$(), $(item)Peony$(), $(item)Rose Bush$(), $(item)Lilac$()). Find in various fields and forests."
