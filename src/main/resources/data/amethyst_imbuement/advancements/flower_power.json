@@ -24,6 +24,30 @@
 			]
 		}
 	},
+	"got_sunflower":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:sunflower"
+					]
+				}
+			]
+		}
+	},
+	"got_peony":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:peony"
+					]
+				}
+			]
+		}
+	},
 	"got_rose_bush":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
