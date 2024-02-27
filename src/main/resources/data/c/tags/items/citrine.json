@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:citrine",
+		{
+			"required": false,
+			"id": "jewelry:citrine"
+		},
+		{
+			"required": false,
+			"id": "cinderscapes:sulfur_quartz"
+		}
+	]
+}

@@ -1,15 +1,15 @@
 {    
 "name": "Jewelry Guide",
 "priority": true,
-"icon": "amethyst_imbuement:imbued_headband",    
-"category": "amethyst_imbuement:trinkets",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"icon": "amethyst_imbuement:imbued_headband",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Here you will learn to craft and imbue jewelry with mystical properties. To begin:$(li)First, imbue some $(#b0b)$(l:amethyst_imbuement:imbuing/beryl_copper)Beryllium Copper Ingots$()$(li)Next, craft your ingots and an $(#b0b)$(l:amethyst_imbuement:gems/amethyst)Amethyst Shard$() into a piece of $(#490)$(l:amethyst_imbuement:trinkets/copper_jewelry)Copper Jewelry$()$(li)This jewelry provides a minor bonus, but isn't capable of containing more potent magics. Imbue your jewelry into $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()"
 },
 {            
-"type": "patchouli:text",            
+"type": "patchouli:text",
 "text": "$(li)Pick the $(l:amethyst_imbuement:trinkets/focus_reagents)bottom center ingredient$() carefully when you are crafting! Each one provides a different innate bonus!$(li)Once imbued, apply an appropriate Augment to grant yourself powerful passive abilities!$(br2)$(l)Note: Jewelry can only have one augment at a time!$()"
 }
 ]

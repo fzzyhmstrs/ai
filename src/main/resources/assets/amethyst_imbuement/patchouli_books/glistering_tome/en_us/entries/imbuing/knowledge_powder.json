@@ -1,19 +1,21 @@
-{    
+{
 "name": "Knowledge Powder",
 "icon": "amethyst_imbuement:knowledge_powder",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "A reagent for more complex recipes, this powder stores distilled wisdom and experience in powdered form, taming the once fiery blaze powder into something more understanding."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/knowledge_powder_imbuing"
-  },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/knowledge_powder_from_mana_potion_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/knowledge_powder_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/knowledge_powder_from_mana_potion_imbuing"
+}
 ]
 }

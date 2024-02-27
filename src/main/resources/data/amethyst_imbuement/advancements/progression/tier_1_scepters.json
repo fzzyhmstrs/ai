@@ -1,0 +1,51 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/tier_2_scepters",
+				"amethyst_imbuement:progression/aspect_gems"
+			]
+		}
+	},
+	"got_fury":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items": [
+				{
+					"tag": "amethyst_imbuement:fury_scepters"
+				}
+			]
+		}
+	},
+	"got_grace":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items": [
+				{
+					"tag": "amethyst_imbuement:grace_scepters"
+				}
+			]
+		}
+	},
+	"got_wit":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items": [
+				{
+					"tag": "amethyst_imbuement:wit_scepters"
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_fury",
+		"got_wit",
+		"got_grace"
+	]
+]
+}

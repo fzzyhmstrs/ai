@@ -1,15 +1,16 @@
-{    
-"name": "Crystalline Heart",    
-"icon": "amethyst_imbuement:crystalline_heart",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Crystalline Heart",
+"icon": "amethyst_imbuement:crystalline_heart",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "A gently beating magical heart. It can provide certain objects with a soul."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/crystalline_heart_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/crystalline_heart_imbuing"
+}
 ]
 }

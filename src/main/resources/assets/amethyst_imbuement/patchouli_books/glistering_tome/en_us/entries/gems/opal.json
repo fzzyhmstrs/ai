@@ -1,15 +1,16 @@
-{    
-"name": "Opal",    
-"icon": "amethyst_imbuement:opal",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Amplification and Invisibility $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce opal in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
+{
+"name": "Opal",
+"icon": "amethyst_imbuement:opal",
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Amplification and Invisibility $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce opal in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/opal_imbuing"
-	}
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/opal_imbuing"
+}
 ]
 }

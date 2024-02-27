@@ -1,15 +1,18 @@
-{    
-"name": "Celestine",    
-"icon": "amethyst_imbuement:celestine",    
-"category": "amethyst_imbuement:gems",    
-"pages": [      
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Divinity $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Produce celestine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
+{
+"name": "Celestine",
+"icon": "amethyst_imbuement:celestine",
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/tier_3_gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Divinity $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Produce celestine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/celestine_imbuing"
-	}
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/unlocks/celestine_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by summoning a $(#490)Wither$()!",
+"recipe": "amethyst_imbuement:imbuing/celestine_imbuing"
+}
 ]
 }

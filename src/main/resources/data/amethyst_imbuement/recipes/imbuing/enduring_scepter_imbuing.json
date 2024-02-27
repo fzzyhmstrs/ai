@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:healers_gem"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftB": {
 	"item": "minecraft:redstone_block"
@@ -33,4 +33,3 @@
   "countA": 1,
   "transferEnchant": true
 }
-

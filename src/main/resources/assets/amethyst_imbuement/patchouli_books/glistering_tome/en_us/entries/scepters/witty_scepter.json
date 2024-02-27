@@ -1,26 +1,28 @@
-{    
-"name": "Witty Scepter",    
+{
+"name": "Witty Scepter",
 "icon": "amethyst_imbuement:witty_scepter",
-"category": "amethyst_imbuement:scepters", 
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "sortnum": 5,
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Tier one wit aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/witty)Witty$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance.$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 250"
 },
-{            
+{
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
 "input_item": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "desc_a": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
-  "desc_b": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
-  "desc_c": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
-  "desc_d": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
-  "desc_e": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
-  "desc_f": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}"
+"desc_a": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]}",
+"desc_b": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"}]}",
+"desc_c": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
+"desc_d": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"}]}",
+"desc_e": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"}]}",
+"desc_f": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/witty_scepter_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/witty_scepter_imbuing"
+}
 ]
 }

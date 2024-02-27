@@ -1,0 +1,25 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/tier_3_gems",
+				"amethyst_imbuement:progression/gear/garnet_gear"
+			]
+		}
+	},
+	"got_gem":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:crystal_adept"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_gem"
+	]
+]
+}

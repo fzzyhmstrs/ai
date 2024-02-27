@@ -1,0 +1,35 @@
+{
+"name": "Scepter Upgrade Guide",
+"priority": true,
+"icon": "amethyst_imbuement:scepter_of_the_vanguard",
+"category": "amethyst_imbuement:starter_guide",
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+
+{
+"type": "patchouli:text",
+"text": "Scepters can be upgraded with special materials to attune them to magical aspects and focuses. These upgraded scepters are more powerful and specialized, and some have unique spells you can't get otherwise!"
+},
+  {
+    "type": "amethyst_imbuement:progression",
+    "progression": {
+      "amethyst_imbuement:golem": {
+        "text": "BUild a GOLEM!"
+      },
+      "amethyst_imbuement:mana": {
+        "text": "BUild a MANA!"
+      },
+      "amethyst_imbuement:focus": {
+        "text": "BUild a FOCUS!"
+      },
+      "amethyst_imbuement:pillars": {
+        "text": "BUild a PILLARS!"
+      }
+    }
+  },
+{
+"type": "patchouli:text",
+"text": "Scepters can follow the plain crafting progression, but for the most powerful spell-casting possible an upgraded scepter can't be beat!$(li)Pick an $(l:amethyst_imbuement:scepter_paths)upgrade path$() to pursue from the $(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree)crafting tree$(). Once you've started on a path, you can't back out!$(li)Find and create the $(l:amethyst_imbuement:scepter_upgrading/gem_materials)base components$() needed to progress.$(li)Craft higher tiers of your scepter path in the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()!"
+}
+]
+}

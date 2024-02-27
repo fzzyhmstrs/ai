@@ -1,15 +1,16 @@
-{    
+{
 "name": "Dazzling Melon Slice",
 "icon": "amethyst_imbuement:dazzling_melon_slice",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "This imbued melon slice seems to glow from within. Consuming it heals you."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/dazzling_melon_slice_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/dazzling_melon_slice_imbuing"
+}
 ]
 }

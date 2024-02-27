@@ -1,15 +1,16 @@
-{    
+{
 "name": "Crystallized Light",
 "icon": "amethyst_imbuement:crystallized_light_blue",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "As useful as Hard Light is, it is constantly shifting and unstable. If only there was a way to stabilize it...? Example recipe shown is for Red Crystallized Light"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/crystallized_light_red_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/unlocks/crystallized_light_unlock",
+"recipe": "amethyst_imbuement:imbuing/crystallized_light_red_imbuing"
+}
 ]
 }

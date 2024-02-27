@@ -46,7 +46,7 @@
 	"entity.amethyst_imbuement.mana_potion_entity": "Mana Potion",
 	"entity.amethyst_imbuement.player_egg_entity": "Egg",
 	"entity.amethyst_imbuement.planar_door_entity": "Planar Door",
-	
+
 	"enchantment.level.11": "XI",
 	"enchantment.level.12": "XII",
 	"enchantment.level.13": "XIII",
@@ -62,7 +62,7 @@
 	"enchantment.level.23": "XXIII",
 	"enchantment.level.24": "XXIV",
 	"enchantment.level.25": "XXV",
-	
+
 	"amethyst_imbuement.advancement.crystalline_beginnings": "Amethyst Imbuement",
 	"amethyst_imbuement.advancement.crystalline_beginnings.desc": "Find an amethyst shard to begin your Amethyst Imbuement journey!",
 	"amethyst_imbuement.advancement.altar": "Top Trending Wiki Article",
@@ -107,6 +107,8 @@
 	"amethyst_imbuement.advancement.focus.desc": "Create your spellcasters focus",
 	"amethyst_imbuement.advancement.gem_of_promise": "Promising",
 	"amethyst_imbuement.advancement.gem_of_promise.desc": "Obtain a gem of promise.",
+	"amethyst_imbuement.advancement.glowing": "Shine Bright",
+	"amethyst_imbuement.advancement.glowing.desc": "Find a brilliant diamond or fragments of one.",
 	"amethyst_imbuement.advancement.golem": "Purple Boi Incoming",
 	"amethyst_imbuement.advancement.golem.desc": "Summon a crystalline golem.",
 	"amethyst_imbuement.advancement.grindstone_hero": "Grindstone Hero",
@@ -150,7 +152,7 @@
 	"amethyst_imbuement.advancement.path_lethality": "The Path of Lethality",
 	"amethyst_imbuement.advancement.path_lethality.desc": "Upgrade a tier 2 §c□ Fury§r scepter into Lethality.",
 	"amethyst_imbuement.advancement.path_lustre": "The Path of Lustre",
-	"amethyst_imbuement.advancement.path_lustre.desc": "Imbue a lustrous scepter, almost completely skipping an upgrade path.", 
+	"amethyst_imbuement.advancement.path_lustre.desc": "Imbue a lustrous scepter, almost completely skipping an upgrade path.",
 	"amethyst_imbuement.advancement.path_missed": "The Path of Missed Opportunity",
 	"amethyst_imbuement.advancement.path_missed.desc": "Imbue an iridescent scepter instead of starting down an upgrade path.",
 	"amethyst_imbuement.advancement.path_redemption": "The Path of Redemption",
@@ -224,7 +226,7 @@
 	"item.amethyst_imbuement.aegis": "Aegis",
 	"item.amethyst_imbuement.judgment": "Judgment",
 	"item.amethyst_imbuement.a_scepter_so_fowl": "A Scepter Most Fowl",
-	
+
 	"item.amethyst_imbuement.golden_heart": "Golden Heart",
 	"item.amethyst_imbuement.golden_heart.flavor": "You can hear it beating softly...",
 	"item.amethyst_imbuement.steel_ingot": "Steel Ingot",
@@ -256,7 +258,7 @@
 	"item.amethyst_imbuement.tigers_eye.flavor": "It seems to watch over you",
 	"item.amethyst_imbuement.energetic_opal": "Energetic Opal",
 	"item.amethyst_imbuement.energetic_opal.flavor": "It crackles softly",
-	
+
 	"item.amethyst_imbuement.steel_helmet": "Steel Helmet",
 	"item.amethyst_imbuement.steel_chestplate": "Steel Chestplate",
 	"item.amethyst_imbuement.steel_leggings": "Steel Leggings",
@@ -354,7 +356,7 @@
 	"item.amethyst_imbuement.totem_of_amethyst": "Totem of Amethyst",
 	"item.amethyst_imbuement.talisman_of_lost_memories": "Talisman of Lost Memories",
 	"item.amethyst_imbuement.talisman_of_lost_memories.flavor": "If you listen close you could swear it's humming a sad tune...",
-	
+
 	"item.amethyst_imbuement.empty_spell_scroll": "Empty Spell Scroll",
 	"item.amethyst_imbuement.spell_scroll": "Spell Scroll",
 	"item.amethyst_imbuement.spell_scroll.spell": "Spell Within: %1$s",
@@ -422,7 +424,7 @@
 	"item.amethyst_imbuement.brutal_gem.recipe": "Hold a Gem of Promise in your off hand and take a bunch of damage from hostile mobs.",
 	"item.amethyst_imbuement.mystical_gem": "Mystical Gem",
 	"item.amethyst_imbuement.mystical_gem.recipe": "Hold a Gem of Promise in your off hand and cast a bunch of spells with a scepter or scroll.",
-	
+
 	"item.amethyst_imbuement.glowing_fragment": "Glowing Fragment",
 	"item.amethyst_imbuement.glowing_fragment.flavor": "It radiates magical energy. This could probably be used to upgrade a magical object...",
 	"item.amethyst_imbuement.accursed_figurine": "Accursed Figurine",
@@ -434,7 +436,7 @@
 	"item.amethyst_imbuement.knowledge_powder": "Knowledge Powder",
 	"item.amethyst_imbuement.knowledge_powder.flavor": "This strange powder stores magical knowledge as effectively as any tome",
 	"item.amethyst_imbuement.moss_covered_seeds": "Moss-Covered Seeds",
-	
+
 	"item.amethyst_imbuement.elixir_of_arcana": "Elixir of Arcana",
 	"item.amethyst_imbuement.elixir_of_arcana.effect.empty": "Elixir of Arcana",
 	"item.amethyst_imbuement.elixir_of_arcana.effect.empty.tooltip1": "Grants a temporary Arcane Aura to regenerate mana and increase spell power",
@@ -454,7 +456,7 @@
 	"item.amethyst_imbuement.mana_regeneration_potion.effect.empty": "Mana Regeneration Potion",
 	"item.amethyst_imbuement.mana_regeneration_potion.effect.empty.tooltip1": "Restore mana in your scepters and other magical items over time.",
 	"item.amethyst_imbuement.dazzling_melon_slice": "Dazzling Melon Slice",
-	
+
 	"block.amethyst_imbuement.polished_amethyst_block": "Polished Amethyst Block",
 	"block.amethyst_imbuement.polished_amethyst_slab": "Polished Amethyst Slab",
 	"block.amethyst_imbuement.polished_amethyst_stairs": "Polished Amethyst Stairs",
@@ -520,7 +522,7 @@
 	"block.amethyst_imbuement.shine_light_magenta": "Magenta Shine Light",
 	"block.amethyst_imbuement.shine_light_pink": "Pink Shine Light",
 	"block.amethyst_imbuement.shine_light_rainbow": "Rainbow Shine Light",
-	
+
 	"enchantment.amethyst_imbuement.heroic": "Heroic",
 	"enchantment.amethyst_imbuement.wasting": "Wasting",
 	"enchantment.amethyst_imbuement.deadly_shot": "Deadly Shot",
@@ -626,7 +628,7 @@
 	"enchantment.amethyst_imbuement.suntouched.desc": "The user gains Strength and Speed during the day.",
 	"enchantment.amethyst_imbuement.swiftness.desc": "Grants the wearer Speed.",
 	"enchantment.amethyst_imbuement.undying.desc": "Totem acts like a Totem of Undying.",
-	
+
 	"enchantment.amethyst_imbuement.magic_missile": "Magic Missile",
 	"enchantment.amethyst_imbuement.magic_missile.desc": "A simple bolt of damaging energy.",
 
@@ -659,10 +661,10 @@
 
 	"enchantment.amethyst_imbuement.carapace": "Carapace",
 	"enchantment.amethyst_imbuement.carapace.desc": "Grants the caster or target Bone Armor.",
-	
+
 	"enchantment.amethyst_imbuement.chain_lightning": "Chain Lightning",
 	"enchantment.amethyst_imbuement.chain_lightning.desc": "A branching lightning blast that strikes the target and other nearby enemies it can branch to. Chance to stun on hit.",
-	
+
 	"enchantment.amethyst_imbuement.chaos_bolt": "Chaos Bolt",
 	"enchantment.amethyst_imbuement.chaos_bolt.desc": "A chaotic bolt of energy that deals damage relative to the status effects the caster has. Applies a random negative status on hit.",
 
@@ -677,7 +679,7 @@
 
 	"enchantment.amethyst_imbuement.crackling_infusion": "Crackling Infusion",
 	"enchantment.amethyst_imbuement.crackling_infusion.desc": "Grants the caster and all nearby allies Lightning Aura, Speed, and Regeneration.",
-	
+
 	"enchantment.amethyst_imbuement.create_hard_light": "Create Hard Light",
 	"enchantment.amethyst_imbuement.create_hard_light.desc": "Materializes a block of hard light a few meters out in the direction cast. Can place blocks in midair.",
 
@@ -689,7 +691,7 @@
 
 	"enchantment.amethyst_imbuement.create_tnt": "Create TNT",
 	"enchantment.amethyst_imbuement.create_tnt.desc": "Places a TNT block and lights it.",
-	
+
 	"enchantment.amethyst_imbuement.create_water": "Create Water",
 	"enchantment.amethyst_imbuement.create_water.desc": "Places a water source block.",
 
@@ -749,7 +751,7 @@
 
 	"enchantment.amethyst_imbuement.full_heal": "Full Heal",
 	"enchantment.amethyst_imbuement.full_heal.desc": "Fully heals the caster or target.",
-	
+
 	"enchantment.amethyst_imbuement.gusting": "Gusting",
 	"enchantment.amethyst_imbuement.gusting.desc": "Knocks back all enemies in a swath in front of the user.",
 
@@ -770,7 +772,7 @@
 
 	"enchantment.amethyst_imbuement.ice_burst": "Ice Burst",
 	"enchantment.amethyst_imbuement.ice_burst.desc": "Calls forth a devastating field of Ice Spikes around the caster.",
-	
+
 	"enchantment.amethyst_imbuement.ice_spikes": "Ice Spikes",
 	"enchantment.amethyst_imbuement.ice_spikes.desc": "Summons a row of icy fangs that damage and freeze on hit.",
 
@@ -782,7 +784,7 @@
 
 	"enchantment.amethyst_imbuement.lightning_aura": "Lightning Aura",
 	"enchantment.amethyst_imbuement.lightning_aura.desc": "Bathes the caster in an aura of crackling energy. Attack and cast speed increased. Shocks nearby enemies. Replaces any existing auras.",
-	
+
 	"enchantment.amethyst_imbuement.lightning_bolt": "Lightning Bolt",
 	"enchantment.amethyst_imbuement.lightning_bolt.desc": "Strikes a nearby target with a lightning bolt.",
 
@@ -827,7 +829,7 @@
 
 	"enchantment.amethyst_imbuement.planar_door": "Planar Door",
 	"enchantment.amethyst_imbuement.planar_door.desc": "Creates a portal and links to the previous portal if any. Older portals are destroyed. Each scepter has its own pair.",
-	
+
 	"enchantment.amethyst_imbuement.poultrymorph": "Poultrymorph",
 	"enchantment.amethyst_imbuement.poultrymorph.desc": "Temporarily transmute the target into a harmless chicken.",
 
@@ -839,13 +841,13 @@
 
 	"enchantment.amethyst_imbuement.resonate": "Resonate",
 	"enchantment.amethyst_imbuement.resonate.desc": "Fires sonic pulses at nearby enemies, dealing increasing damage with each hit.",
-	
+
 	"enchantment.amethyst_imbuement.revivify": "Revivify",
 	"enchantment.amethyst_imbuement.revivify.desc": "Regenerates, Heals, Cleanses, and grants Absorption to the target or caster.",
 
 	"enchantment.amethyst_imbuement.sanctuary": "Sanctuary",
 	"enchantment.amethyst_imbuement.sanctuary.desc": "Target or caster can't be damaged or affected by negative statuses. Dispels on attack or fury spell cast.",
-	
+
 	"enchantment.amethyst_imbuement.shine": "Shine",
 	"enchantment.amethyst_imbuement.shine.desc": "Places a torch.",
 
@@ -878,7 +880,7 @@
 
 	"enchantment.amethyst_imbuement.summon_chorse": "Summon Chorse",
 	"enchantment.amethyst_imbuement.summon_chorse.desc": "Summons a Chorse to carry the caster far and wide. If a summoned chorse exists, it will dismiss the existing Chorse.",
-	
+
 	"enchantment.amethyst_imbuement.summon_fury_totem": "Summon Totem of Fury",
 	"enchantment.amethyst_imbuement.summon_fury_totem.desc": "Summons a totem that periodically damages nearby enemies.",
 
@@ -1028,7 +1030,7 @@
 	"effect.amethyst_imbuement.mending_aura.description": "Increases armor and armor toughness, slowly repairs items in the affected entities inventory or heals them if no items need repairing",
 	"effect.amethyst_imbuement.mana_regeneration.description": "Repairs mana items in the affected entities inventory",
 	"effect.amethyst_imbuement.trance.description": "Rapidly regenerates mana items while drastically slowing movement and attacks. Temporarily increases movement speed and magic power when the effect ends",
-	
+
 	"lore_book.screen": "Imbuing Recipe",
 	"lore_book.screen.cost": "%1$s Levels",
 	"lore_book.screen.too_much_text": "(cont'd...)",
@@ -1043,7 +1045,7 @@
 	"lore_book.screen.mana_hint1": "Durability used with each cast of the spell.",
 	"lore_book.screen.tier_hint1": "Determines which scepters can accept it.",
 	"lore_book.screen.cast_xp_hint1": "How much XP your scepter gains on a successful cast",
-	
+
 	"imbuing_recipes_book.screen": "Imbuing Recipes",
 	"imbuing_recipes_book.page": "%1$s / %2$s",
 	"imbuing_recipes_book.prev": "Previous page",
@@ -1058,7 +1060,7 @@
 	"imbuing_recipes_book.category.equipment": "Equipment and Weapons",
 	"imbuing_recipes_book.category.book": "Enchantments, Augments, and Spells",
 	"imbuing_recipes_book.category.faves": "Favorite Recipes",
-	
+
 	"item.minecraft.potion.effect.curse": "Cursed Potion",
 	"item.minecraft.splash_potion.effect.curse": "Cursed Splash Potion",
 	"item.minecraft.lingering_potion.effect.curse": "Cursed Lingering Potion",
@@ -1071,7 +1073,7 @@
 	"item.minecraft.splash_potion.effect.insight": "Splash Potion of Insight",
 	"item.minecraft.lingering_potion.effect.insight": "Lingering Potion of Insight",
 	"item.minecraft.tipped_arrow.effect.insight": "Tipped Arrow of Insight",
-	
+
 	"key.categories.amethyst_imbuement": "Amethyst Imbuement",
 	"key.amethyst_imbuement.vein_mine_key": "Vein Mine",
 	"key.amethyst_imbuement.spell_key": "Current Scepter Spell",
@@ -1079,21 +1081,26 @@
 	"key.amethyst_imbuement.scepter_down_key": "Previous Scepter Spell",
 	"key.amethyst_imbuement.scepter_radial_menu_key": "Scepter Radial Menu",
 	"key.amethyst_imbuement.sniper_bow_key": "Change Sniper Bow Scope",
-	
+
 	"chat.amethyst_imbuement.active_spell": "Active spell is: ",
 	"chat.amethyst_imbuement.no_spell": "Spells not activated yet...",
-	
+
 	"display.imbuing.cost.small": "%1$s Lvl",
 	"display.imbuing.cost.big": "%1$s Lv",
-	
+
 	"filled_map.village": "Village Map",
 	"filled_map.mineshaft": "Abandoned Mineshaft Map",
 	"filled_map.crystal_witch_house": "Crystal Witch House Map",
 
-	"patchouli.cost_text": "Level Cost: %s",
-	"patchouli.generic_title_text": "Imbuing Recipe",
+	"patchouli.imbuing_cost_text": "Level Cost: %s",
+	"patchouli.imbuing_plus_tip_1": "Enchant applied to item, item is not consumed.",
+	"patchouli.imbuing_plus_tip_2": " Pre-existing enchant will be gain an additional level.",
+	"patchouli.imbuing_cost_tip": "Experience levels required for imbuement",
+	"patchouli.generic_enhancing_title": "Enhancing Recipe",
+	"patchouli.generic_imbuing_title": "Imbuing Recipe",
 	"patchouli.min_level_text": "Min %1$s Level Required: %2$s",
 	"patchouli.style_text": "Spell Style: %s",
+	"patchouli.page_toast_info": "New Pages Unlocked",
 
 	"subtitles.amethyst_imbuement.hamster_hit": "Hamster hurts",
 	"subtitles.amethyst_imbuement.hamster_die": "Hamster dies",
@@ -1111,7 +1118,7 @@
 	"subtitles.amethyst_imbuement.elemental_hurt": "Elemental hurts",
 	"subtitles.amethyst_imbuement.fragment_crumbles": "Fragment crumbles",
 	"subtitles.block.steel.falls": "Steel block fallen onto",
-	
+
 	"recipe.imbuing": "Imbuing",
 	"recipe.enhancing": "Enhancing",
 	"recipe.enhancing.spell_addition": "Disenchanted scrolls",
@@ -1130,7 +1137,7 @@
 	"commands.amethyst_imbuement.success.scrollChangesSpells.disable": "Spell switching via shift-scroll: Disabled",
 
 	"itemGroup.amethyst_imbuement.ai_group": "Amethyst Imbuement",
-	
+
 	"tag.amethyst_imbuement.disenchant_pillar_blocks": "Disenchanting Table Pillar Blocks",
 	"tag.amethyst_imbuement.aegis_scepters": "Aegis Input Scepters",
 	"tag.amethyst_imbuement.equinox_scepters": "Equinox Input Scepters",
@@ -1140,13 +1147,13 @@
 	"tag.amethyst_imbuement.sojourn_scepters": "Sojourn Input Scepters",
 	"tag.amethyst_imbuement.focus_reagents": "Spellcasters Reagents",
 	"tag.amethyst_imbuement.aspect_gems": "Aspect Gems",
-	
+
 	"emi.category.amethyst_imbuement.imbuing_table": "Imbuing",
 	"emi.category.amethyst_imbuement.crystal_altar": "Enhancing",
 	"emi.alert_slot.alert": "Your choice will have consequences!",
 	"emi.alert_slot.alert.desc1": "The selected ingredient may alter the final output.",
 	"emi.alert_slot.alert.desc2": "See the guide or ingredient tooltip for details.",
-	
+
 	"augment_damage.check_can_use": "Not enough durability to use augment!",
 	"augment_damage.escape.check_can_use":"Not enough durability to escape!",
 	"augment_damage.guardian.check_can_use": "Not enough durability to summon a guardian!",
@@ -1163,7 +1170,7 @@
 	"augment_damage.strength.burnout": "Strength augment burnt out!",
 	"augment_damage.undying.burnout": "Undying augment burnt out!",
 	"augment_damage.damage": "Item low on mana!",
-	
+
 	"scepter.modifier.amethyst_imbuement:furious": "Furious",
 	"scepter.modifier.amethyst_imbuement:enraged": "Enraged",
 	"scepter.modifier.amethyst_imbuement:witty": "Witty",
@@ -1203,7 +1210,7 @@
 	"scepter.modifier.amethyst_imbuement:builders_aspect": "Builders Aspect",
 	"scepter.modifier.amethyst_imbuement:sojourner": "Sojourner",
 	"scepter.modifier.amethyst_imbuement:traveler": "Traveler",
-	
+
 	"scepter.modifier.amethyst_imbuement:savant_aspect": "Aspect of the Savant",
 	"scepter.modifier.amethyst_imbuement:fulgurous": "Fulgurous",
 	"scepter.modifier.amethyst_imbuement:disarming": "Disarming",
@@ -1227,7 +1234,7 @@
 	"scepter.modifier.amethyst_imbuement:ensouled_level": "Ensouled",
 	"scepter.modifier.amethyst_imbuement:ensouled_amplifier": "Ensouled",
 	"scepter.modifier.amethyst_imbuement:ensouled_spell_xp": "Ensouled",
-	
+
 	"scepter.modifier.amethyst_imbuement:furious.desc": "+1 §c□ Fury§r XP and minor §c□ Fury§r bonuses",
 	"scepter.modifier.amethyst_imbuement:enraged.desc": "+2 §c□ Fury§r XP and minor §c□ Fury§r bonuses",
 	"scepter.modifier.amethyst_imbuement:witty.desc": "+1 §9◇ Wit§r XP and minor §9◇ Wit§r bonuses",
@@ -1291,14 +1298,14 @@
 	"scepter.modifier.amethyst_imbuement:ensouled_level.desc": "Soul spell effective level increased by 1.",
 	"scepter.modifier.amethyst_imbuement:ensouled_amplifier.desc": "Soul spell effect amplification increased by 2.",
 	"scepter.modifier.amethyst_imbuement:ensouled_spell_xp.desc": "Soul spells gain an additional spell XP on cast.",
-	
+
 	"amethyst_imbuement.tip.scepters": "There are 30 scepters in Amethyst Imbuement. Don't just craft a plain scepter; check out the upgrade tree!",
 	"amethyst_imbuement.tip.figurine": "Malachite Figurines can only be obtained by trading with a Crystal Witch villager.",
 	"amethyst_imbuement.tip.augment": "Some Amethyst Imbuement augments can be applied more than once to stack their effects.",
 	"amethyst_imbuement.tip.trident": "Find a Trident? Upgrade it into a powerful Glistering Trident!",
 	"amethyst_imbuement.tip.warding_candle": "Warding Candles ward off hoglins and piglins.",
 	"amethyst_imbuement.tip.gem_dust": "A variety of magical items can be recycled into Gem Dust for imbuing into powerful new gems",
-	
+
 	"enchantment_lore.amethyst_imbuement:heroic.description": "Heroic\n\nMax Level: VII\n\nIncreases damage against illagers.",
 	"enchantment_lore.amethyst_imbuement:wasting.description": "Wasting\n\nMax Level: IV\n\nDamaged enemies are afflicted with slowness.",
 	"enchantment_lore.amethyst_imbuement:deadly_shot.description": "Deadly Shot\n\nMax Level: IV\n\nIncreases crossbow and sniper bow range and damage.",
@@ -1420,7 +1427,7 @@
 	"enchantment_lore.amethyst_imbuement:weightlessness.description": "Weightlessness\n\nMax Level: V\n\nMagic School: §9◇ Wit§r\n\nGrants levitation and slow falling to the caster or target.",
 	"enchantment_lore.amethyst_imbuement:withering_bolt.description": "Withering Bolt\n\nMax Level: V\n\nMagic School: §c□ Fury§r\n\nSummons a wither skull and casts it at the enemy.",
 	"enchantment_lore.amethyst_imbuement:zap.description": "Zap\n\nMax Level: XI\n\nMagic School: §c□ Fury§r\n\nZaps targets in a line with an electric shock.",
-	
+
 	"readme.main_header.title": "README - Amethyst Imbuement",
 	"readme.main_header.changelog": "Config Changelog:",
 	"readme.main_header.note": "Note:  Previous versions of updated configs that have new version numbers (v1 from v0, for example) will be read and copied over to the new version, and the old version deleted.",

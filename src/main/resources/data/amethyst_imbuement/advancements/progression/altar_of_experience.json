@@ -1,0 +1,37 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/disenchanting_table"
+			]
+		}
+	},
+	"got_altar":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:altar_of_experience"
+					]
+				}
+			]
+		}
+	},
+	"used_table":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:altar_of_experience"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_altar",
+		"used_table"
+	]
+]
+}

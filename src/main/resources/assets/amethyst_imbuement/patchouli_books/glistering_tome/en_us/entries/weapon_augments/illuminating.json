@@ -1,15 +1,16 @@
-{    
-"name": "Illuminating Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:weapon_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Illuminating Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:weapon_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Grants the user Night Vision when scoped in.$(br)$(l)Enchants:$() $(#490)$(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$()$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/illuminating_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/illuminating_imbuing"
+}
 ]
 }

@@ -1,10 +1,11 @@
-{    
-"name": "Copper Jewelry",    
-"icon": "amethyst_imbuement:copper_ring",    
-"category": "amethyst_imbuement:trinkets",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Copper Jewelry",
+"icon": "amethyst_imbuement:copper_ring",
+"category": "amethyst_imbuement:trinkets",
+"advancement": "amethyst_imbuement:progression/beryl_copper",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Copper jewelry is a set of basic trinkets that act as the base for more powerful $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(). Copper jewelry offers you a modest speed bonus, stacking with each piece worn. There are four pieces of base jewelry:$(li)$(#b0b)Copper Headband$()$(li)$(#b0b)Copper Amulet$()$(li)$(#b0b)Copper Ring$()$(li)$(#b0b)Copper Ward$() (Usable as a shield)"
 },
 {

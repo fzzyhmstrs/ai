@@ -1,15 +1,17 @@
-{    
-"name": "Ametrine",    
-"icon": "amethyst_imbuement:ametrine",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Resilience and Perseverance $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce ametrine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+{
+"name": "Ametrine",
+"icon": "amethyst_imbuement:ametrine",
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/tier_2_gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Resilience and Perseverance $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce ametrine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/ametrine_imbuing"
-	}
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/ametrine_imbuing"
+}
 ]
 }

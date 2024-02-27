@@ -1,0 +1,34 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:spells/trance"
+			]
+		}
+	},
+	"unlock2":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_mana":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:mana_regeneration_potion"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"unlock2",
+		"got_mana"
+	]
+]
+}

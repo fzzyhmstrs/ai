@@ -1,16 +1,16 @@
-{    
-"name": "Heartstone",    
-"icon": "amethyst_imbuement:heartstone",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Meaning:$() Health $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Heartstones are only obtainable in loot chests. Rumors say that crystal vendors often stash these in their workshop stores."      
-	},
-	{            
-		"type": "patchouli:spotlight",
-		"item": "amethyst_imbuement:heartstone",
-		"text": "$(o)Created deep underground where an act of true love has occurred. These powerful crystals bolster the body against harm.$()"
-	}
+{
+"name": "Heartstone",
+"icon": "amethyst_imbuement:heartstone",
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Health $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Heartstones are only obtainable in loot chests. Rumors say that crystal vendors often stash these in their workshop stores."
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:heartstone",
+"text": "$(o)Created deep underground where an act of true love has occurred. These powerful crystals bolster the body against harm.$()"
+}
 ]
 }

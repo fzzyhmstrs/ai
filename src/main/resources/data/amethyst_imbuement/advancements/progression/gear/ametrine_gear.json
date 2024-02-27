@@ -1,0 +1,34 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_ametrine":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:ametrine_helmet",
+						"amethyst_imbuement:ametrine_chestplate",
+						"amethyst_imbuement:ametrine_leggings",
+						"amethyst_imbuement:ametrine_boots",
+						"amethyst_imbuement:ametrine_horse_armor",
+						"amethyst_imbuement:ametrine_axe",
+						"amethyst_imbuement:ametrine_pickaxe",
+						"amethyst_imbuement:ametrine_hoe",
+						"amethyst_imbuement:ametrine_shovel",
+						"amethyst_imbuement:ametrine_sword"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_ametrine"
+	]
+]
+}

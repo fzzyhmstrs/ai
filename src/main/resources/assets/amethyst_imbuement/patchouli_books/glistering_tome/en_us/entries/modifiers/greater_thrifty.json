@@ -1,16 +1,16 @@
-{    
-"name": "Greater Thrifty",    
+{
+"name": "Greater Thrifty",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/greater_thrifty.png",
-"sortnum": 19,  
+"sortnum": 19,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Reduces the mana cost of your scepter spells by 15%. This modifier is independent of scepter. Affects:$(li)All scepters$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Greater Thrifty",
 "mod_image": "amethyst_core:textures/gui/patchouli/mod_spotlights/greater_thrifty.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/thrifty)Thrifty$()",
@@ -18,9 +18,10 @@
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Your scepter becomes extremely magic-efficient. Imbue onto any scepter with the recipe on the next page."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_core:thrifty_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_core:thrifty_imbuing"
+}
 ]
 }

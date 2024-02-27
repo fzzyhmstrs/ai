@@ -1,26 +1,37 @@
-{    
-"name": "Ametrine Armor",    
+{
+"name": "Ametrine Armor",
 "icon": "amethyst_imbuement:ametrine_helmet",
 "category": "amethyst_imbuement:armor",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/unlocks/ametrine_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Ametrine Armor is a further upgrade to Netherite Armor. It offers improved protection, knockback resistance, armor toughness, and durability."
 },
-  {
-    "type": "amethyst_imbuement:enhancing_multi",
-    "recipes": [
-      "amethyst_imbuement:enhancing/ametrine_helmet_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_chestplate_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_leggings_enhancing"
-    ]
-  },
-  {
-    "type": "amethyst_imbuement:enhancing_multi",
-    "recipes": [
-      "amethyst_imbuement:enhancing/ametrine_boots_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_horse_armor_enhancing"
-    ]
-  }
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:ametrine_helmet",
+"chestplate": "amethyst_imbuement:ametrine_chestplate",
+"leggings": "amethyst_imbuement:ametrine_leggings",
+"boots": "amethyst_imbuement:ametrine_boots",
+"text": "Enhance Ametrine Armor in the Crystal Altar using the recipes on the next pages."
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/ametrine_helmet_enhancing",
+"amethyst_imbuement:enhancing/ametrine_chestplate_enhancing",
+"amethyst_imbuement:enhancing/ametrine_leggings_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/ametrine_boots_enhancing",
+"amethyst_imbuement:enhancing/ametrine_horse_armor_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
 ]
 }

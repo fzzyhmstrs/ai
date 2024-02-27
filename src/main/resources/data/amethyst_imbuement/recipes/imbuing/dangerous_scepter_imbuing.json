@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:lethal_gem"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftB": {
 	"item": "minecraft:stone_sword"
@@ -33,4 +33,3 @@
   "countA": 1,
   "transferEnchant": true
 }
-

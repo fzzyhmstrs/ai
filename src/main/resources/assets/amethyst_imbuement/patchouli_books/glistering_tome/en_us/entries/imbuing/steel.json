@@ -1,15 +1,16 @@
-{    
-"name": "Steel",    
-"icon": "amethyst_imbuement:steel_ingot",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Steel",
+"icon": "amethyst_imbuement:steel_ingot",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "A strong and durable material used to strengthen armors and other items."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shimmering_fabric_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/shimmering_fabric_imbuing"
+}
 ]
 }

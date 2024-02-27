@@ -1,0 +1,33 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/imbuing_table"
+			]
+		}
+	},
+	"got_shimmering":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:shimmering_helmet",
+						"amethyst_imbuement:shimmering_chestplate",
+						"amethyst_imbuement:shimmering_leggings",
+						"amethyst_imbuement:shimmering_boots"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_shimmering"
+	]
+]
+}

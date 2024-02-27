@@ -1,11 +1,12 @@
-{    
-"name": "Iridescent Scepter",    
-"icon": "amethyst_imbuement:iridescent_scepter",    
+{
+"name": "Iridescent Scepter",
+"icon": "amethyst_imbuement:iridescent_scepter",
 "category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/tier_1_scepters",
 "sortnum": 1,
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The second tier of scepters. Can be imbued with either tier one or two spells. This scepter is no longer available in survival, but if you still have one, it will still work.$(br2)$(l)Mana:$() 550"
 }
 ]

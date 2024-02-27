@@ -1,37 +1,40 @@
-{    
-"name": "Enhancing Recipes",    
-"icon": "amethyst_imbuement:crystal_altar",    
-"category": "amethyst_imbuement:recipes",    
-"pages": [        
-{            
+{
+"name": "Enhancing Recipes",
+"icon": "amethyst_imbuement:crystal_altar",
+"category": "amethyst_imbuement:recipes",
+"pages": [
+{
 "type": "patchouli:text",
 "title": "Hard Light Block",
 "text": "The crystal altars primary purpose is to enhance simple crystals into basic magical gems, but that's not all it's good for! With various dusts and catalysts many other useful things can be done with the table."
 },
-  {
-    "type": "amethyst_imbuement:enhancing",
-    "recipe": "amethyst_imbuement:enhancing/hard_light_block_enhancing",
-    "text": "As an example, pure blocks of solidified light can be made! Crafted hard light blocks will be permanent regardless if the spell variants are or not."
-  },
-  {
-    "type": "amethyst_imbuement:enhancing",
-    "recipe": "amethyst_imbuement:enhancing/empty_spell_scroll_enhancing",
-    "text": "Spell scrolls hold the magical energy of a spell within paper, waiting to be used up or to be transferred to a more permanent home on a scepter. In order to create a spell scroll, one must start with an empty one."
-  },
-  {
-    "type": "amethyst_imbuement:enhancing",
-    "recipe": "amethyst_imbuement:enhancing/glistening_ice_enhancing",
-    "text": "Blue ice makes for a fantastic skating rink, but with a little magic, it can be made even better! Glistening ice is more slippery than blue ice, and it's useful in magical recipes."
-  },
-  {
-    "type": "amethyst_imbuement:enhancing",
-    "recipe": "amethyst_imbuement:enhancing/leather_enhancing",
-    "text": "More alchemy than simple enhancing, the altar can cure the rotten flesh of fallen undead, converting it into a more useable leathery product."
-  },
-  {
-    "type": "amethyst_imbuement:enhancing",
-    "recipe": "amethyst_imbuement:enhancing/shine_light_enhancing",
-    "text": "Shine lights combine all the sunny characteristics of the sunflower with the literal glowing magic of glowstone dust into a compact and convenient light source."
-  }
+{
+"type": "amethyst_imbuement:enhancing",
+"anchor": "hard_light_block",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:enhancing/hard_light_block_enhancing",
+"text": "As an example, pure blocks of solidified light can be made! Crafted hard light blocks will be permanent regardless if the spell variants are or not."
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"anchor": "glistening_ice",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:enhancing/glistening_ice_enhancing",
+"text": "Blue ice makes for a fantastic skating rink, but with a little magic, it can be made even better! Glistening ice is more slippery than blue ice, and it's useful in magical recipes."
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"anchor": "leather",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:enhancing/leather_enhancing",
+"text": "More alchemy than simple enhancing, the altar can cure the rotten flesh of fallen undead, converting it into a more useable leathery product."
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"anchor": "shine_light",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:enhancing/shine_light_enhancing",
+"text": "Shine lights combine all the sunny characteristics of the sunflower with the literal glowing magic of glowstone dust into a compact and convenient light source."
+}
 ]
 }

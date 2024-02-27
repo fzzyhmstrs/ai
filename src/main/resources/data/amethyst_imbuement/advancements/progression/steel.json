@@ -1,0 +1,26 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/basic_spells",
+				"amethyst_imbuement:progression/basic_jewelry",
+				"amethyst_imbuement:progression/steel_armor"
+			]
+		}
+	},
+	"got_steel":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:steel_ingot"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_steel"
+	]
+]
+}

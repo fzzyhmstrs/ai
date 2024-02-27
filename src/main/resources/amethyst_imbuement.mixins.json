@@ -53,6 +53,8 @@
     "TridentEntityMixin"
   ],
   "client": [
+    "BookMixin",
+    "BookEntryMixin",
     "ClientPlayNetworkHandlerMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",

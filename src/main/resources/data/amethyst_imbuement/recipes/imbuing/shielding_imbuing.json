@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:imbued_quartz"
@@ -10,7 +10,7 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftA": {
 	"item": "minecraft:shield"
@@ -40,4 +40,3 @@
   "cost": 4,
   "augment": "amethyst_imbuement:shielding"
 }
-

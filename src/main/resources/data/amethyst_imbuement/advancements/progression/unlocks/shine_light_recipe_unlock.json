@@ -1,0 +1,22 @@
+{
+"criteria":{
+	"imbuing_table":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/imbuing_table"
+		}
+	},
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:shine_light"
+					]
+				}
+			]
+		}
+	}
+}
+}

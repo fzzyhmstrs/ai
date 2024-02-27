@@ -1,15 +1,16 @@
-{    
-"name": "Striding Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:equipment_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Striding Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:equipment_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Provides step assist, allowing you to move up one block steps without jumping.$(br)$(l)Enchants:$() $(#490)Boots$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/striding_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/striding_imbuing"
+}
 ]
 }

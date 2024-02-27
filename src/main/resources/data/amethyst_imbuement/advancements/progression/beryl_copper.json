@@ -1,0 +1,25 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/basic_spells",
+				"amethyst_imbuement:progression/basic_jewelry"
+			]
+		}
+	},
+	"got_beryl_copper":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:beryl_copper_ingot"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_beryl_copper"
+	]
+]
+}

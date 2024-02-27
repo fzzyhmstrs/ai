@@ -13,10 +13,12 @@
     },
     {
       "type": "amethyst_imbuement:imbuing",
+      "unlock": "amethyst_imbuement:progression/imbuing_table",
       "recipe": "amethyst_imbuement:imbuing/empty_spell_scroll_imbuing"
     },
     {
       "type": "amethyst_imbuement:enhancing",
+      "unlock": "amethyst_imbuement:progression/crystal_altar",
       "recipe": "amethyst_imbuement:enhancing/empty_spell_scroll_enhancing"
     }
   ]

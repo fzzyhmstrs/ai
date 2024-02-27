@@ -1,0 +1,36 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_imbuing_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:imbuing_table"
+					]
+				}
+			]
+		}
+	},
+	"used_table":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:imbuing_table"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_imbuing_table",
+		"used_table"
+	]
+]
+}

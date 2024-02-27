@@ -1,15 +1,16 @@
-{    
-"name": "Experience Bush Seed",    
-"icon": "amethyst_imbuement:xp_bush_seed",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Experience Bush Seed",
+"icon": "amethyst_imbuement:xp_bush_seed",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "This seed plants a bush similar to a Sweet Berry Bush. Once mature, harvesting from it will yield $(l:amethyst_imbuement:imbuing/bottle-o-enchanting)Bottles-O'-Enchanting$()! Plant a farm of these to get a steady stream of bottles and XP."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/xp_bush_seed_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/xp_bush_seed_imbuing"
+}
 ]
 }

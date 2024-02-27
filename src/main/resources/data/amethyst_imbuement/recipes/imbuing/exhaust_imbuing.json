@@ -4,13 +4,13 @@
 	"item": "amethyst_imbuement:moonstone"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftB": {
 	"item": "amethyst_imbuement:book_of_lore"

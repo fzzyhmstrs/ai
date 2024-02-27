@@ -1,26 +1,37 @@
 {
-  "name": "Garnet Armor",
-  "icon": "amethyst_imbuement:garnet_helmet",
-  "category": "amethyst_imbuement:armor",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Garnet Armor is an alternate enhancing upgrade for diamond tools. They have the same protection values, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_armor)Glowing Armor$()"
-    },
-    {
-      "type": "amethyst_imbuement:enhancing_multi",
-      "recipes": [
-        "amethyst_imbuement:enhancing/garnet_helmet_enhancing",
-        "amethyst_imbuement:enhancing/garnet_chestplate_enhancing",
-        "amethyst_imbuement:enhancing/garnet_leggings_enhancing"
-      ]
-    },
-    {
-      "type": "amethyst_imbuement:enhancing_multi",
-      "recipes": [
-        "amethyst_imbuement:enhancing/garnet_boots_enhancing",
-        "amethyst_imbuement:enhancing/garnet_horse_armor_enhancing"
-      ]
-    }
-  ]
+"name": "Garnet Armor",
+"icon": "amethyst_imbuement:garnet_helmet",
+"category": "amethyst_imbuement:armor",
+"advancement": "amethyst_imbuement:progression/unlocks/garnet_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Garnet Armor is an alternate enhancing upgrade for diamond tools. They have the same protection values, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_armor)Glowing Armor$()"
+},
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:garnet_helmet",
+"chestplate": "amethyst_imbuement:garnet_chestplate",
+"leggings": "amethyst_imbuement:garnet_leggings",
+"boots": "amethyst_imbuement:garnet_boots",
+"text": "Enhance Garnet Armor in the Crystal Altar using the recipes on the next pages."
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/garnet_helmet_enhancing",
+"amethyst_imbuement:enhancing/garnet_chestplate_enhancing",
+"amethyst_imbuement:enhancing/garnet_leggings_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/garnet_boots_enhancing",
+"amethyst_imbuement:enhancing/garnet_horse_armor_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
+]
 }

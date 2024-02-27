@@ -13,31 +13,30 @@
 	"item": "minecraft:amethyst_shard"
   },
   "craftA": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftB": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftC": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftF": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftG": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftH": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftI": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "title": "Crystalline",
   "cost": 9,
   "augment": "amethyst_imbuement:crystalline"
 }
-

@@ -13,6 +13,8 @@
 {
 "type": "patchouli:entity",
 "entity": "amethyst_imbuement:sardonyx_fragment",
+"scale": 0.85,
+"offset": 0.1,
 "text": "$(li)Default Health/Armor 60 / 8$(li)Default Damage 9 / 15 (enraged)",
 "advancement": "amethyst_imbuement:progression/sardonyx_fragment",
 "secret": true

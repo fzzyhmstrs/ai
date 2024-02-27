@@ -95,7 +95,7 @@ object AiConfig
             @ReadMeText("readme.items.manaItems.fullManaColor")
             var emptyManaColor = ValidatedColor(255,0,85)
 
-            fun getItemBarColor(stack:ItemStack): Int{
+            fun getItemBarColor(stack:ItemStack): Int {
                 val f = max(0.0f, (stack.maxDamage.toFloat() - stack.damage.toFloat()) / stack.maxDamage.toFloat())
                 val r = ((f * fullManaColor.r.get()) + ((1-f)*emptyManaColor.r.get())).toInt()
                 val g = ((f * fullManaColor.g.get()) + ((1-f)*emptyManaColor.g.get())).toInt()
@@ -141,14 +141,14 @@ object AiConfig
             @ReadMeText("readme.items.scroll.levels")
             var levels = ValidatedSeries(arrayOf(1,2,3,5,7),Int::class.java,{a,b-> b>a},"Spell levels need to increase from one to the next tier.")
         }
-        
+
         override fun generateNewClass(): Items {
             return this
         }
     }
 
     private val materialsHeader = buildSectionHeader("materials")
-    
+
     class Materials: ConfigClass(materialsHeader), OldClass<Materials> {
         var armor = Armor()
         class Armor: ConfigSection(Header.Builder().space().add("readme.materials.armor_1").build()) {
@@ -187,9 +187,9 @@ object AiConfig
             return this
         }
     }
-    
+
     private val blocksHeader = buildSectionHeader("altars")
-    
+
     class Blocks: ConfigClass(blocksHeader), OldClass<Blocks>{
 
         fun isCreateBlockTemporary(): Boolean{
@@ -209,20 +209,26 @@ object AiConfig
             @ReadMeText("readme.altars.hardLight.temporaryDuration")
             var temporaryDuration = ValidatedInt(600,Int.MAX_VALUE)
         }
-            
+
         var xpBush = XpBush()
         class XpBush: ConfigSection(Header.Builder().space().add("readme.altars.xp_bush_1").add("readme.altars.xp_bush_2").build()){
             var bonemealChance = ValidatedFloat(0.4f,1f,0f)
             var growChance = ValidatedFloat(0.15f,1f,0f)
         }
-        
+
         var disenchanter = Disenchanter()
         class Disenchanter: ConfigSection(Header.Builder().space().add("readme.altars.disenchant_1").add("readme.altars.disenchant_2").build()){
+
+            fun ignoreEnchantment(enchantment: Enchantment): Boolean{
+                return if (ignoreCurses.get()) enchantment.isCursed else false
+            }
+
             @ReadMeText("readme.altars.disenchanter.levelCosts")
             var levelCosts = ValidatedIntList(listOf(11, 17, 24, 33, 44), {i -> i >= 0}, "Needs integers greater than or equal to 0")
             var baseDisenchantsAllowed = ValidatedInt(1,Int.MAX_VALUE,0)
+            var ignoreCurses = ValidatedBoolean(false)
         }
-        
+
         var imbuing = Imbuing()
         class Imbuing: ConfigSection(Header.Builder().space().add("readme.altars.imbuing_1").add("readme.altars.imbuing_2").build()){
 
@@ -249,7 +255,7 @@ object AiConfig
             var replaceEnchantingTable = ValidatedBoolean(false)
             @ReadMeText("readme.altars.imbuing.difficultyModifier")
             var difficultyModifier = ValidatedFloat(1.0F,10f,0f)
-            
+
             var easyMagic = EasyMagic()
             class EasyMagic: ConfigSection(Header.Builder().add("readme.altars.imbuing_easy_1").add("readme.altars.imbuing_easy_2").build()){
                 var matchEasyMagicBehavior = ValidatedBoolean(true)
@@ -268,7 +274,7 @@ object AiConfig
                 var lapisCost = ValidatedInt(0,Int.MAX_VALUE,0)
             }
         }
-    
+
         var altar = Altar()
         class Altar: ConfigSection(Header.Builder().space().add("readme.altars.altar_1").add("readme.altars.altar_2").build()){
             var baseLevels = ValidatedInt(35,Int.MAX_VALUE,0)
@@ -276,14 +282,14 @@ object AiConfig
             @ReadMeText("readme.altars.altar.customXpMethod")
             var customXpMethod = ValidatedBoolean(true)
         }
-        
+
         override fun generateNewClass(): Blocks {
             return this
         }
     }
 
     private val villagesHeader = buildSectionHeader("villages")
-    
+
     class Villages: ConfigClass(villagesHeader){
         var vanilla = Vanilla()
         class Vanilla: ConfigSection(Header.Builder().space().add("readme.villages.vanilla_1").build()){
@@ -298,7 +304,7 @@ object AiConfig
             var enableTaigaWorkshops = ValidatedBoolean(true)
             var taigaWorkshopWeight = ValidatedInt(3,150,1)
         }
-        
+
         var ctov = Ctov()
         class Ctov: ConfigSection(Header.Builder().space().add("readme.villages.ctov_1").build()){
             var enableCtovWorkshops = ValidatedBoolean(true)
@@ -314,7 +320,7 @@ object AiConfig
             var swampWorkshopWeight = ValidatedInt(4,150,1)
             var swampFortifiedWorkshopWeight = ValidatedInt(4,150,1)
         }
-        
+
         var rs = Rs()
         class Rs: ConfigSection(Header.Builder().space().add("readme.villages.rs_1").build()){
             var enableRsWorkshops = ValidatedBoolean(true)
@@ -337,9 +343,9 @@ object AiConfig
             var skyWorkshopWeight = ValidatedInt(40,150,1)
         }
     }
-    
+
     private val enchantsHeader = buildSectionHeader("enchants")
-    
+
     class Enchants: ConfigClass(enchantsHeader), OldClass<Enchants>{
 
         fun isEnchantEnabled(enchantment: Enchantment): Boolean{
@@ -352,20 +358,20 @@ object AiConfig
             if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
             return amount
         }
-        
+
         fun getVanillaMaxLevel(enchantment: Enchantment, fallback: Int): Int{
             val id = (FzzyPort.ENCHANTMENT.getId(enchantment) ?: return fallback).toString()
             val amount = vanillaEnchantMaxLevels[id] ?: fallback
             if (disableIncreaseMaxLevels.get() && amount > fallback) return fallback
             return amount
         }
-        
+
         @ReadMeText("readme.enchants.disableIncreaseMaxLevels")
         var disableIncreaseMaxLevels = ValidatedBoolean(false)
-        
+
         @ReadMeText("readme.enchants.enabledEnchants")
         var enabledEnchants = ValidatedStringBoolMap(AiConfigDefaults.enabledEnchantments,{id,_ -> Identifier.tryParse(id) != null}, "Needs a valid registered enchantment identifier.")
-        
+
         @ReadMeText("readme.enchants.aiEnchantMaxLevels")
         var aiEnchantMaxLevels = ValidatedStringIntMap(AiConfigDefaults.aiEnchantmentMaxLevels,{ id, i -> Identifier.tryParse(id) != null && i > 0}, "Needs a valid registered enchantment identifier and a level greater than 0.")
 
@@ -438,7 +444,7 @@ object AiConfig
             {attacker,_,_ -> attacker == null},
             {_,victim,_ -> if (victim is Monster) ShouldHitResult.PASS else ShouldHitResult.FAIL}
         )
-        
+
         private val HIT_CHECKER = MobCheckerBuilder.sequence(
             NULL_MONSTER,
             MobCheckers.NOT_SELF,
@@ -458,7 +464,7 @@ object AiConfig
             TOGGLE_PVP_FRIEND,
             OrMobChecker(IS_PVP_FRIEND, MobCheckers.SELF)
         )
-        
+
         fun isEntityPvpTeammate(user: LivingEntity?, entity: Entity, spell: ScepterAugment): Boolean{
             if (entity is Monster)
                 return user is Monster

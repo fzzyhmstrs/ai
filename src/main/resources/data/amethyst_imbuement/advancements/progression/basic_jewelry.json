@@ -1,0 +1,37 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/imbued_jewelry"
+			]
+		}
+	},
+	"got_jewelry":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:copper_amulet",
+						"amethyst_imbuement:copper_headband",
+						"amethyst_imbuement:copper_ring",
+						"amethyst_imbuement:copper_ward",
+						"amethyst_imbuement:steel_amulet",
+						"amethyst_imbuement:steel_headband",
+						"amethyst_imbuement:steel_ring",
+						"amethyst_imbuement:steel_ward"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_jewelry"
+	]
+]
+}

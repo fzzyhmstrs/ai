@@ -1,0 +1,34 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_garnet":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:garnet_helmet",
+						"amethyst_imbuement:garnet_chestplate",
+						"amethyst_imbuement:garnet_leggings",
+						"amethyst_imbuement:garnet_boots",
+						"amethyst_imbuement:garnet_horse_armor",
+						"amethyst_imbuement:garnet_axe",
+						"amethyst_imbuement:garnet_pickaxe",
+						"amethyst_imbuement:garnet_hoe",
+						"amethyst_imbuement:garnet_shovel",
+						"amethyst_imbuement:garnet_sword"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_garnet"
+	]
+]
+}

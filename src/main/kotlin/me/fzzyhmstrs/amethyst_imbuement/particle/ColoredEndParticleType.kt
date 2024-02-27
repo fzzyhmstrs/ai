@@ -10,8 +10,8 @@ class ColoredEndParticleType: ParticleType<ColoredEndParticleEffect>(false, Regi
     private val CODEC = RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<ColoredEndParticleEffect> ->
         instance.group(
             Codec.FLOAT.fieldOf("r").forGetter { effect -> effect.r },
-            Codec.FLOAT.fieldOf("g").forGetter { effect -> effect.r },
-            Codec.FLOAT.fieldOf("b").forGetter { effect -> effect.r },
+            Codec.FLOAT.fieldOf("g").forGetter { effect -> effect.g },
+            Codec.FLOAT.fieldOf("b").forGetter { effect -> effect.b },
             Codec.FLOAT.fieldOf("scale").forGetter { effect -> effect.scale }
         ).apply(instance){r, g, b, scale -> ColoredEndParticleEffect(r, g, b, scale)} }
 

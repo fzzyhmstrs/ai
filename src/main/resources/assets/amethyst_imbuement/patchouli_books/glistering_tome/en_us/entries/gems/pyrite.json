@@ -1,15 +1,17 @@
-{    
-"name": "Pyrite",    
-"icon": "amethyst_imbuement:pyrite",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Prosperity $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce pyrite in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."      
+{
+"name": "Pyrite",
+"icon": "amethyst_imbuement:pyrite",
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/tier_1_gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Prosperity $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce pyrite in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/pyrite_imbuing"
-	}
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/pyrite_imbuing"
+}
 ]
 }

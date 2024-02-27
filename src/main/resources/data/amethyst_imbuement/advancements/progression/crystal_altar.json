@@ -1,0 +1,32 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_altar":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:crystal_altar"
+					]
+				}
+			]
+		}
+	},
+	"used_table":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:enhance"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_altar",
+		"used_table"
+	]
+]
+}

@@ -1,15 +1,17 @@
-{    
-"name": "Mana Potion",    
-"icon": "amethyst_imbuement:mana_potion",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Mana Potion",
+"icon": "amethyst_imbuement:mana_potion",
+"category": "amethyst_imbuement:imbuing",
+"advancement": "amethyst_imbuement:progression/experience_bottle",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Recovers the mana within your scepters, as well as healing your totems and providing you with experience if there are no items needing mana. If there is nothing to repair it will throw and break like an experience bottle, providing double the XP."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/mana_potion_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/mana_potion_imbuing"
+}
 ]
 }

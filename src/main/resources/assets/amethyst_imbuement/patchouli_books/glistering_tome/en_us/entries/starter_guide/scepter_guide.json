@@ -1,16 +1,16 @@
-{    
+{
 "name": "Starting with Scepters",
 "priority": true,
-"icon": "amethyst_imbuement:opaline_scepter",    
-"category": "amethyst_imbuement:scepters",    
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Spellcasting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters, unlocking even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()$(br2)With that accomplished, your path to spell mastery begins as follows... ." 
+"icon": "amethyst_imbuement:opaline_scepter",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Spellcasting will involve crafting, imbuing, exploring, and the perseverance to upgrade your scepters, unlocking even more powerful magics.$(br2)Before you begin, you will need to craft an $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()$(br2)With that accomplished, your path to spell mastery begins as follows... ."
 },
 {
 "type": "patchouli:text",
-"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_available_augments)Augment.$()$(li)Cast your spells and add more augments! For more powerful spells, find tomes scattered around the world.$(li)Begin looking into an $(#b0b)$(l:amethyst_imbuement:scepter_upgrading/intro)upgrade path$() for powering up your scepter."
+"text": "$(li)Imbue or obtain an $(#490)$(l:amethyst_imbuement:gems/opal)Opal$()$(li)Craft an $(#490)$(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$()$(li)Imbue your scepter with an $(l:amethyst_imbuement:scepter_available_augments)Augment.$()$(li)Cast your spells and add more augments! For more powerful spells, find tomes scattered around the world.$(li)Begin looking into an $(#b0b)$(l:amethyst_imbuement:starter_guide/intro)upgrade path$() for powering up your scepter."
 },
 {
 "type": "patchouli:text",

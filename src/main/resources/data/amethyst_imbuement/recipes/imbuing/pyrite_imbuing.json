@@ -22,13 +22,13 @@
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftE": {
 	"item": "amethyst_imbuement:imbued_quartz"
   },
   "craftF": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftG": {
 	"item": "amethyst_imbuement:imbued_quartz"
@@ -44,4 +44,3 @@
   "resultA": "amethyst_imbuement:pyrite",
   "countA": 1
 }
-

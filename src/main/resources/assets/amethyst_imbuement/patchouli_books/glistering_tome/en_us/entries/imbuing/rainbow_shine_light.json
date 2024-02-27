@@ -1,15 +1,17 @@
-{    
+{
 "name": "Rainbow Shine Lights",
 "icon": "amethyst_imbuement:shine_light_rainbow",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Combine several of the colored shine lights and some gem dust to create an iridescent shine light that shifts through the entire color spectrum and emits randomly colored particles."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shine_light_rainbow_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/unlocks/shine_light_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by enhancing some Shine Lights!",
+"recipe": "amethyst_imbuement:imbuing/shine_light_rainbow_imbuing"
+}
 ]
 }

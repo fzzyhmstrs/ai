@@ -1,17 +1,17 @@
 {
-	"name": "Grace Totem",
-	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/grace_totem.png",
-	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:progression/totem_of_grace",
-	"pages": [
-		{
-			"type": "patchouli:text",
-			"text": "Channeling the power of its Healer Gem, this totem will periodically heal the summoner and all allies within range. Perfect for deployment in a safe spot on the battlefield for players to rest and recover.$(br2)How to Obtain:$(li)Spell: Summon Totem of Grace"
-		},
-		{
-			"type": "patchouli:entity",
-			"entity": "amethyst_imbuement:totem_of_grace",
-			"text": "$(li)Default Health/Armor: 12 / 0$(li)Default Heals/Range: 2+ / 7+ Blocks"
-		}
-	]
+"name": "Grace Totem",
+"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/grace_totem.png",
+"category": "amethyst_imbuement:bestiary",
+"advancement": "amethyst_imbuement:progression/totem_of_grace",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Channeling the power of its Healer Gem, this totem will periodically heal the summoner and all allies within range. Perfect for deployment in a safe spot on the battlefield for players to rest and recover.$(br2)How to Obtain:$(li)Spell: Summon Totem of Grace"
+},
+{
+"type": "patchouli:entity",
+"entity": "amethyst_imbuement:totem_of_grace",
+"text": "$(li)Default Health/Armor: 12 / 0$(li)Default Heals/Range: 2+ / 7+ Blocks"
+}
+]
 }

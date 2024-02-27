@@ -13,13 +13,13 @@
 	"item": "minecraft:flint"
   },
   "craftA": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftB": {
 	"item": "minecraft:redstone"
   },
   "craftC": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftD": {
 	"item": "minecraft:redstone"
@@ -31,17 +31,16 @@
 	"item": "minecraft:redstone"
   },
   "craftG": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftH": {
 	"item": "minecraft:redstone"
   },
   "craftI": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "title": "Garnet",
   "cost": 15,
   "resultA": "amethyst_imbuement:garnet",
   "countA": 1
 }
-

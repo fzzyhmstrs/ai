@@ -1,0 +1,26 @@
+{
+"criteria": {
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/gear/glowing_gear",
+				"amethyst_imbuement:progression/gear/garnet_gear",
+				"amethyst_imbuement:progression/tier_2_gems"
+			]
+		}
+	},
+	"got_glowing":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:glowing"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_glowing"
+	]
+]
+}

@@ -1,15 +1,16 @@
-{    
-"name": "Mana Regen Potion",    
-"icon": "amethyst_imbuement:mana_regeneration_potion",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Mana Regen Potion",
+"icon": "amethyst_imbuement:mana_regeneration_potion",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Recovers mana in Scepters and other mana items over time, by granting the Mana Regeneration status effect."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/mana_regeneration_potion_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+  "unlock": "amethyst_imbuement:progression/shine_light_recipe_unlock",
+"recipe": "amethyst_imbuement:imbuing/mana_regeneration_potion_imbuing"
+}
 ]
 }

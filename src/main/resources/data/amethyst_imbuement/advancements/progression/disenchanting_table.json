@@ -1,0 +1,36 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_disenchanting_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:disenchanting_table"
+					]
+				}
+			]
+		}
+	},
+	"used_table":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:disenchanter"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_disenchanting_table",
+		"used_table"
+	]
+]
+}

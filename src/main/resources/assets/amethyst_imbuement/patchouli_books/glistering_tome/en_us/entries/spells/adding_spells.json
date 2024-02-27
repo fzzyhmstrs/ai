@@ -10,6 +10,7 @@
     {
       "type": "amethyst_imbuement:enhancing",
       "recipe": "amethyst_imbuement:enhancing/spell_addition_enhancing",
+      "unlock": "amethyst_imbuement:progression/crystal_altar",
       "text": "The scepter still needs to be able to accept the spell you are trying to add. Trying to combine spells that already exist on the scepter won't do anything."
     }
   ]

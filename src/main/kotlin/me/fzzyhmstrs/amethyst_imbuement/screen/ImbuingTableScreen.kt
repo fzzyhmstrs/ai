@@ -68,6 +68,15 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 return true
             }
         }
+        if(ModCompatHelper.isPatchouliLoaded()) {
+            val d = mouseX - (i + 6).toDouble()
+            val e = mouseY - (j + 111).toDouble()
+            if (!(d < 0.0 || e < 0.0 || d >= 20.0 || e >= 18.0)) {
+                client?.soundManager?.play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.2f))
+                ModCompatHelper.openBookEntry(AI.identity("altars/imbuing_table"))
+                return true
+            }
+        }
         if (AiConfig.blocks.imbuing.getRerollEnabled()){
             val d = mouseX - (i + 94).toDouble()
             val e = mouseY - (j + 37).toDouble()
@@ -287,6 +296,20 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
                 18
             )
         }
+        if (ModCompatHelper.isPatchouliLoaded()){
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+            val u = mouseX - (i + 6)
+            val v = mouseY - (j + 111)
+            val hovered = (u >= 0 && v >= 0 && u < 20 && v < 18)
+            context.drawTexture(this.texture,
+                i + 6,
+                j + 111,
+                236,
+                if(hovered){18 + 144} else {144},
+                20,
+                18
+            )
+        }
         if (handler.reroll.get() != 0){
             val offset = if (handler.reroll.get() > 0) {
                 val u = mouseX - (i + 94)
@@ -314,7 +337,6 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
 
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
-        val ofst2 = 4 //ofst to handle the screen height change
         this.renderBackground(context)
         super.render(context, mouseX, mouseY, delta)
         drawMouseoverTooltip(context, mouseX, mouseY)
@@ -353,7 +375,7 @@ class ImbuingTableScreen(handler: ImbuingTableScreenHandler, playerInventory: Pl
             if (r < 0) continue
             val result = handler.results.getOrNull(r)?:continue
             if (result.type == -2) continue
-            if (!isPointWithinBounds(118, 14 + ofst2 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
+            if (!isPointWithinBounds(118, 14 + 4 + 19 * j, 108, 17, mouseX.toDouble(), mouseY.toDouble())) continue
             val list = if(j == 0 && handler.resultsCanUp){
                 val tempList: MutableList<Text> = mutableListOf()
                 tempList.add(AcText.translatable("container.imbuing_table.previous_recipe"))

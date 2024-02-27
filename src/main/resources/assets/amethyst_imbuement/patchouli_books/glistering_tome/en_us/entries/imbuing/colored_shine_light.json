@@ -1,15 +1,18 @@
-{    
+{
 "name": "Colored Shine Lights",
 "icon": "amethyst_imbuement:shine_light_red",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Use any of the 16 dyes in minecraft to create colored versions of the Shine Light. Example shown is for the Red Shine Light"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shine_light_red_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/unlocks/shine_light_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by enhancing some Shine Lights!",
+"hintItem": "amethyst_imbuement:imbuing_table,amethyst_imbuement:shine_light",
+"recipe": "amethyst_imbuement:imbuing/shine_light_red_imbuing"
+}
 ]
 }

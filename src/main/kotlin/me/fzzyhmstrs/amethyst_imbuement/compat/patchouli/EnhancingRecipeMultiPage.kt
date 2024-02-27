@@ -5,11 +5,15 @@ import me.fzzyhmstrs.amethyst_imbuement.compat.patchouli.PatchouliCompat.ENHANCI
 import me.fzzyhmstrs.amethyst_imbuement.util.AltarRecipe
 import me.fzzyhmstrs.fzzy_core.coding_util.AcText
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.recipe.Ingredient
+import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
+import vazkii.patchouli.api.IVariable
 import vazkii.patchouli.api.PatchouliAPI
+import vazkii.patchouli.client.base.ClientAdvancements
 import vazkii.patchouli.client.book.BookContentsBuilder
 import vazkii.patchouli.client.book.BookEntry
 import vazkii.patchouli.client.book.BookPage
@@ -17,24 +21,56 @@ import vazkii.patchouli.client.book.gui.GuiBook
 import vazkii.patchouli.client.book.gui.GuiBookEntry
 
 
-class EnhancingRecipeMultiPage: BookPage() {
+class EnhancingRecipeMultiPage: BookPage(), AdvancementUpdatable {
 
     private var recipes: Array<Identifier?>? = null
+    private var unlockDesc: IVariable? = null
+    private var unlock: String? = null
+    private var hintItem: IVariable? = null
 
     @Transient
     private var enhancingRecipes: Array<RecipeAndTitle>? = null
+    @Transient
+    private var unlocked: Boolean = true
+    @Transient
+    private var unlockText: MutableList<OrderedText> = mutableListOf()
+    @Transient
+    private var unlockIngredient: Ingredient = Ingredient.EMPTY
+    @Transient
+    private var hintIngredient: Ingredient? = null
 
-    override fun build(world: World?, entry: BookEntry?, builder: BookContentsBuilder?, pageNum: Int) {
+    override fun build(world: World, entry: BookEntry, builder: BookContentsBuilder?, pageNum: Int) {
         super.build(world, entry, builder, pageNum)
         if ((recipes?.size ?: 0) > 3) throw IllegalStateException("recipes array in EnhancingRecipeMultiPage >3 long")
+        hintItem?.let { hintIngredient = it.`as`(Ingredient::class.java) }
         enhancingRecipes = recipes?.map { RecipeAndTitle(null, loadRecipe(world,entry,builder,pageNum,it)) }?.toTypedArray()
+        if (unlock != null) {
+            unlocked = ClientAdvancements.hasDone(unlock) || !entry.book.advancementsEnabled()
+            enhancingRecipes?.let { unlockIngredient = Ingredient.ofStacks(it.mapNotNull { recipe -> recipe.recipe?.getOutput() }.stream()) }
+        }
     }
 
     override fun onDisplayed(parent: GuiBookEntry?, left: Int, top: Int) {
         super.onDisplayed(parent, left, top)
         enhancingRecipes?.let {
             for (titleAndText in it)
-                titleAndText.title = titleAndText.recipe?.getOutput()?.name ?: AcText.translatable("patchouli.generic_title_text")
+                titleAndText.title = titleAndText.recipe?.getOutput()?.name ?: AcText.translatable("patchouli.generic_enhancing_title")
+        }
+        if (unlock == null) return
+        if(unlocked) {
+            if (!ClientAdvancements.hasDone(unlock))
+                unlocked = false
+        } else {
+            if (ClientAdvancements.hasDone(unlock) || !entry.book.advancementsEnabled())
+                unlocked = true
+        }
+        if (!unlocked) {
+            if (unlockDesc == null)
+                unlockDesc = IVariable.wrap(PatchouliCompat.defaultEnhancingUnlockText)
+            unlockText = mc.textRenderer.wrapLines(
+                (unlockDesc?.`as`(Text::class.java)?.copy() ?: AcText.empty()).formatted(Formatting.ITALIC),
+                GuiBook.PAGE_WIDTH
+            )
         }
     }
 
@@ -54,6 +90,11 @@ class EnhancingRecipeMultiPage: BookPage() {
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         //abort if blank
         if (enhancingRecipes == null) return
+
+        if (!unlocked) {
+            PatchouliCompat.renderHint(context, mouseX, mouseY,hintIngredient,unlockIngredient,unlockText,mc,book, parent)
+            return
+        }
 
         var yOffset = 0
         enhancingRecipes?.let {
@@ -118,4 +159,12 @@ class EnhancingRecipeMultiPage: BookPage() {
 
     private class RecipeAndTitle(var title: Text? = null, var recipe: AltarRecipe? = null)
 
+    override fun updateLockStatus(entry: BookEntry): Boolean {
+        if (unlock != null) {
+            val prevUnlocked = unlocked
+            unlocked = ClientAdvancements.hasDone(unlock) || !entry.book.advancementsEnabled()
+            return !prevUnlocked && unlocked
+        }
+        return false
+    }
 }

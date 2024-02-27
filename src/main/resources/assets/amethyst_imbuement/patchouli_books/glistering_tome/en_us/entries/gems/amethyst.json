@@ -1,16 +1,16 @@
-{    
-"name": "Amethyst",    
-"icon": "minecraft:amethyst_shard",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Meaning:$() Energy and Focus $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Find in geodes deep underground or by mining quarts in the Nether."      
-	},
-	{            
-		"type": "patchouli:spotlight",
-		"item": "minecraft:amethyst_shard",
-		"text": "$(o)Amethysts are widely sought after for their ability to focus a mind and energize a body. These powerful crystals have myriad uses; some traders are even said to prize them.$()"       
-	}
+{
+"name": "Amethyst",
+"icon": "minecraft:amethyst_shard",
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Energy and Focus $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Find in geodes deep underground or by mining quarts in the Nether."
+},
+{
+"type": "patchouli:spotlight",
+"item": "minecraft:amethyst_shard",
+"text": "$(o)Amethysts are widely sought after for their ability to focus a mind and energize a body. These powerful crystals have myriad uses; some traders are even said to prize them.$()"
+}
 ]
 }

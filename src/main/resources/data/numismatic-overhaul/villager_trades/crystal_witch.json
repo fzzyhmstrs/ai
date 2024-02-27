@@ -46,7 +46,7 @@
         "type": "numismatic-overhaul:sell_stack",
         "price": 175,
         "sell": {
-          "item": "amethyst_imbuement:citrine",
+          "tag": "c:citrine",
           "count": 1
         },
         "max_uses": 8,
@@ -56,7 +56,7 @@
         "type": "numismatic-overhaul:sell_stack",
         "price": 175,
         "sell": {
-          "item": "amethyst_imbuement:smoky_quartz",
+          "tag": "c:smoky_quartz",
           "count": 1
         },
         "max_uses": 8,

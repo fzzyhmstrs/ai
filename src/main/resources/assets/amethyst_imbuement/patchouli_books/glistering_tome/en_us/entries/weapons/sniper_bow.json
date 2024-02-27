@@ -1,16 +1,17 @@
-{    
-"name": "Sniper Bow",    
-"icon": "amethyst_imbuement:sniper_bow",    
-"category": "amethyst_imbuement:weapons",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Sniper Bow",
+"icon": "amethyst_imbuement:sniper_bow",
+"category": "amethyst_imbuement:weapons",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The sniper bow is designed with precision killing in mind. Besides having longer range and higher damage than the crossbow, right clicking and holding while the bow is loaded zooms into a scope view for precise aiming."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/sniper_bow_imbuing"
-  },
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/sniper_bow_imbuing"
+},
 {
 "type": "patchouli:image",
 "anchor": "scope",
@@ -27,7 +28,7 @@
 "border": true,
 "text": "Switch scope textures by using the '=' key (by default, can be changed in the controls menu)."
 },
-{            
+{
 "type": "patchouli:text",
 "anchor": "upgrades",
 "text": "There are several exclusive enchantments and upgrades available for this deadly weapon:$(br2)$(l)Deadly Shot:$() Increase the range and arrow speed even further.$(br)$(l)Headhunter:$() Gain a massive damage boost when you score a headshot.$(br)$(l)Illuminating:$() Gain night vision when aiming through the scope.$(br)$(l)Puncturing:$() Ignore a fraction of the opponents armor when dealing damage."

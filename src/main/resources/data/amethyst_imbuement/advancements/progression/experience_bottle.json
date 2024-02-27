@@ -1,0 +1,31 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:xp_bush",
+				"amethyst_imbuement:progression/mana_potion"
+			]
+		}
+	},
+	"got_xp_bottle":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:experience_bottle"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_xp_bottle"
+	]
+]
+}

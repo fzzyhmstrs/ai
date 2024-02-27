@@ -1,15 +1,16 @@
-{    
-"name": "Headhunter Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:weapon_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Headhunter Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:weapon_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Greatly increases $(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$() damage upon landing a headshot.$(br)$(l)Enchants:$() $(#490)$(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$()$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/headhunter_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/headhunter_imbuing"
+}
 ]
 }

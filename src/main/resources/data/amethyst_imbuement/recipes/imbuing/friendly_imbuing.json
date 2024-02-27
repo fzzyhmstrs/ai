@@ -4,13 +4,13 @@
 	"item": "amethyst_imbuement:pyrite"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftB": {
 	"item": "minecraft:carved_pumpkin"
@@ -28,4 +28,3 @@
   "cost": 13,
   "augment": "amethyst_imbuement:friendly"
 }
-

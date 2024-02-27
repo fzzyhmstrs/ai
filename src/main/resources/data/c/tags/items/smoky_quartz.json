@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"amethyst_imbuement:smoky_quartz",
+		{
+			"required": false,
+			"id": "cinderscapes:smoky_quartz"
+		}
+	]
+}

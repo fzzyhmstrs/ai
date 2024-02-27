@@ -1,16 +1,17 @@
-{    
-"name": "Iridescent Orb",    
-"icon": "amethyst_imbuement:iridescent_orb",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Iridescent orbs can only be found the various ruins, temples, and other settlements that dot the countryside. Try checking loot chests!$(br2)$(o)Thousands of truths echo across its surface$()"      
-	},
-	{            
-		"type": "patchouli:spotlight",
-		"item": "amethyst_imbuement:iridescent_orb",
-		"text": "$(o)Magical energy pours out of an iridescent orb. Use it to create advanced magical focuses.$()"       
-	}
+{
+"name": "Iridescent Orb",
+"icon": "amethyst_imbuement:iridescent_orb",
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Iridescent orbs can only be found the various ruins, temples, and other settlements that dot the countryside. Try checking loot chests!$(br2)$(o)Thousands of truths echo across its surface$()"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:iridescent_orb",
+"text": "$(o)Magical energy pours out of an iridescent orb. Use it to create advanced magical focuses.$()"
+}
 ]
 }

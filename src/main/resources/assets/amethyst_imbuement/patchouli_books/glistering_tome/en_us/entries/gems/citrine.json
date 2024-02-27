@@ -1,23 +1,26 @@
-{    
-"name": "Citrine",    
-"icon": "amethyst_imbuement:citrine",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Positivity and Luck $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce citrine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() or trade for it with a villager."      
+{
+"name": "Citrine",
+"icon": "amethyst_imbuement:citrine",
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Positivity and Luck $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce citrine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() or trade for it with a villager."
 },
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/citrine_imbuing"
-	},
-	{
-		"type": "amethyst_imbuement:imbuing",
-		"recipe": "amethyst_imbuement:imbuing/citrine_imbuing_from_gem_dust"
-	},
-	{
-		"type": "amethyst_imbuement:enhancing",
-		"recipe": "amethyst_imbuement:enhancing/citrine_enhancing"
-	}
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/citrine_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/citrine_imbuing_from_gem_dust"
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"recipe": "amethyst_imbuement:enhancing/citrine_enhancing",
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
 ]
 }

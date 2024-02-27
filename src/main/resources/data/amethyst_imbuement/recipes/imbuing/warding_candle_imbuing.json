@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftA": {
 	"tag": "minecraft:candles"
@@ -44,4 +44,3 @@
   "resultA": "amethyst_imbuement:warding_candle",
   "countA": 8
 }
-

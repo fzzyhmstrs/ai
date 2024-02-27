@@ -1,9 +1,9 @@
-{    
-"name": "Imbuing Table",    
-"icon": "amethyst_imbuement:imbuing_table",    
-"category": "amethyst_imbuement:altars",    
-"pages": [        
-{            
+{
+"name": "Imbuing Table",
+"icon": "amethyst_imbuement:imbuing_table",
+"category": "amethyst_imbuement:altars",
+"pages": [
+{
 "type": "patchouli:text",            
 "text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power."
 },
@@ -20,9 +20,9 @@
 		["BBBBB","B   B","B   B","B   B","BB BB"],
 		["BBBBB","B   B","B 0 B","B   B","BB BB"]
 	],
-	"mapping": {                  
-	"B": "minecraft:bookshelf",         
-	"0": "amethyst_imbuement:imbuing_table"     
+	"mapping": {
+	"B": "#c:bookshelves",
+	"0": "amethyst_imbuement:imbuing_table"
 	}
 },
 "enable_visualize": false,

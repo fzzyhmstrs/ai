@@ -4,13 +4,13 @@
 	"item": "minecraft:diamond"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:smoky_quartz"
+	"tag": "c:smoky_quartz"
   },
   "craftA": {
 	"item": "minecraft:flint"
@@ -40,4 +40,3 @@
   "cost": 5,
   "augment": "amethyst_imbuement:spiked"
 }
-

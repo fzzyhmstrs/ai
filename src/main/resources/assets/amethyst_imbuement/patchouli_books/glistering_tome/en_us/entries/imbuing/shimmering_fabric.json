@@ -1,15 +1,16 @@
-{    
+{
 "name": "Shimmering Fabric",
 "icon": "amethyst_imbuement:shimmering_fabric",
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "This fabric glitters strangely, even outside of direct light. Use it to craft some basic armor, as well as for crafting spell scrolls."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shimmering_fabric_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/shimmering_fabric_imbuing"
+}
 ]
 }

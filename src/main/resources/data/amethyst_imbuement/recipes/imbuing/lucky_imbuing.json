@@ -1,7 +1,7 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueB": {
 	"item": "amethyst_imbuement:pyrite"
@@ -10,7 +10,7 @@
 	"item": "amethyst_imbuement:pyrite"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftA": {
 	"item": "minecraft:bamboo"
@@ -40,4 +40,3 @@
   "cost": 13,
   "augment": "amethyst_imbuement:lucky"
 }
-

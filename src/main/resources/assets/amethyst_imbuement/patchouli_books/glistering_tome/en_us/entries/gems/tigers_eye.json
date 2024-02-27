@@ -1,18 +1,19 @@
-{    
+{
 "name": "Tigers Eye",
 "icon": "amethyst_imbuement:tigers_eye",
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-{            
-	"type": "patchouli:text",            
-	"text": "$(l)Meaning:$() Powerful protection from supernatural forces $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Mine Tigers Eye from the Nether in veins of Basalt (below Y:60) and Blackstone (any height)."
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/tier_2_gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Powerful protection from supernatural forces $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Mine Tigers Eye from the Nether in veins of Basalt (below Y:60) and Blackstone (any height)."
 },
-	{
-		"type": "patchouli:spotlight",
-		"title": "Tigers Eye",
-		"item": "amethyst_imbuement:tigers_eye",
-		"link_recipe": true,
-		"text": "$(o)It seems to watch over you$()"
-	}
+{
+"type": "patchouli:spotlight",
+"title": "Tigers Eye",
+"item": "amethyst_imbuement:tigers_eye",
+"link_recipe": true,
+"text": "$(o)It seems to watch over you$()"
+}
 ]
 }

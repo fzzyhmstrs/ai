@@ -1,11 +1,19 @@
-{    
+{
 "name": "Steel Armor",
 "icon": "amethyst_imbuement:steel_helmet",
 "category": "amethyst_imbuement:armor",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Steel armor is a basic set of gear that is a slight upgrade over iron."
+},
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:steel_helmet",
+"chestplate": "amethyst_imbuement:steel_chestplate",
+"leggings": "amethyst_imbuement:steel_leggings",
+"boots": "amethyst_imbuement:steel_boots",
+"text": "Craft Steel Armor in the Crafting Table using the recipes on the next pages."
 },
 {
 "type": "patchouli:crafting",

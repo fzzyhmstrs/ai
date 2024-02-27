@@ -6,22 +6,15 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Steel armor is a basic set of gear that is a slight upgrade over iron."
+"text": "A powerful and magical set of armor that can only be found in Witch Houses from treasure chests or from $(l:amethyst_imbuement:bestiary/sardonyx_elemental)Sardonyx Elementals$(). This armor is found infused with the $(l:amethyst_imbuement:modifiers/ensouled)Ensouled$() modifier, which randomly buffs Soul spells cast by the wearer."
 },
-{
-"type": "patchouli:crafting",
-"anchor": "steel_helmet",
-"recipe": "amethyst_imbuement:crafting/steel_helmet",
-"recipe2": "amethyst_imbuement:crafting/steel_chestplate"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:crafting/steel_leggings",
-"recipe2": "amethyst_imbuement:crafting/steel_boots"
-},
-{
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:crafting/steel_horse_armor"
-}
+  {
+    "type": "amethyst_imbuement:armor_stand",
+    "helmet": "amethyst_imbuement:soulwoven_helmet",
+    "chestplate": "amethyst_imbuement:soulwoven_chestplate",
+    "leggings": "amethyst_imbuement:soulwoven_leggings",
+    "boots": "amethyst_imbuement:soulwoven_boots",
+    "text": "This set can only be found, it can't be crafted."
+  }
 ]
 }

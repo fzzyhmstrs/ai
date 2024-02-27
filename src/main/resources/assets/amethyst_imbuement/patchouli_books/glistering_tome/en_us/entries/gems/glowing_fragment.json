@@ -1,16 +1,16 @@
-{    
+{
 "name": "Glowing Fragment",
 "icon": "amethyst_imbuement:glowing_fragment",
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Meaning:$() Magical potential $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Can only be found in loot chests scattered around the world, or by smashing a $(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$()"
-	},
-	{            
-		"type": "patchouli:crafting",
-		"recipe": "amethyst_imbuement:crafting/glowing_fragment",
-		"text": "$(o)A shard of an exceptionally brilliant diamond. This fragment glows with inner potential.$()"
-	}
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Magical potential $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Can only be found in loot chests scattered around the world, or by smashing a $(l:amethyst_imbuement:gems/brilliant_diamond)Brilliant Diamond$()"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/glowing_fragment",
+"text": "$(o)A shard of an exceptionally brilliant diamond. This fragment glows with inner potential.$()"
+}
 ]
 }

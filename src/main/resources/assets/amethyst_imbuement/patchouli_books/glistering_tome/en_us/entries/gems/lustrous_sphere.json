@@ -1,16 +1,17 @@
-{    
-"name": "Lustrous Sphere",    
-"icon": "amethyst_imbuement:lustrous_sphere",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Lustrous spheres can only be found in hard to reach and dangerous places. Try checking late game loot chests!$(br2)$(o)Millions of realities reflect in its depths$()"      
-	},
-	{            
-		"type": "patchouli:spotlight",
-		"item": "amethyst_imbuement:lustrous_sphere",
-		"text": "$(o)Immense energy radiates from a lustrous sphere. Use it to create the most powerful of magical focuses.$()"       
-	}
+{
+"name": "Lustrous Sphere",
+"icon": "amethyst_imbuement:lustrous_sphere",
+"category": "amethyst_imbuement:gems",
+"advancement": "amethyst_imbuement:progression/tier_2_scepters",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Lustrous spheres can only be found in hard to reach and dangerous places. Try checking late game loot chests!$(br2)$(o)Millions of realities reflect in its depths$()"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:lustrous_sphere",
+"text": "$(o)Immense energy radiates from a lustrous sphere. Use it to create the most powerful of magical focuses.$()"
+}
 ]
 }

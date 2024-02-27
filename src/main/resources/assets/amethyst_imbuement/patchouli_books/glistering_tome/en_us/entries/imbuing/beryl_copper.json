@@ -1,15 +1,16 @@
-{    
-"name": "Beryllium Copper",    
-"icon": "amethyst_imbuement:beryl_copper_ingot",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Beryllium Copper",
+"icon": "amethyst_imbuement:beryl_copper_ingot",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "This alloy of copper and beryl is prized for its flexibility and corrosion resistance. Excellent at enhancing weapons and other items."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/beryl_copper_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/beryl_copper_imbuing"
+}
 ]
 }

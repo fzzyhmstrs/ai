@@ -1,11 +1,12 @@
-{    
-"name": "Lustrous Scepter",    
-"icon": "amethyst_imbuement:lustrous_scepter",    
+{
+"name": "Lustrous Scepter",
+"icon": "amethyst_imbuement:lustrous_scepter",
 "category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/tier_2_scepters",
 "sortnum": 2,
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The third and highest tier of scepters. Can be imbued with any spells. This scepter is no longer available in survival, but if you still have one, it will still work.$(br2)$(l)Mana:$() 1450"
 }
 ]

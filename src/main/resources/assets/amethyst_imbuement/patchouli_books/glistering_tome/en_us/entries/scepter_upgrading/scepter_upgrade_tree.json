@@ -1,22 +1,22 @@
-{    
+{
 "name": "Scepter Upgrade Tree",
 "icon": "minecraft:oak_sapling",
-"category": "amethyst_imbuement:scepter_upgrading",    
+"category": "amethyst_imbuement:scepter_upgrading",
 "pages": [
-  {
-    "type": "patchouli:text",
-    "text": "$(o)Amethyst Imbuement$() includes 27 specialized scepters that are arranged by tier in a 'tree'. Following a branch on this tree will yield an extremely powerful scepter that is customized and specialized to your liking.$(br2)$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree#scepter_tree)$(bold)Jump to tree$()"
-  },
-  {
-    "type": "patchouli:text",
-    "text": "Each scepter includes certain Modifiers, and some come with unique spells that aren't craftable by normal means. There are 6 main paths to follow, and 5 sub-paths within each of those paths. This guide contains an overview of all the possible paths and their, advantages, disadvantages, and unique provisions."
-  },
-  {
-    "type": "amethyst_imbuement:skill_tree_1",
-    "anchor": "scepter_tree"
-  },
-  {
-    "type": "amethyst_imbuement:skill_tree_2"
-  }
+{
+"type": "patchouli:text",
+"text": "$(o)Amethyst Imbuement$() includes 30 specialized scepters that are arranged by tier in a 'tree'. Following a branch on this tree will yield an extremely powerful scepter that is customized and specialized to your liking.$(br2)$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree#scepter_tree)$(bold)Jump to tree$()"
+},
+{
+"type": "patchouli:text",
+"text": "Each scepter includes certain Modifiers, and some come with unique spells that aren't craftable by normal means. There are 6 paths to follow, and 6 sub-paths within each of those paths. This guide contains an overview of all the possible paths and their advantages, disadvantages, and unique provisions."
+},
+{
+"type": "amethyst_imbuement:skill_tree_1",
+"anchor": "scepter_tree"
+},
+{
+"type": "amethyst_imbuement:skill_tree_2"
+}
 ]
 }

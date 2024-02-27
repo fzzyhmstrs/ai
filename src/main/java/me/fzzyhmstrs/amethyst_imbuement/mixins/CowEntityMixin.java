@@ -17,18 +17,6 @@ import java.util.Map;
 @Mixin(CowEntity.class)
 public class CowEntityMixin {
 
-    /*@Redirect(method = "interactMob", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemUsage.exchangeStack (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
-    private ItemStack amethyst_imbuement_milkBucketInfinity(ItemStack inputStack, PlayerEntity player, ItemStack outputStack){
-        int level = EnchantmentHelper.getLevel(Enchantments.INFINITY,inputStack);
-        ItemStack tempStack = ItemUsage.exchangeStack(inputStack,player,outputStack);
-        if (level > 0){
-            Map<Enchantment, Integer> map = new HashMap<>();
-            map.put(Enchantments.INFINITY,1);
-            EnchantmentHelper.set(map,tempStack);
-        }
-        return tempStack;
-    }*/
-
     @WrapOperation(method = "interactMob", at = @At(value = "INVOKE", target = "net/minecraft/item/ItemUsage.exchangeStack (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
     private ItemStack amethyst_imbuement_milkBucketInfinity(ItemStack inputStack, PlayerEntity player, ItemStack outputStack, Operation<ItemStack> operation){
         int level = EnchantmentHelper.getLevel(Enchantments.INFINITY,inputStack);

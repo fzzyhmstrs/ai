@@ -1,23 +1,25 @@
 {
-  "name": "Equinox",
-  "icon": "amethyst_imbuement:equinox",
-  "category": "amethyst_imbuement:scepters",
-  "sortnum": 27,
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Tier three fury scepter focused on elemental magic. Adds the modifiers $(l:amethyst_imbuement:modifiers/elemental)Elemental$() and $(l:amethyst_imbuement:modifiers/furious)Furious$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 1450"
-    },
-    {
-      "type": "amethyst_imbuement:scepter_lineage_tier_3",
-      "anc_a": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
-      "anc_b": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
-      "anc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
-      "input_item": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/equinox_imbuing"
-    }
-  ]
+"name": "Equinox",
+"icon": "amethyst_imbuement:equinox",
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/tier_2_scepters",
+"sortnum": 27,
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Tier three fury scepter focused on elemental magic. Adds the modifiers $(l:amethyst_imbuement:modifiers/elemental)Elemental$() and $(l:amethyst_imbuement:modifiers/furious)Furious$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 1450"
+},
+{
+"type": "amethyst_imbuement:scepter_lineage_tier_3",
+"anc_a": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
+"anc_b": "amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]}",
+"anc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
+"input_item": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/equinox_imbuing"
+}
+]
 }

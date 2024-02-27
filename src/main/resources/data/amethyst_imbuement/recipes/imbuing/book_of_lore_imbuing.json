@@ -16,7 +16,7 @@
 	"item": "amethyst_imbuement:knowledge_powder"
   },
   "craftD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftE": {
 	"item": "minecraft:enchanted_book"

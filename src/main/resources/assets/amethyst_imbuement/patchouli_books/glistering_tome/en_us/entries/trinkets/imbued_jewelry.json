@@ -1,27 +1,32 @@
-{    
-"name": "Imbued Jewelry",    
-"icon": "amethyst_imbuement:imbued_ring",    
-"category": "amethyst_imbuement:trinkets",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Imbued Jewelry",
+"icon": "amethyst_imbuement:imbued_ring",
+"category": "amethyst_imbuement:trinkets",
+"advancement": "amethyst_imbuement:progression/basic_jewelry",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Once imbued, your jewelry can contain magic. $(l)Imbued jewelry holds one augment. Choose wisely!$()$(br2)To choose another augment, you may remove the current ability in a $(#490)Grindstone$() or a $(#490)$(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()$(br2)Imbued Jewelry adds a passive beneficial attribute based on the specific crafting ingredient used. Imbued wards can be used as shields."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/imbued_amulet_imbuing"
-  },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/imbued_headband_imbuing"
-  },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/imbued_ring_imbuing"
-  },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/imbued_ward_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/imbued_amulet_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/imbued_headband_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/imbued_ring_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/imbued_ward_imbuing"
+}
 ]
 }

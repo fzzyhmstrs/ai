@@ -1,16 +1,16 @@
-{    
-"name": "Brilliant Diamond",    
-"icon": "amethyst_imbuement:brilliant_diamond",    
-"category": "amethyst_imbuement:gems",    
-"pages": [        
-	{            
-		"type": "patchouli:text",            
-		"text": "$(l)Meaning:$() Brilliance and Fortitude $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Can only be found in loot chests scattered around the world. You may also ask certain traders if they possess any for trade."      
-	},
-	{            
-		"type": "patchouli:spotlight",
-		"item": "amethyst_imbuement:brilliant_diamond",
-		"text": "$(o)Diamonds are very powerful crystals, and this crystal glows with an inner purity that is not often seen on more mundane specimens.$()"       
-	}
+{
+"name": "Brilliant Diamond",
+"icon": "amethyst_imbuement:brilliant_diamond",
+"category": "amethyst_imbuement:gems",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "$(l)Meaning:$() Brilliance and Fortitude $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Can only be found in loot chests scattered around the world. You may also ask certain traders if they possess any for trade."
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:brilliant_diamond",
+"text": "$(o)Diamonds are very powerful crystals, and this crystal glows with an inner purity that is not often seen on more mundane specimens.$()"
+}
 ]
 }

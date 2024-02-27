@@ -1,15 +1,16 @@
-{    
-"name": "Crystalline Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:weapon_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Crystalline Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:weapon_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Increases weapon damage.$(br)$(l)Enchants:$() $(#490)Any weapon$()$(br)$(l)Max Level:$() 6 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/crystalline_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/crystalline_imbuing"
+}
 ]
 }

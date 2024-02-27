@@ -1,15 +1,16 @@
-{    
-"name": "Spiked Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:equipment_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Spiked Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:equipment_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Blocking with a shield augmented with spiked damages the attacker like Thorns.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/spiked_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/spiked_imbuing"
+}
 ]
 }

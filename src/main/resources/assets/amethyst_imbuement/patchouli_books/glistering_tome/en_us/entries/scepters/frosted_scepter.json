@@ -1,23 +1,25 @@
 {
-  "name": "Frosted Scepter",
-  "icon": "amethyst_imbuement:frosted_scepter",
-  "category": "amethyst_imbuement:scepters",
-  "sortnum": 11,
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/ice_aspect)Ice Aspect$() and the unique spell Ice Spikes. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 550"
-    },
-    {
-      "type": "amethyst_imbuement:scepter_lineage_tier_2",
-      "anc_a": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-      "anc_b": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
-      "input_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
-      "desc_a": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/frosted_scepter_imbuing"
-    }
-  ]
+"name": "Frosted Scepter",
+"icon": "amethyst_imbuement:frosted_scepter",
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/tier_1_scepters",
+"sortnum": 11,
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/ice_aspect)Ice Aspect$() and the unique spell Ice Spikes. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 550"
+},
+{
+"type": "amethyst_imbuement:scepter_lineage_tier_2",
+"anc_a": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"anc_b": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"input_item": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
+"desc_a": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/frosted_scepter_imbuing"
+}
+]
 }

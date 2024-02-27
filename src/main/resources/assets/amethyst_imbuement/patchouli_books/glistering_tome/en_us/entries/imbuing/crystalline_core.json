@@ -1,15 +1,17 @@
-{    
-"name": "Crystalline Core",    
-"icon": "amethyst_imbuement:crystalline_core",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Crystalline Core",
+"icon": "amethyst_imbuement:crystalline_core",
+"category": "amethyst_imbuement:imbuing",
+"advancement": "amethyst_imbuement:progression/crystalline_heart",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Use this artifact as the heart of a $(l:amethyst_imbuement:bestiary/crystal_golem)Crystalline Golem$() to bring it to life. See the following pages for details on the Golem itself."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/crystalline_core_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/crystalline_core_imbuing"
+}
 ]
 }

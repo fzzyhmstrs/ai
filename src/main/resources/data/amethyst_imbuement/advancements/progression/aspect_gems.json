@@ -5,7 +5,10 @@
 		"conditions":{
 			"advancements": [
 				"amethyst_imbuement:progression/crystalline_heart",
-				"amethyst_imbuement:progression/witches_orb"
+				"amethyst_imbuement:progression/witches_orb",
+				"amethyst_imbuement:progression/altar_of_experience",
+				"amethyst_imbuement:progression/basic_spells",
+				"amethyst_imbuement:aspect_gem"
 			]
 		}
 	},
@@ -14,12 +17,23 @@
 		"conditions":{
 			"advancement": "amethyst_imbuement:gem_of_promise"
 		}
+	},
+	"got_aspect_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"tag": "amethyst_imbuement:aspect_gems"
+				}
+			]
+		}
 	}
 },
 "requirements": [
 	[
 		"unlock",
-		"got_gem_of_promise"
+		"got_gem_of_promise",
+		"got_aspect_gem"
 	]
 ]
 }

@@ -1,32 +1,39 @@
 {
-  "name": "Gem Dust Recycling",
-  "icon": "amethyst_imbuement:gem_dust",
-  "category": "amethyst_imbuement:recipes",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Gem dust is a base ingredient for the aspect gems used in scepter upgrading. It recycles magical items into new, more useful, items."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_book_of_lore",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_book_of_mythos"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_enchanted_book",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_iridescent_orb"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_lustrous_sphere",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_glowing_fragment"
+"name": "Gem Dust Recycling",
+"icon": "amethyst_imbuement:gem_dust",
+"category": "amethyst_imbuement:recipes",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Gem dust is a base ingredient for the aspect gems used in scepter upgrading. It recycles magical items into new, more useful, items."
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/gem_dust_from_book_of_lore",
+"recipe2": "amethyst_imbuement:crafting/gem_dust_from_book_of_mythos"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/gem_dust_from_enchanted_book",
+"recipe2": "amethyst_imbuement:crafting/gem_dust_from_iridescent_orb"
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/gem_dust_from_lustrous_sphere",
+"recipe2": "amethyst_imbuement:crafting/gem_dust_from_glowing_fragment"
 
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "amethyst_imbuement:crafting/gem_dust_from_aspect_gem",
-      "recipe2": "amethyst_imbuement:crafting/gem_dust_from_spell_scroll"
-    }
-  ]
+},
+{
+"type": "patchouli:crafting",
+"recipe": "amethyst_imbuement:crafting/gem_dust_from_aspect_gem",
+"recipe2": "amethyst_imbuement:crafting/gem_dust_from_spell_scroll"
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"flag": "mod:spectrum",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:optional/gem_dust_enhancing",
+"text": "Using the various dusts produced by the Spectrum anvil crushing technique, you can create a very respectable gem dust mixture in the crystal altar."
+}
+]
 }

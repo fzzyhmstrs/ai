@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/gear/garnet_gear",
+				"minecraft:story/shiny_gear",
+				"amethyst_imbuement:progression/tier_1_gems"
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock"
+	]
+]
+}

@@ -1,15 +1,16 @@
-{    
-"name": "Bottle o' Enchanting",    
-"icon": "minecraft:experience_bottle",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Bottle o' Enchanting",
+"icon": "minecraft:experience_bottle",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Break this potion on the ground to receive between 3 and 11 experience points."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/bottle-o-enchanting_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/bottle-o-enchanting_imbuing"
+}
 ]
 }

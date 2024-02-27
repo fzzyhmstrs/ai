@@ -1,38 +1,52 @@
 {
-  "name": "Glowing Armor",
-  "icon": "amethyst_imbuement:glowing_helmet",
-  "category": "amethyst_imbuement:armor",
-  "extra_recipe_mappings": {
-    "amethyst_imbuement:glowing_helmet": 1,
-    "amethyst_imbuement:glowing_chestplate": 2,
-    "amethyst_imbuement:glowing_leggings": 3,
-    "amethyst_imbuement:glowing_boots": 4,
-    "amethyst_imbuement:glowing_horse_armor": 5
-  },
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "A high tier set of gold-like equipment. They are slightly more protective than diamond, but sacrifice a large chunk of durability for extreme enchantability. Glowing Horse Armor is a strict upgrade of garnet, however."
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/glowing_helmet_imbuing"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/glowing_chestplate_imbuing"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/glowing_leggings_imbuing"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/glowing_boots_imbuing"
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "recipe": "amethyst_imbuement:imbuing/glowing_boots_imbuing"
-    }
-  ]
+"name": "Glowing Armor",
+"icon": "amethyst_imbuement:glowing_helmet",
+"category": "amethyst_imbuement:armor",
+"extra_recipe_mappings": {
+"amethyst_imbuement:glowing_helmet": 1,
+"amethyst_imbuement:glowing_chestplate": 2,
+"amethyst_imbuement:glowing_leggings": 3,
+"amethyst_imbuement:glowing_boots": 4,
+"amethyst_imbuement:glowing_horse_armor": 5
+},
+"advancement": "amethyst_imbuement:progression/unlocks/glowing_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "A high tier set of gold-like equipment. They are slightly more protective than diamond, but sacrifice a large chunk of durability for extreme enchantability. Glowing Horse Armor is a strict upgrade of garnet, however."
+},
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:glowing_helmet",
+"chestplate": "amethyst_imbuement:glowing_chestplate",
+"leggings": "amethyst_imbuement:glowing_leggings",
+"boots": "amethyst_imbuement:glowing_boots",
+"text": "Imbue Glowing Armor in the Imbuing Table using the recipes on the next pages."
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/glowing_helmet_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/glowing_chestplate_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/glowing_leggings_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/glowing_boots_imbuing"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/glowing_boots_imbuing"
+}
+]
 }

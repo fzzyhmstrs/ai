@@ -1,16 +1,16 @@
 {
   "type": "amethyst_imbuement:imbuing",
   "imbueA": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueB": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueC": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "imbueD": {
-	"item": "amethyst_imbuement:citrine"
+	"tag": "c:citrine"
   },
   "craftB": {
 	"item": "amethyst_imbuement:book_of_lore"
@@ -28,4 +28,3 @@
   "cost": 7,
   "augment": "amethyst_imbuement:sparkbolt"
 }
-

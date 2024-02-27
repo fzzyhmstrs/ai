@@ -1,16 +1,16 @@
-{    
-"name": "Lesser Attuned",    
+{
+"name": "Lesser Attuned",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lesser_attuned.png",
-"sortnum": 9,  
+"sortnum": 9,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Reduces the cooldown of your scepter spells by 7.5%. This modifier is independent of scepter. Affects:$(li)All scepters$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Lesser Attuned",
 "mod_image": "amethyst_core:textures/gui/patchouli/mod_spotlights/lesser_attuned.png",
 "ancestor": "N/A",
@@ -18,9 +18,10 @@
 "mod_type": "$(2)Spell Casting$()",
 "mod_text": "Attune your scepter to the world around you. Imbue onto any scepter with the recipe on the next page."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_core:attuned_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_core:attuned_imbuing"
+}
 ]
 }

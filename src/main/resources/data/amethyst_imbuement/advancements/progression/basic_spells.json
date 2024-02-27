@@ -4,7 +4,8 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
-				"amethyst_imbuement:progression/tier_2_scepters"
+				"amethyst_imbuement:progression/tier_2_scepters",
+				"amethyst_imbuement:arcane_researcher"
 			]
 		}
 	},

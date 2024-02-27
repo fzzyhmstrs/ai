@@ -1,0 +1,32 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/gear/ametrine_gear",
+				"minecraft:nether/netherite_armor",
+				"amethyst_imbuement:progression/tier_2_gems"
+			]
+		}
+	},
+	"got_netherite":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items": [
+						"minecraft:netherite_ingot"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_netherite"
+	]
+]
+}

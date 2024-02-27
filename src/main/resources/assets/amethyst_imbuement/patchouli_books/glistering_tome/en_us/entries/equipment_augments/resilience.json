@@ -1,15 +1,16 @@
-{    
-"name": "Resilience Augment",    
-"icon": "amethyst_imbuement:book_of_mythos",    
-"category": "amethyst_imbuement:equipment_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Resilience Augment",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:equipment_augments",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Increase the protection of your armor. Adds one armor point per piece per level and 0.5 armor toughness per piece per level.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() None"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/resilience_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/resilience_imbuing"
+}
 ]
 }

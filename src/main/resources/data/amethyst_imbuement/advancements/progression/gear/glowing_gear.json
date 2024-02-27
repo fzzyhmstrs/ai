@@ -1,0 +1,41 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_glowing":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:glowing_helmet",
+						"amethyst_imbuement:glowing_chestplate",
+						"amethyst_imbuement:glowing_leggings",
+						"amethyst_imbuement:glowing_boots",
+						"amethyst_imbuement:glowing_horse_armor",
+						"amethyst_imbuement:glowing_axe",
+						"amethyst_imbuement:glowing_pick",
+						"amethyst_imbuement:glowing_hoe",
+						"amethyst_imbuement:glowing_spade",
+						"amethyst_imbuement:glowing_blade"
+					]
+				}
+			]
+		}
+	},
+	"got_garnet":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/gear/garnet_gear"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_glowing",
+		"got_garnet"
+	]
+]
+}

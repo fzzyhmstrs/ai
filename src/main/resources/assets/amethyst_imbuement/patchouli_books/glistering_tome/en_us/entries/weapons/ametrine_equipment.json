@@ -1,26 +1,29 @@
-{    
+{
 "name": "Ametrine Equipment",
 "icon": "amethyst_imbuement:ametrine_sword",
 "category": "amethyst_imbuement:weapons",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/unlocks/ametrine_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Ametrine Equipment is a further upgrade to Netherite Equipment. It offers improved damage and durability."
 },
-  {
-    "type": "amethyst_imbuement:enhancing_multi",
-    "recipes": [
-      "amethyst_imbuement:enhancing/ametrine_axe_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_hoe_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_pickaxe_enhancing"
-    ]
-  },
-  {
-    "type": "amethyst_imbuement:enhancing_multi",
-    "recipes": [
-      "amethyst_imbuement:enhancing/ametrine_shovel_enhancing",
-      "amethyst_imbuement:enhancing/ametrine_sword_enhancing"
-    ]
-  }
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/ametrine_axe_enhancing",
+"amethyst_imbuement:enhancing/ametrine_hoe_enhancing",
+"amethyst_imbuement:enhancing/ametrine_pickaxe_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/ametrine_shovel_enhancing",
+"amethyst_imbuement:enhancing/ametrine_sword_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
 ]
 }

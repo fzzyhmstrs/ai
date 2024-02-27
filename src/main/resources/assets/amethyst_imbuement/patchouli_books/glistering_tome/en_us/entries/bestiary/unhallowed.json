@@ -1,17 +1,17 @@
 {
-	"name": "Unhallowed",
-	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/unhallowed.png",
-	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:spells/summon_zombie",
-	"pages": [
-		{
-			"type": "patchouli:text",
-			"text": "Braiiinnss.. These ghoulish summons are a go-to battlefield ally. Numerous and strong, they can easily devastate hordes of foes. At high level, these zombies come equipped with steel armor and glowing blades.$(br2)How to Obtain:$(li)Spell: Summon Zombie"
-		},
-		{
-			"type": "patchouli:entity",
-			"entity": "amethyst_imbuement:unhallowed",
-			"text": "$(li)Default Health/Armor: 20 / 2$(li)Default Damage: 3"
-		}
-	]
+"name": "Unhallowed",
+"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/unhallowed.png",
+"category": "amethyst_imbuement:bestiary",
+"advancement": "amethyst_imbuement:spells/summon_zombie",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Braiiinnss.. These ghoulish summons are a go-to battlefield ally. Numerous and strong, they can easily devastate hordes of foes. At high level, these zombies come equipped with steel armor and glowing blades.$(br2)How to Obtain:$(li)Spell: Summon Zombie"
+},
+{
+"type": "patchouli:entity",
+"entity": "amethyst_imbuement:unhallowed",
+"text": "$(li)Default Health/Armor: 20 / 2$(li)Default Damage: 3"
+}
+]
 }

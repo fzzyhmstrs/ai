@@ -1,15 +1,16 @@
-{    
-"name": "Warding Candle",    
-"icon": "amethyst_imbuement:warding_candle",    
-"category": "amethyst_imbuement:imbuing",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Warding Candle",
+"icon": "amethyst_imbuement:warding_candle",
+"category": "amethyst_imbuement:imbuing",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "These candles are brighter than standard candles, and ward off certain creatures. They also provide double the experience bonus for the $(l:amethyst_imbuement:altars/altar_of_experience)Altar of Experience$()."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/warding_candle_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/warding_candle_imbuing"
+}
 ]
 }

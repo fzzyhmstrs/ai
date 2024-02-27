@@ -1,10 +1,11 @@
-{    
-"name": "Altar of Experience",    
-"icon": "amethyst_imbuement:altar_of_experience",    
-"category": "amethyst_imbuement:altars",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Altar of Experience",
+"icon": "amethyst_imbuement:altar_of_experience",
+"category": "amethyst_imbuement:altars",
+"advancement": "amethyst_imbuement:progression/aspect_gems",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The emerald suspended above this altar turns its friendly gaze towards you and offers to keep your soul safe from harm, ready to return it to you at any time. Use this altar to store your experience. Surrounding this altar with candles or warding candles improves its storage capacity."
 },
 {
@@ -18,9 +19,9 @@
 	"pattern": [
 		["BBBBB","B   B","B 0 B","B   B","BBBBB"]
 	],
-	"mapping": {                  
-	"B": "#minecraft:candles",         
-	"0": "amethyst_imbuement:altar_of_experience"     
+	"mapping": {
+	"B": "#minecraft:candles",
+	"0": "amethyst_imbuement:altar_of_experience"
 	}
 },
 "enable_visualize": false,

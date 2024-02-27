@@ -27,6 +27,7 @@ object RegisterCriteria {
     val IGNITE = TickCriterion(Identifier(AI.MOD_ID,"ignite"))
 
     fun registerAll(){
+        Criteria.register(UNLOCK_BOOK)
         Criteria.register(GIVE_IF_CONFIG)
         Criteria.register(DISENCHANT_USE)
         Criteria.register(DISENCHANTING_PILLARS)

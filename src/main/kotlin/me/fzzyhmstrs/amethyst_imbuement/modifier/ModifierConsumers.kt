@@ -136,7 +136,7 @@ object ModifierConsumers {
                 val list1 = it.world.getOtherEntities(null,box)
                 for (entity in list1){
                     if (entity !is LivingEntity) continue
-                    if (entity is PassiveEntity || entity is GolemEntity ||    AiConfig.entities.isEntityPvpTeammate(it,entity,
+                    if (entity is PassiveEntity || entity is GolemEntity || AiConfig.entities.isEntityPvpTeammate(it,entity,
                             RegisterEnchantment.SUMMON_GRACE_TOTEM)) {
                         EffectQueue.addStatusToQueue(entity, StatusEffects.STRENGTH, 300, 1)
                         EffectQueue.addStatusToQueue(entity, StatusEffects.SPEED, 300, 1)

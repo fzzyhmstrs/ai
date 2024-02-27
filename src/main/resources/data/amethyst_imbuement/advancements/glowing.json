@@ -1,0 +1,29 @@
+{
+"parent": "amethyst_imbuement:crystalline_beginnings",
+"display": {
+	"icon":{
+		"item": "amethyst_imbuement:brilliant_diamond"
+	},
+	"title": {
+		"translate": "amethyst_imbuement.advancement.glowing"
+	},
+	"description": {
+		"translate": "amethyst_imbuement.advancement.glowing.desc"
+	}
+},
+"criteria":{
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:brilliant_diamond",
+						"amethyst_imbuement:glowing_fragment"
+					]
+				}
+			]
+		}
+	}
+}
+}

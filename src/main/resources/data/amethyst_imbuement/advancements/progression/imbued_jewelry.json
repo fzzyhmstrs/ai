@@ -1,0 +1,26 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_imbued_jewelry":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:trinketeer",
+				"amethyst_imbuement:lapidary"
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_imbued_jewelry"
+	]
+]
+}

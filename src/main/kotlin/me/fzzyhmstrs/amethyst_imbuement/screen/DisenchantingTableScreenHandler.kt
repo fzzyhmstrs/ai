@@ -2,6 +2,7 @@ package me.fzzyhmstrs.amethyst_imbuement.screen
 
 import me.fzzyhmstrs.amethyst_core.nbt_util.NbtKeys
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
+import me.fzzyhmstrs.amethyst_imbuement.compat.ModCompatHelper
 import me.fzzyhmstrs.amethyst_imbuement.config.AiConfig
 import me.fzzyhmstrs.amethyst_imbuement.item.SpellScrollItem
 import me.fzzyhmstrs.amethyst_imbuement.registry.*
@@ -138,7 +139,9 @@ class DisenchantingTableScreenHandler(
         val list = if (nbt != null) {
             nbt.getList(ItemStack.ENCHANTMENTS_KEY, 10)
         } else NbtList()
-        return EnchantmentHelper.fromNbt(list).filterKeys { !FzzyPort.ENCHANTMENT.isInTag(it,RegisterTag.DISENCHANTING_BLACKLIST) }.map { it }
+        return EnchantmentHelper.fromNbt(list).filterKeys {
+            !ModCompatHelper.ignoreEnchantment(it, stack)
+        }.map { it }
     }
 
     override fun onButtonClick(player: PlayerEntity, id: Int): Boolean {

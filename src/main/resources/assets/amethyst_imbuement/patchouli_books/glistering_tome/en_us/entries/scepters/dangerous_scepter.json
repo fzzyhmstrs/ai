@@ -1,14 +1,15 @@
-{    
-"name": "Dangerous Scepter",    
+{
+"name": "Dangerous Scepter",
 "icon": "amethyst_imbuement:dangerous_scepter",
-"category": "amethyst_imbuement:scepters", 
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "sortnum": 4,
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Tier one fury aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/dangerous)Dangerous$() and $(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(). Can be augmented with tier one spells. The starting point for progressing through the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$() or the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 250"
 },
-{            
+{
 "type": "amethyst_imbuement:scepter_lineage_tier_1",
 "input_item": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
 "desc_a": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]}",
@@ -16,11 +17,12 @@
 "desc_c": "amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
 "desc_d": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
 "desc_e": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
-  "desc_f": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}"
+"desc_f": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"}]}"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/dangerous_scepter_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/dangerous_scepter_imbuing"
+}
 ]
 }

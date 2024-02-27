@@ -1,26 +1,29 @@
 {
-  "name": "Garnet Equipment",
-  "icon": "amethyst_imbuement:garnet_sword",
-  "category": "amethyst_imbuement:weapons",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Garnet Equipment is an alternate enhancing upgrade for diamond tools. They have the same damage and usage levels, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:imbuing/glowing_tools)Glowing Tools$()"
-    },
-    {
-      "type": "amethyst_imbuement:enhancing_multi",
-      "recipes": [
-        "amethyst_imbuement:enhancing/garnet_axe_enhancing",
-        "amethyst_imbuement:enhancing/garnet_hoe_enhancing",
-        "amethyst_imbuement:enhancing/garnet_pickaxe_enhancing"
-      ]
-    },
-    {
-      "type": "amethyst_imbuement:enhancing_multi",
-      "recipes": [
-        "amethyst_imbuement:enhancing/garnet_shovel_enhancing",
-        "amethyst_imbuement:enhancing/garnet_sword_enhancing"
-      ]
-    }
-  ]
+"name": "Garnet Equipment",
+"icon": "amethyst_imbuement:garnet_sword",
+"category": "amethyst_imbuement:weapons",
+"advancement": "amethyst_imbuement:progression/unlocks/garnet_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Garnet Equipment is an alternate enhancing upgrade for diamond tools. They have the same damage and usage levels, but massively increased durability. They are also the central ingredient in imbuing $(l:amethyst_imbuement:weapons/glowing_tools)Glowing Tools$()"
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/garnet_axe_enhancing",
+"amethyst_imbuement:enhancing/garnet_hoe_enhancing",
+"amethyst_imbuement:enhancing/garnet_pickaxe_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/garnet_shovel_enhancing",
+"amethyst_imbuement:enhancing/garnet_sword_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
+]
 }

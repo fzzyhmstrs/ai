@@ -1,17 +1,19 @@
 {
-	"name": "Cholem",
-	"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/cholem.png",
-	"category": "amethyst_imbuement:bestiary",
-	"advancement": "amethyst_imbuement:spells/summon_cholem",
-	"pages": [
-		{
-			"type": "patchouli:text",
-			"text": "\"I got two words for ya... Cluck It\" These brolic $(m)dudes$() $(m)chickens$() creatures are born ready for combat, using their rippling pecs to smash your opponents to dust. If one of their brothers falls in the line of duty the survivors will become enraged, increasing their damage output.$(br2)How to Obtain:$(li)Spell: Summon Cholem"
-		},
-		{
-			"type": "patchouli:entity",
-			"entity": "amethyst_imbuement:cholem",
-			"text": "$(li)Default Health: 80$(li)Default Damage: 10 / 14 (enraged)"
-		}
-	]
+"name": "Cholem",
+"icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/cholem.png",
+"category": "amethyst_imbuement:bestiary",
+"advancement": "amethyst_imbuement:spells/summon_cholem",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "\"I got two words for ya... Cluck It\" These brolic $(m)dudes$() $(m)chickens$() creatures are born ready for combat, using their rippling pecs to smash your opponents to dust. If one of their brothers falls in the line of duty the survivors will become enraged, increasing their damage output.$(br2)How to Obtain:$(li)Spell: Summon Cholem"
+},
+{
+"type": "patchouli:entity",
+"entity": "amethyst_imbuement:cholem",
+"scale": 0.85,
+"offset": 0.1,
+"text": "$(li)Default Health: 80$(li)Default Damage: 10 / 14 (enraged)"
+}
+]
 }
