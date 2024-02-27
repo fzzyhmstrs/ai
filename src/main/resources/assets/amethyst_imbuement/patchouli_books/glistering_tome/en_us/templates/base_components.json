@@ -75,7 +75,7 @@
 },
 {
 "type": "patchouli:item", 
-"item": "amethyst_imbuement:iridescent_orb,amethyst_imbuement:lustrous_spehere",
+"item": "amethyst_imbuement:opal,amethyst_imbuement:iridescent_orb,amethyst_imbuement:lustrous_spehere",
 "framed": false,
 "x": 7,            
 "y": 54
