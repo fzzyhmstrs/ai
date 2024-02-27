@@ -1,0 +1,39 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_copper":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:beryl_copper_ingot"
+		}
+	},
+	"got_gem":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:opal"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_copper"
+	],
+  [
+		"unlock",
+		"got_gem"
+	]
+]
+}
