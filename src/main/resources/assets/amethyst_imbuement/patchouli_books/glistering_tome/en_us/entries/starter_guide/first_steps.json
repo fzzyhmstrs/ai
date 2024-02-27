@@ -5,25 +5,25 @@
 "pages": [        
 {            
 "type": "patchouli:text",            
-"text": "Follow these steps to set yourself on the right path towards realizing your full potential in Amethyst Imbuement:$(li)Gather important base ingredients$(li)Craft an Imbuing Table and begin setting up bookshelves around it$(li)Set up a mob farm or other method to gather experience"
+"text": "Welcome to Amethyst Imbuement. Ready to start on a magical journey? Start with these simple steps to begin down your path!$(br2)The heart of AI is the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), lets start by gathering up ingredients to make and fuel one!"
 },
 {
-"type": "patchouli:spotlight",
-"title": "Base Items to Gather",
-"item": "minecraft:amethyst_shard,minecraft:quartz,minecraft:crying_obsidian,minecraft:rose_bush,minecraft:lilac,minecraft:oxeye_daisy,minecraft:dandelion",
-"text": "$(l)$(l:amethyst_imbuement:gems/amethyst)Amethyst:$() Find in a Geode or go mining for quartz in the Nether!$(br)$(l)$(l:amethyst_imbuement:gems/quartz)Quartz:$() Key in many recipes. Get that Nether Portal humming!$(br)$(l)$(#490)Crying Obsidian:$() Find this in ruined portals.$(br)$(l)$(#490)Flowers:$() Most base crystals need flowers. Find in various fields and forests."
+"type": "amethyst_imbuement:progression",
+"progression": {
+"amethyst_imbuement:progression/basic_materials_1": {
+"text": "$(l:amethyst_imbuement:gems/amethyst)Amethyst Shards$() are the entrypoint to Amethyst Imbuement, find yourself a geode! $(item)Crying Obsidian$() is an important ingredient in the powerful AI altars."
 },
-{
-"type": "patchouli:spotlight",
-"title": "Imbuing Table",
-"item": "amethyst_imbuement:imbuing_table,minecraft:bookshelf",
-"text": "$(l)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table:$() This enhanced enchanting table is the central workstation of the mod. Crafting one is top priority.$(br)$(l)$(#490)Multiblock:$() Like the enchanting table, bookshelves placed in a ring around the table improve its capabilities. Read more in the link above."
+"amethyst_imbuement:flower_power": {
+"text": "Most base crystals need flowers, especially the 4 double-high flowers ($(item)Sunflower$(), $(item)Peony$(), $(item)Rose Bush$(), $(item)Lilac$()). Find in various fields and forests."
 },
-{
-"type": "patchouli:spotlight",
-"title": "Experience Farm",
-"item": "amethyst_imbuement:xp_bush_seed,minecraft:spawner,minecraft:enchanted_book{StoredEnchantments:[{id:\"amethyst_imbuement:insight\",lvl:3}]}",
-"text": "You will need a LOT of XP!$(br)$(l)$(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bush:$() These bushes grow $(l:amethyst_imbuement:imbuing/bottle-o-enchanting)Bottles-o'-Enchanting$() for you! Imbue up some of these. $(br)$(l)$(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight:$() Enchanting your main weapon with this will churn out experience.$(br)$(l)$(#490)Mob Farm:$() A classic Minecraft endeavor. You may want to set one of these up to farm XP."
+"amethyst_imbuement:progression/imbuing_table": {
+"text": "Craft your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), opening the door to most of the rest of the mod!"
+},
+"amethyst_imbuement:pillars": {
+"text": "The imbuing table is powered by experience. Imbue some $(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bushes$() to secure a steady flow of the stuff. Augment your supply by enchanting gear with $(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight$()."
+},
+"amethyst_imbuement:pillars": {
+"text": "Finish your upgrading journey! Craft a powerful tier 3 scepter."
 }
 ]
 }
