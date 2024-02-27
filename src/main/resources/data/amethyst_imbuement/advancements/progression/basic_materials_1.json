@@ -1,0 +1,33 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_amethyst":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:crystalline_beginnings"
+		}
+	},
+	"got_obby":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:crying_obsidian"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_amethyst"
+	],
+  [
+		"unlock",
+		"got_obby"
+	]
+]
+}
