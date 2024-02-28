@@ -6,7 +6,9 @@ import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterTier
 import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentDatapoint
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.MiscAugment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterTag
 import me.fzzyhmstrs.fzzy_core.coding_util.PerLvlI
+import me.fzzyhmstrs.fzzy_core.coding_util.FzzyPort
 import net.minecraft.block.CropBlock
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -42,7 +44,7 @@ class AbundanceAugment: MiscAugment(ScepterTier.ONE,6) {
                 for (k in -1..1) {
                     val bs = world.getBlockState(userPos.add(i, k, j))
                     val bsb = bs.block
-                    if (bsb is CropBlock) {
+                    if (bsb is CropBlock && !FzzyPort.BLOCK.isInTag(bsb, RegisterTag.ABUNDANCE_BLACKLIST)) {
                         val rnd1 = world.random.nextDouble()
                         if (rnd1 < effect.damage(level)) {
                             successes++
