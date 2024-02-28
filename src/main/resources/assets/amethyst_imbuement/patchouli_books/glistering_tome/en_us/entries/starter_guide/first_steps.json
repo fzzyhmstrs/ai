@@ -14,7 +14,7 @@
 "text": "$(l:amethyst_imbuement:gems/amethyst)Amethyst Shards$() are the entrypoint to Amethyst Imbuement, find yourself a geode! $(item)Crying Obsidian$() is an important ingredient in AI altars."
 },
 "amethyst_imbuement:flower_power": {
-"text": "Many recipes use flowers, especially the 4 double-high flowers ($(item)Sunflower$(), $(item)Peony$(), $(item)Rose Bush$(), $(item)Lilac$()). Find in various fields and forests."
+"text": "Many recipes use flowers, especially the 4 double-high flowers ($(item)Sunflower$(), $(item)Peony$(), $(item)Rose Bush$(), $(item)Lilac$())."
 },
 "amethyst_imbuement:progression/imbuing_table": {
 "text": "Craft your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), opening the door to most of the rest of the mod!"
