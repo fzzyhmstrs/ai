@@ -23,19 +23,12 @@
 				}
 			]
 		}
-	},
-	"got_garnet":{
-		"trigger": "fzzy_core:advancement",
-		"conditions":{
-			"advancement": "amethyst_imbuement:progression/gear/garnet_gear"
-		}
 	}
 },
 "requirements": [
 	[
 		"unlock",
-		"got_glowing",
-		"got_garnet"
+		"got_glowing"
 	]
 ]
 }
