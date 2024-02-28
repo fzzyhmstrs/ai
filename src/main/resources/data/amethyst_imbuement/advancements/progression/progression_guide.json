@@ -1,24 +1,42 @@
 {
 "criteria":{
-	"unlock":{
+	"scepter":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancements": [
-				"amethyst_imbuement:progression/tier_2_gems"
-			]
+			"advancement":"amethyst_imbuement:progression/scepter_guide"
 		}
 	},
-	"got_gem":{
+	"jewelry":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancement": "amethyst_imbuement:crystal_novice"
+			"advancement":"amethyst_imbuement:progression/jewelry_guide"
+		}
+	}
+	"totem":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement":"amethyst_imbuement:progression/totem_guide"
+		}
+	},
+	"equipment":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement":"amethyst_imbuement:progression/equipment_guide"
 		}
 	}
 },
 "requirements": [
 	[
-		"unlock",
-		"got_gem"
+		"scepter"
+	],
+	[
+		"jewelry"
+	],
+	[
+		"totem"
+	],
+	[
+		"equipment"
 	]
 ]
 }
