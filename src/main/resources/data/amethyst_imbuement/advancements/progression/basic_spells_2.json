@@ -1,0 +1,21 @@
+{
+"criteria":{
+	"got_basic_spell_2":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+        "amethyst_imbuement:spells/abundance",
+        "amethyst_imbuement:spells/create_water",
+        "amethyst_imbuement:spells/dismiss",
+        "amethyst_imbuement:spells/flamebolt",
+        "amethyst_imbuement:spells/flare",
+        "amethyst_imbuement:spells/regenerate",
+        "amethyst_imbuement:spells/shine",
+        "amethyst_imbuement:spells/soul_missile",
+        "amethyst_imbuement:spells/summon_hamster",
+        "amethyst_imbuement:spells/zap"
+      ]
+		}
+	}
+}
+}
