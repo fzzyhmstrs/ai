@@ -8,9 +8,25 @@
 "type": "patchouli:text",
 "text": "Here you will learn to craft and imbue jewelry with mystical properties. To begin:$(li)First, imbue some $(#b0b)$(l:amethyst_imbuement:imbuing/beryl_copper)Beryllium Copper Ingots$()$(li)Next, craft your ingots and an $(#b0b)$(l:amethyst_imbuement:gems/amethyst)Amethyst Shard$() into a piece of $(#490)$(l:amethyst_imbuement:trinkets/copper_jewelry)Copper Jewelry$()$(li)This jewelry provides a minor bonus, but isn't capable of containing more potent magics. Imbue your jewelry into $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()"
 },
-{            
-"type": "patchouli:text",
-"text": "$(li)Pick the $(l:amethyst_imbuement:trinkets/focus_reagents)bottom center ingredient$() carefully when you are crafting! Each one provides a different innate bonus!$(li)Once imbued, apply an appropriate Augment to grant yourself powerful passive abilities!$(br2)$(l)Note: Jewelry can only have one augment at a time!$()"
+{
+"type": "amethyst_imbuement:progression",
+"progression": {
+"amethyst_imbuement:progression/basic_materials_3": {
+"text": "Obtain $(l:amethyst_imbuement:imbuing/beryl_copper_ingot)Beryllium Copper$() and $(l:amethyst_imbuement:gems/amethyst_shard)Amethyst Shards$() or $(l:amethyst_imbuement:imbuing/steel_ingot)Steel$() and $(l:amethyst_imbuement:gems/amethyst_shard)Diamonds$()"
+},
+"amethyst_imbuement:progression/basic_jewelry": {
+"text": "Craft your first piece of $(l:amethyst_imbuement:trinkets/copper_jewelry)Copper$() or $(l:amethyst_imbuement:trinkets)Steel$() Jewelry. These come with minor bonuses on their won, but we can go further."
+},
+"amethyst_imbuement:progression/reagent": {
+"text": "Imbued Jewelry is next, it comes with a variety of innate bonuses. Pick your $(l:amethyst_imbuement:trinkets/imbuing_reagents)Reagent$() before imbuing your jewelry."
+},
+"amethyst_imbuement:progression/imbuing_jewelry": {
+"text": "Imbue a piece of $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()."
+},
+"amethyst_imbuement:progression/augment_guide": {
+"text": "Take the next step and augment your jewelry with an $(l:amethyst_imbuement:starter_guide/augment_guide)Augment$()."
+}
+}
 }
 ]
 }
