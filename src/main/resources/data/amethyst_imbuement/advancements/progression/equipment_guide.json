@@ -4,21 +4,33 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
-				"amethyst_imbuement:progression/tier_2_gems"
+				"amethyst_imbuement:progression/gear/ametrine_gear",
+				"amethyst_imbuement:progression/gear/garnet_gear",
+				"amethyst_imbuement:progression/gear/glowing_gear",
+				"amethyst_imbuement:progression/gear/shimmering_armor",
+				"amethyst_imbuement:progression/gear/soulwoven_gear",
+				"amethyst_imbuement:progression/gear/steel_gear"
 			]
 		}
 	},
-	"got_gem":{
-		"trigger": "fzzy_core:advancement",
+	"got_weapon":{
+		"trigger": "minecraft:inventory_changed",
 		"conditions":{
-			"advancement": "amethyst_imbuement:crystal_novice"
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:glistering_trident",
+						"amethyst_imbuement:sniper_bow"
+					]
+				}
+			]
 		}
 	}
 },
 "requirements": [
 	[
 		"unlock",
-		"got_gem"
+		"got_weapon"
 	]
 ]
 }
