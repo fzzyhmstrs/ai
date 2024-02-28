@@ -16,19 +16,22 @@
 "text": "Craft Steel Armor in the Crafting Table using the recipes on the next pages."
 },
 {
-"type": "patchouli:crafting",
+"type": "amethyst_imbuement:crafting",
 "anchor": "steel_helmet",
 "recipe": "amethyst_imbuement:crafting/steel_helmet",
-"recipe2": "amethyst_imbuement:crafting/steel_chestplate"
+"recipe2": "amethyst_imbuement:crafting/steel_chestplate",
+"unlock": "amethyst_imbuement:progression/steel"
 },
 {
-"type": "patchouli:crafting",
+"type": "amethyst_imbuement:crafting",
 "recipe": "amethyst_imbuement:crafting/steel_leggings",
-"recipe2": "amethyst_imbuement:crafting/steel_boots"
+"recipe2": "amethyst_imbuement:crafting/steel_boots",
+"unlock": "amethyst_imbuement:progression/steel"
 },
 {
-"type": "patchouli:crafting",
-"recipe": "amethyst_imbuement:crafting/steel_horse_armor"
+"type": "amethyst_imbuement:crafting",
+"recipe": "amethyst_imbuement:crafting/steel_horse_armor",
+"unlock": "amethyst_imbuement:progression/steel"
 }
 ]
 }

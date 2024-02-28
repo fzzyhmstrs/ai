@@ -2,6 +2,7 @@
 "name": "Scepter Upgrade Tree",
 "icon": "minecraft:oak_sapling",
 "category": "amethyst_imbuement:scepter_upgrading",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
 {
 "type": "patchouli:text",

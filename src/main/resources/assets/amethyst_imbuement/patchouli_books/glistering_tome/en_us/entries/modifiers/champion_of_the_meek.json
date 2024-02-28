@@ -1,16 +1,16 @@
-{    
-"name": "Champion of the Meek",    
+{
+"name": "Champion of the Meek",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/champion_of_the_meek.png",
-"sortnum": 83,  
+"sortnum": 83,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Casting spells adds 2 absorption hearts to the caster and/or their targets and may apply resistance. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Champion of the Meek",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/champion_of_the_meek.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/protective)Protective$()",

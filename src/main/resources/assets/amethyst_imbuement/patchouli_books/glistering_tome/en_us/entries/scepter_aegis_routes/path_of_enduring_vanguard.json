@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Enduring Vanguard",
 "icon": "amethyst_imbuement:scepter_of_the_vanguard",
 "category": "amethyst_imbuement:scepter_aegis_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Aegis to take a spot on the front lines against darkness. As the Warrior of Light, spells that affect your enemies smite them and weaken them. Your spells last slightly longer with Lesser Enduring and gain +1 XP with Graceful, and spell casting protects you and your allies with Protective."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:warrior_of_light\"},{modifier_id:\"amethyst_imbuement:graceful\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "spec": "Holy Warrior Magic",
-  "spells": "(Unique) Barrier",
-  "mods": "Warrior of Light, Lesser Enduring, Graceful, Protective"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:graceful\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:warrior_of_light\"},{modifier_id:\"amethyst_imbuement:graceful\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"spec": "Holy Warrior Magic",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/barrier)Barrier$()",
+"mods": "$(l:amethyst_imbuement:modifiers/warrior_of_light)Warrior of Light$(), $(l:amethyst_imbuement:modifiers/lesser_enduring)Lesser Enduring$(), $(l:amethyst_imbuement:modifiers/graceful)Graceful$(), $(l:amethyst_imbuement:modifiers/protective)Protective$()"
 }
 ]
 }

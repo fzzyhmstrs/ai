@@ -1,0 +1,14 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/gear/soulwoven_gear",
+				"amethyst_imbuement:progression/sardonyx_elemental",
+				"amethyst_imbuement:progression/treasure_chest"
+			]
+		}
+	}
+}
+}

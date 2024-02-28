@@ -1,19 +1,19 @@
-{    
+{
 "name": "Inner Fire",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/inner_fire.png",
 "sortnum": 120,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/witches_orb",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/witches_orb",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Provides +2 as well as +10% to the amplification of spell effects, as well as 25% increased duration of effects. This modifierr is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Inner Fire",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/inner_fire.png",
-  "ancestor": "N/A",
+"ancestor": "N/A",
 "descendant": "N/A",
 "mod_type": "$(2)Effect Bonuses$()",
 "mod_text": "The orb reflects the blazing fire of the gem within and empowers magical effects, both good and bad. Appears on a Witches Orb if crafted with the proper gem."

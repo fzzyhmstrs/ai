@@ -1,11 +1,12 @@
-{    
-"name": "Spell Radial Menu",    
-"icon": "amethyst_imbuement:witches_orb",    
-"category": "amethyst_imbuement:spells",    
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "As of Amethyst Imbuement 1.20.1-17, there is a radial menu for changing spells! Press the [Left Alt] key (by default) to open the menu, and click to select the spell current highlighted by the indicator arrow."
+{
+"name": "Spell Radial Menu",
+"icon": "amethyst_imbuement:witches_orb",
+"category": "amethyst_imbuement:spells",
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "As of Amethyst Imbuement 1.20.1-17, there is a radial menu for changing spells! Press the [$(k:amethyst_imbuement.scepter_radial_menu_key)] key to open the menu, and click to select the spell current highlighted by the indicator arrow."
 },
 {
 "type": "patchouli:image",

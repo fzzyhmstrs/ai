@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Graceful Vanguard",
 "icon": "amethyst_imbuement:scepter_of_the_vanguard",
 "category": "amethyst_imbuement:scepter_aegis_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Aegis to wield advanced holy magic against the darkness. As the Warrior of Light, spells that affect your enemies smite and weaken them. Your Grace spells gain $(o)+2$() XP with Elegant, and spell casting protects you and your allies with Protective."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
-  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:warrior_of_light\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
-  "spec": "Holy Warrior Magic",
-  "spells": "(Unique) Barrier",
-  "mods": "Warrior of Light, Elegant, Protective"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_the_vanguard{modifiers:[{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
+"tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:warrior_of_light\"},{modifier_id:\"amethyst_imbuement:elegant\"}]}",
+"spec": "Holy Warrior Magic",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/barrier)Barrier$()",
+"mods": "$(l:amethyst_imbuement:modifiers/warrior_of_light)Warrior of Light$(), $(l:amethyst_imbuement:modifiers/elegant)Elegant$(), $(l:amethyst_imbuement:modifiers/protective)Protective$()"
 }
 ]
 }

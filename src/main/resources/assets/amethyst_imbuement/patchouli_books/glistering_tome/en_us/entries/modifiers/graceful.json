@@ -1,16 +1,16 @@
-{    
-"name": "Graceful",    
+{
+"name": "Graceful",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/graceful.png",
-"sortnum": 7,  
+"sortnum": 7,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Affects grace spells only. An additional 1 Grace XP gained on spell-cast, and increases the duration of grace spells by 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Graceful",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/graceful.png",
 "ancestor": "N/A",

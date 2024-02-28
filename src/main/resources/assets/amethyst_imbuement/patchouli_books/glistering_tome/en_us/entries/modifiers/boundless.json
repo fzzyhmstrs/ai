@@ -1,19 +1,19 @@
-{    
+{
 "name": "Boundless",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/boundless.png",
 "sortnum": 107,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/spellcasters_focus",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/spellcasters_focus",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Increases the range and area of effect of cast spells by 100% at the expense of 10% increased cooldown. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Boundless",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/boundless.png",
-  "ancestor": "N/A",
+"ancestor": "N/A",
 "descendant": "N/A",
 "mod_type": "$(2)Range of Effect$()",
 "mod_text": "Your focus gains a connection to the vastness of the night sky above, sharing that connection with your magic. Appears on a Spellcasters Focus on tier ignition."

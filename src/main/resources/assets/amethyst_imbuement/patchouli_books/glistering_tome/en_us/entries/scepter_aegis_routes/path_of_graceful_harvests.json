@@ -1,10 +1,11 @@
-{    
+{
 "name": "Route of Graceful Harvests",
 "icon": "amethyst_imbuement:scepter_of_harvests",
 "category": "amethyst_imbuement:scepter_aegis_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Aegis  to tend to your crops and animals with high tier harvest magic. Casting spells shields and protects you and your allies, and damage to the undead is increased with Smiting. Your spells gain +1 XP with Graceful, have a larger area of effect with Reach, and cost slightly less with Lesser Thrifty"
 },
 {
@@ -13,8 +14,8 @@
   "tier_2": "amethyst_imbuement:scepter_of_harvests{modifiers:[{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
   "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
   "spec": "Farming Magic",
-  "spells": "(Unique) Animal Husbandry",
-  "mods": "Protective,Smiting, Reach, Lesser Thrifty, Graceful"
+  "spells": "(Unique) $(l:amethyst_imbuement:spell_book/animal_husbandry)Animal Husbandry$()",
+  "mods": "$(l:amethyst_imbuement:modifiers/protective)Protective$(), $(l:amethyst_imbuement:modifiers/smiting)Smiting$(), $(l:amethyst_imbuement:modifiers/reach)Reach$(), $(l:amethyst_imbuement:modifiers/lesser_thrifty)Lesser Thrifty$(), $(l:amethyst_imbuement:modifiers/graceful)Graceful$()"
 }
 ]
 }

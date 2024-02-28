@@ -1,17 +1,18 @@
 {
-  "name": "Adding Spells",
-  "icon": "amethyst_imbuement:opaline_scepter",
-  "category": "amethyst_imbuement:spells",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "A disenchanting table strips spells off of a scepter onto a spell scroll, rather than a book. This scroll can then be added to another scepter with the following recipe. This only works with scrolls that are disenchanted; a scroll that is made in the crystal altar directly will not work."
-    },
-    {
-      "type": "amethyst_imbuement:enhancing",
-      "recipe": "amethyst_imbuement:enhancing/spell_addition_enhancing",
-      "unlock": "amethyst_imbuement:progression/crystal_altar",
-      "text": "The scepter still needs to be able to accept the spell you are trying to add. Trying to combine spells that already exist on the scepter won't do anything."
-    }
-  ]
+"name": "Adding Spells",
+"icon": "amethyst_imbuement:opaline_scepter",
+"category": "amethyst_imbuement:spells",
+"advancement": "amethyst_imbuement:progression/spell_scroll_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "A disenchanting table strips spells off of a scepter onto a spell scroll, rather than a book. This scroll can then be added to another scepter with the following recipe. This only works with scrolls that are disenchanted; a scroll that is made in the crystal altar directly will not work."
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"recipe": "amethyst_imbuement:enhancing/spell_addition_enhancing",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"text": "The scepter still needs to be able to accept the spell you are trying to add. Trying to combine spells that already exist on the scepter won't do anything."
+}
+]
 }

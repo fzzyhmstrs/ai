@@ -1,16 +1,16 @@
-{    
-"name": "Lethal",    
+{
+"name": "Lethal",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/lethal.png",
-"sortnum": 29,  
+"sortnum": 29,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Increases spell damage by 35% and adds 0.5 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Lethal",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/lethal.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()",

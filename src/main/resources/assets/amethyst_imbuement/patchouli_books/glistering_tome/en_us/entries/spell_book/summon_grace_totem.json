@@ -1,16 +1,17 @@
-{    
+{
 "name": "Summon Totem of Grace",
 "icon": "amethyst_imbuement:healers_gem",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/summon_grace_totem",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Summons a totem that periodically heals the summoner in an area around the totem.$(br)$(l)Magical School:$() $(9)Grace$()$(br)$(l)Mana Cost:$() 100$(br)$(l)Cooldown:$() 120 seconds$(br)$(l)Enchants:$() $(l:amethyst_imbuement:scepters/iridescent_scepter)Iridescent Scepter$(), $(l:amethyst_imbuement:scepters/lustrous_scepter)Lustrous Scepter$()$(br)$(l)Tier:$() 2"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/summon_grace_totem_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
+"recipe": "amethyst_imbuement:imbuing/summon_grace_totem_imbuing"
+}
 ]
 }

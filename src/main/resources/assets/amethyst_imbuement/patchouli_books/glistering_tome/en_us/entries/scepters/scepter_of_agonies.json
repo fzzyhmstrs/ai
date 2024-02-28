@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Tier two fury aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/enduring)Enduring$() and $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach() and the unique spell Cripple. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 550"
+"text": "Tier two fury aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/enduring)Enduring$() and $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach() and the unique spell $(l:amethyst_imbuement:spell_book/cripple)Cripple$(). Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality.$()$(br2)$(l)Mana:$() 550"
 },
 {
 "type": "amethyst_imbuement:scepter_lineage_tier_2",

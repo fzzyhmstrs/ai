@@ -1,10 +1,10 @@
-{    
-"name": "Progression",    
-"icon": "minecraft:leather_boots",    
-"category": "amethyst_imbuement:starter_guide",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Progression",
+"icon": "minecraft:leather_boots",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Now that you've got your feet under you, find out more about the magical equipment and experiences that Amethyst Imbuement can provide.$(li)Craft a scepter and start spellcasting$(li)Create imbued jewelry and imbue them with powerful abilities$(li)Upgrade your equipment beyond anything you thought possible"
 },
 {
@@ -20,7 +20,7 @@
 "text": "An incredible font of inner power, a $(l:amethyst_imbuement:starter_guide/scepter_guide)totem of amethyst$() is an important tool in any crystal witches kit."
 },
 "amethyst_imbuement:progression/equipment_guide": {
-"text": "Sturdy sets of armor and deadly weapons are all at a crystal witches disposal. Legends even talk about mystical $(l:https://www.curseforge.com/minecraft/mc-mods/imbued-gear)Imbued Gear$(), maybe an adventurous witch can learn those secrets."
+"text": "$(l:amethyst_imbuement:starter_guide/equipment_guide)Sturdy sets of armor and deadly weapons$() are all at a crystal witches disposal. Legends even talk about mystical $(l:https://www.curseforge.com/minecraft/mc-mods/imbued-gear)Imbued Gear$(), maybe an adventurous witch can learn those secrets."
 }
 }
 }

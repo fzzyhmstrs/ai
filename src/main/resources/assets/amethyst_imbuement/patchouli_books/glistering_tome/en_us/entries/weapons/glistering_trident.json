@@ -9,8 +9,8 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"unlock": "amethyst_imbuement:progression/imbuing_table",
-"recipe": "amethyst_imbuement:imbuing/glistering_trident_imbuing"
+"recipe": "amethyst_imbuement:imbuing/glistering_trident_imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table"
 }
 ]
 }

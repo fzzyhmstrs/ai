@@ -1,16 +1,16 @@
-{    
-"name": "Enraged",    
+{
+"name": "Enraged",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/enraged.png",
-"sortnum": 2,  
+"sortnum": 2,
 "category": "amethyst_imbuement:modifiers",
 "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Affects fury spells only. An additional 2 Fury XP gained on spell-cast, increases fury spell level by 1, and adds 0.4 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Enraged",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/enraged.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/furious)Furious$()",

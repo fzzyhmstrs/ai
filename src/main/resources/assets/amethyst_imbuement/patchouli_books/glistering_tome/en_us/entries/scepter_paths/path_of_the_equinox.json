@@ -1,20 +1,21 @@
-{    
+{
 "name": "The Path of the Equinox",
 "icon": "amethyst_imbuement:equinox",
 "category": "amethyst_imbuement:scepter_paths",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The Path of the Equinox is the path of the elementalist. Control the elements to fry your opponents with lightning, immolate them with fire, or freeze them solid.$(br2)$(l:amethyst_imbuement:scepter_equinox_routes)Routes on the Path of the Equinox$(/l)"
 },
 {
-  "type": "amethyst_imbuement:scepter_path",
-  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]},amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]},amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]},amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
-  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "spec": "Elemental Spells",
-  "spells": "Ice Spikes (Frosted Scepter)",
-  "mods": "Possible unique modifiers: Elemental, Fire Aspect, Lightning Aspect, Ice Aspect, Enraged"
+"type": "amethyst_imbuement:scepter_path",
+"tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]},amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"}]},amethyst_imbuement:sparking_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lightning_aspect\"}]},amethyst_imbuement:frosted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:ice_aspect\"}]}",
+"tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"}]}",
+"spec": "Elemental Spells",
+"spells": "Ice Spikes (Frosted Scepter)",
+"mods": "Possible unique modifiers: $(l:amethyst_imbuement:modifiers/elemental)Elemental$(), $(l:amethyst_imbuement:modifiers/fire_aspect)Fire Aspect$(), $(l:amethyst_imbuement:modifiers/lightning_aspect)Lightning Aspect$(), $(l:amethyst_imbuement:modifiers/ice_aspect)Ice Aspect$(), $(l:amethyst_imbuement:modifiers/enraged)Enraged$()"
 }
 ]
 }

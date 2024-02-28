@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Witty Summoning",
 "icon": "amethyst_imbuement:scepter_of_summoning",
 "category": "amethyst_imbuement:scepter_resonance_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Resonance to control hordes of minions with high level spells. All your spells have a chance to echo and your summoning spells have a large boost. All of your spells cast a level above normal and your Wit spells gain +1 XP."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "spec": "Summoning",
-  "spells": "Summon Zombie, (Unique) Resonate",
-  "mods": "Echoing, Summoners Aspect, Skillful, Witty"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:summoners_aspect\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"spec": "Summoning",
+"spells": "$(l:amethyst_imbuement:spell_book/summon_zombie)Summon Zombie$(), (Unique) $(l:amethyst_imbuement:spell_book/resonate)Resonate$()",
+"mods": "$(l:amethyst_imbuement:modifiers/echoing)Echoing$(), $(l:amethyst_imbuement:modifiers/summoners_aspect)Summoners Aspect$(), $(l:amethyst_imbuement:modifiers/skillful)Skillful$(), $(l:amethyst_imbuement:modifiers/witty)Witty$()"
 }
 ]
 }

@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Dangerous Blades",
 "icon": "amethyst_imbuement:scepter_of_blades",
 "category": "amethyst_imbuement:scepter_lethality_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Lethality if you want to specialize in blade combat while dishing out maximum damage. Slashing Augments have a big boost, and your overall damage is boosted by Lethal. Less effective at casting non-Fury spells however."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
-  "spec": "Blade Combat",
-  "spells": "Spectral Slash",
-  "mods": "Lethal/Pact of Lethality, Blade Aspect"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:blade_aspect\"}]}",
+"spec": "Blade Combat",
+"spells": "$(l:amethyst_imbuement:spell_book/spectral_slash)Spectral Slash$()",
+"mods": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()/$(l:amethyst_imbuement:modifiers/pact_of_lethality)Pact of Lethality$(), $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$()"
 }
 ]
 }

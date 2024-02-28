@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Tier two grace aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/healers_grace)Healers Grace$() and $(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$() and the unique spell Inspiring Song. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption.$()$(br2)$(l)Mana:$() 550"
+"text": "Tier two grace aspect scepter. Adds the modifiers $(l:amethyst_imbuement:modifiers/healers_grace)Healers Grace$() and $(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$() and the unique spell $(l:amethyst_imbuement:spell_book/inspiring_song)Inspiring Song$(). Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption.$()$(br2)$(l)Mana:$() 550"
 },
 {
 "type": "amethyst_imbuement:scepter_lineage_tier_2",

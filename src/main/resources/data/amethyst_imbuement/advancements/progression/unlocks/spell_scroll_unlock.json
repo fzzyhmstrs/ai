@@ -1,0 +1,32 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:scroll",
+				"amethyst_imbuement:scroll_magic",
+				"amethyst_imbuement:progression/basic_spells"
+			]
+		}
+	},
+	"got_quartz":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:shimmering_fabric"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_quartz"
+	]
+]
+}

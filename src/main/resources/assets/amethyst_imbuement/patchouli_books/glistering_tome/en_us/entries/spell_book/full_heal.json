@@ -10,7 +10,8 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"recipe": "amethyst_imbuement:imbuing/full_heal_imbuing"  
+"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
+"recipe": "amethyst_imbuement:imbuing/full_heal_imbuing"
 }
 ]
 }

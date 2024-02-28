@@ -1,0 +1,22 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/unlocks/spell_scroll_unlock"
+		}
+	},
+	"unlock2":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/altar_of_experience"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"unlock2"
+	]
+]
+}

@@ -1,16 +1,16 @@
-{    
-"name": "Fire Aspect",    
+{
+"name": "Fire Aspect",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/fire_aspect.png",
 "sortnum": 39,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Only affect fire-type spells. Fire spells have 10% reduced cooldown, their level increases by 1, their effects are amplified an additional level, and their effects last 1.5 seconds longer. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Fire Aspect",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/fire_aspect.png",
 "ancestor": "N/A",

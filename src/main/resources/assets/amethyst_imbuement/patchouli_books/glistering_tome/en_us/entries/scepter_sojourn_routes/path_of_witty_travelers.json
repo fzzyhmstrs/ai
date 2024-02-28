@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Witty Travel",
 "icon": "amethyst_imbuement:travelers_scepter",
 "category": "amethyst_imbuement:scepter_sojourn_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Sojourn to explore lands beyond your imagination. All spells related to travel are massively boosted and all Wit spells gain $(o)+2$() XP."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "tier_2": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
-  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:genius\"},{modifier_id:\"amethyst_imbuement:sojourner\"}]}",
-  "spec": "Exploration",
-  "spells": "(Unique) Survey, Summon Boat, Summon Strider",
-  "mods": "Sojourner, Genius"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"tier_2": "amethyst_imbuement:travelers_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:witty\"}]}",
+"tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:genius\"},{modifier_id:\"amethyst_imbuement:sojourner\"}]}",
+"spec": "Exploration",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/survey)Survey$(), $(l:amethyst_imbuement:spell_book/summon_boat)Summon Boat$(), $(l:amethyst_imbuement:spell_book/summon_strider)Summon Strider$()",
+"mods": "$(l:amethyst_imbuement:modifiers/sojourner)Sojourner, $(l:amethyst_imbuement:modifiers/genius)Genius$()"
 }
 ]
 }

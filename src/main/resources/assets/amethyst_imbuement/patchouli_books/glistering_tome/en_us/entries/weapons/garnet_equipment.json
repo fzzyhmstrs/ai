@@ -15,7 +15,9 @@
 "amethyst_imbuement:enhancing/garnet_hoe_enhancing",
 "amethyst_imbuement:enhancing/garnet_pickaxe_enhancing"
 ],
-"unlock": "amethyst_imbuement:progression/crystal_altar"
+"unlock": "amethyst_imbuement:progression/garnet_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Crystal Altar and by obtaining a Garnet!",
+"hintItem": "amethyst_imbuement:crystal_altar,amethyst_imbuement:garnet"
 },
 {
 "type": "amethyst_imbuement:enhancing_multi",
@@ -23,7 +25,9 @@
 "amethyst_imbuement:enhancing/garnet_shovel_enhancing",
 "amethyst_imbuement:enhancing/garnet_sword_enhancing"
 ],
-"unlock": "amethyst_imbuement:progression/crystal_altar"
+"unlock": "amethyst_imbuement:progression/garnet_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Crystal Altar and by obtaining a Garnet!",
+"hintItem": "amethyst_imbuement:crystal_altar,amethyst_imbuement:garnet"
 }
 ]
 }

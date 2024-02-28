@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Furious Blades",
 "icon": "amethyst_imbuement:scepter_of_blades",
 "category": "amethyst_imbuement:scepter_lethality_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Lethality if you want to specialize in blade combat while leveling your spells up to their maximum potential. Slashing Augments have a big boost, and damage increased by Dangerous. Your spells gain +1 XP. Less effective at casting non-Fury spells however."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "spec": "Slash Spell Leveling",
-  "spells": "Spectral Slash",
-  "mods": "Dangerous/Pact of Danger, Blade Aspect, Furious"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_blades{modifiers:[{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:blade_aspect\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"spec": "Slash Spell Leveling",
+"spells": "$(l:amethyst_imbuement:spell_book/spectral_slash)Spectral Slash$()",
+"mods": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()/$(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(), $(l:amethyst_imbuement:modifiers/blade_aspect)Blade Aspect$(), $(l:amethyst_imbuement:modifiers/furious)Furious$()"
 }
 ]
 }

@@ -1,0 +1,19 @@
+{
+"name": "Judgment",
+"icon": "amethyst_imbuement:judgment",
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:progression/unlocks/soulwoven_unlock",
+"sortnum": 1000,
+"pages": [
+{
+"type": "patchouli:text",
+"text": "A grisly scepter born of malice and villager sacrifice. Judgment adds the modifiers $(l:amethyst_imbuement:modifiers/inner_fire)Inner Fire() and $(l:amethyst_imbuement:modifiers/dangerous)Dangerous$(), and the unique spell $(l:amethyst_imbuement:spell_book/execute)Execute$(). Can be used like a weapon. $(br2)$(l)Mana:$() 1450"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:inner_fire\"}]}",
+"link_recipe": true,
+"text": "$(italic)Blood seeps from the end of the jagged curved blade without end, slowly dripping. Dripping. Dripping...$()"
+}
+]
+}

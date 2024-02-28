@@ -1,0 +1,19 @@
+{
+"name": "The Fzzyhammer",
+"icon": "amethyst_imbuement:fzzyhammer",
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:scepter_path/path_of_hammer",
+"sortnum": 1001,
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Squeak. A mighty hammer with the awesome power to summon an army (of hamsters) to your side. The Fzzyhammer adds the unique spell $(l:amethyst_imbuement:spell_book/hamptertime)Hamptertime$(). Can be used like a weapon, and can mine 2x2 blocks at a time in a tunneling pattern. $(br2)$(l)Mana:$() 1250"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:fzzyhammer",
+"link_recipe": true,
+"text": "$(italic)It squeaks softly whenever it strikes a foe.$()"
+}
+]
+}

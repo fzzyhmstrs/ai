@@ -2,12 +2,13 @@
 "name": "Spell Commands",
 "icon": "minecraft:command_block",
 "category": "amethyst_imbuement:spells",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
 {
 "type": "patchouli:text",
 "text": "The spell HUD and spell Radial Menu can be configured with a variety of client-side commands.$(br2)The root of all of these commands is $(l)/spellHud$()"
 },
-{            
+{
 "type": "patchouli:text",
 "title":"Basic HUD Positioning",
 "text": "$(li)topLeft: Moves the HUD to the top left of the screen.$(li)bottomLeft: Moves the HUD to the bottom left of the screen.$(li)topRight: Moves the HUD to the top right of the screen.$(li)bottomRight: Moves the HUD to the bottom right of the screen.$(li)bottomMiddle: Moves the HUD to the bottom middle of the screen.$(li)reset: Resets the HUD (top left, no padding)."

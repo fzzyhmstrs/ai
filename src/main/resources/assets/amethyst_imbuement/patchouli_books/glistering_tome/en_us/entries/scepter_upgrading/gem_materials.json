@@ -2,6 +2,7 @@
 "name": "Gems and Materials",
 "icon": "amethyst_imbuement:gem_dust",
 "category": "amethyst_imbuement:scepter_upgrading",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
 {
 "type": "patchouli:text",

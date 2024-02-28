@@ -10,7 +10,8 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"recipe": "amethyst_imbuement:imbuing/energy_blade_imbuing"  
+"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
+"recipe": "amethyst_imbuement:imbuing/energy_blade_imbuing"
 }
 ]
 }

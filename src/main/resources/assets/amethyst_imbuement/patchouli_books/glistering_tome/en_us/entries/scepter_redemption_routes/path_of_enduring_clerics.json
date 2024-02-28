@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Enduring Cleric",
 "icon": "amethyst_imbuement:clerics_scepter",
 "category": "amethyst_imbuement:scepter_redemption_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Redemption to take on the robes of the Cleric to heal yourself and your allies as you cast magic. Your healing spells are more effective at the expense of other spell types. Spell effects last longer thanks to Enduring, and casting Grace spells heals you or allies."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_2": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:_enduring\"},{modifier_id:\"amethyst_imbuement:healing\"}]}",
-  "spec": "Healing Magic",
-  "spells": "Minor Heal",
-  "mods": "Healers Grace/Healers Pact, Healing, Enduring"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_2": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:_enduring\"},{modifier_id:\"amethyst_imbuement:healing\"}]}",
+"spec": "Healing Magic",
+"spells": "$(l:amethyst_imbuement:spell_book/minor_heal)Minor Heal$()",
+"mods": "$(l:amethyst_imbuement:modifiers/healers_grace)Healers Grace$()/$(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$(), $(l:amethyst_imbuement:modifiers/healing)Healing$(), $(l:amethyst_imbuement:modifiers/enduring)Enduring$()"
 }
 ]
 }

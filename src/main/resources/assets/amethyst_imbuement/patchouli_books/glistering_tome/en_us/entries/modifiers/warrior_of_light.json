@@ -1,16 +1,16 @@
-{    
-"name": "Warrior of Light",    
+{
+"name": "Warrior of Light",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/warrior_of_light.png",
-"sortnum": 79,  
+"sortnum": 79,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Spell cooldowns are decreased by 10%. Spells that hit or affect an undead mob deal 4 damage in addition to their normal effects and may weaken the target. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Smiting",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/warrior_of_light.png",
 "ancestor": "$(l:amethyst_imbuement:modifiers/smiting)Smiting$()",

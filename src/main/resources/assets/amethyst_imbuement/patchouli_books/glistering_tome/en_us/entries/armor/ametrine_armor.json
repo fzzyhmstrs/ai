@@ -23,7 +23,9 @@
 "amethyst_imbuement:enhancing/ametrine_chestplate_enhancing",
 "amethyst_imbuement:enhancing/ametrine_leggings_enhancing"
 ],
-"unlock": "amethyst_imbuement:progression/crystal_altar"
+"unlock": "amethyst_imbuement:progression/ametrine_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Crystal Altar and by obtaining an Ametrine!",
+"hintItem": "amethyst_imbuement:crystal_altar,amethyst_imbuement:ametrine"
 },
 {
 "type": "amethyst_imbuement:enhancing_multi",
@@ -31,7 +33,9 @@
 "amethyst_imbuement:enhancing/ametrine_boots_enhancing",
 "amethyst_imbuement:enhancing/ametrine_horse_armor_enhancing"
 ],
-"unlock": "amethyst_imbuement:progression/crystal_altar"
+"unlock": "amethyst_imbuement:progression/ametrine_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Crystal Altar and by obtaining an Ametrine!",
+"hintItem": "amethyst_imbuement:crystal_altar,amethyst_imbuement:ametrine"
 }
 ]
 }

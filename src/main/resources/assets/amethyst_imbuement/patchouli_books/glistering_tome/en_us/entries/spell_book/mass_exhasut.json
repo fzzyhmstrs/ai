@@ -10,6 +10,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
 "recipe": "amethyst_imbuement:imbuing/mass_exhaust_imbuing"
 }
 ]

@@ -1,0 +1,16 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/basic_spells"
+		}
+	},
+	"unlock2":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/imbuing_table"
+		}
+	}
+}
+}

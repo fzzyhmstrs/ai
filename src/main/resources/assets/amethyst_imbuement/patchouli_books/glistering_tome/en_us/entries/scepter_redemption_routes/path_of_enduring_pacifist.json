@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Enduring Pacifism",
 "icon": "amethyst_imbuement:scepter_of_the_pacifist",
 "category": "amethyst_imbuement:scepter_redemption_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Redemption to enter Sainthood. Your healing spells are massively more effective at the expense of other spell types. Spell effects last longer thanks to Enduring."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:saints_grace\"},{modifier_id:\"amethyst_imbuement:saints_pact\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
-  "spec": "Healing Magic",
-  "spells": "Bedazzle",
-  "mods": "Saints Grace/Saints Pact, Enduring"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_the_pacifist{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"}, {modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:saints_grace\"},{modifier_id:\"amethyst_imbuement:saints_pact\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+"spec": "Healing Magic",
+"spells": "$(l:amethyst_imbuement:spell_book/bedazzle)Bedazzle$()",
+"mods": "$(l:amethyst_imbuement:modifiers/saints_grace)Saints Grace$()/$(l:amethyst_imbuement:modifiers/saints_pact)Saints Pact$(), $(l:amethyst_imbuement:modifiers/enduring)Enduring$()"
 }
 ]
 }

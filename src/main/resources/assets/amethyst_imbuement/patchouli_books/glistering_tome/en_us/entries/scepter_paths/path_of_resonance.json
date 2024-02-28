@@ -1,20 +1,21 @@
-{    
+{
 "name": "The Path of Resonance",
 "icon": "amethyst_imbuement:resonance",
 "category": "amethyst_imbuement:scepter_paths",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The Path of Resonance is the path of the conjurer. All of your spells have a chance to duplicate. Summon powerful creatures, gain insights beyond your wildest dreams, vibrate your opponents skulls right out of their heads!$(br2)$(l:amethyst_imbuement:scepter_resonance_routes)Routes on the Path of Resonance$(/l)"
 },
 {
-  "type": "amethyst_imbuement:scepter_path",
-  "tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]},amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]},amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]},amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
-  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "spec": "Overwhelming Spells",
-  "spells": "Summon Familiar (Scepter of Summoning), Resonate",
-  "mods": "Possible unique modifiers: Echoing, Masterful, Summoners Aspect, Insightful"
+"type": "amethyst_imbuement:scepter_path",
+"tier_1": "amethyst_imbuement:witty_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"}]},amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_summoning{modifiers:[{modifier_id:\"amethyst_imbuement:summoners_aspect\"}]},amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]},amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
+"tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"spec": "Overwhelming Spells",
+"spells": "Summon Familiar (Scepter of Summoning), Resonate",
+"mods": "Possible unique modifiers: $(l:amethyst_imbuement:modifiers/echoing)Echoing$(), $(l:amethyst_imbuement:modifiers/masterful)Masterful$(), $(l:amethyst_imbuement:modifiers/summoners_aspect)Summoners Aspect$(), $(l:amethyst_imbuement:modifiers/insightful)Insightful$()"
 }
 ]
 }

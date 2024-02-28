@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Furious Agony",
 "icon": "amethyst_imbuement:scepter_of_blades",
 "category": "amethyst_imbuement:scepter_lethality_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Lethality if you want to cripple and weaken your enemies in combat while leveling your spells up to their maximum potential. Damage is increased by Dangerous. Your spells gain +1 XP, last longer with Enduring, and reach farther with Lesser Reach. Less effective at casting non-Fury spells however."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
-  "spec": "Negative Status Leveling",
-  "spells": "(Unique) Cripple",
-  "mods": "Dangerous/Pact of Danger, Enduring, Lesser Reach, Furious"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:furious_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:furious\"}]}",
+"spec": "Negative Status Leveling",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/cripple)Cripple$()",
+"mods": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()/$(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(), $(l:amethyst_imbuement:modifiers/enduring)Enduring$(), $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$(), $(l:amethyst_imbuement:modifiers/furious)Furious$()"
 }
 ]
 }

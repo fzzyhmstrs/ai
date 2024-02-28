@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Dangerous Agony",
 "icon": "amethyst_imbuement:scepter_of_agonies",
 "category": "amethyst_imbuement:scepter_lethality_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Lethality if you want to cripple and weaken your enemies in combat while still dishing out damage. Your overall damage is boosted by Lethal, and your spells reach slightly farther with Lesser Reach and last longer with Enduring. Less effective at casting non-Fury spells however."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
-  "spec": "Negative Statuses",
-  "spells": "(Unique) Cripple",
-  "mods": "Lethal/Pact of Lethality, Enduring, Lesser Reach"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_agonies{modifiers:[{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:dangerous\"},{modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:enduring\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+"spec": "Negative Statuses",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/cripple)Cripple$()",
+"mods": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()/$(l:amethyst_imbuement:modifiers/pact_of_lethality)Pact of Lethality$(), $(l:amethyst_imbuement:modifiers/enduring)Enduring$(), $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()"
 }
 ]
 }

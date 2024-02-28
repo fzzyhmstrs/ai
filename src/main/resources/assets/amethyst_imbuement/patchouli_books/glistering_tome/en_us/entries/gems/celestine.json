@@ -11,7 +11,7 @@
 {
 "type": "amethyst_imbuement:imbuing",
 "unlock": "amethyst_imbuement:progression/unlocks/celestine_recipe_unlock",
-"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by summoning a $(#490)Wither$()!",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by summoning a Wither!",
 "recipe": "amethyst_imbuement:imbuing/celestine_imbuing"
 }
 ]

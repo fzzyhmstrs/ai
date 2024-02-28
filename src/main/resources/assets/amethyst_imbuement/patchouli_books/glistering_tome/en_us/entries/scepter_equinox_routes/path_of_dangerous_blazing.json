@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Blazing Danger",
 "icon": "amethyst_imbuement:blazing_scepter",
 "category": "amethyst_imbuement:scepter_equinox_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Equinox if you want to turn your enemies to cinders with maximum flame output. Fire-based Augments have a big boost, and damage is increased by Dangerous. Elemental magic of any kind is further boosted by Elemental, and fury spells gain twice the XP as normal thanks to Furious."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"},{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "spec": "Fire Magic",
-  "spells": "Fireball",
-  "mods": "Dangerous/Pact of Danger, Fire Aspect, Elemental, Furious"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_2": "amethyst_imbuement:blazing_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_3": "amethyst_imbuement:equinox{modifiers:[{modifier_id:\"amethyst_imbuement:elemental\"}, {modifier_id:\"amethyst_imbuement:furious\"},{modifier_id:\"amethyst_imbuement:fire_aspect\"},{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"spec": "Fire Magic",
+"spells": "$(l:amethyst_imbuement:spell_book/fireball)Fireball$()",
+"mods": "$(l:amethyst_imbuement:modifiers/dangerous)Dangerous$()/$(l:amethyst_imbuement:modifiers/pact_of_danger)Pact of Danger$(), $(l:amethyst_imbuement:modifiers/fire_aspect)Fire Aspect$(), $(l:amethyst_imbuement:modifiers/elemental)Elemental$(), $(l:amethyst_imbuement:modifiers/furious)Furious$()"
 }
 ]
 }

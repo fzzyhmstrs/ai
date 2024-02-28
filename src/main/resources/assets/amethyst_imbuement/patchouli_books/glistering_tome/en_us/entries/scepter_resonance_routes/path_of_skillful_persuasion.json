@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Skilled Insight",
 "icon": "amethyst_imbuement:scepter_of_insight",
 "category": "amethyst_imbuement:scepter_resonance_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Resonance to persuade your enemies to fight alongside you with your mastery of magic. All your spells have a chance to echo. All of your spells cast as if they are 2 levels above normal, and cost slightly less with Lesser Attuned."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
-  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
-  "spec": "Mind Control",
-  "spells": "(Unique) Resonate, (Unique) Persuade",
-  "mods": "Echoing, Masterful, Witty, Lesser Attuned"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_2": "amethyst_imbuement:persuasive_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:skillful\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
+"tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:lesser_attuned\"}]}",
+"spec": "Mind Control",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/resonate)Resonate$(), (Unique) $(l:amethyst_imbuement:spell_book/persuade)Persuade$()",
+"mods": "$(l:amethyst_imbuement:modifiers/echoing)Echoing$(), $(l:amethyst_imbuement:modifiers/masterful)Masterful$(), $(l:amethyst_imbuement:modifiers/witty)Witty$(), $(l:amethyst_imbuement:modifiers/lesser_attuned)Lesser Attuned$()"
 }
 ]
 }

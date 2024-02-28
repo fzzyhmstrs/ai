@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Skilled Recall",
 "icon": "amethyst_imbuement:scepter_of_recall",
 "category": "amethyst_imbuement:scepter_sojourn_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Sojourn to travel far and wide while always maintaining your connection to home. All spells related to travel are boosted with Traveler, spells are cast one level above normal, and all Wit spells gain +1 XP. Your spells have much larger range of effect with Greater Reach."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "spec": "Expeditions",
-  "spells": "(Unique) Survey, (Unique) Recall",
-  "mods": "Traveler, Witty, Skillful, Greater Reach"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_recall{modifiers:[{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:greater_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"spec": "Expeditions",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/survey)Survey$(), (Unique) $(l:amethyst_imbuement:spell_book/recall)Recall$()",
+"mods": "$(l:amethyst_imbuement:modifiers/traveler)Traveler$(), $(l:amethyst_imbuement:modifiers/witty)Witty$(), $(l:amethyst_imbuement:modifiers/skillful)Skillful$(), $(l:amethyst_imbuement:modifiers/greater_reach)Greater Reach$()"
 }
 ]
 }

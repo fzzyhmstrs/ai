@@ -1,16 +1,16 @@
-{    
+{
 "name": "Traveler",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/traveler.png",
 "sortnum": 57,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Only affects spells involved with movement and exploration. Affected spells cooldown is decreased 65% and range of effect is increased 15%. Casting an affected spell has a 12.5% chance of granting the caster Speed. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Traveler",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/traveler.png",
 "ancestor": "N/A",

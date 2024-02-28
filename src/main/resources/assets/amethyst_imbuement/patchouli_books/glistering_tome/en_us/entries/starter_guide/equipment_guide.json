@@ -1,10 +1,10 @@
-{    
-"name": "Progression",    
-"icon": "minecraft:leather_boots",    
-"category": "amethyst_imbuement:starter_guide",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Armor and Weapons",
+"icon": "amethyst_imbuement:steel_boots",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "TODO"
 },
 {
@@ -22,8 +22,7 @@
 "amethyst_imbuement:weapons/glowing_tools",
 "amethyst_imbuement:weapons/sniper_bow",
 "amethyst_imbuement:weapons/steel_equipment"
-],
-"title": "Armor and Weapons"
+]
 }
 ]
 }

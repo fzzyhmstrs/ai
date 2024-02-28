@@ -1,16 +1,16 @@
-{    
+{
 "name": "Testament to Power",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/testament_to_power.png",
 "sortnum": 103,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/spellcasters_focus",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/spellcasters_focus",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Adds six levels to the amplification of spell effects and one effective level to spells cast, at the expense of 35% longer cooldowns and 10% reduced effect durations. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Testament to Power",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/testament_to_power.png",
 "ancestor": "N/A",

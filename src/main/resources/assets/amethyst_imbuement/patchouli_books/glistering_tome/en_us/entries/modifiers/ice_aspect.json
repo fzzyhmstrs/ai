@@ -1,16 +1,16 @@
-{    
-"name": "Ice Aspect",    
+{
+"name": "Ice Aspect",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/ice_aspect.png",
 "sortnum": 41,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Only affect ice-type spells. Ice spells have 10% reduced cooldown, their level increases by 1, their effects are amplified an additional level, and their effects last 1.5 seconds longer. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Ice Aspect",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/ice_aspect.png",
 "ancestor": "N/A",

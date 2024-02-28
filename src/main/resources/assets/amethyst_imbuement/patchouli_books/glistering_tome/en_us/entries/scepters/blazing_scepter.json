@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/fire_aspect)Fire Aspect$() and the spell Fireball. Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 550"
+"text": "Tier two fury aspect scepter. Adds the modifier $(l:amethyst_imbuement:modifiers/fire_aspect)Fire Aspect$() and the spell $(l:amethyst_imbuement:spell_book/Fireball)Fireball$(). Can be augmented with tier two or lower spells. Second tier of progression on the $(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox.$()$(br2)$(l)Mana:$() 550"
 },
 {
 "type": "amethyst_imbuement:scepter_lineage_tier_2",

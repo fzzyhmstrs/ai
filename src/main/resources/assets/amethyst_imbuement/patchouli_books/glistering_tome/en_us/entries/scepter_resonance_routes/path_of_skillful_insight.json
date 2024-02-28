@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Skilled Insight",
 "icon": "amethyst_imbuement:scepter_of_insight",
 "category": "amethyst_imbuement:scepter_resonance_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Resonance to masterfully gain experience in combat. All your spells have a chance to echo and killing mobs drops extra experience. All of your spells cast as if they are 2 levels above normal, and their range is slightly increased. Wit spells gain +1 XP."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
-  "spec": "Experience Gain",
-  "spells": "Mental Clarity, (Unique) Resonate",
-  "mods": "Echoing, Insightful, Masterful, Lesser Reach"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_insight{modifiers:[{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_3": "amethyst_imbuement:resonance{modifiers:[{modifier_id:\"amethyst_imbuement:echoing\"},{modifier_id:\"amethyst_imbuement:masterful\"},{modifier_id:\"amethyst_imbuement:insightful\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"}]}",
+"spec": "Experience Gain",
+"spells": "$(l:amethyst_imbuement:spell_book/mental_clarity)Mental Clarity$(), (Unique) $(l:amethyst_imbuement:spell_book/resonate)Resonate$()",
+"mods": "$(l:amethyst_imbuement:modifiers/echoing)Echoing$(), $(l:amethyst_imbuement:modifiers/insightful)Insightful$(), $(l:amethyst_imbuement:modifiers/masterful)Masterful$(), $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()"
 }
 ]
 }

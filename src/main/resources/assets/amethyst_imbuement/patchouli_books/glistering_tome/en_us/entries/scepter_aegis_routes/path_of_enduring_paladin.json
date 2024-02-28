@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Enduring Paladin",
 "icon": "amethyst_imbuement:scepter_of_the_paladin",
 "category": "amethyst_imbuement:scepter_aegis_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Aegis if you want to bolster your allies with long lasting protective magic. As the Champion of the Meek, casting spells shields and protects you and your allies. Your spells last longer with Enduring, and damage to the undead is increased with Smiting."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
-  "tier_2": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
-  "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:champion_of_the_meek\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
-  "spec": "Protective Magic",
-  "spells": "Fortify",
-  "mods": "Champion of the Meek, Enduring, Smiting"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:enduring_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:lesser_enduring\"}]}",
+"tier_2": "amethyst_imbuement:scepter_of_the_paladin{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+"tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:champion_of_the_meek\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:enduring\"}]}",
+"spec": "Protective Magic",
+"spells": "$(l:amethyst_imbuement:spell_book/fortify)Fortify$()",
+"mods": "$(l:amethyst_imbuement:modifiers/champion_of_the_meek)Champion of the Meek$(), $(l:amethyst_imbuement:modifiers/enduring)Enduring$(), $(l:amethyst_imbuement:modifiers/smiting)Smiting$()"
 }
 ]
 }

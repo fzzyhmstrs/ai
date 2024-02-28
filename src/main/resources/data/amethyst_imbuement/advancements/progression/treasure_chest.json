@@ -1,0 +1,24 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:unlock_book"
+			]
+		}
+	},
+	"opened_chest":{
+		"trigger": "minecraft:player_generates_container_loot",
+		"conditions":{
+			"loot_table": "amethyst_imbuement:chests/gilded_treasure"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_gem"
+	]
+]
+}

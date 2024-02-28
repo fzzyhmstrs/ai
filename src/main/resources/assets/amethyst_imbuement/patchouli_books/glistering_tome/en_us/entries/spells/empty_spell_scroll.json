@@ -1,25 +1,26 @@
 {
-  "name": "Empty Spell Scroll",
-  "icon": "amethyst_imbuement:empty_spell_scroll",
-  "category": "amethyst_imbuement:spells",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Spell scrolls are magical parchments that can contain one inscribed spell that the user can cast like a true scepter. To craft a scroll, one must first create an empty one that is ready to accept magic.$(br2)Empty spell scrolls can also be found in certain loot chests, providing one of the earliest opportunities to cast spells if you get lucky with exploration."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "See the next pages for recipes to make spell scrolls..."
-    },
-    {
-      "type": "amethyst_imbuement:imbuing",
-      "unlock": "amethyst_imbuement:progression/imbuing_table",
-      "recipe": "amethyst_imbuement:imbuing/empty_spell_scroll_imbuing"
-    },
-    {
-      "type": "amethyst_imbuement:enhancing",
-      "unlock": "amethyst_imbuement:progression/crystal_altar",
-      "recipe": "amethyst_imbuement:enhancing/empty_spell_scroll_enhancing"
-    }
-  ]
+"name": "Empty Spell Scroll",
+"icon": "amethyst_imbuement:empty_spell_scroll",
+"category": "amethyst_imbuement:spells",
+"advancement": "amethyst_imbuement:progression/unlocks/spell_scroll_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Spell scrolls are magical parchments that can contain one inscribed spell that the user can cast like a true scepter. To craft a scroll, one must first create an empty one that is ready to accept magic.$(br2)Empty spell scrolls can also be found in certain loot chests, providing one of the earliest opportunities to cast spells if you get lucky with exploration."
+},
+{
+"type": "patchouli:text",
+"text": "See the next pages for recipes to make spell scrolls..."
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/empty_spell_scroll_imbuing"
+},
+{
+"type": "amethyst_imbuement:enhancing",
+"unlock": "amethyst_imbuement:progression/crystal_altar",
+"recipe": "amethyst_imbuement:enhancing/empty_spell_scroll_enhancing"
+}
+]
 }

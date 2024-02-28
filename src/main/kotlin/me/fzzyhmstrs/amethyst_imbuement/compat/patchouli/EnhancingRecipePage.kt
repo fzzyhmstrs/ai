@@ -111,7 +111,10 @@ class EnhancingRecipePage: BookPage(), AdvancementUpdatable {
 
 
         //output
-        parent.renderItemStack(context, 88, 17, mouseX, mouseY, enhancingRecipe?.getOutput())
+        if (enhancingRecipe?.react == true)
+            parent.renderIngredient(context, 88, 17, mouseX, mouseY, enhancingRecipe?.base)
+        else
+            parent.renderItemStack(context, 88, 17, mouseX, mouseY, enhancingRecipe?.getOutput())
 
         //inputs
         parent.renderIngredient(

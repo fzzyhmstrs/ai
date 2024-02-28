@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Tier three wit scepter focused on exploration. Adds the modifiers $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and $(l:amethyst_imbuement:modifiers/witty)Witty$() and the unique spell Survey. Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1450"
+"text": "Tier three wit scepter focused on exploration. Adds the modifiers $(l:amethyst_imbuement:modifiers/traveler)Traveler$() and $(l:amethyst_imbuement:modifiers/witty)Witty$() and the unique spell $(l:amethyst_imbuement:spell_book/resonate)Survey$(). Can be augmented with tier three or lower spells. Culmination of the $(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn.$()$(br2)$(l)Mana:$() 1450"
 },
 {
 "type": "amethyst_imbuement:scepter_lineage_tier_3",

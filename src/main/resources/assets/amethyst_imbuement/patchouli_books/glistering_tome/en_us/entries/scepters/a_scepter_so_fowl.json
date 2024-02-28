@@ -1,0 +1,19 @@
+{
+"name": "The Fzzyhammer",
+"icon": "amethyst_imbuement:a_scepter_so_fowl",
+"category": "amethyst_imbuement:scepters",
+"advancement": "amethyst_imbuement:scepter_path/path_of_chimkin",
+"sortnum": 1002,
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Evil quivers at the mere sight of such a fearsome scepter. A Scepter So Fowl adds the modifier $(1:amethyst_imbuement:modifiers/fowl)Fowl$() adds the unique spells $(l:amethyst_imbuement:spell_book/chickenform)Chickenform$(), $(l:amethyst_imbuement:spell_book/poultrymorph)Poultrymorph$(), and $(l:amethyst_imbuement:spell_book/torrent_of_beaks)Torrent of Beaks$(). $(br2)$(l)Mana:$() 600"
+},
+{
+"type": "patchouli:spotlight",
+"item": "amethyst_imbuement:a_scepter_so_fowl",
+"link_recipe": true,
+"text": "$(italic)If you stare into its beady eyes a little too long, you being to feel the overwhelming urge to cluck$()"
+}
+]
+}

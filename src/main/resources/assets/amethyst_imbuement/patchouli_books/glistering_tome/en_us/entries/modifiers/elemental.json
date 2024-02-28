@@ -1,16 +1,16 @@
-{    
-"name": "Elemental",    
+{
+"name": "Elemental",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/elemental.png",
 "sortnum": 45,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Affects all elemental spells. Elemental spells cooldown and mana cost are decreased by 10%, spell level increases by 1, spell range increases 10%, spell effect amplification increases a level and effect duration increases 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Elemental",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/elemental.png",
 "ancestor": "N/A",

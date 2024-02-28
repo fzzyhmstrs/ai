@@ -2,7 +2,7 @@
 "name": "Magic Missile",
 "icon": "amethyst_imbuement:opaline_scepter",
 "category": "amethyst_imbuement:spell_book",
-"advancement": "amethyst_imbuement:spells/magic_missile",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
 {
 "type": "amethyst_imbuement:spell_text",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "tag:amethyst_core:tier_one_spell_scepters",
-"text": "Magic Missile is the intro spell, found on almost every scepter."       
+"text": "Magic Missile is the intro spell, found on almost every scepter."
 }
 ]
 }

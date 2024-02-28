@@ -1,16 +1,16 @@
-{    
+{
 "name": "Healers Pact",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/healers_pact.png",
 "sortnum": 71,
 "category": "amethyst_imbuement:modifiers",
-  "advancement": "amethyst_imbuement:progression/basic_spells",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Affects all non-healing spells. Affected spells cooldown increased by 50% and mana cost increased 20%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$()"
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Healers Pact",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/healers_pact.png",
 "ancestor": "N/A",

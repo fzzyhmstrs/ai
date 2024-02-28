@@ -1,20 +1,21 @@
-{    
+{
 "name": "Dangerous Corruption",
 "icon": "amethyst_imbuement:corrupted_scepter",
 "category": "amethyst_imbuement:scepter_lethality_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Lethality if you want to wither your opponents away with maximum damage. Hitting of affecting your opponents withers them, and your overall damage is boosted by Lethal. Less effective at casting non-Fury spells however."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
-  "tier_2": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
-  "tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
-  "spec": "Withering Damage",
-  "spells": "Soul Missile",
-  "mods": "Lethal/Pact of Lethality, Necrotic"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:dangerous_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"}]}",
+"tier_2": "amethyst_imbuement:corrupted_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:dangerous\"}, {modifier_id:\"amethyst_imbuement:pact_of_danger\"},{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+"tier_3": "amethyst_imbuement:lethality{modifiers:[{modifier_id:\"amethyst_imbuement:lethal\"},{modifier_id:\"amethyst_imbuement:pact_of_lethality\"},{modifier_id:\"amethyst_imbuement:necrotic\"}]}",
+"spec": "Withering Damage",
+"spells": "$(l:amethyst_imbuement:spell_book/soul_missile)Soul Missile$()",
+"mods": "$(l:amethyst_imbuement:modifiers/lethal)Lethal$()/$(l:amethyst_imbuement:modifiers/pact_of_lethality)Pact of Lethality$(), $(l:amethyst_imbuement:modifiers/necrotic)Necrotic$()"
 }
 ]
 }

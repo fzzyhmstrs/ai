@@ -1,18 +1,20 @@
 {
-  "name": "Spell Scroll",
-  "icon": "amethyst_imbuement:spell_scroll",
-  "category": "amethyst_imbuement:spells",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "text": "Once a spell is bound to an empty scroll, a Spell Scroll can be used like a temporary scepter. Right click to cast the included spell just like with a scepter. The tooltip will indicate the included spell, some important details, and how many uses are left. If used up, the scroll will disappear.$(br2)Spells scrolls are also the method by which spells can be moved between scepters, rather than with enchanted books."
-    },
-    {
-      "type": "amethyst_imbuement:enhancing_multi",
-      "recipes": [
-        "amethyst_imbuement:enhancing/spell_scroll_lore_enhancing",
-        "amethyst_imbuement:enhancing/spell_scroll_mythos_enhancing"
-      ]
-    }
-  ]
+"name": "Spell Scroll",
+"icon": "amethyst_imbuement:spell_scroll",
+"category": "amethyst_imbuement:spells",
+"advancement": "amethyst_imbuement:progression/unlocks/spell_scroll_unlock",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Once a spell is bound to an empty scroll, a Spell Scroll can be used like a temporary scepter. Right click to cast the included spell just like with a scepter. The tooltip will indicate the included spell, some important details, and how many uses are left. If used up, the scroll will disappear.$(br2)Spells scrolls are also the method by which spells can be moved between scepters, rather than with enchanted books."
+},
+{
+"type": "amethyst_imbuement:enhancing_multi",
+"recipes": [
+"amethyst_imbuement:enhancing/spell_scroll_lore_enhancing",
+"amethyst_imbuement:enhancing/spell_scroll_mythos_enhancing"
+],
+"unlock": "amethyst_imbuement:progression/crystal_altar"
+}
+]
 }

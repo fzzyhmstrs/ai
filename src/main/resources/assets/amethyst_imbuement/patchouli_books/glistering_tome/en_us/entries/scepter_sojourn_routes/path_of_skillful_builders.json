@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Skilled Building",
 "icon": "amethyst_imbuement:builders_scepter",
 "category": "amethyst_imbuement:scepter_sojourn_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of the Sojourn to masterfully craft the world around you. All spells related to travel and building are boosted, spells are cast one level above normal, and all Wit spells gain +1 XP. Spell range is slightly increased."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_2": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
-  "spec": "Building",
-  "spells": "(Unique) Survey, Hard Light Bridge",
-  "mods": "Traveler, Builders Aspect, Witty, Skillful, Lesser Reach"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:skillful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_2": "amethyst_imbuement:builders_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"tier_3": "amethyst_imbuement:sojourn{modifiers:[{modifier_id:\"amethyst_imbuement:witty\"},{modifier_id:\"amethyst_imbuement:traveler\"},{modifier_id:\"amethyst_imbuement:builders_aspect\"},{modifier_id:\"amethyst_imbuement:lesser_reach\"},{modifier_id:\"amethyst_imbuement:skillful\"}]}",
+"spec": "Building",
+"spells": "(Unique) $(l:amethyst_imbuement:spell_book/survey)Survey$(), $(l:amethyst_imbuement:spell_book/hard_light_bridge)Hard Light Bridge$()",
+"mods": "$(l:amethyst_imbuement:modifiers/traveler)Traveler$(), $(l:amethyst_imbuement:modifiers/builders_aspect)Builders Aspect$(), $(l:amethyst_imbuement:modifiers/witty)Witty$(), $(l:amethyst_imbuement:modifiers/skillful)Skillful$(), $(l:amethyst_imbuement:modifiers/lesser_reach)Lesser Reach$()"
 }
 ]
 }

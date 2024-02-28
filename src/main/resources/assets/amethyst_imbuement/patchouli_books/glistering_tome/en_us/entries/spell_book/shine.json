@@ -1,15 +1,17 @@
-{    
+{
 "name": "Shine",
-"icon": "amethyst_imbuement:book_of_lore",    
+"icon": "amethyst_imbuement:book_of_lore",
 "category": "amethyst_imbuement:spell_book",
+"advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
-  {
-    "type": "amethyst_imbuement:spell_text",
-    "spell": "amethyst_imbuement:shine"
-  },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shine_imbuing"
-  }
+{
+"type": "amethyst_imbuement:spell_text",
+"spell": "amethyst_imbuement:shine"
+},
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
+"recipe": "amethyst_imbuement:imbuing/shine_imbuing"
+}
 ]
 }

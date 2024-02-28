@@ -1,20 +1,21 @@
-{    
+{
 "name": "Route of Graceful Cleric",
 "icon": "amethyst_imbuement:clerics_scepter",
 "category": "amethyst_imbuement:scepter_redemption_routes",
-"pages": [        
-{            
-"type": "patchouli:text",            
+"advancement": "amethyst_imbuement:progression/basic_spells",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "Follow this route on the Path of Redemption to take on the robes of the Cleric to bathe you and your allies in high level healing. Your healing spells are more effective at the expense of other spell types. Spell effects last slightly longer, and casting Grace spells heals you or allies. Grace spells gain 2x XP."
 },
 {
-  "type": "amethyst_imbuement:scepter_route",
-  "tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
-  "tier_2": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
-  "tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
-  "spec": "Healing Magic",
-  "spells": "Minor Heal",
-  "mods": "Healers Grace/Healers Pact, Healing, Lesser Enduring, Graceful"
+"type": "amethyst_imbuement:scepter_route",
+"tier_1": "amethyst_imbuement:graceful_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+"tier_2": "amethyst_imbuement:clerics_scepter{modifiers:[{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+"tier_3": "amethyst_imbuement:redemption{modifiers:[{modifier_id:\"amethyst_imbuement:healers_grace\"},{modifier_id:\"amethyst_imbuement:healers_pact\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:healing\"},{modifier_id:\"amethyst_imbuement:graceful\"}]}",
+"spec": "Healing Magic",
+"spells": "$(l:amethyst_imbuement:spell_book/minor_heal)Minor Heal$()",
+"mods": "$(l:amethyst_imbuement:modifiers/healers_grace)Healers Grace$()/$(l:amethyst_imbuement:modifiers/healers_pact)Healers Pact$(), $(l:amethyst_imbuement:modifiers/healing)Healing$(), $(l:amethyst_imbuement:modifiers/lesser_enduring)Lesser Enduring$(), $(l:amethyst_imbuement:modifiers/graceful)Graceful$()"
 }
 ]
 }
