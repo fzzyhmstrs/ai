@@ -1,0 +1,30 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+			]
+		}
+	},
+	"got_copper":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/basic_materials_3a"
+		}
+	},
+	"got_steel":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/basic_materials_3b"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_copper",
+		"got_steel"
+	]
+]
+}
