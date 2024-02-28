@@ -1,0 +1,54 @@
+{
+"criteria":{
+	"advancements":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:dusty",
+        "amethyst_imbuement:glowing",
+        "amethyst_imbuement:progression/glowing_gear"
+			]
+		}
+	},
+  "got_orb":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:opal",
+						"amethyst_imbuement:iridescent_scepter",
+						"amethyst_imbuement:lustrous_sphere"
+					]
+				}
+			]
+		},
+  "got_stuff":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"amethyst_imbuement:knowledge_powder",
+						"amethyst_imbuement:malachite_figurine",
+						"amethyst_imbuement:accursed_figurine",
+            "amethyst_imbuement:resonant_rod",
+            "amethyst_imbuement:glistening_ice"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"advancements"
+	],
+  [
+    "got_orb"
+  ],
+  [
+    "got_stuff"
+  ]
+]
+}
