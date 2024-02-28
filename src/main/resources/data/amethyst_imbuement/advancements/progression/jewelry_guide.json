@@ -4,21 +4,23 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
-				"amethyst_imbuement:progression/tier_2_gems"
+				"amethyst_imbuement:progression/imbued_jewelry"
 			]
 		}
 	},
-	"got_gem":{
+	"got_mats":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancement": "amethyst_imbuement:crystal_novice"
+			"advancement": "amethyst_imbuement:basic_materials_3"
 		}
 	}
 },
 "requirements": [
 	[
-		"unlock",
-		"got_gem"
+		"unlock"
+	],
+	[
+		"got_mats"
 	]
 ]
 }
