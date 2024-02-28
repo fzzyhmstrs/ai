@@ -1,24 +1,33 @@
 {
 "criteria":{
-	"unlock":{
+	"mats":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancements": [
-				"amethyst_imbuement:progression/tier_2_gems"
-			]
+			"advancement": "amethyst_imbuement:progression/basic_materials_2"
 		}
 	},
-	"got_gem":{
+	"spells":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancement": "amethyst_imbuement:crystal_novice"
+			"advancement": "amethyst_imbuement:progression/basic_spells"
+		}
+	},
+	"books":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:arcane_researcher"
 		}
 	}
 },
 "requirements": [
 	[
-		"unlock",
-		"got_gem"
+		"mats"
+	],
+	[
+		"spells"
+	],
+	[
+		"books"
 	]
 ]
 }
