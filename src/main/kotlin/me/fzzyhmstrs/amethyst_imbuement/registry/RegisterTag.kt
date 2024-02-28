@@ -39,6 +39,7 @@ object RegisterTag {
     val EXCAVATE_BLACKLIST = FzzyPort.BLOCK.tagOf(AI.identity("excavate_blacklist"))
     val UNLOCKABLES_TAG = FzzyPort.BLOCK.tagOf(AI.identity("unlockables"))
     val WARDING_CANDLES_TAG = FzzyPort.BLOCK.tagOf(AI.identity("warding_candles"))
+    val ABUNDANCE_BLACKLIST = FzzyPort.BLOCK.tagOf(AI.identity("abundance_blacklist"))
 
     val EQUINOX_SCEPTERS_TAG = FzzyPort.ITEM.tagOf(AI.identity("equinox_scepters"))
     val LETHALITY_SCEPTERS_TAG = FzzyPort.ITEM.tagOf(AI.identity("lethality_scepters"))
