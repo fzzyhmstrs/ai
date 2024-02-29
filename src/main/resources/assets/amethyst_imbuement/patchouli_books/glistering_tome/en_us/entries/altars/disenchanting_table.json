@@ -4,9 +4,9 @@
 "category": "amethyst_imbuement:altars",
 "advancement": "amethyst_imbuement:progression/altar_of_experience",
 "pages": [
-{            
-"type": "patchouli:text",            
-"text": "When one needs to strip an item of its magical properties, the $(#490)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present and store it in a book... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
+{
+"type": "patchouli:text",
+"text": "When one needs to strip an item of its magical properties, the $(thing)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present and store it in a book... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
 },
 {
 "type": "patchouli:crafting",
@@ -20,16 +20,16 @@
 		["B B B","     ","B   B","     ","B B B"],
 		["B B B","     ","B 0 B","     ","B B B"]
 	],
-	"mapping": {                  
-	"B": "#amethyst_imbuement:disenchant_pillar_blocks",         
-	"0": "amethyst_imbuement:disenchanting_table"     
+	"mapping": {
+	"B": "#amethyst_imbuement:disenchant_pillar_blocks",
+	"0": "amethyst_imbuement:disenchanting_table"
 	}
 },
 "enable_visualize": false,
 "text": "Displayed is the maximum setup for the disenchanting table. Fewer pillars yield less power."
 },
-{            
-"type": "patchouli:text",            
+{
+"type": "patchouli:text",
 "text": "Alone, the disenchanting table can remove up to one enchantment from any item and return an enchanted book. Enchantment removals are item-specific, so different tables won't stack. $(br2)Every two pillars added adds one more disenchant per item.$(br2)Any kind of enchantment can be stripped from an item, $(l)including augments$()"
 }
 ]

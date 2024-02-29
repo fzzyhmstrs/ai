@@ -8,14 +8,14 @@
 "type": "patchouli:text",
 "text": "Shimmering Gear is a basic set of gear that is an alternative to Iron. It provides some basic innate spellcasting bonuses too."
 },
-  {
-    "type": "amethyst_imbuement:armor_stand",
-    "helmet": "amethyst_imbuement:shimmering_helmet",
-    "chestplate": "amethyst_imbuement:shimmering_chestplate",
-    "leggings": "amethyst_imbuement:shimmering_leggings",
-    "boots": "amethyst_imbuement:shimmering_boots",
-    "text": "Craft Shimmering Armor in the Crafting Table using the recipes on the next pages."
-  },
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:shimmering_helmet",
+"chestplate": "amethyst_imbuement:shimmering_chestplate",
+"leggings": "amethyst_imbuement:shimmering_leggings",
+"boots": "amethyst_imbuement:shimmering_boots",
+"text": "Craft Shimmering Armor in the Crafting Table using the recipes on the next pages."
+},
 {
 "type": "patchouli:crafting",
 "recipe": "amethyst_imbuement:crafting/shimmering_helmet",

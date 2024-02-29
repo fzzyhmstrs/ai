@@ -4,8 +4,8 @@
 "category": "amethyst_imbuement:altars",
 "pages": [
 {
-"type": "patchouli:text",            
-"text": "The $(#490)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power."
+"type": "patchouli:text",
+"text": "The $(thing)Imbuing Table$() is the heart of your magical journey. The soulfire burning within provides a limitless supply of magical energy... $(o)if$() you are willing to offer the necessary ingredients and a piece of your soul.$(br2)Surround the table with bookshelves to boost its power."
 },
 {
 "type": "patchouli:crafting",
@@ -32,7 +32,7 @@
 "type": "patchouli:text",
 "title": "Enchanting",
 "anchor": "enchant_info",
-"text": "The imbuing table can function as an advanced $(#490)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than 15. The same bookshelf arrangement requirements apply."
+"text": "The imbuing table can function as an advanced $(thing)Enchanting Table$(). Enchantable items are inserted into the middle slot and Lapis Lazuli into the marked lapis slot. $(br)The imbuing table can enchant items up to level $(l)60$(), twice the cap of the enchanting table. To achieve this level of enchanting power, the table can be surrounded by $(l)30$() bookshelves rather than 15. The same bookshelf arrangement requirements apply."
 },
 {
 "type": "patchouli:text",
