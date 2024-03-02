@@ -4,7 +4,7 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
-				"amethyst_imbuement:progression/crystalline_heart",
+				"amethyst_imbuement:progression//unlocks/crystalline_heart",
 				"amethyst_imbuement:progression/witches_orb",
 				"amethyst_imbuement:progression/altar_of_experience",
 				"amethyst_imbuement:progression/basic_spells",

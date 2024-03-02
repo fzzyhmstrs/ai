@@ -2,7 +2,7 @@
 "name": "Crystalline Core",
 "icon": "amethyst_imbuement:crystalline_core",
 "category": "amethyst_imbuement:imbuing",
-"advancement": "amethyst_imbuement:progression/crystalline_heart",
+"advancement": "amethyst_imbuement:progression//unlocks/crystalline_heart",
 "pages": [
 {
 "type": "patchouli:text",

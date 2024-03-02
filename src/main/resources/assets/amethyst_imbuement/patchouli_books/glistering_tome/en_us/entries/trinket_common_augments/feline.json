@@ -1,15 +1,17 @@
-{    
-"name": "Feline Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_common_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Feline Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_common_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/common_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Wards off nearby creepers.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(),$(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() Other common or jewelry augments (jewelry), other common augments (totem)"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/feline_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "",
+"recipe": "amethyst_imbuement:imbuing/feline_imbuing"
+}
 ]
 }

@@ -1,16 +1,20 @@
-{    
-"name": "Totem of Amethyst",    
-"icon": "amethyst_imbuement:totem_of_amethyst",    
-"category": "amethyst_imbuement:trinkets",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Totem of Amethyst",
+"icon": "amethyst_imbuement:totem_of_amethyst",
+"category": "amethyst_imbuement:trinkets",
+"advancement": "amethyst_imbuement:progression//unlocks/crystalline_heart",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "The Totem of Amethyst is a powerful artifact reminiscent of the totems crafted by illagers. Totems have a soul, and are therefore more potent vessels than jewelry. $(l)Totems can have one passive $(o)and$() $(l)one active augment at a time.$()$(br2)If you wish to change augments, you may strip your totem of its current abilities in a $(#490)Grindstone$() or a $(l:amethyst_imbuement:altars/disenchanting_table)Disenchanting Table$()"
 },
 {
-"type": "patchouli:crafting",
+"type": "amethyst_imbuement:crafting",
 "anchor": "totem",
-"recipe": "amethyst_imbuement:crafting/totem_of_amethyst"
+"recipe": "amethyst_imbuement:crafting/totem_of_amethyst",
+"unlock": "amethyst_imbuement:progression/unlocks/totem_unlock",
+"unlockDesc": "Imbue a Crystalline Heart to unlock this recipe!",
+"hintItem": "amethyst_imbuement:crystalline_heart"
 }
 ]
 }

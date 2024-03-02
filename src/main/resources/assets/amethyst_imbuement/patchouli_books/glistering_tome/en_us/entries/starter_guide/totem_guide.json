@@ -3,14 +3,35 @@
 "priority": true,
 "icon": "amethyst_imbuement:totem_of_amethyst",
 "category": "amethyst_imbuement:starter_guide",
+"advancement": "amethyst_imbuement:progression/totem_guide",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Here you will learn to master amethyst totems and their abilities. To begin:$(li)First find a $(#b0b)Heart of the Sea$() and craft it into a $(l:amethyst_imbuement:recipes/recipes)$(#b0b)Golden Heart$()$(li)Next imbue that heart into a $(#b0b)$(l:amethyst_imbuement:imbuing/crystalline_heart)Crystalline Heart$() with some soul energy, giving it the ability to look after you."
+"text": "Here you will learn to master amethyst totems and their abilities. To begin:$(li)$(li) with some soul energy, giving it the ability to look after you."
 },
+  {
+    "type": "amethyst_imbuement:progression",
+    "progression": {
+      "amethyst_imbuement:golden_heart": {
+        "text": "First find a $(item)Heart of the Sea$() and craft it into a $(l:amethyst_imbuement:recipes/recipes)Golden Heart$()"
+      },
+      "amethyst_imbuement:crystalline_heart": {
+        "text": "Next imbue that heart into a $(l:amethyst_imbuement:imbuing/crystalline_heart)Crystalline Heart$()"
+      },
+      "amethyst_imbuement:totem": {
+        "text": "With a now-pulsing heart in hand, you can craft your $(l:amethyst_imbuement:recipes/)Totem of Amethyst$()"
+      },
+      "amethyst_imbuement:arcane_researcher": {
+        "text": "Find and read Lore Books scattered around the world to start adding more powerful spells to your magical arsenal."
+      },
+      "amethyst_imbuement:progression/tier_1_scepters": {
+        "text": "Begin your journey on an upgrade path by continuing onto the $(l:amethyst_imbuement:starter_guide/scepter_upgrading)Scepter Upgrade Guide$()"
+      }
+    }
+  },
 {
 "type": "patchouli:text",
-"text": "$(li)With a now-pulsing heart in hand, you can craft your $(#b0b)Totem of Amethyst$()$(li)Once crafted, apply an appropriate Augment to grant yourself powerful passive and active abilities!$(br2)$(l)Note: Totems can have one passive $(o)and$() $(l)one active augment at a time!$()"
+"text": "$(li)$(li)Once crafted, apply an appropriate Augment to grant yourself powerful passive and active abilities!$(br2)$(l)Note: Totems can have one passive $(o)and$() $(l)one active augment at a time!$()"
 }
 ]
 }

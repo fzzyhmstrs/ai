@@ -1,0 +1,28 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:totem"
+			]
+		}
+	},
+	"unlock2":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"got_crystal_heart":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:crystalline_heart"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"unlock2",
+		"got_crystal_heart"
+	]
+]
+}
