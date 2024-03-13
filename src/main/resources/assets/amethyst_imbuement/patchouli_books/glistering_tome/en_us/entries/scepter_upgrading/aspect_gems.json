@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Aspect gems are important for crafting various themed scepters as you progress on an upgrade path. They are created by interacting with the environment in various ways.$(br2)$(bold)For any aspect gem to be created, a Gem of Promise needs to be held in the off-hand$()"
+"text": "Aspect gems are vital to craft various themed scepters as you progress on an upgrade path. They are created by interacting with the environment in various ways.$(br2)$(bold)For any aspect gem to be created, a Gem of Promise needs to be held in the off-hand$()"
 },
 {
 "type": "amethyst_imbuement:imbuing",

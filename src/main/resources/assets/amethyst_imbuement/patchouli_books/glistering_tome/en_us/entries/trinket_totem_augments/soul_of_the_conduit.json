@@ -1,15 +1,17 @@
-{    
-"name": "Soul of the Conduit",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_totem_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Soul of the Conduit",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_totem_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/totem_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": ".$(l)Effect:$() Grants the holder Conduit Power while in water and while the totem is active$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Active, drains durability while using and in water$(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other active totem augments."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/soul_of_the_conduit_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/soul_of_the_conduit_imbuing"
+}
 ]
 }

@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Increases spell damage by 15%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
+"text": "Increases spell damage by 15%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

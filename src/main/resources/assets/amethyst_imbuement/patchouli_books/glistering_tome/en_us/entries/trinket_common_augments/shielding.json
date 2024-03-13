@@ -1,15 +1,17 @@
-{    
-"name": "Shielding Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_jewelry_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Shielding Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_jewelry_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/common_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Adds 2% chance of blocking an attack per level. Stacks with jewelery.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 3 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/shielding_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/shielding_imbuing"
+}
 ]
 }

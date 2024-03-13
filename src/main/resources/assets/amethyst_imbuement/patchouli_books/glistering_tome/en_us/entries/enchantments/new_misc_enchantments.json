@@ -1,11 +1,11 @@
-{    
-"name": "New Misc Enchants",    
-"icon": "minecraft:bucket",    
-"category": "amethyst_imbuement:enchantments",    
+{
+"name": "New Misc Enchants",
+"icon": "minecraft:bucket",
+"category": "amethyst_imbuement:enchantments",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Miscellaneous additions and upgrades to Enchanting in Minecraft."
+"text": "Miscellaneous additions to Enchanting in Minecraft."
 },
 {
 "type": "patchouli:spotlight",
@@ -23,7 +23,7 @@
 "type": "patchouli:spotlight",
 "title": "Elytras and Horse Armor",
 "item": "minecraft:elytra,minecraft:iron_horse_armor",
-"text": "Elytras and Horse Armor can now be enchanted in the Enchanting and Imbuing Tables as Armor. This means the tables will look to apply enchantments like Protection, Thorns, etc."
+"text": "Elytras and Horse Armor can now be enchanted in the Enchanting and Imbuing Tables like Armor. This means the tables will look to apply enchantments like Protection, Thorns, etc."
 },
 {
 "type": "patchouli:spotlight",

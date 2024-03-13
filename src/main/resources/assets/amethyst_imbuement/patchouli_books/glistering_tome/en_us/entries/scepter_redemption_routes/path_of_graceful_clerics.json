@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of Redemption to take on the robes of the Cleric to bathe you and your allies in high level healing. Your healing spells are more effective at the expense of other spell types. Spell effects last slightly longer, and casting Grace spells heals you or allies. Grace spells gain 2x XP."
+"text": "Follow this route on the Path of Redemption and take on the robes of the Cleric to bathe you and your allies in high level healing. Your healing spells are more effective at the expense of other spell types. Spell effects last slightly longer, and casting Grace spells heals you or allies. Grace spells gain 2x XP."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

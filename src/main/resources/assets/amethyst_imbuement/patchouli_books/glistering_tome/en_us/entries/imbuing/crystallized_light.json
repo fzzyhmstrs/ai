@@ -5,11 +5,13 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "As useful as Hard Light is, it is constantly shifting and unstable. If only there was a way to stabilize it...? Example recipe shown is for Red Crystallized Light"
+"text": "As useful as Hard Light is, it is constantly shifting and unstable. If only there was a way to stabilize it...? Example recipe is for Red Crystallized Light"
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"unlock": "amethyst_imbuement:progression/unlocks/crystallized_light_unlock",
+"unlock": "amethyst_imbuement:progression/unlocks/crystallized_light_recipe_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by enhancing some Hard Light Blocks!",
+"hintItem": "amethyst_imbuement:imbuing_table,amethyst_imbuement:hard_light_block",
 "recipe": "amethyst_imbuement:imbuing/crystallized_light_red_imbuing"
 }
 ]

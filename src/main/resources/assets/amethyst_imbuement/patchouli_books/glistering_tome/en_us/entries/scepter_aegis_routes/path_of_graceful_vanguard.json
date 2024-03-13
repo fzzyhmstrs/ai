@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of the Aegis to wield advanced holy magic against the darkness. As the Warrior of Light, spells that affect your enemies smite and weaken them. Your Grace spells gain $(o)+2$() XP with Elegant, and spell casting protects you and your allies with Protective."
+"text": "Follow this route on the Path of the Aegis to wield advanced holy magic against the darkness. As the Warrior of Light, spells that affect your enemies smite and weaken them. Your Grace spells gain $(o)+2 $()XP with Elegant, and spell casting protects you and your allies with Protective."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

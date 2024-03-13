@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(o)Amethyst Imbuement$() includes 30 specialized scepters that are arranged by tier in a 'tree'. Following a branch on this tree will yield an extremely powerful scepter that is customized and specialized to your liking.$(br2)$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree#scepter_tree)$(bold)Jump to tree$()"
+"text": "$(o)Amethyst Imbuement$() adds 30 specialized scepters that are arranged by tier in a 'tree'. Following a branch on this tree will yield an extremely powerful scepter that is customized and specialized to your liking.$(br2)$(l:amethyst_imbuement:scepter_upgrading/scepter_upgrade_tree#scepter_tree)$(bold)Jump to tree$()"
 },
 {
 "type": "patchouli:text",

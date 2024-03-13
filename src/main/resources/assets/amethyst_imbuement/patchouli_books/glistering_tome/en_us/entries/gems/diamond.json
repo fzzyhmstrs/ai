@@ -10,7 +10,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "minecraft:diamond",
-"text": "$(o)Diamonds are the queen of gems, supposedly created when the God of Mines crushed all other gems together into one. Use it to provide protection and amplify your innate abilities.$()"
+"text": "$(o)Diamonds; queen of gems, supposedly created when the God of Mines crushed all other gems together into one. Use it to provide protection and amplify your innate abilities.$()"
 }
 ]
 }

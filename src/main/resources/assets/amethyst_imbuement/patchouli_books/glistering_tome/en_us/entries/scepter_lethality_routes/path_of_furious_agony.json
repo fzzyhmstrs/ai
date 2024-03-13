@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of Lethality if you want to cripple and weaken your enemies in combat while leveling your spells up to their maximum potential. Damage is increased by Dangerous. Your spells gain +1 XP, last longer with Enduring, and reach farther with Lesser Reach. Less effective at casting non-Fury spells however."
+"text": "Follow this route on the Path of Lethality to cripple and weaken your enemies in combat while leveling your spells up to their maximum potential. Damage is increased by Dangerous. Your spells gain +1 XP, last longer with Enduring, and reach farther with Lesser Reach. Less effective at casting non-Fury spells however."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

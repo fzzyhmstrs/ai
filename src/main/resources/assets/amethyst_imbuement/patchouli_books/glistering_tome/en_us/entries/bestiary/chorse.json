@@ -2,7 +2,7 @@
 "name": "Chorse",
 "icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/chorse.png",
 "category": "amethyst_imbuement:bestiary",
-"advancement": "amethyst_imbuement:how_strange",
+"advancement": "amethyst_imbuement:progression/chorse",
 "pages": [
 {
 "type": "patchouli:text",

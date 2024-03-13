@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects spells involved with placing blocks in the world. Affected spells have 20% reduced cooldown and increased range of effect. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
+"text": "Affects spells involved with placing blocks in the world. Affected spells have 20% reduced cooldown and increased range of effect. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

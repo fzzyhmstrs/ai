@@ -6,12 +6,12 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Lustrous spheres can only be found in hard to reach and dangerous places. Try checking late game loot chests!$(br2)$(o)Millions of realities reflect in its depths$()"
+"text": "$(l)Obtaining:$() The ability to craft these mystical artifacts is long lost to the sands of time. Lustrous spheres can only be found in the lost civilizations of The End. Try checking late game loot chests!"
 },
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:lustrous_sphere",
-"text": "$(o)Immense energy radiates from a lustrous sphere. Use it to create the most powerful of magical focuses.$()"
+"text": "$(o)Millions of realities reflect in its depths. Immense energy radiates from a lustrous sphere; use it to create the most powerful magical focuses.$()"
 }
 ]
 }

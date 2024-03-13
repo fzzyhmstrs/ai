@@ -1,5 +1,5 @@
 {
-"name": "Glowing Equipment",
+"name":  "Glowing Equipment",
 "icon": "amethyst_imbuement:glowing_blade",
 "category": "amethyst_imbuement:weapons",
 "advancement": "amethyst_imbuement:progression/unlocks/glowing_unlock",

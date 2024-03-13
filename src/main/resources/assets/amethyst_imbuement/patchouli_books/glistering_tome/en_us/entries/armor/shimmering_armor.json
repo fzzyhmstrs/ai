@@ -2,7 +2,7 @@
 "name": "Shimmering Armor",
 "icon": "amethyst_imbuement:shimmering_helmet",
 "category": "amethyst_imbuement:armor",
-"advancement": "amethyst_imbuement:progression/gear/shimmering_unlock",
+"advancement": "amethyst_imbuement:progression/unlocks/shimmering_unlock",
 "pages": [
 {
 "type": "patchouli:text",

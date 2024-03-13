@@ -1,6 +1,6 @@
-{    
+{
 "name": "Trinket Augments",
 "parent": "amethyst_imbuement:augments",
-"description": "Within this section find descriptions of the augments available to your jewelry and totems. Not all augments are available to every item, so they are broken down into applicable categories:",
+"description": "Augments available to your jewelry and totems. Not all augments are available to every item, so they are broken down into applicable sub-categories.",
 "icon": "amethyst_imbuement:totem_of_amethyst"
 }

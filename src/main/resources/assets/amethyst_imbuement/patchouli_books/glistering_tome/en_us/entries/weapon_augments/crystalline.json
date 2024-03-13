@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Effect:$() Increases weapon damage.$(br)$(l)Enchants:$() $(#490)Any weapon$()$(br)$(l)Max Level:$() 6 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Increases weapon damage.$(br)$(l)Enchants:$() $(thing)Any weapon$()$(br)$(l)Max Level:$() 6 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing",

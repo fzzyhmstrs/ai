@@ -1,13 +1,13 @@
-{    "components": [        
-{            
-"type": "patchouli:header",            
-"text": "Base Components",            
-"x": -1,            
-"y": -1        
+{    "components": [
+{
+"type": "patchouli:header",
+"text": "Base Components",
+"x": -1,
+"y": -1
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 12,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -18,21 +18,21 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Powders",
-"x": 49,            
+"x": 49,
 "y": 17
 },
 {
-"type": "patchouli:item", 
+"type": "patchouli:item",
 "item": "amethyst_imbuement:gem_dust,amethyst_imbuement:knowledge_powder",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 12
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 31,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -43,21 +43,21 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Brilliant Diamond",
-"x": 49,            
+"x": 49,
 "y": 36
 },
 {
-"type": "patchouli:item", 
+"type": "patchouli:item",
 "item": "amethyst_imbuement:brilliant_diamond",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 33
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 52,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -68,21 +68,21 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Orbs",
-"x": 49,            
+"x": 49,
 "y": 57
 },
 {
-"type": "patchouli:item", 
-"item": "amethyst_imbuement:opal,amethyst_imbuement:iridescent_orb,amethyst_imbuement:lustrous_spehere",
+"type": "patchouli:item",
+"item": "amethyst_imbuement:opal,amethyst_imbuement:iridescent_orb,amethyst_imbuement:lustrous_sphere",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 54
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 73,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -93,21 +93,21 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Figurines",
-"x": 49,            
+"x": 49,
 "y": 78
 },
 {
-"type": "patchouli:item", 
+"type": "patchouli:item",
 "item": "amethyst_imbuement:malachite_figurine,amethyst_imbuement:accursed_figurine",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 75
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 94,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -118,21 +118,21 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Glowing Tools",
-"x": 49,            
+"x": 49,
 "y": 99
 },
 {
-"type": "patchouli:item", 
+"type": "patchouli:item",
 "item": "amethyst_imbuement:glowing_blade,amethyst_imbuement:glowing_pick,amethyst_imbuement:glowing_hoe",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 96
 },
 {
-"type": "patchouli:image",                        
-"x": 5,            
+"type": "patchouli:image",
+"x": 5,
 "y": 115,
 "image": "amethyst_imbuement:textures/gui/patchouli/half_spotlight.png",
 "width": 40,
@@ -143,16 +143,16 @@
 "texture_height": 32
 },
 {
-"type": "patchouli:text", 
+"type": "patchouli:text",
 "text": "Crafted Materials",
-"x": 49,            
+"x": 49,
 "y": 120
 },
 {
 "type": "patchouli:item",
 "item": "amethyst_imbuement:resonant_rod,amethyst_imbuement:glistening_ice",
 "framed": false,
-"x": 7,            
+"x": 7,
 "y": 117
 }
 ]}

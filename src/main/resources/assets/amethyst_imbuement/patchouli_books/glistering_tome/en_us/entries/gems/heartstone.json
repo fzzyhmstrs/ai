@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Health $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Heartstones are only obtainable in loot chests. Rumors say that crystal vendors often stash these in their workshop stores."
+"text": "$(l)Meaning:$() Health $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Heartstone is only obtainable in loot chests. Rumors say that crystal vendors sometimes stash these somewhere in their workshops."
 },
 {
 "type": "patchouli:spotlight",

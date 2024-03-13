@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of Resonance to persuade your enemies to fight alongside you with your staggering intellect. All your spells have a chance to echo. All of your spells cast a level above normal. Wit spells gain +2 XP, and cost slightly less with Lesser Attuned."
+"text": "Follow this route on the Path of Resonance to use your staggering intellect to persuade your enemies to fight alongside you. All your spells have a chance to echo. All of your spells cast a level above normal. Wit spells gain +2 XP, and cost slightly less with Lesser Attuned."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

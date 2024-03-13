@@ -2,7 +2,7 @@
 "name": "Adding Spells",
 "icon": "amethyst_imbuement:opaline_scepter",
 "category": "amethyst_imbuement:spells",
-"advancement": "amethyst_imbuement:progression/spell_scroll_unlock",
+"advancement": "amethyst_imbuement:progression/unlocks/spell_scroll_unlock",
 "pages": [
 {
 "type": "patchouli:text",

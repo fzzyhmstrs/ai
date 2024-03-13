@@ -1,6 +1,6 @@
-{    
+{
 "name": "Lethality Path Routes",
 "parent": "amethyst_imbuement:scepter_paths",
-"description": "The four specific crafting paths one can take with the Path of Lethality. These paths are related to raw damage output. These are fairly close to what one might consider a 'sub-class'",
+"description": "The six specific crafting paths one can take on the Path of Lethality. These paths are related to raw damage output at the expense of other magic.",
 "icon": "amethyst_imbuement:lethality"
 }

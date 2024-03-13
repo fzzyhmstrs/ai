@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"hammer":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:scepter_path/path_of_hammer"
+		}
+	}
+},
+	"requirements": [
+		[
+			"unlock",
+			"hammer"
+		]
+	]
+}

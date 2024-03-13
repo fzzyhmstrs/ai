@@ -4,6 +4,7 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
+				"amethyst_imbuement:progression/tier_3_scepters",
 				"amethyst_imbuement:progression/gear/ametrine_gear",
 				"amethyst_imbuement:crystal_savant"
 			]

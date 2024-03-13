@@ -1,6 +1,0 @@
-{    
-"name": "装备强化",
-"parent": "amethyst_imbuement:augments",
-"description": "此处列出的强化适用于盔甲和其他装备如盾牌。与武器相关的强化，请参阅$(#490)$(l:amethyst_imbuement:weapon_augments)武器强化$()。",
-"icon": "amethyst_imbuement:ametrine_chestplate"
-}

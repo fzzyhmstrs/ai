@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Corruption and Betrayal $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Accursed figurines can only be obtained through an act of cold-blooded murder. Villagers will drop them when killed by a players hand."
+"text": "$(l)Meaning:$() Corruption and Betrayal $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Accursed figurines can only be obtained through an act of cold-blooded murder. Villagers will drop them when killed by a players hand."
 },
 {
 "type": "patchouli:spotlight",

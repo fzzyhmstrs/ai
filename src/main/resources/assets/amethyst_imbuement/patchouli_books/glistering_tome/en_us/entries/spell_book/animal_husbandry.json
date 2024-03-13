@@ -1,5 +1,5 @@
 {
-"name": "Animal Husbandry",
+"name":  "Animal Husbandry",
 "icon": "amethyst_imbuement:scepter_of_harvests",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/animal_husbandry",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:scepter_of_harvests",
-"text": "The only way to obtain Animal Husbandry is to craft the Scepter of Harvests."       
+"text": "The only way to obtain Animal Husbandry is to craft the Scepter of Harvests."
 }
 ]
 }

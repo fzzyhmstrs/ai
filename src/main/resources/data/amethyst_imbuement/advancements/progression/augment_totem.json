@@ -1,0 +1,96 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"accursed":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:accursed"
+		}
+	},
+	"angelic":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:angelic"
+		}
+	},
+	"beast_master":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:beast_master"
+		}
+	},
+	"consecrated":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:consecrated"
+		}
+	},
+	"escape":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:escape"
+		}
+	},
+	"guardian":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:guardian"
+		}
+	},
+	"hasting":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:hasting"
+		}
+	},
+	"inflammable":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:inflammable"
+		}
+	},
+	"soul_of_the_conduit":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:soul_of_the_conduit"
+		}
+	},
+	"soulbinding":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:soulbinding"
+		}
+	},
+	"strength":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:strength"
+		}
+	},
+	"undying":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:undying"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"accursed",
+		"angelic",
+		"beast_master",
+		"consecrated",
+		"escape",
+		"guardian",
+		"hasting",
+		"inflammable",
+		"soul_of_the_conduit",
+		"soulbinding",
+		"strength",
+		"undying"
+	]
+]
+}

@@ -1,5 +1,8 @@
 {
 "criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
 	"completed_summon_fury_totem":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
@@ -21,6 +24,7 @@
 },
 "requirements": [
 	[
+		"unlock",
 		"completed_summon_fury_totem",
 		"got_lethal_gem"
 	]

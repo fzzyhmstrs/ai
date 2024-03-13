@@ -1,0 +1,26 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"cast_hamsters":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_imbuement:hamptertime"
+		}
+	},
+	"cast_hamster":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_imbuement:summon_hamster"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"cast_hamsters",
+		"cast_hamster"
+	]
+]
+}

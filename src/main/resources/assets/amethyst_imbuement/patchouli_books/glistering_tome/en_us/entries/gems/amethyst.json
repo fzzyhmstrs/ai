@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Energy and Focus $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Find in geodes deep underground or by mining quarts in the Nether."
+"text": "$(l)Meaning:$() Energy and Focus $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Find in geodes deep underground or rarely by mining quarts in the Nether."
 },
 {
 "type": "patchouli:spotlight",

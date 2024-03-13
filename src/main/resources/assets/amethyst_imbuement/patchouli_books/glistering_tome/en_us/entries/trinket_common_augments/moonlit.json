@@ -1,15 +1,17 @@
-{    
-"name": "Moonlit Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_common_augments",    
+{
+"name": "Moonlit Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_common_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/common_augments_unlock",
 "pages": [
-{            
-"type": "patchouli:text",            
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() The user gains Strength and Resistance during the night time.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$(),$(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments (jewelry), other common augments (totem)"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/moonlit_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/moonlit_imbuing"
+}
 ]
 }

@@ -1,6 +1,6 @@
-{    
+{
 "name": "Jewelry Augments",
 "parent": "amethyst_imbuement:trinket_augments",
-"description": "Augments in this list can only be applied to $(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)Imbued Jewelry$()",
+"description": "Augments in this list can only be applied to $(l:amethyst_imbuement:starter_guide/jewelry_guide)Imbued Jewelry$()",
 "icon": "amethyst_imbuement:imbued_ring"
 }

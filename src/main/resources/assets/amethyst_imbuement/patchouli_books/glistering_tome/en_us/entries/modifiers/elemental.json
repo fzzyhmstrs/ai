@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects all elemental spells. Elemental spells cooldown and mana cost are decreased by 10%, spell level increases by 1, spell range increases 10%, spell effect amplification increases a level and effect duration increases 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
+"text": "Affects all elemental spells. Elemental spells cooldown and mana cost are decreased by 10%, spell level increases by 1, spell range increases 10%, spell effect amplification increases a level and effect duration increases 10%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

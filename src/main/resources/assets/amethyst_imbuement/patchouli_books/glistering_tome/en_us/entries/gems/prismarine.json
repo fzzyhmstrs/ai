@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Tranquility and Peace $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Prismarine is an oceanic gem; it can only be found in the depths of the oceans."
+"text": "$(l)Meaning:$() Tranquility and Peace $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Prismarine is an oceanic gem; find it in the depths of the oceans."
 },
 {
 "type": "patchouli:spotlight",

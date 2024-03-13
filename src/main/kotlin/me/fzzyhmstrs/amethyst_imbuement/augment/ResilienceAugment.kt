@@ -2,7 +2,9 @@ package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import com.google.common.collect.Multimap
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.enchantment_util.AttributeProviding
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
@@ -24,6 +26,10 @@ class ResilienceAugment(weight: Rarity,mxLvl: Int = 1, vararg slot: EquipmentSlo
         EquipmentSlot.LEGS to UUID.fromString("797c9e54-ba09-11ed-afa1-0242ac120002"),
         EquipmentSlot.FEET to UUID.fromString("797c9fd0-ba09-11ed-afa1-0242ac120002")
     ))
+
+    override fun canAccept(other: Enchantment?): Boolean {
+        return super.canAccept(other) && other !== RegisterEnchantment.INVISIBILITY
+    }
 
     override fun isAcceptableItem(stack: ItemStack): Boolean {
         return stack.item is ArmorItem

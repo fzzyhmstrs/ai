@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Only affects spells involved with movement and exploration. Affected spells cooldown is decreased 90% and range of effect is increased 25%. Casting an affected spell has a 25% chance of granting the caster Speed and Jump Boost. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn$()"
+"text": "Only affects spells involved with movement and exploration. Affected spells cooldown is decreased 90% and range of effect is increased 25%. Casting an affected spell has a 25% chance of granting the caster Speed and Jump Boost. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_sojourn)Path of the Sojourn $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

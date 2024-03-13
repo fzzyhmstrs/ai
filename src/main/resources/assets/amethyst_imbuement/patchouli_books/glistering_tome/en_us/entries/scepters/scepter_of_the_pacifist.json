@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:scepter_of_the_pacifist",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 24,
+"sortnum":  24,
 "pages": [
 {
 "type": "patchouli:text",

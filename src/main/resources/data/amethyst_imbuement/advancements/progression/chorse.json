@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"how_strange":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:how_strange"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"how_strange"
+	]
+]
+}

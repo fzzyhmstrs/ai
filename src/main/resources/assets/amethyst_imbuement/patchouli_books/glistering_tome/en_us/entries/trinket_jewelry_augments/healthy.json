@@ -1,15 +1,17 @@
-{    
-"name": "Healthy Augment",    
-"icon": "amethyst_imbuement:book_of_mythos",    
-"category": "amethyst_imbuement:trinket_jewelry_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Healthy Augment",
+"icon": "amethyst_imbuement:book_of_mythos",
+"category": "amethyst_imbuement:trinket_jewelry_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/jewelry_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() The wearers health is increased.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Amulet$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/healthy_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/healthy_imbuing"
+}
 ]
 }

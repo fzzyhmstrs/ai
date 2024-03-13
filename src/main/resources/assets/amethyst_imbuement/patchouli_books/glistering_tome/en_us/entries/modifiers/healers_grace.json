@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects healing spells. Healing spells effects are amplified 1 levels and their effect duration is increased 50%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$()"
+"text": "Affects healing spells. Healing spells effects are amplified 1 levels and their effect duration is increased 50%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Cleansing and Protection $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce smoky quartz in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() or trade for it with a villager."
+"text": "$(l)Meaning:$() Cleansing and Protection $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce smoky quartz in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), trade for it with a villager, or enhance it in the $(l:amethyst_imbuement:altars/crystal_altar)Crystal Altar$()"
 },
 {
 "type": "amethyst_imbuement:imbuing",

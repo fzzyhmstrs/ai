@@ -1,5 +1,5 @@
 {
-"name": "Spell Commands",
+"name":  "Spell Commands",
 "icon": "minecraft:command_block",
 "category": "amethyst_imbuement:spells",
 "advancement": "amethyst_imbuement:progression/basic_spells",

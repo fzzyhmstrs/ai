@@ -1,0 +1,46 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/augment_common"
+		}
+	},
+	"unlock2":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/augment_jewelry"
+		}
+	},
+	"unlock3":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:progression/augment_totem"
+		}
+	},
+	"unlock4":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:augmenter"
+		}
+	},
+	"unlock5":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	}
+},
+"requirements": [
+	[
+		"unlock"
+	],
+	[
+		"unlock2"
+	],
+	[
+		"unlock3"
+	],
+	[
+		"unlock4",
+		"unlock5"
+	]
+]
+}

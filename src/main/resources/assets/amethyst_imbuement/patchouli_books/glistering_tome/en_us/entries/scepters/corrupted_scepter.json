@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:corrupted_scepter",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 12,
+"sortnum":  12,
 "pages": [
 {
 "type": "patchouli:text",

@@ -2,10 +2,11 @@
 "name": "Headhunter Augment",
 "icon": "amethyst_imbuement:book_of_lore",
 "category": "amethyst_imbuement:weapon_augments",
+"advancement": "amethyst_imbuement:progression/sniper_bow",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Effect:$() Greatly increases $(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$() damage upon landing a headshot.$(br)$(l)Enchants:$() $(#490)$(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$()$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Greatly increases $(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$() damage upon landing a headshot.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:weapons/sniper_bow)Sniper Bow$()$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing",

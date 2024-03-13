@@ -1,5 +1,5 @@
 {
-"name": "Feline Augment",
+"name":  "Feline Augment",
 "icon": "amethyst_imbuement:book_of_lore",
 "category": "amethyst_imbuement:trinket_common_augments",
 "advancement": "amethyst_imbuement:progression/unlocks/common_augments_unlock",
@@ -10,7 +10,7 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"unlock": "",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
 "recipe": "amethyst_imbuement:imbuing/feline_imbuing"
 }
 ]

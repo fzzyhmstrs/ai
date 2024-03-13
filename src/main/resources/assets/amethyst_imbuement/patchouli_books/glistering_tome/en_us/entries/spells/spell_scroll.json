@@ -1,5 +1,5 @@
 {
-"name": "Spell Scroll",
+"name":  "Spell Scroll",
 "icon": "amethyst_imbuement:spell_scroll",
 "category": "amethyst_imbuement:spells",
 "advancement": "amethyst_imbuement:progression/unlocks/spell_scroll_unlock",

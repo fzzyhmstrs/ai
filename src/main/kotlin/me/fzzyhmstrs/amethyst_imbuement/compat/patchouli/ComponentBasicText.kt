@@ -5,6 +5,7 @@ import net.minecraft.text.Text
 import vazkii.patchouli.api.IVariable
 import vazkii.patchouli.client.book.BookPage
 import vazkii.patchouli.client.book.gui.BookTextRenderer
+import vazkii.patchouli.client.book.gui.GuiBook
 import vazkii.patchouli.client.book.gui.GuiBookEntry
 import vazkii.patchouli.client.book.template.TemplateComponent
 import java.util.function.UnaryOperator
@@ -23,12 +24,12 @@ class ComponentBasicText: TemplateComponent() {
         text?.let { actualText = lookup.apply(it).`as`(Text::class.java) }
     }
 
-    override fun onDisplayed(page: BookPage?, parent: GuiBookEntry?, left: Int, top: Int) {
+    override fun onDisplayed(page: BookPage, parent: GuiBookEntry, left: Int, top: Int) {
         if (text == null){
             text = IVariable.wrap("")
         }
         text?.let { actualText = it.`as`(Text::class.java) }
-        textRenderer = BookTextRenderer(parent, actualText, x, y)
+        textRenderer = BookTextRenderer(parent, actualText, x, y,GuiBook.PAGE_WIDTH - 12, GuiBook.TEXT_LINE_HEIGHT, parent.book.textColor)
     }
 
     override fun render(graphics: DrawContext?, page: BookPage?, mouseX: Int, mouseY: Int, pticks: Float) {

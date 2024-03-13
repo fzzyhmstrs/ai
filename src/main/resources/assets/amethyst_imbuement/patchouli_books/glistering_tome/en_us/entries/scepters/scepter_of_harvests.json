@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:scepter_of_harvests",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 22,
+"sortnum":  22,
 "pages": [
 {
 "type": "patchouli:text",

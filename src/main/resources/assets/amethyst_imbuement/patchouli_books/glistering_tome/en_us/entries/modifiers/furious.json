@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects fury spells only. An additional 1 Fury XP gained on spell-cast, and adds 0.2 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
+"text": "Affects fury spells only. An additional 1 Fury XP gained on spell-cast, and adds 0.2 flat damage. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_lethality)Path of Lethality$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

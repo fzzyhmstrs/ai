@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Amplification and Invisibility $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce opal in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+"text": "$(l)Meaning:$() Amplification and Invisibility $(br)$(l)Primary Aspect:$() $(2)Wit$()$(br)$(l)Obtaining:$() Produce opal in the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
 {
 "type": "amethyst_imbuement:imbuing",

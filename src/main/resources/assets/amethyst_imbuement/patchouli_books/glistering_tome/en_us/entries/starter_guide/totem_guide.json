@@ -1,13 +1,11 @@
 {
 "name": "Totem Guide",
-"priority": true,
 "icon": "amethyst_imbuement:totem_of_amethyst",
 "category": "amethyst_imbuement:starter_guide",
-"advancement": "amethyst_imbuement:progression/totem_guide",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Here you will learn to master amethyst totems and their abilities. To begin:$(li)$(li) with some soul energy, giving it the ability to look after you."
+"text": "Learn to master amethyst totems and their abilities. A vessel for $(thing)Augments$(), a fully powered totem can provide an array of passive $(o)and$() active abilities."
 },
   {
     "type": "amethyst_imbuement:progression",
@@ -21,17 +19,14 @@
       "amethyst_imbuement:totem": {
         "text": "With a now-pulsing heart in hand, you can craft your $(l:amethyst_imbuement:recipes/)Totem of Amethyst$()"
       },
-      "amethyst_imbuement:arcane_researcher": {
-        "text": "Find and read Lore Books scattered around the world to start adding more powerful spells to your magical arsenal."
-      },
-      "amethyst_imbuement:progression/tier_1_scepters": {
-        "text": "Begin your journey on an upgrade path by continuing onto the $(l:amethyst_imbuement:starter_guide/scepter_upgrading)Scepter Upgrade Guide$()"
+      "amethyst_imbuement:progression/augment_guide": {
+        "text": "Once crafted, apply a couple $(l:amethyst_imbuement:starter_guide/augment_guide)Augments$() to grant yourself powerful passive and active abilities!"
       }
+    },
+    "offsets": {
+      "2": -8,
+      "3": -5
     }
-  },
-{
-"type": "patchouli:text",
-"text": "$(li)$(li)Once crafted, apply an appropriate Augment to grant yourself powerful passive and active abilities!$(br2)$(l)Note: Totems can have one passive $(o)and$() $(l)one active augment at a time!$()"
-}
+  }
 ]
 }

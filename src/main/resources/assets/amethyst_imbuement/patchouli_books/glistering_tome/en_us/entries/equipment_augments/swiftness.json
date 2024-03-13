@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Effect:$() Grants the wearer Speed.$(br)$(l)Enchants:$() $(#490)Leggings$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Grants the wearer Speed.$(br)$(l)Enchants:$() $(thing)Leggings$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing",

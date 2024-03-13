@@ -1,6 +1,5 @@
 {
 "name": "Starting with Scepters",
-"priority": true,
 "icon": "amethyst_imbuement:opaline_scepter",
 "category": "amethyst_imbuement:starter_guide",
 "pages": [
@@ -18,15 +17,20 @@
 "text": "Craft your first $(l:amethyst_imbuement:scepters/opaline_scepter)Opaline Scepter$() and cast $(l:amethyst_imbuement:spell_book/magic_missile)Magic Missile!$()"
 },
 "amethyst_imbuement:progression/basic_spells_2": {
-"text": "Imbue your first spell from the list of available $(l:amethyst_imbuement:spells/starter_spells)starter spells$(), and start casting it to begin upgrading your scepters power level."
+"text": "Imbue your first spell from the $(l:amethyst_imbuement:spells/starter_spells)starter spells$(), and cast it to begin upgrading your scepters level."
 },
 "amethyst_imbuement:arcane_researcher": {
-"text": "Find and read Lore Books scattered around the world to start adding more powerful spells to your magical arsenal."
+"text": "Find and read Lore Books scattered around the world to add more powerful spells to your arsenal."
 },
 "amethyst_imbuement:progression/tier_1_scepters": {
-"text": "Begin your journey on an upgrade path by continuing onto the $(l:amethyst_imbuement:starter_guide/scepter_upgrading)Scepter Upgrade Guide$()"
+"text": "Set out on an upgrade path by continuing onto the $(l:amethyst_imbuement:starter_guide/scepter_upgrading)Scepter Upgrade Guide$()"
 }
-}
+},
+  "offsets": {
+    "1": -11,
+    "2": -14,
+    "3": -8
+  }
 }
 ]
 }

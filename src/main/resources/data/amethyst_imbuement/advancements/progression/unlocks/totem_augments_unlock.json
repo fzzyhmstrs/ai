@@ -1,0 +1,21 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:totem"
+			]
+		}
+	},
+	"unlock2":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"unlock2"
+	]
+]
+}

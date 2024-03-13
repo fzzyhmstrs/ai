@@ -1,5 +1,8 @@
 {
 "criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
 	"got_spell_book":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
@@ -22,6 +25,7 @@
 },
 "requirements": [
 	[
+		"unlock",
 		"got_spell_book",
 		"cast_bonestorm"
 	]

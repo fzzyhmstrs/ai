@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/soulwoven_armor)Soulwoven Armor$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
+"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/soulwoven_armor)Soulwoven Armor$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",
@@ -21,7 +21,7 @@
 {
 "type": "patchouli:text",
 "title": "Bonuses",
-"text": "Ensouled randomly adds one of a list of bonuses when casting Soul type spells.$(br2)Affects:$(li)$(l:amethyst_imbuement:armor/soulwoven_armor)Soulwoven Armor$()$(li)$(l:amethyst_imbuement:trinkets/talisman_of_lost_memories)Talisman of Lost Memories$()"
+"text": "All bonuses apply to Soul spell casts only.$(li)Chance to gain bonus XP$(li)Chance to grant Regeneration$(li)Chance to grant Speed$(li)Chance to grant Absorption$(li)Chance to grant bonus armor$(li)20% soul spell cooldown reduction$(li)+1 soul spell level$(li)+2 soul spell effect amplification$(li)+1 soul spell XP gain"
 }
 ]
 }

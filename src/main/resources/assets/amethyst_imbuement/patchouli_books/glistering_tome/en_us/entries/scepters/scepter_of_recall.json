@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:scepter_of_recall",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 20,
+"sortnum":  20,
 "pages": [
 {
 "type": "patchouli:text",

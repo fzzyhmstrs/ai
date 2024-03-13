@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "For those who've visited the Nether, the Bonestorm might send a chill down the spine. Fear not, this bony construct is your ally! Firing powerful, piercing bone spikes at your enemies, Bonestorm are perfect for long range combat.$(br2)How to Obtain:$(li)Spell: Summon Bonestorm"
+"text": "For those who've visited the Nether, the Bonestorm sends a chill down the spine. Fear not, this bony construct is your ally! Firing powerful, piercing bone spikes at your enemies, Bonestorm are perfect for long range combat.$(br2)How to Obtain:$(li)Spell: Summon Bonestorm"
 },
 {
 "type": "patchouli:entity",

@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Reduces the cooldown of your scepter spells by 7.5%. This modifier is independent of scepter. Affects:$(li)All scepters$()"
+"text": "Reduces the cooldown of your scepter spells by 7.5%. This modifier is independent of scepter. Affects:$(li)All scepters $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

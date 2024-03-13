@@ -6,12 +6,11 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Books of lore hold the secrets to imbuing spells. This recipe is a recycling recipe, converting leftover materials into new books, it is not efficient. Explore the world or trade with villagers for more books."
+"text": "Books of lore hold the secrets to imbuing spells. This recipe is a recycling recipe, converting leftovers into new books, it is not efficient. Explore the world or trade with villagers for more books."
 },
 {
 "type": "amethyst_imbuement:imbuing",
 "unlock": "amethyst_imbuement:progression/imbuing_table",
-"hintItem": "amethyst_imbuement:imbuing_table",
 "recipe": "amethyst_imbuement:imbuing/book_of_lore_imbuing"
 }
 ]

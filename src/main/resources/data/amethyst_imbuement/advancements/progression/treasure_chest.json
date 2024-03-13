@@ -18,7 +18,7 @@
 "requirements": [
 	[
 		"unlock",
-		"got_gem"
+		"opened_chest"
 	]
 ]
 }

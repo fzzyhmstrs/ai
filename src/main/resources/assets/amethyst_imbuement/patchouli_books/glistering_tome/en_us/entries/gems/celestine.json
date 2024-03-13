@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Divinity $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Produce celestine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+"text": "$(l)Meaning:$() Divinity $(br)$(l)Primary Aspect:$() $(6)All$()$(br)$(l)Obtaining:$() Produce celestine in the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
 {
 "type": "amethyst_imbuement:imbuing",

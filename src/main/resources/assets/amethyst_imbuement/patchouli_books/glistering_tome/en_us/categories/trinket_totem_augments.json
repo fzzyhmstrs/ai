@@ -1,6 +1,6 @@
-{    
+{
 "name": "Totem Augments",
 "parent": "amethyst_imbuement:trinket_augments",
-"description": "Augments in this list can only be applied to $(#490)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()",
+"description": "Augments in this list can only be applied to $(l:amethyst_imbuement:starter_guide/totem_guide)Totems$()",
 "icon": "amethyst_imbuement:totem_of_amethyst"
 }

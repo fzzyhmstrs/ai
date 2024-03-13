@@ -1,5 +1,5 @@
-{    
+{
 "name": "Enchantments",
-"description": "Amethyst Imbuement adds many enchantments beyond the vanilla offerings, as well as increases the power level of existing enchantments.",
+"description": "Amethyst Imbuement adds many enchantments beyond vanillas, and increases the power level of existing enchantments. Max level of enchantments is configurable in the enchantments config file.",
 "icon": "minecraft:enchanted_book"
 }

@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Powerful protection from supernatural forces $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Mine Tigers Eye from the Nether in veins of Basalt (below Y:60) and Blackstone (any height)."
+"text": "$(l)Meaning:$() Powerful protection from supernatural forces $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Mine Tigers Eye from the Nether in veins of Basalt (below Y:60) & Blackstone (any height)."
 },
 {
 "type": "patchouli:spotlight",

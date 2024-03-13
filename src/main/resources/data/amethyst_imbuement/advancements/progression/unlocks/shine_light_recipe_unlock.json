@@ -6,7 +6,7 @@
 			"advancement": "amethyst_imbuement:progression/imbuing_table"
 		}
 	},
-	"got_gem":{
+	"got_light":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
 			"items":[

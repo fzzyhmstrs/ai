@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:judgment",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/unlocks/soulwoven_unlock",
-"sortnum": 1000,
+"sortnum":  1000,
 "pages": [
 {
 "type": "patchouli:text",

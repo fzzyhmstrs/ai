@@ -1,5 +1,5 @@
-{    
+{
 "name": "Imbuing",
-"description": "Listed here are imbuements you can perform on your $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() that may not be described elsewhere within this tome.",    
+"description": "Listed here are imbuing recipes you can perform in your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() that may not be described elsewhere within this tome. You'll need to create an imbuing table before you can see the recipes.",
 "icon": "amethyst_imbuement:imbuing_table"
 }

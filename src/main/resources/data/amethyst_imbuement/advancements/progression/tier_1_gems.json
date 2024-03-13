@@ -4,6 +4,7 @@
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
 			"advancements": [
+				"amethyst_imbuement:progression/tier_1_scepters",
 				"amethyst_imbuement:progression/tier_2_gems",
 				"amethyst_imbuement:progression/crystal_altar"
 			]

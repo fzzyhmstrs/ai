@@ -1,0 +1,54 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"feline":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:feline"
+		}
+	},
+	"immunity":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:immunity"
+		}
+	},
+	"lucky":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:lucky"
+		}
+	},
+	"moonlit":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:moonlit"
+		}
+	},
+	"shielding":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:shielding"
+		}
+	},
+	"suntouched":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:suntouched"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"feline",
+		"immunity",
+		"lucky",
+		"moonlit",
+		"shielding",
+		"suntouched"
+	]
+]
+}

@@ -1,5 +1,5 @@
 {
-"name": "execute",
+"name":  "execute",
 "icon": "amethyst_imbuement:judgment",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/execute",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:judgment",
-"text": "The only way to obtain Execute is to find Judgment."       
+"text": "The only way to obtain Execute is to find Judgment."
 }
 ]
 }

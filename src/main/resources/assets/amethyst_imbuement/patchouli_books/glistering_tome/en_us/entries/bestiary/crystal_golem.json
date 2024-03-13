@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "A powerful protector of the meek, the Crystalline Golem can dominate the battlefield. A fierce foe to even the hardiest of warriors, they leave plain Iron Golems far behind.$(br2)How to Obtain:$(li)Construct: Build Pattern (flip page)$(li)Augment: Guardian (when HP low)$(li)Spell: Summon Crystalline Golem"
+"text": "A protector of the meek, the Crystalline Golem can dominate the battlefield. A fierce foe to even the hardiest of warriors, they leave plain Iron Golems far behind.$(br2)How to Obtain:$(li)Construct: Build Pattern (flip page)$(li)Augment: Guardian (when HP low)$(li)Spell: Summon Crystalline Golem"
 },
 {
 "type": "patchouli:entity",

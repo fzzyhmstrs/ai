@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"cast_torrent":{
+		"trigger": "amethyst_core:cast_spell",
+		"conditions":{
+			"spell": "amethyst_imbuement:torrent_of_beaks"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"cast_torrent"
+	]
+]
+}

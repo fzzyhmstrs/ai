@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Resilience and Perseverance $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce ametrine in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+"text": "$(l)Meaning:$() Resilience and Perseverance $(br)$(l)Primary Aspect:$() $(c)Fury$()$(br)$(l)Obtaining:$() Produce ametrine in the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
 {
 "type": "amethyst_imbuement:imbuing",

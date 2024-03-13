@@ -488,11 +488,6 @@ object AiConfig
                     return NON_BOSS_HIT_CHECKER.shouldItHit(attacker, victim, args)
                 }
             },
-            NON_ANIMAL{
-                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
-                    return NON_ANIMAL_HIT_CHECKER.shouldItHit(attacker, victim, args)
-                }
-            },
             NON_VILLAGER{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
                     return NON_VILLAGER_HIT_CHECKER.shouldItHit(attacker, victim, args)
@@ -507,7 +502,7 @@ object AiConfig
             },
             NON_FRIENDLY{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
-                    return NON_ANIMAL_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_VILLAGER.shouldItHit(attacker, victim, args)
+                    return if(victim is Angerable) victim.angryAt != null && victim.angryAt == attacker?.uuid else victim !is PassiveEntity
                 }
             },
             NON_FRIENDLY_NON_GOLEM{
@@ -520,19 +515,12 @@ object AiConfig
                     return victim is Monster
                 }
             },
-            NON_PASSIVE{
-                override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
-                    return victim !is PassiveEntity
-                }
-            },
-            NON_BOSS_FRIENDLY{
+            NON_BOSS_NON_FRIENDLY{
                 override fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean {
                     return NON_BOSS_HIT_CHECKER.shouldItHit(attacker, victim, args) && NON_FRIENDLY.shouldItHit(attacker, victim, args)
                 }
             };
             abstract fun shouldItHit(attacker: LivingEntity?, victim: Entity, vararg args: Any?): Boolean
-
-            protected val NON_ANIMAL_HIT_CHECKER: ShouldItHitPredicate = MobCheckerBuilder.single(MobCheckers.NOT_FARM_ANIMAL)
 
             protected val NON_VILLAGER_HIT_CHECKER: ShouldItHitPredicate = MobCheckerBuilder.single(MobCheckers.NOT_VILLAGER)
 
@@ -557,7 +545,7 @@ object AiConfig
 
         @ReadMeText("readme.entities.forcePvpOnAllSpells")
         var forcePvpOnAllSpells = ValidatedBoolean(false)
-        var defaultSecondaryHitCheckerOption = ValidatedEnum(Options.NONE,Options::class.java)
+        var defaultSecondaryHitCheckerOption = ValidatedEnum(Options.NON_VILLAGER,Options::class.java)
 
         var ignoredGuilds = ValidatedStringList(listOf("Streamers"))
 
@@ -642,6 +630,7 @@ object AiConfig
 
         override fun generateNewClass(): Entities {
             sardonyxElemental.devastationBeamDmg.validateAndSet(50f)
+            defaultSecondaryHitCheckerOption.validateAndSet(Options.NON_VILLAGER)
             return this
         }
     }
@@ -775,7 +764,7 @@ object AiConfig
         villages = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("villages_v3.json","villages_v2.json", base = AI.MOD_ID, configClass = {Villages()}, previousClass = {AiConfigOldClasses.VillagesV1()})
         enchants = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("enchantments_v3.json","enchantments_v2.json", base = AI.MOD_ID, configClass = { Enchants() }, previousClass = {AiConfigOldClasses.EnchantmentsV0()})
         trinkets = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("augments_v4.json","augments_v3.json", base = AI.MOD_ID, configClass = {Trinkets()}, previousClass = {Trinkets()})
-        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v6.json","entities_v5.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
+        entities = SyncedConfigHelperV1.readOrCreateUpdatedAndValidate("entities_v7.json","entities_v6.json", base = AI.MOD_ID, configClass = {Entities()}, previousClass = {AiConfigOldClasses.EntitiesV0()})
         resources = SyncedConfigHelperV1.readOrCreateAndValidate("resources_v0.json", base = AI.MOD_ID, configClass = {Resources()})
     }
 

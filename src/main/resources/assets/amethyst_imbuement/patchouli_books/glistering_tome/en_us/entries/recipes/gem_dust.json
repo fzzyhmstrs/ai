@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Gem dust is a base ingredient for the aspect gems used in scepter upgrading. It recycles magical items into new, more useful, items."
+"text": "Gem dust is a base ingredient for aspect gems used in scepter upgrading. It recycles leftover magical items into new, more useful, items."
 },
 {
 "type": "patchouli:crafting",

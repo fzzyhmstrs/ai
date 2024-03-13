@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of the Sojourn to explore lands beyond your imagination. All spells related to travel are massively boosted and all Wit spells gain $(o)+2$() XP."
+"text": "Follow this route on the Path of the Sojourn to explore lands beyond your wildest imagination. All spells related to travel are massively boosted and all Wit spells gain $(o)+2$() XP."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

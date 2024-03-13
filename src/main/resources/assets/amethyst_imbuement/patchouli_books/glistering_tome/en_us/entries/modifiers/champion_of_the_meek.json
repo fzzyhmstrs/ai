@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Casting spells adds 2 absorption hearts to the caster and/or their targets and may apply resistance. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
+"text": "Casting spells adds 2 absorption hearts to the caster and/or their targets and may apply resistance. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

@@ -1,8 +1,8 @@
 {
-"name": "Spellcasters Focus",
+"name":  "Spellcasters Focus",
 "icon": "amethyst_imbuement:spellcasters_focus",
 "category": "amethyst_imbuement:trinkets",
-"advancement": "amethyst_imbuement:progression//unlocks/crystalline_heart",
+"advancement": "amethyst_imbuement:progression/unlocks/crystalline_heart",
 "pages": [
 {
 "type": "patchouli:text",

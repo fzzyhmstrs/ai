@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Increases spell range and AOE by 10% and blesses the caster and all affected teammates with the Blessed status effect, adding armor and reducing incoming damage. This modifier is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb$(), to obtain it you must craft your orb using the appropriate aspect gem."
+"text": "Increases spell range and AOE by 10% and blesses the caster and all affected teammates with the Blessed status effect, adding armor and reducing incoming damage. This modifier is unique to the $(l:amethyst_imbuement:trinkets/witches_orb)Witches Orb,$() to obtain it you must craft your orb using the appropriate aspect gem."
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

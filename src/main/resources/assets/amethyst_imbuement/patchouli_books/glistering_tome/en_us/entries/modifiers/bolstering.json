@@ -1,16 +1,16 @@
-{    
+{
 "name": "Bolstering",
 "icon": "amethyst_imbuement:textures/gui/patchouli/mod_icons/bolstering.png",
 "sortnum": 106,
 "category": "amethyst_imbuement:modifiers",
   "advancement": "amethyst_imbuement:progression/spellcasters_focus",
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Chance to provide buffs to the caster and all nearby allies on successful spell casting and increases spell effect durations by 35%, at the expense of 15% increased mana cost. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Chance to provide buffs to the caster and all nearby allies on successful spell casting and increases spell effect durations by 35%, at the expense of 15% increased mana cost. This modifier is unique to the (l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus,$() to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
-{            
-"type": "amethyst_imbuement:modifier_spotlight",            
+{
+"type": "amethyst_imbuement:modifier_spotlight",
 "mod_head": "Bolstering",
 "mod_image": "amethyst_imbuement:textures/gui/patchouli/mod_spotlights/bolstering.png",
   "ancestor": "N/A",

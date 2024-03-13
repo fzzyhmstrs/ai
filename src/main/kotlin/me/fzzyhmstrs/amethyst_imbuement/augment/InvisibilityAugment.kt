@@ -1,7 +1,9 @@
 package me.fzzyhmstrs.amethyst_imbuement.augment
 
 import me.fzzyhmstrs.amethyst_imbuement.augment.base_augments.EquipmentAugment
+import me.fzzyhmstrs.amethyst_imbuement.registry.RegisterEnchantment
 import me.fzzyhmstrs.fzzy_core.trinket_util.EffectQueue
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -13,5 +15,9 @@ class InvisibilityAugment(weight: Rarity, mxLvl: Int = 1, vararg slot: Equipment
     override fun equipmentEffect(user: LivingEntity, level: Int, stack: ItemStack) {
         if (!checkEnabled()) return
         EffectQueue.addStatusToQueue(user,StatusEffects.INVISIBILITY,260,0)
+    }
+
+    override fun canAccept(other: Enchantment?): Boolean {
+        return super.canAccept(other) && other !== RegisterEnchantment.RESILIENCE
     }
 }

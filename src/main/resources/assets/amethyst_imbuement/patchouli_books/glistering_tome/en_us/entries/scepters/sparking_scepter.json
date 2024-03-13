@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:sparking_scepter",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 10,
+"sortnum":  10,
 "pages": [
 {
 "type": "patchouli:text",

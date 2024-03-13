@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Steel armor is a basic set of gear that is a slight upgrade over iron."
+"text": "Steel armor is a basic set of gear that provides a slight upgrade over iron."
 },
 {
 "type": "amethyst_imbuement:armor_stand",

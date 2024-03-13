@@ -1,5 +1,5 @@
 {
-"name": "Cripple",
+"name":  "Cripple",
 "icon": "amethyst_imbuement:scepter_of_agonies",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/cripple",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:scepter_of_agonies",
-"text": "The only way to obtain Cripple is to craft the Scepter of Agonies."       
+"text": "The only way to obtain Cripple is to craft the Scepter of Agonies."
 }
 ]
 }

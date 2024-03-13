@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:bardic_scepter",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 25,
+"sortnum":  25,
 "pages": [
 {
 "type": "patchouli:text",

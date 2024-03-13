@@ -1,6 +1,6 @@
-{    
+{
 "name": "Trinket Common Augments",
 "parent": "amethyst_imbuement:trinket_augments",
-"description": "Augments in this list can be applied to both $(#490)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$() and $(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()",
+"description": "Augments in this list can be applied to both $(l:amethyst_imbuement:starter_guide/totem_guide)Totems$() and $(l:amethyst_imbuement:starter_guide/jewelry_guide)Jewelry$()",
 "icon": "amethyst_imbuement:imbued_headband"
 }

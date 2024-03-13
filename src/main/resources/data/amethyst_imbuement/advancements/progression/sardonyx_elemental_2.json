@@ -1,0 +1,21 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"killed_elemental":{
+		"trigger": "minecraft:player_killed_entity",
+		"conditions":{
+			"entity": {
+				"type": "amethyst_imbuement:sardonyx_elemental"
+			}
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"killed_elemental"
+	]
+]
+}

@@ -1,15 +1,17 @@
-{    
+{
 "name": "Beast Magnet Augment",
 "icon": "amethyst_imbuement:book_of_lore",
-"category": "amethyst_imbuement:trinket_totem_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+"category": "amethyst_imbuement:trinket_totem_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/jewelry_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Summons and pets pick up items and xp for you, auto-depositing in your inventory. They won't actively seek out items, simply mop up items they happen to be nearby, much like a magnet.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/beast_magnet_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/beast_magnet_imbuing"
+}
 ]
 }

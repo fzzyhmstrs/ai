@@ -1,5 +1,5 @@
-{    
+{
 "name": "Trinkets",
-"description": "The $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() has the ability to enchant certain curios with magic that offer all sorts of positive effects... even protection from death. Read on to get started with such magical trinkets:$(li)$(#490)$(l:amethyst_imbuement:trinkets/jewelry_guide)Jewelry$()$(li)$(#490)$(l:amethyst_imbuement:trinkets/totem_guide)Totems$()",
+"description": "The $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$() has the ability to enchant certain curios with magic that offer all sorts of positive effects... even protection from death. Read on to get started with such magical trinkets:$(li)$(l:amethyst_imbuement:starter_guide/jewelry_guide)Jewelry$()$(li)$(l:amethyst_imbuement:starter_guide/totem_guide)Totems$()",
 "icon": "amethyst_imbuement:totem_of_amethyst"
 }

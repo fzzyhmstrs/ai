@@ -1,11 +1,12 @@
 {
 "name": "Progression",
+"priority": true,
 "icon": "minecraft:leather_boots",
 "category": "amethyst_imbuement:starter_guide",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Now that you've got your feet under you, find out more about the magical equipment and experiences that Amethyst Imbuement can provide.$(li)Craft a scepter and start spellcasting$(li)Create imbued jewelry and imbue them with powerful abilities$(li)Upgrade your equipment beyond anything you thought possible"
+"text": "Now that you've got your feet under you, find out more about the magical equipment and experiences that Amethyst Imbuement can provide."
 },
 {
 "type": "amethyst_imbuement:progression",
@@ -14,13 +15,13 @@
 "text": "Start working on crafting a $(l:amethyst_imbuement:starter_guide/scepter_guide)magical scepter$(), and cast your first spell on your chosen spellcasting path."
 },
 "amethyst_imbuement:progression/jewelry_guide": {
-"text": "Find the materials to start crafting $(l:amethyst_imbuement:starter_guide/scepter_guide)powerful jewelry$() capable of hosting a wide array of specialized magical augments."
+"text": "Start crafting $(l:amethyst_imbuement:starter_guide/scepter_guide)powerful jewelry$() capable of hosting specialized magical augments."
 },
 "amethyst_imbuement:progression/totem_guide": {
 "text": "An incredible font of inner power, a $(l:amethyst_imbuement:starter_guide/scepter_guide)totem of amethyst$() is an important tool in any crystal witches kit."
 },
 "amethyst_imbuement:progression/equipment_guide": {
-"text": "$(l:amethyst_imbuement:starter_guide/equipment_guide)Sturdy sets of armor and deadly weapons$() are all at a crystal witches disposal. Legends even talk about mystical $(l:https://www.curseforge.com/minecraft/mc-mods/imbued-gear)Imbued Gear$(), maybe an adventurous witch can learn those secrets."
+"text": "$(l:amethyst_imbuement:starter_guide/equipment_guide)Magical armor and weapons$() are at a crystal witches disposal. Legends even mention $(l:https://www.curseforge.com/minecraft/mc-mods/imbued-gear)Imbued Gear$()"
 }
 }
 }

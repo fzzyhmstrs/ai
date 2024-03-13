@@ -1,0 +1,17 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancements": [
+				"amethyst_imbuement:progression/imbued_jewelry"
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock"
+	]
+]
+}

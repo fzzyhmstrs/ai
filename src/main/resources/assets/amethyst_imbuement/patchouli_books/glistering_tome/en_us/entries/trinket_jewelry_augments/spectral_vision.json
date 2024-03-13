@@ -1,15 +1,17 @@
-{    
-"name": "Spectral Vision Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_jewelry_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Spectral Vision Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_jewelry_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/jewelry_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Highlights nearby enemies with a spectral glow, even through obstacles.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Headband$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() Other common or jewelry augments"
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/spectral_vision_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/spectral_vision_imbuing"
+}
 ]
 }

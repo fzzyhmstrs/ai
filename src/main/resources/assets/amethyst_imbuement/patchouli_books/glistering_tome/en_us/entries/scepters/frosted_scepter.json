@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:frosted_scepter",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 11,
+"sortnum":  11,
 "pages": [
 {
 "type": "patchouli:text",

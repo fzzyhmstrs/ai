@@ -15,7 +15,7 @@
 "tier_3": "amethyst_imbuement:aegis{modifiers:[{modifier_id:\"amethyst_imbuement:protective\"},{modifier_id:\"amethyst_imbuement:smiting\"},{modifier_id:\"amethyst_imbuement:lesser_enduring\"},{modifier_id:\"amethyst_imbuement:reach\"},{modifier_id:\"amethyst_imbuement:lesser_thrifty\"}]}",
 "spec": "Farming Magic",
 "spells": "(Unique) $(l:amethyst_imbuement:spell_book/animal_husbandry)Animal Husbandry$()",
-"mods": "$(l:amethyst_imbuement:modifiers/protective)Protective$(), $(l:amethyst_imbuement:modifiers/smitting)Smiting$(), $(l:amethyst_imbuement:modifiers/lesser_enduring)Lesser Enduring$(), $(l:amethyst_imbuement:modifiers/reach)Reach$(), $(l:amethyst_imbuement:modifiers/lesser_thrifty)Lesser Thrifty$()"
+"mods": "$(l:amethyst_imbuement:modifiers/protective)Protective$(), $(l:amethyst_imbuement:modifiers/smiting)Smiting$(), $(l:amethyst_imbuement:modifiers/lesser_enduring)Lesser Enduring$(), $(l:amethyst_imbuement:modifiers/reach)Reach$(), $(l:amethyst_imbuement:modifiers/lesser_thrifty)Lesser Thrifty$()"
 }
 ]
 }

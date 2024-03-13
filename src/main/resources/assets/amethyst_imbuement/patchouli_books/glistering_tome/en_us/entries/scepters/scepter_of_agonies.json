@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:scepter_of_agonies",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_1_scepters",
-"sortnum": 14,
+"sortnum":  14,
 "pages": [
 {
 "type": "patchouli:text",

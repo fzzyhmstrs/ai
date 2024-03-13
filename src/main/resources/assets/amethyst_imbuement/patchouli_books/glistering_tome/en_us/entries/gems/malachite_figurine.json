@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Peace and Cooperation $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Obtain a malachite figurine of your own by trading with a Crystal Witch villager."
+"text": "$(l)Meaning:$() Peace and Cooperation$(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Obtain a malachite figurine of your own by trading with a Crystal Witch villager."
 },
 {
 "type": "patchouli:spotlight",

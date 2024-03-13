@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:equinox",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/tier_2_scepters",
-"sortnum": 27,
+"sortnum":  27,
 "pages": [
 {
 "type": "patchouli:text",

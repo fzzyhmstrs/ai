@@ -1,0 +1,19 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"elemental":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "amethyst_imbuement:sardonyx_elemental"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"elemental"
+	]
+]
+}

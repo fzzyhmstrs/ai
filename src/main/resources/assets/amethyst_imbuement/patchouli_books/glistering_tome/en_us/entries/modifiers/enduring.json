@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Increases the duration of spell effects by 30%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox$()"
+"text": "Increases the duration of spell effects by 30%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_equinox)Path of the Equinox $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight_2",

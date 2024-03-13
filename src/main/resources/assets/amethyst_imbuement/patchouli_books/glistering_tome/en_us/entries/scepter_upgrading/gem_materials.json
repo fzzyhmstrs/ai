@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "In order to progress your scepter there are some magical ingredients you must find in chests, trade for, craft or imbue, or generate by interacting with the world."
+"text": "In order to upgrade your scepter there are some magical ingredients you must find in chests, trade for, craft, imbue, or generate by interacting with the world."
 },
 {
 "type": "amethyst_imbuement:base_components"

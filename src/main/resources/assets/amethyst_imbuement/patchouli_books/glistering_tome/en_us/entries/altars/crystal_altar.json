@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "amethyst_imbuement:hidden_text",
-"text": "The $(thing)Crystal Altar$() is a simple work station developed by industrious villagers. It allows for the concentration of magical energy in certain basic crystals and other objects without needing to offer any piece of oneself.",
+"text": "The $(thing)Crystal Altar$() is a work station developed by industrious villagers. It allows for the concentration of magical energy in certain basic crystals and other objects without needing to offer any piece of oneself.",
 "unlock": "amethyst_imbuement:progression/quartz",
 "unlockDesc": "Find some Nether Quartz to unlock this passage!",
 "unlockItem": "minecraft:quartz"

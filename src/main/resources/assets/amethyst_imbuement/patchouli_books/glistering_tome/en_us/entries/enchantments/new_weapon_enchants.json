@@ -1,11 +1,11 @@
-{    
-"name": "New Weapon Enchants",    
-"icon": "amethyst_imbuement:glistering_trident",    
-"category": "amethyst_imbuement:enchantments",    
+{
+"name": "New Weapon Enchants",
+"icon": "amethyst_imbuement:glistering_trident",
+"category": "amethyst_imbuement:enchantments",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "New enchantments available for various weapons."
+"text": "Enchantments tha can be found on or enchanted onto weapons."
 },
 {
 "type": "patchouli:spotlight",

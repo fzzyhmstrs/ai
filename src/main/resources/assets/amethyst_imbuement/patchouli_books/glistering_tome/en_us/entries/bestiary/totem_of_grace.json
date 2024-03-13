@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Channeling the power of its Healer Gem, this totem will periodically heal the summoner and all allies within range. Perfect for deployment in a safe spot on the battlefield for players to rest and recover.$(br2)How to Obtain:$(li)Spell: Summon Totem of Grace"
+"text": "Channeling the power of a Healer Gem, this totem will periodically heal the summoner and all allies within range. Perfect for deployment in a safe spot on the battlefield for players to rest and recover.$(br2)How to Obtain:$(li)Spell: Summon Totem of Grace"
 },
 {
 "type": "patchouli:entity",

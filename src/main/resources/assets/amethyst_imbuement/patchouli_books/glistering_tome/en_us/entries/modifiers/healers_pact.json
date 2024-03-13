@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects all non-healing spells. Affected spells cooldown increased by 50% and mana cost increased 20%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$()"
+"text": "Affects all non-healing spells. Affected spells cooldown increased by 50% and mana cost increased 20%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption $()"
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

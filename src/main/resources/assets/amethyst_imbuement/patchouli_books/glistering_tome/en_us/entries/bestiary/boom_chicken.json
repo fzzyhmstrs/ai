@@ -2,7 +2,7 @@
 "name": "Boom Chicken",
 "icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/boom_chicken.png",
 "category": "amethyst_imbuement:bestiary",
-"advancement": "amethyst_imbuement:spells/torrent_of_beaks",
+"advancement": "amethyst_imbuement:progression/boom_chicken",
 "pages": [
 {
 "type": "patchouli:text",

@@ -1,5 +1,5 @@
 {
-"name": "Recall",
+"name":  "Recall",
 "icon": "amethyst_imbuement:scepter_of_recall",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/recall",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:scepter_of_recall",
-"text": "The only way to obtain Recall is to craft a Scepter of Recall."       
+"text": "The only way to obtain Recall is to craft a Scepter of Recall."
 }
 ]
 }

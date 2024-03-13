@@ -10,20 +10,21 @@
 			]
 		}
 	},
-  "got_orb":{
-		"trigger": "minecraft:inventory_changed",
-		"conditions":{
-			"items":[
-				{
-					"items":[
-						"amethyst_imbuement:opal",
-						"amethyst_imbuement:iridescent_scepter",
-						"amethyst_imbuement:lustrous_sphere"
-					]
-				}
-			]
-		},
-  "got_stuff":{
+    "got_orb": {
+  	  "trigger": "minecraft:inventory_changed",
+  	  "conditions": {
+  		  "items": [
+  			  {
+  				  "items": [
+  					  "amethyst_imbuement:opal",
+  					  "amethyst_imbuement:iridescent_scepter",
+  					  "amethyst_imbuement:lustrous_sphere"
+  				  ]
+  			  }
+  		  ]
+  	  }
+    },
+    "got_stuff":{
 		"trigger": "minecraft:inventory_changed",
 		"conditions":{
 			"items":[

@@ -3,11 +3,11 @@
 "icon": "amethyst_imbuement:glowing_helmet",
 "category": "amethyst_imbuement:armor",
 "extra_recipe_mappings": {
-"amethyst_imbuement:glowing_helmet": 1,
-"amethyst_imbuement:glowing_chestplate": 2,
-"amethyst_imbuement:glowing_leggings": 3,
-"amethyst_imbuement:glowing_boots": 4,
-"amethyst_imbuement:glowing_horse_armor": 5
+"amethyst_imbuement:glowing_helmet": 2,
+"amethyst_imbuement:glowing_chestplate": 3,
+"amethyst_imbuement:glowing_leggings": 4,
+"amethyst_imbuement:glowing_boots": 5,
+"amethyst_imbuement:glowing_horse_armor": 6
 },
 "advancement": "amethyst_imbuement:progression/unlocks/glowing_unlock",
 "pages": [

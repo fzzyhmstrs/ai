@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Follow this route on the Path of the Sojourn to travel far and wide while always maintaining your connection to home. All spells related to travel are boosted with Traveler and all Wit spells gain $(o)+2$() XP. Your spells have much larger range of effect with Greater Reach."
+"text": "Follow this route on the Path of the Sojourn to travel far and wide while maintaining your connection to home. All spells related to travel are boosted with Traveler and all Wit spells gain $(o)+2$() XP. Your spells have much larger range of effect with Greater Reach."
 },
 {
 "type": "amethyst_imbuement:scepter_route",

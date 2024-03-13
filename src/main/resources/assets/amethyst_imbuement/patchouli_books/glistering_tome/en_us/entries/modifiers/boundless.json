@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Increases the range and area of effect of cast spells by 100% at the expense of 10% increased cooldown. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+"text": "Increases the range and area of effect of cast spells by 100% at the expense of 10% increased cooldown. This modifier is unique to the (l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Meaning:$() Protection from the supernatural $(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce moonstone in the $(#490)$(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
+"text": "$(l)Meaning:$() Protection from the supernatural$(br)$(l)Primary Aspect:$() $(9)Grace$()$(br)$(l)Obtaining:$() Produce moonstone in the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$()."
 },
 {
 "type": "amethyst_imbuement:imbuing",

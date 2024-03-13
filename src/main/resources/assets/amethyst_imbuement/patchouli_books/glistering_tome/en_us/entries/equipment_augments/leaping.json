@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Effect:$() Grants the wearer Jump Boost.$(br)$(l)Enchants:$() $(#490)Any armor piece$()$(br)$(l)Max Level:$() 2 $(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Grants the wearer Jump Boost.$(br)$(l)Enchants:$() $(thing)Any armor piece$()$(br)$(l)Max Level:$() 2$(br)$(l)Tier:$() Low$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing",

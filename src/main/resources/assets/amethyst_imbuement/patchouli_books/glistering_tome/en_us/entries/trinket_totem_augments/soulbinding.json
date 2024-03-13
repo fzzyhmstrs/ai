@@ -1,15 +1,17 @@
-{    
-"name": "Soulbinding Augment",    
-"icon": "amethyst_imbuement:book_of_lore",    
-"category": "amethyst_imbuement:trinket_totem_augments",    
-"pages": [        
-{            
-"type": "patchouli:text",            
+{
+"name": "Soulbinding Augment",
+"icon": "amethyst_imbuement:book_of_lore",
+"category": "amethyst_imbuement:trinket_totem_augments",
+"advancement": "amethyst_imbuement:progression/unlocks/totem_augments_unlock",
+"pages": [
+{
+"type": "patchouli:text",
 "text": "$(l)Effect:$() Inventory is not lost upon death.$(br)$(l)Enchants:$() $(l:amethyst_imbuement:trinkets/totem_of_amethyst)Totem of Amethyst$()$(br)$(l)Max Level:$() 1$(br)$(l)Active/Passive:$() Passive$(br)$(l)Tier:$() Extreme$(br)$(l)Incompatibilities:$() Other passive totem augments."
 },
-  {
-    "type": "amethyst_imbuement:imbuing",
-    "recipe": "amethyst_imbuement:imbuing/soulbinding_imbuing"
-  }
+{
+"type": "amethyst_imbuement:imbuing",
+"unlock": "amethyst_imbuement:progression/imbuing_table",
+"recipe": "amethyst_imbuement:imbuing/soulbinding_imbuing"
+}
 ]
 }

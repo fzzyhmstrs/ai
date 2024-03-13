@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Adds six levels to the amplification of spell effects and one effective level to spells cast, at the expense of 35% longer cooldowns and 10% reduced effect durations. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+"text": "Adds six levels to the amplification of spell effects and one effective level to spells cast, at the expense of 35% longer cooldowns and 10% reduced effect durations. This modifier is unique to the (l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

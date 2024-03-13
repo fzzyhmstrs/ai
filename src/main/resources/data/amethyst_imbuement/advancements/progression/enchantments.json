@@ -1,0 +1,86 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"enchanting_use":{
+		"trigger": "fzzy_core:advancement",
+		"conditions":{
+			"advancement": "minecraft:story/enchant_item"
+		}
+	},
+	"got_enchant":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"enchantments":[
+						{
+							"enchantment": "amethyst_imbuement:heroic"
+						},
+						{
+							"enchantment": "amethyst_imbuement:wasting"
+						},
+						{
+							"enchantment": "amethyst_imbuement:deadly_shot"
+						},
+						{
+							"enchantment": "amethyst_imbuement:puncturing"
+						},
+						{
+							"enchantment": "amethyst_imbuement:insight"
+						},
+						{
+							"enchantment": "amethyst_imbuement:lifesteal"
+						},
+						{
+							"enchantment": "amethyst_imbuement:decayed"
+						},
+						{
+							"enchantment": "amethyst_imbuement:contaminated"
+						},
+						{
+							"enchantment": "amethyst_imbuement:cleaving"
+						},
+						{
+							"enchantment": "amethyst_imbuement:multi_jump"
+						},
+						{
+							"enchantment": "amethyst_imbuement:night_vision"
+						},
+						{
+							"enchantment": "amethyst_imbuement:steadfast"
+						},
+						{
+							"enchantment": "amethyst_imbuement:rain_of_thorns"
+						},
+						{
+							"enchantment": "amethyst_imbuement:vein_miner"
+						}
+					]
+				}
+			]
+		}
+	},
+	"got_table":{
+		"trigger": "minecraft:inventory_changed",
+		"conditions":{
+			"items":[
+				{
+					"items":[
+						"minecraft:enchanting_table"
+					]
+				}
+			]
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"got_enchant",
+		"enchanting_use",
+		"got_table"
+	]
+]
+}

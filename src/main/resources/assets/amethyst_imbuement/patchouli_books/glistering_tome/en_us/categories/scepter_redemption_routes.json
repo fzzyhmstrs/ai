@@ -1,6 +1,6 @@
-{    
+{
 "name": "Redemption Path Routes",
 "parent": "amethyst_imbuement:scepter_paths",
-"description": "The six specific crafting paths one can take with the Path of Redemption. These paths are related to healing and supporting. These are fairly close to what one might consider a 'sub-class'",
+"description": "The six specific crafting paths one can take on the Path of Redemption. These paths are related to power healing and support at the expense of other magics.",
 "icon": "amethyst_imbuement:redemption"
 }

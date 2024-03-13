@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "The Path of the Equinox is the path of the elementalist. Control the elements to fry your opponents with lightning, immolate them with fire, or freeze them solid.$(br2)$(l:amethyst_imbuement:scepter_equinox_routes)Routes on the Path of the Equinox$(/l)"
+"text": "The Path of the Equinox is the path of the elements. Control the elements to fry your opponents with lightning, immolate them with fire, or freeze them solid.$(br2)$(l:amethyst_imbuement:scepter_equinox_routes)Routes on the Path of the Equinox$(/l)"
 },
 {
 "type": "amethyst_imbuement:scepter_path",

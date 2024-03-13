@@ -1,5 +1,5 @@
 {
-"name": "Inspiring Song",
+"name":  "Inspiring Song",
 "icon": "amethyst_imbuement:bardic_scepter",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/inspiring_song",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:bardic_scepter",
-"text": "The only way to obtain Inspiring Song is to craft the Bardic Scepter."       
+"text": "The only way to obtain Inspiring Song is to craft the Bardic Scepter."
 }
 ]
 }

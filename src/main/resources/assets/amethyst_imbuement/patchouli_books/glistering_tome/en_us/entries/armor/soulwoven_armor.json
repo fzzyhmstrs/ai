@@ -2,19 +2,19 @@
 "name": "Soulwoven Armor",
 "icon": "amethyst_imbuement:soulwoven_helmet",
 "category": "amethyst_imbuement:armor",
-  "advancement": "amethyst_imbuement:progression/unlocks/soulwoven_unlock",
+"advancement": "amethyst_imbuement:progression/unlocks/soulwoven_unlock",
 "pages": [
 {
 "type": "patchouli:text",
 "text": "A powerful and magical set of armor that can only be found in Witch Houses from treasure chests or from $(l:amethyst_imbuement:bestiary/sardonyx_elemental)Sardonyx Elementals$(). This armor is found infused with the $(l:amethyst_imbuement:modifiers/ensouled)Ensouled$() modifier, which randomly buffs Soul spells cast by the wearer."
 },
-  {
-    "type": "amethyst_imbuement:armor_stand",
-    "helmet": "amethyst_imbuement:soulwoven_helmet",
-    "chestplate": "amethyst_imbuement:soulwoven_chestplate",
-    "leggings": "amethyst_imbuement:soulwoven_leggings",
-    "boots": "amethyst_imbuement:soulwoven_boots",
-    "text": "This set can only be found, it can't be crafted."
-  }
+{
+"type": "amethyst_imbuement:armor_stand",
+"helmet": "amethyst_imbuement:soulwoven_helmet",
+"chestplate": "amethyst_imbuement:soulwoven_chestplate",
+"leggings": "amethyst_imbuement:soulwoven_leggings",
+"boots": "amethyst_imbuement:soulwoven_boots",
+"text": "This set can only be found, it can't be crafted."
+}
 ]
 }

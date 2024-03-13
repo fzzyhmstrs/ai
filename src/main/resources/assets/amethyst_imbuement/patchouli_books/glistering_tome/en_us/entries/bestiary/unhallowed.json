@@ -2,7 +2,7 @@
 "name": "Unhallowed",
 "icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/unhallowed.png",
 "category": "amethyst_imbuement:bestiary",
-"advancement": "amethyst_imbuement:spells/summon_zombie",
+"advancement": "amethyst_imbuement:progression/unhallowed",
 "pages": [
 {
 "type": "patchouli:text",

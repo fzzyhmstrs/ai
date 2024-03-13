@@ -1,11 +1,7 @@
 {
 "criteria":{
 	"unlock":{
-		"trigger": "fzzy_core:advancement",
-		"conditions":{
-			"advancements": [
-			]
-		}
+		"trigger": "amethyst_imbuement:unlock_book"
 	},
 	"got_disenchanting_table":{
 		"trigger": "minecraft:inventory_changed",

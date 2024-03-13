@@ -1,7 +1,6 @@
 {
 "name": "Scepter Upgrade Guide",
-"priority": true,
-"icon": "amethyst_imbuement:scepter_of_the_vanguard",
+"icon": "amethyst_imbuement:corrupted_scepter",
 "category": "amethyst_imbuement:starter_guide",
 "advancement": "amethyst_imbuement:progression/basic_spells",
 "pages": [
@@ -28,7 +27,11 @@
 "amethyst_imbuement:progression/tier_3_scepters": {
 "text": "Finish your upgrading journey! Craft a powerful tier 3 scepter."
 }
-}
+},
+  "offsets": {
+    "1": -3,
+    "2": 3
+  }
 }
 ]
 }

@@ -1,11 +1,12 @@
-{    
-"name": "New Armor Enchants",    
-"icon": "amethyst_imbuement:ametrine_boots",    
-"category": "amethyst_imbuement:enchantments",    
+{
+"name": "New Armor Enchants",
+"icon": "amethyst_imbuement:ametrine_boots",
+"category": "amethyst_imbuement:enchantments",
+"advancement": "",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "New enchantments available for various armor and equipment pieces."
+"text": "Enchantments that can be found on or enchanted onto armor and equipment pieces."
 },
 {
 "type": "patchouli:spotlight",

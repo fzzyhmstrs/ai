@@ -7,7 +7,7 @@
   "pages": [
   {
   "type": "patchouli:text",
-  "text": "Increases the duration of spell effects by 15%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis$()"
+  "text": "Increases the duration of spell effects by 15%. Affects:$(li)$(l:amethyst_imbuement:scepter_paths/path_of_redemption)Path of Redemption$(/l)$(li)$(l:amethyst_imbuement:scepter_paths/path_of_the_aegis)Path of the Aegis $()"
   },
   {
   "type": "amethyst_imbuement:modifier_spotlight",

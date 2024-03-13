@@ -11,6 +11,7 @@
 "type": "amethyst_imbuement:imbuing",
 "unlock": "amethyst_imbuement:progression/unlocks/shine_light_recipe_unlock",
 "unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by enhancing some Shine Lights!",
+"hintItem": "amethyst_imbuement:imbuing_table,amethyst_imbuement:shine_light",
 "recipe": "amethyst_imbuement:imbuing/shine_light_rainbow_imbuing"
 }
 ]

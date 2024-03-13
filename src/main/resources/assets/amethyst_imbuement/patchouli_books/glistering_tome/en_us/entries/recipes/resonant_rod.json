@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(o)It chimes beautifully when struck against a surface$()$(br2)Resonant rods are required to imbue the Tier 3 scepter $(l:amethyst_imbuement:scepters/resonance)Resonance$() to finish the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance$()."
+      "text": "$(o)It chimes beautifully when struck against a surface$()$(br2)Resonant rods are required to imbue the Tier 3 scepter $(l:amethyst_imbuement:scepters/resonance)Resonance$(), in order to finish the $(l:amethyst_imbuement:scepter_paths/path_of_resonance)Path of Resonance$()."
     },
     {
       "type": "patchouli:crafting",

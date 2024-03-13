@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "The Path of Resonance is the path of the conjurer. All of your spells have a chance to duplicate. Summon powerful creatures, gain insights beyond your wildest dreams, vibrate your opponents skulls right out of their heads!$(br2)$(l:amethyst_imbuement:scepter_resonance_routes)Routes on the Path of Resonance$(/l)"
+"text": "The Path of Resonance is the path of the conjurer. Your spells have a chance to duplicate. Summon powerful creatures, gain insights beyond your wildest dreams, vibrate your opponents skulls right out of their heads!$(br2)$(l:amethyst_imbuement:scepter_resonance_routes)Routes on the Path of Resonance$(/l)"
 },
 {
 "type": "amethyst_imbuement:scepter_path",

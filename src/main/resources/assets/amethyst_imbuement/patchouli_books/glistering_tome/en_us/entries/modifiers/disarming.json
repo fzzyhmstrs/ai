@@ -7,7 +7,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Affects struck or affected enemies. 33% chance to apply Weakness II on cast. This modifier is unique to the (l:amethyst_imbuement:focus/getting_started)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
+"text": "Affects struck or affected enemies. 33% chance to apply Weakness II on cast. This modifier is unique to the (l:amethyst_imbuement:trinkets/spellcasters_focus)Spellcasters Focus$(), to obtain it you must ignite your focus to a new tier and select it from one of three options presented."
 },
 {
 "type": "amethyst_imbuement:modifier_spotlight",

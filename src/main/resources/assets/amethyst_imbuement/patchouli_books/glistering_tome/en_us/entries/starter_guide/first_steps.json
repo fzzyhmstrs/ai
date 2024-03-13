@@ -1,11 +1,12 @@
-{    
-"name": "First Steps",    
-"icon": "minecraft:quartz",    
-"category": "amethyst_imbuement:starter_guide",    
-"pages": [        
-{            
-"type": "patchouli:text",            
-"text": "Welcome to Amethyst Imbuement! Ready to start on a magical journey? Take with these simple steps to begin down your path.$(br2)The heart of AI is the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), lets start by gathering up ingredients to make and fuel one!"
+{
+"name":  "First Steps",
+"priority": true,
+"icon": "minecraft:quartz",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Welcome to Amethyst Imbuement! Ready to start on a magical journey? Take with these simple steps to begin down your path. Once you complete this guide, you'll be a full-fledged Crystal Witch, imbuing items with magic, casting spells, and more!"
 },
 {
 "type": "amethyst_imbuement:progression",
@@ -18,12 +19,20 @@
 },
 "amethyst_imbuement:progression/imbuing_table": {
 "text": "Craft your $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(), opening the door to most of the rest of the mod!"
+}
 },
+  "offsets": {
+    "1": 8
+  }
+},
+{
+"type": "amethyst_imbuement:progression",
+"progression": {
 "amethyst_imbuement:xp_bush": {
 "text": "Imbuing is powered by experience. Imbue some $(l:amethyst_imbuement:imbuing/xp_bush_seed)Experience Bushes$() to secure a steady supply. Augment your stocks by enchanting gear with $(l:amethyst_imbuement:enchantments/new_weapon_enchants#insight)Insight$()."
 },
 "amethyst_imbuement:progression/progression_guide": {
-"text": "There's a lot to do in AI! Check out the $(lamethyst_imbuement:starter_guide/progression_guide)Progression Guide$() to learn more."
+"text": "There's a lot to do in AI! Check out the $(l:amethyst_imbuement:starter_guide/progression_guide)Progression Guide$() to learn more."
 }
 }
 }

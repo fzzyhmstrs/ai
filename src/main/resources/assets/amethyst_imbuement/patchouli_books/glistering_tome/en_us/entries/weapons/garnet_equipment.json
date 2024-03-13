@@ -1,5 +1,5 @@
 {
-"name": "Garnet Equipment",
+"name":  "Garnet Equipment",
 "icon": "amethyst_imbuement:garnet_sword",
 "category": "amethyst_imbuement:weapons",
 "advancement": "amethyst_imbuement:progression/unlocks/garnet_unlock",

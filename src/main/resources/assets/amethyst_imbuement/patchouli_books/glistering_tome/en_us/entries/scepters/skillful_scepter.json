@@ -3,7 +3,7 @@
 "icon": "amethyst_imbuement:skillful_scepter",
 "category": "amethyst_imbuement:scepters",
 "advancement": "amethyst_imbuement:progression/basic_spells",
-"sortnum": 6,
+"sortnum":  6,
 "pages": [
 {
 "type": "patchouli:text",

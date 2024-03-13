@@ -10,7 +10,9 @@
 },
 {
 "type": "amethyst_imbuement:imbuing",
-"unlock": "amethyst_imbuement:progression/spell_recipes_unlock",
+"unlock": "amethyst_imbuement:progression/unlocks/spell_recipes_unlock",
+"unlockDesc": "Unlock this recipe by progressing to the Imbuing Table and by casting a Basic Spell!",
+"hintItem": "amethyst_imbuement:imbuing_table,amethyst_imbuement:opaline_scepter",
 "recipe": "amethyst_imbuement:imbuing/summon_strider_imbuing"
 }
 ]

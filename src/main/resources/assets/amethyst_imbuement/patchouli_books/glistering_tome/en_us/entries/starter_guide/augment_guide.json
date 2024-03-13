@@ -1,0 +1,31 @@
+{
+"name": "Augment Guide",
+"icon": "amethyst_imbuement:totem_of_amethyst",
+"category": "amethyst_imbuement:starter_guide",
+"pages": [
+{
+"type": "patchouli:text",
+"text": "Augmentation is one of the most powerful features of the $(l:amethyst_imbuement:altars/imbuing_table)Imbuing Table$(). Apply powerful enchantments to Jewelry, Totems, and many other types of Equipment."
+},
+  {
+    "type": "amethyst_imbuement:progression",
+    "progression": {
+      "amethyst_imbuement:augmenter": {
+        "text": "Augments can be applied to most basic types of gear. Apply an $(l:amethyst_imbuement:equipment_augments)Equipment$() or $(l:amethyst_imbuement:weapon_augments)Weapon$() augment."
+      },
+      "amethyst_imbuement:progression/augment_common": {
+        "text": "$(l:amethyst_imbuement:trinket_common_augments)Some augments$() are common between Imbued Jewelry and Totems. Check them out and imbue one."
+      },
+      "amethyst_imbuement:progression/augment_jewelry": {
+        "text": "Imbue an augment that is $(l:amethyst_imbuement:trinket_jewelry_augments)specific to Imbued Jewelry$(). Addons can add more jewelry that accepts augments, keep an eye out!"
+      },
+      "amethyst_imbuement:progression/augment_totem": {
+        "text": "Imbue a totem with an Augment $(l:amethyst_imbuement:trinket_totem_augments)specific to Totems$()."
+      }
+    },
+    "offsets": {
+      "3": 10
+    }
+  }
+]
+}

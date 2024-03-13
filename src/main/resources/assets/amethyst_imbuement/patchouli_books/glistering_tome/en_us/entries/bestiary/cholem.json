@@ -2,7 +2,7 @@
 "name": "Cholem",
 "icon": "amethyst_imbuement:textures/gui/patchouli/bestiary/cholem.png",
 "category": "amethyst_imbuement:bestiary",
-"advancement": "amethyst_imbuement:spells/summon_cholem",
+"advancement": "amethyst_imbuement:progression/cholem",
 "pages": [
 {
 "type": "patchouli:text",

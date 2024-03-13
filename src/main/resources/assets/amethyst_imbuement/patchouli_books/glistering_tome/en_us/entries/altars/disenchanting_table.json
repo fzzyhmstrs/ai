@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "When one needs to strip an item of its magical properties, the $(thing)Disenchanting Table$() is perfect. With the keen energy of moonstones to wipe away magic, this table can accurately remove any individual aura present and store it in a book... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
+"text": "The $(thing)Disenchanting Table$() is perfect to strip items of their magical properties. With the keen energy of moonstones to wipe away magic, this table can precisely remove any individual enchantment present and store it in a book... $(o)to a point$(). Surround with pillars of crystal to further enhance its abilities."
 },
 {
 "type": "patchouli:crafting",
@@ -16,14 +16,14 @@
 "type": "patchouli:multiblock",
 "name": "Disenchanting Setup",
 "multiblock": {
-	"pattern": [
-		["B B B","     ","B   B","     ","B B B"],
-		["B B B","     ","B 0 B","     ","B B B"]
-	],
-	"mapping": {
-	"B": "#amethyst_imbuement:disenchant_pillar_blocks",
-	"0": "amethyst_imbuement:disenchanting_table"
-	}
+"pattern": [
+["B B B","     ","B   B","     ","B B B"],
+["B B B","     ","B 0 B","     ","B B B"]
+],
+"mapping": {
+"B": "#amethyst_imbuement:disenchant_pillar_blocks",
+"0": "amethyst_imbuement:disenchanting_table"
+}
 },
 "enable_visualize": false,
 "text": "Displayed is the maximum setup for the disenchanting table. Fewer pillars yield less power."

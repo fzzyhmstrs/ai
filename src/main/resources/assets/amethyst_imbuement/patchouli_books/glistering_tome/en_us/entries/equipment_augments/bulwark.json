@@ -5,7 +5,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "$(l)Effect:$() Shield heals the holder by 1 health whenever hit.$(br)$(l)Enchants:$() $(#490)Shield$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() High$(br)$(l)Incompatibilities:$() None"
+"text": "$(l)Effect:$() Shield heals the holder by 1 health whenever hit.$(br)$(l)Enchants:$() $(thing)Shields$()$(br)$(l)Max Level:$() 1 $(br)$(l)Tier:$() Medium$(br)$(l)Incompatibilities:$() None"
 },
 {
 "type": "amethyst_imbuement:imbuing",

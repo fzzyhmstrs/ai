@@ -1,12 +1,11 @@
-{    
+{
 "name": "Jewelry Guide",
-"priority": true,
 "icon": "amethyst_imbuement:imbued_headband",
 "category": "amethyst_imbuement:starter_guide",
 "pages": [
 {
 "type": "patchouli:text",
-"text": "Here you will learn to craft and imbue jewelry with mystical properties. To begin:$(li)First, imbue some $(#b0b)$(l:amethyst_imbuement:imbuing/beryl_copper)Beryllium Copper Ingots$()$(li)Next, craft your ingots and an $(#b0b)$(l:amethyst_imbuement:gems/amethyst)Amethyst Shard$() into a piece of $(#490)$(l:amethyst_imbuement:trinkets/copper_jewelry)Copper Jewelry$()$(li)This jewelry provides a minor bonus, but isn't capable of containing more potent magics. Imbue your jewelry into $(#490)$(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()"
+"text": "Learn to craft and imbue jewelry with mystical properties. No ordinary gold, these trinkets can be imbued with magical properties, shielding you from harm, increasing your damage, and much more."
 },
 {
 "type": "amethyst_imbuement:progression",
@@ -15,18 +14,24 @@
 "text": "Obtain $(l:amethyst_imbuement:imbuing/beryl_copper_ingot)Beryllium Copper$() and $(l:amethyst_imbuement:gems/amethyst_shard)Amethyst Shards$() or $(l:amethyst_imbuement:imbuing/steel_ingot)Steel$() and $(l:amethyst_imbuement:gems/amethyst_shard)Diamonds$()"
 },
 "amethyst_imbuement:progression/basic_jewelry": {
-"text": "Craft your first piece of $(l:amethyst_imbuement:trinkets/copper_jewelry)Copper$() or $(l:amethyst_imbuement:trinkets)Steel$() Jewelry. These come with minor bonuses on their won, but we can go further."
+"text": "Craft your first piece of $(l:amethyst_imbuement:trinkets/copper_jewelry)Copper$() or $(l:amethyst_imbuement:trinkets)Steel$() Jewelry. These have minor bonuses but we can go further."
 },
-"amethyst_imbuement:progression/reagent": {
+"amethyst_imbuement:progression/reagents": {
 "text": "Imbued Jewelry is next, it comes with a variety of innate bonuses. Pick your $(l:amethyst_imbuement:trinkets/imbuing_reagents)Reagent$() before imbuing your jewelry."
 },
 "amethyst_imbuement:progression/imbuing_jewelry": {
 "text": "Imbue a piece of $(l:amethyst_imbuement:trinkets/imbued_jewelry)Imbued Jewelry$()."
 },
 "amethyst_imbuement:progression/augment_guide": {
-"text": "Take the next step and augment your jewelry with an $(l:amethyst_imbuement:starter_guide/augment_guide)Augment$()."
+"text": "Imbue your jewelry with an $(l:amethyst_imbuement:starter_guide/augment_guide)Augment$()."
 }
-}
+},
+  "offsets": {
+    "1": -3,
+    "2": 4,
+    "3": 20,
+    "4": 9
+  }
 }
 ]
 }

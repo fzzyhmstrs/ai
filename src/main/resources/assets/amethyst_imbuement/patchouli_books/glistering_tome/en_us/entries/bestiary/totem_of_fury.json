@@ -6,7 +6,7 @@
 "pages": [
 {
 "type": "patchouli:text",
-"text": "This totem channels its power through its Lethal Gem to blast nearby enemies with powerful shocks. The totem will draw the aggression of enemies it hits, making it good as a diversion or delay tactic.$(br2)How to Obtain:$(li)Spell: Summon Totem of Fury"
+"text": "This totem channels its power through a Lethal Gem to blast nearby enemies with powerful shocks. The totem will draw the aggression of enemies it hits, making it good as a diversion or delay tactic.$(br2)How to Obtain:$(li)Spell: Summon Totem of Fury"
 },
 {
 "type": "patchouli:entity",

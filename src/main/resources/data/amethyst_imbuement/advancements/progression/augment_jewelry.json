@@ -1,0 +1,54 @@
+{
+"criteria":{
+	"unlock":{
+		"trigger": "amethyst_imbuement:unlock_book"
+	},
+	"beast_magnet":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:beast_magnet"
+		}
+	},
+	"draconic_vision":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:draconic_vision"
+		}
+	},
+	"friendly":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:friendly"
+		}
+	},
+	"healthy":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:healthy"
+		}
+	},
+	"rebinding":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:rebinding"
+		}
+	},
+	"spectral_vision":{
+		"trigger": "amethyst_imbuement:augment_item",
+		"conditions":{
+			"augment": "amethyst_imbuement:spectral_vision"
+		}
+	}
+},
+"requirements": [
+	[
+		"unlock",
+		"beast_magnet",
+		"draconic_vision",
+		"friendly",
+		"healthy",
+		"rebinding",
+		"spectral_vision"
+	]
+]
+}

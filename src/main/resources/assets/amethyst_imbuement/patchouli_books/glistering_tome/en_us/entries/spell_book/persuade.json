@@ -1,5 +1,5 @@
 {
-"name": "Persuade",
+"name":  "Persuade",
 "icon": "amethyst_imbuement:persuasive_scepter",
 "category": "amethyst_imbuement:spell_book",
 "advancement": "amethyst_imbuement:spells/persuade",
@@ -11,7 +11,7 @@
 {
 "type": "patchouli:spotlight",
 "item": "amethyst_imbuement:persuasive_scepter",
-"text": "The only way to obtain Persuade is to craft the Persuasive Scepter."       
+"text": "The only way to obtain Persuade is to craft the Persuasive Scepter."
 }
 ]
 }
