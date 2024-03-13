@@ -14,10 +14,8 @@ object RegisterTag {
     val GEMS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","gems"))
     val CITRINE_TAG = FzzyPort.ITEM.tagOf(Identifier("c","citrine"))
     val SMOKY_QUARTZ_TAG = FzzyPort.ITEM.tagOf(Identifier("c","smoky_quartz"))
-
-
-
     val SUNFLOWERS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","sunflowers"))
+
     val SKULLS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","skulls"))
     val STEEL_BOOTS_TAG = FzzyPort.ITEM.tagOf(Identifier("c","steel_boots"))
     val STEEL_CHESTPLATES_TAG = FzzyPort.ITEM.tagOf(Identifier("c","steel_chestplates"))

@@ -49,7 +49,7 @@ object RegisterStatus {
     fun stunUnsafe(livingEntity: LivingEntity, duration: Int){
         livingEntity.addStatusEffect(StatusEffectInstance(STUNNED,duration))
     }
-    
+
     //attribute effects
     val SOUL_SHIELD: StatusEffect = register(CustomStatusEffect(StatusEffectCategory.BENEFICIAL,0x60F5FA)
         .addAttributeModifier(RegisterAttribute.MAGIC_RESISTANCE,"c6914e3a-3266-11ee-be56-0242ac120002",0.1,EntityAttributeModifier.Operation.ADDITION)
@@ -86,8 +86,8 @@ object RegisterStatus {
 
     //auras
     val LIGHTNING_AURA: StatusEffect = register(LightningAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0x00A1FF)
-        .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"0a3a25d6-5ccd-11ee-8c99-0242ac120002", 0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-        .addAttributeModifier(RegisterAttribute.SPELL_COOLDOWN,"0a3a2842-5ccd-11ee-8c99-0242ac120002", 0.1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"0a3a25d6-5ccd-11ee-8c99-0242ac120002", 0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(RegisterAttribute.SPELL_COOLDOWN,"0a3a2842-5ccd-11ee-8c99-0242ac120002", 0.075, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         ,"lightning_aura")
     val ARCANE_AURA: StatusEffect = register(ArcaneAuraStatusEffect(StatusEffectCategory.BENEFICIAL,0xDDA0DD)
         .addAttributeModifier(RegisterAttribute.SPELL_DAMAGE,"2661398a-5d35-11ee-8c99-0242ac120002", 0.15, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
