@@ -3,7 +3,7 @@
 	"unlock":{
 		"trigger": "fzzy_core:advancement",
 		"conditions":{
-			"advancements": "amethyst_imbuement:progression/imbued_jewelry"
+			"advancement": "amethyst_imbuement:progression/imbued_jewelry"
 		}
 	},
 	"got_mats":{

@@ -13,7 +13,7 @@
 "requirements": [
 	[
 		"unlock",
-		"got_gem"
+		"progressed"
 	]
 ]
 }
