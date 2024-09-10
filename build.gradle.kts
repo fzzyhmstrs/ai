@@ -246,5 +246,5 @@ modrinth {
         //embedded.project("trinkets")
         //embedded.project("patchouli")
     }
-    debugMode.set(true)
+    debugMode.set(false)
 }
